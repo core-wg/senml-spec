@@ -1,0 +1,508 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en"><head><title>SIP to RTCWeb Offer/Answer Protocol (ROAP)
+    Gateway</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="SIP to RTCWeb Offer/Answer Protocol (ROAP)
+    Gateway">
+<meta name="generator" content="xml2rfc v1.36pre1-dev (http://xml.resource.org/)">
+<style type='text/css'><!--
+        body {
+                font-family: verdana, charcoal, helvetica, arial, sans-serif;
+                font-size: small; color: #000; background-color: #FFF;
+                margin: 2em;
+        }
+        h1, h2, h3, h4, h5, h6 {
+                font-family: helvetica, monaco, "MS Sans Serif", arial, sans-serif;
+                font-weight: bold; font-style: normal;
+        }
+        h1 { color: #900; background-color: transparent; text-align: right; }
+        h3 { color: #333; background-color: transparent; }
+
+        td.RFCbug {
+                font-size: x-small; text-decoration: none;
+                width: 30px; height: 30px; padding-top: 2px;
+                text-align: justify; vertical-align: middle;
+                background-color: #000;
+        }
+        td.RFCbug span.RFC {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: bold; color: #666;
+        }
+        td.RFCbug span.hotText {
+                font-family: charcoal, monaco, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: normal; text-align: center; color: #FFF;
+        }
+
+        table.TOCbug { width: 30px; height: 15px; }
+        td.TOCbug {
+                text-align: center; width: 30px; height: 15px;
+                color: #FFF; background-color: #900;
+        }
+        td.TOCbug a {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, sans-serif;
+                font-weight: bold; font-size: x-small; text-decoration: none;
+                color: #FFF; background-color: transparent;
+        }
+
+        td.header {
+                font-family: arial, helvetica, sans-serif; font-size: x-small;
+                vertical-align: top; width: 33%;
+                color: #FFF; background-color: #666;
+        }
+        td.author { font-weight: bold; font-size: x-small; margin-left: 4em; }
+        td.author-text { font-size: x-small; }
+
+        /* info code from SantaKlauss at http://www.madaboutstyle.com/tooltip2.html */
+        a.info {
+                /* This is the key. */
+                position: relative;
+                z-index: 24;
+                text-decoration: none;
+        }
+        a.info:hover {
+                z-index: 25;
+                color: #FFF; background-color: #900;
+        }
+        a.info span { display: none; }
+        a.info:hover span.info {
+                /* The span will display just on :hover state. */
+                display: block;
+                position: absolute;
+                font-size: smaller;
+                top: 2em; left: -5em; width: 15em;
+                padding: 2px; border: 1px solid #333;
+                color: #900; background-color: #EEE;
+                text-align: left;
+        }
+
+        a { font-weight: bold; }
+        a:link    { color: #900; background-color: transparent; }
+        a:visited { color: #633; background-color: transparent; }
+        a:active  { color: #633; background-color: transparent; }
+
+        p { margin-left: 2em; margin-right: 2em; }
+        p.copyright { font-size: x-small; }
+        p.toc { font-size: small; font-weight: bold; margin-left: 3em; }
+        table.toc { margin: 0 0 0 3em; padding: 0; border: 0; vertical-align: text-top; }
+        td.toc { font-size: small; font-weight: bold; vertical-align: text-top; }
+
+        ol.text { margin-left: 2em; margin-right: 2em; }
+        ul.text { margin-left: 2em; margin-right: 2em; }
+        li      { margin-left: 3em; }
+
+        /* RFC-2629 <spanx>s and <artwork>s. */
+        em     { font-style: italic; }
+        strong { font-weight: bold; }
+        dfn    { font-weight: bold; font-style: normal; }
+        cite   { font-weight: normal; font-style: normal; }
+        tt     { color: #036; }
+        tt, pre, pre dfn, pre em, pre cite, pre span {
+                font-family: "Courier New", Courier, monospace; font-size: small;
+        }
+        pre {
+                text-align: left; padding: 4px;
+                color: #000; background-color: #CCC;
+        }
+        pre dfn  { color: #900; }
+        pre em   { color: #66F; background-color: #FFC; font-weight: normal; }
+        pre .key { color: #33C; font-weight: bold; }
+        pre .id  { color: #900; }
+        pre .str { color: #000; background-color: #CFF; }
+        pre .val { color: #066; }
+        pre .rep { color: #909; }
+        pre .oth { color: #000; background-color: #FCF; }
+        pre .err { background-color: #FCC; }
+
+        /* RFC-2629 <texttable>s. */
+        table.all, table.full, table.headers, table.none {
+                font-size: small; text-align: center; border-width: 2px;
+                vertical-align: top; border-collapse: collapse;
+        }
+        table.all, table.full { border-style: solid; border-color: black; }
+        table.headers, table.none { border-style: none; }
+        th {
+                font-weight: bold; border-color: black;
+                border-width: 2px 2px 3px 2px;
+        }
+        table.all th, table.full th { border-style: solid; }
+        table.headers th { border-style: none none solid none; }
+        table.none th { border-style: none; }
+        table.all td {
+                border-style: solid; border-color: #333;
+                border-width: 1px 2px;
+        }
+        table.full td, table.headers td, table.none td { border-style: none; }
+
+        hr { height: 1px; }
+        hr.insert {
+                width: 80%; border-style: none; border-width: 0;
+                color: #CCC; background-color: #CCC;
+        }
+--></style>
+</head>
+<body>
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<table summary="layout" width="66%" border="0" cellpadding="0" cellspacing="0"><tr><td><table summary="layout" width="100%" border="0" cellpadding="2" cellspacing="1">
+<tr><td class="header">Network Working Group</td><td class="header">C. Jennings</td></tr>
+<tr><td class="header">Internet-Draft</td><td class="header">S. Nandakumar</td></tr>
+<tr><td class="header">Intended status:  Informational</td><td class="header">Cisco</td></tr>
+<tr><td class="header">Expires:  April 22, 2012</td><td class="header">C. Holmberg</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">Ericsson</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">October 20, 2011</td></tr>
+</table></td></tr></table>
+<h1><br />SIP to RTCWeb Offer/Answer Protocol (ROAP)
+    Gateway<br />draft-jennings-rtcweb-signaling-gateway-00</h1>
+
+<h3>Abstract</h3>
+
+<p>This document proposes behavior of a RTCWeb signaling gateway for
+      mapping message representations between RTCWeb Offer/Answer Protocol
+      (ROAP) scheme and native SIP messaging scheme. Such a signaling gateway
+      is intended to translate to and from/SIP for enabling use cases between
+      a RTCWeb enabled browser and legacy SIP devices.
+</p>
+<h3>Status of this Memo</h3>
+<p>
+This Internet-Draft is submitted  in full
+conformance with the provisions of BCP&nbsp;78 and BCP&nbsp;79.</p>
+<p>
+Internet-Drafts are working documents of the Internet Engineering
+Task Force (IETF).  Note that other groups may also distribute
+working documents as Internet-Drafts.  The list of current
+Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
+<p>
+Internet-Drafts are draft documents valid for a maximum of six months
+and may be updated, replaced, or obsoleted by other documents at any time.
+It is inappropriate to use Internet-Drafts as reference material or to cite
+them other than as &ldquo;work in progress.&rdquo;</p>
+<p>
+This Internet-Draft will expire on April 22, 2012.</p>
+
+<h3>Copyright Notice</h3>
+<p>
+Copyright (c) 2011 IETF Trust and the persons identified as the
+document authors.  All rights reserved.</p>
+<p>
+This document is subject to BCP 78 and the IETF Trust's Legal
+Provisions Relating to IETF Documents
+(http://trustee.ietf.org/license-info) in effect on the date of
+publication of this document.  Please review these documents
+carefully, as they describe your rights and restrictions with respect
+to this document. Code Components extracted from this document must
+include Simplified BSD License text as described in Section 4.e of
+the Trust Legal Provisions and are provided without warranty as
+described in the Simplified BSD License.</p>
+<a name="toc"></a><br /><hr />
+<h3>Table of Contents</h3>
+<p class="toc">
+<a href="#anchor1">1.</a>&nbsp;
+Introduction<br />
+<a href="#anchor2">2.</a>&nbsp;
+Mapping to SIP<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor3">2.1.</a>&nbsp;
+Handling SIP Requests<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor4">2.2.</a>&nbsp;
+Handling SIP Responses<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor5">2.3.</a>&nbsp;
+Handling Web Messages<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor6">2.4.</a>&nbsp;
+Limitations<br />
+<a href="#sec-sec">3.</a>&nbsp;
+Security Considerations<br />
+<a href="#anchor7">4.</a>&nbsp;
+IANA Considerations<br />
+<a href="#anchor8">5.</a>&nbsp;
+Acknowledgments<br />
+<a href="#rfc.references1">6.</a>&nbsp;
+References<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#rfc.references1">6.1.</a>&nbsp;
+Normative References<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#rfc.references2">6.2.</a>&nbsp;
+Informative References<br />
+<a href="#rfc.authors">&#167;</a>&nbsp;
+Authors' Addresses<br />
+</p>
+<br clear="all" />
+
+<a name="anchor1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.1"></a><h3>1.&nbsp;
+Introduction</h3>
+
+<p>This specification suggests one possible way to build a RTCWeb
+      Signaling gateway that maps message representations proposed in <a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a> to native SIP <a class='info' href='#RFC3261'>[RFC3261]<span> (</span><span class='info'>Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston, A., Peterson, J., Sparks, R., Handley, M., and E. Schooler, &ldquo;SIP: Session Initiation Protocol,&rdquo; June&nbsp;2002.</span><span>)</span></a>
+      messages and vice-versa. The specification <a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>
+      describes a signaling protocol for RTCWeb to support negotiation of
+      media session using SDP offer/answer <a class='info' href='#RFC3264'>[RFC3264]<span> (</span><span class='info'>Rosenberg, J. and H. Schulzrinne, &ldquo;An Offer/Answer Model with Session Description Protocol           (SDP),&rdquo; June&nbsp;2002.</span><span>)</span></a>.
+      Such a singaling protocol enables an RTCWeb browser to setup media
+      sessions to another browser or a SIP device. For Browser-to-SIP device
+      use case, the signaling gateway connects to legacy SIP devices such and
+      SHALL translate messages between ROAP and SIP native messages
+      schemes.
+</p>
+<a name="anchor2"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2"></a><h3>2.&nbsp;
+Mapping to SIP</h3>
+
+<p>The design requires the gateway to be SIP transaction statefull but
+      does not require any storage of longer term state. The information that
+      remains constant over the SIP dialog is stored in session tokens while
+      the information that is needed to from a SIP response is stored in
+      response tokens. The gateway appears as a SIP UA to the sip side.
+      Message on the two sides of the signalling gateway are referred to as
+      the SIP side and web side.
+</p>
+<p>The following message flows shows an example where the callee is on
+      the web side and uses a signaling gateway to reach the callee on the SIP
+      side.
+</p><div><img src="w2p.png" alt="Go Read the TXT version of this draft" /></div>
+</div>
+
+<a name="anchor3"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.1"></a><h3>2.1.&nbsp;
+Handling SIP Requests</h3>
+
+<p>When the signalling gateway receives a SIP request, the gateway
+        forms the message on the web request side in the following way: </p>
+<ol class="text">
+<li>The SIP methods INVITE, ACK, BYE, CANCEL are mapped to
+            messageType OFFER, OK, SHUTDOWN, SHUTDOWN respectively
+</li>
+<li>The Seq on web side is formed from the numeric portion of CSeq
+            header field value from the SIP side.
+</li>
+<li>The callerSessionId is formed by a JSON object string that has
+            an call-id attribute containing the SIP call-id header field value
+            and a from-tag attribute containing the SIP from-tag.
+</li>
+<li>If there is a SIP to-tag, it is used for the
+            calleeSessionId.
+</li>
+<li>If there is a SIP body containing SDP, it is copied into the
+            SDP parameter on web side.
+</li>
+<li>The setSessionToken is formed by a JSON object string that has
+            and contact attribute that contains the SIP contact header field
+            value and an route attribute which is an array that has the values
+            of the SIP route header field values in reverse order.
+</li>
+<li>The setResponseToken formed by a JSON object string that has
+            and via attribute that is an array containing the SIP via headers
+            field values. The JSON object also includes an attribute that
+            holds the request method. The gateway MAY include any other SIP
+            headers in an attribute named headers which is an array with one
+            header field in each entry.
+</li>
+</ol>
+
+<a name="anchor4"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.2"></a><h3>2.2.&nbsp;
+Handling SIP Responses</h3>
+
+<p>When the signalling gateway receives a SIP response, the gateway
+        forms the message on the web request side in the following way: </p>
+<ol class="text">
+<li>The SIP responses 180 is mapped to ANSWER with more_coming. A
+            200 response that contains SDP is mapped to ANSWER. 481 is mapped
+            to NOMATCH. 408 is mapped to TIMEOUT. 486 is mapped to REFUSED.
+            491 is mapped to CONFLICT. All other SIP 3xx to 6xx responses are
+            mapped to FAILED.
+</li>
+<li>The Seq on web side is formed from the numeric portion of CSeq
+            header field value from the SIP side.
+</li>
+<li>The callerSessionId is formed by a JSON object string that has
+            an call-id attribute containing the SIP call-id header field value
+            and a from-tag attribute containing the SIP from-tag.
+</li>
+<li>The SIP to-tag is used for the calleeSessionId.
+</li>
+<li>If there is a SIP body containing SDP, it is copied into the
+            SDP parameter on web side.
+</li>
+<li>The setSessionToken is formed by a JSON object string that has
+            and contact attribute that contains the SIP contact header field
+            value and an route attribute which is an array that has the values
+            of the SIP route header field values.
+</li>
+<li>The setResponseToken formed by a JSON object string that has
+            and via attribute that is an array containing the SIP via headers
+            field values. The gateway MAY include any other SIP headers in an
+            attribute named headers which is an array with one header field in
+            each entry.
+</li>
+</ol>
+
+<a name="anchor5"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.3"></a><h3>2.3.&nbsp;
+Handling Web Messages</h3>
+
+<p>When the signalling gateway receives a WEB message, the gateway
+        forms the message on the SIP side in the following way: </p>
+<ol class="text">
+<li>The messageType OFFER, ANSWER with more_coming, ANSWER, OK,
+            NOMATCH, TIMEOUT, REFUSED, CONFLICT, FAILED are mapped to INVITE,
+            180, 200, ACK, 481, 408, 486, 491, 500 respectively.
+</li>
+<li>The messageType SHUTDOWN is mapped to a CANCEL if the
+            calleeSessionId is empty and to BYE otherwise
+</li>
+<li>For SIP responses, The numeric portion of the CSeq is formed by
+            taking the number portion from the Seq field. If the
+            setResponseToken contains a method name, that is used for the
+            method portion of the CSeq otherwise if it does not exist, the
+            request method of the SIP message is used.
+</li>
+<li>The Call-ID header field values is formed from the call-id
+            attribute of the callerSessionId.
+</li>
+<li>The from-tag is formed from the from-tag attribute of the
+            callerSessionId.
+</li>
+<li>If there is a calleeSessionId, it is used for the SIP
+            to-tag.
+</li>
+<li>If there is a SDP parameter, it is used as a SIP SDP body and
+            the content type of and content length headers are set
+            appropriately.
+</li>
+<li>If there is a sessionToken that contains a contact attribute,
+            it is used to form the SIP contact header field value.
+</li>
+<li>If there is a sessionToken that contains a route array, it is
+            used to form the SIP route header field values.
+</li>
+<li>If there is a responseToken that contains a via array, it is
+            used to form the SIP via header field values.
+</li>
+</ol>
+
+<a name="anchor6"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.4"></a><h3>2.4.&nbsp;
+Limitations</h3>
+
+<p>The following things, if used on the SIP side, will not
+        interoperate:
+</p>
+<p></p>
+<ul class="text">
+<li>Redirection via 3xx
+</li>
+<li>UPDATE / PRACK
+</li>
+<li>REFER
+</li>
+<li>SIP to pre RFC 3261 devices that don't support to and from
+            tags.
+</li>
+<li>SUB/NOTify
+</li>
+<li>SIP INVITES that do not contain an SDP offer
+</li>
+<li>SIP extensions to RFC 3261.
+</li>
+</ul>
+
+<a name="sec-sec"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3"></a><h3>3.&nbsp;
+Security Considerations</h3>
+
+<p>TBD
+</p>
+<a name="anchor7"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4"></a><h3>4.&nbsp;
+IANA Considerations</h3>
+
+<p>This document requires no actions from IANA.
+</p>
+<a name="anchor8"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5"></a><h3>5.&nbsp;
+Acknowledgments</h3>
+
+<p>Many thanks for comment, ideas, and text from Eric Rescorla, Harald
+      Alvestrand, Magnus Westerlund, Ted Hardie, and Stefan Hakansson.
+</p>
+<a name="rfc.references"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6"></a><h3>6.&nbsp;
+References</h3>
+
+<a name="rfc.references1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>6.1.&nbsp;Normative References</h3>
+<table width="99%" border="0">
+<tr><td class="author-text" valign="top"><a name="RFC3264">[RFC3264]</a></td>
+<td class="author-text">Rosenberg, J. and H. Schulzrinne, &ldquo;<a href="http://tools.ietf.org/html/rfc3264">An Offer/Answer Model with Session Description Protocol
+          (SDP)</a>,&rdquo; RFC&nbsp;3264, June&nbsp;2002 (<a href="http://www.rfc-editor.org/rfc/rfc3264.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC2119">[RFC2119]</a></td>
+<td class="author-text"><a href="mailto:sob@harvard.edu">Bradner, S.</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate
+          Requirement Levels</a>,&rdquo; BCP&nbsp;14, RFC&nbsp;2119, March&nbsp;1997 (<a href="http://www.rfc-editor.org/rfc/rfc2119.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2119.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2119.xml">XML</a>).</td></tr>
+</table>
+
+<a name="rfc.references2"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>6.2.&nbsp;Informative References</h3>
+<table width="99%" border="0">
+<tr><td class="author-text" valign="top"><a name="RFC3261">[RFC3261]</a></td>
+<td class="author-text">Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston, A., Peterson, J., Sparks, R., Handley, M., and E. Schooler, &ldquo;<a href="http://tools.ietf.org/html/rfc3261">SIP: Session Initiation Protocol</a>,&rdquo; RFC&nbsp;3261, June&nbsp;2002 (<a href="http://www.rfc-editor.org/rfc/rfc3261.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="I-D.ietf-rtcweb-use-cases-and-requirements">[I-D.ietf-rtcweb-use-cases-and-requirements]</a></td>
+<td class="author-text">Holmberg, C., Hakansson, S., and G. Eriksson, &ldquo;<a href="http://www.ietf.org/internet-drafts/draft-ietf-rtcweb-use-cases-and-requirements-06.txt">Web Real-Time Communication Use-cases and
+          Requirements</a>,&rdquo; draft-ietf-rtcweb-use-cases-and-requirements-06 (work in progress), October&nbsp;2011 (<a href="http://www.ietf.org/internet-drafts/draft-ietf-rtcweb-use-cases-and-requirements-06.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="ROAP">[ROAP]</a></td>
+<td class="author-text">Jennings, C. and J. Rosenberg, &ldquo;<a href="http://www.ietf.org/internet-drafts/draft-jennings-rtcweb-signaling.txt">RTCWeb Offer/Answer Protocol (ROAP)</a>,&rdquo; draft-jennings-rtcweb-signaling (work in progress), October&nbsp;2011 (<a href="http://svn.resiprocate.org/rep/ietf-drafts/fluffy/draft-jennings-rtcweb-signaling.txt">TXT</a>).</td></tr>
+</table>
+
+<a name="rfc.authors"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>Authors' Addresses</h3>
+<table width="99%" border="0" cellpadding="0" cellspacing="0">
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Cullen Jennings</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Cisco</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">170 West Tasman Drive</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">San Jose, CA  95134</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">USA</td></tr>
+<tr><td class="author" align="right">Phone:&nbsp;</td>
+<td class="author-text">+1 408 421-9990</td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:fluffy@cisco.com">fluffy@cisco.com</a></td></tr>
+<tr cellpadding="3"><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Suhas Nandakumar</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Cisco</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">170 West Tasman Drive</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">San Jose, CA  95134</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">USA</td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:snandaku@cisco.com">snandaku@cisco.com</a></td></tr>
+<tr cellpadding="3"><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Christer Holmberg</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Ericsson</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Hirsalantie 11</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Jorvas  02420</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Finland</td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:christer.holmberg@ericsson.com">christer.holmberg@ericsson.com</a></td></tr>
+</table>
+</body></html>

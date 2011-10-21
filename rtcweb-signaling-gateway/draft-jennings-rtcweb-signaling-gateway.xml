@@ -10,10 +10,11 @@
 <?rfc colonspace="yes" ?>
 <?rfc rfcedstyle="no" ?>
 <?rfc tocdepth="4"?>
-<rfc category="std" docName="draft-jennings-rtcweb-signaling-gateway-00"
-     ipr="pre5378Trust200902">
+<rfc category="info" docName="draft-jennings-rtcweb-signaling-gateway-00"
+     ipr="trust200902">
   <front>
-    <title abbrev="SIP2ROAP">SIP to RTCWeb Offer/Answer Protocol (ROAP) Gateway</title>
+    <title abbrev="SIP2ROAP">SIP to RTCWeb Offer/Answer Protocol (ROAP)
+    Gateway</title>
 
     <author fullname="Cullen Jennings" initials="C." surname="Jennings">
       <organization>Cisco</organization>
@@ -36,82 +37,88 @@
         <email>fluffy@cisco.com</email>
       </address>
     </author>
-    
+
     <author fullname="Suhas Nandakumar" initials="S." surname="Nandakumar">
       <organization>Cisco</organization>
-      
+
       <address>
         <postal>
           <street>170 West Tasman Drive</street>
+
           <city>San Jose</city>
+
           <region>CA</region>
+
           <code>95134</code>
+
           <country>USA</country>
         </postal>
+
         <email>snandaku@cisco.com</email>
       </address>
     </author>
-    
+
     <author fullname="Christer Holmberg" initials="C." surname="Holmberg">
       <organization>Ericsson</organization>
-      
+
       <address>
         <postal>
-          <street>Hirsalantie 11 </street>
+          <street>Hirsalantie 11</street>
+
           <region>Jorvas</region>
+
           <code>02420</code>
+
           <country>Finland</country>
         </postal>
+
         <email>christer.holmberg@ericsson.com</email>
       </address>
     </author>
-    
 
     <date day="20" month="October" year="2011" />
 
     <area>RAI</area>
 
     <abstract>
-      <t>This document proposes behavior of a RTCWeb signaling gateway for 
+      <t>This document proposes behavior of a RTCWeb signaling gateway for
       mapping message representations between RTCWeb Offer/Answer Protocol
-      (ROAP) scheme and native SIP messaging scheme. Such a signaling gateway 
-      is intended to translate to and from/SIP for enabling use cases between a 
-      RTCWeb enabled browser and legacy SIP devices.
-      </t>
-      
+      (ROAP) scheme and native SIP messaging scheme. Such a signaling gateway
+      is intended to translate to and from/SIP for enabling use cases between
+      a RTCWeb enabled browser and legacy SIP devices.</t>
     </abstract>
   </front>
 
   <middle>
     <section title="Introduction">
-      <t>This specification suggests one possible way to build a RTCWeb 
-      Signaling gateway that maps message representations proposed in 
-      <xref target="ROAP"></xref> to native SIP  <xref target="RFC3261">
-      </xref> messages and vice-versa. The specification <xref target="ROAP">
-      </xref> describes a signaling protocol for RTCWeb to support negotiation
-      of media session using SDP offer/answer <xref target="RFC3264"></xref>.
-      Such a singaling protocol enables an RTCWeb browser to setup media sessions
-      to another browser or a SIP device. For Browser-to-SIP device use case, the 
-      signaling gateway connects to legacy SIP devices such and SHALL translate 
-      messages between ROAP and SIP native messages schemes.</t>
-     </section>
+      <t>This specification suggests one possible way to build a RTCWeb
+      Signaling gateway that maps message representations proposed in <xref
+      target="ROAP"></xref> to native SIP <xref target="RFC3261"> </xref>
+      messages and vice-versa. The specification <xref target="ROAP"> </xref>
+      describes a signaling protocol for RTCWeb to support negotiation of
+      media session using SDP offer/answer <xref target="RFC3264"></xref>.
+      Such a singaling protocol enables an RTCWeb browser to setup media
+      sessions to another browser or a SIP device. For Browser-to-SIP device
+      use case, the signaling gateway connects to legacy SIP devices such and
+      SHALL translate messages between ROAP and SIP native messages
+      schemes.</t>
+    </section>
 
-     <section title="Mapping to SIP">
-     <t>The design requires the gateway to be SIP transaction statefull but
+    <section title="Mapping to SIP">
+      <t>The design requires the gateway to be SIP transaction statefull but
       does not require any storage of longer term state. The information that
       remains constant over the SIP dialog is stored in session tokens while
       the information that is needed to from a SIP response is stored in
       response tokens. The gateway appears as a SIP UA to the sip side.
       Message on the two sides of the signalling gateway are referred to as
       the SIP side and web side.</t>
-    
-    <t>The following message flows shows an example where the callee is on
+
+      <t>The following message flows shows an example where the callee is on
       the web side and uses a signaling gateway to reach the callee on the SIP
       side.</t>
-    
-    <figure>
-      <artwork alt="Go Read the TXT version of this draft"
-        src="w2p.png"><![CDATA[
+
+      <figure>
+        <artwork alt="Go Read the TXT version of this draft" src="w2p.png"><![CDATA[
 participant CallerUA
 participant CallerJS
 participant SIPGW
@@ -178,147 +185,145 @@ SIPGW->CallerJS: {"type":"OK"}
 CallerJS->CallerUA: peer->processSignalingMessage();
 
             ]]></artwork>
-    </figure>
-    
+      </figure>
+
       <section title="Handling SIP Requests">
-      <t>When the signalling gateway receives a SIP request, the gateway
-       forms the message on the web request side in the following way: <list
-       style="numbers">
-          <t>The SIP methods INVITE, ACK, BYE, CANCEL are mapped to
+        <t>When the signalling gateway receives a SIP request, the gateway
+        forms the message on the web request side in the following way: <list
+            style="numbers">
+            <t>The SIP methods INVITE, ACK, BYE, CANCEL are mapped to
             messageType OFFER, OK, SHUTDOWN, SHUTDOWN respectively</t>
-          
-          <t>The Seq on web side is formed from the numeric portion of CSeq
+
+            <t>The Seq on web side is formed from the numeric portion of CSeq
             header field value from the SIP side.</t>
-          
-          <t>The callerSessionId is formed by a JSON object string that has
+
+            <t>The callerSessionId is formed by a JSON object string that has
             an call-id attribute containing the SIP call-id header field value
             and a from-tag attribute containing the SIP from-tag.</t>
-          
-          <t>If there is a SIP to-tag, it is used for the
+
+            <t>If there is a SIP to-tag, it is used for the
             calleeSessionId.</t>
-          
-          <t>If there is a SIP body containing SDP, it is copied into the
+
+            <t>If there is a SIP body containing SDP, it is copied into the
             SDP parameter on web side.</t>
-          
-          <t>The setSessionToken is formed by a JSON object string that has
+
+            <t>The setSessionToken is formed by a JSON object string that has
             and contact attribute that contains the SIP contact header field
             value and an route attribute which is an array that has the values
             of the SIP route header field values in reverse order.</t>
-          
-          <t>The setResponseToken formed by a JSON object string that has
+
+            <t>The setResponseToken formed by a JSON object string that has
             and via attribute that is an array containing the SIP via headers
             field values. The JSON object also includes an attribute that
             holds the request method. The gateway MAY include any other SIP
             headers in an attribute named headers which is an array with one
             header field in each entry.</t>
-        </list></t>
-    </section>
-    
+          </list></t>
+      </section>
+
       <section title="Handling SIP Responses">
-      <t>When the signalling gateway receives a SIP response, the gateway
+        <t>When the signalling gateway receives a SIP response, the gateway
         forms the message on the web request side in the following way: <list
-          style="numbers">
-          <t>The SIP responses 180 is mapped to TENTATIVE_ANSWER. A 200
-            response that contains SDP is mapped to ANSWER. 481 is mapped to
-            NOMATCH. 408 is mapped to TIMEOUT. 486 is mapped to REFUSED. 491
-            is mapped to CONFLICT. All other SIP 3xx to 6xx responses are
+            style="numbers">
+            <t>The SIP responses 180 is mapped to ANSWER with more_coming. A
+            200 response that contains SDP is mapped to ANSWER. 481 is mapped
+            to NOMATCH. 408 is mapped to TIMEOUT. 486 is mapped to REFUSED.
+            491 is mapped to CONFLICT. All other SIP 3xx to 6xx responses are
             mapped to FAILED.</t>
-          
-          <t>The Seq on web side is formed from the numeric portion of CSeq
+
+            <t>The Seq on web side is formed from the numeric portion of CSeq
             header field value from the SIP side.</t>
-          
-          <t>The callerSessionId is formed by a JSON object string that has
+
+            <t>The callerSessionId is formed by a JSON object string that has
             an call-id attribute containing the SIP call-id header field value
             and a from-tag attribute containing the SIP from-tag.</t>
-          
-          <t>The SIP to-tag is used for the calleeSessionId.</t>
-          
-          <t>If there is a SIP body containing SDP, it is copied into the
+
+            <t>The SIP to-tag is used for the calleeSessionId.</t>
+
+            <t>If there is a SIP body containing SDP, it is copied into the
             SDP parameter on web side.</t>
-          
-          <t>The setSessionToken is formed by a JSON object string that has
+
+            <t>The setSessionToken is formed by a JSON object string that has
             and contact attribute that contains the SIP contact header field
             value and an route attribute which is an array that has the values
             of the SIP route header field values.</t>
-          
-          <t>The setResponseToken formed by a JSON object string that has
+
+            <t>The setResponseToken formed by a JSON object string that has
             and via attribute that is an array containing the SIP via headers
             field values. The gateway MAY include any other SIP headers in an
             attribute named headers which is an array with one header field in
             each entry.</t>
-        </list></t>
+          </list></t>
       </section>
-    
+
       <section title="Handling Web Messages">
-      <t>When the signalling gateway receives a WEB message, the gateway
+        <t>When the signalling gateway receives a WEB message, the gateway
         forms the message on the SIP side in the following way: <list
-          style="numbers">
-          <t>The messageType OFFER, TENTATIVE_ANSWER, ANSWER, OK, NOMATCH,
-            TIMEOUT, REFUSED, CONFLICT, FAILED are mapped to INVITE, 180, 200,
-            ACK, 481, 408, 486, 491, 500 respectively.</t>
-          
-          <t>The messageType SHUTDOWN is mapped to a CANCEL if the
+            style="numbers">
+            <t>The messageType OFFER, ANSWER with more_coming, ANSWER, OK,
+            NOMATCH, TIMEOUT, REFUSED, CONFLICT, FAILED are mapped to INVITE,
+            180, 200, ACK, 481, 408, 486, 491, 500 respectively.</t>
+
+            <t>The messageType SHUTDOWN is mapped to a CANCEL if the
             calleeSessionId is empty and to BYE otherwise</t>
-          
-          <t>For SIP responses, The numeric portion of the CSeq is formed by
+
+            <t>For SIP responses, The numeric portion of the CSeq is formed by
             taking the number portion from the Seq field. If the
             setResponseToken contains a method name, that is used for the
             method portion of the CSeq otherwise if it does not exist, the
             request method of the SIP message is used.</t>
-          
-          <t>The Call-ID header field values is formed from the call-id
+
+            <t>The Call-ID header field values is formed from the call-id
             attribute of the callerSessionId.</t>
-          
-          <t>The from-tag is formed from the from-tag attribute of the
+
+            <t>The from-tag is formed from the from-tag attribute of the
             callerSessionId.</t>
-          
-          <t>If there is a calleeSessionId, it is used for the SIP
+
+            <t>If there is a calleeSessionId, it is used for the SIP
             to-tag.</t>
-          
-          <t>If there is a SDP parameter, it is used as a SIP SDP body and
+
+            <t>If there is a SDP parameter, it is used as a SIP SDP body and
             the content type of and content length headers are set
             appropriately.</t>
-          
-          <t>If there is a sessionToken that contains a contact attribute,
+
+            <t>If there is a sessionToken that contains a contact attribute,
             it is used to form the SIP contact header field value.</t>
-          
-          <t>If there is a sessionToken that contains a route array, it is
+
+            <t>If there is a sessionToken that contains a route array, it is
             used to form the SIP route header field values.</t>
-          
-          <t>If there is a responseToken that contains a via array, it is
+
+            <t>If there is a responseToken that contains a via array, it is
             used to form the SIP via header field values.</t>
-        </list></t>
+          </list></t>
       </section>
-    
+
       <section title="Limitations">
-      <t>The following things, if used on the SIP side, will not
+        <t>The following things, if used on the SIP side, will not
         interoperate:</t>
-      
-      <t><list style="symbols">
-        <t>Forking</t>
-        
-        <t>Redirection via 3xx</t>
-        
-        <t>UPDATE / PRACK</t>
-        
-        <t>REFER</t>
-        
-        <t>SIP to pre RFC 3261 devices that don't support to and from
-          tags.</t>
-        
-        <t>SUB/NOTify</t>
-        
-        <t>OFFERS that do not use early offer</t>
-        
-        <t>SIP extensions to RFC 3261.</t>
-      </list></t>
+
+        <t><list style="symbols">
+            <t>Redirection via 3xx</t>
+
+            <t>UPDATE / PRACK</t>
+
+            <t>REFER</t>
+
+            <t>SIP to pre RFC 3261 devices that don't support to and from
+            tags.</t>
+
+            <t>SUB/NOTify</t>
+
+            <t>SIP INVITES that do not contain an SDP offer</t>
+
+            <t>SIP extensions to RFC 3261.</t>
+          </list></t>
+      </section>
     </section>
-    </section>
-    
+
     <section anchor="sec-sec" title="Security Considerations">
       <t>TBD</t>
     </section>
-    
+
     <section title="IANA Considerations">
       <t>This document requires no actions from IANA.</t>
     </section>
@@ -331,7 +336,6 @@ CallerJS->CallerUA: peer->processSignalingMessage();
 
   <back>
     <references title="Normative References">
-
       <reference anchor="RFC3264">
         <front>
           <title>An Offer/Answer Model with Session Description Protocol
@@ -400,7 +404,6 @@ CallerJS->CallerUA: peer->processSignalingMessage();
                 target="http://xml.resource.org/public/rfc/xml/rfc2119.xml"
                 type="XML" />
       </reference>
-
     </references>
 
     <references title="Informative References">
@@ -450,9 +453,6 @@ CallerJS->CallerUA: peer->processSignalingMessage();
                 target="http://www.rfc-editor.org/rfc/rfc3261.txt" type="TXT" />
       </reference>
 
-      
-    
-
       <reference anchor="I-D.ietf-rtcweb-use-cases-and-requirements">
         <front>
           <title>Web Real-Time Communication Use-cases and
@@ -487,40 +487,40 @@ CallerJS->CallerUA: peer->processSignalingMessage();
         <format target="http://www.ietf.org/internet-drafts/draft-ietf-rtcweb-use-cases-and-requirements-06.txt"
                 type="TXT" />
       </reference>
-      
+
       <reference anchor="ROAP">
         <front>
           <title>RTCWeb Offer/Answer Protocol (ROAP)</title>
-          
+
           <author fullname="Cullen Jennings" initials="C." surname="Jennings">
             <organization></organization>
           </author>
-          
+
           <author fullname="Jonathan" initials="J." surname="Rosenberg">
             <organization></organization>
           </author>
-          
+
           <date day="14" month="October" year="2011" />
-         
+
           <abstract>
-            <t>This document describes an protocol used to negotiate media between
-              browsers or other compatible devices.  This protocol provides the
-              state machinery needed to implement the offer/answer model (RFC
-              3264), and defines the semantics and necessary attributes of messages
-              that must be exchanged.  The protocol uses an abstract transport in
-              that it does not actually define how these messages are exchanged.
-              Rather, such exchanges are handled through web-based transports like
-              HTTP or WebSockets.  The protocol focuses solely on media negotiation
-              and does not handle call control, call processing, or other
-              functions.</t>
+            <t>This document describes an protocol used to negotiate media
+            between browsers or other compatible devices. This protocol
+            provides the state machinery needed to implement the offer/answer
+            model (RFC 3264), and defines the semantics and necessary
+            attributes of messages that must be exchanged. The protocol uses
+            an abstract transport in that it does not actually define how
+            these messages are exchanged. Rather, such exchanges are handled
+            through web-based transports like HTTP or WebSockets. The protocol
+            focuses solely on media negotiation and does not handle call
+            control, call processing, or other functions.</t>
           </abstract>
         </front>
-        
+
         <seriesInfo name="Internet-Draft"
-          value="draft-jennings-rtcweb-signaling" />
-        
+                    value="draft-jennings-rtcweb-signaling" />
+
         <format target="http://svn.resiprocate.org/rep/ietf-drafts/fluffy/draft-jennings-rtcweb-signaling.txt"
-          type="TXT" />
+                type="TXT" />
       </reference>
     </references>
   </back>

@@ -1,5 +1,5 @@
-
-
+<html><head><title>wdiff draft-jennings-rtcweb-signaling-gateway.txt.old draft-jennings-rtcweb-signaling-gateway.txt</title></head><body>
+<pre>
 
 Network Working Group                                        C. Jennings
 Internet-Draft                                             S. Nandakumar
@@ -7,7 +7,6 @@ Intended status:  Informational                                    Cisco
 Expires:  April 22, 2012                                     C. Holmberg
                                                                 Ericsson
                                                         October 20, 2011
-
 
            SIP to RTCWeb Offer/Answer Protocol (ROAP) Gateway
                draft-jennings-rtcweb-signaling-gateway-00
@@ -49,17 +48,8 @@ Copyright Notice
    carefully, as they describe your rights and restrictions with respect
    to this document.  Code Components extracted from this document must
    include Simplified BSD License text as described in Section 4.e of
-
-
-
-Jennings, et al.         Expires April 22, 2012                 [Page 1]
-
-Internet-Draft                  SIP2ROAP                    October 2011
-
-
    the Trust Legal Provisions and are provided without warranty as
    described in the Simplified BSD License.
-
 
 Table of Contents
 
@@ -77,42 +67,6 @@ Table of Contents
      6.2.  Informative References  . . . . . . . . . . . . . . . . . . 7
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . . 7
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Jennings, et al.         Expires April 22, 2012                 [Page 2]
-
-Internet-Draft                  SIP2ROAP                    October 2011
-
-
 1.  Introduction
 
    This specification suggests one possible way to build a RTCWeb
@@ -125,7 +79,6 @@ Internet-Draft                  SIP2ROAP                    October 2011
    Browser-to-SIP device use case, the signaling gateway connects to
    legacy SIP devices such and SHALL translate messages between ROAP and
    SIP native messages schemes.
-
 
 2.  Mapping to SIP
 
@@ -146,84 +99,63 @@ Internet-Draft                  SIP2ROAP                    October 2011
   participant SIPGW
   participant CalleeUA
 
-  CallerJS->CallerUA: peer=new PeerConnection();
+  CallerJS-&gt;CallerUA: peer=new PeerConnection();
 
-  CallerJS->CallerUA: peer->addStream();
-  CallerUA->CallerJS: sendSignalingChannel();
-  CallerJS->SIPGW: {"type":"OFFER", "sdp":"..."}
-  SIPGW->CalleeUA: SIP INVITE
+  CallerJS-&gt;CallerUA: peer-&gt;addStream();
+  CallerUA-&gt;CallerJS: sendSignalingChannel();
+  CallerJS-&gt;SIPGW: {"type":"OFFER", "sdp":"..."}
+  SIPGW-&gt;CalleeUA: SIP INVITE
   note right of CalleeUA: Alert user
 
-  CalleeUA->CallerUA: ICE Checking
+  CalleeUA-&gt;CallerUA: ICE Checking
 
-  CalleeUA->SIPGW: SIP 180 w/SDP
-  SIPGW->CallerJS: {"type":"TENTATIVE_ANSWER", "sdp":"..."}
+  CalleeUA-&gt;SIPGW: SIP 180 w/SDP
+  SIPGW-&gt;CallerJS: {"type":"TENTATIVE_ANSWER", "sdp":"..."}
   note right of CallerJS: This SDP has ICE candidates
-  CallerJS->CallerUA: peer->processSignalingMessage();
-  CallerUA->CallerJS: onstatechange();
-
-
-
-Jennings, et al.         Expires April 22, 2012                 [Page 3]
-
-Internet-Draft                  SIP2ROAP                    October 2011
-
-
+  CallerJS-&gt;CallerUA: peer-&gt;processSignalingMessage();
+  CallerUA-&gt;CallerJS: onstatechange();
   note left of CallerUA: Might have one way\nmedia flowing at this point
 
-  CallerUA->CalleeUA: More ICE checking
-  CalleeUA->CallerUA: ICE Completes
-  CallerUA->CallerJS: onopen();
+  CallerUA-&gt;CalleeUA: More ICE checking
+  CalleeUA-&gt;CallerUA: ICE Completes
+  CallerUA-&gt;CallerJS: onopen();
 
-  CalleeUA->SIPGW: SIP 200
-  SIPGW->CallerJS: {"type":"ANSWER", "sdp":"..."}
-  CallerJS->CallerUA: peer->processSignalingMessage();
-  CallerUA->CallerJS: onopen();
+  CalleeUA-&gt;SIPGW: SIP 200
+  SIPGW-&gt;CallerJS: {"type":"ANSWER", "sdp":"..."}
+  CallerJS-&gt;CallerUA: peer-&gt;processSignalingMessage();
+  CallerUA-&gt;CallerJS: onopen();
 
-  CalleeUA->CallerUA: Two-way Media
+  CalleeUA-&gt;CallerUA: Two-way Media
   note right of CalleeUA: Media plays
 
-  CallerUA->CallerJS: sendSignalingChannel();
-  CallerJS->SIPGW: {"type":"OK" }
-  SIPGW->CalleeUA: SIP ACK
-
+  CallerUA-&gt;CallerJS: sendSignalingChannel();
+  CallerJS-&gt;SIPGW: {"type":"OK" }
+  SIPGW-&gt;CalleeUA: SIP ACK
 
   note right of CalleeUA: Callee decides to add video
 
-  CalleeUA->SIPGW: SIP ReINVITE
-  SIPGW->CallerJS: {"type":"OFFER", "sdp":"..."}
-  CallerJS->CallerUA: peer->processSignalingMessage();
+  CalleeUA-&gt;SIPGW: SIP ReINVITE
+  SIPGW-&gt;CallerJS: {"type":"OFFER", "sdp":"..."}
+  CallerJS-&gt;CallerUA: peer-&gt;processSignalingMessage();
 
-  CallerUA->CallerJS: sendSignalingChannel();
-  CallerJS->SIPGW: {"type":"ANSWER", "sdp":"..."}
-  SIPGW->CalleeUA: SIP 200
+  CallerUA-&gt;CallerJS: sendSignalingChannel();
+  CallerJS-&gt;SIPGW: {"type":"ANSWER", "sdp":"..."}
+  SIPGW-&gt;CalleeUA: SIP 200
 
-  CalleeUA->SIPGW: SIP ACK
-  SIPGW->CallerJS: {"type":"OK" }
-  CallerJS->CallerUA: peer->processSignalingMessage();
-  CallerUA->CallerJS: onaddstream();
-
+  CalleeUA-&gt;SIPGW: SIP ACK
+  SIPGW-&gt;CallerJS: {"type":"OK" }
+  CallerJS-&gt;CallerUA: peer-&gt;processSignalingMessage();
+  CallerUA-&gt;CallerJS: onaddstream();
 
   note left of CallerUA: Caller decides to end the session
 
-  CallerJS->CallerUA: peer->close();
-  CallerUA->CallerJS: sendSignalingChannel();
-  CallerJS->SIPGW: {"type":"SHUTDOWN"}
-  SIPGW->CalleeUA: SIP BYE
-  CalleeUA->SIPGW: SIP 200
-  SIPGW->CallerJS: {"type":"OK"}
-  CallerJS->CallerUA: peer->processSignalingMessage();
-
-
-
-
-
-
-
-Jennings, et al.         Expires April 22, 2012                 [Page 4]
-
-Internet-Draft                  SIP2ROAP                    October 2011
-
+  CallerJS-&gt;CallerUA: peer-&gt;close();
+  CallerUA-&gt;CallerJS: sendSignalingChannel();
+  CallerJS-&gt;SIPGW: {"type":"SHUTDOWN"}
+  SIPGW-&gt;CalleeUA: SIP BYE
+  CalleeUA-&gt;SIPGW: SIP 200
+  SIPGW-&gt;CallerJS: {"type":"OK"}
+  CallerJS-&gt;CallerUA: peer-&gt;processSignalingMessage();
 
 2.1.  Handling SIP Requests
 
@@ -272,15 +204,6 @@ Internet-Draft                  SIP2ROAP                    October 2011
        value and an route attribute which is an array that has the
        values of the SIP route header field values.
 
-
-
-
-
-Jennings, et al.         Expires April 22, 2012                 [Page 5]
-
-Internet-Draft                  SIP2ROAP                    October 2011
-
-
    7.  The setResponseToken formed by a JSON object string that has and
        via attribute that is an array containing the SIP via headers
        field values.  The gateway MAY include any other SIP headers in
@@ -328,30 +251,18 @@ Internet-Draft                  SIP2ROAP                    October 2011
    o  SIP INVITES that do not contain an SDP offer
    o  SIP extensions to RFC 3261.
 
-
-
-
-
-Jennings, et al.         Expires April 22, 2012                 [Page 6]
-
-Internet-Draft                  SIP2ROAP                    October 2011
-
-
 3.  Security Considerations
 
    TBD
-
 
 4.  IANA Considerations
 
    This document requires no actions from IANA.
 
-
 5.  Acknowledgments
 
    Many thanks for comment, ideas, and text from Eric Rescorla, Harald
    Alvestrand, Magnus Westerlund, Ted Hardie, and Stefan Hakansson.
-
 
 6.  References
 
@@ -381,18 +292,6 @@ Internet-Draft                  SIP2ROAP                    October 2011
               Protocol (ROAP)", draft-jennings-rtcweb-signaling (work in
               progress), October 2011.
 
-
-
-
-
-
-
-
-Jennings, et al.         Expires April 22, 2012                 [Page 7]
-
-Internet-Draft                  SIP2ROAP                    October 2011
-
-
 Authors' Addresses
 
    Cullen Jennings
@@ -404,7 +303,6 @@ Authors' Addresses
    Phone:  +1 408 421-9990
    Email:  fluffy@cisco.com
 
-
    Suhas Nandakumar
    Cisco
    170 West Tasman Drive
@@ -413,7 +311,6 @@ Authors' Addresses
 
    Email:  snandaku@cisco.com
 
-
    Christer Holmberg
    Ericsson
    Hirsalantie 11
@@ -421,28 +318,5 @@ Authors' Addresses
    Finland
 
    Email:  christer.holmberg@ericsson.com
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Jennings, et al.         Expires April 22, 2012                 [Page 8]
-
+</pre>
+</body></html>
