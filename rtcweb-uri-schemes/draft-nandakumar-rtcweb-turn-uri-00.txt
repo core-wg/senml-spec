@@ -1,0 +1,392 @@
+
+
+
+RTCWEB                                                     S. Nandakumar
+Internet-Draft                                              G. Salgueiro
+Intended status: Standards Track                                P. Jones
+Expires: April 23, 2012                                    Cisco Systems
+                                                        October 21, 2011
+
+
+    URI Scheme for Traversal Using Relays around NAT (TURN) Protocol
+                  draft-nandakumar-rtcweb-turn-uri-00
+
+Abstract
+
+   This document is the specification of the syntax and semantics of the
+   Uniform Resource Identifier (URI) scheme for the Traversal Using
+   Relays around NAT (TURN) protocol.
+
+Status of this Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at http://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on April 23, 2012.
+
+Copyright Notice
+
+   Copyright (c) 2011 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+
+
+Nandakumar, et al.       Expires April 23, 2012                 [Page 1]
+
+Internet-Draft             URI Scheme for TURN              October 2011
+
+
+Table of Contents
+
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . . . 3
+   2.  Terminology . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+   3.  URI Scheme Definition . . . . . . . . . . . . . . . . . . . . . 3
+     3.1.  URI Scheme Syntax . . . . . . . . . . . . . . . . . . . . . 3
+     3.2.  URI Scheme Semantics  . . . . . . . . . . . . . . . . . . . 4
+   4.  IANA Considerations . . . . . . . . . . . . . . . . . . . . . . 5
+   5.  Security Considerations . . . . . . . . . . . . . . . . . . . . 5
+   6.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . 5
+   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+     7.1.  Normative References  . . . . . . . . . . . . . . . . . . . 6
+     7.2.  Informative References  . . . . . . . . . . . . . . . . . . 6
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Nandakumar, et al.       Expires April 23, 2012                 [Page 2]
+
+Internet-Draft             URI Scheme for TURN              October 2011
+
+
+1.  Introduction
+
+   This document specifies the syntax and semantics of the Uniform
+   Resource Identifier (URI) scheme for the Traversal Using Relays
+   around NAT (TURN) protocol.
+
+   The TURN protocol is a specification allowing hosts behind NAT to
+   control the operation of a relay server.  The relay server allows
+   hosts to exchange packets with its peers.  The peers themselves may
+   also be behind NATs.  RFC 5766 [RFC5766] defines the specifics of the
+   TURN protocol.
+
+   The 'turn/turns' URI scheme is used to designate a TURN server (also
+   known as a relay) on Internet hosts accessible using the TURN
+   protocol.  Such an URI scheme allows a uniform way to describe,
+   configure and pass around the information identifyng a TURN server.
+   This would prevent the short-comings inherent with encoding similar
+   information in non-uniform syntaxes such as the ones proposed in
+   WEBRTC Standards [WEBRTC], for example.
+
+   The 'turn/turns' URI follows the common Internet scheme syntax as
+   defined in RFC 3986 [RFC3986].
+
+
+2.  Terminology
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in RFC 2119 [RFC2119].
+
+
+3.  URI Scheme Definition
+
+3.1.  URI Scheme Syntax
+
+   The 'turn' URI takes the following form (the syntax below is non-
+   normative):
+
+      turn:<userinfo>@<host>:<port>
+
+      turns:<userinfo>@<host>:<port>
+
+   where the <port> part and the preceding ":" (colon) character, is
+   OPTIONAL
+
+   The normative syntax of the 'turn' URI is defined as shown in the
+   following Augmented Backus-Naur Form (ABNF) [RFC5234] rule:
+
+
+
+
+Nandakumar, et al.       Expires April 23, 2012                 [Page 3]
+
+Internet-Draft             URI Scheme for TURN              October 2011
+
+
+      turn-uri      =  "turn:" [ userinfo "@" ] host [ ":" port ]
+      userinfo      =  user [ ":" password ]
+      user          =  1*(%x21-24 / %x26-3F / %x41-7F / escaped)
+                            ; The symbols "%", "@", and symbols with
+                            ; a character value below 0x21 may be
+                            ; represented as escaped sequences.
+      password      =  1*(%x21-24 / %x26-3F / %x41-7F / escaped)
+                            ; The symbols "%", "@", and symbols with
+                            ; a character value below 0x21 may be
+                            ; represented as escaped sequences.
+      host          =  hostname / IPv4address / IPv6reference
+      hostname      =  *( domainlabel "." ) toplabel [ "." ]
+      domainlabel   =  alphanum / alphanum *( alphanum / "-" ) alphanum
+      toplabel      =  ALPHA / ALPHA *( alphanum / "-" ) alphanum
+      IPv4address   =  1*3DIGIT "." 1*3DIGIT "." 1*3DIGIT "." 1*3DIGIT
+      IPv6reference =  "[" IPv6address "]"
+      IPV6address   =  hexpart [ ":" IPv4address ]
+      hexpart       =  hexseq / hexseq "::" [ hexseq ] / "::" [ hexseq ]
+      hexseq        =  hex4 *( ":" hex4 )
+      hex4          =  1*4HEXDIG
+      port          =  1*DIGIT
+      alphanum      =  ALPHA / DIGIT
+      escaped       =  "%" HEXDIG HEXDIG
+
+3.2.  URI Scheme Semantics
+
+   The TURN protocol supports sending messages over UDP, TCP or TLS-
+   over-TCP.  The 'turns' URI scheme SHALL be used when TURN is run over
+   TLS-over-TCP and the 'turn' scheme SHALL be used otherwise.  The
+   <host> part of the 'turn' URI, which is REQUIRED, denotes the TURN
+   server host.  The <userinfo> part, identifies the credential required
+   for the long-term crendential mechanism as described in the section 4
+   of RFC 5766 [RFC5766].  The <port> part, if present, denotes the port
+   on which the TURN server is awaiting connection requests.  If it is
+   absent, the default port SHALL be 3478 for both UDP and TCP.  The
+   default port for TURN over TLS SHALL be 5349.
+
+   Example:
+
+      turn:username:password@example.com
+
+      This example configuration SHALL identify a long-term credential
+      for the connection to TURN server, example.com, on default port
+      3478.
+
+
+
+
+
+
+
+Nandakumar, et al.       Expires April 23, 2012                 [Page 4]
+
+Internet-Draft             URI Scheme for TURN              October 2011
+
+
+4.  IANA Considerations
+
+   This document instructs IANA to register the 'turn' URI in the
+   "Permanent URI Schemes" sub-registry in the "Uniform Resource
+   Identifier (URI) Schemes" IANA registry [URIREG].  This registration
+   follows the URI Scheme Registration Template detailed in Section 5.4
+   of RFC 4395 [RFC4395].
+
+      URI scheme name: turn
+
+      Status: Permanent
+
+      URI scheme syntax: see Section 3.1 of RFC XXXX [This document]
+
+      URI scheme semantics: see Section 3.2 of RFC XXXX [This document]
+
+      URI scheme encoding considerations: there are no other encoding
+      considerations for 'turn' URIs that are not described in RFC 5766
+      [RFC5766].
+
+      Protocols that use the scheme: Traversal Using Relays around NAT
+      (TURN)
+
+      Security Considerations: see Section 5 of RFC XXXX [This document]
+
+      Contact: IESG <iesg@ietf.org>
+
+      Author/Change controller: IETF <ietf@ietf.org>
+
+      References: See Section 7 of RFC XXXX [This document]
+
+
+5.  Security Considerations
+
+   The URI Scheme defined by this document for the Traversal Using
+   Relays around NAT (TURN) protocol does not introduce any security
+   considerations beyond those detailed in Section 17 of RFC 5766
+   [RFC5766].
+
+
+6.  Acknowledgements
+
+   TBD
+
+
+7.  References
+
+
+
+
+
+Nandakumar, et al.       Expires April 23, 2012                 [Page 5]
+
+Internet-Draft             URI Scheme for TURN              October 2011
+
+
+7.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [RFC5234]  Crocker, D. and P. Overell, "Augmented BNF for Syntax
+              Specifications: ABNF", STD 68, RFC 5234, January 2008.
+
+   [RFC5766]  Mahy, R., Matthews, P., and J. Rosenberg, "Traversal Using
+              Relays around NAT (TURN): Relay Extensions to Session
+              Traversal Utilities for NAT (STUN)", RFC 5766, April 2010.
+
+7.2.  Informative References
+
+   [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
+              Resource Identifier (URI): Generic Syntax", STD 66,
+              RFC 3986, January 2005.
+
+   [RFC4395]  Hansen, T., Hardie, T., and L. Masinter, "Guidelines and
+              Registration Procedures for New URI Schemes", BCP 35,
+              RFC 4395, February 2006.
+
+   [URIREG]   Internet Assigned Numbers Authority (IANA) Registry,
+              "Uniform Resource Identifier (URI) Schemes",
+              <http://www.iana.org/assignments/uri-schemes.html> .
+
+   [WEBRTC]   W3C, "WebRTC 1.0: Real-time Communication Between
+              Browsers",
+              <http://dev.w3.org/2011/webrtc/editor/webrtc.html> .
+
+
+Authors' Addresses
+
+   Suhas Nandakumar
+   Cisco Systems
+   170 West Tasman Drive
+   San Jose, CA  95134
+   US
+
+   Email: snandaku@cisco.com
+
+
+
+
+
+
+
+
+
+
+
+Nandakumar, et al.       Expires April 23, 2012                 [Page 6]
+
+Internet-Draft             URI Scheme for TURN              October 2011
+
+
+   Gonzalo Salgueiro
+   Cisco Systems
+   7200-12 Kit Creek Road
+   Research Triangle Park, NC  27709
+   US
+
+   Email: gsalguei@cisco.com
+
+
+   Paul E. Jones
+   Cisco Systems
+   7025 Kit Creek Road
+   Research Triangle Park, NC  27709
+   US
+
+   Email: paulej@packetizer.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Nandakumar, et al.       Expires April 23, 2012                 [Page 7]
+
