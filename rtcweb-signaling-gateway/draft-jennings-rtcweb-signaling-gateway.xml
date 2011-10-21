@@ -96,10 +96,10 @@
       target="ROAP"></xref> to native SIP <xref target="RFC3261"> </xref>
       messages and vice-versa. The specification <xref target="ROAP"> </xref>
       describes a signaling protocol for RTCWeb to support negotiation of
-      media session using SDP offer/answer <xref target="RFC3264"></xref>.
-      Such a singaling protocol enables an RTCWeb browser to setup media
+      media session using SDP offer/answer <xref target="RFC3264"></xref> 
+      protocol.Such a singaling protocol enables an RTCWeb browser to setup media
       sessions to another browser or a SIP device. For Browser-to-SIP device
-      use case, the signaling gateway connects to legacy SIP devices such and
+      use case, the signaling gateway connects to legacy SIP devices  and
       SHALL translate messages between ROAP and SIP native messages
       schemes.</t>
     </section>
@@ -113,12 +113,20 @@
       Message on the two sides of the signalling gateway are referred to as
       the SIP side and web side.</t>
 
-      <t>The following message flows shows an example where the callee is on
-      the web side and uses a signaling gateway to reach the callee on the SIP
-      side.</t>
-
+    
+      <t>The following sub-sections show example message flows with detailed
+      message description of native SIP messages that are mapped from ROAP scheme
+      and the ones that are received as responses by the signaling gateway.
+      CallerUA(callerua@atlanta.example.com) is a RTCWeb browser.
+      CalleeUA(sip:calleeua@sippy.example.com) is assumed to be a SIP-enabled
+      device. It is also assumed that CalleeUA has registered with a SIP proxy
+      server to be able to receive the calls vai the proxy.</t>
+      
+    <section anchor="sec.successful-session" title="SuccessFull Session Establishment">
+    <t>In this scenario CallerUA establishes succesful media session with CalleUA, 
+     a legacy SIP end-point, with the help of the RTCWeb signaling gateway.</t>
       <figure>
-        <artwork alt="Go Read the TXT version of this draft" src="w2p.png"><![CDATA[
+        <artwork alt="Go Read the TXT version of this draft" src="sse.png"><![CDATA[
 participant CallerUA
 participant CallerJS
 participant SIPGW
@@ -135,7 +143,7 @@ note right of CalleeUA: Alert user
 CalleeUA->CallerUA: ICE Checking
 
 CalleeUA->SIPGW: SIP 180 w/SDP
-SIPGW->CallerJS: {"type":"TENTATIVE_ANSWER", "sdp":"..."}
+SIPGW->CallerJS: {"type":"ANSWER", "more-coming":"TRUE", "sdp":"..."}
 note right of CallerJS: This SDP has ICE candidates
 CallerJS->CallerUA: peer->processSignalingMessage();
 CallerUA->CallerJS: onstatechange();
@@ -151,11 +159,123 @@ CallerJS->CallerUA: peer->processSignalingMessage();
 CallerUA->CallerJS: onopen();
 
 CalleeUA->CallerUA: Two-way Media     
-note right of CalleeUA: Media plays
+note right of CalleeUA: Media plays 
 
 CallerUA->CallerJS: sendSignalingChannel();
 CallerJS->SIPGW: {"type":"OK" }
 SIPGW->CalleeUA: SIP ACK
+  ]]></artwork>
+      </figure>
+  <t>
+   Message Details
+  </t>
+   <t>
+     Signaling gateway (on behalf of CallerUA) maps ROAP:OFFER (section 5.3.1
+     of RAOP<xref target="ROAP"></xref>)  to SIP:INVITE and
+     sends it to CalleeUA to start the session.</t>
+    <figure><artwork><![CDATA[
+      {
+INVITE sip:calleeua@sippy.example.com SIP/2.0
+Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
+Max-Forwards: 70
+From: CallerUA <sip:callerua@atlanta.example.com>;tag=36707f69b
+To: CalleeUA <sip:calleeua@sippy.example.com>
+Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
+CSeq: 101 INVITE
+Contact: <sip:callerua@client.atlanta.example.com;transport=udp>
+Content-Type: application/sdp
+Content-Length: 159
+            
+v=0
+o=callerua 1429 0  IN IP4 client.atlanta.example.com
+s=SIP Call
+c=IN IP4 192.0.2.101
+t=0 0
+m=audio 16384 RTP/AVP 0
+a=rtpmap:0 PCMU/8000
+a=sendrecv
+}
+ ]]></artwork></figure>     
+   
+   <t>
+    SIP:180 from CalleeUA is received at the signaling gateway.</t>
+    <figure><artwork><![CDATA[
+      {
+SIP/2.0 180 Ringing
+Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
+    ;received=192.0.2.101
+From: CallerUA <sip:callerua@atlanta.example.com>;tag=36707f69b
+To: CalleeUA <sip:calleeua@sippy.example.com>;tag=8321234356
+Call-ID:00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
+CSeq: 101 INVITE
+Contact: <sip:calleeua@client.sippy.example.com;transport=udp>
+Content-Length: 0
+}
+]]></artwork></figure>  
+    <t>This message SHALL be converted to ROAP:Answer (section 5.3.2
+     of RAOP<xref target="ROAP"></xref>) with "more-coming" flag set to true as 
+     desribed in the section 5.2.3 of RAOP<xref target="ROAP"></xref> specification 
+     and sent to CallerUA by the signaling gateway.     
+   </t>       
+   
+    <t>
+    SIP: OK from CalleeUA is received at the signaling gateway.</t>
+    <figure><artwork><![CDATA[
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
+    ;received=192.0.2.101
+From: CallerUA <sip:callerua@atlanta.example.com>;tag=36707f69b
+To: CalleeUA <sip:calleeua@sippy.example.com>;tag=8321234356
+Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
+CSeq: 101 INVITE
+Contact: <sip:calleeua@client.sippy.example.com;transport=udp>
+Content-Type: application/sdp
+Content-Length: 160
+
+v=0
+o=calleeua 2890844527 2890844527 IN IP4 client.sippy.example.com
+s=SIP Call
+c=IN IP4 192.0.2.201
+t=0 0
+m=audio 16834 RTP/AVP 0
+a=rtpmap:0 PCMU/8000
+a=sendrecv
+]]></artwork></figure> 
+      <t>This message SHALL be converted to ROAP:Answer(section 5.3.2
+      of RAOP<xref target="ROAP"></xref>) and sent to caller by the signaling gateway. 
+      This represents a final answer as desribed in the section 5.2.3 of
+      RAOP<xref target="ROAP"></xref>
+    </t>       
+    <t>
+      Signaling gateway (on behalf of CallerUA) maps ROAP:OK (section 5.3.2
+      of RAOP<xref target="ROAP"></xref>) to SIP:ACK and sends it to CalleeUA to start the session.
+      This completes call-setup and media streams are established between CallerUA and the
+      CalleeUA.</t>
+    <figure><artwork><![CDATA[
+ACK sip:calleeua@client.sippy.example.com SIP/2.0
+Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
+Max-Forwards: 70
+From: CallerUA <sip:callerua@atlanta.example.com>;tag=36707f69b
+To: CalleeUA <sip:calleeua@sippy.example.com>;tag=8321234356
+Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
+CSeq: 101 ACK
+Content-Length: 0      
+  ]]></artwork></figure>     
+    
+    </section>  
+   <section anchor="sec.new-media" title="Add New Media (video)"> 
+     <t>This scenario describes the message exchanges when CalleeUA decides
+      to add video as media to an existing audio-only session
+     </t>  
+     <figure>
+       <artwork alt="Go Read the TXT version of this draft" src="new-media.png"><![CDATA[
+participant CallerUA
+participant CallerJS
+participant SIPGW
+participant CalleeUA
+
+CalleeUA->CallerUA: Two-way Media (audio only)     
+note right of CalleeUA: Media plays
 
 
 note right of CalleeUA: Callee decides to add video
@@ -174,6 +294,106 @@ CallerJS->CallerUA: peer->processSignalingMessage();
 CallerUA->CallerJS: onaddstream();
 
 
+CalleeUA->CallerUA: Two-way Media     
+note right of CalleeUA: Media plays with video
+
+  ]]></artwork>
+     </figure>
+     <t>
+       Message Details
+     </t>
+     <t>
+       On receipt of SIP:INVITE with SDP for video, the signaling gateway
+       maps SIP:INVITE to RAOP:OFFER(section 5.3.1 of RAOP<xref target="ROAP">
+       </xref>)  and sends it to CallerUA indicating the intent.</t>
+       <figure><artwork><![CDATA[
+   {      
+INVITE sip:callerua@atlanta.example.com SIP/2.0
+Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
+Max-Forwards: 70
+From: CalleeUA <sip:calleeua@sippy.example.com>;tag=8321234356
+To: CallerUA <sip:callrua@atlanta.example.com>;tag=36707f69b
+Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
+CSeq: 102 INVITE
+Contact: <sip:calleeua@client.sippy.example.com;transport=udp>
+Content-Type: application/sdp
+Content-Length: 159
+            
+v=0
+o=callerua 1429 0  IN IP4 client.atlanta.example.com
+s=SIP Call
+c=IN IP4 192.0.2.101
+t=0 0
+m=video 1024 RTP/AVP 97
+a=fmtp:97 profile-level-id=42E00C
+a=sendrecv
+}
+ ]]></artwork></figure>     
+      
+     <t>
+       CallerUA accepts the new ROAP:OFFER(section 5.3.1 of RAOP<xref target="ROAP">
+       </xref>) and sends ROAP:ANSWER section 5.3.2 of RAOP<xref target="ROAP"></xref>).
+       The signaling gateway maps the ROAP:ANSWER to SIP:200 to be sent to the CalleeUA.</t>
+      
+       <figure><artwork><![CDATA[
+         {
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP client.sippy.example.com:5060;branch=z9hG4bK74bf9
+    ;received=192.0.2.201
+From: CalleeUA <sip:calleeua@sippy.example.com>;tag=8321234356
+To: CallerUA <sip:calleeua@sippy.example.com>;tag=36707f69b
+Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
+CSeq: 102 INVITE
+Contact: <sip:callerua@client.atlanta.example.com;transport=udp>
+Content-Type: application/sdp
+Content-Length: 160
+
+v=0
+o=calleeua 2890844527 2890844527 IN IP4 client.sippy.example.com
+s=SIP Call
+c=IN IP4 192.0.2.201
+t=0 0
+m=video 1024 RTP/AVP 97
+a=fmtp:97 profile-level-id=42E00C
+a=sendrecv
+}
+ ]]></artwork></figure>     
+      
+     <t>
+       CalleeUA accepts the receipt of SIP:200 by sending SIP:ACK.
+       The signaling gateway SIP:ACK to ROAP:OK (section 5.3.2
+       of RAOP<xref target="ROAP"></xref>) sends it to CallerUA.
+       This completes adding the new media (video) to the existing
+       session.</t>
+       <figure><artwork><![CDATA[
+         {
+ACK sip:callerua@client.atlanta.example.com SIP/2.0
+Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
+Max-Forwards: 70
+From: calleeua <sip:calleeua@sippy.example.com>;tag=8321234356
+To: callerua <sip:callerua@atlanta.example.com>;tag=36707f69b
+Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
+CSeq: 102 ACK
+Content-Length: 0  
+}
+  ]]></artwork></figure>     
+        
+   </section> 
+    <section anchor="sec.end-session" title="SuccessFull Session Ending"> 
+        <t>This section capture native SIP message descriptions when the
+        caller decides to end the ongoing session.</t>  
+      <figure>
+        <artwork alt="Go Read the TXT version of this draft" src="end-session.png"><![CDATA[
+participant CallerUA
+participant CallerJS
+participant SIPGW
+participant CalleeUA
+
+CalleeUA->CallerUA: Two-way Media (audio + video)     
+note right of CalleeUA: Media plays
+
+
+
 note left of CallerUA: Caller decides to end the session 
 
 CallerJS->CallerUA: peer->close();
@@ -183,11 +403,50 @@ SIPGW->CalleeUA: SIP BYE
 CalleeUA->SIPGW: SIP 200
 SIPGW->CallerJS: {"type":"OK"}
 CallerJS->CallerUA: peer->processSignalingMessage();
-
-            ]]></artwork>
-      </figure>
-
-      <section title="Handling SIP Requests">
+  ]]></artwork>
+      </figure>  
+      <t>
+        Message Details
+      </t>
+      <t>
+        The signaling gateway maps RAOP:SHUTDOWN message from the CallerUA
+        to SIP:BYE and send it to CalleeUA to end the  ongoing session.</t>
+        <figure><artwork><![CDATA[
+          {
+BYE sip:callerua@client.atlanta.example.com SIP/2.0
+Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bKnashds7
+Max-Forwards: 70
+From: CallerUA <sip:callerua@atlanta.example.com>;tag=36707f69b
+To: CalleeUA <sip:calleeua@sippy.example.com>;tag=8321234356
+Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
+CSeq: 102 BYE
+Content-Length: 0
+}
+ ]]></artwork></figure>     
+         
+      <t>
+        CalleeUA end's the session from it's side by sending SIP:OK.</t>
+        <figure><artwork><![CDATA[
+          {
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
+    ;received=192.0.2.101
+From: CallerUA <sip:callerua@atlanta.example.com>;tag=36707f69b
+To: CalleeUA <sip:calleeua@sippy.example.com>;tag=8321234356
+Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
+CSeq: 101 INVITE
+Contact: <sip:calleeua@client.sippy.example.com;transport=udp>
+Content-Type: application/sdp
+Content-Length: 160
+}
+]]></artwork></figure> 
+      
+      <t>This message SHALL be converted to ROAP:OK(section 5.3.2
+      of RAOP<xref target="ROAP"></xref>) and sent to caller by the signaling gateway. 
+      </t>             
+   </section> 
+   </section>
+    <section title="Handling SIP Requests">
         <t>When the signalling gateway receives a SIP request, the gateway
         forms the message on the web request side in the following way: <list
             style="numbers">
@@ -208,12 +467,12 @@ CallerJS->CallerUA: peer->processSignalingMessage();
             SDP parameter on web side.</t>
 
             <t>The setSessionToken is formed by a JSON object string that has
-            and contact attribute that contains the SIP contact header field
+            contact attribute that contains the SIP contact header field
             value and an route attribute which is an array that has the values
             of the SIP route header field values in reverse order.</t>
 
             <t>The setResponseToken formed by a JSON object string that has
-            and via attribute that is an array containing the SIP via headers
+            via attribute that is an array containing the SIP via headers
             field values. The JSON object also includes an attribute that
             holds the request method. The gateway MAY include any other SIP
             headers in an attribute named headers which is an array with one
@@ -244,12 +503,12 @@ CallerJS->CallerUA: peer->processSignalingMessage();
             SDP parameter on web side.</t>
 
             <t>The setSessionToken is formed by a JSON object string that has
-            and contact attribute that contains the SIP contact header field
+            contact attribute that contains the SIP contact header field
             value and an route attribute which is an array that has the values
             of the SIP route header field values.</t>
 
             <t>The setResponseToken formed by a JSON object string that has
-            and via attribute that is an array containing the SIP via headers
+            via attribute that is an array containing the SIP via headers
             field values. The gateway MAY include any other SIP headers in an
             attribute named headers which is an array with one header field in
             each entry.</t>
@@ -318,8 +577,7 @@ CallerJS->CallerUA: peer->processSignalingMessage();
             <t>SIP extensions to RFC 3261.</t>
           </list></t>
       </section>
-    </section>
-
+   
     <section anchor="sec-sec" title="Security Considerations">
       <t>TBD</t>
     </section>
