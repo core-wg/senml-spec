@@ -10,7 +10,7 @@
 <?rfc colonspace="yes" ?>
 <?rfc rfcedstyle="no" ?>
 <?rfc tocdepth="4"?>
-<rfc category="info" docName="draft-jennings-rtcweb-signaling-gateway-00"
+<rfc category="std" docName="draft-jennings-rtcweb-signaling-gateway-00"
      ipr="trust200902">
   <front>
     <title abbrev="SIP2ROAP">SIP to RTCWeb Offer/Answer Protocol (ROAP)
@@ -329,8 +329,7 @@ CallerJS->CallerUA: peer->processSignalingMessage();
     </section>
 
     <section title="Acknowledgments">
-      <t>Many thanks for comment, ideas, and text from Eric Rescorla, Harald
-      Alvestrand, Magnus Westerlund, Ted Hardie, and Stefan Hakansson.</t>
+      <t>&lt;Get your name here&gt;</t>
     </section>
   </middle>
 

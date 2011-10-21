@@ -3,7 +3,7 @@
 
 Network Working Group                                        C. Jennings
 Internet-Draft                                             S. Nandakumar
-Intended status:  Informational                                    Cisco
+Intended status:  Standards Track                                  Cisco
 Expires:  April 22, 2012                                     C. Holmberg
                                                                 Ericsson
                                                         October 20, 2011
@@ -349,8 +349,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
 
 5.  Acknowledgments
 
-   Many thanks for comment, ideas, and text from Eric Rescorla, Harald
-   Alvestrand, Magnus Westerlund, Ted Hardie, and Stefan Hakansson.
+   <Get your name here>
 
 
 6.  References
@@ -380,6 +379,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
    [ROAP]     Jennings, C. and J. Rosenberg, "RTCWeb Offer/Answer
               Protocol (ROAP)", draft-jennings-rtcweb-signaling (work in
               progress), October 2011.
+
 
 
 
