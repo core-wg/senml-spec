@@ -121,12 +121,12 @@
      <t>   
 	    The 'turn/turns' URI scheme is used to designate a TURN server (also known as a relay) on Internet hosts accessible
         using the TURN protocol.
-        Such an URI scheme allows a uniform way to describe, configure and pass around the information identifyng 
-        a TURN server. This would prevent the short-comings inherent with encoding similar information in non-uniform
+        Such an URI scheme allows a uniform way to describe, configure and exchange the information identifying 
+        a TURN server. This would prevent the shortcomings inherent with encoding similar information in non-uniform
         syntaxes such as the ones proposed in WEBRTC Standards <xref target="WEBRTC"></xref>, for example.
      </t>
       <t>  
-        The 'turn/turns' URI follows the common Internet scheme syntax as defined in RFC 3986 <xref target="RFC3986"></xref>.
+        The 'turn/turns' URI adheres to syntax as defined in RFC 3986 <xref target="RFC3986"></xref>.
 	  </t>  
 	</section>
 	<section anchor="Terminology" title="Terminology">
@@ -149,19 +149,22 @@
     turns:&lt;userinfo&gt;@&lt;host&gt;:&lt;port&gt;
     </t>
     </list>
-    where the &lt;port&gt; part and the preceding ":" (colon) character, is OPTIONAL
+      Where &lt;userinfo&gt; with the "@" (at) sign character, as well as the
+      &lt;port&gt; part and the preceding ":" (colon) character, is OPTIONAL.
     </t>       
      <t>
          The normative syntax of the 'turn' URI is defined as shown in the following 
          Augmented Backus–Naur Form (ABNF) [RFC5234] rule:
      </t>
      <figure><artwork>
-      turn-uri      =  "turn:" [ userinfo "@" ] host [ ":" port ]
+      turn-uri      =  turn-scheme":" [ userinfo "@" ] host [ ":" port ]
+      turn-scheme   =  "turn"/"turns"
       userinfo      =  user [ ":" password ]
-      user          =  1*(%x21-24 / %x26-3F / %x41-7F / escaped)
-                            ; The symbols "%", "@", and symbols with
-                            ; a character value below 0x21 may be 
-                            ; represented as escaped sequences.
+      user          =  1*(%x21-24 / %x26-39 / %x3B-3F / %x41-7F 
+                       / escaped)
+                            ; The symbols "%", ":", "@", and symbols 
+                            ; with a character value below 0x21 may
+                            ; be represented as escaped sequences.
       password      =  1*(%x21-24 / %x26-3F / %x41-7F / escaped)
                             ; The symbols "%", "@", and symbols with
                             ; a character value below 0x21 may be
@@ -188,7 +191,7 @@
      scheme SHALL be used otherwise.   
      The &lt;host&gt; part of the 'turn' URI, which is REQUIRED, denotes the
      TURN server host. The &lt;userinfo&gt; part, identifies the credential required
-     for the long-term crendential mechanism as described in the section 4 of RFC 5766
+     for the long-term credential mechanism as described in the section 4 of RFC 5766
      <xref target="RFC5766"></xref>. The &lt;port&gt; part, if present,
      denotes the port on which the TURN server is awaiting connection requests.  
      If it is absent, the default port SHALL be 3478 for both UDP and TCP. The
@@ -200,6 +203,14 @@
         </t>
         <t>
             <list>
+                <t>
+                    turns:username:password@example.com
+                </t>
+                <t>
+                    This example configuration SHALL identify a 
+                    long-term credential for the TLS-over-TCP connection to TURN server,
+                    example.com, on defualt port 5349.
+                </t> 
                 <t>
                     turn:username:password@example.com
                 </t>
@@ -216,8 +227,12 @@
 
 	<section anchor="IANA" title="IANA Considerations"> 
   	<t>
-  	This document instructs IANA to register the 'turn' URI in the "Permanent URI Schemes" sub-registry in the "Uniform Resource Identifier (URI) Schemes" IANA registry <xref target="URIREG"></xref>.  This registration follows the URI Scheme Registration Template detailed in Section 5.4 of RFC 4395 <xref target="RFC4395"></xref>.
+  	This document instructs IANA to register the 'turn' and 'turns' URI schemes in the "Permanent URI Schemes" sub-registry in the "Uniform Resource Identifier (URI) Schemes" IANA registry <xref target="URIREG"></xref>.  These registrations follows the URI Scheme Registration Template detailed in Section 5.4 of RFC 4395 <xref target="RFC4395"></xref>.
 	</t>
+	<section anchor="IANA_turn" title="The 'turn' URI Scheme Registration">
+    <t>
+    IANA registration of the the 'turn' URI scheme:
+    </t>
     <t>	
     <list>
         <t>URI scheme name: turn
@@ -279,8 +294,77 @@
 	</list>
 	</t>
 	</section>
+	<section anchor="IANA_turns" title="The 'turns' URI Scheme Registration">
+    <t>
+    IANA registration of the the 'turns' URI scheme:
+    </t>
+    <t>	
+    <list>
+        <t>URI scheme name: turns
+    	</t>
+	</list>
+	</t>	   
+    <t>	
+    <list>
+        <t>Status: Permanent
+    	</t>
+	</list>
+	</t>	  
+    <t>	
+    <list>
+        <t>URI scheme syntax: see Section 3.1 of RFC XXXX [This document]
+    	</t>
+	</list>
+	</t>	
+    <t>	
+    <list>
+        <t>URI scheme semantics: see Section 3.2 of RFC XXXX [This document]
+    	</t>
+	</list>
+	</t>
+	<t>	
+    <list>
+        <t>URI scheme encoding considerations: there are no other encoding considerations for 'turns' URIs that are not described in RFC 5766 <xref target="RFC5766"></xref>.
+    	</t>
+	</list>
+	</t>	
+    <t>	
+    <list>
+        <t>Protocols that use the scheme: Traversal Using Relays around NAT (TURN) when run over TLS-over-TCP.
+    	</t>
+	</list>
+	</t>	
+    <t>	
+    <list>
+        <t>Security Considerations: see Section 5 of RFC XXXX [This document]
+    	</t>
+	</list>
+	</t>	
+    <t>	
+    <list>
+        <t>Contact: IESG &lt;iesg@ietf.org&gt;
+    	</t>
+	</list>
+	</t>	   
+    <t>	
+    <list>
+        <t>Author/Change controller: IETF &lt;ietf@ietf.org&gt;
+    	</t>
+	</list>
+	</t>	
+    <t>	
+    <list>
+        <t>References: See Section 7 of RFC XXXX [This document]
+    	</t>
+	</list>
+	</t>
+	</section>
+	</section>
 
 	<section anchor="Security" title="Security Considerations"> 
+	<t>
+	    Generic security considerations for the usage of URIs are discussed in Section 7 of RFC 3986 <xref target="RFC3986"></xref>   
+	</t>     
 	<t>
 	    The URI Scheme defined by this document for the Traversal Using Relays around NAT (TURN) protocol does not introduce any security considerations beyond those detailed in Section 17 of RFC 5766 <xref target="RFC5766"></xref>.
  	</t>
