@@ -3,7 +3,7 @@
 
 Network Working Group                                        C. Jennings
 Internet-Draft                                             S. Nandakumar
-Intended status:  <strike><font color='red'>Informational</font></strike>  <strong><font color='green'>Standards Track</font></strong>                                  Cisco
+Intended status:  Standards Track                                  Cisco
 Expires:  April 22, 2012                                     C. Holmberg
                                                                 Ericsson
                                                         October 20, 2011
@@ -55,29 +55,20 @@ Table of Contents
 
    1.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  3
    2.  Mapping to SIP . . . . . . . . . . . . . . . . . . . . . . . .  3
-     2.1.  <strong><font color='green'>SuccessFull Session Establishment  . . . . . . . . . . . .  3
-     2.2.  Add New Media (video)  . . . . . . . . . . . . . . . . . .  6
-     2.3.  SuccessFull Session Ending . . . . . . . . . . . . . . . .  9
-   3.</font></strong>  Handling SIP Requests  . . . . . . . . . . . . . . . . . . . <strike><font color='red'>5
-     2.2.</font></strike> <strong><font color='green'>. 10
-   4.</font></strong>  Handling SIP Responses . . . . . . . . . . . . . . . . . . <strike><font color='red'>5
-     2.3.</font></strike> <strong><font color='green'>. . 11
-   5.</font></strong>  Handling Web Messages  . . . . . . . . . . . . . . . . . . . <strike><font color='red'>6
-     2.4.</font></strike> <strong><font color='green'>. 11
-   6.</font></strong>  Limitations  . . . . . . . . . . . . . . . . . . . . . . . . <strike><font color='red'>6
-   3.</font></strike> <strong><font color='green'>. 12
-   7.</font></strong>  Security Considerations  . . . . . . . . . . . . . . . . . . . <strike><font color='red'>. 7
-   4.</font></strike> <strong><font color='green'>12
-   8.</font></strong>  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . <strike><font color='red'>. 7
-   5.</font></strike> <strong><font color='green'>12
-   9.</font></strong>  Acknowledgments  . . . . . . . . . . . . . . . . . . . . . . . <strike><font color='red'>. 7
-   6.</font></strike> <strong><font color='green'>12
-   10.</font></strong> References . . . . . . . . . . . . . . . . . . . . . . . . . . <strike><font color='red'>7
-     6.1.</font></strike> <strong><font color='green'>13
-     10.1.</font></strong> Normative References . . . . . . . . . . . . . . . . . . . <strike><font color='red'>7
-     6.2.</font></strike> <strong><font color='green'>13
-     10.2.</font></strong> Informative References . . . . . . . . . . . . . . . . . . <strike><font color='red'>7</font></strike> <strong><font color='green'>13</font></strong>
-   Authors' Addresses . . . . . . . . . . . . . . . . . . . . . . . . <strike><font color='red'>7</font></strike> <strong><font color='green'>13</font></strong>
+     2.1.  SuccessFull Session Establishment  . . . . . . . . . . . .  3
+     2.2.  Add New Media (video)  . . . . . . . . . . . . . . . . . .  <strike><font color='red'>6</font></strike>  <strong><font color='green'>8</font></strong>
+     2.3.  SuccessFull Session Ending . . . . . . . . . . . . . . . .  <strike><font color='red'>9</font></strike> <strong><font color='green'>11</font></strong>
+   3.  Handling SIP Requests  . . . . . . . . . . . . . . . . . . . . <strike><font color='red'>10</font></strike> <strong><font color='green'>12</font></strong>
+   4.  Handling SIP Responses . . . . . . . . . . . . . . . . . . . . <strike><font color='red'>11</font></strike> <strong><font color='green'>13</font></strong>
+   5.  Handling Web Messages  . . . . . . . . . . . . . . . . . . . . <strike><font color='red'>11</font></strike> <strong><font color='green'>13</font></strong>
+   6.  Limitations  . . . . . . . . . . . . . . . . . . . . . . . . . <strike><font color='red'>12</font></strike> <strong><font color='green'>14</font></strong>
+   7.  Security Considerations  . . . . . . . . . . . . . . . . . . . <strike><font color='red'>12</font></strike> <strong><font color='green'>14</font></strong>
+   8.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . <strike><font color='red'>12</font></strike> <strong><font color='green'>14</font></strong>
+   9.  Acknowledgments  . . . . . . . . . . . . . . . . . . . . . . . <strike><font color='red'>12</font></strike> <strong><font color='green'>15</font></strong>
+   10. References . . . . . . . . . . . . . . . . . . . . . . . . . . <strike><font color='red'>13</font></strike> <strong><font color='green'>15</font></strong>
+     10.1. Normative References . . . . . . . . . . . . . . . . . . . <strike><font color='red'>13</font></strike> <strong><font color='green'>15</font></strong>
+     10.2. Informative References . . . . . . . . . . . . . . . . . . <strike><font color='red'>13</font></strike> <strong><font color='green'>15</font></strong>
+   Authors' Addresses . . . . . . . . . . . . . . . . . . . . . . . . <strike><font color='red'>13</font></strike> <strong><font color='green'>15</font></strong>
 
 1.  Introduction
 
@@ -85,13 +76,11 @@ Table of Contents
    Signaling gateway that maps message representations proposed in
    [ROAP] to native SIP [RFC3261] messages and vice-versa.  The
    specification [ROAP] describes a signaling protocol for RTCWeb to
-   support negotiation of media session using SDP offer/answer
-   <strike><font color='red'>[RFC3264].  Such</font></strike> <strong><font color='green'>[RFC3264]
-   protocol.Such</font></strong> a singaling protocol enables an RTCWeb browser to setup
-   media sessions to another browser or a SIP device.  For
-   <strike><font color='red'>Browser-to-SIP</font></strike> <strong><font color='green'>Browser-to-
-   SIP</font></strong> device use case, the signaling gateway connects to legacy SIP
-   devices <strike><font color='red'>such</font></strike> and SHALL translate messages between ROAP and SIP native
+   support negotiation of media session using SDP offer/answer [RFC3264]
+   protocol.Such a singaling protocol enables an RTCWeb browser to setup
+   media sessions to another browser or a SIP device.  For Browser-to-
+   SIP device use case, the signaling gateway connects to legacy SIP
+   devices and SHALL translate messages between ROAP and SIP native
    messages schemes.
 
 2.  Mapping to SIP
@@ -104,19 +93,19 @@ Table of Contents
    Message on the two sides of the signalling gateway are referred to as
    the SIP side and web side.
 
-   The following <strong><font color='green'>sub-sections show example</font></strong> message flows <strike><font color='red'>shows an example where</font></strike> <strong><font color='green'>with detailed
+   The following sub-sections show example message flows with detailed
    message description of native SIP messages that are mapped from ROAP
-   scheme and</font></strong> the <strike><font color='red'>callee is on</font></strike> <strong><font color='green'>ones that are received as responses by</font></strong> the <strike><font color='red'>web side and uses a</font></strike> signaling <strike><font color='red'>gateway</font></strike>
-   <strong><font color='green'>gateway.  CallerUA(callerua@atlanta.example.com) is a RTCWeb browser.
+   scheme and the ones that are received as responses by the signaling
+   gateway.  CallerUA(callerua@atlanta.example.com) is a RTCWeb browser.
    CalleeUA(sip:calleeua@sippy.example.com) is assumed to be a SIP-
    enabled device.  It is also assumed that CalleeUA has registered with
-   a SIP proxy server to be able</font></strong> to <strike><font color='red'>reach</font></strike> <strong><font color='green'>receive</font></strong> the <strike><font color='red'>callee on</font></strike> <strong><font color='green'>calls vai</font></strong> the <strong><font color='green'>proxy.
+   a SIP proxy server to be able to receive the calls vai the proxy.
 
 2.1.  SuccessFull Session Establishment
 
    In this scenario CallerUA establishes succesful media session with
-   CalleUA, a legacy</font></strong> SIP <strike><font color='red'>side.</font></strike> <strong><font color='green'>end-point, with the help of the RTCWeb
-   signaling gateway.</font></strong>
+   CalleUA, a legacy SIP end-point, with the help of the RTCWeb
+   signaling gateway.
 
   participant CallerUA
   participant CallerJS
@@ -134,7 +123,7 @@ Table of Contents
   CalleeUA-&gt;CallerUA: ICE Checking
 
   CalleeUA-&gt;SIPGW: SIP 180 w/SDP
-  SIPGW-&gt;CallerJS: <strike><font color='red'>{"type":"TENTATIVE_ANSWER",</font></strike> <strong><font color='green'>{"type":"ANSWER", "more-coming":"TRUE",</font></strong> "sdp":"..."}
+  SIPGW-&gt;CallerJS: {"type":"ANSWER", "more-coming":"TRUE", "sdp":"..."}
   note right of CallerJS: This SDP has ICE candidates
   CallerJS-&gt;CallerUA: peer-&gt;processSignalingMessage();
   CallerUA-&gt;CallerJS: onstatechange();
@@ -156,11 +145,25 @@ Table of Contents
   CallerJS-&gt;SIPGW: {"type":"OK" }
   SIPGW-&gt;CalleeUA: SIP ACK
 
-   <strong><font color='green'>Message Details
+   Message Details
 
    Signaling gateway (on behalf of CallerUA) maps ROAP:OFFER (section
    5.3.1 of ROAP[ROAP]) to SIP:INVITE and sends it to CalleeUA to start
    the session.
+
+    <strong><font color='green'>{"type":"OFFER",
+     "offererSessionId":"36707f69b",
+     "seq": 1
+     "sdp":"
+          v=0
+          o=callerua 1429 0  IN IP4 client.atlanta.example.com
+          s=Call
+          c=IN IP4 192.0.2.101
+          t=0 0
+          m=audio 16384 RTP/AVP 0
+          a=rtpmap:0 PCMU/8000
+          a=sendrecv"
+    }</font></strong>
 
          {
    INVITE sip:calleeua@sippy.example.com SIP/2.0
@@ -169,14 +172,15 @@ Table of Contents
    From: CallerUA &lt;sip:callerua@atlanta.example.com&gt;;tag=36707f69b
    To: CalleeUA &lt;sip:calleeua@sippy.example.com&gt;
    Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
-   CSeq: 101 INVITE
+   CSeq: <strike><font color='red'>101</font></strike> <strong><font color='green'>1</font></strong> INVITE
    Contact: &lt;sip:callerua@client.atlanta.example.com;transport=udp&gt;
    Content-Type: application/sdp
-   Content-Length: 159
+   <strike><font color='red'>Content-Length: 159</font></strike>
 
    v=0
    o=callerua 1429 0  IN IP4 client.atlanta.example.com
-   s=SIP Call
+   <strike><font color='red'>s=SIP Call</font></strike>
+   <strong><font color='green'>s=Call</font></strong>
    c=IN IP4 192.0.2.101
    t=0 0
    m=audio 16384 RTP/AVP 0
@@ -186,22 +190,48 @@ Table of Contents
 
    SIP:180 from CalleeUA is received at the signaling gateway.
 
-         {
+         <strike><font color='red'>{</font></strike>
+
    SIP/2.0 180 Ringing
    Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
        ;received=192.0.2.101
    From: CallerUA &lt;sip:callerua@atlanta.example.com&gt;;tag=36707f69b
    To: CalleeUA &lt;sip:calleeua@sippy.example.com&gt;;tag=8321234356
    Call-ID:00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
-   CSeq: 101 INVITE
+   CSeq: <strike><font color='red'>101</font></strike> <strong><font color='green'>1</font></strong> INVITE
    Contact: &lt;sip:calleeua@client.sippy.example.com;transport=udp&gt;
-   Content-Length: 0
-   }
+   <strike><font color='red'>Content-Length:</font></strike>
+
+   <strong><font color='green'>v=0
+   o=calleeua 2890844527 2890844527 IN IP4 client.sippy.example.com
+   s=Call
+   c=IN IP4 192.0.2.201
+   t=0</font></strong> 0
+   <strike><font color='red'>}</font></strike>
+   <strong><font color='green'>m=audio 16834 RTP/AVP 0
+   a=rtpmap:0 PCMU/8000
+   a=sendrecv</font></strong>
 
    This message SHALL be converted to ROAP:Answer (section 5.3.2 of
    ROAP[ROAP]) with "more-coming" flag set to true as desribed in the
    section 5.2.3 of ROAP[ROAP] specification and sent to CallerUA by the
    signaling gateway.
+
+    <strong><font color='green'>{"type":"ANSWER",
+     "offererSessionId":"36707f69b",
+     "answererSessionId":"8321234356",
+     "seq": 1,
+     "more-coming": true,
+     "sdp":"
+          v=0
+          o=callerua 1429 0  IN IP4 client.atlanta.example.com
+          s=Call
+          c=IN IP4 192.0.2.101
+          t=0 0
+          m=audio 16384 RTP/AVP 0
+          a=rtpmap:0 PCMU/8000
+          a=sendrecv"
+    }</font></strong>
 
    SIP:  OK from CalleeUA is received at the signaling gateway.
 
@@ -211,14 +241,15 @@ Table of Contents
    From: CallerUA &lt;sip:callerua@atlanta.example.com&gt;;tag=36707f69b
    To: CalleeUA &lt;sip:calleeua@sippy.example.com&gt;;tag=8321234356
    Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
-   CSeq: 101 INVITE
+   CSeq: <strike><font color='red'>101</font></strike> <strong><font color='green'>1</font></strong> INVITE
    Contact: &lt;sip:calleeua@client.sippy.example.com;transport=udp&gt;
    Content-Type: application/sdp
-   Content-Length: 160
+   <strike><font color='red'>Content-Length: 160</font></strike>
 
    v=0
    o=calleeua 2890844527 2890844527 IN IP4 client.sippy.example.com
-   s=SIP Call
+   <strike><font color='red'>s=SIP Call</font></strike>
+   <strong><font color='green'>s=Call</font></strong>
    c=IN IP4 192.0.2.201
    t=0 0
    m=audio 16834 RTP/AVP 0
@@ -230,10 +261,31 @@ Table of Contents
    represents a final answer as desribed in the section 5.2.3 of
    ROAP[ROAP]
 
+    <strong><font color='green'>{"type":"ANSWER",
+     "offererSessionId":"36707f69b",
+     "answererSessionId":"8321234356",
+     "seq": 1,
+     "sdp":"
+   v=0
+   o=calleeua 2890844527 2890844527 IN IP4 client.sippy.example.com
+   s=Call
+   c=IN IP4 192.0.2.201
+   t=0 0
+   m=audio 16834 RTP/AVP 0
+   a=rtpmap:0 PCMU/8000
+   a=sendrecv"
+    }</font></strong>
+
    Signaling gateway (on behalf of CallerUA) maps ROAP:OK (section 5.3.2
    of ROAP[ROAP]) to SIP:ACK and sends it to CalleeUA to start the
    session.  This completes call-setup and media streams are established
    between CallerUA and the CalleeUA.
+
+    <strong><font color='green'>{"type":"OK",
+     "offererSessionId":"36707f69b",
+     "answererSessionId":"8321234356",
+     "seq": 1
+    }</font></strong>
 
    ACK sip:calleeua@client.sippy.example.com SIP/2.0
    Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
@@ -241,20 +293,21 @@ Table of Contents
    From: CallerUA &lt;sip:callerua@atlanta.example.com&gt;;tag=36707f69b
    To: CalleeUA &lt;sip:calleeua@sippy.example.com&gt;;tag=8321234356
    Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
-   CSeq: 101 ACK
-   Content-Length: 0
+   CSeq: <strike><font color='red'>101</font></strike> <strong><font color='green'>1</font></strong> ACK
+   <strike><font color='red'>Content-Length: 0</font></strike>
 
 2.2.  Add New Media (video)
 
    This scenario describes the message exchanges when CalleeUA decides
    to add video as media to an existing audio-only session
+
    participant CallerUA
    participant CallerJS
    participant SIPGW
    participant CalleeUA
 
    CalleeUA-&gt;CallerUA: Two-way Media (audio only)
-   note right of CalleeUA: Media plays</font></strong>
+   note right of CalleeUA: Media plays
 
    note right of CalleeUA: Callee decides to add video
 
@@ -271,7 +324,7 @@ Table of Contents
    CallerJS-&gt;CallerUA: peer-&gt;processSignalingMessage();
    CallerUA-&gt;CallerJS: onaddstream();
 
-   <strong><font color='green'>CalleeUA-&gt;CallerUA: Two-way Media
+   CalleeUA-&gt;CallerUA: Two-way Media
    note right of CalleeUA: Media plays with video
 
    Message Details
@@ -280,17 +333,18 @@ Table of Contents
    maps SIP:INVITE to ROAP:OFFER(section 5.3.1 of ROAP[ROAP]) and sends
    it to CallerUA indicating the intent.
 
-      {
+      <strike><font color='red'>{</font></strike>
+
    INVITE sip:callerua@atlanta.example.com SIP/2.0
    Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
    Max-Forwards: 70
    From: CalleeUA &lt;sip:calleeua@sippy.example.com&gt;;tag=8321234356
    To: CallerUA &lt;sip:callrua@atlanta.example.com&gt;;tag=36707f69b
    Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
-   CSeq: 102 INVITE
+   CSeq: <strike><font color='red'>102</font></strike> <strong><font color='green'>2</font></strong> INVITE
    Contact: &lt;sip:calleeua@client.sippy.example.com;transport=udp&gt;
    Content-Type: application/sdp
-   Content-Length: 159
+   <strike><font color='red'>Content-Length: 159</font></strike>
 
    v=0
    o=callerua 1429 0  IN IP4 client.atlanta.example.com
@@ -300,11 +354,45 @@ Table of Contents
    m=video 1024 RTP/AVP 97
    a=fmtp:97 profile-level-id=42E00C
    a=sendrecv
-   }
+   <strike><font color='red'>}</font></strike>
 
    CallerUA accepts the new ROAP:OFFER(section 5.3.1 of ROAP[ROAP]) and
-   sends ROAP:ANSWER section 5.3.2 of ROAP[ROAP]).  The signaling
-   gateway maps the ROAP:ANSWER to SIP:200 to be sent to the CalleeUA.
+   sends ROAP:ANSWER section 5.3.2 of ROAP[ROAP]).
+
+    <strong><font color='green'>{"type":"OFFER",
+     "offererSessionId":"36707f69b",
+     "answererSessionId":"8321234356",
+     "seq": 2,
+     "sdp":"
+   v=0
+   o=callerua 1429 0  IN IP4 client.atlanta.example.com
+   s=Call
+   c=IN IP4 192.0.2.101
+   t=0 0
+   m=video 1024 RTP/AVP 97
+   a=fmtp:97 profile-level-id=42E00C
+   a=sendrecv"
+    }
+
+   Which results in the follwing answer.
+
+    {"type":"ANSWER",
+     "offererSessionId":"36707f69b",
+     "answererSessionId":"8321234356",
+     "seq": 2,
+     "sdp":"
+   v=0
+   o=calleeua 2890844527 2890844527 IN IP4 client.sippy.example.com
+   s=Call
+   c=IN IP4 192.0.2.201
+   t=0 0
+   m=audio 16834 RTP/AVP 0
+   a=rtpmap:0 PCMU/8000
+   a=sendrecv"
+    }</font></strong>
+
+   The signaling gateway maps the ROAP:ANSWER to SIP:200 to be sent to
+   the CalleeUA.
 
             {
    SIP/2.0 200 OK
@@ -316,7 +404,7 @@ Table of Contents
    CSeq: 102 INVITE
    Contact: &lt;sip:callerua@client.atlanta.example.com;transport=udp&gt;
    Content-Type: application/sdp
-   Content-Length: 160
+   <strike><font color='red'>Content-Length: 160</font></strike>
 
    v=0
    o=calleeua 2890844527 2890844527 IN IP4 client.sippy.example.com
@@ -326,22 +414,29 @@ Table of Contents
    m=video 1024 RTP/AVP 97
    a=fmtp:97 profile-level-id=42E00C
    a=sendrecv
-   }
+   <strike><font color='red'>}</font></strike>
+
    CalleeUA accepts the receipt of SIP:200 by sending SIP:ACK.  The
    signaling gateway SIP:ACK to ROAP:OK (section 5.3.2 of ROAP[ROAP])
    sends it to CallerUA.  This completes adding the new media (video) to
    the existing session.
 
-            {
+            <strike><font color='red'>{</font></strike>
+
    ACK sip:callerua@client.atlanta.example.com SIP/2.0
    Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
    Max-Forwards: 70
    From: calleeua &lt;sip:calleeua@sippy.example.com&gt;;tag=8321234356
    To: callerua &lt;sip:callerua@atlanta.example.com&gt;;tag=36707f69b
    Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
-   CSeq: 102 ACK
-   Content-Length: 0
-   }
+   CSeq: <strike><font color='red'>102</font></strike> <strong><font color='green'>2</font></strong> ACK
+   <strike><font color='red'>Content-Length: 0</font></strike>
+
+    <strong><font color='green'>{"type":"OK",
+     "offererSessionId":"36707f69b",
+     "answererSessionId":"8321234356",
+     "seq": 2</font></strong>
+    }
 
 2.3.  SuccessFull Session Ending
 
@@ -354,7 +449,7 @@ Table of Contents
    participant CalleeUA
 
    CalleeUA-&gt;CallerUA: Two-way Media (audio + video)
-   note right of CalleeUA: Media plays</font></strong>
+   note right of CalleeUA: Media plays
 
    note left of CallerUA: Caller decides to end the session
 
@@ -366,43 +461,55 @@ Table of Contents
    SIPGW-&gt;CallerJS: {"type":"OK"}
    CallerJS-&gt;CallerUA: peer-&gt;processSignalingMessage();
 
-<strike><font color='red'>2.1.</font></strike>
-
-   <strong><font color='green'>Message Details
+   Message Details
 
    The signaling gateway maps ROAP:SHUTDOWN message from the CallerUA to
    SIP:BYE and send it to CalleeUA to end the ongoing session.
 
-            {
+            <strike><font color='red'>{</font></strike>
+
+    <strong><font color='green'>{"type":"SHUTDOWN",
+     "offererSessionId":"36707f69b",
+     "answererSessionId":"8321234356",
+     "seq": 3
+    }</font></strong>
+
   BYE sip:callerua@client.atlanta.example.com SIP/2.0
   Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bKnashds7
   Max-Forwards: 70
   From: CallerUA &lt;sip:callerua@atlanta.example.com&gt;;tag=36707f69b
   To: CalleeUA &lt;sip:calleeua@sippy.example.com&gt;;tag=8321234356
   Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
-  CSeq: 102 BYE
-  Content-Length: 0
-  }
+  CSeq: <strike><font color='red'>102</font></strike> <strong><font color='green'>3</font></strong> BYE
+  <strike><font color='red'>Content-Length: 0
+  }</font></strike>
 
    CalleeUA end's the session from it's side by sending SIP:OK.
 
-             {
+             <strike><font color='red'>{</font></strike>
+
    SIP/2.0 200 OK
    Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
        ;received=192.0.2.101
    From: CallerUA &lt;sip:callerua@atlanta.example.com&gt;;tag=36707f69b
    To: CalleeUA &lt;sip:calleeua@sippy.example.com&gt;;tag=8321234356
    Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
-   CSeq: 101 INVITE
+   CSeq: <strike><font color='red'>101 INVITE</font></strike> <strong><font color='green'>3 BYE</font></strong>
    Contact: &lt;sip:calleeua@client.sippy.example.com;transport=udp&gt;
-   Content-Type: application/sdp
+   <strike><font color='red'>Content-Type: application/sdp
    Content-Length: 160
-   }
+   }</font></strike>
 
    This message SHALL be converted to ROAP:OK(section 5.3.2 of
    ROAP[ROAP]) and sent to caller by the signaling gateway.
 
-3.</font></strong>  Handling SIP Requests
+    <strong><font color='green'>{"type":"OK",
+     "offererSessionId":"36707f69b",
+     "answererSessionId":"8321234356",
+     "seq": 3
+    }</font></strong>
+
+3.  Handling SIP Requests
 
    When the signalling gateway receives a SIP request, the gateway forms
    the message on the web request side in the following way:
@@ -413,25 +520,22 @@ Table of Contents
    3.  The callerSessionId is formed by a JSON object string that has an
        call-id attribute containing the SIP call-id header field value
        and a from-tag attribute containing the SIP from-tag.
+
    4.  If there is a SIP to-tag, it is used for the calleeSessionId.
    5.  If there is a SIP body containing SDP, it is copied into the SDP
        parameter on web side.
    6.  The setSessionToken is formed by a JSON object string that has
-       <strike><font color='red'>and</font></strike>
        contact attribute that contains the SIP contact header field
        value and an route attribute which is an array that has the
        values of the SIP route header field values in reverse order.
-
-   7.  The setResponseToken formed by a JSON object string that has <strike><font color='red'>and</font></strike> via
+   7.  The setResponseToken formed by a JSON object string that has via
        attribute that is an array containing the SIP via headers field
        values.  The JSON object also includes an attribute that holds
        the request method.  The gateway MAY include any other SIP
        headers in an attribute named headers which is an array with one
        header field in each entry.
 
-<strike><font color='red'>2.2.</font></strike>
-
-<strong><font color='green'>4.</font></strong>  Handling SIP Responses
+4.  Handling SIP Responses
 
    When the signalling gateway receives a SIP response, the gateway
    forms the message on the web request side in the following way:
@@ -449,22 +553,20 @@ Table of Contents
    5.  If there is a SIP body containing SDP, it is copied into the SDP
        parameter on web side.
    6.  The setSessionToken is formed by a JSON object string that has
-       <strike><font color='red'>and</font></strike>
        contact attribute that contains the SIP contact header field
        value and an route attribute which is an array that has the
        values of the SIP route header field values.
-   7.  The setResponseToken formed by a JSON object string that has <strike><font color='red'>and</font></strike> via
+   7.  The setResponseToken formed by a JSON object string that has via
        attribute that is an array containing the SIP via headers field
        values.  The gateway MAY include any other SIP headers in an
        attribute named headers which is an array with one header field
        in each entry.
 
-<strike><font color='red'>2.3.</font></strike>
-
-<strong><font color='green'>5.</font></strong>  Handling Web Messages
+5.  Handling Web Messages
 
    When the signalling gateway receives a WEB message, the gateway forms
    the message on the SIP side in the following way:
+
    1.   The messageType OFFER, ANSWER with more_coming, ANSWER, OK,
         NOMATCH, TIMEOUT, REFUSED, CONFLICT, FAILED are mapped to
         INVITE, 180, 200, ACK, 481, 408, 486, 491, 500 respectively.
@@ -490,9 +592,7 @@ Table of Contents
    10.  If there is a responseToken that contains a via array, it is
         used to form the SIP via header field values.
 
-<strike><font color='red'>2.4.</font></strike>
-
-<strong><font color='green'>6.</font></strong>  Limitations
+6.  Limitations
 
    The following things, if used on the SIP side, will not interoperate:
 
@@ -504,34 +604,21 @@ Table of Contents
    o  SIP INVITES that do not contain an SDP offer
    o  SIP extensions to RFC 3261.
 
-<strike><font color='red'>3.</font></strike>
-
-<strong><font color='green'>7.</font></strong>  Security Considerations
+7.  Security Considerations
 
    TBD
 
-<strike><font color='red'>4.</font></strike>
-
-<strong><font color='green'>8.</font></strong>  IANA Considerations
+8.  IANA Considerations
 
    This document requires no actions from IANA.
 
-<strike><font color='red'>5.</font></strike>
+9.  Acknowledgments
 
-<strong><font color='green'>9.</font></strong>  Acknowledgments
+   &lt;Get your name here&gt;
 
-   <strike><font color='red'>Many thanks for comment, ideas, and text from Eric Rescorla, Harald
-   Alvestrand, Magnus Westerlund, Ted Hardie, and Stefan Hakansson.
+10.  References
 
-6.</font></strike>
-
-   <strong><font color='green'>&lt;Get your name here&gt;
-
-10.</font></strong>  References
-
-<strike><font color='red'>6.1.</font></strike>
-
-<strong><font color='green'>10.1.</font></strong>  Normative References
+10.1.  Normative References
 
    [RFC3264]  Rosenberg, J. and H. Schulzrinne, "An Offer/Answer Model
               with Session Description Protocol (SDP)", RFC 3264,
@@ -540,9 +627,7 @@ Table of Contents
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, March 1997.
 
-<strike><font color='red'>6.2.</font></strike>
-
-<strong><font color='green'>10.2.</font></strong>  Informative References
+10.2.  Informative References
 
    [RFC3261]  Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston,
               A., Peterson, J., Sparks, R., Handley, M., and E.
@@ -569,7 +654,6 @@ Authors' Addresses
 
    Phone:  +1 408 421-9990
    Email:  fluffy@cisco.com
-
    Suhas Nandakumar
    Cisco
    170 West Tasman Drive
@@ -577,6 +661,7 @@ Authors' Addresses
    USA
 
    Email:  snandaku@cisco.com
+
    Christer Holmberg
    Ericsson
    Hirsalantie 11

@@ -173,6 +173,24 @@ SIPGW->CalleeUA: SIP ACK
      Signaling gateway (on behalf of CallerUA) maps ROAP:OFFER (section 5.3.1
      of ROAP<xref target="ROAP"></xref>)  to SIP:INVITE and
      sends it to CalleeUA to start the session.</t>
+
+   <figure><artwork><![CDATA[
+ {"type":"OFFER", 
+  "offererSessionId":"36707f69b",
+  "seq": 1
+  "sdp":"
+       v=0
+       o=callerua 1429 0  IN IP4 client.atlanta.example.com
+       s=Call
+       c=IN IP4 192.0.2.101
+       t=0 0
+       m=audio 16384 RTP/AVP 0
+       a=rtpmap:0 PCMU/8000
+       a=sendrecv"
+ }
+ ]]></artwork></figure>    
+
+
     <figure><artwork><![CDATA[
       {
 INVITE sip:calleeua@sippy.example.com SIP/2.0
@@ -181,14 +199,13 @@ Max-Forwards: 70
 From: CallerUA <sip:callerua@atlanta.example.com>;tag=36707f69b
 To: CalleeUA <sip:calleeua@sippy.example.com>
 Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
-CSeq: 101 INVITE
+CSeq: 1 INVITE
 Contact: <sip:callerua@client.atlanta.example.com;transport=udp>
 Content-Type: application/sdp
-Content-Length: 159
             
 v=0
 o=callerua 1429 0  IN IP4 client.atlanta.example.com
-s=SIP Call
+s=Call
 c=IN IP4 192.0.2.101
 t=0 0
 m=audio 16384 RTP/AVP 0
@@ -200,24 +217,48 @@ a=sendrecv
    <t>
     SIP:180 from CalleeUA is received at the signaling gateway.</t>
     <figure><artwork><![CDATA[
-      {
 SIP/2.0 180 Ringing
 Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
     ;received=192.0.2.101
 From: CallerUA <sip:callerua@atlanta.example.com>;tag=36707f69b
 To: CalleeUA <sip:calleeua@sippy.example.com>;tag=8321234356
 Call-ID:00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
-CSeq: 101 INVITE
+CSeq: 1 INVITE
 Contact: <sip:calleeua@client.sippy.example.com;transport=udp>
-Content-Length: 0
-}
+
+v=0
+o=calleeua 2890844527 2890844527 IN IP4 client.sippy.example.com
+s=Call
+c=IN IP4 192.0.2.201
+t=0 0
+m=audio 16834 RTP/AVP 0
+a=rtpmap:0 PCMU/8000
+a=sendrecv
 ]]></artwork></figure>  
     <t>This message SHALL be converted to ROAP:Answer (section 5.3.2
      of ROAP<xref target="ROAP"></xref>) with "more-coming" flag set to true as 
      desribed in the section 5.2.3 of ROAP<xref target="ROAP"></xref> specification 
      and sent to CallerUA by the signaling gateway.     
    </t>       
-   
+  
+   <figure><artwork><![CDATA[
+ {"type":"ANSWER", 
+  "offererSessionId":"36707f69b",
+  "answererSessionId":"8321234356",
+  "seq": 1,
+  "more-coming": true,
+  "sdp":"
+       v=0
+       o=callerua 1429 0  IN IP4 client.atlanta.example.com
+       s=Call
+       c=IN IP4 192.0.2.101
+       t=0 0
+       m=audio 16384 RTP/AVP 0
+       a=rtpmap:0 PCMU/8000
+       a=sendrecv"
+ }
+ ]]></artwork></figure>    
+ 
     <t>
     SIP: OK from CalleeUA is received at the signaling gateway.</t>
     <figure><artwork><![CDATA[
@@ -227,14 +268,13 @@ Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
 From: CallerUA <sip:callerua@atlanta.example.com>;tag=36707f69b
 To: CalleeUA <sip:calleeua@sippy.example.com>;tag=8321234356
 Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
-CSeq: 101 INVITE
+CSeq: 1 INVITE
 Contact: <sip:calleeua@client.sippy.example.com;transport=udp>
 Content-Type: application/sdp
-Content-Length: 160
 
 v=0
 o=calleeua 2890844527 2890844527 IN IP4 client.sippy.example.com
-s=SIP Call
+s=Call
 c=IN IP4 192.0.2.201
 t=0 0
 m=audio 16834 RTP/AVP 0
@@ -245,12 +285,37 @@ a=sendrecv
       of ROAP<xref target="ROAP"></xref>) and sent to caller by the signaling gateway. 
       This represents a final answer as desribed in the section 5.2.3 of
       ROAP<xref target="ROAP"></xref>
-    </t>       
+    </t>  
+   <figure><artwork><![CDATA[
+ {"type":"ANSWER", 
+  "offererSessionId":"36707f69b",
+  "answererSessionId":"8321234356",
+  "seq": 1,
+  "sdp":"
+v=0
+o=calleeua 2890844527 2890844527 IN IP4 client.sippy.example.com
+s=Call
+c=IN IP4 192.0.2.201
+t=0 0
+m=audio 16834 RTP/AVP 0
+a=rtpmap:0 PCMU/8000
+a=sendrecv"
+ }
+ ]]></artwork></figure>         
     <t>
       Signaling gateway (on behalf of CallerUA) maps ROAP:OK (section 5.3.2
       of ROAP<xref target="ROAP"></xref>) to SIP:ACK and sends it to CalleeUA to start the session.
       This completes call-setup and media streams are established between CallerUA and the
       CalleeUA.</t>
+
+  <figure><artwork><![CDATA[
+ {"type":"OK", 
+  "offererSessionId":"36707f69b",
+  "answererSessionId":"8321234356",
+  "seq": 1
+ }
+ ]]></artwork></figure>     
+
     <figure><artwork><![CDATA[
 ACK sip:calleeua@client.sippy.example.com SIP/2.0
 Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
@@ -258,8 +323,7 @@ Max-Forwards: 70
 From: CallerUA <sip:callerua@atlanta.example.com>;tag=36707f69b
 To: CalleeUA <sip:calleeua@sippy.example.com>;tag=8321234356
 Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
-CSeq: 101 ACK
-Content-Length: 0      
+CSeq: 1 ACK
   ]]></artwork></figure>     
     
     </section>  
@@ -307,17 +371,15 @@ note right of CalleeUA: Media plays with video
        maps SIP:INVITE to ROAP:OFFER(section 5.3.1 of ROAP<xref target="ROAP">
        </xref>)  and sends it to CallerUA indicating the intent.</t>
        <figure><artwork><![CDATA[
-   {      
 INVITE sip:callerua@atlanta.example.com SIP/2.0
 Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
 Max-Forwards: 70
 From: CalleeUA <sip:calleeua@sippy.example.com>;tag=8321234356
 To: CallerUA <sip:callrua@atlanta.example.com>;tag=36707f69b
 Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
-CSeq: 102 INVITE
+CSeq: 2 INVITE
 Contact: <sip:calleeua@client.sippy.example.com;transport=udp>
 Content-Type: application/sdp
-Content-Length: 159
             
 v=0
 o=callerua 1429 0  IN IP4 client.atlanta.example.com
@@ -327,13 +389,47 @@ t=0 0
 m=video 1024 RTP/AVP 97
 a=fmtp:97 profile-level-id=42E00C
 a=sendrecv
-}
  ]]></artwork></figure>     
       
      <t>
        CallerUA accepts the new ROAP:OFFER(section 5.3.1 of ROAP<xref target="ROAP">
-       </xref>) and sends ROAP:ANSWER section 5.3.2 of ROAP<xref target="ROAP"></xref>).
-       The signaling gateway maps the ROAP:ANSWER to SIP:200 to be sent to the CalleeUA.</t>
+       </xref>) and sends ROAP:ANSWER section 5.3.2 of ROAP<xref target="ROAP"></xref>). </t>
+
+   <figure><artwork><![CDATA[
+ {"type":"OFFER", 
+  "offererSessionId":"36707f69b",
+  "answererSessionId":"8321234356",
+  "seq": 2,
+  "sdp":"
+v=0
+o=callerua 1429 0  IN IP4 client.atlanta.example.com
+s=Call
+c=IN IP4 192.0.2.101
+t=0 0
+m=video 1024 RTP/AVP 97
+a=fmtp:97 profile-level-id=42E00C
+a=sendrecv"
+ }
+ ]]></artwork></figure>    
+       <t> Which results in the follwing answer. </t>
+
+   <figure><artwork><![CDATA[
+ {"type":"ANSWER", 
+  "offererSessionId":"36707f69b",
+  "answererSessionId":"8321234356",
+  "seq": 2,
+  "sdp":"
+v=0
+o=calleeua 2890844527 2890844527 IN IP4 client.sippy.example.com
+s=Call
+c=IN IP4 192.0.2.201
+t=0 0
+m=audio 16834 RTP/AVP 0
+a=rtpmap:0 PCMU/8000
+a=sendrecv"
+ }
+ ]]></artwork></figure>         
+       <t>The signaling gateway maps the ROAP:ANSWER to SIP:200 to be sent to the CalleeUA.</t>
       
        <figure><artwork><![CDATA[
          {
@@ -346,7 +442,6 @@ Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
 CSeq: 102 INVITE
 Contact: <sip:callerua@client.atlanta.example.com;transport=udp>
 Content-Type: application/sdp
-Content-Length: 160
 
 v=0
 o=calleeua 2890844527 2890844527 IN IP4 client.sippy.example.com
@@ -356,8 +451,7 @@ t=0 0
 m=video 1024 RTP/AVP 97
 a=fmtp:97 profile-level-id=42E00C
 a=sendrecv
-}
- ]]></artwork></figure>     
+]]></artwork></figure>     
       
      <t>
        CalleeUA accepts the receipt of SIP:200 by sending SIP:ACK.
@@ -366,17 +460,22 @@ a=sendrecv
        This completes adding the new media (video) to the existing
        session.</t>
        <figure><artwork><![CDATA[
-         {
 ACK sip:callerua@client.atlanta.example.com SIP/2.0
 Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
 Max-Forwards: 70
 From: calleeua <sip:calleeua@sippy.example.com>;tag=8321234356
 To: callerua <sip:callerua@atlanta.example.com>;tag=36707f69b
 Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
-CSeq: 102 ACK
-Content-Length: 0  
-}
-  ]]></artwork></figure>     
+CSeq: 2 ACK
+]]></artwork></figure>   
+
+  <figure><artwork><![CDATA[
+ {"type":"OK", 
+  "offererSessionId":"36707f69b",
+  "answererSessionId":"8321234356",
+  "seq": 2
+ }
+ ]]></artwork></figure>   
         
    </section> 
     <section anchor="sec.end-session" title="SuccessFull Session Ending"> 
@@ -411,39 +510,49 @@ CallerJS->CallerUA: peer->processSignalingMessage();
       <t>
         The signaling gateway maps ROAP:SHUTDOWN message from the CallerUA
         to SIP:BYE and send it to CalleeUA to end the  ongoing session.</t>
+  <figure><artwork><![CDATA[
+ {"type":"SHUTDOWN", 
+  "offererSessionId":"36707f69b",
+  "answererSessionId":"8321234356",
+  "seq": 3
+ }
+ ]]></artwork></figure>  
+
         <figure><artwork><![CDATA[
-          {
 BYE sip:callerua@client.atlanta.example.com SIP/2.0
 Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bKnashds7
 Max-Forwards: 70
 From: CallerUA <sip:callerua@atlanta.example.com>;tag=36707f69b
 To: CalleeUA <sip:calleeua@sippy.example.com>;tag=8321234356
 Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
-CSeq: 102 BYE
-Content-Length: 0
-}
- ]]></artwork></figure>     
+CSeq: 3 BYE
+]]></artwork></figure>     
          
       <t>
         CalleeUA end's the session from it's side by sending SIP:OK.</t>
         <figure><artwork><![CDATA[
-          {
 SIP/2.0 200 OK
 Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
     ;received=192.0.2.101
 From: CallerUA <sip:callerua@atlanta.example.com>;tag=36707f69b
 To: CalleeUA <sip:calleeua@sippy.example.com>;tag=8321234356
 Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
-CSeq: 101 INVITE
+CSeq: 3 BYE
 Contact: <sip:calleeua@client.sippy.example.com;transport=udp>
-Content-Type: application/sdp
-Content-Length: 160
-}
 ]]></artwork></figure> 
       
       <t>This message SHALL be converted to ROAP:OK(section 5.3.2
       of ROAP<xref target="ROAP"></xref>) and sent to caller by the signaling gateway. 
-      </t>             
+      </t>  
+
+  <figure><artwork><![CDATA[
+ {"type":"OK", 
+  "offererSessionId":"36707f69b",
+  "answererSessionId":"8321234356",
+  "seq": 3
+ }
+ ]]></artwork></figure>  
+           
    </section> 
    </section>
     <section title="Handling SIP Requests">
