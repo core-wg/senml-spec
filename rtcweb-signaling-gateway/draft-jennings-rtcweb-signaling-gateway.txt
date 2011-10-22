@@ -210,7 +210,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
    Message Details
 
    Signaling gateway (on behalf of CallerUA) maps ROAP:OFFER (section
-   5.3.1 of RAOP[ROAP]) to SIP:INVITE and sends it to CalleeUA to start
+   5.3.1 of ROAP[ROAP]) to SIP:INVITE and sends it to CalleeUA to start
    the session.
 
 
@@ -262,8 +262,8 @@ Internet-Draft                  SIP2ROAP                    October 2011
    }
 
    This message SHALL be converted to ROAP:Answer (section 5.3.2 of
-   RAOP[ROAP]) with "more-coming" flag set to true as desribed in the
-   section 5.2.3 of RAOP[ROAP] specification and sent to CallerUA by the
+   ROAP[ROAP]) with "more-coming" flag set to true as desribed in the
+   section 5.2.3 of ROAP[ROAP] specification and sent to CallerUA by the
    signaling gateway.
 
    SIP:  OK from CalleeUA is received at the signaling gateway.
@@ -302,12 +302,12 @@ Internet-Draft                  SIP2ROAP                    October 2011
    a=sendrecv
 
    This message SHALL be converted to ROAP:Answer(section 5.3.2 of
-   RAOP[ROAP]) and sent to caller by the signaling gateway.  This
+   ROAP[ROAP]) and sent to caller by the signaling gateway.  This
    represents a final answer as desribed in the section 5.2.3 of
-   RAOP[ROAP]
+   ROAP[ROAP]
 
    Signaling gateway (on behalf of CallerUA) maps ROAP:OK (section 5.3.2
-   of RAOP[ROAP]) to SIP:ACK and sends it to CalleeUA to start the
+   of ROAP[ROAP]) to SIP:ACK and sends it to CalleeUA to start the
    session.  This completes call-setup and media streams are established
    between CallerUA and the CalleeUA.
 
@@ -369,7 +369,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
    Message Details
 
    On receipt of SIP:INVITE with SDP for video, the signaling gateway
-   maps SIP:INVITE to RAOP:OFFER(section 5.3.1 of RAOP[ROAP]) and sends
+   maps SIP:INVITE to ROAP:OFFER(section 5.3.1 of ROAP[ROAP]) and sends
    it to CallerUA indicating the intent.
 
 
@@ -415,8 +415,8 @@ Internet-Draft                  SIP2ROAP                    October 2011
    a=sendrecv
    }
 
-   CallerUA accepts the new ROAP:OFFER(section 5.3.1 of RAOP[ROAP]) and
-   sends ROAP:ANSWER section 5.3.2 of RAOP[ROAP]).  The signaling
+   CallerUA accepts the new ROAP:OFFER(section 5.3.1 of ROAP[ROAP]) and
+   sends ROAP:ANSWER section 5.3.2 of ROAP[ROAP]).  The signaling
    gateway maps the ROAP:ANSWER to SIP:200 to be sent to the CalleeUA.
 
             {
@@ -450,7 +450,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
 
 
    CalleeUA accepts the receipt of SIP:200 by sending SIP:ACK.  The
-   signaling gateway SIP:ACK to ROAP:OK (section 5.3.2 of RAOP[ROAP])
+   signaling gateway SIP:ACK to ROAP:OK (section 5.3.2 of ROAP[ROAP])
    sends it to CallerUA.  This completes adding the new media (video) to
    the existing session.
 
@@ -492,7 +492,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
 
    Message Details
 
-   The signaling gateway maps RAOP:SHUTDOWN message from the CallerUA to
+   The signaling gateway maps ROAP:SHUTDOWN message from the CallerUA to
    SIP:BYE and send it to CalleeUA to end the ongoing session.
 
 
@@ -532,7 +532,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
    }
 
    This message SHALL be converted to ROAP:OK(section 5.3.2 of
-   RAOP[ROAP]) and sent to caller by the signaling gateway.
+   ROAP[ROAP]) and sent to caller by the signaling gateway.
 
 
 3.  Handling SIP Requests

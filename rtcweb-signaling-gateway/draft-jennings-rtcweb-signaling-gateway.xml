@@ -171,7 +171,7 @@ SIPGW->CalleeUA: SIP ACK
   </t>
    <t>
      Signaling gateway (on behalf of CallerUA) maps ROAP:OFFER (section 5.3.1
-     of RAOP<xref target="ROAP"></xref>)  to SIP:INVITE and
+     of ROAP<xref target="ROAP"></xref>)  to SIP:INVITE and
      sends it to CalleeUA to start the session.</t>
     <figure><artwork><![CDATA[
       {
@@ -213,8 +213,8 @@ Content-Length: 0
 }
 ]]></artwork></figure>  
     <t>This message SHALL be converted to ROAP:Answer (section 5.3.2
-     of RAOP<xref target="ROAP"></xref>) with "more-coming" flag set to true as 
-     desribed in the section 5.2.3 of RAOP<xref target="ROAP"></xref> specification 
+     of ROAP<xref target="ROAP"></xref>) with "more-coming" flag set to true as 
+     desribed in the section 5.2.3 of ROAP<xref target="ROAP"></xref> specification 
      and sent to CallerUA by the signaling gateway.     
    </t>       
    
@@ -242,13 +242,13 @@ a=rtpmap:0 PCMU/8000
 a=sendrecv
 ]]></artwork></figure> 
       <t>This message SHALL be converted to ROAP:Answer(section 5.3.2
-      of RAOP<xref target="ROAP"></xref>) and sent to caller by the signaling gateway. 
+      of ROAP<xref target="ROAP"></xref>) and sent to caller by the signaling gateway. 
       This represents a final answer as desribed in the section 5.2.3 of
-      RAOP<xref target="ROAP"></xref>
+      ROAP<xref target="ROAP"></xref>
     </t>       
     <t>
       Signaling gateway (on behalf of CallerUA) maps ROAP:OK (section 5.3.2
-      of RAOP<xref target="ROAP"></xref>) to SIP:ACK and sends it to CalleeUA to start the session.
+      of ROAP<xref target="ROAP"></xref>) to SIP:ACK and sends it to CalleeUA to start the session.
       This completes call-setup and media streams are established between CallerUA and the
       CalleeUA.</t>
     <figure><artwork><![CDATA[
@@ -304,7 +304,7 @@ note right of CalleeUA: Media plays with video
      </t>
      <t>
        On receipt of SIP:INVITE with SDP for video, the signaling gateway
-       maps SIP:INVITE to RAOP:OFFER(section 5.3.1 of RAOP<xref target="ROAP">
+       maps SIP:INVITE to ROAP:OFFER(section 5.3.1 of ROAP<xref target="ROAP">
        </xref>)  and sends it to CallerUA indicating the intent.</t>
        <figure><artwork><![CDATA[
    {      
@@ -331,8 +331,8 @@ a=sendrecv
  ]]></artwork></figure>     
       
      <t>
-       CallerUA accepts the new ROAP:OFFER(section 5.3.1 of RAOP<xref target="ROAP">
-       </xref>) and sends ROAP:ANSWER section 5.3.2 of RAOP<xref target="ROAP"></xref>).
+       CallerUA accepts the new ROAP:OFFER(section 5.3.1 of ROAP<xref target="ROAP">
+       </xref>) and sends ROAP:ANSWER section 5.3.2 of ROAP<xref target="ROAP"></xref>).
        The signaling gateway maps the ROAP:ANSWER to SIP:200 to be sent to the CalleeUA.</t>
       
        <figure><artwork><![CDATA[
@@ -362,7 +362,7 @@ a=sendrecv
      <t>
        CalleeUA accepts the receipt of SIP:200 by sending SIP:ACK.
        The signaling gateway SIP:ACK to ROAP:OK (section 5.3.2
-       of RAOP<xref target="ROAP"></xref>) sends it to CallerUA.
+       of ROAP<xref target="ROAP"></xref>) sends it to CallerUA.
        This completes adding the new media (video) to the existing
        session.</t>
        <figure><artwork><![CDATA[
@@ -409,7 +409,7 @@ CallerJS->CallerUA: peer->processSignalingMessage();
         Message Details
       </t>
       <t>
-        The signaling gateway maps RAOP:SHUTDOWN message from the CallerUA
+        The signaling gateway maps ROAP:SHUTDOWN message from the CallerUA
         to SIP:BYE and send it to CalleeUA to end the  ongoing session.</t>
         <figure><artwork><![CDATA[
           {
@@ -442,7 +442,7 @@ Content-Length: 160
 ]]></artwork></figure> 
       
       <t>This message SHALL be converted to ROAP:OK(section 5.3.2
-      of RAOP<xref target="ROAP"></xref>) and sent to caller by the signaling gateway. 
+      of ROAP<xref target="ROAP"></xref>) and sent to caller by the signaling gateway. 
       </t>             
    </section> 
    </section>

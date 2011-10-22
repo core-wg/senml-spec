@@ -283,7 +283,7 @@ SuccessFull Session Establishment</h3>
 </p>
 <p>
      Signaling gateway (on behalf of CallerUA) maps ROAP:OFFER (section 5.3.1
-     of RAOP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>)  to SIP:INVITE and
+     of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>)  to SIP:INVITE and
      sends it to CalleeUA to start the session.
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
       {
@@ -324,8 +324,8 @@ Content-Length: 0
 }
 </pre></div>
 <p>This message SHALL be converted to ROAP:Answer (section 5.3.2
-     of RAOP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) with "more-coming" flag set to true as 
-     desribed in the section 5.2.3 of RAOP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a> specification 
+     of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) with "more-coming" flag set to true as 
+     desribed in the section 5.2.3 of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a> specification 
      and sent to CallerUA by the signaling gateway.     
    
 </p>
@@ -353,14 +353,14 @@ a=rtpmap:0 PCMU/8000
 a=sendrecv
 </pre></div>
 <p>This message SHALL be converted to ROAP:Answer(section 5.3.2
-      of RAOP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) and sent to caller by the signaling gateway. 
+      of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) and sent to caller by the signaling gateway. 
       This represents a final answer as desribed in the section 5.2.3 of
-      RAOP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>
+      ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>
     
 </p>
 <p>
       Signaling gateway (on behalf of CallerUA) maps ROAP:OK (section 5.3.2
-      of RAOP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) to SIP:ACK and sends it to CalleeUA to start the session.
+      of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) to SIP:ACK and sends it to CalleeUA to start the session.
       This completes call-setup and media streams are established between CallerUA and the
       CalleeUA.
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
@@ -390,7 +390,7 @@ Add New Media (video)</h3>
 </p>
 <p>
        On receipt of SIP:INVITE with SDP for video, the signaling gateway
-       maps SIP:INVITE to RAOP:OFFER(section 5.3.1 of RAOP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>)  and sends it to CallerUA indicating the intent.
+       maps SIP:INVITE to ROAP:OFFER(section 5.3.1 of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>)  and sends it to CallerUA indicating the intent.
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
    {
 INVITE sip:callerua@atlanta.example.com SIP/2.0
@@ -415,7 +415,7 @@ a=sendrecv
 }
 </pre></div>
 <p>
-       CallerUA accepts the new ROAP:OFFER(section 5.3.1 of RAOP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) and sends ROAP:ANSWER section 5.3.2 of RAOP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>).
+       CallerUA accepts the new ROAP:OFFER(section 5.3.1 of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) and sends ROAP:ANSWER section 5.3.2 of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>).
        The signaling gateway maps the ROAP:ANSWER to SIP:200 to be sent to the CalleeUA.
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
          {
@@ -443,7 +443,7 @@ a=sendrecv
 <p>
        CalleeUA accepts the receipt of SIP:200 by sending SIP:ACK.
        The signaling gateway SIP:ACK to ROAP:OK (section 5.3.2
-       of RAOP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) sends it to CallerUA.
+       of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) sends it to CallerUA.
        This completes adding the new media (video) to the existing
        session.
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
@@ -473,7 +473,7 @@ SuccessFull Session Ending</h3>
       
 </p>
 <p>
-        The signaling gateway maps RAOP:SHUTDOWN message from the CallerUA
+        The signaling gateway maps ROAP:SHUTDOWN message from the CallerUA
         to SIP:BYE and send it to CalleeUA to end the  ongoing session.
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
           {
@@ -504,7 +504,7 @@ Content-Length: 160
 }
 </pre></div>
 <p>This message SHALL be converted to ROAP:OK(section 5.3.2
-      of RAOP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) and sent to caller by the signaling gateway. 
+      of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) and sent to caller by the signaling gateway. 
       
 </p>
 <a name="anchor3"></a><br /><hr />
