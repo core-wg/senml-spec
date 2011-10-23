@@ -70,10 +70,10 @@ Table of Contents
      2.3.  SuccessFull Session Ending . . . . . . . . . . . . . . . . 11
    3.  Handling SIP Requests  . . . . . . . . . . . . . . . . . . . . 12
    4.  Handling SIP Responses . . . . . . . . . . . . . . . . . . . . 13
-   5.  Handling Web Messages  . . . . . . . . . . . . . . . . . . . . 13
+   5.  Handling Web Messages  . . . . . . . . . . . . . . . . . . . . 14
    6.  Limitations  . . . . . . . . . . . . . . . . . . . . . . . . . 14
    7.  Security Considerations  . . . . . . . . . . . . . . . . . . . 14
-   8.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 14
+   8.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 15
    9.  Acknowledgments  . . . . . . . . . . . . . . . . . . . . . . . 15
    10. References . . . . . . . . . . . . . . . . . . . . . . . . . . 15
      10.1. Normative References . . . . . . . . . . . . . . . . . . . 15
@@ -143,7 +143,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
    gateway.  CallerUA(callerua@atlanta.example.com) is a RTCWeb browser.
    CalleeUA(sip:calleeua@sippy.example.com) is assumed to be a SIP-
    enabled device.  It is also assumed that CalleeUA has registered with
-   a SIP proxy server to be able to receive the calls vai the proxy.
+   a SIP proxy server to be able to receive the calls via the proxy.
 
 2.1.  SuccessFull Session Establishment
 
@@ -240,8 +240,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
     }
 
 
-         {
-   INVITE sip:calleeua@sippy.example.com SIP/2.0
+   {INVITE sip:calleeua@sippy.example.com SIP/2.0
    Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
    Max-Forwards: 70
    From: CallerUA <sip:callerua@atlanta.example.com>;tag=36707f69b
@@ -276,12 +275,13 @@ Internet-Draft                  SIP2ROAP                    October 2011
 
 
 
+
 Jennings, et al.         Expires April 22, 2012                 [Page 5]
 
 Internet-Draft                  SIP2ROAP                    October 2011
 
 
-   SIP/2.0 180 Ringing
+   {SIP/2.0 180 Ringing
    Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
        ;received=192.0.2.101
    From: CallerUA <sip:callerua@atlanta.example.com>;tag=36707f69b
@@ -298,9 +298,10 @@ Internet-Draft                  SIP2ROAP                    October 2011
    m=audio 16834 RTP/AVP 0
    a=rtpmap:0 PCMU/8000
    a=sendrecv
+   }
 
    This message SHALL be converted to ROAP:Answer (section 5.3.2 of
-   ROAP[ROAP]) with "more-coming" flag set to true as desribed in the
+   ROAP[ROAP]) with "more-coming" flag set to true as described in the
    section 5.2.3 of ROAP[ROAP] specification and sent to CallerUA by the
    signaling gateway.
 
@@ -331,13 +332,12 @@ Internet-Draft                  SIP2ROAP                    October 2011
 
 
 
-
 Jennings, et al.         Expires April 22, 2012                 [Page 6]
 
 Internet-Draft                  SIP2ROAP                    October 2011
 
 
-   SIP/2.0 200 OK
+   {SIP/2.0 200 OK
    Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
        ;received=192.0.2.101
    From: CallerUA <sip:callerua@atlanta.example.com>;tag=36707f69b
@@ -355,6 +355,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
    m=audio 16834 RTP/AVP 0
    a=rtpmap:0 PCMU/8000
    a=sendrecv
+   }
 
    This message SHALL be converted to ROAP:Answer(section 5.3.2 of
    ROAP[ROAP]) and sent to caller by the signaling gateway.  This
@@ -381,10 +382,9 @@ Internet-Draft                  SIP2ROAP                    October 2011
    session.  This completes call-setup and media streams are established
    between CallerUA and the CalleeUA.
 
-    {"type":"OK",
-     "offererSessionId":"36707f69b",
-     "answererSessionId":"8321234356",
-     "seq": 1
+
+
+
 
 
 
@@ -393,16 +393,21 @@ Jennings, et al.         Expires April 22, 2012                 [Page 7]
 Internet-Draft                  SIP2ROAP                    October 2011
 
 
+    {"type":"OK",
+     "offererSessionId":"36707f69b",
+     "answererSessionId":"8321234356",
+     "seq": 1
     }
 
 
-   ACK sip:calleeua@client.sippy.example.com SIP/2.0
+   {ACK sip:calleeua@client.sippy.example.com SIP/2.0
    Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
    Max-Forwards: 70
    From: CallerUA <sip:callerua@atlanta.example.com>;tag=36707f69b
    To: CalleeUA <sip:calleeua@sippy.example.com>;tag=8321234356
    Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
    CSeq: 1 ACK
+   }
 
 2.2.  Add New Media (video)
 
@@ -438,21 +443,19 @@ Internet-Draft                  SIP2ROAP                    October 2011
    note right of CalleeUA: Media plays with video
 
 
-   Message Details
-
-   On receipt of SIP:INVITE with SDP for video, the signaling gateway
-
-
 
 Jennings, et al.         Expires April 22, 2012                 [Page 8]
 
 Internet-Draft                  SIP2ROAP                    October 2011
 
 
+   Message Details
+
+   On receipt of SIP:INVITE with SDP for video, the signaling gateway
    maps SIP:INVITE to ROAP:OFFER(section 5.3.1 of ROAP[ROAP]) and sends
    it to CallerUA indicating the intent.
 
-   INVITE sip:callerua@atlanta.example.com SIP/2.0
+   {INVITE sip:callerua@atlanta.example.com SIP/2.0
    Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
    Max-Forwards: 70
    From: CalleeUA <sip:calleeua@sippy.example.com>;tag=8321234356
@@ -470,6 +473,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
    m=video 1024 RTP/AVP 97
    a=fmtp:97 profile-level-id=42E00C
    a=sendrecv
+   }
 
    CallerUA accepts the new ROAP:OFFER(section 5.3.1 of ROAP[ROAP]) and
    sends ROAP:ANSWER section 5.3.2 of ROAP[ROAP]).
@@ -490,10 +494,6 @@ Internet-Draft                  SIP2ROAP                    October 2011
     }
 
    Which results in the follwing answer.
-
-
-
-
 
 
 
@@ -524,7 +524,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
    the CalleeUA.
 
             {
-   SIP/2.0 200 OK
+   {SIP/2.0 200 OK
    Via: SIP/2.0/UDP client.sippy.example.com:5060;branch=z9hG4bK74bf9
        ;received=192.0.2.201
    From: CalleeUA <sip:calleeua@sippy.example.com>;tag=8321234356
@@ -542,6 +542,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
    m=video 1024 RTP/AVP 97
    a=fmtp:97 profile-level-id=42E00C
    a=sendrecv
+   }
 
    CalleeUA accepts the receipt of SIP:200 by sending SIP:ACK.  The
    signaling gateway SIP:ACK to ROAP:OK (section 5.3.2 of ROAP[ROAP])
@@ -555,19 +556,19 @@ Internet-Draft                  SIP2ROAP                    October 2011
 
 
 
-
 Jennings, et al.         Expires April 22, 2012                [Page 10]
 
 Internet-Draft                  SIP2ROAP                    October 2011
 
 
-   ACK sip:callerua@client.atlanta.example.com SIP/2.0
+   {ACK sip:callerua@client.atlanta.example.com SIP/2.0
    Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
    Max-Forwards: 70
    From: calleeua <sip:calleeua@sippy.example.com>;tag=8321234356
    To: callerua <sip:callerua@atlanta.example.com>;tag=36707f69b
    Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
    CSeq: 2 ACK
+   }
 
 
     {"type":"OK",
@@ -611,7 +612,6 @@ Internet-Draft                  SIP2ROAP                    October 2011
 
 
 
-
 Jennings, et al.         Expires April 22, 2012                [Page 11]
 
 Internet-Draft                  SIP2ROAP                    October 2011
@@ -624,17 +624,18 @@ Internet-Draft                  SIP2ROAP                    October 2011
     }
 
 
-  BYE sip:callerua@client.atlanta.example.com SIP/2.0
+  {BYE sip:callerua@client.atlanta.example.com SIP/2.0
   Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bKnashds7
   Max-Forwards: 70
   From: CallerUA <sip:callerua@atlanta.example.com>;tag=36707f69b
   To: CalleeUA <sip:calleeua@sippy.example.com>;tag=8321234356
   Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
   CSeq: 3 BYE
+  }
 
    CalleeUA end's the session from it's side by sending SIP:OK.
 
-   SIP/2.0 200 OK
+   {SIP/2.0 200 OK
    Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
        ;received=192.0.2.101
    From: CallerUA <sip:callerua@atlanta.example.com>;tag=36707f69b
@@ -642,6 +643,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
    Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
    CSeq: 3 BYE
    Contact: <sip:calleeua@client.sippy.example.com;transport=udp>
+   }
 
    This message SHALL be converted to ROAP:OK(section 5.3.2 of
    ROAP[ROAP]) and sent to caller by the signaling gateway.
@@ -661,9 +663,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
        messageType OFFER, OK, SHUTDOWN, SHUTDOWN respectively
    2.  The Seq on web side is formed from the numeric portion of CSeq
        header field value from the SIP side.
-   3.  The callerSessionId is formed by a JSON object string that has an
-       call-id attribute containing the SIP call-id header field value
-       and a from-tag attribute containing the SIP from-tag.
+
 
 
 
@@ -673,7 +673,10 @@ Jennings, et al.         Expires April 22, 2012                [Page 12]
 Internet-Draft                  SIP2ROAP                    October 2011
 
 
-   4.  If there is a SIP to-tag, it is used for the calleeSessionId.
+   3.  The offererSessionId is formed by a JSON object string that has
+       an call-id attribute containing the SIP call-id header field
+       value and a from-tag attribute containing the SIP from-tag.
+   4.  If there is a SIP to-tag, it is used for the answererSessionId.
    5.  If there is a SIP body containing SDP, it is copied into the SDP
        parameter on web side.
    6.  The setSessionToken is formed by a JSON object string that has
@@ -699,10 +702,10 @@ Internet-Draft                  SIP2ROAP                    October 2011
        are mapped to FAILED.
    2.  The Seq on web side is formed from the numeric portion of CSeq
        header field value from the SIP side.
-   3.  The callerSessionId is formed by a JSON object string that has an
-       call-id attribute containing the SIP call-id header field value
-       and a from-tag attribute containing the SIP from-tag.
-   4.  The SIP to-tag is used for the calleeSessionId.
+   3.  The offererSessionId is formed by a JSON object string that has
+       an call-id attribute containing the SIP call-id header field
+       value and a from-tag attribute containing the SIP from-tag.
+   4.  The SIP to-tag is used for the answererSessionId.
    5.  If there is a SIP body containing SDP, it is copied into the SDP
        parameter on web side.
    6.  The setSessionToken is formed by a JSON object string that has
@@ -716,10 +719,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
        in each entry.
 
 
-5.  Handling Web Messages
 
-   When the signalling gateway receives a WEB message, the gateway forms
-   the message on the SIP side in the following way:
 
 
 
@@ -729,21 +729,25 @@ Jennings, et al.         Expires April 22, 2012                [Page 13]
 Internet-Draft                  SIP2ROAP                    October 2011
 
 
+5.  Handling Web Messages
+
+   When the signalling gateway receives a WEB message, the gateway forms
+   the message on the SIP side in the following way:
    1.   The messageType OFFER, ANSWER with more_coming, ANSWER, OK,
         NOMATCH, TIMEOUT, REFUSED, CONFLICT, FAILED are mapped to
         INVITE, 180, 200, ACK, 481, 408, 486, 491, 500 respectively.
    2.   The messageType SHUTDOWN is mapped to a CANCEL if the
-        calleeSessionId is empty and to BYE otherwise
+        answererSessionId is empty and to BYE otherwise
    3.   For SIP responses, The numeric portion of the CSeq is formed by
         taking the number portion from the Seq field.  If the
         setResponseToken contains a method name, that is used for the
         method portion of the CSeq otherwise if it does not exist, the
         request method of the SIP message is used.
    4.   The Call-ID header field values is formed from the call-id
-        attribute of the callerSessionId.
+        attribute of the offererSessionId.
    5.   The from-tag is formed from the from-tag attribute of the
-        callerSessionId.
-   6.   If there is a calleeSessionId, it is used for the SIP to-tag.
+        offererSessionId.
+   6.   If there is a answererSessionId, it is used for the SIP to-tag.
    7.   If there is a SDP parameter, it is used as a SIP SDP body and
         the content type of and content length headers are set
         appropriately.
@@ -773,16 +777,17 @@ Internet-Draft                  SIP2ROAP                    October 2011
    TBD
 
 
-8.  IANA Considerations
-
-   This document requires no actions from IANA.
-
 
 
 
 Jennings, et al.         Expires April 22, 2012                [Page 14]
 
 Internet-Draft                  SIP2ROAP                    October 2011
+
+
+8.  IANA Considerations
+
+   This document requires no actions from IANA.
 
 
 9.  Acknowledgments
@@ -819,16 +824,11 @@ Internet-Draft                  SIP2ROAP                    October 2011
               progress), October 2011.
 
 
-Authors' Addresses
 
-   Cullen Jennings
-   Cisco
-   170 West Tasman Drive
-   San Jose, CA  95134
-   USA
 
-   Phone:  +1 408 421-9990
-   Email:  fluffy@cisco.com
+
+
+
 
 
 
@@ -839,6 +839,18 @@ Authors' Addresses
 Jennings, et al.         Expires April 22, 2012                [Page 15]
 
 Internet-Draft                  SIP2ROAP                    October 2011
+
+
+Authors' Addresses
+
+   Cullen Jennings
+   Cisco
+   170 West Tasman Drive
+   San Jose, CA  95134
+   USA
+
+   Phone:  +1 408 421-9990
+   Email:  fluffy@cisco.com
 
 
    Suhas Nandakumar
@@ -857,18 +869,6 @@ Internet-Draft                  SIP2ROAP                    October 2011
    Finland
 
    Email:  christer.holmberg@ericsson.com
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

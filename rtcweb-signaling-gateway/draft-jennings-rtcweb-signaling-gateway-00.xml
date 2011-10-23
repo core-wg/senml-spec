@@ -120,7 +120,7 @@
       CallerUA(callerua@atlanta.example.com) is a RTCWeb browser.
       CalleeUA(sip:calleeua@sippy.example.com) is assumed to be a SIP-enabled
       device. It is also assumed that CalleeUA has registered with a SIP proxy
-      server to be able to receive the calls vai the proxy.</t>
+      server to be able to receive the calls via the proxy.</t>
       
     <section anchor="sec.successful-session" title="SuccessFull Session Establishment">
     <t>In this scenario CallerUA establishes succesful media session with CalleUA, 
@@ -192,8 +192,7 @@ SIPGW->CalleeUA: SIP ACK
 
 
     <figure><artwork><![CDATA[
-      {
-INVITE sip:calleeua@sippy.example.com SIP/2.0
+{INVITE sip:calleeua@sippy.example.com SIP/2.0
 Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
 Max-Forwards: 70
 From: CallerUA <sip:callerua@atlanta.example.com>;tag=36707f69b
@@ -217,7 +216,7 @@ a=sendrecv
    <t>
     SIP:180 from CalleeUA is received at the signaling gateway.</t>
     <figure><artwork><![CDATA[
-SIP/2.0 180 Ringing
+{SIP/2.0 180 Ringing
 Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
     ;received=192.0.2.101
 From: CallerUA <sip:callerua@atlanta.example.com>;tag=36707f69b
@@ -234,10 +233,11 @@ t=0 0
 m=audio 16834 RTP/AVP 0
 a=rtpmap:0 PCMU/8000
 a=sendrecv
+}
 ]]></artwork></figure>  
     <t>This message SHALL be converted to ROAP:Answer (section 5.3.2
      of ROAP<xref target="ROAP"></xref>) with "more-coming" flag set to true as 
-     desribed in the section 5.2.3 of ROAP<xref target="ROAP"></xref> specification 
+     described in the section 5.2.3 of ROAP<xref target="ROAP"></xref> specification 
      and sent to CallerUA by the signaling gateway.     
    </t>       
   
@@ -262,7 +262,7 @@ a=sendrecv
     <t>
     SIP: OK from CalleeUA is received at the signaling gateway.</t>
     <figure><artwork><![CDATA[
-SIP/2.0 200 OK
+{SIP/2.0 200 OK
 Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
     ;received=192.0.2.101
 From: CallerUA <sip:callerua@atlanta.example.com>;tag=36707f69b
@@ -280,6 +280,7 @@ t=0 0
 m=audio 16834 RTP/AVP 0
 a=rtpmap:0 PCMU/8000
 a=sendrecv
+}
 ]]></artwork></figure> 
       <t>This message SHALL be converted to ROAP:Answer(section 5.3.2
       of ROAP<xref target="ROAP"></xref>) and sent to caller by the signaling gateway. 
@@ -317,13 +318,14 @@ a=sendrecv"
  ]]></artwork></figure>     
 
     <figure><artwork><![CDATA[
-ACK sip:calleeua@client.sippy.example.com SIP/2.0
+{ACK sip:calleeua@client.sippy.example.com SIP/2.0
 Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
 Max-Forwards: 70
 From: CallerUA <sip:callerua@atlanta.example.com>;tag=36707f69b
 To: CalleeUA <sip:calleeua@sippy.example.com>;tag=8321234356
 Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
 CSeq: 1 ACK
+}
   ]]></artwork></figure>     
     
     </section>  
@@ -371,7 +373,7 @@ note right of CalleeUA: Media plays with video
        maps SIP:INVITE to ROAP:OFFER(section 5.3.1 of ROAP<xref target="ROAP">
        </xref>)  and sends it to CallerUA indicating the intent.</t>
        <figure><artwork><![CDATA[
-INVITE sip:callerua@atlanta.example.com SIP/2.0
+{INVITE sip:callerua@atlanta.example.com SIP/2.0
 Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
 Max-Forwards: 70
 From: CalleeUA <sip:calleeua@sippy.example.com>;tag=8321234356
@@ -389,6 +391,7 @@ t=0 0
 m=video 1024 RTP/AVP 97
 a=fmtp:97 profile-level-id=42E00C
 a=sendrecv
+}
  ]]></artwork></figure>     
       
      <t>
@@ -433,7 +436,7 @@ a=sendrecv"
       
        <figure><artwork><![CDATA[
          {
-SIP/2.0 200 OK
+{SIP/2.0 200 OK
 Via: SIP/2.0/UDP client.sippy.example.com:5060;branch=z9hG4bK74bf9
     ;received=192.0.2.201
 From: CalleeUA <sip:calleeua@sippy.example.com>;tag=8321234356
@@ -451,6 +454,7 @@ t=0 0
 m=video 1024 RTP/AVP 97
 a=fmtp:97 profile-level-id=42E00C
 a=sendrecv
+}
 ]]></artwork></figure>     
       
      <t>
@@ -460,13 +464,14 @@ a=sendrecv
        This completes adding the new media (video) to the existing
        session.</t>
        <figure><artwork><![CDATA[
-ACK sip:callerua@client.atlanta.example.com SIP/2.0
+{ACK sip:callerua@client.atlanta.example.com SIP/2.0
 Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
 Max-Forwards: 70
 From: calleeua <sip:calleeua@sippy.example.com>;tag=8321234356
 To: callerua <sip:callerua@atlanta.example.com>;tag=36707f69b
 Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
 CSeq: 2 ACK
+}
 ]]></artwork></figure>   
 
   <figure><artwork><![CDATA[
@@ -519,19 +524,20 @@ CallerJS->CallerUA: peer->processSignalingMessage();
  ]]></artwork></figure>  
 
         <figure><artwork><![CDATA[
-BYE sip:callerua@client.atlanta.example.com SIP/2.0
+{BYE sip:callerua@client.atlanta.example.com SIP/2.0
 Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bKnashds7
 Max-Forwards: 70
 From: CallerUA <sip:callerua@atlanta.example.com>;tag=36707f69b
 To: CalleeUA <sip:calleeua@sippy.example.com>;tag=8321234356
 Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
 CSeq: 3 BYE
+}
 ]]></artwork></figure>     
          
       <t>
         CalleeUA end's the session from it's side by sending SIP:OK.</t>
         <figure><artwork><![CDATA[
-SIP/2.0 200 OK
+{SIP/2.0 200 OK
 Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
     ;received=192.0.2.101
 From: CallerUA <sip:callerua@atlanta.example.com>;tag=36707f69b
@@ -539,6 +545,7 @@ To: CalleeUA <sip:calleeua@sippy.example.com>;tag=8321234356
 Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
 CSeq: 3 BYE
 Contact: <sip:calleeua@client.sippy.example.com;transport=udp>
+}
 ]]></artwork></figure> 
       
       <t>This message SHALL be converted to ROAP:OK(section 5.3.2
@@ -565,12 +572,12 @@ Contact: <sip:calleeua@client.sippy.example.com;transport=udp>
             <t>The Seq on web side is formed from the numeric portion of CSeq
             header field value from the SIP side.</t>
 
-            <t>The callerSessionId is formed by a JSON object string that has
+            <t>The offererSessionId is formed by a JSON object string that has
             an call-id attribute containing the SIP call-id header field value
             and a from-tag attribute containing the SIP from-tag.</t>
 
             <t>If there is a SIP to-tag, it is used for the
-            calleeSessionId.</t>
+            answererSessionId.</t>
 
             <t>If there is a SIP body containing SDP, it is copied into the
             SDP parameter on web side.</t>
@@ -602,11 +609,11 @@ Contact: <sip:calleeua@client.sippy.example.com;transport=udp>
             <t>The Seq on web side is formed from the numeric portion of CSeq
             header field value from the SIP side.</t>
 
-            <t>The callerSessionId is formed by a JSON object string that has
+            <t>The offererSessionId is formed by a JSON object string that has
             an call-id attribute containing the SIP call-id header field value
             and a from-tag attribute containing the SIP from-tag.</t>
 
-            <t>The SIP to-tag is used for the calleeSessionId.</t>
+            <t>The SIP to-tag is used for the answererSessionId.</t>
 
             <t>If there is a SIP body containing SDP, it is copied into the
             SDP parameter on web side.</t>
@@ -633,7 +640,7 @@ Contact: <sip:calleeua@client.sippy.example.com;transport=udp>
             180, 200, ACK, 481, 408, 486, 491, 500 respectively.</t>
 
             <t>The messageType SHUTDOWN is mapped to a CANCEL if the
-            calleeSessionId is empty and to BYE otherwise</t>
+            answererSessionId is empty and to BYE otherwise</t>
 
             <t>For SIP responses, The numeric portion of the CSeq is formed by
             taking the number portion from the Seq field. If the
@@ -642,12 +649,12 @@ Contact: <sip:calleeua@client.sippy.example.com;transport=udp>
             request method of the SIP message is used.</t>
 
             <t>The Call-ID header field values is formed from the call-id
-            attribute of the callerSessionId.</t>
+            attribute of the offererSessionId.</t>
 
             <t>The from-tag is formed from the from-tag attribute of the
-            callerSessionId.</t>
+            offererSessionId.</t>
 
-            <t>If there is a calleeSessionId, it is used for the SIP
+            <t>If there is a answererSessionId, it is used for the SIP
             to-tag.</t>
 
             <t>If there is a SDP parameter, it is used as a SIP SDP body and
