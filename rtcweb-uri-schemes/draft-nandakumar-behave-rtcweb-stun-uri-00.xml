@@ -400,7 +400,10 @@ escaped       = "%" HEXDIG HEXDIG
     <section anchor="Acknowledgements" title="Acknowledgements">
     <t>
 	Many thanks to Cullen Jennings for his detailed review and thoughtful comments on this document.
-	</t>
+    </t>
+    <t>
+     We acknowledge the existence of draft-petithuguenin-behave-turn-uri-bis-04 document as a parallel effort in defining the URI scheme for TURN. Awareness of this draft came late in the process and we have not had to time to reach out to the author of that memo and discuss opportunities to collaborate on a single document. It is our intentions to do so.
+    </t>    
     </section>
     
 </middle>
