@@ -170,16 +170,12 @@
      <figure><artwork>
 stun-uri      = stun-scheme ":" [ userinfo "@" ] host [ ":" port ]
 stun-scheme   = "stun"/"stuns"
-userinfo      = user [ ":" password ]
+userinfo      = user
 user          = 1*(%x21-24 / %x26-39 / %x3B-3F / %x41-7F 
                 / escaped)
                     ; The symbols "%", ":", "@", and symbols 
                     ; with a character value below 0x21 may
                     ; be represented as escaped sequences.
-password      = 1*(%x21-24 / %x26-3F / %x41-7F / escaped)
-                    ; The symbols "%", "@", and symbols with
-                    ; a character value below 0x21 may be
-                    ; represented as escaped sequences.
 host          = hostname / IPv4address / IPv6reference
 hostname      = *( domainlabel "." ) toplabel [ "." ]
 domainlabel   = alphanum / alphanum *( alphanum / "-" ) alphanum
