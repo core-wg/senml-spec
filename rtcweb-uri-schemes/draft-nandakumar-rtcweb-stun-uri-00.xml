@@ -124,9 +124,15 @@
     <t>   
 	    The 'stun/stuns' URI scheme is used to designate a standalone STUN server or any Internet host performing the 
 	    operations of a STUN server in the context of STUN usages (Section 14 RFC 5389 <xref target="RFC5389"></xref>).
-        Such an URI scheme allows a uniform way to describe, configure and exchange the information identifying 
-        a STUN server. This would prevent the shortcomings inherent with encoding similar information in non-uniform
-        syntaxes such as the ones proposed in WEBRTC Standards <xref target="WEBRTC"></xref>, for example.
+        With the advent of standards such as WEBRTC <xref target="WEBRTC"></xref>, we anticipate a plethora of endpoints and
+        web applications to be able to identify and communicate with such a STUN server to carry out the STUN protocol.
+        This also implies those endpoints and/or applications to be provisioned with appropriate configuration required 
+        to identify the STUN server. Having an inconsistent syntax has its drawbacks and can result in non-interoperable 
+        solutions. It can result in solutions that are ambiguous and have implementation limitations on the different 
+        aspects of the syntax and alike. The 'stun/stuns' URI scheme helps alleviate most of these issues by providing a consistent 
+        way to describe, configure and exchange the information identifying a STUN server. This would also prevent the 
+        shortcomings inherent with encoding similar information in non-uniform syntaxes such as the ones proposed in 
+        the WEBRTC Standards <xref target="WEBRTC"></xref>, for example.
     </t>
      <t>   
         The 'stun/stuns' URI scheme adheres to generic syntax defined in RFC 3986 <xref target="RFC3986">.</xref>.
@@ -159,84 +165,84 @@
     &lt;port&gt; part and the preceding ":" (colon) character, is OPTIONAL.
     </t>       
      <t>
-     The normative syntax of the 'stun' URI is defined as shown in the following Augmented Backus–Naur Form (ABNF) [RFC5234] rule:
+     The normative syntax of the 'stun' URI is defined as shown in the following Augmented Backus–Naur Form (ABNF) <xref target="RFC5234"></xref>. rule:
      </t>
      <figure><artwork>
-      stun-uri      =  stun-schme":" [ userinfo "@" ] host [ ":" port ]
-      stun-scheme   =  "stun"/"stuns"
-      userinfo      =  user [ ":" password ]
-      user          =  1*(%x21-24 / %x26-39 / %x3B-3F / %x41-7F 
-                       / escaped)
-                            ; The symbols "%", ":", "@", and symbols 
-                            ; with a character value below 0x21 may
-                            ; be represented as escaped sequences.
-      password      =  1*(%x21-24 / %x26-3F / %x41-7F / escaped)
-                            ; The symbols "%", "@", and symbols with
-                            ; a character value below 0x21 may be
-                            ; represented as escaped sequences.
-      host          =  hostname / IPv4address / IPv6reference
-      hostname      =  *( domainlabel "." ) toplabel [ "." ]
-      domainlabel   =  alphanum / alphanum *( alphanum / "-" ) alphanum
-      toplabel      =  ALPHA / ALPHA *( alphanum / "-" ) alphanum
-      IPv4address   =  1*3DIGIT "." 1*3DIGIT "." 1*3DIGIT "." 1*3DIGIT
-      IPv6reference =  "[" IPv6address "]"
-      IPV6address   =  hexpart [ ":" IPv4address ]
-      hexpart       =  hexseq / hexseq "::" [ hexseq ] / "::" [ hexseq ]
-      hexseq        =  hex4 *( ":" hex4 )
-      hex4          =  1*4HEXDIG
-      port          =  1*DIGIT
-      alphanum      =  ALPHA / DIGIT
-      escaped       =  "%" HEXDIG HEXDIG
-	</artwork></figure>              
+stun-uri      = stun-scheme ":" [ userinfo "@" ] host [ ":" port ]
+stun-scheme   = "stun"/"stuns"
+userinfo      = user [ ":" password ]
+user          = 1*(%x21-24 / %x26-39 / %x3B-3F / %x41-7F 
+                / escaped)
+                    ; The symbols "%", ":", "@", and symbols 
+                    ; with a character value below 0x21 may
+                    ; be represented as escaped sequences.
+password      = 1*(%x21-24 / %x26-3F / %x41-7F / escaped)
+                    ; The symbols "%", "@", and symbols with
+                    ; a character value below 0x21 may be
+                    ; represented as escaped sequences.
+host          = hostname / IPv4address / IPv6reference
+hostname      = *( domainlabel "." ) toplabel [ "." ]
+domainlabel   = alphanum / alphanum *( alphanum / "-" ) alphanum
+toplabel      = ALPHA / ALPHA *( alphanum / "-" ) alphanum
+IPv4address   = 1*3DIGIT "." 1*3DIGIT "." 1*3DIGIT "." 1*3DIGIT
+IPv6reference = "[" IPv6address "]"
+IPv6address   = hexpart [ ":" IPv4address ]
+hexpart       = hexseq / hexseq "::" [ hexseq ] / "::" [ hexseq ]
+hexseq        = hex4 *( ":" hex4 )
+hex4          = 1*4HEXDIG
+port          = 1*DIGIT
+alphanum      = ALPHA / DIGIT
+escaped       = "%" HEXDIG HEXDIG
+	</artwork></figure>
+	<t>
+	The &lt;host&gt;, &lt;port&gt; and &lt;userinfo&gt; rules are described in Appendix A of RFC 3986 <xref target="RFC3986"></xref>.  The core rules &lt;ALPHA&gt;, &lt;DIGIT&gt; and &lt;HEXDIGIT&gt; are used as described in Appendix B of RFC 5234 <xref target="RFC5234"></xref>.
+	</t>
     </section>
     <section anchor="URI_Scheme_Semantics" title="URI Scheme Semantics">
     <t>
-     The STUN protocol supports sending messages over UDP, TCP or TLS-over-TCP. The
-     'stuns' URI scheme SHALL be used when STUN is run over TLS-over-TCP and the 'stun' scheme SHALL be used otherwise.
-     The &lt;host&gt; part of the 'stun' URI, which is REQUIRED, denotes the STUN server host.
-     The &lt;userinfo&gt; part, which is OPTIONAL, identifies the credential in the form of a username 
-     and password as required by the optional authentication and message integrity procedures described in 
-     section 10 of RFC 5389 <xref target="RFC5389"></xref>. Such a credential MAY used by STUN end-points
-     to authenticate and protect integrity of STUN messages, say, to perform connectivity checks.The interactions 
-     involving STUN clients and standalone STUN Servers SHALL NOT utilize any credential mechanisms as 
-     described in the section 13 of RFC 5389 <xref target="RFC5389"></xref>.
-     The &lt;port&gt; part,if present,denotes the port on which the STUN server is awaiting connection requests.  
-     For a standalone STUN server the port SHALL default to 3478 for both UDP and TCP. The default port for TLS shall
-     be 5349.                      
+     The STUN protocol supports sending messages over UDP, TCP or TLS-over-TCP. The 'stuns' URI scheme SHALL be used 
+     when STUN is run over TLS-over-TCP (or DTLS-over-UDP in the future) and the 'stun' scheme SHALL be used otherwise. 
+     The &lt;host&gt; part of the 'stun' URI, which is REQUIRED, denotes the STUN server host. The &lt;userinfo&gt; part 
+     is OPTIONAL and  MAY NOT be utilized within the 'stun/stuns' URI scheme. It is provided so as to be compatible with
+     certain non-standard standalone STUN server implementations that enforce clients to authenticate. The &lt;port&gt; part,
+     if present,denotes the port on which the STUN server is awaiting connection requests. For a standalone STUN server 
+     the port SHALL default to 3478 for both UDP and TCP. The default port for TLS SHALL be 5349.                      
     </t>
-        <t>
-            Example:
-        </t>
-        <t>
-            <list>
-                <t>
-                    stun:example.com:1234 
-                 </t>
-                 <t>    
-                  This example identifies STUN Server at example.com listening on 
-                  port 1234.
-                </t>
-                <t>
-                    stuns:example.com
-                </t>
-                <t>
-                  This example identifies a STUN server at example.com listening
-                  on the default port 5349.
-                </t>  
-                <t>
-                    stun:username:password@example.com:1234 
-                </t>
-                <t>    
-                    This example configuration SHALL identify a short-term or a
-                    long-term credential for the connection to STUN server,
-                    example.com, on port 1234
-                </t>
-            </list>
-        </t>
-        
     </section>
     </section>
-
+    <section anchor="URI_Examples" title="Examples">
+        <t>    
+        URI identifying a STUN Server at example.com listening on port 1234:
+        </t>
+        <t>
+        <list>
+        <t>
+        stun:example.com:1234 
+        </t>
+        </list>
+        </t>
+        <t>
+        A URI to identify a STUN server at example.com listening on the default TLS port 5349:
+        </t>
+        <t>
+        <list>
+        <t>
+        stuns:example.com
+        </t>
+        </list>
+        </t>
+        <t>    
+        URI to identify a short-term or a long-term credential for the connection to STUN server, example.com, on port 1234:
+        </t>
+        <t>
+        <list>
+        <t>
+        stun:username:password@example.com:1234 
+        </t>
+        </list>
+        </t>
+    </section>
+    
 	<section anchor="IANA" title="IANA Considerations"> 
   	<t>
   	This document instructs IANA to register the 'stun' and 'stuns' URI schemes in the "Permanent URI Schemes" sub-registry in the "Uniform Resource Identifier (URI) Schemes" IANA registry <xref target="URIREG"></xref>.  These registrations follows the URI Scheme Registration Template detailed in Section 5.4 of RFC 4395 <xref target="RFC4395"></xref>.
@@ -283,7 +289,7 @@
 	</t>	
     <t>	
     <list>
-        <t>Security Considerations: see Section 5 of RFC XXXX [This document]
+        <t>Security Considerations: see Section 6 of RFC XXXX [This document]
     	</t>
 	</list>
 	</t>	
@@ -301,7 +307,7 @@
 	</t>	
     <t>	
     <list>
-        <t>References: See Section 7 of RFC XXXX [This document]
+        <t>References: See Section 8 of RFC XXXX [This document]
     	</t>
 	</list>
 	</t>
@@ -348,7 +354,7 @@
 	</t>	
     <t>	
     <list>
-        <t>Security Considerations: see Section 5 of RFC XXXX [This document]
+        <t>Security Considerations: see Section 6 of RFC XXXX [This document]
     	</t>
 	</list>
 	</t>	
@@ -366,7 +372,7 @@
 	</t>	
     <t>	
     <list>
-        <t>References: See Section 7 of RFC XXXX [This document]
+        <t>References: See Section 8 of RFC XXXX [This document]
     	</t>
 	</list>
 	</t>
@@ -379,12 +385,18 @@
 	</t>    
 	<t>
  	The URI Scheme defined by this document for the Session Traversal Utilities for NAT (STUN) protocol does not introduce any security considerations beyond those detailed in Section 16 of RFC 5389 <xref target="RFC5389"></xref>.
- 	</t>
+	</t>
+	<t>
+	The STUN protocol supports two opional credential mechanisms as described in the Section 10 of RFC 5389 [RFC5389]. For the short-term 
+	credential mechanism (Section 10.1 of RFC 5389 <xref target="RFC5389"></xref>), the security of such a credential SHALL be the responsibility 
+	of the STUN usage mechanism, say ICE (RFC 5245 <xref target="RFC5245"></xref>). For the long-term credential mechanism (Section 10.2 of
+	    RFC 5389 <xref target="RFC5389"></xref>), such a credential MUST be passed over a secure transport such as HTTPS (RFC 2818 <xref target="RFC2818"></xref>).
+	</t>    
 	</section>
 
     <section anchor="Acknowledgements" title="Acknowledgements">
     <t>
-	TBD
+	Many thanks to Cullen Jennings for his detailed review and thoughtful comments on this document.
 	</t>
     </section>
     
@@ -400,6 +412,7 @@
 	    <?rfc include="reference.RFC.4395" ?>
         <?rfc include="reference.RFC.3986" ?> 
         <?rfc include="reference.RFC.5245"?>
+        <?rfc include="reference.RFC.2818"?>
 	    <reference anchor="URIREG">
       	<front>
       		<title>

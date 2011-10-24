@@ -120,11 +120,17 @@
 	</t>
      <t>   
 	    The 'turn/turns' URI scheme is used to designate a TURN server (also known as a relay) on Internet hosts accessible
-        using the TURN protocol.
-        Such an URI scheme allows a uniform way to describe, configure and exchange the information identifying 
-        a TURN server. This would prevent the shortcomings inherent with encoding similar information in non-uniform
-        syntaxes such as the ones proposed in WEBRTC Standards <xref target="WEBRTC"></xref>, for example.
-     </t>
+	    using the TURN protocol. With the advent of standards such as WEBRTC <xref target="WEBRTC"></xref>, we anticipate a plethora
+         of endpoints and web applications to be able to identify and communicate with such a TURN server to carry out the TURN protocol.
+         This also implies those endpoints and/or applications to be provisioned with appropriate configuration required 
+         to identify the TURN server. Having an inconsistent syntax has its drawbacks and can result in non-interoperable 
+         solutions. It can result in solutions that are ambiguous and have implementation limitations on the different 
+         aspects of the syntax and alike. The 'turn/turns' URI scheme helps alleviate most of these issues by providing a consistent 
+         way to describe, configure and exchange the information identifying a TURN server. This would also prevent the 
+         shortcomings inherent with encoding similar information in non-uniform syntaxes such as the ones proposed in 
+         the WEBRTC Standards <xref target="WEBRTC"></xref>, for example.  
+        </t>
+       
       <t>  
         The 'turn/turns' URI adheres to syntax as defined in RFC 3986 <xref target="RFC3986"></xref>.
 	  </t>  
@@ -153,77 +159,72 @@
       &lt;port&gt; part and the preceding ":" (colon) character, is OPTIONAL.
     </t>       
      <t>
-         The normative syntax of the 'turn' URI is defined as shown in the following 
-         Augmented Backus–Naur Form (ABNF) [RFC5234] rule:
+         The normative syntax of the 'turn' URI is defined as shown in the following Augmented Backus–Naur Form (ABNF) <xref target="RFC5234"></xref> rule:
      </t>
      <figure><artwork>
-      turn-uri      =  turn-scheme":" [ userinfo "@" ] host [ ":" port ]
-      turn-scheme   =  "turn"/"turns"
-      userinfo      =  user [ ":" password ]
-      user          =  1*(%x21-24 / %x26-39 / %x3B-3F / %x41-7F 
-                       / escaped)
-                            ; The symbols "%", ":", "@", and symbols 
-                            ; with a character value below 0x21 may
-                            ; be represented as escaped sequences.
-      password      =  1*(%x21-24 / %x26-3F / %x41-7F / escaped)
-                            ; The symbols "%", "@", and symbols with
-                            ; a character value below 0x21 may be
-                            ; represented as escaped sequences.
-      host          =  hostname / IPv4address / IPv6reference
-      hostname      =  *( domainlabel "." ) toplabel [ "." ]
-      domainlabel   =  alphanum / alphanum *( alphanum / "-" ) alphanum
-      toplabel      =  ALPHA / ALPHA *( alphanum / "-" ) alphanum
-      IPv4address   =  1*3DIGIT "." 1*3DIGIT "." 1*3DIGIT "." 1*3DIGIT
-      IPv6reference =  "[" IPv6address "]"
-      IPV6address   =  hexpart [ ":" IPv4address ]
-      hexpart       =  hexseq / hexseq "::" [ hexseq ] / "::" [ hexseq ]
-      hexseq        =  hex4 *( ":" hex4 )
-      hex4          =  1*4HEXDIG
-      port          =  1*DIGIT
-      alphanum      =  ALPHA / DIGIT
-      escaped       =  "%" HEXDIG HEXDIG
-	</artwork></figure>              
+turn-uri      = turn-scheme ":" [ userinfo "@" ] host [ ":" port ]
+turn-scheme   = "turn"/"turns"
+userinfo      = user [ ":" password ]
+user          = 1*(%x21-24 / %x26-39 / %x3B-3F / %x41-7F 
+                / escaped)
+                    ; The symbols "%", ":", "@", and symbols 
+                    ; with a character value below 0x21 may
+                    ; be represented as escaped sequences.
+password      = 1*(%x21-24 / %x26-3F / %x41-7F / escaped)
+                    ; The symbols "%", "@", and symbols with
+                    ; a character value below 0x21 may be
+                    ; represented as escaped sequences.
+host          = hostname / IPv4address / IPv6reference
+hostname      = *( domainlabel "." ) toplabel [ "." ]
+domainlabel   = alphanum / alphanum *( alphanum / "-" ) alphanum
+toplabel      = ALPHA / ALPHA *( alphanum / "-" ) alphanum
+IPv4address   = 1*3DIGIT "." 1*3DIGIT "." 1*3DIGIT "." 1*3DIGIT
+IPv6reference = "[" IPv6address "]"
+IPv6address   = hexpart [ ":" IPv4address ]
+hexpart       = hexseq / hexseq "::" [ hexseq ] / "::" [ hexseq ]
+hexseq        = hex4 *( ":" hex4 )
+hex4          = 1*4HEXDIG
+port          = 1*DIGIT
+alphanum      = ALPHA / DIGIT
+escaped       = "%" HEXDIG HEXDIG
+	</artwork></figure>  
+	<t>
+	The &lt;host&gt;, &lt;port&gt; and &lt;userinfo&gt; rules are described in Appendix A of RFC 3986 <xref target="RFC3986"></xref>.  The core rules &lt;ALPHA&gt;, &lt;DIGIT&gt; and &lt;HEXDIGIT&gt; are used as described in Appendix B of RFC 5234 <xref target="RFC5234"></xref>.
+	</t>
     </section>
     <section anchor="URI_Scheme_Semantics" title="URI Scheme Semantics">
     <t>
-     The TURN protocol supports sending messages over UDP, TCP or TLS-over-TCP. The
-     'turns' URI scheme SHALL be used when TURN is run over TLS-over-TCP and the 'turn' 
-     scheme SHALL be used otherwise.   
-     The &lt;host&gt; part of the 'turn' URI, which is REQUIRED, denotes the
-     TURN server host. The &lt;userinfo&gt; part, identifies the credential required
-     for the long-term credential mechanism as described in the section 4 of RFC 5766
-     <xref target="RFC5766"></xref>. The &lt;port&gt; part, if present,
-     denotes the port on which the TURN server is awaiting connection requests.  
-     If it is absent, the default port SHALL be 3478 for both UDP and TCP. The
-     default port for TURN over TLS SHALL be 5349.
-     
+     The TURN protocol supports sending messages over UDP, TCP or TLS-over-TCP. The 'turns' URI scheme SHALL be used when TURN is run over
+     TLS-over-TCP (or in the future DTLS-over-UDP) and the 'turn' scheme SHALL be used otherwise.  The &lt;host&gt; part of the 'turn' URI,
+     which is REQUIRED, denotes the TURN server host. The &lt;userinfo&gt; part, identifies the credential required for the long-term credential
+     mechanism as described in the section 10.2 of RFC 5389 <xref target="RFC5389"></xref>. The &lt;port&gt; part, if present, denotes the port on 
+     which the TURN server is awaiting connection requests. If it is absent, the default port SHALL be 3478 for both UDP and TCP. The default port 
+     for TURN over TLS SHALL be 5349.
      </t>
-        <t>
-            Example:
-        </t>
-        <t>
-            <list>
-                <t>
-                    turns:username:password@example.com
-                </t>
-                <t>
-                    This example configuration SHALL identify a 
-                    long-term credential for the TLS-over-TCP connection to TURN server,
-                    example.com, on defualt port 5349.
-                </t> 
-                <t>
-                    turn:username:password@example.com
-                </t>
-                <t>
-                    This example configuration SHALL identify a 
-                    long-term credential for the connection to TURN server,
-                    example.com, on default port 3478.
-                </t>    
-            </list>
-        </t>
-        
-    </section>
-    </section>
+     </section>
+     </section>
+     <section anchor="URI_Examples" title="Examples">
+     <t>
+     URI to identify a long-term credential for the TLS-over-TCP connection to TURN server, example.com, on default port 5349:
+     </t>
+     <t>
+     <list>
+     <t>
+     turns:username:password@example.com
+     </t>
+     </list>
+     </t>
+     <t>
+     URI to identify a long-term credential for the connection to TURN server, example.com, on default port 3478:
+     </t>             
+     <t>
+     <list>
+     <t>
+     turn:username:password@example.com
+     </t>
+     </list>
+     </t>        
+     </section>
 
 	<section anchor="IANA" title="IANA Considerations"> 
   	<t>
@@ -271,7 +272,7 @@
 	</t>	
     <t>	
     <list>
-        <t>Security Considerations: see Section 5 of RFC XXXX [This document]
+        <t>Security Considerations: see Section 6 of RFC XXXX [This document]
     	</t>
 	</list>
 	</t>	
@@ -289,7 +290,7 @@
 	</t>	
     <t>	
     <list>
-        <t>References: See Section 7 of RFC XXXX [This document]
+        <t>References: See Section 8 of RFC XXXX [This document]
     	</t>
 	</list>
 	</t>
@@ -336,7 +337,7 @@
 	</t>	
     <t>	
     <list>
-        <t>Security Considerations: see Section 5 of RFC XXXX [This document]
+        <t>Security Considerations: see Section 6 of RFC XXXX [This document]
     	</t>
 	</list>
 	</t>	
@@ -354,7 +355,7 @@
 	</t>	
     <t>	
     <list>
-        <t>References: See Section 7 of RFC XXXX [This document]
+        <t>References: See Section 8 of RFC XXXX [This document]
     	</t>
 	</list>
 	</t>
@@ -367,16 +368,19 @@
 	</t>     
 	<t>
 	    The URI Scheme defined by this document for the Traversal Using Relays around NAT (TURN) protocol does not introduce any security considerations beyond those detailed in Section 17 of RFC 5766 <xref target="RFC5766"></xref>.
- 	</t>
+	</t>
+	<t>
+	Since embedding password in the URI MAY cause security issues, it is expected that the credential MUST be passed over a secure transport
+	such as HTTPS (RFC 2818 <xref target="RFC2818"></xref>).
+	</t>    
 	</section>
 
     <section anchor="Acknowledgements" title="Acknowledgements">
     <t>
-	TBD
+	Many thanks to Cullen Jennings for his detailed review and thoughtful comments on this document.
 	</t>
     </section>
-    
-</middle>
+</middle>    
 
 <back>
     <references title="Normative References">
@@ -386,7 +390,9 @@
     </references>
     <references title="Informative References">
 	    <?rfc include="reference.RFC.4395" ?>
-        <?rfc include="reference.RFC.3986" ?> 
+        <?rfc include="reference.RFC.3986" ?>
+        <?rfc include="reference.RFC.5389" ?>
+        <?rfc include="reference.RFC.2818" ?>
 	    <reference anchor="URIREG">
       	<front>
       		<title>
