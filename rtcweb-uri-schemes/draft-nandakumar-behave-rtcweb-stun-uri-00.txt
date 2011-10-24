@@ -68,11 +68,11 @@ Table of Contents
    5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . . . 5
      5.1.  The 'stun' URI Scheme Registration  . . . . . . . . . . . . 5
      5.2.  The 'stuns' URI Scheme Registration . . . . . . . . . . . . 6
-   6.  Security Considerations . . . . . . . . . . . . . . . . . . . . 7
+   6.  Security Considerations . . . . . . . . . . . . . . . . . . . . 6
    7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . 7
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . . . 7
      8.1.  Normative References  . . . . . . . . . . . . . . . . . . . 7
-     8.2.  Informative References  . . . . . . . . . . . . . . . . . . 8
+     8.2.  Informative References  . . . . . . . . . . . . . . . . . . 7
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . . 8
 
 
@@ -181,16 +181,12 @@ Internet-Draft             URI Scheme for STUN              October 2011
 
    stun-uri      = stun-scheme ":" [ userinfo "@" ] host [ ":" port ]
    stun-scheme   = "stun"/"stuns"
-   userinfo      = user [ ":" password ]
+   userinfo      = user
    user          = 1*(%x21-24 / %x26-39 / %x3B-3F / %x41-7F
                    / escaped)
                        ; The symbols "%", ":", "@", and symbols
                        ; with a character value below 0x21 may
                        ; be represented as escaped sequences.
-   password      = 1*(%x21-24 / %x26-3F / %x41-7F / escaped)
-                       ; The symbols "%", "@", and symbols with
-                       ; a character value below 0x21 may be
-                       ; represented as escaped sequences.
    host          = hostname / IPv4address / IPv6reference
    hostname      = *( domainlabel "." ) toplabel [ "." ]
    domainlabel   = alphanum / alphanum *( alphanum / "-" ) alphanum
@@ -217,6 +213,10 @@ Internet-Draft             URI Scheme for STUN              October 2011
 
    The STUN protocol supports sending messages over UDP, TCP or TLS-
    over-TCP.  The 'stuns' URI scheme SHALL be used when STUN is run over
+   TLS-over-TCP (or DTLS-over-UDP in the future) and the 'stun' scheme
+   SHALL be used otherwise.  The <host> part of the 'stun' URI, which is
+   REQUIRED, denotes the STUN server host.  The <userinfo> part is
+   OPTIONAL and MAY NOT be utilized within the 'stun/stuns' URI scheme.
 
 
 
@@ -225,10 +225,6 @@ Nandakumar, et al.       Expires April 27, 2012                 [Page 4]
 Internet-Draft             URI Scheme for STUN              October 2011
 
 
-   TLS-over-TCP (or DTLS-over-UDP in the future) and the 'stun' scheme
-   SHALL be used otherwise.  The <host> part of the 'stun' URI, which is
-   REQUIRED, denotes the STUN server host.  The <userinfo> part is
-   OPTIONAL and MAY NOT be utilized within the 'stun/stuns' URI scheme.
    It is provided so as to be compatible with certain non-standard
    standalone STUN server implementations that enforce clients to
    authenticate.  The <port> part, if present,denotes the port on which
@@ -272,7 +268,11 @@ Internet-Draft             URI Scheme for STUN              October 2011
 
       URI scheme syntax: see Section 3.1 of RFC XXXX [This document]
 
+      URI scheme semantics: see Section 3.2 of RFC XXXX [This document]
 
+      URI scheme encoding considerations: there are no other encoding
+      considerations for 'stun' URIs that are not described in RFC 5389
+      [RFC5389].
 
 
 
@@ -280,12 +280,6 @@ Nandakumar, et al.       Expires April 27, 2012                 [Page 5]
 
 Internet-Draft             URI Scheme for STUN              October 2011
 
-
-      URI scheme semantics: see Section 3.2 of RFC XXXX [This document]
-
-      URI scheme encoding considerations: there are no other encoding
-      considerations for 'stun' URIs that are not described in RFC 5389
-      [RFC5389].
 
       Protocols that use the scheme: Session Traversal Utilities for NAT
       (STUN)
@@ -326,17 +320,6 @@ Internet-Draft             URI Scheme for STUN              October 2011
       References: See Section 8 of RFC XXXX [This document]
 
 
-
-
-
-
-
-
-Nandakumar, et al.       Expires April 27, 2012                 [Page 6]
-
-Internet-Draft             URI Scheme for STUN              October 2011
-
-
 6.  Security Considerations
 
    Generic security considerations for the usage of URIs are discussed
@@ -346,6 +329,13 @@ Internet-Draft             URI Scheme for STUN              October 2011
    Utilities for NAT (STUN) protocol does not introduce any security
    considerations beyond those detailed in Section 16 of RFC 5389
    [RFC5389].
+
+
+
+Nandakumar, et al.       Expires April 27, 2012                 [Page 6]
+
+Internet-Draft             URI Scheme for STUN              October 2011
+
 
    The STUN protocol supports two opional credential mechanisms as
    described in the Section 10 of RFC 5389 [RFC5389].  For the short-
@@ -384,15 +374,6 @@ Internet-Draft             URI Scheme for STUN              October 2011
               "Session Traversal Utilities for NAT (STUN)", RFC 5389,
               October 2008.
 
-
-
-
-
-Nandakumar, et al.       Expires April 27, 2012                 [Page 7]
-
-Internet-Draft             URI Scheme for STUN              October 2011
-
-
 8.2.  Informative References
 
    [RFC2818]  Rescorla, E., "HTTP Over TLS", RFC 2818, May 2000.
@@ -404,6 +385,13 @@ Internet-Draft             URI Scheme for STUN              October 2011
    [RFC4395]  Hansen, T., Hardie, T., and L. Masinter, "Guidelines and
               Registration Procedures for New URI Schemes", BCP 35,
               RFC 4395, February 2006.
+
+
+
+Nandakumar, et al.       Expires April 27, 2012                 [Page 7]
+
+Internet-Draft             URI Scheme for STUN              October 2011
+
 
    [RFC5245]  Rosenberg, J., "Interactive Connectivity Establishment
               (ICE): A Protocol for Network Address Translator (NAT)
@@ -439,16 +427,6 @@ Authors' Addresses
    Email: gsalguei@cisco.com
 
 
-
-
-
-
-
-Nandakumar, et al.       Expires April 27, 2012                 [Page 8]
-
-Internet-Draft             URI Scheme for STUN              October 2011
-
-
    Paul E. Jones
    Cisco Systems
    7025 Kit Creek Road
@@ -466,39 +444,5 @@ Internet-Draft             URI Scheme for STUN              October 2011
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Nandakumar, et al.       Expires April 27, 2012                 [Page 9]
+Nandakumar, et al.       Expires April 27, 2012                 [Page 8]
 
