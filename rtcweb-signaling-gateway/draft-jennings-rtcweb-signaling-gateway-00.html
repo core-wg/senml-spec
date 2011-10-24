@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="SIP to RTCWeb Offer/Answer Protocol (ROAP)
     Gateway">
-<meta name="generator" content="xml2rfc v1.36 (http://xml.resource.org/)">
+<meta name="generator" content="xml2rfc v1.36pre1-dev (http://xml.resource.org/)">
 <style type='text/css'><!--
         body {
                 font-family: verdana, charcoal, helvetica, arial, sans-serif;
@@ -146,9 +146,9 @@
 <tr><td class="header">Network Working Group</td><td class="header">C. Jennings</td></tr>
 <tr><td class="header">Internet-Draft</td><td class="header">S. Nandakumar</td></tr>
 <tr><td class="header">Intended status:  Standards Track</td><td class="header">Cisco</td></tr>
-<tr><td class="header">Expires:  April 22, 2012</td><td class="header">C. Holmberg</td></tr>
+<tr><td class="header">Expires:  April 26, 2012</td><td class="header">C. Holmberg</td></tr>
 <tr><td class="header">&nbsp;</td><td class="header">Ericsson</td></tr>
-<tr><td class="header">&nbsp;</td><td class="header">October 20, 2011</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">October 24, 2011</td></tr>
 </table></td></tr></table>
 <h1><br />SIP to RTCWeb Offer/Answer Protocol (ROAP)
     Gateway<br />draft-jennings-rtcweb-signaling-gateway-00</h1>
@@ -176,7 +176,7 @@ and may be updated, replaced, or obsoleted by other documents at any time.
 It is inappropriate to use Internet-Drafts as reference material or to cite
 them other than as &ldquo;work in progress.&rdquo;</p>
 <p>
-This Internet-Draft will expire on April 22, 2012.</p>
+This Internet-Draft will expire on April 26, 2012.</p>
 
 <h3>Copyright Notice</h3>
 <p>
@@ -239,17 +239,29 @@ Introduction</h3>
       Signaling gateway that maps message representations proposed in <a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a> to native SIP <a class='info' href='#RFC3261'>[RFC3261]<span> (</span><span class='info'>Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston, A., Peterson, J., Sparks, R., Handley, M., and E. Schooler, &ldquo;SIP: Session Initiation Protocol,&rdquo; June&nbsp;2002.</span><span>)</span></a>
       messages and vice-versa. The specification <a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>
       describes a signaling protocol for RTCWeb to support negotiation of
-      media session using SDP offer/answer <a class='info' href='#RFC3264'>[RFC3264]<span> (</span><span class='info'>Rosenberg, J. and H. Schulzrinne, &ldquo;An Offer/Answer Model with Session Description Protocol           (SDP),&rdquo; June&nbsp;2002.</span><span>)</span></a> 
-      protocol.Such a singaling protocol enables an RTCWeb browser to setup media
-      sessions to another browser or a SIP device. For Browser-to-SIP device
-      use case, the signaling gateway connects to legacy SIP devices  and
-      SHALL translate messages between ROAP and SIP native messages
+      media session using SDP offer/answer <a class='info' href='#RFC3264'>[RFC3264]<span> (</span><span class='info'>Rosenberg, J. and H. Schulzrinne, &ldquo;An Offer/Answer Model with Session Description Protocol           (SDP),&rdquo; June&nbsp;2002.</span><span>)</span></a>
+      protocol. Such a signaling protocol enables an RTCWeb browser to setup
+      media sessions to another browser or a SIP device. For Browser-to-SIP
+      device use case, the signaling gateway connects to legacy SIP devices
+      and SHALL translate messages between ROAP and SIP native messages
       schemes.
 </p>
 <a name="anchor2"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.2"></a><h3>2.&nbsp;
 Mapping to SIP</h3>
+
+<p></p>
+<blockquote class="text"><dl>
+<dt>Note:</dt>
+<dd>The SDP and SIP examples are not correct but
+          illustrate the rough outline of the mechanism. Future version will
+          correct this. 
+</dd>
+<dt></dt>
+<dd>
+</dd>
+</dl></blockquote>
 
 <p>The design requires the gateway to be SIP transaction statefull but
       does not require any storage of longer term state. The information that
@@ -260,9 +272,9 @@ Mapping to SIP</h3>
       the SIP side and web side.
 </p>
 <p>The following sub-sections show example message flows with detailed
-      message description of native SIP messages that are mapped from ROAP scheme
-      and the ones that are received as responses by the signaling gateway.
-      CallerUA(callerua@atlanta.example.com) is a RTCWeb browser.
+      message description of native SIP messages that are mapped from ROAP
+      scheme and the ones that are received as responses by the signaling
+      gateway. CallerUA(callerua@atlanta.example.com) is a RTCWeb browser.
       CalleeUA(sip:calleeua@sippy.example.com) is assumed to be a SIP-enabled
       device. It is also assumed that CalleeUA has registered with a SIP proxy
       server to be able to receive the calls via the proxy.
@@ -272,19 +284,17 @@ Mapping to SIP</h3>
 <a name="rfc.section.2.1"></a><h3>2.1.&nbsp;
 SuccessFull Session Establishment</h3>
 
-<p>In this scenario CallerUA establishes succesful media session with CalleUA, 
-     a legacy SIP end-point, with the help of the RTCWeb signaling gateway.
+<p>In this scenario CallerUA establishes successful media session with
+        CalleeUA, a legacy SIP end-point, with the help of the RTCWeb
+        signaling gateway.
 </p><div><img src="sse.png" alt="Go Read the TXT version of this draft" /></div>
 </div>
 
-<p>
-   Message Details
-  
+<p>Message Details
 </p>
-<p>
-     Signaling gateway (on behalf of CallerUA) maps ROAP:OFFER (section 5.3.1
-     of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>)  to SIP:INVITE and
-     sends it to CalleeUA to start the session.
+<p>Signaling gateway (on behalf of CallerUA) maps ROAP:OFFER (section
+        5.3.1 of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) to SIP:INVITE and sends it
+        to CalleeUA to start the session.
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
  {"type":"OFFER",
   "offererSessionId":"36707f69b",
@@ -320,8 +330,7 @@ a=rtpmap:0 PCMU/8000
 a=sendrecv
 }
 </pre></div>
-<p>
-    SIP:180 from CalleeUA is received at the signaling gateway.
+<p>SIP:180 from CalleeUA is received at the signaling gateway.
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 {SIP/2.0 180 Ringing
 Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
@@ -342,11 +351,10 @@ a=rtpmap:0 PCMU/8000
 a=sendrecv
 }
 </pre></div>
-<p>This message SHALL be converted to ROAP:Answer (section 5.3.2
-     of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) with "more-coming" flag set to true as 
-     described in the section 5.2.3 of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a> specification 
-     and sent to CallerUA by the signaling gateway.     
-   
+<p>This message SHALL be converted to ROAP:Answer (section 5.3.2 of
+        ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) with "more-coming" flag set to true
+        as described in the section 5.2.3 of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>
+        specification and sent to CallerUA by the signaling gateway.
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
  {"type":"ANSWER",
   "offererSessionId":"36707f69b",
@@ -364,8 +372,7 @@ a=sendrecv
        a=sendrecv"
  }
 </pre></div>
-<p>
-    SIP: OK from CalleeUA is received at the signaling gateway.
+<p>SIP: OK from CalleeUA is received at the signaling gateway.
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 {SIP/2.0 200 OK
 Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
@@ -387,11 +394,10 @@ a=rtpmap:0 PCMU/8000
 a=sendrecv
 }
 </pre></div>
-<p>This message SHALL be converted to ROAP:Answer(section 5.3.2
-      of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) and sent to caller by the signaling gateway. 
-      This represents a final answer as desribed in the section 5.2.3 of
-      ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>
-    
+<p>This message SHALL be converted to ROAP:Answer(section 5.3.2 of
+        ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) and sent to caller by the signaling
+        gateway. This represents a final answer as described in the section
+        5.2.3 of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
  {"type":"ANSWER",
   "offererSessionId":"36707f69b",
@@ -408,11 +414,10 @@ a=rtpmap:0 PCMU/8000
 a=sendrecv"
  }
 </pre></div>
-<p>
-      Signaling gateway (on behalf of CallerUA) maps ROAP:OK (section 5.3.2
-      of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) to SIP:ACK and sends it to CalleeUA to start the session.
-      This completes call-setup and media streams are established between CallerUA and the
-      CalleeUA.
+<p>Signaling gateway (on behalf of CallerUA) maps ROAP:OK (section
+        5.3.2 of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) to SIP:ACK and sends it to
+        CalleeUA to start the session. This completes call-setup and media
+        streams are established between CallerUA and the CalleeUA.
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
  {"type":"OK",
   "offererSessionId":"36707f69b",
@@ -435,18 +440,15 @@ CSeq: 1 ACK
 Add New Media (video)</h3>
 
 <p>This scenario describes the message exchanges when CalleeUA decides
-      to add video as media to an existing audio-only session
-     
+        to add video as media to an existing audio-only session
 </p><div><img src="new-media.png" alt="Go Read the TXT version of this draft" /></div>
 </div>
 
-<p>
-       Message Details
-     
+<p>Message Details
 </p>
-<p>
-       On receipt of SIP:INVITE with SDP for video, the signaling gateway
-       maps SIP:INVITE to ROAP:OFFER(section 5.3.1 of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>)  and sends it to CallerUA indicating the intent.
+<p>On receipt of SIP:INVITE with SDP for video, the signaling gateway
+        maps SIP:INVITE to ROAP:OFFER(section 5.3.1 of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) and sends it to CallerUA indicating the
+        intent.
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 {INVITE sip:callerua@atlanta.example.com SIP/2.0
 Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
@@ -468,8 +470,8 @@ a=fmtp:97 profile-level-id=42E00C
 a=sendrecv
 }
 </pre></div>
-<p>
-       CallerUA accepts the new ROAP:OFFER(section 5.3.1 of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) and sends ROAP:ANSWER section 5.3.2 of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>). 
+<p>CallerUA accepts the new ROAP:OFFER(section 5.3.1 of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) and sends ROAP:ANSWER section 5.3.2 of
+        ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>).
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
  {"type":"OFFER",
   "offererSessionId":"36707f69b",
@@ -486,7 +488,7 @@ a=fmtp:97 profile-level-id=42E00C
 a=sendrecv"
  }
 </pre></div>
-<p> Which results in the follwing answer. 
+<p>Which results in the follwing answer.
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
  {"type":"ANSWER",
   "offererSessionId":"36707f69b",
@@ -503,7 +505,8 @@ a=rtpmap:0 PCMU/8000
 a=sendrecv"
  }
 </pre></div>
-<p>The signaling gateway maps the ROAP:ANSWER to SIP:200 to be sent to the CalleeUA.
+<p>The signaling gateway maps the ROAP:ANSWER to SIP:200 to be sent to
+        the CalleeUA.
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
          {
 {SIP/2.0 200 OK
@@ -526,12 +529,9 @@ a=fmtp:97 profile-level-id=42E00C
 a=sendrecv
 }
 </pre></div>
-<p>
-       CalleeUA accepts the receipt of SIP:200 by sending SIP:ACK.
-       The signaling gateway SIP:ACK to ROAP:OK (section 5.3.2
-       of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) sends it to CallerUA.
-       This completes adding the new media (video) to the existing
-       session.
+<p>CalleeUA accepts the receipt of SIP:200 by sending SIP:ACK. The
+        signaling gateway SIP:ACK to ROAP:OK (section 5.3.2 of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) sends it to CallerUA. This completes adding the
+        new media (video) to the existing session.
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 {ACK sip:callerua@client.atlanta.example.com SIP/2.0
 Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
@@ -558,13 +558,10 @@ SuccessFull Session Ending</h3>
 </p><div><img src="end-session.png" alt="Go Read the TXT version of this draft" /></div>
 </div>
 
-<p>
-        Message Details
-      
+<p>Message Details
 </p>
-<p>
-        The signaling gateway maps ROAP:SHUTDOWN message from the CallerUA
-        to SIP:BYE and send it to CalleeUA to end the  ongoing session.
+<p>The signaling gateway maps ROAP:SHUTDOWN message from the CallerUA
+        to SIP:BYE and send it to CalleeUA to end the ongoing session.
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
  {"type":"SHUTDOWN",
   "offererSessionId":"36707f69b",
@@ -581,8 +578,7 @@ Call-ID: 00000000-00000003-2331a5b0-2aa0cdf5@atlanta.example.com
 CSeq: 3 BYE
 }
 </pre></div>
-<p>
-        CalleeUA end's the session from it's side by sending SIP:OK.
+<p>CalleeUA end's the session from it's side by sending SIP:OK.
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 {SIP/2.0 200 OK
 Via: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9
@@ -594,9 +590,9 @@ CSeq: 3 BYE
 Contact: &lt;sip:calleeua@client.sippy.example.com;transport=udp&gt;
 }
 </pre></div>
-<p>This message SHALL be converted to ROAP:OK(section 5.3.2
-      of ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) and sent to caller by the signaling gateway. 
-      
+<p>This message SHALL be converted to ROAP:OK(section 5.3.2 of
+        ROAP<a class='info' href='#ROAP'>[ROAP]<span> (</span><span class='info'>Jennings, C. and J. Rosenberg, &ldquo;RTCWeb Offer/Answer Protocol (ROAP),&rdquo; October&nbsp;2011.</span><span>)</span></a>) and sent to caller by the signaling
+        gateway.
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
  {"type":"OK",
   "offererSessionId":"36707f69b",
@@ -609,36 +605,36 @@ Contact: &lt;sip:calleeua@client.sippy.example.com;transport=udp&gt;
 <a name="rfc.section.3"></a><h3>3.&nbsp;
 Handling SIP Requests</h3>
 
-<p>When the signalling gateway receives a SIP request, the gateway
-        forms the message on the web request side in the following way: </p>
+<p>When the signalling gateway receives a SIP request, the gateway forms
+      the message on the web request side in the following way: </p>
 <ol class="text">
 <li>The SIP methods INVITE, ACK, BYE, CANCEL are mapped to
-            messageType OFFER, OK, SHUTDOWN, SHUTDOWN respectively
+          messageType OFFER, OK, SHUTDOWN, SHUTDOWN respectively
 </li>
 <li>The Seq on web side is formed from the numeric portion of CSeq
-            header field value from the SIP side.
+          header field value from the SIP side.
 </li>
 <li>The offererSessionId is formed by a JSON object string that has
-            an call-id attribute containing the SIP call-id header field value
-            and a from-tag attribute containing the SIP from-tag.
+          an call-id attribute containing the SIP call-id header field value
+          and a from-tag attribute containing the SIP from-tag.
 </li>
 <li>If there is a SIP to-tag, it is used for the
-            answererSessionId.
+          answererSessionId.
 </li>
-<li>If there is a SIP body containing SDP, it is copied into the
-            SDP parameter on web side.
+<li>If there is a SIP body containing SDP, it is copied into the SDP
+          parameter on web side.
 </li>
 <li>The setSessionToken is formed by a JSON object string that has
-            contact attribute that contains the SIP contact header field
-            value and an route attribute which is an array that has the values
-            of the SIP route header field values in reverse order.
+          contact attribute that contains the SIP contact header field value
+          and an route attribute which is an array that has the values of the
+          SIP route header field values in reverse order.
 </li>
-<li>The setResponseToken formed by a JSON object string that has
-            via attribute that is an array containing the SIP via headers
-            field values. The JSON object also includes an attribute that
-            holds the request method. The gateway MAY include any other SIP
-            headers in an attribute named headers which is an array with one
-            header field in each entry.
+<li>The setResponseToken formed by a JSON object string that has via
+          attribute that is an array containing the SIP via headers field
+          values. The JSON object also includes an attribute that holds the
+          request method. The gateway MAY include any other SIP headers in an
+          attribute named headers which is an array with one header field in
+          each entry.
 </li>
 </ol>
 
@@ -648,36 +644,36 @@ Handling SIP Requests</h3>
 Handling SIP Responses</h3>
 
 <p>When the signalling gateway receives a SIP response, the gateway
-        forms the message on the web request side in the following way: </p>
+      forms the message on the web request side in the following way: </p>
 <ol class="text">
-<li>The SIP responses 180 is mapped to ANSWER with more_coming. A
-            200 response that contains SDP is mapped to ANSWER. 481 is mapped
-            to NOMATCH. 408 is mapped to TIMEOUT. 486 is mapped to REFUSED.
-            491 is mapped to CONFLICT. All other SIP 3xx to 6xx responses are
-            mapped to FAILED.
+<li>The SIP responses 180 is mapped to ANSWER with more_coming. A 200
+          response that contains SDP is mapped to ANSWER. 481 is mapped to
+          NOMATCH. 408 is mapped to TIMEOUT. 486 is mapped to REFUSED. 491 is
+          mapped to CONFLICT. All other SIP 3xx to 6xx responses are mapped to
+          FAILED.
 </li>
 <li>The Seq on web side is formed from the numeric portion of CSeq
-            header field value from the SIP side.
+          header field value from the SIP side.
 </li>
 <li>The offererSessionId is formed by a JSON object string that has
-            an call-id attribute containing the SIP call-id header field value
-            and a from-tag attribute containing the SIP from-tag.
+          an call-id attribute containing the SIP call-id header field value
+          and a from-tag attribute containing the SIP from-tag.
 </li>
 <li>The SIP to-tag is used for the answererSessionId.
 </li>
-<li>If there is a SIP body containing SDP, it is copied into the
-            SDP parameter on web side.
+<li>If there is a SIP body containing SDP, it is copied into the SDP
+          parameter on web side.
 </li>
 <li>The setSessionToken is formed by a JSON object string that has
-            contact attribute that contains the SIP contact header field
-            value and an route attribute which is an array that has the values
-            of the SIP route header field values.
+          contact attribute that contains the SIP contact header field value
+          and an route attribute which is an array that has the values of the
+          SIP route header field values.
 </li>
-<li>The setResponseToken formed by a JSON object string that has
-            via attribute that is an array containing the SIP via headers
-            field values. The gateway MAY include any other SIP headers in an
-            attribute named headers which is an array with one header field in
-            each entry.
+<li>The setResponseToken formed by a JSON object string that has via
+          attribute that is an array containing the SIP via headers field
+          values. The gateway MAY include any other SIP headers in an
+          attribute named headers which is an array with one header field in
+          each entry.
 </li>
 </ol>
 
@@ -686,43 +682,43 @@ Handling SIP Responses</h3>
 <a name="rfc.section.5"></a><h3>5.&nbsp;
 Handling Web Messages</h3>
 
-<p>When the signalling gateway receives a WEB message, the gateway
-        forms the message on the SIP side in the following way: </p>
+<p>When the signalling gateway receives a WEB message, the gateway forms
+      the message on the SIP side in the following way: </p>
 <ol class="text">
 <li>The messageType OFFER, ANSWER with more_coming, ANSWER, OK,
-            NOMATCH, TIMEOUT, REFUSED, CONFLICT, FAILED are mapped to INVITE,
-            180, 200, ACK, 481, 408, 486, 491, 500 respectively.
+          NOMATCH, TIMEOUT, REFUSED, CONFLICT, FAILED are mapped to INVITE,
+          180, 200, ACK, 481, 408, 486, 491, 500 respectively.
 </li>
 <li>The messageType SHUTDOWN is mapped to a CANCEL if the
-            answererSessionId is empty and to BYE otherwise
+          answererSessionId is empty and to BYE otherwise
 </li>
 <li>For SIP responses, The numeric portion of the CSeq is formed by
-            taking the number portion from the Seq field. If the
-            setResponseToken contains a method name, that is used for the
-            method portion of the CSeq otherwise if it does not exist, the
-            request method of the SIP message is used.
+          taking the number portion from the Seq field. If the
+          setResponseToken contains a method name, that is used for the method
+          portion of the CSeq otherwise if it does not exist, the request
+          method of the SIP message is used.
 </li>
 <li>The Call-ID header field values is formed from the call-id
-            attribute of the offererSessionId.
+          attribute of the offererSessionId.
 </li>
 <li>The from-tag is formed from the from-tag attribute of the
-            offererSessionId.
+          offererSessionId.
 </li>
 <li>If there is a answererSessionId, it is used for the SIP
-            to-tag.
+          to-tag.
 </li>
-<li>If there is a SDP parameter, it is used as a SIP SDP body and
-            the content type of and content length headers are set
-            appropriately.
+<li>If there is a SDP parameter, it is used as a SIP SDP body and the
+          content type of and content length headers are set
+          appropriately.
 </li>
-<li>If there is a sessionToken that contains a contact attribute,
-            it is used to form the SIP contact header field value.
+<li>If there is a sessionToken that contains a contact attribute, it
+          is used to form the SIP contact header field value.
 </li>
 <li>If there is a sessionToken that contains a route array, it is
-            used to form the SIP route header field values.
+          used to form the SIP route header field values.
 </li>
-<li>If there is a responseToken that contains a via array, it is
-            used to form the SIP via header field values.
+<li>If there is a responseToken that contains a via array, it is used
+          to form the SIP via header field values.
 </li>
 </ol>
 
@@ -732,7 +728,7 @@ Handling Web Messages</h3>
 Limitations</h3>
 
 <p>The following things, if used on the SIP side, will not
-        interoperate:
+      interoperate:
 </p>
 <p></p>
 <ul class="text">
@@ -743,7 +739,7 @@ Limitations</h3>
 <li>REFER
 </li>
 <li>SIP to pre RFC 3261 devices that don't support to and from
-            tags.
+          tags.
 </li>
 <li>SUB/NOTify
 </li>
@@ -798,10 +794,10 @@ References</h3>
 <tr><td class="author-text" valign="top"><a name="RFC3261">[RFC3261]</a></td>
 <td class="author-text">Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston, A., Peterson, J., Sparks, R., Handley, M., and E. Schooler, &ldquo;<a href="http://tools.ietf.org/html/rfc3261">SIP: Session Initiation Protocol</a>,&rdquo; RFC&nbsp;3261, June&nbsp;2002 (<a href="http://www.rfc-editor.org/rfc/rfc3261.txt">TXT</a>).</td></tr>
 <tr><td class="author-text" valign="top"><a name="I-D.ietf-rtcweb-use-cases-and-requirements">[I-D.ietf-rtcweb-use-cases-and-requirements]</a></td>
-<td class="author-text">Holmberg, C., Hakansson, S., and G. Eriksson, &ldquo;<a href="http://tools.ietf.org/html/draft-ietf-rtcweb-use-cases-and-requirements-06">Web Real-Time Communication Use-cases and
+<td class="author-text">Holmberg, C., Hakansson, S., and G. Eriksson, &ldquo;<a href="http://www.ietf.org/internet-drafts/draft-ietf-rtcweb-use-cases-and-requirements-06.txt">Web Real-Time Communication Use-cases and
           Requirements</a>,&rdquo; draft-ietf-rtcweb-use-cases-and-requirements-06 (work in progress), October&nbsp;2011 (<a href="http://www.ietf.org/internet-drafts/draft-ietf-rtcweb-use-cases-and-requirements-06.txt">TXT</a>).</td></tr>
 <tr><td class="author-text" valign="top"><a name="ROAP">[ROAP]</a></td>
-<td class="author-text">Jennings, C. and J. Rosenberg, &ldquo;<a href="http://tools.ietf.org/html/draft-jennings-rtcweb-signaling">RTCWeb Offer/Answer Protocol (ROAP)</a>,&rdquo; draft-jennings-rtcweb-signaling (work in progress), October&nbsp;2011 (<a href="http://svn.resiprocate.org/rep/ietf-drafts/fluffy/draft-jennings-rtcweb-signaling.txt">TXT</a>).</td></tr>
+<td class="author-text">Jennings, C. and J. Rosenberg, &ldquo;<a href="http://www.ietf.org/internet-drafts/draft-jennings-rtcweb-signaling.txt">RTCWeb Offer/Answer Protocol (ROAP)</a>,&rdquo; draft-jennings-rtcweb-signaling (work in progress), October&nbsp;2011 (<a href="http://svn.resiprocate.org/rep/ietf-drafts/fluffy/draft-jennings-rtcweb-signaling.txt">TXT</a>).</td></tr>
 </table>
 
 <a name="rfc.authors"></a><br /><hr />

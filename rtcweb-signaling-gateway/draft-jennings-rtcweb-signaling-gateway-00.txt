@@ -4,9 +4,9 @@
 Network Working Group                                        C. Jennings
 Internet-Draft                                             S. Nandakumar
 Intended status:  Standards Track                                  Cisco
-Expires:  April 22, 2012                                     C. Holmberg
+Expires:  April 26, 2012                                     C. Holmberg
                                                                 Ericsson
-                                                        October 20, 2011
+                                                        October 24, 2011
 
 
            SIP to RTCWeb Offer/Answer Protocol (ROAP) Gateway
@@ -35,7 +35,7 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on April 22, 2012.
+   This Internet-Draft will expire on April 26, 2012.
 
 Copyright Notice
 
@@ -52,7 +52,7 @@ Copyright Notice
 
 
 
-Jennings, et al.         Expires April 22, 2012                 [Page 1]
+Jennings, et al.         Expires April 26, 2012                 [Page 1]
 
 Internet-Draft                  SIP2ROAP                    October 2011
 
@@ -108,7 +108,7 @@ Table of Contents
 
 
 
-Jennings, et al.         Expires April 22, 2012                 [Page 2]
+Jennings, et al.         Expires April 26, 2012                 [Page 2]
 
 Internet-Draft                  SIP2ROAP                    October 2011
 
@@ -120,14 +120,18 @@ Internet-Draft                  SIP2ROAP                    October 2011
    [ROAP] to native SIP [RFC3261] messages and vice-versa.  The
    specification [ROAP] describes a signaling protocol for RTCWeb to
    support negotiation of media session using SDP offer/answer [RFC3264]
-   protocol.Such a singaling protocol enables an RTCWeb browser to setup
-   media sessions to another browser or a SIP device.  For Browser-to-
-   SIP device use case, the signaling gateway connects to legacy SIP
-   devices and SHALL translate messages between ROAP and SIP native
-   messages schemes.
+   protocol.  Such a signaling protocol enables an RTCWeb browser to
+   setup media sessions to another browser or a SIP device.  For
+   Browser-to-SIP device use case, the signaling gateway connects to
+   legacy SIP devices and SHALL translate messages between ROAP and SIP
+   native messages schemes.
 
 
 2.  Mapping to SIP
+
+   Note:  The SDP and SIP examples are not correct but illustrate the
+      rough outline of the mechanism.  Future version will correct this.
+
 
    The design requires the gateway to be SIP transaction statefull but
    does not require any storage of longer term state.  The information
@@ -147,8 +151,8 @@ Internet-Draft                  SIP2ROAP                    October 2011
 
 2.1.  SuccessFull Session Establishment
 
-   In this scenario CallerUA establishes succesful media session with
-   CalleUA, a legacy SIP end-point, with the help of the RTCWeb
+   In this scenario CallerUA establishes successful media session with
+   CalleeUA, a legacy SIP end-point, with the help of the RTCWeb
    signaling gateway.
 
 
@@ -160,11 +164,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
 
 
 
-
-
-
-
-Jennings, et al.         Expires April 22, 2012                 [Page 3]
+Jennings, et al.         Expires April 26, 2012                 [Page 3]
 
 Internet-Draft                  SIP2ROAP                    October 2011
 
@@ -220,7 +220,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
 
 
 
-Jennings, et al.         Expires April 22, 2012                 [Page 4]
+Jennings, et al.         Expires April 26, 2012                 [Page 4]
 
 Internet-Draft                  SIP2ROAP                    October 2011
 
@@ -276,7 +276,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
 
 
 
-Jennings, et al.         Expires April 22, 2012                 [Page 5]
+Jennings, et al.         Expires April 26, 2012                 [Page 5]
 
 Internet-Draft                  SIP2ROAP                    October 2011
 
@@ -332,7 +332,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
 
 
 
-Jennings, et al.         Expires April 22, 2012                 [Page 6]
+Jennings, et al.         Expires April 26, 2012                 [Page 6]
 
 Internet-Draft                  SIP2ROAP                    October 2011
 
@@ -359,7 +359,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
 
    This message SHALL be converted to ROAP:Answer(section 5.3.2 of
    ROAP[ROAP]) and sent to caller by the signaling gateway.  This
-   represents a final answer as desribed in the section 5.2.3 of
+   represents a final answer as described in the section 5.2.3 of
    ROAP[ROAP]
 
     {"type":"ANSWER",
@@ -388,7 +388,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
 
 
 
-Jennings, et al.         Expires April 22, 2012                 [Page 7]
+Jennings, et al.         Expires April 26, 2012                 [Page 7]
 
 Internet-Draft                  SIP2ROAP                    October 2011
 
@@ -444,7 +444,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
 
 
 
-Jennings, et al.         Expires April 22, 2012                 [Page 8]
+Jennings, et al.         Expires April 26, 2012                 [Page 8]
 
 Internet-Draft                  SIP2ROAP                    October 2011
 
@@ -500,7 +500,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
 
 
 
-Jennings, et al.         Expires April 22, 2012                 [Page 9]
+Jennings, et al.         Expires April 26, 2012                 [Page 9]
 
 Internet-Draft                  SIP2ROAP                    October 2011
 
@@ -556,7 +556,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
 
 
 
-Jennings, et al.         Expires April 22, 2012                [Page 10]
+Jennings, et al.         Expires April 26, 2012                [Page 10]
 
 Internet-Draft                  SIP2ROAP                    October 2011
 
@@ -612,7 +612,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
 
 
 
-Jennings, et al.         Expires April 22, 2012                [Page 11]
+Jennings, et al.         Expires April 26, 2012                [Page 11]
 
 Internet-Draft                  SIP2ROAP                    October 2011
 
@@ -668,7 +668,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
 
 
 
-Jennings, et al.         Expires April 22, 2012                [Page 12]
+Jennings, et al.         Expires April 26, 2012                [Page 12]
 
 Internet-Draft                  SIP2ROAP                    October 2011
 
@@ -724,7 +724,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
 
 
 
-Jennings, et al.         Expires April 22, 2012                [Page 13]
+Jennings, et al.         Expires April 26, 2012                [Page 13]
 
 Internet-Draft                  SIP2ROAP                    October 2011
 
@@ -780,7 +780,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
 
 
 
-Jennings, et al.         Expires April 22, 2012                [Page 14]
+Jennings, et al.         Expires April 26, 2012                [Page 14]
 
 Internet-Draft                  SIP2ROAP                    October 2011
 
@@ -836,7 +836,7 @@ Internet-Draft                  SIP2ROAP                    October 2011
 
 
 
-Jennings, et al.         Expires April 22, 2012                [Page 15]
+Jennings, et al.         Expires April 26, 2012                [Page 15]
 
 Internet-Draft                  SIP2ROAP                    October 2011
 
@@ -892,5 +892,5 @@ Authors' Addresses
 
 
 
-Jennings, et al.         Expires April 22, 2012                [Page 16]
+Jennings, et al.         Expires April 26, 2012                [Page 16]
 
