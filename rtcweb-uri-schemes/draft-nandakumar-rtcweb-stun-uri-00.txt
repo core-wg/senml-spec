@@ -145,7 +145,7 @@ Internet-Draft             URI Scheme for STUN              October 2011
    proposed in the WEBRTC Standards [WEBRTC], for example.
 
    The 'stun/stuns' URI scheme adheres to generic syntax defined in RFC
-   3986 .  [RFC3986].
+   3986 [RFC3986].
 
 
 2.  Terminology
