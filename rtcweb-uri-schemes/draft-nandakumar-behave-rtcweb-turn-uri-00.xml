@@ -187,10 +187,13 @@ hex4          = 1*4HEXDIG
 port          = 1*DIGIT
 alphanum      = ALPHA / DIGIT
 escaped       = "%" HEXDIG HEXDIG
-	</artwork></figure>  
-	<t>
+     </artwork></figure>  
+  
+     <t hangText="Note:"> The current ABNF proposal doesn't specify a mechanism for handling different transports. 
+            We have identified a possible solution and will be included in the future version of the draft.</t>  
+    <t>
 	The &lt;host&gt;, &lt;port&gt; and &lt;userinfo&gt; rules are described in Appendix A of RFC 3986 <xref target="RFC3986"></xref>.  The core rules &lt;ALPHA&gt;, &lt;DIGIT&gt; and &lt;HEXDIGIT&gt; are used as described in Appendix B of RFC 5234 <xref target="RFC5234"></xref>.
-	</t>
+	
     </section>
     <section anchor="URI_Scheme_Semantics" title="URI Scheme Semantics">
     <t>
