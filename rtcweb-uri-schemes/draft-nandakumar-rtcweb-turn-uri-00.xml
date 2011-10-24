@@ -132,7 +132,7 @@
         </t>
        
       <t>  
-        The 'turn/turns' URI adheres to syntax as defined in RFC 3986 <xref target="RFC3986"></xref>.
+          The 'turn/turns' URI scheme adheres to the generic syntax defined in RFC 3986 <xref target="RFC3986"></xref>.
 	  </t>  
 	</section>
 	<section anchor="Terminology" title="Terminology">

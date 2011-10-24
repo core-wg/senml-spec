@@ -135,7 +135,7 @@
         the WEBRTC Standards <xref target="WEBRTC"></xref>, for example.
     </t>
      <t>   
-        The 'stun/stuns' URI scheme adheres to generic syntax defined in RFC 3986 <xref target="RFC3986"></xref>.
+         The 'stun/stuns' URI scheme adheres to the generic syntax defined in RFC 3986 <xref target="RFC3986"></xref>.
     </t>
     <t>
       

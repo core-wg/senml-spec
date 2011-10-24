@@ -142,8 +142,8 @@ Internet-Draft             URI Scheme for TURN              October 2011
    encoding similar information in non-uniform syntaxes such as the ones
    proposed in the WEBRTC Standards [WEBRTC], for example.
 
-   The 'turn/turns' URI adheres to syntax as defined in RFC 3986
-   [RFC3986].
+   The 'turn/turns' URI scheme adheres to the generic syntax defined in
+   RFC 3986 [RFC3986].
 
 
 2.  Terminology
