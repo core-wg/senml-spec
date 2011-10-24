@@ -193,7 +193,7 @@ escaped       = "%" HEXDIG HEXDIG
             We have identified a possible solution and will be included in the future version of the draft.</t>  
     <t>
 	The &lt;host&gt;, &lt;port&gt; and &lt;userinfo&gt; rules are described in Appendix A of RFC 3986 <xref target="RFC3986"></xref>.  The core rules &lt;ALPHA&gt;, &lt;DIGIT&gt; and &lt;HEXDIGIT&gt; are used as described in Appendix B of RFC 5234 <xref target="RFC5234"></xref>.
-	
+	</t>
     </section>
     <section anchor="URI_Scheme_Semantics" title="URI Scheme Semantics">
     <t>
@@ -365,23 +365,67 @@ escaped       = "%" HEXDIG HEXDIG
 	</section>
 	</section>
 
-	<section anchor="Security" title="Security Considerations"> 
-	<t>
-	    Generic security considerations for the usage of URIs are discussed in Section 7 of RFC 3986 <xref target="RFC3986"></xref>   
-	</t>     
-	<t>
-	    The URI Scheme defined by this document for the Traversal Using Relays around NAT (TURN) protocol does not introduce any security considerations beyond those detailed in Section 17 of RFC 5766 <xref target="RFC5766"></xref>.
-	</t>
-	<t>
-	Since embedding password in the URI MAY cause security issues, it is expected that the credential MUST be passed over a secure transport
-	such as HTTPS (RFC 2818 <xref target="RFC2818"></xref>).
-	</t>    
-	</section>
-
+    <section anchor="Security" title="Security Considerations">
+        <t>The URI Scheme defined by this document for the Traversal Using
+            Relays around NAT (TURN) protocol needs to consider the security
+            considerations detailed in Section 17 of RFC 5766 <xref
+                target="RFC5766"></xref>.</t>
+        
+        <t>As described in Section 3.2.1 of <xref target="RFC3986">STD
+            66</xref>, having authentication information (specifically passwords) in
+            a URI means that the URI must be handled carefully:</t>
+        
+        <t><list style="empty">
+            <t>The passing of authentication information in clear text has
+                proven to be a security risk in almost every case where it has been
+                used.</t>
+        </list>Section 3.2.1 contains advice on handling URI that contain
+            passwords in the userinfo portion. Implementations of this specification
+            MUST implement that advice. </t>
+        
+        <t>Specifically if a URI that contains credentials leaks, then it would
+            allow an attacker to use the TURN server which is referenced by the URI.
+            Such an attack has two major impacts. First, it uses up the operator's
+            bandwidth. Second, if the operator bills the user for TURN server usage,
+            then it may expose the user to costs incurred by the attacker. However,
+            the attacker never obtains the user's private information, nor does this
+            attack allow for traffic amplification. </t>
+        
+        <t>The expected use environment mitigates to some degree concerns about
+            TURN URIs compared to other URIs, such as HTTPS. First, users do not
+            dereference TURN URIs directly. Instead, they are passed to the TURN
+            stack. Thus, concerns about confusion or leakage due to the URI being
+            displayed to the user are significantly reduced; indeed the URI need
+            never be available to the user at all.</t>
+        
+        <t>One of the primary use cases for a TURN URI with credentials is
+            WebRTC. In this case, a web server will be offering a calling service
+            and may have an associated TURN server it can use. In this case, the
+            browser will need to use the TURN server and the browser has no long
+            term or preexisting relationship with the TURN server. The web server
+            needs to provide some credential to the client which it can use to
+            access the TURN server. Since TURN authentication is via username and
+            password, this implies that the credential is a username/password pair.
+            While this must be transmitted securely (i.e., over HTTPS), the security
+            properties are the same whether the password is carried separately or is
+            part of the URL. Moreover, because the web server and TURN servers can
+            cooperate, a new password can be issued for every call, making
+            short-term credentials feasible and thus significantly mitigating the
+            risk.</t>
+        
+        <t>If a TURN URI is transferred between hosts, it MUST be done over a
+            protocol that provides confidentiality such as <xref
+                target="RFC2818">HTTPS</xref>. It is RECOMMENDED that the credential
+            only be valid for a single call and preferably for no more than one day.
+            that "preferably" is bad.</t>
+    </section>
     <section anchor="Acknowledgements" title="Acknowledgements">
     <t>
 	Many thanks to Cullen Jennings for his detailed review and thoughtful comments on this document.
-	</t>
+    </t>
+    <t>
+     We acknowledge the existence of draft-petithuguenin-behave-turn-uri-bis-04 document as a parallel effort in defining the URI scheme for TURN. Awareness of this draft came late in the process and we have not had to time to reach out to the author of that memo and discuss opportunities to collaborate on a single document. It is our intentions to do so.
+    </t>    
     </section>
 </middle>    
 
