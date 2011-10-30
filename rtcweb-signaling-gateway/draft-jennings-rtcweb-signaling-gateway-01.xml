@@ -10,7 +10,7 @@
 <?rfc colonspace="yes" ?>
 <?rfc rfcedstyle="no" ?>
 <?rfc tocdepth="4"?>
-<rfc category="std" docName="draft-jennings-rtcweb-signaling-gateway-00"
+<rfc category="std" docName="draft-jennings-rtcweb-signaling-gateway-01"
      ipr="trust200902">
   <front>
     <title abbrev="SIP2ROAP">SIP to RTCWeb Offer/Answer Protocol (ROAP)
@@ -76,7 +76,7 @@
       </address>
     </author>
 
-    <date day="24" month="October" year="2011" />
+    <date day="30" month="October" year="2011" />
 
     <area>RAI</area>
 
@@ -108,7 +108,7 @@
       <t><list style="hanging">
           <t hangText="Note:">The SDP and SIP examples are not correct but
           illustrate the rough outline of the mechanism. Future version will
-          correct this. </t>
+          correct this.</t>
 
           <t hangText=""></t>
         </list></t>
@@ -722,6 +722,67 @@ Contact: <sip:calleeua@client.sippy.example.com;transport=udp>
         </list></t>
     </section>
 
+    <section anchor="sec-glare" title="Handling Glare">
+      <t>SIP uses a timer based mechanism as defined by Section 14.1 and 14.2
+      of [RFC3261] and further clarified by Section 3.5 of [RFC6141]. This
+      mechanism consists of any UAS sending an 491 response to any INVITE in a
+      SIP dialog when having an outstanding INVITE. Then depending on the UAC
+      relation to the SIP Dialog it will start a timer in the interval 0-2
+      seconds or 2.1-4 seconds before restarting. As SIP UA is both a UAC and
+      a UAS, this normally results in that the INVITEs in both direction gets
+      terminated when a glare occur. </t>
+
+      <t>Depending on the role of the gateway and the SIP end-point the
+      gateway can act in different ways to minimize the delay to handle the
+      glare situation and depending on where it happens. From the gateways
+      perspective the glare situation can be detected between the gateway and
+      the ROAP peer or between the gateway and the SIP UA. Depending on where
+      it occur different actions should be taken. </t>
+
+      <t>Glare between a ROAP Peer and a gateway can occur when the gateway
+      have issued an ROAP OFFER based on a translation of an SIP Invite. When
+      issuing that ROAP OFFER it needs to assign a tie-breaker value. Two
+      reasonable choices exist, either a random value or 4,294,967,295. Using
+      4,294,967,295 would ensure that the gateway's ROAP Message always wins
+      over a ROAP peer's message. This to avoid incurring SIP resolution
+      mechanism timeouts on the session transaction. The downside would be if
+      two gateway's gets interconnected then this will result in an immediate
+      glare situation that requires retry. Thus using random values is anyway
+      required to be supported. The recommendation is that the gateway uses
+      tie-breaker value 4,294,967,295 until a double glare situation arises or
+      it is known that the peer is a gateway, in which cases it generates a
+      random value. </t>
+
+      <t>If the gateway's OFFER wins the gateway responds to the ROAP peer's
+      OFFER with Error:CONFLICT. </t>
+
+      <t>If the gateway's OFFER loses the gateway will need to communicate
+      this to the SIP UA. Thus it needs to send a 491 to the SIP UA. Now the
+      gateway has the responsibility to provide the SIP UA with the ROAP
+      Peer's OFFER. That could be accomplished by sending a SIP Invite to the
+      SIP UA after the 491 that indicates that it is a new SIP Invite rather
+      than the one that caused the conflict. How likely that is to succeed
+      depends on the SIP UA's role in establishing the SIP Dialog, if it owns
+      the Call-ID of dialog ID its timer T as a result of the 491 response
+      will be in the 2.1-4 interval and likely give the new INVITE message
+      time to be processed. However, if the SIP UA doesn't own Call-ID of the
+      dialog ID, then it will use a timer T that is in the interval 0-2
+      seconds, thus potentially resulting in a new glare situation. </t>
+
+      <t>In case the glare occurs after the gateway translated and sent the
+      ROAP OFFER as a SIP INVITE the gateway will receive an SIP Invite before
+      a response to its SIP Invite. However, the gateway has the possibility
+      to cause the ROAP peers SIP INVITE to be the losing one on the ROAP side
+      of the gateway by translating the SIP UA's Invite into a ROAP OFFER and
+      the assign it a tie-breaker value greater than the ROAP Peer's value.
+      That way terminating it and letting the SIP side's offer go through
+      immediate rather than being stuck in waiting for a timer to cause a
+      re-Invite. In case the ROAP peer tie-breaker value is 4,294,967,295 the
+      gateway can either respond with a 491 to the SIP UA's Invite and then
+      send the ROAP Peer's as new message after the 491 response, or send a
+      ROAP OFFER back that causes double glare.</t>
+    </section>
+
     <section title="Limitations">
       <t>The following things, if used on the SIP side, will not
       interoperate:</t>
@@ -753,7 +814,7 @@ Contact: <sip:calleeua@client.sippy.example.com;transport=udp>
     </section>
 
     <section title="Acknowledgments">
-      <t>&lt;Get your name here&gt;</t>
+      <t>The text for the glare section was provided by Magnus Westerlund.</t>
     </section>
   </middle>
 
