@@ -121,13 +121,13 @@
       well and both styles of API could coexist and be used where
       appropriate.</t>
 
-      <t>The protocol defined here covers media negotiation, but does not
-      provide any call control. Concepts like ringing of phones, user search,
-      call forwarding, redirection, transfer, hold, and so on, are all the
-      domain of call processing and are out of scope for this specification.
-      It is assumed that the application running within the browser provides
-      any call control based on the needs of the application, the scope of
-      which is not a matter of standardization.</t>
+      <t>The protocol defined here does not provide any call control. Concepts
+      like ringing of phones, user search, call forwarding, redirection,
+      transfer, hold, and so on, are all the domain of call processing and are
+      out of scope for this specification. It is assumed that the application
+      running within the browser provides any call control based on the needs
+      of the application, the scope of which is not a matter of
+      standardization.</t>
 
       <t>Despite that fact that it has an abstract transport, ROAP is still a
       protocol. This means it has state machines, and it has rules governing
@@ -176,7 +176,7 @@
       implementation effort required outside the browser and RTC-Web signaling
       gateways. This implies the following requirements:</t>
 
-      <t><list style="symbols">
+    
           <t>It should be possible to develop a simple browser to browser
           voice and video service in a small amount of code. In particular, it
           MUST be possible to implement a functional service such that:</t>
@@ -218,7 +218,7 @@
               acting as a relay or a translator for codecs which are not
               jointly supported).</t>
             </list></t>
-        </list></t>
+      
 
       <t>Finally it seems clear that SDP is too complicated to reinvent, so
       despite its manifest deficiencies we opt to take it as-is rather than
@@ -243,7 +243,7 @@
           <t>This is a new media session and not an update to a different
           session.</t>
 
-          <t>Here is my SDP offer, including media parameters and ICE
+          <t>Here is A's SDP offer, including media parameters and ICE
           candidates.</t>
         </list></t>
 
@@ -359,7 +359,7 @@ m=audio 49175 RTP/AVP 0"
     <section anchor="sec-syntax" title="Semantics &amp; Syntax">
       <section anchor="sec-reliability" title="Reliability Model">
         <t>The general model is the JS application or whatever transport is
-        being used for ROAP is responsible to reliable transition and any
+        being used for ROAP is responsible for reliable transition and any
         required end to end retransmissions. However, the SDP state machine
         does need to understand when the far end has received an ANSWER and if
         it caused an error or not.</t>
@@ -387,9 +387,9 @@ m=audio 49175 RTP/AVP 0"
         <t><list style="hanging">
             <t hangText="NOTE:">The split of the reliability model between the
             JS and browser is something where implementations are playing
-            around and trying to get some experience with what works best.
-            This is an area that is highly likely to change as understanding
-            of all the implications evolves.</t>
+            around with and trying to get some experience with what works
+            best. This is an area that is highly likely to change as
+            understanding of the implications evolves.</t>
           </list></t>
       </section>
 
@@ -425,17 +425,21 @@ m=audio 49175 RTP/AVP 0"
           browser) it is incremented by one. The Seq of an OK or ANSWER is set
           to the same Seq that was used in the OFFER which caused it. When a
           PeerConnection objects originates a new session by sending an OFFER
-          type message, it starts the Seq at 1. Note: If browser A starts an
-          OFFER/ANSWER/OK transaction with a seq of 1 to browser B, then later
-          B initiates a second OFFER/ANSWER?/OK transaction, it will have a
-          seq of 2.</t>
+          type message, it starts the Seq at 1. </t>
+
+          <t><list style="hanging">
+              <t hangText="Note:">If browser A starts an OFFER/ANSWER/OK
+              transaction with a seq of 1 to browser B, then later B initiates
+              a second OFFER/ANSWER?/OK transaction, it will have a seq of
+              2.</t>
+            </list></t>
         </section>
 
-        <section title="More-coming">
+        <section title="More-coming Flag">
           <t>This is a boolean flag that can only appear in an ANSWER and, if
-          set to true, indicates \that this answer is not the final answer
-          that will be sent for the associated OFFER. If this flag is not
-          present, it is assumed to be false.</t>
+          set to true, indicates that this answer is not the final answer that
+          will be sent for the associated OFFER. If this flag is not present,
+          it is assumed to be false.</t>
 
           <t>A common situation where the flag may be set to true could be in
           a case where an Agent had received an OFFER and wished to
@@ -463,9 +467,9 @@ m=audio 49175 RTP/AVP 0"
 
           <t>It easier to be able to indicate that OFFER resulted in one valid
           ANSWER, but that the OFFER needs to be held open as other valid
-          ANSWERS may replace the current one. This stops the other side from
-          generating new a new OFFER while this is taking place. This is also
-          needed to support a SIP gateway doing early media.</t>
+          ANSWERS which would replace the current one. This stops the other
+          side from generating new a new OFFER while this is taking place.
+          This is also needed to support a SIP gateway doing early media.</t>
         </section>
 
         <section title="Session Tokens">
@@ -494,6 +498,12 @@ m=audio 49175 RTP/AVP 0"
           in a "setResponseToken" field in the message being responded to. If
           no "setResponseToken" field is present, then the "responseToken"
           field MUST be omitted.</t>
+        </section>
+
+        <section title="Tie Breaker">
+          <t>The tiebreaker field is a 32 bit random integer used for glare
+          resoltuion as described in <xref
+          target="sec.offer-glare"></xref>.</t>
         </section>
       </section>
 
@@ -588,7 +598,7 @@ AnswererUA->AnswererJS: onaddstream();
             <t>The first two situations are described in this section. The
             third case is described in <xref
             target="sec.change-media"></xref>. Any other condition represents
-            an alien packet and SHOULD be rejected with Error: NOMATCH</t>
+            an alien packet and SHOULD be rejected with Error:NOMATCH</t>
 
             <t>If no media session exists with the given "offererSessionId"
             value, then this is a new media session. The answerer has three
@@ -596,7 +606,7 @@ AnswererUA->AnswererJS: onaddstream();
 
             <t><list style="symbols">
                 <t>Reject the request, either silently with no response or
-                with an Error: REFUSED message;</t>
+                with an Error:REFUSED message;</t>
 
                 <t>Reply to the OFFER message with a final ANSWER message; or
                 <xref target="sec.ANSWER"></xref></t>
@@ -627,7 +637,7 @@ AnswererUA->AnswererJS: onaddstream();
             <t>If an OFFER is received that has already been received and
             responded to and the media session still exists, then the answerer
             MUST respond with the same message as before. If the session has
-            been terminated in the meantime, then an ERROR:NOMATCH message
+            been terminated in the meantime, then an Error:NOMATCH message
             SHOULD be sent.</t>
           </section>
         </section>
@@ -674,10 +684,109 @@ AnswererUA->AnswererJS: onaddstream();
         of ICE parameters. The recipient of a new OFFER on a valid connection
         MUST respond with an appropriate ANSWER message. However that message
         MAY refuse to accept the proposed new configuration. If the session
-        has been terminated in the meantime, then an ERROR:NOMATCH message
+        has been terminated in the meantime, then an Error:NOMATCH message
         SHOULD be sent.</t>
 
         <section anchor="sec.offer-glare" title="Conflicting OFFERS (glare)">
+          <t>Because a change of media parameters may be initiated by either
+          side, there is a potential for the change requests to occur
+          simultaneously (i.e., "glare"). This document defines a glare
+          handling procedure that results in immediate resolution of the glare
+          condition allowing one OFFER message to continue to be processed
+          while the other is terminated. It is defined in such a way that it
+          can interwork with SIP's glare handling mechanism. However SIP's
+          timer based mechanism aren't suitable for the ROAP as strict
+          requirements on ROAP message transport between end-points are not
+          possible and thus easily could result in an repeated glare
+          situation. </t>
+
+          <t>To achieve immediate resolution each OFFER message includes a 32
+          unsigned integer value, the tie breaker, that is randomly generated
+          for each new OFFER message an end-point issues. Whenever a end-point
+          receives an OFFER message that has the same sequence number as an
+          outstanding OFFER the end-point itself sent, a glare condition has
+          arisen. In a glare condition the end-point compares the received
+          OFFER's tiebreaker value with the tiebreaker value of the tiebreaker
+          in the OFFER outstanding. The OFFER with the greatest numerical
+          value wins and that OFFER is allowed to continue being processed. IF
+          the received OFFER lost the tie breaking an Error:CONFLICT message
+          is sent. If it is the outstanding OFFER that lost, the end-point can
+          expect an Error:CONFLICT message to be eventually received. However,
+          that OFFER can immediately be considered as terminated. </t>
+
+          <t>Some special considerations has been made in this glare handling
+          for interworking well with SIP glare handling as currently
+          specified. Thus it has the notion of a gateway that converts the
+          ROAP message into SIP message. This process is discussed in more
+          detail below after the basic rules are defined normatively. </t>
+
+          <t>A regular end-point SHALL generate a random 32-bit unsigned
+          numerical value for each OFFER message. In the case the random value
+          becomes 0 or 4,294,967,295 a new random value SHALL be generated
+          until it is neither values. The values 0 and 4,294,967,295 MAY be
+          assigned to ROAP messages generated by gateways to ensure efficient
+          glare handling towards other systems. </t>
+
+          <t>An ROAP message end-point that has an outstanding OFFER, i.e. an
+          OFFER where it has not yet received an ANSWER SHALL upon receiving
+          an OFFER perform the following processing: </t>
+
+          <t> <list style="hanging">
+              <t hangText="1">Check if the incomming OFFER has a
+              answererSessionId, if not it is an initial offer. If the
+              outstanding OFFER also is an intial OFFER there is an Error. If
+              the outstanding OFFER is not an initial OFFER and the
+              outstanding OFFER do have answererSessionId equal to the
+              offererSessionId in the received message then the sequence
+              numbers are checked. In case the incomming OFFER's sequence
+              number is equal to the sequence number of the outstanding OFFER
+              there is glare. If the sequence number is not the same and the
+              sequence number of the incomming is larger than the outstanding
+              OFFER's sequence number, then this message is out of order with
+              an ANSWER to the out-standing message. If the sequence number of
+              the incomming is lower than the outstanding, then this is a old
+              request.</t>
+
+              <t hangText=""></t>
+
+              <t hangText="2">In case of glare, compare the tie-breaker values
+              for each OFFER. The tie-breaker value that is greater than the
+              other wins. The OFFER with the winning value is processed as if
+              there was no glare. The OFFER with the losing value is
+              terminated, see 3A or 3B. In case the tie-breaker values are
+              equal the double-glare case in 3C is invoked. </t>
+
+              <t hangText=""></t>
+
+              <t hangText="3A">The OFFER being terminated is the received one:
+              The end-point SHALL send a Error:CONFLICT response message. </t>
+
+              <t hangText=""></t>
+
+              <t hangText="3B">The OFFER being terminated is this end-points
+              outstanding OFFER: The end-point knows the OFFER will be
+              terminated and can expect an Error:CONFLICT response. The
+              end-point can assume this termination and MAY issue a new OFFER
+              as soon as possible after having concluded the transactions for
+              the winning OFFER.</t>
+
+              <t hangText=""></t>
+
+              <t hangText="3C">The two tie-breaker values where equal, in this
+              case both OFFERs are terminated and a Error:DOUBLCONFLICT
+              message is sent. Both of the Offerer SHOULD re-attempt their
+              offers by generating new OFFER messages, these messages SHALL
+              have new tie-breaker values and incremented sequence number.
+              Also gateways SHOULD generate random values, as one reason for
+              this double conflict is that two gateways have become
+              interconnected and both selects either 0 or 4,294,967,295.</t>
+
+              <t hangText=""></t>
+            </list></t>
+
+   
+<!-- This block of text is the OLD SIP based approach 
+
           <t><list style="hanging">
               <t hangText="Note:">The algorithm described here models what is
               used in SIP today. There is a backwards compatible proposal that
@@ -689,7 +798,7 @@ AnswererUA->AnswererJS: onaddstream();
           side, there is a potential for the change requests to occur
           simultaneously (i.e., "glare"). When an agent which has sent an
           OFFER and not yet received an ANSWER receives an OFFER from the
-          other side, it MUST respond with an ERROR: CONFLICT message.</t>
+          other side, it MUST respond with an Error: CONFLICT message.</t>
 
           <t>An offerer which receives an Error: conflict message MUST either
           abandon the attempted capability change or generate a timer of T
@@ -707,13 +816,14 @@ AnswererUA->AnswererJS: onaddstream();
           attempt a new OFFER once more, if it still desires that session
           modification to take place. The new OFFER might be the same as the
           original offer (other than the seq) or it might be different.</t>
+-->
 
           <t>The following figure assumes the previous message flow has
           happened and media is flowing.</t>
 
           <figure>
             <artwork alt="Go Read the TXT version of this draft"
-                     src="glare.png"><![CDATA[
+                     src="glare.png"><![CDATA[TOOD - FIX 
 participant OffererUA
 participant OffererJS
 participant AnswererJS
@@ -771,7 +881,7 @@ OffererUA->OffererJS: onaddstream();
           <t>It is an error, though technically possible, for an agent to
           generate a second OFFER while it already has an unanswered OFFER
           pending. An agent which receives such an offer MUST respond with an
-          ERROR: FAILED message containing a "RetryAfter" attribute generated
+          Error:FAILED message containing a "RetryAfter" attribute generated
           as a random value from 0 to 10 seconds.</t>
         </section>
       </section>
@@ -784,31 +894,32 @@ OffererUA->OffererJS: onaddstream();
 
         <figure>
           <artwork alt="Go Read the TXT version of this draft"
-                   src="shutdown.png"><![CDATA[
-participant CallerUA
-participant CallerJS
-participant CalleeJS
-participant CalleeUA
+                   src="shutdown.png"><![CDATA[TODO - FIX NAMES 
 
-CallerJS->CallerUA: peer->close();
-CallerUA->CallerJS: sendSignalingChannel();
-CallerJS->CalleeJS: { "type":"SHUTDOWN" }
-CalleeJS->CalleeUA: peer->processSignalingMessage();
-CalleeUA->CalleeJS: onclose();
+participant OffererUA
+participant OffererJS
+participant AnswererJS
+participant AnswererUA
 
-CalleeUA->CalleeJS: sendSignalingChannel();
-CalleeJS->CallerJS: {"type":"OK"}
-CallerJS->CallerUA: peer->processSignalingMessage();
-CallerUA->CallerJS: onclose();
+OffererJS->OffererUA: peer->close();
+OffererUA->OffererJS: sendSignalingChannel();
+OffererJS->AnswererJS: { "type":"SHUTDOWN" }
+AnswererJS->AnswererUA: peer->processSignalingMessage();
+AnswererUA->AnswererJS: onclose();
+
+AnswererUA->AnswererJS: sendSignalingChannel();
+AnswererJS->OffererJS: {"type":"OK"}
+OffererJS->OffererUA: peer->processSignalingMessage();
+OffererUA->OffererJS: onclose();
             ]]></artwork>
         </figure>
 
         <t>Upon receipt of a SHUTDOWN which corresponds to an existing
         session, an agent MUST immediately terminate the session and send an
         OK message. Subsequent messages directed to this session MUST result
-        in an Error: noMatch message. Similarly, on receipt of the OK, the
+        in an Error:NOMATCH message. Similarly, on receipt of the OK, the
         agent which sent the SHUTDOWN MUST terminate the session and SHOULD
-        respond to future messages with Error: noMatch.</t>
+        respond to future messages with Error:NOMATCH.</t>
       </section>
 
       <!-- FLUFFY 
@@ -842,14 +953,14 @@ CallerUA->CallerJS: onclose();
             <artwork alt="Go Read the TXT version of this draft"
                      src="cap.png"><![CDATA[
 participant WebServer
-participant CalleeJS
-participant CalleeUA
+participant AnswererJS
+participant AnswererUA
 
-WebServer->CalleeJS: { "type":"CAP_REQUEST" }
-CalleeJS->CalleeUA: peer->processSignalingMessage();
+WebServer->AnswererJS: { "type":"CAP_REQUEST" }
+AnswererJS->AnswererUA: peer->processSignalingMessage();
 
-CalleeUA->CalleeJS: sendSignalingChannel();
-CalleeJS->WebServer: {"type":"CAPABILITIES", "sdp":"..." }
+AnswererUA->AnswererJS: sendSignalingChannel();
+AnswererJS->WebServer: {"type":"CAPABILITIES", "sdp":"..." }
             ]]></artwork>
           </figure>
       </section>
@@ -890,6 +1001,11 @@ CalleeJS->WebServer: {"type":"CAPABILITIES", "sdp":"..." }
           <t>The CONFLICT error is used to indicate that an agent has received
           an OFFER while it has its own OFFER outstanding. The offerer's
           behavior in response to this error is defined in <xref
+          target="sec.offer-glare"></xref>.</t>
+        </section>
+
+        <section anchor="err.doubleconflict" title="DOUBLECONFLICT">
+          <t>The DOUBLECONFLICT error is used to indicate the tiebreaker values in CONFLICT were the same. See <xref
           target="sec.offer-glare"></xref>.</t>
         </section>
 
@@ -955,11 +1071,13 @@ CalleeJS->WebServer: {"type":"CAPABILITIES", "sdp":"..." }
             fidelity;</t>
 
             <t>&lt;add more here&gt;</t>
-          </list>The JS applications should also be able to update and change
-        these hints mid-session. Some types of hint changes may simply impact
-        the parameter on various codecs and require no signalling to the other
-        end of the media stream. Other types of hint changes may cause a new
-        offer answer exchange.</t>
+          </list></t>
+
+        <t>The JS applications should also be able to update and change these
+        hints mid-session. Some types of hint changes may simply impact the
+        parameter on various codecs and require no signalling to the other end
+        of the media stream. Other types of hint changes may cause a new offer
+        answer exchange.</t>
       </section>
 
       <section title="Stats">
@@ -1020,8 +1138,10 @@ CalleeJS->WebServer: {"type":"CAPABILITIES", "sdp":"..." }
     </section>
 
     <section title="Acknowledgments">
-      <t>Many thanks for comment, ideas, and text from Eric Rescorla, Harald
-      Alvestrand, Magnus Westerlund, Ted Hardie, and Stefan Hakansson.</t>
+      <t>The text for the glare resoltuion section was provided by Magnus
+      Westerlund. Many thanks for comment, ideas, and text from Eric Rescorla,
+      Harald Alvestrand, Magnus Westerlund, Ted Hardie, and Stefan
+      Hakansson.</t>
     </section>
 
     <section title="Open Issues">
