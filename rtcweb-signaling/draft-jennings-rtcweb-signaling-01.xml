@@ -103,11 +103,10 @@
       behaviors, and messages that are exchanged between instances of the
       state machines. However, it does not specify the actual on the wire
       transport of these messages. Rather, it assumes that the implementation
-      of this protocol would occur within the browser itself, and then browser
-      APIs would allow the application's JavaScript to request creation of
-      messages and insert messages into the state machine. The actual transfer
-      of these messages would be the responsibility of the web application,
-      and would utilize protocols such as HTTP and WebSockets. To facilitate
+      of this protocol would occur within the browser itself, and that
+      the application-specific JS will be invoked to handle message transport,
+      using mechanisms such as XMLHttpRequest (XHR) and WebSockets.
+      To facilitate
       implementation within a browser, messages are encoded in JSON
       <xref target="RFC4627"></xref>. This protocol, with appropriate
       selected transports, could also be implemented by a signalling gateway
@@ -126,7 +125,7 @@
       transfer, hold, and so on, are all the domain of call processing and are
       out of scope for this specification. It is assumed that the application
       running within the browser provides any call control based on the needs
-      of the application, the scope of which is not a matter of
+      of the application, the scope of which is not a matter for
       standardization.</t>
 
       <t>Despite that fact that it has an abstract transport, ROAP is still a
@@ -135,8 +134,7 @@
       operates properly based on any set of inputs. It is assumed that this
       state machinery is implemented in the browser and thus immutable by the
       application, which can then guarantee proper behavior regardless of the
-      operation of the resident JavaScript. This provides an important layer
-      of protection.</t>
+      operation of the resident JavaScript. </t>
 
       <t>The protocol is designed to operate between two entities (browsers
       for example), which exchange messages "directly" - meaning that a
@@ -149,7 +147,7 @@
       features. As long as those modifications produce messages compliant to
       this specification, <xref target="RFC3264">SDP Offer/Answer</xref>,
       <xref target="RFC4566">SDP</xref>, <xref target="RFC5245">ICE</xref> and
-      any other dependencies, the modifications are permissible.</t>
+      any other dependencies, interoperability is still possible.</t>
 
       <t>This protocol is designed for two major use cases:</t>
 
@@ -182,7 +180,7 @@
           MUST be possible to implement a functional service such that:</t>
 
           <t><list style="symbols">
-              <t>It's possible to build a web service that maintains only
+	    <t>The web service maintains only
               transaction state, not call state;</t>
 
               <t>In the browser to browser case, the web server can simply
@@ -358,32 +356,37 @@ m=audio 49175 RTP/AVP 0"
 
     <section anchor="sec-syntax" title="Semantics &amp; Syntax">
       <section anchor="sec-reliability" title="Reliability Model">
-        <t>The general model is the JS application or whatever transport is
-        being used for ROAP is responsible for reliable transition and any
-        required end to end retransmissions. However, the SDP state machine
-        does need to understand when the far end has received an ANSWER and if
-        it caused an error or not.</t>
-
-        <t>ROAP messages are typically carried over a reliable transport
-        (likely HTTP via XMLHttpRequest or WebSockets), so the chance of
-        message loss is low (though non-zero), provided that the signaling
-        service is up. However, the common web reliability and scaleability
-        model is based on the principle that transactions are idempotent and
-        that requests can just be discarded and will be retried. A retry of a
-        transaction might happened if a given host was down and the DNS round
-        robin approach wanted to move to the next server, or if a server was
-        overloaded, or if there was a hiccup in the network. Web applications
-        that want to work well need to deal with theses issues to get the
-        advantages of the general web design pattern for scaleability and
-        reliability.</t>
-
-        <t>To support this web model in this protocol, OFFER and ANSWER
-        messages are acknowledged end to end with an ANSWER or OK however any
-        retransmission need to be handled by the JS or whatever is providing
-        the transport of the ROAP messages. The combination of the sessionID
-        and seq allow the browser to detect and discard duplicate
-        requests.</t>
-
+        <t>
+	  ROAP messages are typically carried over a reliable transport
+	  (likely HTTP via XMLHttpRequest or WebSockets), so the chance of
+	  message loss is low (though non-zero), provided that the signaling
+	  service is up. However, the common web reliability and scaleability
+	  model is based on the principle that transactions are idempotent and
+	  that requests can just be discarded and will be retried. A retry of a
+	  transaction might happened if a given host was down and the DNS round
+	  robin approach wanted to move to the next server, or if a server was
+	  overloaded, or if there was a hiccup in the network. Web applications
+	  that want to work well need to deal with theses issues to get the
+	  advantages of the general web design pattern for scaleability and
+	  reliability. Because only the application knows what its internal reliability
+	  characteristics are, the JS application (and whatever associated
+	  servers it uses) are ultimately responsible for ensuring end-to-end
+	  delivery; the browser simply assumes that messages which are
+	  provided to the JS will be delivered eventually.
+	</t>
+	<t>
+	  However, in order to maintain OFFER/ANSWER transaction state,
+	  the SDP state machine does need to understand
+	  when the far end has received an ANSWER if
+	  it caused an error or not. 
+	  To support this model, OFFER and ANSWER
+	  messages are acknowledged end to end with an ANSWER or OK however any
+	  retransmission need to be handled by the JS or whatever is providing
+	  the transport of the ROAP messages. The combination of the sessionID
+	  and seq allow the browser to detect and discard duplicate
+	  requests and to detect glare.
+	</t>
+	
         <t><list style="hanging">
             <t hangText="NOTE:">The split of the reliability model between the
             JS and browser is something where implementations are playing
@@ -435,43 +438,6 @@ m=audio 49175 RTP/AVP 0"
             </list></t>
         </section>
 
-        <section title="More-coming Flag">
-          <t>This is a boolean flag that can only appear in an ANSWER and, if
-          set to true, indicates that this answer is not the final answer that
-          will be sent for the associated OFFER. If this flag is not present,
-          it is assumed to be false.</t>
-
-          <t>A common situation where the flag may be set to true could be in
-          a case where an Agent had received an OFFER and wished to
-          immediately respond with an ANSWER that allowed ICE checking to
-          start from both sides; but the Agent could not respond with a final
-          ANSWER because the agent was still waiting for user authorization to
-          determine which media should be sent. In this case, the Agent could
-          send an ANSWER that had "more answer's coming" but that allowed ICE
-          to start. Then later, when the user had authorized the media, the
-          Agent could send an ANSWER with the more-coming flag set to false
-          that indicated this was the final media selection.</t>
-
-          <t>This is a bit different that sending a final ANSWER with just the
-          ICE right away then later sending an OFFER to update the media.
-          Consider the where browser A requests video with B. When the A side
-          that sent the initial OFFER gets an ANSWER that rejects the video,
-          it may very well present an users interface that indicates that the
-          there is no media. Five seconds later when browser B sends an OFFER
-          requesting video, browser A may present an interface that ask if it
-          is OK to do the video that was just rejected. This results in a
-          crappy user an experience and in the extreme can result in both
-          sides always rejecting the other sides OFFER of video, then waiting
-          for the user to authorize video that results in a new OFFER that is
-          always rejected.</t>
-
-          <t>It easier to be able to indicate that OFFER resulted in one valid
-          ANSWER, but that the OFFER needs to be held open as other valid
-          ANSWERS which would replace the current one. This stops the other
-          side from generating new a new OFFER while this is taking place.
-          This is also needed to support a SIP gateway doing early media.</t>
-        </section>
-
         <section title="Session Tokens">
           <t>While session IDs serve to uniquely identify a session, it may be
           useful to allow one or another sides to offload state onto the other
@@ -500,11 +466,6 @@ m=audio 49175 RTP/AVP 0"
           field MUST be omitted.</t>
         </section>
 
-        <section title="Tie Breaker">
-          <t>The tiebreaker field is a 32 bit random integer used for glare
-          resoltuion as described in <xref
-          target="sec.offer-glare"></xref>.</t>
-        </section>
       </section>
 
       <section title="Media Setup">
@@ -578,8 +539,14 @@ AnswererUA->AnswererJS: onaddstream();
             <t>In order to start a new media session, a offerer constructs a
             new OFFER message with a fresh offererSessionId. The
             answererSessionId field MUST be empty. Like all SDP offers, the
-            message MUST contain an "sdp" field with the offerer's offer.</t>
+            message MUST contain an "sdp" field with the offerer's offer.
+	    It MUST also contain the tieBreaker field, containing
+	    a 32 bit random integer used for glare
+	    resolution as described in <xref
+	    target="sec.offer-glare"></xref>.
+	    </t>
           </section>
+
 
           <section title="Answerer Behavior">
             <t>A answerer can receive an OFFER in three cases:</t>
@@ -631,7 +598,7 @@ AnswererUA->AnswererJS: onaddstream();
 
                 <t>Respond with a message containing an SDP answer in the
                 "sdp" field. This will contain the answerer's (potentially
-                provisional) media information and the ICE parameters.</t>
+                with moreComing=true) media information and the ICE parameters.</t>
               </list></t>
 
             <t>If an OFFER is received that has already been received and
@@ -649,7 +616,46 @@ AnswererUA->AnswererJS: onaddstream();
           parameter containing ICE candidates and the final media parameters
           for the session (although of course these can be adjusted by a new
           OFFER/ANSWER exchange. See <xref
-          target="sec.change-media"></xref>)</t>
+          target="sec.change-media"></xref>). In addition, ANSWERs
+	  MAY contain the moreComing flag, as described below.
+	  </t>
+	  
+	  <section title="moreComing Flag">
+	    <t>This is a boolean flag that can only appear in an ANSWER and, if
+	    set to true, indicates that this answer is not the final answer that
+	    will be sent for the associated OFFER. If this flag is not present,
+	    it is assumed to be false.</t>
+
+	    <t>One motivating use case for moreComing is where an Agent wishes
+	    to respond immediately to an OFFER in order to start ICE checking
+	    before the user has provided authorization to send media. The
+	    Agent cannot send an ANSWER containing media information but
+	    can send ICE candidate. In this case, the Agent could
+	    send an ANSWER that had moreComing=true but that allowed ICE
+	    to start. Then later, when the user had authorized the media, the
+	    Agent could send an ANSWER with the moreComing flag=false
+	    that indicated this was the final media selection.</t>
+
+	    <t>To see why simply having multiple independent offers
+	    (as opposed to multiple answers for a single offer),
+	    consider the case where browser A requests video with B. When the A side
+	    that sent the initial OFFER gets an ANSWER that rejects the video,
+	    it may very well present a UI indication that 
+	    there is no media. Five seconds later when browser B sends an OFFER
+	    requesting video, browser A may present a UI element that asks
+	    is OK to do the video that was just rejected. This results in a
+	    bad user experience and in the extreme can result in both
+	    sides always rejecting the other side's OFFER of video, then waiting
+	    for the user to authorize video that results in a new OFFER that is
+	    always rejected.</t>
+
+	    <t>It easier to be able to indicate that OFFER resulted in one valid
+	    ANSWER, but that the OFFER needs to be held open as other valid
+	    ANSWERS which would replace the current one. This stops the other
+	    side from generating new a new OFFER while this is taking place.
+	    This is also needed to support a SIP gateway doing early media.</t>
+	  </section>
+
         </section>
 
         <section anchor="sec.OK" title="OK">
