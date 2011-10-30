@@ -10,7 +10,7 @@
 <?rfc colonspace="yes" ?>
 <?rfc rfcedstyle="no" ?>
 <?rfc tocdepth="4"?>
-<rfc category="std" docName="draft-jennings-rtcweb-signaling-00"
+<rfc category="std" docName="draft-jennings-rtcweb-signaling-01"
      ipr="pre5378Trust200902">
   <front>
     <title abbrev="ROAP">RTCWeb Offer/Answer Protocol (ROAP)</title>
@@ -47,7 +47,30 @@
       </address>
     </author>
 
-    <date day="14" month="October" year="2011" />
+       <author initials="J." surname="Uberti"
+          fullname="Justin Uberti">
+        <organization abbrev="Google">
+              Google, Inc.
+        </organization>  
+      </author>
+
+
+    <author initials="R." surname="Jesup" fullname="Randell Jesup">
+      <organization>Mozilla</organization>
+      <address>
+        <postal>
+          <street></street>
+          <code></code> 
+          <city></city> 
+          <country></country>
+        </postal>
+        <email>randell-ietf@jesup.org</email>
+      </address>
+    </author>
+
+
+
+    <date day="30" month="October" year="2011" />
 
     <area>RAI</area>
 
@@ -150,8 +173,8 @@
           MUST be possible to implement a functional service such that:</t>
 
           <t><list style="symbols">
-              <t>It's possible to build a web service that maintains only transaction state, not call
-              state;</t>
+              <t>It's possible to build a web service that maintains only
+              transaction state, not call state;</t>
 
               <t>In the browser to browser case, the web server can simply
               pass protocol messages between the browser agents without
@@ -178,7 +201,9 @@
               <t>Permits the mechanical translation of messages without
               knowledge of the details of all the browser capabilities;</t>
 
-              <t>is only requried to maintains  transaction state, not call state (note is fine if an implemtation want to maintain call state); and</t>
+              <t>is only requried to maintains transaction state, not call
+              state (note is fine if an implemtation want to maintain call
+              state); and</t>
 
               <t>Does not need to send or receive the media (unless also
               acting as a relay or a translator for codecs which are not
@@ -302,12 +327,29 @@ m=audio 49175 RTP/AVP 0"
       any future messages it sends that have the same offererSessionId MUST
       include this state in a sessionState attribute. Similarly if a request
       contains an setResponseState attribute, that state MUST be included in
-      any response to that request in a responseState attribute. </t>-->
+      any response to that request in a responseState attribute. </t>
+-->
 
       <t>Once a session has been set up, additional rounds of offer/answer can
       be sent using the OFFER/ANSWER/OK sequence. Note that the seq attribute
       makes it easy to differentiate these additional rounds from the initial
       exchange and from each other.</t>
+
+    <t>At the point that one side which to end the session, it simply sends a
+    SHUTDOWN message which is responded to with an OK response. A SHUTDOWN can
+    be sent regardless of it any response has been received to the initial
+    OFFER. The key purpose of the SHUTDOWN messages is to allwow the other side to
+    know they can clean up any state assocated with the session. </t>
+
+ <!--  FLUFFY
+      <t>There is one addition request called CAP_REQUEST that is used to find
+      out the type of capabilities that a browser may support. The browser
+      responds to this request with a CAPABILITIES responses that includes SDP
+      representing its capabilities.</t>
+-->
+
+
+
     </section>
 
     <section anchor="sec-syntax" title="Semantics &amp; Syntax">
@@ -406,9 +448,7 @@ m=audio 49175 RTP/AVP 0"
           needed to support a SIP gateway doing early media.</t>
         </section>
 
-        <!-- FLUFFY -->
 
-        <!-- 
         <section title="Session Tokens">
           <t>While session IDs serve to uniquely identify a session, it may be
           useful to allow one or another sides to offload state onto the other
@@ -436,7 +476,8 @@ m=audio 49175 RTP/AVP 0"
           no "setResponseToken" field is present, then the "responseToken"
           field MUST be omitted.</t>
         </section>
--->
+
+
       </section>
 
       <section title="Media Setup">
@@ -447,7 +488,7 @@ m=audio 49175 RTP/AVP 0"
 
         <figure>
           <artwork alt="Go Read the TXT version of this draft"
-                   src="rtcweb-signaling/simple-b2b.png"><![CDATA[
+                   src="simple-b2b.png"><![CDATA[
 participant OffererUA
 participant OffererJS
 participant AnswererJS
@@ -484,7 +525,8 @@ AnswererUA->AnswererJS: onaddstream();
             ]]></artwork>
         </figure>
 
-        <t>The above figure shows a simple message flow for negotiating media:</t>
+        <t>The above figure shows a simple message flow for negotiating
+        media:</t>
 
         <t><list style="symbols">
             <t>The offerer sends an OFFER to initiate the call;</t>
@@ -649,14 +691,12 @@ AnswererUA->AnswererJS: onaddstream();
           modification to take place. The new OFFER might be the same as the
           original offer (other than the seq) or it might be different.</t>
 
-          <t>[FIGURE: Glare]</t>
-
           <t>The following figure assumes the previous message flow has
           happened and media is flowing.</t>
 
           <figure>
             <artwork alt="Go Read the TXT version of this draft"
-                     src="rtcweb-signaling/glare.png"><![CDATA[
+                     src="glare.png"><![CDATA[
 participant OffererUA
 participant OffererJS
 participant AnswererJS
@@ -719,6 +759,86 @@ OffererUA->OffererJS: onaddstream();
         </section>
       </section>
 
+ <section title="Notification of Media Termination">
+        <t>The SHUTDOWN message is used to indicate the termination of an
+        existing session. Either side may initiate a SHUTDOWN at any time
+        during the session, including while the initial OFFER is outstanding
+        (i.e., before an ANSWER has been sent/received.)</t>
+
+        <figure>
+            <artwork alt="Go Read the TXT version of this draft"
+                     src="shutdown.png"><![CDATA[
+participant CallerUA
+participant CallerJS
+participant CalleeJS
+participant CalleeUA
+
+CallerJS->CallerUA: peer->close();
+CallerUA->CallerJS: sendSignalingChannel();
+CallerJS->CalleeJS: { "type":"SHUTDOWN" }
+CalleeJS->CalleeUA: peer->processSignalingMessage();
+CalleeUA->CalleeJS: onclose();
+
+CalleeUA->CalleeJS: sendSignalingChannel();
+CalleeJS->CallerJS: {"type":"OK"}
+CallerJS->CallerUA: peer->processSignalingMessage();
+CallerUA->CallerJS: onclose();
+            ]]></artwork>
+          </figure>
+
+        <t>Upon receipt of a SHUTDOWN which corresponds to an existing
+        session, an agent MUST immediately terminate the session and send an
+        OK message. Subsequent messages directed to this session MUST result
+        in an Error: noMatch message. Similarly, on receipt of the OK, the
+        agent which sent the SHUTDOWN MUST terminate the session and SHOULD
+        respond to future messages with Error: noMatch.</t>
+      </section>
+
+  <!-- FLUFFY 
+      <section title="Capability Discovery">
+        <t>It is common for an agent to wish to discover an agent's
+        capabilities before starting a media sessions (for instance, to be
+        able to display a different icon if video is available.) The
+        CAP_REQUEST/CAPABILITIES message sequence is provided for this
+        purpose.</t>
+
+        <t>A CAP_REQUEST message is simply an empty message of type
+        CAP_REQUEST, e.g., {"messageType":"CAP_REQUEST"}. Because it does not
+        create a session, it MUST NOT contain either callerSessionId or cSeq
+        values. However, it MAY contain a setResponseToken value attribute to
+        allow for response correlation.</t>
+
+        <t>Responding to a CAP_REQUEST message is OPTIONAL. However, an agent
+        which opts to do so SHOULD respond with a CAPABILITIES message with an
+        "sdp" attribute containing a "sample" offer. This offer SHOULD contain
+        an SDP value (minus the ICE parameters) which is representative of the
+        type of offer that the agent would make if negotiating a media
+        session. For instance, if the agent has a camera and microphone, the
+        "sdp" field would likely contain m-lines for both audio and video. An
+        agent MAY also respond to a CAP_REQUEST with an Error such as Error:
+        failed to indicate that it refuses to respond.</t>
+
+        <t>The following figure shows an example where the web server wishes
+        to discover the capabilities of the browser.</t>
+
+        <figure>
+            <artwork alt="Go Read the TXT version of this draft"
+                     src="cap.png"><![CDATA[
+participant WebServer
+participant CalleeJS
+participant CalleeUA
+
+WebServer->CalleeJS: { "type":"CAP_REQUEST" }
+CalleeJS->CalleeUA: peer->processSignalingMessage();
+
+CalleeUA->CalleeJS: sendSignalingChannel();
+CalleeJS->WebServer: {"type":"CAPABILITIES", "sdp":"..." }
+            ]]></artwork>
+          </figure>
+      </section>
+-->
+
+
       <section anchor="sec.err" title="Errors">
         <t>Errors are indicated by the messageType "ERROR". All errors MUST
         contain an "errorType" field indicating the type of error which
@@ -764,6 +884,8 @@ OffererUA->OffererJS: onaddstream();
           which the message MAY be retried (though retries are OPTIONAL).</t>
         </section>
       </section>
+
+
     </section>
 
     <section anchor="sec-sec" title="Security Considerations">
