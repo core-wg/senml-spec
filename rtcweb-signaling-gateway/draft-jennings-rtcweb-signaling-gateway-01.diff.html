@@ -599,8 +599,8 @@ Table of Contents
    on where it occur different actions should be taken.
 
    Glare between a ROAP Peer and a gateway can occur when the gateway
-   have issued an ROAP OFFER based on a translation of an SIP Invite.
-   When issuing that ROAP OFFER it needs to assign a tie-breaker value.
+   have issued an ROAP OFFER based on a translation of an SIP INVITE.
+   When issuing that ROAP OFFER it needs to assign a tiebreaker value.
    Two reasonable choices exist, either a random value or 4,294,967,295.
    Using 4,294,967,295 would ensure that the gateway's ROAP Message
    always wins over a ROAP peer's message.  This to avoid incurring SIP
@@ -623,7 +623,7 @@ Table of Contents
    Invite to the SIP UA after the 491 that indicates that it is a new
    SIP Invite rather than the one that caused the conflict.  How likely
    that is to succeed depends on the SIP UA's role in establishing the
-   SIP Dialog, if it owns the Call-ID of dialog ID its timer T as a
+   SIP dialog, if it owns the Call-ID of dialog ID its timer T as a
    result of the 491 response will be in the 2.1-4 interval and likely
    give the new INVITE message time to be processed.  However, if the
    SIP UA doesn't own Call-ID of the dialog ID, then it will use a timer
@@ -634,13 +634,13 @@ Table of Contents
    ROAP OFFER as a SIP INVITE the gateway will receive an SIP Invite
    before a response to its SIP Invite.  However, the gateway has the
    possibility to cause the ROAP peers SIP INVITE to be the losing one
-   on the ROAP side of the gateway by translating the SIP UA's Invite
-   into a ROAP OFFER and the assign it a tie-breaker value greater than
+   on the ROAP side of the gateway by translating the SIP UA's INVITE
+   into a ROAP OFFER and the assign it a tiebreaker value greater than
    the ROAP Peer's value.  That way terminating it and letting the SIP
    side's offer go through immediate rather than being stuck in waiting
-   for a timer to cause a re-Invite.  In case the ROAP peer tie-breaker
+   for a timer to cause a reINVITE.  In case the ROAP peer tiebreaker
    value is 4,294,967,295 the gateway can either respond with a 491 to
-   the SIP UA's Invite and then send the ROAP Peer's as new message
+   the SIP UA's INVITE and then send the ROAP Peer's as new message
    after the 491 response, or send a ROAP OFFER back that causes double
    glare.
 
