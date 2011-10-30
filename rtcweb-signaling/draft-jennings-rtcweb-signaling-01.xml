@@ -108,10 +108,10 @@
       messages and insert messages into the state machine. The actual transfer
       of these messages would be the responsibility of the web application,
       and would utilize protocols such as HTTP and WebSockets. To facilitate
-      implementation within a browser, messages are encoded in JSON
-      <xref target="RFC4627"></xref>. This protocol, with appropriate
-      selected transports, could also be implemented by a signalling gateway
-      that converts ROAP to SIP or Jingle.</t>
+      implementation within a browser, messages are encoded in JSON <xref
+      target="RFC4627"></xref>. This protocol, with appropriate selected
+      transports, could also be implemented by a signalling gateway that
+      converts ROAP to SIP or Jingle.</t>
 
       <t>This protocol is designed to be closely aligned with the
       PeerConnection API defined in the RTCWeb API<xref
@@ -819,47 +819,38 @@ AnswererUA->AnswererJS: onaddstream();
 
           <figure>
             <artwork alt="Go Read the TXT version of this draft"
-                     src="glare.png"><![CDATA[TOOD - FIX 
-participant OffererUA
+                     src="glare.png"><![CDATA[participant OffererUA
 participant OffererJS
 participant AnswererJS
 participant AnswererUA
 
 note left of OffererJS: "Hi, Let's do video"
 note right of AnswererJS: "Sounds great"
-
 OffererJS->OffererUA: peer->addStream( new MediaStream() );
 OffererUA->OffererJS: sendSignalingChannel();
 AnswererJS->AnswererUA: peer->addStream( new MediaStream() );
 AnswererUA->AnswererJS: sendSignalingChannel();
 OffererJS->AnswererJS: {"type":"OFFER", tiebreaker="123", "sdp":"..."}
-AnswererJS->OffererJS: X {"type":"OFFER", tiebreaker="456", "sdp":"..."}
+AnswererJS->OffererJS: {"type":"OFFER", tiebreaker="456", "sdp":"..."}
 AnswererJS->AnswererUA: peer->processSignalingMessage();
-OffererJS->OffererUA:  X peer->processSignalingMessage();
+OffererJS->OffererUA: peer->processSignalingMessage();
+
 
 OffererUA->OffererJS: sendSignalingChannel();
 AnswererUA->AnswererJS: sendSignalingChannel();
 OffererJS->AnswererJS: {"type":"ERROR",error="conflict","sdp":"..."}
-AnswererJS->OffererJS: {"type":"ERROR",error="conflict","sdp":"..."}
-AnswererJS->AnswererUA: peer->processSignalingMessage();
-OffererJS->OffererUA: peer->processSignalingMessage();
-
-OffererUA->OffererUA: wait 1.1 seconds
-OffererUA->OffererJS: sendSignalingChannel();
-OffererJS->AnswererJS: {"type":"OFFER", "sdp":"..."}
-AnswererJS->AnswererUA: peer->processSignalingMessage();
-AnswererUA->AnswererJS: sendSignalingChannel();
 AnswererJS->OffererJS: {"type":"ANSWER", "sdp":"..."}
-OffererJS->OffererUA: peer->processSignalingMessage();
-OffererUA->AnswererUA: One way Video
+AnswererJS->AnswererUA: peer->processSignalingMessage();
+OffererJS->OffererUA:  peer->processSignalingMessage();
+
 OffererUA->OffererJS: sendSignalingChannel();
 OffererJS->AnswererJS: {"type":"OK"}
 AnswererJS->AnswererUA: peer->processSignalingMessage();
 AnswererUA->AnswererJS: onaddstream();
 
-AnswererUA->AnswererUA: wait 2.7 seconds
+
 AnswererUA->AnswererJS: sendSignalingChannel();
-AnswererJS->OffererJS: {"type":"OFFER", "sdp":"..."}
+AnswererJS->OffererJS: {"type":"OFFER", tiebreaker="789", "sdp":"..."}
 OffererJS->OffererUA: peer->processSignalingMessage();
 OffererUA->OffererJS: sendSignalingChannel();
 OffererJS->AnswererJS: {"type":"ANSWER", "sdp":"..."}
