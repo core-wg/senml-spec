@@ -108,8 +108,8 @@
       messages and insert messages into the state machine. The actual transfer
       of these messages would be the responsibility of the web application,
       and would utilize protocols such as HTTP and WebSockets. To facilitate
-      implementation within a browser, JSON notation is used to describe the
-      messages <xref target="RFC4627"></xref>. This protocol, with appropriate
+      implementation within a browser, messages are encoded in JSON
+      <xref target="RFC4627"></xref>. This protocol, with appropriate
       selected transports, could also be implemented by a signalling gateway
       that converts ROAP to SIP or Jingle.</t>
 
