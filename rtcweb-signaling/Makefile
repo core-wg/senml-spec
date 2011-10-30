@@ -38,5 +38,5 @@ draft-ietf-p2psip-reload.html: draft-ietf-p2psip-reload.ixml
 	htmlwdiff  $^.old $^ >  $@
 
 %.pdf: %.html
-	wkpdf -p letter -s $^ -o $@
+	wkpdf -p letter -m 20 -s $^ -o $@
 
