@@ -47,28 +47,27 @@
       </address>
     </author>
 
-       <author initials="J." surname="Uberti"
-          fullname="Justin Uberti">
-        <organization abbrev="Google">
-              Google, Inc.
-        </organization>  
-      </author>
+    <author fullname="Justin Uberti" initials="J." surname="Uberti">
+      <organization abbrev="Google">Google, Inc.</organization>
+    </author>
 
-
-    <author initials="R." surname="Jesup" fullname="Randell Jesup">
+    <author fullname="Randell Jesup" initials="R." surname="Jesup">
       <organization>Mozilla</organization>
+
       <address>
         <postal>
           <street></street>
-          <code></code> 
-          <city></city> 
+
+          <code></code>
+
+          <city></city>
+
           <country></country>
         </postal>
+
         <email>randell-ietf@jesup.org</email>
       </address>
     </author>
-
-
 
     <date day="30" month="October" year="2011" />
 
@@ -102,7 +101,7 @@
 
       <t>The protocol specified here defines the state machines, semantic
       behaviors, and messages that are exchanged between instances of the
-      state machines. However, it does not specify the actual on-the-wire
+      state machines. However, it does not specify the actual on the wire
       transport of these messages. Rather, it assumes that the implementation
       of this protocol would occur within the browser itself, and then browser
       APIs would allow the application's JavaScript to request creation of
@@ -110,15 +109,25 @@
       of these messages would be the responsibility of the web application,
       and would utilize protocols such as HTTP and WebSockets. To facilitate
       implementation within a browser, JSON notation is used to describe the
-      messages <xref target="RFC4627"></xref>.</t>
+      messages <xref target="RFC4627"></xref>. This protocol, with appropriate
+      selected transports, could also be implemented by a signalling gateway
+      that converts ROAP to SIP or Jingle.</t>
 
-      <t>The protocol defined here covers media control, but does not provide
-      any call control. Concepts like ringing of phones, user search, call
-      forwarding, redirection, transfer, hold, and so on, are all the domain
-      of call processing and are out of scope for this specification. It is
-      assumed that the application running within the browser provides any
-      call control based on the needs of the application, the scope of which
-      is not a matter of standardization.</t>
+      <t>This protocol is designed to be closely aligned with the
+      PeerConnection API defined in the RTCWeb API<xref
+      target="webrtc-api"></xref> specification. It is important to note that
+      while ROAP does not require what has been referred to as a low level API
+      for media manipulation, ROAP does not prevent having a such an API as
+      well and both styles of API could coexist and be used where
+      appropriate.</t>
+
+      <t>The protocol defined here covers media negotiation, but does not
+      provide any call control. Concepts like ringing of phones, user search,
+      call forwarding, redirection, transfer, hold, and so on, are all the
+      domain of call processing and are out of scope for this specification.
+      It is assumed that the application running within the browser provides
+      any call control based on the needs of the application, the scope of
+      which is not a matter of standardization.</t>
 
       <t>Despite that fact that it has an abstract transport, ROAP is still a
       protocol. This means it has state machines, and it has rules governing
@@ -201,8 +210,8 @@
               <t>Permits the mechanical translation of messages without
               knowledge of the details of all the browser capabilities;</t>
 
-              <t>is only requried to maintains transaction state, not call
-              state (note is fine if an implemtation want to maintain call
+              <t>is only required to maintains transaction state, not call
+              state (note is fine if an implementation want to maintain call
               state); and</t>
 
               <t>Does not need to send or receive the media (unless also
@@ -318,42 +327,43 @@ m=audio 49175 RTP/AVP 0"
       target="sec-syntax"></xref>. Only a small number of messages are
       permitted and much of the message set is devoted to error handling.</t>
 
-      <!--  FLUFFY
-     
-     <t>In building web systems it is often useful for a request to contain
+      <t>In building web systems it is often useful for a request to contain
       some state that is passed back in future messages. This system includes
       two types of state: session state and request state. If a browser
       receives a message that contains state in a setSessionState attribute,
       any future messages it sends that have the same offererSessionId MUST
       include this state in a sessionState attribute. Similarly if a request
       contains an setResponseState attribute, that state MUST be included in
-      any response to that request in a responseState attribute. </t>
--->
+      any response to that request in a responseState attribute.</t>
 
       <t>Once a session has been set up, additional rounds of offer/answer can
       be sent using the OFFER/ANSWER/OK sequence. Note that the seq attribute
       makes it easy to differentiate these additional rounds from the initial
       exchange and from each other.</t>
 
-    <t>At the point that one side which to end the session, it simply sends a
-    SHUTDOWN message which is responded to with an OK response. A SHUTDOWN can
-    be sent regardless of it any response has been received to the initial
-    OFFER. The key purpose of the SHUTDOWN messages is to allwow the other side to
-    know they can clean up any state assocated with the session. </t>
+      <t>At the point that one side which to end the session, it simply sends
+      a SHUTDOWN message which is responded to with an OK response. A SHUTDOWN
+      can be sent regardless of it any response has been received to the
+      initial OFFER. The key purpose of the SHUTDOWN messages is to allow the
+      other side to know they can clean up any state associated with the
+      session.</t>
 
- <!--  FLUFFY
+      <!--  FLUFFY
       <t>There is one addition request called CAP_REQUEST that is used to find
       out the type of capabilities that a browser may support. The browser
       responds to this request with a CAPABILITIES responses that includes SDP
       representing its capabilities.</t>
--->
-
-
-
+      -->
     </section>
 
     <section anchor="sec-syntax" title="Semantics &amp; Syntax">
       <section anchor="sec-reliability" title="Reliability Model">
+        <t>The general model is the JS application or whatever transport is
+        being used for ROAP is responsible to reliable transition and any
+        required end to end retransmissions. However, the SDP state machine
+        does need to understand when the far end has received an ANSWER and if
+        it caused an error or not.</t>
+
         <t>ROAP messages are typically carried over a reliable transport
         (likely HTTP via XMLHttpRequest or WebSockets), so the chance of
         message loss is low (though non-zero), provided that the signaling
@@ -368,9 +378,19 @@ m=audio 49175 RTP/AVP 0"
         reliability.</t>
 
         <t>To support this web model in this protocol, OFFER and ANSWER
-        messages are retried by the client until they are acknowledged end to
-        end with an ANSWER or OK. The combination of the sessionID and seq
-        allow the browser to detect and discard duplicate requests.</t>
+        messages are acknowledged end to end with an ANSWER or OK however any
+        retransmission need to be handled by the JS or whatever is providing
+        the transport of the ROAP messages. The combination of the sessionID
+        and seq allow the browser to detect and discard duplicate
+        requests.</t>
+
+        <t><list style="hanging">
+            <t hangText="NOTE:">The split of the reliability model between the
+            JS and browser is something where implementations are playing
+            around and trying to get some experience with what works best.
+            This is an area that is highly likely to change as understanding
+            of all the implications evolves.</t>
+          </list></t>
       </section>
 
       <section title="Common Fields">
@@ -448,7 +468,6 @@ m=audio 49175 RTP/AVP 0"
           needed to support a SIP gateway doing early media.</t>
         </section>
 
-
         <section title="Session Tokens">
           <t>While session IDs serve to uniquely identify a session, it may be
           useful to allow one or another sides to offload state onto the other
@@ -476,8 +495,6 @@ m=audio 49175 RTP/AVP 0"
           no "setResponseToken" field is present, then the "responseToken"
           field MUST be omitted.</t>
         </section>
-
-
       </section>
 
       <section title="Media Setup">
@@ -715,8 +732,8 @@ OffererJS->OffererUA: peer->processSignalingMessage();
 
 OffererUA->OffererJS: sendSignalingChannel();
 AnswererUA->AnswererJS: sendSignalingChannel();
-OffererJS->AnswererJS: {"type":"ERROR", error = "conflict", "sdp":"..."}
-AnswererJS->OffererJS: {"type":"ERROR", error = "conflict", "sdp":"..."}
+OffererJS->AnswererJS: {"type":"ERROR",error="conflict","sdp":"..."}
+AnswererJS->OffererJS: {"type":"ERROR",error="conflict","sdp":"..."}
 AnswererJS->AnswererUA: peer->processSignalingMessage();
 OffererJS->OffererUA: peer->processSignalingMessage();
 
@@ -759,15 +776,15 @@ OffererUA->OffererJS: onaddstream();
         </section>
       </section>
 
- <section title="Notification of Media Termination">
+      <section title="Notification of Media Termination">
         <t>The SHUTDOWN message is used to indicate the termination of an
         existing session. Either side may initiate a SHUTDOWN at any time
         during the session, including while the initial OFFER is outstanding
         (i.e., before an ANSWER has been sent/received.)</t>
 
         <figure>
-            <artwork alt="Go Read the TXT version of this draft"
-                     src="shutdown.png"><![CDATA[
+          <artwork alt="Go Read the TXT version of this draft"
+                   src="shutdown.png"><![CDATA[
 participant CallerUA
 participant CallerJS
 participant CalleeJS
@@ -784,7 +801,7 @@ CalleeJS->CallerJS: {"type":"OK"}
 CallerJS->CallerUA: peer->processSignalingMessage();
 CallerUA->CallerJS: onclose();
             ]]></artwork>
-          </figure>
+        </figure>
 
         <t>Upon receipt of a SHUTDOWN which corresponds to an existing
         session, an agent MUST immediately terminate the session and send an
@@ -794,7 +811,7 @@ CallerUA->CallerJS: onclose();
         respond to future messages with Error: noMatch.</t>
       </section>
 
-  <!-- FLUFFY 
+      <!-- FLUFFY 
       <section title="Capability Discovery">
         <t>It is common for an agent to wish to discover an agent's
         capabilities before starting a media sessions (for instance, to be
@@ -836,8 +853,7 @@ CalleeJS->WebServer: {"type":"CAPABILITIES", "sdp":"..." }
             ]]></artwork>
           </figure>
       </section>
--->
-
+      -->
 
       <section anchor="sec.err" title="Errors">
         <t>Errors are indicated by the messageType "ERROR". All errors MUST
@@ -884,8 +900,6 @@ CalleeJS->WebServer: {"type":"CAPABILITIES", "sdp":"..." }
           which the message MAY be retried (though retries are OPTIONAL).</t>
         </section>
       </section>
-
-
     </section>
 
     <section anchor="sec-sec" title="Security Considerations">
