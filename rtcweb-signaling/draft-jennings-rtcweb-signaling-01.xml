@@ -103,14 +103,15 @@
       behaviors, and messages that are exchanged between instances of the
       state machines. However, it does not specify the actual on the wire
       transport of these messages. Rather, it assumes that the implementation
-      of this protocol would occur within the browser itself, and that
-      the application-specific JS will be invoked to handle message transport,
-      using mechanisms such as XMLHttpRequest (XHR) and WebSockets.
-      To facilitate
-      implementation within a browser, messages are encoded in JSON
-      <xref target="RFC4627"></xref>. This protocol, with appropriate
-      selected transports, could also be implemented by a signalling gateway
-      that converts ROAP to SIP or Jingle.</t>
+      of this protocol would occur within the browser itself, and then browser
+      APIs would allow the application's JavaScript to request creation of
+      messages and insert messages into the state machine. The actual transfer
+      of these messages would be the responsibility of the web application,
+      and would utilize protocols such as HTTP and WebSockets. To facilitate
+      implementation within a browser, messages are encoded in JSON <xref
+      target="RFC4627"></xref>. This protocol, with appropriate selected
+      transports, could also be implemented by a signalling gateway that
+      converts ROAP to SIP or Jingle.</t>
 
       <t>This protocol is designed to be closely aligned with the
       PeerConnection API defined in the RTCWeb API<xref
@@ -174,49 +175,46 @@
       implementation effort required outside the browser and RTC-Web signaling
       gateways. This implies the following requirements:</t>
 
-    
-          <t>It should be possible to develop a simple browser to browser
-          voice and video service in a small amount of code. In particular, it
-          MUST be possible to implement a functional service such that:</t>
+      <t>It should be possible to develop a simple browser to browser voice
+      and video service in a small amount of code. In particular, it MUST be
+      possible to implement a functional service such that:</t>
 
-          <t><list style="symbols">
-	    <t>The web service maintains only
-              transaction state, not call state;</t>
+      <t><list style="symbols">
+          <t>It's possible to build a web service that maintains only
+          transaction state, not call state;</t>
 
-              <t>In the browser to browser case, the web server can simply
-              pass protocol messages between the browser agents without
-              examining or modifying them;</t>
+          <t>In the browser to browser case, the web server can simply pass
+          protocol messages between the browser agents without examining or
+          modifying them;</t>
 
-              <t>The service operates without needing to examine the details
-              of the browser capabilities (e.g., new codecs should be
-              automatically accommodated without modifying either the service
-              or the associated JS.</t>
-            </list></t>
+          <t>The service operates without needing to examine the details of
+          the browser capabilities (e.g., new codecs should be automatically
+          accommodated without modifying either the service or the associated
+          JS.</t>
+        </list></t>
 
-          <t></t>
+      <t></t>
 
-          <t>It should be possible to implement a simple RTC-Web gateway
-          that:</t>
+      <t>It should be possible to implement a simple RTC-Web gateway that:</t>
 
-          <t><list style="symbols">
-              <t>Connects to legacy SIP devices ranging from multiscreen video
-              phones to PSTN gateways;</t>
+      <t><list style="symbols">
+          <t>Connects to legacy SIP devices ranging from multiscreen video
+          phones to PSTN gateways;</t>
 
-              <t>Has a deterministic mapping between RTC-Web messages and SIP
-              messages;</t>
+          <t>Has a deterministic mapping between RTC-Web messages and SIP
+          messages;</t>
 
-              <t>Permits the mechanical translation of messages without
-              knowledge of the details of all the browser capabilities;</t>
+          <t>Permits the mechanical translation of messages without knowledge
+          of the details of all the browser capabilities;</t>
 
-              <t>is only required to maintains transaction state, not call
-              state (note is fine if an implementation want to maintain call
-              state); and</t>
+          <t>is only required to maintains transaction state, not call state
+          (note is fine if an implementation want to maintain call state);
+          and</t>
 
-              <t>Does not need to send or receive the media (unless also
-              acting as a relay or a translator for codecs which are not
-              jointly supported).</t>
-            </list></t>
-      
+          <t>Does not need to send or receive the media (unless also acting as
+          a relay or a translator for codecs which are not jointly
+          supported).</t>
+        </list></t>
 
       <t>Finally it seems clear that SDP is too complicated to reinvent, so
       despite its manifest deficiencies we opt to take it as-is rather than
@@ -428,7 +426,7 @@ m=audio 49175 RTP/AVP 0"
           browser) it is incremented by one. The Seq of an OK or ANSWER is set
           to the same Seq that was used in the OFFER which caused it. When a
           PeerConnection objects originates a new session by sending an OFFER
-          type message, it starts the Seq at 1. </t>
+          type message, it starts the Seq at 1.</t>
 
           <t><list style="hanging">
               <t hangText="Note:">If browser A starts an OFFER/ANSWER/OK
@@ -704,7 +702,7 @@ AnswererUA->AnswererJS: onaddstream();
           timer based mechanism aren't suitable for the ROAP as strict
           requirements on ROAP message transport between end-points are not
           possible and thus easily could result in an repeated glare
-          situation. </t>
+          situation.</t>
 
           <t>To achieve immediate resolution each OFFER message includes a 32
           unsigned integer value, the tie breaker, that is randomly generated
@@ -718,26 +716,26 @@ AnswererUA->AnswererJS: onaddstream();
           the received OFFER lost the tie breaking an Error:CONFLICT message
           is sent. If it is the outstanding OFFER that lost, the end-point can
           expect an Error:CONFLICT message to be eventually received. However,
-          that OFFER can immediately be considered as terminated. </t>
+          that OFFER can immediately be considered as terminated.</t>
 
           <t>Some special considerations has been made in this glare handling
           for interworking well with SIP glare handling as currently
           specified. Thus it has the notion of a gateway that converts the
           ROAP message into SIP message. This process is discussed in more
-          detail below after the basic rules are defined normatively. </t>
+          detail below after the basic rules are defined normatively.</t>
 
           <t>A regular end-point SHALL generate a random 32-bit unsigned
           numerical value for each OFFER message. In the case the random value
           becomes 0 or 4,294,967,295 a new random value SHALL be generated
           until it is neither values. The values 0 and 4,294,967,295 MAY be
           assigned to ROAP messages generated by gateways to ensure efficient
-          glare handling towards other systems. </t>
+          glare handling towards other systems.</t>
 
           <t>An ROAP message end-point that has an outstanding OFFER, i.e. an
           OFFER where it has not yet received an ANSWER SHALL upon receiving
-          an OFFER perform the following processing: </t>
+          an OFFER perform the following processing:</t>
 
-          <t> <list style="hanging">
+          <t><list style="hanging">
               <t hangText="1">Check if the incomming OFFER has a
               answererSessionId, if not it is an initial offer. If the
               outstanding OFFER also is an intial OFFER there is an Error. If
@@ -760,12 +758,12 @@ AnswererUA->AnswererJS: onaddstream();
               other wins. The OFFER with the winning value is processed as if
               there was no glare. The OFFER with the losing value is
               terminated, see 3A or 3B. In case the tie-breaker values are
-              equal the double-glare case in 3C is invoked. </t>
+              equal the double-glare case in 3C is invoked.</t>
 
               <t hangText=""></t>
 
               <t hangText="3A">The OFFER being terminated is the received one:
-              The end-point SHALL send a Error:CONFLICT response message. </t>
+              The end-point SHALL send a Error:CONFLICT response message.</t>
 
               <t hangText=""></t>
 
@@ -790,8 +788,7 @@ AnswererUA->AnswererJS: onaddstream();
               <t hangText=""></t>
             </list></t>
 
-   
-<!-- This block of text is the OLD SIP based approach 
+          <!-- This block of text is the OLD SIP based approach 
 
           <t><list style="hanging">
               <t hangText="Note:">The algorithm described here models what is
@@ -829,8 +826,7 @@ AnswererUA->AnswererJS: onaddstream();
 
           <figure>
             <artwork alt="Go Read the TXT version of this draft"
-                     src="glare.png"><![CDATA[TOOD - FIX 
-participant OffererUA
+                     src="glare.png"><![CDATA[participant OffererUA
 participant OffererJS
 participant AnswererJS
 participant AnswererUA
@@ -841,34 +837,27 @@ OffererJS->OffererUA: peer->addStream( new MediaStream() );
 OffererUA->OffererJS: sendSignalingChannel();
 AnswererJS->AnswererUA: peer->addStream( new MediaStream() );
 AnswererUA->AnswererJS: sendSignalingChannel();
-OffererJS->AnswererJS: {"type":"OFFER", "sdp":"..."}
-AnswererJS->OffererJS: {"type":"OFFER", "sdp":"..."}
+OffererJS->AnswererJS: {"type":"OFFER", tiebreaker="123", "sdp":"..."}
+AnswererJS->OffererJS: {"type":"OFFER", tiebreaker="456", "sdp":"..."}
 AnswererJS->AnswererUA: peer->processSignalingMessage();
 OffererJS->OffererUA: peer->processSignalingMessage();
+
 
 OffererUA->OffererJS: sendSignalingChannel();
 AnswererUA->AnswererJS: sendSignalingChannel();
 OffererJS->AnswererJS: {"type":"ERROR",error="conflict","sdp":"..."}
-AnswererJS->OffererJS: {"type":"ERROR",error="conflict","sdp":"..."}
-AnswererJS->AnswererUA: peer->processSignalingMessage();
-OffererJS->OffererUA: peer->processSignalingMessage();
-
-OffererUA->OffererUA: wait 1.1 seconds
-OffererUA->OffererJS: sendSignalingChannel();
-OffererJS->AnswererJS: {"type":"OFFER", "sdp":"..."}
-AnswererJS->AnswererUA: peer->processSignalingMessage();
-AnswererUA->AnswererJS: sendSignalingChannel();
 AnswererJS->OffererJS: {"type":"ANSWER", "sdp":"..."}
-OffererJS->OffererUA: peer->processSignalingMessage();
-OffererUA->AnswererUA: One way Video
+AnswererJS->AnswererUA: peer->processSignalingMessage();
+OffererJS->OffererUA:  peer->processSignalingMessage();
+
 OffererUA->OffererJS: sendSignalingChannel();
 OffererJS->AnswererJS: {"type":"OK"}
 AnswererJS->AnswererUA: peer->processSignalingMessage();
 AnswererUA->AnswererJS: onaddstream();
 
-AnswererUA->AnswererUA: wait 2.7 seconds
+
 AnswererUA->AnswererJS: sendSignalingChannel();
-AnswererJS->OffererJS: {"type":"OFFER", "sdp":"..."}
+AnswererJS->OffererJS: {"type":"OFFER", tiebreaker="789", "sdp":"..."}
 OffererJS->OffererUA: peer->processSignalingMessage();
 OffererUA->OffererJS: sendSignalingChannel();
 OffererJS->AnswererJS: {"type":"ANSWER", "sdp":"..."}
@@ -1011,7 +1000,8 @@ AnswererJS->WebServer: {"type":"CAPABILITIES", "sdp":"..." }
         </section>
 
         <section anchor="err.doubleconflict" title="DOUBLECONFLICT">
-          <t>The DOUBLECONFLICT error is used to indicate the tiebreaker values in CONFLICT were the same. See <xref
+          <t>The DOUBLECONFLICT error is used to indicate the tiebreaker
+          values in CONFLICT were the same. See <xref
           target="sec.offer-glare"></xref>.</t>
         </section>
 
