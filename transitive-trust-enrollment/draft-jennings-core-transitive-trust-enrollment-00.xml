@@ -10,7 +10,8 @@
 <?rfc colonspace="yes" ?>
 <?rfc rfcedstyle="no" ?>
 <?rfc tocdepth="4"?>
-<rfc category="std" docName="draft-jennings-core-transitive-trust-enrollment-00"
+<rfc category="exp"
+     docName="draft-jennings-core-transitive-trust-enrollment-00"
      ipr="trust200902">
   <front>
     <title abbrev="Transitive Trust Enrollment">Transitive Trust Enrollment
@@ -43,68 +44,339 @@
     <area>APP</area>
 
     <abstract>
-      <t>TODO</t>
+      <t>This specification defines a sysem that allwos constrainted internet
+      devices to securely enroll into a system. It is based on the idea that
+      each device will be manafacured with a one time password that can be
+      used by the customer to tell the device which controlle to enroll
+      with.</t>
     </abstract>
   </front>
 
   <middle>
     <section title="Introduction">
-      <t>TODO</t>
+      <t>Secure enrolment of devices into internet based systems has never
+      been easy. The constrined devices that need to be enrolled into systems
+      today face many challenges. Often they have no user interface sucha s aa
+      keyabord or screen - they might have a single button and LED. At the
+      time they are installed, there may not be a working network or power.
+      These devices are being used for increasily more improtatnt and safetey
+      critical applicaitons. This documents specifes an enrommlment sytem for
+      such devices.</t>
+
+      <t>The high level information flow is illistrated in the following
+      figure. The goal is get to the point where thre Device knows that it
+      should be talking to the Conroller, and the Controller knows it should
+      be talking the the Device and the Device and Controller can communicated
+      using CoAP and authenticate each other using their public keys.</t>
+
+      <figure>
+        <artwork alt="Go Read the TXT version of this draft"
+                 src="tte-boxes.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+      </figure>
+
+      <t>When the Manfacture builds the Device, they include an One Time
+      Password (OTP) that the Introduce can use to enroll the Device with the
+      Controller (Message 1). The manafacutre also runs a web site know as the
+      MotherShip that knows the OTP for every device that Manfactures builds
+      (Message 2). The device can include the OTP as a QR code on the outside
+      of the device. When the device is intalled, the installer uses a
+      software agent known as the Introducer. The Introducer would typically
+      be something like an application running on an iPhone. When the device
+      is installed, the Introducer can scan the QR code the device to find the
+      OTP (Message 3). The Introducer then contacts the MotherShip and uses
+      the OTP to tell the MotherShip which Controller this Device is should
+      use (Message 4 and 5). Later, the first time the Device boots up and
+      gets network connectivty, it contacts the MotherShip to find out if it
+      has been assinged to a controller (Message 9). The MotherShip tells the
+      device which Controller to talk to which the Device saves in non
+      volitile memory (Message 10). From that point on, any time the device
+      boots, it can directly communicate with the Controller (Message 11).</t>
+
+      <t>The Intorducer has the option of informing Controller about any
+      Devices that it has enrolled with this Controller (Message 6). The
+      controlelr can optionally contct the MotherShip to find out about the
+      status of any Devices that it has not heard from (Messages 7 and 8).</t>
+
+      <t>The system is designed to acheive several desirable properties:<list
+          style="symbols">
+          <t>Can work for Devices with very limited memory and processing
+          power</t>
+
+          <t>Does not require network or power to be up when the Device is
+          insalled</t>
+
+          <t>Is fairly secure (see more in the security section)</t>
+
+          <t>Minimal adition to manafacturing costs</t>
+
+          <t>The installer can detect if the OTP has allready been used</t>
+
+          <t>Provides a worksflow where a Device does not need to be taken out
+          of the box to be enrolled. This can be very important for enable
+          consumers to self service enroll devices they buy from a service
+          provider.</t>
+
+          <t>Works with common Firewall and NAT network topologies</t>
+        </list>One of the key steps in making this system work is getting the
+      OTP from the Device to Introducer. There are several ways that could
+      happen but a few of the aproaches consided here are:</t>
+
+      <t><list style="symbols">
+          <t>Using a QR code or other barcode printed on the Device and/or box
+          it comes in</t>
+
+          <t>Having a single LED on the device that blinks out the OTP
+          information and using a video capture applicaiton on the Introducer
+          to read this</t>
+
+          <t>The manafacture providing the OTP in some other machine readable
+          form</t>
+
+          <t>Including the OTP in an RFID tag on the device that can be read
+          by the Introducer</t>
+
+          <t>Some electrical interface (such as one wire memory) on the Device
+          that can be read by the Introducer</t>
+        </list>The semantic level information in each message is discussed in
+      XXX and the syntax of the messages is discussed in XXX. The security
+      properties of the sytstem are described in XXX.</t>
     </section>
 
-    <section title="Mapping to SIP">
-      <t><list style="hanging">
-          <t hangText="Note:">Example Note.</t>
+    <section title="Enrollment Information Flow ">
+      <t>The Manafacture, Device, MotherShip, Introducer, and Controller are
+      abreviated M,D,MS,I,C respectively. The Device, MotherShip, and
+      Controller all use CoAP to communicate with eachother and thus each have
+      a asymetic key pair that is used to form the DTLS connections between
+      them. The MotherShip acts as an HTTP server to communicate with the
+      Introducer and Controller and needs a certfictes to use HTTPS.</t>
 
-          <t hangText=""></t>
+      <t>It is assumed that the Device may have a NAT between it and the
+      Controller with the Device on the inside of the NAT. The MotherShip is
+      assuem to be a gnerally acceable server on the internet but the
+      Controller and Device can be on the inside of a Firewall and/or NAT
+      between them and the internet.</t>
+
+      <t>In the follwing message flow we use the follwing definitions:<list
+          style="hanging">
+          <t hangText="Fingerprint">This referse to a hash of the DTLS public
+          key used by thge associated network element. So "MS Fingerprint"
+          means a fingerpint of the public key that the MotherShip will use
+          when forming CoAP connections over DTLS.</t>
+
+          <t hangText="MS ID">A 32 bit integer that uniquly identifies the
+          MotherShip. Section XXX explains how to use the MS ID to create a
+          URL than can be used to contact the MotherShip</t>
+
+          <t hangText="Dev ID">A 24 bit integer that identifies the Device and
+          when combined with the MotherShip is unique. Two devices that use
+          the same MotherShip can not have the same Dev ID</t>
+
+          <t hangText="Dev URN">A globally unique URN assigned by the
+          Manafacture to uniquely indeitify this device. This SHOULD be one of
+          the URNs from TODO REF.</t>
+
+          <t hangText="OTP">The One TIme Password created by the manfacture
+          for enrollment of the Device. This is an cryptogrpahically random 32
+          bit integer. (TODO this size OK?)</t>
+
+          <t hangText="C Addr">Address of the Controller. This is an IPv4 or
+          IPv6 addreess and port which the Device can use to form a CoAP
+          connection to the Controller.</t>
+
+          <t hangText="Dev Descp">A locally singinficatn string that the
+          Introducer can assign to Device. For example, the convention for a
+          thermostat in buidling 30, floo2, office 361 might be assign the
+          string "BLD30/2/361 - Thermostat". This string is purely provided as
+          a way for the Introducer and Controlle to excahnge information that
+          may be usefull for the Installer.</t>
+
+          <t hangText="Dev Status">The Controller can querry the MotherShip
+          for the enrollment status of a Device that is enrolled with that
+          Controller. The vairios tstuats returend are discussed in XXX. TODDO
+          MOVE If the MotherShip does not consider the querry a valid deivce
+          ither to an incorect Device URN or OTP or that the device has been
+          revoked, it</t>
         </list></t>
 
-      <t>Thee proxy.</t>
-
-        <figure>
-          <artwork alt="Go Read the TXT version of this draft" src="tte-boxes.png"><![CDATA[
-TOOD FIGURE 
-  ]]></artwork>
-        </figure>
-
-<t> more here </t>
-
-        <figure>
-          <artwork alt="Go Read the TXT version of this draft" src="tte-arrows.png"><![CDATA[
-participant M
-participant D
-participant MS
-participant I
-participant C
+      <figure>
+        <artwork alt="Go Read the TXT version of this draft"
+                 src="tte-arrows.png"><![CDATA[participant Manafacture
+participant Device
+participant MotherShip
+participant Introducer
+participant Controller
  
-M-->D: 1 MS Address,\nMS Fingerprint
-M-->MS: 2 Dev URN, OTP
-note right of I: User tells I:\n C Addr, Dev Desc
-D-->I: 3 MS Addr, Dev ID, OTP
-I->MS: 4 Dev ID, OTP,\nC Addr, C Fingerprint
-MS->I: 5 Dev URN,\nDev Fingerprint
-I->C: 6 Dev URN, Dev Fingerprint, \nOTP, DevDesc
-C->MS: 7 DevURN, OTP
-MS->C: 8 Dev State
-D->MS: 9 Dev PoP, Dev URN
-MS->D: 10 MS PoP, C Addr,\n C Fingerprint
-D->C: 11 Hello
-C->D: 12 HelloAck
-  ]]></artwork>
-        </figure>
+Manafacture-->Device: 1 MS ID,MS Fingerprint,\nDev ID, OTP
+Manafacture-->MotherShip: 2 Dev URN, Dev ID, OTP
+note right of Introducer: User tells I:\n C Addr, Dev Desc
+Device-->Introducer: 3 MS ID, Dev ID, OTP
+Introducer->MotherShip: 4 Dev ID, OTP,\nC Addr, C Fingerprint
+MotherShip->Introducer: 5 Dev URN,\nDev Fingerprint
+Introducer->Controller: 6 Dev URN,\nDev Fingerprint, \nOTP, Dev Desc
+Controller->MotherShip: 7 Dev URN, OTP
+MotherShip->Controller: 8 Dev State
+Device->MotherShip: 9 Dev URN
+MotherShip->Device: 10 Addr,\n C Fingerprint
+Device->Controller: 11 Hello
+Controller->Device: 12 HelloAck
+]]></artwork>
+      </figure>
 
-        <t>Message Details</t>
+      <t>Message Details</t>
 
-        <t>More</t>
-     
+      <t>When the device is build, it needs to be assined a gogally unique
+      URN, a Dev ID, and an MotherShip. A single manfacture MAY operate many
+      MotherShips as each one only support 16 million devices. A perfectly
+      reasonable way to generate the Dev ID is to use the least significnat 24
+      bits of the Device URN. The devnice need to be programmed with the IP
+      address and port of the MotherShip along with the fingerprint of the
+      public key that the MotherShip will use in the DTLS CoAP exchange.</t>
+
+      <t>TODO ref RFC 5785 wellknonw</t>
+
+      <t>The creattion of the MotherShip domainname is discussed in XXX. The
+      QR code fore the Device MUST be a HTTPS URL that points at the
+      aproaprate MotherShip and MUST include a URL parameter called "otp" that
+      is set to OTP represented in hexideciamal and MUST inlcude a URL
+      paramter called "devid" that is set to the Device ID represented in
+      hexidicimal. It MUST use the default HTTP port and MUST have an absolute
+      path of /.wellknknown/tte. As an example, if the MotherShip domainname
+      was ""tte-000000.net", the OTP was 0x12345678 and the Device ID was
+      0xABCDEF, a valid URL would be:</t>
+
+      <figure>
+        <artwork><![CDATA[https://tte-000000.net/.well-known/tte?otp=12345678,DevID=abcdef]]></artwork>
+      </figure>
+
+      <t>The QR code SHOULD use an error coding level of "H". This would
+      generate the follwing QR code</t>
+
+      <figure>
+        <artwork alt="Go Read the TXT version of this draft" src="qrcode.png"><![CDATA[QR code in ASCII art letf as an exersiise 
+to the reader but there is one in the PDF version.      ]]></artwork>
+      </figure>
+
+      <t>more</t>
+
+      <t>The Introduces reads the QR code with uses the URL found the QR code
+      to contact the MotherShip in messages 4 and 5. The URL is refered to as
+      the Enrollment URL . </t>
+
+      <t>Message 4 and 5 MUST be sent over TLS and the Introducer MUST verify
+      the HTTPS certificate of the MotherShip matches the URL. The Introducer
+      can either perform an HTTPS GET or POST. If the introducer does at GET,
+      it MUST make an HTTPS GET request to the Enrolllment URL and MUST act as
+      web browser. IN the case of a GET, the MotherShip MUST return a web
+      pages that allows the user to enter the ip address and port of the
+      Controller as well as the fingerprint of the Controllers public key used
+      in in CoAP. If the Controller does not wish to act as a web browser,
+      instead of using the GET, it will use a PUT. When using a PUT, the
+      Controller MUST make a HTTPS POST request to an URL formed by appending
+      three paramters to the Enrollment URL. The paramters are cip which MUST
+      have the IP address of the Controller, cport which MUST have the port of
+      the Controller, and cfingerprint which MUST have the fingerprint of the
+      Controllers Public Key represend in hexidecimal. If, and only if, the
+      MotherShip succesfull stored the address, it MUST return a HTTP 200
+      reponse with a JSON string containing the URN and Fingerprint for that
+      Device. The format of this object is described in XXX. </t>
+
+      <t>Once the MotherShip has succefully stored the Conrroller address for
+      a given OTP. It MUST not allow that OTP to be used again to store an an
+      address for that Device. The OTP can be used after this to querry the
+      status of the enrollment as described in XXX. </t>
+
+      <t>Message 6 is optional and MAY be ommited. As osme point after the
+      Intorducer has succcessfully mapped the Device to the Controller, it can
+      send a HTTP or HTTPS reqquest to the controller to notify that it can
+      expect to hear from a particular device. This does not need happen
+      imediately and the infrmation can be saved so it can be done far in the
+      futre. This might happen in a case wehre Devices were being installed
+      before the Conroller was even operational. In other cases it might be
+      done immediately. (TODO - look at in web browser case having MotherShip
+      redirect Introducer to Controller after successfull Introduction. This
+      is done with a HTTP POST to TBD URL with parmaters to convey the Device
+      URN and Fingerprint learned from the MotherShip, the OTP password that
+      so the Controller and use it in querry the MotherShip for status, and a
+      locall significatn desciption string that can be used to help lable the
+      device for mamanagemrn reasons. </t>
+
+      <t>In the case where the Controller has learned the URN and OTP for a
+      given Device, it MAY querry the MotherShip to find out the enrollment
+      status. It does this with an HTTP GET request to TBD URL. The variso
+      status that can be returned in TBD JSON doc are: revoked, not mapped,
+      mapped, registred. TODO better names and descriptions. </t>
+
+      <t>When the Device boots and has nework connectivity, it attmpts to form
+      a CoAP connection to the MotherShip. It does a CoAP GET reqeust to TBD
+      URL passing it's URN as a paramter. Detials of this message are provied
+      in XXX. The Device MUST check that the Public Key prvided by the
+      MotherSHIp in the DTLS connection matches the fingerprint provided by
+      the Manfacture.The MotherShip needs to look at the Publick Key provided
+      in the DTLS and ensure that it matches the fingerprint for this Device
+      that provided by the Manfacture. If it does match, the MotherShip MUST
+      return (in Message 10) the ip address and port for the Controller as
+      wells as the Fingerprint for the controllers public key. Details for
+      they syntax of these messages are provided in XXX. If this is
+      successfull, the Device MUST store the address and fingeprrint for the
+      Controller in non violitile memory and on future reboots, skip all the
+      steps before this and direclty connenct to the controller. </t>
+
+      <t>At this point, the Device can form a CoAP connection to the
+      Controller. The Device can verify that it is speakign to the correct
+      Controller by checking the DTLS Publc Key matches the fingerprint for
+      the controller that was retrieved from the MotherShip. If the Introduce
+      contact the controller in message 6, then the Controller has the
+      fingerprint of the Device and verify it maches the TDTLS Public Key. If
+      the Contgroller does not have the information from Message 6, it can be
+      configured to either ignore the Device until it gets the infomation from
+      the Intorducer or it MAY be configured to accept the connection based
+      purely on the </t>
+    </section>
+
+    <section title="Message Formats">
+      <t></t>
     </section>
 
     <section anchor="sec-sec" title="Security Considerations">
       <t>TBD</t>
+
+      <t>Replacing Dead Controller with new - need the private keys of old
+      one. </t>
+
+      <t>What happens in OTP stollen during Device transit </t>
+
+      <t>Network topoligy consideration - Introducer can insall firewall rules
+      that allow Device to contact MotherShip.</t>
+
+      <t>WHy works with NATs / FWs. </t>
+
+      <t></t>
+    </section>
+
+    <section title="MotherShip ID and URLs">
+      <t>This system requires there is a rpgramatic way to go from a
+      MotherShip ID, which is a 32 bit integer, to a URL that can be used to
+      contact that MotherShip. The aproach here is to use DNS to that. For
+      mothership that have a high order byte of 0x00, the DNS hostname of the
+      MotherShip if formed by prepending "tte-" to the lower order 24 bits of
+      the MotherShip ID represented in hexidecimal then apending ".net". So
+      the hostname for the MotherShip ID 10 would be "tte-00000A.net".</t>
+
+      <t>A Manfacture gets a MotherShip ID simply be registrying the
+      corisponding DNS entry. The MoetherShip ID zero is reeserved for
+      examples, and MUST not be treated as a valid ID by operational
+      systems.</t>
     </section>
 
     <section title="IANA Considerations">
-      <t>This document requires no actions from IANA.</t>
+      <t>TODO - registry for top byte of MohterShip ID</t>
+
+      <t>TODO register .wellknown HTTP URL </t>
+    </section>
+
+    <section title="Light Based Enrollment">
+      <t></t>
     </section>
 
     <section title="Acknowledgments">
@@ -162,40 +434,50 @@ C->D: 12 HelloAck
     </references>
 
     <references title="Informative References">
-      
+      <reference anchor="I-D.ietf-core-coap">
+        <front>
+          <title>Constrained Application Protocol (CoAP)</title>
 
+          <author fullname="Zach Shelby" initials="Z" surname="Shelby">
+            <organization></organization>
+          </author>
 
-<reference anchor='I-D.ietf-core-coap'>
-<front>
-<title>Constrained Application Protocol (CoAP)</title>
+          <author fullname="Klaus Hartke" initials="K" surname="Hartke">
+            <organization></organization>
+          </author>
 
-<author initials='Z' surname='Shelby' fullname='Zach Shelby'>
-    <organization />
-</author>
+          <author fullname="Carsten Bormann" initials="C" surname="Bormann">
+            <organization></organization>
+          </author>
 
-<author initials='K' surname='Hartke' fullname='Klaus Hartke'>
-    <organization />
-</author>
+          <author fullname="Brian Frank" initials="B" surname="Frank">
+            <organization></organization>
+          </author>
 
-<author initials='C' surname='Bormann' fullname='Carsten Bormann'>
-    <organization />
-</author>
+          <date day="31" month="October" year="2011" />
 
-<author initials='B' surname='Frank' fullname='Brian Frank'>
-    <organization />
-</author>
+          <abstract>
+            <t>This document specifies the Constrained Application Protocol
+            (CoAP), a specialized web transfer protocol for use with
+            constrained networks and nodes for machine-to-machine applications
+            such as smart energy and building automation. These constrained
+            nodes often have 8-bit microcontrollers with small amounts of ROM
+            and RAM, while networks such as 6LoWPAN often have high packet
+            error rates and a typical throughput of 10s of kbit/s. CoAP
+            provides a method/response interaction model between application
+            end-points, supports built-in resource discovery, and includes key
+            web concepts such as URIs and content-types. CoAP easily
+            translates to HTTP for integration with the web while meeting
+            specialized requirements such as multicast support, very low
+            overhead and simplicity for constrained environments.</t>
+          </abstract>
+        </front>
 
-<date month='October' day='31' year='2011' />
+        <seriesInfo name="Internet-Draft" value="draft-ietf-core-coap-08" />
 
-<abstract><t>This document specifies the Constrained Application Protocol (CoAP), a specialized web transfer protocol for use with constrained networks and nodes for machine-to-machine applications such as smart energy and building automation.  These constrained nodes often have 8-bit microcontrollers with small amounts of ROM and RAM, while networks such as 6LoWPAN often have high packet error rates and a typical throughput of 10s of kbit/s.  CoAP provides a method/response interaction model between application end-points, supports built-in resource discovery, and includes key web concepts such as URIs and content-types.  CoAP easily translates to HTTP for integration with the web while meeting specialized requirements such as multicast support, very low overhead and simplicity for constrained environments.</t></abstract>
-
-</front>
-
-<seriesInfo name='Internet-Draft' value='draft-ietf-core-coap-08' />
-<format type='TXT'
-        target='http://www.ietf.org/internet-drafts/draft-ietf-core-coap-08.txt' />
-</reference>
-
+        <format target="http://www.ietf.org/internet-drafts/draft-ietf-core-coap-08.txt"
+                type="TXT" />
+      </reference>
     </references>
   </back>
 </rfc>
