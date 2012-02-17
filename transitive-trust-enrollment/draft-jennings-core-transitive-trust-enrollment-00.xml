@@ -39,7 +39,7 @@
       </address>
     </author>
 
-    <date day="17" month="January" year="2012" />
+    <date day="16" month="February" year="2012" />
 
     <area>APP</area>
 
@@ -57,13 +57,93 @@
       <t>Secure enrolment of devices into internet based systems has never
       been easy. The constrained devices that need to be enrolled into systems
       today face many challenges. Often they have no user interface such as a
-      keyboard or screen - they might have a single button and LED. At the
+      keyboard or screen - they might have only a single button or LED. At the
       time they are installed, there may not be a working network or power.
       These devices are being used for increasingly more important and safety
       critical applications. This documents specifies an enrolment system for
       such devices.</t>
 
-      <t>The high level information flow is illustrated in the following
+      <t>The simplified high level information flow is illustrated in the
+      following figure. The goal is get to the point where there Device knows
+      that it should be talking to the Controller.</t>
+
+      <figure>
+        <artwork alt="Go Read the TXT version of this draft"
+                 src="tte-boxes-simple.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+      </figure>
+
+   <t>When the Manufacture builds the Device, they include an One Time Password
+   (OTP) that the Introduce can use to enroll the Device with the
+   Controller. The manufacture also runs a web site know as the MotherShip that
+   knows the OTP for every device that Manufactures builds. The device can
+   include the OTP as a QR code on the outside of the device. When the device is
+   installed, the installer uses a software agent known as the Introducer. The
+   Introducer would typically be something like an application running on an
+   iPhone. When the device is installed, the Introducer can scan the QR code the
+   device to find the OTP (Message 1). The Introducer then contacts the
+   MotherShip and uses the OTP to tell the MotherShip which Controller this
+   Device is should use (Message 3). Later, the first time the Device boots up
+   and gets network connectivity, it contacts the MotherShip and MotherShip
+   tells the device which Controller to talk to (Message 3). From that point on,
+   any time the device boots, it can directly communicate with the Controller
+   (Message 4). The actuall message flow is slightly more complicated and shown
+   in seciton TODO but uses the same basic idea as this simplified flow. </t>
+
+      <t>The system is designed to achieve several desirable properties:<list
+          style="symbols">
+          <t>Can work for Devices with very limited memory and processing
+          power</t>
+
+          <t>Does not require network or power to be up when the Device is
+          installed</t>
+
+          <t>Is fairly secure (see more in the security section)</t>
+
+          <t>Minimal addition to manufacturing costs</t>
+
+          <t>The installer can detect if the OTP has already been used</t>
+
+          <t>Provides a works flow where a Device does not need to be taken
+          out of the box to be enrolled. This can be very important for enable
+          consumers to self service enroll devices they buy from a service
+          provider.</t>
+
+          <t>Works with common Firewall and NAT network topologies</t>
+        </list></t>
+
+        <t>One of the key steps in making this system work is getting the OTP
+        from the Device to Introducer. There are several ways that could happen
+        but a few of the approaches consider here are:</t>
+
+      <t><list style="symbols">
+          <t>Using a QR code or other bar code printed on the Device and/or
+          box it comes in.</t>
+
+          <t>Having a single LED on the device that blinks out the OTP
+          information and using a video capture application on the Introducer
+          to read this.</t>
+
+          <t>The manufacture providing the OTP in some other machine readable
+          form</t>
+
+          <t>Including the OTP in an RFID tag on the device that can be read
+          by the Introducer.</t>
+
+          <t>Some electrical interface (such as one wire memory) on the Device
+          that can be read by the Introducer.</t>
+        </list></t>
+
+        <t>The semantic level information in each message is discussed in XXX
+        and the syntax of the messages is discussed in XXX. The security
+        properties of the system are described in XXX.</t>
+
+    </section>
+
+
+    <section title="TODO">
+
+       <t>The high level information flow is illustrated in the following
       figure. The goal is get to the point where there Device knows that it
       should be talking to the Controller, and the Controller knows it should
       be talking the Device and the Device and Controller can communicated
@@ -98,49 +178,6 @@
       controller can optionally contact the MotherShip to find out about the
       status of any Devices that it has not heard from (Messages 7 and 8).</t>
 
-      <t>The system is designed to achieve several desirable properties:<list
-          style="symbols">
-          <t>Can work for Devices with very limited memory and processing
-          power</t>
-
-          <t>Does not require network or power to be up when the Device is
-          installed</t>
-
-          <t>Is fairly secure (see more in the security section)</t>
-
-          <t>Minimal addition to manufacturing costs</t>
-
-          <t>The installer can detect if the OTP has already been used</t>
-
-          <t>Provides a works flow where a Device does not need to be taken
-          out of the box to be enrolled. This can be very important for enable
-          consumers to self service enroll devices they buy from a service
-          provider.</t>
-
-          <t>Works with common Firewall and NAT network topologies</t>
-        </list>One of the key steps in making this system work is getting the
-      OTP from the Device to Introducer. There are several ways that could
-      happen but a few of the approaches consider here are:</t>
-
-      <t><list style="symbols">
-          <t>Using a QR code or other bar code printed on the Device and/or
-          box it comes in</t>
-
-          <t>Having a single LED on the device that blinks out the OTP
-          information and using a video capture application on the Introducer
-          to read this</t>
-
-          <t>The manufacture providing the OTP in some other machine readable
-          form</t>
-
-          <t>Including the OTP in an RFID tag on the device that can be read
-          by the Introducer</t>
-
-          <t>Some electrical interface (such as one wire memory) on the Device
-          that can be read by the Introducer</t>
-        </list>The semantic level information in each message is discussed in
-      XXX and the syntax of the messages is discussed in XXX. The security
-      properties of the system are described in XXX.</t>
     </section>
 
     <section title="Enrollment Information Flow ">
@@ -168,7 +205,7 @@
           MotherShip. Section XXX explains how to use the MS ID to create a
           URL than can be used to contact the MotherShip</t>
 
-          <t hangText="Dev ID">A 24 bit integer that identifies the Device and
+          <t hangText="Dev ID">A 32 bit integer that identifies the Device and
           when combined with the MotherShip is unique. Two devices that use
           the same MotherShip can not have the same Dev ID</t>
 
@@ -177,8 +214,8 @@
           the URNs from TODO REF.</t>
 
           <t hangText="OTP">The One Time Password created by the manufacture
-          for enrollment of the Device. This is an cryptographically random 32
-          bit integer. (TODO this size OK?)</t>
+          for enrollment of the Device. This is an cryptographically random 64
+          bit integer. </t>
 
           <t hangText="C Addr">Address of the Controller. This is an IPv4 or
           IPv6 address and port which the Device can use to form a CoAP
@@ -228,8 +265,8 @@ Controller->Device: 12 HelloAck
       <t>When the device is build, it needs to be assigned a globally unique
       URN, a Dev ID, and an MotherShip. A single manufacture MAY operate many
       MotherShips as each one only support 16 million devices. A perfectly
-      reasonable way to generate the Dev ID is to use the least significant 24
-      bits of the Device URN. The device need to be programmed with the IP
+      reasonable way to generate the Dev ID is to use the least significant 32
+      bits of the Device URN. The device needs to be programmed with the IP
       address and port of the MotherShip along with the fingerprint of the
       public key that the MotherShip will use in the DTLS CoAP exchange.</t>
 
@@ -242,22 +279,25 @@ Controller->Device: 12 HelloAck
       parameter called "devid" that is set to the Device ID represented in
       hexadecimal. It MUST use the default HTTP port and MUST have an absolute
       path of /.wellknknown/tte. As an example, if the MotherShip domain name
-      was ""tte-000000.net", the OTP was 0x12345678 and the Device ID was
-      0xABCDEF, a valid URL would be:</t>
+      was ""tte-000000.net", the OTP was 0x123456789abcdef0 and the Device ID was
+      0xABCDEF01, a valid URL would be:</t>
 
       <figure>
-        <artwork><![CDATA[https://tte-000000.net/.well-known/tte?otp=12345678,DevID=abcdef]]></artwork>
+        <artwork>
+<![CDATA[
+https://tte-000000.net/.well-known/tte?
+        otp=123456789abcdef0,DevID=abcdef01]]></artwork>
       </figure>
 
       <t>The QR code SHOULD use an error coding level of "H". This would
-      generate the following QR code</t>
+      generate the following QR code - TODO- REGENREATE THIS QR</t>
 
       <figure>
         <artwork alt="Go Read the TXT version of this draft" src="qrcode.png"><![CDATA[QR code in ASCII art left as an exercise 
 to the reader but there is one in the PDF version.      ]]></artwork>
       </figure>
 
-      <t>more</t>
+      <t>TODO more</t>
 
       <t>The Introduces reads the QR code with uses the URL found the QR code
       to contact the MotherShip in messages 4 and 5. The URL is referred to as
@@ -360,12 +400,14 @@ to the reader but there is one in the PDF version.      ]]></artwork>
       contact that MotherShip. The approach here is to use DNS to that. For
       MotherShip that have a high order byte of 0x00, the DNS host name of the
       MotherShip if formed by prepending "tte-" to the lower order 24 bits of
-      the MotherShip ID represented in hexadecimal then appending ".net". So
-      the host name for the MotherShip ID 10 would be "tte-00000A.net".</t>
+      the MotherShip ID represented in hexadecimal then appending ".net". So the
+      host name for the MotherShip ID 10 would be "tte-00000A.net". Mothership
+      ID that have a high order byter other than 0x00 are reservered for future
+      specifications. </t>
 
       <t>A Manufacture gets a MotherShip ID simply be registering the
       corresponding DNS entry. The MotherShip ID zero is reserved for
-      examples, and MUST not be treated as a valid ID by operational
+      examples, and MUST NOT be treated as a valid ID by operational
       systems.</t>
     </section>
 
