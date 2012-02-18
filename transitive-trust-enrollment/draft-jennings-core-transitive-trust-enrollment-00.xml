@@ -428,7 +428,7 @@ to the reader but there is one in the PDF version.      ]]></artwork>
     <section title="Light Based Enrollment">
       <t>An alternative to QR codes is to have an LED on the device flash out
       the relevant information to the introducer. The output string is formed by
-d      concatenating a 16 bit start of message constant value of 0x0001, followed
+      concatenating a 16 bit start of message constant value of 0x0001, followed
       by the mothership ID, device ID, OTP, then 8 bit twos compliment checksum
       value of the previous bytes including the start of message constant. All
       values are in network byte order. The resulting string is output using
@@ -448,6 +448,13 @@ d      concatenating a 16 bit start of message constant value of 0x0001, followe
       barcode. Then the OTP for a given device is generated using the master
       secret and deviceID of that device. Need to sort out details of scheme
       like this.  </t>
+    </section>
+
+   <section title="No Public Key Crypto">
+      <t> The examples here assumed that COAP was being used with DTLS with
+      asymmetric keys. It would also be possible to use DTLS in Pre Shared Key
+      (PSK) mode in very simular flow where the Introducer provided to the
+      Mothership the PSK to be used between the Device and the Controller.  </t>
     </section>
 
     <section title="Acknowledgments">
