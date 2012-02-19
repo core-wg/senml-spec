@@ -142,9 +142,10 @@
           that can be read by the Introducer.</t>
         </list></t>
 
-        <t>The semantic level information in each message is discussed in XXX
-        and the syntax of the messages is discussed in XXX. The security
-        properties of the system are described in XXX.</t>
+        <t>The semantic level information in each message is discussed in <xref
+        target="sec-enrollment" /> and the syntax of the messages is discussed
+        in <xref target="sec-syntax" />. The security properties of the system
+        are described in <xref target="sec-sec" />.</t>
 
     </section>
 
@@ -152,16 +153,17 @@
      <section title="Enrollment Information Flow" anchor="sec-enrollment" >
       <t>The Manufacture, Device, MotherShip, Introducer, and Controller are
       abbreviated M,D,MS,I,C respectively. The Device, MotherShip, and
-      Controller all use CoAP to communicate with each other and thus each
-      have a asymmetric key pair that is used to form the DTLS connections
-      between them. The MotherShip acts as an HTTP server to communicate with
-      the Introducer and Controller. The MotherShip needs a certificates to use HTTPS.</t>
+      Controller all use CoAP to communicate with each other and thus each have
+      a asymmetric key pair that is used to form the DTLS connections between
+      them. The MotherShip acts as an HTTP server to communicate with the
+      Introducer and Controller. The MotherShip needs a certificates to use
+      HTTPS.</t>
 
       <t>It is assumed that the Device may have a NAT between it and the
-      Controller with that the Device is on the inside of the NAT. The MotherShip is
-      assume to be a generally accessible server on the internet but the
-      Controller and Device can be on the inside of a Firewall and/or NAT
-      between them and the MotherShip.</t>
+      Controller with that the Device is on the inside of the NAT. The
+      MotherShip is assume to be a generally accessible server on the internet
+      but the Controller and Device can be on the inside of a Firewall and/or
+      NAT between them and the MotherShip.</t>
 
       <t>In the following message flow we use the following definitions:<list
           style="hanging">
@@ -171,8 +173,8 @@
           when forming CoAP connections over DTLS.</t>
 
           <t hangText="MS ID">A 32 bit integer that uniquely identifies the
-          MotherShip. <xref target="sec-msid" /> explains how to use the MS ID to create a
-          URL than can be used to contact the MotherShip</t>
+          MotherShip. <xref target="sec-msid" /> explains how to use the MS ID
+          to create a URL than can be used to contact the MotherShip</t>
 
           <t hangText="Dev ID">A 32 bit integer that identifies the Device and
           when combined with the MotherShip is unique. Two devices that use
@@ -199,7 +201,8 @@
 
           <t hangText="Dev Status">The Controller can query the MotherShip for
           the enrollment status of a Device that is enrolled with that
-          Controller. The various stats returned are discussed in XXX. </t>
+          Controller. The various states returned are defined in <xref
+          target="sec-enroll-state"/>. </t>
         </list></t>
 
        <t>The high level information flow is illustrated in the following
@@ -218,19 +221,19 @@
       Password (OTP) that the Introduce can use to enroll the Device with the
       Controller (Message 1). The manufacture also runs a web site know as the
       MotherShip that knows the OTP for every device that Manufactures builds
-      (Message 2). The device can include the OTP as a QR code on the outside
-      of the device. When the device is installed, the installer uses a
-      software agent known as the Introducer. The Introducer would typically
-      be something like an application running on an iPhone. When the device
-      is installed, the Introducer can scan the QR code the device to find the
-      OTP (Message 3). The Introducer then contacts the MotherShip and uses
-      the OTP to tell the MotherShip which Controller this Device is should
-      use (Message 4 and 5). Later, the first time the Device boots up and
-      gets network connectivity, it contacts the MotherShip to find out if it
-      has been assigned to a controller (Message 9). The MotherShip tells the
-      device which Controller to talk to which the Device saves in non
-      volatile memory (Message 10). From that point on, any time the device
-      boots, it can directly communicate with the Controller (Message 11).</t>
+      (Message 2). The device can include the OTP as a QR code on the outside of
+      the device. When the device is installed, the installer uses a software
+      agent known as the Introducer. The Introducer would typically be something
+      like an application running on an iPhone. When the device is installed,
+      the Introducer can scan the QR code the device to find the OTP (Message
+      3). The Introducer then contacts the MotherShip and uses the OTP to tell
+      the MotherShip which Controller this Device is should use (Message 4 and
+      5). Later, the first time the Device boots up and gets network
+      connectivity, it contacts the MotherShip to find out if it has been
+      assigned to a controller (Message 9). The MotherShip tells the device
+      which Controller to talk to which the Device saves in non volatile memory
+      (Message 10). From that point on, any time the device boots, it can
+      directly communicate with the Controller (Message 11).</t>
 
       <t>The Introducer has the option of informing Controller about any
       Devices that it has enrolled with this Controller (Message 6). The
@@ -271,17 +274,17 @@ Controller->Device: 12 HelloAck
       address and port of the MotherShip along with the fingerprint of the
       public key that the MotherShip will use in the DTLS CoAP exchange.</t>
 
-      <t>TODO ref RFC 5785 well known</t>
+<!--      <t>TODO ref RFC 5785 well known</t> -->
 
-      <t>The creation of the MotherShip domain name is discussed in <xref target="sec-msid" />. The
-      QR code for the Device MUST be a HTTPS URL that points at the
-      appropriate MotherShip and MUST include a URL parameter called "otp"
-      that is set to OTP represented in hexadecimal and MUST include a URL
-      parameter called "devid" that is set to the Device ID represented in
-      hexadecimal. It MUST use the default HTTP port and MUST have an absolute
-      path of /.wellknown/tte. As an example, if the MotherShip domain name
-      was ""tte-000000.net", the OTP was 0x123456789abcdef0 and the Device ID was
-      0xABCDEF01, a valid URL would be:</t>
+      <t>The creation of the MotherShip domain name is discussed in <xref
+      target="sec-msid" />. The QR code for the Device MUST be a HTTPS URL that
+      points at the appropriate MotherShip and MUST include a URL parameter
+      called "otp" that is set to OTP represented in hexadecimal and MUST
+      include a URL parameter called "devid" that is set to the Device ID
+      represented in hexadecimal. It MUST use the default HTTP port and MUST
+      have an absolute path of /.wellknown/tte. As an example, if the MotherShip
+      domain name was ""tte-000000.net", the OTP was 0x123456789abcdef0 and the
+      Device ID was 0xABCDEF01, a valid URL would be:</t>
 
       <figure>
         <artwork>
@@ -291,7 +294,7 @@ https://tte-000000.net/.well-known/tte?
       </figure>
 
       <t>The QR code SHOULD use an error coding level of "H". This would
-      generate the following QR code - TODO- REGENERATE THIS QR</t>
+      generate the following QR code:</t>
 
       <figure>
         <artwork alt="Go Read the TXT version of this draft" src="qrcode.png"><![CDATA[QR code in ASCII art left as an exercise 
@@ -318,27 +321,28 @@ to the reader but there is one in the PDF version.      ]]></artwork>
       of the Controllers Public Key represented in hexadecimal. If, and only
       if, the MotherShip successful stored the address, it MUST return a HTTP
       200 response with a JSON string containing the URN and Fingerprint for
-      that Device. The format of this object is described in XXX.</t>
+      that Device. The format of this object is described in <xref target="sec-enroll-state"/>.</t>
 
       <t>Once the MotherShip has successfully stored the Controller address
       for a given OTP. It MUST not allow that OTP to be used again to store an
       address for that Device. The OTP can be used after this to query the
-      status of the enrollment as described in XXX.</t>
+      status of the enrollment as described in <xref target="sec-enroll-state"/>.</t>
 
       <t>Message 6 is optional and MAY be omitted. As some point after the
       Introducer has successfully mapped the Device to the Controller, it can
-      send a HTTP or HTTPS request to the controller to notify that it can
-      expect to hear from a particular device. This does not need happen
-      immediately and the information can be saved so it can be done far in
-      the future. This might happen in a case where Devices were being
+      send a HTTP or HTTPS request to the Controller to notify that it can
+      expect to hear from a particular device.  The message formats for this are
+      defined in <xref target="sec-controller-enroll"/>. This does not need
+      happen immediately and the information can be saved so it can be done far
+      in the future. This might happen in a case where Devices were being
       installed before the Controller was even operational. In other cases it
       might be done immediately. (TODO - look at in web browser case having
       MotherShip redirect Introducer to Controller after successful
-      Introduction. This is done with a HTTP POST to TBD URL with parameters
-      to convey the Device URN and Fingerprint learned from the MotherShip,
-      the OTP password that so the Controller and use it in query the
-      MotherShip for status, and a locally significant description string that
-      can be used to help label the device for management reasons.</t>
+      Introduction.) This is done with a HTTP POST to TBD URL with parameters to
+      convey the Device URN and Fingerprint learned from the MotherShip, the OTP
+      password that so the Controller and use it in query the MotherShip for
+      status, and a locally significant description string that can be used to
+      help label the device for management reasons.</t>
 
       <t>In the case where the Controller has learned the URN and OTP for a
       given Device, it MAY query the MotherShip to find out the enrollment
@@ -346,20 +350,21 @@ to the reader but there is one in the PDF version.      ]]></artwork>
       status that can be returned in TBD JSON doc are: revoked, not mapped,
       mapped, registered. TODO better names and descriptions.</t>
 
-      <t>When the Device boots and has network connectivity, it attempts to
-      form a CoAP connection to the MotherShip. It does a CoAP GET request to
-      TBD URL passing it's URN as a parameter. Details of this message are
-      provided in XXX. The Device MUST check that the Public Key provided by
-      the MotherShip in the DTLS connection matches the fingerprint provided
-      by the Manufacture. The MotherShip needs to look at the Public Key
-      provided in the DTLS and ensure that it matches the fingerprint for this
-      Device that provided by the Manufacture. If it does match, the
-      MotherShip MUST return (in Message 10) the IP address and port for the
-      Controller as wells as the Fingerprint for the controllers public key.
-      Details for they syntax of these messages are provided in XXX. If this
-      is successful, the Device MUST store the address and fingerprint for the
-      Controller in non volatile memory and on future reboots, skip all the
-      steps before this and directly connect to the controller.</t>
+      <t>When the Device boots and has network connectivity, it attempts to form
+      a CoAP connection to the MotherShip. It does a CoAP GET request to TBD URL
+      passing it's URN as a parameter. Details of this message are provided in
+      <xref target="sec-coap-enroll"/>. The Device MUST check that the Public
+      Key provided by the MotherShip in the DTLS connection matches the
+      fingerprint provided by the Manufacture. The MotherShip needs to look at
+      the Public Key provided in the DTLS and ensure that it matches the
+      fingerprint for this Device that provided by the Manufacture. If it does
+      match, the MotherShip MUST return (in Message 10) the IP address and port
+      for the Controller as wells as the Fingerprint for the controllers public
+      key.  Details for they syntax of these messages are provided in <xref
+      target="sec-coap-enroll"/>. If this is successful, the Device MUST store
+      the address and fingerprint for the Controller in non volatile memory and
+      on future reboots, skip all the steps before this and directly connect to
+      the controller.</t>
 
       <t>At this point, the Device can form a CoAP connection to the
       Controller. The Device can verify that it is speaking to the correct
@@ -373,25 +378,47 @@ to the reader but there is one in the PDF version.      ]]></artwork>
       based purely on the</t>
     </section>
 
-    <section title="Message Formats">
-      <t>TODO</t>
+    <section title="Message Formats"  anchor="sec-syntax">
+      <t>This section is missing from the current draft and will be completed in
+      future revisions once feedback on the overal design and been
+      incorporated. </t>
 
-   <section title="MotherShip ID and URLs" anchor="sec-msid">
-      <t>This system requires there is a programmatic way to go from a
-      MotherShip ID, which is a 32 bit integer, to a URL that can be used to
-      contact that MotherShip. The approach here is to use DNS to that. For
-      MotherShip that have a high order byte of 0x00, the DNS host name of the
-      MotherShip if formed by prepending "tte-" to the lower order 24 bits of
-      the MotherShip ID represented in hexadecimal then appending ".net". So the
-      host name for the MotherShip ID 10 would be "tte-00000A.net". Mothership
-      ID that have a high order byter other than 0x00 are reserved for future
-      specifications. </t>
+      <section title="Device Enrollment Query" anchor="sec-coap-enroll">
+        <t>
+          TODO - define well known COAP URL on Mothership that device uses to
+          get information about controller. </t>
+      </section>
 
-      <t>A Manufacture gets a MotherShip ID simply be registering the
-      corresponding DNS entry. The MotherShip ID zero is reserved for
-      examples, and MUST NOT be treated as a valid ID by operational
-      systems.</t>
-    </section>
+      <section title="JSON Enrollment States" anchor="sec-enroll-state">
+        <t>
+          TODO - Define a JSON object with device URN, device public key or fingerprint, and
+          enrollment state.
+        </t>
+      </section>
+
+    <section title="Controller Enrollment Messages" anchor="sec-controller-enroll">
+        <t>TODO - define HTTP messages to allow Introducer to tell Controller
+        about a new Device. Need a way for Introducer to tell Controller, the
+        Device public key or fingerprint, the device URN, and the locally
+        significant label string, and the OTP.  </t>
+      </section>
+
+      <section title="MotherShip ID and URLs" anchor="sec-msid">
+        <t>This system requires there is a programmatic way to go from a
+        MotherShip ID, which is a 32 bit integer, to a URL that can be used to
+        contact that MotherShip. The approach here is to use DNS to that. For
+        MotherShip that have a high order byte of 0x00, the DNS host name of the
+        MotherShip if formed by prepending "tte-" to the lower order 24 bits of
+        the MotherShip ID represented in hexadecimal then appending ".net". So
+        the host name for the MotherShip ID 10 would be
+        "tte-00000A.net". Mothership ID that have a high order byter other than
+        0x00 are reserved for future specifications. </t>
+
+        <t>A Manufacture gets a MotherShip ID simply be registering the
+        corresponding DNS entry. The MotherShip ID zero is reserved for
+        examples, and MUST NOT be treated as a valid ID by operational
+        systems.</t>
+      </section>
 
     </section>
 
