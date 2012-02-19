@@ -39,7 +39,7 @@
       </address>
     </author>
 
-    <date day="17" month="February" year="2012" />
+    <date day="19" month="February" year="2012" />
 
     <area>APP</area>
 
@@ -47,29 +47,27 @@
     <abstract>
 
       <t>
-        This specification defines a system that allows constrained internet
-        devices to securely enroll into a system. It is based on the idea that
-        each device will be manufactured with a one time password that can be
-        used by the customer to tell the device which controller to enroll
-        with.</t>
-    
-      <t>
-        This is an very early sketch of solution and still lacking many
-        details. </t>
+        This document provides an very early sketch of a system that allows
+        constrained internet devices to securely enroll into a system. This work
+        is very early and lacking in many details. The solution is based on the
+        idea that each device will be manufactured with a one time password that
+        can be used by the customer to tell the device which controller to
+        enroll with. </t>
 
     </abstract>
   </front>
 
   <middle>
     <section title="Introduction">
-      <t>Secure enrollment of devices into internet based systems has never
-      been easy. The constrained devices that need to be enrolled into systems
-      today face many challenges. Often they have no user interface such as a
-      keyboard or screen - they might have only a single button or LED. At the
-      time they are installed, there may not be a working network or power.
-      These devices are being used for increasingly more important and safety
-      critical applications. This documents specifies an enrollment system for
-      such devices.</t>
+      <t>Secure enrollment of devices into internet based systems has never been
+      easy. The constrained devices that need to be enrolled into systems today
+      face many challenges. Typically, simple devices have no user interface
+      such as a keyboard or screen - they might have only a single button or
+      LED. At the time they are installed, there may not be a working network or
+      even power.  These devices are being used for increasingly more important
+      and safety critical applications that have a need for reasonable security
+      and privacy. This documents specifies an enrollment system for such
+      devices.</t>
 
       <t>The simplified high level information flow is illustrated in the
       following figure. The goal is get to the point where there Device knows
@@ -81,22 +79,24 @@
 ]]></artwork>
       </figure>
 
-   <t>When the Manufacture builds the Device, they include an One Time Password
-   (OTP) that the Introduce can use to enroll the Device with the
-   Controller. The manufacture also runs a web site know as the MotherShip that
-   knows the OTP for every device that Manufactures builds. The device can
-   include the OTP as a QR code on the outside of the device. When the device is
-   installed, the installer uses a software agent known as the Introducer. The
-   Introducer would typically be something like an application running on an
-   iPhone. When the device is installed, the Introducer can scan the QR code the
-   device to find the OTP (Message 1). The Introducer then contacts the
-   MotherShip and uses the OTP to tell the MotherShip which Controller this
-   Device is should use (Message 3). Later, the first time the Device boots up
-   and gets network connectivity, it contacts the MotherShip and MotherShip
-   tells the device which Controller to talk to (Message 3). From that point on,
-   any time the device boots, it can directly communicate with the Controller
-   (Message 4). The actual message flow is slightly more complicated and shown
-   in section TODO but uses the same basic idea as this simplified flow. </t>
+      <t>When the Manufacture builds the Device, they include an One Time
+      Password (OTP) that the Introducer can use to enroll the Device with the
+      Controller. The manufacture also runs a web site know as the MotherShip
+      that knows the OTP for every device that Manufactures builds. The device
+      can include the OTP as a QR code on the outside of the device. When the
+      device is installed, the installer uses a software agent known as the
+      Introducer. The Introducer would typically be something like an
+      application running on an iPhone. When the device is installed, the
+      Introducer can scan the QR code the device to find the OTP (Message
+      1). The Introducer then contacts the MotherShip and uses the OTP to tell
+      the MotherShip which Controller this Device is should use (Message
+      3). Later, the first time the Device boots up and gets network
+      connectivity, it contacts the MotherShip and MotherShip tells the device
+      which Controller to talk to (Message 3). From that point on, any time the
+      device boots, the Device can directly communicate with the Controller
+      (Message 4). The actual message flow is slightly more complicated and
+      shown in <xref target="sec-enrollment"/> but uses the same basic idea as
+      this simplified flow. </t>
 
       <t>The system is designed to achieve several desirable properties:<list
           style="symbols">
@@ -149,7 +149,58 @@
     </section>
 
 
-    <section title="TODO">
+     <section title="Enrollment Information Flow" anchor="sec-enrollment" >
+      <t>The Manufacture, Device, MotherShip, Introducer, and Controller are
+      abbreviated M,D,MS,I,C respectively. The Device, MotherShip, and
+      Controller all use CoAP to communicate with each other and thus each
+      have a asymmetric key pair that is used to form the DTLS connections
+      between them. The MotherShip acts as an HTTP server to communicate with
+      the Introducer and Controller. The MotherShip needs a certificates to use HTTPS.</t>
+
+      <t>It is assumed that the Device may have a NAT between it and the
+      Controller with that the Device is on the inside of the NAT. The MotherShip is
+      assume to be a generally accessible server on the internet but the
+      Controller and Device can be on the inside of a Firewall and/or NAT
+      between them and the MotherShip.</t>
+
+      <t>In the following message flow we use the following definitions:<list
+          style="hanging">
+          <t hangText="Fingerprint">This refers to a hash of the DTLS public
+          key used by the associated network element. So "MS Fingerprint"
+          means a fingerprint of the public key that the MotherShip will use
+          when forming CoAP connections over DTLS.</t>
+
+          <t hangText="MS ID">A 32 bit integer that uniquely identifies the
+          MotherShip. <xref target="sec-msid" /> explains how to use the MS ID to create a
+          URL than can be used to contact the MotherShip</t>
+
+          <t hangText="Dev ID">A 32 bit integer that identifies the Device and
+          when combined with the MotherShip is unique. Two devices that use
+          the same MotherShip can not have the same Dev ID</t>
+
+          <t hangText="Dev URN">A globally unique URN assigned by the
+          Manufacture to uniquely identify this device. This SHOULD be one of
+          the URNs from TODO REF.</t>
+
+          <t hangText="OTP">The One Time Password created by the manufacture
+          for enrollment of the Device. This is an cryptographically random 64
+          bit integer. </t>
+
+          <t hangText="C Addr">Address of the Controller. This is an IPv4 or
+          IPv6 address and port which the Device can use to form a CoAP
+          connection to the Controller.</t>
+
+          <t hangText="Dev Descp">A locally significant string that the
+          Introducer can assign to Device. For example, the convention for a
+          thermostat in building 30, floor2, office 361 might be assign the
+          string "BLD30/2/361 - Thermostat". This string is purely provided as
+          a way for the Introducer and Controller to exchange information that
+          may be useful for the Installer.</t>
+
+          <t hangText="Dev Status">The Controller can query the MotherShip for
+          the enrollment status of a Device that is enrolled with that
+          Controller. The various stats returned are discussed in XXX. </t>
+        </list></t>
 
        <t>The high level information flow is illustrated in the following
       figure. The goal is get to the point where there Device knows that it
@@ -186,65 +237,7 @@
       controller can optionally contact the MotherShip to find out about the
       status of any Devices that it has not heard from (Messages 7 and 8).</t>
 
-    </section>
-
-    <section title="Enrollment Information Flow ">
-      <t>The Manufacture, Device, MotherShip, Introducer, and Controller are
-      abbreviated M,D,MS,I,C respectively. The Device, MotherShip, and
-      Controller all use CoAP to communicate with each other and thus each
-      have a asymmetric key pair that is used to form the DTLS connections
-      between them. The MotherShip acts as an HTTP server to communicate with
-      the Introducer and Controller and needs a certificates to use HTTPS.</t>
-
-      <t>It is assumed that the Device may have a NAT between it and the
-      Controller with the Device on the inside of the NAT. The MotherShip is
-      assume to be a generally accessible server on the internet but the
-      Controller and Device can be on the inside of a Firewall and/or NAT
-      between them and the internet.</t>
-
-      <t>In the following message flow we use the following definitions:<list
-          style="hanging">
-          <t hangText="Fingerprint">This refers to a hash of the DTLS public
-          key used by the associated network element. So "MS Fingerprint"
-          means a fingerprint of the public key that the MotherShip will use
-          when forming CoAP connections over DTLS.</t>
-
-          <t hangText="MS ID">A 32 bit integer that uniquely identifies the
-          MotherShip. Section XXX explains how to use the MS ID to create a
-          URL than can be used to contact the MotherShip</t>
-
-          <t hangText="Dev ID">A 32 bit integer that identifies the Device and
-          when combined with the MotherShip is unique. Two devices that use
-          the same MotherShip can not have the same Dev ID</t>
-
-          <t hangText="Dev URN">A globally unique URN assigned by the
-          Manufacture to uniquely identify this device. This SHOULD be one of
-          the URNs from TODO REF.</t>
-
-          <t hangText="OTP">The One Time Password created by the manufacture
-          for enrollment of the Device. This is an cryptographically random 64
-          bit integer. </t>
-
-          <t hangText="C Addr">Address of the Controller. This is an IPv4 or
-          IPv6 address and port which the Device can use to form a CoAP
-          connection to the Controller.</t>
-
-          <t hangText="Dev Descp">A locally significant string that the
-          Introducer can assign to Device. For example, the convention for a
-          thermostat in building 30, floor2, office 361 might be assign the
-          string "BLD30/2/361 - Thermostat". This string is purely provided as
-          a way for the Introducer and Controller to exchange information that
-          may be useful for the Installer.</t>
-
-          <t hangText="Dev Status">The Controller can query the MotherShip for
-          the enrollment status of a Device that is enrolled with that
-          Controller. The various stats returned are discussed in XXX. TODO
-          MOVE If the MotherShip does not consider the query a valid device
-          due to either an incorrect Device URN or OTP or that the device has
-          been revoked, it</t>
-        </list></t>
-
-      <figure>
+     <figure>
         <artwork alt="Go Read the TXT version of this draft"
                  src="tte-arrows.png"><![CDATA[participant Manufacture
 participant Device
@@ -280,8 +273,8 @@ Controller->Device: 12 HelloAck
 
       <t>TODO ref RFC 5785 well known</t>
 
-      <t>The creation of the MotherShip domain name is discussed in XXX. The
-      QR code fore the Device MUST be a HTTPS URL that points at the
+      <t>The creation of the MotherShip domain name is discussed in <xref target="sec-msid" />. The
+      QR code for the Device MUST be a HTTPS URL that points at the
       appropriate MotherShip and MUST include a URL parameter called "otp"
       that is set to OTP represented in hexadecimal and MUST include a URL
       parameter called "devid" that is set to the Device ID represented in
@@ -382,6 +375,24 @@ to the reader but there is one in the PDF version.      ]]></artwork>
 
     <section title="Message Formats">
       <t>TODO</t>
+
+   <section title="MotherShip ID and URLs" anchor="sec-msid">
+      <t>This system requires there is a programmatic way to go from a
+      MotherShip ID, which is a 32 bit integer, to a URL that can be used to
+      contact that MotherShip. The approach here is to use DNS to that. For
+      MotherShip that have a high order byte of 0x00, the DNS host name of the
+      MotherShip if formed by prepending "tte-" to the lower order 24 bits of
+      the MotherShip ID represented in hexadecimal then appending ".net". So the
+      host name for the MotherShip ID 10 would be "tte-00000A.net". Mothership
+      ID that have a high order byter other than 0x00 are reserved for future
+      specifications. </t>
+
+      <t>A Manufacture gets a MotherShip ID simply be registering the
+      corresponding DNS entry. The MotherShip ID zero is reserved for
+      examples, and MUST NOT be treated as a valid ID by operational
+      systems.</t>
+    </section>
+
     </section>
 
     <section anchor="sec-sec" title="Security Considerations">
@@ -400,42 +411,24 @@ to the reader but there is one in the PDF version.      ]]></artwork>
       <t></t>
     </section>
 
-    <section title="MotherShip ID and URLs">
-      <t>This system requires there is a programmatic way to go from a
-      MotherShip ID, which is a 32 bit integer, to a URL that can be used to
-      contact that MotherShip. The approach here is to use DNS to that. For
-      MotherShip that have a high order byte of 0x00, the DNS host name of the
-      MotherShip if formed by prepending "tte-" to the lower order 24 bits of
-      the MotherShip ID represented in hexadecimal then appending ".net". So the
-      host name for the MotherShip ID 10 would be "tte-00000A.net". Mothership
-      ID that have a high order byter other than 0x00 are reserved for future
-      specifications. </t>
+     <section title="Variations">
 
-      <t>A Manufacture gets a MotherShip ID simply be registering the
-      corresponding DNS entry. The MotherShip ID zero is reserved for
-      examples, and MUST NOT be treated as a valid ID by operational
-      systems.</t>
-    </section>
-
-    <section title="IANA Considerations">
-      <t>TODO - registry for top byte of MotherShip ID</t>
-
-      <t>TODO register .wellknown HTTP URL</t>
-    </section>
-
-    <section title="Light Based Enrollment">
+    <section title="LED Based Enrollment">
       <t>An alternative to QR codes is to have an LED on the device flash out
       the relevant information to the introducer. The output string is formed by
       concatenating a 16 bit start of message constant value of 0x0001, followed
-      by the mothership ID, device ID, OTP, then 8 bit twos compliment checksum
-      value of the previous bytes including the start of message constant. All
+      by the mothership ID, device ID, OTP, then an 8 bit twos compliment checksum
+      value computed over the previous bytes including the start of message constant. All
       values are in network byte order. The resulting string is output using
-      zero return encoding on the LED at a baud rate of 15Hz. This allows a
-      device such as a smartphone with video capture to detect the signal using
-      a typical video camera and recover the information. TODO - see if this
-      works at 30Hz. See about encoding multiple intensity levels in the LED -
-      initial experiments indicate this does not work as auto contrast tends to
-      saturate LED range.  </t>
+      Non-Return-to-Zero Inverted (NRZI) encoding on the LED at a baud rate of
+      15Hz. This allows a device such as a smartphone with video capture to
+      detect the signal using a typical video camera and recover the
+      information.</t>
+      <t>
+        TODO - see if this works at 30Hz. See about encoding multiple intensity
+        levels or colors in the LED.  initial experiments indicate this does not
+        work very well as auto contrast in the video camera tends to saturate
+        LED range. Would an Adler-32 checksum be beter? </t>
     </section>
 
     <section title="Bulk Enrollment">
@@ -453,6 +446,26 @@ to the reader but there is one in the PDF version.      ]]></artwork>
       asymmetric keys. It would also be possible to use DTLS in Pre Shared Key
       (PSK) mode in very simular flow where the Introducer provided to the
       Mothership the PSK to be used between the Device and the Controller.  </t>
+    </section>
+
+    </section>
+
+   <section title="Open Issues">
+      <t> The references section is in serios need of work - let me know stuff that should be added to it. </t>
+
+      <t> Does QR encoding of L work out better than H?</t>
+
+      <t>Is there any advantage in having the HTTP URL in well-known space?</t>
+
+      <t>Is there some clever way (perhaps zeroconf) for introducer to discover Controller information. </t>
+
+     
+    </section>
+
+  <section title="IANA Considerations">
+      <t>TODO - create registry for the top byte of MotherShip ID</t>
+
+      <t>TODO register .wellknown HTTP URL</t>
     </section>
 
     <section title="Acknowledgments">
