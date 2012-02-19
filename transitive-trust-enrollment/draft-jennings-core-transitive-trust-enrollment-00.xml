@@ -10,6 +10,11 @@
 <?rfc colonspace="yes" ?>
 <?rfc rfcedstyle="no" ?>
 <?rfc tocdepth="4"?>
+
+<!-- remove thse next two to move back to internet draft -->
+<?rfc topblock="yes"?>
+<?rfc private=" "?>
+
 <rfc category="exp"
      docName="draft-jennings-core-transitive-trust-enrollment-00"
      ipr="trust200902">
@@ -39,7 +44,7 @@
       </address>
     </author>
 
-    <date day="19" month="February" year="2012" />
+    <date day="14" month="February" year="2012" />
 
     <area>APP</area>
 
@@ -66,11 +71,12 @@
       documents specifies an enrollment system for such devices.</t>
 
       <t>In many systems, there is a need to configured a Device, such as a
-      sensor or actuator, to be controlled by some specific controller. In the
-      case Devices like a switch and light, it may be that all the Controller
-      does is later configure the switch to control the light but before this
-      can happen, both Devices need to be under the control of a common
-      Controller that is authorized to make changes to them.</t>
+      sensor or actuator, so that it is controlled by some specific
+      controller. In the case Devices like a switch and light, it may be that
+      all the Controller does is later configure the switch to control the
+      light. To make this happen, both Devices need to be under the control of
+      a common Controller that is authorized to make changes to the
+      Devices.</t>
 
       <t>The simplified high-level information flow is illustrated in the
       following figure. The goal is to get to the point where the Device knows
