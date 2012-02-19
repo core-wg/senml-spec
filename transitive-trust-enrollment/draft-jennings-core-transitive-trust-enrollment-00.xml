@@ -67,10 +67,10 @@
 
       <t>In many systems, there is a need to configured a Device, such as a
       sensor or actuator, to be controlled by some specific controller. In the
-      case Devices like a switch and light, it may be that all the Contrller
-      does is later configure the switch to controll the light but before this
-      can happen, both Devices need to be under the controll of a common
-      Controller that is authorized to make changes to them. </t>
+      case Devices like a switch and light, it may be that all the Controller
+      does is later configure the switch to control the light but before this
+      can happen, both Devices need to be under the control of a common
+      Controller that is authorized to make changes to them.</t>
 
       <t>The simplified high-level information flow is illustrated in the
       following figure. The goal is to get to the point where the Device knows
@@ -85,18 +85,18 @@
       <t>When the Manufacturer builds the Device, it includes a One Time
       Password (OTP) that the Introducer can use to enroll the Device with the
       Controller. The Manufacturer also runs a website known as the MotherShip
-      that knows the OTP for every device that Manufacturer builds. The device
-      can include the OTP as a QR code on the outside of the device. When the
-      device is installed, the installer uses a software agent known as the
+      that knows the OTP for every device that Manufacturer builds. The Device
+      can include the OTP as a QR code on the outside of the Device. When the
+      Device is installed, the installer uses a software agent known as the
       Introducer. The Introducer would typically be something like an
-      application running on an iPhone. When the device is installed, the
-      Introducer can scan the QR code on the device to find the OTP (Message
+      application running on an iPhone. When the Device is installed, the
+      Introducer can scan the QR code on the Device to find the OTP (Message
       1). The Introducer then contacts the MotherShip and uses the OTP to tell
       the MotherShip which Controller this Device is should use (Message 3).
       Later, the first time the Device boots up and gets network connectivity,
-      it contacts the MotherShip, and the MotherShip tells the device which
+      it contacts the MotherShip, and the MotherShip tells the Device which
       Controller to talk to (Message 3). From that point on, any time the
-      device boots, the Device can communicate directly with the Controller
+      Device boots, the Device can communicate directly with the Controller
       (Message 4). The actual message flow is slightly more complicated and
       shown in <xref target="sec-enrollment"></xref>, but it uses the same
       basic idea as this simplified flow.</t>
@@ -131,14 +131,14 @@
           <t>Using a QR code or other bar code printed on the Device and/or
           box it comes in</t>
 
-          <t>Having a single LED on the device that blinks out the OTP
+          <t>Having a single LED on the Device that blinks out the OTP
           information and using a video capture application on the Introducer
           to read this</t>
 
           <t>The manufacture providing the OTP in some other machine readable
           form</t>
 
-          <t>Including the OTP in an RFID tag on the device that can be read
+          <t>Including the OTP in an RFID tag on the Device that can be read
           by the Introducer</t>
 
           <t>Having an electrical interface (such as one wire memory) on the
@@ -179,11 +179,11 @@
           MotherShip.</t>
 
           <t hangText="Dev ID">A 32-bit integer that identifies the Device and
-          when combined with the MotherShip is unique. Two devices that use
+          when combined with the MotherShip is unique. Two Devices that use
           the same MotherShip cannot have the same Dev ID.</t>
 
           <t hangText="Dev URN">A globally unique URN assigned by the
-          Manufacturer to uniquely identify this device. This SHOULD be one of
+          Manufacturer to uniquely identify this Device. This SHOULD be one of
           the URNs from <xref target="I-D.arkko-core-dev-urn"></xref>.</t>
 
           <t hangText="OTP">The One Time Password created by the Manufacturer
@@ -226,7 +226,7 @@
       MotherShip which Controller this Device should use (Message 4 and 5).
       Later the Device contacts the MotherShip and tells the Device which
       Controller to talk to, information that the Device saves in non-volatile
-      memory (Message 9 and 10). From that point on, any time the device
+      memory (Message 9 and 10). From that point on, any time the Device
       boots, it can directly communicate with the Controller (Message 11 and
       12).</t>
 
@@ -259,11 +259,11 @@ Controller->Device: 12 HelloAck
 ]]></artwork>
       </figure>
 
-      <t>When the device is built, it needs to be assigned a globally unique
+      <t>When the Device is built, it needs to be assigned a globally unique
       URN, a Dev ID, and a MotherShip. A single manufacturer MAY operate many
-      Motherships as each one can only support 16 million devices. A perfectly
+      MotherShips as each one can only support 16 million Devices. A perfectly
       reasonable way to generate the Dev ID is to use the least significant 32
-      bits of the Device URN. The device needs to be programmed with the IP
+      bits of the Device URN. The Device needs to be programmed with the IP
       address and port of the MotherShip along with the fingerprint of the
       public key that the MotherShip will use in the DTLS CoAP exchange.</t>
 
@@ -302,7 +302,7 @@ to the reader but there is one in the PDF version.      ]]></artwork>
 
       <t>Messages 4 and 5 MUST be sent over TLS, and the Introducer MUST
       verify that the HTTPS certificate of the MotherShip matches the URL. The
-      Introducer can perform either an HTTPS GET or POST. If the introducer
+      Introducer can perform either an HTTPS GET or POST. If the Introducer
       does a GET, it MUST make an HTTPS GET request to the Enrollment URL and
       MUST act as a web browser to process returned HTML pages. In the case of
       a GET, the MotherShip MUST return a web page that allows the user to
@@ -329,7 +329,7 @@ to the reader but there is one in the PDF version.      ]]></artwork>
       <t>Message 6 is optional and MAY be omitted. As some point after the
       Introducer has successfully mapped the Device to the Controller, it can
       send an HTTP or HTTPS request to the Controller to notify it that it can
-      expect to hear from a particular device. The message formats for this
+      expect to hear from a particular Device. The message formats for this
       are defined in <xref target="sec-controller-enroll"></xref>. This does
       not need happen immediately and the information can be saved so it can
       be done far in the future. This might happen if Devices were being
@@ -339,7 +339,7 @@ to the reader but there is one in the PDF version.      ]]></artwork>
       Introduction.) This is done with an HTTP POST to TBD URL with parameters
       to convey the Device URN and Fingerprint learned from the MotherShip,
       the OTP password, and a locally significant description string that can
-      be used to help label the device for management reasons.</t>
+      be used to help label the Device for management reasons.</t>
 
       <t>In the case where the Controller has learned the URN and OTP for a
       given Device, it MAY query the MotherShip to find out the enrollment
@@ -358,21 +358,21 @@ to the reader but there is one in the PDF version.      ]]></artwork>
       fingerprint for this Device that was provided by the Manufacturer. If
       everything does match, the MotherShip MUST return (in Message 10) the IP
       address and port for the Controller as well as the Fingerprint for the
-      controller's public key. Details for the syntax of these messages are
+      Controller's public key. Details for the syntax of these messages are
       provided in <xref target="sec-coap-enroll"></xref>. If this is
       successful, the Device MUST store the address and fingerprint for the
       Controller in non-volatile memory and, on future reboots, skip all the
-      steps before this and connect directly to the controller. (TODO - Define
+      steps before this and connect directly to the Controller. (TODO - Define
       how retries work if the Device has not yet been enrolled.)</t>
 
       <t>At this point, the Device can form a CoAP connection to the
       Controller. The Device can verify that it is speaking to the correct
       Controller by checking that the DTLS Public Key matches the fingerprint
-      for the controller that was retrieved from the MotherShip. If the
+      for the Controller that was retrieved from the MotherShip. If the
       Introducer has contacted the Controller in message 6, then the
       Controller will already have the fingerprint of the Device and can
-      verify that it matches the DTLS information in the conection between the
-      Device and the Controller. </t>
+      verify that it matches the DTLS information in the connection between
+      the Device and the Controller.</t>
 
       <t>The Controller MAY be configured such that if it does not have the
       information from Message 6 it can ignore the Device until it gets the
@@ -387,12 +387,12 @@ to the reader but there is one in the PDF version.      ]]></artwork>
       incorporated.</t>
 
       <section anchor="sec-coap-enroll" title="Device Enrollment Query">
-        <t>TODO - define well known COAP URL on Mothership that the Device
+        <t>TODO - define well known COAP URL on MotherShip that the Device
         uses to get information about Controller.</t>
       </section>
 
       <section anchor="sec-enroll-state" title="JSON Enrollment States">
-        <t>TODO - Define a JSON object with device URN, device public key or
+        <t>TODO - Define a JSON object with Device URN, Device public key or
         fingerprint, and enrollment state.</t>
       </section>
 
@@ -400,7 +400,7 @@ to the reader but there is one in the PDF version.      ]]></artwork>
                title="Controller Enrollment Messages">
         <t>TODO - define HTTP messages to allow Introducer to tell Controller
         about a new Device. Need a way for Introducer to tell Controller, the
-        Device public key or fingerprint, the device URN, and the locally
+        Device public key or fingerprint, the Device URN, and the locally
         significant label string, and the OTP.</t>
       </section>
 
@@ -412,13 +412,13 @@ to the reader but there is one in the PDF version.      ]]></artwork>
         of the MotherShip if formed by prepending "tte-" to the lower order 24
         bits of the MotherShip ID represented in hexadecimal, and then
         appending ".net". So the host name for the MotherShip ID 10 would be
-        "tte-00000A.net". Mothership IDs that have a high order byte other
+        "tte-00000A.net". MotherShip IDs that have a high order byte other
         than 0x00 are reserved for future specifications.</t>
 
         <t>A Manufacturer gets a MotherShip ID simply be registering the
         corresponding DNS entry. The MotherShip ID zero is reserved for
         examples and MUST NOT be treated as a valid ID by operational systems.
-        A manufacturer wishing to have more than 2^32 devices would simply
+        A manufacturer wishing to have more than 2^32 Devices would simply
         register multiple MotherShip IDs.</t>
       </section>
     </section>
@@ -432,22 +432,22 @@ to the reader but there is one in the PDF version.      ]]></artwork>
       Controller.</t>
 
       <t>What happens if the OTP is stolen during Device transit? The short
-      answer is that the device is compromised at this point and needs to be
-      discarded or returned to the manufacture to get a new device ID and OTP.
-      The Introducer needs to detect that this has happened and warn the user.
-      </t>
+      answer is that the Device is compromised at this point and needs to be
+      discarded or returned to the manufacture to get a new Device ID and OTP.
+      The Introducer needs to detect that this has happened and warn the
+      user.</t>
 
-      <t>There are additional concerns about devices that may be operational
+      <t>There are additional concerns about Devices that may be operational
       without ever being introduced to a Controller. For example, if a light
       switch supported this protocol, but could also be used just as a stand
       alone light switch, there is a risk the OTP could be stolen by an
-      attacker, with the attacker enrolling the device to the attacker's
-      controller. When the correct user installs the light switch, if they
+      attacker, with the attacker enrolling the Device to the attacker's
+      Controller. When the correct user installs the light switch, if they
       never bother to try to Introduce it to anything, they will not detect
       that it has been compromised. One way to mitigate this risk in
       situations where it exists might be to include some manual configuration
-      on the device to indicate that it is to be used in stand-alone mode,
-      such as a jumper that can be cut. </t>
+      on the Device to indicate that it is to be used in stand-alone mode,
+      such as a jumper that can be cut.</t>
 
       <t>Network topology consideration - Introducer can install firewall
       rules that allow Devices to contact MotherShip.</t>
@@ -459,15 +459,15 @@ to the reader but there is one in the PDF version.      ]]></artwork>
 
     <section title="Variations">
       <section title="LED Based Enrollment">
-        <t>An alternative to QR codes is to have an LED on the device flash
+        <t>An alternative to QR codes is to have an LED on the Device flash
         out the relevant information to the Introducer. The output string is
         formed by concatenating a 16-bit start of message constant value of
-        0x0001, followed by the Mothership ID, Device ID, OTP, and then an
+        0x0001, followed by the MotherShip ID, Device ID, OTP, and then an
         8-bit two's compliment checksum value computed over the previous
         bytes, including the start of message constant. All values are in
         network byte order. The resulting string is output using
         Non-Return-to-Zero Inverted (NRZI) encoding on the LED at a baud rate
-        of 15 bps. This allows a device such as a smartphone with video
+        of 15 bps. This allows a Device such as a smartphone with video
         capture to detect the signal and recover the information.</t>
 
         <t>TODO - see if this works at 30 bps. See about encoding multiple
@@ -481,16 +481,16 @@ to the reader but there is one in the PDF version.      ]]></artwork>
         define some scheme where one can simply bar code something on the
         outside of a box and can bulk enroll all the sensors in the box.
         Perhaps have a scheme where there is a master secret and start and end
-        device ID on the outside of box bar code. Then the OTP for a given
-        device is generated using the master secret and deviceID of that
-        device. Need to sort out details of a scheme like this.</t>
+        Device ID on the outside of box bar code. Then the OTP for a given
+        Device is generated using the master secret and DeviceID of that
+        Device. Need to sort out details of a scheme like this.</t>
       </section>
 
       <section title="No Public Key Crypto">
         <t>The examples here assumed that COAP was being used with DTLS with
         asymmetric keys. It would also be possible to use DTLS in Pre Shared
         Key (PSK) mode in a very similar flow, where the Introducer provided
-        the Mothership with the PSK to be used between the Device and the
+        the MotherShip with the PSK to be used between the Device and the
         Controller.</t>
       </section>
     </section>
