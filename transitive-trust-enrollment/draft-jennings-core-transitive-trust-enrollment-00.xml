@@ -67,7 +67,7 @@
 
       <t>The simplified high level information flow is illustrated in the
       following figure. The goal is get to the point where there Device knows
-      that it should be talking to the Controller.</t>
+      that it should be talking to the Controller. </t>
 
       <figure>
         <artwork alt="Go Read the TXT version of this draft"
@@ -176,7 +176,7 @@
 
           <t hangText="Dev URN">A globally unique URN assigned by the
           Manufacture to uniquely identify this device. This SHOULD be one of
-          the URNs from <xref target="I-D.arkko-core-dev-urn" />.</t>
+          the URNs from <xref target="I-D.arkko-core-dev-urn"></xref>.</t>
 
           <t hangText="OTP">The One Time Password created by the manufacture
           for enrollment of the Device. This is an cryptographically random 64
@@ -292,8 +292,8 @@ https://tte-000000.net/.well-known/tte?
       generate the following QR code:</t>
 
       <figure>
-        <artwork alt="Go Read the TXT version of this draft" src="qrcode.png">
-<![CDATA[QR code in ASCII art left as an exercise 
+        <artwork alt="Go Read the TXT version of this draft" src="qrcode.png"><![CDATA[
+QR code in ASCII art left as an exercise 
 to the reader but there is one in the PDF version.      ]]></artwork>
       </figure>
 
@@ -303,22 +303,22 @@ to the reader but there is one in the PDF version.      ]]></artwork>
 
       <t>Message 4 and 5 MUST be sent over TLS and the Introducer MUST verify
       the HTTPS certificate of the MotherShip matches the URL. The Introducer
-      can either perform an HTTPS GET or POST. If the introducer does at GET, it
-      MUST make an HTTPS GET request to the Enrollment URL and MUST act as web
-      browser. In the case of a GET, the MotherShip MUST return a web pages that
-      allows the user to enter the IP address and port of the Controller as well
-      as the fingerprint of the Controllers public key used in CoAP. If the
-      Controller does not wish to act as a web browser, instead of using the
-      GET, it will use a PUT. When using a PUT, the Controller MUST make a HTTPS
-      POST request to an URL formed by appending three parameters to the
-      Enrollment URL. The parameters are cip which MUST have the IP address of
-      the Controller, cport which MUST have the port of the Controller, and
-      cfingerprint which MUST have the fingerprint of the Controllers Public Key
-      represented in hexadecimal. If, and only if, the MotherShip successful
-      stored the address, the response to the POST MUST return a HTTP 200
-      response with a JSON string containing the URN and Fingerprint for that
-      Device. The format of this object is described in <xref
-      target="sec-enroll-state"></xref>.</t>
+      can either perform an HTTPS GET or POST. If the introducer does at GET,
+      it MUST make an HTTPS GET request to the Enrollment URL and MUST act as
+      web browser. In the case of a GET, the MotherShip MUST return a web
+      pages that allows the user to enter the IP address and port of the
+      Controller as well as the fingerprint of the Controllers public key used
+      in CoAP. If the Controller does not wish to act as a web browser,
+      instead of using the GET, it will use a PUT. When using a PUT, the
+      Controller MUST make a HTTPS POST request to an URL formed by appending
+      three parameters to the Enrollment URL. The parameters are cip which
+      MUST have the IP address of the Controller, cport which MUST have the
+      port of the Controller, and cfingerprint which MUST have the fingerprint
+      of the Controllers Public Key represented in hexadecimal. If, and only
+      if, the MotherShip successful stored the address, the response to the
+      POST MUST return a HTTP 200 response with a JSON string containing the
+      URN and Fingerprint for that Device. The format of this object is
+      described in <xref target="sec-enroll-state"></xref>.</t>
 
       <t>Once the MotherShip has successfully stored the Controller address
       for a given OTP. It MUST not allow that OTP to be used again to store an
@@ -338,8 +338,9 @@ to the reader but there is one in the PDF version.      ]]></artwork>
       case having MotherShip redirect Introducer to Controller after
       successful Introduction.) This is done with a HTTP POST to TBD URL with
       parameters to convey the Device URN and Fingerprint learned from the
-      MotherShip, the OTP password, and a locally significant description string
-      that can be used to help label the device for management reasons.</t>
+      MotherShip, the OTP password, and a locally significant description
+      string that can be used to help label the device for management
+      reasons.</t>
 
       <t>In the case where the Controller has learned the URN and OTP for a
       given Device, it MAY query the MotherShip to find out the enrollment
@@ -348,34 +349,34 @@ to the reader but there is one in the PDF version.      ]]></artwork>
       mapped, registered. TODO - could use better names and descriptions.</t>
 
       <t>When the Device powered up and has network connectivity for the first
-      time, it attempts to form a CoAP connection to the MotherShip. The Device
-      makes a CoAP GET request to TBD URL passing it's URN as a
+      time, it attempts to form a CoAP connection to the MotherShip. The
+      Device makes a CoAP GET request to TBD URL passing it's URN as a
       parameter. Details of this message are provided in <xref
       target="sec-coap-enroll"></xref>. The Device MUST check that the Public
       Key provided by the MotherShip in the DTLS connection matches the
       fingerprint provided by the Manufacture. The MotherShip needs to look at
       the Public Key provided in the DTLS and ensure that it matches the
       fingerprint for this Device that provided by the Manufacture. If it does
-      match, the MotherShip MUST return (in Message 10) the IP address and port
-      for the Controller as wells as the Fingerprint for the controllers public
-      key. Details for they syntax of these messages are provided in <xref
-      target="sec-coap-enroll"></xref>.  If this is successful, the Device MUST
-      store the address and fingerprint for the Controller in non volatile
-      memory and on future reboots, skip all the steps before this and directly
-      connect to the controller. (TODO - Define how retries work if the Device
-      has not yet been enrolled.)</t>
+      match, the MotherShip MUST return (in Message 10) the IP address and
+      port for the Controller as wells as the Fingerprint for the controllers
+      public key. Details for they syntax of these messages are provided in
+      <xref target="sec-coap-enroll"></xref>. If this is successful, the
+      Device MUST store the address and fingerprint for the Controller in non
+      volatile memory and on future reboots, skip all the steps before this
+      and directly connect to the controller. (TODO - Define how retries work
+      if the Device has not yet been enrolled.)</t>
 
       <t>At this point, the Device can form a CoAP connection to the
       Controller. The Device can verify that it is speaking to the correct
-      Controller by checking the DTLS Public Key matches the fingerprint for the
-      controller that was retrieved from the MotherShip. If the Introducer
+      Controller by checking the DTLS Public Key matches the fingerprint for
+      the controller that was retrieved from the MotherShip. If the Introducer
       contact the Controller in message 6, then the Controller has the
       fingerprint of the Device and verify it matches the DTLS Public Key. If
       the Controller does not have the information from Message 6, it can be
-      configured to either ignore the Device until it gets the information from
-      the Introducer or it MAY be configured to accept the connection based
-      purely on the fact that the network was configured to allow the Device to
-      send messages to the Controller.</t>
+      configured to either ignore the Device until it gets the information
+      from the Introducer or it MAY be configured to accept the connection
+      based purely on the fact that the network was configured to allow the
+      Device to send messages to the Controller.</t>
     </section>
 
     <section anchor="sec-syntax" title="Message Formats">
@@ -384,8 +385,8 @@ to the reader but there is one in the PDF version.      ]]></artwork>
       incorporated.</t>
 
       <section anchor="sec-coap-enroll" title="Device Enrollment Query">
-        <t>TODO - define well known COAP URL on Mothership that the Device uses to
-        get information about Controller.</t>
+        <t>TODO - define well known COAP URL on Mothership that the Device
+        uses to get information about Controller.</t>
       </section>
 
       <section anchor="sec-enroll-state" title="JSON Enrollment States">
@@ -405,12 +406,12 @@ to the reader but there is one in the PDF version.      ]]></artwork>
         <t>This system requires there is a programmatic way to go from a
         MotherShip ID, which is a 32 bit integer, to a URL that can be used to
         contact that MotherShip. The approach here is to use DNS for that. For
-        a MotherShip ID that has a high order byte of 0x00, the DNS host name of
-        the MotherShip if formed by prepending "tte-" to the lower order 24
+        a MotherShip ID that has a high order byte of 0x00, the DNS host name
+        of the MotherShip if formed by prepending "tte-" to the lower order 24
         bits of the MotherShip ID represented in hexadecimal then appending
         ".net". So the host name for the MotherShip ID 10 would be
-        "tte-00000A.net". Mothership IDs that have a high order byte other than
-        0x00 are reserved for future specifications.</t>
+        "tte-00000A.net". Mothership IDs that have a high order byte other
+        than 0x00 are reserved for future specifications.</t>
 
         <t>A Manufacture gets a MotherShip ID simply be registering the
         corresponding DNS entry. The MotherShip ID zero is reserved for
@@ -421,26 +422,26 @@ to the reader but there is one in the PDF version.      ]]></artwork>
     </section>
 
     <section anchor="sec-sec" title="Security Considerations">
-      <t>This section has not really been started and needs lots of work. </t>
+      <t>This section has not really been started and needs lots of work.</t>
 
       <t>TODO - Discuss how one can replacing a dead Controller with new in an
       operational network. Short answer is likely that one needs backup the
-      private keys of old Controller and move these to the new Controller.  </t>
+      private keys of old Controller and move these to the new Controller.</t>
 
       <t>What happens in OTP stolen during Device transit? The short answer is
-      that the device is compromised at this point and needs to be discarded or
-      returned to the manufacture to get a new device ID and OTP. The needs to
-      detect that this has happened can detect that this has happened. There are
-      additional concerns for device that may be operational without ever being
-      introduced to a Controller. For example, if a light switch supported this
-      protocol, but could also be used just as a stand alone light switch, there
-      is a risk the OTP could be stollen by an attacker and the attacker enrolls
-      the device to the attackers controller. When the correct users installs
-      the light switch, if they never bother to try to Introduce it to anything,
-      they will not detect it has been compromised. One way to mitigate with for
-      devices where this is a risk is make them need some manual configuration
-      on the device such as cutting a jumper to indicate it has should be used
-      in stand alone mode. </t>
+      that the device is compromised at this point and needs to be discarded
+      or returned to the manufacture to get a new device ID and OTP. The needs
+      to detect that this has happened can detect that this has happened.
+      There are additional concerns for device that may be operational without
+      ever being introduced to a Controller. For example, if a light switch
+      supported this protocol, but could also be used just as a stand alone
+      light switch, there is a risk the OTP could be stolen by an attacker and
+      the attacker enrolls the device to the attackers controller. When the
+      correct users installs the light switch, if they never bother to try to
+      Introduce it to anything, they will not detect it has been compromised.
+      One way to mitigate with for devices where this is a risk is make them
+      need some manual configuration on the device such as cutting a jumper to
+      indicate it has should be used in stand alone mode.</t>
 
       <t>Network topology consideration - Introducer can install firewall
       rules that allow Device to contact MotherShip.</t>
@@ -484,7 +485,7 @@ to the reader but there is one in the PDF version.      ]]></artwork>
         asymmetric keys. It would also be possible to use DTLS in Pre Shared
         Key (PSK) mode in very similar flow where the Introducer provided to
         the Mothership the PSK to be used between the Device and the
-        Controller. </t>
+        Controller.</t>
       </section>
     </section>
 
@@ -504,7 +505,7 @@ to the reader but there is one in the PDF version.      ]]></artwork>
     <section title="IANA Considerations">
       <t>TODO - create registry for the top byte of MotherShip ID</t>
 
-      <t>TODO register .wellknown HTTP URL</t>
+      <t>TODO register .well-known HTTP URL</t>
     </section>
 
     <section title="Acknowledgments">
@@ -562,7 +563,7 @@ to the reader but there is one in the PDF version.      ]]></artwork>
                 type="XML" />
       </reference>
 
- <reference anchor="I-D.ietf-core-coap">
+      <reference anchor="I-D.ietf-core-coap">
         <front>
           <title>Constrained Application Protocol (CoAP)</title>
 
@@ -606,38 +607,42 @@ to the reader but there is one in the PDF version.      ]]></artwork>
         <format target="http://www.ietf.org/internet-drafts/draft-ietf-core-coap-08.txt"
                 type="TXT" />
       </reference>
-
     </references>
 
     <references title="Informative References">
-   
-<reference anchor='I-D.arkko-core-dev-urn'>
-<front>
-<title>Uniform Resource Names for Device Identifiers</title>
+      <reference anchor="I-D.arkko-core-dev-urn">
+        <front>
+          <title>Uniform Resource Names for Device Identifiers</title>
 
-<author initials='J' surname='Arkko' fullname='Jari Arkko'>
-    <organization />
-</author>
+          <author fullname="Jari Arkko" initials="J" surname="Arkko">
+            <organization></organization>
+          </author>
 
-<author initials='C' surname='Jennings' fullname='Cullen Jennings'>
-    <organization />
-</author>
+          <author fullname="Cullen Jennings" initials="C" surname="Jennings">
+            <organization></organization>
+          </author>
 
-<author initials='Z' surname='Shelby' fullname='Zach Shelby'>
-    <organization />
-</author>
+          <author fullname="Zach Shelby" initials="Z" surname="Shelby">
+            <organization></organization>
+          </author>
 
-<date month='October' day='31' year='2011' />
+          <date day="31" month="October" year="2011" />
 
-<abstract><t>This memo describes a new Uniform Resource Name (URN) namespace for hardware device identifiers.  A general representation of device identity can be useful in many applications, such as in sensor data streams and storage, or equipment inventories.  A URN-based representation can be easily passed along in any application that needs the information.</t></abstract>
+          <abstract>
+            <t>This memo describes a new Uniform Resource Name (URN) namespace
+            for hardware device identifiers. A general representation of
+            device identity can be useful in many applications, such as in
+            sensor data streams and storage, or equipment inventories. A
+            URN-based representation can be easily passed along in any
+            application that needs the information.</t>
+          </abstract>
+        </front>
 
-</front>
+        <seriesInfo name="Internet-Draft" value="draft-arkko-core-dev-urn-01" />
 
-<seriesInfo name='Internet-Draft' value='draft-arkko-core-dev-urn-01' />
-<format type='TXT'
-        target='http://www.ietf.org/internet-drafts/draft-arkko-core-dev-urn-01.txt' />
-</reference>
-  
+        <format target="http://www.ietf.org/internet-drafts/draft-arkko-core-dev-urn-01.txt"
+                type="TXT" />
+      </reference>
     </references>
   </back>
 </rfc>
