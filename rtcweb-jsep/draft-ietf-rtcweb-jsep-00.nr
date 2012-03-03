@@ -38,10 +38,6 @@ This document proposes a mechanism for allowing a Javascript application to full
 
 This document is an input document for discussion.  It should be discussed in the RTCWEB WG list, rtcweb@ietf.org.
 
-.ti 0
-Requirements Language
-
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in RFC 2119 [RFC2119].
 
 .ti 0
 Status of this Memo
@@ -146,6 +142,10 @@ While specific concerns like this could be addressed by modifying the generic pr
 The browser environment also has its own challenges that cause problems for an embedded signaling state machine. One of these is that the user may reload the web page at any time. If this happens, and the state machine is being run at a server, the server can simply push the current state back down to the page and resume the call where it left off.
 If instead the state machine is run at the browser end, and is instantiated within, for example, the PeerConnection object, that state machine will be reinitialized when the page is reloaded and the JavaScript re-executed. This actually complicates the design of any interoperability service, as all cases where an offer or answer has already been generated but is now "forgotten" must now be handled by trying to move the client state machine forward to the same state it had been in previously in order to match what has already been delivered to and/or answered by the far side, or handled by ensuring that aborts are cleanly handled from every state and the negotiation rapidly restarted.
 
+.ti 0
+Terminology
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in RFC 2119 [RFC2119].
 
 .ti 0
 2. JSEP Approach
