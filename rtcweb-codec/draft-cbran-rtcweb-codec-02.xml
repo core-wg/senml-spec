@@ -10,10 +10,10 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="std" docName="draft-cbran-rtcweb-codec-01"
+<rfc category="std" docName="draft-cbran-rtcweb-codec-02"
      ipr="noDerivativesTrust200902">
   <front>
-    <title abbrev="Abbreviated-Title">WebRTC Codec and Media Processing
+    <title abbrev="WebRTC Codec">WebRTC Codec and Media Processing
     Requirements</title>
 
     <author fullname="Cary Bran" initials="C." surname="Bran">
@@ -60,6 +60,20 @@
       </address>
     </author>
 
+ <author initials="JM." surname="Valin" fullname="Jean-Marc Valin">
+   <organization>Mozilla</organization>
+   <address>
+     <postal>
+       <street>650 Castro Street</street>
+       <city>Mountain View</city>
+       <region>CA</region>
+       <code>94041</code>
+       <country>USA</country>
+     </postal>
+     <email>jmvalin@jmvalin.ca</email>
+   </address>
+ </author>
+
     <date day="29" month="October" year="2011" />
 
     <abstract>
@@ -103,6 +117,14 @@
 
             <t>Opus [draft-ietf-codec-opus]</t>
           </list></t>
+	  <t>
+	  For all cases where the client is able to process audio at a sampling rate
+	  higher than 8 kHz, it is RECOMMENDED that Opus be offered before PCMA/PCMU.
+	  For Opus, all modes MUST be supported, for all ptime values up to 120 ms.
+	  Clients MAY use the offer/answer mechanism to signal a preference for a
+	  particular mode or ptime.
+	</t>
+
       </section>
 
       <section title="Video Codec Requirements">
@@ -134,38 +156,98 @@
       </section>
     </section>
 
-    <section title="WebRTC Client Requirements">
-      <t>It is plausible that the dominant near to mid-term WebRTC usage model
-      will be people using the interactive audio and video capabilities to
-      communicate with each other via web browsers running on a notebook
-      computer that has built-in microphone and speakers. The
-      notebook-as-communication-device paradigm presents challenging echo
-      cancellation and audio gain problems, the specific remedy of which will
-      not be mandated here. However, while no specific algorithm or standard
-      will be required by WebRTC compatible clients, functionality such as
-      automatic gain control, echo cancellation, headset detection and passing
-      call control events to connected devices will improve the user
-      experience and should be implemented by the endpoint device.</t>
 
-      <t>To address the problems outlined above, suitable implementations of
-      the functionality listed below SHOULD be available within an RTC-Web
-      endpoint device.</t>
+<section anchor="level" title="Audio Level">
+<t>
+It is desirable to standardize the "on the wire" audio level for speech transmission
+to avoid users having to manually adjust the playback and to facilitate
+mixing in conferencing applications. It is also desirable to be consistent
+with ITU-T recommendations G.169 and G.115, which recommend an active audio level
+of -19 dBm0. However, unlike G.169 and G.115, the audio for WebRTC is not
+constrained to have a passband specified by G.712 and can in fact be sampled
+at any sampling rate from 8 kHz to 48 kHz and up. For this reason, the level
+SHOULD be normalized by only considering frequencies above 300 Hz, regardless
+of the sampling rate used. The level SHOULD also be adapted to avoid clipping,
+either by lowering the gain to a level below -19 dBm0, or through the use of a
+compressor. 
+</t>
 
-      <t><list style="symbols">
-          <t>Automatic gain control</t>
+<t>AUTHORS' NOTE: The idea of using the same level as what the ITU-T recommends is that
+it should improve inter-operability while at the same time maintaining
+sufficient dynamic range and reducing the risk of clipping. The main drawbacks
+are that the resulting level is about 12 dB lower than typical "commercial music" levels and it
+leaves room for ill-behaved clients to be much louder than a normal client. While using
+music-type levels is not really an option (it would require using the same compressor-limitors
+that studios use), it would be possible to have a level slightly higher (e.g. 3 dB) than what is
+recommended above without causing interoperability problems. 
+</t>
+ 
+<t>
+Assuming 16-bit PCM with a value of +/-32767, -19 dBm0 corresponds to a 
+root mean square (RMS) level of 2600. Only active speech should be considered 
+in the RMS calculation. If the client has control over the entire audio capture
+path, as is typically the case for a regular phone, then it is RECOMMENDED that
+the gain be adjusted in such a way that active speech have a level of 2600 (-19 dBm0)
+for an average speaker. If the client does not have control over the entire audio
+capture, as is typically the case for a software client, then the client
+SHOULD use automatic gain control (AGC) to dynamically adjust the level to 2600 
+(-19 dBm0) +/- 6 dB. For music or desktop sharing applications, the level 
+SHOULD NOT be automatically adjusted and the client SHOULD allow the user to set
+the gain manually.
+</t>
 
-          <t>Echo cancellation, including acoustic echo cancellation</t>
+<t>The RECOMMENDED filter for normalizing the signal energy is a second-order
+Butterworth filter with a 300 Hz cutoff frequency. 
+</t>
+ 
+<t>
+It is common for the audio output on some devices to be "calibrated" for playing
+back pre-recorded "commercial" music, which is typically around 12 dB louder than the level
+recommended in this section. Because of this, clients MAY increase
+the gain before playback.
+</t>
 
-          <t>Headset detection</t>
 
-          <t>Call control event notification to connected devices such as
-          headsets</t>
+</section>
 
-          <t>Auto-adjustments to gain control and echo cancellation algorithms
-          based on if headset or internal speakers/microphone is being
-          used</t>
-        </list></t>
-    </section>
+<section anchor="aec" title="Acoustic Echo Cancellation (AEC)">
+<t>
+   It is plausible that the dominant near to mid-term WebRTC usage model
+   will be people using the interactive audio and video capabilities to
+   communicate with each other via web browsers running on a notebook
+   computer that has built-in microphone and speakers.  The notebook-as-
+   communication-device paradigm presents challenging echo cancellation
+   problems, the specific remedy of which will not be
+   mandated here.  However, while no specific algorithm or standard will
+   be required by WebRTC compatible clients, echo cancellation will improve the
+   user experience and should be implemented by the endpoint device.
+</t>
+
+<t>
+ SHOULD include an AEC and if not, SHOULD ensure that the speaker-to-microphone
+ gain is below unity at all frequencies to avoid instability when none of the
+ client has echo cancellation. For clients that do not control the audio capture
+ and playback devices directly, it is RECOMMENDED to support echo cancellation
+ between devices running at slight different sampling rates, such as when a webcam
+ is used for microphone.
+</t>
+
+<t>
+ The client SHOULD allow either the entire AEC or the non-linear
+ processing (NLP) to be turned off for applications, such as music, that 
+ do not behave well with the spectral attenuation methods typically used
+ in NLPs. It SHOULD have the ability to detect the presence of a headset and disable
+echo cancellation. 
+</t>
+
+<t>
+For some applications where the remote client may not have an echo canceller, the local client MAY include a far-end echo canceller, but if that it the case, it SHOULD be disabled by default.
+</t>
+
+<t>Call control event notification to connected devices such as headsets (what's that exactly?)</t>
+      
+</section>
+
 
     <section title="Legacy VoIP Interoperability">
       <t>The codec requirements above will ensure, at a minimum, voice
