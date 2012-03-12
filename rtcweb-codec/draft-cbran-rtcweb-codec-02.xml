@@ -74,7 +74,7 @@
    </address>
  </author>
 
-    <date day="29" month="October" year="2011" />
+    <date day="12" month="March" year="2012" />
 
     <abstract>
       <t>This document outlines the codec and media processing requirements
@@ -128,12 +128,7 @@
       </section>
 
       <section title="Video Codec Requirements">
-        <t>If the MPEG-LA issues an intent to offer H.264 baseline profile on
-        a royalty free basis for use in browsers before March 15, 2012, then
-        the REQUIRED video codecs will be H.264 baseline. If this does not
-        happen by that the date, then the REQUIRED video codec will be VP8
-        <xref target="I-D.webm"></xref>.</t>
-
+      
         <t>The following feature list applies to all required video
         codecs.</t>
 
@@ -143,7 +138,7 @@
             <t>MUST support at least 10 frames per second (fps) and SHOULD
             support 30 fps</t>
 
-            <t>If VP8, then MUST support a the bilinear and none
+            <t>If VP8 is supported, then it MUST support the bilinear and none
             reconstruction filters</t>
 
             <t>OPTIONALLY offer support for additional color spaces</t>
@@ -254,8 +249,7 @@ For some applications where the remote client may not have an echo canceller, th
       interoperability capabilities between WebRTC client applications and
       legacy phone systems.</t>
 
-      <t>Video interoperability will be dependent upon the MPEG-LA decision
-      regarding H.264 baseline.</t>
+  
     </section>
 
     <section anchor="IANA" title="IANA Considerations">
