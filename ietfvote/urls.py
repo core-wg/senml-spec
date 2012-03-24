@@ -9,7 +9,8 @@ from vote.views import *
 
 urlpatterns = patterns('',
     (r'^$', about ), 
-    (r'^speaker/(?P<speakerName>\w{1,50})/$', speaker ), 
-    (r'^rate/(?P<judge>\w{1,50})/(?P<rating>\d{1})/$', rate ), 
+    (r'^speaker/(?P<speakerName>[ \%a-zA-Z0-9]{1,50})/$', speaker ), 
+    (r'^rate/(?P<judge>[ \%a-zA-Z0-9]{1,50})/(?P<rating>\d{1,15})/$', rate ), 
     (r'^recent/$', recent ), 
+    (r'^since/(?P<time>[\d]{1,15})/$', since ), 
 )

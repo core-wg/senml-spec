@@ -55,7 +55,7 @@ def addRating( rating , judge ):
 globalRatingTime = 0
 globalRatingValue = " "
 
-def getRecentRatings( ):
+def getRecentRatings( startTime ):
     global globalRatingTime
     global globalRatingValue
 
@@ -74,6 +74,7 @@ def getRecentRatings( ):
     ratings.reverse()
 
     for rating in ratings:
+        
         json += "{ time:%d, speaker:'%s', judge:'%s', rating:%d },\n"%(
             rating.time, rating.speaker, rating.judge, rating.rating )
 
