@@ -43,6 +43,7 @@ import django.core.signals
 import django.db
 import django.dispatch.dispatcher
 
+from vote.models import initDataBase
 
 def log_exception(*args, **kwds):
     logging.exception('Exception in request:')
@@ -64,6 +65,9 @@ def main():
     
     if os.environ['SERVER_SOFTWARE'].startswith("Development"):
         logging.getLogger().setLevel(logging.DEBUG)
+
+    # initial new data base
+    initDataBase()
     
     # Create a Django application for WSGI.
     application = django.core.handlers.wsgi.WSGIHandler()

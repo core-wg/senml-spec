@@ -26,6 +26,28 @@ from google.appengine.runtime import apiproxy_errors
 from vote.models import *
 
 
+def speaker(request, speakerName):
+    logging.debug( "Setting active speaker to %s"%(speakerName) )
+
+    setSpeaker( speakerName )
+    
+    return HttpResponse() # return a 200  
+
+
+def rate(request, rating ):
+    logging.debug( "Rating active speaker to %s"%(rating) )
+
+    rating = int( rating )
+    
+    if rating < 1 :
+        rating = 1
+    if rating > 5 :
+        rating = 5;
+        
+    addRating( rating )
+    
+    return HttpResponse() # return a 200  
+
 
 def about(request):
     ver = os.environ['SERVER_SOFTWARE']

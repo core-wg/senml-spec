@@ -8,11 +8,7 @@ from django.views.generic.simple import redirect_to
 from vote.views import *
 
 urlpatterns = patterns('',
-   # (r'^pachube/(?P<feed>\d{1,8})/(?P<stream>\d{1,3})/view/$', view1 ), 
-   # (r'^pachube/(?P<feed>\d{1,8})/(?P<stream>\d{1,3})/json/$', json ), 
-   # (r'^pachube/(?P<feed>\d{1,8})/(?P<stream>\d{1,3})/table/$', view3 ), 
-   # (r'^pachube/(?P<feed>\d{1,8})/(?P<stream>\d{1,3})/chart/$', view4 ), 
-
     (r'^$', about ), 
-
+    (r'^speaker/(?P<speakerName>\w{1,50})/$', speaker ), 
+    (r'^rate/(?P<rating>\d{1})/$', rate ), 
 )
