@@ -69,7 +69,7 @@ def getRecentRatings( ):
 
     query = Rating.all();
     query.order("-time") #TODO - should have time based limits 
-    ratings = query.fetch(900) #TODO need to deal with more than 900 meassurements
+    ratings = query.fetch(2000) #TODO need to deal with more than 900 meassurements
 
     ratings.reverse()
 
