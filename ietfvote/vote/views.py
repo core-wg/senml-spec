@@ -34,7 +34,7 @@ def speaker(request, speakerName):
     return HttpResponse() # return a 200  
 
 
-def rate(request, rating ):
+def rate(request, judge, rating ):
     logging.debug( "Rating active speaker to %s"%(rating) )
 
     rating = int( rating )
@@ -44,7 +44,7 @@ def rate(request, rating ):
     if rating > 5 :
         rating = 5;
         
-    addRating( rating )
+    addRating( rating, judge )
     
     return HttpResponse() # return a 200  
 

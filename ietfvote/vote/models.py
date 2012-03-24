@@ -43,7 +43,7 @@ class Rating( db.Model ):
     rating  = db.IntegerProperty(required=True) # unique interger ID for this sensor 
    
 
-def addRating( rating , judge = "unknown" ):
+def addRating( rating , judge ):
     speaker = getSpeaker()
 
     now = long( time.time() )
@@ -52,7 +52,18 @@ def addRating( rating , judge = "unknown" ):
     rating.put()
 
 
+globalRatingTime = 0
+globalRatingValue = " "
+
 def getRecentRatings( ):
+    global globalRatingTime
+    global globalRatingValue
+
+    now = long( time.time() )
+    if globalRatingTime+5 > now: # use cached data for 5 seconds
+        #logging.debug( "getRecentRatings using cached value" )
+        return globalRatingValue
+    
     json = ''
     json += "{ data: [ \n"
 
@@ -63,8 +74,12 @@ def getRecentRatings( ):
     ratings.reverse()
 
     for rating in ratings:
-        json += "{ time:%d, speaker:'%s', judge:'%s', rating:%d },\n"%( rating.time, rating.speaker, rating.judge, rating.rating )
+        json += "{ time:%d, speaker:'%s', judge:'%s', rating:%d },\n"%(
+            rating.time, rating.speaker, rating.judge, rating.rating )
 
     json += " ] }"
+
+    globalRatingValue = json
+    globalRatingTime = now
     
     return json
