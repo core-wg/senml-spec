@@ -60,7 +60,16 @@ def about(request):
         'host':request.META["HTTP_HOST"] } )
 
 
+def recent( request ):
+    json = getRecentRatings()
 
+    #response = HttpResponse("text/plain")
+    response = HttpResponse()
+    #response['Content-Disposition'] = 'attachment; filename=somefilename.csv'
+    response.write( json );
+
+    return response 
+    
 
 
 

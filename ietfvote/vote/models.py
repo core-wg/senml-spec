@@ -36,7 +36,6 @@ def setSpeaker( name ):
     return speaker.speaker
     
     
-
 class Rating( db.Model ):
     time    = db.IntegerProperty(required=True) # time this messarement was made (seconds since unix epoch)
     speaker = db.StringProperty(required=True) #
@@ -48,7 +47,24 @@ def addRating( rating , judge = "unknown" ):
     speaker = getSpeaker()
 
     now = long( time.time() )
-  
+
     rating = Rating( time=now , speaker=speaker, rating=rating, judge=judge )
     rating.put()
 
+
+def getRecentRatings( ):
+    json = ''
+    json += "{ data: [ \n"
+
+    query = Rating.all();
+    query.order("-time") #TODO - should have time based limits 
+    ratings = query.fetch(900) #TODO need to deal with more than 900 meassurements
+
+    ratings.reverse()
+
+    for rating in ratings:
+        json += "{ time:%d, speaker:'%s', judge:'%s', rating:%d },\n"%( rating.time, rating.speaker, rating.judge, rating.rating )
+
+    json += " ] }"
+    
+    return json
