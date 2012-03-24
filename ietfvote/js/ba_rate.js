@@ -156,3 +156,21 @@ var ba_rate = function(div, initial_data, poll) {
     };
 }
 
+/*
+     var simulator = new data_simulator();
+     var initial_data = [];
+     var t = (new Date().getTime() / 1000) * 1000 -100000;
+     var ba;
+
+     for (var i=0; i<100; i++) {
+	initial_data.push([t, 2.5])
+        t+=1000;			    
+     }
+	*/		  
+
+var startup = function(div) {
+    var initial_data = [];
+    var t = (new Date().getTime() / 1000) * 1000 -100000;
+    var ba = new ba_rate(div, initial_data, function() {poll_appspot(ba);});
+    ba.start_plot();
+};

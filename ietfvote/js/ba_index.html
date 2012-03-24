@@ -4,8 +4,7 @@
 <script src="https://raw.github.com/documentcloud/underscore/master/underscore.js"></script>
 <script src="http://code.highcharts.com/stock/highstock.js"></script>
 
-<script src="ba_dummy_data.js"></script>
-<script src="ba_rate.js"></script>
+<script src="https://raw.github.com/fluffy/ietf/master/ietfvote/js/ba_rate.js"></script>
 
 </head>
 <body>
@@ -14,29 +13,7 @@
 
 <script>
      $(function() {
-     var simulator = new data_simulator();
-     var initial_data = [];
-     var t = (new Date().getTime() / 1000) * 1000 -100000;
-     var ba;
-
-     for (var i=0; i<100; i++) {
-	initial_data.push([t, 2.5])
-        t+=1000;			    
-     }
-			  
-     function poll() {
-       console.log("Poll called");
-       d = simulator.generate_next_second();
-			  //ba.update_plot(d);
-       setTimeout(function() {
-			  ba.update_plot(d);
-			  setTimeout(poll, 100);
-			  },10);
-	}
-			  
-     ba = new ba_rate("container", initial_data, function() {poll_appspot(ba);});
-     ba.start_plot();
-
+     startup('container');
 }
 );
 </script>
