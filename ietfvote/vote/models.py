@@ -74,9 +74,9 @@ def getRecentRatings( startTime ):
     ratings.reverse()
 
     for rating in ratings:
-        
-        json += "{ time:%d, speaker:'%s', judge:'%s', rating:%d },\n"%(
-            rating.time, rating.speaker, rating.judge, rating.rating )
+        if rating.time >= startTime:
+            json += "{ time:%d, speaker:'%s', judge:'%s', rating:%d },\n"%(
+                rating.time, rating.speaker, rating.judge, rating.rating )
 
     json += " ] }"
 
