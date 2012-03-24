@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<p>{% trans " about this " %}</p>
+
+<!--
+<p>{% trans "Django Version: " %} {{ djangoVersion }} </p>
+<p>{% trans "Python Version: " %} {{ pythonVersion }} </p>
+<p>{% trans "Software Version: " %} {{ osVersion }} </p>
+--->
+
+<!--
+{% get_available_languages as LANGUAGES %}
+<p>
+{% trans "Available in :" %}
+{% for lang in LANGUAGES %}
+{{ lang.1 }} 
+{% endfor %}
+</p>
+-->
+
+<!--
+<form action="/i18n/setlang/" method="post">
+<input name="next" type="hidden" value="/search/" />
+<select name="language">
+{% for lang in LANGUAGES %}
+<option value="{{ lang.0 }}">{{ lang.1 }}</option>
+{% endfor %}
+</select>
+<input type="submit" value={% trans "Set Language" %} />
+</form>
+-->
+
+{% endblock %}

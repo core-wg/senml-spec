@@ -1,0 +1,23 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+{% load i18n %}
+<html>
+<head>
+<title>{% trans "V6 Check" %}</title>
+{% block head %}{% endblock %}
+<style type="text/css" media="all">@import "/static/style.css";</style>
+
+</head>
+<body>
+<div id="banner">
+  <h1>{% trans "V6 Check" %}</h1>
+</div>
+<div id="nav">
+</div>
+<div id="contents">
+  {% block content %}{% endblock %}
+</div>
+<div id="footer">
+  <p>{% trans "TEST ONLY - DO NOT USE THIS WEB SITE" %}</p>
+</div>
+</body>
+</html>
