@@ -49,6 +49,10 @@ def rate(request, judge, rating ):
     return HttpResponse() # return a 200  
 
 
+def main(request):
+    return render_to_response('main.html'  )
+
+
 def about(request):
     ver = os.environ['SERVER_SOFTWARE']
     devel = ver.startswith("Development")
