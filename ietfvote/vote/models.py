@@ -46,7 +46,7 @@ class Rating( db.Model ):
 def addRating( rating , judge ):
     speaker = getSpeaker()
 
-    now = long( time.time() )
+    now = long( 1000.0 * time.time() )
 
     rating = Rating( time=now , speaker=speaker, rating=rating, judge=judge )
     rating.put()
@@ -65,7 +65,7 @@ def getRecentRatings( startTime ):
         return globalRatingValue
     
     json = ''
-    json += "{ data: [ \n"
+    json += '{ "data": [ \n'
 
     query = Rating.all();
     query.order("-time") #TODO - should have time based limits 
@@ -73,9 +73,13 @@ def getRecentRatings( startTime ):
 
     ratings.reverse()
 
+    empty = True
     for rating in ratings:
+        if not empty:
+            json += ",\n"
+        empty = False
         if rating.time >= startTime:
-            json += "{ time:%d, speaker:'%s', judge:'%s', rating:%d },\n"%(
+            json += '{ "time":%d, "speaker":"%s", "judge":"%s", "rating":%d }'%(
                 rating.time, rating.speaker, rating.judge, rating.rating )
 
     json += " ] }"
