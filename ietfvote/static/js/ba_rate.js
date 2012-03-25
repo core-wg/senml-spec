@@ -5,7 +5,7 @@ var poll_appspot = function(ba) {
 	       url:'http://ietfvote.appspot.com/recent/',
 	       success:function(s) {
 		   js = JSON.parse(s);
-		   
+
 		   ba.update_plot(js.data);
 		   setTimeout(function() {
 				  poll_appspot(ba);
