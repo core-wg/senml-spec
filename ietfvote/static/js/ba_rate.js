@@ -226,7 +226,7 @@ var startup = function(div) {
     }
 
     $.ajax({
-	       url:'http://ietfvote.appspot.com/recent/',
+	       url:prefix + 'recent/',
 	       success:function(s) {
 		   js = JSON.parse(s);
 		   
