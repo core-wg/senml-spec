@@ -36,8 +36,7 @@
 					ba.update_plot(js.data, js.now);
 					setTimeout(function() {
 						poll_appspot(ba, last_time);
-			      },
-			      1); // This is no timeout, it's just to unwind the stack
+					}, 100); // This is not much of a timeout, it's just to unwind the stack
 				}
 			});
 		};
@@ -72,6 +71,7 @@
 						delete raters_[x];
 					});
 
+					$('#users').val('' + count + ' voters');
 					rating = total / count;
 					if (isNaN(rating)) {
 						// console.log("Huh: rating is nan: " + total + "," + count);
