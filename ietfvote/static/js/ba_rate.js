@@ -198,6 +198,15 @@
 			};
 		};
 
+	var ready = function(div, initial_data, now) {
+			var series;
+			var flags;
+
+			var ba = new ba_rate(div, function() {
+				poll_appspot(ba, 0);
+			});
+			ba.start_plot(initial_data, now);
+		};
 	var startup = function(div) {
 			$("#rating-slider").slider({
 				min: 1,
@@ -214,15 +223,5 @@
 				}
 			});
 		};
-
-	var ready = function(div, initial_data, now) {
-			var series;
-			var flags;
-
-			var ba = new ba_rate(div, function() {
-				poll_appspot(ba, 0);
-			});
-			ba.start_plot(initial_data, now);
-		};
-	window.ready = ready;
+	window.startup = startup;
 }());
