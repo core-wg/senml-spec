@@ -68,7 +68,7 @@ def recent( request ):
     return since(0)
 
 
-def since( startTime ):
+def since( request, startTime ):
     s = long( startTime )
     json = getRecentRatings( s )
 
