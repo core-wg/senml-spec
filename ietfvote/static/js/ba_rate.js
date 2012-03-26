@@ -2,7 +2,7 @@
 	'use strict'; /*jshint browser:true*/
 	/*global _,$,console,Highcharts*/
 	var last_polled_time = 0;
-	var me = "monkey-" + Math.floor(Math.random() * 10000000);
+	var me = "webmule" + Math.floor(Math.random() * 10000000);
 	var prefix = 'http://' + window.location.host + ':' + window.location.port + '/';
 
 	var slider_change_cb = function(event, ui) {
