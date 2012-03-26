@@ -67,7 +67,7 @@ var ba_rate = function(div, initial_data, poll) {
 
 	_.each(ratings, function(rating) {
 		   var r;
-		   vat ct = 10;
+		   var ct = 10;
 		   
 		   // Compute ratings up to the next sample
 		   while(this_second_ < rating.time) {
