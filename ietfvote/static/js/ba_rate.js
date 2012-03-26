@@ -224,7 +224,7 @@ var startup = function(div) {
     }
 
     $.ajax({
-	       url:prefix + '/recent/',
+	       url:prefix + 'recent/',
 	       success:function(s) {
 		   js = JSON.parse(s);
 		   

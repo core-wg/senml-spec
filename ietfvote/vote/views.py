@@ -73,7 +73,7 @@ def since( request, startTime ):
     json = getRecentRatings( s )
 
     #response = HttpResponse("text/plain")
-    response = HttpResponse("application/json")
+    response = HttpResponse()
     #response['Content-Disposition'] = 'attachment; filename=somefilename.csv'
     response.write( json );
 
