@@ -10,7 +10,7 @@ var poll_appspot = function(ba) {
 		   setTimeout(function() {
 				  poll_appspot(ba);
 			      },
-			      50000000);
+			      1000);
 		   }
 	   }
 	  );
