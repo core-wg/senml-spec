@@ -69,10 +69,10 @@ var ba_rate = function(div, initial_data, poll) {
 			   r = compute_rating();
 			   var point = [this_second_, r];
 //			   console.log("P: " + this_second_ + " " + r);
-			   chart_.series[0].addPoint([this_second_, r]);
+//			   chart_.series[0].addPoint([this_second_, r]);
 		       }
 		       else {
-			  chart_.series[0].addPoint([this_second_, 2.5]);
+//			  chart_.series[0].addPoint([this_second_, 2.5]);
 		       }
 		       this_second_ += 1000;
 		   }
