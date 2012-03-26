@@ -146,6 +146,7 @@ var ba_rate = function(div, poll) {
 	       });
         
         // Fill in values to now
+        console.log("Need to add values foe" + (this_second_ - now));
         for (;this_second_ < now; this_second_ += 1000) {
             series.push([this_second_, compute_rating()]);
         }
