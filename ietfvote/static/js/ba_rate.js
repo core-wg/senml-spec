@@ -58,14 +58,14 @@ var ba_rate = function(div, poll) {
 	var serieses;
 
 	serieses = compute_updates(ratings);
-	console.log("Computed updates: " + series[0].length + " points " + 
-		   series[1].length + " flags");
+	console.log("Computed updates: " + serieses[0].length + " points " + 
+		   serieses[1].length + " flags");
 	
 	_.each(serieses[0], function(x) {
-		   chart_.series[0].add_point(x);
+		   chart_.serieses[0].add_point(x);
 	       });
 	_.each(serieses[1], function(x) {
-		   chart_.series[1].add_point(x);
+		   chart_.serieses[1].add_point(x);
 	       });
 
 	return;	
