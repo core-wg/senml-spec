@@ -77,7 +77,6 @@ def since( startTime ):
     response.write( json );
 
     return response
-    
 
 
 
