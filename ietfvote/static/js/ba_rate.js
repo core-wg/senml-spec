@@ -136,13 +136,14 @@
 					});
 
 					// Fill in values to now
+					console.log(this_second_, now);
 					this_second_ = Math.floor(now / 1000) * 1000;
 					series.push([this_second_, compute_rating()]);
 					return [series, flags];
 				};
 
 			var start_plot = function(initial_data, now) {
-					var serieses = compute_updates(initial_data);
+					var serieses = compute_updates(initial_data, now);
 
 					chart_ = new Highcharts.StockChart({
 						chart: {
