@@ -5,6 +5,7 @@ var poll_appspot = function(ba, last_time) {
     if (last_time) {
 	url += last_time;
     }
+    console.log("Fetching url " + url);
     $.ajax({
 	       url:url,
 	       success:function(s) {
