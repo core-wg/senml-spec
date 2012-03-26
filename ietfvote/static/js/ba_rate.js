@@ -151,7 +151,7 @@ var ba_rate = function(div, poll) {
 	       });
         
         // Add a value for the alst sample
-        series.push([rating.time, compute_rating()]);
+        series.push([ratings[ratings.length-1].time, compute_rating()]);
 	return [series, flags];
     };
 
