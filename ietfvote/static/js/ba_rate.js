@@ -224,13 +224,11 @@ var ba_rate = function(div, poll) {
 }
 
 var startup = function(div) {
-    if (false) {
-         $("#rating-slider").slider({
-                                        min:1,
-                                        max:5,
-                                        value:3
-                                    });
-    }
+    $("#rating-slider").slider({
+                                   min:1,
+                                   max:5,
+                                   value:3
+                               });
 
     $.ajax({
 	       url:prefix + 'recent/',
