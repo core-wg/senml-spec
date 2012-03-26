@@ -111,7 +111,10 @@ var ba_rate = function(div, initial_data, poll) {
 						
 						yAxis : {
 						    min:0,
-						    max:5
+						    max:5,
+						    title : {
+							text : 'Speaker Rating'
+							}
 						},
 						rangeSelector : {
 						    buttons : [
@@ -135,7 +138,7 @@ var ba_rate = function(div, initial_data, poll) {
 						},
 						
 						series : [ {
-							       name : 'Ratings',
+							       name : 'Rating',
 							       data : initial_data,
 							       id :'ratingsseries'
 							   },
@@ -167,8 +170,10 @@ var ba_rate = function(div, initial_data, poll) {
         t+=1000;			    
      }
 	*/		
-  
+
 var startup = function(div) {
+    $("#rating-slider").slider();
+
     $.ajax({
 	       url:'http://ietfvote.appspot.com/recent/',
 	       success:function(s) {
