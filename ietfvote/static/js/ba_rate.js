@@ -32,7 +32,7 @@ var poll_appspot = function(ba, last_time) {
 		   setTimeout(function() {
 				  poll_appspot(ba, last_time);
 			      },
-			      1000);
+			      1);
 	       }
 	   }
 	  );
