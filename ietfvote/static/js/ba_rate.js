@@ -27,10 +27,8 @@ var poll_appspot = function(ba, last_time) {
 		   
                    console.log("Got " + js.data.length + " values");
 //                   console.log(js.data);
-                   if (js.data.length) {
-		       last_time = js.now + 1;
-		       ba.update_plot(js.data, js.now);
-                   }
+		   last_time = js.now + 1;
+		   ba.update_plot(js.data, js.now);
 		   setTimeout(function() {
 				  poll_appspot(ba, last_time);
 			      },
@@ -99,9 +97,6 @@ var ba_rate = function(div, poll) {
     var compute_updates = function(ratings, now) {
 	var series = [];
 	var flags = [];
-
-	if (ratings.length == 0)
-	    return [[],[]];
 
     	if (!this_second_) {
 	    this_second_ = Math.floor(ratings[0].time/1000) * 1000;
