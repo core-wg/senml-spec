@@ -71,12 +71,14 @@ var ba_rate = function(div, initial_data, poll) {
 		   
 		   // Compute ratings up to the next sample
 		   while(this_second_ < rating.time) {
-		       if (!ct--)
-			   return;
+
 		       if (!_.isEmpty(raters_)) {
 			   r = compute_rating();
 			   var point = [this_second_, r];
 			   console.log("P: " + this_second_ + " " + r);
+			   ct--;
+			   if (!ct)
+			       return;
 			   chart_.series[0].addPoint([this_second_, r]);
 		       }
 		       else {
