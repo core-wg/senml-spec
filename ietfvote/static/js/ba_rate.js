@@ -36,7 +36,7 @@
 					ba.update_plot(js.data, js.now);
 					setTimeout(function() {
 						poll_appspot(ba, last_time);
-					}, 100); // This is not much of a timeout, it's just to unwind the stack
+					}, 5000);
 				}
 			});
 		};
