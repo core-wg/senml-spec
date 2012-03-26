@@ -190,7 +190,7 @@ var startup = function(div) {
 var ready = function(div, initial_data) {
     var t = (new Date().getTime() / 1000) * 1000 -100000;
     var first_time = initial_data[0].time;
-    var fake_data =0;
+    var fake_data =[];
 
     for (var l = 300; l>0; l--) {
 	fake_data.push([first_time - (l * 1000), 2.5]);
