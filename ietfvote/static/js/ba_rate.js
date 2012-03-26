@@ -25,6 +25,8 @@ var poll_appspot = function(ba, last_time) {
 	       success:function(s) {
 		   js = JSON.parse(s);
 		   
+                   console.log("Got " + js.data.length + " values");
+                   console.log(js.data);
                    if (js.data.length) {
 		       last_time = js.data[js.data.length - 1].time + 1;
 		       ba.update_plot(js.data);
