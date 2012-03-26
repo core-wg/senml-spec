@@ -60,7 +60,7 @@ def getRecentRatings( startTime ):
     global globalRatingValue
 
     now = long( 1000.0 * time.time() )
-    if globalRatingTime+5000 > now && startTime == 0: # use cached data for 5 seconds
+    if globalRatingTime+5000 > now and startTime == 0: # use cached data for 5 seconds
         #logging.debug( "getRecentRatings using cached value" )
         return globalRatingValue
     
