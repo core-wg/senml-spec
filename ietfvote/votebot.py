@@ -97,7 +97,8 @@ class VoteBot(MUCJabberBot):
     @botcmd
     def speaker(self, mess, args):
         # Check to see if sender is authorized
-        if (mess.getFrom().getResource() != "master"):
+        #if (mess.getFrom().getResource() != "botmaster"):
+        if (mess.getType() == "groupchat"):
             return "Sorry, unauthorized"
         # Read message to extract speaker
         speaker = re.sub("^speaker[ ]+", "", mess.getBody())
