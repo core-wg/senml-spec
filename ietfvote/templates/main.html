@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block head %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="https://raw.github.com/documentcloud/underscore/master/underscore.js"></script>
+<script src="http://code.highcharts.com/stock/highstock.js"></script>
+
+<!-- <script src="https://ietfvote.appspot.com/static/js/ba_rate.js"></script> -->
+<script src="https://raw.github.com/fluffy/ietf/master/ietfvote/static/js/ba_rate.js"></script>
+
+{% endblock %}
+
+
+{% block content %}
+<div id="container" style="height: 500px; min-width: 500px"></div>
+
+<script>
+     $(function() {
+     startup('container');
+}
+);
+</script>
+
+Your rating: <div id="rating-slider"></div>
+{% endblock %}

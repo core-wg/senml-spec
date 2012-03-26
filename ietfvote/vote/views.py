@@ -49,6 +49,10 @@ def rate(request, judge, rating ):
     return HttpResponse() # return a 200  
 
 
+def main(request):
+    return render_to_response('main.html'  )
+
+
 def about(request):
     ver = os.environ['SERVER_SOFTWARE']
     devel = ver.startswith("Development")
@@ -61,21 +65,14 @@ def about(request):
 
 
 def recent( request ):
-    json = getRecentRatings( 0 )
+    return since(0)
+
+
+def since( startTime ):
+    json = getRecentRatings(long(_startTime ))
 
     #response = HttpResponse("text/plain")
-    response = HttpResponse()
-    #response['Content-Disposition'] = 'attachment; filename=somefilename.csv'
-    response.write( json );
-
-    return response
-
-
-def since( time ):
-    json = getRecentRatings( time )
-
-    #response = HttpResponse("text/plain")
-    response = HttpResponse()
+    response = HttpResponse("application/json")
     #response['Content-Disposition'] = 'attachment; filename=somefilename.csv'
     response.write( json );
 
