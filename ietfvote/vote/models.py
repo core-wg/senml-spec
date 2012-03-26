@@ -75,10 +75,10 @@ def getRecentRatings( startTime ):
 
     empty = True
     for rating in ratings:
-        if not empty:
-            json += ",\n"
-        empty = False
         if rating.time >= startTime:
+            if not empty:
+                json += ",\n"
+            empty = False
             json += '{ "time":%d, "speaker":"%s", "judge":"%s", "rating":%d }'%(
                 rating.time, rating.speaker, rating.judge, rating.rating )
 
