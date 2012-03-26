@@ -5,6 +5,7 @@ var poll_appspot = function(ba) {
 	       url:'http://ietfvote.appspot.com/recent/',
 	       success:function(s) {
 		   js = JSON.parse(s);
+		   
 		   ba.update_plot(js.data);
 		   setTimeout(function() {
 				  poll_appspot(ba);
@@ -54,6 +55,19 @@ var ba_rate = function(div, poll) {
 
     
     var update_plot = function(ratings) {
+	var serieses;
+
+	serieses = compute_updates(ratings);
+	console.log("Computed updates: " + series[0].length + " points " + 
+		   series[1].length + " flags");
+	
+	_.each(serieses[0], function(x) {
+		   chart_.series[0].add_point(x);
+	       });
+	_.each(serieses[1], function(x) {
+		   chart_.series[1].add_point(x);
+	       });
+
 	return;	
     };
 
@@ -111,11 +125,6 @@ var ba_rate = function(div, poll) {
 	return [series, flags];
     };
 
-    var get_next_data = function() {
-	var d = poll_();
-//	update_plot(d);
-    };
-    
     var start_plot = function(initial_data) {
 	var serieses = compute_updates(initial_data);
 
@@ -125,7 +134,7 @@ var ba_rate = function(div, poll) {
 						    events:{
 							load: function() {
 							    setTimeout(
-							    get_next_data,
+							    poll_appspot,
 						            100);
 							}
 						    }
