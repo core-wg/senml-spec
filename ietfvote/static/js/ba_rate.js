@@ -71,7 +71,7 @@
 						delete raters_[x];
 					});
 
-					$('#users').val('' + count + ' voters');
+					$('#users').text('' + count + ' voters');
 					rating = total / count;
 					if (isNaN(rating)) {
 						// console.log("Huh: rating is nan: " + total + "," + count);
