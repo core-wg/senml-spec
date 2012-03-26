@@ -166,10 +166,21 @@ var ba_rate = function(div, initial_data, poll) {
 	initial_data.push([t, 2.5])
         t+=1000;			    
      }
-	*/		  
-
+	*/		
+  
 var startup = function(div) {
-    var initial_data = [];
+    $.ajax({
+	       url:'http://ietfvote.appspot.com/recent/',
+	       success:function(s) {
+		   js = JSON.parse(s);
+		   
+		   ready(div,js.data);
+	       }
+	   }
+	  );
+};
+
+var ready = function(div, initial_data) {
     var t = (new Date().getTime() / 1000) * 1000 -100000;
     var ba = new ba_rate(div, initial_data, function() {poll_appspot(ba);});
     ba.start_plot();
