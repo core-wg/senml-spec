@@ -83,7 +83,6 @@
 			var update_plot = function(ratings, now) {
 					var serieses = compute_updates(ratings, now);
 					console.log("Computed updates: " + serieses[0].length + " points " + serieses[1].length + " flags");
-					console.log(serieses[0]);
 
 					_.each(serieses[0], function(x) {
 						chart_.series[0].addPoint(x);
@@ -136,9 +135,8 @@
 					});
 
 					// Fill in values to now
-					console.log(this_second_, now);
 					this_second_ = Math.floor(now / 1000) * 1000;
-					series.push([this_second_, compute_rating()]);
+					series.push([now, compute_rating()]);
 					return [series, flags];
 				};
 
