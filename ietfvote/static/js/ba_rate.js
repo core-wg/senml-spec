@@ -46,7 +46,7 @@ var ba_rate = function(div, initial_data, poll) {
 	       });
 	
 	rating = total/count;
-	if isNaN(rating) {
+	if (isNaN (rating)) {
 	    console.log("Huh: rating is nan: " + total + "," + count);
 	    rating = 2.5;
 	}
