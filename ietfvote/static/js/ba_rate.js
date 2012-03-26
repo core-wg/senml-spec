@@ -15,7 +15,7 @@ var poll_appspot = function(ba) {
 	  );
 };
 
-var ba_rate = function(div, initial_data, initial_flags, poll) {
+var ba_rate = function(div, poll) {
     var div_ = div;  // The div to render on
     var poll_ = poll;
     var chart_ = undefined;
@@ -115,7 +115,9 @@ var ba_rate = function(div, initial_data, initial_flags, poll) {
 //	update_plot(d);
     };
     
-    var start_plot = function() {
+    var start_plot = function(initial_data) {
+	var serieses = compute_updates(initial_data);
+
 	chart_ = new Highcharts.StockChart( {
 						chart : {
 						    renderTo: 'container',
@@ -158,12 +160,12 @@ var ba_rate = function(div, initial_data, initial_flags, poll) {
 						
 						series : [ {
 							       name : 'Rating',
-							       data : initial_data,
+							       data : serieses[0],
 							       id :'ratingsseries'
 							   },
 							   {
 							       type:'flags',
-							       data:initial_flags,
+							       data:serieses[1],
 							       onSeries:'ratingsseries'
 							   }
 							 ],
@@ -209,11 +211,6 @@ var ready = function(div, initial_data) {
     var series;
     var flags;
     
-    x = ba.compute_updates(initial_data);
-
-    series = x[0];
-    series = x[1];
-
-    var ba = new ba_rate(div, series, flags, function() {poll_appspot(ba);});
-    ba.start_plot();
+    var ba = new ba_rate(div, function() {poll_appspot(ba);});
+    ba.start_plot(initial_data);
 };
