@@ -65,7 +65,7 @@ def about(request):
 
 
 def recent( request ):
-    return since(0)
+    return since(request,0)
 
 
 def since( request, startTime ):
