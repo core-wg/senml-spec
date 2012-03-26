@@ -6,11 +6,10 @@
 	var prefix = 'http://' + window.location.host + ':' + window.location.port + '/';
 
 	var slider_change_cb = function(event, ui) {
-			console.log("Slider changed", ui.value);
 			$.ajax({
 				url: prefix + 'rate/' + me + '/' + ui.value + '/',
 				success: function(x) {
-					console.log("Rating recorded");
+					console.log("Rating recorded", ui.value);
 				}
 			});
 		};
@@ -24,19 +23,16 @@
 			if (last_time) {
 				url = prefix + 'since/' + last_time + '/';
 			}
-			console.log("Fetching url " + url);
 			$.ajax({
 				url: url,
 				success: function(s) {
 					var js = JSON.parse(s);
 
-					console.log("Got " + js.data.length + " values");
-					//                   console.log(js.data);
 					last_time = js.now + 1;
 					ba.update_plot(js.data, js.now);
 					setTimeout(function() {
 						poll_appspot(ba, last_time);
-					}, 5000);
+					}, 2000);
 				}
 			});
 		};
@@ -48,9 +44,7 @@
 			var raters_ = {};
 			var current_speaker_;
 			var this_second_ = 0;
-			var idle_lifetime_ = 300000; // 5 minutes
 			var compute_rating = function() {
-					var to_delete = [];
 					var total = 0;
 					var count = 0;
 					var rating;
@@ -59,22 +53,15 @@
 					// idle and recording those which are
 					_.each(raters_, function(rating, rater_name, list) {
 						// TODO(ekr@rtfm.com): Filter out when speaker changes
-						if ((this_second_ - rating.time) > idle_lifetime_) {
-							console.log("Expiring out judge " + rating.judge);
-							to_delete.push(rating.judge);
-						} else if ( !! rating.rating) {
+						if ( !! rating.rating) {
 							total += rating.rating;
 							count++;
 						}
-					});
-					_.each(to_delete, function(x) {
-						delete raters_[x];
 					});
 
 					$('#users').text('' + count + ' voters');
 					rating = total / count;
 					if (isNaN(rating)) {
-						// console.log("Huh: rating is nan: " + total + "," + count);
 						rating = 3;
 					}
 					return rating;
@@ -82,12 +69,11 @@
 
 			var update_plot = function(ratings, now) {
 					var serieses = compute_updates(ratings, now);
-					console.log("Computed updates: " + serieses[0].length + " points " + serieses[1].length + " flags");
 
-					_.each(serieses[0], function(x) {
+					_.each(serieses.points, function(x) {
 						chart_.series[0].addPoint(x);
 					});
-					_.each(serieses[1], function(x) {
+					_.each(serieses.flags, function(x) {
 						chart_.series[1].addPoint(x);
 					});
 
@@ -112,10 +98,8 @@
 								if (!_.isEmpty(raters_)) {
 									r = compute_rating();
 									var point = [this_second_, r];
-									series.push([this_second_, r]);
-								} else {
-									series.push([this_second_, r]);
 								}
+								series.push([this_second_, r]);
 								this_second_ += 1000;
 							}
 
@@ -137,7 +121,7 @@
 					// Fill in values to now
 					this_second_ = Math.floor(now / 1000) * 1000;
 					series.push([this_second_, compute_rating()]);
-					return [series, flags];
+					return { points: series, flags: flags };
 				};
 
 			var start_plot = function(initial_data, now) {
@@ -148,8 +132,7 @@
 							renderTo: 'container',
 							events: {
 								load: function() {
-									setTimeout(
-									poll_, 100);
+									setTimeout(poll_, 1000);
 								}
 							}
 						},
@@ -180,11 +163,11 @@
 
 						series: [{
 							name: 'Rating',
-							data: serieses[0],
+							data: serieses.points,
 							id: 'ratingsseries'
 						}, {
 							type: 'flags',
-							data: serieses[1],
+							data: serieses.flags,
 							onSeries: 'ratingsseries'
 						}]
 					});
@@ -211,6 +194,7 @@
 				orientation: "vertical",
 				min: 1,
 				max: 5,
+				step: 0.1,
 				value: 3,
 				stop: slider_change_cb
 			});
