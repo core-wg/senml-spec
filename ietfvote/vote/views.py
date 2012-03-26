@@ -65,18 +65,19 @@ def about(request):
 
 
 def recent( request ):
-    return since(0)
+	return since(0)
 
 
 def since( startTime ):
-    json = getRecentRatings(long(_startTime ))
+	s = long( startTime )
+	json = getRecentRatings( s )
 
-    #response = HttpResponse("text/plain")
-    response = HttpResponse("application/json")
-    #response['Content-Disposition'] = 'attachment; filename=somefilename.csv'
-    response.write( json );
+	#response = HttpResponse("text/plain")
+	response = HttpResponse("application/json")
+	#response['Content-Disposition'] = 'attachment; filename=somefilename.csv'
+	response.write( json );
 
-    return response
+	return response
 
 
 
