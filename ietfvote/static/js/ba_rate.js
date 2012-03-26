@@ -172,7 +172,7 @@ var ba_rate = function(div, initial_data, poll) {
 	*/		
 
 var startup = function(div) {
-    $("#rating-slider").slider();
+//    $("#rating-slider").slider();
 
     $.ajax({
 	       url:'http://ietfvote.appspot.com/recent/',
