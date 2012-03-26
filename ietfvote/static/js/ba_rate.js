@@ -1,9 +1,13 @@
 var last_polled_time = 0;
 
 var poll_appspot = function(ba, last_time) {
-    var url = 'http://ietfvote.appspot.com/recent/';
+    var url;
+
+    if (!last_time) {
+	url = 'http://ietfvote.appspot.com/recent/';
+    }
     if (last_time) {
-	url += last_time + "/";
+	url = 'http://ietfvote.appspot.com/since/' + last_time + '/';
     }
     console.log("Fetching url " + url);
     $.ajax({
