@@ -32,7 +32,7 @@ var poll_appspot = function(ba, last_time) {
 		   setTimeout(function() {
 				  poll_appspot(ba, last_time);
 			      },
-			      1);
+			      1); // This is no timeout, it's just to unwind the stack
 	       }
 	   }
 	  );
@@ -240,7 +240,7 @@ var ready = function(div, initial_data, now) {
     var series;
     var flags;
     
-    var ba = new ba_rate(div, function() {poll_appspot(ba, 0);});
+    var ba = new ba_rate(div, function() {poll_appspot(ba, now);});
     ba.start_plot(initial_data, now);
 };
 
