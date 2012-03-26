@@ -134,7 +134,7 @@ var ba_rate = function(div, poll) {
 						    events:{
 							load: function() {
 							    setTimeout(
-							    poll_appspot,
+							    poll_,
 						            100);
 							}
 						    }
