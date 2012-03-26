@@ -62,10 +62,10 @@ var ba_rate = function(div, poll) {
 		   serieses[1].length + " flags");
 	
 	_.each(serieses[0], function(x) {
-		   chart_.series[0].add_point(x);
+		   chart_.series[0].addPoint(x);
 	       });
 	_.each(serieses[1], function(x) {
-		   chart_.series[1].add_point(x);
+		   chart_.series[1].addPoint(x);
 	       });
 
 	return;	
