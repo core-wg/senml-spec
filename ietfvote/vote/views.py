@@ -68,17 +68,15 @@ def recent( request ):
     return since(0)
 
 
-def since( startTime ):
-    startTime = long( startTime )
-    json = getRecentRatings( startTime )
-
+def since( request, startTime ):
+    s = long( startTime )
+    json = getRecentRatings( s )
     #response = HttpResponse("text/plain")
     response = HttpResponse("application/json")
     #response['Content-Disposition'] = 'attachment; filename=somefilename.csv'
     response.write( json );
 
     return response
-    
 
 
 
