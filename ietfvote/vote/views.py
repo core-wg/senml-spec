@@ -76,6 +76,7 @@ def recent( request ):
 
 
 def since( startTime ):
+    startTime = long( startTime )
     json = getRecentRatings( startTime )
 
     #response = HttpResponse("text/plain")
