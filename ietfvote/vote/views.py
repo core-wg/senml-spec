@@ -71,7 +71,6 @@ def recent( request ):
 def since( request, startTime ):
     s = long( startTime )
     json = getRecentRatings( s )
-
     #response = HttpResponse("text/plain")
     response = HttpResponse()
     #response['Content-Disposition'] = 'attachment; filename=somefilename.csv'
