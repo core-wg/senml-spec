@@ -11,7 +11,7 @@ urlpatterns = patterns('',
     (r'^$', main ), 
     (r'^about/$', about ), 
     (r'^speaker/(?P<speakerName>[ \%a-zA-Z0-9_]{1,140})/$', speaker ), 
-    (r'^rate/(?P<judge>[ \%a-zA-Z0-9_-]{1,140})/(?P<rating>[^/]{1,64})/$', rate ), 
+    (r'^rate/(?P<judge>[ \%a-zA-Z0-9_-]{1,140})/(?P<rating>.{1,64})$', rate ), 
     (r'^recent/$', recent ), 
     (r'^since/(?P<startTime>\d{1,15})/$', since ), 
 )
