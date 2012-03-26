@@ -108,6 +108,7 @@ var ba_rate = function(div, poll) {
 		   current_speaker_ = rating.speaker;
 		   raters_[rating.judge] = rating;
 	       });
+	return [series, flags];
     };
 
     var get_next_data = function() {
