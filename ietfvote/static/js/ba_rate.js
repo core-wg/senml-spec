@@ -67,10 +67,12 @@ var ba_rate = function(div, initial_data, poll) {
 
 	_.each(ratings, function(rating) {
 		   var r;
-
-		   ratings = ratings.slice(1, 5);
+		   vat ct = 10;
+		   
 		   // Compute ratings up to the next sample
 		   while(this_second_ < rating.time) {
+		       if (!ct--)
+			   return;
 		       if (!_.isEmpty(raters_)) {
 			   r = compute_rating();
 			   var point = [this_second_, r];
