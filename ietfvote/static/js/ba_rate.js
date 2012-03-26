@@ -136,7 +136,7 @@
 
 					// Fill in values to now
 					this_second_ = Math.floor(now / 1000) * 1000;
-					series.push([now, compute_rating()]);
+					series.push([this_second_, compute_rating()]);
 					return [series, flags];
 				};
 

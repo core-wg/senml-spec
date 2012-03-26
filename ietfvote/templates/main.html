@@ -15,17 +15,19 @@
 body { font: sans-serif; }
 #contents { position: relative;}
 #rating { position: absolute; left: 10px; top: 10px; width: 40px; }
+#rating-slider { height: 300px; }
 #rating > * { margin: 5px auto; }
-#container { margin-left: 50px; }
+#container { margin-left: 50px; height: 500px; min-width: 500px; }
+div[title] { width: auto; font-size: 150%; font-weight: bold; }
 </style>
 
 {% endblock %}
 
 
 {% block content %}
-<div id="rating"><div>Your rating:</div> <div id="rating-slider"></div></div>
+<div id="rating"><div>Your rating:</div> <div title="OK">+</div><div id="rating-slider"></div><div title="Crap">-</div></div>
 
-<div id="container" style="height: 500px; min-width: 500px"></div>
+<div id="container" style=""></div>
 
 <script>
      $(function() {
