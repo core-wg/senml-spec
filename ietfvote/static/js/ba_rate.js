@@ -44,8 +44,13 @@ var ba_rate = function(div, initial_data, poll) {
 	_.each(to_delete, function(x) {
 		   delete raters_[x];
 	       });
-
-	return total/count;
+	
+	rating = total/count;
+	if isNaN(rating) {
+	    console.log("Huh: rating is nan: " + total + "," + count);
+	    rating = 2.5;
+	}
+	return rating;
     };
 
     
