@@ -5,7 +5,6 @@ var poll_appspot = function(ba) {
 	       url:'http://ietfvote.appspot.com/recent/',
 	       success:function(s) {
 		   js = JSON.parse(s);
-
 		   ba.update_plot(js.data);
 		   setTimeout(function() {
 				  poll_appspot(ba);
@@ -16,7 +15,7 @@ var poll_appspot = function(ba) {
 	  );
 };
 
-var ba_rate = function(div, initial_data, poll) {
+var ba_rate = function(div, initial_data, initial_flags, poll) {
     var div_ = div;  // The div to render on
     var poll_ = poll;
     var chart_ = undefined;
@@ -55,10 +54,13 @@ var ba_rate = function(div, initial_data, poll) {
 
     
     var update_plot = function(ratings) {
+	return;	
+    };
+
+    var compute_updates = function(ratings) {
 	var series = [];
 	var flags = [];
-	
-	ratings = ratings.slice(1, 10);
+
 	if (ratings.length == 0)
 	    return;
 
@@ -75,11 +77,12 @@ var ba_rate = function(div, initial_data, poll) {
 		       if (!_.isEmpty(raters_)) {
 			   r = compute_rating();
 			   var point = [this_second_, r];
-			   console.log("P: " + this_second_ + " " + r);
-			   chart_.series[0].addPoint([this_second_, r]);
+//			   console.log("P: " + this_second_ + " " + r);
+			   series.push([this_second_, r]);
 		       }
 		       else {
 //			  chart_.series[0].addPoint([this_second_, 2.5]);
+			   series.push([this_second_, r]);
 		       }
 		       this_second_ += 1000;
 		   }
@@ -87,12 +90,19 @@ var ba_rate = function(div, initial_data, poll) {
 		   if (current_speaker_ !== rating.speaker) {
 //		       console.log("Speaker switched. New rating should be " + rating.rating);
 		       raters_ = {};
+/*
 		       chart_.series[1].addPoint({
 						     x:rating.time,
 						     y:rating.rating,
 						     title:rating.speaker,
 						     text:rating.speaker
-						 });
+						 });/ */
+		       flags.push({
+				      x:rating.time,
+				      y:rating.rating,
+				      title:rating.speaker,
+				      text:rating.speaker
+				  });
 		   }
 		   
 		   current_speaker_ = rating.speaker;
@@ -153,7 +163,7 @@ var ba_rate = function(div, initial_data, poll) {
 							   },
 							   {
 							       type:'flags',
-							       data:[],
+							       data:initial_flags,
 							       onSeries:'ratingsseries'
 							   }
 							 ],
@@ -164,7 +174,8 @@ var ba_rate = function(div, initial_data, poll) {
 
     return {
 	start_plot : start_plot,
-	update_plot: update_plot	
+	update_plot: update_plot,
+	compute_updates: compute_updates	
     };
 }
 
@@ -195,12 +206,11 @@ var startup = function(div) {
 };
 
 var ready = function(div, initial_data) {
-    var first_time = 1000 * Math.floor(initial_data[0].time / 1000);
-    var fake_data =[];
+    var series;
+    var flags;
+    
+    [series, flags] = ba.compute_updates(initial_data);
 
-    for (var l = 300; l>0; l--) {
-	fake_data.push([first_time - (l * 1000), 2.5]);
-    }
-    var ba = new ba_rate(div, fake_data, function() {poll_appspot(ba);});
+    var ba = new ba_rate(div, series, flags, function() {poll_appspot(ba);});
     ba.start_plot();
 };
