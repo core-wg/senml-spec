@@ -48,8 +48,10 @@ var ba_rate = function(div, initial_data, poll) {
 	return total/count;
     };
 
+    
     var update_plot = function(ratings) {
 	var series = [];
+	var flags = [];
 
 	if (ratings.length == 0)
 	    return;
@@ -187,6 +189,12 @@ var startup = function(div) {
 
 var ready = function(div, initial_data) {
     var t = (new Date().getTime() / 1000) * 1000 -100000;
-    var ba = new ba_rate(div, initial_data, function() {poll_appspot(ba);});
+    var first_time = initial_data[0].time;
+    var fake_data[] =0;
+
+    for (var l = 300; i>0; i++) {
+	fake_data.append([first_time - (l * 1000), 2.5]);
+    }
+    var ba = new ba_rate(div, fake_data, function() {poll_appspot(ba);});
     ba.start_plot();
 };
