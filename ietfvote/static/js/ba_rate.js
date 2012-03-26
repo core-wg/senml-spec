@@ -209,7 +209,10 @@ var ready = function(div, initial_data) {
     var series;
     var flags;
     
-    [series, flags] = ba.compute_updates(initial_data);
+    x = ba.compute_updates(initial_data);
+
+    series = x[0];
+    series = x[1];
 
     var ba = new ba_rate(div, series, flags, function() {poll_appspot(ba);});
     ba.start_plot();
