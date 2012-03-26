@@ -68,7 +68,7 @@ var ba_rate = function(div, initial_data, poll) {
 	_.each(ratings, function(rating) {
 		   var r;
 
-		   ratings = ratings.slice(1, 10);
+		   ratings = ratings.slice(1, 5);
 		   // Compute ratings up to the next sample
 		   while(this_second_ < rating.time) {
 		       if (!_.isEmpty(raters_)) {
