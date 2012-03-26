@@ -69,7 +69,7 @@ var ba_rate = function(div, poll) {
 	rating = total/count;
 	if (isNaN (rating)) {
 	    console.log("Huh: rating is nan: " + total + "," + count);
-	    rating = 2.5;
+	    rating = 3;
 	}
 	return rating;
     };
