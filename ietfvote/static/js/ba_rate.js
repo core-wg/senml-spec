@@ -21,7 +21,7 @@ var poll_appspot = function(ba, last_time) {
 				  poll_appspot(ba, last_time);
 			      },
 			      1000);
-		   }
+	       }
 	   }
 	  );
 };
@@ -69,7 +69,7 @@ var ba_rate = function(div, poll) {
 
 	serieses = compute_updates(ratings);
 	console.log("Computed updates: " + serieses[0].length + " points " + 
-		   serieses[1].length + " flags");
+		    serieses[1].length + " flags");
 	
 	_.each(serieses[0], function(x) {
 		   chart_.series[0].addPoint(x);
@@ -146,8 +146,8 @@ var ba_rate = function(div, poll) {
 						    events:{
 							load: function() {
 							    setTimeout(
-							    poll_,
-						            100);
+							        poll_,
+						                100);
 							}
 						    }
 						},
@@ -157,7 +157,7 @@ var ba_rate = function(div, poll) {
 						    max:5,
 						    title : {
 							text : 'Speaker Rating'
-							}
+						    }
 						},
 						rangeSelector : {
 						    buttons : [
@@ -204,19 +204,19 @@ var ba_rate = function(div, poll) {
 }
 
 /*
-     var simulator = new data_simulator();
-     var initial_data = [];
-     var t = (new Date().getTime() / 1000) * 1000 -100000;
-     var ba;
+ var simulator = new data_simulator();
+ var initial_data = [];
+ var t = (new Date().getTime() / 1000) * 1000 -100000;
+ var ba;
 
-     for (var i=0; i<100; i++) {
-	initial_data.push([t, 2.5])
-        t+=1000;			    
-     }
-	*/		
+ for (var i=0; i<100; i++) {
+ initial_data.push([t, 2.5])
+ t+=1000;			    
+ }
+ */		
 
 var startup = function(div) {
-//    $("#rating-slider").slider();
+    //    $("#rating-slider").slider();
 
     $.ajax({
 	       url:'http://ietfvote.appspot.com/recent/',
