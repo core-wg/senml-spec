@@ -1,8 +1,6 @@
 var last_polled_time = 0;
 
 var poll_appspot = function(ba) {
-    return;
-
     $.ajax({
 	       url:'http://ietfvote.appspot.com/recent/',
 	       success:function(s) {
@@ -12,7 +10,7 @@ var poll_appspot = function(ba) {
 		   setTimeout(function() {
 				  poll_appspot(ba);
 			      },
-			      5000);
+			      50000000);
 		   }
 	   }
 	  );
