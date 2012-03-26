@@ -59,13 +59,13 @@ def getRecentRatings( startTime ):
     global globalRatingTime
     global globalRatingValue
 
-    now = long( time.time() )
-    if globalRatingTime+5 > now: # use cached data for 5 seconds
+    now = long( 1000.0 * time.time() )
+    if globalRatingTime+5000 > now && startTime == 0: # use cached data for 5 seconds
         #logging.debug( "getRecentRatings using cached value" )
         return globalRatingValue
     
     json = ''
-    json += '{ "data": [ \n'
+    json += '{ "now":%d, "data" : [ \n'%now
 
     query = Rating.all();
     query.order("-time") #TODO - should have time based limits 
@@ -84,7 +84,8 @@ def getRecentRatings( startTime ):
 
     json += " ] }"
 
-    globalRatingValue = json
-    globalRatingTime = now
+    if startTime == 0:
+        globalRatingValue = json
+        globalRatingTime = now
     
     return json
