@@ -36,7 +36,8 @@
 					ba.update_plot(js.data, js.now);
 					setTimeout(function() {
 						poll_appspot(ba, last_time);
-					}, 1);
+			      },
+			      1); // This is no timeout, it's just to unwind the stack
 				}
 			});
 		};
@@ -135,7 +136,7 @@
 					});
 
 					// Fill in values to now
-					thi_second_ = Math.floor(now / 1000) * 1000;
+					this_second_ = Math.floor(now / 1000) * 1000;
 					series.push([this_second_, compute_rating()]);
 					return [series, flags];
 				};
