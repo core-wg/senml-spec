@@ -1,22 +1,28 @@
 var last_polled_time = 0;
 
-var poll_appspot = function(ba) {
+var poll_appspot = function(ba, last_time) {
+    var url = 'http://ietfvote.appspot.com/recent/';
+    if (last_time) {
+	url += last_time + "/";
+    }
+    console.log("Fetching url " + url);
     $.ajax({
-	       url:'http://ietfvote.appspot.com/recent/',
+	       url:url,
 	       success:function(s) {
 		   js = JSON.parse(s);
-
+		   
+		   last_time = js.data[js.data.length - 1].time;
 		   ba.update_plot(js.data);
 		   setTimeout(function() {
-				  poll_appspot(ba);
+				  poll_appspot(ba, last_time);
 			      },
-			      5000);
+			      1000);
 		   }
 	   }
 	  );
 };
 
-var ba_rate = function(div, initial_data, poll) {
+var ba_rate = function(div, poll) {
     var div_ = div;  // The div to render on
     var poll_ = poll;
     var chart_ = undefined;
@@ -44,15 +50,39 @@ var ba_rate = function(div, initial_data, poll) {
 	_.each(to_delete, function(x) {
 		   delete raters_[x];
 	       });
-
-	return total/count;
+	
+	rating = total/count;
+	if (isNaN (rating)) {
+	    console.log("Huh: rating is nan: " + total + "," + count);
+	    rating = 2.5;
+	}
+	return rating;
     };
 
+    
     var update_plot = function(ratings) {
+	var serieses;
+
+	serieses = compute_updates(ratings);
+	console.log("Computed updates: " + serieses[0].length + " points " + 
+		   serieses[1].length + " flags");
+	
+	_.each(serieses[0], function(x) {
+		   chart_.series[0].addPoint(x);
+	       });
+	_.each(serieses[1], function(x) {
+		   chart_.series[1].addPoint(x);
+	       });
+
+	return;	
+    };
+
+    var compute_updates = function(ratings) {
 	var series = [];
+	var flags = [];
 
 	if (ratings.length == 0)
-	    return;
+	    return [[],[]];
 
     	if (!this_second_) {
 	    this_second_ = Math.floor(ratings[0].time/1000) * 1000;
@@ -61,49 +91,58 @@ var ba_rate = function(div, initial_data, poll) {
 	_.each(ratings, function(rating) {
 		   var r;
 
-		   // Compute ratings up to the next sample
-		   while(this_second_ < rating.time) {
-		       if (!_.isEmpty(raters_)) {
-			   r = compute_rating();
-			   var point = [this_second_, r];
-//			   console.log("P: " + this_second_ + " " + r);
-			   chart_.series[0].addPoint([this_second_, r]);
+		   if (rating.time > this_second_) {
+		       // Compute ratings up to the next sample
+		       while(this_second_ < rating.time) {
+
+			   if (!_.isEmpty(raters_)) {
+			       r = compute_rating();
+			       var point = [this_second_, r];
+			       //			   console.log("P: " + this_second_ + " " + r);
+			       series.push([this_second_, r]);
+			   }
+			   else {
+			       //			  chart_.series[0].addPoint([this_second_, 2.5]);
+			       series.push([this_second_, r]);
+			   }
+			   this_second_ += 1000;
 		       }
-		       else {
-			  chart_.series[0].addPoint([this_second_, 2.5]);
+		       
+		       if (current_speaker_ !== rating.speaker) {
+			   //		       console.log("Speaker switched. New rating should be " + rating.rating);
+			   raters_ = {};
+			   /*
+			    chart_.series[1].addPoint({
+			    x:rating.time,
+			    y:rating.rating,
+			    title:rating.speaker,
+			    text:rating.speaker
+			    });/ */
+			   flags.push({
+					  x:rating.time,
+					  y:rating.rating,
+					  title:rating.speaker,
+					  text:rating.speaker
+				      });
 		       }
-		       this_second_ += 1000;
+		       
+		       current_speaker_ = rating.speaker;
+		       raters_[rating.judge] = rating;
 		   }
-		   
-		   if (current_speaker_ !== rating.speaker) {
-//		       console.log("Speaker switched. New rating should be " + rating.rating);
-		       raters_ = {};
-		       chart_.series[1].addPoint({
-						     x:rating.time,
-						     y:rating.rating,
-						     title:rating.speaker,
-						     text:rating.speaker
-						 });
-		   }
-		   
-		   current_speaker_ = rating.speaker;
-		   raters_[rating.judge] = rating;
 	       });
+	return [series, flags];
     };
 
-    var get_next_data = function() {
-	var d = poll_();
-//	update_plot(d);
-    };
-    
-    var start_plot = function() {
+    var start_plot = function(initial_data) {
+	var serieses = compute_updates(initial_data);
+
 	chart_ = new Highcharts.StockChart( {
 						chart : {
 						    renderTo: 'container',
 						    events:{
 							load: function() {
 							    setTimeout(
-							    get_next_data,
+							    poll_,
 						            100);
 							}
 						    }
@@ -111,7 +150,10 @@ var ba_rate = function(div, initial_data, poll) {
 						
 						yAxis : {
 						    min:0,
-						    max:5
+						    max:5,
+						    title : {
+							text : 'Speaker Rating'
+							}
 						},
 						rangeSelector : {
 						    buttons : [
@@ -135,13 +177,13 @@ var ba_rate = function(div, initial_data, poll) {
 						},
 						
 						series : [ {
-							       name : 'Ratings',
-							       data : initial_data,
+							       name : 'Rating',
+							       data : serieses[0],
 							       id :'ratingsseries'
 							   },
 							   {
 							       type:'flags',
-							       data:[],
+							       data:serieses[1],
 							       onSeries:'ratingsseries'
 							   }
 							 ],
@@ -152,7 +194,8 @@ var ba_rate = function(div, initial_data, poll) {
 
     return {
 	start_plot : start_plot,
-	update_plot: update_plot	
+	update_plot: update_plot,
+	compute_updates: compute_updates	
     };
 }
 
@@ -167,8 +210,10 @@ var ba_rate = function(div, initial_data, poll) {
         t+=1000;			    
      }
 	*/		
-  
+
 var startup = function(div) {
+//    $("#rating-slider").slider();
+
     $.ajax({
 	       url:'http://ietfvote.appspot.com/recent/',
 	       success:function(s) {
@@ -181,7 +226,9 @@ var startup = function(div) {
 };
 
 var ready = function(div, initial_data) {
-    var t = (new Date().getTime() / 1000) * 1000 -100000;
-    var ba = new ba_rate(div, initial_data, function() {poll_appspot(ba);});
-    ba.start_plot();
+    var series;
+    var flags;
+    
+    var ba = new ba_rate(div, function() {poll_appspot(ba, 0);});
+    ba.start_plot(initial_data);
 };
