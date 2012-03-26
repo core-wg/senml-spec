@@ -69,7 +69,7 @@ def recent( request ):
 
 
 def since( startTime ):
-    json = getRecentRatings(long(_startTime))
+    json = getRecentRatings(long(_startTime ))
 
     #response = HttpResponse("text/plain")
     response = HttpResponse("application/json")
@@ -77,7 +77,6 @@ def since( startTime ):
     response.write( json );
 
     return response
-    
 
 
 
