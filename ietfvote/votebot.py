@@ -18,6 +18,15 @@ import re
 import urllib2
 import logging
 
+def isNonAscii(str):
+    return not all(ord(c) < 128 for c in str)
+
+def stringHash(str):
+    hash = 0
+    for c in str: 
+        hash = (hash + ord(c)) % (1<<13)
+    return hash
+
 class MUCJabberBot(JabberBot):
 
     ''' Add features in JabberBot to allow it to handle specific
@@ -66,19 +75,24 @@ class VoteBot(MUCJabberBot):
 
     @botcmd
     def vote(self, mess, args):
-        # Close 
         # Extract judge
         judge = mess.getFrom().getResource()
         # Extract rating
         m = re.search("([0-9.]+)", mess.getBody())
         if (not m): 
-            return "C'mon, "+ judge +", you have to give me a number"
+            return judge +": Dude, you have to give me a number"
         value = int(float(m.group(0)));
+        # Un-unicode-ize the judge 
+        if (isNonAscii(judge)):
+            judge = "unicode_monkey_"+str(stringHash(judge))
         # Load relevant URL
         strval = str(value)
         url = "http://ietfvote.appspot.com/rate/"+ judge +"/"+ strval +"/"
-        req = urllib2.Request(url)
-        res = urllib2.urlopen(req)
+        try:
+            req = urllib2.Request(url)
+            res = urllib2.urlopen(req)
+        except urllib2.HTTPError:
+            pass
 
     @botcmd
     def speaker(self, mess, args):
@@ -88,13 +102,16 @@ class VoteBot(MUCJabberBot):
         # Read message to extract speaker
         speaker = re.sub("^speaker[ ]+", "", mess.getBody())
         # Validate the name and URL-encode
-        if (not all(ord(c) < 128 for c in speaker)):
+        if (isNonAscii(speaker)):
             return "This is the IETF, please use ASCII only"
         speaker = urllib2.quote(speaker)
         # Load relevant URL
         url = "http://ietfvote.appspot.com/speaker/"+ speaker +"/"
-        req = urllib2.Request(url)
-        res = urllib2.urlopen(req)
+        try:
+            req = urllib2.Request(url)
+            res = urllib2.urlopen(req)
+        except urllib2.HTTPError:
+            pass
 
 
 if __name__ == '__main__':
