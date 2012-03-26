@@ -5,16 +5,6 @@
 	var me = "webmule" + Math.floor(Math.random() * 10000000);
 	var prefix = 'http://' + window.location.host + ':' + window.location.port + '/';
 
-	var throttle = function(f, t) {
-			var to;
-			return function() {
-				if (to !== undefined) {
-					clearTimeout(to);
-				}
-				to = setTimeout(f, t);
-			};
-		};
-
 	var slider_change_cb = function(event, ui) {
 			console.log("Slider changed", ui.value);
 			$.ajax({
@@ -222,7 +212,7 @@
 				min: 1,
 				max: 5,
 				value: 3,
-				slide: throttle(slider_change_cb, 250)
+				stop: slider_change_cb
 			});
 
 			$.ajax({
