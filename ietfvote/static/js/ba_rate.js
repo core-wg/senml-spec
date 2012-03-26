@@ -149,6 +149,9 @@ var ba_rate = function(div, poll) {
 		       raters_[rating.judge] = rating;
 		   }
 	       });
+        
+        // Add a value for the alst sample
+        series.push([rating.time, compute_rating()]);
 	return [series, flags];
     };
 
