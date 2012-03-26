@@ -1,4 +1,14 @@
 var last_polled_time = 0;
+var me = "monkey-" + Math.floor(Math.random() * 10000000);
+
+
+var slider_change_cb = function(event, ui) {
+    console.log("Slider changed. new value=" + ui.value);
+    $.ajax({
+               url:'http://ietfvote.appspot.com/rate/' + me + '/' + ui.value + '/',
+               success:function(x) { console.log("Rating recorded");}
+           });
+};
 
 var poll_appspot = function(ba, last_time) {
     var url;
@@ -205,7 +215,13 @@ var ba_rate = function(div, poll) {
 }
 
 var startup = function(div) {
-    //    $("#rating-slider").slider();
+    if (false) {
+         $("#rating-slider").slider({
+                                        min:1,
+                                        max:5,
+                                        value:3
+                                    });
+    }
 
     $.ajax({
 	       url:'http://ietfvote.appspot.com/recent/',
@@ -225,3 +241,4 @@ var ready = function(div, initial_data) {
     var ba = new ba_rate(div, function() {poll_appspot(ba, 0);});
     ba.start_plot(initial_data);
 };
+
