@@ -12,8 +12,9 @@
 <!-- <script src="https://ietfvote.appspot.com/static/js/ba_rate.js"></script> -->
 <script src="https://raw.github.com/fluffy/ietf/master/ietfvote/static/js/ba_rate.js"></script>
 <style type="text/css">
-#rating { position: absolute; left: 0; width: 50px; }
-#rating > * { margin: 0 auto; }
+body { font: sans-serif; }
+#rating { position: absolute; left: 10px; width: 50px; }
+#rating > * { margin: 5px auto; }
 #container { margin-left: 50px; }
 </style>
 
@@ -21,9 +22,9 @@
 
 
 {% block content %}
-<div id="container" style="height: 500px; min-width: 500px"></div>
-
 <div id="rating"><div>Your rating:</div> <div id="rating-slider"></div></div>
+
+<div id="container" style="height: 500px; min-width: 500px"></div>
 
 <script>
      $(function() {
