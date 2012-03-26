@@ -62,7 +62,7 @@ var ba_rate = function(div, poll) {
 	var flags = [];
 
 	if (ratings.length == 0)
-	    return;
+	    return [[],[]];
 
     	if (!this_second_) {
 	    this_second_ = Math.floor(ratings[0].time/1000) * 1000;
