@@ -2,7 +2,7 @@ var last_polled_time = 0;
 
 var poll_appspot = function(ba, last_time) {
     $.ajax({
-	       url:'http://ietfvote.appspot.com/recent/',
+	       url:'http://ietfvote.appspot.com/recent/' + last_time,
 	       success:function(s) {
 		   js = JSON.parse(s);
 		   
