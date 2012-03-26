@@ -169,7 +169,7 @@ var ba_rate = function(div, poll) {
 						
 						yAxis : {
 						    min:0,
-						    max:5,
+						    max:6,
 						    title : {
 							text : 'Speaker Rating'
 						    }
