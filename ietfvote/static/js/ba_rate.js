@@ -45,6 +45,7 @@ var ba_rate = function(div, poll) {
 	_.each(raters_, function(rating, rater_name, list) {
 		   // TODO(ekr@rtfm.com): Filter out when speaker changes
 		   if ((this_second_ - rating.time) > idle_lifetime_) {
+                       console.log("Expiring out judge " + rating.judge);
 		       to_delete.push(rating.judge);
 		   } else {
 		       total += rating.rating;
@@ -54,7 +55,7 @@ var ba_rate = function(div, poll) {
 	_.each(to_delete, function(x) {
 		   delete raters_[x];
 	       });
-	
+        
 	rating = total/count;
 	if (isNaN (rating)) {
 	    console.log("Huh: rating is nan: " + total + "," + count);
@@ -202,18 +203,6 @@ var ba_rate = function(div, poll) {
 	compute_updates: compute_updates	
     };
 }
-
-/*
- var simulator = new data_simulator();
- var initial_data = [];
- var t = (new Date().getTime() / 1000) * 1000 -100000;
- var ba;
-
- for (var i=0; i<100; i++) {
- initial_data.push([t, 2.5])
- t+=1000;			    
- }
- */		
 
 var startup = function(div) {
     //    $("#rating-slider").slider();
