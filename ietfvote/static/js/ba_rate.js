@@ -1,14 +1,15 @@
 var last_polled_time = 0;
 
-var poll_appspot = function(ba) {
+var poll_appspot = function(ba, last_time) {
     $.ajax({
 	       url:'http://ietfvote.appspot.com/recent/',
 	       success:function(s) {
 		   js = JSON.parse(s);
 		   
+		   last_time = js.data[js.data.length - 1].time;
 		   ba.update_plot(js.data);
 		   setTimeout(function() {
-				  poll_appspot(ba);
+				  poll_appspot(ba, last_time);
 			      },
 			      1000);
 		   }
@@ -223,6 +224,6 @@ var ready = function(div, initial_data) {
     var series;
     var flags;
     
-    var ba = new ba_rate(div, function() {poll_appspot(ba);});
+    var ba = new ba_rate(div, function() {poll_appspot(ba, 0);});
     ba.start_plot(initial_data);
 };
