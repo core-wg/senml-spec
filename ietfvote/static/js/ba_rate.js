@@ -193,7 +193,7 @@ var ready = function(div, initial_data) {
     var fake_data =0;
 
     for (var l = 300; l>0; l--) {
-	fake_data.append([first_time - (l * 1000), 2.5]);
+	fake_data.push([first_time - (l * 1000), 2.5]);
     }
     var ba = new ba_rate(div, fake_data, function() {poll_appspot(ba);});
     ba.start_plot();
