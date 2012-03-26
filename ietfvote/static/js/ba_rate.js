@@ -7,7 +7,7 @@
 
 	var slider_change_cb = function(event, ui) {
 			$.ajax({
-				url: prefix + 'rate/' + me + '/' + ui.value + '/',
+				url: prefix + 'rate/' + me + '/' + ui.value,
 				success: function(x) {
 					console.log("Rating recorded", ui.value);
 				}
