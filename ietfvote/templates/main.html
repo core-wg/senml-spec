@@ -11,13 +11,18 @@
 
 <!-- <script src="https://ietfvote.appspot.com/static/js/ba_rate.js"></script> -->
 <script src="https://raw.github.com/fluffy/ietf/master/ietfvote/static/js/ba_rate.js"></script>
-
+<style type="tex/css">
+#rating { float: left; width: 50px; }
+#container { margin-left: 50px; }
+</style>
 
 {% endblock %}
 
 
 {% block content %}
 <div id="container" style="height: 500px; min-width: 500px"></div>
+
+<div id="rating"><div>Your rating:</div> <div id="rating-slider"></div></div>
 
 <script>
      $(function() {
@@ -26,5 +31,4 @@
 );
 </script>
 
-Your rating: <div id="rating-slider"></div>
 {% endblock %}

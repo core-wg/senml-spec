@@ -208,9 +208,11 @@
 		};
 	var startup = function(div) {
 			$("#rating-slider").slider({
+				orientation: "vertical",
 				min: 1,
 				max: 5,
-				value: 3
+				value: 3,
+				slide: slider_change_cb
 			});
 
 			$.ajax({
