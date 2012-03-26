@@ -57,7 +57,8 @@ var ba_rate = function(div, initial_data, poll) {
     var update_plot = function(ratings) {
 	var series = [];
 	var flags = [];
-
+	
+	ratings = ratings.slice(1, 10);
 	if (ratings.length == 0)
 	    return;
 
@@ -67,7 +68,6 @@ var ba_rate = function(div, initial_data, poll) {
 
 	_.each(ratings, function(rating) {
 		   var r;
-		   var ct = 10;
 		   
 		   // Compute ratings up to the next sample
 		   while(this_second_ < rating.time) {
@@ -76,9 +76,6 @@ var ba_rate = function(div, initial_data, poll) {
 			   r = compute_rating();
 			   var point = [this_second_, r];
 			   console.log("P: " + this_second_ + " " + r);
-			   ct--;
-			   if (!ct)
-			       return;
 			   chart_.series[0].addPoint([this_second_, r]);
 		       }
 		       else {
