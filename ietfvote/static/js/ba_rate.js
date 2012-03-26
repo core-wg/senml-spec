@@ -84,43 +84,45 @@ var ba_rate = function(div, poll) {
 
 	_.each(ratings, function(rating) {
 		   var r;
-		   
-		   // Compute ratings up to the next sample
-		   while(this_second_ < rating.time) {
 
-		       if (!_.isEmpty(raters_)) {
-			   r = compute_rating();
-			   var point = [this_second_, r];
-//			   console.log("P: " + this_second_ + " " + r);
-			   series.push([this_second_, r]);
+		   if (rating.time > this_second_) {
+		       // Compute ratings up to the next sample
+		       while(this_second_ < rating.time) {
+
+			   if (!_.isEmpty(raters_)) {
+			       r = compute_rating();
+			       var point = [this_second_, r];
+			       //			   console.log("P: " + this_second_ + " " + r);
+			       series.push([this_second_, r]);
+			   }
+			   else {
+			       //			  chart_.series[0].addPoint([this_second_, 2.5]);
+			       series.push([this_second_, r]);
+			   }
+			   this_second_ += 1000;
 		       }
-		       else {
-//			  chart_.series[0].addPoint([this_second_, 2.5]);
-			   series.push([this_second_, r]);
+		       
+		       if (current_speaker_ !== rating.speaker) {
+			   //		       console.log("Speaker switched. New rating should be " + rating.rating);
+			   raters_ = {};
+			   /*
+			    chart_.series[1].addPoint({
+			    x:rating.time,
+			    y:rating.rating,
+			    title:rating.speaker,
+			    text:rating.speaker
+			    });/ */
+			   flags.push({
+					  x:rating.time,
+					  y:rating.rating,
+					  title:rating.speaker,
+					  text:rating.speaker
+				      });
 		       }
-		       this_second_ += 1000;
+		       
+		       current_speaker_ = rating.speaker;
+		       raters_[rating.judge] = rating;
 		   }
-		   
-		   if (current_speaker_ !== rating.speaker) {
-//		       console.log("Speaker switched. New rating should be " + rating.rating);
-		       raters_ = {};
-/*
-		       chart_.series[1].addPoint({
-						     x:rating.time,
-						     y:rating.rating,
-						     title:rating.speaker,
-						     text:rating.speaker
-						 });/ */
-		       flags.push({
-				      x:rating.time,
-				      y:rating.rating,
-				      title:rating.speaker,
-				      text:rating.speaker
-				  });
-		   }
-		   
-		   current_speaker_ = rating.speaker;
-		   raters_[rating.judge] = rating;
 	       });
 	return [series, flags];
     };
