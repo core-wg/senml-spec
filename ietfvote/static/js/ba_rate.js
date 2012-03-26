@@ -25,8 +25,12 @@ var poll_appspot = function(ba, last_time) {
 	       success:function(s) {
 		   js = JSON.parse(s);
 		   
-		   last_time = js.data[js.data.length - 1].time + 1;
-		   ba.update_plot(js.data);
+                   console.log("Got " + js.data.length + " values");
+                   console.log(js.data);
+                   if (js.data.length) {
+		       last_time = js.now + 1;
+		       ba.update_plot(js.data, js.now);
+                   }
 		   setTimeout(function() {
 				  poll_appspot(ba, last_time);
 			      },
@@ -75,10 +79,10 @@ var ba_rate = function(div, poll) {
     };
 
     
-    var update_plot = function(ratings) {
+    var update_plot = function(ratings, now) {
 	var serieses;
 
-	serieses = compute_updates(ratings);
+	serieses = compute_updates(ratings, now);
 	console.log("Computed updates: " + serieses[0].length + " points " + 
 		    serieses[1].length + " flags");
 	
@@ -92,7 +96,7 @@ var ba_rate = function(div, poll) {
 	return;	
     };
 
-    var compute_updates = function(ratings) {
+    var compute_updates = function(ratings, now) {
 	var series = [];
 	var flags = [];
 
@@ -145,10 +149,15 @@ var ba_rate = function(div, poll) {
 		       raters_[rating.judge] = rating;
 		   }
 	       });
+        
+        // Fill in values to now
+        for (;this_second_ < now; this_second_ += 1000) {
+            series.push([this_second_, compute_rating()]);
+        }
 	return [series, flags];
     };
 
-    var start_plot = function(initial_data) {
+    var start_plot = function(initial_data, now) {
 	var serieses = compute_updates(initial_data);
 
 	chart_ = new Highcharts.StockChart( {
@@ -165,7 +174,7 @@ var ba_rate = function(div, poll) {
 						
 						yAxis : {
 						    min:0,
-						    max:5,
+						    max:6,
 						    title : {
 							text : 'Speaker Rating'
 						    }
@@ -215,30 +224,28 @@ var ba_rate = function(div, poll) {
 }
 
 var startup = function(div) {
-    if (false) {
-         $("#rating-slider").slider({
-                                        min:1,
-                                        max:5,
-                                        value:3
-                                    });
-    }
+    $("#rating-slider").slider({
+                                   min:1,
+                                   max:5,
+                                   value:3
+                               });
 
     $.ajax({
 	       url:prefix + 'recent/',
 	       success:function(s) {
 		   js = JSON.parse(s);
 		   
-		   ready(div,js.data);
+		   ready(div,js.data, js.now);
 	       }
 	   }
 	  );
 };
 
-var ready = function(div, initial_data) {
+var ready = function(div, initial_data, now) {
     var series;
     var flags;
     
     var ba = new ba_rate(div, function() {poll_appspot(ba, 0);});
-    ba.start_plot(initial_data);
+    ba.start_plot(initial_data, now);
 };
 
