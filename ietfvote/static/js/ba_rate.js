@@ -222,7 +222,7 @@
 				min: 1,
 				max: 5,
 				value: 3,
-				slide: throttle(slider_change_cb, 2500)
+				slide: throttle(slider_change_cb, 250)
 			});
 
 			$.ajax({
