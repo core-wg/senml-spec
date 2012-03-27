@@ -40,15 +40,19 @@ class Rating( db.Model ):
     time    = db.IntegerProperty(required=True) # time this messarement was made (seconds since unix epoch)
     speaker = db.StringProperty(required=True) #
     judge   = db.StringProperty(required=True) #
-    rating  = db.IntegerProperty(required=True) # unique interger ID for this sensor 
+    rating  = db.IntegerProperty(required=True) # From 1.0 to 5.0
+    frating  = db.IntegerProperty(required=False) # Fractional part
    
 
 def addRating( rating , judge ):
     speaker = getSpeaker()
 
     now = long( 1000.0 * time.time() )
+    r = int( rating )
+    fr = int(round(rating%1*1000))
 
-    rating = Rating( time=now , speaker=speaker, rating=rating, judge=judge )
+    rating = Rating( time=now , speaker=speaker, rating=r, frating=fr, judge=judge )
+    # rating = Rating( time=now , speaker=speaker, rating=int(rating), judge=judge )
     rating.put()
 
 
@@ -59,13 +63,13 @@ def getRecentRatings( startTime ):
     global globalRatingTime
     global globalRatingValue
 
-    now = long( time.time() )
-    if globalRatingTime+5 > now: # use cached data for 5 seconds
+    now = long( 1000.0 * time.time() )
+    if globalRatingTime+5000 > now and startTime == 0: # use cached data for 5 seconds
         #logging.debug( "getRecentRatings using cached value" )
         return globalRatingValue
     
     json = ''
-    json += '{ "data": [ \n'
+    json += '{ "now":%d, "data" : [ \n'%now
 
     query = Rating.all();
     query.order("-time") #TODO - should have time based limits 
@@ -75,16 +79,18 @@ def getRecentRatings( startTime ):
 
     empty = True
     for rating in ratings:
-        if not empty:
-            json += ",\n"
-        empty = False
         if rating.time >= startTime:
-            json += '{ "time":%d, "speaker":"%s", "judge":"%s", "rating":%d }'%(
-                rating.time, rating.speaker, rating.judge, rating.rating )
+            if not empty:
+                json += ",\n"
+            empty = False
+            r = rating.rating + ((rating.frating or 0) / 1000.0)
+            json += '{"time":%d,"speaker":"%s","judge":"%s","rating":%f}'%(
+                rating.time, rating.speaker, rating.judge, r)
 
     json += " ] }"
 
-    globalRatingValue = json
-    globalRatingTime = now
+    if startTime == 0:
+        globalRatingValue = json
+        globalRatingTime = now
     
     return json

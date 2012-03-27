@@ -1,234 +1,212 @@
-var last_polled_time = 0;
+(function() {
+	'use strict'; /*jshint browser:true*/
+	/*global _,$,console,Highcharts*/
+	var last_polled_time = 0;
+	var me = "webmule" + Math.floor(Math.random() * 10000000);
+	var prefix = 'http://' + window.location.host + ':' + window.location.port + '/';
 
-var poll_appspot = function(ba, last_time) {
-    var url = 'http://ietfvote.appspot.com/recent/';
-    if (last_time) {
-	url += last_time + "/";
-    }
-    console.log("Fetching url " + url);
-    $.ajax({
-	       url:url,
-	       success:function(s) {
-		   js = JSON.parse(s);
-		   
-		   last_time = js.data[js.data.length - 1].time;
-		   ba.update_plot(js.data);
-		   setTimeout(function() {
-				  poll_appspot(ba, last_time);
-			      },
-			      1000);
-		   }
-	   }
-	  );
-};
+	var slider_change_cb = function(event, ui) {
+			$.ajax({
+				url: prefix + 'rate/' + me + '/' + ui.value,
+				success: function(x) {
+					console.log("Rating recorded", ui.value);
+				}
+			});
+		};
 
-var ba_rate = function(div, poll) {
-    var div_ = div;  // The div to render on
-    var poll_ = poll;
-    var chart_ = undefined;
-    var raters_ = {};
-    var current_speaker_ = undefined;
-    var this_second_ = 0;
-    var idle_lifetime_ = 300000; // 5 minutes
-    
-    var compute_rating = function() {
-	var to_delete = [];
-	var total = 0;
-	var count = 0;
+	var poll_appspot = function(ba, last_time) {
+			var url;
 
-	// Go through all the raters, aggregating those which aren't
-	// idle and recording those which are
-	_.each(raters_, function(rating, rater_name, list) {
-		   // TODO(ekr@rtfm.com): Filter out when speaker changes
-		   if ((this_second_ - rating.time) > idle_lifetime_) {
-		       to_delete.push(rating.judge);
-		   } else {
-		       total += rating.rating;
-		       count++;
-		   }
-	       });
-	_.each(to_delete, function(x) {
-		   delete raters_[x];
-	       });
-	
-	rating = total/count;
-	if (isNaN (rating)) {
-	    console.log("Huh: rating is nan: " + total + "," + count);
-	    rating = 2.5;
-	}
-	return rating;
-    };
+			if (!last_time) {
+				url = prefix + 'recent/';
+			}
+			if (last_time) {
+				url = prefix + 'since/' + last_time + '/';
+			}
+			$.ajax({
+				url: url,
+				success: function(s) {
+					var js = JSON.parse(s);
 
-    
-    var update_plot = function(ratings) {
-	var serieses;
+					last_time = js.now + 1;
+					ba.update_plot(js.data, js.now);
+					setTimeout(function() {
+						poll_appspot(ba, last_time);
+					}, 2000);
+				}
+			});
+		};
 
-	serieses = compute_updates(ratings);
-	console.log("Computed updates: " + serieses[0].length + " points " + 
-		   serieses[1].length + " flags");
-	
-	_.each(serieses[0], function(x) {
-		   chart_.series[0].addPoint(x);
-	       });
-	_.each(serieses[1], function(x) {
-		   chart_.series[1].addPoint(x);
-	       });
+	var ba_rate = function(div, poll) {
+			var div_ = div; // The div to render on
+			var poll_ = poll;
+			var chart_;
+			var raters_ = {};
+			var current_speaker_;
+			var this_second_ = 0;
+			var compute_rating = function() {
+					var total = 0;
+					var count = 0;
+					var rating;
 
-	return;	
-    };
+					// Go through all the raters, aggregating those which aren't
+					// idle and recording those which are
+					_.each(raters_, function(rating, rater_name, list) {
+						// TODO(ekr@rtfm.com): Filter out when speaker changes
+						if ( !! rating.rating) {
+							total += rating.rating;
+							count++;
+						}
+					});
 
-    var compute_updates = function(ratings) {
-	var series = [];
-	var flags = [];
+					$('#users').text('' + count + ' voters');
+					rating = total / count;
+					if (isNaN(rating)) {
+						rating = 3;
+					}
+					return rating;
+				};
 
-	if (ratings.length == 0)
-	    return [[],[]];
+			var update_plot = function(ratings, now) {
+					var serieses = compute_updates(ratings, now);
 
-    	if (!this_second_) {
-	    this_second_ = Math.floor(ratings[0].time/1000) * 1000;
-	}
+					_.each(serieses.points, function(x) {
+						chart_.series[0].addPoint(x);
+					});
+					_.each(serieses.flags, function(x) {
+						chart_.series[1].addPoint(x);
+					});
 
-	_.each(ratings, function(rating) {
-		   var r;
+					return;
+				};
 
-		   if (rating.time > this_second_) {
-		       // Compute ratings up to the next sample
-		       while(this_second_ < rating.time) {
+			var compute_updates = function(ratings, now) {
+					var series = [];
+					var flags = [];
 
-			   if (!_.isEmpty(raters_)) {
-			       r = compute_rating();
-			       var point = [this_second_, r];
-			       //			   console.log("P: " + this_second_ + " " + r);
-			       series.push([this_second_, r]);
-			   }
-			   else {
-			       //			  chart_.series[0].addPoint([this_second_, 2.5]);
-			       series.push([this_second_, r]);
-			   }
-			   this_second_ += 1000;
-		       }
-		       
-		       if (current_speaker_ !== rating.speaker) {
-			   //		       console.log("Speaker switched. New rating should be " + rating.rating);
-			   raters_ = {};
-			   /*
-			    chart_.series[1].addPoint({
-			    x:rating.time,
-			    y:rating.rating,
-			    title:rating.speaker,
-			    text:rating.speaker
-			    });/ */
-			   flags.push({
-					  x:rating.time,
-					  y:rating.rating,
-					  title:rating.speaker,
-					  text:rating.speaker
-				      });
-		       }
-		       
-		       current_speaker_ = rating.speaker;
-		       raters_[rating.judge] = rating;
-		   }
-	       });
-	return [series, flags];
-    };
+					if (!this_second_) {
+						this_second_ = Math.floor(ratings[0].time / 1000) * 1000;
+					}
 
-    var start_plot = function(initial_data) {
-	var serieses = compute_updates(initial_data);
+					_.each(ratings, function(rating) {
+						var r;
 
-	chart_ = new Highcharts.StockChart( {
-						chart : {
-						    renderTo: 'container',
-						    events:{
-							load: function() {
-							    setTimeout(
-							    poll_,
-						            100);
+						if (rating.time > this_second_) {
+							// Compute ratings up to the next sample
+							while (this_second_ < rating.time) {
+
+								if (!_.isEmpty(raters_)) {
+									r = compute_rating();
+									var point = [this_second_, r];
+								}
+								series.push([this_second_, r]);
+								this_second_ += 1000;
 							}
-						    }
-						},
-						
-						yAxis : {
-						    min:0,
-						    max:5,
-						    title : {
-							text : 'Speaker Rating'
+
+							if (current_speaker_ !== rating.speaker) {
+								raters_ = {};
+								flags.push({
+									x: rating.time,
+									y: rating.rating,
+									title: rating.speaker,
+									text: rating.speaker
+								});
+							}
+
+							current_speaker_ = rating.speaker;
+							raters_[rating.judge] = rating;
+						}
+					});
+
+					// Fill in values to now
+					this_second_ = Math.floor(now / 1000) * 1000;
+					series.push([this_second_, compute_rating()]);
+					return { points: series, flags: flags };
+				};
+
+			var start_plot = function(initial_data, now) {
+					var serieses = compute_updates(initial_data, now);
+
+					chart_ = new Highcharts.StockChart({
+						chart: {
+							renderTo: 'container',
+							events: {
+								load: function() {
+									setTimeout(poll_, 1000);
+								}
 							}
 						},
-						rangeSelector : {
-						    buttons : [
-							{
-							    count: 5,
-							    type: 'minute',
-							    text: '5M'
-							},
-							{
-							    count: 15,
-							    type: 'minute',
-							    text: '15M'
-							},
-							{
-							    type: 'all',
-							    text: 'All'
-							},
-						    ],
-						    inputEnabled: false,
-						    selected: 0
+
+						yAxis: {
+							min: 0,
+							max: 6,
+							title: {
+								text: 'Speaker Rating'
+							}
 						},
-						
-						series : [ {
-							       name : 'Rating',
-							       data : serieses[0],
-							       id :'ratingsseries'
-							   },
-							   {
-							       type:'flags',
-							       data:serieses[1],
-							       onSeries:'ratingsseries'
-							   }
-							 ],
-						
-					    }
-					  );
-    };
+						rangeSelector: {
+							buttons: [{
+								count: 5,
+								type: 'minute',
+								text: '5M'
+							}, {
+								count: 15,
+								type: 'minute',
+								text: '15M'
+							}, {
+								type: 'all',
+								text: 'All'
+							}],
+							inputEnabled: false,
+							selected: 0
+						},
 
-    return {
-	start_plot : start_plot,
-	update_plot: update_plot,
-	compute_updates: compute_updates	
-    };
-}
+						series: [{
+							name: 'Rating',
+							data: serieses.points,
+							id: 'ratingsseries'
+						}, {
+							type: 'flags',
+							data: serieses.flags,
+							onSeries: 'ratingsseries'
+						}]
+					});
+				};
 
-/*
-     var simulator = new data_simulator();
-     var initial_data = [];
-     var t = (new Date().getTime() / 1000) * 1000 -100000;
-     var ba;
+			return {
+				start_plot: start_plot,
+				update_plot: update_plot,
+				compute_updates: compute_updates
+			};
+		};
 
-     for (var i=0; i<100; i++) {
-	initial_data.push([t, 2.5])
-        t+=1000;			    
-     }
-	*/		
+	var ready = function(div, initial_data, now) {
+			var series;
+			var flags;
 
-var startup = function(div) {
-//    $("#rating-slider").slider();
+			var ba = new ba_rate(div, function() {
+				poll_appspot(ba, 0);
+			});
+			ba.start_plot(initial_data, now);
+		};
+	var startup = function(div) {
+			$("#rating-slider").slider({
+				orientation: "vertical",
+				min: 1,
+				max: 5,
+				step: 0.1,
+				value: 3,
+				stop: slider_change_cb
+			});
 
-    $.ajax({
-	       url:'http://ietfvote.appspot.com/recent/',
-	       success:function(s) {
-		   js = JSON.parse(s);
-		   
-		   ready(div,js.data);
-	       }
-	   }
-	  );
-};
+			$.ajax({
+				url: prefix + 'recent/',
+				success: function(s) {
+					var js = JSON.parse(s);
 
-var ready = function(div, initial_data) {
-    var series;
-    var flags;
-    
-    var ba = new ba_rate(div, function() {poll_appspot(ba, 0);});
-    ba.start_plot(initial_data);
-};
+					ready(div, js.data, js.now);
+				}
+			});
+		};
+	window.startup = startup;
+}());
