@@ -42,14 +42,7 @@ def rate(request, judge, rating ):
     try:
     	rating = float( rating )
     except:
-        text = ''
-        try:
-            response = urllib2.urlopen('http://www.google.com/ig/calculator?q=' + rating)
-            text = response.read()
-	    data = json.loads(text.replace('{','{"').replace(',',',"').replace(':','":'))
-            rating = float(data['rhs'])
-        except:
-            return HttpResponse(text, status=400)
+        return HttpResponse(text, status=400)
     
     if rating < 1 :
         rating = 1
