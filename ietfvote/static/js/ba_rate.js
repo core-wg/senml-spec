@@ -21,6 +21,7 @@
 			var current_speaker_;
 			var this_second_ = 0;
 			var last_time_ = 0;
+			var voters_ = 0;
 			var compute_rating = function() {
 					var total = 0;
 					var count = 0;
@@ -36,8 +37,8 @@
 						}
 					});
 
-					$('#users').text('' + count + ' voters');
 					rating = total / count;
+					voters_ = count;
 					if (isNaN(rating)) {
 						rating = 3;
 					}
@@ -98,6 +99,7 @@
 					_.each(serieses.flags, function(x) {
 						chart_.series[1].addPoint(x);
 					});
+					$('#users').text('' + voters_ + ' voters');
 
 					return;
 				};
