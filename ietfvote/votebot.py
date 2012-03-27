@@ -109,7 +109,7 @@ class VoteBot(MUCJabberBot):
             judge = "unicode_monkey_"+str(stringHash(judge))
         # Load relevant URL
         strval = str(value)
-        url = "http://ietfvote.appspot.com/rate/"+ judge +"/"+ strval +"/"
+        url = "http://ietfvote.appspot.com/rate/"+ judge +"/"+ strval
         try:
             req = urllib2.Request(url)
             res = urllib2.urlopen(req)
