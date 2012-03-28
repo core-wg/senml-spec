@@ -6,51 +6,23 @@
 	var prefix = 'http://' + window.location.host + ':' + window.location.port + '/';
 
 	var slider_change_cb = function(event, ui) {
-			console.log("Slider changed", ui.value);
 			$.ajax({
-				url: prefix + 'rate/' + me + '/' + ui.value + '/',
+				url: prefix + 'rate/' + me + '/' + ui.value,
 				success: function(x) {
-					console.log("Rating recorded");
+					console.log("Rating recorded", ui.value);
 				}
 			});
 		};
 
-	var poll_appspot = function(ba, last_time) {
-			var url;
 
-			if (!last_time) {
-				url = prefix + 'recent/';
-			}
-			if (last_time) {
-				url = prefix + 'since/' + last_time + '/';
-			}
-			console.log("Fetching url " + url);
-			$.ajax({
-				url: url,
-				success: function(s) {
-					var js = JSON.parse(s);
-
-					console.log("Got " + js.data.length + " values");
-					//                   console.log(js.data);
-					last_time = js.now + 1;
-					ba.update_plot(js.data, js.now);
-					setTimeout(function() {
-						poll_appspot(ba, last_time);
-					}, 100); // This is not much of a timeout, it's just to unwind the stack
-				}
-			});
-		};
-
-	var ba_rate = function(div, poll) {
-			var div_ = div; // The div to render on
-			var poll_ = poll;
+	var ba_rate = function() {
 			var chart_;
 			var raters_ = {};
 			var current_speaker_;
 			var this_second_ = 0;
-			var idle_lifetime_ = 300000; // 5 minutes
+			var last_time_ = 0;
+			var voters_ = 0;
 			var compute_rating = function() {
-					var to_delete = [];
 					var total = 0;
 					var count = 0;
 					var rating;
@@ -59,39 +31,18 @@
 					// idle and recording those which are
 					_.each(raters_, function(rating, rater_name, list) {
 						// TODO(ekr@rtfm.com): Filter out when speaker changes
-						if ((this_second_ - rating.time) > idle_lifetime_) {
-							console.log("Expiring out judge " + rating.judge);
-							to_delete.push(rating.judge);
-						} else if ( !! rating.rating) {
+						if ( !! rating.rating) {
 							total += rating.rating;
 							count++;
 						}
 					});
-					_.each(to_delete, function(x) {
-						delete raters_[x];
-					});
 
-					$('#users').text('' + count + ' voters');
 					rating = total / count;
+					voters_ = count;
 					if (isNaN(rating)) {
-						// console.log("Huh: rating is nan: " + total + "," + count);
 						rating = 3;
 					}
 					return rating;
-				};
-
-			var update_plot = function(ratings, now) {
-					var serieses = compute_updates(ratings, now);
-					console.log("Computed updates: " + serieses[0].length + " points " + serieses[1].length + " flags");
-
-					_.each(serieses[0], function(x) {
-						chart_.series[0].addPoint(x);
-					});
-					_.each(serieses[1], function(x) {
-						chart_.series[1].addPoint(x);
-					});
-
-					return;
 				};
 
 			var compute_updates = function(ratings, now) {
@@ -112,10 +63,8 @@
 								if (!_.isEmpty(raters_)) {
 									r = compute_rating();
 									var point = [this_second_, r];
-									series.push([this_second_, r]);
-								} else {
-									series.push([this_second_, r]);
 								}
+								series.push([this_second_, r]);
 								this_second_ += 1000;
 							}
 
@@ -135,9 +84,43 @@
 					});
 
 					// Fill in values to now
+					last_time_ = now;
 					this_second_ = Math.floor(now / 1000) * 1000;
 					series.push([this_second_, compute_rating()]);
-					return [series, flags];
+					return { points: series, flags: flags };
+				};
+
+			var update_plot = function(ratings, now) {
+					var serieses = compute_updates(ratings, now);
+
+					_.each(serieses.points, function(x) {
+						chart_.series[0].addPoint(x);
+					});
+					_.each(serieses.flags, function(x) {
+						chart_.series[1].addPoint(x);
+					});
+					$('#users').text('' + voters_ + ' voters');
+
+					return;
+				};
+
+			var poll_appspot = function() {
+					var url;
+		
+					if (!last_time_) {
+						url = prefix + 'recent/';
+					}
+					if (last_time_) {
+						url = prefix + 'since/' + last_time_ + '/';
+					}
+					$.ajax({
+						url: url,
+						success: function(s) {
+							var js = JSON.parse(s);
+		
+							update_plot(js.data, js.now);
+						}
+					});
 				};
 
 			var start_plot = function(initial_data, now) {
@@ -148,8 +131,7 @@
 							renderTo: 'container',
 							events: {
 								load: function() {
-									setTimeout(
-									poll_, 100);
+									setInterval(poll_appspot, 5000);
 								}
 							}
 						},
@@ -180,37 +162,35 @@
 
 						series: [{
 							name: 'Rating',
-							data: serieses[0],
+							data: serieses.points,
 							id: 'ratingsseries'
 						}, {
 							type: 'flags',
-							data: serieses[1],
+							data: serieses.flags,
 							onSeries: 'ratingsseries'
 						}]
 					});
 				};
 
 			return {
-				start_plot: start_plot,
-				update_plot: update_plot,
-				compute_updates: compute_updates
+				start_plot: start_plot
 			};
 		};
 
-	var ready = function(div, initial_data, now) {
+	var ready = function(initial_data, now) {
 			var series;
 			var flags;
 
-			var ba = new ba_rate(div, function() {
-				poll_appspot(ba, 0);
-			});
+			var ba = new ba_rate();
 			ba.start_plot(initial_data, now);
 		};
-	var startup = function(div) {
+
+	var startup = function() {
 			$("#rating-slider").slider({
 				orientation: "vertical",
 				min: 1,
 				max: 5,
+				step: 0.1,
 				value: 3,
 				stop: slider_change_cb
 			});
@@ -220,7 +200,7 @@
 				success: function(s) {
 					var js = JSON.parse(s);
 
-					ready(div, js.data, js.now);
+					ready(js.data, js.now);
 				}
 			});
 		};

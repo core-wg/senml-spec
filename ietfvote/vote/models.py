@@ -40,15 +40,19 @@ class Rating( db.Model ):
     time    = db.IntegerProperty(required=True) # time this messarement was made (seconds since unix epoch)
     speaker = db.StringProperty(required=True) #
     judge   = db.StringProperty(required=True) #
-    rating  = db.IntegerProperty(required=True) # unique interger ID for this sensor 
+    rating  = db.IntegerProperty(required=True) # From 1.0 to 5.0
+    frating  = db.IntegerProperty(required=False) # Fractional part
    
 
 def addRating( rating , judge ):
     speaker = getSpeaker()
 
     now = long( 1000.0 * time.time() )
+    r = int( rating )
+    fr = int(round(rating%1*1000))
 
-    rating = Rating( time=now , speaker=speaker, rating=rating, judge=judge )
+    rating = Rating( time=now , speaker=speaker, rating=r, frating=fr, judge=judge )
+    # rating = Rating( time=now , speaker=speaker, rating=int(rating), judge=judge )
     rating.put()
 
 
@@ -84,8 +88,9 @@ def getRecentRatings( startTime ):
             if not empty:
                 json += ",\n"
             empty = False
-            json += '{ "time":%d, "speaker":"%s", "judge":"%s", "rating":%d }'%(
-                rating.time, rating.speaker, rating.judge, rating.rating )
+            r = rating.rating + ((rating.frating or 0) / 1000.0)
+            json += '{"time":%d,"speaker":"%s","judge":"%s","rating":%f}'%(
+                rating.time, rating.speaker, rating.judge, r)
 
     json += " ] }"
 

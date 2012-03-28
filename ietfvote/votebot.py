@@ -17,6 +17,24 @@ from datetime import datetime
 import re
 import urllib2
 import logging
+import json
+
+def isNonAscii(str):
+    return not all(ord(c) < 128 for c in str)
+
+def stringHash(str):
+    hash = 0
+    for c in str: 
+        hash = (hash + ord(c)) % (1<<13)
+    return hash
+
+def googleCalc(calc_str):
+    calc_str = urllib2.quote(calc_str)
+    response = urllib2.urlopen('http://www.google.com/ig/calculator?q=' + calc_str)
+    text = response.read()
+    data = json.loads(text.replace('{','{"').replace(',',',"').replace(':','":'))
+    return float(data['rhs'])
+
 
 class MUCJabberBot(JabberBot):
 
@@ -66,35 +84,59 @@ class VoteBot(MUCJabberBot):
 
     @botcmd
     def vote(self, mess, args):
-        # Close 
         # Extract judge
         judge = mess.getFrom().getResource()
         # Extract rating
-        m = re.search("([0-9.]+)", mess.getBody())
-        if (not m): 
-            return "C'mon, "+ judge +", you have to give me a number"
-        value = int(float(m.group(0)));
+        raw_value = re.sub("^vote ", "", mess.getBody());
+        value = 0
+        if (raw_value == ""):
+            return "Dude, what's your vote?"
+        else:
+            try: 
+                # Try to interpret with Google Calc
+                value = googleCalc(raw_value)
+            except:
+                # Pull out the first number and use that
+                m = re.search("[0-9]+(.[0-9]+)?", raw_value)
+                if (m):
+                    value = m.group(0);
+                else:
+                    return "Come on, '"+raw_value+"' is not a vote"
+                    pass
+        
+        # Un-unicode-ize the judge 
+        if (isNonAscii(judge)):
+            judge = "unicode_monkey_"+str(stringHash(judge))
         # Load relevant URL
         strval = str(value)
-        url = "http://ietfvote.appspot.com/rate/"+ judge +"/"+ strval +"/"
-        req = urllib2.Request(url)
-        res = urllib2.urlopen(req)
+        url = "http://ietfvote.appspot.com/rate/"+ judge +"/"+ strval
+        try:
+            req = urllib2.Request(url)
+            res = urllib2.urlopen(req)
+            return judge+": Vote submitted: "+value
+        except urllib2.HTTPError:
+            return judge+": Unable to submit vote "+value
+            pass
 
     @botcmd
     def speaker(self, mess, args):
         # Check to see if sender is authorized
-        if (mess.getFrom().getResource() != "master"):
+        #if (mess.getFrom().getResource() != "botmaster"):
+        if (mess.getType() == "groupchat"):
             return "Sorry, unauthorized"
         # Read message to extract speaker
         speaker = re.sub("^speaker[ ]+", "", mess.getBody())
         # Validate the name and URL-encode
-        if (not all(ord(c) < 128 for c in speaker)):
+        if (isNonAscii(speaker)):
             return "This is the IETF, please use ASCII only"
         speaker = urllib2.quote(speaker)
         # Load relevant URL
         url = "http://ietfvote.appspot.com/speaker/"+ speaker +"/"
-        req = urllib2.Request(url)
-        res = urllib2.urlopen(req)
+        try:
+            req = urllib2.Request(url)
+            res = urllib2.urlopen(req)
+        except urllib2.HTTPError:
+            pass
 
 
 if __name__ == '__main__':

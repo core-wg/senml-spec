@@ -1,6 +1,8 @@
 import logging
 import sys
 import os
+import urllib2
+import json
 
 
 from django.http import HttpResponse
@@ -37,7 +39,10 @@ def speaker(request, speakerName):
 def rate(request, judge, rating ):
     logging.debug( "Rating active speaker to %s"%(rating) )
 
-    rating = int( rating )
+    try:
+    	rating = float( rating )
+    except:
+        return HttpResponse(text, status=400)
     
     if rating < 1 :
         rating = 1
@@ -46,7 +51,7 @@ def rate(request, judge, rating ):
         
     addRating( rating, judge )
     
-    return HttpResponse() # return a 200  
+    return HttpResponse(rating) # return a 200  
 
 
 def main(request):
