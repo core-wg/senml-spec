@@ -60,16 +60,21 @@ def getRecentRatings( startTime ):
     global globalRatingValue
 
     now = long( 1000.0 * time.time() )
-    if globalRatingTime+5000 > now and startTime == 0: # use cached data for 5 seconds
-        #logging.debug( "getRecentRatings using cached value" )
-        return globalRatingValue
+
+    if startTime < now - 30*60*1000: # limit to 30 minutes old 
+        startTime = now - 30*60*1000
+        
+    #if globalRatingTime+5000 > now and startTime == 0: # use cached data for 5 seconds
+    #    #logging.debug( "getRecentRatings using cached value" )
+    #    return globalRatingValue
     
     json = ''
     json += '{ "now":%d, "data" : [ \n'%now
 
     query = Rating.all();
+    query.filter( 'time >', startTime )
     query.order("-time") #TODO - should have time based limits 
-    ratings = query.fetch(2000) #TODO need to deal with more than 900 meassurements
+    ratings = query.fetch(500) #TODO need to deal with more than 900 meassurements
 
     ratings.reverse()
 
