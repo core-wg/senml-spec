@@ -31,9 +31,12 @@
 					// idle and recording those which are
 					_.each(raters_, function(rating, rater_name, list) {
 						// TODO(ekr@rtfm.com): Filter out when speaker changes
+                                                if ((this_second_ - rating.time) > 300000) {
+                                                    rating.rating = 0;                                                    
+                                                }
 						if ( !! rating.rating) {
-							total += rating.rating;
-							count++;
+						    total += rating.rating;
+						    count++;
 						}
 					});
 
