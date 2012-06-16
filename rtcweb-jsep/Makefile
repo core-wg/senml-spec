@@ -9,6 +9,7 @@ PDF  := $(patsubst %.nr,%.pdf,$(SRC))
 
 all: $(TXT) $(DIF) 
 
+
 #draft-ietf-rtcweb-jsep-00.txt: draft-ietf-rtcweb-jsep-00.nr
 #	nroff draft-ietf-rtcweb-jsep-00.nr > draft-ietf-rtcweb-jsep-00.txt 
 
