@@ -1,0 +1,168 @@
+
+
+
+Network Working Group                                        C. Jennings
+Internet-Draft                                                     Cisco
+Intended status: BCP                                       June 21, 2012
+Expires: December 23, 2012
+
+
+                      Vendors Considered Harmfull
+             draft-jennings-vendors-considered-harmfull-00
+
+Abstract
+
+   There are things vendors will do to make sure the internet has a
+   robust and stable solution to congestion.  However, significantly
+   decreasing the video quality of their currently shipping products is
+   not likely to be one of the things they will do.
+
+Status of this Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.  This document may not be modified,
+   and derivative works of it may not be created, and it may not be
+   published except as an Internet-Draft.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at http://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on December 23, 2012.
+
+Copyright Notice
+
+   Copyright (c) 2012 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+
+
+
+Jennings                Expires December 23, 2012               [Page 1]
+
+Internet-Draft              Harmfull Vendors                   June 2012
+
+
+   described in the Simplified BSD License.
+
+
+1.  Executive Summary
+
+   This paper looks at what type of fine advice, even when accompanied
+   by many fine lunches and dinners, is likely to be ignored by vendors.
+   For better or worse, many vendors seem to follow the following
+   principals:
+
+      Principal 1 - Tomorrow is Better:
+
+      Version N+1 of a product MUST NOT [RFC2119] have a worse users
+      experience than version N under the same network conditions.
+
+
+
+      Principal 2 - Yesterday is Past:
+
+      If a major vendors products does X, and X is bad for the user
+      population overall but makes their product look better in some
+      cases to individual users, it's OK for products from other vendors
+      to do X.
+
+
+
+      Principal 3 - Today is not Tomorrow:
+
+      Version 1.0 of the product does not need to worry about congestion
+      control, security, management, and so on.
+
+
+
+   So what does this all mean for a video application on the web?  There
+   is some evidence to indicate that existing interactive video products
+   use more bandwidth than a single TCP connection would use in the same
+   network conditions.  This is not a unique situation - many
+   applications that run over TCP, such as google maps, iTunes, and
+   netflix can use more bandwidth than a single TCP connection would use
+   in the same network conditions.  One approach is not to abandon the
+   constraints of TCP but instead limit an application to what 4 TCP
+   connections would use.  This approach has been widely deployed with
+   results that don't appear disastrous in most cases and is the
+   solutions adopted by [I-D.perkins-avtcore-rtp-circuit-breakers] which
+   sugests up to an "order of magnitude" more than TCP.
+
+   The IETF needs to find a path to allow video applications to meet
+   their needs without causing a violation of the anti-entropy
+
+
+
+Jennings                Expires December 23, 2012               [Page 2]
+
+Internet-Draft              Harmfull Vendors                   June 2012
+
+
+   principle.  Working groups that are constrained to do video in a way
+   that is strictly TCP friendly are likely to have their output ignored
+   by the vendors.
+
+
+2.  Normative References
+
+   [I-D.perkins-avtcore-rtp-circuit-breakers]
+              Perkins, C. and V. Singh, "RTP Congestion Control: Circuit
+              Breakers for Unicast Sessions",
+              draft-perkins-avtcore-rtp-circuit-breakers-00 (work in
+              progress), March 2012.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+
+Author's Address
+
+   Cullen Jennings
+   Cisco
+   170 West Tasman Drive
+   San Jose, CA  95134
+   USA
+
+   Email: fluffy@cisco.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jennings                Expires December 23, 2012               [Page 3]
+
