@@ -53,39 +53,44 @@
   <middle>
     <section title="Executive Summary">
 
-     <t>This paper looks at what type of fine advice, even when accompanied by
-     many fine lunches and dinners, is likely to be ignored by vendors. For
-     better or worse, many vendors seem to follow the following principals: </t>
+      <t>This paper looks at what type of fine advice, even when accompanied by
+      many fine lunches and dinners, is likely to be ignored by vendors. For
+      better or worse, many vendors seem to follow the following principals:
+      </t>
 
       <t>
         <list>
 
           <t>
-            Principal 1 - Tomorrow is Better:
-          </t> <t>
-            Version N+1 of a product MUST NOT <xref target="RFC2119"/> have a worse users
-            experience than version N under the same network conditions.
+            Principal 1 - Tomorrow is Better: 
+          </t> 
+          <t> 
+            Version N+1 of a product MUST NOT <xref target="RFC2119"/> have a
+            worse users experience than version N under the same network
+            conditions.
           </t>
-<t> </t>
+          <t> </t>
 
           <t>
-            Principal 2 - Yesterday can't be changed:
-          </t> <t>
-
-             If a major vendors products does X, which is bad for the
-            user population overall but makes their product look better to
-            individual users, it's OK for products from other vendors to do X.
+            Principal 2 - Yesterday is Past:
+          </t> 
+          <t>
+            If a major vendors products does X, and X is bad for the user
+            population overall but makes their product look better in some cases
+            to individual users, it's OK for products from other vendors to do
+            X.
           </t>
-<t> </t>
+          <t> </t>
 
           <t>
             Principal 3 - Today is not Tomorrow: 
-          </t> <t>
-          Version 1.0 of the product does not need to worry about
-            congestion control, security, management, and so on.
+          </t> 
+          <t>
+            Version 1.0 of the product does not need to worry about congestion
+            control, security, management, and so on.
           </t>
-<t> </t>
-
+          <t> </t>
+          
         </list>
       </t>
 
@@ -119,26 +124,26 @@
     <references title="Normative References">
 
 
-<reference anchor='I-D.perkins-avtcore-rtp-circuit-breakers'>
-<front>
-<title>RTP Congestion Control: Circuit Breakers for Unicast Sessions</title>
+      <reference anchor='I-D.perkins-avtcore-rtp-circuit-breakers'>
+        <front>
+          <title>RTP Congestion Control: Circuit Breakers for Unicast Sessions</title>
 
-<author initials='C' surname='Perkins' fullname='Colin Perkins'>
-    <organization />
-</author>
+          <author initials='C' surname='Perkins' fullname='Colin Perkins'>
+            <organization />
+          </author>
 
-<author initials='V' surname='Singh' fullname='Varun Singh'>
-    <organization />
-</author>
+          <author initials='V' surname='Singh' fullname='Varun Singh'>
+            <organization />
+          </author>
 
-<date month='March' day='5' year='2012' />
+          <date month='March' day='5' year='2012' />
 
-</front>
+        </front>
 
-<seriesInfo name='Internet-Draft' value='draft-perkins-avtcore-rtp-circuit-breakers-00' />
-<format type='TXT'
-        target='http://www.ietf.org/internet-drafts/draft-perkins-avtcore-rtp-circuit-breakers-00.txt' />
-</reference>
+        <seriesInfo name='Internet-Draft' value='draft-perkins-avtcore-rtp-circuit-breakers-00' />
+        <format type='TXT'
+                target='http://www.ietf.org/internet-drafts/draft-perkins-avtcore-rtp-circuit-breakers-00.txt' />
+      </reference>
 
       <reference anchor='RFC2119'>
 
@@ -156,7 +161,7 @@
           <date year='1997' month='March' />
           <area>General</area>
           <keyword>keyword</keyword>
-   </front>
+        </front>
 
         <seriesInfo name='BCP' value='14' />
         <seriesInfo name='RFC' value='2119' />
