@@ -12,11 +12,10 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="std" docName="draft-cbran-rtcweb-codec-02"
+<rfc category="bcp" docName="draft-jennings-vendors-considered-harmfull-00"
      ipr="noDerivativesTrust200902">
   <front>
-    <title abbrev="WebRTC Codec">WebRTC Codec and Media Processing
-    Requirements</title>
+    <title abbrev="Harmfull Vendors">Vendors Considered Harmfull</title>
 
    
     <author fullname="Cullen Jennings" initials="C." surname="Jennings">
@@ -46,23 +45,109 @@
     <date day="21" month="June" year="2012" />
 
     <abstract>
-      <t>This document outlines the codec and media processing requirements
-      for WebRTC client application and endpoint devices.</t>
+      <t>This document outlines the significant harm caused by vendors of
+      internt equipment to state of congestion on the internet.</t>
     </abstract>
   </front>
 
   <middle>
-    <section title="Introduction">
-      <t>An integral part of the success and adoption of the Web Real Time
-      Communications (WebRTC) will be the voice and video interoperability
-      between WebRTC applications. This specification will outline the media
-      processing and codec requirements for WebRTC client implementations.</t>
+    <section title="Executive Summary">
+
+
+      <t>Vendors can be a source of significant issues when it comes to congestion control. The IETF gives them good advice on what to do, yet they often choose to ignore it. This paper looks at what type of fine advice, even when accompanied by many fine lunches and dinners, is likely to be ignored by vendors. For better or worse, many vendors seem to follow the following principals. </t>
+
+<t>
+<list>
+
+<t>
+Principal 1:
+
+Anti-Entropy: Version N+1 of a product MUST NOT have a worse users expereince than version N under the same network conditions. 
+</t>
+
+<t>
+Principal 2:
+
+Low Road: If a major vendors products does X, which is bad for the user ovulation overall but makes their product look better to individual users, it's OK for products from other vendors to do X as well as long as I can justify it by pointing out the competitor did it first. 
+</t>
+
+<t>
+Principal 3:
+
+Manjana: Version 1.0 of the product does not need to worry about congestion control, security, management, and so on.
+</t>
+
+</list>
+</t>
+
+<t>
+So what does this all mean for a video application on the web. There is some
+evidence to indicate that existing products may use more bandwidth than a single
+TCP connection would use in the same network conditions. This is not a unique
+situation - many applications that run over TCP, such as google maps, iTunes,
+and netflicks can use more bandwidth than a single TCP connection would use in
+the same network conditions. One approach is not to abandon the constraints of
+TCP but instead limit an application to what 4 TCP connections would use. This
+approach has been widely deployed with results that don't appear disastrous in
+most cases.
+</t>
+
+<t>
+The IETF needs to find a path to allow video applications to meet their needs
+without causing a violation of the anti-entropy principle. Working groups that
+are constrained to do video in a way that is strictly TCP friendly are likely to
+have their output ignored by the vendors.
+</t>
+
     </section>
 
   </middle>
 
   <back>
     <references title="Normative References">
+
+<reference anchor='RFC2119'>
+
+<front>
+<title abbrev='RFC Key Words'>Key words for use in RFCs to Indicate Requirement Levels</title>
+<author initials='S.' surname='Bradner' fullname='Scott Bradner'>
+<organization>Harvard University</organization>
+<address>
+<postal>
+<street>1350 Mass. Ave.</street>
+<street>Cambridge</street>
+<street>MA 02138</street></postal>
+<phone>- +1 617 495 3864</phone>
+<email>sob@harvard.edu</email></address></author>
+<date year='1997' month='March' />
+<area>General</area>
+<keyword>keyword</keyword>
+<abstract>
+<t>
+   In many standards track documents several words are used to signify
+   the requirements in the specification.  These words are often
+   capitalized.  This document defines these words as they should be
+   interpreted in IETF documents.  Authors who follow these guidelines
+   should incorporate this phrase near the beginning of their document:
+
+<list>
+<t>
+      The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
+      NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and
+      "OPTIONAL" in this document are to be interpreted as described in
+      RFC 2119.
+</t></list></t>
+<t>
+   Note that the force of these words is modified by the requirement
+   level of the document in which they are used.
+</t></abstract></front>
+
+<seriesInfo name='BCP' value='14' />
+<seriesInfo name='RFC' value='2119' />
+<format type='TXT' octets='4723' target='http://www.rfc-editor.org/rfc/rfc2119.txt' />
+<format type='HTML' octets='17491' target='http://xml.resource.org/public/rfc/html/rfc2119.html' />
+<format type='XML' octets='5777' target='http://xml.resource.org/public/rfc/xml/rfc2119.xml' />
+</reference>
 
     </references>
   </back>
