@@ -17,7 +17,7 @@
   <front>
     <title abbrev="Harmfull Vendors">Vendors Considered Harmfull</title>
 
-   
+    
     <author fullname="Cullen Jennings" initials="C." surname="Jennings">
       <organization>Cisco</organization>
 
@@ -34,8 +34,6 @@
           <country>USA</country>
         </postal>
 
-        <phone>+1 408 421-9990</phone>
-
         <email>fluffy@cisco.com</email>
       </address>
     </author>
@@ -45,59 +43,73 @@
     <date day="21" month="June" year="2012" />
 
     <abstract>
-      <t>This document outlines the significant harm caused by vendors of
-      internt equipment to state of congestion on the internet.</t>
+      <t> There are things vendors will do to make sure the internet has a
+      robust and stable solution to congestion. However, significantly
+      decreasing the video quality of their currently shipping products is not
+      likely to be one of the things they will do.  </t>
     </abstract>
   </front>
 
   <middle>
     <section title="Executive Summary">
 
+     <t>This paper looks at what type of fine advice, even when accompanied by
+     many fine lunches and dinners, is likely to be ignored by vendors. For
+     better or worse, many vendors seem to follow the following principals: </t>
 
-      <t>Vendors can be a source of significant issues when it comes to congestion control. The IETF gives them good advice on what to do, yet they often choose to ignore it. This paper looks at what type of fine advice, even when accompanied by many fine lunches and dinners, is likely to be ignored by vendors. For better or worse, many vendors seem to follow the following principals. </t>
+      <t>
+        <list>
 
-<t>
-<list>
+          <t>
+            Principal 1 - Tomorrow is Better:
+          </t> <t>
+            Version N+1 of a product MUST NOT <xref target="RFC2119"/> have a worse users
+            experience than version N under the same network conditions.
+          </t>
+<t> </t>
 
-<t>
-Principal 1:
+          <t>
+            Principal 2 - Yesterday can't be changed:
+          </t> <t>
 
-Anti-Entropy: Version N+1 of a product MUST NOT have a worse users expereince than version N under the same network conditions. 
-</t>
+             If a major vendors products does X, which is bad for the
+            user population overall but makes their product look better to
+            individual users, it's OK for products from other vendors to do X.
+          </t>
+<t> </t>
 
-<t>
-Principal 2:
+          <t>
+            Principal 3 - Today is not Tomorrow: 
+          </t> <t>
+          Version 1.0 of the product does not need to worry about
+            congestion control, security, management, and so on.
+          </t>
+<t> </t>
 
-Low Road: If a major vendors products does X, which is bad for the user ovulation overall but makes their product look better to individual users, it's OK for products from other vendors to do X as well as long as I can justify it by pointing out the competitor did it first. 
-</t>
+        </list>
+      </t>
 
-<t>
-Principal 3:
+      <t>
+        So what does this all mean for a video application on the web? There is
+        some evidence to indicate that existing interactive video products use
+        more bandwidth than a single TCP connection would use in the same
+        network conditions. This is not a unique situation - many applications
+        that run over TCP, such as google maps, iTunes, and netflix can use more
+        bandwidth than a single TCP connection would use in the same network
+        conditions. One approach is not to abandon the constraints of TCP but
+        instead limit an application to what 4 TCP connections would use. This
+        approach has been widely deployed with results that don't appear
+        disastrous in most cases and is the solutions adopted by <xref
+        target="I-D.perkins-avtcore-rtp-circuit-breakers" /> which sugests up to
+        an "order of magnitude" more than TCP.
+      </t>
 
-Manjana: Version 1.0 of the product does not need to worry about congestion control, security, management, and so on.
-</t>
-
-</list>
-</t>
-
-<t>
-So what does this all mean for a video application on the web. There is some
-evidence to indicate that existing products may use more bandwidth than a single
-TCP connection would use in the same network conditions. This is not a unique
-situation - many applications that run over TCP, such as google maps, iTunes,
-and netflicks can use more bandwidth than a single TCP connection would use in
-the same network conditions. One approach is not to abandon the constraints of
-TCP but instead limit an application to what 4 TCP connections would use. This
-approach has been widely deployed with results that don't appear disastrous in
-most cases.
-</t>
-
-<t>
-The IETF needs to find a path to allow video applications to meet their needs
-without causing a violation of the anti-entropy principle. Working groups that
-are constrained to do video in a way that is strictly TCP friendly are likely to
-have their output ignored by the vendors.
-</t>
+      <t>
+        The IETF needs to find a path to allow video applications to meet their
+        needs without causing a violation of the anti-entropy principle. Working
+        groups that are constrained to do video in a way that is strictly TCP
+        friendly are likely to have their output ignored by the vendors.
+      </t>
 
     </section>
 
@@ -106,48 +118,52 @@ have their output ignored by the vendors.
   <back>
     <references title="Normative References">
 
-<reference anchor='RFC2119'>
 
+<reference anchor='I-D.perkins-avtcore-rtp-circuit-breakers'>
 <front>
-<title abbrev='RFC Key Words'>Key words for use in RFCs to Indicate Requirement Levels</title>
-<author initials='S.' surname='Bradner' fullname='Scott Bradner'>
-<organization>Harvard University</organization>
-<address>
-<postal>
-<street>1350 Mass. Ave.</street>
-<street>Cambridge</street>
-<street>MA 02138</street></postal>
-<phone>- +1 617 495 3864</phone>
-<email>sob@harvard.edu</email></address></author>
-<date year='1997' month='March' />
-<area>General</area>
-<keyword>keyword</keyword>
-<abstract>
-<t>
-   In many standards track documents several words are used to signify
-   the requirements in the specification.  These words are often
-   capitalized.  This document defines these words as they should be
-   interpreted in IETF documents.  Authors who follow these guidelines
-   should incorporate this phrase near the beginning of their document:
+<title>RTP Congestion Control: Circuit Breakers for Unicast Sessions</title>
 
-<list>
-<t>
-      The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
-      NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and
-      "OPTIONAL" in this document are to be interpreted as described in
-      RFC 2119.
-</t></list></t>
-<t>
-   Note that the force of these words is modified by the requirement
-   level of the document in which they are used.
-</t></abstract></front>
+<author initials='C' surname='Perkins' fullname='Colin Perkins'>
+    <organization />
+</author>
 
-<seriesInfo name='BCP' value='14' />
-<seriesInfo name='RFC' value='2119' />
-<format type='TXT' octets='4723' target='http://www.rfc-editor.org/rfc/rfc2119.txt' />
-<format type='HTML' octets='17491' target='http://xml.resource.org/public/rfc/html/rfc2119.html' />
-<format type='XML' octets='5777' target='http://xml.resource.org/public/rfc/xml/rfc2119.xml' />
+<author initials='V' surname='Singh' fullname='Varun Singh'>
+    <organization />
+</author>
+
+<date month='March' day='5' year='2012' />
+
+</front>
+
+<seriesInfo name='Internet-Draft' value='draft-perkins-avtcore-rtp-circuit-breakers-00' />
+<format type='TXT'
+        target='http://www.ietf.org/internet-drafts/draft-perkins-avtcore-rtp-circuit-breakers-00.txt' />
 </reference>
+
+      <reference anchor='RFC2119'>
+
+        <front>
+          <title abbrev='RFC Key Words'>Key words for use in RFCs to Indicate Requirement Levels</title>
+          <author initials='S.' surname='Bradner' fullname='Scott Bradner'>
+            <organization>Harvard University</organization>
+            <address>
+              <postal>
+                <street>1350 Mass. Ave.</street>
+                <street>Cambridge</street>
+              <street>MA 02138</street></postal>
+              <phone>- +1 617 495 3864</phone>
+          <email>sob@harvard.edu</email></address></author>
+          <date year='1997' month='March' />
+          <area>General</area>
+          <keyword>keyword</keyword>
+   </front>
+
+        <seriesInfo name='BCP' value='14' />
+        <seriesInfo name='RFC' value='2119' />
+        <format type='TXT' octets='4723' target='http://www.rfc-editor.org/rfc/rfc2119.txt' />
+        <format type='HTML' octets='17491' target='http://xml.resource.org/public/rfc/html/rfc2119.html' />
+        <format type='XML' octets='5777' target='http://xml.resource.org/public/rfc/xml/rfc2119.xml' />
+      </reference>
 
     </references>
   </back>
