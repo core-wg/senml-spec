@@ -139,41 +139,46 @@
         some evidence to indicate that existing interactive video products use
         more bandwidth than a single TCP connection would use in the same
         network conditions. This is not a unique situation - many applications
-        that run over TCP, such as google maps, iTunes, and netflix can use more
+        that run over TCP, such as google maps, iTunes, and Netflix can use more
         bandwidth than a single TCP connection would use in the same network
         conditions. One approach is not to abandon the constraints of TCP but
         instead limit an application to what 4 TCP connections would
         use. Variants of this approach has been widely deployed with results
         that don't appear disastrous. It is also the solutions adopted by <xref
-        target="I-D.perkins-avtcore-rtp-circuit-breakers" /> which suggests using up to
-        an "order of magnitude" more bandwidth than TCP.
+        target="I-D.perkins-avtcore-rtp-circuit-breakers" /> which suggests
+        using up to an "order of magnitude" more bandwidth than TCP.
       </t>
 
       <t>
         The IETF needs to find a path to allow interactive video applications to
         have reasonable congestion control without causing a violation of the
-        above principles. Working groups that are constrained to do video in a
-        way that is strictly TCP friendly are likely to have their output
-        ignored by the vendors. Just like the vendors have ignored it for
-        interactive audio.
+        above principles. On the other hand, it needs to make it clear that it
+        would be reasonable for standard network operation procedures to block
+        traffic from applications that pushed all the TCP traffic to near zero
+        bandwidth. Working groups that are constrained to do video in a way that
+        is strictly TCP friendly are likely to have their output ignored by the
+        vendors. Just like the vendors have ignored it for interactive
+        audio.
       </t>
 
     </section>
 
-    <section title="Apendix A: Measurements">
+    <section title="Appendix A: Measurements">
       <t>
-        This section contains measurement results showing interactions between RTP and TCP flows for 
-        the following clients - Apple Facetime, Google Hangout, Cisco Movi and Microsoft Skype. We chose these
-        clients since they represent the greatest and the latest VOIP clients used by numerous
+        This section contains measurement results showing interactions between
+        RTP and TCP flows for the following clients - Apple Facetime, Google
+        Hangout, Cisco Movi and Microsoft Skype. We chose these clients since
+        they represent the greatest and the latest VOIP clients used by numerous
         end-users across the globe.
       </t>  
        <t> 
-        The idea is to observe and analyze the behavior of RTP bandwidth uitlization when in competition with other 
-        flows, say TCP.
+        The idea is to observe and analyze the behavior of RTP bandwidth
+        utilization when in competition with other flows, say TCP.
         </t>
         <t>
-        As with any experiment conducted by humans, even this experiment may have flaws. We try to provide our analysis
-        on the topic being investigated to the best of our understanding on the test setup and its implicatations.
+        The measurements represent some early observations and these results have
+        not been carefully verified. We encourage others to duplicate the
+        experiment.
       </t>
       <t>
         To perform the measurements, the below test-setup was used. 
@@ -184,21 +189,26 @@
         ]]></artwork>
     </figure>
       <t>
-       A special version of the Cisco router with pMod tool is used for impairing bandwith between the networks 
-       to which device under tests are individualy connected.
-       The device under test (DUT) 1 is physically connected to "Network A", whereas, 
-       DUT-2 is wirelessly connected to Internet through Linksly wireless router. The router itself is connected to
-       the wireless router via "Network B" a shown.
+       A special version of the Cisco router with pMod tool is used for
+       impairing bandwidth between the networks to which device under tests are
+       individually connected.  The device under test (DUT) 1 is physically
+       connected to "Network A", whereas, DUT-2 is wirelessly connected to
+       Internet through Linksys wireless router. The router itself is connected
+       to the wireless router via "Network B" a shown.
       </t>  
       <t>
-        Network Link A is bandwith capped at 512 kbps and a delay of 250 ms is inserted for the incoming packets, thus 
-        resulting in a low download rate and delayed packets at the DUT-1.
+        Network Link A is bandwidth capped at 512 kbps and a delay of 250 ms is
+        inserted for the incoming packets, thus resulting in a low download rate
+        and delayed packets at the DUT-1.
       </t>
       <t>
-        A 2 way audio and video RTP call with a competing FTP flow was instantiated to peform the measurements.
-       
-            In the order of Skpye, Hangout, Facetime and Movi, the below graphs capture the interactions between RTP and 
-        TCP (FTP-Data) as observed from DUT-1. THe 
+        A 2 way audio and video RTP call with a competing FTP flow was
+        instantiated to perform the measurements.
+      </t>
+    <t>
+            In the order of Skpye, Hangout, Facetime and Movi, the below graphs
+            capture the interactions between RTP and TCP (FTP-Data) as observed
+            from DUT-1. THe
       
       </t>  
       <t>
@@ -217,6 +227,8 @@
        Y-axis       --> Bits per second
       </t> 
       
+   
+<section title="Skype" >
       <t>
        Mircosoft Skype Graph - 512 Kbps Link with 250 ms latency  
       </t>
@@ -225,7 +237,8 @@
           src="graph-skype-512.png"><![CDATA[TODO ASCII FIGURE 
 ]]></artwork>
       </figure>
-      
+       </section>    
+<section title="Hangouts" >
       <t>
         Google Hangout Graph - 512 Kbps Link with 250 ms latency  
       </t>
@@ -234,7 +247,9 @@
           src="graph-hangout-512.png"><![CDATA[TODO ASCII FIGURE 
 ]]></artwork>
       </figure>
-      
+
+       </section>    
+<section title="Facetime" >
       <t>
         Apple Facetime Graph - 512 Kbps Link with 250 ms latency  
       </t>
@@ -243,7 +258,9 @@
           src="graph-facetime-512.png"><![CDATA[TODO ASCII FIGURE 
 ]]></artwork>
       </figure>
-     
+ </section>    
+<section title="Movi" >
+
       <t>
         Cisco Movi Graph - 512 Kbps Link with 250 ms latency  
       </t>
@@ -252,7 +269,8 @@
           src="graph-movi-512.png"><![CDATA[TODO ASCII FIGURE 
 ]]></artwork>
       </figure>
-      
+</section>
+
     </section>
 
   </middle>
