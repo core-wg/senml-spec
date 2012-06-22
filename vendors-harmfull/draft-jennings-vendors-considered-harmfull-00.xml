@@ -162,15 +162,97 @@
 
     <section title="Apendix A: Measurements">
       <t>
-        This section contains measurement results TODO
+        This section contains measurement results showing interactions between RTP and TCP flows for 
+        the following clients - Apple Facetime, Google Hangout, Cisco Movi and Microsoft Skype. We chose these
+        clients since they represent the greatest and the latest VOIP clients used by numerous
+        end-users across the globe.
+      </t>  
+       <t> 
+        The idea is to observe and analyze the behavior of RTP bandwidth uitlization when in competition with other 
+        flows, say TCP.
+        </t>
+        <t>
+        As with any experiment conducted by humans, even this experiment may have flaws. We try to provide our analysis
+        on the topic being investigated to the best of our understanding on the test setup and its implicatations.
       </t>
-
+      <t>
+        To perform the measurements, the below test-setup was used. 
+      </t>
+      <figure>
+      <artwork alt="Test Setup"
+        src="test-setup.png"><![CDATA[TODO ASCII FIGURE 
+        ]]></artwork>
+    </figure>
+      <t>
+       A special version of the Cisco router with pMod tool is used for impairing bandwith between the networks 
+       to which device under tests are individualy connected.
+       The device under test (DUT) 1 is physically connected to "Network A", whereas, 
+       DUT-2 is wirelessly connected to Internet through Linksly wireless router. The router itself is connected to
+       the wireless router via "Network B" a shown.
+      </t>  
+      <t>
+        Network Link A is bandwith capped at 512 kbps and a delay of 250 ms is inserted for the incoming packets, thus 
+        resulting in a low download rate and delayed packets at the DUT-1.
+      </t>
+      <t>
+        A 2 way audio and video RTP call with a competing FTP flow was instantiated to peform the measurements.
+       
+            In the order of Skpye, Hangout, Facetime and Movi, the below graphs capture the interactions between RTP and 
+        TCP (FTP-Data) as observed from DUT-1. THe 
+      
+      </t>  
+      <t>
+      Graphs shown below are read as follows
+      </t>
+      <t>
+        Red Line      --> TCP Flow
+      </t>
+      <t>
+       Black Line    --> RTP Flow
+      </t>
+      <t>
+       X-axis       --> Time in seconds
+      </t>
+      <t>
+       Y-axis       --> Bits per second
+      </t> 
+      
+      <t>
+       Mircosoft Skype Graph - 512 Kbps Link with 250 ms latency  
+      </t>
       <figure>
         <artwork alt="Go Read the TXT version of this draft"
-                 src="graph-skype-512.png"><![CDATA[TODO ASCII FIGURE 
+          src="graph-skype-512.png"><![CDATA[TODO ASCII FIGURE 
 ]]></artwork>
       </figure>
-
+      
+      <t>
+        Google Hangout Graph - 512 Kbps Link with 250 ms latency  
+      </t>
+      <figure>
+        <artwork alt="Go Read the TXT version of this draft"
+          src="graph-hangout-512.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+      </figure>
+      
+      <t>
+        Apple Facetime Graph - 512 Kbps Link with 250 ms latency  
+      </t>
+      <figure>
+        <artwork alt="Go Read the TXT version of this draft"
+          src="graph-facetime-512.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+      </figure>
+     
+      <t>
+        Cisco Movi Graph - 512 Kbps Link with 250 ms latency  
+      </t>
+      <figure>
+        <artwork alt="Go Read the TXT version of this draft"
+          src="graph-movi-512.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+      </figure>
+      
     </section>
 
   </middle>
