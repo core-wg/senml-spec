@@ -80,7 +80,7 @@
     </author>
 
 
-    <date day="21" month="June" year="2012" />
+    <date day="22" month="June" year="2012" />
 
     <abstract>
       <t> There are things vendors will do to make sure that the internet has a
@@ -136,7 +136,7 @@
 
       <t>
         So what does this all mean for a video application on the web? There is
-        some evidence to indicate that existing interactive video products use
+        some evidence (see <xref target="data" />) to indicate that existing interactive video products use
         more bandwidth than a single TCP connection would use in the same
         network conditions. This is not a unique situation - many applications
         that run over TCP, such as google maps, iTunes, and Netflix can use more
@@ -163,7 +163,7 @@
 
     </section>
 
-    <section title="Appendix A: Measurements">
+    <section title="Measurements" anchor="data" >
       <t>
         This section contains measurement results showing interactions between
         RTP and TCP flows for the following clients - Apple Facetime, Google
