@@ -121,6 +121,19 @@
 
     </section>
 
+    <section title="Apendix A: Measurements">
+      <t>
+        This section contains measurement results TODO
+      </t>
+
+      <figure>
+        <artwork alt="Go Read the TXT version of this draft"
+                 src="graph-skype-512.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+      </figure>
+
+    </section>
+
   </middle>
 
   <back>
