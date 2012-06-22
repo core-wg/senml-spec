@@ -83,7 +83,7 @@
     <date day="21" month="June" year="2012" />
 
     <abstract>
-      <t> There are things vendors will do to make sure the internet has a
+      <t> There are things vendors will do to make sure that the internet has a
       robust and stable solution to congestion. However, significantly
       decreasing the video quality of their currently shipping products is
       probably not one of the things they will do.  </t>
@@ -93,7 +93,7 @@
   <middle>
     <section title="Executive Summary">
 
-      <t>This paper looks at what type of fine advice, even when accompanied by
+      <t>This paper looks at what type of good advice, even when accompanied by
       many fine lunches and dinners, is likely to be ignored by vendors. For
       better or worse, many vendors seem to follow the following principals:
       </t>
@@ -106,7 +106,7 @@
           </t> 
           <t> 
             Version N+1 of a product MUST NOT <xref target="RFC2119"/> have a
-            worse users experience than version N under the same network
+            worse user experience than version N under the same network
             conditions.
           </t>
           <t> </t>
@@ -116,7 +116,7 @@
           </t> 
           <t>
             If a major vendors products does X, and X turns out to be bad for
-            the user population overall but makes that product look better in
+            the overall user population but makes that product look better in
             some cases to individual users, then it's OK for products from other
             vendors to also do X.
           </t>
@@ -190,16 +190,16 @@
     </figure>
       <t>
        A special version of the Cisco router with pMod tool is used for
-       impairing bandwidth between the networks to which device under tests are
+       impairing bandwidth between the networks to which devices under test are
        individually connected.  The device under test (DUT) 1 is physically
-       connected to "Network A", whereas, DUT-2 is wirelessly connected to
+       connected to "Network B", whereas, DUT-2 is wirelessly connected to
        Internet through Linksys wireless router. The router itself is connected
-       to the wireless router via "Network B" a shown.
+       to the wireless router via "Network A" a shown.
       </t>  
       <t>
-        Network Link A is bandwidth capped at 512 kbps and a delay of 250 ms is
+        Network Link A is bandwidth capped at 512 Kbps and a delay of 250 ms is
         inserted for the incoming packets, thus resulting in a low download rate
-        and delayed packets at the DUT-1.
+        and delayed packets at DUT-1.
       </t>
       <t>
         A 2 way audio and video RTP call with a competing FTP flow was
@@ -208,11 +208,11 @@
     <t>
             In the order of Skpye, Hangout, Facetime and Movi, the below graphs
             capture the interactions between RTP and TCP (FTP-Data) as observed
-            from DUT-1. THe
+            from DUT-1.
       
       </t>  
       <t>
-      Graphs shown below are read as follows
+      Graphs shown below are read as follows:
       </t>
       <t>
         Red Line      --> TCP Flow
