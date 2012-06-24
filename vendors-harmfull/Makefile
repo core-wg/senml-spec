@@ -17,14 +17,14 @@ clean:
 #	xsltproc -o $@ rfc2629.xslt $^
 
 %.html: %.xml
-	xml2rfc $^ $@
+	/Users/XTM/HTML5/ietf/xml2rfc/xml2rfc-1.36/xml2rfc.tcl $^ $@
 
 
 %.txt: %.xml
-	xml2rfc $^ $@
+	/Users/XTM/HTML5/ietf/xml2rfc/xml2rfc-1.36/xml2rfc.tcl $^ $@
 
 %.diff.html: %.txt
-	htmlwdiff  $^.old $^ >  $@
+	/Users/XTM/HTML5/ietf/xml2rfc/xml2rfc-1.36/htmlwdiff  $^.old $^ >  $@
 
 %.pdf: %.html
 	wkpdf -p letter -s $^ -o $@

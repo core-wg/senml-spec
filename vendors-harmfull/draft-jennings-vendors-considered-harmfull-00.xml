@@ -197,8 +197,8 @@
        to the wireless router via "Network A" a shown.
       </t>  
       <t>
-        Network Link A is bandwidth capped at 512 Kbps and a delay of 250 ms is
-        inserted for the incoming packets, thus resulting in a low download rate
+        Network Link A is bandwidth capped at rates 512 Kbps, 1Mbps, 2Mbps and a delay of 0ms,50ms,
+        250ms respectively is inserted for the incoming packets, thus resulting in a varied download rates
         and delayed packets at DUT-1.
       </t>
       <t>
@@ -228,47 +228,351 @@
       </t> 
       
    
-<section title="Skype" >
-      <t>
-       Mircosoft Skype Graph - 512 Kbps Link with 250 ms latency  
-      </t>
-      <figure>
-        <artwork alt="Go Read the TXT version of this draft"
-          src="graph-skype-512.png"><![CDATA[TODO ASCII FIGURE 
+<section title="Skype Graphs" >
+  <t>
+   This section captures TCP flow interaction with 2-way Skype call for
+   network links of 512 Kbps, 1 Mbps and 2 Mbps capacity respectively.
+  </t>
+  <section title="512 Kbps link">
+    <t>
+      0 ms latency
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="skype-512-0.png"><![CDATA[TODO ASCII FIGURE 
+    ]]></artwork>
+    </figure>
+    <t>
+      50 ms latency  
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="skype-512-50.png"><![CDATA[TODO ASCII FIGURE 
 ]]></artwork>
-      </figure>
-       </section>    
+    </figure>
+    <t>
+      250 ms latency  
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="graph-skype-512.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+    </figure>
+  </section>  
+  
+  <section title="1 Mbps link">
+    <t>
+      0 ms latency
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="skype-1mb-0.png"><![CDATA[TODO ASCII FIGURE 
+    ]]></artwork>
+    </figure>
+    <t>
+      50 ms latency  
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="skype-1mb-50.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+    </figure>
+    <t>
+      250 ms latency  
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="skype-1mb-250.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+    </figure>
+  </section>  
+  <section title="2 Mbps link">
+    <t>
+      0 ms latency
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="skype-2mb-0.png"><![CDATA[TODO ASCII FIGURE 
+    ]]></artwork>
+    </figure>
+    <t>
+      50 ms latency  
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="skype-2mb-50.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+    </figure>
+    <t>
+      250 ms latency  
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="skype-2mb-250.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+    </figure>
+  </section>  
+  
+  
+ </section>    
 <section title="Hangouts" >
-      <t>
-        Google Hangout Graph - 512 Kbps Link with 250 ms latency  
-      </t>
-      <figure>
-        <artwork alt="Go Read the TXT version of this draft"
-          src="graph-hangout-512.png"><![CDATA[TODO ASCII FIGURE 
+  <t>
+    This section captures TCP flow interaction with 2-way Hangout call for
+    network links of 512 Kbps, 1 Mbps and 2 Mbps capacity respectively.
+  </t>
+  <section title="512 Kbps link">
+    <t>
+      0 ms latency
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="hangout-512-0.png"><![CDATA[TODO ASCII FIGURE 
+    ]]></artwork>
+    </figure>
+    <t>
+      50 ms latency  
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="hangout-512-50.png"><![CDATA[TODO ASCII FIGURE 
 ]]></artwork>
-      </figure>
-
+    </figure>
+    <t>
+      250 ms latency  
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="graph-hangout-512.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+    </figure>
+  </section>  
+  
+  <section title="1 Mbps link">
+    <t>
+      0 ms latency
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="hangout-1mb-0.png"><![CDATA[TODO ASCII FIGURE 
+    ]]></artwork>
+    </figure>
+    <t>
+      50 ms latency  
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="hangout-1mb-50.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+    </figure>
+    <t>
+      250 ms latency  
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="hangout-1mb-250.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+    </figure>
+  </section>  
+  <section title="2 Mbps link">
+    <t>
+      0 ms latency
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="hangout-2mb-0.png"><![CDATA[TODO ASCII FIGURE 
+    ]]></artwork>
+    </figure>
+    <t>
+      50 ms latency  
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="hangout-2mb-50.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+    </figure>
+    <t>
+      250 ms latency  
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="hangout-2mb-250.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+    </figure>
+  </section>  
+  
        </section>    
 <section title="Facetime" >
-      <t>
-        Apple Facetime Graph - 512 Kbps Link with 250 ms latency  
-      </t>
-      <figure>
-        <artwork alt="Go Read the TXT version of this draft"
-          src="graph-facetime-512.png"><![CDATA[TODO ASCII FIGURE 
+  <t>
+    This section captures TCP flow interaction with 2-way Facetime call for
+    network links of 512 Kbps, 1 Mbps and 2 Mbps capacity respectively.
+  </t>
+  <section title="512 Kbps link">
+    <t>
+      0 ms latency
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="facetime-512-0.png"><![CDATA[TODO ASCII FIGURE 
+    ]]></artwork>
+    </figure>
+    <t>
+      50 ms latency  
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="facetime-512-50.png"><![CDATA[TODO ASCII FIGURE 
 ]]></artwork>
-      </figure>
+    </figure>
+    <t>
+      250 ms latency  
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="graph-facetime-512.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+    </figure>
+  </section>  
+  
+  <section title="1 Mbps link">
+    <t>
+      0 ms latency
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="facetime-1mb-0.png"><![CDATA[TODO ASCII FIGURE 
+    ]]></artwork>
+    </figure>
+    <t>
+      50 ms latency  
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="facetime-1mb-50.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+    </figure>
+    <t>
+      250 ms latency  
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="facetime-1mb-250.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+    </figure>
+  </section>  
+  <section title="2 Mbps link">
+    <t>
+      0 ms latency
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="facetime-2mb-0.png"><![CDATA[TODO ASCII FIGURE 
+    ]]></artwork>
+    </figure>
+    <t>
+      50 ms latency  
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="facetime-2mb-50.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+    </figure>
+    <t>
+      250 ms latency  
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="facetime-2mb-250.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+    </figure>
+  </section>  
+  
  </section>    
 <section title="Movi" >
 
-      <t>
-        Cisco Movi Graph - 512 Kbps Link with 250 ms latency  
-      </t>
-      <figure>
-        <artwork alt="Go Read the TXT version of this draft"
-          src="graph-movi-512.png"><![CDATA[TODO ASCII FIGURE 
+  <t>
+    This section captures TCP flow interaction with 2-way Movi call for
+    network links of 512 Kbps, 1 Mbps and 2 Mbps capacity respectively.
+  </t>
+  <section title="512 Kbps link">
+    <t>
+      0 ms latency
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="movi-512-0.png"><![CDATA[TODO ASCII FIGURE 
+    ]]></artwork>
+    </figure>
+    <t>
+      50 ms latency  
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="movi-512-50.png"><![CDATA[TODO ASCII FIGURE 
 ]]></artwork>
-      </figure>
+    </figure>
+    <t>
+      250 ms latency  
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="graph-movi-512.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+    </figure>
+  </section>  
+  
+  <section title="1 Mbps link">
+    <t>
+      0 ms latency
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="movi-1mb-0.png"><![CDATA[TODO ASCII FIGURE 
+    ]]></artwork>
+    </figure>
+    <t>
+      50 ms latency  
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="movi-1mb-50.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+    </figure>
+    <t>
+      250 ms latency  
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="movi-1mb-250.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+    </figure>
+  </section>  
+  <section title="2 Mbps link">
+    <t>
+      0 ms latency
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="movi-2mb-0.png"><![CDATA[TODO ASCII FIGURE 
+    ]]></artwork>
+    </figure>
+    <t>
+      50 ms latency  
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="movi-2mb-50.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+    </figure>
+    <t>
+      250 ms latency  
+    </t>
+    <figure>
+      <artwork alt="Go Read the TXT version of this draft"
+        src="movi-2mb-250.png"><![CDATA[TODO ASCII FIGURE 
+]]></artwork>
+    </figure>
+  </section>  
+  
 </section>
 
     </section>
