@@ -1,0 +1,392 @@
+
+
+
+Network Working Group                                        S. Dhesikan
+Internet-Draft                                                     Cisco
+Intended status: Standards Track                                D. Druta
+Expires: January 10, 2013                                            ATT
+                                                             C. Jennings
+                                                                P. Jones
+                                                                   Cisco
+                                                            July 9, 2012
+
+
+             DSCP and other packet markings for RTCWeb QoS
+                      draft-jennings-rtcweb-qos-00
+
+Abstract
+
+   Many networks, such as Service Provider and Enterprise networks, can
+   prioritize packets based on various Differentiated Services Code
+   Points (DSCP).  This document defines the recommended DSCP values for
+   browsers to use for various classes of traffic.
+
+   This draft is a very early and far from done.  It is meant to provide
+   the structure for the idea of how to do this but much discussion is
+   needed about the details.
+
+Status of this Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.  This document may not be modified,
+   and derivative works of it may not be created, and it may not be
+   published except as an Internet-Draft.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at http://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on January 10, 2013.
+
+Copyright Notice
+
+   Copyright (c) 2012 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+
+
+
+Dhesikan, et al.        Expires January 10, 2013                [Page 1]
+
+Internet-Draft                 RTCWeb QoS                      July 2012
+
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+1.  Introduction
+
+   DiffServ style packet marking can help provide QoS in some
+   environments.  There are many use cases where they do not help but
+   they seldom make things worse.  This draft proposes how browser and
+   other VoIP applications can mark packets.  This draft does not
+   contradict or redefine any advice from previous IETF RFC but simply
+   provides a simple set of recommendations for implementors based on
+   the previous RFCs.
+
+   There are some environments where priority markings frequently help.
+   These include:
+
+   1.  If the congested link is the broadband uplink in a Cable or DSL
+   scenario, often residential routers/NAT support prioritization based
+   on DSCP.
+
+   2.  If the congested link is a local WiFi network, marking may help.
+
+   3.  In some some cellular style deployments, markings may help in
+   cases where the network does not remove them.
+
+   Traditionally DSCP values have been thought of as being site
+   specific, with each site selecting its own code points for each QoS
+   level.  However in the RTCWeb use cases, the browsers need to set
+   them to something when there is no site specific information.  This
+   document describes a reasonable default set of DSCP code point values
+   drawn from existing RFCs and common usage.  These code points are
+   solely defaults.  Future drafts may define mechanisms for site
+   specific mappings to override the values provided in this draft.
+
+   This draft defines some inputs that the browser can look at to
+   determine how to set the various packet markings and defines the a
+   mapping from abstract QoS policies (media type, priority level) to
+   those packet markings.
+
+
+
+
+
+Dhesikan, et al.        Expires January 10, 2013                [Page 2]
+
+Internet-Draft                 RTCWeb QoS                      July 2012
+
+
+2.  Terminology
+
+   TODO add the boiler plate
+
+
+3.  Inputs
+
+   The first input is the type of the media.  The browser provides this
+   input as it knows if the media is audio, video, or data.  In this
+   specification, both interactive and streaming media is included.
+   They are treated in different categories as their QoS requirements
+   are slightly different.  The second input is the relative priority of
+   the stream within that session.  Many applications have multiple
+   video streams and often some are more important than others.
+   Javascript applications can tell the browser whether a particular
+   media stream is high, medium, or low importance to the application.
+
+
+4.  DSCP Mappings
+
+       +-----------------------+-----------+-----------+-----------+
+       |                       |    Low    |   Medium  |    High   |
+       +-----------------------+-----------+-----------+-----------+
+       | Audio                 |  46 (EF)  |  46 (EF)  |  46 (EF)  |
+       | Interactive Video     | 38 (AF43) | 36 (AF42) | 34 (AF41) |
+       | Non-Interactive Video | 26 (AF33) | 28 (AF32) | 30 (AF31) |
+       | Data                  |  8 (CS1)  |   0 (BE)  | 10 (AF11) |
+       +-----------------------+-----------+-----------+-----------+
+
+                                  Table 1
+
+
+5.  QCI Mapping
+
+              +-----------------------+-----+--------+------+
+              |                       | Low | Medium | High |
+              +-----------------------+-----+--------+------+
+              | Audio                 |  1  |    1   |   1  |
+              | Interactive Video     |  2  |    2   |   2  |
+              | Non-Interactive Video |  8  |    6   |   4  |
+              | Data                  |  9  |    9   |   3  |
+              +-----------------------+-----+--------+------+
+
+                                  Table 2
+
+   This corresponds to the mapping provided in TODO REF which are: QCI
+   values (LTE)
+
+
+
+
+Dhesikan, et al.        Expires January 10, 2013                [Page 3]
+
+Internet-Draft                 RTCWeb QoS                      July 2012
+
+
+   +-------+--------+-----+--------------------------------------------+
+   | Value |        |     |                     Use                    |
+   +-------+--------+-----+--------------------------------------------+
+   | 1     |   GBR  |  2  |              Interactive Voice             |
+   | 2     |   GBR  |  4  |              Interactive Video             |
+   | 3     |   GBR  |  5  |            Non-Interactive Video           |
+   | 4     |   GBR  |  3  |              Real Time Gaming              |
+   | 5     | Non-BG | R 1 |               IMS Signalling               |
+   | 6     | Non-BG | R 7 |       interactive Voice, video, games      |
+   | 7-9   | Non-BG | R 6 |  non interactive video / TCP web, email, / |
+   |       |        |     |            Platinum vs gold user           |
+   +-------+--------+-----+--------------------------------------------+
+
+                                  Table 3
+
+
+6.  WiFI Mapping
+
+              +-----------------------+-----+--------+------+
+              |                       | Low | Medium | High |
+              +-----------------------+-----+--------+------+
+              | Audio                 |  6  |    6   |   6  |
+              | Interactive Video     |  5  |    5   |   5  |
+              | Non-Interactive Video |  4  |    4   |   4  |
+              | Data                  |  1  |    0   |   3  |
+              +-----------------------+-----+--------+------+
+
+                                  Table 4
+
+   This corresponds to the mappings from TODO REF of
+
+   +-------+----+------------------+---------------------+-------------+
+   | Value |    |   Traffic Type   |   Access Category   | Designation |
+   |       |    |                  |         (AC)        |             |
+   +-------+----+------------------+---------------------+-------------+
+   | 1     | BK |    Background    |        AC_BK        |  Background |
+   | 2     |  - |      (spare)     |        AC_BK        |  Background |
+   | 0     | BE |    Best Effort   |        AC_BE        | Best Effort |
+   | 3     | EE | Excellent Effort |        AC_BE        | Best Effort |
+   | 4     | CL |  Controlled Loat |        AC_VI        |    Video    |
+   | 5     | VI |       Video      |        AC_VI        |    Video    |
+   | 6     | VO |       Voice      |        AC_VO        |    Voice    |
+   | 7     | NC |  Network Control |        AC_VO        |    Voice    |
+   +-------+----+------------------+---------------------+-------------+
+
+                                  Table 5
+
+
+
+
+
+Dhesikan, et al.        Expires January 10, 2013                [Page 4]
+
+Internet-Draft                 RTCWeb QoS                      July 2012
+
+
+7.  W3C API Implications
+
+   To work with this proposal, the W3C specification would need to
+   provide a way to specify the importance of media and data streams.
+
+   The W3C API should also provide a way for the application to find out
+   the source and destination IP and ports of any flow as well as the
+   DSCP value or other markings in use for that flow.  The JS
+   application can then communicate this to a web service that may
+   install a particular policy for that flow.
+
+
+8.  Security Considerations
+
+   TODO - discuss implications of what browser can set and what JS can
+   set
+
+
+9.  IANA Considerations
+
+   This specification does not require any actions from IANA.
+
+
+10.  Acknowledgements
+
+   Thanks for hints on code to do this from Paolo Severini, Jim
+   Hasselbrook, Joe Marcus, and Erik Nordmark.
+
+   remove
+
+
+11.  Appendix: Code Hints
+
+   On windows setting the source interface works but BSD, OSX, Linux use
+   weak end-system model and will route out different interface if that
+   looks like a better route.  (TODO - Can someone verify this with
+   specific versions)
+
+   In windows you might be able to tell something about priority of an
+   interface for ICE purposes with WlanQueryInterface or GetIfTable.
+
+   The specific mechanisms required to set DSCP code points depend on
+   the application platform.
+
+   In windows, setting the DSCP is not easy.  See Knowledge Base Article
+   KB248611.  TODO - add more information about what can be done for
+   windows.
+
+
+
+
+Dhesikan, et al.        Expires January 10, 2013                [Page 5]
+
+Internet-Draft                 RTCWeb QoS                      July 2012
+
+
+   For most unix variants, the following program can set DSCP.
+
+   TODO - make this work in V6.  For v6 have a look at IPv6_TCLASS or
+   better the tclass part of sin6_flowid for IPv6
+
+   TODO - Can someone test and report back results of program in iOS,
+   Android, Linux, OSX, BSD.
+
+   Example test program:
+
+   TODO - insert test program
+
+
+12.  Normative References
+
+   [1]  Babiarz, J., Chan, K., and F. Baker, "Configuration Guidelines
+        for DiffServ Service Classes", RFC 4594, August 2006.
+
+   [2]  Davie, B., Charny, A., Bennet, J., Benson, K., Le Boudec, J.,
+        Courtney, W., Davari, S., Firoiu, V., and D. Stiliadis, "An
+        Expedited Forwarding PHB (Per-Hop Behavior)", RFC 3246,
+        March 2002.
+
+   [3]  Nichols, K., Blake, S., Baker, F., and D. Black, "Definition of
+        the Differentiated Services Field (DS Field) in the IPv4 and
+        IPv6 Headers", RFC 2474, December 1998.
+
+   [4]  Heinanen, J., Baker, F., Weiss, W., and J. Wroclawski, "Assured
+        Forwarding PHB Group", RFC 2597, June 1999.
+
+   [5]  Bradner, S., "Key words for use in RFCs to Indicate Requirement
+        Levels", BCP 14, RFC 2119, March 1997.
+
+
+Authors' Addresses
+
+   Subha Dhesikan
+   Cisco
+
+   Email: sdhesika@cisco.com
+
+
+   Dan Druta
+   ATT
+
+   Email: dd5826@att.com
+
+
+
+
+
+Dhesikan, et al.        Expires January 10, 2013                [Page 6]
+
+Internet-Draft                 RTCWeb QoS                      July 2012
+
+
+   Cullen Jennings
+   Cisco
+
+   Email: fluffy@cisco.com
+
+
+   Paul Jones
+   Cisco
+
+   Email: paulej@packetizer.com>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dhesikan, et al.        Expires January 10, 2013                [Page 7]
+
