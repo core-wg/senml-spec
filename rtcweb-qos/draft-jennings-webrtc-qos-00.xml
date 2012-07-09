@@ -146,13 +146,10 @@ is high, medium, or low importance to the application.
     <ttcol align='center'>Low</ttcol>
     <ttcol align='center'>Medium</ttcol>
     <ttcol align='center'>High</ttcol>
-<c>Importance          </c><c>                   Low      </c><c>             Med        </c><c>           High</c>
-<c>Audio               </c><c>                       46 (EF)  </c><c>           46 (EF)    </c><c>         46 (EF) </c>
-<c>Interactive Video     </c><c>                38 (AF43)  </c><c>           36 (AF42)    </c><c>       34 (AF41) </c>
-<c>Non-Interactive Video   </c><c>           26 (AF33)  </c><c>      28 (AF32)   </c><c>     30 (AF31)</c>
-<c>Data                     </c><c>                  8 (CS1)     </c><c>      0 (BE) </c><c>            10 (AF11)</c>
-
-
+<c>Audio                 </c><c>   46 (EF)    </c><c>   46 (EF)    </c><c>    46 (EF)   </c>
+<c>Interactive Video     </c><c>   38 (AF43)  </c><c>   36 (AF42)  </c><c>    34 (AF41) </c>
+<c>Non-Interactive Video </c><c>   26 (AF33)  </c><c>   28 (AF32)  </c><c>    30 (AF31) </c>
+<c>Data                  </c><c>   8 (CS1)    </c><c>   0 (BE)     </c><c>    10 (AF11) </c>
 </texttable>
 
 <t>
@@ -160,44 +157,55 @@ is high, medium, or low importance to the application.
 </t>
 </section>
 <section title="QCI Mapping">
-<t>
 
-Importance                          Low         Med         High
-Audio                                  1         1         1
-Interactive Video                  2         2         2
-Non-Interactive Video                8        6        4
-Data                                    9         9         3 
 
-</t>
+<texttable anchor="table-qci">
+    <ttcol align='left'> </ttcol>
+    <ttcol align='center'>Low</ttcol>
+    <ttcol align='center'>Medium</ttcol>
+    <ttcol align='center'>High</ttcol>
+<c>Audio                 </c><c>   1    </c><c>  1    </c><c>    1 </c>
+<c>Interactive Video     </c><c>   2    </c><c>  2    </c><c>    2 </c>
+<c>Non-Interactive Video </c><c>   8    </c><c>  6    </c><c>    4 </c>
+<c>Data                  </c><c>   9    </c><c>  9    </c><c>    3 </c>
+</texttable>
+
 
 <t>
 This corresponds to the mapping provided in TODO REF which are:
 QCI values (LTE)
 </t>
 
-<t>
+<texttable anchor="table-qci-ref">
+ <ttcol align='left'> Value</ttcol>
+    <ttcol align='center'> </ttcol>
+    <ttcol align='center'> </ttcol>
+    <ttcol align='center'>Use</ttcol>
+<c>1   </c><c>GBR   </c><c>    2 </c><c> Interactive Voice </c>
+<c>2   </c><c>GBR   </c><c>    4 </c><c> Interactive Video </c>
+<c>3   </c><c>GBR   </c><c>    5 </c><c> Non-Interactive Video </c>
+<c>4   </c><c>GBR   </c><c>    3 </c><c> Real Time Gaming  </c>
+<c>5   </c><c>Non-BG</c><c>R   1 </c><c> IMS Signalling </c>
+<c>6   </c><c>Non-BG</c><c>R   7 </c><c> interactive Voice, video, games </c>
+<c>7-9 </c><c>Non-BG</c><c>R   6 </c><c> non interactive video / TCP web, email, / Platinum vs gold user  </c>
+</texttable>
 
-1   GBR       2  Interactive Voice
-2   GBR       4  Interactive Video
-3   GBR       5  Non-Interactive Video
-4   GBR       3  Real Time Gaming 
-5   Non-BGR   1  IMS Signalling
-6   Non-BGR   7  interactive Voice, video, games
-7-9 Non-BGR   6  non interactive video / TCP web, email, / Platinum vs gold user ?
 
-
-</t>
 </section>
 <section title="WiFI Mapping">
-<t>
 
-Importance                          Low         Med         High
-Audio                                  6        6        6
-Interactive Video                  5        5        5
-Non-Interactive Video                4        4        4
-Data                                    1        0        3
 
-</t>
+<texttable anchor="table-wifi">
+    <ttcol align='left'> </ttcol>
+    <ttcol align='center'>Low</ttcol>
+    <ttcol align='center'>Medium</ttcol>
+    <ttcol align='center'>High</ttcol>
+<c>Audio                 </c><c>   6    </c><c>  6    </c><c>    6 </c>
+<c>Interactive Video     </c><c>   5    </c><c>  5    </c><c>    5 </c>
+<c>Non-Interactive Video </c><c>   4    </c><c>  4    </c><c>    4 </c>
+<c>Data                  </c><c>   1    </c><c>  0    </c><c>    3 </c>
+</texttable>
+
 
 <t>
 	
@@ -205,22 +213,24 @@ Data                                    1        0        3
 	This corresponds to the mappings from TODO REF of 
 </t>
 
-<t>
 
-Priority        802.1p Priority 802.1p Designation        Traffic Type        Access Category (AC)        Designation
-Low        1        BK                Background        AC_BK        Background
-            2        -        (spare)                AC_BK        Background
-            0        BE        Best Effort        AC_BE        Best Effort
-           3        EE        Excellent Effor AC_BE        Best Effort
-           4        CL        Controlled Load        AC_VI        Video
-           5        VI        Video                AC_VI        Video
-           6        VO        Voice                AC_VO        Voice
-High        7        NC                Network Control        AC_VO        Voice
+<texttable anchor="table-wifi-ref">
+    <ttcol align='left'>Value</ttcol>
+    <ttcol align='center'></ttcol>
+    <ttcol align='center'>Traffic Type</ttcol>
+    <ttcol align='center'>Access Category (AC)</ttcol>
+    <ttcol align='center'>Designation</ttcol>
+<c>           1   </c><c>     BK   </c><c>     Background      </c><c>    AC_BK    </c><c>    Background </c>
+<c>           2   </c><c>     -    </c><c>     (spare)         </c><c>    AC_BK    </c><c>    Background </c>
+<c>           0   </c><c>     BE   </c><c>     Best Effort     </c><c>    AC_BE    </c><c>    Best Effort </c>
+<c>           3   </c><c>     EE   </c><c>     Excellent Effort</c><c>    AC_BE    </c><c>    Best Effort </c>
+<c>           4   </c><c>     CL   </c><c>     Controlled Loat </c><c>    AC_VI    </c><c>    Video </c>
+<c>           5   </c><c>     VI   </c><c>     Video           </c><c>    AC_VI    </c><c>    Video </c>
+<c>           6   </c><c>     VO   </c><c>     Voice           </c><c>    AC_VO    </c><c>    Voice </c>
+<c>           7   </c><c>     NC   </c><c>     Network Control </c><c>    AC_VO    </c><c>    Voice </c>
+</texttable>
 
 
-
-
-</t>
 </section>
 <section title="W3C API Implications">
 <t>
