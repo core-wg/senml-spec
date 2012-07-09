@@ -19,7 +19,7 @@ clean:
 %.html: %.xml
 	xml2rfc $^ $@
 
-%.txt: %xml2rfc $^ $@
+%.txt: %.xml $^ $@
 	xml2rfc $^ $@
 
 %.diff.html: %.txt
