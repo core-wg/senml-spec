@@ -1,63 +1,150 @@
-﻿Name: draft-jennings-rtcweb-qos
+<?xml version="1.0" encoding="US-ASCII"?>
+
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+
+<?rfc toc="no"?>
+<?rfc tocompact="yes"?>
+<?rfc tocdepth="3"?>
+<?rfc tocindent="yes"?>
+<?rfc symrefs="no"?>
+<?rfc sortrefs="yes"?>
+<?rfc comments="yes"?>
+<?rfc inline="yes"?>
+<?rfc compact="yes"?>
+<?rfc subcompact="yes"?>
 
 
-Title: DSCP and other packet markings for RTCWeb QoS 
+<rfc category="std" docName="draft-jennings-rtcweb-qos-00"
+     ipr="noDerivativesTrust200902">
+  <front>
+    <title abbrev="RTCWeb QoS">DSCP and other packet markings for RTCWeb QoS</title>
 
+    
+  <author fullname="Subha Dhesikan" initials="S." surname="Dhesikan">
+      <organization>Cisco</organization>
+      <address>
+        <email>sdhesika@cisco.com</email>
+      </address>
+    </author>
 
-Authors: Subha Dhesikan, Dan Druta?, Cullen Jennings, Paul Jones, James Polk? 
-Abstract[a]:
+  <author fullname="Dan Druta" initials="D." surname="Druta">
+      <organization>ATT</organization>
+      <address>
+        <email>dd5826@att.com</email>
+      </address>
+    </author>
 
+    <author fullname="Cullen Jennings" initials="C." surname="Jennings">
+      <organization>Cisco</organization>
+      <address>
+        <email>fluffy@cisco.com</email>
+      </address>
+    </author>
 
-Many networks, such as Service Provider and Enterprise networks, can prioritize packets based on various Differentiated Services Code Points (DSCP). This document defines the recommended DSCP values for browsers to use for various classes of traffic. 
+   <author fullname="Paul Jones" initials="P." surname="Jones">
+      <organization>Cisco</organization>
+      <address>
+        <email>paulej@packetizer.com></email>
+      </address>
+    </author>
 
+    <date day="9" month="July" year="2012" />
 
-This draft is a very early and far from done. It is meant to provide the structure for the idea of how to do this but much discussion is needed about the details. 
-Introduction:
+    <abstract>
+      <t> Many networks, such as Service Provider and Enterprise networks, can prioritize packets based on various Differentiated Services Code Points (DSCP). This document defines the recommended DSCP values for browsers to use for various classes of traffic. 
+      </t>
+      <t>
+      This draft is a very early and far from done. It is meant to provide the structure for the idea of how to do this but much discussion is needed about the details.  </t>
+    </abstract>
+  </front>
 
+  <middle>
+   
+<section title="Introduction">
+<t>
 
 DiffServ style packet marking can help provide QoS in some environments. There are many use cases where they do not help but they seldom make things worse. This draft proposes how browser and other VoIP applications can mark packets. This draft does not contradict or redefine any advice from previous IETF RFC but simply provides a simple set of recommendations for implementors based on the previous RFCs. 
 
+</t>
+
+<t>
 
 There are some environments where priority markings frequently help. These include:
 
+</t>
 
+<t>
 1. If the congested link is the broadband uplink in a Cable or DSL scenario, often residential routers/NAT support prioritization based on DSCP.
-2. If the congested link is a local WiFi network, marking may help.
-3. In some some cellular style deployments, markings may help in cases where the network does not remove them. 
+</t>
 
+<t>2. If the congested link is a local WiFi network, marking may help.
+</t>
+
+<t>
+3. In some some cellular style deployments, markings may help in cases where the network does not remove them. 
+</t>
+
+<t>
 
 Traditionally DSCP values have been thought of as being site specific, with each site selecting its own code points for each QoS level. However in the RTCWeb use cases, the browsers need to set them to something when there is no site specific information. This document describes a reasonable default set of DSCP code point values drawn from existing RFCs and common usage. These code points are solely defaults. Future drafts may define mechanisms for 
 site specific mappings to override the values provided in this draft.  
 
+</t>
 
+<t>
 This draft defines some inputs that the browser can look at to determine how to set the various packet markings and defines the a mapping from abstract QoS policies (media type, priority level) to those packet markings.
 
 
-Terminology
+</t>
+</section>
+<section title="Terminology">
+<t>
+
 TODO add the boiler plate
-Inputs
-The first input is the type of the media. The browser provides this input as it knows if the media is audio, video, or data. In this specification, both interactive and streaming media is included. They are treated in different categories as their QoS requirements are slightly different. 
-The second input is the relative priority of the stream within that session.  Many applications have multiple video streams and often some are more important than others. 
-Javascript applications can tell the browser whether a particular media stream is high, medium, or low importance to the application.
+</t>
+</section>
+<section title="Inputs">
+<t>
+
+The first input is the type of the media. The browser provides this input as it
+knows if the media is audio, video, or data. In this specification, both
+interactive and streaming media is included. They are treated in different
+categories as their QoS requirements are slightly different.  The second input
+is the relative priority of the stream within that session.  Many applications
+have multiple video streams and often some are more important than others.
+Javascript applications can tell the browser whether a particular media stream
+is high, medium, or low importance to the application.
 
 
-DSCP Mappings:
+</t>
+</section>
+<section title="DSCP Mappings">
+<t>
+
 Importance                             Low                   Med                   High
 Audio                                      46 (EF)             46 (EF)             46 (EF) 
 Interactive Video                     38 (AF43)             36 (AF42)           34 (AF41) 
 Non-Interactive Video              26 (AF33)        28 (AF32)        30 (AF31)
 Data                                       8 (CS1)           0 (BE)             10 (AF11)
-QCI Mapping:
+</t>
+</section>
+<section title="QCI Mapping">
+<t>
+
 Importance                          Low         Med         High
 Audio                                  1         1         1
 Interactive Video                  2         2         2
 Non-Interactive Video                8        6        4
 Data                                    9         9         3 
 
+</t>
 
+<t>
 This corresponds to the mapping provided in TODO REF which are:
 QCI values (LTE)
+</t>
 
+<t>
 
 1   GBR       2  Interactive Voice
 2   GBR       4  Interactive Video
@@ -68,22 +155,26 @@ QCI values (LTE)
 7-9 Non-BGR   6  non interactive video / TCP web, email, / Platinum vs gold user ?
 
 
-WiFI Mapping:
+</t>
+</section>
+<section title="WiFI Mapping">
+<t>
+
 Importance                          Low         Med         High
 Audio                                  6        6        6
 Interactive Video                  5        5        5
 Non-Interactive Video                4        4        4
 Data                                    1        0        3
 
+</t>
 
-	
-
-	
-
+<t>
 	
 
 	This corresponds to the mappings from TODO REF of 
+</t>
 
+<t>
 
 Priority        802.1p Priority 802.1p Designation        Traffic Type        Access Category (AC)        Designation
 Low        1        BK                Background        AC_BK        Background
@@ -98,168 +189,353 @@ High        7        NC                Network Control        AC_VO        Voice
 
 
 
-W3C API Implications
+</t>
+</section>
+<section title="W3C API Implications">
+<t>
+
 To work with this proposal, the W3C specification would need to provide a way to specify the importance of media and data streams. 
 
+</t>
 
+<t>
 The W3C API should also provide a way for the application to find out the source and destination IP and ports of any flow as well as the DSCP value or other markings in use for that flow. The JS application can then communicate this to a web service that may install a particular policy for that flow. 
 
-
-
-
-
-
-Security Considerations
+</t>
+</section>
+<section title="Security Considerations">
+<t>
 
 
 TODO - discuss implications of what browser can set and what JS can set 
 
-
-IANA Considerations
-
+</t>
+</section>
+<section title="IANA Considerations">
+<t>
 
 This specification does not require any actions from IANA. 
 
 
-Acknowledgements
-Thanks for hints on code to do this from Paolo Severini, Jim Hasselbrook, Joe Marcus, and Erik Nordmark <nordmark@cisco.com>.
+</t>
+</section>
+<section title="Acknowledgements">
+<t>
+
+Thanks for hints on code to do this from Paolo Severini, Jim Hasselbrook, Joe Marcus, and Erik Nordmark.
 
 
 
+</t>
+
+<t>
 
 
+remove 
 
-References
-RFC 4594
-RFC 3246
-RFC 2474
-RFC 2597
+</t>
+</section>
+<section title="Appendix: Code Hints  ">
+<t>
 
+On windows setting the source interface works but BSD, OSX, Linux use weak end-system model and will route out different interface if that looks like a better route. (TODO - Can someone verify this with specific versions) 
 
-Appendix: Code Hints  
-On windows setting the source interface works but BSD, OSX, Linux use weak end-system model and will route out different interface if that looks like a better route. (TODO - Can someone verify this with specific versions)  [b]
+</t>
 
-
+<t>
 In windows you might be able to tell something about priority of an interface for ICE purposes with WlanQueryInterface or GetIfTable. 
+</t>
 
+<t>
 
 The specific mechanisms required to set DSCP code points depend on the application platform.
+</t>
 
+<t>
 
 In windows, setting the DSCP is not easy. See Knowledge Base Article KB248611. TODO - add more information about what can be done for windows. 
 
+</t>
 
+<t>
 For most unix variants, the following program can set DSCP. 
 
+</t>
 
+<t>
 TODO - make this work in V6. For v6 have a look at IPv6_TCLASS or better the tclass part of sin6_flowid for IPv6
 
+</t>
 
+<t>
 TODO - Can someone test and report back results of program in iOS, Android, Linux, OSX, BSD. 
+</t>
 
+<t>
 
 Example test program:
+</t>
+
+<t>
+TODO - insert test program 
 
 
+      </t>
+
+    </section>
 
 
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <errno.h>
-#include <unistd.h>
+  </middle>
+
+  <back>
+    <references title="Normative References">
+
+<reference anchor='RFC4594'>
+
+<front>
+<title>Configuration Guidelines for DiffServ Service Classes</title>
+<author initials='J.' surname='Babiarz' fullname='J. Babiarz'>
+<organization /></author>
+<author initials='K.' surname='Chan' fullname='K. Chan'>
+<organization /></author>
+<author initials='F.' surname='Baker' fullname='F. Baker'>
+<organization /></author>
+<date year='2006' month='August' />
+<abstract>
+<t>This document describes service classes configured with Diffserv and recommends how they can be used and how to construct them using Differentiated Services Code Points (DSCPs), traffic conditioners, Per-Hop Behaviors (PHBs), and Active Queue Management (AQM) mechanisms.  There is no intrinsic requirement that particular DSCPs, traffic conditioners, PHBs, and AQM be used for a certain service class, but as a policy and for interoperability it is useful to apply them consistently.  This memo provides information for the Internet community.</t></abstract></front>
+
+<seriesInfo name='RFC' value='4594' />
+<format type='TXT' octets='144044' target='http://www.rfc-editor.org/rfc/rfc4594.txt' />
+</reference>
+
+<reference anchor='RFC3246'>
+
+<front>
+<title>An Expedited Forwarding PHB (Per-Hop Behavior)</title>
+<author initials='B.' surname='Davie' fullname='B. Davie'>
+<organization /></author>
+<author initials='A.' surname='Charny' fullname='A. Charny'>
+<organization /></author>
+<author initials='J.C.R.' surname='Bennet' fullname='J.C.R. Bennet'>
+<organization /></author>
+<author initials='K.' surname='Benson' fullname='K. Benson'>
+<organization /></author>
+<author initials='J.Y.' surname='Le Boudec' fullname='J.Y. Le Boudec'>
+<organization /></author>
+<author initials='W.' surname='Courtney' fullname='W. Courtney'>
+<organization /></author>
+<author initials='S.' surname='Davari' fullname='S. Davari'>
+<organization /></author>
+<author initials='V.' surname='Firoiu' fullname='V. Firoiu'>
+<organization /></author>
+<author initials='D.' surname='Stiliadis' fullname='D. Stiliadis'>
+<organization /></author>
+<date year='2002' month='March' />
+<abstract>
+<t>This document defines a PHB (per-hop behavior) called Expedited Forwarding (EF).  The PHB is a basic building block in the Differentiated Services architecture.  EF is intended to provide a building block for low delay, low jitter and low loss services by ensuring that the EF aggregate is served at a certain configured rate.  This document obsoletes RFC 2598. [STANDARDS-TRACK]</t></abstract></front>
+
+<seriesInfo name='RFC' value='3246' />
+<format type='TXT' octets='33896' target='http://www.rfc-editor.org/rfc/rfc3246.txt' />
+</reference>
 
 
-#define MSG "Hello, World!"
+<reference anchor='RFC2474'>
+
+<front>
+<title abbrev='Differentiated Services Field'>Definition of the Differentiated Services Field (DS Field) in the IPv4 and IPv6 Headers</title>
+<author initials='K.' surname='Nichols' fullname='Kathleen Nichols'>
+<organization>Cisco Systems</organization>
+<address>
+<postal>
+<street>170 West Tasman Drive</street>
+<city>San Jose</city>
+<region>CA</region>
+<code>95134-1706</code>
+<country>USA</country></postal>
+<phone>+1 408 525 4857</phone>
+<email>kmn@cisco.com</email></address></author>
+<author initials='S.' surname='Blake' fullname='Steven Blake'>
+<organization>Torrent Networking Technologies</organization>
+<address>
+<postal>
+<street>3000 Aerial Center</street>
+<city>Morrisville</city>
+<region>NC</region>
+<code>27560</code>
+<country>USA</country></postal>
+<phone>+1 919 468 8466 x232</phone>
+<email>slblake@torrentnet.com</email></address></author>
+<author initials='F.' surname='Baker' fullname='Fred Baker'>
+<organization>Cisco Systems</organization>
+<address>
+<postal>
+<street>519 Lado Drive</street>
+<city> Santa Barbara</city>
+<region>CA</region>
+<code>93111</code>
+<country>USA</country></postal>
+<phone>+1 408 526 4257</phone>
+<email>fred@cisco.com</email></address></author>
+<author initials='D.L.' surname='Black' fullname='David L. Black'>
+<organization>EMC Corporation</organization>
+<address>
+<postal>
+<street>35 Parkwood Drive</street>
+<city>Hopkinton</city>
+<region>MA</region>
+<code>01748</code>
+<country>USA</country></postal>
+<phone>+1 508 435 1000 x76140</phone>
+<email>black_david@emc.com</email></address></author>
+<date year='1998' month='December' />
+<area>Internet</area>
+<keyword>internet protocol version 4</keyword>
+<keyword>IPv6</keyword>
+<keyword>IPv4</keyword>
+<keyword>internet protocol version 6</keyword>
+<keyword>type of service</keyword>
+<abstract>
+<t>
+   Differentiated services enhancements to the Internet protocol are
+   intended to enable scalable service discrimination in the Internet
+   without the need for per-flow state and signaling at every hop.  A
+   variety of services may be built from a small, well-defined set of
+   building blocks which are deployed in network nodes.  The services
+   may be either end-to-end or intra-domain; they include both those
+   that can satisfy quantitative performance requirements (e.g., peak
+   bandwidth) and those based on relative performance (e.g., &quot;class&quot;
+   differentiation).  Services can be constructed by a combination of:
+
+<list>
+<t>
+   - setting bits in an IP header field at network boundaries
+     (autonomous system boundaries, internal administrative boundaries,
+     or hosts),
+</t>
+<t>
+   - using those bits to determine how packets are forwarded by the
+     nodes inside the network, and
+</t>
+<t>
+   - conditioning the marked packets at network boundaries in accordance
+     with the requirements or rules of each service.
+</t></list></t>
+<t>
+   The requirements or rules of each service must be set through
+   administrative policy mechanisms which are outside the scope of this
+   document.  A differentiated services-compliant network node includes
+   a classifier that selects packets based on the value of the DS field,
+   along with buffer management and packet scheduling mechanisms capable
+   of delivering the specific packet forwarding treatment indicated by
+   the DS field value.  Setting of the DS field and conditioning of the
+   temporal behavior of marked packets need only be performed at network
+   boundaries and may vary in complexity.
+</t>
+<t>
+   This document defines the IP header field, called the DS (for
+   differentiated services) field.  In IPv4, it defines the layout of
+   the TOS octet; in IPv6, the Traffic Class octet.  In addition, a base
+   set of packet forwarding treatments, or per-hop behaviors, is
+   defined.
+</t>
+<t>
+   For a more complete understanding of differentiated services, see
+   also the differentiated services architecture .
+</t></abstract></front>
+
+<seriesInfo name='RFC' value='2474' />
+<format type='TXT' octets='50576' target='http://www.rfc-editor.org/rfc/rfc2474.txt' />
+<format type='HTML' octets='67719' target='http://xml.resource.org/public/rfc/html/rfc2474.html' />
+<format type='XML' octets='62259' target='http://xml.resource.org/public/rfc/xml/rfc2474.xml' />
+</reference>
 
 
-int
-main(void) {
-        int sock = -1;
-        struct sockaddr *local_addr = NULL;
-        struct sockaddr_in sockin, host;
-        int tos = 0x60; /* CS3 */
-        socklen_t socksiz = 0;
-        char *buffer = NULL;
+<reference anchor='RFC2597'>
 
+<front>
+<title>Assured Forwarding PHB Group</title>
+<author initials='J.' surname='Heinanen' fullname='Juha Heinanen'>
+<organization>Telia Finland</organization>
+<address>
+<postal>
+<street>Myyrmaentie 2</street>
+<city>Vantaa</city>
+<code>01600</code>
+<country>FI</country></postal>
+<email>jh@telia.fi</email></address></author>
+<author initials='F.' surname='Baker' fullname='Fred Baker'>
+<organization>Cisco Systems</organization>
+<address>
+<postal>
+<street>519 Lado Drive</street>
+<city>Santa Barbara</city>
+<region>CA</region>
+<code>93111</code>
+<country>US</country></postal>
+<email>fred@cisco.com</email></address></author>
+<author initials='W.' surname='Weiss' fullname='Walter Weiss'>
+<organization>Lucent Technologies</organization>
+<address>
+<postal>
+<street>300 Baker Avenue</street>
+<street>Suite 100</street>
+<city>Concord</city>
+<region>MA</region>
+<code>01742-2168</code>
+<country>US</country></postal>
+<email>wweiss@lucent.com</email></address></author>
+<author initials='J.' surname='Wroclawski' fullname='J. Wroclawski'>
+<organization>MIT Laboratory for Computer Science</organization>
+<address>
+<postal>
+<street>545 Technology Square</street>
+<city>Cambridge</city>
+<region>MA</region>
+<code>02139</code>
+<country>US</country></postal>
+<email>jtw@lcs.mit.edu</email></address></author>
+<date year='1999' month='June' />
+<abstract>
+<t>This document defines a general useDifferentiated Services (DS)Per-Hop-Behavior (PHB) Group called Assured Forwarding (AF).
+The AF PHB group provides delivery of IP packets in four
+independently forwarded AF classes.
+Within each AF class, an IP
+packet can be assigned one of three different levels of drop
+precedence.
+A DS node does not reorder IP packets of the same
+microflow if they belong to the same AF class.</t></abstract></front>
 
-        sock = socket(AF_INET, SOCK_DGRAM, 0);
-        if (sock < 0) {
-                fprintf(stderr,"Error: %s\n", strerror(errno));[c]
-                exit(-1);
-        }
+<seriesInfo name='RFC' value='2597' />
+<format type='TXT' octets='24068' target='http://www.rfc-editor.org/rfc/rfc2597.txt' />
+</reference>
 
+   
 
-        memset(&sockin, 0, sizeof(sockin));
-        sockin.sin_family = PF_INET;
-        sockin.sin_addr.s_addr = inet_addr("11.1.1.1");
-        socksiz = sizeof(sockin);
+      <reference anchor='RFC2119'>
 
+        <front>
+          <title abbrev='RFC Key Words'>Key words for use in RFCs to Indicate Requirement Levels</title>
+          <author initials='S.' surname='Bradner' fullname='Scott Bradner'>
+            <organization>Harvard University</organization>
+            <address>
+              <postal>
+                <street>1350 Mass. Ave.</street>
+                <street>Cambridge</street>
+              <street>MA 02138</street></postal>
+              <phone>- +1 617 495 3864</phone>
+          <email>sob@harvard.edu</email></address></author>
+          <date year='1997' month='March' />
+          <area>General</area>
+          <keyword>keyword</keyword>
+        </front>
 
-        local_addr = (struct sockaddr *) &sockin;
+        <seriesInfo name='BCP' value='14' />
+        <seriesInfo name='RFC' value='2119' />
+        <format type='TXT' octets='4723' target='http://www.rfc-editor.org/rfc/rfc2119.txt' />
+        <format type='HTML' octets='17491' target='http://xml.resource.org/public/rfc/html/rfc2119.html' />
+        <format type='XML' octets='5777' target='http://xml.resource.org/public/rfc/xml/rfc2119.xml' />
+      </reference>
 
-
-        /* Set ToS/DSCP */
-        if (setsockopt(sock, IPPROTO_IP, IP_TOS,  &tos,[d]
-            sizeof(tos)) < 0) {
-                fprintf(stderr,"Error setting TOS: %s\n", strerror(errno));
-        }
-
-
-        /* Bind to a specific local address */
-        if (bind(sock, local_addr, socksiz) < 0) {
-                fprintf(stderr,"Error binding to socket: %s\n", strerror(errno));
-                close(sock); sock=-1;
-                exit(-1);
-        }
-
-
-        buffer = (char *) malloc(strlen(MSG) + 1);[e]
-        if ( buffer == NULL ) {
-                fprintf(stderr,"Error allocating memory: %s\n", strerror(errno));[f]
-                close( sock ); sock=-1;
-                exit(-1);
-}
-        strlcpy(buffer, MSG, strlen(MSG) + 1);
-        memset(&host, 0, sizeof(host));
-        host.sin_family = PF_INET;
-        host.sin_addr.s_addr = inet_addr("10.1.1.1");
-        host.sin_port = htons(12345);
-
-
-        if (sendto(sock, buffer, strlen(buffer), 0,
-             (struct sockaddr *) &host, sizeof(host)) < 0) {
-                fprintf(stderr,"Error sending message: %s\n", strerror(errno));[f]
-                close(sock); sock=-1;
-free(buffer); buffer=NULL;
-                exit(-1);
-        }
-
-
-        free(buffer); buffer=NULL;
-        close(sock); sock=-1;
-
-
-        return 0;
-}
-
-
-
-
-[a]Cullen Jennings:
-Feel free to rewrite anything I have put in.
-[b]ekr:
-Why is this relevant here?
-[c]ekr:
-fprintf(stderr,...)
-[d]ekr:
-why are you casting this? setsockopt's third argument is a void *. In C any argument can be automatically converted to (void *)
-[e]ekr:
-Maybe check the return value? Otherwise, you could just call strdup. For that matter, why are you copying message, just send it directly.
-[f]ekr:
-fprintf(stderr,..)
+    </references>
+  </back>
+</rfc>
