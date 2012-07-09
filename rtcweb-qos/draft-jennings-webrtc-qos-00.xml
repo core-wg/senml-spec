@@ -38,14 +38,20 @@ ipr="noDerivativesTrust200902">
     <author fullname="Paul Jones" initials="P." surname="Jones">
       <organization>Cisco</organization>
       <address>
-        <email>paulej@packetizer.com&gt;</email>
+        <email>paulej@packetizer.com</email>
+      </address>
+    </author>
+   <author fullname="James Polk" initials="J." surname="Polk">
+      <organization>Cisco</organization>
+      <address>
+        <email>jmpolk@cisco.com</email>
       </address>
     </author>
     <date day="9" month="July" year="2012" />
     <abstract>
       <t>Many networks, such as Service Provider and Enterprise
-      networks, can prioritize packets based on various
-      Differentiated Services Code Points (DSCP). This document
+      networks, can provide per packet treatmentss based on 
+      Differentiated Services Code Points (DSCP) on a per hop basis. This document
       defines the recommended DSCP values for browsers to use for
       various classes of traffic.</t>
       <t>This draft is a very early and far from done. It is meant
@@ -56,18 +62,27 @@ ipr="noDerivativesTrust200902">
   <middle>
     <section title="Introduction">
       <t>DiffServ style packet marking can help provide QoS in some
-      environments. There are many use cases where they do not help
-      but they seldom make things worse. This draft proposes how
+      environments. There are many use cases where such marking does not help,
+      but it seldom make things worse, if packets are marked appropriately.  In
+      other words, when attempting to avoid congestion by marking certain
+      traffic flows, say all audio or all audio and video, marking too many
+      audio and/or video flows for a given network's capacity can prevent
+      desirable results. Either too much other traffic will be starved, or there
+      is not enough capacity for the preferentially marked packets (i.e., audio
+      and/or video).
+      </t>
+      <t>
+        This draft proposes how
       browser and other VoIP applications can mark packets. This
       draft does not contradict or redefine any advice from
-      previous IETF RFC but simply provides a simple set of
+      previous IETF RFCs but simply provides a simple set of
       recommendations for implementors based on the previous
       RFCs.</t>
       <t>There are some environments where priority markings
       frequently help. These include:</t>
       <t>1. If the congested link is the broadband uplink in a
       Cable or DSL scenario, often residential routers/NAT support
-      prioritization based on DSCP.</t>
+      preferential treatment based on DSCP.</t>
       <t>2. If the congested link is a local WiFi network, marking
       may help.</t>
       <t>3. In some some cellular style deployments, markings may
@@ -87,7 +102,7 @@ ipr="noDerivativesTrust200902">
       priority level) to those packet markings.</t>
     </section>
     <section title="Terminology">
-      <t>TODO add the boiler plate</t>
+      <t>TODO - add the boiler plate</t>
     </section>
     <section title="Inputs">
       <t>The first input is the type of the media. The browser
@@ -95,7 +110,7 @@ ipr="noDerivativesTrust200902">
       or data. In this specification, both interactive and
       streaming media is included. They are treated in different
       categories as their QoS requirements are slightly different.
-      The second input is the relative priority of the stream
+      The second input is the relative treatment of the stream
       within that session. Many applications have multiple video
       streams and often some are more important than others.
       Javascript applications can tell the browser whether a
@@ -112,14 +127,17 @@ ipr="noDerivativesTrust200902">
         <c>46 (EF)</c>
         <c>46 (EF)</c>
         <c>46 (EF)</c>
+
         <c>Interactive Video</c>
         <c>38 (AF43)</c>
         <c>36 (AF42)</c>
         <c>34 (AF41)</c>
+
         <c>Non-Interactive Video</c>
         <c>26 (AF33)</c>
         <c>28 (AF32)</c>
         <c>30 (AF31)</c>
+
         <c>Data</c>
         <c>8 (CS1)</c>
         <c>0 (BE)</c>
