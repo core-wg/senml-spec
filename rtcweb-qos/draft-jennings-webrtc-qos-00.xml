@@ -4,7 +4,7 @@
 Title: DSCP and other packet markings for RTCWeb QoS 
 
 
-Authors: Subha Dhesikan, Dan Druta?, Cullen Jennings, James? Paul?
+Authors: Subha Dhesikan, Dan Druta?, Cullen Jennings, Paul Jones, James Polk? 
 Abstract[a]:
 
 
@@ -36,23 +36,23 @@ This draft defines some inputs that the browser can look at to determine how to 
 Terminology
 TODO add the boiler plate
 Inputs
-The first input is the type of the media. The browser provides this input as it knows if the media is audio, video, or data. In this specification, audio and video media always refers to interactive media where low latency is desired - streaming media[b] is out of scope.[c] 
-
-
+The first input is the type of the media. The browser provides this input as it knows if the media is audio, video, or data. In this specification, both interactive and streaming media is included. They are treated in different categories as their QoS requirements are slightly different. 
 The second input is the relative priority of the stream within that session.  Many applications have multiple video streams and often some are more important than others. 
 Javascript applications can tell the browser whether a particular media stream is high, medium, or low importance to the application.
 
 
 DSCP Mappings:
-Importance             Low                   Med                   High
-Video                      38 (AF43)             36 (AF42)           34 (AF41) 
-Audio                      46 (EF)             46 (EF)             46 (EF) 
-Data                       8 (CS1)                   0 (BE)             10 (AF11)
+Importance                             Low                   Med                   High
+Audio                                      46 (EF)             46 (EF)             46 (EF) 
+Interactive Video                     38 (AF43)             36 (AF42)           34 (AF41) 
+Non-Interactive Video              26 (AF33)        28 (AF32)        30 (AF31)
+Data                                       8 (CS1)           0 (BE)             10 (AF11)
 QCI Mapping:
-Importance  Low         Med         High
-Video                  2         2         2
-Audio                  1         1         1
-Data            9         9         3 
+Importance                          Low         Med         High
+Audio                                  1         1         1
+Interactive Video                  2         2         2
+Non-Interactive Video                8        6        4
+Data                                    9         9         3 
 
 
 This corresponds to the mapping provided in TODO REF which are:
@@ -69,25 +69,20 @@ QCI values (LTE)
 
 
 WiFI Mapping:
-Importance
-	Low
-	Medium
-	High
-	Video
-	5
-	5
-	5
-	Audio
-	6
-	6
-	6
-	Data
-	1
-	0
-	3
+Importance                          Low         Med         High
+Audio                                  6        6        6
+Interactive Video                  5        5        5
+Non-Interactive Video                4        4        4
+Data                                    1        0        3
+
+
 	
 
-This corresponds to the mappings from TODO REF of 
+	
+
+	
+
+	This corresponds to the mappings from TODO REF of 
 
 
 Priority        802.1p Priority 802.1p Designation        Traffic Type        Access Category (AC)        Designation
@@ -107,10 +102,9 @@ W3C API Implications
 To work with this proposal, the W3C specification would need to provide a way to specify the importance of media and data streams. 
 
 
-The W3C API should also provide a way for the application to find out the source and destination IP and ports of any flow as well as the DSCP value or other markings in use for that flow. The application can then communicate this to a web service that may install a particular policy for that flow. 
+The W3C API should also provide a way for the application to find out the source and destination IP and ports of any flow as well as the DSCP value or other markings in use for that flow. The JS application can then communicate this to a web service that may install a particular policy for that flow. 
 
 
-TODO: "Access Agnostic Quality of Service" - consider possibility of using process like ALTO Discovery process (reverse lookup IP to get domain, then NAPTR on domain) to find a QoS server that is informed about about the flow.  
 
 
 
@@ -143,7 +137,7 @@ RFC 2597
 
 
 Appendix: Code Hints  
-On windows setting the source interface works but BSD, OSX, Linux use weak end-system model and will route out different interface if that looks like a better route. (TODO - Can someone verify this with specific versions)  [d]
+On windows setting the source interface works but BSD, OSX, Linux use weak end-system model and will route out different interface if that looks like a better route. (TODO - Can someone verify this with specific versions)  [b]
 
 
 In windows you might be able to tell something about priority of an interface for ICE purposes with WlanQueryInterface or GetIfTable. 
@@ -196,7 +190,7 @@ main(void) {
 
         sock = socket(AF_INET, SOCK_DGRAM, 0);
         if (sock < 0) {
-                fprintf(stderr,"Error: %s\n", strerror(errno));[e]
+                fprintf(stderr,"Error: %s\n", strerror(errno));[c]
                 exit(-1);
         }
 
@@ -211,7 +205,7 @@ main(void) {
 
 
         /* Set ToS/DSCP */
-        if (setsockopt(sock, IPPROTO_IP, IP_TOS,  &tos,[f]
+        if (setsockopt(sock, IPPROTO_IP, IP_TOS,  &tos,[d]
             sizeof(tos)) < 0) {
                 fprintf(stderr,"Error setting TOS: %s\n", strerror(errno));
         }
@@ -225,9 +219,9 @@ main(void) {
         }
 
 
-        buffer = (char *) malloc(strlen(MSG) + 1);[g]
+        buffer = (char *) malloc(strlen(MSG) + 1);[e]
         if ( buffer == NULL ) {
-                fprintf(stderr,"Error allocating memory: %s\n", strerror(errno));[h]
+                fprintf(stderr,"Error allocating memory: %s\n", strerror(errno));[f]
                 close( sock ); sock=-1;
                 exit(-1);
 }
@@ -240,7 +234,7 @@ main(void) {
 
         if (sendto(sock, buffer, strlen(buffer), 0,
              (struct sockaddr *) &host, sizeof(host)) < 0) {
-                fprintf(stderr,"Error sending message: %s\n", strerror(errno));[h]
+                fprintf(stderr,"Error sending message: %s\n", strerror(errno));[f]
                 close(sock); sock=-1;
 free(buffer); buffer=NULL;
                 exit(-1);
@@ -259,15 +253,13 @@ free(buffer); buffer=NULL;
 
 [a]Cullen Jennings:
 Feel free to rewrite anything I have put in.
-[b]Subha D:
-Cullen, why did you decide to make steraming media out of scope? This is an important type of traffic served by the browser toda. Example: training video, company broadcast, digital media etc. Just trying to understand.
-[d]ekr:
+[b]ekr:
 Why is this relevant here?
-[e]ekr:
+[c]ekr:
 fprintf(stderr,...)
-[f]ekr:
+[d]ekr:
 why are you casting this? setsockopt's third argument is a void *. In C any argument can be automatically converted to (void *)
-[g]ekr:
+[e]ekr:
 Maybe check the return value? Otherwise, you could just call strdup. For that matter, why are you copying message, just send it directly.
-[h]ekr:
+[f]ekr:
 fprintf(stderr,..)
