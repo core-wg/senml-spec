@@ -11,6 +11,14 @@
 <?rfc rfcedstyle="no" ?>
 <?rfc tocdepth="4"?>
 
+<!- 
+
+TODO 
+- change name of mohtership to "Trasnfer Server" ? "Transfer Agent" ? 
+
+-->
+
+
 <!-- remove thse next two to move back to internet draft -->
 <?rfc topblock="yes"?>
 <?rfc private=" "?>
