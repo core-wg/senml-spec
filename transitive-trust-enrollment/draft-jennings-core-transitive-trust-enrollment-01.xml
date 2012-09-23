@@ -295,17 +295,17 @@ the reader but there is one in the PDF version.
         </t>
 
         <t>
-          <list
-              style="hanging">
+          <list  style="hanging">
             
             <t hangText="Path:"> foo/bar </t>
+
+            <t> YADA </t>
             
             <t hangText="Methods:"> foo/bar </t>
             
             <t hangText="Parameters:"> 
 
-              <list
-                  style="hanging">
+              <list  style="hanging">
 
                 <t hangText="foo:"> foo/bar </t>
                 <t hangText="bar:"> foo/bar </t>
@@ -349,6 +349,39 @@ the reader but there is one in the PDF version.
 
       <section title ="Fetch">
         <t> TODO </t>
+
+        <t>
+          <list  style="hanging">
+            
+            <t hangText="Path:"> foo/bar </t>
+
+            <t> YADA </t>
+            
+            <t hangText="Methods:"> foo/bar </t>
+            
+            <t hangText="Parameters:"> 
+
+              <list  style="hanging">
+
+                <t hangText="foo:"> foo/bar </t>
+                <t hangText="bar:"> foo/bar </t>
+
+              </list>          
+
+            </t>
+            
+            
+            <t hangText="Return Values:"> 
+            </t>
+            
+          </list>
+        </t>
+        
+        <section title="Example" >
+          <t> TODO </t>
+        </section>
+
+
       </section>
 
     </section>
@@ -452,6 +485,9 @@ the reader but there is one in the PDF version.
       cost for embedded processor in volume with this much flash, ram, etc is
       very roughly $1.50 USD in 2012. A key part of getting this to be small is
       the extremely small crypto footprint from using SHA224-CFB. </t>
+
+      <section title="Random Numbers">
+      </section>
 
     </section>
 
