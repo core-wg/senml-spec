@@ -2,15 +2,15 @@ set autonumber true
 set time_height 30
 set column_width 150
 
-#participant Manufacturer as Manufacturer
+participant Manufacturer as Manufacturer
 participant Transfer Agent as TransferAgent
 participant Device as Device
 participant Introducer as Introducer
 participant User as User
 participant Controller as Controller
  
-#Manufacturer-->Device: TaURL, DevURN, OTP, secret 
-#Manufacturer-->TransferAgent: DevURN, OTP
+Manufacturer-->Device: TaURL, DevURN, OTP, secret 
+Manufacturer-->TransferAgent: DevURN, OTP
 
 Device-->Introducer: QR with TaURL, DevID, OTP, secret
 

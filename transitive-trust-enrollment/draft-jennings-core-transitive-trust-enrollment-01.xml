@@ -13,7 +13,7 @@
 
 
 <rfc category="exp"
-     docName="draft-jennings-core-transitive-trust-enrollment-00"
+     docName="draft-jennings-core-transitive-trust-enrollment-01"
      ipr="trust200902">
   <front>
     <title abbrev="Transitive Trust Enrollment">Transitive Trust Enrollment
@@ -90,28 +90,27 @@
 ]]></artwork>
       </figure>
 
-      <t>When the Manufacturer builds the Device, it includes a One Time
+      <t>When the Manufacturer builds the Device, it includes an One Time
       Password (OTP) that the Introducer can use to enroll the Device with the
       Controller. The Manufacturer also runs a website known as the Transfer
       Agent that knows the OTP for every device that use that Transfer
       Agent. The Device can include the OTP as a QR code on the outside of the
-      Device. When the Device is installed, the network administrator or installer
-      uses a software agent known as the Introducer. The Introducer would
-      typically be simply a normal browser running on an smart phone with a
-      camera that can read QR codes. When the Device is installed, the Introducer
-      can scan the QR code on the Device. This QR code includes a URL to the
-      Transfer Agent along with the OTP and a separate controller
-      secret. (Message 1). The Introducer then contacts the Transfer Agent and
-      uses the OTP to tell the Transfer Agent which Controller this Device is
-      should use (Message 3). The Introducer can also tell the Controller the
-      controller secrete from the Device (Message TODO).  Later, the first time
-      the Device boots up and gets network connectivity, it contacts the
-      Transfer Agent, and the Transfer Agent tells the Device which Controller
-      to talk to (Message 3). From that point on, any time the Device boots, the
-      Device can communicate directly with the Controller (Message 4). The
-      actual message flow is slightly more complicated and shown in <xref
-      target="sec-enrollment"></xref>, but it uses the same basic idea as this
-      simplified flow.</t>
+      Device. When the Device is installed, the network administrator or
+      installer uses a software agent known as the Introducer. The Introducer
+      would typically be simply a normal browser running on an smart phone with
+      a camera that can read QR codes. When the Device is installed, the
+      Introducer can scan the QR code on the Device. This QR code includes a URL
+      to the Transfer Agent along with the OTP and a separate Device secret
+      DevSecret. (Message 1). The Introducer then contacts the Transfer Agent and
+      uses the OTP to tell the Transfer Agent which Controller this Device
+      should use (Message 2). The Introducer can also tell the Controller the
+      DevSecret (Message 3).  Later, the first time the Device boots up and gets
+      network connectivity, it contacts the Transfer Agent, and the Transfer
+      Agent tells the Device which Controller to talk to (Message 4). From that
+      point on, any time the Device boots, the Device can communicate directly
+      with the Controller (Message 5). The actual message flow is slightly more
+      complicated and shown in <xref target="sec-enrollment"></xref>, but it
+      uses the same basic idea as this simplified flow.</t>
 
       <t>The system is designed to achieve several desirable properties:<list
           style="symbols">
@@ -136,25 +135,22 @@
         </list></t>
 
       <t>One of the key steps in making this system work is getting the OTP from
-      the Device to Introducer. The main approach used here is using a QR code
-      other bar code capable of representing a URL and having this printed on
-      the Device and/or box it comes in. </t>
+      the Device to Introducer. The approach used here is using a QR code
+      representing a URL. The QR code is printed on the Device and/or box it
+      comes in. </t>
 
       <t>The semantic level information in each message is discussed in <xref
       target="sec-enrollment"></xref> and the syntax of the messages is
       discussed in <xref target="sec-syntax"></xref>. The security properties
       of the system are described in <xref target="sec-sec"></xref>.</t>
-    </section>
 
-    <section anchor="sec-enrollment" title="Enrollment Information Flow">
-      <t>The Manufacturer, Device, Transfer Agent, Introducer, User, and
-      Controller are abbreviated M,D,TA,I,U, and C respectively. The Device uses
+  <t> The Device uses
       HTTP or COAP to communicate with the controller. The Transfer Agent and
       Introducer use HTTP to communicate with various entities. There are two
       bits of keying material used for cryptographic operations. Th first is the
       One Time Password (OTP) that is passed via QR code from the device to the
       Introducer then the Introducer uses to authorize itself to the Transfer
-      Agent. There is also a secret that is used to secure communications
+      Agent. There is also a DevSecret that is used to secure communications
       between the Device and the Controller.  The Transfer Agent needs a normal
       certificate to use HTTPS.</t>
 
@@ -163,6 +159,11 @@
       Transfer Agent is assumed to be a generally accessible server on the
       internet but the Controller and Device can be on the inside of a
       Firewall or NAT between them and the Transfer Agent.</t>
+
+    </section>
+
+    <section anchor="sec-enrollment" title="Enrollment Information Flow">
+    
 
       <t>In the following message flow we use the following definitions:<list
           style="hanging">
@@ -195,7 +196,7 @@
       is get to the point where the Device knows that it should be talking to
       the Controller, the Controller knows it should be talking the Device,
       and the Device and Controller can communicate and
-      authenticate each other using the secret.</t>
+      authenticate each other using the DevSecret.</t>
 
          <figure>
         <artwork alt="Go Read the TXT version of this draft"
@@ -204,23 +205,41 @@ TODO
 ]]></artwork>
       </figure>
 
-
       <t>When the Manufacturer builds the Device, it includes a One Time
-      Password (OTP) on the Device and Transfer Agent (Message 1 and 2). When the
-      Device is installed, the Introducer reads OTP and other information from
-      the Device (Message 3). The Introducer then uses the OTP to tell the
-      Transfer Agent which Controller this Device should use (Message 4 and 5).
-      Later the Device contacts the Transfer Agent and tells the Device which
-      Controller to talk to, information that the Device saves in non-volatile
-      memory (Message 9 and 10). From that point on, any time the Device
-      boots, it can directly communicate with the Controller (Message 11 and
-      12).</t>
+      Password (OTP) on the device, a DevSecret, and the URN for the Devices
+      (DevURN). It also creates a QR code on the device that contains the URL to
+      the transfer agent (TaURL), the URN for the Device (DevURL), the OTP, and
+      the DevSecret. This QR codes is described in detail in section TODO. This is
+      corresponds to message 1 in the above figure. </t>
 
-      <t>The Introducer has the option of informing Controller about any
-      Devices that it has enrolled with this Controller (Message 6). The
-      Controller can optionally contact the Transfer Agent to find out about the
-      status of any Devices that it has not heard from (Messages 7 and 8).</t>
+      <t> The Manufacturer also tells the Transfer Agent one the OTP is for the
+      Particular DevURN. (Message 2) </t>
 
+      <t> When the Device is installed, the Introducer reads OTP, DevSecret,
+      DeviceURN, and the URL for the Transfer Agent (TaURL) from the Device
+      (Message 3) by scanning the QR code on the device. If the Introducer is a
+      web browser, it will use the Transfer Agent URL to fetch an HTML user
+      interface to perform the next steps. In messages 5, the user interface on
+      the Introducer will allow the user to user to enter the URL for Controller
+      (ContURL) and an optional label for the device (DevLabel). </t>
+
+      <t> Next the controller uses tells the Transfer Agent the Controller URL
+      to use for this DeviceURN. This request is authenticated by the Transfer
+      Agent using the OTP (message 6). </t>
+
+      <t> Later the Device contacts the Transfer Agent and the Transfer Agent
+      tells the Device the URL of the Controller to talk to (ContURL) in message
+      8 and 9). From that point on, any time the Device boots, it can directly
+      communicate with the Controller (Message 10 and 11). The Controller and
+      Device both know the DevSecret for the device and can use that to
+      authenticated and encrypt communications between them. It is suggested
+      that the first thing the Controller and Device do is use this DevSecret to securely replace it
+      with some different secret that is not known to anyone that saw the QR
+      code. </t>
+
+<t> Open Issue: should we add in an additional ContSecret that is picked by controller, passed to Introducer, then to Trust Agent, then to Device? </t>
+
+    
  
       <t>When the Device is built, it needs to be assigned a globally unique
       URN, a Dev ID, and a Transfer Agent. A single manufacturer MAY operate many
