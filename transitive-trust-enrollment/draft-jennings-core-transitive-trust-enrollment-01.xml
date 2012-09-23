@@ -37,28 +37,26 @@
 
         <phone>+1 408 421-9990</phone>
 
-        <email>fluffy@cisco.com</email>
+        <email>fluffy@iii.ca</email>
       </address>
     </author>
 
-    <date day="23" month="September" year="2012" />
+    <date day="9" month="September" year="2012" />
 
     <area>APP</area>
 
     <abstract>
-
-      <t> This is a copy of the paper sent to the "Smart Object Security"
-      workshop March 23, 2012 in Paris. It is submitted as an IETF draft to
-      have a record of it in the draft archive. The origiinal plublication date
-      of this work was Feb 14, 2012. Readers are encouraged to read later
-      versions of this draft. </t>
-
-      <t>This document provides a very early sketch of a enrollment protocol
-      that allows constrained internet devices to securely enroll into a
-      system. As the work is in its early phase, many details remain to be
-      resolved. The solution is based on the idea that each device will be
-      manufactured with a one time password that can be used by the customer
-      to tell the device which controller to enroll with.</t>
+      <t>This document provides a sketch of a rendevous protocol that allows
+      constrained internet devices such as sensors to securely connect into a
+      system that uses them.  The solution is based on the idea that each device
+      will be manufactured with a one time password that can be used by the
+      customer to tell the device which controller to enroll with and the device
+      is manfactured to contact a given Transfer Server that is used to tell the
+      device which system to connect to. The admistrator of the devcie can get
+      this one time password from the device using a QR code then use that one
+      time password to to inform a Trasnfer Server which system the device
+      should connect to. The device will conctact the Transfer Agent, get this
+      information, then conncec to the aperoaprete system. </t>
     </abstract>
   </front>
 
@@ -94,53 +92,56 @@
 
       <t>When the Manufacturer builds the Device, it includes a One Time
       Password (OTP) that the Introducer can use to enroll the Device with the
-      Controller. The Manufacturer also runs a website known as the MotherShip
-      that knows the OTP for every device that Manufacturer builds. The Device
-      can include the OTP as a QR code on the outside of the Device. When the
-      Device is installed, the installer uses a software agent known as the
-      Introducer. The Introducer would typically be something like an
-      application running on an iPhone. When the Device is installed, the
-      Introducer can scan the QR code on the Device to find the OTP (Message
-      1). The Introducer then contacts the MotherShip and uses the OTP to tell
-      the MotherShip which Controller this Device is should use (Message 3).
-      Later, the first time the Device boots up and gets network connectivity,
-      it contacts the MotherShip, and the MotherShip tells the Device which
-      Controller to talk to (Message 3). From that point on, any time the
-      Device boots, the Device can communicate directly with the Controller
-      (Message 4). The actual message flow is slightly more complicated and
-      shown in <xref target="sec-enrollment"></xref>, but it uses the same
-      basic idea as this simplified flow.</t>
+      Controller. The Manufacturer also runs a website known as the Transfer
+      Agent that knows the OTP for every device that use that Transfer
+      Agent. The Device can include the OTP as a QR code on the outside of the
+      Device. When the Device is installed, the network admistroatr or installer
+      uses a software agent known as the Introducer. The Introducer would
+      typically be simplye a normal browser running on an smart phone with a
+      camer that can read QR codes. When the Device is installed, the Introducer
+      can scan the QR code on the Device. This QR code includes a URL to the
+      Transfer Agent along iwth the OTP and a seprate controller
+      secret. (Message 1). The Introducer then contacts the Transfer Agent and
+      uses the OTP to tell the Transfer Agent which Controller this Device is
+      should use (Message 3). The Introducer can also tell the Controller the
+      controlerl secrete from the Device (Message TODO).  Later, the first time
+      the Device boots up and gets network connectivity, it contacts the
+      Transfer Agent, and the Transfer Agent tells the Device which Controller
+      to talk to (Message 3). From that point on, any time the Device boots, the
+      Device can communicate directly with the Controller (Message 4). The
+      actual message flow is slightly more complicated and shown in <xref
+      target="sec-enrollment"></xref>, but it uses the same basic idea as this
+      simplified flow.</t>
 
       <t>The system is designed to achieve several desirable properties:<list
           style="symbols">
           <t>Can work for Devices with very limited memory and processing
-          power</t>
+          power.</t>
 
           <t>Does not require network or power to be up when the Device is
-          installed</t>
+          installed.</t>
 
-          <t>Is fairly secure (see more in the security section)</t>
+          <t>Is fairly secure (see more in the security section).</t>
 
-          <t>Minimal addition to manufacturing costs</t>
+          <t>Minimal addition to manufacturing costs.</t>
 
-          <t>The installer can detect if the OTP has already been used</t>
+          <t>The installer can detect if the OTP has already been used.</t>
 
           <t>Provides a work flow in which a Device does not need to be taken
           out of the box to be enrolled. This can be very important to enable
           consumers themselves to enroll devices they buy from a service
           provider.</t>
 
-          <t>Works with common Firewall and NAT network topologies</t>
+          <t>Works with common Firewall and NAT network topologies.</t>
         </list></t>
 
-      <t>One of the key steps in making this system work is getting the OTP
-      from the Device to Introducer. There are several ways that could happen
-      but a few of the approaches considered here are:</t>
+      <t>One of the key steps in making this system work is getting the OTP from
+      the Device to Introducer. The main aproach used here is using a QR code
+      other bar code capable of represneting a URL and having this printed on
+      the Device and/or box it comes in.  There are several other ways that this
+      could happen such as:</t>
 
       <t><list style="symbols">
-          <t>Using a QR code or other bar code printed on the Device and/or
-          box it comes in</t>
-
           <t>Having a single LED on the Device that blinks out the OTP
           information and using a video capture application on the Introducer
           to read this</t>
@@ -162,35 +163,35 @@
     </section>
 
     <section anchor="sec-enrollment" title="Enrollment Information Flow">
-      <t>The Manufacturer, Device, MotherShip, Introducer, and Controller are
-      abbreviated M,D,MS,I,C respectively. The Device, MotherShip, and
+      <t>The Manufacturer, Device, Transfer Agent, Introducer, and Controller are
+      abbreviated M,D,MS,I,C respectively. The Device, Transfer Agent, and
       Controller all use CoAP to communicate with each other and thus each
       have an asymmetric key pair that is used to form the DTLS connections
-      between them. The MotherShip acts as an HTTP server to communicate with
-      the Introducer and Controller. The MotherShip needs a normal certificate
+      between them. The Transfer Agent acts as an HTTP server to communicate with
+      the Introducer and Controller. The Transfer Agent needs a normal certificate
       to use HTTPS.</t>
 
       <t>It is assumed that the Device may have a NAT between it and the
       Controller and that the Device is on the inside of the NAT. The
-      MotherShip is assumed to be a generally accessible server on the
+      Transfer Agent is assumed to be a generally accessible server on the
       internet but the Controller and Device can be on the inside of a
-      Firewall or NAT between them and the MotherShip.</t>
+      Firewall or NAT between them and the Transfer Agent.</t>
 
       <t>In the following message flow we use the following definitions:<list
           style="hanging">
           <t hangText="Fingerprint">This refers to a hash of the DTLS public
           key used by the associated network element. "MS Fingerprint" means a
-          fingerprint of the public key that the MotherShip will use when
+          fingerprint of the public key that the Transfer Agent will use when
           forming CoAP connections over DTLS.</t>
 
           <t hangText="MS ID">A 32-bit integer that uniquely identifies the
-          MotherShip. <xref target="sec-msid"></xref> explains how to use the
+          Transfer Agent. <xref target="sec-msid"></xref> explains how to use the
           MS ID to create a URL that can be used to contact the
-          MotherShip.</t>
+          Transfer Agent.</t>
 
           <t hangText="Dev ID">A 32-bit integer that identifies the Device and
-          when combined with the MotherShip is unique. Two Devices that use
-          the same MotherShip cannot have the same Dev ID.</t>
+          when combined with the Transfer Agent is unique. Two Devices that use
+          the same Transfer Agent cannot have the same Dev ID.</t>
 
           <t hangText="Dev URN">A globally unique URN assigned by the
           Manufacturer to uniquely identify this Device. This SHOULD be one of
@@ -211,7 +212,7 @@
           a way to let the Introducer and Controller exchange information that
           may be useful for the Installer.</t>
 
-          <t hangText="Dev Status">The Controller can query the MotherShip for
+          <t hangText="Dev Status">The Controller can query the Transfer Agent for
           the enrollment status of a Device that is enrolled with that
           Controller. The various states returned are defined in <xref
           target="sec-enroll-state"></xref>.</t>
@@ -230,11 +231,11 @@
       </figure>
 
       <t>When the Manufacturer builds the Device, it includes a One Time
-      Password (OTP) on the Device and MotherShip (Message 1 and 2). When the
+      Password (OTP) on the Device and Transfer Agent (Message 1 and 2). When the
       Device is installed, the Introducer reads OTP and other information from
       the Device (Message 3). The Introducer then uses the OTP to tell the
-      MotherShip which Controller this Device should use (Message 4 and 5).
-      Later the Device contacts the MotherShip and tells the Device which
+      Transfer Agent which Controller this Device should use (Message 4 and 5).
+      Later the Device contacts the Transfer Agent and tells the Device which
       Controller to talk to, information that the Device saves in non-volatile
       memory (Message 9 and 10). From that point on, any time the Device
       boots, it can directly communicate with the Controller (Message 11 and
@@ -242,51 +243,51 @@
 
       <t>The Introducer has the option of informing Controller about any
       Devices that it has enrolled with this Controller (Message 6). The
-      Controller can optionally contact the MotherShip to find out about the
+      Controller can optionally contact the Transfer Agent to find out about the
       status of any Devices that it has not heard from (Messages 7 and 8).</t>
 
       <figure>
         <artwork alt="Go Read the TXT version of this draft"
                  src="tte-arrows.png"><![CDATA[participant Manufacturer
 participant Device
-participant MotherShip
+participant Transfer Agent
 participant Introducer
 participant Controller
  
 Manufacturer-->Device: 1 MS ID,MS Fingerprint,\nDev ID, OTP
-Manufacturer-->MotherShip: 2 Dev URN, Dev ID, OTP
+Manufacturer-->Transfer Agent: 2 Dev URN, Dev ID, OTP
 note right of Introducer: User tells I:\n C Addr, Dev Desc
 Device-->Introducer: 3 MS ID, Dev ID, OTP
-Introducer->MotherShip: 4 Dev ID, OTP,\nC Addr, C Fingerprint
-MotherShip->Introducer: 5 Dev URN,\nDev Fingerprint
+Introducer->Transfer Agent: 4 Dev ID, OTP,\nC Addr, C Fingerprint
+Transfer Agent->Introducer: 5 Dev URN,\nDev Fingerprint
 Introducer->Controller: 6 Dev URN,\nDev Fingerprint, \nOTP, Dev Desc
-Controller->MotherShip: 7 Dev URN, OTP
-MotherShip->Controller: 8 Dev State
-Device->MotherShip: 9 Dev URN
-MotherShip->Device: 10 Addr,\n C Fingerprint
+Controller->Transfer Agent: 7 Dev URN, OTP
+Transfer Agent->Controller: 8 Dev State
+Device->Transfer Agent: 9 Dev URN
+Transfer Agent->Device: 10 Addr,\n C Fingerprint
 Device->Controller: 11 Hello
 Controller->Device: 12 HelloAck
 ]]></artwork>
       </figure>
 
       <t>When the Device is built, it needs to be assigned a globally unique
-      URN, a Dev ID, and a MotherShip. A single manufacturer MAY operate many
-      MotherShips as each one can only support 16 million Devices. A perfectly
+      URN, a Dev ID, and a Transfer Agent. A single manufacturer MAY operate many
+      Transfer Agents as each one can only support 16 million Devices. A perfectly
       reasonable way to generate the Dev ID is to use the least significant 32
       bits of the Device URN. The Device needs to be programmed with the IP
-      address and port of the MotherShip along with the fingerprint of the
-      public key that the MotherShip will use in the DTLS CoAP exchange.</t>
+      address and port of the Transfer Agent along with the fingerprint of the
+      public key that the Transfer Agent will use in the DTLS CoAP exchange.</t>
 
       <!--      <t>TODO ref RFC 5785 well known</t> -->
 
-      <t>The creation of the MotherShip domain name is discussed in <xref
+      <t>The creation of the Transfer Agent domain name is discussed in <xref
       target="sec-msid"></xref>. The QR code for the Device MUST be an HTTPS
-      URL that points at the appropriate MotherShip and MUST include a URL
+      URL that points at the appropriate Transfer Agent and MUST include a URL
       parameter called "otp" that is set to OTP represented in hexadecimal and
       MUST include a URL parameter called "devid" that is set to the Device ID
       represented in hexadecimal. It MUST use the default HTTP port and MUST
       have an absolute path of /.well-known/tte. As an example, if the
-      MotherShip's domain name was ""tte-000000.net", the OTP was
+      Transfer Agent's domain name was ""tte-000000.net", the OTP was
       0x123456789abcdef0 and the Device ID was 0xABCDEF01, a valid URL would
       be:</t>
 
@@ -307,15 +308,15 @@ to the reader but there is one in the PDF version.      ]]></artwork>
       </figure>
 
       <t>The Introducer reads the QR code found and the Device, then uses this
-      URL to contact the MotherShip in messages 4 and 5. This URL is referred
+      URL to contact the Transfer Agent in messages 4 and 5. This URL is referred
       to as the Enrollment URL .</t>
 
       <t>Messages 4 and 5 MUST be sent over TLS, and the Introducer MUST
-      verify that the HTTPS certificate of the MotherShip matches the URL. The
+      verify that the HTTPS certificate of the Transfer Agent matches the URL. The
       Introducer can perform either an HTTPS GET or POST. If the Introducer
       does a GET, it MUST make an HTTPS GET request to the Enrollment URL and
       MUST act as a web browser to process returned HTML pages. In the case of
-      a GET, the MotherShip MUST return a web page that allows the user to
+      a GET, the Transfer Agent MUST return a web page that allows the user to
       enter the IP address and port of the Controller as well as the
       fingerprint of the Controller's public key used in CoAP. If the
       Controller does not wish to act as a web browser, instead of using the
@@ -324,13 +325,13 @@ to the reader but there is one in the PDF version.      ]]></artwork>
       Enrollment URL. The parameters are cip, which MUST have the IP address
       of the Controller; cport, which MUST have the port of the Controller;
       and cfingerprint, which MUST have the fingerprint of the Controller's
-      Public Key, represented in hexadecimal. If, and only if, the MotherShip
+      Public Key, represented in hexadecimal. If, and only if, the Transfer Agent
       successfully stores the address information, the POST MUST return an
       HTTP 200 response with a JSON string containing the URN and Fingerprint
       for that Device. The format of this object is described in <xref
       target="sec-enroll-state"></xref>.</t>
 
-      <t>Once the MotherShip has successfully stored the Controller's address
+      <t>Once the Transfer Agent has successfully stored the Controller's address
       for a given OTP, it MUST NOT allow that OTP to be used again to store an
       address for that Device. The OTP can be used after this to query the
       status of the enrollment as described in <xref
@@ -345,28 +346,28 @@ to the reader but there is one in the PDF version.      ]]></artwork>
       be done far in the future. This might happen if Devices were being
       installed before the Controller was even operational. In other cases it
       might be done immediately. (TODO - look at in web browser case having
-      MotherShip redirect Introducer to Controller after successful
+      Transfer Agent redirect Introducer to Controller after successful
       Introduction.) This is done with an HTTP POST to TBD URL with parameters
-      to convey the Device URN and Fingerprint learned from the MotherShip,
+      to convey the Device URN and Fingerprint learned from the Transfer Agent,
       the OTP password, and a locally significant description string that can
       be used to help label the Device for management reasons.</t>
 
       <t>In the case where the Controller has learned the URN and OTP for a
-      given Device, it MAY query the MotherShip to find out the enrollment
+      given Device, it MAY query the Transfer Agent to find out the enrollment
       status. It does this with an HTTP GET request to TBD URL. The various
       statuses that can be returned in TBD JSON doc are: revoked, not mapped,
       mapped, registered. TODO - could use better names and descriptions.</t>
 
       <t>When the Device has powered up and has network connectivity for the
-      first time, it attempts to form a CoAP connection to the MotherShip. The
+      first time, it attempts to form a CoAP connection to the Transfer Agent. The
       Device makes a CoAP GET request to TBD URL, passing its URN as a
       parameter. Details of this message are provided in <xref
       target="sec-coap-enroll"></xref>. The Device MUST check that the Public
-      Key provided by the MotherShip in the DTLS connection matches the
-      fingerprint provided by the Manufacturer. The MotherShip needs to look
+      Key provided by the Transfer Agent in the DTLS connection matches the
+      fingerprint provided by the Manufacturer. The Transfer Agent needs to look
       at the Public Key provided in the DTLS and ensure that it matches the
       fingerprint for this Device that was provided by the Manufacturer. If
-      everything does match, the MotherShip MUST return (in Message 10) the IP
+      everything does match, the Transfer Agent MUST return (in Message 10) the IP
       address and port for the Controller as well as the Fingerprint for the
       Controller's public key. Details for the syntax of these messages are
       provided in <xref target="sec-coap-enroll"></xref>. If this is
@@ -378,7 +379,7 @@ to the reader but there is one in the PDF version.      ]]></artwork>
       <t>At this point, the Device can form a CoAP connection to the
       Controller. The Device can verify that it is speaking to the correct
       Controller by checking that the DTLS Public Key matches the fingerprint
-      for the Controller that was retrieved from the MotherShip. If the
+      for the Controller that was retrieved from the Transfer Agent. If the
       Introducer has contacted the Controller in message 6, then the
       Controller will already have the fingerprint of the Device and can
       verify that it matches the DTLS information in the connection between
@@ -397,7 +398,7 @@ to the reader but there is one in the PDF version.      ]]></artwork>
       incorporated.</t>
 
       <section anchor="sec-coap-enroll" title="Device Enrollment Query">
-        <t>TODO - define well known COAP URL on MotherShip that the Device
+        <t>TODO - define well known COAP URL on Transfer Agent that the Device
         uses to get information about Controller.</t>
       </section>
 
@@ -414,22 +415,22 @@ to the reader but there is one in the PDF version.      ]]></artwork>
         significant label string, and the OTP.</t>
       </section>
 
-      <section anchor="sec-msid" title="MotherShip ID and URLs">
-        <t>This system requires a programmatic way to go from a MotherShip ID,
+      <section anchor="sec-msid" title="Transfer Agent ID and URLs">
+        <t>This system requires a programmatic way to go from a Transfer Agent ID,
         which is a 32-bit integer, to an address that can be used to contact
-        that MotherShip. The approach here is to use DNS for that mapping. For
-        a MotherShip ID that has a high order byte of 0x00, the DNS host name
-        of the MotherShip if formed by prepending "tte-" to the lower order 24
-        bits of the MotherShip ID represented in hexadecimal, and then
-        appending ".net". So the host name for the MotherShip ID 10 would be
-        "tte-00000A.net". MotherShip IDs that have a high order byte other
+        that Transfer Agent. The approach here is to use DNS for that mapping. For
+        a Transfer Agent ID that has a high order byte of 0x00, the DNS host name
+        of the Transfer Agent if formed by prepending "tte-" to the lower order 24
+        bits of the Transfer Agent ID represented in hexadecimal, and then
+        appending ".net". So the host name for the Transfer Agent ID 10 would be
+        "tte-00000A.net". Transfer Agent IDs that have a high order byte other
         than 0x00 are reserved for future specifications.</t>
 
-        <t>A Manufacturer gets a MotherShip ID simply be registering the
-        corresponding DNS entry. The MotherShip ID zero is reserved for
+        <t>A Manufacturer gets a Transfer Agent ID simply be registering the
+        corresponding DNS entry. The Transfer Agent ID zero is reserved for
         examples and MUST NOT be treated as a valid ID by operational systems.
         A manufacturer wishing to have more than 2^32 Devices would simply
-        register multiple MotherShip IDs.</t>
+        register multiple Transfer Agent IDs.</t>
       </section>
     </section>
 
@@ -460,7 +461,7 @@ to the reader but there is one in the PDF version.      ]]></artwork>
       such as a jumper that can be cut.</t>
 
       <t>Network topology consideration - Introducer can install firewall
-      rules that allow Devices to contact MotherShip.</t>
+      rules that allow Devices to contact Transfer Agent.</t>
 
       <t>why works with NATs / FWs.</t>
 
@@ -472,7 +473,7 @@ to the reader but there is one in the PDF version.      ]]></artwork>
         <t>An alternative to QR codes is to have an LED on the Device flash
         out the relevant information to the Introducer. The output string is
         formed by concatenating a 16-bit start of message constant value of
-        0x0001, followed by the MotherShip ID, Device ID, OTP, and then an
+        0x0001, followed by the Transfer Agent ID, Device ID, OTP, and then an
         8-bit two's compliment checksum value computed over the previous
         bytes, including the start of message constant. All values are in
         network byte order. The resulting string is output using
@@ -500,7 +501,7 @@ to the reader but there is one in the PDF version.      ]]></artwork>
         <t>The examples here assumed that COAP was being used with DTLS with
         asymmetric keys. It would also be possible to use DTLS in Pre Shared
         Key (PSK) mode in a very similar flow, where the Introducer provided
-        the MotherShip with the PSK to be used between the Device and the
+        the Transfer Agent with the PSK to be used between the Device and the
         Controller.</t>
       </section>
     </section>
@@ -519,7 +520,7 @@ to the reader but there is one in the PDF version.      ]]></artwork>
     </section>
 
     <section title="IANA Considerations">
-      <t>TODO - create registry for the top byte of MotherShip ID</t>
+      <t>TODO - create registry for the top byte of Transfer Agent ID</t>
 
       <t>TODO register .well-known HTTP URL</t>
     </section>

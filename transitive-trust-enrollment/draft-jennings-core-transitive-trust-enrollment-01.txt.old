@@ -3,14 +3,20 @@
 
 Network Working Group                                        C. Jennings
 Internet-Draft                                                     Cisco
-Intended status:  Experimental                         February 14, 2012
-Expires:  August 17, 2012
+Intended status:  Experimental                        September 23, 2012
+Expires:  March 27, 2013
 
 
           Transitive Trust Enrollment for Constrained Devices
            draft-jennings-core-transitive-trust-enrollment-00
 
 Abstract
+
+   This is a copy of the paper sent to the "Smart Object Security"
+   workshop March 23, 2012 in Paris.  It is submitted as an IETF draft
+   to have a record of it in the draft archive.  The origiinal
+   plublication date of this work was Feb 14, 2012.  Readers are
+   encouraged to read later versions of this draft.
 
    This document provides a very early sketch of a enrollment protocol
    that allows constrained internet devices to securely enroll into a
@@ -34,7 +40,7 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 17, 2012.
+   This Internet-Draft will expire on March 27, 2013.
 
 Copyright Notice
 
@@ -43,20 +49,20 @@ Copyright Notice
 
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents
+
+
+
+Jennings                 Expires March 27, 2013                 [Page 1]
+
+Internet-Draft         Transitive Trust Enrollment        September 2012
+
+
    (http://trustee.ietf.org/license-info) in effect on the date of
    publication of this document.  Please review these documents
    carefully, as they describe your rights and restrictions with respect
    to this document.  Code Components extracted from this document must
    include Simplified BSD License text as described in Section 4.e of
    the Trust Legal Provisions and are provided without warranty as
-
-
-
-Jennings                 Expires August 17, 2012                [Page 1]
-
-Internet-Draft         Transitive Trust Enrollment         February 2012
-
-
    described in the Simplified BSD License.
 
 
@@ -99,19 +105,20 @@ Internet-Draft         Transitive Trust Enrollment         February 2012
    the MotherShip and uses the OTP to tell the MotherShip which
    Controller this Device is should use (Message 3).  Later, the first
    time the Device boots up and gets network connectivity, it contacts
+
+
+
+Jennings                 Expires March 27, 2013                 [Page 2]
+
+Internet-Draft         Transitive Trust Enrollment        September 2012
+
+
    the MotherShip, and the MotherShip tells the Device which Controller
    to talk to (Message 3).  From that point on, any time the Device
    boots, the Device can communicate directly with the Controller
    (Message 4).  The actual message flow is slightly more complicated
    and shown in Section 2, but it uses the same basic idea as this
    simplified flow.
-
-
-
-Jennings                 Expires August 17, 2012                [Page 2]
-
-Internet-Draft         Transitive Trust Enrollment         February 2012
-
 
    The system is designed to achieve several desirable properties:
    o  Can work for Devices with very limited memory and processing power
@@ -154,6 +161,14 @@ Internet-Draft         Transitive Trust Enrollment         February 2012
    Controller all use CoAP to communicate with each other and thus each
    have an asymmetric key pair that is used to form the DTLS connections
    between them.  The MotherShip acts as an HTTP server to communicate
+
+
+
+Jennings                 Expires March 27, 2013                 [Page 3]
+
+Internet-Draft         Transitive Trust Enrollment        September 2012
+
+
    with the Introducer and Controller.  The MotherShip needs a normal
    certificate to use HTTPS.
 
@@ -161,14 +176,6 @@ Internet-Draft         Transitive Trust Enrollment         February 2012
    Controller and that the Device is on the inside of the NAT.  The
    MotherShip is assumed to be a generally accessible server on the
    internet but the Controller and Device can be on the inside of a
-
-
-
-Jennings                 Expires August 17, 2012                [Page 3]
-
-Internet-Draft         Transitive Trust Enrollment         February 2012
-
-
    Firewall or NAT between them and the MotherShip.
 
    In the following message flow we use the following definitions:
@@ -210,6 +217,14 @@ Internet-Draft         Transitive Trust Enrollment         February 2012
 
    When the Manufacturer builds the Device, it includes a One Time
    Password (OTP) on the Device and MotherShip (Message 1 and 2).  When
+
+
+
+Jennings                 Expires March 27, 2013                 [Page 4]
+
+Internet-Draft         Transitive Trust Enrollment        September 2012
+
+
    the Device is installed, the Introducer reads OTP and other
    information from the Device (Message 3).  The Introducer then uses
    the OTP to tell the MotherShip which Controller this Device should
@@ -217,14 +232,6 @@ Internet-Draft         Transitive Trust Enrollment         February 2012
    tells the Device which Controller to talk to, information that the
    Device saves in non-volatile memory (Message 9 and 10).  From that
    point on, any time the Device boots, it can directly communicate with
-
-
-
-Jennings                 Expires August 17, 2012                [Page 4]
-
-Internet-Draft         Transitive Trust Enrollment         February 2012
-
-
    the Controller (Message 11 and 12).
 
    The Introducer has the option of informing Controller about any
@@ -266,19 +273,19 @@ Internet-Draft         Transitive Trust Enrollment         February 2012
    points at the appropriate MotherShip and MUST include a URL parameter
    called "otp" that is set to OTP represented in hexadecimal and MUST
    include a URL parameter called "devid" that is set to the Device ID
+
+
+
+Jennings                 Expires March 27, 2013                 [Page 5]
+
+Internet-Draft         Transitive Trust Enrollment        September 2012
+
+
    represented in hexadecimal.  It MUST use the default HTTP port and
    MUST have an absolute path of /.well-known/tte.  As an example, if
    the MotherShip's domain name was ""tte-000000.net", the OTP was
    0x123456789abcdef0 and the Device ID was 0xABCDEF01, a valid URL
    would be:
-
-
-
-
-
-Jennings                 Expires August 17, 2012                [Page 5]
-
-Internet-Draft         Transitive Trust Enrollment         February 2012
 
 
    https://tte-000000.net/.well-known/tte?
@@ -322,6 +329,14 @@ Internet-Draft         Transitive Trust Enrollment         February 2012
    Message 6 is optional and MAY be omitted.  As some point after the
    Introducer has successfully mapped the Device to the Controller, it
    can send an HTTP or HTTPS request to the Controller to notify it that
+
+
+
+Jennings                 Expires March 27, 2013                 [Page 6]
+
+Internet-Draft         Transitive Trust Enrollment        September 2012
+
+
    it can expect to hear from a particular Device.  The message formats
    for this are defined in Section 3.3.  This does not need happen
    immediately and the information can be saved so it can be done far in
@@ -329,14 +344,6 @@ Internet-Draft         Transitive Trust Enrollment         February 2012
    the Controller was even operational.  In other cases it might be done
    immediately.  (TODO - look at in web browser case having MotherShip
    redirect Introducer to Controller after successful Introduction.)
-
-
-
-Jennings                 Expires August 17, 2012                [Page 6]
-
-Internet-Draft         Transitive Trust Enrollment         February 2012
-
-
    This is done with an HTTP POST to TBD URL with parameters to convey
    the Device URN and Fingerprint learned from the MotherShip, the OTP
    password, and a locally significant description string that can be
@@ -378,19 +385,17 @@ Internet-Draft         Transitive Trust Enrollment         February 2012
 
    The Controller MAY be configured such that if it does not have the
    information from Message 6 it can ignore the Device until it gets the
+
+
+
+Jennings                 Expires March 27, 2013                 [Page 7]
+
+Internet-Draft         Transitive Trust Enrollment        September 2012
+
+
    information from the Introducer, or, alternatively, such that it can
    accept the connection based purely on the fact that the network was
    configured to send messages to the Controller.
-
-
-
-
-
-
-
-Jennings                 Expires August 17, 2012                [Page 7]
-
-Internet-Draft         Transitive Trust Enrollment         February 2012
 
 
 3.  Message Formats
@@ -435,20 +440,21 @@ Internet-Draft         Transitive Trust Enrollment         February 2012
    simply register multiple MotherShip IDs.
 
 
+
+
+
+
+Jennings                 Expires March 27, 2013                 [Page 8]
+
+Internet-Draft         Transitive Trust Enrollment        September 2012
+
+
 4.  Security Considerations
 
    This section has not really been started and needs lots of work.
 
    TODO - Discuss how one can replace a dead Controller with a new one
    in an operational network.  The short answer is likely that one needs
-
-
-
-Jennings                 Expires August 17, 2012                [Page 8]
-
-Internet-Draft         Transitive Trust Enrollment         February 2012
-
-
    to back up the private keys of the old Controller and move these to
    the new Controller.
 
@@ -491,19 +497,18 @@ Internet-Draft         Transitive Trust Enrollment         February 2012
    This allows a Device such as a smartphone with video capture to
    detect the signal and recover the information.
 
+
+
+
+Jennings                 Expires March 27, 2013                 [Page 9]
+
+Internet-Draft         Transitive Trust Enrollment        September 2012
+
+
    TODO - see if this works at 30 bps.  See about encoding multiple
    intensity levels or colors in the LED.  Initial experiments indicate
    this does not work very well as auto contrast in the video camera
    tends to saturate LED range.  Would an Adler-32 checksum be better?
-
-
-
-
-
-Jennings                 Expires August 17, 2012                [Page 9]
-
-Internet-Draft         Transitive Trust Enrollment         February 2012
-
 
 5.2.  Bulk Enrollment
 
@@ -548,18 +553,18 @@ Internet-Draft         Transitive Trust Enrollment         February 2012
 
    Some of the fundamental ideas in this draft where inspired by Max
    Pritikin's work.  I'd like to thank the following people for review
+
+
+
+Jennings                 Expires March 27, 2013                [Page 10]
+
+Internet-Draft         Transitive Trust Enrollment        September 2012
+
+
    comments:  Eric Rescorla
 
 
 9.  References
-
-
-
-
-Jennings                 Expires August 17, 2012               [Page 10]
-
-Internet-Draft         Transitive Trust Enrollment         February 2012
-
 
 9.1.  Normative References
 
@@ -607,10 +612,5 @@ Author's Address
 
 
 
-
-
-
-
-
-Jennings                 Expires August 17, 2012               [Page 11]
+Jennings                 Expires March 27, 2013                [Page 11]
 
