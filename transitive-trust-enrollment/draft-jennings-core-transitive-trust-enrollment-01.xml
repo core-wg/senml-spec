@@ -290,7 +290,41 @@ the reader but there is one in the PDF version.
       number would do it by changing the tte1 to tte2. </t>
 
       <section title ="Create">
-        <t> TODO </t>
+        <t> The HTTP REST API allow the manufacture to tell the Transfer Device
+        about the DevURN and OTP for a given device the Manufacture has created.
+        </t>
+
+        <t>
+          <list
+              style="hanging">
+            
+            <t hangText="Path:"> foo/bar </t>
+            
+            <t hangText="Methods:"> foo/bar </t>
+            
+            <t hangText="Parameters:"> 
+
+              <list
+                  style="hanging">
+
+                <t hangText="foo:"> foo/bar </t>
+                <t hangText="bar:"> foo/bar </t>
+
+              </list>          
+
+            </t>
+            
+            
+            <t hangText="Return Values:"> 
+            </t>
+            
+          </list>
+        </t>
+        
+        <section title="Example" >
+          <t> TODO </t>
+        </section>
+
       </section>
 
       <section title ="Setup">
@@ -398,7 +432,7 @@ the reader but there is one in the PDF version.
         Device. Need to sort out details of a scheme like this.</t>
       </section>
 
-      <section title="No Public Key Crypto">
+      <section title="Public Key Crypto">
         <t>The examples here assumed that COAP was being used with DTLS in Pre
         Shared Key (PSK) mode. It would also be possible to use DTLS with self
         signed certificates with a very similar flow, where the Introducer
@@ -416,7 +450,8 @@ the reader but there is one in the PDF version.
       for reading a 1-wire temperature sensor. This fit in under 32k of flash,
       and uses less than 4k or ram on an 8 bit AVR processor. That means the
       cost for embedded processor in volume with this much flash, ram, etc is
-      very roughly $1.50 USD in 2012.  </t>
+      very roughly $1.50 USD in 2012. A key part of getting this to be small is
+      the extremely small crypto footprint from using SHA224-CFB. </t>
 
     </section>
 
@@ -446,7 +481,7 @@ the reader but there is one in the PDF version.
       Shelby. </t>
     </section>
 
-    <section title="Appendix A: JOSE SHA224-CFB">
+    <section title="Appendix A: JOSE SHA224-CFB" anchor="sec-sha224-cfb" >
 
       <t> Note: This section will eventually be moved to an experimental draft
       submitted to JOSE WG. </t>
@@ -463,7 +498,8 @@ the reader but there is one in the PDF version.
       "mac" field. </t>
 
       <t> TODO example. Todo fix to base64 instead of hex encoding. TOOD talk to
-      Barnes about keyID and case with no key wrap. </t>
+      Barnes about keyID and case with no key wrap. TODO - state of sha224-cfb
+      and this is all experimental.  </t>
 
     </section>
 
