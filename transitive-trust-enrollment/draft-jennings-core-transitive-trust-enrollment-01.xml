@@ -103,8 +103,8 @@
       a camera that can read QR codes. When the Device is installed, the
       Introducer can scan the QR code on the Device. This QR code includes a URL
       to the Transfer Agent along with the OTP and a separate Device secret
-      DevSecret. (Message 1). The Introducer then contacts the Transfer Agent and
-      uses the OTP to tell the Transfer Agent which Controller this Device
+      DevSecret. (Message 1). The Introducer then contacts the Transfer Agent
+      and uses the OTP to tell the Transfer Agent which Controller this Device
       should use (Message 2). The Introducer can also tell the Controller the
       DevSecret (Message 3).  Later, the first time the Device boots up and gets
       network connectivity, it contacts the Transfer Agent, and the Transfer
@@ -143,18 +143,18 @@
 
       <t>The semantic level information in each message is discussed in <xref
       target="sec-enrollment"></xref> and the syntax of the messages is
-      discussed in <xref target="sec-ta-api"></xref> and <xref target="sec-cont-api"></xref>. The security properties
-      of the system are described in <xref target="sec-sec"></xref>.</t>
+      discussed in <xref target="sec-ta-api"></xref> and <xref
+      target="sec-cont-api"></xref>. The security properties of the system are
+      described in <xref target="sec-sec"></xref>.</t>
 
-  <t> The Device uses
-      HTTP or COAP to communicate with the controller. The Transfer Agent and
-      Introducer use HTTP to communicate with various entities. There are two
-      bits of keying material used for cryptographic operations. Th first is the
-      One Time Password (OTP) that is passed via QR code from the device to the
-      Introducer then the Introducer uses to authorize itself to the Transfer
-      Agent. There is also a DevSecret that is used to secure communications
-      between the Device and the Controller.  The Transfer Agent needs a normal
-      certificate to use HTTPS.</t>
+      <t> The Device uses HTTP or COAP to communicate with the controller. The
+      Transfer Agent and Introducer use HTTP to communicate with various
+      entities. There are two bits of keying material used for cryptographic
+      operations. Th first is the One Time Password (OTP) that is passed via QR
+      code from the device to the Introducer then the Introducer uses to
+      authorize itself to the Transfer Agent. There is also a DevSecret that is
+      used to secure communications between the Device and the Controller.  The
+      Transfer Agent needs a normal certificate to use HTTPS.</t>
 
       <t>It is assumed that the Device may have a NAT between it and the
       Controller and that the Device is on the inside of the NAT. The
@@ -451,8 +451,9 @@ the reader but there is one in the PDF version.
       <t> Note: This section will eventually be moved to an experimental draft
       submitted to JOSE WG. </t>
 
-      <t> This section describes how to create a JOSE object that is encrypted
-      and signed with SHA224-CFB as specified in <xref target="HashCFB" />. </t>
+      <t> This section describes how to create a JOSE object as described by
+      <xref target="I-D.barnes-jose-jsms" /> that is encrypted and signed with
+      SHA224-CFB as specified in <xref target="HashCFB" />. </t>
 
     </section>
 
@@ -617,22 +618,10 @@ the reader but there is one in the PDF version.
 <facsimile>+1(617)258-8682</facsimile>
 <email>timbl@w3.org</email></address></author>
 <date year='1999' month='June' />
-<abstract>
-<t>
-   The Hypertext Transfer Protocol (HTTP) is an application-level
-   protocol for distributed, collaborative, hypermedia information
-   systems. It is a generic, stateless, protocol which can be used for
-   many tasks beyond its use for hypertext, such as name servers and
-   distributed object management systems, through extension of its
-   request methods, error codes and headers . A feature of HTTP is
-   the typing and negotiation of data representation, allowing systems
-   to be built independently of the data being transferred.
-</t>
-<t>
-   HTTP has been in use by the World-Wide Web global information
-   initiative since 1990. This specification defines the protocol
-   referred to as "HTTP/1.1", and is an update to RFC 2068 .
-</t></abstract></front>
+
+
+
+</front>
 
 <seriesInfo name='RFC' value='2616' />
 <format type='TXT' octets='422317' target='http://www.rfc-editor.org/rfc/rfc2616.txt' />
@@ -665,21 +654,7 @@ the reader but there is one in the PDF version.
 
           <date day="31" month="October" year="2011" />
 
-          <abstract>
-            <t>This document specifies the Constrained Application Protocol
-            (CoAP), a specialized web transfer protocol for use with
-            constrained networks and nodes for machine-to-machine applications
-            such as smart energy and building automation. These constrained
-            nodes often have 8-bit microcontrollers with small amounts of ROM
-            and RAM, while networks such as 6LoWPAN often have high packet
-            error rates and a typical throughput of 10s of kbit/s. CoAP
-            provides a method/response interaction model between application
-            end-points, supports built-in resource discovery, and includes key
-            web concepts such as URIs and content-types. CoAP easily
-            translates to HTTP for integration with the web while meeting
-            specialized requirements such as multicast support, very low
-            overhead and simplicity for constrained environments.</t>
-          </abstract>
+     
         </front>
 
         <seriesInfo name="Internet-Draft" value="draft-ietf-core-coap-08" />
@@ -701,7 +676,6 @@ the reader but there is one in the PDF version.
 
 <date month='June' day='15' year='2012' />
 
-<abstract><t>Many applications require the ability to send cryptographically secured messages.  While the IETF has defined a number of formats for such messages (e.g.  CMS) those formats use encodings which are not easy to use in modern applications.  This document describes the JavaScript Message Security format (JSMS), a new cryptographic message format which is based on JavaScript Object Notation (JSON) and thus is easy for many applications to generate and parse.</t></abstract>
 
 </front>
 
@@ -736,14 +710,7 @@ the reader but there is one in the PDF version.
 
           <date day="31" month="October" year="2011" />
 
-          <abstract>
-            <t>This memo describes a new Uniform Resource Name (URN) namespace
-            for hardware device identifiers. A general representation of
-            device identity can be useful in many applications, such as in
-            sensor data streams and storage, or equipment inventories. A
-            URN-based representation can be easily passed along in any
-            application that needs the information.</t>
-          </abstract>
+        
         </front>
 
         <seriesInfo name="Internet-Draft" value="draft-arkko-core-dev-urn-01" />
