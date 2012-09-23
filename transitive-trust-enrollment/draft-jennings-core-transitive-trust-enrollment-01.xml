@@ -166,13 +166,11 @@
 
     <section anchor="sec-enrollment" title="Enrollment Information Flow">
     
-
       <t>In the following message flow we use the following definitions:<list
           style="hanging">
          
-
-          <t hangText="TaURL">A http URL that can be used to reach the Transfer Agent.</t>
-
+          <t hangText="TaURL">A http URL that can be used to reach the Transfer
+          Agent.</t>
 
           <t hangText="DevURN">A globally unique URN assigned by the
           Manufacturer to uniquely identify this Device. This SHOULD be one of
@@ -216,8 +214,8 @@ TODO
       Password (OTP) on the device, a DevSecret, and the URN for the Devices
       (DevURN). It also creates a QR code on the device that contains the URL to
       the transfer agent (TaURL), the URN for the Device (DevURL), the OTP, and
-      the DevSecret. This QR codes is described in detail in section TODO. This is
-      corresponds to message 1 in the above figure. </t>
+      the DevSecret. This QR codes is described in detail in section TODO. This
+      is corresponds to message 1 in the above figure. </t>
 
       <t> The Manufacturer also tells the Transfer Agent one the OTP is for the
       Particular DevURN. (Message 2) </t>
@@ -277,16 +275,19 @@ https://example.net/.well-known/tte1/setup/urn:dev:mac:90a2da001a0c
       generate the following QR code:</t>
 
       <figure>
-        <artwork alt="Go Read the TXT version of this draft" src="qrcode.png"><![CDATA[
-QR code in ASCII art left as an exercise 
-to the reader but there is one in the PDF version.      ]]></artwork>
+        <artwork alt="Go Read the TXT version of this draft"
+        src="qrcode.png"><![CDATA[
+QR code in ASCII art left as an exercise to
+the reader but there is one in the PDF version.  
+]]></artwork>
       </figure>
 
     </section>
 
     <section title ="Transfer Agent API" anchor="sec-ta-api">
 
-      <t> Note that future version of the API that needed to increment a version number would do it by changing the tte1 to tte2. </t>
+      <t> Note that future version of the API that needed to increment a version
+      number would do it by changing the tte1 to tte2. </t>
 
       <section title ="Create">
         <t> TODO </t>
@@ -300,8 +301,8 @@ to the reader but there is one in the PDF version.      ]]></artwork>
       <section title ="Bind">
         <t> TODO
 
- MUST be sent over TLS, and the Introducer MUST
-      verify that the HTTPS certificate of the Transfer Agent matches the URL.
+ MUST be sent over TLS, and the Introducer MUST verify that the HTTPS
+ certificate of the Transfer Agent matches the URL.
 
 
  </t>
@@ -310,14 +311,11 @@ to the reader but there is one in the PDF version.      ]]></artwork>
       for a given OTP, it MUST NOT allow that OTP to be used again to store an
       address for that Device. </t>  
 
-
       </section>
 
       <section title ="Fetch">
         <t> TODO </t>
       </section>
-
- 
 
     </section>
 
@@ -344,12 +342,12 @@ to the reader but there is one in the PDF version.      ]]></artwork>
 
       <t>TODO - Discuss how one can replace a dead Controller with a new one
       in an operational network. The short answer is likely that one needs to
-      back up the private keys of the old Controller and move these to the new
+      back up the keys of the old Controller and move these to the new
       Controller.</t>
 
       <t>What happens if the OTP is stolen during Device transit? The short
       answer is that the Device is compromised at this point and needs to be
-      discarded or returned to the manufacture to get a new Device ID and OTP.
+      discarded or returned to the manufacture to get a new OTP.
       The Introducer needs to detect that this has happened and warn the
       user.</t>
 
@@ -358,20 +356,18 @@ to the reader but there is one in the PDF version.      ]]></artwork>
       switch supported this protocol, but could also be used just as a stand
       alone light switch, there is a risk the OTP could be stolen by an
       attacker, with the attacker enrolling the Device to the attacker's
-      Controller. When the correct user installs the light switch, if they
-      never bother to try to Introduce it to anything, they will not detect
-      that it has been compromised. One way to mitigate this risk in
-      situations where it exists might be to include some manual configuration
-      on the Device to indicate that it is to be used in stand-alone mode,
-      such as a jumper that can be cut.</t>
+      Controller. When the correct user installs the light switch, if they never
+      bother to try to Introduce it to anything, they will not detect that it
+      has been compromised. One way to mitigate this risk might be to include
+      some manual configuration on the Device to indicate that it is to be used
+      in stand-alone mode, such as a jumper that can be cut.</t>
 
       <t>Network topology consideration - Introducer can install firewall
       rules that allow Devices to contact Transfer Agent.</t>
 
-      <t>why works with NATs / FWs.</t>
+      <t>Explain why works with NATs / FWs.</t>
 
-      <t></t>
-    </section>
+     </section>
 
     <section title="Variations">
       <section title="LED Based Enrollment">
@@ -456,7 +452,7 @@ to the reader but there is one in the PDF version.      ]]></artwork>
       submitted to JOSE WG. </t>
 
       <t> This section describes how to create a JOSE object that is encrypted
-      and signed with SHA224-CFB as specified in TODO REF. </t>
+      and signed with SHA224-CFB as specified in <xref target="HashCFB" />. </t>
 
     </section>
 
@@ -543,6 +539,110 @@ to the reader but there is one in the PDF version.      ]]></artwork>
                 type="XML" />
       </reference>
 
+
+<reference anchor='RFC2616'>
+
+<front>
+<title abbrev='HTTP/1.1'>Hypertext Transfer Protocol -- HTTP/1.1</title>
+<author initials='R.' surname='Fielding' fullname='Roy T. Fielding'>
+<organization abbrev='UC Irvine'>Department of Information and Computer Science</organization>
+<address>
+<postal>
+<street>University of California, Irvine</street>
+<city>Irvine</city>
+<region>CA</region>
+<code>92697-3425</code></postal>
+<facsimile>+1(949)824-1715</facsimile>
+<email>fielding@ics.uci.edu</email></address></author>
+<author initials='J.' surname='Gettys' fullname='James Gettys'>
+<organization abbrev='Compaq/W3C'>World Wide Web Consortium</organization>
+<address>
+<postal>
+<street>MIT Laboratory for Computer Science, NE43-356</street>
+<street>545 Technology Square</street>
+<city>Cambridge</city>
+<region>MA</region>
+<code>02139</code></postal>
+<facsimile>+1(617)258-8682</facsimile>
+<email>jg@w3.org</email></address></author>
+<author initials='J.' surname='Mogul' fullname='Jeffrey C. Mogul'>
+<organization abbrev='Compaq'>Compaq Computer Corporation</organization>
+<address>
+<postal>
+<street>Western Research Laboratory</street>
+<street>250 University Avenue</street>
+<city>Palo Alto</city>
+<region>CA</region>
+<code>94305</code></postal>
+<email>mogul@wrl.dec.com</email></address></author>
+<author initials='H.' surname='Frystyk' fullname='Henrik Frystyk Nielsen'>
+<organization abbrev='W3C/MIT'>World Wide Web Consortium</organization>
+<address>
+<postal>
+<street>MIT Laboratory for Computer Science, NE43-356</street>
+<street>545 Technology Square</street>
+<city>Cambridge</city>
+<region>MA</region>
+<code>02139</code></postal>
+<facsimile>+1(617)258-8682</facsimile>
+<email>frystyk@w3.org</email></address></author>
+<author initials='L.' surname='Masinter' fullname='Larry Masinter'>
+<organization abbrev='Xerox'>Xerox Corporation</organization>
+<address>
+<postal>
+<street>MIT Laboratory for Computer Science, NE43-356</street>
+<street>3333 Coyote Hill Road</street>
+<city>Palo Alto</city>
+<region>CA</region>
+<code>94034</code></postal>
+<email>masinter@parc.xerox.com</email></address></author>
+<author initials='P.' surname='Leach' fullname='Paul J. Leach'>
+<organization abbrev='Microsoft'>Microsoft Corporation</organization>
+<address>
+<postal>
+<street>1 Microsoft Way</street>
+<city>Redmond</city>
+<region>WA</region>
+<code>98052</code></postal>
+<email>paulle@microsoft.com</email></address></author>
+<author initials='T.' surname='Berners-Lee' fullname='Tim Berners-Lee'>
+<organization abbrev='W3C/MIT'>World Wide Web Consortium</organization>
+<address>
+<postal>
+<street>MIT Laboratory for Computer Science, NE43-356</street>
+<street>545 Technology Square</street>
+<city>Cambridge</city>
+<region>MA</region>
+<code>02139</code></postal>
+<facsimile>+1(617)258-8682</facsimile>
+<email>timbl@w3.org</email></address></author>
+<date year='1999' month='June' />
+<abstract>
+<t>
+   The Hypertext Transfer Protocol (HTTP) is an application-level
+   protocol for distributed, collaborative, hypermedia information
+   systems. It is a generic, stateless, protocol which can be used for
+   many tasks beyond its use for hypertext, such as name servers and
+   distributed object management systems, through extension of its
+   request methods, error codes and headers . A feature of HTTP is
+   the typing and negotiation of data representation, allowing systems
+   to be built independently of the data being transferred.
+</t>
+<t>
+   HTTP has been in use by the World-Wide Web global information
+   initiative since 1990. This specification defines the protocol
+   referred to as "HTTP/1.1", and is an update to RFC 2068 .
+</t></abstract></front>
+
+<seriesInfo name='RFC' value='2616' />
+<format type='TXT' octets='422317' target='http://www.rfc-editor.org/rfc/rfc2616.txt' />
+<format type='PS' octets='5529857' target='http://www.rfc-editor.org/rfc/rfc2616.ps' />
+<format type='PDF' octets='550558' target='http://www.rfc-editor.org/rfc/rfc2616.pdf' />
+<format type='HTML' octets='636125' target='http://xml.resource.org/public/rfc/html/rfc2616.html' />
+<format type='XML' octets='493420' target='http://xml.resource.org/public/rfc/xml/rfc2616.xml' />
+</reference>
+
+
       <reference anchor="I-D.ietf-core-coap">
         <front>
           <title>Constrained Application Protocol (CoAP)</title>
@@ -587,9 +687,37 @@ to the reader but there is one in the PDF version.      ]]></artwork>
         <format target="http://www.ietf.org/internet-drafts/draft-ietf-core-coap-08.txt"
                 type="TXT" />
       </reference>
+
+
+
+
+<reference anchor='I-D.barnes-jose-jsms'>
+<front>
+<title>JavaScript Message Security Format</title>
+
+<author initials='R' surname='Barnes' fullname='Richard Barnes'>
+    <organization />
+</author>
+
+<date month='June' day='15' year='2012' />
+
+<abstract><t>Many applications require the ability to send cryptographically secured messages.  While the IETF has defined a number of formats for such messages (e.g.  CMS) those formats use encodings which are not easy to use in modern applications.  This document describes the JavaScript Message Security format (JSMS), a new cryptographic message format which is based on JavaScript Object Notation (JSON) and thus is easy for many applications to generate and parse.</t></abstract>
+
+</front>
+
+<seriesInfo name='Internet-Draft' value='draft-barnes-jose-jsms-00' />
+<format type='TXT'
+        target='http://www.ietf.org/internet-drafts/draft-barnes-jose-jsms-00.txt' />
+</reference>
+
+
+
+
     </references>
 
     <references title="Informative References">
+
+
       <reference anchor="I-D.arkko-core-dev-urn">
         <front>
           <title>Uniform Resource Names for Device Identifiers</title>
@@ -623,6 +751,35 @@ to the reader but there is one in the PDF version.      ]]></artwork>
         <format target="http://www.ietf.org/internet-drafts/draft-arkko-core-dev-urn-01.txt"
                 type="TXT" />
       </reference>
+
+
+
+<reference anchor='I-D.jennings-senml'>
+<front>
+<title>Media Types for Sensor Markup Language (SENML)</title>
+
+<author initials='C' surname='Jennings' fullname='Cullen Jennings'>
+    <organization />
+</author>
+
+<author initials='Z' surname='Shelby' fullname='Zach Shelby'>
+    <organization />
+</author>
+
+<author initials='J' surname='Arkko' fullname='Jari Arkko'>
+    <organization />
+</author>
+
+<date month='October' day='31' year='2011' />
+
+</front>
+
+<seriesInfo name='Internet-Draft' value='draft-jennings-senml-07' />
+<format type='TXT'
+        target='http://www.ietf.org/internet-drafts/draft-jennings-senml-07.txt' />
+</reference>
+
+
     </references>
   </back>
 </rfc>
