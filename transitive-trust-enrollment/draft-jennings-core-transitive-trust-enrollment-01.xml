@@ -147,13 +147,16 @@
     </section>
 
     <section anchor="sec-enrollment" title="Enrollment Information Flow">
-      <t>The Manufacturer, Device, Transfer Agent, Introducer, and Controller are
-      abbreviated M,D,MS,I,C respectively. The Device, Transfer Agent, and
-      Controller all use CoAP to communicate with each other and thus each
-      have an asymmetric key pair that is used to form the DTLS connections
-      between them. The Transfer Agent acts as an HTTP server to communicate with
-      the Introducer and Controller. The Transfer Agent needs a normal certificate
-      to use HTTPS.</t>
+      <t>The Manufacturer, Device, Transfer Agent, Introducer, User, and
+      Controller are abbreviated M,D,TA,I,U, and C respectively. The Device uses
+      HTTP or COAP to communicate with the controller. The Transfer Agent and
+      Introducer use HTTP to communicate with various entities. There are two
+      bits of keying material used for cryptographic operations. Th first is the
+      One Time Password (OTP) that is passed via QR code from the device to the
+      Introducer then the Introducer uses to authorize itself to the Transfer
+      Agent. There is also a secret that is used to secure communications
+      between the Device and the Controller.  The Transfer Agent needs a normal
+      certificate to use HTTPS.</t>
 
       <t>It is assumed that the Device may have a NAT between it and the
       Controller and that the Device is on the inside of the NAT. The
@@ -163,52 +166,44 @@
 
       <t>In the following message flow we use the following definitions:<list
           style="hanging">
-          <t hangText="Fingerprint">This refers to a hash of the DTLS public
-          key used by the associated network element. "MS Fingerprint" means a
-          fingerprint of the public key that the Transfer Agent will use when
-          forming CoAP connections over DTLS.</t>
+         
 
-          <t hangText="MS ID">A 32-bit integer that uniquely identifies the
-          Transfer Agent. <xref target="sec-msid"></xref> explains how to use the
-          MS ID to create a URL that can be used to contact the
-          Transfer Agent.</t>
+          <t hangText="TaURL">A http URL that can be used to reach the Transfer Agent.</t>
 
-          <t hangText="Dev ID">A 32-bit integer that identifies the Device and
-          when combined with the Transfer Agent is unique. Two Devices that use
-          the same Transfer Agent cannot have the same Dev ID.</t>
 
-          <t hangText="Dev URN">A globally unique URN assigned by the
+          <t hangText="DevURN">A globally unique URN assigned by the
           Manufacturer to uniquely identify this Device. This SHOULD be one of
           the URNs from <xref target="I-D.arkko-core-dev-urn"></xref>.</t>
 
           <t hangText="OTP">The One Time Password created by the Manufacturer
-          for enrolling the Device. This is a cryptographically random 64-bit
-          integer.</t>
+          for enrolling the Device. This is TODO bytes of cryptographically random data.</t>
 
-          <t hangText="C Addr">Address of the Controller. This is an IPv4 or
-          IPv6 address and port which the Device can use to form a CoAP
-          connection to the Controller.</t>
+          <t hangText="ConURL">This is a URL that provides the address to reach
+          the controller. It can have a scheme of http, https, coap, or
+          coaps. </t>
 
-          <t hangText="Dev Descp">A locally significant string that the
+          <t hangText="DevLabel">A locally significant string that the
           Introducer can assign to a Device. For example, the convention for a
           thermostat in building 30, floor2, office 361 might be assign the
           string "BLD30/2/361 - Thermostat". This string is provided purely as
           a way to let the Introducer and Controller exchange information that
-          may be useful for the Installer.</t>
+          may be useful for the use installing the system.</t>
 
-          <t hangText="Dev Status">The Controller can query the Transfer Agent for
-          the enrollment status of a Device that is enrolled with that
-          Controller. The various states returned are defined in <xref
-          target="sec-enroll-state"></xref>.</t>
         </list></t>
 
       <t>The information flow is illustrated in the following figure. The goal
       is get to the point where the Device knows that it should be talking to
       the Controller, the Controller knows it should be talking the Device,
-      and the Device and Controller can communicate using CoAP and
-      authenticate each other using their public keys.</t>
+      and the Device and Controller can communicate and
+      authenticate each other using the secret.</t>
 
-    
+         <figure>
+        <artwork alt="Go Read the TXT version of this draft"
+                 src="tte-arrows.svg"><![CDATA[
+TODO
+]]></artwork>
+      </figure>
+
 
       <t>When the Manufacturer builds the Device, it includes a One Time
       Password (OTP) on the Device and Transfer Agent (Message 1 and 2). When the
@@ -226,13 +221,7 @@
       Controller can optionally contact the Transfer Agent to find out about the
       status of any Devices that it has not heard from (Messages 7 and 8).</t>
 
-      <figure>
-        <artwork alt="Go Read the TXT version of this draft"
-                 src="tte-arrows.svg"><![CDATA[
-TODO
-]]></artwork>
-      </figure>
-
+ 
       <t>When the Device is built, it needs to be assigned a globally unique
       URN, a Dev ID, and a Transfer Agent. A single manufacturer MAY operate many
       Transfer Agents as each one can only support 16 million Devices. A perfectly
