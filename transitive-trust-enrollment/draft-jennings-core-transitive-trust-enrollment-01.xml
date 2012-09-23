@@ -143,7 +143,7 @@
 
       <t>The semantic level information in each message is discussed in <xref
       target="sec-enrollment"></xref> and the syntax of the messages is
-      discussed in <xref target="sec-syntax"></xref>. The security properties
+      discussed in <xref target="sec-ta-api"></xref> and <xref target="sec-cont-api"></xref>. The security properties
       of the system are described in <xref target="sec-sec"></xref>.</t>
 
   <t> The Device uses
@@ -179,9 +179,14 @@
           the URNs from <xref target="I-D.arkko-core-dev-urn"></xref>.</t>
 
           <t hangText="OTP">The One Time Password created by the Manufacturer
-          for enrolling the Device. This is TODO bytes of cryptographically random data.</t>
+          for enrolling the Device. This is TODO bytes of cryptographically
+          random data.</t>
+   
+          <t hangText="DevSecret">The secret created by the Manufacturer for the
+          device to communicated with the Controller. This is TODO bytes of
+          cryptographically random data.</t>
 
-          <t hangText="ConURL">This is a URL that provides the address to reach
+          <t hangText="ContURL">This is a URL that provides the address to reach
           the controller. It can have a scheme of http, https, coap, or
           coaps. </t>
 
@@ -235,9 +240,9 @@ TODO
       communicate with the Controller (Message 10 and 11). The Controller and
       Device both know the DevSecret for the device and can use that to
       authenticated and encrypt communications between them. It is suggested
-      that the first thing the Controller and Device do is use this DevSecret to securely replace it
-      with some different secret that is not known to anyone that saw the QR
-      code. </t>
+      that the first thing the Controller and Device do is use this DevSecret to
+      securely replace it with some different secret that is not known to anyone
+      that saw the QR code. </t>
 
       <t> Open Issue: should we add in an additional ContSecret that is picked
       by controller, passed to Introducer, then to Trust Agent, then to Device?
@@ -247,21 +252,24 @@ TODO
 
     <section title="QR Code">
 
-      <t> The QR code for the Device MUST be an HTTPS
-      URL that points at the appropriate Transfer Agent and MUST include a URL
-      parameter called "otp" that is set to OTP represented in hexadecimal and
-      MUST include a URL parameter called "devid" that is set to the Device ID
-      represented in hexadecimal. It MUST use the default HTTP port and MUST
-      have an absolute path of /.well-known/tte. As an example, if the
-      Transfer Agent's domain name was ""tte-000000.net", the OTP was
-      0x123456789abcdef0 and the Device ID was 0xABCDEF01, a valid URL would
+      <t> The QR code for the Device MUST be an HTTPS URL that points at the
+      appropriate Transfer Agent. The path MUST be formed by concatenating
+      ".well-known/tte1/setup" and the DevURN. It MUST include the OTP as a hex
+      encoded value for a parameter called otp.  The secret MUST be encoded in
+      hex and used as the fragment identifier of the URL. The reasons the secret
+      is put as a fragment is so that if the Introducer scans the QR code and
+      dereferences the URL with a web browser, the fragment identifier is not
+      transferred in the request to the Transfer Agent.
+      </t>
+
+      <t> As an example, if the
+      Transfer Agent's domain example.net, a valid URL for the QR code would
       be:</t>
 
       <figure>
         <artwork><![CDATA[
-TODO - make shorter spaces 
-https://dev.fluffy.im : 8000/v1/setup/urn:dev:mac:90a2da001a0c
-/ 88F5EC91493E473B758159C7792C/ # 00004DCFDCDBD9F54C1B2E71FC22
+https://example.net/.well-known/tte1/setup/urn:dev:mac:90a2da001a0c
+    ?otp=88F5EC91493E473B758159C7792C#00004DCFDCDBD9F54C1B2E71FC22
 ]]></artwork>
       </figure>
 
@@ -274,133 +282,63 @@ QR code in ASCII art left as an exercise
 to the reader but there is one in the PDF version.      ]]></artwork>
       </figure>
 
-      <t>The Introducer reads the QR code found and the Device, then uses this
-      URL to contact the Transfer Agent in messages 4 and 5. This URL is referred
-      to as the Enrollment URL .</t>
+    </section>
 
-      <t>Messages 4 and 5 MUST be sent over TLS, and the Introducer MUST
-      verify that the HTTPS certificate of the Transfer Agent matches the URL. The
-      Introducer can perform either an HTTPS GET or POST. If the Introducer
-      does a GET, it MUST make an HTTPS GET request to the Enrollment URL and
-      MUST act as a web browser to process returned HTML pages. In the case of
-      a GET, the Transfer Agent MUST return a web page that allows the user to
-      enter the IP address and port of the Controller as well as the
-      fingerprint of the Controller's public key used in CoAP. If the
-      Controller does not wish to act as a web browser, instead of using the
-      GET, it will use a PUT. When using a PUT, the Controller MUST make an
-      HTTPS POST request to a URL formed by appending three parameters to the
-      Enrollment URL. The parameters are cip, which MUST have the IP address
-      of the Controller; cport, which MUST have the port of the Controller;
-      and cfingerprint, which MUST have the fingerprint of the Controller's
-      Public Key, represented in hexadecimal. If, and only if, the Transfer Agent
-      successfully stores the address information, the POST MUST return an
-      HTTP 200 response with a JSON string containing the URN and Fingerprint
-      for that Device. The format of this object is described in <xref
-      target="sec-enroll-state"></xref>.</t>
+    <section title ="Transfer Agent API" anchor="sec-ta-api">
 
-      <t>Once the Transfer Agent has successfully stored the Controller's address
+      <t> Note that future version of the API that needed to increment a version number would do it by changing the tte1 to tte2. </t>
+
+      <section title ="Create">
+        <t> TODO </t>
+      </section>
+
+      <section title ="Setup">
+        <t>  Transfer Agent MUST return a web page that allows the user to
+      enter the </t>
+      </section>
+
+      <section title ="Bind">
+        <t> TODO
+
+ MUST be sent over TLS, and the Introducer MUST
+      verify that the HTTPS certificate of the Transfer Agent matches the URL.
+
+
+ </t>
+
+    <t>Once the Transfer Agent has successfully stored the Controller's address
       for a given OTP, it MUST NOT allow that OTP to be used again to store an
-      address for that Device. The OTP can be used after this to query the
-      status of the enrollment as described in <xref
-      target="sec-enroll-state"></xref>.</t>
+      address for that Device. </t>  
 
-      <t>Message 6 is optional and MAY be omitted. As some point after the
-      Introducer has successfully mapped the Device to the Controller, it can
-      send an HTTP or HTTPS request to the Controller to notify it that it can
-      expect to hear from a particular Device. The message formats for this
-      are defined in <xref target="sec-controller-enroll"></xref>. This does
-      not need happen immediately and the information can be saved so it can
-      be done far in the future. This might happen if Devices were being
-      installed before the Controller was even operational. In other cases it
-      might be done immediately. (TODO - look at in web browser case having
-      Transfer Agent redirect Introducer to Controller after successful
-      Introduction.) This is done with an HTTP POST to TBD URL with parameters
-      to convey the Device URN and Fingerprint learned from the Transfer Agent,
-      the OTP password, and a locally significant description string that can
-      be used to help label the Device for management reasons.</t>
 
-      <t>In the case where the Controller has learned the URN and OTP for a
-      given Device, it MAY query the Transfer Agent to find out the enrollment
-      status. It does this with an HTTP GET request to TBD URL. The various
-      statuses that can be returned in TBD JSON doc are: revoked, not mapped,
-      mapped, registered. TODO - could use better names and descriptions.</t>
+      </section>
 
-      <t>When the Device has powered up and has network connectivity for the
-      first time, it attempts to form a CoAP connection to the Transfer Agent. The
-      Device makes a CoAP GET request to TBD URL, passing its URN as a
-      parameter. Details of this message are provided in <xref
-      target="sec-coap-enroll"></xref>. The Device MUST check that the Public
-      Key provided by the Transfer Agent in the DTLS connection matches the
-      fingerprint provided by the Manufacturer. The Transfer Agent needs to look
-      at the Public Key provided in the DTLS and ensure that it matches the
-      fingerprint for this Device that was provided by the Manufacturer. If
-      everything does match, the Transfer Agent MUST return (in Message 10) the IP
-      address and port for the Controller as well as the Fingerprint for the
-      Controller's public key. Details for the syntax of these messages are
-      provided in <xref target="sec-coap-enroll"></xref>. If this is
-      successful, the Device MUST store the address and fingerprint for the
-      Controller in non-volatile memory and, on future reboots, skip all the
-      steps before this and connect directly to the Controller. (TODO - Define
-      how retries work if the Device has not yet been enrolled.)</t>
+      <section title ="Fetch">
+        <t> TODO </t>
+      </section>
 
-      <t>At this point, the Device can form a CoAP connection to the
-      Controller. The Device can verify that it is speaking to the correct
-      Controller by checking that the DTLS Public Key matches the fingerprint
-      for the Controller that was retrieved from the Transfer Agent. If the
-      Introducer has contacted the Controller in message 6, then the
-      Controller will already have the fingerprint of the Device and can
-      verify that it matches the DTLS information in the connection between
-      the Device and the Controller.</t>
+ 
 
-      <t>The Controller MAY be configured such that if it does not have the
-      information from Message 6 it can ignore the Device until it gets the
-      information from the Introducer, or, alternatively, such that it can
-      accept the connection based purely on the fact that the network was
-      configured to send messages to the Controller.</t>
     </section>
 
-    <section anchor="sec-syntax" title="Message Formats">
-      <t>This section is missing from the current draft and will be completed
-      in future revisions once feedback on the overall design and been
-      incorporated.</t>
+    <section title ="Controller API" anchor="sec-cont-api">
 
-      <section anchor="sec-coap-enroll" title="Device Enrollment Query">
-        <t>TODO - define well known COAP URL on Transfer Agent that the Device
-        uses to get information about Controller.</t>
+    <section title ="Test Alive">
+        <t> TODO </t>
       </section>
 
-      <section anchor="sec-enroll-state" title="JSON Enrollment States">
-        <t>TODO - Define a JSON object with Device URN, Device public key or
-        fingerprint, and enrollment state.</t>
+    <section title ="Add">
+        <t> TODO </t>
       </section>
 
-      <section anchor="sec-controller-enroll"
-               title="Controller Enrollment Messages">
-        <t>TODO - define HTTP messages to allow Introducer to tell Controller
-        about a new Device. Need a way for Introducer to tell Controller, the
-        Device public key or fingerprint, the Device URN, and the locally
-        significant label string, and the OTP.</t>
+    <section title ="Sensor Update">
+        <t> TODO </t>
       </section>
 
-      <section anchor="sec-msid" title="Transfer Agent ID and URLs">
-        <t>This system requires a programmatic way to go from a Transfer Agent ID,
-        which is a 32-bit integer, to an address that can be used to contact
-        that Transfer Agent. The approach here is to use DNS for that mapping. For
-        a Transfer Agent ID that has a high order byte of 0x00, the DNS host name
-        of the Transfer Agent if formed by prepending "tte-" to the lower order 24
-        bits of the Transfer Agent ID represented in hexadecimal, and then
-        appending ".net". So the host name for the Transfer Agent ID 10 would be
-        "tte-00000A.net". Transfer Agent IDs that have a high order byte other
-        than 0x00 are reserved for future specifications.</t>
-
-        <t>A Manufacturer gets a Transfer Agent ID simply be registering the
-        corresponding DNS entry. The Transfer Agent ID zero is reserved for
-        examples and MUST NOT be treated as a valid ID by operational systems.
-        A manufacturer wishing to have more than 2^32 Devices would simply
-        register multiple Transfer Agent IDs.</t>
-      </section>
     </section>
 
+
+   
     <section anchor="sec-sec" title="Security Considerations">
       <t>This section has not really been started and needs lots of work.</t>
 
@@ -474,6 +412,16 @@ to the reader but there is one in the PDF version.      ]]></artwork>
     </section>
 
     <section title="Implementation Notes">
+
+      <t> The system described here can be implemented on a very small
+      device. An implementations for Arduino with ethernet was done that
+      includes all the parts described here including SENML, JSON, the
+      encryption and signing, HTTP, DNS, and DHCP. It also included libraries
+      for reading a 1-wire temperature sensor. This fit in under 32k of flash,
+      and uses less than 4k or ram on an 8 bit AVR processor. That means the
+      cost for embedded processor in volume with this much flash, ram, etc is
+      very roughly $1.50 USD in 2012.  </t>
+
     </section>
 
     <section title="Open Issues">
@@ -501,10 +449,54 @@ to the reader but there is one in the PDF version.      ]]></artwork>
       comments: Eric Rescorla, Jari Arkko, Lyndsay Campbell, and Zach
       Shelby. </t>
     </section>
+
+    <section title="Apendix A: JOSE SHA224-CFB">
+
+      <t> Note: This section will eventually be moved to an experimental draft
+      submitted to JOSE WG. </t>
+
+      <t> This section describes how to create a JOSE object that is encrypted
+      and signed with SHA224-CFB as specified in TODO REF. </t>
+
+    </section>
+
   </middle>
 
   <back>
     <references title="Normative References">
+
+      
+      <reference anchor="HashCFB">
+        <front>
+          <title abbrev="Hash-CFB">Hash-CFB: Authenticated Encryptions without a Block Cipher</title>
+
+          <author fullname="Christian Forler" initials="C." surname="Forler">
+            <organization> Bauhaus University </organization>
+            <address>
+            </address>
+          </author>
+          <author fullname="David McGrew" initials="D." surname="McGrew">
+            <organization> Cisco </organization>
+            <address>
+            </address>
+          </author>
+        <author fullname="Stefan Lucks" initials="S." surname="Lucks">
+          <organization> Bauhaus University </organization>
+          <address>
+          </address>
+          </author>
+          <author fullname="Jakob Wenzel" initials="J." surname="Wenzel">
+            <organization> Bauhaus University </organization>
+            <address>
+            </address>
+          </author>
+          
+          <date month="July" day="5" year="2012" />
+        </front>
+        <seriesInfo name="Directions in Authenticated Ciphers Workshop" value="" />
+      </reference>
+      
+
       <reference anchor="RFC2119">
         <front>
           <title abbrev="RFC Key Words">Key words for use in RFCs to Indicate
