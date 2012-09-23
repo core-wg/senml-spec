@@ -41,22 +41,22 @@
       </address>
     </author>
 
-    <date day="9" month="September" year="2012" />
+    <date day="23" month="September" year="2012" />
 
-    <area>APP</area>
+    <area>SEC</area>
 
     <abstract>
-      <t>This document provides a sketch of a rendevous protocol that allows
+      <t>This document provides a sketch of a rendezvous protocol that allows
       constrained internet devices such as sensors to securely connect into a
       system that uses them.  The solution is based on the idea that each device
       will be manufactured with a one time password that can be used by the
       customer to tell the device which controller to enroll with and the device
-      is manfactured to contact a given Transfer Server that is used to tell the
-      device which system to connect to. The admistrator of the devcie can get
+      is manufactured to contact a given Transfer Server that is used to tell the
+      device which system to connect to. The administrator of the device can get
       this one time password from the device using a QR code then use that one
-      time password to to inform a Trasnfer Server which system the device
-      should connect to. The device will conctact the Transfer Agent, get this
-      information, then conncec to the aperoaprete system. </t>
+      time password to to inform a Transfer Server which system the device
+      should connect to. The device will contact the Transfer Agent, get this
+      information, then connect to the appropriate system. </t>
     </abstract>
   </front>
 
@@ -95,16 +95,16 @@
       Controller. The Manufacturer also runs a website known as the Transfer
       Agent that knows the OTP for every device that use that Transfer
       Agent. The Device can include the OTP as a QR code on the outside of the
-      Device. When the Device is installed, the network admistroatr or installer
+      Device. When the Device is installed, the network administrator or installer
       uses a software agent known as the Introducer. The Introducer would
-      typically be simplye a normal browser running on an smart phone with a
-      camer that can read QR codes. When the Device is installed, the Introducer
+      typically be simply a normal browser running on an smart phone with a
+      camera that can read QR codes. When the Device is installed, the Introducer
       can scan the QR code on the Device. This QR code includes a URL to the
-      Transfer Agent along iwth the OTP and a seprate controller
+      Transfer Agent along with the OTP and a separate controller
       secret. (Message 1). The Introducer then contacts the Transfer Agent and
       uses the OTP to tell the Transfer Agent which Controller this Device is
       should use (Message 3). The Introducer can also tell the Controller the
-      controlerl secrete from the Device (Message TODO).  Later, the first time
+      controller secrete from the Device (Message TODO).  Later, the first time
       the Device boots up and gets network connectivity, it contacts the
       Transfer Agent, and the Transfer Agent tells the Device which Controller
       to talk to (Message 3). From that point on, any time the Device boots, the
@@ -118,7 +118,7 @@
           <t>Can work for Devices with very limited memory and processing
           power.</t>
 
-          <t>Does not require network or power to be up when the Device is
+          <t>Does not require network or power to be available when the Device is
           installed.</t>
 
           <t>Is fairly secure (see more in the security section).</t>
@@ -136,25 +136,9 @@
         </list></t>
 
       <t>One of the key steps in making this system work is getting the OTP from
-      the Device to Introducer. The main aproach used here is using a QR code
-      other bar code capable of represneting a URL and having this printed on
-      the Device and/or box it comes in.  There are several other ways that this
-      could happen such as:</t>
-
-      <t><list style="symbols">
-          <t>Having a single LED on the Device that blinks out the OTP
-          information and using a video capture application on the Introducer
-          to read this</t>
-
-          <t>The manufacture providing the OTP in some other machine readable
-          form</t>
-
-          <t>Including the OTP in an RFID tag on the Device that can be read
-          by the Introducer</t>
-
-          <t>Having an electrical interface (such as one wire memory) on the
-          Device that can be read by the Introducer</t>
-        </list></t>
+      the Device to Introducer. The main approach used here is using a QR code
+      other bar code capable of representing a URL and having this printed on
+      the Device and/or box it comes in. </t>
 
       <t>The semantic level information in each message is discussed in <xref
       target="sec-enrollment"></xref> and the syntax of the messages is
@@ -224,11 +208,7 @@
       and the Device and Controller can communicate using CoAP and
       authenticate each other using their public keys.</t>
 
-      <figure>
-        <artwork alt="Go Read the TXT version of this draft"
-                 src="tte-boxes.png"><![CDATA[TODO ASCII FIGURE 
-]]></artwork>
-      </figure>
+    
 
       <t>When the Manufacturer builds the Device, it includes a One Time
       Password (OTP) on the Device and Transfer Agent (Message 1 and 2). When the
@@ -248,25 +228,8 @@
 
       <figure>
         <artwork alt="Go Read the TXT version of this draft"
-                 src="tte-arrows.png"><![CDATA[participant Manufacturer
-participant Device
-participant Transfer Agent
-participant Introducer
-participant Controller
- 
-Manufacturer-->Device: 1 MS ID,MS Fingerprint,\nDev ID, OTP
-Manufacturer-->Transfer Agent: 2 Dev URN, Dev ID, OTP
-note right of Introducer: User tells I:\n C Addr, Dev Desc
-Device-->Introducer: 3 MS ID, Dev ID, OTP
-Introducer->Transfer Agent: 4 Dev ID, OTP,\nC Addr, C Fingerprint
-Transfer Agent->Introducer: 5 Dev URN,\nDev Fingerprint
-Introducer->Controller: 6 Dev URN,\nDev Fingerprint, \nOTP, Dev Desc
-Controller->Transfer Agent: 7 Dev URN, OTP
-Transfer Agent->Controller: 8 Dev State
-Device->Transfer Agent: 9 Dev URN
-Transfer Agent->Device: 10 Addr,\n C Fingerprint
-Device->Controller: 11 Hello
-Controller->Device: 12 HelloAck
+                 src="tte-arrows.svg"><![CDATA[
+TODO
 ]]></artwork>
       </figure>
 

@@ -1,0 +1,23 @@
+title TODO THIS
+set autonumber true
+
+participant Manufacturer as Manufacturer
+participant Device as Device
+participant Transfer Agent as TransferAgent
+participant Introducer as Introducer
+participant User as User
+participant Controller as Controller
+ 
+Manufacturer-->Device: 1 MS ID,MS Fingerprint,\nDev ID, OTP
+Manufacturer-->TransferAgent: 2 Dev URN, Dev ID, OTP
+User-->Introducer: User tells I:\n C Addr, Dev Desc
+Device-->Introducer: 3 MS ID, Dev ID, OTP
+Introducer->TransferAgent: 4 Dev ID, OTP,\nC Addr, C Fingerprint
+TransferAgent->Introducer: 5 Dev URN,\nDev Fingerprint
+Introducer->Controller: 6 Dev URN,\nDev Fingerprint, \nOTP, Dev Desc
+Controller->TransferAgent: 7 Dev URN, OTP
+TransferAgent->Controller: 8 Dev State
+Device->TransferAgent: 9 Dev URN
+TransferAgent->Device: 10 Addr,\n C Fingerprint
+Device->Controller: 11 Hello
+Controller->Device: 12 HelloAck
