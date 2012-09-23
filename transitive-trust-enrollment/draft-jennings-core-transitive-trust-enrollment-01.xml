@@ -446,7 +446,7 @@ the reader but there is one in the PDF version.
       Shelby. </t>
     </section>
 
-    <section title="Apendix A: JOSE SHA224-CFB">
+    <section title="Appendix A: JOSE SHA224-CFB">
 
       <t> Note: This section will eventually be moved to an experimental draft
       submitted to JOSE WG. </t>
@@ -454,6 +454,16 @@ the reader but there is one in the PDF version.
       <t> This section describes how to create a JOSE object as described by
       <xref target="I-D.barnes-jose-jsms" /> that is encrypted and signed with
       SHA224-CFB as specified in <xref target="HashCFB" />. </t>
+
+      <t> This adds a new ENCRYPTION algorithm called sha224-cfb to <xref
+      target="I-D.barnes-jose-jsms" />. This takes one parameter named "n" which
+      represents the nonce as defined in <xref target="HashCFB" />. It is
+      RECOMMENDED that they key be 14 bytes long and the nonce is 24 bytes of
+      data. The authentication information from the algorithm is stored in the
+      "mac" field. </t>
+
+      <t> TODO example. Todo fix to base64 instead of hex encoding. TOOD talk to
+      Barnes about keyID and case with no key wrap. </t>
 
     </section>
 
