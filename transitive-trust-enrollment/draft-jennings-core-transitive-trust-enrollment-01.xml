@@ -11,9 +11,7 @@
 <?rfc rfcedstyle="no" ?>
 <?rfc tocdepth="4"?>
 
-   <!--      <t>TODO ref RFC 5785 well known</t> -->
-
-
+  
 <rfc category="exp"
      docName="draft-jennings-core-transitive-trust-enrollment-01"
      ipr="trust200902">
@@ -43,7 +41,7 @@
       </address>
     </author>
 
-    <date day="23" month="September" year="2012" />
+    <date day="27" month="September" year="2012" />
 
     <area>SEC</area>
 
@@ -106,11 +104,12 @@
       DevSecret. (Message 1). The Introducer then contacts the Transfer Agent
       and uses the OTP to tell the Transfer Agent which Controller this Device
       should use (Message 2). The Introducer can also tell the Controller the
-      DevSecret (Message 3).  Later, the first time the Device boots up and gets
-      network connectivity, it contacts the Transfer Agent, and the Transfer
-      Agent tells the Device which Controller to talk to (Message 4). From that
-      point on, any time the Device boots, the Device can communicate directly
-      with the Controller (Message 5). The actual message flow is slightly more
+      DevSecret (Message 3) so that the Controller and Device can authenticate
+      each other.  Later, the first time the Device boots up and gets network
+      connectivity, it contacts the Transfer Agent, and the Transfer Agent tells
+      the Device which Controller to talk to (Message 4). From that point on,
+      any time the Device boots, the Device can communicate directly with the
+      Controller (Message 5). The actual message flow is slightly more
       complicated and shown in <xref target="sec-enrollment"></xref>, but it
       uses the same basic idea as this simplified flow.</t>
 
@@ -137,8 +136,8 @@
         </list></t>
 
       <t>One of the key steps in making this system work is getting the OTP from
-      the Device to Introducer. The approach used here is using a QR code
-      representing a URL. The QR code is printed on the Device and/or box it
+      the Device to the Introducer. The approach used here is to use a QR code
+      representing the URL. The QR code is printed on the Device and/or box it
       comes in. </t>
 
       <t>The semantic level information in each message is discussed in <xref
@@ -150,7 +149,7 @@
       <t> The Device uses HTTP or COAP to communicate with the controller. The
       Transfer Agent and Introducer use HTTP to communicate with various
       entities. There are two bits of keying material used for cryptographic
-      operations. Th first is the One Time Password (OTP) that is passed via QR
+      operations. The first is the One Time Password (OTP) that is passed via QR
       code from the device to the Introducer then the Introducer uses to
       authorize itself to the Transfer Agent. There is also a DevSecret that is
       used to secure communications between the Device and the Controller.  The
@@ -169,20 +168,21 @@
       <t>In the following message flow we use the following definitions:<list
           style="hanging">
          
-          <t hangText="TaURL">A http URL that can be used to reach the Transfer
-          Agent.</t>
+          <t hangText="TaURL">A http URL that can be used to reach the root
+          resource on the Transfer Agent.</t>
 
           <t hangText="DevURN">A globally unique URN assigned by the
-          Manufacturer to uniquely identify this Device. This SHOULD be one of
-          the URNs from <xref target="I-D.arkko-core-dev-urn"></xref>.</t>
+          Manufacturer to uniquely identify this Device. <!-- MOVE TODO This
+          SHOULD be one of the URNs from <xref
+          target="I-D.arkko-core-dev-urn"></xref>. --> </t>
 
           <t hangText="OTP">The One Time Password created by the Manufacturer
-          for enrolling the Device. This is TODO bytes of cryptographically
-          random data.</t>
+          for enrolling the Device. <!-- TODO MOVE This is 14 bytes of
+          cryptographically random data. --> </t>
    
           <t hangText="DevSecret">The secret created by the Manufacturer for the
-          device to communicated with the Controller. This is TODO bytes of
-          cryptographically random data.</t>
+          device to communicated with the Controller. <!-- TODO MOVE This is 14
+          bytes of cryptographically random data.  --> </t>
 
           <t hangText="ContURL">This is a URL that provides the address to reach
           the controller. It can have a scheme of http, https, coap, or
@@ -205,7 +205,7 @@
 
          <figure>
         <artwork alt="Go Read the TXT version of this draft"
-                 src="tte-arrows.svg"><![CDATA[
+                 src="tte-arrows.svg" width="100%" ><![CDATA[
 TODO
 ]]></artwork>
       </figure>
@@ -217,8 +217,8 @@ TODO
       the DevSecret. This QR codes is described in detail in section TODO. This
       is corresponds to message 1 in the above figure. </t>
 
-      <t> The Manufacturer also tells the Transfer Agent one the OTP is for the
-      Particular DevURN. (Message 2) </t>
+      <t> The Manufacturer also tells the Transfer Agent the OTP and DevURN for
+      this Device. (Message 2) </t>
 
       <t> When the Device is installed, the Introducer reads OTP, DevSecret,
       DeviceURN, and the URL for the Transfer Agent (TaURL) from the Device
@@ -248,16 +248,27 @@ TODO
 
     </section>
 
+  <section title="Terminology">
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT",
+      "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+      interpreted as described in <xref target="RFC2119"></xref>.</t>
+
+      <t> When this draft says Base64, it means the URL safe Base64 encoding
+      from TODO.</t>
+    </section>
+
     <section title="QR Code">
 
       <t> The QR code for the Device MUST be an HTTPS URL that points at the
-      appropriate Transfer Agent. The path MUST be formed by concatenating
-      ".well-known/tte1/setup" and the DevURN. It MUST include the OTP as a hex
-      encoded value for a parameter called otp.  The secret MUST be encoded in
-      hex and used as the fragment identifier of the URL. The reasons the secret
-      is put as a fragment is so that if the Introducer scans the QR code and
-      dereferences the URL with a web browser, the fragment identifier is not
-      transferred in the request to the Transfer Agent.
+      appropriate Transfer Agent. The authority MUST be formed by coping the
+      authority from the TaURL. The path is formed by concatenating
+      ".well-known/tte1/" followed the DevURN followed by "/s". It MUST include
+      the OTP as a Base64 encoded value for a parameter called otp.  The secret
+      MUST be encoded in Base64 and used as the fragment identifier of the
+      URL. The reasons the secret is put as a fragment is so that if the
+      Introducer scans the QR code and dereferences the URL with a web browser,
+      the fragment identifier is not transferred in the request to the Transfer
+      Agent.
       </t>
 
       <t> As an example, if the
@@ -266,7 +277,8 @@ TODO
 
       <figure>
         <artwork><![CDATA[
-https://example.net/.well-known/tte1/setup/urn:dev:mac:90a2da001a0c
+TOOD - change hex to base64
+https://example.net/.well-known/tte1/urn:dev:mac:90a2da001a0c/s
     ?otp=88F5EC91493E473B758159C7792C#00004DCFDCDBD9F54C1B2E71FC22
 ]]></artwork>
       </figure>
@@ -407,16 +419,15 @@ the reader but there is one in the PDF version.
     <section anchor="sec-sec" title="Security Considerations">
       <t>This section has not really been started and needs lots of work.</t>
 
-      <t>TODO - Discuss how one can replace a dead Controller with a new one
-      in an operational network. The short answer is likely that one needs to
-      back up the keys of the old Controller and move these to the new
+      <t>TODO - Discuss how one can replace a dead Controller with a new one in
+      an operational network. The short answer is likely that one needs to back
+      up the keys of the old Controller and move these to the new
       Controller.</t>
 
       <t>What happens if the OTP is stolen during Device transit? The short
       answer is that the Device is compromised at this point and needs to be
-      discarded or returned to the manufacture to get a new OTP.
-      The Introducer needs to detect that this has happened and warn the
-      user.</t>
+      discarded or returned to the manufacture to get a new OTP.  The Introducer
+      needs to detect that this has happened and warn the user.</t>
 
       <t>There are additional concerns about Devices that may be operational
       without ever being introduced to a Controller. For example, if a light
@@ -438,31 +449,33 @@ the reader but there is one in the PDF version.
 
     <section title="Variations">
       <section title="LED Based Enrollment">
-        <t>An alternative to QR codes is to have an LED on the Device flash
-        out the relevant information to the Introducer. The output string is
-        formed by concatenating a 16-bit start of message constant value of
-        0x0001, followed by the TaURN, DevURN, OTP, DevSecret and then an
-        8-bit two's compliment checksum value computed over the previous
-        bytes, including the start of message constant. All values are in
-        network byte order. The resulting string is output using
-        Non-Return-to-Zero Inverted (NRZI) encoding on the LED at a baud rate
-        of 15 bps. This allows a Device such as a smartphone with video
-        capture to detect the signal and recover the information.</t>
+        <t>An alternative to QR codes is to have an LED on the Device flash out
+        the relevant information to the Introducer. The output string is formed
+        by concatenating a 16-bit start of message constant value of 0x0001,
+        followed by the 8 bit length of TaURN, TaURN, 8 bit length of DevURN,
+        the DevURN, 8 bit length of OTP, OTP, 8 bit length of DevSect, DevSecret
+        and then an 8-bit two's compliment checksum value computed over the
+        previous bytes, including the start of message constant. All values are
+        in network byte order. The resulting string is output using
+        Non-Return-to-Zero Inverted (NRZI) encoding on the LED at a baud rate of
+        15 bps. This allows a Device such as a smartphone with video capture to
+        detect the signal and recover the information.</t>
 
         <t>TODO - see if this works at 30 bps. See about encoding multiple
-        intensity levels or colors in the LED. Initial experiments indicate
-        this does not work very well as auto contrast in the video camera
-        tends to saturate LED range. Would an Adler-32 checksum be better?</t>
+        intensity levels or colors in the LED. Initial experiments indicate this
+        does not work very well as auto contrast in the video camera tends to
+        saturate LED range. Would an Adler-32 checksum be better? Could multiple
+        colors of intensity improve the speed of this as this is slow. </t>
       </section>
 
       <section title="Bulk Enrollment">
-        <t>Imagine one wants to enroll a whole box of sensors. We should
-        define some scheme where one can simply bar code something on the
-        outside of a box and can bulk enroll all the sensors in the box.
-        Perhaps have a scheme where there is a master secret and start and end
-        DevURN on the outside of box bar code. Then the OTP for a given
-        Device is generated using the master secret and DevURN of that
-        Device. Need to sort out details of a scheme like this.</t>
+        <t>Imagine one wants to enroll a whole box of sensors. We should define
+        some scheme where one can simply bar code something on the outside of a
+        box and can bulk enroll all the sensors in the box.  Perhaps have a
+        scheme where there is a master secret and start and end DevURN on the
+        outside of box bar code. Then the OTP for a given Device is generated
+        using the master secret and DevURN of that Device. Need to sort out
+        details of a scheme like this.</t>
       </section>
 
       <section title="Public Key Crypto">
@@ -487,6 +500,7 @@ the reader but there is one in the PDF version.
       the extremely small crypto footprint from using SHA224-CFB. </t>
 
       <section title="Random Numbers">
+        <t> Note: This section would be better in a separate draft. </t>
       </section>
 
     </section>
@@ -529,13 +543,18 @@ the reader but there is one in the PDF version.
       <t> This adds a new ENCRYPTION algorithm called sha224-cfb to <xref
       target="I-D.barnes-jose-jsms" />. This takes one parameter named "n" which
       represents the nonce as defined in <xref target="HashCFB" />. It is
-      RECOMMENDED that they key be 14 bytes long and the nonce is 24 bytes of
-      data. The authentication information from the algorithm is stored in the
+      RECOMMENDED that they key be 14 bytes long and the nonce is 24 bytes
+      long. The authentication information from the algorithm is stored in the
       "mac" field. </t>
 
-      <t> TODO example. Todo fix to base64 instead of hex encoding. TOOD talk to
+      <section title="Example" >
+        
+        <t> TODO example. Todo fix to base64 instead of hex encoding. TOOD talk to
       Barnes about keyID and case with no key wrap. TODO - state of sha224-cfb
       and this is all experimental.  </t>
+
+
+        </section>
 
     </section>
 
@@ -547,7 +566,8 @@ the reader but there is one in the PDF version.
       
       <reference anchor="HashCFB">
         <front>
-          <title abbrev="Hash-CFB">Hash-CFB: Authenticated Encryptions without a Block Cipher</title>
+          <title abbrev="Hash-CFB">Hash-CFB: Authenticated Encryptions without a
+          Block Cipher</title>
 
           <author fullname="Christian Forler" initials="C." surname="Forler">
             <organization> Bauhaus University </organization>
@@ -623,12 +643,33 @@ the reader but there is one in the PDF version.
       </reference>
 
 
+
+<reference anchor='RFC5785'>
+
+<front>
+<title>Defining Well-Known Uniform Resource Identifiers (URIs)</title>
+<author initials='M.' surname='Nottingham' fullname='M. Nottingham'>
+<organization /></author>
+<author initials='E.' surname='Hammer-Lahav' fullname='E. Hammer-Lahav'>
+<organization /></author>
+<date year='2010' month='April' />
+<abstract>
+<t>This memo defines a path prefix for "well-known locations", "/.well-known/",
+in selected Uniform Resource Identifier (URI)
+schemes. [STANDARDS-TRACK]</t></abstract></front>
+
+<seriesInfo name='RFC' value='5785' />
+<format type='TXT' octets='13779' target='http://www.rfc-editor.org/rfc/rfc5785.txt' />
+</reference>
+
+
 <reference anchor='RFC2616'>
 
 <front>
 <title abbrev='HTTP/1.1'>Hypertext Transfer Protocol -- HTTP/1.1</title>
 <author initials='R.' surname='Fielding' fullname='Roy T. Fielding'>
-<organization abbrev='UC Irvine'>Department of Information and Computer Science</organization>
+<organization abbrev='UC Irvine'>Department of Information and Computer
+Science</organization>
 <address>
 <postal>
 <street>University of California, Irvine</street>
