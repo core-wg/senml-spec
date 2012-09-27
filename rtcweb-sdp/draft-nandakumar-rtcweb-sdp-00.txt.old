@@ -1,0 +1,1176 @@
+
+
+
+Network Working Group                                        C. Jennings
+Internet-Draft                                             S. Nandakumar
+Intended status:  Standards Track                                  Cisco
+Expires:  March 24, 2013                              September 20, 2012
+
+
+                           SDP for the WebRTC
+                      draft-jennings-rtcweb-sdp-00
+
+Abstract
+
+   The Web Real-Time Communication (WebRTC) working group is charged to
+   provide protocol support for direct interactive rich communication
+   using audio, video and data between two peers web browsers.  This
+   document describes the role of Session Description protocol (SDP)
+   with in the WebRTC framework for negotiating media setup between the
+   peers.  SDP is negotiated between the WebRTC peers using Offer/Answer
+   exchange mechanism as described in the RFC 3264.This document serves
+   a introductory purpose for the WebRTC application developers and
+   browser implementers in using SDP with in the context of WebRTC.
+
+Status of this Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at http://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on March 24, 2013.
+
+Copyright Notice
+
+   Copyright (c) 2012 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+
+
+
+Jennings & Nandakumar    Expires March 24, 2013                 [Page 1]
+
+Internet-Draft                 SDP4WebRTC                 September 2012
+
+
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+Table of Contents
+
+   1.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  3
+   2.  SDP and the WebRTC . . . . . . . . . . . . . . . . . . . . . .  3
+   3.  Offer/Answer and the WebRTC  . . . . . . . . . . . . . . . . .  4
+   4.  WebRTC Session Description . . . . . . . . . . . . . . . . . .  4
+     4.1.  Secure Two-Way Audio and Video with Feedback . . . . . . .  5
+     4.2.  Secure Two-way Audio,Video,Data and remove data stream . . 11
+     4.3.  Add New Media (video)  . . . . . . . . . . . . . . . . . . 15
+   5.  SDP Modifiability  . . . . . . . . . . . . . . . . . . . . . . 20
+   6.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 20
+   7.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+     7.1.  Normative References . . . . . . . . . . . . . . . . . . . 20
+     7.2.  Informative References . . . . . . . . . . . . . . . . . . 20
+   Authors' Addresses . . . . . . . . . . . . . . . . . . . . . . . . 21
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jennings & Nandakumar    Expires March 24, 2013                 [Page 2]
+
+Internet-Draft                 SDP4WebRTC                 September 2012
+
+
+1.  Introduction
+
+   Javascript Session Exchange Protocol(JSEP) specifies a generic
+   protocol needed to generate RFC 3264 offers and answers negotiated
+   between the WebRTC peers for setting up, updating and tearing down a
+   multimedia session.  For this purpose, SDP is used to construct
+   RFC3264 offers/answers for describing (media and non-media) streams
+   as appropriate for recipients of a session description to participate
+   in the session.
+
+   The remainder of this document is organized as follows:  Section 2
+   provides an overview of SDP and Offer/Answer exchange mechanism in
+   the WebRTC context.  Section 4 provides sample SDP usages for most
+   common WebRTC use cases building from the concepts in the previous
+   sections.  Section 5 provides few thoughts about modifiability of SDP
+   by a WebRTC application. .
+
+
+2.  SDP and the WebRTC
+
+   The purpose of this section is to provide general overview of SDP and
+   its components.  For a more in-depth understanding, the readers are
+   advised to refer to RFC 4566.
+
+   The Session Description Protocol (SDP) [RFC4566] describes multimedia
+   sessions,which can be audio,video, whiteboards,fax,modem, and other
+   media-streams.  It provides a general purpose,standard representation
+   to convey aspects of multimedia session such as media
+   details,transport addresses and related metadata in a transport
+   agnostic manner.  Such information is intended for the purpose of
+   session announcement,session invitation and parameter negotiation.
+
+   As of today SDP is widely used in the context of Session Initiation
+   Protocol , Real-time Transport Protocol, and Real-time Streaming
+   Protocol.
+
+   WebRTC proposes JavaScript application to fully control the signaling
+   plane of a multimedia session as described in the JSEP specification
+   [RFC].JSEP provides mechanisms to create session characterisation and
+   media definition information to conduct the session based on SDP.
+
+   In this context, SDP provides grammatical structure syntactically
+   with conveying the intention and capabilities semantically for the
+   participants with in the session.
+
+   Below figure provides semantic components for the purpose of
+   describing WebRTC session along with the corresponding lines from the
+   SDP.
+
+
+
+Jennings & Nandakumar    Expires March 24, 2013                 [Page 3]
+
+Internet-Draft                 SDP4WebRTC                 September 2012
+
+
+   TODO ASCII FIGURE
+
+
+3.  Offer/Answer and the WebRTC
+
+   The section provides an overview of the SDP Offer/Answer protocol and
+   its scope is intentionally brief in nature.  Interested readers are
+   recommended to refer to RFC3264 for more specific details.
+
+   The offer answer [RFC3264] model specifies rule for the bilateral
+   exchange of Session Description Protocol (SDP) messages for creation
+   of multimedia streams.It defines protocol with involved participants
+   exchanging desired session characteristics from each others
+   perspective modelled on SDP to negotiate the session between them.
+
+   In the most basic form, the protocol operation begins by one of the
+   participants sending an initial SDP offer describing its intent to
+   start a multimedia communication session.  The participant receiving
+   the offer MAY generate an SDP answer accepting the offer or it MAY
+   reject the offer.  If the session is accepted the offer answer model
+   guarantees a common view of the multimedia session between the
+   participants.
+
+   At any time, either participant MAY generate a new SDP offer that
+   updates the session in progress.
+
+   With in the WebRTC context, the offer/answer model defines the state-
+   machinery for WebRTC peers to negotiate session descriptions between
+   them during initial setup stages as well as for eventual session
+   updates.  Javascript Session Establishment Protocol specification for
+   WebRTC provides the mechanism for generating RFC 3264 offers and
+   answers in order for both sides of the session to negotiate details
+   such as list of media formats to be sent/received, bandwidth
+   information, crypto parameters, transport parameters, for example.
+
+
+4.  WebRTC Session Description
+
+   A typical web based real-time multimedia communication session can be
+   characterized as below:
+
+   (a)  It has zero or more Audio only, Video only or Audio/Video Media
+        streams
+   (b)  MAY zero or more non-media data streams
+
+
+
+
+
+
+
+Jennings & Nandakumar    Expires March 24, 2013                 [Page 4]
+
+Internet-Draft                 SDP4WebRTC                 September 2012
+
+
+   (c)  All the streams are secured with DTLS/SRTP
+   (d)  ICE processing for NAT Traversal
+   (e)  Sessions over IPV-only, IPV6-only , dual-stack based clients.
+
+   WebRTC proposes using SDP based Offer/Answer model to negotiate
+   multimedia session between two peers browsers [JSEP Specification].
+   Building on the concepts from previous sections, the following
+   subsections attempts to describe the usage of SDP for most common
+   WebRTC use-cases.
+
+   In all the use-cases, Alice and Bob are assumed to be the WebRTC
+   peers.
+
+4.1.  Secure Two-Way Audio and Video with Feedback
+
+   This use-case allows two users to participate in a two-way
+   communication session securely on their WebRTC enabled Web browsers.
+   TODO ASCII FIGURE
+
+   More specifically, this use-case demonstrates following aspects of
+   the WebRTC session
+   (1)  SRTP wit DTLS based encryption
+   (2)  RTP and RTCP Muxing
+   (3)  RTCP based feedback and reduced size support
+   (4)  ICE processing for NAT Traversal
+   (5)  Audio Codec Offered :  PCMU, Opus, iLBC
+   (6)  Audio Codec Answered :  Opus
+   (7)  Video Codecs Offered:  H.264, VP8
+   (8)  Video Codecs Answered:  H.264
+   (9)  Data Channel Support
+   The tables below capture SDP messages generated.  Pointers to
+   appropriate RFCs and sections are provided,wherever necessary,
+   against SDP lines.
+
+   +----------------------------------------+--------------------------+
+   | SDP Contents                           | RFC#/Notes               |
+   +----------------------------------------+--------------------------+
+   | v=0                                    | [RFC4566]                |
+   | o=alice 20518 0 IN IP4 0.0.0.0         | [RFC4566] - Session      |
+   |                                        | Origin Information       |
+   | s=                                     | [RFC4566]                |
+   | t=0 0                                  | [RFC4566]                |
+   | a=ice-ufrag:074c6550                   | [RFC5245] - Session      |
+   |                                        | Level ICE parameter      |
+   | a=ice-pwd:a28a397a4c3f31747d1ee3474af0 | [RFC5245] - Session      |
+   | 8a068                                  | Level ICE parameter      |
+
+
+
+
+
+Jennings & Nandakumar    Expires March 24, 2013                 [Page 5]
+
+Internet-Draft                 SDP4WebRTC                 September 2012
+
+
+   | a=fingerprint:sha-1                    | [RFC5245] - Session DTLS |
+   | 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7 | Fingerprint for SRTP     |
+   | :70:9d:1f:66:79:a8:07                  |                          |
+   | a=rtcp-rsize                           | [RFC5506] - Alice        |
+   |                                        | intends to use reduced   |
+   |                                        | size RTCP for this       |
+   |                                        | session                  |
+   | m=audio 54609 RTP/SAVPF 0 109 98       | [RFC4566]                |
+   | c= IN IP4 24.23.204.141                | [RFC4566]                |
+   | a=rtpmap:0 PCMU/8000                   | [RFC3551]                |
+   | a=rtpmap:109 opus/48000                | [draft-spittka-payload-r |
+   |                                        | tp-opus-0]               |
+   | a=ptime:20                             | [draft-spittka-payload-r |
+   |                                        | tp-opus-0]               |
+   | a=rtpmap:98 iLBC/8000 a=fmtp:98        | [RFC3592]                |
+   | mode=20                                |                          |
+   | a=sendrecv                             | [RFC3264] - Alice can    |
+   |                                        | send and recv audio      |
+   | a=rtcp-mux                             | [RFC5761] - Alice can    |
+   |                                        | perform RTP/RTCP Muxing  |
+   |                                        | on port 54609            |
+   | b=AS:256                               | [RFC4566]                |
+   | b=RS:0                                 | [RFC3556]                |
+   | b=RR:0                                 | [RFC3556]                |
+   | a=candidate:0 1 UDP 2113667327         | [RFC5245] - Host ICE     |
+   | 192.168.1.4 54609 typ host             | Candidate for Opus       |
+   |                                        | Stream                   |
+   | a=candidate:1 1 UDP 694302207          | [RFC5245] - Server       |
+   | 24.23.204.141 54609 typ srflx raddr    | Reflexive ICE Candidate  |
+   | 192.168.1.4 rport 54609                | for the above host       |
+   |                                        | candidate                |
+   | a=candidate:0 2 UDP 2113667326         | [RFC5245] - Second Host  |
+   | 192.168.1.4 64678 typ host             | Candidate                |
+   | a=candidate:1 2 UDP 1694302206         | [RFC5245] -Server        |
+   | 24.23.204.141 64678 typ srflx raddr    | Reflexive Candidate for  |
+   | 192.168.1.4 rport 64678                | the Second Host          |
+   |                                        | Candidate                |
+   | a=rtcp-fb:109 nack                     | [RFC5104] - Indicates    |
+   |                                        | NACK RTCP feedback       |
+   |                                        | support for Opus         |
+   | m=video 62537 RTP/SAVPF 99 120         | [RFC4566]                |
+   | c= IN IP4 24.23.204.141                | [RFC4566]                |
+   | a=rtpmap:99 H264/90000                 | [RFC3598]                |
+   | a=fmtp:99                              | [RFC3598]                |
+   | profile-level-id=4d0028;packetization- |                          |
+   | mode=1                                 |                          |
+   | a=rtpmap:120 VP8/90000                 | [draft-ietf-payload-vp8- |
+   |                                        | 04]                      |
+
+
+
+Jennings & Nandakumar    Expires March 24, 2013                 [Page 6]
+
+Internet-Draft                 SDP4WebRTC                 September 2012
+
+
+   | a=sendrecv                             | [RFC3264] - Alice can    |
+   |                                        | send and recv video      |
+   | a=rtcp-mux                             | [RFC5761] - Alice can    |
+   |                                        | perform RTP/RTCP Muxing  |
+   |                                        | on port 62537            |
+   | a=candidate:0 1 UDP 2113667327         | [RFC5245]                |
+   | 192.168.1.4 62537 typ host             |                          |
+   | a=candidate:1 1 UDP 1694302207         | [RFC5245]                |
+   | 24.23.204.141 62537 typ srflx raddr    |                          |
+   | 192.168.1.4 rport 62537                |                          |
+   | a=candidate:0 2 2113667326 192.168.1.4 | [RFC5245]                |
+   | 54721 typ host                         |                          |
+   | a=candidate:1 2 UDP 1694302206         | [RFC5245]                |
+   | 24.23.204.141 54721 typ srflx raddr    |                          |
+   | 192.168.1.4 rport 54721                |                          |
+   | a=rtcp-fb:99 nack pli                  | [RFC5104] - Indicates    |
+   |                                        | support for Picture loss |
+   |                                        | Indication and NACK of   |
+   |                                        | H.264                    |
+   | a=rtcp-fb:99 ccm fir                   | [RFC5104] - VP8 Full     |
+   |                                        | Intra Frame              |
+   |                                        | Request-Codec Control    |
+   |                                        | Message support          |
+   | a=rtcp-fb:120 nack pli                 | [RFC5104] - Indicates    |
+   |                                        | support for Picture loss |
+   |                                        | Indication and NACK of   |
+   |                                        | VP8                      |
+   | a=rtcp-fb:120 ccm fir                  | [RFC5104] - VP8 Full     |
+   |                                        | Intra Frame              |
+   |                                        | Request-Codec Control    |
+   |                                        | Message support          |
+   | m=application 56966 SCTP/DTLS 5000     | [draft-ietf-rtcweb-data- |
+   |                                        | channel-01]              |
+   | c= IN IP4 24.23.204.141                | [RFC4566]                |
+   | a=fmtp:5000                            | [draft-ietf-rtcweb-data- |
+   | protocol=webrtc-datachannel;streams=16 | channel-01]              |
+   | a=sendrecv                             | [RFC3264] - Alice can    |
+   |                                        | send and recv non-media  |
+   |                                        | data                     |
+   | a=rtcp-mux                             | [RFC5761] - Alice can    |
+   |                                        | perform RTP/RTCP Muxing  |
+   |                                        | on port 56966            |
+   | a=candidate:0 1 UDP 2113667327         | [RFC5245]                |
+   | 192.168.1.7 56966 typ host             |                          |
+   | a=candidate:1 1 UDP 1694302207         | [RFC5245]                |
+   | 24.23.204.141 56966 typ srflx raddr    |                          |
+   | 192.168.1.7 rport 56966                |                          |
+
+
+
+
+Jennings & Nandakumar    Expires March 24, 2013                 [Page 7]
+
+Internet-Draft                 SDP4WebRTC                 September 2012
+
+
+   | a=candidate:0 2 UDP 2113667326         | [RFC5245]                |
+   | 192.168.1.7 51641 typ host             |                          |
+   | a=candidate:1 2 UDP 1694302206         | [RFC5245]                |
+   | 24.23.204.141 51641 typ srflx raddr    |                          |
+   | 192.168.1.7 rport 51641                |                          |
+   | a=rtcp-fb:5000 nack                    | [RFC5104] - Indicates    |
+   |                                        | NACK feedback support    |
+   |                                        | for the data-channel     |
+   +----------------------------------------+--------------------------+
+
+                          Table 1: 4.1 SDP Offer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jennings & Nandakumar    Expires March 24, 2013                 [Page 8]
+
+Internet-Draft                 SDP4WebRTC                 September 2012
+
+
+   +----------------------------------------+--------------------------+
+   | SDP Contents                           | RFC#/Notes               |
+   +----------------------------------------+--------------------------+
+   | v=0                                    | [RFC4566]                |
+   | o=bob 16833 0 IN IP4 0.0.0.0           | [RFC4566] - Session      |
+   |                                        | Origin Information       |
+   | s=                                     | [RFC4566]                |
+   | t=0 0                                  | [RFC4566]                |
+   | a=ice-ufrag:c300d85b                   | [RFC5245] - Session      |
+   |                                        | Level ICE username frag  |
+   | a=ice-pwd:de4e99bd291c325921d5d47efbab | [RFC5245] - Session      |
+   | d9a2                                   | Level ICE password       |
+   | a=fingerprint:sha-1                    | [RFC5245] - Session DTLS |
+   | 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7 | Fingerprint for SRTP     |
+   | :70:9d:1f:66:79:a8:07                  |                          |
+   | a=rtcp-rsize                           | [RFC5506] - Alice        |
+   |                                        | intends to use reduced   |
+   |                                        | size RTCP for this       |
+   |                                        | session                  |
+   | m=audio 49203 RTP/SAVPF 109            | [RFC4566]                |
+   | c= IN IP4 98.248.92.77                 | [RFC4566]                |
+   | a=rtpmap:109 opus/48000                | [draft-spittka-payload-r |
+   |                                        | tp-opus-0]               |
+   | a=ptime:20                             | [draft-spittka-payload-r |
+   |                                        | tp-opus-0]               |
+   | a=rtpmap:98 iLBC/8000 a=fmtp:98        | [RFC3592]                |
+   | mode=20                                |                          |
+   | a=sendrecv                             | [RFC3264] - Bob can send |
+   |                                        | and recv audio           |
+   | a=rtcp-mux                             | [RFC5761] - Bob can      |
+   |                                        | perform RTP/RTCP Muxing  |
+   |                                        | on port 49203            |
+   | a=candidate:0 1 UDP 2113667327         | [RFC5245] - Host ICE     |
+   | 192.168.1.7 49203 typ host             | Candidate for Opus       |
+   |                                        | Stream                   |
+   | a=ccandidate:1 1 UDP 1694302207        | [RFC5245] - Server       |
+   | 98.248.92.77 49203 typ srflx raddr     | Reflexive ICE Candidate  |
+   | 192.168.1.7 rport 49203                | for the above host       |
+   |                                        | candidate                |
+   | a=candidate:candidate:0 2 UDP          | [RFC5245] - Second Host  |
+   | 2113667326 192.168.1.7 60065 typ host  | Candidate                |
+   | a=candidate:1 2 UDP 1694302206         | [RFC5245] -Server        |
+   | 98.248.92.77 60065 typ srflx raddr     | Reflexive Candidate for  |
+   | 192.168.1.7 rport 60065                | the Second Host          |
+   |                                        | Candidate                |
+   | m=video 63130 RTP/SAVPF 99 120         | [RFC4566]                |
+   | c= IN IP4 98.248.92.771                | [RFC4566]                |
+   | a=rtpmap:99 H264/90000                 | [RFC3598]                |
+
+
+
+Jennings & Nandakumar    Expires March 24, 2013                 [Page 9]
+
+Internet-Draft                 SDP4WebRTC                 September 2012
+
+
+   | a=fmtp:99                              | [RFC3598]                |
+   | profile-level-id=4d0028;packetization- |                          |
+   | mode=1                                 |                          |
+   | a=rtpmap:120 VP8/90000                 | [draft-ietf-payload-vp8- |
+   |                                        | 04]                      |
+   | a=sendrecv                             | [RFC3264] - Bob can send |
+   |                                        | and recv video           |
+   | a=rtcp-mux                             | [RFC5761] - Bob can      |
+   |                                        | perform RTP/RTCP Muxing  |
+   |                                        | on port 63130            |
+   | a=candidate:0 1 UDP 2113667327         | [RFC5245]                |
+   | 192.168.1.7 63130 typ host             |                          |
+   | a=candidate:1 1 UDP 1694302207         | [RFC5245]                |
+   | 98.248.92.77 63130 typ srflx raddr     |                          |
+   | 192.168.1.7 rport 63130                |                          |
+   | a=candidate:0 2 UDP 2113667326         | [RFC5245]                |
+   | 192.168.1.7 56607 typ host             |                          |
+   | a=candidate:1 2 UDP 1694302206         | [RFC5245]                |
+   | 98.248.92.77 56607 typ srflx raddr     |                          |
+   | 192.168.1.7 rport 56607                |                          |
+   | a=rtcp-fb:99 nack pli                  | [RFC5104] - Indicates    |
+   |                                        | support for Picture loss |
+   |                                        | Indication and NACK of   |
+   |                                        | H.264                    |
+   | a=rtcp-fb:99 ccm fir                   | [RFC5104] - H.264 Full   |
+   |                                        | Intra Frame              |
+   |                                        | Request-Codec Control    |
+   |                                        | Message support          |
+   | m=application 55700 SCTP/DTLS 5000     | [draft-ietf-rtcweb-data- |
+   |                                        | channel-01]              |
+   | c= IN IP4 98.248.92.771                | [RFC4566]                |
+   | a=fmtp:5000                            | [draft-ietf-rtcweb-data- |
+   | protocol=webrtc-datachannel;streams=16 | channel-01]              |
+   | a=sendrecv                             | [RFC3264] - Bob can send |
+   |                                        | and recv non-media data  |
+   | a=rtcp-mux                             | [RFC5761] - Bob can      |
+   |                                        | perform RTP/RTCP Muxing  |
+   |                                        | on port 55700            |
+   | a=candidate:0 1 UDP 2113667327         | [RFC5245] - Refer 4.1    |
+   | 192.168.1.7 55700 typ host             | SDP Offer                |
+   | a=candidate:1 1 UDP 1694302207         | [RFC5245] Refer 4.1 SDP  |
+   | 98.248.92.77 55700 typ srflx raddr     | Offer                    |
+   | 192.168.1.7 rport 55700                |                          |
+   | a=candidate:0 2 UDP 2113667326         | [RFC5245] Refer 4.1 SDP  |
+   | 192.168.1.7 58137 typ host             | Offer                    |
+   | a=candidate:1 2 UDP 1694302206         | [RFC5245] Refer 4.1 SDP  |
+   | 98.248.92.77 58137 typ srflx raddr     | Offer                    |
+   | 192.168.1.7 rport 581371               |                          |
+
+
+
+Jennings & Nandakumar    Expires March 24, 2013                [Page 10]
+
+Internet-Draft                 SDP4WebRTC                 September 2012
+
+
+   | a=rtcp-fb:5000 nack                    | [RFC5104] - Indicates    |
+   |                                        | NACK feedback support    |
+   |                                        | for the data-channel     |
+   +----------------------------------------+--------------------------+
+
+                          Table 2: 4.1 SDP Answer
+
+4.2.  Secure Two-way Audio,Video,Data and remove data stream
+
+   This case is similar to use-case in section 4.1.  It differs by Alice
+   removing data-stream once the session is in progress.
+   TODO ASCII FIGURE
+
+   As a precondition, A Two-Way Audio,Video and Data Session is already
+   setup.  The table below captures just Offer/Answer details
+   corresponding to data-stream.
+
+   +----------------------------------------+--------------------------+
+   | SDP Contents                           | RFC#/Notes               |
+   +----------------------------------------+--------------------------+
+   | v=0                                    | [RFC4566]                |
+   | o=alice 20519 0 IN IP4 0.0.0.0         | [RFC4566]                |
+   | s=                                     | [RFC4566]                |
+   | t=0 0                                  | [RFC4566]                |
+   | a=ice-ufrag:074c6550                   | [RFC5245]                |
+   | a=ice-pwd:a28a397a4c3f31747d1ee3474af0 | [RFC5245]                |
+   | 8a068                                  |                          |
+   | a=fingerprint:sha-1                    | [RFC5245]                |
+   | 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7 |                          |
+   | :70:9d:1f:66:79:a8:07                  |                          |
+   | a=rtcp-rsize                           | [RFC5506]                |
+   | m=audio 54609 RTP/SAVPF 0 109 98       | [RFC4566]                |
+   | c= IN IP4 24.23.204.141                | [RFC4566]                |
+   | a=rtpmap:0 PCMU/8000                   | [RFC3551]                |
+   | a=rtpmap:109 opus/48000                | [draft-spittka-payload-r |
+   |                                        | tp-opus-0]               |
+   | a=ptime:20                             | [draft-spittka-payload-r |
+   |                                        | tp-opus-0]               |
+   | a=rtpmap:98 iLBC/8000 a=fmtp:98        | [RFC3592]                |
+   | mode=20                                |                          |
+   | a=sendrecv                             | [RFC3264]                |
+   | a=rtcp-mux                             | [RFC5761]                |
+   | a=candidate:0 1 UDP 2113667327         | [RFC5245]                |
+   | 192.168.1.4 54609 typ host             |                          |
+   | a=candidate:1 1 UDP 694302207          | [RFC5245]                |
+   | 24.23.204.141 54609 typ srflx raddr    |                          |
+   | 192.168.1.4 rport 54609                |                          |
+
+
+
+
+Jennings & Nandakumar    Expires March 24, 2013                [Page 11]
+
+Internet-Draft                 SDP4WebRTC                 September 2012
+
+
+   | a=candidate:0 2 UDP 2113667326         | [RFC5245]                |
+   | 192.168.1.4 64678 typ host             |                          |
+   | a=candidate:1 2 UDP 1694302206         | [RFC5245]                |
+   | 24.23.204.141 64678 typ srflx raddr    |                          |
+   | 192.168.1.4 rport 64678                |                          |
+   | a=rtcp-fb:109 nack                     | [RFC5104]                |
+   | m=video 62537 RTP/SAVPF 99 120         | [RFC4566]                |
+   | c= IN IP4 24.23.204.141                | [RFC4566]                |
+   | a=rtpmap:99 H264/90000                 | [RFC3598]                |
+   | a=fmtp:99                              | [RFC3598]                |
+   | profile-level-id=4d0028;packetization- |                          |
+   | mode=1                                 |                          |
+   | a=rtpmap:120 VP8/90000                 | [draft-ietf-payload-vp8- |
+   |                                        | 04]                      |
+   | a=sendrecv                             | [RFC3264]                |
+   | a=rtcp-mux                             | [RFC5761]                |
+   | a=candidate:0 1 UDP 2113667327         | [RFC5245]                |
+   | 192.168.1.4 62537 typ host             |                          |
+   | a=candidate:1 1 UDP 1694302207         | [RFC5245]                |
+   | 24.23.204.141 62537 typ srflx raddr    |                          |
+   | 192.168.1.4 rport 62537                |                          |
+   | a=candidate:0 2 2113667326 192.168.1.4 | [RFC5245]                |
+   | 54721 typ host                         |                          |
+   | a=candidate:1 2 UDP 1694302206         | [RFC5245]                |
+   | 24.23.204.141 54721 typ srflx raddr    |                          |
+   | 192.168.1.4 rport 54721                |                          |
+   | a=rtcp-fb:99 nack pli                  | [RFC5104]                |
+   | a=rtcp-fb:99 ccm fir                   | [RFC5104]                |
+   | a=rtcp-fb:120 nack pli                 | [RFC5104]                |
+   | a=rtcp-fb:120 ccm fir                  | [RFC5104]                |
+   | m=application 0 SCTP/DTLS 5000         | [draft-ietf-rtcweb-data- |
+   |                                        | channel-01] - Port 0     |
+   |                                        |  indicates dropping data |
+   |                                        |  stream                  |
+   | c= IN IP4 24.23.204.141                | [RFC4566]                |
+   | a=fmtp:5000                            | [draft-ietf-rtcweb-data- |
+   | protocol=webrtc-datachannel;streams=16 | channel-01]              |
+   | a=sendrecv                             | [RFC3264]                |
+   | a=rtcp-mux                             | [RFC5761]                |
+   | a=candidate:0 1 UDP 2113667327         | [RFC5245]                |
+   | 192.168.1.7 56966 typ host             |                          |
+   | a=candidate:1 1 UDP 1694302207         | [RFC5245]                |
+   | 24.23.204.141 56966 typ srflx raddr    |                          |
+   | 192.168.1.7 rport 56966                |                          |
+   | a=candidate:0 2 UDP 2113667326         | [RFC5245]                |
+   | 192.168.1.7 51641 typ host             |                          |
+
+
+
+
+
+Jennings & Nandakumar    Expires March 24, 2013                [Page 12]
+
+Internet-Draft                 SDP4WebRTC                 September 2012
+
+
+   | a=candidate:1 2 UDP 1694302206         | [RFC5245]                |
+   | 24.23.204.141 51641 typ srflx raddr    |                          |
+   | 192.168.1.7 rport 51641                |                          |
+   | a=rtcp-fb:5000 nack                    | [RFC5104]                |
+   +----------------------------------------+--------------------------+
+
+                      Table 3: 4.2 SDP Updated Offer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jennings & Nandakumar    Expires March 24, 2013                [Page 13]
+
+Internet-Draft                 SDP4WebRTC                 September 2012
+
+
+   +----------------------------------------+--------------------------+
+   | SDP Contents                           | RFC#/Notes               |
+   +----------------------------------------+--------------------------+
+   | v=0                                    | [RFC4566]                |
+   | o=bob 16833 0 IN IP4 0.0.0.0           | [RFC4566]                |
+   | s=                                     | [RFC4566]                |
+   | t=0 0                                  | [RFC4566]                |
+   | a=ice-ufrag:c300d85b                   | [RFC5245]                |
+   | a=ice-pwd:de4e99bd291c325921d5d47efbab | [RFC5245]                |
+   | d9a2                                   |                          |
+   | a=fingerprint:sha-1                    | [RFC5245]                |
+   | 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7 |                          |
+   | :70:9d:1f:66:79:a8:07                  |                          |
+   | a=rtcp-rsize                           | [RFC5506]                |
+   | m=audio 49203 RTP/SAVPF 109            | [RFC4566]                |
+   | c= IN IP4 98.248.92.77                 | [RFC4566]                |
+   | a=rtpmap:109 opus/48000                | [draft-spittka-payload-r |
+   |                                        | tp-opus-0]               |
+   | a=ptime:20                             | [draft-spittka-payload-r |
+   |                                        | tp-opus-0]               |
+   | a=rtpmap:98 iLBC/8000 a=fmtp:98        | [RFC3592]                |
+   | mode=20                                |                          |
+   | a=sendrecv                             | [RFC3264]                |
+   | a=rtcp-mux                             | [RFC5761]                |
+   | a=candidate:0 1 UDP 2113667327         | [RFC5245]                |
+   | 192.168.1.7 49203 typ host             |                          |
+   | a=ccandidate:1 1 UDP 1694302207        | [RFC5245]                |
+   | 98.248.92.77 49203 typ srflx raddr     |                          |
+   | 192.168.1.7 rport 49203                |                          |
+   | a=candidate:candidate:0 2 UDP          | [RFC5245]                |
+   | 2113667326 192.168.1.7 60065 typ host  |                          |
+   | a=candidate:1 2 UDP 1694302206         | [RFC5245]                |
+   | 98.248.92.77 60065 typ srflx raddr     |                          |
+   | 192.168.1.7 rport 60065                |                          |
+   | m=video 63130 RTP/SAVPF 99 120         | [RFC4566]                |
+   | c= IN IP4 98.248.92.771                | [RFC4566]                |
+   | a=rtpmap:99 H264/90000                 | [RFC3598]                |
+   | a=fmtp:99                              | [RFC3598]                |
+   | profile-level-id=4d0028;packetization- |                          |
+   | mode=1                                 |                          |
+   | a=rtpmap:120 VP8/90000                 | [draft-ietf-payload-vp8- |
+   |                                        | 04]                      |
+   | a=sendrecv                             | [RFC3264]                |
+   | a=rtcp-mux                             | [RFC5761]0               |
+   | a=candidate:0 1 UDP 2113667327         | [RFC5245]                |
+   | 192.168.1.7 63130 typ host             |                          |
+
+
+
+
+
+Jennings & Nandakumar    Expires March 24, 2013                [Page 14]
+
+Internet-Draft                 SDP4WebRTC                 September 2012
+
+
+   | a=candidate:1 1 UDP 1694302207         | [RFC5245]                |
+   | 98.248.92.77 63130 typ srflx raddr     |                          |
+   | 192.168.1.7 rport 63130                |                          |
+   | a=candidate:0 2 UDP 2113667326         | [RFC5245]                |
+   | 192.168.1.7 56607 typ host             |                          |
+   | a=candidate:1 2 UDP 1694302206         | [RFC5245]                |
+   | 98.248.92.77 56607 typ srflx raddr     |                          |
+   | 192.168.1.7 rport 56607                |                          |
+   | a=rtcp-fb:99 nack pli                  | [RFC5104]                |
+   | a=rtcp-fb:99 ccm fir                   | [RFC5104]                |
+   | m=application 0 SCTP/DTLS 5000         | [draft-ietf-rtcweb-data- |
+   |                                        | channel-01]              |
+   | c= IN IP4 98.248.92.771                | [RFC4566]                |
+   | a=fmtp:5000                            | [draft-ietf-rtcweb-data- |
+   | protocol=webrtc-datachannel;streams=16 | channel-01]              |
+   | a=sendrecv                             | [RFC3264]                |
+   | a=rtcp-mux                             | [RFC5761]                |
+   | a=candidate:0 1 UDP 2113667327         | [RFC5245]                |
+   | 192.168.1.7 55700 typ host             |                          |
+   | a=candidate:1 1 UDP 1694302207         | [RFC5245]                |
+   | 98.248.92.77 55700 typ srflx raddr     |                          |
+   | 192.168.1.7 rport 55700                |                          |
+   | a=candidate:0 2 UDP 2113667326         | [RFC5245]                |
+   | 192.168.1.7 58137 typ host             |                          |
+   | a=candidate:1 2 UDP 1694302206         | [RFC5245]                |
+   | 98.248.92.77 58137 typ srflx raddr     |                          |
+   | 192.168.1.7 rport 581371               |                          |
+   | a=rtcp-fb:5000 nack                    | [RFC5104]                |
+   +----------------------------------------+--------------------------+
+
+                          Table 4: 4.2 SDP Answer
+
+4.3.  Add New Media (video)
+
+   This scenario describes the message exchanges when Alice decides to
+   add video as media to an existing audio-only session
+   TODO ASCII FIGURE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jennings & Nandakumar    Expires March 24, 2013                [Page 15]
+
+Internet-Draft                 SDP4WebRTC                 September 2012
+
+
+   +-----------------------------------------+-------------------------+
+   | SDP Contents                            | RFC#/Notes              |
+   +-----------------------------------------+-------------------------+
+   | v=0                                     | [RFC4566]               |
+   | o=alice 20519 0 IN IP4 0.0.0.0          | [RFC4566]               |
+   | s=                                      | [RFC4566]               |
+   | t=0 0                                   | [RFC4566]               |
+   | a=ice-ufrag:074c6550                    | [RFC5245]               |
+   | a=ice-pwd:a28a397a4c3f31747d1ee3474af08 | [RFC5245]               |
+   | a068                                    |                         |
+   | a=fingerprint:sha-1                     | [RFC5245]               |
+   | 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7: |                         |
+   | 70:9d:1f:66:79:a8:07                    |                         |
+   | a=rtcp-rsize                            | [RFC5506]               |
+   | m=audio 54609 RTP/SAVPF 0 109 98        | [RFC4566]               |
+   | c= IN IP4 24.23.204.141                 | [RFC4566]               |
+   | a=rtpmap:0 PCMU/8000                    | [RFC3551]               |
+   | a=rtpmap:109 opus/48000                 | [draft-spittka-payload- |
+   |                                         | rtp-opus-0]             |
+   | a=ptime:20                              | [draft-spittka-payload- |
+   |                                         | rtp-opus-0]             |
+   | a=rtpmap:98 iLBC/8000 a=fmtp:98 mode=20 | [RFC3592]               |
+   | a=sendrecv                              | [RFC3264]               |
+   | a=rtcp-mux                              | [RFC5761]               |
+   | b=AS:256                                | [RFC4566]               |
+   | a=candidate:0 1 UDP 2113667327          | [RFC5245]               |
+   | 192.168.1.4 54609 typ host              |                         |
+   | a=candidate:1 1 UDP 694302207           | [RFC5245]               |
+   | 24.23.204.141 54609 typ srflx raddr     |                         |
+   | 192.168.1.4 rport 54609                 |                         |
+   | a=candidate:0 2 UDP 2113667326          | [RFC5245]               |
+   | 192.168.1.4 64678 typ host              |                         |
+   | a=candidate:1 2 UDP 1694302206          | [RFC5245]               |
+   | 24.23.204.141 64678 typ srflx raddr     |                         |
+   | 192.168.1.4 rport 64678                 |                         |
+   | a=rtcp-fb:109 nack                      | [RFC5104]               |
+   +-----------------------------------------+-------------------------+
+
+                 Table 5: 4.3 SDP Initial Audio Only Offer
+
+
+
+
+
+
+
+
+
+
+
+
+Jennings & Nandakumar    Expires March 24, 2013                [Page 16]
+
+Internet-Draft                 SDP4WebRTC                 September 2012
+
+
+   +-----------------------------------------+-------------------------+
+   | SDP Contents                            | RFC#/Notes              |
+   +-----------------------------------------+-------------------------+
+   | v=0                                     | [RFC4566]               |
+   | o=bob 16833 0 IN IP4 0.0.0.0            | [RFC4566]               |
+   | s=                                      | [RFC4566]               |
+   | t=0 0                                   | [RFC4566]               |
+   | a=ice-ufrag:c300d85b                    | [RFC5245]               |
+   | a=ice-pwd:de4e99bd291c325921d5d47efbabd | [RFC5245]               |
+   | 9a2                                     |                         |
+   | a=fingerprint:sha-1                     | [RFC5245]               |
+   | 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7: |                         |
+   | 70:9d:1f:66:79:a8:07                    |                         |
+   | a=rtcp-rsize                            | [RFC5506]               |
+   | m=audio 49203 RTP/SAVPF 109             | [RFC4566]               |
+   | c= IN IP4 98.248.92.77                  | [RFC4566]               |
+   | a=rtpmap:109 opus/48000                 | [draft-spittka-payload- |
+   |                                         | rtp-opus-0]             |
+   | a=ptime:20                              | [draft-spittka-payload- |
+   |                                         | rtp-opus-0]             |
+   | a=rtpmap:98 iLBC/8000 a=fmtp:98 mode=20 | [RFC3592]               |
+   | a=sendrecv                              | [RFC3264]               |
+   | a=rtcp-mux                              | [RFC5761]               |
+   | a=candidate:0 1 UDP 2113667327          | [RFC5245]               |
+   | 192.168.1.7 49203 typ host              |                         |
+   | a=ccandidate:1 1 UDP 1694302207         | [RFC5245]               |
+   | 98.248.92.77 49203 typ srflx raddr      |                         |
+   | 192.168.1.7 rport 49203                 |                         |
+   | a=candidate:candidate:0 2 UDP           | [RFC5245]               |
+   | 2113667326 192.168.1.7 60065 typ host   |                         |
+   | a=candidate:1 2 UDP 1694302206          | [RFC5245]               |
+   | 98.248.92.77 60065 typ srflx raddr      |                         |
+   | 192.168.1.7 rport 60065                 |                         |
+   +-----------------------------------------+-------------------------+
+
+                    Table 6: 4.3 SDP Answer- Audio Only
+
+   Alice decides to add Video to the current session
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jennings & Nandakumar    Expires March 24, 2013                [Page 17]
+
+Internet-Draft                 SDP4WebRTC                 September 2012
+
+
+   +-----------------------------------------+-------------------------+
+   | SDP Contents                            | RFC#/Notes              |
+   +-----------------------------------------+-------------------------+
+   | v=0                                     | [RFC4566]               |
+   | o=alice 20520 0 IN IP4 0.0.0.0          | [RFC4566] - Increased   |
+   |                                         | Version Number          |
+   | s=                                      | [RFC4566]               |
+   | t=0 0                                   | [RFC4566]               |
+   | a=ice-ufrag:074c6550                    | [RFC5245]               |
+   | a=ice-pwd:a28a397a4c3f31747d1ee3474af08 | [RFC5245]               |
+   | a068                                    |                         |
+   | a=fingerprint:sha-1                     | [RFC5245]               |
+   | 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7: |                         |
+   | 70:9d:1f:66:79:a8:07                    |                         |
+   | a=rtcp-rsize                            | [RFC5506]               |
+   | m=audio 54609 RTP/SAVPF 0 109 98        | [RFC4566]               |
+   | c= IN IP4 24.23.204.141                 | [RFC4566]               |
+   | a=rtpmap:0 PCMU/8000                    | [RFC3551]               |
+   | a=rtpmap:109 opus/48000                 | [draft-spittka-payload- |
+   |                                         | rtp-opus-0]             |
+   | a=ptime:20                              | [draft-spittka-payload- |
+   |                                         | rtp-opus-0]             |
+   | a=rtpmap:98 iLBC/8000 a=fmtp:98 mode=20 | [RFC3592]               |
+   | a=sendrecv                              | [RFC3264]               |
+   | a=rtcp-mux                              | [RFC5761]               |
+   | a=candidate:0 1 UDP 2113667327          | [RFC5245]               |
+   | 192.168.1.4 54609 typ host              |                         |
+   | a=candidate:1 1 UDP 694302207           | [RFC5245]               |
+   | 24.23.204.141 54609 typ srflx raddr     |                         |
+   | 192.168.1.4 rport 54609                 |                         |
+   | a=candidate:0 2 UDP 2113667326          | [RFC5245]               |
+   | 192.168.1.4 64678 typ host              |                         |
+   | a=candidate:1 2 UDP 1694302206          | [RFC5245]               |
+   | 24.23.204.141 64678 typ srflx raddr     |                         |
+   | 192.168.1.4 rport 64678                 |                         |
+   | a=rtcp-fb:109 nack                      | [RFC5104]               |
+   | m=video 62537 RTP/SAVPF120              | [RFC4566]               |
+   | c= IN IP4 24.23.204.141                 | [RFC4566]               |
+   | a=rtpmap:120 VP8/90000                  | [draft-ietf-payload-vp8 |
+   |                                         | -04]                    |
+   | a=sendrecv                              | [RFC3264]               |
+   | a=rtcp-mux                              | [RFC5761]               |
+   | a=candidate:0 1 UDP 2113667327          | [RFC5245]               |
+   | 192.168.1.4 62537 typ host              |                         |
+   | a=candidate:1 1 UDP 1694302207          | [RFC5245]               |
+   | 24.23.204.141 62537 typ srflx raddr     |                         |
+   | 192.168.1.4 rport 62537                 |                         |
+
+
+
+
+Jennings & Nandakumar    Expires March 24, 2013                [Page 18]
+
+Internet-Draft                 SDP4WebRTC                 September 2012
+
+
+   | a=candidate:0 2 2113667326 192.168.1.4  | [RFC5245]               |
+   | 54721 typ host                          |                         |
+   | a=candidate:1 2 UDP 1694302206          | [RFC5245]               |
+   | 24.23.204.141 54721 typ srflx raddr     |                         |
+   | 192.168.1.4 rport 54721                 |                         |
+   | a=rtcp-fb:120 nack pli                  | [RFC5104]               |
+   | a=rtcp-fb:120 ccm fir                   | [RFC5104]               |
+   +-----------------------------------------+-------------------------+
+
+                  Table 7: 4.3 SDP Updated Offer w/Video
+
+   +-----------------------------------------+-------------------------+
+   | SDP Contents                            | RFC#/Notes              |
+   +-----------------------------------------+-------------------------+
+   | v=0                                     | [RFC4566]               |
+   | o=bob 16833 0 IN IP4 0.0.0.0            | [RFC4566]               |
+   | s=                                      | [RFC4566]               |
+   | t=0 0                                   | [RFC4566]               |
+   | a=ice-ufrag:c300d85b                    | [RFC5245]               |
+   | a=ice-pwd:de4e99bd291c325921d5d47efbabd | [RFC5245]               |
+   | 9a2                                     |                         |
+   | a=fingerprint:sha-1                     | [RFC5245]               |
+   | 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7: |                         |
+   | 70:9d:1f:66:79:a8:07                    |                         |
+   | a=rtcp-rsize                            | [RFC5506]               |
+   | m=audio 49203 RTP/SAVPF 109             | [RFC4566]               |
+   | c= IN IP4 98.248.92.77                  | [RFC4566]               |
+   | a=rtpmap:109 opus/48000                 | [draft-spittka-payload- |
+   |                                         | rtp-opus-0]             |
+   | a=ptime:20                              | [draft-spittka-payload- |
+   |                                         | rtp-opus-0]             |
+   | a=rtpmap:98 iLBC/8000 a=fmtp:98 mode=20 | [RFC3592]               |
+   | a=sendrecv                              | [RFC3264]               |
+   | a=rtcp-mux                              | [RFC5761]               |
+   | a=candidate:0 1 UDP 2113667327          | [RFC5245]               |
+   | 192.168.1.7 49203 typ host              |                         |
+   | a=ccandidate:1 1 UDP 1694302207         | [RFC5245]               |
+   | 98.248.92.77 49203 typ srflx raddr      |                         |
+   | 192.168.1.7 rport 49203                 |                         |
+   | a=candidate:candidate:0 2 UDP           | [RFC5245]               |
+   | 2113667326 192.168.1.7 60065 typ host   |                         |
+   | a=candidate:1 2 UDP 1694302206          | [RFC5245]               |
+   | 98.248.92.77 60065 typ srflx raddr      |                         |
+   | 192.168.1.7 rport 60065                 |                         |
+   | m=video 63130 RTP/SAVPF 99 120          | [RFC4566]               |
+   | c= IN IP4 98.248.92.771                 | [RFC4566]               |
+   | a=rtpmap:120 VP8/90000                  | [draft-ietf-payload-vp8 |
+   |                                         | -04]                    |
+
+
+
+Jennings & Nandakumar    Expires March 24, 2013                [Page 19]
+
+Internet-Draft                 SDP4WebRTC                 September 2012
+
+
+   | a=sendrecv                              | [RFC3264]               |
+   | a=rtcp-mux                              | [RFC5761]               |
+   | a=candidate:0 1 UDP 2113667327          | [RFC5245]               |
+   | 192.168.1.7 63130 typ host              |                         |
+   | a=candidate:1 1 UDP 1694302207          | [RFC5245]               |
+   | 98.248.92.77 63130 typ srflx raddr      |                         |
+   | 192.168.1.7 rport 63130                 |                         |
+   | a=candidate:0 2 UDP 2113667326          | [RFC5245]               |
+   | 192.168.1.7 56607 typ host              |                         |
+   | a=candidate:1 2 UDP 1694302206          | [RFC5245]               |
+   | 98.248.92.77 56607 typ srflx raddr      |                         |
+   | 192.168.1.7 rport 56607                 |                         |
+   +-----------------------------------------+-------------------------+
+
+                          Table 8: 4.3 SDP Answer
+
+
+5.  SDP Modifiability
+
+   TODO
+
+
+6.  IANA Considerations
+
+   This document requires no actions from IANA.
+
+
+7.  References
+
+7.1.  Normative References
+
+   [RFC3264]  Rosenberg, J. and H. Schulzrinne, "An Offer/Answer Model
+              with Session Description Protocol (SDP)", RFC 3264,
+              June 2002.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+7.2.  Informative References
+
+   [RFC3261]  Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston,
+              A., Peterson, J., Sparks, R., Handley, M., and E.
+              Schooler, "SIP: Session Initiation Protocol", RFC 3261,
+              June 2002.
+
+   [I-D.ietf-rtcweb-use-cases-and-requirements]
+              Holmberg, C., Hakansson, S., and G. Eriksson, "Web Real-
+              Time Communication Use-cases and Requirements",
+
+
+
+Jennings & Nandakumar    Expires March 24, 2013                [Page 20]
+
+Internet-Draft                 SDP4WebRTC                 September 2012
+
+
+              draft-ietf-rtcweb-use-cases-and-requirements-06 (work in
+              progress), October 2011.
+
+   [ROAP]     Jennings, C. and J. Rosenberg, "RTCWeb Offer/Answer
+              Protocol (ROAP)", draft-jennings-rtcweb-signaling (work in
+              progress), October 2011.
+
+
+Authors' Addresses
+
+   Cullen Jennings
+   Cisco
+   170 West Tasman Drive
+   San Jose, CA  95134
+   USA
+
+   Phone:  +1 408 421-9990
+   Email:  fluffy@cisco.com
+
+
+   Suhas Nandakumar
+   Cisco
+   170 West Tasman Drive
+   San Jose, CA  95134
+   USA
+
+   Email:  snandaku@cisco.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jennings & Nandakumar    Expires March 24, 2013                [Page 21]
+

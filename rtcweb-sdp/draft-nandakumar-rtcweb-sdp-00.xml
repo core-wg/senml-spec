@@ -1,0 +1,1031 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+<?xml-stylesheet type="text/xsl" href="rfc2629.xslt" ?>
+<?rfc toc="yes" ?>
+<?rfc symrefs="yes" ?>
+<?rfc iprnotified="yes" ?>
+<?rfc strict="no" ?>
+<?rfc compact="yes" ?>
+<?rfc sortrefs="no" ?>
+<?rfc colonspace="yes" ?>
+<?rfc rfcedstyle="no" ?>
+<?rfc tocdepth="4"?>
+<rfc category="std" docName="draft-nandakumar-rtcweb-sdp-00"
+     ipr="trust200902">
+  <front>
+    <title abbrev="SDP4WebRTC">SDP for the WebRTC</title>
+
+     <author fullname="Suhas Nandakumar" initials="S." surname="Nandakumar">
+      <organization>Cisco</organization>
+
+      <address>
+        <postal>
+          <street>170 West Tasman Drive</street>
+
+          <city>San Jose</city>
+
+          <region>CA</region>
+
+          <code>95134</code>
+
+          <country>USA</country>
+        </postal>
+
+        <email>snandaku@cisco.com</email>
+      </address>
+    </author>
+
+   <author fullname="Cullen Jennings" initials="C." surname="Jennings">
+      <organization>Cisco</organization>
+
+      <address>
+        <postal>
+          <street>170 West Tasman Drive</street>
+
+          <city>San Jose</city>
+
+          <region>CA</region>
+
+          <code>95134</code>
+
+          <country>USA</country>
+        </postal>
+
+        <phone>+1 408 421-9990</phone>
+
+        <email>fluffy@cisco.com</email>
+      </address>
+    </author>
+
+    <date day="27" month="September" year="2012" />
+
+    <area>RAI</area>
+
+    <abstract>
+      <t>The Web Real-Time Communication (WebRTC) working group is charged to provide protocol support for 
+        direct interactive rich communication using audio, video and data between two peers web browsers.
+        This document describes the role of Session Description protocol (SDP) with in the WebRTC framework 
+        for negotiating media setup between the peers. SDP is negotiated between the WebRTC peers using Offer/Answer exchange 
+        mechanism as described in the RFC 3264.This document serves a introductory purpose for the WebRTC application
+        developers and browser implementers in using SDP with in the context of WebRTC.</t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section title="Introduction">
+      <t>Javascript Session Exchange Protocol(JSEP) specifies a generic protocol needed to generate 
+        RFC 3264 offers and answers negotiated between the WebRTC peers for setting up, updating and
+        tearing down a multimedia session. For this purpose, SDP is used to construct RFC3264 offers/answers
+        for describing (media and non-media) streams as appropriate for recipients of a session description 
+        to participate in the session.
+      </t>
+       <t>The remainder of this document is organized as follows: Section 2  provides an overview of 
+         SDP and Offer/Answer exchange mechanism in the WebRTC context. Section 4 provides sample 
+         SDP usages for most common WebRTC use cases building from the concepts in the previous sections. Section 5 provides few thoughts about modifiability of SDP by a WebRTC application. .</t>
+    </section>
+
+    <section title="SDP and the WebRTC">
+      <t>
+        The purpose of this section is to provide general overview of SDP and its components. 
+         For a more in-depth understanding, the readers are advised to refer to RFC 4566. 
+      </t>
+      <t>
+        The Session Description Protocol (SDP) [RFC4566] describes multimedia sessions,which
+        can be audio,video, whiteboards,fax,modem, and other media-streams.
+        It provides a general purpose,standard representation to convey aspects of multimedia session such as 
+        media details,transport addresses and related metadata in a transport agnostic manner. Such information 
+        is intended for the purpose of session announcement,session invitation and parameter negotiation.  
+      </t>
+      <t>
+        As of today SDP is widely used in the context of Session Initiation Protocol , Real-time Transport Protocol,
+        and Real-time Streaming Protocol.
+      </t>
+      <t>
+        WebRTC proposes JavaScript application to fully control the signaling plane of a multimedia session as described
+        in the JSEP specification [RFC].JSEP provides mechanisms to create session characterisation and media definition 
+        information to conduct the session based on SDP.
+      </t>
+      <t>
+        In this context, SDP provides grammatical structure syntactically with conveying the intention and 
+        capabilities semantically for the participants with in the session.
+      </t>
+      <t>
+        Below figure provides semantic components for the purpose of describing WebRTC session
+        along with the corresponding lines from the SDP.    
+      </t>
+      <figure>
+        <artwork alt="SDP in WebRTC"
+          src="http://172.27.190.21/rtcweb/sdp.png"><![CDATA[TODO ASCII FIGURE 
+        ]]></artwork>
+      </figure>
+    </section>
+    <section title="Offer/Answer and the WebRTC">
+    <t>
+      The section provides an overview of the  SDP Offer/Answer protocol and its scope is intentionally brief in nature. 
+      Interested readers are recommended to refer to RFC3264 for more specific details.
+    </t>
+    <t>
+      The  offer answer [RFC3264] model specifies rule for the bilateral exchange of Session Description Protocol (SDP) messages
+      for creation of multimedia streams.It defines protocol with involved participants exchanging desired session characteristics 
+      from each others perspective modelled on SDP to negotiate the session between them. 
+    </t>  
+    <t>
+      In the most basic form, the protocol operation begins by one of the participants sending an initial SDP offer 
+      describing its intent to start a multimedia communication session. The participant receiving the offer MAY generate 
+      an SDP answer accepting the offer or it MAY reject the offer. If the session is accepted the offer answer model 
+      guarantees a common view of the multimedia session between the participants. 
+    </t>
+    <t>
+      At any time, either participant MAY generate a new SDP offer that updates the session in progress. 
+    </t> 
+     <t>
+       With in the WebRTC context, the offer/answer model defines the state-machinery for WebRTC peers to negotiate session descriptions between them 
+       during initial setup stages as well as for eventual session updates. 
+       Javascript Session Establishment Protocol specification for WebRTC provides the mechanism for generating RFC 3264 offers and answers 
+       in order for both sides of the session to negotiate details such as list of media formats 
+       to be sent/received, bandwidth information, crypto parameters, transport parameters, for example. 
+     </t> 
+    </section>
+    
+    <section title="WebRTC Session Description">
+      
+     <t>
+       A typical web based real-time multimedia communication session can be characterized as below:       
+     </t>     
+      <t>
+      <list style="format (%c)">
+        <t>It has zero or more Audio only, Video only or Audio/Video Media streams</t>
+        <t>MAY zero or more non-media data streams</t>
+        <t>All the streams are secured with DTLS/SRTP</t>
+        <t>ICE processing for NAT Traversal</t>
+        <t>Sessions over IPV-only, IPV6-only , dual-stack based clients.</t>
+       </list>
+     </t> 
+      <t>
+        WebRTC proposes using SDP based Offer/Answer model to negotiate multimedia session between two peers browsers
+        [JSEP Specification]. Building on the concepts from previous sections, the following subsections attempts to 
+        describe the usage of SDP for most common WebRTC use-cases. 
+      </t>
+      <t>
+        In all the use-cases, Alice and Bob are assumed to be the WebRTC peers.
+      </t>
+      <section anchor="successful-2way-savpf"
+        title="Secure Two-Way Audio and Video with Feedback">
+        <t>This use-case allows two users to participate in a two-way communication session securely on their WebRTC enabled 
+          Web browsers.
+        </t>
+        <figure>
+          <artwork alt="Successful-Session 2 Way SAVPF"
+            src="http://172.27.190.21/rtcweb/ietf85/Two-WaySAVPF.png"><![CDATA[TODO ASCII FIGURE 
+        ]]></artwork>
+        </figure>
+        <t>
+          More specifically, this use-case demonstrates following aspects of the WebRTC session 
+          <list style="format (%d)">
+            <t>SRTP wit DTLS based encryption</t>
+            <t>RTP and RTCP Muxing</t>
+            <t>RTCP based feedback and reduced size support</t>
+            <t>ICE processing for NAT Traversal</t>
+            <t>Audio Codec Offered : PCMU, Opus, iLBC</t>
+            <t>Audio Codec Answered : Opus</t>
+            <t>Video Codecs Offered: H.264, VP8</t>
+            <t>Video Codecs Answered: H.264</t>
+            <t>Data Channel Support</t>
+          </list>  
+          The tables below capture SDP messages generated. Pointers to appropriate RFCs and sections are provided,wherever necessary,
+          against SDP lines.
+        </t>
+        <texttable anchor="table_1_1" title="4.1 SDP Offer">
+          <ttcol align='left'>SDP Contents </ttcol>
+          <ttcol align='left'>RFC#/Notes</ttcol>
+          <c>v=0</c>
+          <c>[RFC4566]</c>
+          <c>o=alice 20518 0 IN IP4 0.0.0.0</c>
+          <c>[RFC4566] - Session Origin Information</c>
+          <c>s=</c>
+          <c>[RFC4566]</c>
+          <c>t=0 0</c>
+          <c>[RFC4566]</c>
+          <c>a=ice-ufrag:074c6550</c>
+          <c>[RFC5245] - Session Level ICE parameter</c>          
+          <c>a=ice-pwd:a28a397a4c3f31747d1ee3474af08a068</c>
+          <c>[RFC5245] - Session Level ICE parameter</c>
+          <c>a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7:70:9d:1f:66:79:a8:07</c>
+          <c>[RFC5245] - Session DTLS Fingerprint for SRTP</c>
+          <c>a=rtcp-rsize</c>
+          <c>[RFC5506] - Alice intends to use reduced size RTCP for this session</c>          
+          <c>m=audio 54609 RTP/SAVPF 0 109 98</c>
+          <c>[RFC4566]</c>
+          <c>c= IN IP4 24.23.204.141</c>
+          <c>[RFC4566]</c>
+          <c>a=rtpmap:0 PCMU/8000</c>
+          <c>[RFC3551]</c>  
+          <c>a=rtpmap:109 opus/48000</c>
+          <c>[draft-spittka-payload-rtp-opus-0]</c>
+          <c>a=ptime:20</c>
+          <c>[draft-spittka-payload-rtp-opus-0]</c>
+          <c>a=rtpmap:98 iLBC/8000
+             a=fmtp:98 mode=20</c>
+          <c>[RFC3592]</c>
+          <c>a=sendrecv</c>
+          <c>[RFC3264] - Alice can send and recv audio</c>  
+          <c>a=rtcp-mux</c>
+          <c>[RFC5761] - Alice can perform RTP/RTCP Muxing on port 54609</c>                   
+          <c>b=AS:256</c>
+          <c>[RFC4566]</c>
+          <c>b=RS:0</c>
+          <c>[RFC3556]</c>
+          <c>b=RR:0</c>
+          <c>[RFC3556]</c>
+          <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 54609 typ host</c>
+          <c>[RFC5245] - Host ICE Candidate for Opus Stream</c>
+          <c>a=candidate:1 1 UDP  694302207 24.23.204.141 54609 typ srflx raddr 192.168.1.4 rport 54609</c>
+          <c>[RFC5245] - Server Reflexive ICE Candidate for the above host candidate</c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.4 64678 typ host</c>
+          <c>[RFC5245] - Second Host Candidate </c>
+          <c>a=candidate:1 2 UDP  1694302206 24.23.204.141 64678 typ srflx raddr 192.168.1.4 rport 64678</c>
+          <c>[RFC5245] -Server Reflexive Candidate for the Second Host Candidate</c>
+          <c>a=rtcp-fb:109 nack</c>
+          <c>[RFC5104] - Indicates NACK RTCP feedback support for Opus</c>          
+          <c>m=video  62537 RTP/SAVPF 99 120</c>
+          <c>[RFC4566] </c>
+          <c>c= IN IP4 24.23.204.141</c>
+          <c>[RFC4566]</c>
+          <c>a=rtpmap:99 H264/90000</c>
+          <c>[RFC3598]</c>
+          <c>a=fmtp:99 profile-level-id=4d0028;packetization-mode=1</c>
+          <c>[RFC3598]</c>        
+          <c>a=rtpmap:120 VP8/90000</c>
+          <c>[draft-ietf-payload-vp8-04]</c>
+          <c>a=sendrecv</c>
+          <c>[RFC3264] - Alice can send and recv video</c> 
+          <c>a=rtcp-mux</c>
+          <c>[RFC5761] - Alice can perform RTP/RTCP Muxing on port 62537</c>          
+          <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 62537 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 1 UDP  1694302207 24.23.204.141 62537 typ srflx raddr 192.168.1.4 rport 62537</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:0 2 2113667326 192.168.1.4 54721 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 2 UDP 1694302206 24.23.204.141 54721 typ srflx raddr 192.168.1.4 rport 54721</c>
+          <c>[RFC5245]</c>
+          <c>a=rtcp-fb:99 nack pli</c>
+          <c>[RFC5104] - Indicates support for Picture loss Indication and NACK of H.264</c>
+          <c>a=rtcp-fb:99 ccm fir</c>
+          <c>[RFC5104] - VP8 Full Intra Frame Request-Codec Control Message support</c>
+          <c>a=rtcp-fb:120 nack pli</c>
+          <c>[RFC5104] - Indicates support for Picture loss Indication and NACK of VP8</c>
+          <c>a=rtcp-fb:120 ccm fir</c>
+          <c>[RFC5104] - VP8 Full Intra Frame Request-Codec Control Message support</c>
+          <c>m=application  56966 SCTP/DTLS 5000</c>
+          <c>[draft-ietf-rtcweb-data-channel-01] </c>
+          <c>c= IN IP4 24.23.204.141</c>
+          <c>[RFC4566]</c>
+          <c>a=fmtp:5000 protocol=webrtc-datachannel;streams=16</c>
+          <c>[draft-ietf-rtcweb-data-channel-01]</c>
+          <c>a=sendrecv</c>
+          <c>[RFC3264] - Alice can send and recv non-media data</c> 
+          <c>a=rtcp-mux</c>
+          <c>[RFC5761] - Alice can perform RTP/RTCP Muxing on port 56966</c>
+          <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 56966 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 1 UDP 1694302207 24.23.204.141 56966 typ srflx raddr 192.168.1.7 rport 56966</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 51641 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 2 UDP 1694302206 24.23.204.141 51641 typ srflx raddr 192.168.1.7 rport 51641</c>
+          <c>[RFC5245]</c>
+          <c>a=rtcp-fb:5000 nack </c>
+          <c>[RFC5104] - Indicates NACK feedback support for the data-channel</c>
+        </texttable>  
+        <texttable anchor="table_1_2" title="4.1 SDP Answer">
+          <ttcol align='left'>SDP Contents </ttcol>
+          <ttcol align='left'>RFC#/Notes</ttcol>
+          <c>v=0</c>
+          <c>[RFC4566]</c>
+          <c>o=bob 16833 0 IN IP4 0.0.0.0</c>
+          <c>[RFC4566] - Session Origin Information</c>
+          <c>s=</c>
+          <c>[RFC4566]</c>
+          <c>t=0 0</c>
+          <c>[RFC4566]</c>
+          <c>a=ice-ufrag:c300d85b</c>
+          <c>[RFC5245] - Session Level ICE username frag</c>          
+          <c>a=ice-pwd:de4e99bd291c325921d5d47efbabd9a2</c>
+          <c>[RFC5245] - Session Level ICE password</c>
+          <c>a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7:70:9d:1f:66:79:a8:07</c>
+          <c>[RFC5245] - Session DTLS Fingerprint for SRTP</c>
+          <c>a=rtcp-rsize</c>
+          <c>[RFC5506] - Alice intends to use reduced size RTCP for this session</c>          
+          <c>m=audio 49203 RTP/SAVPF 109</c>
+          <c>[RFC4566]</c>
+          <c>c= IN IP4 98.248.92.77</c>
+          <c>[RFC4566]</c>
+          <c>a=rtpmap:109 opus/48000</c>
+          <c>[draft-spittka-payload-rtp-opus-0]</c>
+          <c>a=ptime:20</c>
+          <c>[draft-spittka-payload-rtp-opus-0]</c>
+          <c>a=rtpmap:98 iLBC/8000
+            a=fmtp:98 mode=20</c>
+          <c>[RFC3592]</c>
+          <c>a=sendrecv</c>
+          <c>[RFC3264] - Bob can send and recv audio</c>  
+          <c>a=rtcp-mux</c>
+          <c>[RFC5761] - Bob can perform RTP/RTCP Muxing on port 49203</c>                   
+          <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 49203 typ host</c>
+          <c>[RFC5245] - Host ICE Candidate for Opus Stream</c>
+          <c>a=ccandidate:1 1 UDP 1694302207 98.248.92.77 49203 typ srflx raddr 192.168.1.7 rport 49203</c>
+          <c>[RFC5245] - Server Reflexive ICE Candidate for the above host candidate</c>
+          <c>a=candidate:candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
+          <c>[RFC5245] - Second Host Candidate </c>
+          <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065</c>
+          <c>[RFC5245] -Server Reflexive Candidate for the Second Host Candidate</c>
+          <c>m=video  63130 RTP/SAVPF 99 120</c>
+          <c>[RFC4566] </c>
+          <c>c= IN IP4 98.248.92.771</c>
+          <c>[RFC4566]</c>
+          <c>a=rtpmap:99 H264/90000</c>
+          <c>[RFC3598]</c>
+          <c>a=fmtp:99 profile-level-id=4d0028;packetization-mode=1</c>
+          <c>[RFC3598]</c>        
+          <c>a=rtpmap:120 VP8/90000</c>
+          <c>[draft-ietf-payload-vp8-04]</c>
+          <c>a=sendrecv</c>
+          <c>[RFC3264] - Bob can send and recv video</c> 
+          <c>a=rtcp-mux</c>
+          <c>[RFC5761] - Bob can perform RTP/RTCP Muxing on port 63130</c>          
+          <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 63130 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 1 UDP 1694302207 98.248.92.77 63130 typ srflx raddr 192.168.1.7 rport 63130</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 56607 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 56607 typ srflx raddr 192.168.1.7 rport 56607</c>
+          <c>[RFC5245]</c>
+          <c>a=rtcp-fb:99 nack pli</c>
+          <c>[RFC5104] - Indicates support for Picture loss Indication and NACK of H.264</c>
+          <c>a=rtcp-fb:99 ccm fir</c>
+          <c>[RFC5104] - H.264 Full Intra Frame Request-Codec Control Message support</c>
+          <c>m=application  55700 SCTP/DTLS 5000</c>
+          <c>[draft-ietf-rtcweb-data-channel-01] </c>
+          <c>c= IN IP4 98.248.92.771</c>
+          <c>[RFC4566]</c>
+          <c>a=fmtp:5000 protocol=webrtc-datachannel;streams=16</c>
+          <c>[draft-ietf-rtcweb-data-channel-01]</c>
+          <c>a=sendrecv</c>
+          <c>[RFC3264] - Bob can send and recv non-media data</c> 
+          <c>a=rtcp-mux</c>
+          <c>[RFC5761] - Bob can perform RTP/RTCP Muxing on port 55700</c>
+          <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 55700 typ host</c>
+          <c>[RFC5245] - Refer 4.1 SDP Offer</c>
+          <c>a=candidate:1 1 UDP 1694302207 98.248.92.77 55700 typ srflx raddr 192.168.1.7 rport 55700</c>
+          <c>[RFC5245] Refer 4.1 SDP Offer</c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 58137 typ host</c>
+          <c>[RFC5245] Refer 4.1 SDP Offer</c>
+          <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 58137 typ srflx raddr 192.168.1.7 rport 581371</c>
+          <c>[RFC5245] Refer 4.1 SDP Offer</c>
+          <c>a=rtcp-fb:5000 nack </c>
+          <c>[RFC5104] - Indicates NACK feedback support for the data-channel</c>
+        </texttable>  
+   </section>   
+      <section anchor="sec.successful-session-remove-datachannel"
+        title="Secure Two-way Audio,Video,Data and remove data stream">
+        <t>This case is similar to use-case in section 4.1. It differs by Alice removing data-stream
+           once the session is in progress.
+        </t>
+        <figure>
+          <artwork alt="Successful-Session 2 Way SAVPF"
+            src="http://172.27.190.21/rtcweb/ietf85/SessionAVD-D.png"><![CDATA[TODO ASCII FIGURE 
+        ]]></artwork>
+        </figure>
+        <t>
+          As a precondition, A Two-Way Audio,Video and Data Session is already setup.
+          The table below captures just Offer/Answer details corresponding to data-stream.
+        </t>
+        <texttable anchor="table_2_1" title="4.2 SDP Updated Offer">
+          <ttcol align='left'>SDP Contents </ttcol>
+          <ttcol align='left'>RFC#/Notes</ttcol>
+          <c>v=0</c>
+          <c>[RFC4566]</c>
+          <c>o=alice 20519 0 IN IP4 0.0.0.0</c>
+          <c>[RFC4566]</c>
+          <c>s=</c>
+          <c>[RFC4566]</c>
+          <c>t=0 0</c>
+          <c>[RFC4566]</c>
+          <c>a=ice-ufrag:074c6550</c>
+          <c>[RFC5245]</c>          
+          <c>a=ice-pwd:a28a397a4c3f31747d1ee3474af08a068</c>
+          <c>[RFC5245]</c>
+          <c>a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7:70:9d:1f:66:79:a8:07</c>
+          <c>[RFC5245]</c>
+          <c>a=rtcp-rsize</c>
+          <c>[RFC5506]</c>          
+          <c>m=audio 54609 RTP/SAVPF 0 109 98</c>
+          <c>[RFC4566]</c>
+          <c>c= IN IP4 24.23.204.141</c>
+          <c>[RFC4566]</c>
+          <c>a=rtpmap:0 PCMU/8000</c>
+          <c>[RFC3551]</c>  
+          <c>a=rtpmap:109 opus/48000</c>
+          <c>[draft-spittka-payload-rtp-opus-0]</c>
+          <c>a=ptime:20</c>
+          <c>[draft-spittka-payload-rtp-opus-0]</c>
+          <c>a=rtpmap:98 iLBC/8000
+            a=fmtp:98 mode=20</c>
+          <c>[RFC3592]</c>
+          <c>a=sendrecv</c>
+          <c>[RFC3264]</c>  
+          <c>a=rtcp-mux</c>
+          <c>[RFC5761]</c>                   
+          <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 54609 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 1 UDP  694302207 24.23.204.141 54609 typ srflx raddr 192.168.1.4 rport 54609</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.4 64678 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 2 UDP  1694302206 24.23.204.141 64678 typ srflx raddr 192.168.1.4 rport 64678</c>
+          <c>[RFC5245]</c>
+          <c>a=rtcp-fb:109 nack</c>
+          <c>[RFC5104]</c>          
+          <c>m=video  62537 RTP/SAVPF 99 120</c>
+          <c>[RFC4566] </c>
+          <c>c= IN IP4 24.23.204.141</c>
+          <c>[RFC4566]</c>
+          <c>a=rtpmap:99 H264/90000</c>
+          <c>[RFC3598]</c>
+          <c>a=fmtp:99 profile-level-id=4d0028;packetization-mode=1</c>
+          <c>[RFC3598]</c>        
+          <c>a=rtpmap:120 VP8/90000</c>
+          <c>[draft-ietf-payload-vp8-04]</c>
+          <c>a=sendrecv</c>
+          <c>[RFC3264]</c> 
+          <c>a=rtcp-mux</c>
+          <c>[RFC5761]</c>          
+          <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 62537 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 1 UDP  1694302207 24.23.204.141 62537 typ srflx raddr 192.168.1.4 rport 62537</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:0 2 2113667326 192.168.1.4 54721 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 2 UDP 1694302206 24.23.204.141 54721 typ srflx raddr 192.168.1.4 rport 54721</c>
+          <c>[RFC5245]</c>
+          <c>a=rtcp-fb:99 nack pli</c>
+          <c>[RFC5104]</c>
+          <c>a=rtcp-fb:99 ccm fir</c>
+          <c>[RFC5104]</c>
+          <c>a=rtcp-fb:120 nack pli</c>
+          <c>[RFC5104]</c>
+          <c>a=rtcp-fb:120 ccm fir</c>
+          <c>[RFC5104]</c>
+          <c>m=application  0 SCTP/DTLS 5000</c>
+          <c>[draft-ietf-rtcweb-data-channel-01] - Port 0 indicates dropping data stream </c>
+          <c>c= IN IP4 24.23.204.141</c>
+          <c>[RFC4566]</c>
+          <c>a=fmtp:5000 protocol=webrtc-datachannel;streams=16</c>
+          <c>[draft-ietf-rtcweb-data-channel-01]</c>
+          <c>a=sendrecv</c>
+          <c>[RFC3264]</c> 
+          <c>a=rtcp-mux</c>
+          <c>[RFC5761]</c>
+          <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 56966 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 1 UDP 1694302207 24.23.204.141 56966 typ srflx raddr 192.168.1.7 rport 56966</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 51641 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 2 UDP 1694302206 24.23.204.141 51641 typ srflx raddr 192.168.1.7 rport 51641</c>
+          <c>[RFC5245]</c>
+          <c>a=rtcp-fb:5000 nack </c>
+          <c>[RFC5104]</c>
+        </texttable>  
+        <texttable anchor="table_2_2" title="4.2 SDP Answer">
+          <ttcol align='left'>SDP Contents </ttcol>
+          <ttcol align='left'>RFC#/Notes</ttcol>
+          <c>v=0</c>
+          <c>[RFC4566]</c>
+          <c>o=bob 16833 0 IN IP4 0.0.0.0</c>
+          <c>[RFC4566]</c>
+          <c>s=</c>
+          <c>[RFC4566]</c>
+          <c>t=0 0</c>
+          <c>[RFC4566]</c>
+          <c>a=ice-ufrag:c300d85b</c>
+          <c>[RFC5245]</c>          
+          <c>a=ice-pwd:de4e99bd291c325921d5d47efbabd9a2</c>
+          <c>[RFC5245]</c>
+          <c>a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7:70:9d:1f:66:79:a8:07</c>
+          <c>[RFC5245]</c>
+          <c>a=rtcp-rsize</c>
+          <c>[RFC5506]</c>          
+          <c>m=audio 49203 RTP/SAVPF 109</c>
+          <c>[RFC4566]</c>
+          <c>c= IN IP4 98.248.92.77</c>
+          <c>[RFC4566]</c>
+          <c>a=rtpmap:109 opus/48000</c>
+          <c>[draft-spittka-payload-rtp-opus-0]</c>
+          <c>a=ptime:20</c>
+          <c>[draft-spittka-payload-rtp-opus-0]</c>
+          <c>a=rtpmap:98 iLBC/8000
+            a=fmtp:98 mode=20</c>
+          <c>[RFC3592]</c>
+          <c>a=sendrecv</c>
+          <c>[RFC3264]</c>  
+          <c>a=rtcp-mux</c>
+          <c>[RFC5761]</c>                   
+          <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 49203 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=ccandidate:1 1 UDP 1694302207 98.248.92.77 49203 typ srflx raddr 192.168.1.7 rport 49203</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065</c>
+          <c>[RFC5245]</c>
+          <c>m=video  63130 RTP/SAVPF 99 120</c>
+          <c>[RFC4566] </c>
+          <c>c= IN IP4 98.248.92.771</c>
+          <c>[RFC4566]</c>
+          <c>a=rtpmap:99 H264/90000</c>
+          <c>[RFC3598]</c>
+          <c>a=fmtp:99 profile-level-id=4d0028;packetization-mode=1</c>
+          <c>[RFC3598]</c>        
+          <c>a=rtpmap:120 VP8/90000</c>
+          <c>[draft-ietf-payload-vp8-04]</c>
+          <c>a=sendrecv</c>
+          <c>[RFC3264]</c> 
+          <c>a=rtcp-mux</c>
+          <c>[RFC5761]0</c>          
+          <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 63130 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 1 UDP 1694302207 98.248.92.77 63130 typ srflx raddr 192.168.1.7 rport 63130</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 56607 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 56607 typ srflx raddr 192.168.1.7 rport 56607</c>
+          <c>[RFC5245]</c>
+          <c>a=rtcp-fb:99 nack pli</c>
+          <c>[RFC5104]</c>
+          <c>a=rtcp-fb:99 ccm fir</c>
+          <c>[RFC5104]</c>
+          <c>m=application  0 SCTP/DTLS 5000</c>
+          <c>[draft-ietf-rtcweb-data-channel-01] </c>
+          <c>c= IN IP4 98.248.92.771</c>
+          <c>[RFC4566]</c>
+          <c>a=fmtp:5000 protocol=webrtc-datachannel;streams=16</c>
+          <c>[draft-ietf-rtcweb-data-channel-01]</c>
+          <c>a=sendrecv</c>
+          <c>[RFC3264]</c> 
+          <c>a=rtcp-mux</c>
+          <c>[RFC5761]</c>
+          <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 55700 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 1 UDP 1694302207 98.248.92.77 55700 typ srflx raddr 192.168.1.7 rport 55700</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 58137 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 58137 typ srflx raddr 192.168.1.7 rport 581371</c>
+          <c>[RFC5245]</c>
+          <c>a=rtcp-fb:5000 nack </c>
+          <c>[RFC5104]</c>
+        </texttable>  
+      </section> 
+    
+      <section anchor="sec.successful-session-add-new-media"
+        title="Add New Media (video)">
+        <t>This scenario describes the message exchanges when Alice decides
+          to add video as media to an existing audio-only session</t>
+        <figure>
+          <artwork alt="Successful-Session 2 Way SAVPF"
+            src="http://172.27.190.21/rtcweb/ietf85/AddVideo.png"><![CDATA[TODO ASCII FIGURE 
+        ]]></artwork>
+        </figure>
+         <texttable anchor="table_3_1" title="4.3 SDP Initial Audio Only Offer">
+          <ttcol align='left'>SDP Contents </ttcol>
+          <ttcol align='left'>RFC#/Notes</ttcol>
+          <c>v=0</c>
+          <c>[RFC4566]</c>
+          <c>o=alice 20519 0 IN IP4 0.0.0.0</c>
+          <c>[RFC4566]</c>
+          <c>s=</c>
+          <c>[RFC4566]</c>
+          <c>t=0 0</c>
+          <c>[RFC4566]</c>
+          <c>a=ice-ufrag:074c6550</c>
+          <c>[RFC5245]</c>          
+          <c>a=ice-pwd:a28a397a4c3f31747d1ee3474af08a068</c>
+          <c>[RFC5245]</c>
+          <c>a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7:70:9d:1f:66:79:a8:07</c>
+          <c>[RFC5245]</c>
+          <c>a=rtcp-rsize</c>
+          <c>[RFC5506]</c>          
+          <c>m=audio 54609 RTP/SAVPF 0 109 98</c>
+          <c>[RFC4566]</c>
+          <c>c= IN IP4 24.23.204.141</c>
+          <c>[RFC4566]</c>
+          <c>a=rtpmap:0 PCMU/8000</c>
+          <c>[RFC3551]</c>  
+          <c>a=rtpmap:109 opus/48000</c>
+          <c>[draft-spittka-payload-rtp-opus-0]</c>
+          <c>a=ptime:20</c>
+          <c>[draft-spittka-payload-rtp-opus-0]</c>
+          <c>a=rtpmap:98 iLBC/8000
+            a=fmtp:98 mode=20</c>
+          <c>[RFC3592]</c>
+          <c>a=sendrecv</c>
+          <c>[RFC3264]</c>  
+          <c>a=rtcp-mux</c>
+          <c>[RFC5761]</c>                   
+          <c>b=AS:256</c>
+          <c>[RFC4566]</c>
+          <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 54609 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 1 UDP  694302207 24.23.204.141 54609 typ srflx raddr 192.168.1.4 rport 54609</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.4 64678 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 2 UDP  1694302206 24.23.204.141 64678 typ srflx raddr 192.168.1.4 rport 64678</c>
+          <c>[RFC5245]</c>
+          <c>a=rtcp-fb:109 nack</c>
+          <c>[RFC5104]</c>          
+        </texttable>  
+        <texttable anchor="table_3_2" title="4.3 SDP Answer- Audio Only">
+          <ttcol align='left'>SDP Contents </ttcol>
+          <ttcol align='left'>RFC#/Notes</ttcol>
+          <c>v=0</c>
+          <c>[RFC4566]</c>
+          <c>o=bob 16833 0 IN IP4 0.0.0.0</c>
+          <c>[RFC4566]</c>
+          <c>s=</c>
+          <c>[RFC4566]</c>
+          <c>t=0 0</c>
+          <c>[RFC4566]</c>
+          <c>a=ice-ufrag:c300d85b</c>
+          <c>[RFC5245]</c>          
+          <c>a=ice-pwd:de4e99bd291c325921d5d47efbabd9a2</c>
+          <c>[RFC5245]</c>
+          <c>a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7:70:9d:1f:66:79:a8:07</c>
+          <c>[RFC5245]</c>
+          <c>a=rtcp-rsize</c>
+          <c>[RFC5506]</c>          
+          <c>m=audio 49203 RTP/SAVPF 109</c>
+          <c>[RFC4566]</c>
+          <c>c= IN IP4 98.248.92.77</c>
+          <c>[RFC4566]</c>
+          <c>a=rtpmap:109 opus/48000</c>
+          <c>[draft-spittka-payload-rtp-opus-0]</c>
+          <c>a=ptime:20</c>
+          <c>[draft-spittka-payload-rtp-opus-0]</c>
+          <c>a=rtpmap:98 iLBC/8000
+            a=fmtp:98 mode=20</c>
+          <c>[RFC3592]</c>
+          <c>a=sendrecv</c>
+          <c>[RFC3264]</c>  
+          <c>a=rtcp-mux</c>
+          <c>[RFC5761]</c>                   
+          <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 49203 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=ccandidate:1 1 UDP 1694302207 98.248.92.77 49203 typ srflx raddr 192.168.1.7 rport 49203</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065</c>
+          <c>[RFC5245]</c>
+        </texttable>
+        <t>
+          Alice decides to add Video to the current session
+        </t>
+        <texttable anchor="table_3_3" title="4.3 SDP Updated Offer w/Video">
+          <ttcol align='left'>SDP Contents </ttcol>
+          <ttcol align='left'>RFC#/Notes</ttcol>
+          <c>v=0</c>
+          <c>[RFC4566]</c>
+          <c>o=alice 20520 0 IN IP4 0.0.0.0</c>
+          <c>[RFC4566] - Increased Version Number</c>
+          <c>s=</c>
+          <c>[RFC4566]</c>
+          <c>t=0 0</c>
+          <c>[RFC4566]</c>
+          <c>a=ice-ufrag:074c6550</c>
+          <c>[RFC5245]</c>          
+          <c>a=ice-pwd:a28a397a4c3f31747d1ee3474af08a068</c>
+          <c>[RFC5245]</c>
+          <c>a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7:70:9d:1f:66:79:a8:07</c>
+          <c>[RFC5245]</c>
+          <c>a=rtcp-rsize</c>
+          <c>[RFC5506]</c>          
+          <c>m=audio 54609 RTP/SAVPF 0 109 98</c>
+          <c>[RFC4566]</c>
+          <c>c= IN IP4 24.23.204.141</c>
+          <c>[RFC4566]</c>
+          <c>a=rtpmap:0 PCMU/8000</c>
+          <c>[RFC3551]</c>  
+          <c>a=rtpmap:109 opus/48000</c>
+          <c>[draft-spittka-payload-rtp-opus-0]</c>
+          <c>a=ptime:20</c>
+          <c>[draft-spittka-payload-rtp-opus-0]</c>
+          <c>a=rtpmap:98 iLBC/8000
+            a=fmtp:98 mode=20</c>
+          <c>[RFC3592]</c>
+          <c>a=sendrecv</c>
+          <c>[RFC3264]</c>  
+          <c>a=rtcp-mux</c>
+          <c>[RFC5761]</c>                   
+          <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 54609 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 1 UDP  694302207 24.23.204.141 54609 typ srflx raddr 192.168.1.4 rport 54609</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.4 64678 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 2 UDP  1694302206 24.23.204.141 64678 typ srflx raddr 192.168.1.4 rport 64678</c>
+          <c>[RFC5245]</c>
+          <c>a=rtcp-fb:109 nack</c>
+          <c>[RFC5104]</c>          
+          <c>m=video  62537 RTP/SAVPF120</c>
+          <c>[RFC4566] </c>
+          <c>c= IN IP4 24.23.204.141</c>
+          <c>[RFC4566]</c>
+          <c>a=rtpmap:120 VP8/90000</c>
+          <c>[draft-ietf-payload-vp8-04]</c>
+          <c>a=sendrecv</c>
+          <c>[RFC3264]</c> 
+          <c>a=rtcp-mux</c>
+          <c>[RFC5761]</c>          
+          <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 62537 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 1 UDP  1694302207 24.23.204.141 62537 typ srflx raddr 192.168.1.4 rport 62537</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:0 2 2113667326 192.168.1.4 54721 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 2 UDP 1694302206 24.23.204.141 54721 typ srflx raddr 192.168.1.4 rport 54721</c>
+          <c>[RFC5245]</c>
+          <c>a=rtcp-fb:120 nack pli</c>
+          <c>[RFC5104]</c>
+          <c>a=rtcp-fb:120 ccm fir</c>
+          <c>[RFC5104]</c>
+        </texttable>  
+        <texttable anchor="table_3_4" title="4.3 SDP Answer">
+          <ttcol align='left'>SDP Contents </ttcol>
+          <ttcol align='left'>RFC#/Notes</ttcol>
+          <c>v=0</c>
+          <c>[RFC4566]</c>
+          <c>o=bob 16833 0 IN IP4 0.0.0.0</c>
+          <c>[RFC4566]</c>
+          <c>s=</c>
+          <c>[RFC4566]</c>
+          <c>t=0 0</c>
+          <c>[RFC4566]</c>
+          <c>a=ice-ufrag:c300d85b</c>
+          <c>[RFC5245]</c>          
+          <c>a=ice-pwd:de4e99bd291c325921d5d47efbabd9a2</c>
+          <c>[RFC5245]</c>
+          <c>a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7:70:9d:1f:66:79:a8:07</c>
+          <c>[RFC5245]</c>
+          <c>a=rtcp-rsize</c>
+          <c>[RFC5506]</c>          
+          <c>m=audio 49203 RTP/SAVPF 109</c>
+          <c>[RFC4566]</c>
+          <c>c= IN IP4 98.248.92.77</c>
+          <c>[RFC4566]</c>
+          <c>a=rtpmap:109 opus/48000</c>
+          <c>[draft-spittka-payload-rtp-opus-0]</c>
+          <c>a=ptime:20</c>
+          <c>[draft-spittka-payload-rtp-opus-0]</c>
+          <c>a=rtpmap:98 iLBC/8000
+            a=fmtp:98 mode=20</c>
+          <c>[RFC3592]</c>
+          <c>a=sendrecv</c>
+          <c>[RFC3264]</c>  
+          <c>a=rtcp-mux</c>
+          <c>[RFC5761]</c>                   
+          <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 49203 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=ccandidate:1 1 UDP 1694302207 98.248.92.77 49203 typ srflx raddr 192.168.1.7 rport 49203</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065</c>
+          <c>[RFC5245]</c>
+          <c>m=video  63130 RTP/SAVPF 99 120</c>
+          <c>[RFC4566] </c>
+          <c>c= IN IP4 98.248.92.771</c>
+          <c>[RFC4566]</c>
+          <c>a=rtpmap:120 VP8/90000</c>
+          <c>[draft-ietf-payload-vp8-04]</c>
+          <c>a=sendrecv</c>
+          <c>[RFC3264]</c> 
+          <c>a=rtcp-mux</c>
+          <c>[RFC5761]</c>          
+          <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 63130 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 1 UDP 1694302207 98.248.92.77 63130 typ srflx raddr 192.168.1.7 rport 63130</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 56607 typ host</c>
+          <c>[RFC5245]</c>
+          <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 56607 typ srflx raddr 192.168.1.7 rport 56607</c>
+          <c>[RFC5245]</c>
+        </texttable>
+      </section> 
+      
+    </section>
+   
+    <section title="SDP Modifiability">
+      <t>TODO</t>
+
+     </section>
+
+    <section title="IANA Considerations">
+      <t>This document requires no actions from IANA.</t>
+    </section>
+  </middle>
+
+  <back>
+    <references title="Normative References">
+      <reference anchor="RFC3264">
+        <front>
+          <title>An Offer/Answer Model with Session Description Protocol
+          (SDP)</title>
+
+          <author fullname="J. Rosenberg" initials="J." surname="Rosenberg">
+            <organization></organization>
+          </author>
+
+          <author fullname="H. Schulzrinne" initials="H."
+                  surname="Schulzrinne">
+            <organization></organization>
+          </author>
+
+          <date month="June" year="2002" />
+        </front>
+
+        <seriesInfo name="RFC" value="3264" />
+
+        <format octets="60854"
+                target="http://www.rfc-editor.org/rfc/rfc3264.txt" type="TXT" />
+      </reference>
+
+      <reference anchor="RFC2119">
+        <front>
+          <title abbrev="RFC Key Words">Key words for use in RFCs to Indicate
+          Requirement Levels</title>
+
+          <author fullname="Scott Bradner" initials="S." surname="Bradner">
+            <organization>Harvard University</organization>
+
+            <address>
+              <postal>
+                <street>1350 Mass. Ave.</street>
+
+                <street>Cambridge</street>
+
+                <street>MA 02138</street>
+              </postal>
+
+              <phone>- +1 617 495 3864</phone>
+
+              <email>sob@harvard.edu</email>
+            </address>
+          </author>
+
+          <date month="March" year="1997" />
+
+          <area>General</area>
+
+          <keyword>keyword</keyword>
+        </front>
+
+        <seriesInfo name="BCP" value="14" />
+
+        <seriesInfo name="RFC" value="2119" />
+
+        <format octets="4723"
+                target="http://www.rfc-editor.org/rfc/rfc2119.txt" type="TXT" />
+
+        <format octets="17491"
+                target="http://xml.resource.org/public/rfc/html/rfc2119.html"
+                type="HTML" />
+
+        <format octets="5777"
+                target="http://xml.resource.org/public/rfc/xml/rfc2119.xml"
+                type="XML" />
+      </reference>
+    </references>
+
+    <references title="Informative References">
+      <reference anchor="RFC3261">
+        <front>
+          <title>SIP: Session Initiation Protocol</title>
+
+          <author fullname="J. Rosenberg" initials="J." surname="Rosenberg">
+            <organization></organization>
+          </author>
+
+          <author fullname="H. Schulzrinne" initials="H."
+                  surname="Schulzrinne">
+            <organization></organization>
+          </author>
+
+          <author fullname="G. Camarillo" initials="G." surname="Camarillo">
+            <organization></organization>
+          </author>
+
+          <author fullname="A. Johnston" initials="A." surname="Johnston">
+            <organization></organization>
+          </author>
+
+          <author fullname="J. Peterson" initials="J." surname="Peterson">
+            <organization></organization>
+          </author>
+
+          <author fullname="R. Sparks" initials="R." surname="Sparks">
+            <organization></organization>
+          </author>
+
+          <author fullname="M. Handley" initials="M." surname="Handley">
+            <organization></organization>
+          </author>
+
+          <author fullname="E. Schooler" initials="E." surname="Schooler">
+            <organization></organization>
+          </author>
+
+          <date month="June" year="2002" />
+        </front>
+
+        <seriesInfo name="RFC" value="3261" />
+
+        <format octets="647976"
+                target="http://www.rfc-editor.org/rfc/rfc3261.txt" type="TXT" />
+      </reference>
+
+      <reference anchor="I-D.ietf-rtcweb-use-cases-and-requirements">
+        <front>
+          <title>Web Real-Time Communication Use-cases and
+          Requirements</title>
+
+          <author fullname="Christer Holmberg" initials="C" surname="Holmberg">
+            <organization></organization>
+          </author>
+
+          <author fullname="Stefan Hakansson" initials="S" surname="Hakansson">
+            <organization></organization>
+          </author>
+
+          <author fullname="Goran Eriksson" initials="G" surname="Eriksson">
+            <organization></organization>
+          </author>
+
+          <date day="4" month="October" year="2011" />
+
+          <abstract>
+            <t>This document describes web based real-time communication
+            use-cases. Based on the use-cases, the document also derives
+            requirements related to the browser, and the API used by web
+            applications to request and control media stream services provided
+            by the browser.</t>
+          </abstract>
+        </front>
+
+        <seriesInfo name="Internet-Draft"
+                    value="draft-ietf-rtcweb-use-cases-and-requirements-06" />
+
+        <format target="http://www.ietf.org/internet-drafts/draft-ietf-rtcweb-use-cases-and-requirements-06.txt"
+                type="TXT" />
+      </reference>
+
+      <reference anchor="ROAP">
+        <front>
+          <title>RTCWeb Offer/Answer Protocol (ROAP)</title>
+
+          <author fullname="Cullen Jennings" initials="C." surname="Jennings">
+            <organization></organization>
+          </author>
+
+          <author fullname="Jonathan" initials="J." surname="Rosenberg">
+            <organization></organization>
+          </author>
+
+          <date day="14" month="October" year="2011" />
+
+          <abstract>
+            <t>This document describes an protocol used to negotiate media
+            between browsers or other compatible devices. This protocol
+            provides the state machinery needed to implement the offer/answer
+            model (RFC 3264), and defines the semantics and necessary
+            attributes of messages that must be exchanged. The protocol uses
+            an abstract transport in that it does not actually define how
+            these messages are exchanged. Rather, such exchanges are handled
+            through web-based transports like HTTP or WebSockets. The protocol
+            focuses solely on media negotiation and does not handle call
+            control, call processing, or other functions.</t>
+          </abstract>
+        </front>
+
+        <seriesInfo name="Internet-Draft"
+                    value="draft-jennings-rtcweb-signaling" />
+
+        <format target="http://svn.resiprocate.org/rep/ietf-drafts/fluffy/draft-jennings-rtcweb-signaling.txt"
+                type="TXT" />
+      </reference>
+    </references>
+  </back>
+</rfc>
