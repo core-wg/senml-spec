@@ -309,96 +309,218 @@ the reader but there is one in the PDF version.
         <t>
           <list  style="hanging">
             
-            <t hangText="Path:"> foo/bar </t>
+            <t hangText="Path:"> .well-known/tte1/d/{DevURN} </t>
 
-            <t> YADA </t>
-            
-            <t hangText="Methods:"> foo/bar </t>
+             <t hangText="Methods:"> POST </t>
             
             <t hangText="Parameters:"> 
-
               <list  style="hanging">
 
-                <t hangText="foo:"> foo/bar </t>
-                <t hangText="bar:"> foo/bar </t>
-
+                <t hangText="otp:"> Base64 encoded version of the OTP</t>
+             
               </list>          
+            </t>
+            
+            <t hangText="Return Values:">  TODO 
+            </t>
 
-            </t>
-            
-            
-            <t hangText="Return Values:"> 
-            </t>
-            
-          </list>
+           </list>
         </t>
-        
-        <section title="Example" >
-          <t> TODO </t>
-        </section>
+ 
+        <t> This creates and entry for the device in the data base and stores
+        the OTP associated with this Device. The Transfer Agent SHOULD
+        authenticated this request to authorize it. Note the "d" in the path is
+        short for "device" and having this path segment allows for future
+        extensibility. </t>
+
+    
+          <t> Example Request:
+          <figure>
+            <artwork><![CDATA[
+POST https://example.net/.well-known/tte1/d/urn:dev:mac:90a2da001a0c
+          ?otp=88F5EC91493E473B758159C7792C
+]]></artwork>
+          </figure>
+          </t>
+
+          <t> Example Response:
+          <figure>
+            <artwork><![CDATA[
+TODO
+]]></artwork>
+          </figure>
+          </t>
+
 
       </section>
 
       <section title ="Setup">
         <t>  Transfer Agent MUST return a web page that allows the user to
       enter the </t>
+
+      <t>
+          <list  style="hanging">
+            
+            <t hangText="Path:"> .well-known/tte1/d/{DevURN}/s </t>
+
+             <t hangText="Methods:"> GET </t>
+            
+            <t hangText="Parameters:"> 
+              <list  style="hanging">
+
+                <t hangText="otp:"> Base64 encoded version of the OTP</t>
+             
+              </list>          
+            </t>
+            
+            <t hangText="Return Values:"> HTML5 web page
+            </t>
+
+           </list>
+        </t>
+ 
+        <t>
+          This MUST return a HTML web page that has a suitable user interface to
+          allow the user to enter the address of the the Controller. It is
+          suggested the page validate this controller entry is correct using the
+          "alive" API in Section TODO.  Once the Controller is verified, the web
+          page MUST tell the Transfer Agent the Controller address using the
+          "bind" API in Section TODO and the page MUST tell the controller the
+          DevURN and DevSecret for the Device using the "add" API in Section
+          TODO.
+        </t>
+
+        <t> Example Request:
+          <figure>
+            <artwork><![CDATA[
+GET https://example.net/.well-known/tte1/d/urn:dev:mac:90a2da001a0c/s
+          ?otp=88F5EC91493E473B758159C7792C
+]]></artwork>
+          </figure>
+          </t>
+
+
+
       </section>
 
       <section title ="Bind">
         <t> TODO
+        MUST be sent over TLS, and the Introducer MUST verify that the HTTPS
+        certificate of the Transfer Agent matches the URL.
+        </t>
+        
+        <t>Once the Transfer Agent has successfully stored the Controller's address
+        for a given OTP, it MUST NOT allow that OTP to be used again to store an
+        address for that Device. </t>  
 
- MUST be sent over TLS, and the Introducer MUST verify that the HTTPS
- certificate of the Transfer Agent matches the URL.
-
-
- </t>
-
-    <t>Once the Transfer Agent has successfully stored the Controller's address
-      for a given OTP, it MUST NOT allow that OTP to be used again to store an
-      address for that Device. </t>  
-
-      </section>
-
-      <section title ="Fetch">
-        <t> TODO </t>
+        
 
         <t>
           <list  style="hanging">
             
-            <t hangText="Path:"> foo/bar </t>
+            <t hangText="Path:"> .well-known/tte1/d/{DevURN}/c </t>
 
-            <t> YADA </t>
-            
-            <t hangText="Methods:"> foo/bar </t>
+             <t hangText="Methods:"> PUT </t>
             
             <t hangText="Parameters:"> 
-
               <list  style="hanging">
 
-                <t hangText="foo:"> foo/bar </t>
-                <t hangText="bar:"> foo/bar </t>
-
+                <t hangText="otp:"> Base64 encoded version of the OTP</t>
+                <t hangText="conturl:"> URL to controller escaped as necessary for placement in a URL</t>
+             
               </list>          
-
             </t>
             
+            <t hangText="Return Values:"> TODO
+            </t>
+
+           </list>
+        </t>
+ 
+        <t>
+         This request using the 
+        </t>
+
+        <t> Example Request:
+          <figure>
+            <artwork><![CDATA[
+TODO
+PUT https://example.net/.well-known/tte1/d/urn:dev:mac:90a2da001a0c/c
+          ?otp=88F5EC91493E473B758159C7792C
+]]></artwork>
+          </figure>
+          </t>
+
+      </section>
+      
+      <section title ="Fetch">
+        <t> This API allows a Device to get the information about the controller
+        it should connect to. It is provided in an JSON object which is
+        encrypted using the OTP. </t>
+        
+        <t>
+          <list  style="hanging">
             
-            <t hangText="Return Values:"> 
+            <t hangText="Path:"> .well-known/tte1/{DevURN}/c </t>
+            
+            <t hangText="Methods:"> GET </t>
+            
+            <t hangText="Parameters:"> 
+             None          
+            </t>
+            
+            <t hangText="Success Return Values:"> 
+              JSON object as defined in TODO that contains the encrypted URL to
+              the Controller.
+            </t>
+
+            <t hangText="Error Return Values:"> 
+            Returns HTTP 404 if the DevID can not be found or if the controller
+            URL has not yet been set for this DevURN.
             </t>
             
           </list>
         </t>
-        
-        <section title="Example" >
-          <t> TODO </t>
-        </section>
+   
+        <t>
+          The Transfer Agent looks up the OTP and ContURL for the requested
+          DevURN. If the DevURN can not be found, or the ContURL has not yet
+          been set for this DevURN, then the Transfer Agent returns a HTTP 404
+          error. If they are found, it then uses the Authenticated Encryption
+          with Associated Data (AEAD) algorithm described in Section TODO to
+          form the JSON object that is returned. The OTP, is used as the key for
+          the AEAD, the ContURL is the input data to be encrypted, and the
+          DevURN is used as Associated Data for the authentication.
+        </t>
 
+   <t> Example Request:
+          <figure>
+            <artwork><![CDATA[
+GET https://example.net/.well-known/tte1/d/urn:dev:mac:90a2da001a0c/c
+]]></artwork>
+          </figure>
+          </t>
 
+          <t> Example Response:
+          <figure>
+            <artwork><![CDATA[
+TODO
+]]></artwork>
+          </figure>
+          </t>
+     
+  
       </section>
 
     </section>
 
     <section title ="Controller API" anchor="sec-cont-api">
+
+      <t> The Alive and Add API need to include a CORS (TODO REF) header to
+      allow AJAX from the Transfer Agent to call these APIs. They MUST include
+      an HTTP header in the response that sets the header field
+      Access-Control-Allow-Origin to a value of "*". TODO security section needs
+      to discuss implications.  </t>
 
     <section title ="Test Alive">
         <t> TODO </t>
@@ -448,6 +570,7 @@ the reader but there is one in the PDF version.
      </section>
 
     <section title="Variations">
+
       <section title="LED Based Enrollment">
         <t>An alternative to QR codes is to have an LED on the Device flash out
         the relevant information to the Introducer. The output string is formed
@@ -519,7 +642,7 @@ the reader but there is one in the PDF version.
     </section>
 
     <section title="IANA Considerations">
-      <t>TODO register .well-known HTTP URL</t>
+      <t>TODO register .well-known/tte1 </t>
     </section>
 
     <section title="Acknowledgments">
@@ -553,6 +676,20 @@ the reader but there is one in the PDF version.
       Barnes about keyID and case with no key wrap. TODO - state of sha224-cfb
       and this is all experimental.  </t>
 
+      <t> 
+          <figure>
+            <artwork><![CDATA[
+Input Key (Hex) = 88F5EC91493E473B758159C7792C  
+Input Associated Data = "urn:dev:mac:90a2da001a0c"
+Input plain text = "http://example.com" - TODO 
+
+Result  =
+{
+  TODO 
+}
+]]></artwork>
+          </figure>
+          </t>
 
         </section>
 
