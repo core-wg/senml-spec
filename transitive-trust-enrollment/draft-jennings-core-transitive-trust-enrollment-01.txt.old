@@ -3,8 +3,8 @@
 
 Network Working Group                                        C. Jennings
 Internet-Draft                                                     Cisco
-Intended status:  Experimental                        September 23, 2012
-Expires:  March 27, 2013
+Intended status:  Experimental                        September 27, 2012
+Expires:  March 31, 2013
 
 
           Transitive Trust Enrollment for Constrained Devices
@@ -40,7 +40,7 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on March 27, 2013.
+   This Internet-Draft will expire on March 31, 2013.
 
 Copyright Notice
 
@@ -52,7 +52,7 @@ Copyright Notice
 
 
 
-Jennings                 Expires March 27, 2013                 [Page 1]
+Jennings                 Expires March 31, 2013                 [Page 1]
 
 Internet-Draft         Transitive Trust Enrollment        September 2012
 
@@ -70,33 +70,33 @@ Table of Contents
 
    1.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  3
    2.  Enrollment Information Flow  . . . . . . . . . . . . . . . . .  4
-   3.  QR Code  . . . . . . . . . . . . . . . . . . . . . . . . . . .  6
-   4.  Transfer Agent API . . . . . . . . . . . . . . . . . . . . . .  6
-     4.1.  Create . . . . . . . . . . . . . . . . . . . . . . . . . .  7
-       4.1.1.  Example  . . . . . . . . . . . . . . . . . . . . . . .  7
-     4.2.  Setup  . . . . . . . . . . . . . . . . . . . . . . . . . .  7
-     4.3.  Bind . . . . . . . . . . . . . . . . . . . . . . . . . . .  7
-     4.4.  Fetch  . . . . . . . . . . . . . . . . . . . . . . . . . .  7
-       4.4.1.  Example  . . . . . . . . . . . . . . . . . . . . . . .  7
-   5.  Controller API . . . . . . . . . . . . . . . . . . . . . . . .  8
-     5.1.  Test Alive . . . . . . . . . . . . . . . . . . . . . . . .  8
-     5.2.  Add  . . . . . . . . . . . . . . . . . . . . . . . . . . .  8
-     5.3.  Sensor Update  . . . . . . . . . . . . . . . . . . . . . .  8
-   6.  Security Considerations  . . . . . . . . . . . . . . . . . . .  8
-   7.  Variations . . . . . . . . . . . . . . . . . . . . . . . . . .  9
-     7.1.  LED Based Enrollment . . . . . . . . . . . . . . . . . . .  9
-     7.2.  Bulk Enrollment  . . . . . . . . . . . . . . . . . . . . .  9
-     7.3.  Public Key Crypto  . . . . . . . . . . . . . . . . . . . .  9
-   8.  Implementation Notes . . . . . . . . . . . . . . . . . . . . .  9
-     8.1.  Random Numbers . . . . . . . . . . . . . . . . . . . . . . 10
-   9.  Open Issues  . . . . . . . . . . . . . . . . . . . . . . . . . 10
-   10. IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 10
-   11. Acknowledgments  . . . . . . . . . . . . . . . . . . . . . . . 10
-   12. Appendix A: JOSE SHA224-CFB  . . . . . . . . . . . . . . . . . 10
-   13. References . . . . . . . . . . . . . . . . . . . . . . . . . . 11
-     13.1. Normative References . . . . . . . . . . . . . . . . . . . 11
-     13.2. Informative References . . . . . . . . . . . . . . . . . . 11
-   Author's Address . . . . . . . . . . . . . . . . . . . . . . . . . 11
+   3.  Terminology  . . . . . . . . . . . . . . . . . . . . . . . . .  6
+   4.  QR Code  . . . . . . . . . . . . . . . . . . . . . . . . . . .  6
+   5.  Transfer Agent API . . . . . . . . . . . . . . . . . . . . . .  7
+     5.1.  Create . . . . . . . . . . . . . . . . . . . . . . . . . .  7
+     5.2.  Setup  . . . . . . . . . . . . . . . . . . . . . . . . . .  7
+     5.3.  Bind . . . . . . . . . . . . . . . . . . . . . . . . . . .  8
+     5.4.  Fetch  . . . . . . . . . . . . . . . . . . . . . . . . . .  8
+   6.  Controller API . . . . . . . . . . . . . . . . . . . . . . . .  9
+     6.1.  Test Alive . . . . . . . . . . . . . . . . . . . . . . . .  9
+     6.2.  Add  . . . . . . . . . . . . . . . . . . . . . . . . . . .  9
+     6.3.  Sensor Update  . . . . . . . . . . . . . . . . . . . . . . 10
+   7.  Security Considerations  . . . . . . . . . . . . . . . . . . . 10
+   8.  Variations . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+     8.1.  LED Based Enrollment . . . . . . . . . . . . . . . . . . . 11
+     8.2.  Bulk Enrollment  . . . . . . . . . . . . . . . . . . . . . 11
+     8.3.  Public Key Crypto  . . . . . . . . . . . . . . . . . . . . 11
+   9.  Implementation Notes . . . . . . . . . . . . . . . . . . . . . 12
+     9.1.  Random Numbers . . . . . . . . . . . . . . . . . . . . . . 12
+   10. Open Issues  . . . . . . . . . . . . . . . . . . . . . . . . . 12
+   11. IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 12
+   12. Acknowledgments  . . . . . . . . . . . . . . . . . . . . . . . 12
+   13. Appendix A: JOSE SHA224-CFB  . . . . . . . . . . . . . . . . . 13
+     13.1. Example  . . . . . . . . . . . . . . . . . . . . . . . . . 13
+   14. References . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+     14.1. Normative References . . . . . . . . . . . . . . . . . . . 13
+     14.2. Informative References . . . . . . . . . . . . . . . . . . 14
+   Author's Address . . . . . . . . . . . . . . . . . . . . . . . . . 14
 
 
 
@@ -108,7 +108,7 @@ Table of Contents
 
 
 
-Jennings                 Expires March 27, 2013                 [Page 2]
+Jennings                 Expires March 31, 2013                 [Page 2]
 
 Internet-Draft         Transitive Trust Enrollment        September 2012
 
@@ -154,20 +154,22 @@ Internet-Draft         Transitive Trust Enrollment        September 2012
    (Message 1).  The Introducer then contacts the Transfer Agent and
    uses the OTP to tell the Transfer Agent which Controller this Device
    should use (Message 2).  The Introducer can also tell the Controller
-   the DevSecret (Message 3).  Later, the first time the Device boots up
+   the DevSecret (Message 3) so that the Controller and Device can
+   authenticate each other.  Later, the first time the Device boots up
    and gets network connectivity, it contacts the Transfer Agent, and
    the Transfer Agent tells the Device which Controller to talk to
    (Message 4).  From that point on, any time the Device boots, the
    Device can communicate directly with the Controller (Message 5).  The
    actual message flow is slightly more complicated and shown in
-   Section 2, but it uses the same basic idea as this simplified flow.
 
 
 
-Jennings                 Expires March 27, 2013                 [Page 3]
+Jennings                 Expires March 31, 2013                 [Page 3]
 
 Internet-Draft         Transitive Trust Enrollment        September 2012
 
+
+   Section 2, but it uses the same basic idea as this simplified flow.
 
    The system is designed to achieve several desirable properties:
    o  Can work for Devices with very limited memory and processing
@@ -184,19 +186,19 @@ Internet-Draft         Transitive Trust Enrollment        September 2012
    o  Works with common Firewall and NAT network topologies.
 
    One of the key steps in making this system work is getting the OTP
-   from the Device to Introducer.  The approach used here is using a QR
-   code representing a URL.  The QR code is printed on the Device and/or
-   box it comes in.
+   from the Device to the Introducer.  The approach used here is to use
+   a QR code representing the URL.  The QR code is printed on the Device
+   and/or box it comes in.
 
    The semantic level information in each message is discussed in
-   Section 2 and the syntax of the messages is discussed in Section 4
-   and Section 5.  The security properties of the system are described
-   in Section 6.
+   Section 2 and the syntax of the messages is discussed in Section 5
+   and Section 6.  The security properties of the system are described
+   in Section 7.
 
    The Device uses HTTP or COAP to communicate with the controller.  The
    Transfer Agent and Introducer use HTTP to communicate with various
    entities.  There are two bits of keying material used for
-   cryptographic operations.  Th first is the One Time Password (OTP)
+   cryptographic operations.  The first is the One Time Password (OTP)
    that is passed via QR code from the device to the Introducer then the
    Introducer uses to authorize itself to the Transfer Agent.  There is
    also a DevSecret that is used to secure communications between the
@@ -218,22 +220,19 @@ Internet-Draft         Transitive Trust Enrollment        September 2012
 
 
 
-
-
-Jennings                 Expires March 27, 2013                 [Page 4]
+Jennings                 Expires March 31, 2013                 [Page 4]
 
 Internet-Draft         Transitive Trust Enrollment        September 2012
 
 
-   TaURL  A http URL that can be used to reach the Transfer Agent.
+   TaURL  A http URL that can be used to reach the root resource on the
+      Transfer Agent.
    DevURN  A globally unique URN assigned by the Manufacturer to
-      uniquely identify this Device.  This SHOULD be one of the URNs
-      from [I-D.arkko-core-dev-urn].
+      uniquely identify this Device.
    OTP  The One Time Password created by the Manufacturer for enrolling
-      the Device.  This is TODO bytes of cryptographically random data.
+      the Device.
    DevSecret  The secret created by the Manufacturer for the device to
-      communicated with the Controller.  This is TODO bytes of
-      cryptographically random data.
+      communicated with the Controller.
    ContURL  This is a URL that provides the address to reach the
       controller.  It can have a scheme of http, https, coap, or coaps.
    DevLabel  A locally significant string that the Introducer can assign
@@ -259,8 +258,8 @@ Internet-Draft         Transitive Trust Enrollment        September 2012
    described in detail in section TODO.  This is corresponds to message
    1 in the above figure.
 
-   The Manufacturer also tells the Transfer Agent one the OTP is for the
-   Particular DevURN.  (Message 2)
+   The Manufacturer also tells the Transfer Agent the OTP and DevURN for
+   this Device.  (Message 2)
 
    When the Device is installed, the Introducer reads OTP, DevSecret,
    DeviceURN, and the URL for the Transfer Agent (TaURL) from the Device
@@ -273,15 +272,14 @@ Internet-Draft         Transitive Trust Enrollment        September 2012
 
    Next the controller uses tells the Transfer Agent the Controller URL
    to use for this DeviceURN.  This request is authenticated by the
+   Transfer Agent using the OTP (message 6).
 
 
 
-Jennings                 Expires March 27, 2013                 [Page 5]
+Jennings                 Expires March 31, 2013                 [Page 5]
 
 Internet-Draft         Transitive Trust Enrollment        September 2012
 
-
-   Transfer Agent using the OTP (message 6).
 
    Later the Device contacts the Transfer Agent and the Transfer Agent
    tells the Device the URL of the Controller to talk to (ContURL) in
@@ -298,69 +296,121 @@ Internet-Draft         Transitive Trust Enrollment        September 2012
    Device?
 
 
-3.  QR Code
+3.  Terminology
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT",
+   "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+   interpreted as described in [RFC2119].
+
+   When this draft says Base64, it means the URL safe Base64 encoding
+   from TODO.
+
+
+4.  QR Code
 
    The QR code for the Device MUST be an HTTPS URL that points at the
-   appropriate Transfer Agent.  The path MUST be formed by concatenating
-   ".well-known/tte1/setup" and the DevURN.  It MUST include the OTP as
-   a hex encoded value for a parameter called otp.  The secret MUST be
-   encoded in hex and used as the fragment identifier of the URL.  The
-   reasons the secret is put as a fragment is so that if the Introducer
-   scans the QR code and dereferences the URL with a web browser, the
-   fragment identifier is not transferred in the request to the Transfer
-   Agent.
+   appropriate Transfer Agent.  The authority MUST be formed by coping
+   the authority from the TaURL.  The path is formed by concatenating
+   ".well-known/tte1/" followed the DevURN followed by "/s".  It MUST
+   include the OTP as a Base64 encoded value for a parameter called otp.
+   The secret MUST be encoded in Base64 and used as the fragment
+   identifier of the URL.  The reasons the secret is put as a fragment
+   is so that if the Introducer scans the QR code and dereferences the
+   URL with a web browser, the fragment identifier is not transferred in
+   the request to the Transfer Agent.
 
    As an example, if the Transfer Agent's domain example.net, a valid
    URL for the QR code would be:
 
-   https://example.net/.well-known/tte1/setup/urn:dev:mac:90a2da001a0c
+   TOOD - change hex to base64
+   https://example.net/.well-known/tte1/urn:dev:mac:90a2da001a0c/s
        ?otp=88F5EC91493E473B758159C7792C#00004DCFDCDBD9F54C1B2E71FC22
 
    The QR code SHOULD use an error coding level of "H".  This would
    generate the following QR code:
 
-   QR code in ASCII art left as an exercise to
-   the reader but there is one in the PDF version.
-
-
-4.  Transfer Agent API
-
-   Note that future version of the API that needed to increment a
-   version number would do it by changing the tte1 to tte2.
 
 
 
-
-
-Jennings                 Expires March 27, 2013                 [Page 6]
+Jennings                 Expires March 31, 2013                 [Page 6]
 
 Internet-Draft         Transitive Trust Enrollment        September 2012
 
 
-4.1.  Create
+   QR code in ASCII art left as an exercise to
+   the reader but there is one in the PDF version.
+
+
+5.  Transfer Agent API
+
+   Note that future version of the API that needed to increment a
+   version number would do it by changing the tte1 to tte2.
+
+5.1.  Create
 
    The HTTP REST API allow the manufacture to tell the Transfer Device
    about the DevURN and OTP for a given device the Manufacture has
    created.
 
-   Path:  foo/bar
-      YADA
-   Methods:  foo/bar
+   Path:  .well-known/tte1/d/{DevURN}
+   Methods:  POST
    Parameters:
-      foo:  foo/bar
-      bar:  foo/bar
-   Return Values:
+      otp:  Base64 encoded version of the OTP
+   Return Values:  TODO
 
-4.1.1.  Example
+   This creates and entry for the device in the data base and stores the
+   OTP associated with this Device.  The Transfer Agent SHOULD
+   authenticated this request to authorize it.  Note the "d" in the path
+   is short for "device" and having this path segment allows for future
+   extensibility.
+
+   Example Request:
+
+   POST https://example.net/.well-known/tte1/d/urn:dev:mac:90a2da001a0c
+             ?otp=88F5EC91493E473B758159C7792C
+
+   Example Response:
 
    TODO
 
-4.2.  Setup
+5.2.  Setup
 
    Transfer Agent MUST return a web page that allows the user to enter
    the
 
-4.3.  Bind
+   Path:  .well-known/tte1/d/{DevURN}/s
+   Methods:  GET
+   Parameters:
+
+
+
+
+
+
+
+Jennings                 Expires March 31, 2013                 [Page 7]
+
+Internet-Draft         Transitive Trust Enrollment        September 2012
+
+
+      otp:  Base64 encoded version of the OTP
+   Return Values:  HTML5 web page
+
+   This MUST return a HTML web page that has a suitable user interface
+   to allow the user to enter the address of the the Controller.  It is
+   suggested the page validate this controller entry is correct using
+   the "alive" API in Section TODO.  Once the Controller is verified,
+   the web page MUST tell the Transfer Agent the Controller address
+   using the "bind" API in Section TODO and the page MUST tell the
+   controller the DevURN and DevSecret for the Device using the "add"
+   API in Section TODO.
+
+   Example Request:
+
+   GET https://example.net/.well-known/tte1/d/urn:dev:mac:90a2da001a0c/s
+             ?otp=88F5EC91493E473B758159C7792C
+
+5.3.  Bind
 
    TODO MUST be sent over TLS, and the Introducer MUST verify that the
    HTTPS certificate of the Transfer Agent matches the URL.
@@ -369,46 +419,116 @@ Internet-Draft         Transitive Trust Enrollment        September 2012
    address for a given OTP, it MUST NOT allow that OTP to be used again
    to store an address for that Device.
 
-4.4.  Fetch
-
-   TODO
-
-   Path:  foo/bar
-      YADA
-   Methods:  foo/bar
+   Path:  .well-known/tte1/d/{DevURN}/c
+   Methods:  PUT
    Parameters:
-      foo:  foo/bar
-      bar:  foo/bar
-   Return Values:
+      otp:  Base64 encoded version of the OTP
+      conturl:  URL to controller escaped as necessary for placement in
+         a URL
+   Return Values:  TODO
 
-4.4.1.  Example
+   This request using the
+
+   Example Request:
 
    TODO
+   PUT https://example.net/.well-known/tte1/d/urn:dev:mac:90a2da001a0c/c
+             ?otp=88F5EC91493E473B758159C7792C
+
+5.4.  Fetch
+
+   This API allows a Device to get the information about the controller
+   it should connect to.  It is provided in an JSON object which is
+   encrypted using the OTP.
 
 
 
 
-Jennings                 Expires March 27, 2013                 [Page 7]
+Jennings                 Expires March 31, 2013                 [Page 8]
 
 Internet-Draft         Transitive Trust Enrollment        September 2012
 
 
-5.  Controller API
+   Path:  .well-known/tte1/{DevURN}/c
+   Methods:  GET
+   Parameters:  None
+   Success Return Values:  JSON object as defined in TODO that contains
+      the encrypted URL to the Controller.
+   Error Return Values:  Returns HTTP 404 if the DevID can not be found
+      or if the controller URL has not yet been set for this DevURN.
 
-5.1.  Test Alive
+   The Transfer Agent looks up the OTP and ContURL for the requested
+   DevURN.  If the DevURN can not be found, or the ContURL has not yet
+   been set for this DevURN, then the Transfer Agent returns a HTTP 404
+   error.  If they are found, it then uses the Authenticated Encryption
+   with Associated Data (AEAD) algorithm described in Section TODO to
+   form the JSON object that is returned.  The OTP, is used as the key
+   for the AEAD, the ContURL is the input data to be encrypted, and the
+   DevURN is used as Associated Data for the authentication.
+
+   Example Request:
+
+   GET https://example.net/.well-known/tte1/d/urn:dev:mac:90a2da001a0c/c
+
+   Example Response:
 
    TODO
 
-5.2.  Add
+
+6.  Controller API
+
+   The Alive and Add API need to include a CORS (TODO REF) header to
+   allow AJAX from the Transfer Agent to call these APIs.  They MUST
+   include an HTTP header in the response that sets the header field
+   Access-Control-Allow-Origin to a value of "*".  TODO security section
+   needs to discuss implications.
+
+6.1.  Test Alive
 
    TODO
 
-5.3.  Sensor Update
+   Path:  .well-known/tte1/alive
+   Methods:  GET
+   Parameters:  None
+   Return Values:  TODO
+
+6.2.  Add
 
    TODO
 
 
-6.  Security Considerations
+
+
+
+Jennings                 Expires March 31, 2013                 [Page 9]
+
+Internet-Draft         Transitive Trust Enrollment        September 2012
+
+
+   Path:  .well-known/tte1/c/{DevURN}/k
+   Methods:  PUT
+   Parameters:
+      secret:  Base64 encoded version of the secret
+      DevLabel:
+   Return Values:  TODO
+
+6.3.  Sensor Update
+
+   TODO
+
+   Path:  .well-known/tte1/s/{DevURN}/v
+   Methods:  PUT
+   Parameters:  None
+   Body:  Encrypted SENML
+   Return Values:  TODO
+
+   The body is a Encrypted JOSE object as specified in TODO.  The
+   secrete for this Device is used as the key to encrypt the data.  The
+   DevURN is used as the associated data.  The decrypted data is a SENML
+   sensor reading for this Device as described in TODO.
+
+
+7.  Security Considerations
 
    This section has not really been started and needs lots of work.
 
@@ -434,42 +554,44 @@ Internet-Draft         Transitive Trust Enrollment        September 2012
    to indicate that it is to be used in stand-alone mode, such as a
    jumper that can be cut.
 
+
+
+Jennings                 Expires March 31, 2013                [Page 10]
+
+Internet-Draft         Transitive Trust Enrollment        September 2012
+
+
    Network topology consideration - Introducer can install firewall
    rules that allow Devices to contact Transfer Agent.
 
    Explain why works with NATs / FWs.
 
 
+8.  Variations
 
-
-
-
-Jennings                 Expires March 27, 2013                 [Page 8]
-
-Internet-Draft         Transitive Trust Enrollment        September 2012
-
-
-7.  Variations
-
-7.1.  LED Based Enrollment
+8.1.  LED Based Enrollment
 
    An alternative to QR codes is to have an LED on the Device flash out
    the relevant information to the Introducer.  The output string is
    formed by concatenating a 16-bit start of message constant value of
-   0x0001, followed by the TaURN, DevURN, OTP, DevSecret and then an
-   8-bit two's compliment checksum value computed over the previous
-   bytes, including the start of message constant.  All values are in
-   network byte order.  The resulting string is output using Non-Return-
-   to-Zero Inverted (NRZI) encoding on the LED at a baud rate of 15 bps.
-   This allows a Device such as a smartphone with video capture to
-   detect the signal and recover the information.
+   0x0001, followed by the 8 bit length of TaURN, TaURN, 8 bit length of
+   DevURN, the DevURN, 8 bit length of OTP, OTP, 8 bit length of
+   DevSect, DevSecret and then an 8-bit two's compliment checksum value
+   computed over the previous bytes, including the start of message
+   constant.  All values are in network byte order.  The resulting
+   string is output using Non-Return-to-Zero Inverted (NRZI) encoding on
+   the LED at a baud rate of 15 bps.  This allows a Device such as a
+   smartphone with video capture to detect the signal and recover the
+   information.
 
    TODO - see if this works at 30 bps.  See about encoding multiple
    intensity levels or colors in the LED.  Initial experiments indicate
    this does not work very well as auto contrast in the video camera
    tends to saturate LED range.  Would an Adler-32 checksum be better?
+   Could multiple colors of intensity improve the speed of this as this
+   is slow.
 
-7.2.  Bulk Enrollment
+8.2.  Bulk Enrollment
 
    Imagine one wants to enroll a whole box of sensors.  We should define
    some scheme where one can simply bar code something on the outside of
@@ -479,7 +601,7 @@ Internet-Draft         Transitive Trust Enrollment        September 2012
    generated using the master secret and DevURN of that Device.  Need to
    sort out details of a scheme like this.
 
-7.3.  Public Key Crypto
+8.3.  Public Key Crypto
 
    The examples here assumed that COAP was being used with DTLS in Pre
    Shared Key (PSK) mode.  It would also be possible to use DTLS with
@@ -488,7 +610,14 @@ Internet-Draft         Transitive Trust Enrollment        September 2012
    certificate or public key of Controller.
 
 
-8.  Implementation Notes
+
+
+Jennings                 Expires March 31, 2013                [Page 11]
+
+Internet-Draft         Transitive Trust Enrollment        September 2012
+
+
+9.  Implementation Notes
 
    The system described here can be implemented on a very small device.
    An implementations for Arduino with ethernet was done that includes
@@ -497,22 +626,16 @@ Internet-Draft         Transitive Trust Enrollment        September 2012
    reading a 1-wire temperature sensor.  This fit in under 32k of flash,
    and uses less than 4k or ram on an 8 bit AVR processor.  That means
    the cost for embedded processor in volume with this much flash, ram,
-
-
-
-Jennings                 Expires March 27, 2013                 [Page 9]
-
-Internet-Draft         Transitive Trust Enrollment        September 2012
-
-
    etc is very roughly $1.50 USD in 2012.  A key part of getting this to
    be small is the extremely small crypto footprint from using SHA224-
    CFB.
 
-8.1.  Random Numbers
+9.1.  Random Numbers
+
+   Note:  This section would be better in a separate draft.
 
 
-9.  Open Issues
+10.  Open Issues
 
    The references section is in serious need of work - let me know stuff
    that should be added to it.
@@ -525,12 +648,12 @@ Internet-Draft         Transitive Trust Enrollment        September 2012
    discover the ContURL?
 
 
-10.  IANA Considerations
+11.  IANA Considerations
 
-   TODO register .well-known HTTP URL
+   TODO register .well-known/tte1
 
 
-11.  Acknowledgments
+12.  Acknowledgments
 
    Some of the fundamental ideas in this draft where inspired by Max
    Pritikin's work on Transitive Trust Introduction.  Randy Bush
@@ -540,7 +663,17 @@ Internet-Draft         Transitive Trust Enrollment        September 2012
    and Zach Shelby.
 
 
-12.  Appendix A: JOSE SHA224-CFB
+
+
+
+
+
+Jennings                 Expires March 31, 2013                [Page 12]
+
+Internet-Draft         Transitive Trust Enrollment        September 2012
+
+
+13.  Appendix A: JOSE SHA224-CFB
 
    Note:  This section will eventually be moved to an experimental draft
    submitted to JOSE WG.
@@ -552,26 +685,30 @@ Internet-Draft         Transitive Trust Enrollment        September 2012
    This adds a new ENCRYPTION algorithm called sha224-cfb to
    [I-D.barnes-jose-jsms].  This takes one parameter named "n" which
    represents the nonce as defined in [HashCFB].  It is RECOMMENDED that
-   they key be 14 bytes long and the nonce is 24 bytes of data.  The
-
-
-
-Jennings                 Expires March 27, 2013                [Page 10]
-
-Internet-Draft         Transitive Trust Enrollment        September 2012
-
-
+   they key be 14 bytes long and the nonce is 24 bytes long.  The
    authentication information from the algorithm is stored in the "mac"
    field.
+
+13.1.  Example
 
    TODO example.  Todo fix to base64 instead of hex encoding.  TOOD talk
    to Barnes about keyID and case with no key wrap.  TODO - state of
    sha224-cfb and this is all experimental.
 
 
-13.  References
+   Input Key (Hex) = 88F5EC91493E473B758159C7792C
+   Input Associated Data = "urn:dev:mac:90a2da001a0c"
+   Input plain text = "http://example.com" - TODO
 
-13.1.  Normative References
+   Result  =
+   {
+     TODO
+   }
+
+
+14.  References
+
+14.1.  Normative References
 
    [HashCFB]  Forler, C., McGrew, D., Lucks, S., and J. Wenzel, "Hash-
               CFB: Authenticated Encryptions without a Block Cipher",
@@ -584,6 +721,14 @@ Internet-Draft         Transitive Trust Enrollment        September 2012
    [I-D.ietf-core-coap]
               Shelby, Z., Hartke, K., Bormann, C., and B. Frank,
               "Constrained Application Protocol (CoAP)",
+
+
+
+Jennings                 Expires March 31, 2013                [Page 13]
+
+Internet-Draft         Transitive Trust Enrollment        September 2012
+
+
               draft-ietf-core-coap-08 (work in progress), October 2011.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
@@ -593,7 +738,11 @@ Internet-Draft         Transitive Trust Enrollment        September 2012
               Masinter, L., Leach, P., and T. Berners-Lee, "Hypertext
               Transfer Protocol -- HTTP/1.1", RFC 2616, June 1999.
 
-13.2.  Informative References
+   [RFC5785]  Nottingham, M. and E. Hammer-Lahav, "Defining Well-Known
+              Uniform Resource Identifiers (URIs)", RFC 5785,
+              April 2010.
+
+14.2.  Informative References
 
    [I-D.arkko-core-dev-urn]
               Arkko, J., Jennings, C., and Z. Shelby, "Uniform Resource
@@ -604,17 +753,6 @@ Internet-Draft         Transitive Trust Enrollment        September 2012
               Jennings, C., Shelby, Z., and J. Arkko, "Media Types for
               Sensor Markup Language (SENML)", draft-jennings-senml-07
               (work in progress), October 2011.
-
-
-
-
-
-
-
-
-Jennings                 Expires March 27, 2013                [Page 11]
-
-Internet-Draft         Transitive Trust Enrollment        September 2012
 
 
 Author's Address
@@ -642,31 +780,5 @@ Author's Address
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Jennings                 Expires March 27, 2013                [Page 12]
+Jennings                 Expires March 31, 2013                [Page 14]
 

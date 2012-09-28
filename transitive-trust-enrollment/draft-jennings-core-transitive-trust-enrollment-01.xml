@@ -10,8 +10,6 @@
 <?rfc colonspace="yes" ?>
 <?rfc rfcedstyle="no" ?>
 <?rfc tocdepth="4"?>
-
-  
 <rfc category="exp"
      docName="draft-jennings-core-transitive-trust-enrollment-01"
      ipr="trust200902">
@@ -48,15 +46,16 @@
     <abstract>
       <t>This document provides a sketch of a rendezvous protocol that allows
       constrained internet devices such as sensors to securely connect into a
-      system that uses them.  The solution is based on the idea that each device
-      will be manufactured with a one time password that can be used by the
-      customer to tell the device which controller to enroll with and the device
-      is manufactured to contact a given Transfer Server that is used to tell the
-      device which system to connect to. The administrator of the device can get
-      this one time password from the device using a QR code then use that one
-      time password to to inform a Transfer Server which system the device
-      should connect to. The device will contact the Transfer Agent, get this
-      information, then connect to the appropriate system. </t>
+      system that uses them. The solution is based on the idea that each
+      device will be manufactured with a one time password that can be used by
+      the customer to tell the device which controller to enroll with and the
+      device is manufactured to contact a given Transfer Server that is used
+      to tell the device which system to connect to. The administrator of the
+      device can get this one time password from the device using a QR code
+      then use that one time password to to inform a Transfer Server which
+      system the device should connect to. The device will contact the
+      Transfer Agent, get this information, then connect to the appropriate
+      system.</t>
     </abstract>
   </front>
 
@@ -93,33 +92,34 @@
       <t>When the Manufacturer builds the Device, it includes an One Time
       Password (OTP) that the Introducer can use to enroll the Device with the
       Controller. The Manufacturer also runs a website known as the Transfer
-      Agent that knows the OTP for every device that use that Transfer
-      Agent. The Device can include the OTP as a QR code on the outside of the
+      Agent that knows the OTP for every device that use that Transfer Agent.
+      The Device can include the OTP as a QR code on the outside of the
       Device. When the Device is installed, the network administrator or
       installer uses a software agent known as the Introducer. The Introducer
-      would typically be simply a normal browser running on an smart phone with
-      a camera that can read QR codes. When the Device is installed, the
-      Introducer can scan the QR code on the Device. This QR code includes a URL
-      to the Transfer Agent along with the OTP and a separate Device secret
-      DevSecret. (Message 1). The Introducer then contacts the Transfer Agent
-      and uses the OTP to tell the Transfer Agent which Controller this Device
-      should use (Message 2). The Introducer can also tell the Controller the
-      DevSecret (Message 3) so that the Controller and Device can authenticate
-      each other.  Later, the first time the Device boots up and gets network
-      connectivity, it contacts the Transfer Agent, and the Transfer Agent tells
-      the Device which Controller to talk to (Message 4). From that point on,
-      any time the Device boots, the Device can communicate directly with the
-      Controller (Message 5). The actual message flow is slightly more
-      complicated and shown in <xref target="sec-enrollment"></xref>, but it
-      uses the same basic idea as this simplified flow.</t>
+      would typically be simply a normal browser running on an smart phone
+      with a camera that can read QR codes. When the Device is installed, the
+      Introducer can scan the QR code on the Device. This QR code includes a
+      URL to the Transfer Agent along with the OTP and a separate Device
+      secret DevSecret. (Message 1). The Introducer then contacts the Transfer
+      Agent and uses the OTP to tell the Transfer Agent which Controller this
+      Device should use (Message 2). The Introducer can also tell the
+      Controller the DevSecret (Message 3) so that the Controller and Device
+      can authenticate each other. Later, the first time the Device boots up
+      and gets network connectivity, it contacts the Transfer Agent, and the
+      Transfer Agent tells the Device which Controller to talk to (Message 4).
+      From that point on, any time the Device boots, the Device can
+      communicate directly with the Controller (Message 5). The actual message
+      flow is slightly more complicated and shown in <xref
+      target="sec-enrollment"></xref>, but it uses the same basic idea as this
+      simplified flow.</t>
 
       <t>The system is designed to achieve several desirable properties:<list
           style="symbols">
           <t>Can work for Devices with very limited memory and processing
           power.</t>
 
-          <t>Does not require network or power to be available when the Device is
-          installed.</t>
+          <t>Does not require network or power to be available when the Device
+          is installed.</t>
 
           <t>Is fairly secure (see more in the security section).</t>
 
@@ -135,10 +135,10 @@
           <t>Works with common Firewall and NAT network topologies.</t>
         </list></t>
 
-      <t>One of the key steps in making this system work is getting the OTP from
-      the Device to the Introducer. The approach used here is to use a QR code
-      representing the URL. The QR code is printed on the Device and/or box it
-      comes in. </t>
+      <t>One of the key steps in making this system work is getting the OTP
+      from the Device to the Introducer. The approach used here is to use a QR
+      code representing the URL. The QR code is printed on the Device and/or
+      box it comes in.</t>
 
       <t>The semantic level information in each message is discussed in <xref
       target="sec-enrollment"></xref> and the syntax of the messages is
@@ -146,47 +146,44 @@
       target="sec-cont-api"></xref>. The security properties of the system are
       described in <xref target="sec-sec"></xref>.</t>
 
-      <t> The Device uses HTTP or COAP to communicate with the controller. The
+      <t>The Device uses HTTP or COAP to communicate with the controller. The
       Transfer Agent and Introducer use HTTP to communicate with various
       entities. There are two bits of keying material used for cryptographic
-      operations. The first is the One Time Password (OTP) that is passed via QR
-      code from the device to the Introducer then the Introducer uses to
-      authorize itself to the Transfer Agent. There is also a DevSecret that is
-      used to secure communications between the Device and the Controller.  The
-      Transfer Agent needs a normal certificate to use HTTPS.</t>
+      operations. The first is the One Time Password (OTP) that is passed via
+      QR code from the device to the Introducer then the Introducer uses to
+      authorize itself to the Transfer Agent. There is also a DevSecret that
+      is used to secure communications between the Device and the Controller.
+      The Transfer Agent needs a normal certificate to use HTTPS.</t>
 
       <t>It is assumed that the Device may have a NAT between it and the
-      Controller and that the Device is on the inside of the NAT. The
-      Transfer Agent is assumed to be a generally accessible server on the
-      internet but the Controller and Device can be on the inside of a
-      Firewall or NAT between them and the Transfer Agent.</t>
-
+      Controller and that the Device is on the inside of the NAT. The Transfer
+      Agent is assumed to be a generally accessible server on the internet but
+      the Controller and Device can be on the inside of a Firewall or NAT
+      between them and the Transfer Agent.</t>
     </section>
 
     <section anchor="sec-enrollment" title="Enrollment Information Flow">
-    
       <t>In the following message flow we use the following definitions:<list
           style="hanging">
-         
           <t hangText="TaURL">A http URL that can be used to reach the root
           resource on the Transfer Agent.</t>
 
           <t hangText="DevURN">A globally unique URN assigned by the
           Manufacturer to uniquely identify this Device. <!-- MOVE TODO This
           SHOULD be one of the URNs from <xref
-          target="I-D.arkko-core-dev-urn"></xref>. --> </t>
+          target="I-D.arkko-core-dev-urn"></xref>. --></t>
 
           <t hangText="OTP">The One Time Password created by the Manufacturer
           for enrolling the Device. <!-- TODO MOVE This is 14 bytes of
-          cryptographically random data. --> </t>
-   
-          <t hangText="DevSecret">The secret created by the Manufacturer for the
-          device to communicated with the Controller. <!-- TODO MOVE This is 14
-          bytes of cryptographically random data.  --> </t>
+          cryptographically random data. --></t>
 
-          <t hangText="ContURL">This is a URL that provides the address to reach
-          the controller. It can have a scheme of http, https, coap, or
-          coaps. </t>
+          <t hangText="DevSecret">The secret created by the Manufacturer for
+          the device to communicated with the Controller. <!-- TODO MOVE This is 14
+          bytes of cryptographically random data.  --></t>
+
+          <t hangText="ContURL">This is a URL that provides the address to
+          reach the controller. It can have a scheme of http, https, coap, or
+          coaps.</t>
 
           <t hangText="DevLabel">A locally significant string that the
           Introducer can assign to a Device. For example, the convention for a
@@ -194,86 +191,82 @@
           string "BLD30/2/361 - Thermostat". This string is provided purely as
           a way to let the Introducer and Controller exchange information that
           may be useful for the use installing the system.</t>
-
         </list></t>
 
       <t>The information flow is illustrated in the following figure. The goal
       is get to the point where the Device knows that it should be talking to
       the Controller, the Controller knows it should be talking the Device,
-      and the Device and Controller can communicate and
-      authenticate each other using the DevSecret.</t>
+      and the Device and Controller can communicate and authenticate each
+      other using the DevSecret.</t>
 
-         <figure>
+      <figure>
         <artwork alt="Go Read the TXT version of this draft"
-                 src="tte-arrows.svg" width="100%" ><![CDATA[
+                 src="tte-arrows.svg" width="100%"><![CDATA[
 TODO
 ]]></artwork>
       </figure>
 
       <t>When the Manufacturer builds the Device, it includes a One Time
       Password (OTP) on the device, a DevSecret, and the URN for the Devices
-      (DevURN). It also creates a QR code on the device that contains the URL to
-      the transfer agent (TaURL), the URN for the Device (DevURL), the OTP, and
-      the DevSecret. This QR codes is described in detail in section TODO. This
-      is corresponds to message 1 in the above figure. </t>
+      (DevURN). It also creates a QR code on the device that contains the URL
+      to the transfer agent (TaURL), the URN for the Device (DevURL), the OTP,
+      and the DevSecret. This QR codes is described in detail in section TODO.
+      This is corresponds to message 1 in the above figure.</t>
 
-      <t> The Manufacturer also tells the Transfer Agent the OTP and DevURN for
-      this Device. (Message 2) </t>
+      <t>The Manufacturer also tells the Transfer Agent the OTP and DevURN for
+      this Device. (Message 2)</t>
 
-      <t> When the Device is installed, the Introducer reads OTP, DevSecret,
+      <t>When the Device is installed, the Introducer reads OTP, DevSecret,
       DeviceURN, and the URL for the Transfer Agent (TaURL) from the Device
-      (Message 3) by scanning the QR code on the device. If the Introducer is a
-      web browser, it will use the Transfer Agent URL to fetch an HTML user
-      interface to perform the next steps. In messages 5, the user interface on
-      the Introducer will allow the user to user to enter the URL for Controller
-      (ContURL) and an optional label for the device (DevLabel). </t>
+      (Message 3) by scanning the QR code on the device. If the Introducer is
+      a web browser, it will use the Transfer Agent URL to fetch an HTML user
+      interface to perform the next steps. In messages 5, the user interface
+      on the Introducer will allow the user to user to enter the URL for
+      Controller (ContURL) and an optional label for the device
+      (DevLabel).</t>
 
-      <t> Next the controller uses tells the Transfer Agent the Controller URL
+      <t>Next the controller uses tells the Transfer Agent the Controller URL
       to use for this DeviceURN. This request is authenticated by the Transfer
-      Agent using the OTP (message 6). </t>
+      Agent using the OTP (message 6).</t>
 
-      <t> Later the Device contacts the Transfer Agent and the Transfer Agent
-      tells the Device the URL of the Controller to talk to (ContURL) in message
-      8 and 9). From that point on, any time the Device boots, it can directly
-      communicate with the Controller (Message 10 and 11). The Controller and
-      Device both know the DevSecret for the device and can use that to
-      authenticated and encrypt communications between them. It is suggested
-      that the first thing the Controller and Device do is use this DevSecret to
-      securely replace it with some different secret that is not known to anyone
-      that saw the QR code. </t>
+      <t>Later the Device contacts the Transfer Agent and the Transfer Agent
+      tells the Device the URL of the Controller to talk to (ContURL) in
+      message 8 and 9). From that point on, any time the Device boots, it can
+      directly communicate with the Controller (Message 10 and 11). The
+      Controller and Device both know the DevSecret for the device and can use
+      that to authenticated and encrypt communications between them. It is
+      suggested that the first thing the Controller and Device do is use this
+      DevSecret to securely replace it with some different secret that is not
+      known to anyone that saw the QR code.</t>
 
-      <t> Open Issue: should we add in an additional ContSecret that is picked
-      by controller, passed to Introducer, then to Trust Agent, then to Device?
-      </t>
-
+      <t>Open Issue: should we add in an additional ContSecret that is picked
+      by controller, passed to Introducer, then to Trust Agent, then to
+      Device?</t>
     </section>
 
-  <section title="Terminology">
+    <section title="Terminology">
       <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT",
       "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
       interpreted as described in <xref target="RFC2119"></xref>.</t>
 
-      <t> When this draft says Base64, it means the URL safe Base64 encoding
+      <t>When this draft says Base64, it means the URL safe Base64 encoding
       from TODO.</t>
     </section>
 
     <section title="QR Code">
-
-      <t> The QR code for the Device MUST be an HTTPS URL that points at the
+      <t>The QR code for the Device MUST be an HTTPS URL that points at the
       appropriate Transfer Agent. The authority MUST be formed by coping the
       authority from the TaURL. The path is formed by concatenating
-      ".well-known/tte1/" followed the DevURN followed by "/s". It MUST include
-      the OTP as a Base64 encoded value for a parameter called otp.  The secret
-      MUST be encoded in Base64 and used as the fragment identifier of the
-      URL. The reasons the secret is put as a fragment is so that if the
-      Introducer scans the QR code and dereferences the URL with a web browser,
-      the fragment identifier is not transferred in the request to the Transfer
-      Agent.
-      </t>
+      ".well-known/tte1/" followed the DevURN followed by "/s". It MUST
+      include the OTP as a Base64 encoded value for a parameter called otp.
+      The secret MUST be encoded in Base64 and used as the fragment identifier
+      of the URL. The reasons the secret is put as a fragment is so that if
+      the Introducer scans the QR code and dereferences the URL with a web
+      browser, the fragment identifier is not transferred in the request to
+      the Transfer Agent.</t>
 
-      <t> As an example, if the
-      Transfer Agent's domain example.net, a valid URL for the QR code would
-      be:</t>
+      <t>As an example, if the Transfer Agent's domain example.net, a valid
+      URL for the QR code would be:</t>
 
       <figure>
         <artwork><![CDATA[
@@ -287,345 +280,310 @@ https://example.net/.well-known/tte1/urn:dev:mac:90a2da001a0c/s
       generate the following QR code:</t>
 
       <figure>
-        <artwork alt="Go Read the TXT version of this draft"
-        src="qrcode.png"><![CDATA[
+        <artwork alt="Go Read the TXT version of this draft" src="qrcode.png"><![CDATA[
 QR code in ASCII art left as an exercise to
 the reader but there is one in the PDF version.  
 ]]></artwork>
       </figure>
-
     </section>
 
-    <section title ="Transfer Agent API" anchor="sec-ta-api">
+    <section anchor="sec-ta-api" title="Transfer Agent API">
+      <t>Note that future version of the API that needed to increment a
+      version number would do it by changing the tte1 to tte2.</t>
 
-      <t> Note that future version of the API that needed to increment a version
-      number would do it by changing the tte1 to tte2. </t>
+      <section title="Create">
+        <t>The HTTP REST API allow the manufacture to tell the Transfer Device
+        about the DevURN and OTP for a given device the Manufacture has
+        created.</t>
 
-      <section title ="Create">
-        <t> The HTTP REST API allow the manufacture to tell the Transfer Device
-        about the DevURN and OTP for a given device the Manufacture has created.
-        </t>
+        <t><list style="hanging">
+            <t hangText="Path:">.well-known/tte1/d/{DevURN}</t>
 
-        <t>
-          <list  style="hanging">
-            
-            <t hangText="Path:"> .well-known/tte1/d/{DevURN} </t>
+            <t hangText="Methods:">POST</t>
 
-             <t hangText="Methods:"> POST </t>
-            
-            <t hangText="Parameters:"> 
-              <list  style="hanging">
+            <t hangText="Parameters:"><list style="hanging">
+                <t hangText="otp:">Base64 encoded version of the OTP</t>
+              </list></t>
 
-                <t hangText="otp:"> Base64 encoded version of the OTP</t>
-             
-              </list>          
-            </t>
-            
-            <t hangText="Return Values:">  TODO 
-            </t>
+            <t hangText="Return Values:">TODO</t>
+          </list></t>
 
-           </list>
-        </t>
- 
-        <t> This creates and entry for the device in the data base and stores
+        <t>This creates and entry for the device in the data base and stores
         the OTP associated with this Device. The Transfer Agent SHOULD
-        authenticated this request to authorize it. Note the "d" in the path is
-        short for "device" and having this path segment allows for future
-        extensibility. </t>
+        authenticated this request to authorize it. Note the "d" in the path
+        is short for "device" and having this path segment allows for future
+        extensibility.</t>
 
-    
-          <t> Example Request:
-          <figure>
+        <t>Example Request: <figure>
             <artwork><![CDATA[
 POST https://example.net/.well-known/tte1/d/urn:dev:mac:90a2da001a0c
           ?otp=88F5EC91493E473B758159C7792C
 ]]></artwork>
-          </figure>
-          </t>
+          </figure></t>
 
-          <t> Example Response:
-          <figure>
+        <t>Example Response: <figure>
             <artwork><![CDATA[
 TODO
 ]]></artwork>
-          </figure>
-          </t>
-
-
+          </figure></t>
       </section>
 
-      <section title ="Setup">
-        <t>  Transfer Agent MUST return a web page that allows the user to
-      enter the </t>
+      <section title="Setup">
+        <t>Transfer Agent MUST return a web page that allows the user to enter
+        the</t>
 
-      <t>
-          <list  style="hanging">
-            
-            <t hangText="Path:"> .well-known/tte1/d/{DevURN}/s </t>
+        <t><list style="hanging">
+            <t hangText="Path:">.well-known/tte1/d/{DevURN}/s</t>
 
-             <t hangText="Methods:"> GET </t>
-            
-            <t hangText="Parameters:"> 
-              <list  style="hanging">
+            <t hangText="Methods:">GET</t>
 
-                <t hangText="otp:"> Base64 encoded version of the OTP</t>
-             
-              </list>          
-            </t>
-            
-            <t hangText="Return Values:"> HTML5 web page
-            </t>
+            <t hangText="Parameters:"><list style="hanging">
+                <t hangText="otp:">Base64 encoded version of the OTP</t>
+              </list></t>
 
-           </list>
-        </t>
- 
-        <t>
-          This MUST return a HTML web page that has a suitable user interface to
-          allow the user to enter the address of the the Controller. It is
-          suggested the page validate this controller entry is correct using the
-          "alive" API in Section TODO.  Once the Controller is verified, the web
-          page MUST tell the Transfer Agent the Controller address using the
-          "bind" API in Section TODO and the page MUST tell the controller the
-          DevURN and DevSecret for the Device using the "add" API in Section
-          TODO.
-        </t>
+            <t hangText="Return Values:">HTML5 web page</t>
+          </list></t>
 
-        <t> Example Request:
-          <figure>
+        <t>This MUST return a HTML web page that has a suitable user interface
+        to allow the user to enter the address of the the Controller. It is
+        suggested the page validate this controller entry is correct using the
+        "alive" API in Section TODO. Once the Controller is verified, the web
+        page MUST tell the Transfer Agent the Controller address using the
+        "bind" API in Section TODO and the page MUST tell the controller the
+        DevURN and DevSecret for the Device using the "add" API in Section
+        TODO.</t>
+
+        <t>Example Request: <figure>
             <artwork><![CDATA[
 GET https://example.net/.well-known/tte1/d/urn:dev:mac:90a2da001a0c/s
           ?otp=88F5EC91493E473B758159C7792C
 ]]></artwork>
-          </figure>
-          </t>
-
-
-
+          </figure></t>
       </section>
 
-      <section title ="Bind">
-        <t> TODO
-        MUST be sent over TLS, and the Introducer MUST verify that the HTTPS
-        certificate of the Transfer Agent matches the URL.
-        </t>
-        
-        <t>Once the Transfer Agent has successfully stored the Controller's address
-        for a given OTP, it MUST NOT allow that OTP to be used again to store an
-        address for that Device. </t>  
+      <section title="Bind">
+        <t>TODO MUST be sent over TLS, and the Introducer MUST verify that the
+        HTTPS certificate of the Transfer Agent matches the URL.</t>
 
-        
+        <t>Once the Transfer Agent has successfully stored the Controller's
+        address for a given OTP, it MUST NOT allow that OTP to be used again
+        to store an address for that Device.</t>
 
-        <t>
-          <list  style="hanging">
-            
-            <t hangText="Path:"> .well-known/tte1/d/{DevURN}/c </t>
+        <t><list style="hanging">
+            <t hangText="Path:">.well-known/tte1/d/{DevURN}/c</t>
 
-             <t hangText="Methods:"> PUT </t>
-            
-            <t hangText="Parameters:"> 
-              <list  style="hanging">
+            <t hangText="Methods:">PUT</t>
 
-                <t hangText="otp:"> Base64 encoded version of the OTP</t>
-                <t hangText="conturl:"> URL to controller escaped as necessary for placement in a URL</t>
-             
-              </list>          
-            </t>
-            
-            <t hangText="Return Values:"> TODO
-            </t>
+            <t hangText="Parameters:"><list style="hanging">
+                <t hangText="otp:">Base64 encoded version of the OTP</t>
 
-           </list>
-        </t>
- 
-        <t>
-         This request using the 
-        </t>
+                <t hangText="conturl:">URL to controller escaped as necessary
+                for placement in a URL</t>
+              </list></t>
 
-        <t> Example Request:
-          <figure>
+            <t hangText="Return Values:">TODO</t>
+          </list></t>
+
+        <t>This request using the</t>
+
+        <t>Example Request: <figure>
             <artwork><![CDATA[
 TODO
 PUT https://example.net/.well-known/tte1/d/urn:dev:mac:90a2da001a0c/c
           ?otp=88F5EC91493E473B758159C7792C
 ]]></artwork>
-          </figure>
-          </t>
-
+          </figure></t>
       </section>
-      
-      <section title ="Fetch">
-        <t> This API allows a Device to get the information about the controller
-        it should connect to. It is provided in an JSON object which is
-        encrypted using the OTP. </t>
-        
-        <t>
-          <list  style="hanging">
-            
-            <t hangText="Path:"> .well-known/tte1/{DevURN}/c </t>
-            
-            <t hangText="Methods:"> GET </t>
-            
-            <t hangText="Parameters:"> 
-             None          
-            </t>
-            
-            <t hangText="Success Return Values:"> 
-              JSON object as defined in TODO that contains the encrypted URL to
-              the Controller.
-            </t>
 
-            <t hangText="Error Return Values:"> 
-            Returns HTTP 404 if the DevID can not be found or if the controller
-            URL has not yet been set for this DevURN.
-            </t>
-            
-          </list>
-        </t>
-   
-        <t>
-          The Transfer Agent looks up the OTP and ContURL for the requested
-          DevURN. If the DevURN can not be found, or the ContURL has not yet
-          been set for this DevURN, then the Transfer Agent returns a HTTP 404
-          error. If they are found, it then uses the Authenticated Encryption
-          with Associated Data (AEAD) algorithm described in Section TODO to
-          form the JSON object that is returned. The OTP, is used as the key for
-          the AEAD, the ContURL is the input data to be encrypted, and the
-          DevURN is used as Associated Data for the authentication.
-        </t>
+      <section title="Fetch">
+        <t>This API allows a Device to get the information about the
+        controller it should connect to. It is provided in an JSON object
+        which is encrypted using the OTP.</t>
 
-   <t> Example Request:
-          <figure>
+        <t><list style="hanging">
+            <t hangText="Path:">.well-known/tte1/{DevURN}/c</t>
+
+            <t hangText="Methods:">GET</t>
+
+            <t hangText="Parameters:">None</t>
+
+            <t hangText="Success Return Values:">JSON object as defined in
+            TODO that contains the encrypted URL to the Controller.</t>
+
+            <t hangText="Error Return Values:">Returns HTTP 404 if the DevID
+            can not be found or if the controller URL has not yet been set for
+            this DevURN.</t>
+          </list></t>
+
+        <t>The Transfer Agent looks up the OTP and ContURL for the requested
+        DevURN. If the DevURN can not be found, or the ContURL has not yet
+        been set for this DevURN, then the Transfer Agent returns a HTTP 404
+        error. If they are found, it then uses the Authenticated Encryption
+        with Associated Data (AEAD) algorithm described in Section TODO to
+        form the JSON object that is returned. The OTP, is used as the key for
+        the AEAD, the ContURL is the input data to be encrypted, and the
+        DevURN is used as Associated Data for the authentication.</t>
+
+        <t>Example Request: <figure>
             <artwork><![CDATA[
 GET https://example.net/.well-known/tte1/d/urn:dev:mac:90a2da001a0c/c
 ]]></artwork>
-          </figure>
-          </t>
+          </figure></t>
 
-          <t> Example Response:
-          <figure>
+        <t>Example Response: <figure>
             <artwork><![CDATA[
 TODO
 ]]></artwork>
-          </figure>
-          </t>
-     
-  
+          </figure></t>
       </section>
-
     </section>
 
-    <section title ="Controller API" anchor="sec-cont-api">
-
-      <t> The Alive and Add API need to include a CORS (TODO REF) header to
+    <section anchor="sec-cont-api" title="Controller API">
+      <t>The Alive and Add API need to include a CORS (TODO REF) header to
       allow AJAX from the Transfer Agent to call these APIs. They MUST include
       an HTTP header in the response that sets the header field
-      Access-Control-Allow-Origin to a value of "*". TODO security section needs
-      to discuss implications.  </t>
+      Access-Control-Allow-Origin to a value of "*". TODO security section
+      needs to discuss implications.</t>
 
-    <section title ="Test Alive">
-        <t> TODO </t>
+      <section title="Test Alive">
+        <t>TODO</t>
+
+        <t><list style="hanging">
+            <t hangText="Path:">.well-known/tte1/alive</t>
+
+            <t hangText="Methods:">GET</t>
+
+            <t hangText="Parameters:">None</t>
+
+            <t hangText="Return Values:">TODO</t>
+          </list></t>
       </section>
 
-    <section title ="Add">
-        <t> TODO </t>
+      <section title="Add">
+        <t>TODO</t>
+
+        <t><list style="hanging">
+            <t hangText="Path:">.well-known/tte1/c/{DevURN}/k</t>
+
+            <t hangText="Methods:">PUT</t>
+
+            <t hangText="Parameters:"><list style="hanging">
+                <t hangText="secret:">Base64 encoded version of the secret</t>
+
+                <t hangText="DevLabel:"></t>
+              </list></t>
+
+            <t hangText="Return Values:">TODO</t>
+          </list></t>
       </section>
 
-    <section title ="Sensor Update">
-        <t> TODO </t>
-      </section>
+      <section title="Sensor Update">
+        <t>TODO</t>
 
+        <t><list style="hanging">
+            <t hangText="Path:">.well-known/tte1/s/{DevURN}/v</t>
+
+            <t hangText="Methods:">PUT</t>
+
+            <t hangText="Parameters:">None</t>
+
+            <t hangText="Body:">Encrypted SENML</t>
+
+            <t hangText="Return Values:">TODO</t>
+          </list></t>
+
+        <t>The body is a Encrypted JOSE object as specified in TODO. The
+        secrete for this Device is used as the key to encrypt the data. The
+        DevURN is used as the associated data. The decrypted data is a SENML
+        sensor reading for this Device as described in TODO.</t>
+      </section>
     </section>
 
-
-   
     <section anchor="sec-sec" title="Security Considerations">
       <t>This section has not really been started and needs lots of work.</t>
 
-      <t>TODO - Discuss how one can replace a dead Controller with a new one in
-      an operational network. The short answer is likely that one needs to back
-      up the keys of the old Controller and move these to the new
+      <t>TODO - Discuss how one can replace a dead Controller with a new one
+      in an operational network. The short answer is likely that one needs to
+      back up the keys of the old Controller and move these to the new
       Controller.</t>
 
       <t>What happens if the OTP is stolen during Device transit? The short
       answer is that the Device is compromised at this point and needs to be
-      discarded or returned to the manufacture to get a new OTP.  The Introducer
-      needs to detect that this has happened and warn the user.</t>
+      discarded or returned to the manufacture to get a new OTP. The
+      Introducer needs to detect that this has happened and warn the user.</t>
 
       <t>There are additional concerns about Devices that may be operational
       without ever being introduced to a Controller. For example, if a light
       switch supported this protocol, but could also be used just as a stand
       alone light switch, there is a risk the OTP could be stolen by an
       attacker, with the attacker enrolling the Device to the attacker's
-      Controller. When the correct user installs the light switch, if they never
-      bother to try to Introduce it to anything, they will not detect that it
-      has been compromised. One way to mitigate this risk might be to include
-      some manual configuration on the Device to indicate that it is to be used
-      in stand-alone mode, such as a jumper that can be cut.</t>
+      Controller. When the correct user installs the light switch, if they
+      never bother to try to Introduce it to anything, they will not detect
+      that it has been compromised. One way to mitigate this risk might be to
+      include some manual configuration on the Device to indicate that it is
+      to be used in stand-alone mode, such as a jumper that can be cut.</t>
 
       <t>Network topology consideration - Introducer can install firewall
       rules that allow Devices to contact Transfer Agent.</t>
 
       <t>Explain why works with NATs / FWs.</t>
-
-     </section>
+    </section>
 
     <section title="Variations">
-
       <section title="LED Based Enrollment">
-        <t>An alternative to QR codes is to have an LED on the Device flash out
-        the relevant information to the Introducer. The output string is formed
-        by concatenating a 16-bit start of message constant value of 0x0001,
-        followed by the 8 bit length of TaURN, TaURN, 8 bit length of DevURN,
-        the DevURN, 8 bit length of OTP, OTP, 8 bit length of DevSect, DevSecret
-        and then an 8-bit two's compliment checksum value computed over the
-        previous bytes, including the start of message constant. All values are
-        in network byte order. The resulting string is output using
-        Non-Return-to-Zero Inverted (NRZI) encoding on the LED at a baud rate of
-        15 bps. This allows a Device such as a smartphone with video capture to
-        detect the signal and recover the information.</t>
+        <t>An alternative to QR codes is to have an LED on the Device flash
+        out the relevant information to the Introducer. The output string is
+        formed by concatenating a 16-bit start of message constant value of
+        0x0001, followed by the 8 bit length of TaURN, TaURN, 8 bit length of
+        DevURN, the DevURN, 8 bit length of OTP, OTP, 8 bit length of DevSect,
+        DevSecret and then an 8-bit two's compliment checksum value computed
+        over the previous bytes, including the start of message constant. All
+        values are in network byte order. The resulting string is output using
+        Non-Return-to-Zero Inverted (NRZI) encoding on the LED at a baud rate
+        of 15 bps. This allows a Device such as a smartphone with video
+        capture to detect the signal and recover the information.</t>
 
         <t>TODO - see if this works at 30 bps. See about encoding multiple
-        intensity levels or colors in the LED. Initial experiments indicate this
-        does not work very well as auto contrast in the video camera tends to
-        saturate LED range. Would an Adler-32 checksum be better? Could multiple
-        colors of intensity improve the speed of this as this is slow. </t>
+        intensity levels or colors in the LED. Initial experiments indicate
+        this does not work very well as auto contrast in the video camera
+        tends to saturate LED range. Would an Adler-32 checksum be better?
+        Could multiple colors of intensity improve the speed of this as this
+        is slow.</t>
       </section>
 
       <section title="Bulk Enrollment">
-        <t>Imagine one wants to enroll a whole box of sensors. We should define
-        some scheme where one can simply bar code something on the outside of a
-        box and can bulk enroll all the sensors in the box.  Perhaps have a
-        scheme where there is a master secret and start and end DevURN on the
-        outside of box bar code. Then the OTP for a given Device is generated
-        using the master secret and DevURN of that Device. Need to sort out
-        details of a scheme like this.</t>
+        <t>Imagine one wants to enroll a whole box of sensors. We should
+        define some scheme where one can simply bar code something on the
+        outside of a box and can bulk enroll all the sensors in the box.
+        Perhaps have a scheme where there is a master secret and start and end
+        DevURN on the outside of box bar code. Then the OTP for a given Device
+        is generated using the master secret and DevURN of that Device. Need
+        to sort out details of a scheme like this.</t>
       </section>
 
       <section title="Public Key Crypto">
         <t>The examples here assumed that COAP was being used with DTLS in Pre
         Shared Key (PSK) mode. It would also be possible to use DTLS with self
         signed certificates with a very similar flow, where the Introducer
-        provided the Transfer Agent with the finger of the certificate or public
-        key of Controller.</t>
+        provided the Transfer Agent with the finger of the certificate or
+        public key of Controller.</t>
       </section>
     </section>
 
     <section title="Implementation Notes">
-
-      <t> The system described here can be implemented on a very small
-      device. An implementations for Arduino with ethernet was done that
-      includes all the parts described here including SENML, JSON, the
-      encryption and signing, HTTP, DNS, and DHCP. It also included libraries
-      for reading a 1-wire temperature sensor. This fit in under 32k of flash,
-      and uses less than 4k or ram on an 8 bit AVR processor. That means the
-      cost for embedded processor in volume with this much flash, ram, etc is
-      very roughly $1.50 USD in 2012. A key part of getting this to be small is
-      the extremely small crypto footprint from using SHA224-CFB. </t>
+      <t>The system described here can be implemented on a very small device.
+      An implementations for Arduino with ethernet was done that includes all
+      the parts described here including SENML, JSON, the encryption and
+      signing, HTTP, DNS, and DHCP. It also included libraries for reading a
+      1-wire temperature sensor. This fit in under 32k of flash, and uses less
+      than 4k or ram on an 8 bit AVR processor. That means the cost for
+      embedded processor in volume with this much flash, ram, etc is very
+      roughly $1.50 USD in 2012. A key part of getting this to be small is the
+      extremely small crypto footprint from using SHA224-CFB.</t>
 
       <section title="Random Numbers">
-        <t> Note: This section would be better in a separate draft. </t>
+        <t>Note: This section would be better in a separate draft.</t>
       </section>
-
     </section>
 
     <section title="Open Issues">
@@ -642,7 +600,7 @@ TODO
     </section>
 
     <section title="IANA Considerations">
-      <t>TODO register .well-known/tte1 </t>
+      <t>TODO register .well-known/tte1</t>
     </section>
 
     <section title="Acknowledgments">
@@ -651,33 +609,30 @@ TODO
       crisp and excellent advice on what the security properties of the
       solutions should be. I'd like to thank the following people for review
       comments: Eric Rescorla, Jari Arkko, Lyndsay Campbell, and Zach
-      Shelby. </t>
+      Shelby.</t>
     </section>
 
-    <section title="Appendix A: JOSE SHA224-CFB" anchor="sec-sha224-cfb" >
+    <section anchor="sec-sha224-cfb" title="Appendix A: JOSE SHA224-CFB">
+      <t>Note: This section will eventually be moved to an experimental draft
+      submitted to JOSE WG.</t>
 
-      <t> Note: This section will eventually be moved to an experimental draft
-      submitted to JOSE WG. </t>
+      <t>This section describes how to create a JOSE object as described by
+      <xref target="I-D.barnes-jose-jsms"></xref> that is encrypted and signed
+      with SHA224-CFB as specified in <xref target="HashCFB"></xref>.</t>
 
-      <t> This section describes how to create a JOSE object as described by
-      <xref target="I-D.barnes-jose-jsms" /> that is encrypted and signed with
-      SHA224-CFB as specified in <xref target="HashCFB" />. </t>
+      <t>This adds a new ENCRYPTION algorithm called sha224-cfb to <xref
+      target="I-D.barnes-jose-jsms"></xref>. This takes one parameter named
+      "n" which represents the nonce as defined in <xref
+      target="HashCFB"></xref>. It is RECOMMENDED that they key be 14 bytes
+      long and the nonce is 24 bytes long. The authentication information from
+      the algorithm is stored in the "mac" field.</t>
 
-      <t> This adds a new ENCRYPTION algorithm called sha224-cfb to <xref
-      target="I-D.barnes-jose-jsms" />. This takes one parameter named "n" which
-      represents the nonce as defined in <xref target="HashCFB" />. It is
-      RECOMMENDED that they key be 14 bytes long and the nonce is 24 bytes
-      long. The authentication information from the algorithm is stored in the
-      "mac" field. </t>
+      <section title="Example">
+        <t>TODO example. Todo fix to base64 instead of hex encoding. TOOD talk
+        to Barnes about keyID and case with no key wrap. TODO - state of
+        sha224-cfb and this is all experimental.</t>
 
-      <section title="Example" >
-        
-        <t> TODO example. Todo fix to base64 instead of hex encoding. TOOD talk to
-      Barnes about keyID and case with no key wrap. TODO - state of sha224-cfb
-      and this is all experimental.  </t>
-
-      <t> 
-          <figure>
+        <t><figure>
             <artwork><![CDATA[
 Input Key (Hex) = 88F5EC91493E473B758159C7792C  
 Input Associated Data = "urn:dev:mac:90a2da001a0c"
@@ -688,50 +643,48 @@ Result  =
   TODO 
 }
 ]]></artwork>
-          </figure>
-          </t>
-
-        </section>
-
+          </figure></t>
+      </section>
     </section>
-
   </middle>
 
   <back>
     <references title="Normative References">
-
-      
       <reference anchor="HashCFB">
         <front>
-          <title abbrev="Hash-CFB">Hash-CFB: Authenticated Encryptions without a
-          Block Cipher</title>
+          <title abbrev="Hash-CFB">Hash-CFB: Authenticated Encryptions without
+          a Block Cipher</title>
 
           <author fullname="Christian Forler" initials="C." surname="Forler">
-            <organization> Bauhaus University </organization>
-            <address>
-            </address>
+            <organization>Bauhaus University</organization>
+
+            <address></address>
           </author>
+
           <author fullname="David McGrew" initials="D." surname="McGrew">
-            <organization> Cisco </organization>
-            <address>
-            </address>
+            <organization>Cisco</organization>
+
+            <address></address>
           </author>
-        <author fullname="Stefan Lucks" initials="S." surname="Lucks">
-          <organization> Bauhaus University </organization>
-          <address>
-          </address>
+
+          <author fullname="Stefan Lucks" initials="S." surname="Lucks">
+            <organization>Bauhaus University</organization>
+
+            <address></address>
           </author>
+
           <author fullname="Jakob Wenzel" initials="J." surname="Wenzel">
-            <organization> Bauhaus University </organization>
-            <address>
-            </address>
+            <organization>Bauhaus University</organization>
+
+            <address></address>
           </author>
-          
-          <date month="July" day="5" year="2012" />
+
+          <date day="5" month="July" year="2012" />
         </front>
-        <seriesInfo name="Directions in Authenticated Ciphers Workshop" value="" />
+
+        <seriesInfo name="Directions in Authenticated Ciphers Workshop"
+                    value="" />
       </reference>
-      
 
       <reference anchor="RFC2119">
         <front>
@@ -779,118 +732,208 @@ Result  =
                 type="XML" />
       </reference>
 
+      <reference anchor="RFC5785">
+        <front>
+          <title>Defining Well-Known Uniform Resource Identifiers
+          (URIs)</title>
 
+          <author fullname="M. Nottingham" initials="M." surname="Nottingham">
+            <organization></organization>
+          </author>
 
-<reference anchor='RFC5785'>
+          <author fullname="E. Hammer-Lahav" initials="E."
+                  surname="Hammer-Lahav">
+            <organization></organization>
+          </author>
 
-<front>
-<title>Defining Well-Known Uniform Resource Identifiers (URIs)</title>
-<author initials='M.' surname='Nottingham' fullname='M. Nottingham'>
-<organization /></author>
-<author initials='E.' surname='Hammer-Lahav' fullname='E. Hammer-Lahav'>
-<organization /></author>
-<date year='2010' month='April' />
-<abstract>
-<t>This memo defines a path prefix for "well-known locations", "/.well-known/",
-in selected Uniform Resource Identifier (URI)
-schemes. [STANDARDS-TRACK]</t></abstract></front>
+          <date month="April" year="2010" />
+        </front>
 
-<seriesInfo name='RFC' value='5785' />
-<format type='TXT' octets='13779' target='http://www.rfc-editor.org/rfc/rfc5785.txt' />
-</reference>
+        <seriesInfo name="RFC" value="5785" />
 
+        <format octets="13779"
+                target="http://www.rfc-editor.org/rfc/rfc5785.txt" type="TXT" />
+      </reference>
 
-<reference anchor='RFC2616'>
+      <reference anchor="RFC2616">
+        <front>
+          <title abbrev="HTTP/1.1">Hypertext Transfer Protocol --
+          HTTP/1.1</title>
 
-<front>
-<title abbrev='HTTP/1.1'>Hypertext Transfer Protocol -- HTTP/1.1</title>
-<author initials='R.' surname='Fielding' fullname='Roy T. Fielding'>
-<organization abbrev='UC Irvine'>Department of Information and Computer
-Science</organization>
-<address>
-<postal>
-<street>University of California, Irvine</street>
-<city>Irvine</city>
-<region>CA</region>
-<code>92697-3425</code></postal>
-<facsimile>+1(949)824-1715</facsimile>
-<email>fielding@ics.uci.edu</email></address></author>
-<author initials='J.' surname='Gettys' fullname='James Gettys'>
-<organization abbrev='Compaq/W3C'>World Wide Web Consortium</organization>
-<address>
-<postal>
-<street>MIT Laboratory for Computer Science, NE43-356</street>
-<street>545 Technology Square</street>
-<city>Cambridge</city>
-<region>MA</region>
-<code>02139</code></postal>
-<facsimile>+1(617)258-8682</facsimile>
-<email>jg@w3.org</email></address></author>
-<author initials='J.' surname='Mogul' fullname='Jeffrey C. Mogul'>
-<organization abbrev='Compaq'>Compaq Computer Corporation</organization>
-<address>
-<postal>
-<street>Western Research Laboratory</street>
-<street>250 University Avenue</street>
-<city>Palo Alto</city>
-<region>CA</region>
-<code>94305</code></postal>
-<email>mogul@wrl.dec.com</email></address></author>
-<author initials='H.' surname='Frystyk' fullname='Henrik Frystyk Nielsen'>
-<organization abbrev='W3C/MIT'>World Wide Web Consortium</organization>
-<address>
-<postal>
-<street>MIT Laboratory for Computer Science, NE43-356</street>
-<street>545 Technology Square</street>
-<city>Cambridge</city>
-<region>MA</region>
-<code>02139</code></postal>
-<facsimile>+1(617)258-8682</facsimile>
-<email>frystyk@w3.org</email></address></author>
-<author initials='L.' surname='Masinter' fullname='Larry Masinter'>
-<organization abbrev='Xerox'>Xerox Corporation</organization>
-<address>
-<postal>
-<street>MIT Laboratory for Computer Science, NE43-356</street>
-<street>3333 Coyote Hill Road</street>
-<city>Palo Alto</city>
-<region>CA</region>
-<code>94034</code></postal>
-<email>masinter@parc.xerox.com</email></address></author>
-<author initials='P.' surname='Leach' fullname='Paul J. Leach'>
-<organization abbrev='Microsoft'>Microsoft Corporation</organization>
-<address>
-<postal>
-<street>1 Microsoft Way</street>
-<city>Redmond</city>
-<region>WA</region>
-<code>98052</code></postal>
-<email>paulle@microsoft.com</email></address></author>
-<author initials='T.' surname='Berners-Lee' fullname='Tim Berners-Lee'>
-<organization abbrev='W3C/MIT'>World Wide Web Consortium</organization>
-<address>
-<postal>
-<street>MIT Laboratory for Computer Science, NE43-356</street>
-<street>545 Technology Square</street>
-<city>Cambridge</city>
-<region>MA</region>
-<code>02139</code></postal>
-<facsimile>+1(617)258-8682</facsimile>
-<email>timbl@w3.org</email></address></author>
-<date year='1999' month='June' />
+          <author fullname="Roy T. Fielding" initials="R." surname="Fielding">
+            <organization abbrev="UC Irvine">Department of Information and
+            Computer Science</organization>
 
+            <address>
+              <postal>
+                <street>University of California, Irvine</street>
 
+                <city>Irvine</city>
 
-</front>
+                <region>CA</region>
 
-<seriesInfo name='RFC' value='2616' />
-<format type='TXT' octets='422317' target='http://www.rfc-editor.org/rfc/rfc2616.txt' />
-<format type='PS' octets='5529857' target='http://www.rfc-editor.org/rfc/rfc2616.ps' />
-<format type='PDF' octets='550558' target='http://www.rfc-editor.org/rfc/rfc2616.pdf' />
-<format type='HTML' octets='636125' target='http://xml.resource.org/public/rfc/html/rfc2616.html' />
-<format type='XML' octets='493420' target='http://xml.resource.org/public/rfc/xml/rfc2616.xml' />
-</reference>
+                <code>92697-3425</code>
+              </postal>
 
+              <facsimile>+1(949)824-1715</facsimile>
+
+              <email>fielding@ics.uci.edu</email>
+            </address>
+          </author>
+
+          <author fullname="James Gettys" initials="J." surname="Gettys">
+            <organization abbrev="Compaq/W3C">World Wide Web
+            Consortium</organization>
+
+            <address>
+              <postal>
+                <street>MIT Laboratory for Computer Science, NE43-356</street>
+
+                <street>545 Technology Square</street>
+
+                <city>Cambridge</city>
+
+                <region>MA</region>
+
+                <code>02139</code>
+              </postal>
+
+              <facsimile>+1(617)258-8682</facsimile>
+
+              <email>jg@w3.org</email>
+            </address>
+          </author>
+
+          <author fullname="Jeffrey C. Mogul" initials="J." surname="Mogul">
+            <organization abbrev="Compaq">Compaq Computer
+            Corporation</organization>
+
+            <address>
+              <postal>
+                <street>Western Research Laboratory</street>
+
+                <street>250 University Avenue</street>
+
+                <city>Palo Alto</city>
+
+                <region>CA</region>
+
+                <code>94305</code>
+              </postal>
+
+              <email>mogul@wrl.dec.com</email>
+            </address>
+          </author>
+
+          <author fullname="Henrik Frystyk Nielsen" initials="H."
+                  surname="Frystyk">
+            <organization abbrev="W3C/MIT">World Wide Web
+            Consortium</organization>
+
+            <address>
+              <postal>
+                <street>MIT Laboratory for Computer Science, NE43-356</street>
+
+                <street>545 Technology Square</street>
+
+                <city>Cambridge</city>
+
+                <region>MA</region>
+
+                <code>02139</code>
+              </postal>
+
+              <facsimile>+1(617)258-8682</facsimile>
+
+              <email>frystyk@w3.org</email>
+            </address>
+          </author>
+
+          <author fullname="Larry Masinter" initials="L." surname="Masinter">
+            <organization abbrev="Xerox">Xerox Corporation</organization>
+
+            <address>
+              <postal>
+                <street>MIT Laboratory for Computer Science, NE43-356</street>
+
+                <street>3333 Coyote Hill Road</street>
+
+                <city>Palo Alto</city>
+
+                <region>CA</region>
+
+                <code>94034</code>
+              </postal>
+
+              <email>masinter@parc.xerox.com</email>
+            </address>
+          </author>
+
+          <author fullname="Paul J. Leach" initials="P." surname="Leach">
+            <organization abbrev="Microsoft">Microsoft
+            Corporation</organization>
+
+            <address>
+              <postal>
+                <street>1 Microsoft Way</street>
+
+                <city>Redmond</city>
+
+                <region>WA</region>
+
+                <code>98052</code>
+              </postal>
+
+              <email>paulle@microsoft.com</email>
+            </address>
+          </author>
+
+          <author fullname="Tim Berners-Lee" initials="T."
+                  surname="Berners-Lee">
+            <organization abbrev="W3C/MIT">World Wide Web
+            Consortium</organization>
+
+            <address>
+              <postal>
+                <street>MIT Laboratory for Computer Science, NE43-356</street>
+
+                <street>545 Technology Square</street>
+
+                <city>Cambridge</city>
+
+                <region>MA</region>
+
+                <code>02139</code>
+              </postal>
+
+              <facsimile>+1(617)258-8682</facsimile>
+
+              <email>timbl@w3.org</email>
+            </address>
+          </author>
+
+          <date month="June" year="1999" />
+        </front>
+
+        <seriesInfo name="RFC" value="2616" />
+
+        <format octets="422317"
+                target="http://www.rfc-editor.org/rfc/rfc2616.txt" type="TXT" />
+
+        <format octets="5529857"
+                target="http://www.rfc-editor.org/rfc/rfc2616.ps" type="PS" />
+
+        <format octets="550558"
+                target="http://www.rfc-editor.org/rfc/rfc2616.pdf" type="PDF" />
+
+        <format octets="636125"
+                target="http://xml.resource.org/public/rfc/html/rfc2616.html"
+                type="HTML" />
+
+        <format octets="493420"
+                target="http://xml.resource.org/public/rfc/xml/rfc2616.xml"
+                type="XML" />
+      </reference>
 
       <reference anchor="I-D.ietf-core-coap">
         <front>
@@ -913,8 +956,6 @@ Science</organization>
           </author>
 
           <date day="31" month="October" year="2011" />
-
-     
         </front>
 
         <seriesInfo name="Internet-Draft" value="draft-ietf-core-coap-08" />
@@ -923,35 +964,25 @@ Science</organization>
                 type="TXT" />
       </reference>
 
+      <reference anchor="I-D.barnes-jose-jsms">
+        <front>
+          <title>JavaScript Message Security Format</title>
 
+          <author fullname="Richard Barnes" initials="R" surname="Barnes">
+            <organization></organization>
+          </author>
 
+          <date day="15" month="June" year="2012" />
+        </front>
 
-<reference anchor='I-D.barnes-jose-jsms'>
-<front>
-<title>JavaScript Message Security Format</title>
+        <seriesInfo name="Internet-Draft" value="draft-barnes-jose-jsms-00" />
 
-<author initials='R' surname='Barnes' fullname='Richard Barnes'>
-    <organization />
-</author>
-
-<date month='June' day='15' year='2012' />
-
-
-</front>
-
-<seriesInfo name='Internet-Draft' value='draft-barnes-jose-jsms-00' />
-<format type='TXT'
-        target='http://www.ietf.org/internet-drafts/draft-barnes-jose-jsms-00.txt' />
-</reference>
-
-
-
-
+        <format target="http://www.ietf.org/internet-drafts/draft-barnes-jose-jsms-00.txt"
+                type="TXT" />
+      </reference>
     </references>
 
     <references title="Informative References">
-
-
       <reference anchor="I-D.arkko-core-dev-urn">
         <front>
           <title>Uniform Resource Names for Device Identifiers</title>
@@ -969,8 +1000,6 @@ Science</organization>
           </author>
 
           <date day="31" month="October" year="2011" />
-
-        
         </front>
 
         <seriesInfo name="Internet-Draft" value="draft-arkko-core-dev-urn-01" />
@@ -979,34 +1008,30 @@ Science</organization>
                 type="TXT" />
       </reference>
 
+      <reference anchor="I-D.jennings-senml">
+        <front>
+          <title>Media Types for Sensor Markup Language (SENML)</title>
 
+          <author fullname="Cullen Jennings" initials="C" surname="Jennings">
+            <organization></organization>
+          </author>
 
-<reference anchor='I-D.jennings-senml'>
-<front>
-<title>Media Types for Sensor Markup Language (SENML)</title>
+          <author fullname="Zach Shelby" initials="Z" surname="Shelby">
+            <organization></organization>
+          </author>
 
-<author initials='C' surname='Jennings' fullname='Cullen Jennings'>
-    <organization />
-</author>
+          <author fullname="Jari Arkko" initials="J" surname="Arkko">
+            <organization></organization>
+          </author>
 
-<author initials='Z' surname='Shelby' fullname='Zach Shelby'>
-    <organization />
-</author>
+          <date day="31" month="October" year="2011" />
+        </front>
 
-<author initials='J' surname='Arkko' fullname='Jari Arkko'>
-    <organization />
-</author>
+        <seriesInfo name="Internet-Draft" value="draft-jennings-senml-07" />
 
-<date month='October' day='31' year='2011' />
-
-</front>
-
-<seriesInfo name='Internet-Draft' value='draft-jennings-senml-07' />
-<format type='TXT'
-        target='http://www.ietf.org/internet-drafts/draft-jennings-senml-07.txt' />
-</reference>
-
-
+        <format target="http://www.ietf.org/internet-drafts/draft-jennings-senml-07.txt"
+                type="TXT" />
+      </reference>
     </references>
   </back>
 </rfc>
