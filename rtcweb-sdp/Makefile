@@ -1,41 +1,31 @@
 
 
 SRC  := $(wildcard draft-*.xml)
-WSRC  := $(wildcard *.wsd)
 
 HTML := $(patsubst %.xml,%.html,$(SRC))
 TXT  := $(patsubst %.xml,%.txt,$(SRC))
 DIF  := $(patsubst %.xml,%.diff.html,$(SRC))
 PDF  := $(patsubst %.xml,%.pdf,$(SRC))
-SVG  := $(patsubst %.wsd,%.svg,$(WSRC))
 
-#all: $(HTML) $(TXT) $(DIF) $(PDF)
-all: $(HTML) $(TXT) $(DIF) $(SVG)
+all: $(HTML) $(TXT) $(DIF) $(PDF)
+#all: $(HTML) $(TXT) $(DIF)
 
 clean:
-	rm -f *~ draft*.html draft*pdf draft-*txt $(SVG)
+	rm *~ draft*.html draft*pdf draft-*txt
 
 #%.html: %.xml
 #	xsltproc -o $@ rfc2629.xslt $^
 
 %.html: %.xml
-	xml2rfc $^ $@
+	/Users/ccg-cteo/HTML5/ietf/binaries/xml2rfc/xml2rfc-1.36/xml2rfc.tcl $^ $@
 
 
 %.txt: %.xml
-	xml2rfc $^ $@
+	/Users/ccg-cteo/HTML5/ietf/binaries/xml2rfc/xml2rfc-1.36/xml2rfc.tcl $^ $@
 
 %.diff.html: %.txt
-	htmlwdiff  $^.old $^ >  $@
+	/Users/ccg-cteo/HTML5/ietf/binaries/xml2rfc/xml2rfc-1.36/htmlwdiff  $^.old $^ >  $@
 
-%.pdf: %.html  $(SVG)
+%.pdf: %.html
 	wkpdf -p letter -s $^ -o $@
-
-%.svg: %.wsd
-	node ~/bin/ladder.js $^ $@
-
-%.png: %.svg
-	java -jar batik-rasterizer.jar $^ -d $@ -bg 255.255.255.255
-
-
 
