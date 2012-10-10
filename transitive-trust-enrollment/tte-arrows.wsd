@@ -2,29 +2,31 @@ set autonumber true
 set time_height 30
 set column_width 150
 
-participant Manufacturer as Manufacturer
+#participant Manufacturer as Manufacturer
+
 participant Transfer Agent as TransferAgent
 participant Device as Device
 participant Introducer as Introducer
 participant User as User
 participant Controller as Controller
  
-Manufacturer-->Device: TaURL, DevURN, OTP, secret 
-Manufacturer-->TransferAgent: DevURN, OTP
+#Manufacturer-->Device: TaURL, DevURN, OTP, secret 
+#Manufacturer-->TransferAgent: DevURN, OTP
 
-Device-->Introducer: QR with TaURL, DevID, OTP, secret
+Device-->Introducer: QR with TaURL, DevURN, OTP, secret
 
-Introducer->TransferAgent: DevID
+Introducer->TransferAgent: Get UI ( DevURN )
 
-User-->Introducer: ContURL, DevLabel
+User-->Introducer: Provide ContURL and DevLabel
 
-Introducer->TransferAgent: DevID, OTP, ContURL
+Introducer->TransferAgent: bind( DevURN, OTP, ContURL )
 
-Introducer->Controller: DevURN, secret, DevLabel
+Introducer->Controller: add( DevURN, DevSecret, DevLabel )
 
 
-Device->TransferAgent: DevURN
+Device->TransferAgent: findController( DevURN )
 TransferAgent->Device: ContURL encrpted with OTP
 
-Device->Controller: Hello authenticated with secret
-Controller->Device: HelloAck authenticated with secret
+Device->Controller: Hello authenticated with DevSecret
+Controller->Device: HelloAck authenticated with DevSecret
+

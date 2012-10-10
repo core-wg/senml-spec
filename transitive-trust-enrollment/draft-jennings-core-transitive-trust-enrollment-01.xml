@@ -39,9 +39,9 @@
       </address>
     </author>
 
-    <date day="27" month="September" year="2012" />
+    <date day="8" month="October" year="2012" />
 
-    <area>SEC</area>
+    <area>APPS</area>
 
     <abstract>
       <t>This document provides a sketch of a rendezvous protocol that allows
@@ -140,13 +140,7 @@
       code representing the URL. The QR code is printed on the Device and/or
       box it comes in.</t>
 
-      <t>The semantic level information in each message is discussed in <xref
-      target="sec-enrollment"></xref> and the syntax of the messages is
-      discussed in <xref target="sec-ta-api"></xref> and <xref
-      target="sec-cont-api"></xref>. The security properties of the system are
-      described in <xref target="sec-sec"></xref>.</t>
-
-      <t>The Device uses HTTP or COAP to communicate with the controller. The
+      <t>The Device uses HTTP or COAP <xref target="I-D.ietf-core-coap" />  to communicate with the controller. The
       Transfer Agent and Introducer use HTTP to communicate with various
       entities. There are two bits of keying material used for cryptographic
       operations. The first is the One Time Password (OTP) that is passed via
@@ -160,6 +154,13 @@
       Agent is assumed to be a generally accessible server on the internet but
       the Controller and Device can be on the inside of a Firewall or NAT
       between them and the Transfer Agent.</t>
+
+      <t>The semantic level information in each message is discussed in <xref
+      target="sec-enrollment"></xref> and the syntax of the messages is
+      discussed in <xref target="sec-ta-api"></xref> and <xref
+      target="sec-cont-api"></xref>. The security properties of the system are
+      described in <xref target="sec-sec"></xref>.</t>
+
     </section>
 
     <section anchor="sec-enrollment" title="Enrollment Information Flow">
@@ -169,9 +170,7 @@
           resource on the Transfer Agent.</t>
 
           <t hangText="DevURN">A globally unique URN assigned by the
-          Manufacturer to uniquely identify this Device. <!-- MOVE TODO This
-          SHOULD be one of the URNs from <xref
-          target="I-D.arkko-core-dev-urn"></xref>. --></t>
+          Manufacturer to uniquely identify this Device. </t>
 
           <t hangText="OTP">The One Time Password created by the Manufacturer
           for enrolling the Device. <!-- TODO MOVE This is 14 bytes of
@@ -229,6 +228,9 @@ TODO
       to use for this DeviceURN. This request is authenticated by the Transfer
       Agent using the OTP (message 6).</t>
 
+      <t> The Introduce can also tell the controller the DevSecret for this
+      Device and the optional DevLabel (message 7). </t>
+
       <t>Later the Device contacts the Transfer Agent and the Transfer Agent
       tells the Device the URL of the Controller to talk to (ContURL) in
       message 8 and 9). From that point on, any time the Device boots, it can
@@ -255,9 +257,13 @@ TODO
 
     <section title="QR Code">
       <t>The QR code for the Device MUST be an HTTPS URL that points at the
-      appropriate Transfer Agent. The authority MUST be formed by coping the
+      appropriate Transfer Agent. The authority MUST be formed by using the
       authority from the TaURL. The path is formed by concatenating
-      ".well-known/tte1/" followed the DevURN followed by "/s". It MUST
+      ".well-known/tte1/" followed the DevURN followed by "/s". 
+      The DevURN
+      SHOULD be one of the URNs defined in <xref
+      target="I-D.arkko-core-dev-urn"></xref>.
+      It MUST
       include the OTP as a Base64 encoded value for a parameter called otp.
       The secret MUST be encoded in Base64 and used as the fragment identifier
       of the URL. The reasons the secret is put as a fragment is so that if
@@ -290,6 +296,9 @@ the reader but there is one in the PDF version.
     <section anchor="sec-ta-api" title="Transfer Agent API">
       <t>Note that future version of the API that needed to increment a
       version number would do it by changing the tte1 to tte2.</t>
+
+      <t> TODO - still need to define all the error responses but basic approach
+      will be a simple JSON object with the error responses. </t>
 
       <section title="Create">
         <t>The HTTP REST API allow the manufacture to tell the Transfer Device
@@ -329,8 +338,9 @@ TODO
       </section>
 
       <section title="Setup">
-        <t>Transfer Agent MUST return a web page that allows the user to enter
-        the</t>
+        <t>Transfer Agent MUST return a web page that allows the user to provide
+        the information needed for the bind then call the bind and add
+        methods. </t>
 
         <t><list style="hanging">
             <t hangText="Path:">.well-known/tte1/d/{DevURN}/s</t>
@@ -419,7 +429,7 @@ PUT https://example.net/.well-known/tte1/d/urn:dev:mac:90a2da001a0c/c
         DevURN. If the DevURN can not be found, or the ContURL has not yet
         been set for this DevURN, then the Transfer Agent returns a HTTP 404
         error. If they are found, it then uses the Authenticated Encryption
-        with Associated Data (AEAD) algorithm described in Section TODO to
+        with Associated Data (AEAD) algorithm described in Appendix A (TODO ref) to
         form the JSON object that is returned. The OTP, is used as the key for
         the AEAD, the ContURL is the input data to be encrypted, and the
         DevURN is used as Associated Data for the authentication.</t>
@@ -446,7 +456,9 @@ TODO
       needs to discuss implications.</t>
 
       <section title="Test Alive">
-        <t>TODO</t>
+        <t>This method allows the Introducer to validate that a valid Controller
+        address has been entered. It simply returns and HTTP 200 if the
+        controller is operational. </t>
 
         <t><list style="hanging">
             <t hangText="Path:">.well-known/tte1/alive</t>
@@ -460,7 +472,9 @@ TODO
       </section>
 
       <section title="Add">
-        <t>TODO</t>
+        <t>This method is used by the Introducer to add a new Device to the
+        Controller. (Open issues - should it result in redirect to a controller
+        web page to configure device? ) </t>
 
         <t><list style="hanging">
             <t hangText="Path:">.well-known/tte1/c/{DevURN}/k</t>
@@ -468,9 +482,9 @@ TODO
             <t hangText="Methods:">PUT</t>
 
             <t hangText="Parameters:"><list style="hanging">
-                <t hangText="secret:">Base64 encoded version of the secret</t>
+                <t hangText="devSecret:">Base64 encoded version of the secret</t>
 
-                <t hangText="DevLabel:"></t>
+                <t hangText="devLabel:"></t>
               </list></t>
 
             <t hangText="Return Values:">TODO</t>
@@ -492,10 +506,10 @@ TODO
             <t hangText="Return Values:">TODO</t>
           </list></t>
 
-        <t>The body is a Encrypted JOSE object as specified in TODO. The
+        <t>The body is a Encrypted JOSE object as specified in Appendix A (TODO REF). The
         secrete for this Device is used as the key to encrypt the data. The
         DevURN is used as the associated data. The decrypted data is a SENML
-        sensor reading for this Device as described in TODO.</t>
+        sensor reading for this Device as described in <xref target="I-D.jennings-senml" />.</t>
       </section>
     </section>
 
@@ -548,7 +562,7 @@ TODO
         this does not work very well as auto contrast in the video camera
         tends to saturate LED range. Would an Adler-32 checksum be better?
         Could multiple colors of intensity improve the speed of this as this
-        is slow.</t>
+        is very slow.</t>
       </section>
 
       <section title="Bulk Enrollment">
@@ -565,7 +579,7 @@ TODO
         <t>The examples here assumed that COAP was being used with DTLS in Pre
         Shared Key (PSK) mode. It would also be possible to use DTLS with self
         signed certificates with a very similar flow, where the Introducer
-        provided the Transfer Agent with the finger of the certificate or
+        provided the Transfer Agent with the fingerprint of the certificate or
         public key of Controller.</t>
       </section>
     </section>
@@ -583,6 +597,19 @@ TODO
 
       <section title="Random Numbers">
         <t>Note: This section would be better in a separate draft.</t>
+        <t> TODO </t>
+        <t> Sources of randomness in use: 16 bytes of random data created during
+        manufacturing. A 32 bit boot counter that increments ever time the
+        device boots. 8 byte pool of random data from sensor readings. 8 byte
+        pool of random data from timing of receiving or sending network
+        packets. 8 bytes that is stored in eeprom and updated once every 24
+        hours by creating 8 bytes of random data using the random number
+        generator. Data is mixed into the pools by xor and then rotating the
+        pool. 32 bit counter of that increments each time a random number is
+        generated but resets to 0 on reboot. All the above data is used as input
+        to SHA224 to generate each random number. This effectively rekeys the
+        PRNG for every random number which is slower than other approaches but
+        did not seem to be a performance issues for these applications. </t>
       </section>
     </section>
 
