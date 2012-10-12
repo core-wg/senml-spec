@@ -39,7 +39,7 @@
       </address>
     </author>
 
-    <date day="8" month="October" year="2012" />
+    <date day="12" month="October" year="2012" />
 
     <area>APPS</area>
 
@@ -140,13 +140,17 @@
       code representing the URL. The QR code is printed on the Device and/or
       box it comes in.</t>
 
-      <t>The Device uses HTTP or COAP <xref target="I-D.ietf-core-coap" />  to communicate with the controller. The
-      Transfer Agent and Introducer use HTTP to communicate with various
-      entities. There are two bits of keying material used for cryptographic
+      <t>The Device uses HTTP or COAP <xref target="I-D.ietf-core-coap" /> 
+      to communicate with the controller.
+      The
+      Transfer Agent and Introducer use HTTPS to communicate to each other. 
+      There are three peices of keying material used for cryptographic
       operations. The first is the One Time Password (OTP) that is passed via
       QR code from the device to the Introducer then the Introducer uses to
       authorize itself to the Transfer Agent. There is also a DevSecret that
       is used to secure communications between the Device and the Controller.
+      Finally there is  a TaSecret that is used to secure
+      communications between the Device and the TransferAgent. 
       The Transfer Agent needs a normal certificate to use HTTPS.</t>
 
       <t>It is assumed that the Device may have a NAT between it and the
@@ -175,6 +179,10 @@
           <t hangText="OTP">The One Time Password created by the Manufacturer
           for enrolling the Device. <!-- TODO MOVE This is 14 bytes of
           cryptographically random data. --></t>
+
+          <t hangText="TaSecret">The secret created by the Manufacturer for the
+          Device to communicated with the TransferAgent. <!-- TODO MOVE This is
+          14 bytes of cryptographically random data. --></t>
 
           <t hangText="DevSecret">The secret created by the Manufacturer for
           the device to communicated with the Controller. <!-- TODO MOVE This is 14
@@ -205,39 +213,47 @@ TODO
 ]]></artwork>
       </figure>
 
-      <t>When the Manufacturer builds the Device, it includes a One Time
-      Password (OTP) on the device, a DevSecret, and the URN for the Devices
+      <t>
+        When the Manufacturer builds the Device,
+        it includes a TaSecret on the device, a DevSecret, and the URN for the Devices
       (DevURN). It also creates a QR code on the device that contains the URL
       to the transfer agent (TaURL), the URN for the Device (DevURL), the OTP,
       and the DevSecret. This QR codes is described in detail in section TODO.
-      This is corresponds to message 1 in the above figure.</t>
-
-      <t>The Manufacturer also tells the Transfer Agent the OTP and DevURN for
-      this Device. (Message 2)</t>
+    The Manufacturer also tells the Transfer Agent the OTP, TaSecret and DevURN for
+      this Device.</t>
 
       <t>When the Device is installed, the Introducer reads OTP, DevSecret,
       DeviceURN, and the URL for the Transfer Agent (TaURL) from the Device
-      (Message 3) by scanning the QR code on the device. If the Introducer is
+      by scanning the QR code on the device (Message 1) . If the Introducer is
       a web browser, it will use the Transfer Agent URL to fetch an HTML user
-      interface to perform the next steps. In messages 5, the user interface
+      interface to perform the next steps (Message 2). The user interface
       on the Introducer will allow the user to user to enter the URL for
       Controller (ContURL) and an optional label for the device
-      (DevLabel).</t>
+      (DevLabel) .</t>
 
       <t>Next the controller uses tells the Transfer Agent the Controller URL
       to use for this DeviceURN. This request is authenticated by the Transfer
-      Agent using the OTP (message 6).</t>
+      Agent using the OTP (Message 3).
 
-      <t> The Introduce can also tell the controller the DevSecret for this
-      Device and the optional DevLabel (message 7). </t>
+      Open Issue: right now the OTP is transfered in the request (which is over
+      HTTPS). A better design might be to have the Introducer prove procession
+      of the OTP to the Transfer Agent and not send the OTP over the wire. </t>
+
+
+      <t> The Introduce also tells the controller the DevSecret for this
+      Device and the optional DevLabel (message 4).  </t>
 
       <t>Later the Device contacts the Transfer Agent and the Transfer Agent
-      tells the Device the URL of the Controller to talk to (ContURL) in
-      message 8 and 9). From that point on, any time the Device boots, it can
-      directly communicate with the Controller (Message 10 and 11). The
-      Controller and Device both know the DevSecret for the device and can use
-      that to authenticated and encrypt communications between them. It is
-      suggested that the first thing the Controller and Device do is use this
+      tells the Device the URL of the Controller to talk to (ContURL) in message
+      6 and 6). The information from the Transfer Agent to Device is encrypted
+      and signed with the TaSecret. </t>
+
+      <t>
+      From that point on, any time the Device
+      boots, it can directly communicate with the Controller (Message 7 and
+      8). The Controller and Device both know the DevSecret for the device and
+      can use that to authenticated and encrypt communications between them. It
+      is suggested that the first thing the Controller and Device do is use this
       DevSecret to securely replace it with some different secret that is not
       known to anyone that saw the QR code.</t>
 
@@ -361,7 +377,7 @@ TODO
         page MUST tell the Transfer Agent the Controller address using the
         "bind" API in Section TODO and the page MUST tell the controller the
         DevURN and DevSecret for the Device using the "add" API in Section
-        TODO.</t>
+        TODO. MUST be done over HTTPS. </t>
 
         <t>Example Request: <figure>
             <artwork><![CDATA[
@@ -430,7 +446,7 @@ PUT https://example.net/.well-known/tte1/d/urn:dev:mac:90a2da001a0c/c
         been set for this DevURN, then the Transfer Agent returns a HTTP 404
         error. If they are found, it then uses the Authenticated Encryption
         with Associated Data (AEAD) algorithm described in Appendix A (TODO ref) to
-        form the JSON object that is returned. The OTP, is used as the key for
+        form the JSON object that is returned. The TaSecret, is used as the key for
         the AEAD, the ContURL is the input data to be encrypted, and the
         DevURN is used as Associated Data for the authentication.</t>
 
@@ -597,19 +613,17 @@ TODO
 
       <section title="Random Numbers">
         <t>Note: This section would be better in a separate draft.</t>
-        <t> TODO </t>
-        <t> Sources of randomness in use: 16 bytes of random data created during
+
+        <t> TODO - Explain how to use SHA224_DRBG as defined in NIST
+        SP800-90A. TODO REF. Store reseed counter in eeprom every 24
+        hours. Explain what to store in eeprom on reseed.  </t>
+
+        <t> Todo - Discuss sources of randomness in use: 16 bytes of random data created during
         manufacturing. A 32 bit boot counter that increments ever time the
         device boots. 8 byte pool of random data from sensor readings. 8 byte
         pool of random data from timing of receiving or sending network
-        packets. 8 bytes that is stored in eeprom and updated once every 24
-        hours by creating 8 bytes of random data using the random number
-        generator. Data is mixed into the pools by xor and then rotating the
-        pool. 32 bit counter of that increments each time a random number is
-        generated but resets to 0 on reboot. All the above data is used as input
-        to SHA224 to generate each random number. This effectively rekeys the
-        PRNG for every random number which is slower than other approaches but
-        did not seem to be a performance issues for these applications. </t>
+        packets. A 32 bit counter of that increments each time a random number
+        is generated but resets to 0 on reboot. </t>
       </section>
     </section>
 

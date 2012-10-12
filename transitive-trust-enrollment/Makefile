@@ -10,7 +10,7 @@ PDF  := $(patsubst %.xml,%.pdf,$(SRC))
 SVG  := $(patsubst %.wsd,%.svg,$(WSRC))
 
 #all: $(HTML) $(TXT) $(DIF) $(PDF)
-all: $(HTML) $(TXT) $(DIF) $(SVG)
+all: $(HTML) $(TXT) $(DIF) $(SVG) $(PDF)
 
 clean:
 	rm -f *~ draft*.html draft*pdf draft-*txt $(SVG)
