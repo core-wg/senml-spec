@@ -22,7 +22,7 @@
 <line x1="225" y1="300" x2="75" y2="300" width = "1" stroke="black"/>
 <line x1="75" y1="300" x2="82" y2="293"  transform="rotate(0, 75, 300)"  width="1"  stroke="black"/><line x1="75" y1="300" x2="82" y2="307"  transform="rotate(0, 75, 300)"  width="1"  stroke="black"/><text x="222" y="297"  font-size="15"  text-anchor="end"  transform="rotate(0, 222, 297)"  fill = "black" >5. findController( DevURN )</text>
 <line x1="75" y1="330" x2="225" y2="330" width = "1" stroke="black"/>
-<line x1="225" y1="330" x2="218" y2="323"  transform="rotate(0, 225, 330)"  width="1"  stroke="black"/><line x1="225" y1="330" x2="218" y2="337"  transform="rotate(0, 225, 330)"  width="1"  stroke="black"/><text x="78" y="327"  font-size="15"  text-anchor="start"  transform="rotate(0, 78, 327)"  fill = "black" >6. ContURL encrpted with OTP</text>
+<line x1="225" y1="330" x2="218" y2="323"  transform="rotate(0, 225, 330)"  width="1"  stroke="black"/><line x1="225" y1="330" x2="218" y2="337"  transform="rotate(0, 225, 330)"  width="1"  stroke="black"/><text x="78" y="327"  font-size="15"  text-anchor="start"  transform="rotate(0, 78, 327)"  fill = "black" >6. ContURL encrpted with TaSecret</text>
 <line x1="225" y1="360" x2="525" y2="360" width = "1" stroke="black"/>
 <line x1="525" y1="360" x2="518" y2="353"  transform="rotate(0, 525, 360)"  width="1"  stroke="black"/><line x1="525" y1="360" x2="518" y2="367"  transform="rotate(0, 525, 360)"  width="1"  stroke="black"/><text x="228" y="357"  font-size="15"  text-anchor="start"  transform="rotate(0, 228, 357)"  fill = "black" >7. Hello authenticated with DevSecret</text>
 <line x1="525" y1="390" x2="225" y2="390" width = "1" stroke="black"/>

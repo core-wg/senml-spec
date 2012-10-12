@@ -25,7 +25,7 @@ Introducer->Controller: add( DevURN, DevSecret, DevLabel )
 
 
 Device->TransferAgent: findController( DevURN )
-TransferAgent->Device: ContURL encrpted with OTP
+TransferAgent->Device: ContURL encrpted with TaSecret
 
 Device->Controller: Hello authenticated with DevSecret
 Controller->Device: HelloAck authenticated with DevSecret

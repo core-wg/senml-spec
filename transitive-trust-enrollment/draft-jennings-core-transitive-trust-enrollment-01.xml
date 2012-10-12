@@ -85,7 +85,7 @@
 
       <figure>
         <artwork alt="Go Read the TXT version of this draft"
-                 src="tte-boxes-simple.png"><![CDATA[TODO ASCII FIGURE 
+                 src="tte-boxes-simple.png"><![CDATA[TODO - See PDF Version of draft 
 ]]></artwork>
       </figure>
 
@@ -144,7 +144,7 @@
       to communicate with the controller.
       The
       Transfer Agent and Introducer use HTTPS to communicate to each other. 
-      There are three peices of keying material used for cryptographic
+      There are three pieces of keying material used for cryptographic
       operations. The first is the One Time Password (OTP) that is passed via
       QR code from the device to the Introducer then the Introducer uses to
       authorize itself to the Transfer Agent. There is also a DevSecret that
@@ -177,16 +177,13 @@
           Manufacturer to uniquely identify this Device. </t>
 
           <t hangText="OTP">The One Time Password created by the Manufacturer
-          for enrolling the Device. <!-- TODO MOVE This is 14 bytes of
-          cryptographically random data. --></t>
+          for enrolling the Device.</t>
 
           <t hangText="TaSecret">The secret created by the Manufacturer for the
-          Device to communicated with the TransferAgent. <!-- TODO MOVE This is
-          14 bytes of cryptographically random data. --></t>
+          Device to communicated with the TransferAgent.</t>
 
           <t hangText="DevSecret">The secret created by the Manufacturer for
-          the device to communicated with the Controller. <!-- TODO MOVE This is 14
-          bytes of cryptographically random data.  --></t>
+          the device to communicated with the Controller.</t>
 
           <t hangText="ContURL">This is a URL that provides the address to
           reach the controller. It can have a scheme of http, https, coap, or
@@ -209,7 +206,7 @@
       <figure>
         <artwork alt="Go Read the TXT version of this draft"
                  src="tte-arrows.svg" width="100%"><![CDATA[
-TODO
+TODO - See PDF Version of draft 
 ]]></artwork>
       </figure>
 
