@@ -11,7 +11,7 @@
 <?rfc rfcedstyle="no" ?>
 <?rfc tocdepth="4"?>
 <rfc category="exp"
-     docName="draft-jennings-core-transitive-trust-enrollment-01"
+     docName="draft-jennings-core-transitive-trust-enrollment-02"
      ipr="trust200902">
   <front>
     <title abbrev="Transitive Trust Enrollment">Transitive Trust Enrollment
@@ -39,7 +39,7 @@
       </address>
     </author>
 
-    <date day="13" month="October" year="2012" />
+    <date day="14" month="October" year="2012" />
 
     <area>APPS</area>
 
