@@ -39,7 +39,7 @@
       </address>
     </author>
 
-    <date day="12" month="October" year="2012" />
+    <date day="13" month="October" year="2012" />
 
     <area>APPS</area>
 
@@ -69,7 +69,7 @@
       working network or even power. However, these devices are being used for
       applications that are increasingly important and safety-critical, so
       they need to have reasonable security and privacy characteristics. This
-      documents specifie an enrollment system for such devices.</t>
+      documents specifies an enrollment system for such devices.</t>
 
       <t>In many systems, there is a need to configure a Device, such as a
       sensor or actuator, so that it is controlled by some specific
