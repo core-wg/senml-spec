@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="us-ascii"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
-<?rfc toc="no"?>
+<?rfc toc="yes"?>
 <?rfc tocompact="yes"?>
 <?rfc tocdepth="3"?>
 <?rfc tocindent="yes"?>
@@ -103,9 +103,25 @@ ipr="noDerivativesTrust200902">
       defines the a mapping from abstract QoS policies (media type,
       priority level) to those packet markings.</t>
     </section>
+
+    <section title="Relation to Other Standards">
+    
+      <t> This specification does not change or override the advice in any other
+      standards about setting packet marketings. It simply provides a non
+      normative summary of them and provides the context of how they relate into
+      the RTCWeb context. It also specified the requirements for the W3C API to
+      understand what it needs to control and how the control splits between
+      things the JavaScript application running in the browser can control and
+      things the browser needs to control. In some cases such as DSCP where the
+      normative RFC leaves open multiple options to choose from, this clarifies
+      which choice should be used in the RTCWeb context. </t>
+
+    </section>
+ 
     <section title="Terminology">
       <t>TODO - add the boiler plate</t>
     </section>
+
     <section title="Inputs">
       <t>The first input is the type of the media. The browser
       provides this input as it knows if the media is audio, video,
