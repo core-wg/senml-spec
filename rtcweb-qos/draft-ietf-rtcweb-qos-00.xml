@@ -10,7 +10,7 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="yes"?>
-<rfc category="std" docName="draft-jennings-rtcweb-qos-00"
+<rfc category="std" docName="draft-ietf-webrtc-qos-00"
 ipr="noDerivativesTrust200902">
   <front>
     <title abbrev="RTCWeb QoS">DSCP and other packet markings for
@@ -22,19 +22,21 @@ ipr="noDerivativesTrust200902">
         <email>sdhesika@cisco.com</email>
       </address>
     </author>
-    <author fullname="Dan Druta" initials="D." surname="Druta">
+    <author fullname="Dan Druta" initials="D." surname="Druta" role="editor">
       <organization>ATT</organization>
       <address>
         <email>dd5826@att.com</email>
       </address>
     </author>
-    <author fullname="Cullen Jennings" initials="C."
+ <!--
+   <author fullname="Cullen Jennings" initials="C."
     surname="Jennings">
       <organization>Cisco</organization>
       <address>
         <email>fluffy@cisco.com</email>
       </address>
     </author>
+-->
     <author fullname="Paul Jones" initials="P." surname="Jones">
       <organization>Cisco</organization>
       <address>
@@ -47,7 +49,7 @@ ipr="noDerivativesTrust200902">
         <email>jmpolk@cisco.com</email>
       </address>
     </author>
-    <date day="9" month="July" year="2012" />
+    <date day="14" month="October" year="2012" />
     <abstract>
       <t>Many networks, such as Service Provider and Enterprise
       networks, can provide per packet treatments based on 
@@ -258,7 +260,7 @@ ipr="noDerivativesTrust200902">
         <c>Best Effort</c>
         <c>4</c>
         <c>CL</c>
-        <c>Controlled Loat</c>
+        <c>Controlled Load</c>
         <c>AC_VI</c>
         <c>Video</c>
         <c>5</c>
@@ -298,8 +300,10 @@ ipr="noDerivativesTrust200902">
       IANA.</t>
     </section>
     <section title="Acknowledgements">
-      <t>Thanks for hints on code to do this from Paolo Severini,
-      Jim Hasselbrook, Joe Marcus, and Erik Nordmark.</t>
+      <t> Cullen Jennings was one of the authors of this text in the original
+      individual submission but was unceremoniously kicked off by the chairs when
+      it became a WG version. Thanks for hints on code to do this from Paolo
+      Severini, Jim Hasselbrook, Joe Marcus, and Erik Nordmark.</t>
     </section>
     <section title="Appendix: Code Hints ">
       <t>On windows setting the source interface works but BSD,
