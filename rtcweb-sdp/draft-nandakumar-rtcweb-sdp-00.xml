@@ -10,7 +10,7 @@
 <?rfc colonspace="yes" ?>
 <?rfc rfcedstyle="no" ?>
 <?rfc tocdepth="4"?>
-<rfc category="std" docName="draft-nandakumar-rtcweb-sdp-00"
+<rfc category="info" docName="draft-nandakumar-rtcweb-sdp-00"
      ipr="trust200902">
   <front>
     <title abbrev="SDP4WebRTC">SDP for the WebRTC</title>
@@ -65,8 +65,8 @@
       <t>The Web Real-Time Communication (WebRTC) <xref target="WEBRTC"></xref> working group is charged to provide protocol support for 
         direct interactive rich communication using audio, video and data between two peers' web browsers.
         With in the WebRTC framework, Session Description protocol (SDP) <xref target="RFC4566"></xref> is used for negotiating 
-        session capabilities between the peers.Such a negotiataion happens based on the SDP Offer/Answer exchange 
-        mechanism as described in the RFC 3264 <xref target="RFC3264"></xref>.
+        session capabilities between the peers. Such a negotiataion happens based on the SDP Offer/Answer exchange 
+        mechanism described in the RFC 3264 <xref target="RFC3264"></xref>.
       </t>
       <t>This document serves a introductory purpose in describing the role of SDP for the most common WebRTC use-cases.
       </t>
@@ -92,12 +92,12 @@
       </section>
     <section title="SDP and the WebRTC">
       <t>
-        The purpose of this section is to provide general overview of SDP and its components. 
-        For a more in-depth understanding, the readers are advised to refer to the RFC 4566 <xref target="RFC4566"></xref>. 
+        The purpose of this section is to provide a general overview of SDP and its components. 
+        For a more in-depth understanding, the readers are advised to refer to the <xref target="RFC4566"></xref>. 
       </t>
       <t>
         The Session Description Protocol (SDP) <xref target="RFC4566"></xref> describes multimedia sessions,which
-        can be audio,video, whiteboards,fax,modem, and other streams.It provides a general purpose,standard representation 
+        can be audio,video, whiteboards,fax,modem, and other streams. It provides a general purpose,standard representation 
         to describe various aspects of multimedia session such as media capabilities,transport addresses and related metadata
         in a transport agnostic manner,for the purposes of session announcement,session invitation and parameter negotiation.  
       </t>
@@ -107,7 +107,7 @@
       </t>
       <t>
         Below figure introduces high-level breakup of SDP into components that semantically describe a multimedia session,
-        in our case,say,a WebRTC session <xref target="WEBRTC"></xref>.It by no means captures everything about SDP and hence, should  
+        in our case,say,a WebRTC session <xref target="WEBRTC"></xref>. It by no means captures everything about SDP and hence, should  
         be used for informational purposes only.
       </t>
       <figure>
@@ -116,7 +116,7 @@
       </figure>
       <t>
         <xref target="WEBRTC"></xref> proposes JavaScript application to fully control the signaling plane 
-        of a multimedia session as described in the JSEP specification<xref target="JSEP"></xref>.JSEP provides mechanisms to create 
+        of a multimedia session as described in the JSEP specification <xref target="JSEP"></xref>. JSEP provides mechanisms to create 
         session characterisation and media definition information to conduct the session based on SDP exchanges.
       </t>
       <t>
@@ -170,18 +170,18 @@
         <t>MAY contain zero or more non-media data streams</t>
         <t>All the streams are secured with DTLS/SRTP</t>
         <t>ICE processing for NAT Traversal</t>
-        <t>Sessions over IPv4-only, IPv6-only , dual-stack based clients.</t>
+        <t>Sessions over IPv4-only, IPv6-only, dual-stack based clients.</t>
        </list>
      </t> 
       <t>
-        As mentioned earlier <xref target="WEBRTC"></xref>proposes using SDP based Offer/Answer model to negotiate
+        As mentioned earlier <xref target="WEBRTC"></xref> proposes using SDP based Offer/Answer model to negotiate
         multimedia session between peers' browsers
         Building on the concepts from the previous sections, the following subsections attempts to 
         describe the usage of SDP for the most common WebRTC use-cases. 
       </t>
       <t>
         In all the use-cases, Alice and Bob are assumed to be the WebRTC peers unless mentioned otherwise.
-        Pointers to appropriate RFCs and note are provided,wherever necessary,agains the SDP lines.
+        Pointers to appropriate RFCs and notes are provided, wherever necessary,agains the SDP lines.
       </t>
       <section anchor="successful-2way-savpf"
         title="Secure Two-Way Audio,Video and Data with RTCP Feedback">
@@ -201,7 +201,7 @@ end note
 ]]></artwork>
         </figure>
         <t>
-          More specifically, this use-case demonstrates following aspects of the WebRTC session 
+          More specifically, this use-case demonstrates following aspects of a WebRTC session 
           <list>
             <t>SRTP with DTLS based encryption</t>
             <t>RTP and RTCP Muxing</t>
@@ -405,7 +405,7 @@ end note
    </section> 
     <section anchor="sec.successful-session-remove-datachannel"
           title="Secure Two-way Audio,Video,Data and remove data stream">
-        <t>This scenario builds upon from the usecase in the section 4.1
+        <t>This scenario builds upon from the usecase in the section 5.1
           It extends by Alice removing data-stream once the session is in progress.
         </t>
         <figure>
@@ -587,7 +587,7 @@ Alice->Bob: Two-way Opus Audio and VP8 Video
           <c>a=rtcp-fb:99 ccm fir</c>
           <c><xref target="RFC5104"></xref></c>
           <c>m=application  0 SCTP/DTLS 5000</c>
-          <c><xref target="draft-ietf-rtcweb-data-channel"></xref> </c>
+          <c><xref target="draft-ietf-rtcweb-data-channel"></xref> Bob accepts dropping the data stream </c>
           <c>c= IN IP4 98.248.92.771</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=fmtp:5000 protocol=webrtc-datachannel;streams=16</c>
@@ -661,7 +661,7 @@ end note
           <c>a=rtcp-rsize</c>
           <c><xref target="RFC5506"></xref></c>
           <c>a=group:BUNDLE foo bar</c>
-          <c><xref target="RFC5888">Alice supports grouping of m= lines</xref></c>           
+          <c><xref target="RFC5888"></xref>Alice supports grouping of m= lines</c>           
           <c>m=audio 54609 RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
           <c>c= IN IP4 24.23.204.141</c>
@@ -779,7 +779,7 @@ end note
       <section anchor="sec.successful-session-two-video-streams"
         title="Successful One Way Session with 2 Video Streams">
         <t> In this scenario Alice and Bob engage in one-way multimedia session with
-          2 video streams, one corresponding to Alice's video and other corresponding to
+          Bob receiving two video streams, one corresponding to Alice's video and other corresponding to
           her presentation slides.
         </t>
         <figure>
@@ -795,7 +795,7 @@ note right of Bob
 Bob accepts Alice's offer
 end note
 Bob->Alice: Answer(Audio:Opus, Video1,2: VP8)
-Alice->Bob: Two-way Opus Audio, VP8 Video
+Alice->Bob: One-way Opus Audio, VP8 Video
 note right of Alice
 Bob can hear Alice and see her video feed as well
 as her presentation slides.
@@ -1213,7 +1213,7 @@ Alice->Bob: Two-way Opus Audio, VP8 Video
           In the scenario desribed below, Alice sends <xref target="RFC3264"></xref> Offer with two
           sets of media descriptions per media type.
           <list>
-            <t> One set that correponds to WebRTC Compliant RTP/SAVPF based audio and video descriptions.
+            <t> One set that correponds to <xref target="WEBRTC"></xref> Compliant RTP/SAVPF based audio and video descriptions.
             </t>
             <t> Another set with RTP/AVP based audio and video descriptions for the legacy Interop purposes. </t>
             <t>
@@ -1245,7 +1245,7 @@ note right of Bob
  Bob recognizes"legacy compliant" media description from Alice.
  and accepts the same.
 end note
-Alice->Bob: Two-way Opus Audio, H.264 Video
+Alice->Bob: Two-way Opus Audio, VP8 Video
 note right of Alice
   Session also suports RTP/RTCP Mux, RTCP feedback (nack,pli) 
 end note
@@ -1320,6 +1320,8 @@ end note
           <c><xref target="RFC4566"></xref>Alice includes RTP/AVP audio stream description</c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:7f:7d:f9:c9:c7:70:9d:1f:66:79:a8:07</c>
+          <c><xref target="RFC5245"></xref></c>
           <c>a=rtpmap:109 opus/48000</c>
           <c><xref target="draft-spittka-payload-rtp-opus"></xref></c>
           <c>a=ptime:20</c>
@@ -1342,12 +1344,14 @@ end note
           <c><xref target="RFC4566"></xref>Alice includes RTP/AVP video stream description </c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:7d:f7:c9:c7:70:9d:1f:66:79:a8:07</c>
+          <c><xref target="RFC5245"></xref></c>
           <c>a=rtpmap:120 VP8/90000</c>
           <c><xref target="draft-ietf-payload-vp8"></xref></c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref></c> 
           <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref>Alice intends to perform RTP/RTCP</c>          
+          <c><xref target="RFC5761"></xref>Alice intends to perform RTP/RTCP Mux</c>          
           <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 62445 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP  1694302207 24.23.204.141 62537 typ srflx raddr 192.168.1.4 rport 62445</c>
@@ -1617,10 +1621,10 @@ end note
       <reference anchor="RFC4796">
         <front>
           <title>The Session Description Protocol (SDP) Content Attribute</title>        
-          <author fullname="A. Duric" initials="A." surname="Duric">
+          <author fullname="J. Hautakorpi" initials="J." surname="Hautakorpi">
             <organization></organization>
           </author>
-          <author fullname="S. Andersen" initials="S." surname="Andersen">
+          <author fullname="G. Camarillo" initials="G." surname="Camarillo">
             <organization></organization>
           </author>
           <date month="February" year="2007" />
