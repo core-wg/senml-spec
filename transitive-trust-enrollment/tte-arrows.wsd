@@ -7,7 +7,7 @@ set column_width 150
 participant Transfer Agent as TransferAgent
 participant Device as Device
 participant Introducer as Introducer
-participant User as User
+#participant User as User
 participant Controller as Controller
  
 #Manufacturer-->Device: TaURL, DevURN, OTP, secret 
@@ -17,7 +17,7 @@ Device-->Introducer: QR with TaURL, DevURN, OTP, secret
 
 Introducer->TransferAgent: Get UI ( DevURN )
 
-User-->Introducer: Provide ContURL and DevLabel
+#User-->Introducer: Provide ContURL and DevLabel
 
 Introducer->TransferAgent: bind( DevURN, OTP, ContURL )
 
@@ -25,7 +25,7 @@ Introducer->Controller: add( DevURN, DevSecret, DevLabel )
 
 
 Device->TransferAgent: findController( DevURN )
-TransferAgent->Device: ContURL encrpted with OTP
+TransferAgent->Device: ContURL encrpted with TaSecret
 
 Device->Controller: Hello authenticated with DevSecret
 Controller->Device: HelloAck authenticated with DevSecret

@@ -1,35 +1,30 @@
-<svg baseProfile="full" xmlns="http://www.w3.org/2000/svg" width="825" height="570">
+<svg baseProfile="full" xmlns="http://www.w3.org/2000/svg" width="675" height="540">
 <text x="75" y="90"  font-size="15"  text-anchor="middle">Transfer Agent</text>
-<line x1="75" y1="120" x2="75" y2="450" width = "1" stroke="black"/>
-<text x="75" y="510"  font-size="15"  text-anchor="middle">Transfer Agent</text>
+<line x1="75" y1="120" x2="75" y2="420" width = "1" stroke="black"/>
+<text x="75" y="480"  font-size="15"  text-anchor="middle">Transfer Agent</text>
 <text x="225" y="90"  font-size="15"  text-anchor="middle">Device</text>
-<line x1="225" y1="120" x2="225" y2="450" width = "1" stroke="black"/>
-<text x="225" y="510"  font-size="15"  text-anchor="middle">Device</text>
+<line x1="225" y1="120" x2="225" y2="420" width = "1" stroke="black"/>
+<text x="225" y="480"  font-size="15"  text-anchor="middle">Device</text>
 <text x="375" y="90"  font-size="15"  text-anchor="middle">Introducer</text>
-<line x1="375" y1="120" x2="375" y2="450" width = "1" stroke="black"/>
-<text x="375" y="510"  font-size="15"  text-anchor="middle">Introducer</text>
-<text x="525" y="90"  font-size="15"  text-anchor="middle">User</text>
-<line x1="525" y1="120" x2="525" y2="450" width = "1" stroke="black"/>
-<text x="525" y="510"  font-size="15"  text-anchor="middle">User</text>
-<text x="675" y="90"  font-size="15"  text-anchor="middle">Controller</text>
-<line x1="675" y1="120" x2="675" y2="450" width = "1" stroke="black"/>
-<text x="675" y="510"  font-size="15"  text-anchor="middle">Controller</text>
+<line x1="375" y1="120" x2="375" y2="420" width = "1" stroke="black"/>
+<text x="375" y="480"  font-size="15"  text-anchor="middle">Introducer</text>
+<text x="525" y="90"  font-size="15"  text-anchor="middle">Controller</text>
+<line x1="525" y1="120" x2="525" y2="420" width = "1" stroke="black"/>
+<text x="525" y="480"  font-size="15"  text-anchor="middle">Controller</text>
 <line x1="225" y1="180" x2="375" y2="180" width = "1" stroke="black"/>
 <line x1="375" y1="180" x2="368" y2="173"  transform="rotate(0, 375, 180)"  width="1"  stroke="black"/><line x1="375" y1="180" x2="368" y2="187"  transform="rotate(0, 375, 180)"  width="1"  stroke="black"/><text x="228" y="177"  font-size="15"  text-anchor="start"  transform="rotate(0, 228, 177)"  fill = "black" >1. QR with TaURL, DevURN, OTP, secret</text>
 <line x1="375" y1="210" x2="75" y2="210" width = "1" stroke="black"/>
 <line x1="75" y1="210" x2="82" y2="203"  transform="rotate(0, 75, 210)"  width="1"  stroke="black"/><line x1="75" y1="210" x2="82" y2="217"  transform="rotate(0, 75, 210)"  width="1"  stroke="black"/><text x="372" y="207"  font-size="15"  text-anchor="end"  transform="rotate(0, 372, 207)"  fill = "black" >2. Get UI ( DevURN )</text>
-<line x1="525" y1="240" x2="375" y2="240" width = "1" stroke="black"/>
-<line x1="375" y1="240" x2="382" y2="233"  transform="rotate(0, 375, 240)"  width="1"  stroke="black"/><line x1="375" y1="240" x2="382" y2="247"  transform="rotate(0, 375, 240)"  width="1"  stroke="black"/><text x="522" y="237"  font-size="15"  text-anchor="end"  transform="rotate(0, 522, 237)"  fill = "black" >3. Provide ContURL and DevLabel</text>
-<line x1="375" y1="270" x2="75" y2="270" width = "1" stroke="black"/>
-<line x1="75" y1="270" x2="82" y2="263"  transform="rotate(0, 75, 270)"  width="1"  stroke="black"/><line x1="75" y1="270" x2="82" y2="277"  transform="rotate(0, 75, 270)"  width="1"  stroke="black"/><text x="372" y="267"  font-size="15"  text-anchor="end"  transform="rotate(0, 372, 267)"  fill = "black" >4. bind( DevURN, OTP, ContURL )</text>
-<line x1="375" y1="300" x2="675" y2="300" width = "1" stroke="black"/>
-<line x1="675" y1="300" x2="668" y2="293"  transform="rotate(0, 675, 300)"  width="1"  stroke="black"/><line x1="675" y1="300" x2="668" y2="307"  transform="rotate(0, 675, 300)"  width="1"  stroke="black"/><text x="378" y="297"  font-size="15"  text-anchor="start"  transform="rotate(0, 378, 297)"  fill = "black" >5. add( DevURN, DevSecret, DevLabel )</text>
-<line x1="225" y1="330" x2="75" y2="330" width = "1" stroke="black"/>
-<line x1="75" y1="330" x2="82" y2="323"  transform="rotate(0, 75, 330)"  width="1"  stroke="black"/><line x1="75" y1="330" x2="82" y2="337"  transform="rotate(0, 75, 330)"  width="1"  stroke="black"/><text x="222" y="327"  font-size="15"  text-anchor="end"  transform="rotate(0, 222, 327)"  fill = "black" >6. findController( DevURN )</text>
-<line x1="75" y1="360" x2="225" y2="360" width = "1" stroke="black"/>
-<line x1="225" y1="360" x2="218" y2="353"  transform="rotate(0, 225, 360)"  width="1"  stroke="black"/><line x1="225" y1="360" x2="218" y2="367"  transform="rotate(0, 225, 360)"  width="1"  stroke="black"/><text x="78" y="357"  font-size="15"  text-anchor="start"  transform="rotate(0, 78, 357)"  fill = "black" >7. ContURL encrpted with OTP</text>
-<line x1="225" y1="390" x2="675" y2="390" width = "1" stroke="black"/>
-<line x1="675" y1="390" x2="668" y2="383"  transform="rotate(0, 675, 390)"  width="1"  stroke="black"/><line x1="675" y1="390" x2="668" y2="397"  transform="rotate(0, 675, 390)"  width="1"  stroke="black"/><text x="228" y="387"  font-size="15"  text-anchor="start"  transform="rotate(0, 228, 387)"  fill = "black" >8. Hello authenticated with DevSecret</text>
-<line x1="675" y1="420" x2="225" y2="420" width = "1" stroke="black"/>
-<line x1="225" y1="420" x2="232" y2="413"  transform="rotate(0, 225, 420)"  width="1"  stroke="black"/><line x1="225" y1="420" x2="232" y2="427"  transform="rotate(0, 225, 420)"  width="1"  stroke="black"/><text x="672" y="417"  font-size="15"  text-anchor="end"  transform="rotate(0, 672, 417)"  fill = "black" >9. HelloAck authenticated with DevSecret</text>
+<line x1="375" y1="240" x2="75" y2="240" width = "1" stroke="black"/>
+<line x1="75" y1="240" x2="82" y2="233"  transform="rotate(0, 75, 240)"  width="1"  stroke="black"/><line x1="75" y1="240" x2="82" y2="247"  transform="rotate(0, 75, 240)"  width="1"  stroke="black"/><text x="372" y="237"  font-size="15"  text-anchor="end"  transform="rotate(0, 372, 237)"  fill = "black" >3. bind( DevURN, OTP, ContURL )</text>
+<line x1="375" y1="270" x2="525" y2="270" width = "1" stroke="black"/>
+<line x1="525" y1="270" x2="518" y2="263"  transform="rotate(0, 525, 270)"  width="1"  stroke="black"/><line x1="525" y1="270" x2="518" y2="277"  transform="rotate(0, 525, 270)"  width="1"  stroke="black"/><text x="378" y="267"  font-size="15"  text-anchor="start"  transform="rotate(0, 378, 267)"  fill = "black" >4. add( DevURN, DevSecret, DevLabel )</text>
+<line x1="225" y1="300" x2="75" y2="300" width = "1" stroke="black"/>
+<line x1="75" y1="300" x2="82" y2="293"  transform="rotate(0, 75, 300)"  width="1"  stroke="black"/><line x1="75" y1="300" x2="82" y2="307"  transform="rotate(0, 75, 300)"  width="1"  stroke="black"/><text x="222" y="297"  font-size="15"  text-anchor="end"  transform="rotate(0, 222, 297)"  fill = "black" >5. findController( DevURN )</text>
+<line x1="75" y1="330" x2="225" y2="330" width = "1" stroke="black"/>
+<line x1="225" y1="330" x2="218" y2="323"  transform="rotate(0, 225, 330)"  width="1"  stroke="black"/><line x1="225" y1="330" x2="218" y2="337"  transform="rotate(0, 225, 330)"  width="1"  stroke="black"/><text x="78" y="327"  font-size="15"  text-anchor="start"  transform="rotate(0, 78, 327)"  fill = "black" >6. ContURL encrpted with TaSecret</text>
+<line x1="225" y1="360" x2="525" y2="360" width = "1" stroke="black"/>
+<line x1="525" y1="360" x2="518" y2="353"  transform="rotate(0, 525, 360)"  width="1"  stroke="black"/><line x1="525" y1="360" x2="518" y2="367"  transform="rotate(0, 525, 360)"  width="1"  stroke="black"/><text x="228" y="357"  font-size="15"  text-anchor="start"  transform="rotate(0, 228, 357)"  fill = "black" >7. Hello authenticated with DevSecret</text>
+<line x1="525" y1="390" x2="225" y2="390" width = "1" stroke="black"/>
+<line x1="225" y1="390" x2="232" y2="383"  transform="rotate(0, 225, 390)"  width="1"  stroke="black"/><line x1="225" y1="390" x2="232" y2="397"  transform="rotate(0, 225, 390)"  width="1"  stroke="black"/><text x="522" y="387"  font-size="15"  text-anchor="end"  transform="rotate(0, 522, 387)"  fill = "black" >8. HelloAck authenticated with DevSecret</text>
 </svg>

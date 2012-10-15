@@ -7,6 +7,7 @@ Intended status: Standards Track                                D. Druta
 Expires: January 10, 2013                                            ATT
                                                              C. Jennings
                                                                 P. Jones
+                                                                 J. Polk
                                                                    Cisco
                                                             July 9, 2012
 
@@ -17,9 +18,10 @@ Expires: January 10, 2013                                            ATT
 Abstract
 
    Many networks, such as Service Provider and Enterprise networks, can
-   prioritize packets based on various Differentiated Services Code
-   Points (DSCP).  This document defines the recommended DSCP values for
-   browsers to use for various classes of traffic.
+   provide per packet treatments based on Differentiated Services Code
+   Points (DSCP) on a per hop basis.  This document defines the
+   recommended DSCP values for browsers to use for various classes of
+   traffic.
 
    This draft is a very early and far from done.  It is meant to provide
    the structure for the idea of how to do this but much discussion is
@@ -47,8 +49,6 @@ Status of this Memo
 Copyright Notice
 
    Copyright (c) 2012 IETF Trust and the persons identified as the
-   document authors.  All rights reserved.
-
 
 
 
@@ -56,6 +56,8 @@ Dhesikan, et al.        Expires January 10, 2013                [Page 1]
 
 Internet-Draft                 RTCWeb QoS                      July 2012
 
+
+   document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents
@@ -71,19 +73,26 @@ Internet-Draft                 RTCWeb QoS                      July 2012
 1.  Introduction
 
    DiffServ style packet marking can help provide QoS in some
-   environments.  There are many use cases where they do not help but
-   they seldom make things worse.  This draft proposes how browser and
-   other VoIP applications can mark packets.  This draft does not
-   contradict or redefine any advice from previous IETF RFC but simply
-   provides a simple set of recommendations for implementors based on
-   the previous RFCs.
+   environments.  There are many use cases where such marking does not
+   help, but it seldom make things worse, if packets are marked
+   appropriately.  In other words, when attempting to avoid congestion
+   by marking certain traffic flows, say all audio or all audio and
+   video, marking too many audio and/or video flows for a given
+   network's capacity can prevent desirable results.  Either too much
+   other traffic will be starved, or there is not enough capacity for
+   the preferentially marked packets (i.e., audio and/or video).
+
+   This draft proposes how browser and other VoIP applications can mark
+   packets.  This draft does not contradict or redefine any advice from
+   previous IETF RFCs but simply provides a simple set of
+   recommendations for implementors based on the previous RFCs.
 
    There are some environments where priority markings frequently help.
    These include:
 
    1.  If the congested link is the broadband uplink in a Cable or DSL
-   scenario, often residential routers/NAT support prioritization based
-   on DSCP.
+   scenario, often residential routers/NAT support preferential
+   treatment based on DSCP.
 
    2.  If the congested link is a local WiFi network, marking may help.
 
@@ -96,6 +105,14 @@ Internet-Draft                 RTCWeb QoS                      July 2012
    them to something when there is no site specific information.  This
    document describes a reasonable default set of DSCP code point values
    drawn from existing RFCs and common usage.  These code points are
+
+
+
+Dhesikan, et al.        Expires January 10, 2013                [Page 2]
+
+Internet-Draft                 RTCWeb QoS                      July 2012
+
+
    solely defaults.  Future drafts may define mechanisms for site
    specific mappings to override the values provided in this draft.
 
@@ -105,17 +122,9 @@ Internet-Draft                 RTCWeb QoS                      July 2012
    those packet markings.
 
 
-
-
-
-Dhesikan, et al.        Expires January 10, 2013                [Page 2]
-
-Internet-Draft                 RTCWeb QoS                      July 2012
-
-
 2.  Terminology
 
-   TODO add the boiler plate
+   TODO - add the boiler plate
 
 
 3.  Inputs
@@ -124,8 +133,8 @@ Internet-Draft                 RTCWeb QoS                      July 2012
    input as it knows if the media is audio, video, or data.  In this
    specification, both interactive and streaming media is included.
    They are treated in different categories as their QoS requirements
-   are slightly different.  The second input is the relative priority of
-   the stream within that session.  Many applications have multiple
+   are slightly different.  The second input is the relative treatment
+   of the stream within that session.  Many applications have multiple
    video streams and often some are more important than others.
    Javascript applications can tell the browser whether a particular
    media stream is high, medium, or low importance to the application.
@@ -145,6 +154,21 @@ Internet-Draft                 RTCWeb QoS                      July 2012
                                   Table 1
 
 
+
+
+
+
+
+
+
+
+
+
+Dhesikan, et al.        Expires January 10, 2013                [Page 3]
+
+Internet-Draft                 RTCWeb QoS                      July 2012
+
+
 5.  QCI Mapping
 
               +-----------------------+-----+--------+------+
@@ -160,14 +184,6 @@ Internet-Draft                 RTCWeb QoS                      July 2012
 
    This corresponds to the mapping provided in TODO REF which are: QCI
    values (LTE)
-
-
-
-
-Dhesikan, et al.        Expires January 10, 2013                [Page 3]
-
-Internet-Draft                 RTCWeb QoS                      July 2012
-
 
    +-------+--------+-----+--------------------------------------------+
    | Value |        |     |                     Use                    |
@@ -200,6 +216,15 @@ Internet-Draft                 RTCWeb QoS                      July 2012
 
    This corresponds to the mappings from TODO REF of
 
+
+
+
+
+Dhesikan, et al.        Expires January 10, 2013                [Page 4]
+
+Internet-Draft                 RTCWeb QoS                      July 2012
+
+
    +-------+----+------------------+---------------------+-------------+
    | Value |    |   Traffic Type   |   Access Category   | Designation |
    |       |    |                  |         (AC)        |             |
@@ -215,14 +240,6 @@ Internet-Draft                 RTCWeb QoS                      July 2012
    +-------+----+------------------+---------------------+-------------+
 
                                   Table 5
-
-
-
-
-
-Dhesikan, et al.        Expires January 10, 2013                [Page 4]
-
-Internet-Draft                 RTCWeb QoS                      July 2012
 
 
 7.  W3C API Implications
@@ -253,7 +270,15 @@ Internet-Draft                 RTCWeb QoS                      July 2012
    Thanks for hints on code to do this from Paolo Severini, Jim
    Hasselbrook, Joe Marcus, and Erik Nordmark.
 
-   remove
+
+
+
+
+
+
+Dhesikan, et al.        Expires January 10, 2013                [Page 5]
+
+Internet-Draft                 RTCWeb QoS                      July 2012
 
 
 11.  Appendix: Code Hints
@@ -261,7 +286,7 @@ Internet-Draft                 RTCWeb QoS                      July 2012
    On windows setting the source interface works but BSD, OSX, Linux use
    weak end-system model and will route out different interface if that
    looks like a better route.  (TODO - Can someone verify this with
-   specific versions)
+   specific versions?)
 
    In windows you might be able to tell something about priority of an
    interface for ICE purposes with WlanQueryInterface or GetIfTable.
@@ -273,14 +298,6 @@ Internet-Draft                 RTCWeb QoS                      July 2012
    KB248611.  TODO - add more information about what can be done for
    windows.
 
-
-
-
-Dhesikan, et al.        Expires January 10, 2013                [Page 5]
-
-Internet-Draft                 RTCWeb QoS                      July 2012
-
-
    For most unix variants, the following program can set DSCP.
 
    TODO - make this work in V6.  For v6 have a look at IPv6_TCLASS or
@@ -291,7 +308,97 @@ Internet-Draft                 RTCWeb QoS                      July 2012
 
    Example test program:
 
-   TODO - insert test program
+ #include <sys/types.h>
+ #include <sys/socket.h>
+ #include <netdb.h>
+ #include <netinet/in.h>
+ #include <arpa/inet.h>
+ #include <stdio.h>
+ #include <string.h>
+ #include <stdlib.h>
+ #include <errno.h>
+ #include <unistd.h>
+
+
+ #define MSG "Hello, World!"
+
+
+ int
+ main(void) {
+    int sock = -1;
+    struct sockaddr *local_addr = NULL;
+    struct sockaddr_in sockin, host;
+    int tos = 0x60; /* CS3 */
+
+
+
+Dhesikan, et al.        Expires January 10, 2013                [Page 6]
+
+Internet-Draft                 RTCWeb QoS                      July 2012
+
+
+    socklen_t socksiz = 0;
+    char *buffer = NULL;
+
+    sock = socket(AF_INET, SOCK_DGRAM, 0);
+    if (sock < 0) {
+       fprintf(stderr,"Error: %s\n", strerror(errno));
+       exit(-1);
+    }
+
+    memset(&sockin, 0, sizeof(sockin));
+    sockin.sin_family = PF_INET;
+    sockin.sin_addr.s_addr = inet_addr("11.1.1.1");
+    socksiz = sizeof(sockin);
+
+    local_addr = (struct sockaddr *) &sockin;
+
+    /* Set ToS/DSCP */
+    if (setsockopt(sock, IPPROTO_IP, IP_TOS,  &tos,
+                   sizeof(tos)) < 0) {
+       fprintf(stderr,"Error setting TOS: %s\n", strerror(errno));
+    }
+
+    /* Bind to a specific local address */
+    if (bind(sock, local_addr, socksiz) < 0) {
+       fprintf(stderr,"Error binding to socket: %s\n", strerror(errno));
+       close(sock); sock=-1;
+       exit(-1);
+    }
+
+    buffer = (char *) malloc(strlen(MSG) + 1);
+    if ( buffer == NULL ) {
+       fprintf(stderr,"Error allocating memory: %s\n", strerror(errno));
+       close( sock ); sock=-1;
+       exit(-1);
+    }
+    strlcpy(buffer, MSG, strlen(MSG) + 1);
+    memset(&host, 0, sizeof(host));
+    host.sin_family = PF_INET;
+    host.sin_addr.s_addr = inet_addr("10.1.1.1");
+    host.sin_port = htons(12345);
+
+    if (sendto(sock, buffer, strlen(buffer), 0,
+               (struct sockaddr *) &host, sizeof(host)) < 0) {
+       fprintf(stderr,"Error sending message: %s\n", strerror(errno));
+       close(sock); sock=-1;
+       free(buffer); buffer=NULL;
+       exit(-1);
+    }
+
+
+
+Dhesikan, et al.        Expires January 10, 2013                [Page 7]
+
+Internet-Draft                 RTCWeb QoS                      July 2012
+
+
+    free(buffer); buffer=NULL;
+    close(sock); sock=-1;
+
+    return 0;
+ }
+
 
 
 12.  Normative References
@@ -329,24 +436,29 @@ Authors' Addresses
    Email: dd5826@att.com
 
 
-
-
-
-Dhesikan, et al.        Expires January 10, 2013                [Page 6]
-
-Internet-Draft                 RTCWeb QoS                      July 2012
-
-
    Cullen Jennings
    Cisco
 
    Email: fluffy@cisco.com
 
 
+
+
+Dhesikan, et al.        Expires January 10, 2013                [Page 8]
+
+Internet-Draft                 RTCWeb QoS                      July 2012
+
+
    Paul Jones
    Cisco
 
-   Email: paulej@packetizer.com>
+   Email: paulej@packetizer.com
+
+
+   James Polk
+   Cisco
+
+   Email: jmpolk@cisco.com
 
 
 
@@ -388,5 +500,5 @@ Internet-Draft                 RTCWeb QoS                      July 2012
 
 
 
-Dhesikan, et al.        Expires January 10, 2013                [Page 7]
+Dhesikan, et al.        Expires January 10, 2013                [Page 9]
 
