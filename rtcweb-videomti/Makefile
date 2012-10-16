@@ -1,24 +1,23 @@
 
 
-SRC  := $(wildcard draft-*.nr)
+SRC  := $(wildcard draft-*.xml)
 
-HTML := $(patsubst %.nr,%.html,$(SRC))
-TXT  := $(patsubst %.nr,%.txt,$(SRC)) 
-DIF  := $(patsubst %.nr,%.diff.html,$(SRC)) 
-PDF  := $(patsubst %.nr,%.pdf,$(SRC))
+HTML := $(patsubst %.xml,%.html,$(SRC))
+TXT  := $(patsubst %.xml,%.txt,$(SRC))
+DIF  := $(patsubst %.xml,%.diff.html,$(SRC))
+PDF  := $(patsubst %.xml,%.pdf,$(SRC))
 
-all: $(TXT) $(DIF) 
+all: $(HTML) $(TXT) $(DIF) $(PDF)
+#all: $(HTML) $(TXT) $(DIF)
 
+clean:
+	rm *~ draft*.html draft*pdf draft-*txt
 
-#draft-ietf-rtcweb-jsep-00.txt: draft-ietf-rtcweb-jsep-00.nr
-#	nroff draft-ietf-rtcweb-jsep-00.nr > draft-ietf-rtcweb-jsep-00.txt 
+#%.html: %.xml
+#	xsltproc -o $@ rfc2629.xslt $^
 
 %.html: %.xml
 	xml2rfc $^ $@
-
-%.txt: %.nr
-	nroff $^ > $@
-
 
 %.txt: %.xml
 	xml2rfc $^ $@
