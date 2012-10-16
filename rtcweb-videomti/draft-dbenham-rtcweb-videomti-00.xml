@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+<?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
+<rfc category="info" docName="draft-dbenham-webrtc-videomti-00" ipr="trust200902"
+     updates="">
+  <?rfc toc="yes"?>
+
+  <?rfc tocdepth="4"?>
+
+  <?rfc symrefs="yes"?>
+
+  <?rfc sortrefs="yes" ?>
+
+  <?rfc compact="yes" ?>
+
+  <?rfc subcompact="no" ?>
+
+  <!-- for I-D stage only -->
+
+  <?rfc strict="no" ?>
+
+  <!-- as we have no 'Security Considerations' in isolation-->
+
+  <?rfc comments="yes" ?>
+
+  <?rfc inline="no" ?>
+
+  <front>
+    <title abbrev="AVC for RTCweb MTI">H.264/AVC as Mandatory-to-Implement
+    Video Codec for RTCweb</title>
+
+    <author fullname="David Benham" initials="D" surname="Benham">
+      <organization>Cisco</organization>
+
+      <address>
+        <postal>
+          <street>170 West Tasman Drive</street>
+
+          <city>San Jose, CA 95134</city>
+
+          <country>United States</country>
+        </postal>
+
+        <email>dbenham@cisco.com</email>
+      </address>
+    </author>
+
+  <author fullname="Cullen" initials="C" surname="Cullen Jennings">
+      <organization>Cisco</organization>
+
+      <address>
+        <postal>
+          <street>170 West Tasman Drive</street>
+
+          <city>San Jose, CA 95134</city>
+
+          <country>United States</country>
+        </postal>
+
+        <email>fluffy@cisco.com</email>
+      </address>
+    </author>
+
+    <author fullname="David Singer" initials="D" surname="Singer">
+      <organization>Apple</organization>
+
+      <address>
+        <postal>
+         
+        </postal>
+
+        <email>singer@apple.com</email>
+      </address>
+    </author>
+
+    <author fullname="Krasimir Kolarov" initials="K" surname="Kolarov">
+      <organization>Apple</organization>
+
+      <address>
+        <postal>
+         
+        </postal>
+
+        <email>kolarov@apple.com</email>
+      </address>
+    </author>
+
+
+
+    <date/>
+
+    <area>Real-time Applications and Infrastructure</area>
+
+    <workgroup>RTCweb Working Group</workgroup>
+
+    <abstract>
+      <t>This memo proposes that H.264/AVC be selected as the
+      mandatory-to-implement (MTI) video codec for RTCweb due to is Adoption
+      Advantage, Quality-Power-Bandwidth advantage, Hardware Acceleration
+      Advantage and Well-established IPR Status.</t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section title="Introduction">
+      <t>This memo offers a proposal that H.264/AVC be selected as the
+      mandatory-to-implement (MTI) video codec for RTCweb. This document
+      asserts that the constrained baseline profile is the likely best choice
+      and uses it to make certain points. However, the author(s) are open to
+      assertions that other H.264/AVC profile(s) should be additionally
+      mandated or recommended.</t>
+
+      <t>This document is not intended for publication as an RFC.</t>
+    </section>
+
+    <section title="Terminology">
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+      "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+      document are to be interpreted as described in RFC2119>.</t>
+    </section>
+
+    <section anchor="Adoption" title="H.264/AVC Adoption Advantage ">
+      <t>H.264/AVC is widely used for enterprise videoconferencing equipment
+      and services. High-definition (HD), web videoconferencing commonly uses
+      H.264/AVC as well, including Skype.</t>
+
+      <t>H.264/AVC is becoming the de-facto standard for the Mobile web and
+      3GPP has recommended the H.264/AVC <xref target="AVC01"></xref> codec
+      along with the mandatory H.263. Apple’s iOS, Google's Android, RIM’s
+      Blackberry and Ericsson’s mobile device platforms all support
+      H.264/AVC.</t>
+
+      <t>Web (entertainment) video is dominated by H.264/AVC, and increasingly
+      “multi-screen/BYOD” video services from cable companies and telco’s are
+      using H.264/AVC over their private web video networks</t>
+
+      <t>Thus, HTML5 browsers will likely need to have the H.264/AVC codec
+      regardless to remain popular. Internet Explorer and Safari appear to be
+      including H.264/AVC in the set of codecs they ship regardless of the
+      RTCweb video codec MTI decision. And Google’s Chrome continues shipping
+      with H.264/AVC today.</t>
+
+      <t>We assert that the lack of clearly indicating that H.264/AVC was the
+      mandatory video codec for HTML5’s video tag has created uncertainty and
+      increased costs for those deploying sites or developing applications
+      trying to cover multiple possible codecs instead. </t>
+
+      <t>Mandating the H.264/AVC codec for RTCweb is in the best interest of
+      rapid adoption given it is already pervasive deployed and used in
+      real-time communications and web video applications. </t>
+    </section>
+
+    <section anchor="Quality-Power-Bandwidth"
+             title="H.264/AVC has the Quality-Power-Bandwidth advantage">
+      <t>First, we believe that mobile devices will be important to the
+      success of RTCweb going forward. They generally have slower CPUs than
+      desktop computers and maximizing battery life is extremely important.
+      </t>
+
+      <t>Second, we assert that the three (3) most important factors to
+      analyze in that context are a) the user experience or perceptual quality
+      of the resultant video images, b) the amount of compute or CPU power
+      applied to do the compression - this correlates with electrical power
+      consumption, and c) the amount of bandwidth available or consumed. All
+      three factors must be considered together as they are interrelated. </t>
+
+      <t>For a given bitrate, a codec can improve the quality by doing more
+      computation, but that will drain power quicker. While 4G/LTE brings more
+      bandwidth to the equation, error properties of the medium and/or mobile
+      data transmission costs will still put pressure on implementers to
+      minimize bandwidth utilized by RTCweb streams. Throwing bandwidth at the
+      problem is not a good assumption to improve quality while keeping CPU
+      power constant.</t>
+
+      <t>We quickly captured examples of leading H.264/AVC and VP8 products on
+      popular mobile and desktop platforms and came to the conclusion that
+      H.264 looks better than VP8 when both are run on same platform at the
+      same bitrates.</t>
+
+      <t>It is very hard in making tests to try and decide what parameters to
+      use for codecs in a way that does not bias tests. So instead, we choose
+      the "best in class" products that we could find to demonstrate
+      performance comparisons.</t>
+
+      <t>Captures of Mobile Tests;</t>
+
+
+      <t>FaceTime using H.264 on an iPhone to linphone on a fast desktop PC.
+     http://dl.dropbox.com/u/17089001/video-samples/facetime.mov </t>
+
+
+      <t>Bria using VP8 on iPhone to linphone on a fast desktop PC. 
+http://dl.dropbox.com/u/17089001/video-samples/iphone-vp8-vs-iphone-264.mov </t>
+
+      <t>Bria using VP8 on Galaxy Nexus to linphone on a fast desktop PC.
+http://dl.dropbox.com/u/17089001/video-samples/galaxy-nexus.mov </t>
+
+      <t>Shown side-by-side, Bria using VP8 on iPhone (left) and FaceTime with
+      H.264/AVC on iPhone (right), going to linphone and FaceTime.
+http://dl.dropbox.com/u/17089001/video-samples/iphone-vp8-vs-iphone-264.mov </t>
+
+      <t>Captures of Desktop-only Tests;</t>
+
+      <t>FaceTime H.264/AVC from a fast notebook computer to fast desktop.
+      
+http://dl.dropbox.com/u/17089001/video-samples/facetime-264-desktop.mov </t>
+
+      <t>-or-
+http://dl.dropbox.com/u/17089001/video-samples/facetime-264-desktop.webm </t>
+
+      <t>Chrome with VP8 from same fast notebook computer to same fast
+      desktop.
+http://dl.dropbox.com/u/17089001/video-samples/chrome-vp8-desktop.mov </t>
+
+      <t>-or-
+http://dl.dropbox.com/u/17089001/video-samples/chrome-vp8-desktop.webm </t>
+
+      <t>Two fast notebook computers - one running Chrome and the other
+      running Fictive - both sending to the same desktop computer shown side
+      by side.
+http://dl.dropbox.com/u/17089001/video-samples/chrome_and_factime_desktop.mov></t>
+
+      <t>-or-
+http://dl.dropbox.com/u/17089001/video-samples/chrome_and_factime_desktop.webm</t>
+
+
+      <t>The tests and resultant captures were done on a fast wireless network
+      with no other traffic on the wireless network, with the exception of the
+      side by side demo. For the sides by side demo above, both devices were
+      on the same WiFi network but did not seem to be having any losses or
+      coming close to filling the network. The results in the side by side
+      seemed to be the same as when there were run independently so we do not
+      believe that having them both on the same network impacted results. </t>
+
+      <t>Of course, these results do not preclude implementations improving in
+      the future, but this gives some idea of the current state of the art.
+      </t>
+
+      <t>Our conclusion is that H.264/AVC is best at delivering on the
+      Quality-Power-Bandwidth optimization. </t>
+    </section>
+
+    <section anchor="HardwareAcceleration"
+             title="Hardware Acceleration Advantage">
+      <t>H.264/AVC has a several year head start on hardware/DSP optimization
+      and is already deployed pervasively. For handheld mobile phones,
+      hardware acceleration is a must to maximize Quality-Power-Bandwidth.
+      </t>
+
+      <t>H.264/AVC hardware is already incredibly inexpensive. Some of the low
+      end consumer cameras will record H.264/AVC video, such as this sub-100
+      US dollar (&lt;$100) Powershot A810 from Cannon<xref
+      target="AVC07">.</xref></t>
+    </section>
+
+    <section anchor="IPRstatus"
+             title="Well-Established IPR Status for H.264/AVC">
+      <section anchor="DisclosedPatents"
+               title="Disclosed and Publicly Available Lists of Patents">
+        <t>As typical with many standards bodies, the joint work of ITU/MPEG
+        that produced H.264/AVC has a common patent policy requiring
+        disclosure by participants and third parties of any known patents or
+        patent applications that may be essential to implement specifications
+        in development. These can be downloaded in spreadsheet format <xref
+        target="AVC02"></xref>. The policy goes on to ask contributors to
+        pre-agree to either RAND (reasonable &amp; non-discriminatory, but may
+        not be free) or royalty-free licensing of their own company’s patents,
+        with or without reciprocal requirements. There is some anecdotal
+        evidence to suggest US courts consider such disclosure requirements
+        <xref target="AVC03"> </xref> in patent lawsuit decisions. </t>
+
+        <t>While all that alone doesn’t guarantee 100% visibility of all
+        possible essential patent claims, H.264/AVC was finished in late 2003
+        and has been commercially shipping at scale for 6-7 years or more
+        which should have brought to light any other patent holders interested
+        in enforcing or collecting on their essential patents.</t>
+
+        <t>Over 300 patents (more if counting multiple jurisdictions) covering
+        mechanisms spanning several of AVC’s profiles are licensed via the
+        MPEG LA H.264/AVC licensing program and are publicly listed <xref
+        target="AVC04"></xref>.</t>
+
+        <t>The risk of an unknown, essential patent appearing at this point
+        should be comparatively low, which would be a benefit to selecting a
+        H.264/AVC profile as the mandatory codec.</t>
+      </section>
+
+      <section anchor="DisclosedPatents2"
+               title="Royalty Free for Innovation, Low-volume shipments">
+        <t>To paraphrase, the MPEG LA license <xref target="AVC05"></xref>
+        does allow up to 100K units per year, per legal entity/company (type
+        “a” sublicensees in MPEG LA’s definition), to be shipped for zero ($0)
+        royalty cost. This should be adequate for many RTCweb innovators or
+        start-ups to try out new implementations on a large set of users
+        before incurring any patent royalty costs, a benefit to selecting a
+        H.264/AVC profile as the mandatory codec.</t>
+      </section>
+
+      <section anchor="HigherTools"
+               title="Higher H.264/AVC Profile Tools Bundled">
+        <t>It should be noted that when one licenses the MPEG LA H.264/AVC
+        pool [AVC04], patents for higher profile tools – such as CABAC, 8x8 - are
+        bundled in with those required for the constrained baseline profile.
+        Thus, these could optionally be used by RTCweb implementers to achieve
+        even greater performance or efficiencies than using H.264 constrained
+        baseline alone, a benefit to selecting H.264/AVC and RTCweb could also
+        go as far as recommending those higher profiles.</t>
+      </section>
+
+      <section anchor="FutureRF" title="Future IPR Status Consideration">
+        <t>For additional informative purposes, the MPEG/IEC/ISO made a call
+        for a royalty-free video coding solution for the Internet. As of its
+        98th meeting, two tracks forward are being pursued; one of which is
+        based on the H.264/AVC constrained baseline profile <xref
+        target="AVC06"></xref>. MPEG is presently collecting patent
+        licensing declarations that would include patent holder’s royalty
+        expectations unbundled from other higher profile mechanisms. Should
+        this effort result in a royalty-free constrained baseline profile,
+        this would benefit RTCweb in the future if H.264/AVC is selected as
+        mandatory today.</t>
+      </section>
+    </section>
+
+    <section anchor="WhatisVP8status"
+             title="Questions about IPR Status of VP8">
+      <t>For the purposes of further illustrating the benefits of the
+      well-known IPR status of H.264/AVC, what follows are some comparisons to
+      the unknowns that surround VP8 as of the writing of this contribution.
+      Information that resolves the open questions below is welcomed. </t>
+
+      <t>First, Google should be commended for offering their essential
+      patents on VP8 royalty-free. However, other patent holders –- including
+      ones not licensees of VP8/WebM -- may exist as suggested by all the
+      respondents to MPEG LA’s call for a VP8 essential patent pool. Also, VP8
+      was not developed openly in a standards body and thus subjected to the
+      prescribed essential patent disclosures, etc.</t>
+
+      <t>Second, others have previously advocated that the lack of lawsuits
+      against shipping VP8 implementations to date means all is ok. VP8 has
+      been shipping a shorter time compared to H.264/AVC and the finite number
+      of companies that have shipped it to date may have, for example,
+      sufficiently large patent portfolios themselves to have discouraged
+      others from starting such a VP8 lawsuit against them. Bottom line is
+      that it isn’t a good argument that no prior lawsuits are an implicit
+      indication of low risk to future patent lawsuit for VP8.</t>
+
+<texttable anchor="table_1" title="Comparison of H.264/AVC & VP8 IPR Status Impacting Features">
+   <ttcol align='center'>Attribute</ttcol>
+   <ttcol align='center'>AVC</ttcol>
+   <ttcol align='center'>VP8</ttcol>
+   <c>Developed Openly in Standards Body</c>
+   <c>Yes</c>
+   <c>No</c>
+
+<c> - </c><c> </c><c> </c>
+
+   <c>Required Patent Disclosures and/or predeclared RAND or similar licensing promise</c>
+   <c>Yes</c>
+   <c>No</c>
+
+<c> - </c><c> </c><c> </c>
+
+   <c>Open Source implementation</c>
+   <c>Yes</c>
+   <c>Yes</c>
+
+<c> - </c><c> </c><c> </c>
+
+   <c>Patent Royalties</c>
+   <c>Yes for >100KU per yr</c>
+   <c>None Known (*)</c>
+</texttable>
+
+      <t>(*) A dozen or so companies responded to MPEG LA’s call for essential
+      patents on VP8, but a license for that has not been published and fees
+      that may be asked for in the future is unknown. </t>
+
+      <t>As suggested by Table 1, sufficient time and open, industry
+      development along with the prescribed patent disclosures is beneficial
+      to be more certain of the risks with shipping the chosen mandatory
+      codec.</t>
+
+      <t>Not having the benefit of a longer deployment duration and open,
+      industry development for VP8, the following questions result;</t>
+
+      <t><list style="empty">
+          <t>(a) Like MPEG/IEC/ISO, can Google list the present patents
+          covered in its VP8 license (of course it is noted that any future
+          Google owned essential patents are supposed to be included too)?</t>
+
+          <t>(b) Does Google, or anyone else involved in any patent analysis,
+          know of any third-parties with viable essential patent claims on
+          VP8? c) If any in (b), are they not a concern? Why? </t>
+
+          <t>(c) If any in (b), are they not a concern? Why?</t>
+
+          <t>(d) If Google is certain there is no concern regarding (b) &amp;
+          (c), can Google provide some assurance (such as indemnification) to
+          the VP8 licensees and thus indirectly assuring the RTCweb working
+          group?</t>
+        </list></t>
+
+      <t/>
+    </section>
+
+    <section anchor="security" title="Security Considerations">
+      <t>TBD.</t>
+    </section>
+
+    <section anchor="iana" title="IANA Considerations">
+      <t>None.</t>
+    </section>
+
+<!--
+    <section title="Acknowledgements">
+      <t>Thank you to --blank-- for their valuable contributions.</t>
+    </section>
+-->
+
+  </middle>
+
+  <back>
+    <references title="Normative References">
+      <?rfc ?>
+    </references>
+
+    <references title="Informative References">
+      <?rfc ?>
+
+      <reference anchor="AVC01"
+                 target="http://www.3gpp.org/ftp/Specs/html-info/26235.htm">
+        <front>
+          <title>Packet switched conversational multimedia applications;
+          Default codecs</title>
+
+          <author initials="TS 26.235" surname="3GPP"/>
+
+          <date month="" year="2008"/>
+        </front>
+      </reference>
+
+      <reference anchor="AVC02"
+                 target="http://www.iso.org/iso/standards_development/patents">
+        <front>
+          <title>ISO Standards and Patent\s</title>
+
+          <author initials="" surname="ISO"/>
+
+          <date month="April" year="2006"/>
+        </front>
+      </reference>
+
+      <reference anchor="AVC03"
+                 target="http://caselaw.findlaw.com/us-federal-circuit/1150919.html">
+        <front>
+          <title>QUALCOMM INCORPORATED v. BROADCOM CORPORATION</title>
+
+          <author initials="" surname="US Federal Court"/>
+
+          <date month="December" year="2008"/>
+        </front>
+      </reference>
+
+      <reference anchor="AVC04"
+                 target="http://www.mpegla.com/main/programs/avc/Documents/avc-att1.pdf">
+        <front>
+          <title>MPEG LA H.264 AVC Patent Pool – Attachment 1</title>
+
+          <author initials="" surname="MPEG LA"/>
+
+          <date month="August" year="2012"/>
+        </front>
+      </reference>
+
+      <reference anchor="AVC05"
+                 target="http://www.mpegla.com/main/programs/avc/Documents/AVC_TermsSummary.pdf">
+        <front>
+          <title>SUMMARY OF AVC/H.264 LICENSE TERMS</title>
+
+          <author initials="" surname="MPEG LA"/>
+
+          <date month="" year="unknown"/>
+        </front>
+      </reference>
+
+      <reference anchor="AVC06"
+                 target="http://mpeg.chiariglione.org/working_documents/mpeg-04/part29/WVC.zip">
+        <front>
+          <title>Working Draft 2 of ISO/IEC 14496-29 Web Video Coding</title>
+
+          <author initials="ISO" surname="MPEG"/>
+
+          <date month="" year="2012"/>
+        </front>
+      </reference>
+
+      <reference anchor="AVC07"
+                 target="http://www.usa.canon.com/cusa/consumer/products/cameras/digital_cameras/powershot_a810">
+        <front>
+          <title>Powershot A810 Specifications</title>
+
+          <author initials="" surname="Cannon Inc"/>
+
+          <date month="" year="2012"/>
+        </front>
+      </reference>
+    </references>
+  </back>
+</rfc>
