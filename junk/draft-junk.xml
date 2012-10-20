@@ -1754,6 +1754,52 @@ AnswererJS->WebServer: {"type":"CAPABILITIES", "sdp":"..." }
 <format type='TXT' octets='172112' target='http://www.rfc-editor.org/rfc/rfc5766.txt' />
 </reference>
 
+
+
+
+<reference anchor='RFC6386'>
+
+<front>
+<title>VP8 Data Format and Decoding Guide</title>
+<author initials='J.' surname='Bankoski' fullname='J. Bankoski'>
+<organization /></author>
+<author initials='J.' surname='Koleszar' fullname='J. Koleszar'>
+<organization /></author>
+<author initials='L.' surname='Quillio' fullname='L. Quillio'>
+<organization /></author>
+<author initials='J.' surname='Salonen' fullname='J. Salonen'>
+<organization /></author>
+<author initials='P.' surname='Wilkins' fullname='P. Wilkins'>
+<organization /></author>
+<author initials='Y.' surname='Xu' fullname='Y. Xu'>
+<organization /></author>
+<date year='2011' month='November' />
+<abstract>
+<t>This document describes the VP8 compressed video data format, together with a discussion of the decoding procedure for the format.  This document is not an Internet Standards Track specification; it is published for informational purposes.</t></abstract></front>
+
+<seriesInfo name='RFC' value='6386' />
+<format type='TXT' octets='564613' target='http://www.rfc-editor.org/rfc/rfc6386.txt' />
+</reference>
+
+
+<reference anchor='RFC6716'>
+
+<front>
+<title>Definition of the Opus Audio Codec</title>
+<author initials='JM.' surname='Valin' fullname='JM. Valin'>
+<organization /></author>
+<author initials='K.' surname='Vos' fullname='K. Vos'>
+<organization /></author>
+<author initials='T.' surname='Terriberry' fullname='T. Terriberry'>
+<organization /></author>
+<date year='2012' month='September' />
+<abstract>
+<t>This document defines the Opus interactive speech and audio codec.  Opus is designed to handle a wide range of interactive audio applications, including Voice over IP, videoconferencing, in-game chat, and even live, distributed music performances.  It scales from low bitrate narrowband speech at 6 kbit/s to very high quality stereo music at 510 kbit/s.  Opus uses both Linear Prediction (LP) and the Modified Discrete Cosine Transform (MDCT) to achieve good compression of both speech and music. [STANDARDS-TRACK]</t></abstract></front>
+
+<seriesInfo name='RFC' value='6716' />
+<format type='TXT' octets='977743' target='http://www.rfc-editor.org/rfc/rfc6716.txt' />
+</reference>
+
     </references>
   </back>
 </rfc>
