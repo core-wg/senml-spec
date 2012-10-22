@@ -11,7 +11,7 @@
 <?rfc colonspace="yes" ?>
 <?rfc rfcedstyle="no" ?>
 <?rfc tocdepth="4"?>
-<rfc category="std" docName="draft-jennings-senml-10" ipr="trust200902">
+<rfc category="std" docName="draft-jennings-senml-11" ipr="trust200902">
   <front>
     <title abbrev="Sensor Markup">Media Types for Sensor Markup Language
     (SENML)</title>
