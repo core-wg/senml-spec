@@ -1,0 +1,1525 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en"><head><title>Media Types for Sensor Markup Language
+    (SENML)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Media Types for Sensor Markup Language
+    (SENML)">
+<meta name="generator" content="xml2rfc v1.35 (http://xml.resource.org/)">
+<style type='text/css'><!--
+        body {
+                font-family: verdana, charcoal, helvetica, arial, sans-serif;
+                font-size: small; color: #000; background-color: #FFF;
+                margin: 2em;
+        }
+        h1, h2, h3, h4, h5, h6 {
+                font-family: helvetica, monaco, "MS Sans Serif", arial, sans-serif;
+                font-weight: bold; font-style: normal;
+        }
+        h1 { color: #900; background-color: transparent; text-align: right; }
+        h3 { color: #333; background-color: transparent; }
+
+        td.RFCbug {
+                font-size: x-small; text-decoration: none;
+                width: 30px; height: 30px; padding-top: 2px;
+                text-align: justify; vertical-align: middle;
+                background-color: #000;
+        }
+        td.RFCbug span.RFC {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: bold; color: #666;
+        }
+        td.RFCbug span.hotText {
+                font-family: charcoal, monaco, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: normal; text-align: center; color: #FFF;
+        }
+
+        table.TOCbug { width: 30px; height: 15px; }
+        td.TOCbug {
+                text-align: center; width: 30px; height: 15px;
+                color: #FFF; background-color: #900;
+        }
+        td.TOCbug a {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, sans-serif;
+                font-weight: bold; font-size: x-small; text-decoration: none;
+                color: #FFF; background-color: transparent;
+        }
+
+        td.header {
+                font-family: arial, helvetica, sans-serif; font-size: x-small;
+                vertical-align: top; width: 33%;
+                color: #FFF; background-color: #666;
+        }
+        td.author { font-weight: bold; font-size: x-small; margin-left: 4em; }
+        td.author-text { font-size: x-small; }
+
+        /* info code from SantaKlauss at http://www.madaboutstyle.com/tooltip2.html */
+        a.info {
+                /* This is the key. */
+                position: relative;
+                z-index: 24;
+                text-decoration: none;
+        }
+        a.info:hover {
+                z-index: 25;
+                color: #FFF; background-color: #900;
+        }
+        a.info span { display: none; }
+        a.info:hover span.info {
+                /* The span will display just on :hover state. */
+                display: block;
+                position: absolute;
+                font-size: smaller;
+                top: 2em; left: -5em; width: 15em;
+                padding: 2px; border: 1px solid #333;
+                color: #900; background-color: #EEE;
+                text-align: left;
+        }
+
+        a { font-weight: bold; }
+        a:link    { color: #900; background-color: transparent; }
+        a:visited { color: #633; background-color: transparent; }
+        a:active  { color: #633; background-color: transparent; }
+
+        p { margin-left: 2em; margin-right: 2em; }
+        p.copyright { font-size: x-small; }
+        p.toc { font-size: small; font-weight: bold; margin-left: 3em; }
+        table.toc { margin: 0 0 0 3em; padding: 0; border: 0; vertical-align: text-top; }
+        td.toc { font-size: small; font-weight: bold; vertical-align: text-top; }
+
+        ol.text { margin-left: 2em; margin-right: 2em; }
+        ul.text { margin-left: 2em; margin-right: 2em; }
+        li      { margin-left: 3em; }
+
+        /* RFC-2629 <spanx>s and <artwork>s. */
+        em     { font-style: italic; }
+        strong { font-weight: bold; }
+        dfn    { font-weight: bold; font-style: normal; }
+        cite   { font-weight: normal; font-style: normal; }
+        tt     { color: #036; }
+        tt, pre, pre dfn, pre em, pre cite, pre span {
+                font-family: "Courier New", Courier, monospace; font-size: small;
+        }
+        pre {
+                text-align: left; padding: 4px;
+                color: #000; background-color: #CCC;
+        }
+        pre dfn  { color: #900; }
+        pre em   { color: #66F; background-color: #FFC; font-weight: normal; }
+        pre .key { color: #33C; font-weight: bold; }
+        pre .id  { color: #900; }
+        pre .str { color: #000; background-color: #CFF; }
+        pre .val { color: #066; }
+        pre .rep { color: #909; }
+        pre .oth { color: #000; background-color: #FCF; }
+        pre .err { background-color: #FCC; }
+
+        /* RFC-2629 <texttable>s. */
+        table.all, table.full, table.headers, table.none {
+                font-size: small; text-align: center; border-width: 2px;
+                vertical-align: top; border-collapse: collapse;
+        }
+        table.all, table.full { border-style: solid; border-color: black; }
+        table.headers, table.none { border-style: none; }
+        th {
+                font-weight: bold; border-color: black;
+                border-width: 2px 2px 3px 2px;
+        }
+        table.all th, table.full th { border-style: solid; }
+        table.headers th { border-style: none none solid none; }
+        table.none th { border-style: none; }
+        table.all td {
+                border-style: solid; border-color: #333;
+                border-width: 1px 2px;
+        }
+        table.full td, table.headers td, table.none td { border-style: none; }
+
+        hr { height: 1px; }
+        hr.insert {
+                width: 80%; border-style: none; border-width: 0;
+                color: #CCC; background-color: #CCC;
+        }
+--></style>
+</head>
+<body>
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<table summary="layout" width="66%" border="0" cellpadding="0" cellspacing="0"><tr><td><table summary="layout" width="100%" border="0" cellpadding="2" cellspacing="1">
+<tr><td class="header">Network Working Group</td><td class="header">C. Jennings</td></tr>
+<tr><td class="header">Internet-Draft</td><td class="header">Cisco</td></tr>
+<tr><td class="header">Intended status:  Standards Track</td><td class="header">Z. Shelby</td></tr>
+<tr><td class="header">Expires:  May 4, 2012</td><td class="header">Sensinode</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">J. Arkko</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">Ericsson</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">Nov 1, 2011</td></tr>
+</table></td></tr></table>
+<h1><br />Media Types for Sensor Markup Language
+    (SENML)<br />draft-jennings-senml-07</h1>
+
+<h3>Abstract</h3>
+
+<p>This specification defines media types for representing
+      simple sensor measurements and device parameters in the Sensor
+      Markup Language (SenML).  Representations are defined in
+      JavaScript Object Notation (JSON), eXtensible Markup Language
+      (XML) and Efficient XML Interchange (EXI), which share the
+      common SenML data model. A simple sensor, such as a temperature
+      sensor, could use this media type in protocols such as HTTP or
+      CoAP to transport the measurements of the sensor or to be
+      configured.
+</p>
+<h3>Status of this Memo</h3>
+<p>
+This Internet-Draft is submitted  in full
+conformance with the provisions of BCP&nbsp;78 and BCP&nbsp;79.</p>
+<p>
+Internet-Drafts are working documents of the Internet Engineering
+Task Force (IETF).  Note that other groups may also distribute
+working documents as Internet-Drafts.  The list of current
+Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
+<p>
+Internet-Drafts are draft documents valid for a maximum of six months
+and may be updated, replaced, or obsoleted by other documents at any time.
+It is inappropriate to use Internet-Drafts as reference material or to cite
+them other than as &ldquo;work in progress.&rdquo;</p>
+<p>
+This Internet-Draft will expire on May 4, 2012.</p>
+
+<h3>Copyright Notice</h3>
+<p>
+Copyright (c) 2011 IETF Trust and the persons identified as the
+document authors.  All rights reserved.</p>
+<p>
+This document is subject to BCP 78 and the IETF Trust's Legal
+Provisions Relating to IETF Documents
+(http://trustee.ietf.org/license-info) in effect on the date of
+publication of this document.  Please review these documents
+carefully, as they describe your rights and restrictions with respect
+to this document. Code Components extracted from this document must
+include Simplified BSD License text as described in Section 4.e of
+the Trust Legal Provisions and are provided without warranty as
+described in the Simplified BSD License.</p>
+<a name="toc"></a><br /><hr />
+<h3>Table of Contents</h3>
+<p class="toc">
+<a href="#anchor1">1.</a>&nbsp;
+Overview<br />
+<a href="#anchor2">2.</a>&nbsp;
+Requirements and Design Goals<br />
+<a href="#anchor3">3.</a>&nbsp;
+Terminology<br />
+<a href="#semant">4.</a>&nbsp;
+Semantics<br />
+<a href="#anchor4">5.</a>&nbsp;
+Associating Meta-data<br />
+<a href="#anchor5">6.</a>&nbsp;
+JSON Representation (application/senml+json)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor6">6.1.</a>&nbsp;
+Examples<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor7">6.1.1.</a>&nbsp;
+Single Datapoint<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#co-ex">6.1.2.</a>&nbsp;
+Multiple Datapoints<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#an-co-ex">6.1.3.</a>&nbsp;
+Multiple Measurements<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#rest-ex">6.1.4.</a>&nbsp;
+Collection of Resources<br />
+<a href="#sec-xml-examle">7.</a>&nbsp;
+XML Representation (application/senml+xml)<br />
+<a href="#anchor8">8.</a>&nbsp;
+EXI Representation (application/senml+exi)<br />
+<a href="#anchor9">9.</a>&nbsp;
+Usage Considerations<br />
+<a href="#anchor10">10.</a>&nbsp;
+IANA Considerations<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#sec-units">10.1.</a>&nbsp;
+Units Registry<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#sec-iana-media">10.2.</a>&nbsp;
+Media Type Registration<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor11">10.2.1.</a>&nbsp;
+senml+json Media Type Registration<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor12">10.2.2.</a>&nbsp;
+senml+xml Media Type Registration<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor13">10.2.3.</a>&nbsp;
+senml+exi Media Type Registration<br />
+<a href="#sec-sec">11.</a>&nbsp;
+Security Considerations<br />
+<a href="#sec-privacy">12.</a>&nbsp;
+Privacy Considerations<br />
+<a href="#anchor14">13.</a>&nbsp;
+Acknowledgement<br />
+<a href="#rfc.references1">14.</a>&nbsp;
+References<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#rfc.references1">14.1.</a>&nbsp;
+Normative References<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#rfc.references2">14.2.</a>&nbsp;
+Informative References<br />
+<a href="#rfc.authors">&#167;</a>&nbsp;
+Authors' Addresses<br />
+</p>
+<br clear="all" />
+
+<a name="anchor1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.1"></a><h3>1.&nbsp;
+Overview</h3>
+
+<p>Connecting sensors to the internet is not new, and there have been
+      many protocols designed to facilitate it. This specification defines new
+      media types for carrying simple sensor information in a protocol such as
+      HTTP or CoAP<a class='info' href='#I-D.ietf-core-coap'>[I&#8209;D.ietf&#8209;core&#8209;coap]<span> (</span><span class='info'>Shelby, Z. and B. Frank, &ldquo;Constrained Application Protocol (CoAP),&rdquo; January&nbsp;2011.</span><span>)</span></a> called the Sensor
+      Markup Language (SenML). This format was designed so that processors
+      with very limited capabilities could easily encode a sensor measurement
+      into the media type, while at the same time a server parsing the data
+      could relatively efficiently collect a large number of sensor
+      measurements. There are many types of more complex measurements and
+      measurements that this media type would not be suitable for. A decision
+      was made not to carry most of the meta data about the sensor in this
+      media type to help reduce the size of the data and improve efficiency in
+      decoding. Instead meta-data about a sensor resource can be described
+      out-of-band using the CoRE Link Format <a class='info' href='#I-D.ietf-core-link-format'>[I&#8209;D.ietf&#8209;core&#8209;link&#8209;format]<span> (</span><span class='info'>Shelby, Z., &ldquo;Constrained Application Protocol (CoAP),&rdquo; January&nbsp;2011.</span><span>)</span></a>. The markup language can be
+      used for a variety of data flow models, most notably data feeds pushed
+      from a sensor to a collector, and the web resource model where the
+      sensor is requested as a resource representation (GET
+      /sensor/temperature).
+</p>
+<p>SenML is defined by a data model for measurements and simple
+      meta-data about measurements and devices. The data is structured 
+      as a single object (with attributes) that contains an array of entries. Each
+      entry is an object that has attributes such as a unique identifier
+      for the sensor, the time the measurement was made, and the current
+      value. Serializations for this data model are defined for JSON <a class='info' href='#RFC4627'>[RFC4627]<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object           Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a>, XML and Efficient XML Interchange (EXI).
+</p>
+<p>For example, the following shows a measurement from a temperature
+      gauge encoded in the JSON syntax.
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>{"e":[{ "n": "urn:dev:ow:10e2073a01080063", "v":23.5, "u":"degC" }]}
+</pre></div>
+<p>In the example above, the array in the object has a single
+      measurement for a sensor named "urn:dev:ow:10e2073a01080063" with a temperature of
+      23.5 degrees Celsius.
+</p>
+<a name="anchor2"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2"></a><h3>2.&nbsp;
+Requirements and Design Goals</h3>
+
+<p>The design goal is to be able to send simple sensor measurements in
+      small packets on mesh networks from large numbers of constrained
+      devices. Keeping the total size under 80 bytes makes this easy to use on
+      a wireless mesh network. It is always difficult to define what small
+      code is, but there is a desire to be able to implement this in roughly 1
+      KB of flash on a 8 bit microprocessor. Experience with Google power
+      meter and large scale deployments has indicated that the solution needs
+      to support allowing multiple measurements to be batched into a single
+      HTTP or CoAP request. This "batch" upload capability allows the server
+      side to efficiently support a large number of devices. It also
+      conveniently supports batch transfers from proxies and storage devices,
+      even in situations where the sensor itself sends just a single data item
+      at a time. The multiple measurements could be from multiple related
+      sensors or from the same sensor but at different times.
+</p>
+<a name="anchor3"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3"></a><h3>3.&nbsp;
+Terminology</h3>
+
+<p>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+      "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+      document are to be interpreted as described in <a class='info' href='#RFC2119'>RFC 2119<span> (</span><span class='info'>Bradner, S., &ldquo;Key words for use in RFCs to Indicate           Requirement Levels,&rdquo; March&nbsp;1997.</span><span>)</span></a> [RFC2119].
+</p>
+<a name="semant"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4"></a><h3>4.&nbsp;
+Semantics</h3>
+
+<p>Each representation caries a single SenML object that represents a
+      set of measurements and/or parameters. This object contains several
+      optional attributes described below and a mandatory array of one or more
+      entries.
+</p>
+<p></p>
+<blockquote class="text"><dl>
+<dt>Base Name</dt>
+<dd><br />
+This is a string
+          that is prepended to the names found in the entries. This
+          attribute is optional.<br />
+<br />
+
+</dd>
+<dt>Base Time</dt>
+<dd><br />
+A base time that is
+          added to the time found in an entry. This attribute is
+          optional.<br />
+<br />
+
+</dd>
+<dt>Base Units</dt>
+<dd><br />
+A base unit that
+          is assumed for all entries, unless otherwise indicated. This
+          attribute is optional. Acceptable values are specified in <a class='info' href='#sec-units'>Section&nbsp;10.1<span> (</span><span class='info'>Units Registry</span><span>)</span></a>.<br />
+<br />
+
+</dd>
+<dt>Version</dt>
+<dd><br />
+Version number of
+          media type format. This attribute is optional positive integer and
+          defaults to 1 if not present.<br />
+<br />
+
+</dd>
+<dt>Measurement or Parameter Entries</dt>
+<dd><br />
+Array of
+          values for sensor measurements or other generic parameters (such as configuration
+          parameters). If present there must be at least one entry in 
+          the array.<br />
+<br />
+
+</dd>
+</dl></blockquote>
+
+<p>Each array entry contains several attributes, some of which are
+      optional and some of which are mandatory.
+</p>
+<p></p>
+<blockquote class="text"><dl>
+<dt>Name</dt>
+<dd><br />
+Name of the sensor or parameter. When
+          appended to the Base Name attribute, this must result in a globally
+          unique identifier for the resource. The name is optional, if the Base
+          Name is present. If the name is missing Base Name must uniquely
+          identify the resource. This can be used to represent a large array of
+          measurements from the same sensor without having to repeat its
+          identifier on every measurement.<br />
+<br />
+
+</dd>
+<dt>Units</dt>
+<dd><br />
+Units for a
+          measurement value. Optional, if Base Unit is present or if not required 
+          for a parameter. Acceptable values are specified 
+          in <a class='info' href='#sec-units'>Section&nbsp;10.1<span> (</span><span class='info'>Units Registry</span><span>)</span></a>.<br />
+<br />
+
+</dd>
+<dt>Value</dt>
+<dd><br />
+Value of the
+          entry. Optional if a Sum value is present, otherwise required.
+          Values are represented using three basic data types, Floating point
+          numbers ("v" field for "Value"), Booleans ("bv" for "Boolean Value")
+          and Strings ("sv" for "String Value"). Exactly one of these three
+          fields MUST appear.<br />
+<br />
+
+</dd>
+<dt>Sum</dt>
+<dd><br />
+Integrated sum of the
+          values over time. Optional. This attribute is in the
+          units specified in the Unit value multiplied by seconds.<br />
+<br />
+
+</dd>
+<dt>Time</dt>
+<dd><br />
+Time when value
+          was recorded. Optional.<br />
+<br />
+
+</dd>
+<dt>Update Time</dt>
+<dd><br />
+Update time. A
+          time in seconds that represents the maximum time before this sensor
+          will provide an updated reading for a measurement. This can be used 
+          to detect the
+          failure of sensors or communications path from the sensor.
+          Optional.<br />
+<br />
+
+</dd>
+</dl></blockquote>
+
+<p>The SenML format can be extended with further custom attributes placed
+      in the base object, or in an entry. Extensions in the base object pertain 
+      to all entries, whereas extensions in an entry object only pertain to that.
+</p>
+<p>Systems reading one of the objects MUST check for the Version
+      attribute. If this value is a version number larger than the version
+      which the system understands, the system SHOULD NOT use this object.
+      This allows the version number to indicate that the object contains
+      mandatory to understand attributes. New version numbers can only be
+      defined in RFC which updates this specification or it successors.
+</p>
+<p>The Name value is concatenated to the Base Name value to get the name
+      of the sensor. The resulting name needs to uniquely identify and
+      differentiate the sensor from all others. If the object is a
+      representation resulting from the request of a URI <a class='info' href='#RFC3986'>[RFC3986]<span> (</span><span class='info'>Berners-Lee, T., Fielding, R., and L. Masinter, &ldquo;Uniform Resource Identifier (URI): Generic Syntax,&rdquo; January&nbsp;2005.</span><span>)</span></a>, then in the absence
+      of the Base Name attribute, this URI is used as the default value of
+      Base Name. Thus in this case the Name field needs to be unique for that
+      URI, for example an index or subresource name of sensors handled by the
+      URI.
+</p>
+<p>Alternatively, for objects not related to a URI, a unique
+      name is required. In any case, it is RECOMMENDED that the full
+      names are represented as URIs or URNs <a class='info' href='#RFC2141'>[RFC2141]<span> (</span><span class='info'>Moats, R., &ldquo;URN Syntax,&rdquo; May&nbsp;1997.</span><span>)</span></a>. One way to create a unique name is to
+      include a EUI-48 or EUI-64 identifier (A MAC address) or some
+      other bit string that is guaranteed uniqueness (such as a 1-wire
+      address) that is assigned to the device. Some of the examples in
+      this draft use the device URN type as specified in <a class='info' href='#I-D.arkko-core-dev-urn'>[I&#8209;D.arkko&#8209;core&#8209;dev&#8209;urn]<span> (</span><span class='info'>Arkko, J., Jennings, C., and Z. Shelby, &ldquo;Uniform Resource Names for Device Identifiers,&rdquo; October&nbsp;2011.</span><span>)</span></a>. UUIDs <a class='info' href='#RFC4122'>[RFC4122]<span> (</span><span class='info'>Leach, P., Mealling, M., and R. Salz, &ldquo;A Universally Unique IDentifier (UUID) URN           Namespace,&rdquo; July&nbsp;2005.</span><span>)</span></a> are another way to generate a unique
+      name.
+</p>
+<p>The resulting concatenated name MUST consist only of characters out
+      of the set "A" to "Z", "a" to "z", "0" to "9", "-", ":", ".", or "_" and
+      it MUST start with a character out of the set "A" to "Z", "a" to "z", or
+      "0" to "9". This restricted character set was chosen so that these names
+      can be directly used as in other types of URI including segments of an
+      HTTP path with no special encoding. <a class='info' href='#RFC5952'>[RFC5952]<span> (</span><span class='info'>Kawamura, S. and M. Kawashima, &ldquo;A Recommendation for IPv6 Address Text Representation,&rdquo; August&nbsp;2010.</span><span>)</span></a>
+      contains advice on encoding an IPv6 address in a name.
+</p>
+<p>If either the Base Time or Time value is missing, the missing
+      attribute is considered to have a value of zero. The Base Time and Time
+      values are added together to get the time of measurement. A time of zero
+      indicates that the sensor does not know the absolute time and the
+      measurement was made roughly "now". A negative value is used to indicate
+      seconds in the past from roughly "now". A positive value is used to
+      indicate the number of seconds, excluding leap seconds, since the start
+      of the year 1970 in UTC .
+</p>
+<p>Representing the statistical characteristics of measurements can be
+      very complex. Future specification may add new attributes to provide
+      better information about the statistical properties of the
+      measurement.
+</p>
+<a name="anchor4"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5"></a><h3>5.&nbsp;
+Associating Meta-data</h3>
+
+<p>SenML is designed to carry the minimum dynamic information about
+      measurements, and for efficiency reasons does not carry more static
+      meta-data about the device, object or sensors. Instead, it is assumed
+      that this meta-data is carried out of band. For web resources using
+      SenML representations, this meta-data can be made available using the
+      CoRE Link Format <a class='info' href='#I-D.ietf-core-link-format'>[I&#8209;D.ietf&#8209;core&#8209;link&#8209;format]<span> (</span><span class='info'>Shelby, Z., &ldquo;Constrained Application Protocol (CoAP),&rdquo; January&nbsp;2011.</span><span>)</span></a>.
+</p>
+<p>The CoRE Link Format provides a simple way to describe Web Links, and
+      in particular allows a web server to describe resources it is hosting.
+      The list of links that a web server has available, can be discovered by
+      retrieving the /.well-known/core resource, which returns the list of
+      links in the CoRE Link Format. Each link may contain attributes, for
+      example title, resource type, interface description and
+      content-type.
+</p>
+<p>The most obvious use of this link format is to describe that a 
+      resource is available in a SenML format in the first place. The relevant 
+      media type indicator is included in the Content-Type (ct=) attribute. 
+      
+</p>
+<p>Further semantics about a resource can be included in the Resource Type and 
+      Interface Description attributes. The Resource Type (rt=) attribute is meant 
+      to give a semantic meaning to that resource. For example rt="OutdoorTemperature" 
+      would indicate static semantic meaning in addition to the unit information 
+      included in SenML. The Interface Description (if=) attribute is used to describe 
+      the REST interface of a resource, and may include e.g. a reference to a WADL 
+      description <a class='info' href='#WADL'>[WADL]<span> (</span><span class='info'>Hadley, M., &ldquo;Web Application Description Language (WADL),&rdquo; 2009.</span><span>)</span></a>.
+      
+</p>
+<a name="anchor5"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6"></a><h3>6.&nbsp;
+JSON Representation (application/senml+json)</h3>
+
+<p>Root variables:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="right"><col align="left"><col align="left">
+<tr><th align="right">SenML</th><th align="left">JSON</th><th align="left">Type</th></tr>
+<tr>
+<td align="right">Base Name</td>
+<td align="left">bn</td>
+<td align="left">String</td>
+</tr>
+<tr>
+<td align="right">Base Time</td>
+<td align="left">bt</td>
+<td align="left">Number</td>
+</tr>
+<tr>
+<td align="right">Base Units</td>
+<td align="left">bu</td>
+<td align="left">Number</td>
+</tr>
+<tr>
+<td align="right">Version</td>
+<td align="left">ver</td>
+<td align="left">Number</td>
+</tr>
+<tr>
+<td align="right">Measurement or Parameters</td>
+<td align="left">e</td>
+<td align="left">Array</td>
+</tr>
+</table>
+<br clear="all" />
+
+<p>Measurement or Parameter Entries:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="right"><col align="left"><col align="left">
+<tr><th align="right">SenML</th><th align="left">JSON</th><th align="left">Notes</th></tr>
+<tr>
+<td align="right">Name</td>
+<td align="left">n</td>
+<td align="left">String</td>
+</tr>
+<tr>
+<td align="right">Units</td>
+<td align="left">u</td>
+<td align="left">String</td>
+</tr>
+<tr>
+<td align="right">Value</td>
+<td align="left">v</td>
+<td align="left">Floating point</td>
+</tr>
+<tr>
+<td align="right">String Value</td>
+<td align="left">sv</td>
+<td align="left">String</td>
+</tr>
+<tr>
+<td align="right">Boolean Value</td>
+<td align="left">bv</td>
+<td align="left">Boolean</td>
+</tr>
+<tr>
+<td align="right">Value Sum</td>
+<td align="left">s</td>
+<td align="left">Floating point</td>
+</tr>
+<tr>
+<td align="right">Time</td>
+<td align="left">t</td>
+<td align="left">Number</td>
+</tr>
+<tr>
+<td align="right">Update Time</td>
+<td align="left">ut</td>
+<td align="left">Number</td>
+</tr>
+</table>
+<br clear="all" />
+
+<p>All of the data is UTF-8, but since this is for machine to machine
+      communications on constrained systems, only characters with code points
+      between U+0001 and U+007F are allowed which corresponds to the
+      ASCII<a class='info' href='#RFC0020'>[RFC0020]<span> (</span><span class='info'>Cerf, V., &ldquo;ASCII format for network interchange,&rdquo; October&nbsp;1969.</span><span>)</span></a> subset of UTF-8.
+</p>
+<p>The root contents MUST consist of exactly one JSON object as specified by
+      <a class='info' href='#RFC4627'>[RFC4627]<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object           Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a>. This object MAY contain a "bn" attribute
+      with a value of type string. This object MAY contain a "bt" attribute
+      with a value of type number. The object MAY contain a "bu" attribute with a value of type string.
+      The object MAY contain a "ver" attribute with a value of type number. The object MAY contain other attribute
+      value pairs, and the object MUST contain exactly one "e" attribute with a
+      value of type array. The array MUST have one or more measurement or parameter
+      objects.
+</p>
+<p>Inside each measurement or parameter object the "n", "u", and
+      "sv" attributes are of type string, the "t" and "ut" attributes
+      are of type number, the "bv" attribute is of type boolean, and
+      the "v" and "s" attributes are of type floating point. All the
+      attributes are optional, but as specified in <a class='info' href='#semant'>Section&nbsp;4<span> (</span><span class='info'>Semantics</span><span>)</span></a>, one of the "v", "sv", or "bv" attributes MUST
+      appear unless the "s" attribute is also present. The "v", and
+      "sv", and "bv" attributes MUST NOT appear together.
+</p>
+<p>Systems
+      receiving measurements MUST be able to process the range of floating point numbers that
+      are representable as an IEEE double-precision floating-point numbers
+      <a class='info' href='#IEEE.754.1985'>[IEEE.754.1985]<span> (</span><span class='info'>Institute of Electrical and Electronics             Engineers, &ldquo;Standard for Binary Floating-Point Arithmetic,&rdquo; August&nbsp;1985.</span><span>)</span></a>. The number of significant digits
+      in any measurement is not relevant, so a reading of 1.1 has exactly the
+      same semantic meaning as 1.10. If the value has an exponent, the "e"
+      MUST be in lower case. The mantissa SHOULD be less than 19 characters
+      long and the exponent SHOULD be less than 5 characters long. This allows
+      time values to have better than micro second precision over the next 100
+      years.
+</p>
+<a name="anchor6"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6.1"></a><h3>6.1.&nbsp;
+Examples</h3>
+
+<a name="anchor7"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6.1.1"></a><h3>6.1.1.&nbsp;
+Single Datapoint</h3>
+
+<p>The following shows a temperature reading taken approximately "now"
+        by a 1-wire sensor device that was assigned the unique 1-wire address
+        of 10e2073a01080063:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+{"m":[{ "n": "urn:dev:ow:10e2073a01080063", "v":23.5 }]}</pre></div>
+<a name="co-ex"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6.1.2"></a><h3>6.1.2.&nbsp;
+Multiple Datapoints</h3>
+
+<p>The following example shows voltage and current now, i.e.,
+        at an unspecified time. The device has an EUI-64 MAC address
+        of 0024befffe804ff1.
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+{"e":[
+     { "n": "voltage", "t": 0, "u": "V", "v": 120.1 },
+     { "n": "current", "t": 0, "u": "A", "v": 1.2 }],
+ "bn": "urn:dev:mac:0024befffe804ff1/"
+}</pre></div>
+<p>The next example is similar to the above one, but shows
+        current at Tue Jun 8 18:01:16 UTC 2010 and at each second for
+        the previous 5 seconds.
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+{"e":[
+     { "n": "voltage", "u": "V", "v": 120.1 },
+     { "n": "current", "t": -5, "v": 1.2 },
+     { "n": "current", "t": -4, "v": 1.30 },
+     { "n": "current", "t": -3, "v": 0.14e1 },
+     { "n": "current", "t": -2, "v": 1.5 },
+     { "n": "current", "t": -1, "v": 1.6 },
+     { "n": "current", "t": 0,   "v": 1.7 }],
+ "bn": "urn:dev:mac:0024befffe804ff1/",
+ "bt": 1276020076,
+ "ver": 1,
+ "bu": "A"
+}</pre></div>
+<a name="an-co-ex"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6.1.3"></a><h3>6.1.3.&nbsp;
+Multiple Measurements</h3>
+
+<p>The following example shows humidity measurements from a
+        mobile device with an IPv6 address 2001:db8::1, starting at Mon Oct 31 13:24:24 UTC 2011. The device
+        also provide position data, which is provided in the same
+        measurement or parameter array as separate entries. Note time is used to for
+        correlating data that belongs together, e.g., a measurement
+        and a parameter associated with it. Finally, the device also reports extra data about its battery status at a separate time.
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+{"e":[
+     { "v": 20.0, "t": 0 },
+     { "sv": "E 24' 30.621", "u": "lon", "t": 0 },
+     { "sv": "N 60' 7.965", "u": "lat", "t": 0 },
+     { "v": 20.3, "t": 60 },
+     { "sv": "E 24' 30.622", "u": "lon", "t": 60 },
+     { "sv": "N 60' 7.965", "u": "lat", "t": 60 },
+     { "v": 20.7, "t": 120 },
+     { "sv": "E 24' 30.623", "u": "lon", "t": 120 },
+     { "sv": "N 60' 7.966", "u": "lat", "t": 120 },
+     { "v": 98.0, "u": "%EL", "t": 150 },
+     { "v": 21.2, "t": 180 },
+     { "sv": "E 24' 30.628", "u": "lon", "t": 180 },
+     { "sv": "N 60' 7.967", "u": "lat", "t": 180 }],
+ "bn": "http://[2001:db8::1]",
+ "bt": 1320067464,
+ "bu": "%RH"
+}</pre></div>
+<a name="rest-ex"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6.1.4"></a><h3>6.1.4.&nbsp;
+Collection of Resources</h3>
+
+<p>The following example shows how to query one device that
+        can provide multiple measurements. The example assumes that a
+        client has fetched information from a device at 2001:db8::2 by
+        performing a GET operation on http://[2001:db8::2] at Mon Oct
+        31 16:27:09 UTC 2011, and has gotten two separate values as a
+        result, a temperature and humidity measurement.
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+{"e":[
+     { "n": "temperature", "v": 27.2, "u": "degC" },
+     { "n": "humidity", "v": 80, "u": "%RH" }],
+ "bn": "http://[2001:db8::2]/",
+ "bt": 1320078429,
+ "ver": 1
+}</pre></div>
+<a name="sec-xml-examle"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.7"></a><h3>7.&nbsp;
+XML Representation (application/senml+xml)</h3>
+
+<p>A SenML object can also be represented in XML format as defined in this section. The 
+      following example shows an XML example for the same sensor measurement as in <a class='info' href='#co-ex'>Section&nbsp;6.1.2<span> (</span><span class='info'>Multiple Datapoints</span><span>)</span></a>.
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;senml xmlns="urn:ietf:params:xml:ns:senml"
+       bn="urn:dev:mac:0024befffe804ff1/"
+       bt="1276020076"
+       ver="1" bu="A"&gt;
+
+  &lt;e n="voltage" u="V" v="120.1" /&gt;
+
+  &lt;e n="current" t="-5" v="1.2" /&gt;
+
+  &lt;e n="current" t="-4" v="1.30" /&gt;
+
+  &lt;e n="current" t="-3" v="0.14e1" /&gt;
+
+  &lt;e n="current" t="-2" v="1.5" /&gt;
+
+  &lt;e n="current" t="-1" v="1.6" /&gt;
+
+  &lt;e n="current" t="0" v="1.7" /&gt;
+
+&lt;/senml&gt;
+</pre></div>
+<p>The RelaxNG schema for the XML is:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+default namespace = "urn:ietf:params:xml:ns:senml"
+namespace rng = "http://relaxng.org/ns/structure/1.0"
+
+e = element e {
+  attribute n { xsd:string }?,
+  attribute u { xsd:string }?,
+  attribute v { xsd:float }?,
+  attribute sv { xsd:string }?,
+  attribute bv { xsd:boolean }?,
+  attribute s { xsd:decimal }?,
+  attribute t { xsd:integer }?,
+  attribute ut { xsd:integer }?,
+  p*
+}
+
+senml =
+  element senml {
+    attribute bn { xsd:string }?,
+    attribute bt { xsd:integer }?,
+    attribute bu { xsd:string }?,
+    attribute ver { xsd:integer }?,
+    e*
+  }
+
+start = senml
+</pre></div>
+<a name="anchor8"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.8"></a><h3>8.&nbsp;
+EXI Representation (application/senml+exi)</h3>
+
+<p>
+      For efficient transmission of SenML over e.g. a constrained network, Efficient 
+      XML Interchange (EXI) can be used. This encodes the XML Schema structure of SenML
+      into binary tags and values rather than ASCII text. An EXI representation of SenML 
+      SHOULD be made using the strict schema-mode of EXI. This mode however does not allow tag 
+      extensions to the schema, and therefore any extensions will be lost in the encoding. 
+      For uses where extensions need to be preserved in EXI, the non-strict schema mode of EXI 
+      MAY be used.
+      
+</p>
+<p>The following XSD Schema is generated from the RelaxNG and used for
+      strict schema guided EXI processing. (TODO: define a better schema that
+      include the common strings. I'd like to have something where the stream
+      ended up defined in a way that it was trivial to encode sensor
+      measurement into EXI in a small amount of C code. )
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           targetNamespace="urn:ietf:params:xml:ns:senml"
+           xmlns:ns1="urn:ietf:params:xml:ns:senml"&gt;
+
+  &lt;xs:element name="e"&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:attribute name="n" type="xs:string"/&gt;
+      &lt;xs:attribute name="u" type="xs:string"/&gt;
+      &lt;xs:attribute name="v" type="xs:float"/&gt;
+      &lt;xs:attribute name="sv" type="xs:string"/&gt;
+      &lt;xs:attribute name="bv" type="xs:boolean"/&gt;
+      &lt;xs:attribute name="s" type="xs:decimal"/&gt;
+      &lt;xs:attribute name="t" type="xs:integer"/&gt;
+      &lt;xs:attribute name="ut" type="xs:integer"/&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:element name="senml"&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:sequence&gt;
+        &lt;xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:e"/&gt;
+      &lt;/xs:sequence&gt;
+      &lt;xs:attribute name="bn" type="xs:string"/&gt;
+      &lt;xs:attribute name="bt" type="xs:integer"/&gt;
+      &lt;xs:attribute name="bu" type="xs:string"/&gt;
+      &lt;xs:attribute name="ver" type="xs:integer"/&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+&lt;/xs:schema&gt;
+</pre></div>
+<p>The following shows a hexdump of the EXI produced from
+      encoding the following XML example. Note that while this example is similar to the the first example in
+      <a class='info' href='#co-ex'>Section&nbsp;6.1.2<span> (</span><span class='info'>Multiple Datapoints</span><span>)</span></a> in JSON format, it has been simplified by omitting the URNs and units.
+
+      </p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;senml xmlns="urn:ietf:params:xml:ns:senml"&gt;
+  &lt;e n="voltage" t="0" v="120.1" /&gt;
+  &lt;e n="current" t="0" v="1.2" /&gt;
+&lt;/senml&gt;
+</pre></div><p>
+
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+Result:
+
+0000000  90 60 84 bb 37 b6 3a 30 b3 b2 a0 02 58 84 c0 00
+0000020  84 b1 ba b9 39 32 b7 3a 20 02 06 40 08
+</pre></div>
+<a name="anchor9"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.9"></a><h3>9.&nbsp;
+Usage Considerations</h3>
+
+<p>The measurements support sending both the current value of a sensor
+      as well as the an integrated sum. For many types of measurements, the
+      sum is more useful than the current value. For example, an electrical
+      meter that measures the energy a given computer uses will typically want
+      to measure the cumulative amount of energy used. This is less prone to
+      error than reporting the power each second and trying to have something
+      on the server side sum together all the power measurements. If the
+      network between the sensor and the meter goes down over some period of
+      time, when it comes back up, the cumulative sum helps reflect what
+      happened while the network was down. A meter like this would typically
+      report a measurement with the units set to watts, but it would put the
+      sum of energy used in the "s" attribute of the measurement. It might
+      optionally include the current power in the "v" attribute.
+</p>
+<p>While the benefit of using the integrated sum is fairly clear for
+      measurements like power and energy, it is less obvious for something
+      like temperature. Reporting the sum of the temperature makes it easy to
+      compute averages even when the individual temperature values are not
+      reported frequently enough to compute accurate averages. Implementors
+      are encouraged to report the cumulative sum as well as the raw value of
+      a given sensor.
+</p>
+<p>Applications that use the cumulative sum values need to understand
+      they are very loosely defined by this specification, and depending on
+      the particular sensor implementation may behave in unexpected ways.
+      Applications should be able to deal with the following issues:
+</p>
+<p></p>
+<ol class="text">
+<li>Many sensors will allow the cumulative sums to "wrap" back to
+          zero after the value gets sufficiently large.
+</li>
+<li>Some sensors will reset the cumulative sum back to zero when the
+          device is reset, loses power, or is replaced with a different
+          sensor.
+</li>
+<li>Applications cannot make assumptions about when the device
+          started accumulating values into the sum.
+</li>
+</ol>
+
+<p>Typically applications can make some assumptions about specific
+      sensors that will allow them to deal with these problems. A common
+      assumption is that for sensors whose measurement values are always
+      positive, the sum should never get smaller; so if the sum does get
+      smaller, the application will know that one of the situations listed
+      above has happened.
+</p>
+<a name="anchor10"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.10"></a><h3>10.&nbsp;
+IANA Considerations</h3>
+
+<p>Note to RFC Editor: Please replace all occurrences of "RFC-AAAA" with
+      the RFC number of this specification.
+</p>
+<a name="sec-units"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.10.1"></a><h3>10.1.&nbsp;
+Units Registry</h3>
+
+<p>IANA will create a registry of unit symbols. The primary purpose of
+        this registry is to make sure that symbols uniquely map to give type
+        of measurement. Definitions for many of these units can be found in
+        <a class='info' href='#NIST822'>[NIST822]<span> (</span><span class='info'>Thompson, A. and B. Taylor, &ldquo;Guide for the Use of the International System of Units           (SI),&rdquo; .</span><span>)</span></a> and <a class='info' href='#BIPM'>[BIPM]<span> (</span><span class='info'>Bureau International des Poids et             Mesures, &ldquo;The International System of Units (SI),&rdquo; .</span><span>)</span></a>.
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="right"><col align="left"><col align="left">
+<tr><th align="right">Symbol</th><th align="left">Description</th><th align="left">Reference</th></tr>
+<tr>
+<td align="right">m</td>
+<td align="left">meter</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">kg</td>
+<td align="left">kilogram</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">s</td>
+<td align="left">second</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">A</td>
+<td align="left">ampere</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">K</td>
+<td align="left">kelvin</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">cd</td>
+<td align="left">candela</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">mol</td>
+<td align="left">mole</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">Hz</td>
+<td align="left">hertz</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">rad</td>
+<td align="left">radian</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">sr</td>
+<td align="left">steradian</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">N</td>
+<td align="left">newton</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">Pa</td>
+<td align="left">pascal</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">J</td>
+<td align="left">joule</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">W</td>
+<td align="left">watt</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">C</td>
+<td align="left">coulomb</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">V</td>
+<td align="left">volt</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">F</td>
+<td align="left">farad</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">Ohm</td>
+<td align="left">ohm</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">S</td>
+<td align="left">siemens</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">Wb</td>
+<td align="left">weber</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">T</td>
+<td align="left">tesla</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">H</td>
+<td align="left">henry</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">degC</td>
+<td align="left">degrees Celsius</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">lm</td>
+<td align="left">lumen</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">lx</td>
+<td align="left">lux</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">Bq</td>
+<td align="left">becquerel</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">Gy</td>
+<td align="left">gray</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">Sv</td>
+<td align="left">sievert</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">kat</td>
+<td align="left">katal</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">pH</td>
+<td align="left">pH acidity</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">%</td>
+<td align="left">Value of a switch. A value of 0.0 indicates the switch is off
+          while 100.0 indicates on.</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">count</td>
+<td align="left">counter value</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">%RH</td>
+<td align="left">Relative Humidity</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">m2</td>
+<td align="left">area</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">l</td>
+<td align="left">volume in liters</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">m/s</td>
+<td align="left">velocity</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">m/s2</td>
+<td align="left">acceleration</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">l/s</td>
+<td align="left">flow rate in liters per second</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">W/m2</td>
+<td align="left">irradiance</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">cd/m2</td>
+<td align="left">luminance</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">Bspl</td>
+<td align="left">bel sound pressure level</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">bit/s</td>
+<td align="left">bits per second</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">lat</td>
+<td align="left">degrees latitude. Assumed to be in WGS84 unless another reference frame is known for the sensor.</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">lon</td>
+<td align="left">degrees longitude. Assumed to be in WGS84 unless another reference frame is known for the sensor.</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+<tr>
+<td align="right">%EL</td>
+<td align="left">remaining battery energy level in percents</td>
+<td align="left">RFC-AAAA</td>
+</tr>
+</table>
+<br clear="all" />
+
+<p>New entries can be added to the registration by either Expert
+        Review or IESG Approval as defined in <a class='info' href='#RFC5226'>[RFC5226]<span> (</span><span class='info'>Narten, T. and H. Alvestrand, &ldquo;Guidelines for Writing an IANA Considerations Section in           RFCs,&rdquo; May&nbsp;2008.</span><span>)</span></a>.
+        Experts should exercise their own good judgment but need to consider
+        the following guidelines:
+</p>
+<p></p>
+<ol class="text">
+<li>There needs to be a real and compelling use for any new unit to
+            be added.
+</li>
+<li>Units should define the semantic information and be chosen
+            carefully. Implementors need to remember that the same word may be
+            used in different real-life contexts. For example, degrees when
+            measuring latitude have no semantic relation to degrees when
+            measuring temperature; thus two different units are needed.
+</li>
+<li>These measurements are produced by computers for consumption by
+            computers. The principle is that conversion has to be easily be
+            done when both reading and writing the media type. The value of a
+            single canonical representation outweighs the convenience of easy
+            human representations or loss of precision in a conversion.
+</li>
+<li>Use of SI prefixes such as "k" before the unit is not allowed.
+            Instead one can represent the value using scientific notation such
+            a 1.2e3.
+</li>
+<li>For a given type of measurement, there will only be one unit
+            type defined. So for length, meters are defined and other lengths
+            such as mile, foot, light year are not allowed. For most cases,
+            the SI unit is preferred.
+</li>
+<li>Symbol names that could be easily confused with existing common
+            units or units combined with prefixes should be avoided. For
+            example, selecting a unit name of "mph" to indicate something that
+            had nothing to do with velocity would be a bad choice, as "mph" is
+            commonly used to mean miles per hour.
+</li>
+<li>The following should not be used because the are common SI
+            prefixes: Y, Z, E, P, T, G, M, k, h, da, d, c, n, u, p, f, a, z,
+            y, Ki, Mi, Gi, Ti, Pi, Ei, Zi, Yi.
+</li>
+<li>The following units should not be used as they are commonly
+            used to represent other measurements Ky, Gal, dyn, etg, P, St, Mx,
+            G, Oe, Gb, sb, Lmb, ph, Ci, R, RAD, REM, gal, bbl, qt, degF, Cal,
+            BTU, HP, pH, B/s, psi, Torr, atm, at, bar, kWh.
+</li>
+<li>The unit names are case sensitive and the correct case needs to
+            be used, but symbols that differ only in case should not be
+            allocated.
+</li>
+<li>A number after a unit typically indicates the previous unit
+            raised to that power, and the / indicates that the units that
+            follow are the reciprocal. A unit should have only one / in the
+            name.
+</li>
+</ol>
+
+<a name="sec-iana-media"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.10.2"></a><h3>10.2.&nbsp;
+Media Type Registration</h3>
+
+<p>The following registrations are done following the procedure
+        specified in <a class='info' href='#RFC4288'>[RFC4288]<span> (</span><span class='info'>Freed, N. and J. Klensin, &ldquo;Media Type Specifications and Registration Procedures,&rdquo; December&nbsp;2005.</span><span>)</span></a> and <a class='info' href='#RFC3023'>[RFC3023]<span> (</span><span class='info'>Murata, M., St. Laurent, S., and D. Kohn, &ldquo;XML Media Types,&rdquo; January&nbsp;2001.</span><span>)</span></a>.
+</p>
+<p>Note to RFC Editor: Please replace all occurrences of "RFC-AAAA"
+        with the RFC number of this specification.
+</p>
+<a name="anchor11"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.10.2.1"></a><h3>10.2.1.&nbsp;
+senml+json Media Type Registration</h3>
+
+<p>Type name: application
+</p>
+<p>Subtype name: senml+json
+</p>
+<p>Required parameters: none
+</p>
+<p>Optional parameters: none
+</p>
+<p>Encoding considerations: Must be encoded as using a subset of the
+          encoding allowed in <a class='info' href='#RFC4627'>[RFC4627]<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object           Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a>. Specifically,
+          only the ASCII<a class='info' href='#RFC0020'>[RFC0020]<span> (</span><span class='info'>Cerf, V., &ldquo;ASCII format for network interchange,&rdquo; October&nbsp;1969.</span><span>)</span></a> subset of the UTF-8
+          characters are allowed. This simplifies implementation of very
+          simple system and does not impose any significant limitations as all
+          this data is meant for machine to machine communications and is not
+          meant to be human readable.
+</p>
+<p>Security considerations: Sensor data can contain a wide range of
+          information ranging from information that is very public, such the
+          outside temperature in a given city, to very private information
+          that requires integrity and confidentiality protection, such as
+          patient health information. This format does not provide any
+          security and instead relies on the transport protocol that carries
+          it to provide security. Given applications need to look at the
+          overall context of how this media type will be used to decide if the
+          security is adequate.
+</p>
+<p>Interoperability considerations: Applications should ignore any
+          JSON key value pairs that they do not understand. This allows
+          backwards compatibility extensions to this specification. The "ver"
+          field can be used to ensure the receiver supports a minimal level of
+          functionality needed by the creator of the JSON object.
+</p>
+<p>Published specification: RFC-AAAA
+</p>
+<p>Applications that use this media type: The type is used by
+          systems that report electrical power usage and environmental
+          information such as temperature and humidity. It can be used for a
+          wide range of sensor reporting systems.
+</p>
+<p>Additional information:
+</p>
+<p>Magic number(s): none
+</p>
+<p>File extension(s): senml
+</p>
+<p>Macintosh file type code(s): none
+</p>
+<p>Person &amp; email address to contact for further information:
+          Cullen Jennings &lt;c.jennings@ieee.org&gt;
+</p>
+<p>Intended usage: COMMON
+</p>
+<p>Restrictions on usage: None
+</p>
+<p>Author: Cullen Jennings &lt;c.jennings@ieee.org&gt;
+</p>
+<p>Change controller: IESG
+</p>
+<a name="anchor12"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.10.2.2"></a><h3>10.2.2.&nbsp;
+senml+xml Media Type Registration</h3>
+
+<p>Type name: application
+</p>
+<p>Subtype name: senml+xml
+</p>
+<p>Required parameters: none
+</p>
+<p>Optional parameters: none
+</p>
+<p>Encoding considerations: TBD
+</p>
+<p>Security considerations: TBD
+</p>
+<p>Interoperability considerations: TBD
+</p>
+<p>Published specification: RFC-AAAA
+</p>
+<p>Applications that use this media type: TBD
+</p>
+<p>Additional information:
+</p>
+<p>Magic number(s): none
+</p>
+<p>File extension(s): senml
+</p>
+<p>Macintosh file type code(s): none
+</p>
+<p>Person &amp; email address to contact for further information:
+          Cullen Jennings &lt;c.jennings@ieee.org&gt;
+</p>
+<p>Intended usage: COMMON
+</p>
+<p>Restrictions on usage: None
+</p>
+<p>Author: Cullen Jennings &lt;c.jennings@ieee.org&gt;
+</p>
+<p>Change controller: IESG
+</p>
+<a name="anchor13"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.10.2.3"></a><h3>10.2.3.&nbsp;
+senml+exi Media Type Registration</h3>
+
+<p>Type name: application
+</p>
+<p>Subtype name: senml+exi
+</p>
+<p>Required parameters: none
+</p>
+<p>Optional parameters: none
+</p>
+<p>Encoding considerations: TBD
+</p>
+<p>Security considerations: TBD
+</p>
+<p>Interoperability considerations: TBD
+</p>
+<p>Published specification: RFC-AAAA
+</p>
+<p>Applications that use this media type: TBD
+</p>
+<p>Additional information:
+</p>
+<p>Magic number(s): none
+</p>
+<p>File extension(s): senml
+</p>
+<p>Macintosh file type code(s): none
+</p>
+<p>Person &amp; email address to contact for further information:
+          Cullen Jennings &lt;c.jennings@ieee.org&gt;
+</p>
+<p>Intended usage: COMMON
+</p>
+<p>Restrictions on usage: None
+</p>
+<p>Author: Cullen Jennings &lt;c.jennings@ieee.org&gt;
+</p>
+<p>Change controller: IESG
+</p>
+<a name="sec-sec"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.11"></a><h3>11.&nbsp;
+Security Considerations</h3>
+
+<p>See <a class='info' href='#sec-privacy'>Section&nbsp;12<span> (</span><span class='info'>Privacy Considerations</span><span>)</span></a>.Further discussion of security
+      proprieties can be found in <a class='info' href='#sec-iana-media'>Section&nbsp;10.2<span> (</span><span class='info'>Media Type Registration</span><span>)</span></a>.
+</p>
+<a name="sec-privacy"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.12"></a><h3>12.&nbsp;
+Privacy Considerations</h3>
+
+<p>Sensor data can range from information with almost no security
+      considerations, such as the current temperature in a given city, to
+      highly sensitive medical or location data. This specification provides
+      no security protection for the data but is meant to be used inside
+      another container or transport protocol such as S/MIME or HTTP with TLS
+      that can provide integrity, confidentiality, and authentication
+      information about the source of the data.
+</p>
+<a name="anchor14"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.13"></a><h3>13.&nbsp;
+Acknowledgement</h3>
+
+<p>We would like to thank Lisa Dusseault, Joe Hildebrand, Lyndsay
+      Campbell, Martin Thomson, John Klensin, Bjoern Hoehrmann, and Carsten
+      Bormann for their review comments.
+</p>
+<a name="rfc.references"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.14"></a><h3>14.&nbsp;
+References</h3>
+
+<a name="rfc.references1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>14.1.&nbsp;Normative References</h3>
+<table width="99%" border="0">
+<tr><td class="author-text" valign="top"><a name="RFC4627">[RFC4627]</a></td>
+<td class="author-text">Crockford, D., &ldquo;<a href="http://tools.ietf.org/html/rfc4627">The application/json Media Type for JavaScript Object
+          Notation (JSON)</a>,&rdquo; RFC&nbsp;4627, July&nbsp;2006 (<a href="http://www.rfc-editor.org/rfc/rfc4627.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC3023">[RFC3023]</a></td>
+<td class="author-text">Murata, M., St. Laurent, S., and D. Kohn, &ldquo;<a href="http://tools.ietf.org/html/rfc3023">XML Media Types</a>,&rdquo; RFC&nbsp;3023, January&nbsp;2001 (<a href="http://www.rfc-editor.org/rfc/rfc3023.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC4288">[RFC4288]</a></td>
+<td class="author-text">Freed, N. and J. Klensin, &ldquo;<a href="http://tools.ietf.org/html/rfc4288">Media Type Specifications and Registration Procedures</a>,&rdquo; BCP&nbsp;13, RFC&nbsp;4288, December&nbsp;2005 (<a href="http://www.rfc-editor.org/rfc/rfc4288.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC2119">[RFC2119]</a></td>
+<td class="author-text"><a href="mailto:sob@harvard.edu">Bradner, S.</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate
+          Requirement Levels</a>,&rdquo; BCP&nbsp;14, RFC&nbsp;2119, March&nbsp;1997 (<a href="http://www.rfc-editor.org/rfc/rfc2119.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2119.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2119.xml">XML</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="IEEE.754.1985">[IEEE.754.1985]</a></td>
+<td class="author-text">Institute of Electrical and Electronics
+            Engineers, &ldquo;Standard for Binary Floating-Point Arithmetic,&rdquo; IEEE&nbsp;Standard 754, August&nbsp;1985.</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC5226">[RFC5226]</a></td>
+<td class="author-text">Narten, T. and H. Alvestrand, &ldquo;Guidelines for Writing an IANA Considerations Section in
+          RFCs,&rdquo; BCP&nbsp;26, May&nbsp;2008.</td></tr>
+</table>
+
+<a name="rfc.references2"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>14.2.&nbsp;Informative References</h3>
+<table width="99%" border="0">
+<tr><td class="author-text" valign="top"><a name="RFC2141">[RFC2141]</a></td>
+<td class="author-text"><a href="mailto:jayhawk@ds.internic.net">Moats, R.</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2141">URN Syntax</a>,&rdquo; RFC&nbsp;2141, May&nbsp;1997 (<a href="ftp://ftp.isi.edu/in-notes/rfc2141.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2141.xml">XML</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC3986">[RFC3986]</a></td>
+<td class="author-text"><a href="mailto:timbl@w3.org">Berners-Lee, T.</a>, <a href="mailto:fielding@gbiv.com">Fielding, R.</a>, and <a href="mailto:LMM@acm.org">L. Masinter</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc3986">Uniform Resource Identifier (URI): Generic Syntax</a>,&rdquo; STD&nbsp;66, RFC&nbsp;3986, January&nbsp;2005 (<a href="ftp://ftp.isi.edu/in-notes/rfc3986.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc3986.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc3986.xml">XML</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="I-D.ietf-core-coap">[I-D.ietf-core-coap]</a></td>
+<td class="author-text">Shelby, Z. and B. Frank, &ldquo;<a href="http://www.ietf.org/internet-drafts/draft-ietf-core-coap-07.txt">Constrained Application Protocol (CoAP)</a>,&rdquo; draft-ietf-core-coap-07 (work in progress), January&nbsp;2011 (<a href="http://www.ietf.org/internet-drafts/draft-ietf-core-coap-07.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="I-D.ietf-core-link-format">[I-D.ietf-core-link-format]</a></td>
+<td class="author-text">Shelby, Z., &ldquo;<a href="http://www.ietf.org/internet-drafts/draft-ietf-core-link-format-07.txt">Constrained Application Protocol (CoAP)</a>,&rdquo; draft-ietf-core-link-format-07 (work in progress), January&nbsp;2011 (<a href="http://www.ietf.org/internet-drafts/draft-ietf-core-link-format-07.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="BIPM">[BIPM]</a></td>
+<td class="author-text">Bureau International des Poids et
+            Mesures, &ldquo;<a href="http://www.bipm.org/utils/common/pdf/si_brochure_8_en.pdf">The International System of Units (SI)</a>,&rdquo; 8th edition, 2006&nbsp;.</td></tr>
+<tr><td class="author-text" valign="top"><a name="NIST822">[NIST822]</a></td>
+<td class="author-text">Thompson, A. and B. Taylor, &ldquo;<a href="http://physics.nist.gov/cuu/pdf/sp811.pdf">Guide for the Use of the International System of Units
+          (SI)</a>,&rdquo; NIST Special Publication 811, 2008 Edition&nbsp;.</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC5952">[RFC5952]</a></td>
+<td class="author-text">Kawamura, S. and M. Kawashima, &ldquo;<a href="http://tools.ietf.org/html/rfc5952">A Recommendation for IPv6 Address Text Representation</a>,&rdquo; RFC&nbsp;5952, August&nbsp;2010 (<a href="http://www.rfc-editor.org/rfc/rfc5952.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC4122">[RFC4122]</a></td>
+<td class="author-text"><a href="mailto:paulle@microsoft.com">Leach, P.</a>, <a href="mailto:michael@refactored-networks.com">Mealling, M.</a>, and <a href="mailto:rsalz@datapower.com">R. Salz</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc4122">A Universally Unique IDentifier (UUID) URN
+          Namespace</a>,&rdquo; RFC&nbsp;4122, July&nbsp;2005 (<a href="http://www.rfc-editor.org/rfc/rfc4122.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc4122.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc4122.xml">XML</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC0020">[RFC0020]</a></td>
+<td class="author-text">Cerf, V., &ldquo;<a href="http://tools.ietf.org/html/rfc20">ASCII format for network interchange</a>,&rdquo; RFC&nbsp;20, October&nbsp;1969 (<a href="http://www.rfc-editor.org/rfc/rfc20.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="I-D.arkko-core-dev-urn">[I-D.arkko-core-dev-urn]</a></td>
+<td class="author-text">Arkko, J., Jennings, C., and Z. Shelby, &ldquo;<a href="http://www.ietf.org/internet-drafts/draft-arkko-core-dev-urn-00.txt">Uniform Resource Names for Device Identifiers</a>,&rdquo; draft-arkko-core-dev-urn-00 (work in progress), October&nbsp;2011 (<a href="http://www.ietf.org/internet-drafts/draft-arkko-core-dev-urn-00.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="WADL">[WADL]</a></td>
+<td class="author-text">Hadley, M., &ldquo;<a href="http://java.net/projects/wadl/sources/svn/content/trunk/www/wadl20090202.pdf">Web Application Description Language (WADL)</a>,&rdquo; 2009.</td></tr>
+</table>
+
+<a name="rfc.authors"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>Authors' Addresses</h3>
+<table width="99%" border="0" cellpadding="0" cellspacing="0">
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Cullen Jennings</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Cisco</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">170 West Tasman Drive</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">San Jose, CA  95134</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">USA</td></tr>
+<tr><td class="author" align="right">Phone:&nbsp;</td>
+<td class="author-text">+1 408 421-9990</td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:fluffy@cisco.com">fluffy@cisco.com</a></td></tr>
+<tr cellpadding="3"><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Zach Shelby</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Sensinode</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Kidekuja 2</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Vuokatti  88600</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">FINLAND</td></tr>
+<tr><td class="author" align="right">Phone:&nbsp;</td>
+<td class="author-text">+358407796297</td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:zach@sensinode.com">zach@sensinode.com</a></td></tr>
+<tr cellpadding="3"><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Jari Arkko</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Ericsson</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Jorvas  02420</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Finland</td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:jari.arkko@piuha.net">jari.arkko@piuha.net</a></td></tr>
+</table>
+</body></html>
