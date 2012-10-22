@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="us-ascii"?>
 <?xml version="1.0" encoding="US-ASCII"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
 <?xml-stylesheet type="text/xsl" href="rfc2629.xslt" ?>
@@ -175,9 +176,7 @@
           optional.<vspace blankLines="1" /></t>
 
           <t hangText="Base Units"><vspace blankLines="1" />A base unit that
-          is assumed for all entries, unless otherwise indicated. The base unit 
-          SHOULD comply with the Unified Code for Units of Measure <xref target="UCUM"/>
-          in case sensitive form (c/s column). This
+          is assumed for all entries, unless otherwise indicated. This
           attribute is optional. <vspace blankLines="1" /></t>
 
           <t hangText="Version"><vspace blankLines="1" />Version number of
@@ -205,10 +204,7 @@
           blankLines="1" /></t>
 
           <t hangText="Units"><vspace blankLines="1" />Units for a measurement
-          value. The unit SHOULD comply with the Unified Code for Units of
-          Measure <xref target="UCUM"/> in case sensitive form (c/s column).
-          Optional, if Base Unit is present or if not required for a
-          parameter.<vspace blankLines="1" /></t>
+          value.<vspace blankLines="1" /></t>
 
           <t hangText="Value"><vspace blankLines="1" />Value of the entry.
           Optional if a Sum value is present, otherwise required. Values are
@@ -516,21 +512,21 @@
             <artwork><![CDATA[
 {"e":[
      { "v": 20.0, "t": 0 },
-     { "sv": "E 24' 30.621", "n": "lon", "t": 0 },
-     { "sv": "N 60' 7.965", "n": "lat", "t": 0 },
+     { "sv": "E 24' 30.621", "u": "lon", "t": 0 },
+     { "sv": "N 60' 7.965", "u": "lat", "t": 0 },
      { "v": 20.3, "t": 60 },
-     { "sv": "E 24' 30.622", "n": "lon", "t": 60 },
-     { "sv": "N 60' 7.965", "n": "lat", "t": 60 },
+     { "sv": "E 24' 30.622", "u": "lon", "t": 60 },
+     { "sv": "N 60' 7.965", "u": "lat", "t": 60 },
      { "v": 20.7, "t": 120 },
-     { "sv": "E 24' 30.623", "n": "lon", "t": 120 },
-     { "sv": "N 60' 7.966", "n": "lat", "t": 120 },
+     { "sv": "E 24' 30.623", "u": "lon", "t": 120 },
+     { "sv": "N 60' 7.966", "u": "lat", "t": 120 },
      { "v": 98.0, "u": "%EL", "t": 150 },
      { "v": 21.2, "t": 180 },
-     { "sv": "E 24' 30.628", "n": "lon", "t": 180 },
-     { "sv": "N 60' 7.967", "n": "lat", "t": 180 }],
+     { "sv": "E 24' 30.628", "u": "lon", "t": 180 },
+     { "sv": "N 60' 7.967", "u": "lat", "t": 180 }],
  "bn": "http://[2001:db8::1]",
  "bt": 1320067464,
- "bu": "%"
+ "bu": "%RH"
 }]]></artwork>
           </figure>
         </section>
@@ -547,7 +543,7 @@
             <artwork><![CDATA[
 {"e":[
      { "n": "temperature", "v": 27.2, "u": "Cel" },
-     { "n": "humidity", "v": 80, "u": "%" }],
+     { "n": "humidity", "v": 80, "u": "%RH" }],
  "bn": "http://[2001:db8::2]/",
  "bt": 1320078429,
  "ver": 1
@@ -803,6 +799,377 @@ start = senml
       <t>Note to RFC Editor: Please replace all occurrences of "RFC-AAAA" with
       the RFC number of this specification.</t>
 
+      <section anchor="sec-units" title="Units Registry">
+        <t>IANA will create a registry of unit symbols. The primary purpose of
+        this registry is to make sure that symbols uniquely map to give type
+        of measurement. Definitions for many of these units can be found in
+        <xref target="NIST822"></xref> and <xref target="BIPM"></xref>.</t>
+
+        <t> In adition to the units in this table, any of the Unified Code for
+        Units of Measure <xref target="UCUM"/> in case sensitive form (c/s
+        column) can be prepended by the string "UCUM:" and used in SEML. </t>
+
+
+        <texttable>
+          <ttcol align="right">Symbol</ttcol>
+
+          <ttcol align="left">Description</ttcol>
+
+          <ttcol align="left">Reference</ttcol>
+
+          <c>m</c>
+
+          <c>meter</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>kg</c>
+
+          <c>kilogram</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>s</c>
+
+          <c>second</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>A</c>
+
+          <c>ampere</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>K</c>
+
+          <c>kelvin</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>cd</c>
+
+          <c>candela</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>mol</c>
+
+          <c>mole</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>Hz</c>
+
+          <c>hertz</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>rad</c>
+
+          <c>radian</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>sr</c>
+
+          <c>steradian</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>N</c>
+
+          <c>newton</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>Pa</c>
+
+          <c>pascal</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>J</c>
+
+          <c>joule</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>W</c>
+
+          <c>watt</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>C</c>
+
+          <c>coulomb</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>V</c>
+
+          <c>volt</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>F</c>
+
+          <c>farad</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>Ohm</c>
+
+          <c>ohm</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>S</c>
+
+          <c>siemens</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>Wb</c>
+
+          <c>weber</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>T</c>
+
+          <c>tesla</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>H</c>
+
+          <c>henry</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>Cel</c>
+
+          <c>degrees Celsius</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>lm</c>
+
+          <c>lumen</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>lx</c>
+
+          <c>lux</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>Bq</c>
+
+          <c>becquerel</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>Gy</c>
+
+          <c>gray</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>Sv</c>
+
+          <c>sievert</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>kat</c>
+
+          <c>katal</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>pH</c>
+
+          <c>pH acidity</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>%</c>
+
+          <c>Value of a switch. A value of 0.0 indicates the switch is off
+          while 100.0 indicates on.</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>count</c>
+
+          <c>counter value</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>%RH</c>
+
+          <c>Relative Humidity</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>m2</c>
+
+          <c>area</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>l</c>
+
+          <c>volume in liters</c>
+
+          <c>RFC-AAAA</c>
+
+          <!-- should this be m3 -->
+
+          <c>m/s</c>
+
+          <c>velocity</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>m/s2</c>
+
+          <c>acceleration</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>l/s</c>
+
+          <c>flow rate in liters per second</c>
+
+          <c>RFC-AAAA</c>
+
+          <!-- should this be m3/s -->
+
+          <c>W/m2</c>
+
+          <c>irradiance</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>cd/m2</c>
+
+          <c>luminance</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>Bspl</c>
+
+          <c>bel sound pressure level</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>bit/s</c>
+
+          <c>bits per second</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>lat</c>
+
+          <c>degrees latitude. Assumed to be in WGS84 unless another reference
+          frame is known for the sensor.</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>lon</c>
+
+          <c>degrees longitude. Assumed to be in WGS84 unless another
+          reference frame is known for the sensor.</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>%EL</c>
+
+          <c>remaining battery energy level in percents</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>EL</c>
+
+          <c>remaining battery energy level in seconds</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>beet/m</c>
+
+          <c>Heart rate in beets per minute</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>beets</c>
+
+          <c>Cumulative number of heart beats</c>
+
+          <c>RFC-AAAA</c>
+        </texttable>
+
+        <t>New entries can be added to the registration by either Expert
+        Review or IESG Approval as defined in <xref target="RFC5226"></xref>.
+        Experts should exercise their own good judgment but need to consider
+        the following guidelines:</t>
+
+        <t><list style="numbers">
+            <t>There needs to be a real and compelling use for any new unit to
+            be added.</t>
+
+            <t>Units should define the semantic information and be chosen
+            carefully. Implementors need to remember that the same word may be
+            used in different real-life contexts. For example, degrees when
+            measuring latitude have no semantic relation to degrees when
+            measuring temperature; thus two different units are needed.</t>
+
+            <t>These measurements are produced by computers for consumption by
+            computers. The principle is that conversion has to be easily be
+            done when both reading and writing the media type. The value of a
+            single canonical representation outweighs the convenience of easy
+            human representations or loss of precision in a conversion.</t>
+
+            <t>Use of SI prefixes such as "k" before the unit is not allowed.
+            Instead one can represent the value using scientific notation such
+            a 1.2e3.</t>
+
+            <t>For a given type of measurement, there will only be one unit
+            type defined. So for length, meters are defined and other lengths
+            such as mile, foot, light year are not allowed. For most cases,
+            the SI unit is preferred.</t>
+
+            <t>Symbol names that could be easily confused with existing common
+            units or units combined with prefixes should be avoided. For
+            example, selecting a unit name of "mph" to indicate something that
+            had nothing to do with velocity would be a bad choice, as "mph" is
+            commonly used to mean miles per hour.</t>
+
+            <t>The following should not be used because the are common SI
+            prefixes: Y, Z, E, P, T, G, M, k, h, da, d, c, n, u, p, f, a, z,
+            y, Ki, Mi, Gi, Ti, Pi, Ei, Zi, Yi.</t>
+
+            <t>The following units should not be used as they are commonly
+            used to represent other measurements Ky, Gal, dyn, etg, P, St, Mx,
+            G, Oe, Gb, sb, Lmb, ph, Ci, R, RAD, REM, gal, bbl, qt, degF, Cal,
+            BTU, HP, pH, B/s, psi, Torr, atm, at, bar, kWh.</t>
+
+            <t>The unit names are case sensitive and the correct case needs to
+            be used, but symbols that differ only in case should not be
+            allocated.</t>
+
+            <t>A number after a unit typically indicates the previous unit
+            raised to that power, and the / indicates that the units that
+            follow are the reciprocal. A unit should have only one / in the
+            name.</t>
+          </list></t>
+      </section>
+
+
       <section anchor="sec-iana-media" title="Media Type Registration">
         <t>The following registrations are done following the procedure
         specified in <xref target="RFC4288"></xref> and <xref
@@ -986,6 +1353,63 @@ start = senml
 
   <back>
     <references title="Normative References">
+
+      <reference anchor="RFC5226">
+        <front>
+          <title>Guidelines for Writing an IANA Considerations Section in
+          RFCs</title>
+
+          <author fullname="T. Narten" initials="T." surname="Narten">
+            <organization></organization>
+          </author>
+
+          <author fullname="H. Alvestrand" initials="H." surname="Alvestrand">
+            <organization></organization>
+          </author>
+
+          <date month="May" year="2008" />
+        </front>
+
+        <seriesInfo name="BCP" value="26" />
+      </reference>
+
+
+      <reference anchor="BIPM">
+        <front>
+          <title>The International System of Units (SI)</title>
+
+          <author>
+            <organization>Bureau International des Poids et
+            Mesures</organization>
+          </author>
+        </front>
+
+        <seriesInfo name="8th edition, 2006" value="" />
+
+        <format target="http://www.bipm.org/utils/common/pdf/si_brochure_8_en.pdf"
+                type="PDF" />
+      </reference>
+
+
+      <reference anchor="NIST822">
+        <front>
+          <title>Guide for the Use of the International System of Units
+          (SI)</title>
+
+          <author initials="A." surname="Thompson">
+            <organization />
+          </author>
+
+          <author initials="B." surname="Taylor">
+            <organization />
+          </author>
+        </front>
+
+        <seriesInfo name="NIST Special Publication 811, 2008 Edition" value="" />
+
+        <format target="http://physics.nist.gov/cuu/pdf/sp811.pdf" type="PDF" />
+      </reference>
+
       <reference anchor="RFC3688">
         <front>
           <title>The IETF XML Registry</title>
