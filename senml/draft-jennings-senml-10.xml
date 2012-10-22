@@ -10,7 +10,7 @@
 <?rfc colonspace="yes" ?>
 <?rfc rfcedstyle="no" ?>
 <?rfc tocdepth="4"?>
-<rfc category="std" docName="draft-jennings-senml-09" ipr="trust200902">
+<rfc category="std" docName="draft-jennings-senml-10" ipr="trust200902">
   <front>
     <title abbrev="Sensor Markup">Media Types for Sensor Markup Language
     (SENML)</title>
@@ -860,13 +860,13 @@ start = senml
           <t>Macintosh file type code(s): none</t>
 
           <t>Person &amp; email address to contact for further information:
-          Cullen Jennings &lt;c.jennings@ieee.org&gt;</t>
+          Cullen Jennings &lt;fluffy@iii.ca&gt;</t>
 
           <t>Intended usage: COMMON</t>
 
           <t>Restrictions on usage: None</t>
 
-          <t>Author: Cullen Jennings &lt;c.jennings@ieee.org&gt;</t>
+          <t>Author: Cullen Jennings &lt;fluffy@iii.ca&gt;</t>
 
           <t>Change controller: IESG</t>
         </section>
@@ -899,13 +899,13 @@ start = senml
           <t>Macintosh file type code(s): none</t>
 
           <t>Person &amp; email address to contact for further information:
-          Cullen Jennings &lt;c.jennings@ieee.org&gt;</t>
+          Cullen Jennings &lt;fluffy@iii.ca&gt;</t>
 
           <t>Intended usage: COMMON</t>
 
           <t>Restrictions on usage: None</t>
 
-          <t>Author: Cullen Jennings &lt;c.jennings@ieee.org&gt;</t>
+          <t>Author: Cullen Jennings &lt;fluffy@iii.ca&gt;</t>
 
           <t>Change controller: IESG</t>
         </section>
@@ -938,13 +938,13 @@ start = senml
           <t>Macintosh file type code(s): none</t>
 
           <t>Person &amp; email address to contact for further information:
-          Cullen Jennings &lt;c.jennings@ieee.org&gt;</t>
+          Cullen Jennings &lt;fluffy@iii.ca&gt;</t>
 
           <t>Intended usage: COMMON</t>
 
           <t>Restrictions on usage: None</t>
 
-          <t>Author: Cullen Jennings &lt;c.jennings@ieee.org&gt;</t>
+          <t>Author: Cullen Jennings &lt;fluffy@iii.ca&gt;</t>
 
           <t>Change controller: IESG</t>
         </section>
