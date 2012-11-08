@@ -4,17 +4,17 @@
 P2PSIP                                                       C. Jennings
 Internet-Draft                                                     Cisco
 Intended status:  Standards Track                       B. Lowekamp, Ed.
-Expires:  January 17, 2013                                         Skype
+Expires:  May 9, 2013                                              Skype
                                                              E. Rescorla
                                                               RTFM, Inc.
                                                                 S. Baset
                                                           H. Schulzrinne
                                                      Columbia University
-                                                           July 16, 2012
+                                                       November 05, 2012
 
 
          REsource LOcation And Discovery (RELOAD) Base Protocol
-                       draft-ietf-p2psip-base-22
+                       draft-ietf-p2psip-base-23
 
 Abstract
 
@@ -47,14 +47,14 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on January 17, 2013.
+   This Internet-Draft will expire on May 9, 2013.
 
 
 
 
-Jennings, et al.        Expires January 17, 2013                [Page 1]
+Jennings, et al.           Expires May 9, 2013                  [Page 1]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 Copyright Notice
@@ -108,9 +108,9 @@ Copyright Notice
 
 
 
-Jennings, et al.        Expires January 17, 2013                [Page 2]
+Jennings, et al.           Expires May 9, 2013                  [Page 2]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 Table of Contents
@@ -164,14 +164,14 @@ Table of Contents
 
 
 
-Jennings, et al.        Expires January 17, 2013                [Page 3]
+Jennings, et al.           Expires May 9, 2013                  [Page 3]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
          6.3.2.1.  Processing Configuration Sequence Numbers . . . .  46
          6.3.2.2.  Destination and Via Lists . . . . . . . . . . . .  47
-         6.3.2.3.  Forwarding Options  . . . . . . . . . . . . . . .  49
+         6.3.2.3.  Forwarding Option . . . . . . . . . . . . . . . .  49
        6.3.3.   Message Contents Format  . . . . . . . . . . . . . .  50
          6.3.3.1.  Response Codes and Response Errors  . . . . . . .  51
        6.3.4.   Security Block . . . . . . . . . . . . . . . . . . .  53
@@ -220,9 +220,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013                [Page 4]
+Jennings, et al.           Expires May 9, 2013                  [Page 4]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
        6.6.4.   DTLS/UDP with SR . . . . . . . . . . . . . . . . . .  83
@@ -276,9 +276,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013                [Page 5]
+Jennings, et al.           Expires May 9, 2013                  [Page 5]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
      10.8.  Route query  . . . . . . . . . . . . . . . . . . . . . . 117
@@ -288,7 +288,7 @@ Internet-Draft                 RELOAD Base                     July 2012
        11.1.1.  Relax NG Grammar . . . . . . . . . . . . . . . . . . 126
      11.2.  Discovery Through Configuration Server . . . . . . . . . 128
      11.3.  Credentials  . . . . . . . . . . . . . . . . . . . . . . 129
-       11.3.1.  Self-Generated Credentials . . . . . . . . . . . . . 131
+       11.3.1.  Self-Generated Credentials . . . . . . . . . . . . . 130
      11.4.  Searching for a Bootstrap Node . . . . . . . . . . . . . 131
      11.5.  Contacting a Bootstrap Node  . . . . . . . . . . . . . . 131
    12. Message Flow Example  . . . . . . . . . . . . . . . . . . . . 132
@@ -332,9 +332,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013                [Page 6]
+Jennings, et al.           Expires May 9, 2013                  [Page 6]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
        14.17.2. Config Chord URL . . . . . . . . . . . . . . . . . . 156
@@ -388,9 +388,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013                [Page 7]
+Jennings, et al.           Expires May 9, 2013                  [Page 7]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 1.  Introduction
@@ -444,9 +444,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013                [Page 8]
+Jennings, et al.           Expires May 9, 2013                  [Page 8]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
       how RELOAD is used with the Chord based DHT algorithm, which is
@@ -500,9 +500,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013                [Page 9]
+Jennings, et al.           Expires May 9, 2013                  [Page 9]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    to Node 70.  In order to send a message to Node 70, it would first
@@ -556,9 +556,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 10]
+Jennings, et al.           Expires May 9, 2013                 [Page 10]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
             Application
@@ -612,9 +612,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 11]
+Jennings, et al.           Expires May 9, 2013                 [Page 11]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 
@@ -637,7 +637,7 @@ Internet-Draft                 RELOAD Base                     July 2012
       directly between nodes.  Each such protocol includes the
       appropriate provisions for per-hop framing or hop-by-hop ACKs
       required by unreliable transports.  TLS [RFC5246] and DTLS
-      [RFC4347] are the currently defined "link layer" protocols used by
+      [RFC6347] are the currently defined "link layer" protocols used by
       RELOAD for hop-by-hop communication.  New protocols can be
       defined, as described in Section 6.6.1 and Section 11.1.  As this
       document defines only TLS and DTLS, we use those terms throughout
@@ -668,9 +668,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 12]
+Jennings, et al.           Expires May 9, 2013                 [Page 12]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
                 | Internet Model  |
@@ -724,9 +724,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 13]
+Jennings, et al.           Expires May 9, 2013                 [Page 13]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    finally how applications can retrieve and use the data.
@@ -780,9 +780,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 14]
+Jennings, et al.           Expires May 9, 2013                 [Page 14]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    providing "Key based routing" (KBR), although as RELOAD supports
@@ -836,9 +836,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 15]
+Jennings, et al.           Expires May 9, 2013                 [Page 15]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 1.2.4.  Topology Plugin
@@ -892,9 +892,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 16]
+Jennings, et al.           Expires May 9, 2013                 [Page 16]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    plugin to control the overlay and resource operations and messages.
@@ -927,14 +927,14 @@ Internet-Draft                 RELOAD Base                     July 2012
    RELOAD messages.  RELOAD provides communications security at three
    levels:
 
-   Connection Level:    Connections between peers are secured with TLS,
+   Connection Level:    Connections between nodes are secured with TLS,
       DTLS, or potentially some to be defined future protocol.
    Message Level:    Each RELOAD message is signed.
-   Object Level:    Stored objects is signed by the creating peer.
+   Object Level:    Stored objects are signed by the creating node.
 
-   These three levels of security work together to allow peers to verify
-   the origin and correctness of data they receive from other peers,
-   even in the face of malicious activity by other peers in the overlay.
+   These three levels of security work together to allow nodes to verify
+   the origin and correctness of data they receive from other nodes,
+   even in the face of malicious activity by other nodes in the overlay.
    RELOAD also provides access control built on top of these
    communications security features.  Because the peer responsible for
    storing a piece of data can validate the signature on the data being
@@ -948,9 +948,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 17]
+Jennings, et al.           Expires May 9, 2013                 [Page 17]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    only.  This feature is used together with certificate-based access
@@ -1004,9 +1004,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 18]
+Jennings, et al.           Expires May 9, 2013                 [Page 18]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    Overlay Instance:  A specific overlay algorithm and the collection of
@@ -1060,9 +1060,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 19]
+Jennings, et al.           Expires May 9, 2013                 [Page 19]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 
@@ -1116,9 +1116,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 20]
+Jennings, et al.           Expires May 9, 2013                 [Page 20]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 
@@ -1164,17 +1164,17 @@ Internet-Draft                 RELOAD Base                     July 2012
    o  To determine the set of resources for which the node is
       responsible.
 
-   Each node has a certificate [RFC5280] containing a Node-ID, which is
-   unique within an overlay instance.
+   Each node has a certificate [RFC5280] containing this Node-ID, which
+   is unique within an overlay instance.
 
    The certificate serves multiple purposes:
 
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 21]
+Jennings, et al.           Expires May 9, 2013                 [Page 21]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    o  It entitles the user to store data at specific locations in the
@@ -1228,9 +1228,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 22]
+Jennings, et al.           Expires May 9, 2013                 [Page 22]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    self-signed.  This allows for a single set of code paths in the
@@ -1284,9 +1284,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 23]
+Jennings, et al.           Expires May 9, 2013                 [Page 23]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 3.2.1.  Client Routing
@@ -1340,9 +1340,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 24]
+Jennings, et al.           Expires May 9, 2013                 [Page 24]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    o  Possess security credentials required by the overlay it is
@@ -1396,9 +1396,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 25]
+Jennings, et al.           Expires May 9, 2013                 [Page 25]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    RELOAD's routing utilizes three basic mechanisms:
@@ -1452,16 +1452,16 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 26]
+Jennings, et al.           Expires May 9, 2013                 [Page 26]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    client or peer:  A forwards its request to B and the response is
    returned to A in the same manner regardless of A's role in the
    overlay.
 
-   This figure shows use of full via-lists by intermediate peers B and
+   This figure shows use of full via lists by intermediate peers B and
    X. However, if B and/or X are willing to store state, then they may
    elect to truncate the lists, save that information internally (keyed
    by the transaction id), and return the response message along the
@@ -1492,8 +1492,8 @@ Internet-Draft                 RELOAD Base                     July 2012
    <----------
         Dest=A
 
-   As before, when B receives the message, he creates via list
-   consisting of [A].  However, instead of sending [A,B], X creates an
+   As before, when B receives the message, he creates a via list
+   consisting of [A].  However, instead of sending [A, B], X creates an
    opaque ID X1 which maps internally to [A, B] (perhaps by being an
    encryption of [A, B] and forwards to Z with only X1 as the via list.
    When the response arrives at X, it maps X1 back to [A, B] and then
@@ -1508,9 +1508,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 27]
+Jennings, et al.           Expires May 9, 2013                 [Page 27]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    by the initiating node.
@@ -1539,9 +1539,9 @@ Internet-Draft                 RELOAD Base                     July 2012
    order to support this case, some small number of "bootstrap nodes"
    typically need to be publicly accessible so that new peers can
    directly connect to them.  Section 11 contains more detail on this.
-   The second case is when a client node connects to a node at an
-   arbitrary IP address, rather than to its responsible peer, as
-   described in the second bullet point of Section 3.2.1.
+   The second case is when a client connects to a peer at an arbitrary
+   IP address, rather than to its responsible peer, as described in the
+   second bullet point of Section 3.2.1.
 
    In general, a peer needs to maintain connections to all of the peers
    near it in the Overlay Instance and to enough other peers to have
@@ -1564,9 +1564,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 28]
+Jennings, et al.           Expires May 9, 2013                 [Page 28]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    to implement this DHT is fully contained in this specification but it
@@ -1620,9 +1620,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 29]
+Jennings, et al.           Expires May 9, 2013                 [Page 29]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    o  Getting a copy of the data it is now responsible for storing and
@@ -1676,9 +1676,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 30]
+Jennings, et al.           Expires May 9, 2013                 [Page 30]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 3.6.1.  Initial Configuration
@@ -1695,7 +1695,7 @@ Internet-Draft                 RELOAD Base                     July 2012
 
    If a node already has the valid configuration document that it
    received by some out of band method, this step can be skipped.  Note
-   that that out of band method MUST provide authentication and
+   that that out of band method must provide authentication and
    integrity, because the configuration document contains the trust
    anchors for the system.
 
@@ -1714,7 +1714,7 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 3.6.3.  Diagnostics
 
-   Significant advice around managing a RELAOD overlay and extensions
+   Significant advice around managing a RELOAD overlay and extensions
    for diagnostics are described in [I-D.ietf-p2psip-diagnostics].
 
 
@@ -1732,9 +1732,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 31]
+Jennings, et al.           Expires May 9, 2013                 [Page 31]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    variety of purposes:
@@ -1788,9 +1788,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 32]
+Jennings, et al.           Expires May 9, 2013                 [Page 32]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 
@@ -1824,8 +1824,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    what certificate is appropriate.
 
    The most natural rule is that a certificate authorizes a user to
-   store data keyed with their user name X. This rule is used for all
-   the Kinds defined in this specification.  Thus, only a user with a
+   store data keyed with their user name X. Thus, only a user with a
    certificate for "alice@example.org" could write to that location in
    the overlay.  However, other usages can define any rules they choose,
    including publicly writable values.
@@ -1841,15 +1840,14 @@ Internet-Draft                 RELOAD Base                     July 2012
    The size requirements of the data being stored in the overlay are
    variable.  For instance, a SIP AOR and voicemail differ widely in the
    storage size.  RELOAD leaves it to the Usage and overlay
-
-
-
-Jennings, et al.        Expires January 17, 2013               [Page 33]
-
-Internet-Draft                 RELOAD Base                     July 2012
-
-
    configuration to limit size imbalance of various Kinds.
+
+
+
+Jennings, et al.           Expires May 9, 2013                 [Page 33]
+
+Internet-Draft                 RELOAD Base                 November 2012
+
 
 5.1.2.  Replication
 
@@ -1893,22 +1891,20 @@ Internet-Draft                 RELOAD Base                     July 2012
       defines.
    o  Defines the data structure for each of the Kinds.
    o  Defines access control rules for each of the Kinds.
-   o  Defines how the Resource Name is formed that is hashed to form the
-      Resource-ID where each Kind is stored.
-
-
-
-
-
-Jennings, et al.        Expires January 17, 2013               [Page 34]
-
-Internet-Draft                 RELOAD Base                     July 2012
-
-
+   o  Defines how the Resource Name is hashed to form the Resource-ID
+      where each Kind is stored.
    o  Describes how values will be merged after a network partition.
       Unless otherwise specified, the default merging rule is to act as
       if all the values that need to be merged were stored and as if the
       order they were stored in corresponds to the stored time values
+
+
+
+Jennings, et al.           Expires May 9, 2013                 [Page 34]
+
+Internet-Draft                 RELOAD Base                 November 2012
+
+
       associated with (and carried in) their values.  Because the stored
       time values are those associated with the peer which did the
       writing, clock skew is generally not an issue.  If two nodes are
@@ -1953,18 +1949,18 @@ Internet-Draft                 RELOAD Base                     July 2012
 6.  Overlay Management Protocol
 
    This section defines the basic protocols used to create, maintain,
-
-
-
-Jennings, et al.        Expires January 17, 2013               [Page 35]
-
-Internet-Draft                 RELOAD Base                     July 2012
-
-
    and use the RELOAD overlay network.  We start by defining the basic
    concept of how message destinations are interpreted when routing
    messages.  We then describe the symmetric recursive routing model,
    which is RELOAD's default routing algorithm.  We then define the
+
+
+
+Jennings, et al.           Expires May 9, 2013                 [Page 35]
+
+Internet-Draft                 RELOAD Base                 November 2012
+
+
    message structure and then finally define the messages used to join
    and maintain the overlay.
 
@@ -2009,23 +2005,23 @@ Internet-Draft                 RELOAD Base                     July 2012
       MUST be silently dropped.  Otherwise, the message is destined for
       this node and it verify the signature and pass it up to the upper
       layers.
-
-
-
-Jennings, et al.        Expires January 17, 2013               [Page 36]
-
-Internet-Draft                 RELOAD Base                     July 2012
-
-
    o  If the entry is a Node-ID which equals this node's Node-ID, then
       the message is destined for this node.  If this is the only entry
       on the destination list, the message is destined for this node and
       so the node passes it up to the upper layers.  Otherwise the node
+
+
+
+Jennings, et al.           Expires May 9, 2013                 [Page 36]
+
+Internet-Draft                 RELOAD Base                 November 2012
+
+
       removes the entry from the destination list and repeats the
       routing process with the next entry on the destination list.  If
       the message is a response and list compression was used, then the
       node first modifies the destination list to reinsert the saved
-      state, e.g., by unpacking any opaque ids.
+      state, e.g., by unpacking any opaque IDS.
    o  If the entry is the wildcard Node-ID, the message is destined for
       this node and it passes it up to the upper layers.
    o  If the entry is a Node-ID which is not equal to this node, then
@@ -2061,23 +2057,23 @@ Internet-Draft                 RELOAD Base                     July 2012
 
    As an example of the first strategy, consider an example with nodes
    A, B, C, D and E. If node D receives a message from node C with via
-   list (A, B), then D would forward to the next node (E) with via list
-   (A, B, C).  Now, if E wants to respond to the message, it reverses
-   the via list to produce the destination list, resulting in (D, C, B,
-   A).  When D forwards the response to C, the destination list will
-
-
-
-Jennings, et al.        Expires January 17, 2013               [Page 37]
-
-Internet-Draft                 RELOAD Base                     July 2012
-
-
-   contain (C, B, A).
+   list [A, B], then D would forward to the next node E with via list
+   [A, B, C].  Now, if E wants to respond to the message, it reverses
+   the via list to produce the destination list, resulting in [D, C, B,
+   A].  When D forwards the response to C, the destination list will
+   contain [C, B, A].
 
    As an example of the second strategy, if node D receives a message
-   from node C with transaction ID X and via list (A, B), it could store
-   (X, C) in its state database and forward the message with the via
+   from node C with transaction ID X and via list [A, B], it could store
+
+
+
+Jennings, et al.           Expires May 9, 2013                 [Page 37]
+
+Internet-Draft                 RELOAD Base                 November 2012
+
+
+   [X, C] in its state database and forward the message with the via
    list unchanged.  When D receives the response, it consults its state
    database for transaction id X, determines that the request came from
    C, and forwards the response to C.
@@ -2088,12 +2084,12 @@ Internet-Draft                 RELOAD Base                     July 2012
    RELOAD provides explicit support for this functionality in the form
    of opaque IDs, which can replace any number of via list entries.  For
    instance, in the above example, Node D might send E a via list
-   containing only the opaque ID (I).  E would then use the destination
-   list (D, I) to send its return message.  When D processes this
+   containing only the opaque ID I. E would then use the destination
+   list [D, I] to send its return message.  When D processes this
    destination list, it would detect that I is a opaque ID, recover the
-   via list (A, B, C), and reverse that to produce the correct
-   destination list (C, B, A) before sending it to C. This feature is
-   called List Compression.  Possibilities for a opaque id include a
+   via list [A, B, C], and reverse that to produce the correct
+   destination list [C, B, A] before sending it to C. This feature is
+   called List Compression.  Possibilities for a opaque ID include a
    compressed version of the original via list or an index into a state
    database containing the original via list, but the details are a
    local matter.
@@ -2111,39 +2107,39 @@ Internet-Draft                 RELOAD Base                     July 2012
    option or overlay configuration option explicitly indicates this
    state is not needed, the state MUST be maintained for at least the
    value of the overlay-reliability-timer configuration parameter and
-   MAY be kept longer.  Future extension, such as
-   [I-D.jiang-p2psip-relay], may define mechanisms for determining when
-   this state does not need to be retained.
+   MAY be kept longer.  Future extension, such as [I-D.ietf-p2psip-rpr],
+   may define mechanisms for determining when this state does not need
+   to be retained.
 
    None of the above mechanisms are required for responses, since there
    is no need to ensure that subsequent requests follow the same path.
 
    To be precise on the responsibility of the intermediate node, suppose
    that an intermediate node, A, receives a message from node B with via
-   list X-Y-Z.  Node A MUST implement an algorithm that ensures that A
+   list [X, Y, Z].  Node A MUST implement an algorithm that ensures that
+   A returns a response to this request to node B with the destination
+   list [B, Z, Y, X], provided that the node to which A forwards the
+   request follows the same contract.  Node A normally learns the
+   Node-ID B is using via an Attach, but a node using a certificate with
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 38]
+Jennings, et al.           Expires May 9, 2013                 [Page 38]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
-   returns a response to this request to node B with the destination
-   list B-Z-Y-X, provided that the node to which A forwards the request
-   follows the same contract.  Node A normally learns the Node-ID B is
-   using via an Attach, but a node using a certificate with a single
-   Node-ID MAY elect to not send an Attach (see Section 3.2.1 bullet 2).
-   If a node with a certificate with multiple Node-IDs attempts to route
-   a message other than a Ping or Attach through a node without
-   performing an Attach, the receiving node MUST reject the request with
-   an Error_Forbidden error.  The node MUST implement support for
-   returning responses to a Ping or Attach request made by a joining
-   node Attaching to its responsible peer.
+   a single Node-ID MAY elect to not send an Attach (see Section 3.2.1
+   bullet 2).  If a node with a certificate with multiple Node-IDs
+   attempts to route a message other than a Ping or Attach through a
+   node without performing an Attach, the receiving node MUST reject the
+   request with an Error_Forbidden error.  The node MUST implement
+   support for returning responses to a Ping or Attach request made by a
+   joining node Attaching to its responsible peer.
 
 6.1.3.  Opaque ID
 
-   If the first entry in the destination list is an opaque id (e.g., a
+   If the first entry in the destination list is an opaque ID (e.g., a
    compressed via list), the peer MUST replace that entry with the
    original via list that it replaced and then re-examine the
    destination list to determine which of the three cases in Section 6.1
@@ -2151,14 +2147,14 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 6.2.  Symmetric Recursive Routing
 
-   This Section defines RELOAD's symmetric recursive routing algorithm,
-   which is the default algorithm used by nodes to route messages
-   through the overlay.  All implementations MUST implement this routing
-   algorithm.  An overlay MAY be configured to use alternative routing
-   algorithms, and alternative routing algorithms MAY be selected on a
-   per-message basis.  I.e., a node in an overlay which supports SRR and
-   routing algorithm XXX might use SRR some of the time and XXX some of
-   the time.
+   This Section defines RELOAD's Symmetric Recursive Routing (SRR)
+   algorithm, which is the default algorithm used by nodes to route
+   messages through the overlay.  All implementations MUST implement
+   this routing algorithm.  An overlay MAY be configured to use
+   alternative routing algorithms, and alternative routing algorithms
+   MAY be selected on a per-message basis.  I.e., a node in an overlay
+   which supports SRR and routing algorithm RPR [I-D.ietf-p2psip-rpr]
+   might use SRR some of the time and RPR some of the time.
 
 6.2.1.  Request Origination
 
@@ -2177,18 +2173,18 @@ Internet-Draft                 RELOAD Base                     July 2012
    determine the appropriate next hop.
 
    Parallel requests for a resource are a common solution to improve
-
-
-
-Jennings, et al.        Expires January 17, 2013               [Page 39]
-
-Internet-Draft                 RELOAD Base                     July 2012
-
-
    reliability in the face of churn or of subversive peers.  Parallel
    searches for usage-specified replicas are managed by the usage layer,
    for instance by having the usage store data at multiple Resource-IDs
    with the requesting node sending requests to each of those Resource-
+
+
+
+Jennings, et al.           Expires May 9, 2013                 [Page 39]
+
+Internet-Draft                 RELOAD Base                 November 2012
+
+
    IDs.  However, a single request MAY also be routed through multiple
    adjacent peers, even when known to be sub-optimal, to improve
    reliability [vulnerabilities-acsac04].  Such parallel searches MAY be
@@ -2233,17 +2229,17 @@ Internet-Draft                 RELOAD Base                     July 2012
    for the parts of a structure that were required in all messages, we
    just define these in a fixed position, as adding a type and length
    for them is unnecessary and would simply increase bandwidth and
-
-
-
-Jennings, et al.        Expires January 17, 2013               [Page 40]
-
-Internet-Draft                 RELOAD Base                     July 2012
-
-
    introduces new potential for interoperability issues.
 
    Each message has three parts, concatenated as shown below:
+
+
+
+
+Jennings, et al.           Expires May 9, 2013                 [Page 40]
+
+Internet-Draft                 RELOAD Base                 November 2012
+
 
      +-------------------------+
      |    Forwarding Header    |
@@ -2276,10 +2272,11 @@ Internet-Draft                 RELOAD Base                     July 2012
 6.3.1.  Presentation Language
 
    The structures defined in this document are defined using a C-like
-   syntax based on the presentation language used to define
-   TLS[RFC5246].  Advantages of this style include:
+   syntax based on the presentation language used to define TLS
+   [RFC5246].  Advantages of this style include:
 
-   o  It familiar enough looking that most readers can grasp it quickly.
+   o  It is familiar enough looking that most readers can grasp it
+      quickly.
    o  The ability to define nested structures allows a separation
       between high-level and low-level message structures.
    o  It has a straightforward wire encoding that allows quick
@@ -2289,15 +2286,17 @@ Internet-Draft                 RELOAD Base                     July 2012
 
    Several idiosyncrasies of this language are worth noting.
 
-
-
-
-Jennings, et al.        Expires January 17, 2013               [Page 41]
-
-Internet-Draft                 RELOAD Base                     July 2012
-
-
    o  All lengths are denoted in bytes, not objects.
+
+
+
+
+
+Jennings, et al.           Expires May 9, 2013                 [Page 41]
+
+Internet-Draft                 RELOAD Base                 November 2012
+
+
    o  Variable length values are denoted like arrays with angle
       brackets.
    o  "select" is used to indicate variant structures.
@@ -2317,7 +2316,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    width of the containing integral type.  For instance, Boolean
    represents a true or false:
 
-         enum { false (0), true(1), (255)} Boolean;
+         enum { false (0), true(1), (255) } Boolean;
 
 
    A boolean value is either a 1 or a 0.  The max value of 255 indicates
@@ -2345,15 +2344,15 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
    Like a NodeId, a ResourceId is an opaque string of bytes, but unlike
-
-
-
-Jennings, et al.        Expires January 17, 2013               [Page 42]
-
-Internet-Draft                 RELOAD Base                     July 2012
-
-
    NodeIds, ResourceIds are variable length, up to 254 bytes (2040 bits)
+
+
+
+Jennings, et al.           Expires May 9, 2013                 [Page 42]
+
+Internet-Draft                 RELOAD Base                 November 2012
+
+
    in length.  On the wire, each ResourceId is preceded by a single
    length byte (allowing lengths up to 255).  Thus, the 3-byte value
    "FOO" would be encoded as:  03 46 4f 4f.  Note the < range > syntax
@@ -2367,15 +2366,15 @@ Internet-Draft                 RELOAD Base                     July 2012
    address:
 
 
-        enum {reservedAddr(0), ipv4_address (1), ipv6_address (2),
-             (255)} AddressType;
+        enum { reservedAddr(0), ipv4_address(1), ipv6_address(2),
+             (255) } AddressType;
 
-        struct  {
+        struct {
           uint32                  addr;
           uint16                  port;
         } IPv4AddrPort;
 
-        struct  {
+        struct {
           uint128                 addr;
           uint16                  port;
         } IPv6AddrPort;
@@ -2404,9 +2403,10 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 43]
+
+Jennings, et al.           Expires May 9, 2013                 [Page 43]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    type:  the type of address (v4 or v6).
@@ -2455,14 +2455,14 @@ Internet-Draft                 RELOAD Base                     July 2012
           Destination        via_list[via_list_length];
           Destination        destination_list
                                [destination_list_length];
-          ForwardingOptions  options[options_length];
+          ForwardingOption   options[options_length];
         } ForwardingHeader;
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 44]
+Jennings, et al.           Expires May 9, 2013                 [Page 44]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    The contents of the structure are:
@@ -2477,8 +2477,8 @@ Internet-Draft                 RELOAD Base                     July 2012
       hash of the overlay name.  The purpose of this field is to allow
       nodes to participate in multiple overlays and to detect accidental
       misconfiguration.  This is not a security critical function.  The
-      overlay name MUST consist of a sequence of charters what would be
-      allowable as a DNS name.
+      overlay name MUST consist of a sequence of characters what would
+      be allowable as a DNS name.
 
    configuration_sequence:  The sequence number of the configuration
       file.
@@ -2494,7 +2494,7 @@ Internet-Draft                 RELOAD Base                     July 2012
       be decremented by one at every hop along the route the message
       traverses just before transmission.  If a received message has a
       TTL of 0, and the message is not destined for the receiving node,
-      then the message MUST NOT be propagated further and and a
+      then the message MUST NOT be propagated further and a
       "Error_TTL_Exceeded" error should be generated.  The initial value
       of the TTL SHOULD be 100 and MUST NOT exceed 100 unless defined
       otherwise by the overlay configuration.  Implementations which
@@ -2507,7 +2507,7 @@ Internet-Draft                 RELOAD Base                     July 2012
       (0x40000000) is set to 1, it indicates that this is the last (or
       only) fragment.  The next six bits (0x20000000 to 0x01000000) are
       reserved and SHOULD be set to zero.  The remainder of the field is
-      used to indicate the fragment offset; see Section 6.7
+      used to indicate the fragment offset; see Section 6.7.
 
 
 
@@ -2516,9 +2516,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 45]
+Jennings, et al.           Expires May 9, 2013                 [Page 45]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    length:  The count in bytes of the size of the message, including the
@@ -2560,7 +2560,7 @@ Internet-Draft                 RELOAD Base                     July 2012
       first element in the destination list is where the message goes
       next.  The list shrinks as the message traverses each listed peer.
 
-   options:  Contains a series of ForwardingOptions entries.  See
+   options:  Contains a series of ForwardingOption entries.  See
       Section 6.3.2.3.
 
 6.3.2.1.  Processing Configuration Sequence Numbers
@@ -2568,13 +2568,13 @@ Internet-Draft                 RELOAD Base                     July 2012
    In order to be part of the overlay, a node MUST have a copy of the
    overlay configuration document.  In order to allow for configuration
    document changes, each version of the configuration document has a
-   sequence number which is monotonically increasing mod 65536.  Because
+   sequence number which is monotonically increasing mod 65535.  Because
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 46]
+Jennings, et al.           Expires May 9, 2013                 [Page 46]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    the sequence number may in principle wrap, greater than or less than
@@ -2597,10 +2597,10 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 6.3.2.2.  Destination and Via Lists
 
-   The destination list and via lists are sequences of Destination
+   The destination list and via list are sequences of Destination
    values:
 
-     enum {reserved(0), node(1), resource(2), opaque_id_type(3),
+     enum { reserved(0), node(1), resource(2), opaque_id_type(3),
                /* 128-255 not allowed */ (255) }
                DestinationType;
 
@@ -2628,9 +2628,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 47]
+Jennings, et al.           Expires May 9, 2013                 [Page 47]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
      } Destination;
@@ -2667,10 +2667,10 @@ Internet-Draft                 RELOAD Base                     July 2012
       A Node-ID.
 
    opaque
-      A compressed list of Node-IDs and/or resources.  Because this
-      value was compressed by one of the peers, it is only meaningful to
-      that peer and cannot be decoded by other peers.  Thus, it is
-      represented as an opaque string.
+      A compressed list of Node-IDs and an eventual Resource-ID.
+      Because this value was compressed by one of the peers, it is only
+      meaningful to that peer and cannot be decoded by other peers.
+      Thus, it is represented as an opaque string.
 
    resource
       The Resource-ID of the resource which is desired.  This type MUST
@@ -2684,9 +2684,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 48]
+Jennings, et al.           Expires May 9, 2013                 [Page 48]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    connection table entry has changed, the identifier SHOULD be split
@@ -2694,32 +2694,32 @@ Internet-Draft                 RELOAD Base                     July 2012
    startup, the generation counters should be initialized to random
    values.  An implementation could use 12 bits for the connection table
    index and 3 bits for the generation counter.  (Note that this does
-   not suggest a 4096 entry connection table for every node, only the
+   not suggest a 4096 entry connection table for every peer, only the
    ability to encode for a larger connection table.)  When a connection
    table slot is used for a new connection, the generation counter is
    incremented (with wrapping).  Connection table slots are used on a
    rotating basis to maximize the time interval between uses of the same
    slot for different connections.  When routing a message to an entry
-   in the destination list encoding a connection table entry, the node
+   in the destination list encoding a connection table entry, the peer
    confirms that the generation counter matches the current generation
    counter of that index before forwarding the message.  If it does not
    match, the message is silently dropped.
 
-6.3.2.3.  Forwarding Options
+6.3.2.3.  Forwarding Option
 
    The Forwarding header can be extended with forwarding header options,
    which are a series of ForwardingOptions structures:
 
     enum { reservedForwarding(0), (255) }
-      ForwardingOptionsType;
+      ForwardingOptionType;
 
     struct {
-      ForwardingOptionsType     type;
+      ForwardingOptionType      type;
       uint8                     flags;
       uint16                    length;
       select (type) {
             /* This type may be extended */
-      } option;
+      };
     } ForwardingOption;
 
 
@@ -2740,16 +2740,16 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 49]
+Jennings, et al.           Expires May 9, 2013                 [Page 49]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    flags
       Three flags are defined FORWARD_CRITICAL(0x01),
       DESTINATION_CRITICAL(0x02), and RESPONSE_COPY(0x04).  These flags
       MUST NOT be set in a response.  If the FORWARD_CRITICAL flag is
-      set, any node that would forward the message but does not
+      set, any peer that would forward the message but does not
       understand this options MUST reject the request with an
       Error_Unsupported_Forwarding_Option error response.  If the
       DESTINATION_CRITICAL flag is set, any node that generates a
@@ -2780,7 +2780,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    struct {
      uint16                 message_code;
      opaque                 message_body<0..2^32-1>;
-     MessageExtensions      extensions<0..2^32-1>;
+     MessageExtension       extensions<0..2^32-1>;
    } MessageContents;
 
 
@@ -2796,9 +2796,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 50]
+Jennings, et al.           Expires May 9, 2013                 [Page 50]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 
@@ -2841,20 +2841,20 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 6.3.3.1.  Response Codes and Response Errors
 
-   A peer processing a request returns its status in the message_code
+   A node processing a request returns its status in the message_code
    field.  If the request was a success, then the message code is the
    response code that matches the request (i.e., the next code up).  The
    response payload is then as defined in the request/response
    descriptions.
 
    If the request has failed, then the message code is set to 0xffff
-   (error) and the payload MUST be an error_response PDU, as shown
+   (error) and the payload MUST be an error_response message, as shown
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 51]
+Jennings, et al.           Expires May 9, 2013                 [Page 51]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    below.
@@ -2887,7 +2887,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    Error_Forbidden:  The requesting node does not have permission to
       make this request.
 
-   Error_Not_Found:  The resource or peer cannot be found or does not
+   Error_Not_Found:  The resource or node cannot be found or does not
       exist.
 
    Error_Request_Timeout:  A response to the request has not been
@@ -2908,9 +2908,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 52]
+Jennings, et al.           Expires May 9, 2013                 [Page 52]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 
@@ -2919,8 +2919,8 @@ Internet-Draft                 RELOAD Base                     July 2012
       or some other parameter that is inconsistent with the overlay
       configuration.
 
-   Error_Unsupported_Forwarding_Option:  A peer receiving the request
-      with a forwarding options flagged as critical but the peer does
+   Error_Unsupported_Forwarding_Option:  A node receiving the request
+      with a forwarding options flagged as critical but the node does
       not support this option.  See section Section 6.3.2.3.
 
    Error_TTL_Exceeded:  A peer receiving the request where the TTL got
@@ -2929,16 +2929,16 @@ Internet-Draft                 RELOAD Base                     July 2012
    Error_Message_Too_Large:  A peer receiving the request that was too
       large.  See section Section 6.6.
 
-   Error_Response_Too_Large:  A peer would have generated a response
+   Error_Response_Too_Large:  A node would have generated a response
       that is too large per the max_response_length field.
 
-   Error_Config_Too_Old:  A destination peer received a request with a
+   Error_Config_Too_Old:  A destination node received a request with a
       configuration sequence that's too old.  See Section 6.3.2.1.
 
    Error_Config_Too_New:  A destination node received a request with a
       configuration sequence that's too new.  See Section 6.3.2.1.
 
-   Error_Unknown_Kind:  A destination node received a request with an
+   Error_Unknown_Kind:  A destination peer received a request with an
       unknown Kind-ID.  See Section 7.4.1.2.
 
    Error_In_Progress:  An Attach is already in progress to this peer.
@@ -2964,9 +2964,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 53]
+Jennings, et al.           Expires May 9, 2013                 [Page 53]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    struct {
@@ -2986,7 +2986,7 @@ Internet-Draft                 RELOAD Base                     July 2012
       A bucket of certificates.
 
    signature
-      A signature over the message contents.
+      A signature.
 
    The certificates bucket SHOULD contain all the certificates necessary
    to verify every signature in both the message and the internal
@@ -2996,11 +2996,11 @@ Internet-Draft                 RELOAD Base                     July 2012
    copy of each certificate to be sent.  In systems that have an
    alternative certificate distribution mechanism, some certificates MAY
    be omitted.  However, unless an alternative mechanism for immediately
-   generating certifcates, such as shared secret security (Section 13.4)
-   is used, it is strongly RECOMMENDED that implementors include all
-   referenced certificates, otherwise there is the possibility that
-   messages may not be immediately verifiable because certificates must
-   first be retrieved.
+   generating certificates, such as shared secret security
+   (Section 13.4) is used, it is strongly RECOMMENDED that implementors
+   include all referenced certificates, otherwise there is the
+   possibility that messages may not be immediately verifiable because
+   certificates must first be retrieved.
 
    NOTE TO IMPLEMENTERS:  This requirement implies that a peer storing
    data is obligated to retain certificates for the data it holds
@@ -3013,16 +3013,16 @@ Internet-Draft                 RELOAD Base                     July 2012
 
    type
       The type of the certificate, as defined in [RFC6091].  Only the
-      use of X.509 certificates is defined in this draft.
+      use of X.509 certificates is defined in this document.
 
 
 
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 54]
+Jennings, et al.           Expires May 9, 2013                 [Page 54]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 
@@ -3041,7 +3041,7 @@ Internet-Draft                 RELOAD Base                     July 2012
      enum { reservedSignerIdentity(0),
             cert_hash(1), cert_hash_node_id(2),
             none(3)
-            (255)} SignerIdentityType;
+            (255) } SignerIdentityType;
 
      struct {
        select (identity_type) {
@@ -3066,7 +3066,7 @@ Internet-Draft                 RELOAD Base                     July 2012
        SignerIdentityValue    identity[SignerIdentity.length];
      } SignerIdentity;
 
-     struct  {
+     struct {
         SignatureAndHashAlgorithm     algorithm;   // From TLS
         SignerIdentity                identity;
         opaque                        signature_value<0..2^16-1>;
@@ -3076,17 +3076,17 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 55]
+Jennings, et al.           Expires May 9, 2013                 [Page 55]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 
    algorithm
       The signature algorithm in use.  The algorithm definitions are
-      found in the IANA TLS SignatureAlgorithm Registry and
-      HashAlgorithm registries.  All implementations MUST support
-      RSASSA-PKCS1-v1_5 [RFC3447] signatures with SHA-256 hashes.
+      found in the IANA TLS SignatureAlgorithm and HashAlgorithm
+      Registries.  All implementations MUST support RSASSA-PKCS1-v1_5
+      [RFC3447] signatures with SHA-256 hashes.
 
    identity
       The identity used to form the signature.
@@ -3095,7 +3095,7 @@ Internet-Draft                 RELOAD Base                     July 2012
       The value of the signature.
 
    There are two permitted identity formats, one for a certificate with
-   only one node-id and one for a certificate with multiple node-ids.
+   only one Node-ID and one for a certificate with multiple Node-IDs.
    In the first case, the cert_hash type MUST be used.  The hash_alg
    field is used to indicate the algorithm used to produce the hash.
    The certificate_hash contains the hash of the certificate object
@@ -3104,7 +3104,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    In the second case, the cert_hash_node_id type MUST be used.  The
    hash_alg is as in cert_hash but the cert_hash_node_id is computed
    over the NodeId used to sign concatenated with the certificate.
-   I.e., H(NodeID || certificate).  The NodeId is represented without
+   I.e., H(NodeId || certificate).  The NodeId is represented without
    any framing or length fields, as simple raw bytes.  This is safe
    because NodeIds are fixed-length for a given overlay.
 
@@ -3132,16 +3132,16 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 56]
+Jennings, et al.           Expires May 9, 2013                 [Page 56]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    1.  The response to a message sent to a specific Node-ID MUST have
        been sent by that Node-ID.
-   2.  The response to a message sent to a Resource-Id MUST have been
+   2.  The response to a message sent to a Resource-ID MUST have been
        sent by a Node-ID which is as close to or closer to the target
-       Resource-Id than any node in the requesting node's neighbor
+       Resource-ID than any node in the requesting node's neighbor
        table.
 
    The second condition serves as a primitive check for responses from
@@ -3188,9 +3188,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 57]
+Jennings, et al.           Expires May 9, 2013                 [Page 57]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 6.4.2.  Methods and types for use by topology plugins
@@ -3222,7 +3222,7 @@ Internet-Draft                 RELOAD Base                     July 2012
 
    Because joins may only be executed between nodes which are directly
    adjacent, receiving peers MUST verify that any JoinReq they receive
-   arrives from a transport channel that is bound to the Node-Id to be
+   arrives from a transport channel that is bound to the Node-ID to be
    assumed by the joining peer.)  This also prevents replay attacks
    provided that DTLS anti-replay is used.
 
@@ -3244,9 +3244,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 58]
+Jennings, et al.           Expires May 9, 2013                 [Page 58]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    joining.)  If not, they MUST discard the message.
@@ -3281,7 +3281,7 @@ Internet-Draft                 RELOAD Base                     July 2012
 
    Because leaves may only be executed between nodes which are directly
    adjacent, receiving peers MUST verify that any LeaveReq they receive
-   arrives from a transport channel that is bound to the Node-Id to be
+   arrives from a transport channel that is bound to the Node-ID to be
    assumed by the leaving peer.)  This also prevents replay attacks
    provided that DTLS anti-replay is used.
 
@@ -3300,13 +3300,13 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 59]
+Jennings, et al.           Expires May 9, 2013                 [Page 59]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    When a peer receives an Attach request with the send_update flag set
-   to "true" (Section 6.4.2.4.1, it MUST send an Update message back to
+   to True (Section 6.4.2.4.1), it MUST send an Update message back to
    the sender of the Attach request after the completion of the
    corresponding ICE check and TLS connection.  Note that the sender of
    a such Attach request may not have joined the overlay yet.
@@ -3333,13 +3333,13 @@ Internet-Draft                 RELOAD Base                     July 2012
 
    One important use of the RouteQuery request is to support iterative
    routing.  The sender selects one of the peers in its routing table
-   and sends it a RouteQuery message with the destination_object set to
+   and sends it a RouteQuery message with the destination field set to
    the Node-ID or Resource-ID it wishes to route to.  The receiving peer
    responds with information about the peers to which the request would
    be routed.  The sending peer MAY then use the Attach method to attach
    to that peer(s), and repeat the RouteQuery.  Eventually, the sender
    gets a response from a peer that is closest to the identifier in the
-   destination_object as determined by the topology plugin.  At that
+   destination field as determined by the topology plugin.  At that
    point, the sender can send messages directly to that peer.
 
 6.4.2.4.1.  Request Definition
@@ -3356,9 +3356,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 60]
+Jennings, et al.           Expires May 9, 2013                 [Page 60]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
          } RouteQueryReq;
@@ -3368,13 +3368,13 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
    send_update
-      A single byte.  This may be set to "true" to indicate that the
+      A single byte.  This may be set to True to indicate that the
       requester wishes the responder to initiate an Update request
-      immediately.  Otherwise, this value MUST be set to "false".
+      immediately.  Otherwise, this value MUST be set to False.
 
    destination
       The destination which the requester is interested in.  This may be
-      any valid destination object, including a Node-ID, opaque ids, or
+      any valid destination object, including a Node-ID, opaque ID, or
       Resource-ID.
 
    overlay_specific_data
@@ -3387,7 +3387,7 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 6.4.2.5.  Probe
 
-   Probe provides primitive "exploration" services:  it allows node to
+   Probe provides primitive "exploration" services:  it allows a node to
    determine which resources another node is responsible for; and it
    allows some discovery services using multicast, anycast, or
    broadcast.  A probe can be addressed to a specific Node-ID, or the
@@ -3402,19 +3402,19 @@ Internet-Draft                 RELOAD Base                     July 2012
    responder to provide.
 
         enum { reservedProbeInformation(0), responsible_set(1),
-               num_resources(2), uptime(3),  (255)}
+               num_resources(2), uptime(3), (255) }
              ProbeInformationType;
 
         struct {
           ProbeInformationType     requested_info<0..2^8-1>;
-        } ProbeReq
+        } ProbeReq;
 
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 61]
+Jennings, et al.           Expires May 9, 2013                 [Page 61]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    The currently defined values for ProbeInformation are:
@@ -3448,6 +3448,7 @@ Internet-Draft                 RELOAD Base                     July 2012
 
              case uptime:
                uint32              uptime;
+
              /* This type may be extended */
 
            };
@@ -3467,10 +3468,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-
-Jennings, et al.        Expires January 17, 2013               [Page 62]
+Jennings, et al.           Expires May 9, 2013                 [Page 62]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    A ProbeAns message contains a sequence of ProbeInformation
@@ -3512,7 +3512,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    A node sends an Attach request when it wishes to establish a direct
    TCP or UDP connection to another node for the purpose of sending
    RELOAD messages.  A client that can establish a connection directly
-   need not send an attach as described in the second bullet of
+   need not send an Attach as described in the second bullet of
    Section 3.2.1
 
    As described in Section 6.1, an Attach may be routed to either a
@@ -3524,9 +3524,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 63]
+Jennings, et al.           Expires May 9, 2013                 [Page 63]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    large resource updates.
@@ -3580,9 +3580,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 64]
+Jennings, et al.           Expires May 9, 2013                 [Page 64]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
         enum { reservedOverlayLink(0), DTLS-UDP-SR(1),
@@ -3603,9 +3603,9 @@ Internet-Draft                 RELOAD Base                     July 2012
           opaque                foundation<0..255>;
           uint32                priority;
           CandType              type;
-          select (type){
+          select (type) {
             case host:
-              ;          /* Nothing */
+              ;          /* Empty */
             case srflx:
             case prflx:
             case relay:
@@ -3614,7 +3614,7 @@ Internet-Draft                 RELOAD Base                     July 2012
           IceExtension          extensions<0..2^16-1>;
         } IceCandidate;
 
-        struct  {
+        struct {
           opaque                ufrag<0..2^8-1>;
           opaque                password<0..2^8-1>;
           opaque                role<0..2^8-1>;
@@ -3636,9 +3636,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 65]
+Jennings, et al.           Expires May 9, 2013                 [Page 65]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
       The ICE password.
@@ -3657,8 +3657,8 @@ Internet-Draft                 RELOAD Base                     July 2012
    Each ICE candidate is represented as an IceCandidate structure, which
    is a direct translation of the information from the ICE string
    structures, with the exception of the component ID.  Since there is
-   only one component, it is always 1, and thus left out of the PDU.
-   The remaining values are specified as follows:
+   only one component, it is always 1, and thus left out of the
+   structure.  The remaining values are specified as follows:
 
    addr_port
       corresponds to the connection-address and port productions.
@@ -3666,7 +3666,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    overlay_link
       corresponds to the OverlayLinkType production, Overlay Link
       protocols used with No-ICE MUST specify "No-ICE" in their
-      description.  Future overlay link values can be added be defining
+      description.  Future overlay link values can be added by defining
       new OverlayLinkType values in the IANA registry in Section 14.10.
       Future extensions to the encapsulation or framing that provide for
       backward compatibility with that specified by a previously defined
@@ -3692,14 +3692,14 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 66]
+Jennings, et al.           Expires May 9, 2013                 [Page 66]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    rel_addr_port
       corresponds to the rel-addr and rel-port productions.  Only
-      present for type "relay".
+      present for types "relay", "srflx" and "prflx".
 
    extensions
       ICE extensions.  The name and value fields correspond to binary
@@ -3732,7 +3732,7 @@ Internet-Draft                 RELOAD Base                     July 2012
          Attach request.  It MUST then process this Attach request,
          generate an AttachReqAns response, and proceed with the
          corresponding ICE check.
-      *  If the peer's own Node-ID is larger when compared as big-endien
+      *  If the peer's own Node-ID is larger when compared as big-endian
          unsigned integers, it MUST generate an Error_In_Progress error
          to this Attach request, then proceed to wait for and complete
          the Attach and the corresponding ICE check it has originated.
@@ -3748,9 +3748,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 67]
+Jennings, et al.           Expires May 9, 2013                 [Page 67]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 6.5.1.3.  Using ICE With RELOAD
@@ -3804,9 +3804,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 68]
+Jennings, et al.           Expires May 9, 2013                 [Page 68]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    peer-reflexive addresses it discovers through them.  It SHOULD then
@@ -3815,7 +3815,7 @@ Internet-Draft                 RELOAD Base                     July 2012
 
    Only peers to which the peer currently has connections may be used.
    If the connection to that host is lost, it MUST be removed from the
-   list of stun servers and a new server from the same group MUST be
+   list of STUN servers and a new server from the same group MUST be
    selected unless there are no others servers in the group in which
    case some other peer MAY be used.
 
@@ -3850,9 +3850,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 6.5.1.6.  Prioritizing Candidates
 
    However, standardization of additional protocols for use with ICE is
-   expected, including TCP[I-D.ietf-mmusic-ice-tcp] and protocols such
-   as SCTP and DCCP.  UDP encapsulations for SCTP and DCCP would expand
-   the available Overlay Link protocols available for RELOAD.  When
+   expected, including TCP [RFC6544] and protocols such as SCTP and
+   DCCP.  UDP encapsulations for SCTP and DCCP would expand the
+   available Overlay Link protocols available for RELOAD.  When
    additional protocols are available, the following prioritization is
    RECOMMENDED:
 
@@ -3860,9 +3860,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 69]
+Jennings, et al.           Expires May 9, 2013                 [Page 69]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    o  Highest priority is assigned to protocols that offer well-
@@ -3916,9 +3916,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 70]
+Jennings, et al.           Expires May 9, 2013                 [Page 70]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 6.5.1.9.  Role Determination
@@ -3972,9 +3972,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 71]
+Jennings, et al.           Expires May 9, 2013                 [Page 71]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    closed.
@@ -4004,9 +4004,8 @@ Internet-Draft                 RELOAD Base                     July 2012
 6.5.1.14.  Receiving Media
 
    An agent MUST be prepared to receive packets for the application
-   protocol (TLS or DTLS carrying RELOAD, SIP or anything else) at any
-   time.  The jitter and RTP considerations in Section 11 of ICE do not
-   apply to RELOAD.
+   protocol (TLS or DTLS carrying RELOAD) at any time.  The jitter and
+   RTP considerations in Section 11 of ICE do not apply to RELOAD.
 
 6.5.2.  AppAttach
 
@@ -4028,12 +4027,13 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 72]
+
+Jennings, et al.           Expires May 9, 2013                 [Page 72]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
-        struct  {
+        struct {
           opaque                  ufrag<0..2^8-1>;
           opaque                  password<0..2^8-1>;
           uint16                  application;
@@ -4075,7 +4075,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    application ID is not supported, the peer MUST reply with an
    Error_Not_Found error.
 
-        struct  {
+        struct {
           opaque                  ufrag<0..2^8-1>;
           opaque                  password<0..2^8-1>;
           uint16                  application;
@@ -4084,9 +4084,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 73]
+Jennings, et al.           Expires May 9, 2013                 [Page 73]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
         } AppAttachAns;
@@ -4098,14 +4098,14 @@ Internet-Draft                 RELOAD Base                     July 2012
 
    Ping is used to test connectivity along a path.  A ping can be
    addressed to a specific Node-ID, to the peer controlling a given
-   location (by using a resource ID), or to the broadcast Node-ID
+   location (by using a Resource-ID), or to the broadcast Node-ID
    (2^128-1).
 
 6.5.3.1.  Request Definition
 
         struct {
           opaque<0..2^16-1> padding;
-        } PingReq
+        } PingReq;
 
 
    The Ping request is empty of meaningful contents.  However, it may
@@ -4140,9 +4140,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 74]
+Jennings, et al.           Expires May 9, 2013                 [Page 74]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 6.5.4.  ConfigUpdate
@@ -4196,9 +4196,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 75]
+Jennings, et al.           Expires May 9, 2013                 [Page 75]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    kinds (type==kind)
@@ -4209,7 +4209,7 @@ Internet-Draft                 RELOAD Base                     July 2012
 6.5.4.2.  Response Definition
 
         struct {
-        } ConfigUpdateAns
+        } ConfigUpdateAns;
 
 
    If the ConfigUpdateReq is of type "config" it MUST only be processed
@@ -4252,9 +4252,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 76]
+Jennings, et al.           Expires May 9, 2013                 [Page 76]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    link protocol needs to be able to establish a secure, authenticated
@@ -4262,11 +4262,11 @@ Internet-Draft                 RELOAD Base                     July 2012
    integrity for individual data elements.  RELOAD currently supports
    three Overlay Link protocols:
 
-   o  DTLS [RFC4347] over UDP with Simple Reliability (SR)
+   o  DTLS [RFC6347] over UDP with Simple Reliability (SR)
       (OverlayLinkType=DTLS-UDP-SR
    o  TLS [RFC5246] over TCP with Framing Header, No-ICE
       (OverlayLinkType=TLS-TCP-FH-NO-ICE
-   o  DTLS [RFC4347] over UDP with SR, No-ICE (OverlayLinkType=DTLS-UDP-
+   o  DTLS [RFC6347] over UDP with SR, No-ICE (OverlayLinkType=DTLS-UDP-
       SR-NO-ICE)
 
    Note that although UDP does not properly have "connections", both TLS
@@ -4308,9 +4308,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 77]
+Jennings, et al.           Expires May 9, 2013                 [Page 77]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    table for subsequent retransmissions.
@@ -4324,7 +4324,7 @@ Internet-Draft                 RELOAD Base                     July 2012
 
    Endpoint authentication  When a node forms an association with
       another endpoint, it MUST be possible to cryptographically verify
-      that the endpoint has a given Node-Id.
+      that the endpoint has a given Node-ID.
 
    Traffic origin authentication and integrity  When a node receives
       traffic from another endpoint, it MUST be possible to
@@ -4364,15 +4364,15 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 78]
+Jennings, et al.           Expires May 9, 2013                 [Page 78]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 6.6.1.2.  ICE-TCP
 
-   The ICE-TCP draft [I-D.ietf-mmusic-ice-tcp] allows TCP to be
-   supported as an Overlay Link protocol that can be added using ICE.
+   The ICE-TCP RFC [RFC6544] allows TCP to be supported as an Overlay
+   Link protocol that can be added using ICE.
 
 6.6.1.3.  Message-oriented Transports
 
@@ -4420,12 +4420,12 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 79]
+Jennings, et al.           Expires May 9, 2013                 [Page 79]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
-        enum { data(128), ack(129), (255)} FramedMessageType;
+        enum { data(128), ack(129), (255) } FramedMessageType;
 
         struct {
           FramedMessageType       type;
@@ -4476,9 +4476,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 80]
+Jennings, et al.           Expires May 9, 2013                 [Page 80]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 
@@ -4532,9 +4532,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 81]
+Jennings, et al.           Expires May 9, 2013                 [Page 81]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 6.6.3.1.  Stop and Wait Sender Algorithm
@@ -4588,9 +4588,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 82]
+Jennings, et al.           Expires May 9, 2013                 [Page 82]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    messages.  For example, assuming an RTO of 500 ms, requests would be
@@ -4644,9 +4644,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 83]
+Jennings, et al.           Expires May 9, 2013                 [Page 83]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    used, no STUN connectivity checks or keepalives are used.
@@ -4678,7 +4678,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    has been chosen as it is far easier to implement than e2e PMTU
    discovery across an ever-changing overlay, and it effectively
    addresses the reliability issues of relying on IP-layer
-   fragmentation.  However, PING can be used to allow e2e PMTU discovery
+   fragmentation.  However, Ping can be used to allow e2e PMTU discovery
    to be implemented if desired.
 
    Upon receipt of a fragmented message by the intended peer, the peer
@@ -4700,9 +4700,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 84]
+Jennings, et al.           Expires May 9, 2013                 [Page 84]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    first fragment therefore has an offset of 0.  The last fragment
@@ -4748,7 +4748,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    The contents of this structure are as follows:
 
    length
-      The size of the StoredData structure in octets excluding the size
+      The size of the StoredData structure in bytes excluding the size
       of length itself.
 
 
@@ -4756,9 +4756,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 85]
+Jennings, et al.           Expires May 9, 2013                 [Page 85]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 
@@ -4800,10 +4800,10 @@ Internet-Draft                 RELOAD Base                     July 2012
    distinguished by Kind-ID.  The definition of a Kind describes both
    the data values which may be stored and the data model of the data.
    Some data models allow multiple values to be stored under the same
-   Kind-ID.  Section Section 7.2 describes the available data models.
-   Thus, for instance, a given Resource-ID might contain a single-value
-   element stored under Kind-ID X and an array containing multiple
-   values stored under Kind-ID Y.
+   Kind-ID.  Section 7.2 describes the available data models.  Thus, for
+   instance, a given Resource-ID might contain a single-value element
+   stored under Kind-ID X and an array containing multiple values stored
+   under Kind-ID Y.
 
 7.1.  Data Signature Computation
 
@@ -4812,9 +4812,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 86]
+Jennings, et al.           Expires May 9, 2013                 [Page 86]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    Resource-ID even though they are not present in the StoredData
@@ -4828,14 +4828,14 @@ Internet-Draft                 RELOAD Base                     July 2012
    Where these values are:
 
    resource_id
-      The resource ID where this data is stored.
+      The Resource-ID where this data is stored.
 
    kind
       The Kind-ID for this data.
 
    storage_time
-
       The contents of the storage_time data value.
+
    StoredDataValue
       The contents of the stored data value, as described in the
       previous sections.
@@ -4863,14 +4863,14 @@ Internet-Draft                 RELOAD Base                     July 2012
    o  dictionary
 
    These are represented with the StoredDataValue structure.  The actual
-   dataModel is known from the Kind being stored.
+   data model is known from the Kind being stored.
 
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 87]
+Jennings, et al.           Expires May 9, 2013                 [Page 87]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
         struct {
@@ -4879,7 +4879,7 @@ Internet-Draft                 RELOAD Base                     July 2012
         } DataValue;
 
         struct {
-          select (dataModel) {
+          select (DataModel) {
             case single_value:
               DataValue             single_value_entry;
 
@@ -4924,9 +4924,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 88]
+Jennings, et al.           Expires May 9, 2013                 [Page 88]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    A array element is represented as an ArrayEntry:
@@ -4980,9 +4980,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 89]
+Jennings, et al.           Expires May 9, 2013                 [Page 89]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    given node to operate on a given value should succeed or fail.  It is
@@ -5036,9 +5036,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 90]
+Jennings, et al.           Expires May 9, 2013                 [Page 90]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    maximum value of i MUST be specified in the Kind definition.
@@ -5088,13 +5088,13 @@ Internet-Draft                 RELOAD Base                     July 2012
        } StoreReq;
 
 
-   A single Store request stores data of a number of kinds to a single
+   A single Store request stores data of a number of Kinds to a single
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 91]
+Jennings, et al.           Expires May 9, 2013                 [Page 91]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    resource location.  The contents of the structure are:
@@ -5148,16 +5148,16 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 92]
+Jennings, et al.           Expires May 9, 2013                 [Page 92]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    o  For original (non-replica) stores, the StoreReq is signed by a
       credential which is authorized to write this Kind at this
-      Resource-Id.  If this check fails, the request MUST be rejected
+      Resource-ID.  If this check fails, the request MUST be rejected
       with an Error_Forbidden error.
-   o  For replica stores, the StoreReq is signed by a Node-Id which is a
+   o  For replica stores, the StoreReq is signed by a Node-ID which is a
       plausible node to either have originally stored the value or in
       the replica set.  What this means is overlay specific, but in the
       case of the Chord based DHT defined in this specification, replica
@@ -5204,9 +5204,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 93]
+Jennings, et al.           Expires May 9, 2013                 [Page 93]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    equivalent to the following:  at the time the peer initially receives
@@ -5217,7 +5217,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    Unless otherwise specified by the usage, if a peer attempts to store
    data previously stored by another node (e.g., for replicas or
    topology shifts) and that store fails with either an
-   Error_Generation_Counter_Too_Low or an Error_Data_Too old error, the
+   Error_Generation_Counter_Too_Low or an Error_Data_Too_Old error, the
    peer MUST fetch the newer data from the peer generating the error and
    use that to replace its own copy.  This rule allows resynchronization
    after partitions heal.
@@ -5233,7 +5233,7 @@ Internet-Draft                 RELOAD Base                     July 2012
       A store of an array entry replaces (or inserts) the given value at
       the location specified by the index.  Because arrays are sparse, a
       store past the end of the array extends it with nonexistent values
-      (exists=False) as required.  A store at index 0xffffffff places
+      (exists = False) as required.  A store at index 0xffffffff places
       the new value at the end of the array regardless of the length of
       the array.  The resulting StoredData has the correct index value
       when it is subsequently fetched.
@@ -5260,9 +5260,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 94]
+Jennings, et al.           Expires May 9, 2013                 [Page 94]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
                                      Store
@@ -5316,9 +5316,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 95]
+Jennings, et al.           Expires May 9, 2013                 [Page 95]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    The contents of each StoreKindResponse are:
@@ -5333,10 +5333,10 @@ Internet-Draft                 RELOAD Base                     July 2012
    replicas
       The list of other peers at which the data was/will be replicated.
       In overlays and applications where the responsible peer is
-      intended to store redundant copies, this allows the storing peer
+      intended to store redundant copies, this allows the storing node
       to independently verify that the replicas have in fact been
       stored.  It does this verification by using the Stat method (see
-      Section 7.4.3).  Note that the storing peer is not required to
+      Section 7.4.3).  Note that the storing node is not required to
       perform this verification.
 
    The response itself is just StoreKindResponse values packed end-to-
@@ -5357,7 +5357,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    given usage, then the peer MUST fail the request and generate an
    Error_Data_Too_Large error.
 
-   If any type of request tries to access a data Kind that the node does
+   If any type of request tries to access a data Kind that the peer does
    not know about, an Error_Unknown_Kind MUST be generated.  The
    error_info in the Error_Response is:
 
@@ -5372,9 +5372,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 96]
+Jennings, et al.           Expires May 9, 2013                 [Page 96]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 7.4.1.3.  Removing Values
@@ -5384,9 +5384,9 @@ Internet-Draft                 RELOAD Base                     July 2012
    DataValue contains a boolean value called "exists" which indicates
    whether a value is present at that location.  In order to effectively
    remove a value, the owner stores a new DataValue with "exists" set to
-   "false":
+   False:
 
-      exists = false
+      exists = False
       value = {} (0 length)
 
    The owner SHOULD use a lifetime for the nonexistent value at least as
@@ -5428,9 +5428,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 97]
+Jennings, et al.           Expires May 9, 2013                 [Page 97]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 7.4.2.1.  Request Definition
@@ -5445,7 +5445,7 @@ Internet-Draft                 RELOAD Base                     July 2012
           uint64                  generation;
           uint16                  length;
 
-          select (dataModel) {
+          select (DataModel) {
             case single_value: ;    /* Empty */
 
             case array:
@@ -5456,7 +5456,7 @@ Internet-Draft                 RELOAD Base                     July 2012
 
             /* This structure may be extended */
 
-          } model_specifier;
+          } model_specifer;
         } StoredDataSpecifier;
 
         struct {
@@ -5484,9 +5484,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 98]
+Jennings, et al.           Expires May 9, 2013                 [Page 98]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 
@@ -5495,7 +5495,7 @@ Internet-Draft                 RELOAD Base                     July 2012
       reject requests corresponding to unknown Kinds unless specifically
       configured otherwise.
 
-   dataModel
+   DataModel
       The data model of the data.  This is not transmitted on the wire
       but comes from the definition of the Kind.
 
@@ -5540,9 +5540,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013               [Page 99]
+Jennings, et al.           Expires May 9, 2013                 [Page 99]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 7.4.2.2.  Response Definition
@@ -5587,7 +5587,7 @@ Internet-Draft                 RELOAD Base                     July 2012
       exist.  These signatures are unnecessary as the entire response is
       signed by that node.  Note that entries which have been removed by
       the procedure of Section 7.4.1.3 and have not yet expired also
-      have exists = false but have valid signatures from the node which
+      have exists = False but have valid signatures from the node which
       did the store.
 
    Upon receipt of a FetchAns message, nodes MUST verify the signatures
@@ -5596,9 +5596,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 100]
+Jennings, et al.           Expires May 9, 2013                [Page 100]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    implies that implementations which wish to store data for long
@@ -5652,9 +5652,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 101]
+Jennings, et al.           Expires May 9, 2013                [Page 101]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
         struct {
@@ -5675,7 +5675,7 @@ Internet-Draft                 RELOAD Base                     July 2012
         } DictionaryEntryMeta;
 
         struct {
-          select (model) {
+          select (DataModel) {
             case single_value:
               MetaData              single_value_entry;
 
@@ -5708,14 +5708,14 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 102]
+Jennings, et al.           Expires May 9, 2013                [Page 102]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    The structures used in StatAns parallel those used in FetchAns:  a
    response consists of multiple StatKindResponse values, one for each
-   kind that was in the request.  The contents of the StatKindResponse
+   Kind that was in the request.  The contents of the StatKindResponse
    are the same as those in the FetchKindResponse, except that the
    values list contains StoredMetaData entries instead of StoredData
    entries.
@@ -5741,7 +5741,8 @@ Internet-Draft                 RELOAD Base                     July 2012
       The hash algorithm used to perform the digest of the value.
 
    hash_value
-      A digest of the value using hash_algorithm.
+      A digest using hash_algorithm on the value field of the DataValue
+      including its 4 leading length bytes.
 
 7.4.4.  Find
 
@@ -5763,10 +5764,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-
-Jennings, et al.        Expires January 17, 2013              [Page 103]
+Jennings, et al.           Expires May 9, 2013                [Page 103]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    The request contains a list of Kind-IDs which the Find is for, as
@@ -5820,14 +5820,14 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 104]
+Jennings, et al.           Expires May 9, 2013                [Page 104]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    closest
-      The closest resource ID to the specified resource ID.  This is 0
-      if no resource ID is known.
+      The closest Resource-ID to the specified Resource-ID.  This is 0
+      if no Resource-ID is known.
 
    Note that the response does not contain the contents of the data
    stored at these Resource-IDs.  If the requester wants this, it must
@@ -5839,7 +5839,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    document and registering the Kind-ID with IANA.  This is the
    preferred method for Kinds which may be widely used and reused.  The
    second method is to simply define the Kind and its parameters in the
-   configuration document using the section of Kind-id space set aside
+   configuration document using the section of Kind-ID space set aside
    for private use.  This method MAY be used to define ad hoc Kinds in
    new overlays.
 
@@ -5876,9 +5876,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 105]
+Jennings, et al.           Expires May 9, 2013                [Page 105]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    o  The Node-ID in the certificate.
@@ -5932,9 +5932,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 106]
+Jennings, et al.           Expires May 9, 2013                [Page 106]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    Typically this should be set to the reciprocal of the estimate of
@@ -5947,7 +5947,7 @@ Internet-Draft                 RELOAD Base                     July 2012
 
         struct {
           uint8                   iteration;
-          IpAddressAndPort        server_address;
+          IpAddressPort           server_address;
         } TurnServer;
 
 
@@ -5988,9 +5988,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 107]
+Jennings, et al.           Expires May 9, 2013                [Page 107]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    relative to peers is not too low, this approach will result in
@@ -6044,9 +6044,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 108]
+Jennings, et al.           Expires May 9, 2013                [Page 108]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
       but is believed to be unstable in large (>1000) overlays with high
@@ -6060,7 +6060,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    algorithm.  In Chord (and in the algorithm described here), nodes are
    arranged in a ring with node n being adjacent to nodes n-1 and n+1,
    with all arithmetic being done modulo 2^{k}, where k is the length of
-   the Node-Id in bits, so that node 2^{k} - 1 is directly before node
+   the Node-ID in bits, so that node 2^{k} - 1 is directly before node
    0.
 
    Each peer keeps track of a finger table and a neighbor table.  The
@@ -6096,16 +6096,16 @@ Internet-Draft                 RELOAD Base                     July 2012
 
    For this Chord based topology plugin, the size of the Resource-ID is
    128 bits.  The hash of a Resource-ID MUST be computed using SHA-1
-   [RFC3174]then truncating the SHA-1 result to the most significant 128
+   [RFC3174] then truncating the SHA-1 result to the most significant
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 109]
+Jennings, et al.           Expires May 9, 2013                [Page 109]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
-   bits.
+   128 bits.
 
 10.3.  Routing
 
@@ -6117,7 +6117,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    that node.  Otherwise, it MUST route the request to the peer in the
    routing table that has the largest Node-ID that is in the interval
    between the peer and k.  If no such node is found, it finds the
-   smallest Node-Id that is greater than k and MUST route the message to
+   smallest Node-ID that is greater than k and MUST route the message to
    that node.
 
 10.4.  Redundancy
@@ -6156,9 +6156,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 110]
+Jennings, et al.           Expires May 9, 2013                [Page 110]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    3.  JP SHOULD send Attach requests to initiate connections to each of
@@ -6212,9 +6212,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 111]
+Jennings, et al.           Expires May 9, 2013                [Page 111]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 10.6.  Routing Attaches
@@ -6231,7 +6231,7 @@ Internet-Draft                 RELOAD Base                     July 2012
 
    An Update for this DHT is defined as
 
-        enum { reserved (0),
+        enum { reserved(0),
                peer_ready(1), neighbors(2), full(3), (255) }
              ChordUpdateType;
 
@@ -6239,7 +6239,7 @@ Internet-Draft                 RELOAD Base                     July 2012
         struct {
            uint32                uptime;
            ChordUpdateType         type;
-           select(type){
+           select (type){
             case peer_ready:                   /* Empty */
               ;
 
@@ -6268,9 +6268,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 112]
+Jennings, et al.           Expires May 9, 2013                [Page 112]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    peer_ready:    this peer is ready to receive messages.  This message
@@ -6324,9 +6324,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 113]
+Jennings, et al.           Expires May 9, 2013                [Page 113]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    nodes in its Neighbor Table.  The update will contain all the Node-
@@ -6380,9 +6380,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 114]
+Jennings, et al.           Expires May 9, 2013                [Page 114]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    In the first case, no change is needed.
@@ -6427,7 +6427,7 @@ Internet-Draft                 RELOAD Base                     July 2012
 10.7.4.1.  Updating neighbor table
 
    A peer MUST periodically send an Update request to every peer in its
-   Connection Table.  The purpose of this is to keep the predecessor and
+   Neighbor Table.  The purpose of this is to keep the predecessor and
    successor lists up to date and to detect failed peers.  The default
    time is about every ten minutes, but the configuration server SHOULD
    set this in the configuration document using the "chord-update-
@@ -6436,9 +6436,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 115]
+Jennings, et al.           Expires May 9, 2013                [Page 115]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 10.7.4.2.  Refreshing finger table
@@ -6461,7 +6461,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    table entry.  The selection SHOULD be exponentially weighted to
    attempt to replace earlier (lower i) entries in the finger table.  A
    simple way to implement this selection is to search through the
-   finger table entries from i=0 and each time an invalid entry is
+   finger table entries from i=1 and each time an invalid entry is
    encountered, send a Ping to replace that entry with probability 0.5.
 
    Alternative 2:  A peer monitors the Update messages received from its
@@ -6492,9 +6492,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 116]
+Jennings, et al.           Expires May 9, 2013                [Page 116]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    value 16 was chosen to ensure high odds of a node maintaining
@@ -6538,7 +6538,7 @@ Internet-Draft                 RELOAD Base                     July 2012
 10.8.  Route query
 
    For this topology plugin, the RouteQueryReq contains no additional
-   information.  The RouteQueryAns contains the single node ID of the
+   information.  The RouteQueryAns contains the single Node-ID of the
    next peer to which the responding peer would have routed the request
    message in recursive routing:
 
@@ -6548,9 +6548,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 117]
+Jennings, et al.           Expires May 9, 2013                [Page 117]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
       } ChordRouteQueryAns;
@@ -6571,18 +6571,19 @@ Internet-Draft                 RELOAD Base                     July 2012
    prior to exiting the Overlay Instance.  The overlay_specific_data
    field MUST contain the ChordLeaveData structure defined below:
 
-              enum { reserved (0),
+              enum { reserved(0),
                       from_succ(1), from_pred(2), (255) }
                     ChordLeaveType;
 
                struct {
                  ChordLeaveType         type;
 
-                  select(type) {
+                  select (type) {
                     case from_succ:
-                      NodeId              successors<0..2^16-1>;
+                      NodeId            successors<0..2^16-1>;
+
                     case from_pred:
-                       NodeId              predecessors<0..2^16-1>;
+                       NodeId           predecessors<0..2^16-1>;
                   };
                } ChordLeaveData;
 
@@ -6603,10 +6604,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-
-Jennings, et al.        Expires January 17, 2013              [Page 118]
+Jennings, et al.           Expires May 9, 2013                [Page 118]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    The 'type' field indicates whether the Leave request was sent by a
@@ -6660,9 +6660,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 119]
+Jennings, et al.           Expires May 9, 2013                [Page 119]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    BXNpcGl0MSkwJwYDVQQLEyBTaXBpdCBUZXN0IENlcnRpZmljYXRlIEF1dGhvcml0
@@ -6716,9 +6716,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 120]
+Jennings, et al.           Expires May 9, 2013                [Page 120]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
           </mandatory-extension>
@@ -6772,9 +6772,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 121]
+Jennings, et al.           Expires May 9, 2013                [Page 121]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    provides a signature over the preceding configuration element.  Each
@@ -6822,15 +6822,15 @@ Internet-Draft                 RELOAD Base                     July 2012
       bootstrap nodes.  It has an attribute called "address" that
       represents the IP address (either IPv4 or IPv6, since they can be
       distinguished) and an optional attribute called "port" that
-      represents the port and defaults to 6084.  The IP address is in
+      represents the port and defaults to 6084.  The IPv6 address is in
       typical hexadecimal form using standard period and colon
       separators as specified in [RFC5952].  More than one bootstrap-
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 122]
+Jennings, et al.           Expires May 9, 2013                [Page 122]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
       peer element may be present.
@@ -6843,7 +6843,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    multicast-bootstrap   This element represents the address of a
       multicast, broadcast, or anycast address and port that may be used
       for bootstrap.  Nodes SHOULD listen on the address.  It has an
-      attributed called "address" that represents the IP address and an
+      attribute called "address" that represents the IP address and an
       optional attribute called "port" that represents the port and
       defaults to 6084.  More than one "multicast-bootstrap" element may
       be present.
@@ -6884,9 +6884,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 123]
+Jennings, et al.           Expires May 9, 2013                [Page 123]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    kind-signer   This contains a single Node-ID in hexadecimal and
@@ -6906,8 +6906,8 @@ Internet-Draft                 RELOAD Base                     July 2012
       arbitrary number of these elements can be provided.  Note that
       because certificates may expire, bad-node entries need only be
       present for the lifetime of the certificate.  Technically
-      speaking, bad node-ids may be reused once their certificates have
-      expired, the requirement for node-ids to be pseudo randomly
+      speaking, bad Node-IDs may be reused once their certificates have
+      expired, the requirement for Node-IDs to be pseudo randomly
       generated gives this event a vanishing probability.
    mandatory-extension   This element contains the name of an XML
       namespace that a node joining the overlay MUST support.  The
@@ -6918,13 +6918,13 @@ Internet-Draft                 RELOAD Base                     July 2012
       Section 2.3.  More than one mandatory-extension element may be
       present.
 
-   Inside each overlay element, the required-kinds elements can also
-   occur.  This element indicates the Kinds that members must support
-   and contains multiple kind-block elements that each define a single
-   Kind that MUST be supported by nodes in the overlay.  Each kind-block
-   consists of a single kind element and a kind-signature.  The kind
-   element defines the Kind.  The kind-signature is the signature
-   computed over the kind element.
+   Inside each configuration element, the required-kinds element can
+   also occur.  This element indicates the Kinds that members must
+   support and contains multiple kind-block elements that each define a
+   single Kind that MUST be supported by nodes in the overlay.  Each
+   kind-block consists of a single kind element and a kind-signature.
+   The kind element defines the Kind.  The kind-signature is the
+   signature computed over the kind element.
 
    Each kind has either an id attribute or a name attribute.  The name
    attribute is a string representing the Kind (the name registered to
@@ -6940,9 +6940,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 124]
+Jennings, et al.           Expires May 9, 2013                [Page 124]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    data-model:  the data model to be used.
@@ -6955,7 +6955,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    All of the non optional values MUST be provided.  If the Kind is
    registered with IANA, the data-model and access-control elements MUST
    match those in the Kind registration, and clients MUST ignore them in
-   favor of the IANA versions.  Multiple required-kinds elements MAY be
+   favor of the IANA versions.  Multiple kind-block elements MAY be
    present.
 
    The kind-block element also MUST contain a "kind-signature" element.
@@ -6963,7 +6963,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    first < of the kind to the end of the last > of the kind in the same
    way as the signature element described later in this section.
 
-   The configuration file needs to be treated as a binary blob that
+   The configuration element needs to be treated as a binary blob that
    cannot be changed - including any whitespace changes - or the
    signature will break.  The signature is computed by taking each
    configuration element and starting from, and including, the first <
@@ -6971,11 +6971,10 @@ Internet-Draft                 RELOAD Base                     July 2012
    </configuration> and treating this as a binary blob that is signed
    using the standard SecurityBlock defined in Section 6.3.4.  The
    SecurityBlock is base 64 encoded using the base64 alphabet from
-   RFC[RFC4648] and put in the signature element following the
+   [RFC4648] and put in the signature element following the
    configuration object in the configuration file.  Any configuration
-   file through the overlay (as opposed to directly from the
-   configuration server) MUST be signed by one of the configure-signers
-   from the previous extant configuration.  Recipients MUST verify the
+   file MUST be signed by one of the configuration-signer elements from
+   the previous extant configuration.  Recipients MUST verify the
    signature prior to accepting the configuration file.
 
    When a node receives a new configuration file, it MUST change its
@@ -6993,15 +6992,14 @@ Internet-Draft                 RELOAD Base                     July 2012
    problems, including total collapse of the network if configuration
    parameters are not properly considered.  Such an event may be
    necessary in case of a compromised CA or similar problem, but for
-
-
-
-Jennings, et al.        Expires January 17, 2013              [Page 125]
-
-Internet-Draft                 RELOAD Base                     July 2012
-
-
    large overlays should be avoided in almost all circumstances.
+
+
+
+Jennings, et al.           Expires May 9, 2013                [Page 125]
+
+Internet-Draft                 RELOAD Base                 November 2012
+
 
 11.1.1.  Relax NG Grammar
 
@@ -7049,16 +7047,16 @@ Internet-Draft                 RELOAD Base                     July 2012
    parameter &= element root-cert { xsd:base64Binary }*
    parameter &= element required-kinds { kind-block* }?
    parameter &= element enrollment-server { xsd:anyURI }*
-
-
-
-Jennings, et al.        Expires January 17, 2013              [Page 126]
-
-Internet-Draft                 RELOAD Base                     July 2012
-
-
    parameter &= element kind-signer {  xsd:string }*
    parameter &= element configuration-signer {  xsd:string }*
+
+
+
+Jennings, et al.           Expires May 9, 2013                [Page 126]
+
+Internet-Draft                 RELOAD Base                 November 2012
+
+
    parameter &= element bad-node {  xsd:string }*
    parameter &= element no-ice { xsd:boolean }?
    parameter &= element shared-secret { xsd:string }?
@@ -7105,16 +7103,16 @@ Internet-Draft                 RELOAD Base                     July 2012
 
    kind-parameter &= element data-model { data-model-type }
    data-model-type |= "SINGLE"
-
-
-
-Jennings, et al.        Expires January 17, 2013              [Page 127]
-
-Internet-Draft                 RELOAD Base                     July 2012
-
-
    data-model-type |= "ARRAY"
    data-model-type |= "DICTIONARY"
+
+
+
+Jennings, et al.           Expires May 9, 2013                [Page 127]
+
+Internet-Draft                 RELOAD Base                 November 2012
+
+
    data-model-type |=  xsd:string # data model extensions
 
    kind-parameter &= element access-control { access-control-type }
@@ -7148,12 +7146,12 @@ Internet-Draft                 RELOAD Base                     July 2012
    mechanism.  The out of band mechanisms MAY also provide an optional
    URL for the configuration server.  If a URL for the configuration
    server is not provided, the node MUST do a DNS SRV query using a
-   Service name of "p2psip-enroll" and a protocol of TCP to find a
+   Service name of "reload-config" and a protocol of TCP to find a
    configuration server and form the URL by appending a path of "/.well-
-   known/p2psip-enroll" to the overlay name.  This uses the "well known
+   known/reload-config" to the overlay name.  This uses the "well known
    URI" framework defined in [RFC5785].  For example, if the overlay
    name was example.com, the URL would be
-   "https://example.com/.well-known/p2psip-enroll".
+   "https://example.com/.well-known/reload-config".
 
    Once an address and URL for the configuration server is determined,
    the peer MUST form an HTTPS connection to that IP address.  The
@@ -7161,15 +7159,15 @@ Internet-Draft                 RELOAD Base                     July 2012
    Then the node MUST fetch a new copy of the configuration file.  To do
    this, the peer performs a GET to the URL.  The result of the HTTP GET
    is an XML configuration file described above, which MUST replace any
-
-
-
-Jennings, et al.        Expires January 17, 2013              [Page 128]
-
-Internet-Draft                 RELOAD Base                     July 2012
-
-
    previously learned configuration file for this overlay.
+
+
+
+
+Jennings, et al.           Expires May 9, 2013                [Page 128]
+
+Internet-Draft                 RELOAD Base                 November 2012
+
 
    For overlays that do not use a configuration server, nodes need to
    obtain the configuration information needed to join the overlay
@@ -7196,7 +7194,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    existing protocols support exactly this model.
 
    The certificate request protocol is performed over HTTPS.  The
-   request is an HTTP POST with the parameter encodes as described in
+   request is an HTTP POST with the parameters encoded as described in
    [RFC2388] and the following properties:
 
    o  If authentication is required, there is an form parameter of
@@ -7217,15 +7215,15 @@ Internet-Draft                 RELOAD Base                     July 2012
    user name is acceptable, the server generates and returns a
    certificate for the certificate signing request in the "csr"
    parameter of the request.  The SubjectAltName field in the
-
-
-
-Jennings, et al.        Expires January 17, 2013              [Page 129]
-
-Internet-Draft                 RELOAD Base                     July 2012
-
-
    certificate contains the following values:
+
+
+
+
+Jennings, et al.           Expires May 9, 2013                [Page 129]
+
+Internet-Draft                 RELOAD Base                 November 2012
+
 
    o  One or more Node-IDs which MUST be cryptographically random
       [RFC4086].  Each MUST be chosen by the enrollment server in such a
@@ -7235,9 +7233,9 @@ Internet-Draft                 RELOAD Base                     July 2012
       uniformResourceIdentifier type and MUST contain RELOAD URIs as
       described in Section 14.15 and MUST contain a Destination list
       with a single entry of type "node_id".  The enrollment server
-      SHOULD maintain a mapping of users to node-ids and if the same
+      SHOULD maintain a mapping of users to Node-IDs and if the same
       user returns (e.g., to have their certificate re-issued) return
-      the same Node-ID, thus avoiding the need for implementations to
+      the same Node-IDs, thus avoiding the need for implementations to
       re-store all their data when their certificates expire.
    o  A single name this user is allowed to use in the overlay, using
       type rfc822Name.  Enrollment servers SHOULD take care to only
@@ -7263,37 +7261,38 @@ Internet-Draft                 RELOAD Base                     July 2012
    bad_CSR  There was a problem with the CSR.
 
    If the client receives an unknown token in the body, it SHOULD treat
-   it as a failure for an unknown reasons.
+   it as a failure for an unknown reason.
 
    The client MUST check that the certificate returned chains back to
    one of the certificates received in the "root-cert" list of the
    overlay configuration data (including PKIX BasicConstraints checks.)
-   The node then reads the certificate to find the Node-IDs it can use.
-
-
-
-
-
-
-
-Jennings, et al.        Expires January 17, 2013              [Page 130]
-
-Internet-Draft                 RELOAD Base                     July 2012
-
+   The node then reads the certificate to find the Node-ID it can use.
 
 11.3.1.  Self-Generated Credentials
 
    If the "self-signed-permitted" element is present in the
    configuration and set to "true", then a node MUST generate its own
    self-signed certificate to join the overlay.  The self-signed
+
+
+
+Jennings, et al.           Expires May 9, 2013                [Page 130]
+
+Internet-Draft                 RELOAD Base                 November 2012
+
+
    certificate MAY contain any user name of the users choice.
 
-   The Node-ID MUST be computed by applying the digest specified in the
-   self-signed-permitted element to the DER representation of the user's
-   public key (more specifically the subjectPublicKeyInfo) and taking
-   the high order bits.  When accepting a self-signed certificate, nodes
-   MUST check that the Node-ID and public keys match.  This prevents
-   Node-ID theft.
+   For self-signed certificate containing only one Node-ID, the Node-ID
+   MUST be computed by applying the digest specified in the self-signed-
+   permitted element to the DER representation of the user's public key
+   (more specifically the subjectPublicKeyInfo) and taking the high
+   order bits.  For self-signed certficates containing multiple Node-
+   IDs, the index of the Node-ID (from 1 to the number of Node-IDs
+   needed) must be prepended as a 4 bytes big endian integer to the DER
+   representation of the user's public key and taking the high order
+   bits.  When accepting a self-signed certificate, nodes MUST check
+   that the Node-ID and public keys match.  This prevents Node-ID theft.
 
    Once the node has constructed a self-signed certificate, it MAY join
    the overlay.  Before storing its certificate in the overlay
@@ -7329,15 +7328,15 @@ Internet-Draft                 RELOAD Base                     July 2012
 
    When contacting a bootstrap node, the joining node MUST first form
    the DTLS or TLS connection to the bootstrap node and then sends an
-
-
-
-Jennings, et al.        Expires January 17, 2013              [Page 131]
-
-Internet-Draft                 RELOAD Base                     July 2012
-
-
    Attach request over this connection with the destination Node-ID set
+
+
+
+Jennings, et al.           Expires May 9, 2013                [Page 131]
+
+Internet-Draft                 RELOAD Base                 November 2012
+
+
    to the joining node's Node-ID.
 
    When the requester node finally does receive a response from some
@@ -7366,11 +7365,11 @@ Internet-Draft                 RELOAD Base                     July 2012
    peer to a resource ID of itself (JP).  It gets routed to the
    admitting peer (AP) because JP is not yet part of the overlay.  When
    AP responds, JP and AP use ICE to set up a connection and then set up
-   TLS.  Once AP has connected to JP, AP sends to JP an Update to
+   DTLS.  Once AP has connected to JP, AP sends to JP an Update to
    populate its Routing Table.  The following example shows the Update
-   happening after the TLS connection is formed but it could also happen
-   before in which case the Update would often be routed through other
-   nodes.
+   happening after the DTLS connection is formed but it could also
+   happen before in which case the Update would often be routed through
+   other nodes.
 
 
 
@@ -7388,9 +7387,10 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 132]
+
+Jennings, et al.           Expires May 9, 2013                [Page 132]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
        JP        PPP       PP        AP        NP        NNP       BP
@@ -7439,14 +7439,14 @@ Internet-Draft                 RELOAD Base                     July 2012
 
    The JP then forms connections to the appropriate neighbors, such as
    NP, by sending an Attach which gets routed via other nodes.  When NP
-   responds, JP and NP use ICE and TLS to set up a connection.
+   responds, JP and NP use ICE and DTLS to set up a connection.
 
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 133]
+Jennings, et al.           Expires May 9, 2013                [Page 133]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
        JP        PPP       PP        AP        NP        NNP       BP
@@ -7500,9 +7500,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 134]
+Jennings, et al.           Expires May 9, 2013                [Page 134]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
        JP        NP        XX        TP
@@ -7556,9 +7556,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 135]
+Jennings, et al.           Expires May 9, 2013                [Page 135]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
        JP        PPP       PP        AP        NP        NNP       BP
@@ -7612,9 +7612,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 136]
+Jennings, et al.           Expires May 9, 2013                [Page 136]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
        JP        PPP       PP        AP        NP        NNP       BP
@@ -7668,9 +7668,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 137]
+Jennings, et al.           Expires May 9, 2013                [Page 137]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    Finally, now that JP has a copy of all the data and is ready to route
@@ -7724,16 +7724,16 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 138]
+Jennings, et al.           Expires May 9, 2013                [Page 138]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 13.2.  Attacks on P2P Overlays
 
    The two basic functions provided by overlay nodes are storage and
-   routing:  some node is responsible for storing a peer's data and for
-   allowing a third peer to fetch this stored data.  Other nodes are
+   routing:  some peer is responsible for storing a node's data and for
+   allowing a third node to fetch this stored data.  Other peers are
    responsible for routing messages to and from the storing nodes.  Each
    of these issues is covered in the following sections.
 
@@ -7743,8 +7743,8 @@ Internet-Draft                 RELOAD Base                     July 2012
    describe in this specification are intended to protect overlay
    routing and user registration information in RELOAD messages.
 
-   To protect the signaling from attackers pretending to be valid peers
-   (or peers other than themselves), the first requirement is to ensure
+   To protect the signaling from attackers pretending to be valid nodes
+   (or nodes other than themselves), the first requirement is to ensure
    that all messages are received from authorized members of the
    overlay.  For this reason, RELOAD transports all messages over a
    secure channel (TLS and DTLS are defined in this document) which
@@ -7767,7 +7767,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    are unique and are meant to be chosen and used by humans much like a
    SIP Address of Record (AOR) or an email address.  The user is also
    assigned one or more Node-IDs by the central enrollment authority.
-   Both the name and the Node-ID are placed in the certificate, along
+   Both the name and the Node-IDs are placed in the certificate, along
    with the user's public key.
 
    Each certificate enables an entity to act in two sorts of roles:
@@ -7780,19 +7780,19 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 139]
+Jennings, et al.           Expires May 9, 2013                [Page 139]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    a certificate, this usage does not require a global PKI.  Instead,
    certificates are signed by a central enrollment authority which acts
    as the certificate authority for the Overlay Instance.  This
-   authority signs each peer's certificate.  Because each peer possesses
+   authority signs each node's certificate.  Because each node possesses
    the CA's certificate (which they receive on enrollment) they can
    verify the certificates of the other entities in the overlay without
    further communication.  Because the certificates contain the user/
-   peer's public key, communications from the user/peer can be verified
+   node's public key, communications from the user/node can be verified
    in turn.
 
    If self-signed certificates are used, then the security provided is
@@ -7806,7 +7806,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    shared secret admission control scheme as well.
 
    Because all stored data is signed by the owner of the data the
-   storing peer can verify that the storer is authorized to perform a
+   storing node can verify that the storer is authorized to perform a
    store at that Resource-ID and also allow any consumer of the data to
    verify the provenance and integrity of the data when it retrieves it.
 
@@ -7815,7 +7815,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    information).  Thus, certificate lifetimes should be chosen to
    balance the compromise window versus the cost of certificate renewal.
    Because RELOAD is already designed to operate in the face of some
-   fraction of malicious peers, this form of compromise is not fatal.
+   fraction of malicious nodes, this form of compromise is not fatal.
 
    All implementations MUST implement certificate-based security.
 
@@ -7836,9 +7836,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 140]
+Jennings, et al.           Expires May 9, 2013                [Page 140]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    If passwords are used as the source of shared-keys, then TLS-SRP is a
@@ -7857,14 +7857,14 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 13.5.1.  Authorization
 
-   When a client wants to store some value, it first digitally signs the
+   When a node wants to store some value, it first digitally signs the
    value with its own private key.  It then sends a Store request that
    contains both the value and the signature towards the storing peer
    (which is defined by the Resource Name construction algorithm for
    that particular Kind of value).
 
    When the storing peer receives the request, it must determine whether
-   the storing client is authorized to store at this Resource-ID/Kind-ID
+   the storing node is authorized to store at this Resource-ID/Kind-ID
    pair.  Determining this requires comparing the user's identity to the
    requirements of the access control model (see Section 7.3).  If it
    satisfies those requirements the user is authorized to write, pending
@@ -7881,7 +7881,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    Resource-ID will be determined by hashing the Resource Name.  Because
    SIP Location uses the USER-NODE-MATCH policy, it first verifies that
    the user name in the certificate hashes to the requested Resource-ID.
-   It then verifies that the Node-Id in the certificate matches the
+   It then verifies that the Node-ID in the certificate matches the
    dictionary key being used for the store.  If both of these checks
    succeed, the Store is authorized.  Note that because the access
    control model is different for different Kinds, the exact set of
@@ -7892,17 +7892,17 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 141]
+Jennings, et al.           Expires May 9, 2013                [Page 141]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 13.5.2.  Distributed Quota
 
    Being a peer in an Overlay Instance carries with it the
    responsibility to store data for a given region of the Overlay
-   Instance.  However, allowing clients to store unlimited amounts of
-   data would create unacceptable burdens on peers and would also enable
+   Instance.  However, allowing nodes to store unlimited amounts of data
+   would create unacceptable burdens on peers and would also enable
    trivial denial of service attacks.  RELOAD addresses this issue by
    requiring configurations to define maximum sizes for each Kind of
    stored data.  Attempts to store values exceeding this size MUST be
@@ -7920,7 +7920,7 @@ Internet-Draft                 RELOAD Base                     July 2012
 13.5.3.  Correctness
 
    Because each stored value is signed, it is trivial for any retrieving
-   peer to verify the integrity of the stored value.  Some more care
+   node to verify the integrity of the stored value.  Some more care
    needs to be taken to prevent version rollback attacks.  Rollback
    attacks on storage are prevented by the use of store times and
    lifetime values in each store.  A lifetime represents the latest time
@@ -7938,19 +7938,19 @@ Internet-Draft                 RELOAD Base                     July 2012
 
    The mechanisms described here provides a high degree of security, but
    some attacks remain possible.  Most simply, it is possible for
-   storing nodes to refuse to store a value (i.e., reject any request).
-   In addition, a storing node can deny knowledge of values which it has
+   storing peers to refuse to store a value (i.e., reject any request).
+   In addition, a storing peer can deny knowledge of values which it has
    previously accepted.  To some extent these attacks can be ameliorated
    by attempting to store to/retrieve from replicas, but a retrieving
-   client does not know whether it should try this or not, since there
-   is a cost to doing so.
+   node does not know whether it should try this or not, since there is
+   a cost to doing so.
 
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 142]
+Jennings, et al.           Expires May 9, 2013                [Page 142]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    The certificate-based authentication scheme prevents a single peer
@@ -7964,7 +7964,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    and the percentage of compromised peers.
 
    In addition, when a Kind is multivalued (e.g., an array data model),
-   the storing node can return only some subset of the values, thus
+   the storing peer can return only some subset of the values, thus
    biasing its responses.  This can be countered by using single values
    rather than sets, but that makes coordination between multiple
    storing agents much more difficult.  This is a trade off that must be
@@ -7977,8 +7977,8 @@ Internet-Draft                 RELOAD Base                     July 2012
    the attacker from performing a DOS attack that misroutes requests in
    the overlay.  There are a few obvious observations to make about
    this.  First, it is easy to ensure that an attacker is at least a
-   valid peer in the Overlay Instance.  Second, this is a DOS attack
-   only.  Third, if a large percentage of the peers on the Overlay
+   valid node in the Overlay Instance.  Second, this is a DOS attack
+   only.  Third, if a large percentage of the nodes on the Overlay
    Instance are controlled by the attacker, it is probably impossible to
    perfectly secure against this.
 
@@ -8004,33 +8004,33 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 143]
+Jennings, et al.           Expires May 9, 2013                [Page 143]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 13.6.2.  Admissions Control
 
    Admission to a RELOAD Overlay Instance is controlled by requiring
-   that each peer have a certificate containing its Node-Id.  The
+   that each peer have a certificate containing its Node-ID.  The
    requirement to have a certificate is enforced by using certificate-
    based mutual authentication on each connection.  (Note:  the
    following only applies when self-signed certificates are not used.)
    Whenever a peer connects to another peer, each side automatically
-   checks that the other has a suitable certificate.  These Node-Ids are
+   checks that the other has a suitable certificate.  These Node-IDs are
    randomly assigned by the central enrollment server.  This has two
    benefits:
 
    o  It allows the enrollment server to limit the number of Node-IDs
       issued to any individual user.
-   o  It prevents the attacker from choosing specific Node-Ids.
+   o  It prevents the attacker from choosing specific Node-IDs.
 
    The first property allows protection against Sybil attacks (provided
    the enrollment server uses strict rate limiting policies).  The
    second property deters but does not completely prevent Eclipse
    attacks.  Because an Eclipse attacker must impersonate peers on the
    other side of the attacker, he must have a certificate for suitable
-   Node-Ids, which requires him to repeatedly query the enrollment
+   Node-IDs, which requires him to repeatedly query the enrollment
    server for new certificates, which will match only by chance.  From
    the attacker's perspective, the difficulty is that if he only has a
    small number of certificates, the region of the Overlay Instance he
@@ -8060,9 +8060,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 144]
+Jennings, et al.           Expires May 9, 2013                [Page 144]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    of the overlay by having the information come directly, or be
@@ -8116,9 +8116,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 145]
+Jennings, et al.           Expires May 9, 2013                [Page 145]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    an attacker to mount a variety of attacks.  In particular, if an
@@ -8155,7 +8155,7 @@ Internet-Draft                 RELOAD Base                     July 2012
    wellknown-uri-review@ietf.org on October 12, 2010.
 
            +----------------------------+----------------------+
-           | URI suffix:                | p2psip-enroll        |
+           | URI suffix:                | reload-config        |
            | Change controller:         | IETF <iesg@ietf.org> |
            | Specification document(s): | [RFC-AAAA]           |
            | Related information:       | None                 |
@@ -8165,31 +8165,30 @@ Internet-Draft                 RELOAD Base                     July 2012
 
    [[Note to RFC Editor - this paragraph can be removed before
    publication. ]] IANA has already allocated a TCP port for the main
-   peer to peer protocol.  This port has the name p2p-sip and the port
-   number of 6084.  IANA needs to update this registration to be defined
-   for UDP as well as TCP.
+   peer to peer protocol.  This port has the name p2psip-enroll and the
+   port number of 6084.  IANA needs to update this registration to
+   change the service name to reload-config and to define it for UDP as
+   well as TCP.
 
 
 
-
-Jennings, et al.        Expires January 17, 2013              [Page 146]
+Jennings, et al.           Expires May 9, 2013                [Page 146]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    IANA SHALL make the following port registration:
 
-   +------------------------------+------------------------------------+
-   | Registration Technical       | Cullen Jennings <fluffy@cisco.com> |
-   | Contact                      |                                    |
-   | Registration Owner           | IETF <iesg@ietf.org>               |
-   | Transport Protocol           | TCP & UDP                          |
-   | Port Number                  | 6084                               |
-   | Service Name                 | p2psip-enroll                      |
-   | Description                  | Peer to Peer Infrastructure        |
-   |                              | Enrollment                         |
-   | Reference                    | [RFC-AAAA]                         |
-   +------------------------------+------------------------------------+
+   +-----------------------------+-------------------------------------+
+   | Registration Technical      | Cullen Jennings <fluffy@cisco.com>  |
+   | Contact                     |                                     |
+   | Registration Owner          | IETF <iesg@ietf.org>                |
+   | Transport Protocol          | TCP & UDP                           |
+   | Port Number                 | 6084                                |
+   | Service Name                | reload-config                       |
+   | Description                 | Peer to Peer Infrastructure         |
+   |                             | Configuration                       |
+   +-----------------------------+-------------------------------------+
 
 14.3.  Overlay Algorithm Types
 
@@ -8224,17 +8223,15 @@ Internet-Draft                 RELOAD Base                     July 2012
                       | NODE-MATCH      | RFC-AAAA |
                       | USER-NODE-MATCH | RFC-AAAA |
                       | NODE-MULTIPLE   | RFC-AAAA |
-
-
-
-
-Jennings, et al.        Expires January 17, 2013              [Page 147]
-
-Internet-Draft                 RELOAD Base                     July 2012
-
-
                       | EXP-MATCH       | RFC-AAAA |
                       +-----------------+----------+
+
+
+
+Jennings, et al.           Expires May 9, 2013                [Page 147]
+
+Internet-Draft                 RELOAD Base                 November 2012
+
 
    The value EXP-MATCH has been made available for the purposes of
    experimentation.  This value is not meant for vendor specific use of
@@ -8284,9 +8281,12 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 148]
+
+
+
+Jennings, et al.           Expires May 9, 2013                [Page 148]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 14.7.  Data Model
@@ -8340,9 +8340,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 149]
+Jennings, et al.           Expires May 9, 2013                [Page 149]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
       +---------------------------------+----------------+----------+
@@ -8396,9 +8396,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 150]
+Jennings, et al.           Expires May 9, 2013                [Page 150]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    not meant for vendor specific use of any sort and MUST NOT be used
@@ -8452,9 +8452,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 151]
+Jennings, et al.           Expires May 9, 2013                [Page 151]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
                +--------------------+------+---------------+
@@ -8508,9 +8508,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 152]
+Jennings, et al.           Expires May 9, 2013                [Page 152]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    The value exp-forward has been made available for the purposes of
@@ -8564,9 +8564,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 153]
+Jennings, et al.           Expires May 9, 2013                [Page 153]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    o  A peer.
@@ -8620,9 +8620,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 154]
+Jennings, et al.           Expires May 9, 2013                [Page 154]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    Encoding Considerations:  The reload URI is not intended to be human-
@@ -8676,9 +8676,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 155]
+Jennings, et al.           Expires May 9, 2013                [Page 155]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    Magic number(s):  none
@@ -8732,9 +8732,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 156]
+Jennings, et al.           Expires May 9, 2013                [Page 156]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    draft by Salman A. Baset, Henning Schulzrinne, and Marcin
@@ -8788,9 +8788,9 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 157]
+Jennings, et al.           Expires May 9, 2013                [Page 157]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    [RFC3629]  Yergeau, F., "UTF-8, a transformation format of ISO
@@ -8803,9 +8803,6 @@ Internet-Draft                 RELOAD Base                     July 2012
    [RFC4279]  Eronen, P. and H. Tschofenig, "Pre-Shared Key Ciphersuites
               for Transport Layer Security (TLS)", RFC 4279,
               December 2005.
-
-   [RFC4347]  Rescorla, E. and N. Modadugu, "Datagram Transport Layer
-              Security", RFC 4347, April 2006.
 
    [RFC4395]  Hansen, T., Hardie, T., and L. Masinter, "Guidelines and
               Registration Procedures for New URI Schemes", BCP 35,
@@ -8841,17 +8838,17 @@ Internet-Draft                 RELOAD Base                     July 2012
               Traversal Utilities for NAT (STUN)", RFC 5766, April 2010.
 
    [RFC5952]  Kawamura, S. and M. Kawashima, "A Recommendation for IPv6
-
-
-
-Jennings, et al.        Expires January 17, 2013              [Page 158]
-
-Internet-Draft                 RELOAD Base                     July 2012
-
-
               Address Text Representation", RFC 5952, August 2010.
 
    [RFC6091]  Mavrogiannopoulos, N. and D. Gillmor, "Using OpenPGP Keys
+
+
+
+Jennings, et al.           Expires May 9, 2013                [Page 158]
+
+Internet-Draft                 RELOAD Base                 November 2012
+
+
               for Transport Layer Security (TLS) Authentication",
               RFC 6091, February 2011.
 
@@ -8861,6 +8858,9 @@ Internet-Draft                 RELOAD Base                     July 2012
    [RFC6298]  Paxson, V., Allman, M., Chu, J., and M. Sargent,
               "Computing TCP's Retransmission Timer", RFC 6298,
               June 2011.
+
+   [RFC6347]  Rescorla, E. and N. Modadugu, "Datagram Transport Layer
+              Security Version 1.2", RFC 6347, January 2012.
 
    [w3c-xml-namespaces]
               Bray, T., Hollander, D., Layman, A., Tobin, R., and Henry
@@ -8885,27 +8885,26 @@ Internet-Draft                 RELOAD Base                     July 2012
               (RELOAD)", draft-ietf-hip-reload-instance-04 (work in
               progress), October 2011.
 
-   [I-D.ietf-mmusic-ice-tcp]
-              Rosenberg, J., Keranen, A., Lowekamp, B., and A. Roach,
-              "TCP Candidates with Interactive Connectivity
-              Establishment (ICE)", draft-ietf-mmusic-ice-tcp-16 (work
-              in progress), November 2011.
-
    [I-D.ietf-p2psip-diagnostics]
               Bryan, D., Jiang, X., Even, R., and H. Song, "P2PSIP
               Overlay Diagnostics", draft-ietf-p2psip-diagnostics-08
               (work in progress), December 2011.
 
+   [I-D.ietf-p2psip-rpr]
+              Zong, N., Even, R., and Y. Zhang, "An extension to RELOAD
+              to support Relay Peer Routing", draft-ietf-p2psip-rpr-01
+              (work in progress), November 2011.
+
    [I-D.ietf-p2psip-self-tuning]
-
-
-
-Jennings, et al.        Expires January 17, 2013              [Page 159]
-
-Internet-Draft                 RELOAD Base                     July 2012
-
-
               Maenpaa, J., Camarillo, G., and J. Hautakorpi, "A Self-
+
+
+
+Jennings, et al.           Expires May 9, 2013                [Page 159]
+
+Internet-Draft                 RELOAD Base                 November 2012
+
+
               tuning Distributed Hash Table (DHT) for REsource LOcation
               And Discovery (RELOAD)", draft-ietf-p2psip-self-tuning-05
               (work in progress), January 2012.
@@ -8920,12 +8919,6 @@ Internet-Draft                 RELOAD Base                     July 2012
               Jennings, C., Lowekamp, B., Rescorla, E., Baset, S., and
               H. Schulzrinne, "A SIP Usage for RELOAD",
               draft-ietf-p2psip-sip-07 (work in progress), January 2012.
-
-   [I-D.jiang-p2psip-relay]
-              Jiang, X., Zong, N., Even, R., and Y. Zhang, "An extension
-              to RELOAD to support Direct Response and Relay Peer
-              routing", draft-jiang-p2psip-relay-05 (work in progress),
-              March 2011.
 
    [RFC1122]  Braden, R., "Requirements for Internet Hosts -
               Communication Layers", STD 3, RFC 1122, October 1989.
@@ -8953,14 +8946,6 @@ Internet-Draft                 RELOAD Base                     July 2012
               Authentication", RFC 5054, November 2007.
 
    [RFC5095]  Abley, J., Savola, P., and G. Neville-Neil, "Deprecation
-
-
-
-Jennings, et al.        Expires January 17, 2013              [Page 160]
-
-Internet-Draft                 RELOAD Base                     July 2012
-
-
               of Type 0 Routing Headers in IPv6", RFC 5095,
               December 2007.
 
@@ -8968,6 +8953,14 @@ Internet-Draft                 RELOAD Base                     July 2012
               "Host Identity Protocol", RFC 5201, April 2008.
 
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
+
+
+
+Jennings, et al.           Expires May 9, 2013                [Page 160]
+
+Internet-Draft                 RELOAD Base                 November 2012
+
+
               Housley, R., and W. Polk, "Internet X.509 Public Key
               Infrastructure Certificate and Certificate Revocation List
               (CRL) Profile", RFC 5280, May 2008.
@@ -8988,6 +8981,10 @@ Internet-Draft                 RELOAD Base                     July 2012
               and A. Johnston, "HIP BONE: Host Identity Protocol (HIP)
               Based Overlay Networking Environment (BONE)", RFC 6079,
               January 2011.
+
+   [RFC6544]  Rosenberg, J., Keranen, A., Lowekamp, B., and A. Roach,
+              "TCP Candidates with Interactive Connectivity
+              Establishment (ICE)", RFC 6544, March 2012.
 
    [Sybil]    Douceur, J., "The Sybil Attack", IPTPS 02, March 2002.
 
@@ -9010,15 +9007,16 @@ Internet-Draft                 RELOAD Base                     July 2012
               Improving DHT Lookup Performance under Churn",  IEEE
               P2P'06.
 
-
-
-Jennings, et al.        Expires January 17, 2013              [Page 161]
-
-Internet-Draft                 RELOAD Base                     July 2012
-
-
    [minimizing-churn-sigcomm06]
               Godfrey, P., Shenker, S., and I. Stoica, "Minimizing Churn
+
+
+
+Jennings, et al.           Expires May 9, 2013                [Page 161]
+
+Internet-Draft                 RELOAD Base                 November 2012
+
+
               in Distributed Systems",  SIGCOMM 2006.
 
    [non-transitive-dhts-worlds05]
@@ -9068,9 +9066,11 @@ A.1.  Iterative vs Recursive
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 162]
+
+
+Jennings, et al.           Expires May 9, 2013                [Page 162]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 A.2.  Symmetric vs Forward response
@@ -9124,9 +9124,9 @@ A.3.  Direct Response
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 163]
+Jennings, et al.           Expires May 9, 2013                [Page 163]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
       timeout that will increase the response latency whenever A is not
@@ -9161,7 +9161,7 @@ Internet-Draft                 RELOAD Base                     July 2012
 
 A.4.  Relay Peers
 
-   [I-D.jiang-p2psip-relay] has proposed implementing a form of direct
+   [I-D.ietf-p2psip-rpr] has proposed implementing a form of direct
    response by having A identify a peer, Q, that will be directly
    reachable by any other peer.  A uses Attach to establish a connection
    with Q and advertises Q's IP address in the request sent to Z. Z
@@ -9180,9 +9180,9 @@ A.4.  Relay Peers
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 164]
+Jennings, et al.           Expires May 9, 2013                [Page 164]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    added such a feature to RELOAD at this point.
@@ -9236,9 +9236,9 @@ B.1.  Why Not Only Peers?
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 165]
+Jennings, et al.           Expires May 9, 2013                [Page 165]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
    o  The node does not have appropriate network connectivity, typically
@@ -9292,9 +9292,9 @@ B.2.  Clients as Application-Level Agents
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 166]
+Jennings, et al.           Expires May 9, 2013                [Page 166]
 
-Internet-Draft                 RELOAD Base                     July 2012
+Internet-Draft                 RELOAD Base                 November 2012
 
 
 Authors' Addresses
@@ -9348,5 +9348,5 @@ Authors' Addresses
 
 
 
-Jennings, et al.        Expires January 17, 2013              [Page 167]
+Jennings, et al.           Expires May 9, 2013                [Page 167]
 
