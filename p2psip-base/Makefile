@@ -8,6 +8,10 @@ DIF  := $(patsubst %.xml,%.diff.html,$(SRC))
 
 all: $(HTML) $(TXT) $(DIF)
 
+clean:
+	rm *~ draft*.html draft*pdf draft-*txt
+
+
 %.html: %.xml
 	xml2rfc $^ $@
 
@@ -19,6 +23,9 @@ all: $(HTML) $(TXT) $(DIF)
 
 %.diff.html: %.txt
 	htmlwdiff  $^.old $^ >  $@
+
+%.pdf: %.html
+	wkpdf -p letter -s $^ -o $@
 
 check:
 	java -jar jing.jar -c config-schema.rnc config.xml

@@ -1,0 +1,113 @@
+#234567890123456789012345678901234567890123456789012345678901234567890
+
+namespace chord = "urn:ietf:params:xml:ns:p2p:config-chord"
+namespace local = ""
+default namespace p2pcf = "urn:ietf:params:xml:ns:p2p:config-base"
+namespace rng = "http://relaxng.org/ns/structure/1.0"
+
+anything =
+    (element * { anything }
+     | attribute * { text }
+     | text)*
+
+foreign-elements = element * - (p2pcf:* | local:* | chord:*) 
+                   { anything }*
+foreign-attributes = attribute * - (p2pcf:*|local:*|chord:*) 
+                     { text }*
+foreign-nodes = (foreign-attributes | foreign-elements)*
+
+start =  element p2pcf:overlay {
+      overlay-element
+}
+
+overlay-element &=  element configuration {
+            attribute instance-name { xsd:string },
+            attribute expiration { xsd:dateTime }?,
+            attribute sequence { xsd:long }?,
+            foreign-attributes*, 
+            parameter
+        }+ 
+overlay-element &= element signature {
+            attribute algorithm { signature-algorithm-type }?,
+            xsd:base64Binary
+        }*
+
+signature-algorithm-type |= "rsa-sha1"
+signature-algorithm-type |=  xsd:string # signature alg extensions
+
+parameter &= element topology-plugin { topology-plugin-type }?
+topology-plugin-type |= xsd:string # topo plugin extensions
+parameter &= element max-message-size { xsd:unsignedInt }?
+parameter &= element initial-ttl { xsd:int }?
+parameter &= element root-cert { xsd:base64Binary }*
+parameter &= element required-kinds { kind-block* }?
+parameter &= element enrollment-server { xsd:anyURI }*
+parameter &= element kind-signer {  xsd:string }*
+parameter &= element bad-node {  xsd:string }*
+parameter &= element no-ice { xsd:boolean }?
+parameter &= element shared-secret { xsd:string }?
+parameter &= element overlay-link-protocol { xsd:string }*
+parameter &= element clients-permitted { xsd:boolean }?
+parameter &= element turn-density { xsd:int }?
+parameter &= element node-id-length { xsd:int }?
+parameter &= foreign-elements*
+
+parameter &=
+    element self-signed-permitted {
+        attribute digest { self-signed-digest-type },
+        xsd:boolean
+    }?
+self-signed-digest-type |= "sha1"
+self-signed-digest-type |=  xsd:string # signature digest extensions
+
+parameter &= element bootstrap-node {
+                attribute address { xsd:string },
+                attribute port { xsd:int }?
+             }*
+
+parameter &= element multicast-bootstrap { 
+                attribute address {  xsd:string },     
+                attribute port { xsd:int }?
+             }*
+
+kind-block = element kind-block {
+    element kind {
+        (  attribute name { kind-names }
+           | attribute id { xsd:int } ),
+        kind-parameter
+    } & 
+    element kind-signature  {
+        attribute algorithm { signature-algorithm-type }?,
+        xsd:base64Binary
+    }?
+}
+
+kind-parameter &= element max-count { xsd:int }
+kind-parameter &= element max-size { xsd:int }
+kind-parameter &= element max-node-multiple { xsd:int }?
+
+kind-parameter &= element data-model { data-model-type }
+data-model-type |= "SINGLE"
+data-model-type |= "ARRAY"
+data-model-type |= "DICTIONARY"
+data-model-type |=  xsd:string # data model extensions
+
+kind-parameter &= element access-control { access-control-type }
+access-control-type |= "USER-MATCH"
+access-control-type |= "NODE-MATCH"
+access-control-type |= "USER-NODE-MATCH"
+access-control-type |= "NODE-MULTIPLE"
+access-control-type |= xsd:string # access control extensions
+
+kind-parameter &= foreign-elements*
+
+kind-names |= "TURN-SERVICE"
+kind-names |= "CERTIFICATE_BY_NODE"
+kind-names |= "CERTIFICATE_BY_USER"
+kind-names |= xsd:string # kind extensions
+
+# Chord specific parameters 
+topology-plugin-type |= "CHORD-RELOAD"
+parameter &= element chord:chord-ping-interval { xsd:int }?
+parameter &= element chord:chord-update-interval { xsd:int }?
+parameter &= element chord:chord-reactive { xsd:boolean }?
