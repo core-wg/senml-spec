@@ -4,39 +4,12 @@
 <!-- TODO Items 
 Check if the qualicom IPR issueed and if anything can be done 
 
-
-Say which of 
-  SignatureAndHashAlgorithm     algorithm;
-are mandatory to implements
-
-Add pad data option to PING ... and update section 5.7 to mention this 
-
 in NODE-MULTIPLE, you need to gen and text all i which seems lame 
 
-Does direct return respone routing actuall work give you don't have all the stuff you need to do ICE for both sides. Prob need to say it means no ICE. 
+JoinReq and LeaveReq have a node ID in them and it is a potential confusing and useless - shouild we remove this. 
 
-JonReq and LeaveReq have a node ID in them and it is a potential confusing and useless - shouild we remove this. 
+--> 
 
-On Feb 5, 2011, at 9:32 AM, Marc Petit-Huguenin wrote:
-BTW I was not able to find text explaining what to do if the message level
-signature fails.  Should the message be dropped (and so be retransmitted) or
-should an error be sent back?
--->
-<!-- One or more node-ids? See Hugenin's post from 11/22 -->
-<!-- nodeids in join/leave -->
-<!--
-A.17. "config_data (type==config)"
-
-The definition of this field is "[t]he contents of the configuration document",
-but 10.1 says that a file "...can contain multiple 'configuration' elements...".
-So should not this field be in fact defined as "One XML configuration
-production.  This MUST be encoded with UTF-8 and assume a default namespace of
-...", like for the Kinds value?  And in this case what about the signature
-element in the XML fragment?
--->
-<!-- Also A.32-35 relate tothe same thing -->
-<!-- unscrew the draft-maenpaa reference -->
-<!-- TODO EKR: do something about (-1) and array stores. -->
 <?xml-stylesheet type="text/xsl" href="rfc2629.xslt" ?>
 <?rfc toc="yes" ?>
 <?rfc symrefs="yes" ?>
@@ -47,7 +20,7 @@ element in the XML fragment?
 <?rfc rfcedstyle="no" ?>
 <!-- Don't change this. It breaks stuff -->
 <?rfc tocdepth="4"?>
-<rfc category="std" docName="draft-ietf-p2psip-base-22"
+<rfc category="std" docName="draft-ietf-p2psip-base-23"
      ipr="pre5378Trust200902">
   <front>
     <title abbrev="RELOAD Base">REsource LOcation And Discovery (RELOAD) Base
@@ -155,7 +128,7 @@ element in the XML fragment?
       </address>
     </author>
 
-    <date day="16" month="July" year="2012" />
+    <date day="05" month="November" year="2012" />
 
     <area>RAI</area>
 
@@ -177,17 +150,17 @@ element in the XML fragment?
     </abstract>
 
     <!--
-    <note title="Legal">
-      <t>THIS DOCUMENT AND THE INFORMATION CONTAINED THEREIN ARE PROVIDED ON
-      AN &ldquo;AS IS&rdquo; BASIS AND THE CONTRIBUTOR, THE ORGANIZATION
-      HE/SHE REPRESENTS OR IS SPONSORED BY (IF ANY), THE INTERNET SOCIETY, THE
-      IETF TRUST, AND THE INTERNET ENGINEERING TASK FORCE, DISCLAIM ALL
-      WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY
-      WARRANTY THAT THE USE OF THE INFORMATION THEREIN WILL NOT INFRINGE ANY
-      RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A
-      PARTICULAR PURPOSE.</t>
-    </note>
--->
+      <note title="Legal">
+        <t>THIS DOCUMENT AND THE INFORMATION CONTAINED THEREIN ARE PROVIDED ON
+        AN &ldquo;AS IS&rdquo; BASIS AND THE CONTRIBUTOR, THE ORGANIZATION
+        HE/SHE REPRESENTS OR IS SPONSORED BY (IF ANY), THE INTERNET SOCIETY, THE
+        IETF TRUST, AND THE INTERNET ENGINEERING TASK FORCE, DISCLAIM ALL
+        WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY
+        WARRANTY THAT THE USE OF THE INFORMATION THEREIN WILL NOT INFRINGE ANY
+        RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A
+        PARTICULAR PURPOSE.</t>
+       </note>
+     -->
   </front>
 
   <middle>
@@ -420,7 +393,7 @@ element in the XML fragment?
             transporting traffic directly between nodes. Each such protocol
             includes the appropriate provisions for per-hop framing or
             hop-by-hop ACKs required by unreliable transports. TLS <xref
-            target="RFC5246"></xref> and DTLS <xref target="RFC4347"></xref>
+            target="RFC5246"></xref> and DTLS <xref target="RFC6347"></xref>
             are the currently defined "link layer" protocols used by RELOAD
             for hop-by-hop communication. New protocols can be defined, as
             described in <xref target="sec.future-link"></xref> and <xref
@@ -666,19 +639,19 @@ Transport    |      Link       |     +-------+  +------+
         levels:</t>
 
         <t><list style="hanging">
-            <t hangText="Connection Level: ">Connections between peers are
+            <t hangText="Connection Level: ">Connections between nodes are
             secured with TLS, DTLS, or potentially some to be defined future
             protocol.</t>
 
             <t hangText="Message Level: ">Each RELOAD message is signed.</t>
 
-            <t hangText="Object Level: ">Stored objects is signed by the
-            creating peer.</t>
+            <t hangText="Object Level: ">Stored objects are signed by the
+            creating node.</t>
           </list></t>
 
-        <t>These three levels of security work together to allow peers to
+        <t>These three levels of security work together to allow nodes to
         verify the origin and correctness of data they receive from other
-        peers, even in the face of malicious activity by other peers in the
+        nodes, even in the face of malicious activity by other nodes in the
         overlay. RELOAD also provides access control built on top of these
         communications security features. Because the peer responsible for
         storing a piece of data can validate the signature on the data being
@@ -937,7 +910,7 @@ Transport    |      Link       |     +-------+  +------+
           </list></t>
 
         <t>Each node has a certificate <xref target="RFC5280"></xref>
-        containing a Node-ID, which is unique within an overlay instance.</t>
+        containing this Node-ID, which is unique within an overlay instance.</t>
 
         <t>The certificate serves multiple purposes:</t>
 
@@ -1215,7 +1188,7 @@ Dest=Z
         returned to A in the same manner regardless of A's role in the
         overlay.</t>
 
-        <t>This figure shows use of full via-lists by intermediate peers B and
+        <t>This figure shows use of full via lists by intermediate peers B and
         X. However, if B and/or X are willing to store state, then they may
         elect to truncate the lists, save that information internally (keyed
         by the transaction id), and return the response message along the path
@@ -1250,8 +1223,8 @@ Dest=Z
              ]]></artwork>
         </figure>
 
-        <t>As before, when B receives the message, he creates via list
-        consisting of [A]. However, instead of sending [A,B], X creates an
+        <t>As before, when B receives the message, he creates a via list
+        consisting of [A]. However, instead of sending [A, B], X creates an
         opaque ID X1 which maps internally to [A, B] (perhaps by being an
         encryption of [A, B] and forwards to Z with only X1 as the via list.
         When the response arrives at X, it maps X1 back to [A, B] and then
@@ -1289,8 +1262,8 @@ Dest=Z
         order to support this case, some small number of "bootstrap nodes"
         typically need to be publicly accessible so that new peers can
         directly connect to them. <xref target="sec-enrollment"></xref>
-        contains more detail on this. The second case is when a client node
-        connects to a node at an arbitrary IP address, rather than to its
+        contains more detail on this. The second case is when a client
+        connects to a peer at an arbitrary IP address, rather than to its
         responsible peer, as described in the second bullet point of <xref
         target="sec-client-routing"></xref>.</t>
 
@@ -1436,7 +1409,7 @@ Dest=Z
 
           <t>If a node already has the valid configuration document that it
           received by some out of band method, this step can be skipped. Note
-          that that out of band method MUST provide authentication and
+          that that out of band method must provide authentication and
           integrity, because the configuration document contains the trust
           anchors for the system.</t>
         </section>
@@ -1455,7 +1428,7 @@ Dest=Z
         </section>
 
         <section title="Diagnostics">
-          <t>Significant advice around managing a RELAOD overlay and
+          <t>Significant advice around managing a RELOAD overlay and
           extensions for diagnostics are described in <xref
           target="I-D.ietf-p2psip-diagnostics"></xref>.</t>
         </section>
@@ -1566,8 +1539,7 @@ Dest=Z
           what certificate is appropriate.</t>
 
           <t>The most natural rule is that a certificate authorizes a user to
-          store data keyed with their user name X. This rule is used for all
-          the Kinds defined in this specification. Thus, only a user with a
+          store data keyed with their user name X. Thus, only a user with a
           certificate for "alice@example.org" could write to that location in
           the overlay. However, other usages can define any rules they choose,
           including publicly writable values.</t>
@@ -1638,7 +1610,7 @@ Dest=Z
 
             <t>Defines access control rules for each of the Kinds.</t>
 
-            <t>Defines how the Resource Name is formed that is hashed to form
+            <t>Defines how the Resource Name is hashed to form
             the Resource-ID where each Kind is stored.</t>
 
             <t>Describes how values will be merged after a network partition.
@@ -1754,7 +1726,7 @@ Dest=Z
               the routing process with the next entry on the destination list.
               If the message is a response and list compression was used, then
               the node first modifies the destination list to reinsert the
-              saved state, e.g., by unpacking any opaque ids.</t>
+              saved state, e.g., by unpacking any opaque IDS.</t>
 
               <t>If the entry is the wildcard Node-ID, the message is destined
               for this node and it passes it up to the upper layers.</t>
@@ -1796,15 +1768,15 @@ Dest=Z
 
           <t>As an example of the first strategy, consider an example with
           nodes A, B, C, D and E. If node D receives a message from node C
-          with via list (A, B), then D would forward to the next node (E) with
-          via list (A, B, C). Now, if E wants to respond to the message, it
+          with via list [A, B], then D would forward to the next node E with
+          via list [A, B, C]. Now, if E wants to respond to the message, it
           reverses the via list to produce the destination list, resulting in
-          (D, C, B, A). When D forwards the response to C, the destination
-          list will contain (C, B, A).</t>
+          [D, C, B, A]. When D forwards the response to C, the destination
+          list will contain [C, B, A].</t>
 
           <t>As an example of the second strategy, if node D receives a
-          message from node C with transaction ID X and via list (A, B), it
-          could store (X, C) in its state database and forward the message
+          message from node C with transaction ID X and via list [A, B], it
+          could store [X, C] in its state database and forward the message
           with the via list unchanged. When D receives the response, it
           consults its state database for transaction id X, determines that
           the request came from C, and forwards the response to C.</t>
@@ -1815,12 +1787,12 @@ Dest=Z
           route. RELOAD provides explicit support for this functionality in
           the form of opaque IDs, which can replace any number of via list
           entries. For instance, in the above example, Node D might send E a
-          via list containing only the opaque ID (I). E would then use the
-          destination list (D, I) to send its return message. When D processes
+          via list containing only the opaque ID I. E would then use the
+          destination list [D, I] to send its return message. When D processes
           this destination list, it would detect that I is a opaque ID,
-          recover the via list (A, B, C), and reverse that to produce the
-          correct destination list (C, B, A) before sending it to C. This
-          feature is called List Compression. Possibilities for a opaque id
+          recover the via list [A, B, C], and reverse that to produce the
+          correct destination list [C, B, A] before sending it to C. This
+          feature is called List Compression. Possibilities for a opaque ID
           include a compressed version of the original via list or an index
           into a state database containing the original via list, but the
           details are a local matter.</t>
@@ -1842,7 +1814,7 @@ Dest=Z
           be maintained for at least the value of the
           overlay-reliability-timer configuration parameter and MAY be kept
           longer. Future extension, such as <xref
-          target="I-D.jiang-p2psip-relay"></xref>, may define mechanisms for
+          target="I-D.ietf-p2psip-rpr"></xref>, may define mechanisms for
           determining when this state does not need to be retained.</t>
 
           <t>None of the above mechanisms are required for responses, since
@@ -1851,9 +1823,9 @@ Dest=Z
 
           <t>To be precise on the responsibility of the intermediate node,
           suppose that an intermediate node, A, receives a message from node B
-          with via list X-Y-Z. Node A MUST implement an algorithm that ensures
+          with via list [X, Y, Z]. Node A MUST implement an algorithm that ensures
           that A returns a response to this request to node B with the
-          destination list B-Z-Y-X, provided that the node to which A forwards
+          destination list [B, Z, Y, X], provided that the node to which A forwards
           the request follows the same contract. Node A normally learns the
           Node-ID B is using via an Attach, but a node using a certificate
           with a single Node-ID MAY elect to not send an Attach (see <xref
@@ -1867,7 +1839,7 @@ Dest=Z
         </section>
 
         <section anchor="sec-opaque-Node-ID" title="Opaque ID">
-          <t>If the first entry in the destination list is an opaque id (e.g.,
+          <t>If the first entry in the destination list is an opaque ID (e.g.,
           a compressed via list), the peer MUST replace that entry with the
           original via list that it replaced and then re-examine the
           destination list to determine which of the three cases in <xref
@@ -1876,14 +1848,14 @@ Dest=Z
       </section>
 
       <section title="Symmetric Recursive Routing">
-        <t>This Section defines RELOAD's symmetric recursive routing
+        <t>This Section defines RELOAD's Symmetric Recursive Routing (SRR)
         algorithm, which is the default algorithm used by nodes to route
         messages through the overlay. All implementations MUST implement this
         routing algorithm. An overlay MAY be configured to use alternative
         routing algorithms, and alternative routing algorithms MAY be selected
         on a per-message basis. I.e., a node in an overlay which supports SRR
-        and routing algorithm XXX might use SRR some of the time and XXX some
-        of the time.</t>
+		and routing algorithm <xref target="I-D.ietf-p2psip-rpr">RPR</xref>
+        might use SRR some of the time and RPR some of the time.</t>
 
         <section anchor="sec-request-origination" title="Request Origination">
           <t>In order to originate a message to a given Node-ID or
@@ -2002,11 +1974,11 @@ Dest=Z
                  title="Presentation Language">
           <t>The structures defined in this document are defined using a
           C-like syntax based on the presentation language used to define
-          TLS<xref target="RFC5246"></xref>. Advantages of this style
+          <xref target="RFC5246">TLS</xref>. Advantages of this style
           include:</t>
 
           <t><list style="symbols">
-              <t>It familiar enough looking that most readers can grasp it
+              <t>It is familiar enough looking that most readers can grasp it
               quickly.</t>
 
               <t>The ability to define nested structures allows a separation
@@ -2050,7 +2022,7 @@ Dest=Z
               <!--begin-pdu-->
 
               <artwork><![CDATA[
-      enum { false (0), true(1), (255)} Boolean;
+      enum { false (0), true(1), (255) } Boolean;
 
     ]]></artwork>
             </figure>
@@ -2112,15 +2084,15 @@ Dest=Z
 
               <artwork><![CDATA[
 
-     enum {reservedAddr(0), ipv4_address (1), ipv6_address (2), 
-          (255)} AddressType;
+     enum { reservedAddr(0), ipv4_address(1), ipv6_address(2),
+          (255) } AddressType;
 
-     struct  {
+     struct {
        uint32                  addr;
        uint16                  port;
      } IPv4AddrPort;
 
-     struct  {
+     struct {
        uint128                 addr;
        uint16                  port;
      } IPv6AddrPort;
@@ -2207,7 +2179,7 @@ Dest=Z
        Destination        via_list[via_list_length];
        Destination        destination_list
                             [destination_list_length];
-       ForwardingOptions  options[options_length];
+       ForwardingOption   options[options_length];
      } ForwardingHeader;
 ]]></artwork>
           </figure>
@@ -2230,7 +2202,7 @@ Dest=Z
               name. The purpose of this field is to allow nodes to participate
               in multiple overlays and to detect accidental misconfiguration.
               This is not a security critical function. The overlay name MUST
-              consist of a sequence of charters what would be allowable as a
+              consist of a sequence of characters what would be allowable as a
               DNS name.</t>
 
               <t></t>
@@ -2254,7 +2226,7 @@ Dest=Z
               along the route the message traverses just before transmission.
               If a received message has a TTL of 0, and the message is not
               destined for the receiving node, then the message MUST NOT be
-              propagated further and and a "Error_TTL_Exceeded" error should
+              propagated further and a "Error_TTL_Exceeded" error should
               be generated. The initial value of the TTL SHOULD be 100 and
               MUST NOT exceed 100 unless defined otherwise by the overlay
               configuration. Implementations which receive message with a TTL
@@ -2270,7 +2242,7 @@ Dest=Z
               indicates that this is the last (or only) fragment. The next six
               bits (0x20000000 to 0x01000000) are reserved and SHOULD be set
               to zero. The remainder of the field is used to indicate the
-              fragment offset; see <xref target="sec-frag-reass"></xref></t>
+              fragment offset; see <xref target="sec-frag-reass"></xref>.</t>
 
               <t></t>
 
@@ -2333,7 +2305,7 @@ Dest=Z
 
               <t></t>
 
-              <t hangText="options:">Contains a series of ForwardingOptions
+              <t hangText="options:">Contains a series of ForwardingOption
               entries. See <xref target="sec-forwarding-options"></xref>.</t>
             </list></t>
 
@@ -2343,7 +2315,7 @@ Dest=Z
             the overlay configuration document. In order to allow for
             configuration document changes, each version of the configuration
             document has a sequence number which is monotonically increasing
-            mod 65536. Because the sequence number may in principle wrap,
+            mod 65535. Because the sequence number may in principle wrap,
             greater than or less than are interpreted by modulo arithmetic as
             in TCP.</t>
 
@@ -2366,14 +2338,14 @@ Dest=Z
 
           <section anchor="sec.dest-via-list"
                    title="Destination and Via Lists">
-            <t>The destination list and via lists are sequences of Destination
+            <t>The destination list and via list are sequences of Destination
             values:</t>
 
             <figure>
               <!--begin-pdu-->
 
               <artwork><![CDATA[
-  enum {reserved(0), node(1), resource(2), opaque_id_type(3),
+  enum { reserved(0), node(1), resource(2), opaque_id_type(3),
             /* 128-255 not allowed */ (255) }
             DestinationType;
 
@@ -2454,7 +2426,7 @@ Dest=Z
 
                 <t hangText="opaque"></t>
 
-                <t>A compressed list of Node-IDs and/or resources. Because
+                <t>A compressed list of Node-IDs and an eventual Resource-ID. Because
                 this value was compressed by one of the peers, it is only
                 meaningful to that peer and cannot be decoded by other peers.
                 Thus, it is represented as an opaque string.</t>
@@ -2478,19 +2450,19 @@ Dest=Z
             random values. An implementation could use 12 bits for the
             connection table index and 3 bits for the generation counter.
             (Note that this does not suggest a 4096 entry connection table for
-            every node, only the ability to encode for a larger connection
+            every peer, only the ability to encode for a larger connection
             table.) When a connection table slot is used for a new connection,
             the generation counter is incremented (with wrapping). Connection
             table slots are used on a rotating basis to maximize the time
             interval between uses of the same slot for different connections.
             When routing a message to an entry in the destination list
-            encoding a connection table entry, the node confirms that the
+            encoding a connection table entry, the peer confirms that the
             generation counter matches the current generation counter of that
             index before forwarding the message. If it does not match, the
             message is silently dropped.</t>
           </section>
 
-          <section anchor="sec-forwarding-options" title="Forwarding Options">
+          <section anchor="sec-forwarding-options" title="Forwarding Option">
             <t>The Forwarding header can be extended with forwarding header
             options, which are a series of ForwardingOptions structures:</t>
 
@@ -2499,15 +2471,15 @@ Dest=Z
 
               <artwork><![CDATA[
  enum { reservedForwarding(0), (255) } 
-   ForwardingOptionsType;
+   ForwardingOptionType;
 	
  struct {
-   ForwardingOptionsType     type;
+   ForwardingOptionType      type;
    uint8                     flags;
    uint16                    length;
    select (type) {
          /* This type may be extended */
-   } option;
+   };
  } ForwardingOption;
 
         ]]></artwork>
@@ -2536,7 +2508,7 @@ Dest=Z
                 <t>Three flags are defined FORWARD_CRITICAL(0x01),
                 DESTINATION_CRITICAL(0x02), and RESPONSE_COPY(0x04). These
                 flags MUST NOT be set in a response. If the FORWARD_CRITICAL
-                flag is set, any node that would forward the message but does
+                flag is set, any peer that would forward the message but does
                 not understand this options MUST reject the request with an
                 Error_Unsupported_Forwarding_Option error response. If the
                 DESTINATION_CRITICAL flag is set, any node that generates a
@@ -2576,7 +2548,7 @@ struct {
 struct {
   uint16                 message_code;
   opaque                 message_body<0..2^32-1>;
-  MessageExtensions      extensions<0..2^32-1>;
+  MessageExtension       extensions<0..2^32-1>;
 } MessageContents;
 
 ]]></artwork>
@@ -2654,14 +2626,14 @@ struct {
 
           <section anchor="sec-response-code"
                    title="Response Codes and Response Errors">
-            <t>A peer processing a request returns its status in the
+            <t>A node processing a request returns its status in the
             message_code field. If the request was a success, then the message
             code is the response code that matches the request (i.e., the next
             code up). The response payload is then as defined in the
             request/response descriptions.</t>
 
             <t>If the request has failed, then the message code is set to
-            0xffff (error) and the payload MUST be an error_response PDU, as
+            0xffff (error) and the payload MUST be an error_response message, as
             shown below.</t>
 
             <t>When the message code is 0xffff, the payload MUST be an
@@ -2712,7 +2684,7 @@ struct {
 
                 <t></t>
 
-                <t hangText="Error_Not_Found:">The resource or peer cannot be
+                <t hangText="Error_Not_Found:">The resource or node cannot be
                 found or does not exist.</t>
 
                 <t></t>
@@ -2747,9 +2719,9 @@ struct {
 
                 <t></t>
 
-                <t hangText="Error_Unsupported_Forwarding_Option:">A peer
+                <t hangText="Error_Unsupported_Forwarding_Option:">A node
                 receiving the request with a forwarding options flagged as
-                critical but the peer does not support this option. See
+                critical but the node does not support this option. See
                 section <xref target="sec-forwarding-options"></xref>.</t>
 
                 <t></t>
@@ -2766,13 +2738,13 @@ struct {
 
                 <t></t>
 
-                <t hangText="Error_Response_Too_Large:">A peer would have
+                <t hangText="Error_Response_Too_Large:">A node would have
                 generated a response that is too large per the
                 max_response_length field.</t>
 
                 <t></t>
 
-                <t hangText="Error_Config_Too_Old:">A destination peer
+                <t hangText="Error_Config_Too_Old:">A destination node
                 received a request with a configuration sequence that's too
                 old. See <xref target="sec.config-seq"></xref>.</t>
 
@@ -2784,7 +2756,7 @@ struct {
 
                 <t></t>
 
-                <t hangText="Error_Unknown_Kind:">A destination node received
+                <t hangText="Error_Unknown_Kind:">A destination peer received
                 a request with an unknown Kind-ID. See <xref
                 target="sec-store-resp"></xref>.</t>
 
@@ -2841,7 +2813,7 @@ struct {
 
               <t hangText="signature"></t>
 
-              <t>A signature over the message contents.</t>
+              <t>A signature.</t>
             </list></t>
 
           <t>The certificates bucket SHOULD contain all the certificates
@@ -2852,7 +2824,7 @@ struct {
           allowing for only a single copy of each certificate to be sent. In
           systems that have an alternative certificate distribution mechanism,
           some certificates MAY be omitted. However, unless an alternative
-          mechanism for immediately generating certifcates, such as shared
+          mechanism for immediately generating certificates, such as shared
           secret security (<xref target="sec-shared-secret"></xref>) is used,
           it is strongly RECOMMENDED that implementors include all referenced
           certificates, otherwise there is the possibility that messages may
@@ -2874,7 +2846,7 @@ struct {
 
               <t>The type of the certificate, as defined in <xref
               target="RFC6091"></xref>. Only the use of X.509 certificates is
-              defined in this draft.</t>
+              defined in this document.</t>
 
               <t></t>
 
@@ -2899,7 +2871,7 @@ struct {
   enum { reservedSignerIdentity(0), 
          cert_hash(1), cert_hash_node_id(2), 
          none(3)
-         (255)} SignerIdentityType;
+         (255) } SignerIdentityType;
 
   struct {
     select (identity_type) {
@@ -2924,7 +2896,7 @@ struct {
     SignerIdentityValue    identity[SignerIdentity.length];
   } SignerIdentity;
 
-  struct  {
+  struct {
      SignatureAndHashAlgorithm     algorithm;   // From TLS
      SignerIdentity                identity;
      opaque                        signature_value<0..2^16-1>;
@@ -2940,8 +2912,8 @@ struct {
               <t hangText="algorithm "></t>
 
               <t>The signature algorithm in use. The algorithm definitions are
-              found in the IANA TLS SignatureAlgorithm Registry and
-              HashAlgorithm registries. All implementations MUST support
+              found in the IANA TLS SignatureAlgorithm and
+              HashAlgorithm Registries. All implementations MUST support
               RSASSA-PKCS1-v1_5 <xref target="RFC3447"></xref> signatures with
               SHA-256 hashes.</t>
 
@@ -2959,8 +2931,8 @@ struct {
             </list></t>
 
           <t>There are two permitted identity formats, one for a certificate
-          with only one node-id and one for a certificate with multiple
-          node-ids. In the first case, the cert_hash type MUST be used. The
+          with only one Node-ID and one for a certificate with multiple
+          Node-IDs. In the first case, the cert_hash type MUST be used. The
           hash_alg field is used to indicate the algorithm used to produce the
           hash. The certificate_hash contains the hash of the certificate
           object (i.e., the DER-encoded certificate).</t>
@@ -2968,7 +2940,7 @@ struct {
           <t>In the second case, the cert_hash_node_id type MUST be used. The
           hash_alg is as in cert_hash but the cert_hash_node_id is computed
           over the NodeId used to sign concatenated with the certificate.
-          I.e., H(NodeID || certificate). The NodeId is represented without
+          I.e., H(NodeId || certificate). The NodeId is represented without
           any framing or length fields, as simple raw bytes. This is safe
           because NodeIds are fixed-length for a given overlay.</t>
 
@@ -2999,9 +2971,9 @@ struct {
               <t>The response to a message sent to a specific Node-ID MUST
               have been sent by that Node-ID.</t>
 
-              <t>The response to a message sent to a Resource-Id MUST have
+              <t>The response to a message sent to a Resource-ID MUST have
               been sent by a Node-ID which is as close to or closer to the
-              target Resource-Id than any node in the requesting node's
+              target Resource-ID than any node in the requesting node's
               neighbor table.</t>
             </list></t>
 
@@ -3092,7 +3064,7 @@ struct {
             <t>Because joins may only be executed between nodes which are
             directly adjacent, receiving peers MUST verify that any JoinReq
             they receive arrives from a transport channel that is bound to the
-            Node-Id to be assumed by the joining peer.) This also prevents
+            Node-ID to be assumed by the joining peer.) This also prevents
             replay attacks provided that DTLS anti-replay is used.</t>
 
             <t>If the request succeeds, the responding peer responds with a
@@ -3156,7 +3128,7 @@ struct {
             <t>Because leaves may only be executed between nodes which are
             directly adjacent, receiving peers MUST verify that any LeaveReq
             they receive arrives from a transport channel that is bound to the
-            Node-Id to be assumed by the leaving peer.) This also prevents
+            Node-ID to be assumed by the leaving peer.) This also prevents
             replay attacks provided that DTLS anti-replay is used.</t>
 
             <t>Upon receiving a Leave request, a peer MUST update its own
@@ -3174,7 +3146,7 @@ struct {
             shift.</t>
 
             <t>When a peer receives an Attach request with the send_update
-            flag set to "true" (<xref target="sec-send-update"></xref>, it
+            flag set to True (<xref target="sec-send-update"></xref>), it
             MUST send an Update message back to the sender of the Attach
             request after the completion of the corresponding ICE check and
             TLS connection. Note that the sender of a such Attach request may
@@ -3204,12 +3176,12 @@ struct {
             <t>One important use of the RouteQuery request is to support
             iterative routing. The sender selects one of the peers in its
             routing table and sends it a RouteQuery message with the
-            destination_object set to the Node-ID or Resource-ID it wishes to
+            destination field set to the Node-ID or Resource-ID it wishes to
             route to. The receiving peer responds with information about the
             peers to which the request would be routed. The sending peer MAY
             then use the Attach method to attach to that peer(s), and repeat
             the RouteQuery. Eventually, the sender gets a response from a peer
-            that is closest to the identifier in the destination_object as
+            that is closest to the identifier in the destination field as
             determined by the topology plugin. At that point, the sender can
             send messages directly to that peer.</t>
 
@@ -3239,10 +3211,10 @@ struct {
 
                   <t hangText="send_update "></t>
 
-                  <t>A single byte. This may be set to "true" to indicate that
+                  <t>A single byte. This may be set to True to indicate that
                   the requester wishes the responder to initiate an Update
                   request immediately. Otherwise, this value MUST be set to
-                  "false".</t>
+                  False.</t>
 
                   <t></t>
 
@@ -3250,7 +3222,7 @@ struct {
 
                   <t>The destination which the requester is interested in.
                   This may be any valid destination object, including a
-                  Node-ID, opaque ids, or Resource-ID.</t>
+                  Node-ID, opaque ID, or Resource-ID.</t>
 
                   <t></t>
 
@@ -3267,7 +3239,7 @@ struct {
           </section>
 
           <section title="Probe">
-            <t>Probe provides primitive "exploration" services: it allows node
+            <t>Probe provides primitive "exploration" services: it allows a node
             to determine which resources another node is responsible for; and
             it allows some discovery services using multicast, anycast, or
             broadcast. A probe can be addressed to a specific Node-ID, or the
@@ -3285,12 +3257,12 @@ struct {
 
                 <artwork><![CDATA[
      enum { reservedProbeInformation(0), responsible_set(1),
-            num_resources(2), uptime(3),  (255)} 
+            num_resources(2), uptime(3), (255) }
           ProbeInformationType;
 
      struct {
        ProbeInformationType     requested_info<0..2^8-1>;
-     } ProbeReq
+     } ProbeReq;
 
 ]]></artwork>
               </figure>
@@ -3341,6 +3313,7 @@ struct {
 
           case uptime:
             uint32              uptime;
+
           /* This type may be extended */
 
         };
@@ -3407,7 +3380,7 @@ struct {
           <t>A node sends an Attach request when it wishes to establish a
           direct TCP or UDP connection to another node for the purpose of
           sending RELOAD messages. A client that can establish a connection
-          directly need not send an attach as described in the second bullet
+          directly need not send an Attach as described in the second bullet
           of <xref target="sec-client-routing"></xref></t>
 
           <t>As described in <xref target="sec-message-forwarding"></xref>, an
@@ -3456,9 +3429,9 @@ struct {
        opaque                foundation<0..255>;
        uint32                priority;
        CandType              type;
-       select (type){
+       select (type) {
          case host:
-           ;          /* Nothing */
+           ;          /* Empty */
          case srflx:
          case prflx:
          case relay:
@@ -3467,7 +3440,7 @@ struct {
        IceExtension          extensions<0..2^16-1>;
      } IceCandidate;
 
-     struct  {
+     struct {
        opaque                ufrag<0..2^8-1>;
        opaque                password<0..2^8-1>;                
        opaque                role<0..2^8-1>;
@@ -3516,7 +3489,7 @@ struct {
             which is a direct translation of the information from the ICE
             string structures, with the exception of the component ID. Since
             there is only one component, it is always 1, and thus left out of
-            the PDU. The remaining values are specified as follows:</t>
+            the structure. The remaining values are specified as follows:</t>
 
             <t><list style="hanging">
                 <t hangText="addr_port"></t>
@@ -3530,7 +3503,7 @@ struct {
 
                 <t>corresponds to the OverlayLinkType production, Overlay Link
                 protocols used with No-ICE MUST specify "No-ICE" in their
-                description. Future overlay link values can be added be
+                description. Future overlay link values can be added by
                 defining new OverlayLinkType values in the IANA registry in
                 <xref target="sec-iana-overlay-link"></xref>. Future
                 extensions to the encapsulation or framing that provide for
@@ -3566,7 +3539,7 @@ struct {
                 <t hangText="rel_addr_port"></t>
 
                 <t>corresponds to the rel-addr and rel-port productions. Only
-                present for type "relay".</t>
+                present for types "relay", "srflx" and "prflx".</t>
 
                 <t></t>
 
@@ -3612,7 +3585,7 @@ struct {
                     proceed with the corresponding ICE check.</t>
 
                     <t>If the peer's own Node-ID is larger when compared as
-                    big-endien unsigned integers, it MUST generate an
+                    big-endian unsigned integers, it MUST generate an
                     Error_In_Progress error to this Attach request, then
                     proceed to wait for and complete the Attach and the
                     corresponding ICE check it has originated.</t>
@@ -3687,7 +3660,7 @@ struct {
 
             <t>Only peers to which the peer currently has connections may be
             used. If the connection to that host is lost, it MUST be removed
-            from the list of stun servers and a new server from the same group
+            from the list of STUN servers and a new server from the same group
             MUST be selected unless there are no others servers in the group
             in which case some other peer MAY be used.</t>
           </section>
@@ -3724,8 +3697,8 @@ struct {
 
           <section title="Prioritizing Candidates">
             <t>However, standardization of additional protocols for use with
-            ICE is expected, including TCP<xref
-            target="I-D.ietf-mmusic-ice-tcp"></xref> and protocols such as
+            ICE is expected, including <xref
+            target="RFC6544">TCP</xref> and protocols such as
             SCTP and DCCP. UDP encapsulations for SCTP and DCCP would expand
             the available Overlay Link protocols available for RELOAD. When
             additional protocols are available, the following prioritization
@@ -3866,8 +3839,8 @@ struct {
 
           <section title="Receiving Media">
             <t>An agent MUST be prepared to receive packets for the
-            application protocol (TLS or DTLS carrying RELOAD, SIP or anything
-            else) at any time. The jitter and RTP considerations in Section 11
+            application protocol (TLS or DTLS carrying RELOAD)
+            at any time. The jitter and RTP considerations in Section 11
             of ICE do not apply to RELOAD.</t>
           </section>
         </section>
@@ -3891,7 +3864,7 @@ struct {
               <!--begin-pdu-->
 
               <artwork><![CDATA[
-     struct  {
+     struct {
        opaque                  ufrag<0..2^8-1>;
        opaque                  password<0..2^8-1>;                
        uint16                  application;
@@ -3957,7 +3930,7 @@ struct {
               <!--begin-pdu-->
 
               <artwork><![CDATA[
-     struct  {
+     struct {
        opaque                  ufrag<0..2^8-1>;
        opaque                  password<0..2^8-1>;                
        uint16                  application;
@@ -3976,7 +3949,7 @@ struct {
         <section title="Ping">
           <t>Ping is used to test connectivity along a path. A ping can be
           addressed to a specific Node-ID, to the peer controlling a given
-          location (by using a resource ID), or to the broadcast Node-ID
+          location (by using a Resource-ID), or to the broadcast Node-ID
           (2^128-1).</t>
 
           <section title="Request Definition">
@@ -3986,7 +3959,7 @@ struct {
               <artwork><![CDATA[
      struct {
        opaque<0..2^16-1> padding;
-     } PingReq
+     } PingReq;
 
 ]]></artwork>
             </figure>
@@ -4107,7 +4080,7 @@ struct {
 
               <artwork><![CDATA[
      struct {
-     } ConfigUpdateAns
+     } ConfigUpdateAns;
 
 ]]></artwork>
             </figure>
@@ -4161,13 +4134,13 @@ struct {
         elements. RELOAD currently supports three Overlay Link protocols:</t>
 
         <t><list style="symbols">
-            <t>DTLS <xref target="RFC4347"></xref> over UDP with Simple
+            <t>DTLS <xref target="RFC6347"></xref> over UDP with Simple
             Reliability (SR) (OverlayLinkType=DTLS-UDP-SR</t>
 
             <t>TLS <xref target="RFC5246"></xref> over TCP with Framing
             Header, No-ICE (OverlayLinkType=TLS-TCP-FH-NO-ICE</t>
 
-            <t>DTLS <xref target="RFC4347"></xref> over UDP with SR, No-ICE
+            <t>DTLS <xref target="RFC6347"></xref> over UDP with SR, No-ICE
             (OverlayLinkType=DTLS-UDP-SR-NO-ICE)</t>
           </list></t>
 
@@ -4220,7 +4193,7 @@ struct {
               <t hangText="Endpoint authentication">When a node forms an
               association with another endpoint, it MUST be possible to
               cryptographically verify that the endpoint has a given
-              Node-Id.</t>
+              Node-ID.</t>
 
               <t></t>
 
@@ -4267,8 +4240,8 @@ struct {
           </section>
 
           <section title="ICE-TCP">
-            <t>The ICE-TCP draft <xref
-            target="I-D.ietf-mmusic-ice-tcp"></xref> allows TCP to be
+            <t>The ICE-TCP RFC <xref
+            target="RFC6544"></xref> allows TCP to be
             supported as an Overlay Link protocol that can be added using
             ICE.</t>
           </section>
@@ -4313,7 +4286,7 @@ struct {
 
             <artwork><![CDATA[
 
-     enum { data(128), ack(129), (255)} FramedMessageType;
+     enum { data(128), ack(129), (255) } FramedMessageType;
 
      struct {            
        FramedMessageType       type;
@@ -4549,7 +4522,7 @@ struct {
         has been chosen as it is far easier to implement than e2e PMTU
         discovery across an ever-changing overlay, and it effectively
         addresses the reliability issues of relying on IP-layer fragmentation.
-        However, PING can be used to allow e2e PMTU discovery to be
+        However, Ping can be used to allow e2e PMTU discovery to be
         implemented if desired.</t>
 
         <t>Upon receipt of a fragmented message by the intended peer, the peer
@@ -4619,7 +4592,7 @@ struct {
 
           <t hangText="length "></t>
 
-          <t>The size of the StoredData structure in octets excluding the size
+          <t>The size of the StoredData structure in bytes excluding the size
           of length itself.</t>
 
           <t></t>
@@ -4676,7 +4649,7 @@ struct {
       distinguished by Kind-ID. The definition of a Kind describes both the
       data values which may be stored and the data model of the data. Some
       data models allow multiple values to be stored under the same Kind-ID.
-      Section <xref target="sec-kind-model"></xref> describes the available
+      <xref target="sec-kind-model"></xref> describes the available
       data models. Thus, for instance, a given Resource-ID might contain a
       single-value element stored under Kind-ID X and an array containing
       multiple values stored under Kind-ID Y.</t>
@@ -4699,7 +4672,7 @@ struct {
 
             <t hangText="resource_id "></t>
 
-            <t>The resource ID where this data is stored.</t>
+            <t>The Resource-ID where this data is stored.</t>
 
             <t></t>
 
@@ -4711,9 +4684,9 @@ struct {
 
             <t hangText="storage_time "></t>
 
-            <t></t>
-
             <t>The contents of the storage_time data value.</t>
+
+            <t></t>
 
             <t hangText="StoredDataValue "></t>
 
@@ -4753,7 +4726,7 @@ struct {
           </list></t>
 
         <t>These are represented with the StoredDataValue structure. The
-        actual dataModel is known from the Kind being stored.</t>
+        actual data model is known from the Kind being stored.</t>
 
         <figure>
           <!--begin-pdu-->
@@ -4766,7 +4739,7 @@ struct {
      } DataValue;
 
      struct {
-       select (dataModel) {
+       select (DataModel) {
          case single_value:
            DataValue             single_value_entry;
 
@@ -4997,7 +4970,7 @@ struct {
              ]]></artwork>
             </figure>
 
-            <t>A single Store request stores data of a number of kinds to a
+            <t>A single Store request stores data of a number of Kinds to a
             single resource location. The contents of the structure are: <list
                 style="hanging">
                 <t></t>
@@ -5075,10 +5048,10 @@ struct {
 
                 <t>For original (non-replica) stores, the StoreReq is signed
                 by a credential which is authorized to write this Kind at this
-                Resource-Id. If this check fails, the request MUST be rejected
+                Resource-ID. If this check fails, the request MUST be rejected
                 with an Error_Forbidden error.</t>
 
-                <t>For replica stores, the StoreReq is signed by a Node-Id
+                <t>For replica stores, the StoreReq is signed by a Node-ID
                 which is a plausible node to either have originally stored the
                 value or in the replica set. What this means is overlay
                 specific, but in the case of the Chord based DHT defined in
@@ -5139,7 +5112,7 @@ struct {
             <t>Unless otherwise specified by the usage, if a peer attempts to
             store data previously stored by another node (e.g., for replicas
             or topology shifts) and that store fails with either an
-            Error_Generation_Counter_Too_Low or an Error_Data_Too old error,
+            Error_Generation_Counter_Too_Low or an Error_Data_Too_Old error,
             the peer MUST fetch the newer data from the peer generating the
             error and use that to replace its own copy. This rule allows
             resynchronization after partitions heal.</t>
@@ -5161,7 +5134,7 @@ struct {
                 <t>A store of an array entry replaces (or inserts) the given
                 value at the location specified by the index. Because arrays
                 are sparse, a store past the end of the array extends it with
-                nonexistent values (exists=False) as required. A store at
+                nonexistent values (exists = False) as required. A store at
                 index 0xffffffff places the new value at the end of the array
                 regardless of the length of the array. The resulting
                 StoredData has the correct index value when it is subsequently
@@ -5270,10 +5243,10 @@ struct {
                 <t>The list of other peers at which the data was/will be
                 replicated. In overlays and applications where the responsible
                 peer is intended to store redundant copies, this allows the
-                storing peer to independently verify that the replicas have in
+                storing node to independently verify that the replicas have in
                 fact been stored. It does this verification by using the Stat
                 method (see <xref target="sec-stat"></xref>). Note that the
-                storing peer is not required to perform this verification.</t>
+                storing node is not required to perform this verification.</t>
               </list></t>
 
             <t>The response itself is just StoreKindResponse values packed
@@ -5296,7 +5269,7 @@ struct {
             an Error_Data_Too_Large error.</t>
 
             <t>If any type of request tries to access a data Kind that the
-            node does not know about, an Error_Unknown_Kind MUST be generated.
+            peer does not know about, an Error_Unknown_Kind MUST be generated.
             The error_info in the Error_Response is:</t>
 
             <figure>
@@ -5318,10 +5291,10 @@ struct {
             Each DataValue contains a boolean value called "exists" which
             indicates whether a value is present at that location. In order to
             effectively remove a value, the owner stores a new DataValue with
-            "exists" set to "false":</t>
+            "exists" set to False:</t>
 
             <t><list>
-                <t>exists = false</t>
+                <t>exists = False</t>
 
                 <t>value = {} (0 length)</t>
               </list></t>
@@ -5370,7 +5343,7 @@ struct {
        uint64                  generation;
        uint16                  length;
 
-       select (dataModel) {
+       select (DataModel) {
          case single_value: ;    /* Empty */
 
          case array:
@@ -5381,7 +5354,7 @@ struct {
 
          /* This structure may be extended */
 
-       } model_specifier;
+       } model_specifer;
      } StoredDataSpecifier;
 
      struct {
@@ -5425,7 +5398,7 @@ struct {
 
                 <t></t>
 
-                <t hangText="dataModel "></t>
+                <t hangText="DataModel "></t>
 
                 <t>The data model of the data. This is not transmitted on the
                 wire but comes from the definition of the Kind.</t>
@@ -5447,7 +5420,7 @@ struct {
 
                 <t></t>
 
-                <t hangText="model_specifier "></t>
+                <t hangText="model_specifier"></t>
 
                 <t>A reference to the data value being requested within the
                 data model specified for the Kind. For instance, if the data
@@ -5544,7 +5517,7 @@ struct {
                 signatures are unnecessary as the entire response is signed by
                 that node. Note that entries which have been removed by the
                 procedure of <xref target="sec.remove"></xref> and have not
-                yet expired also have exists = false but have valid signatures
+                yet expired also have exists = False but have valid signatures
                 from the node which did the store.</t>
               </list></t>
 
@@ -5627,7 +5600,7 @@ struct {
      } DictionaryEntryMeta;
 
      struct {
-       select (model) {
+       select (DataModel) {
          case single_value:
            MetaData              single_value_entry;
 
@@ -5662,7 +5635,7 @@ struct {
 
             <t>The structures used in StatAns parallel those used in FetchAns:
             a response consists of multiple StatKindResponse values, one for
-            each kind that was in the request. The contents of the
+            each Kind that was in the request. The contents of the
             StatKindResponse are the same as those in the FetchKindResponse,
             except that the values list contains StoredMetaData entries
             instead of StoredData entries.</t>
@@ -5701,7 +5674,8 @@ struct {
 
                 <t hangText="hash_value"></t>
 
-                <t>A digest of the value using hash_algorithm.</t>
+                <t>A digest using hash_algorithm on the value field of the
+                   DataValue including its 4 leading length bytes.</t>
               </list></t>
           </section>
         </section>
@@ -5793,8 +5767,8 @@ struct {
 
                 <t hangText="closest "></t>
 
-                <t>The closest resource ID to the specified resource ID. This
-                is 0 if no resource ID is known.</t>
+                <t>The closest Resource-ID to the specified Resource-ID. This
+                is 0 if no Resource-ID is known.</t>
               </list></t>
 
             <t>Note that the response does not contain the contents of the
@@ -5808,7 +5782,7 @@ struct {
           a document and registering the Kind-ID with IANA. This is the
           preferred method for Kinds which may be widely used and reused. The
           second method is to simply define the Kind and its parameters in the
-          configuration document using the section of Kind-id space set aside
+          configuration document using the section of Kind-ID space set aside
           for private use. This method MAY be used to define ad hoc Kinds in
           new overlays.</t>
 
@@ -5927,7 +5901,7 @@ struct {
         <artwork><![CDATA[
      struct {
        uint8                   iteration;
-       IpAddressAndPort        server_address;
+       IpAddressPort           server_address;
      } TurnServer;
 
  ]]></artwork>
@@ -6047,7 +6021,7 @@ struct {
         algorithm. In Chord (and in the algorithm described here),
 	nodes are arranged in a ring with node n being adjacent to
 	nodes n-1 and n+1, with all arithmetic being done
-	modulo 2^{k}, where k is the length of the Node-Id in bits,
+	modulo 2^{k}, where k is the length of the Node-ID in bits,
 	so that node 2^{k} - 1 is directly before node 0.
 	</t>
 	<t>
@@ -6084,7 +6058,7 @@ struct {
       <section title="Hash Function">
         <t>For this Chord based topology plugin, the size of the Resource-ID
         is 128 bits. The hash of a Resource-ID MUST be computed using SHA-1
-        <xref target="RFC3174"></xref>then truncating the SHA-1 result to the
+        <xref target="RFC3174"></xref> then truncating the SHA-1 result to the
         most significant 128 bits.</t>
       </section>
 
@@ -6097,7 +6071,7 @@ struct {
         that node. Otherwise, it MUST route the request to the peer in the
         routing table that has the largest Node-ID that is in the interval
         between the peer and k. If no such node is found, it finds the
-        smallest Node-Id that is greater than k and MUST route the message to
+        smallest Node-ID that is greater than k and MUST route the message to
         that node.</t>
       </section>
 
@@ -6208,7 +6182,7 @@ struct {
           <!--begin-pdu-->
 
           <artwork><![CDATA[
-     enum { reserved (0), 
+     enum { reserved(0),
             peer_ready(1), neighbors(2), full(3), (255) }
           ChordUpdateType;
 
@@ -6216,7 +6190,7 @@ struct {
      struct {
         uint32                uptime; 
         ChordUpdateType         type;
-        select(type){
+        select (type){
          case peer_ready:                   /* Empty */
            ;
 
@@ -6414,7 +6388,7 @@ struct {
 
           <section title="Updating neighbor table">
             <t>A peer MUST periodically send an Update request to every peer
-            in its Connection Table. The purpose of this is to keep the
+            in its Neighbor Table. The purpose of this is to keep the
             predecessor and successor lists up to date and to detect failed
             peers. The default time is about every ten minutes, but the
             configuration server SHOULD set this in the configuration document
@@ -6444,7 +6418,7 @@ struct {
             finger table entry. The selection SHOULD be exponentially weighted
             to attempt to replace earlier (lower i) entries in the finger
             table. A simple way to implement this selection is to search
-            through the finger table entries from i=0 and each time an invalid
+            through the finger table entries from i=1 and each time an invalid
             entry is encountered, send a Ping to replace that entry with
             probability 0.5.</t>
 
@@ -6520,7 +6494,7 @@ struct {
 
       <section title="Route query">
         <t>For this topology plugin, the RouteQueryReq contains no additional
-        information. The RouteQueryAns contains the single node ID of the next
+        information. The RouteQueryAns contains the single Node-ID of the next
         peer to which the responding peer would have routed the request
         message in recursive routing:</t>
 
@@ -6557,18 +6531,19 @@ struct {
         the Overlay Instance. The overlay_specific_data field MUST contain the
         ChordLeaveData structure defined below: <figure>
             <artwork><![CDATA[
-           enum { reserved (0),
+           enum { reserved(0),
                    from_succ(1), from_pred(2), (255) }
                  ChordLeaveType;
 
             struct {
               ChordLeaveType         type;
 
-               select(type) {
+               select (type) {
                  case from_succ:
-                   NodeId              successors<0..2^16-1>;
+                   NodeId            successors<0..2^16-1>;
+
                  case from_pred:
-                    NodeId              predecessors<0..2^16-1>;
+                    NodeId           predecessors<0..2^16-1>;
                };
             } ChordLeaveData;
 ]]></artwork>
@@ -6780,7 +6755,7 @@ QgUf4cKBiF+65Ue7hZuDJa2EMv8qW4twEhGDYclpFU9YozyS1OhvUg==
             of one of the bootstrap nodes. It has an attribute called
             "address" that represents the IP address (either IPv4 or IPv6,
             since they can be distinguished) and an optional attribute called
-            "port" that represents the port and defaults to 6084. The IP
+            "port" that represents the port and defaults to 6084. The IPv6
             address is in typical hexadecimal form using standard period and
             colon separators as specified in <xref target="RFC5952"></xref>.
             More than one bootstrap-peer element may be present.</t>
@@ -6795,7 +6770,7 @@ QgUf4cKBiF+65Ue7hZuDJa2EMv8qW4twEhGDYclpFU9YozyS1OhvUg==
             <t hangText="multicast-bootstrap ">This element represents the
             address of a multicast, broadcast, or anycast address and port
             that may be used for bootstrap. Nodes SHOULD listen on the
-            address. It has an attributed called "address" that represents the
+            address. It has an attribute called "address" that represents the
             IP address and an optional attribute called "port" that represents
             the port and defaults to 6084. More than one "multicast-bootstrap"
             element may be present.</t>
@@ -6871,8 +6846,8 @@ QgUf4cKBiF+65Ue7hZuDJa2EMv8qW4twEhGDYclpFU9YozyS1OhvUg==
             An arbitrary number of these elements can be provided. Note that
             because certificates may expire, bad-node entries need only be
             present for the lifetime of the certificate. Technically speaking,
-            bad node-ids may be reused once their certificates have expired,
-            the requirement for node-ids to be pseudo randomly generated gives
+            bad Node-IDs may be reused once their certificates have expired,
+            the requirement for Node-IDs to be pseudo randomly generated gives
             this event a vanishing probability.</t>
 
             <t hangText="mandatory-extension ">This element contains the name
@@ -6885,7 +6860,7 @@ QgUf4cKBiF+65Ue7hZuDJa2EMv8qW4twEhGDYclpFU9YozyS1OhvUg==
             mandatory-extension element may be present.</t>
           </list></t>
 
-        <t>Inside each overlay element, the required-kinds elements can also
+        <t>Inside each configuration element, the required-kinds element can also
         occur. This element indicates the Kinds that members must support and
         contains multiple kind-block elements that each define a single Kind
         that MUST be supported by nodes in the overlay. Each kind-block
@@ -6919,7 +6894,7 @@ QgUf4cKBiF+65Ue7hZuDJa2EMv8qW4twEhGDYclpFU9YozyS1OhvUg==
         <t>All of the non optional values MUST be provided. If the Kind is
         registered with IANA, the data-model and access-control elements MUST
         match those in the Kind registration, and clients MUST ignore them in
-        favor of the IANA versions. Multiple required-kinds elements MAY be
+        favor of the IANA versions. Multiple kind-block elements MAY be
         present.</t>
 
         <t>The kind-block element also MUST contain a "kind-signature"
@@ -6928,7 +6903,7 @@ QgUf4cKBiF+65Ue7hZuDJa2EMv8qW4twEhGDYclpFU9YozyS1OhvUg==
         in the same way as the signature element described later in this
         section.</t>
 
-        <t>The configuration file needs to be treated as a binary blob that
+        <t>The configuration element needs to be treated as a binary blob that
         cannot be changed - including any whitespace changes - or the
         signature will break. The signature is computed by taking each
         configuration element and starting from, and including, the first &lt;
@@ -6936,11 +6911,10 @@ QgUf4cKBiF+65Ue7hZuDJa2EMv8qW4twEhGDYclpFU9YozyS1OhvUg==
         &lt;/configuration&gt; and treating this as a binary blob that is
         signed using the standard SecurityBlock defined in <xref
         target="sec-signature"></xref>. The SecurityBlock is base 64 encoded
-        using the base64 alphabet from RFC<xref target="RFC4648"></xref> and
+        using the base64 alphabet from <xref target="RFC4648"></xref> and
         put in the signature element following the configuration object in the
-        configuration file. Any configuration file through the overlay (as
-        opposed to directly from the configuration server) MUST be signed by
-        one of the configure-signers from the previous extant configuration.
+        configuration file. Any configuration file MUST be signed by
+        one of the configuration-signer elements from the previous extant configuration.
         Recipients MUST verify the signature prior to accepting the
         configuration file.</t>
 
@@ -7095,12 +7069,12 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
         The out of band mechanisms MAY also provide an optional URL for the
         configuration server. If a URL for the configuration server is not
         provided, the node MUST do a DNS SRV query using a Service name of
-        "p2psip-enroll" and a protocol of TCP to find a configuration server
-        and form the URL by appending a path of "/.well-known/p2psip-enroll"
+        "reload-config" and a protocol of TCP to find a configuration server
+        and form the URL by appending a path of "/.well-known/reload-config"
         to the overlay name. This uses the "well known URI" framework defined
         in <xref target="RFC5785"></xref>. For example, if the overlay name
         was example.com, the URL would be
-        "https://example.com/.well-known/p2psip-enroll".</t>
+        "https://example.com/.well-known/reload-config".</t>
 
         <t>Once an address and URL for the configuration server is determined,
         the peer MUST form an HTTPS connection to that IP address. The
@@ -7137,7 +7111,7 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
         exactly this model.</t>
 
         <t>The certificate request protocol is performed over HTTPS. The
-        request is an HTTP POST with the parameter encodes as described in
+        request is an HTTP POST with the parameters encoded as described in
         <xref target="RFC2388"></xref> and the following properties:</t>
 
         <t><list style="symbols">
@@ -7178,9 +7152,9 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
             contain RELOAD URIs as described in <xref
             target="sec-reload-uri"></xref> and MUST contain a Destination
             list with a single entry of type "node_id". The enrollment server
-            SHOULD maintain a mapping of users to node-ids and if the same
+            SHOULD maintain a mapping of users to Node-IDs and if the same
             user returns (e.g., to have their certificate re-issued) return
-            the same Node-ID, thus avoiding the need for implementations to
+            the same Node-IDs, thus avoiding the need for implementations to
             re-store all their data when their certificates expire.</t>
 
             <t>A single name this user is allowed to use in the overlay, using
@@ -7220,12 +7194,12 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
            
          </list></t>
          
-         <t> If the client receives an unknown token in the body, it SHOULD treat it as a failure for an unknown reasons. </t>
+         <t> If the client receives an unknown token in the body, it SHOULD treat it as a failure for an unknown reason. </t>
 
         <t>The client MUST check that the certificate returned chains back to
         one of the certificates received in the "root-cert" list of the
         overlay configuration data (including PKIX BasicConstraints checks.)
-        The node then reads the certificate to find the Node-IDs it can
+        The node then reads the certificate to find the Node-ID it can
         use.</t>
 
         <section title="Self-Generated Credentials">
@@ -7234,10 +7208,15 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
           self-signed certificate to join the overlay. The self-signed
           certificate MAY contain any user name of the users choice.</t>
 
-          <t>The Node-ID MUST be computed by applying the digest specified in
+          <t>For self-signed certificate containing only one Node-ID,
+          the Node-ID MUST be computed by applying the digest specified in
           the self-signed-permitted element to the DER representation of the
           user's public key (more specifically the subjectPublicKeyInfo) and
-          taking the high order bits. When accepting a self-signed
+          taking the high order bits. For self-signed certficates containing
+          multiple Node-IDs, the index of the Node-ID (from 1 to the number
+          of Node-IDs needed) must be prepended as a 4 bytes big endian integer
+          to the DER representation of the user's public key and taking the
+          high order bits.  When accepting a self-signed
           certificate, nodes MUST check that the Node-ID and public keys
           match. This prevents Node-ID theft.</t>
 
@@ -7305,9 +7284,9 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
       to one of the bootstrap nodes. JP then sends an Attach through that peer
       to a resource ID of itself (JP). It gets routed to the admitting peer
       (AP) because JP is not yet part of the overlay. When AP responds, JP and
-      AP use ICE to set up a connection and then set up TLS. Once AP has
+      AP use ICE to set up a connection and then set up DTLS. Once AP has
       connected to JP, AP sends to JP an Update to populate its Routing Table.
-      The following example shows the Update happening after the TLS
+      The following example shows the Update happening after the DTLS
       connection is formed but it could also happen before in which case the
       Update would often be routed through other nodes.</t>
 
@@ -7361,7 +7340,7 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
 
       <t>The JP then forms connections to the appropriate neighbors, such as
       NP, by sending an Attach which gets routed via other nodes. When NP
-      responds, JP and NP use ICE and TLS to set up a connection.</t>
+      responds, JP and NP use ICE and DTLS to set up a connection.</t>
 
       <figure>
         <artwork><![CDATA[
@@ -7607,8 +7586,8 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
 
       <section title="Attacks on P2P Overlays">
         <t>The two basic functions provided by overlay nodes are storage and
-        routing: some node is responsible for storing a peer's data and for
-        allowing a third peer to fetch this stored data. Other nodes are
+        routing: some peer is responsible for storing a node's data and for
+        allowing a third node to fetch this stored data. Other peers are
         responsible for routing messages to and from the storing nodes. Each
         of these issues is covered in the following sections.</t>
 
@@ -7619,7 +7598,7 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
         and user registration information in RELOAD messages.</t>
 
         <t>To protect the signaling from attackers pretending to be valid
-        peers (or peers other than themselves), the first requirement is to
+        nodes (or nodes other than themselves), the first requirement is to
         ensure that all messages are received from authorized members of the
         overlay. For this reason, RELOAD transports all messages over a secure
         channel (TLS and DTLS are defined in this document) which provides
@@ -7643,7 +7622,7 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
         are unique and are meant to be chosen and used by humans much like a
         SIP Address of Record (AOR) or an email address. The user is also
         assigned one or more Node-IDs by the central enrollment authority.
-        Both the name and the Node-ID are placed in the certificate, along
+        Both the name and the Node-IDs are placed in the certificate, along
         with the user's public key.</t>
 
         <t>Each certificate enables an entity to act in two sorts of
@@ -7661,11 +7640,11 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
         validate a certificate, this usage does not require a global PKI.
         Instead, certificates are signed by a central enrollment authority
         which acts as the certificate authority for the Overlay Instance. This
-        authority signs each peer's certificate. Because each peer possesses
+        authority signs each node's certificate. Because each node possesses
         the CA's certificate (which they receive on enrollment) they can
         verify the certificates of the other entities in the overlay without
         further communication. Because the certificates contain the
-        user/peer's public key, communications from the user/peer can be
+        user/node's public key, communications from the user/node can be
         verified in turn.</t>
 
         <t>If self-signed certificates are used, then the security provided is
@@ -7679,7 +7658,7 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
         admission control scheme as well.</t>
 
         <t>Because all stored data is signed by the owner of the data the
-        storing peer can verify that the storer is authorized to perform a
+        storing node can verify that the storer is authorized to perform a
         store at that Resource-ID and also allow any consumer of the data to
         verify the provenance and integrity of the data when it retrieves
         it.</t>
@@ -7689,7 +7668,7 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
         information). Thus, certificate lifetimes should be chosen to balance
         the compromise window versus the cost of certificate renewal. Because
         RELOAD is already designed to operate in the face of some fraction of
-        malicious peers, this form of compromise is not fatal.</t>
+        malicious nodes, this form of compromise is not fatal.</t>
 
         <t>All implementations MUST implement certificate-based security.</t>
       </section>
@@ -7722,14 +7701,14 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
         relatively simple.</t>
 
         <section title="Authorization">
-          <t>When a client wants to store some value, it first digitally signs
+          <t>When a node wants to store some value, it first digitally signs
           the value with its own private key. It then sends a Store request
           that contains both the value and the signature towards the storing
           peer (which is defined by the Resource Name construction algorithm
           for that particular Kind of value).</t>
 
           <t>When the storing peer receives the request, it must determine
-          whether the storing client is authorized to store at this
+          whether the storing node is authorized to store at this
           Resource-ID/Kind-ID pair. Determining this requires comparing the
           user's identity to the requirements of the access control model (see
           <xref target="sec.access_control"></xref>). If it satisfies those
@@ -7752,7 +7731,7 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
           Resource-ID will be determined by hashing the Resource Name. Because
           SIP Location uses the USER-NODE-MATCH policy, it first verifies that
           the user name in the certificate hashes to the requested
-          Resource-ID. It then verifies that the Node-Id in the certificate
+          Resource-ID. It then verifies that the Node-ID in the certificate
           matches the dictionary key being used for the store. If both of
           these checks succeed, the Store is authorized. Note that because the
           access control model is different for different Kinds, the exact set
@@ -7762,7 +7741,7 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
         <section title="Distributed Quota">
           <t>Being a peer in an Overlay Instance carries with it the
           responsibility to store data for a given region of the Overlay
-          Instance. However, allowing clients to store unlimited amounts of
+          Instance. However, allowing nodes to store unlimited amounts of
           data would create unacceptable burdens on peers and would also
           enable trivial denial of service attacks. RELOAD addresses this
           issue by requiring configurations to define maximum sizes for each
@@ -7783,7 +7762,7 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
 
         <section title="Correctness">
           <t>Because each stored value is signed, it is trivial for any
-          retrieving peer to verify the integrity of the stored value. Some
+          retrieving node to verify the integrity of the stored value. Some
           more care needs to be taken to prevent version rollback attacks.
           Rollback attacks on storage are prevented by the use of store times
           and lifetime values in each store. A lifetime represents the latest
@@ -7801,11 +7780,11 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
         <section anchor="sec-residual-attacks" title="Residual Attacks">
           <t>The mechanisms described here provides a high degree of security,
           but some attacks remain possible. Most simply, it is possible for
-          storing nodes to refuse to store a value (i.e., reject any request).
-          In addition, a storing node can deny knowledge of values which it
+          storing peers to refuse to store a value (i.e., reject any request).
+          In addition, a storing peer can deny knowledge of values which it
           has previously accepted. To some extent these attacks can be
           ameliorated by attempting to store to/retrieve from replicas, but a
-          retrieving client does not know whether it should try this or not,
+          retrieving node does not know whether it should try this or not,
           since there is a cost to doing so.</t>
 
           <t>The certificate-based authentication scheme prevents a single
@@ -7819,7 +7798,7 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
           replication factor and the percentage of compromised peers.</t>
 
           <t>In addition, when a Kind is multivalued (e.g., an array data
-          model), the storing node can return only some subset of the values,
+          model), the storing peer can return only some subset of the values,
           thus biasing its responses. This can be countered by using single
           values rather than sets, but that makes coordination between
           multiple storing agents much more difficult. This is a trade off
@@ -7832,9 +7811,9 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
         integrity of the stored data, routing security focuses on stopping the
         attacker from performing a DOS attack that misroutes requests in the
         overlay. There are a few obvious observations to make about this.
-        First, it is easy to ensure that an attacker is at least a valid peer
+        First, it is easy to ensure that an attacker is at least a valid node
         in the Overlay Instance. Second, this is a DOS attack only. Third, if
-        a large percentage of the peers on the Overlay Instance are controlled
+        a large percentage of the nodes on the Overlay Instance are controlled
         by the attacker, it is probably impossible to perfectly secure against
         this.</t>
 
@@ -7859,20 +7838,20 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
 
         <section title="Admissions Control">
           <t>Admission to a RELOAD Overlay Instance is controlled by requiring
-          that each peer have a certificate containing its Node-Id. The
+          that each peer have a certificate containing its Node-ID. The
           requirement to have a certificate is enforced by using
           certificate-based mutual authentication on each connection. (Note:
           the following only applies when self-signed certificates are not
           used.) Whenever a peer connects to another peer, each side
           automatically checks that the other has a suitable certificate.
-          These Node-Ids are randomly assigned by the central enrollment
+          These Node-IDs are randomly assigned by the central enrollment
           server. This has two benefits:</t>
 
           <t><list style="symbols">
               <t>It allows the enrollment server to limit the number of
               Node-IDs issued to any individual user.</t>
 
-              <t>It prevents the attacker from choosing specific Node-Ids.</t>
+              <t>It prevents the attacker from choosing specific Node-IDs.</t>
             </list></t>
 
           <t>The first property allows protection against Sybil attacks
@@ -7880,7 +7859,7 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
           The second property deters but does not completely prevent Eclipse
           attacks. Because an Eclipse attacker must impersonate peers on the
           other side of the attacker, he must have a certificate for suitable
-          Node-Ids, which requires him to repeatedly query the enrollment
+          Node-IDs, which requires him to repeatedly query the enrollment
           server for new certificates, which will match only by chance. From
           the attacker's perspective, the difficulty is that if he only has a
           small number of certificates, the region of the Overlay Instance he
@@ -7996,7 +7975,7 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
 
           <c>URI suffix:</c>
 
-          <c>p2psip-enroll</c>
+          <c>reload-config</c>
 
           <c>Change controller:</c>
 
@@ -8015,8 +7994,9 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
       <section title="Port Registrations">
         <t>[[Note to RFC Editor - this paragraph can be removed before
         publication. ]] IANA has already allocated a TCP port for the main
-        peer to peer protocol. This port has the name p2p-sip and the port
-        number of 6084. IANA needs to update this registration to be defined
+        peer to peer protocol. This port has the name p2psip-enroll and the port
+        number of 6084. IANA needs to update this registration to change the 
+        service name to reload-config and to define it 
         for UDP as well as TCP.</t>
 
         <t>IANA SHALL make the following port registration:</t>
@@ -8044,15 +8024,12 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
 
           <c>Service Name</c>
 
-          <c>p2psip-enroll</c>
+          <c>reload-config</c>
 
           <c>Description</c>
 
-          <c>Peer to Peer Infrastructure Enrollment</c>
-
-          <c>Reference</c>
-
-          <c>[RFC-AAAA]</c>
+          <c>Peer to Peer Infrastructure Configuration</c>
+          
         </texttable>
       </section>
 
@@ -9232,7 +9209,7 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
 
       <?rfc include="reference.RFC.5246"?>
 
-      <?rfc include="reference.RFC.4347"?>
+      <?rfc include="reference.RFC.6347"?>
 
       <?rfc include="reference.RFC.4648"?>
 
@@ -9346,7 +9323,7 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
 
       <?rfc include="reference.I-D.ietf-p2psip-service-discovery"?>
 
-      <?rfc include="reference.I-D.ietf-mmusic-ice-tcp"?>
+      <?rfc include="reference.RFC.6544"?>
 
       <?rfc include="reference.RFC.3688"?>
 
@@ -9376,7 +9353,7 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
 
       <?rfc include="reference.RFC.2311"?>
 
-      <?rfc include="reference.I-D.jiang-p2psip-relay"?>
+      <?rfc include="reference.I-D.ietf-p2psip-rpr"?>
 
       <?rfc include="reference.RFC.5785"?>
 
@@ -9764,7 +9741,7 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
       </section>
 
       <section title="Relay Peers">
-        <t><xref target="I-D.jiang-p2psip-relay"></xref> has proposed
+        <t><xref target="I-D.ietf-p2psip-rpr"></xref> has proposed
         implementing a form of direct response by having A identify a peer, Q,
         that will be directly reachable by any other peer. A uses Attach to
         establish a connection with Q and advertises Q's IP address in the
@@ -9874,23 +9851,11 @@ parameter &= element chord:chord-reactive { xsd:boolean }?
   </back>
 </rfc>
 <!-- TODO: 20110426 
-From Slides:
-3. How to identify connection endpoints with multiple node-ids (see Marc's email) - 
 
 From list:
-1. Thread entitled Isssues not fixed in draft-ietf-p2psip-base-13 - ??
-DONE 3. Respond to Marc's mandatory extensions proposal -CJ 
-
-Private emails with Marc:
-1. See multiple node-ids mail - 
 
 Other
 Go over audio
 
 See "new issues" below.
--->
-<!-- 
-TODO: Make sure that we say somewhere that you need to check signatures
-once the fragments are all present.
-
 -->
