@@ -1,0 +1,854 @@
+STEPHEN FARRELL
+===============
+(12) section 7: I don't see how to send a reference to a certificate -
+5.3.4 doesn't seem to allow for that now - wouldn't you need a new
+CertificateType for that?
+
+By a reference you mean, e.g., a URL?
+
+
+Yeah a URL could be an example. The text says you can send a
+reference to the cert but I don't see a field where I can put
+e.g. a URL "thus avoiding the need to send a certificate" as
+it says.
+
+TODOEKR: This appears to be a real defect. I think it's a version
+skew problem. The certificate indicators are hashes, so how does this
+work?
+
+
+
+
+
+WESLEY EDDY
+===========
+Multi-part DISCUSS, which I think requires a document update (and possibly more
+discussion, though the email thread between Michael Scharf and Bruce is a great
+start):
+
+(1) Section 5.6.3.1 has a handwave about TFRC and TFRC-SP, however those both
+require description of how both sender and receiver-side information can be used
+to compute loss intervals and measure losses, which isn't here, and may not
+even be necessary here.  The section is "retransmission and flow control" but
+those are both distinct (though coupled) with congestion control, and TFRC
+answers neither.  I don't think the mention of TFRC is even proper and not related
+to the rest of the section since it's more for applications that are streaming out
+data at some controlled rate, rather than sending messages and waiting for
+acknowledgements on them or retransmission events.  What's here doesn't seem
+to relate.
+
+
+(2) As noted by Michael Scharf, the RTO computation text in section 5.6.3.1.1
+has a confused (or confusing) citation of RFC 6298 and may lead to instability in
+presence of RTT variations.
+
+will continue discussion on these two issues in the thread with Michael.
+
+
+
+(3)  During discussion of the tsv-dir review from Michael Scharf, it became evident
+that some issues are confusing in the split between the functionality for end-to-end
+message transport across the overlay versus similar functions that exist
+hop-by-hop in the overlay (e.g. by using TCP).  Some cases where this was apparent:
+
+general comment that we spent a lot of time with the document working
+on careful use of the terms applied to overlay link layer, topology
+plugin, etc, but recognize that it can still be refined more and
+appreciate suggestions on how to improve clarity on these issues,
+since the text "TCP is a good link-layer protocol" throws a parsing
+exception in general...
+
+- in the section 1.2.5 mention of "reliability, congestion control, flow control, etc"
+
+I see your point and will try to tighten up this text.
+
+- in the timer discussion around section 5.2.1
+
+I'm not clear what the confusion is.  Text was added to this paragraph
+to remind the reader that this is the e2e mechanism and not the
+hop-by-hop.  Open to suggestions on how to clarify further.
+
+- in the discussion of head-of-line blocking around section 5.5.1.6
+
+Would a sentence or two about why head-of-line blocking is bad in an
+overlay-link protocol be appropriate here?  I think Michael also had a
+question about this same issue.
+
+- in section 5.6.3, throughout the section
+
+I see a few things that could be tightened up here and I think there
+will be some rewriting wrt the issues in Michael's thread, so will
+hopefully help address these issues.
+
+
+It would be good for clarity to have some text in the architecture section to describe
+the envisioned division of labor between the overlay protocol and the underlying
+(layer-4) transports that are used in the "link" layer and how those relate to the
+message transport sub-layer of RELOAD, especially since those transports offer
+different services to the application.
+
+I think the text in 1.2 addresses these issues mostly, though I think
+some additional discussion of how "congestion" applies to each layer
+could be added.
+
+I think I disagree with the phrase "transports offer different
+services to the application" here, however.  The traditional
+transports, i.e. TCP, UDP, and SCTP, are being used by the overlay
+link layer and are not offering any services to an application within
+the RELOAD framework.  Could add some more discussion of how various
+features of the traditional transport protocols help or hinder
+performance of the link layer (e.g. head-of-line blocking) in 5.6,
+though, if that would address the issue you're thinking about.
+
+Otherwise, problems with nested control
+loops that exist between layer-4 protocols and various layer-2 technologies can
+similarly arise in RELOAD use.
+
+Could you clarify what problems you're concerned with here?  Given the
+lightweight nature of RELOAD's e2e protocol (which given its use for
+occasional single transactions and neighbor maintenance seems
+appropriate), I don't see the opportunity for significant control
+loops.
+
+
+
+RUSS HOUSLEY
+===========
+The Gen-ART Review by Mary Barnes on 9-August-2011 points out
+significant inconsistencies in the document.  Please resolve these
+inconsistencies.  Please consider the other comments as well; Mary
+offers very helpful suggestions.  The review can be found at:
+http://www.ietf.org/mail-archive/web/gen-art/current/msg06582.html.
+
+
+CJ - sent meial to russ June 18, 2012 hopint to clear this
+
+
+
+Mary had a bunch of good suggestions that I would like to incorporate into a revised-id but I want to be clear on what you consider the discuss level inconsistencies to be. I think  just about all the inconsistencies Mary mentions are relatively clear to me what needs to be done with the the exception of the issue on use of 2119 language
+
+From Mary's review, one of the inconsistencies she mentions is  
+
+Section 5.2.1 is totally inconsistent with the use of normative language (i.e., lower case occurrences and lack of KEY words) - shouldn't the following be normative statements something like the following: 
+-- First paragraph:
+---First sentence:  "a node constructs" -> "a node MUST construct".
+--- 3rd sentence: "resulting message will use the normal overlay routing" -> "resulting message MUST use the normal overlay routing"
+--- 4th sentence: "The node can also" ->  "The node MAY also"
+-- Third paragraph: 
+--- 3rd sentence: "a single request can also" -> "a single request MAY also"
+-- Fourth paragraph:
+--- 1st sentence: this could be interpreted as normative:  "Because messages may" ->  "Because messages can"
+--- 3rd sentence:  "the request is retransmitted" ->  "the request MUST be retransmitted"
+
+
+I wanted to understand if you considered this part of your Discuss or more part of a comment? Or if you wanted to provide any guidance on  what you expect to see. 
+
+My view is that the MUST / MAY / SHOULD are just abbreviations for english text.  What we need in a draft is clear advice that causes implementors to do the right thing. Different WG have different styles and this WG may have used the the 2119 terms less often than others. If there is places where implements might do the wrong thing and adding some more langue is needed to help fix that, I'm glad to do that but I did not find Mary's review really helped me find theses places. Lots of the places that she is suggesting changes I think are fine as is. Some others I do agree with her that what is there would be improved with the use of 2119. 
+
+
+
+
+Thanks for the detailed review - you caught some good stuff. Most of this makes essence but we should probably talk about usage of 2119 language. 
+
+On Aug 9, 2011, at 16:05 , Mary Barnes wrote:
+simple
+=======================================================================
+
+Document: draft-ietf-p2psip-base-17
+Reviewer:  Mary Barnes 
+Review Date:  9 August  2011
+IETF LC End Date: 22 July 2011
+
+Summary: Not Ready.  
+
+Comments:
+----------------
+The document is very a dense (with detailed technical information) and long (150 page) specification for a Peer-to-peer signaling protocol.  While the overall technical functionality seems fairly correct and thoroughly specified, the primary issue is a tremendous lack of normative language in the main body of the document.  Non-inclusive details of such are included below.  
+
+The 2119 MUST/SHOULD/MAY terms are simply abbreviations for some words defined in 2119, and different WGs have different styles about how extensively they should be used. P2PSIP has obviously been on the more sparing side of that spectrum. This isn't to say that there aren't any places where it would be useful to add such language, but rather that our policy has been to add it principally where there is likely ambiguity, rather than everywhere where behavior is defined. I'll work thought these and see where they might help reduce the chance of a an implementers doing the wrong thing but in generally when we define a structure in something like ASN.1 or ABNF, if the structure always has a field X, we just use the language like ASN.1 or ABNF to indicate it always has that. We don't  also say it MUST be there. 
+
+
+Major Issues:
+-------------------
+
+General: 
+--There is a fair number of cases where normative language should be used.  I have detailed some (but certainly not all)  instances where it is lacking with proposed rewording.  I have also noted cases where it is used (lower case) where it could be confused with needing normative language and where it isn't necessary and there are some cases where it's just not clear. I consider these major since it can impact interoperability and could lead developers to not implement key functionality.  
+
+--There is also little or no normative language for the majority of the elements in the structures - i.e., the reader has to assume which elements are mandatory and which are optional and it's not always clear.   For example, rather than saying "Field x contains blah", it should say "Field x MUST contain blah" and rather than "The contents of the message will be x, y and z", it should say something like "The message MUST (or SHOULD) contain x, y and z".  I have not detailed the places where this is necessary in most cases.  The authors should review the detailed definition for each of the messages. 
+
+
+However, the syntax actually tells you whether a field is mandatory or not. I.e.,
+there is a "select/case" syntax for indicating optional fields (and some fields are
+variable length). So I don't think it's really ambiguous in the general case whether
+a field need be present.
+
+With that said, this seems like something that would be better discussed real time - I may be missing the point on some of these. When would be a good time to have a call?
+
+--The message names are used inconsistently.  The IANA registry has the message codes all lower case.  There are places in the examples and the body of the document where the _req part is missing, there is no "_", the first letters are Upper case, etc.  The messages are also used in a general sense - e.g., "MUST perform an Attach", which should really be stated as "MUST send an attach_req message)
+
+Well, it's the Attach is much more than sending a attach_req and we found that trying to add more just make the document even longer and harder to understand than it currently is. We been pretty careful about the case as some systems auto generate code out the the structures in the draft. I'm glad to walk through these and figure them out with you. That said, these have been changed various times and it's hard to find them all so there could certainly be a mistakes in this. 
+
+
+
+Major - Detailed:
+
+- Sections 32.1, 3.2.2 and 3.3: lots of changes needed to reword using normative language.  
+
+- Section 3.4, last paragraph: Needs to be reworded normatively and more precisely. It's really not clear to me what the required behavior is as it first says it needs to (which I'm not sure is a SHOULD or is REQUIRED to) maintain connections to all the peers near and enough others.., but how much is "enough".   Also, what is meant by the "specified link set" - is that referring to all the nearby peers or the peers+enough others?  Or is this more clearly (and normatively) specified elsewhere, such that a reference could be added  
+
+All of section 3 is overview and not meant to have the normative descriptions which happen in the later sections. 
+
+
+- Section 4.2: needs normative language - i.e.:
+--"Each Usage needs to …" ->  "Each Usage MUST…"
+
+This gets into the whole 2119 usage of words in requirements. Right here we are writing requirements for what future RFC needs to include. 
+
+
+- Section 5.1.1: Bullet items need normative language
+-- 1st bullet: It's also  not clear what the its are in "it passes it up".  I think it should be "the node passes the message up to the upper layers".   However, this probably needs to be normative language - i.e., "the node MUST pass the message to the upper layers".  The same applies to the third bullet. 
+--bullet 2:  "the message is destined for this node and is passed up…" -> "the message is destined for this node and MUST be passed…., 
+
+members of the WG objected to MUST level mandating of how the actually server software was architected. Note this passing up a level is not about anything to do with what happens on the wire. See section 6 of 2119 which pretty much says not to use MUST this way.
+
+
+- Section 5.1.2:
+-- Paragraphs 5, 6, 7 and 8 need to be reworded to have normative statements. 
+
+Let's talk on the phone - I'm not seeing the issue here. 
+
+-- Last paragraph (9) mixes normative text with in an example. The normative text needs to be separated from the example
+
+seriously? I'm just not getting how this will help make it more interoperable but again, glad to change if we can figure out a real improvement. 
+
+- e.g., split some of the sentences into the normative behavior and then the example. 
+
+-Section 5.2.1 is totally inconsistent with the use of normative language (i.e., lower case occurrences and lack of KEY words) - shouldn't the following be normative statements something like the following: 
+-- First paragraph:
+---First sentence:  "a node constructs" -> "a node MUST construct".
+--- 3rd sentence: "resulting message will use the normal overlay routing" -> "resulting message MUST use the normal overlay routing"
+--- 4th sentence: "The node can also" ->  "The node MAY also"
+-- Third paragraph: 
+--- 3rd sentence: "a single request can also" -> "a single request MAY also"
+-- Fourth paragraph:
+--- 1st sentence: this could be interpreted as normative:  "Because messages may" ->  "Because messages can"
+2119 is very clear it refers to MAY and not may. I really don't know what word is best here but ignoring 2119, which word looks better "may" or "can" for this sentence?
+
+--- 3rd sentence:  "the request is retransmitted" ->  "the request MUST be retransmitted"
+
+
+This all looks like internal software design to help
+
+-Section 5.3.2: 
+-- General: some of the contents of the structure have normative language and others don't.  There is some normative behavior defined for these fields later, so perhaps adding section references as you do for some fields would be helpful.  
+
+For example: 
+--"overlay": shouldn't this be normative:  "the overlay name is hashed with SHA-1" -> "the overlay name MUST be hashed with SHA-1"
+--"destination_list": seems like some of this should be normative? 
+
+-Section 5.3.2.1:
+--1st paragraph: shouldn't this be normative? 
+"the configuration document has a sequence number" ->  "the configuration document MUST contain a sequence number"
+-- 1st paragraph, last sentence: "may"  -> "can" 
+
+-Section 5.3.2.2:
+--Paragraph after the 1st structure:  Shouldn't this be stated normatively since it is described how the structure MUST be handled depending upon the contents?  
+--Paragraph after second structure, suggest the following changes:
+---"the generation counters should" ->  "the generation counters SHOULD"
+---"An implementation could use.." -> "An implementation MAY use…"
+---"the node confirms that the generation counter matches" -> "the node MUST confirm that the generation counter matches"
+---"If it does not match, it is silently dropped." -> "If it does not match, it MUST be silently dropped."
+
+-Section 5.3.3.1:
+--1st para: "a request returns" -> "a request MUST return" 
+--1st para: "then the message code is the response code that matches the request" -> 
+"then the message code MUST be set to the response code that matches the request"
+--2nd para: "message code is set" ->  "message code MUST be set"
+
+-Section 5.3.4 - needs normative language:
+--1st paragraph after GenericCertificate structure:
+---"All signatures are formatted" -> "Alls signatures MUST be formatted"
+---"The input structure…varies.." ->  "The input structure … MAY vary…"
+
+-Section 5.4.1: "need to be described" -> "MUST be described" 
+
+-Section 5.4.2-Section 7.  These sections need to be carefully reviewed and updated appropriately with normative text.  [ I have marks up for pages 55-102 where normative language is needed if someone wants those scanned and forwarded - I'm just too lazy to type them all out.] 
+
+- Section 8:  There is only one actual normative word used in this section!  There is a lc "should" that ought to be "SHOULD".  I don't know if the authors assumed that the normative language in TURN was sufficient, but I do not believe that is the case as it leaves the normative behavior to be inferred by the reader/implementor. Rather than rewrite the whole section myself, the authors need to review carefully. For example, there are "needs to", which likely are really and lots of present tense statements (e.g., "The address of the peer is stored…"), which ought to be MUSTs or SHOULDs.
+
+- Section 9.2:  seems like this needs normative language. Suggest the following:
+OLD:
+  For this Chord based topology plugin, the size of the Resource-ID is
+  128 bits.  The hash of a Resource-ID is computed using SHA-1
+  [RFC3174]then truncating the SHA-1 result to the most significant 128
+  bits.
+NEW:
+  For Chord-RELOAD, the size of the Resource-ID MUST be 
+  128 bits.  The hash of a Resource-ID MUST be computed using SHA-1
+  [RFC3174].  The SHA-1 result MUST be truncated to the most significant 
+  128 bits.
+
+- Section 9.3: Needs normative language. 
+OLD: 
+  If a peer is not responsible for a Resource-ID k, but is directly
+  connected to a node with Node-ID k, then it routes the message to
+  that node.  Otherwise, it routes the request to the peer in the
+  routing table that has the largest Node-ID that is in the interval
+  between the peer and k.  If no such node is found, it finds the
+  smallest Node-Id that is greater than k and routes the message to
+  that node.
+NEW: 
+  If a peer is not responsible for a Resource-ID k, but is directly
+  connected to a node with Node-ID k, then it MUST route the message to
+  that node.  Otherwise, it MUST route the request to the peer in the
+  routing table that has the largest Node-ID that is in the interval
+  between the peer and k.  If no such node is found, it MUST find the
+  smallest Node-Id that is greater than k and MUST route the message to
+  that node.
+
+- Section 9.4: Needs normative language.  
+
+- Section 9.5: While this section does have a fair amount of normative language, it is still lacking in a few cases: 
+--Item 2.:  "should" -> "SHOULD"
+--Item 5.:  "The AP sends the response…" -> "The AP MUST send the response…" 
+--1st paragraph after list: "…can directly connect…" -> "MAY directly connect"
+--2nd paragraph after list: "it can still populate" -> "it MAY still populate"
+--2nd paragraph after list: the description of the use of PING should be reworded with normative language (I'll leave that exercise to the authors)
+--3rd paragraph after the list:  "JP simply sends" -> "JP MUST send" 
+
+- Section 9.7.1:
+--1st para:  ".., it then sends…" -> ".., it then MUST send …"
+--3rd para: needs normative language
+OLD:
+  In no event does
+  an attempt to reestablish connectivity with a lost neighbor allow the
+  peer to remain in the neighbor table. 
+NEW: 
+  In the case of 
+  an attempt to reestablish connectivity with a lost neighbor, the peer 
+  MUST not remain in the neighbor table. 
+OR: 
+  In the case of 
+  an attempt to reestablish connectivity with a lost neighbor, the peer 
+  MUST be removed from the neighbor table.
+-- 4th para: "should" -> "SHOULD" (2 cases),  "use Pings" -> "MUST use Pings"
+
+-Section 9.7.2:
+--1st para:  "..the failed peer are removed.." -> "…the failed peer MUST be removed.."
+--2nd para:  "…the peer initiates…" -> "…the peer MUST initiate.."
+
+-Section 9.7.3:
+--1st para after list:  "is needed" -> "is REQUIRED"
+--3rd para after list:  "the peer sends an Update" -> "the peer MUST send an Update"
+
+-Section 9.7.4.4:  Needs a scrub for normative language
+
+-Section 9.9: Needs a scrub for normative language. 
+
+-Section 10.1: General: Needs a lot of work to be specified using normative language.  The majority of the configuration elements are not specified using normative language - for example, terms such as permitted, allowed, valid are used in statements rather than normative language
+or they are indicative of the need for normative language.  A specific example is in the definition for "clients-permitted":
+
+OLD:
+     This element represents whether clients are
+     permitted or whether all nodes must be peers.  If it is set to
+     "true" or absent, this indicates that clients are permitted.  If
+     it is set to "false" then nodes are not allowed to remain clients
+     after the initial join. 
+
+NEW: 
+     This element represents whether clients are
+     permitted or whether all nodes need to be peers.  If clients 
+     are permitted, the element MUST be set to "true" or absent.  
+     If the nodes are not allowed to remain clients after the 
+     initial join, the element MUST be set to "false".
+
+--Section 10.1 - 4th para after the element list states that "All of the non optional values MUST be provided".  However, the list of elements in the previous paragraph are not specifically identified as non optional.  I think the first 3 are mandatory.  So, I would suggest to re-word the 3rd paragraph as follows and delete the 1st sentence in the 4th paragraph noted above: 
+OLD:
+  In addition, the kind element contains the following elements:
+  max-count:  the maximum number of values which members of the overlay
+     must support.
+  data-model:  the data model to be used.
+  max-size:  the maximum size of individual values.
+  access-control:  the access control model to be used.
+  max-node-multiple:  This is optional and only used when the access
+     control is NODE-MULTIPLE.  This indicates the maximum value for
+     the i counter.  This is an integer greater than 0.
+
+NEW: 
+  In addition, the kind element MUST contain the following elements:
+  max-count:  the maximum number of values which members of the overlay
+     must support.
+  data-model:  the data model to be used.
+  max-size:  the maximum size of individual values.
+  access-control:  the access control model to be used.
+
+  The kind element MAY also contain the following element:
+  max-node-multiple:  if the access control is NODE-MULTIPLE, 
+     this element MAY be included. This indicates the maximum value for
+     the i counter.  It MUST be an integer greater than 0.   
+
+--Section 10.1, next to last para: There's no normative language, but it seems there should be since it is specifying specification computations and encoding that I believe are required. 
+
+- Section 10.2:  Needs more normative language:
+
+-- 2nd para: 
+OLD: This value is provided by the user or some other out of band 
+    provisioning mechanism.
+
+NEW: This value MUST be provided by the user or some other out of band 
+    provisioning mechanism."
+
+-- 3rd para: 
+OLD:  
+  Once an address and URL for the configuration server is determined,
+  the peer forms an HTTPS connection to that IP address. 
+NEW: 
+  Once an address and URL for the configuration server is determined,
+  the peer MUST form an HTTPS connection to that IP address. 
+
+-- 4th para:  "which replaces" ->  "which MUST replace"
+
+-- 5th para:  "nodes obtain the" -> "nodes MUST obtain the"
+
+- Section 10.3: 
+-- 3rd para:  "is performed" -> "MUST be performed".  
+-- 3rd para: Bullets need to be modified to normative. 
+-- 4th para: "the certificate contains" -> "the certificate MUST contain"
+-- para after 2nd set of bullets:  needs normative language.
+-- 2nd para after 2nd set of bullets:  "The node then reads…" ->  "The node MUST then use…"
+
+- Section 10.5:
+--Second para: "the joining node first forms" -> "the joining node MUST first form"
+--3rd para:  text uses the phrase "it can note the Node-ID in the response and use this Node-ID to start sending requests".  It's not clear whether the use of the Node-ID is a MAY or a MUST.  
+
+- Section 12. I'm assuming that the security directorate has reviewed this in detail, thus my focus in reviewing this section was on general understanding. The biggest issues is that there is NO normative language at all in the security section.  As in other sections, terms like "need", "are/is used/sent, etc.",  "ensure", lower case reserved words rather than upper case, etc. are used when normative language ought to have been used. 
+
+
+- Section 13. IANA Registrations:
+- General: there seem to be several registries for which the usage/requirement is unclear as there's no mention of such in the body of the document.  In general, references to the sections in the document describing the information included in the registries would be more than helpful.
+
+- Section 13.5: Creates a RELOAD Application Registry, but the use and need for such isn't described elsewhere in the document 
+
+
+
+Section 5.5.2.1 defines the usage of this and contains the text 
+
+     A 16-bit application-id as defined in the Section 13.5.  This
+     number represents the IANA registered application that is going to
+     send data on this connection.  
+
+
+- Section 13.12. Forwarding Options Registry. SEction 5.3.2.3 seems to define three flags for the Forwarding options type, so it's not clear to me why this registry has just "invalid" and "reserved"
+
+
+The registry is for the ForwardingOptionsType code points and not the flags. Any new forwarding option could use any of these flags. The flags only indicate who needs to understand the the forwarding option. 
+
+CJ: The bits cab be set for any any forwarding option so they are outside the
+registry
+
+- Section 13.15:  Defines/registers a RELOAD URI schema but there is no mention of this URI anywhere else in the document.  In what context is it used?    
+
+It would be used by other specifications that use Reload. It's not used inside of reload itself. Folks wanted it defined here so we kept it consistent and other specs could use the URI. 
+
+
+
+Minor  Issues:
+---------------------
+
+- Section 1.2.1, 2nd paragraph: I don't understand the example as to why a single application requires multiple usages - i.e, why voicemail?  Isn't the intent to say that an application might need to use both SIP and XMPP - i.e., you wouldn't define a "usage" for an application, would you?   
+storing voicemail in the DHT would require a different usage than the type of rendezvous service of XMPP or SIP
+
+
+- Section 2. Some of the definitions use terms that are not yet defined, so that's not particularly helpful - i.e,. Attach and Update are used. In some cases (e.g., Connection Table), you could just delete the statement with the reference. 
+
+
+I'm not sure how to resolve this. I agree that by the time we get to the definition, if you have not read the rest of the document, the sentence, " This includes nodes with which Attach handshakes have
+     been done but which have not sent any Updates." does not currently mean something that you can understand. But after reading the document, this sense helps clear up something implementors were confused about so I definitely don't want to loose it. I'd like to fix this but not sure what you are suggesting. Are you suggesting just saying in these terms are defined later with a forward reference and leaving the sentence there?
+
+
+- Section 3.3, last paragraph.  Add a reference to 5.4.2.4  after "RouteQuery method"
+
+- Section 5.1: "If any of these are incorrect…"  - need to specify what qualifies as "incorrect" - is it wrong formatting, invalid header field 
+value, etc.?
+
+- Section 5.1.2:
+--1st paragraph: I have no idea what the "other three cases" references. 
+
+- Section 5.2: "may be configured" -> "can be configured",  "alternative 
+routing algorithms may be selected" -> "alternative routing algorithms MAY be selected"
+
+- Section 5.3:  The three parts of the messages are listed and the last sentence says that "The following sections describe the format of each part of the message", but there are 4 sub-sections in 5.3, with the first section NOT describing one of the three parts of the messages.  I suggest to strike that last sentence and just put references to the sections in the list items for each of the three messages. 
+
+-Section 5.3.3: 
+--"critical" description:  "Whether this extension must be.." "Whether this extension needs to be…" 
+
+-Section 5.3.4:  1st para after certificate structure:  "may contain" -> "MAY contain" 
+
+-Section 5.5: It would be helpful to highlight that foundation, priority and type are based on ICE, in particular since ICE is not discussed until the subsequent section - e.g., "the foundation production" -> "the ICE foundation production". 
+
+- Section 5.6:  
+-- The last three paragraphs are confusing. 
+---In particular, it's not clear what algorithms are being referenced in this sentence:
+ "We will first define each of these algorithms, then
+  define overlay link protocols that use them."
+--- In the note paragraph, I believe "These protocols have been chosen…" is referring to the three overlay link protocols supported by RELOAD per this document.
+---The Note to implementors paragraph seems out of context
+--- Per my next comment, I suggest to move the detailed discussion of future overlay link protocols to the appendix, so some of this text may be relevant only to that. 
+
+-Section 5.6.1:  I suggest that the sub-sections in this section be moved to an appendix and a reference to such be added. 
+
+-Section 5.6.3.1.1, next to the last paragraph:
+"when a link may be failing" -> "when a link might be failing"
+
+- Section 9.1: While this is an overview, it seems to me that some of this is describing normative behavior (that I don't see specified else).  Per the general comment, I would reword the first sentence as follows: 
+OLD:
+  The algorithm described here is a modified version of the Chord
+  algorithm.
+NEW:
+   The algorithm described here, Chord-RELOAD is a modified version 
+   of the Chord algorithm.
+
+- Section 10.3, 1st para:  "required" -> "REQUIRED"
+
+- Section 10.3.1, last sentence: "must"  -> "MUST"
+
+- Section 10.4, 1st para, last sentence: "should use" -> "SHOULD use"
+
+- Section 11 - examples:
+--General - there are no detailed messages shown anywhere for the examples. There should be at least one, in particular given the comment above about the RELOAD URI that is registered, but not mentioned anywhere else in the document. 
+--first example (see my nit below about the examples not being numbered or labeled in any way):  The third sentence says that "It gets routed to the admitting peer (AP), yet the flow shows that the message first gets routed to the PP and then onto AP. It would be helpful if that were clarified. 
+-  Also (general), the text mentions the use of ICE.  It's not clear to me exactly where in the flow that happens - it would be good to annotate such (i.e., in a similar manner as the TLS is illustrated). 
+- next to the last example (text on page 131, diagram on page 132): I'm quite confused as the text states that JP has received an update from AP and thus now knows APs predecessors, which are also JP's predecessors, so JP Attaches to them. However, the diagram does not show JP getting an Update from AP and it shows JP doing Updates to PPP and PP rather than Attaches (as the text suggests).  
+
+- Section 13.10. Overlay link types: These specific string types are not used elsewhere in the document.  Suggest that a reference to 5.6 be added and these particular strings be included in parenthesis after the items in the list.  
+
+CJ: added this 
+
+
+
+
+- Section 13.16, Security considerations portion: 
+-- The first sentence doesn't make sense. Did you mean? 
+  "This media type is typically not used to
+  transport information that needs to be kept confidential, 
+  however, there are cases where the integrity of the information is
+  important."
+
+yes - that is much better - this text was added late and received little review 
+cj: fixed 
+
+-- "then the contents of the file need to be…" -> "then the contents of the file MUST be …"   
+
+
+
+Nits:
+-----
+- General: kind is sometimes "Kind" and sometimes "kind".  The former is more readable and highlights it as a reserved word. 
+
+Seems reasonable
+
+
+- Section 2.  
+--General: It would be helpful if the terms were alphabetized. 
+
+this is easy to do but complicates the forward reference problem. Thoughts on what is best?
+
+--Node: "We use the term "Node" to refer to …" -> "Refers to …"
+CJ: fixed
+
+- Section 3.2:
+-- 2nd para, last sentence:  "refer such" -> "refer to such"
+that needs to b fixed
+CJ: Fixed
+
+-- 3rd para, 1st sentence:  "concept" -> "entity"
+CJ:fixed
+
+- Section 4.1.4,
+(this is section 4.1.1 for others reading this) 
+
+4th paragraph: I'm still not getting the applicability of voicemail as a RELOAD Kind (per the reference also in section 1.2.1).  I guess you are talking about a voicemail message (in this case) and a server or application in section 1.2.1?   Voicemail just does not seem like an obvious example to me.  
+
+All it is trying to say is the size of a storing the audio for a voicemail in the overlay is much larger than saving a link. Note that several people in the WG think it is nuts to try and save a full voice message in the overlay and several others think the opposite. This argument was avoid by explicitly mention in this draft the example of voicemail.
+
+
+- Section 5.1.1, last bullet:  "In that case,…" ->  "In the latter case, …" 
+make sense 
+
+
+
+- Section 5.1.2:
+-- 2nd para:  "arrange" -> "ensure",  "This may be arranged" -> "This can be arranged…" 
+make sense
+
+-- 3rd para (1st after bullets): It's not clear that A…E is a set of ordered nodes in the example. I would suggest to reword as:
+OLD:
+  As an example of the first strategy, if node D 
+NEW: 
+ Consider an example with nodes A, B, C, D and E, respectively.  If 
+ node D….
+ok
+
+
+- Section 5.3.1.1: First two sentences can be reworded more succinctly - you're not really providing definitions here, put rather describing the 
+the syntax for and providing examples illustrative of the presentation language. 
+
+OLD: 
+  The following definitions are used throughout RELOAD and so are
+  defined here.  
+
+we really are defining opaque and true and false here 
+
+They also provide a convenient introduction to how to
+  read the presentation language.
+NEW: 
+  This section provides an introduction to the presentation language
+  used throughout RELOAD. 
+
+- Section 5.3.3.1: Error_Data_Too_Old is duplicated.
+that's embarrassing :-) 
+
+
+- Section 5.5.1.6: Add references for SCTP and DCCP. 
+
+- Section 6.4.1.3:  The reference to "this Version" is superfluous. Propose the following change:
+OLD:
+  This version of RELOAD (unlike previous versions) does not have an
+  explicit Remove operation.
+NEW: 
+  RELOAD does not have an explicit Remove operation.
+
+CJ: fixed
+
+
+
+- Section 9: General. The first sentence states that the algorithm defined here is referred to as "chord-reload", however, subsequent sections don't seem to use that term.
+
+uh, that should have been upper case in this section. 
+
+It would be more clear if that term was used. And, really, it would be more consistent to use the term Chord-RELOAD. However, this should also be consistent with the IANA-Registration which has CHORD-RELOAD. 
+
+- Section 9.7.4.3, 3rd para: 
+-- Remove "Note to implementers".  Text already highlights that the text is specific to implementations. 
+-- "may be found" -> "can be found"
+
+- Section 9.8:  "For this topology plugin" -> "For Chord-RELOAD"
+
+- Section 10.2, 2nd para:  "determines" -> "determining"
+needs to be fixed
+
+
+- Section 11: 
+- General: there are no labels for any of the call flows, so it's not always clear what the text is referring to.  In general, I think the text precedes the flow. 
+- "abbreviation" -> "abbreviations" 
+needs to be fixed
+
+
+- Section 13.16:
+--Interoperability considerations:  "knows" -> "known" 
+needs to be fixed
+
+
+- Section 14: "provied" -> "provided"
+needs to be fixed
+
+- Appendix C: Delete now - it's totally useless as is.
+make sense
+47
+
+STEWART BRYANT 
+=======================================
+
+
+ADRIAN FARREL
+=============
+ADRIAN FARREL
+=============
+
+
+
+
+Adrian Farrel has entered the following ballot position for
+draft-ietf-p2psip-base-18: Discuss
+
+When responding, please keep the subject line intact and reply to all
+email addresses included in the To and CC lines. (Feel free to cut this
+introductory paragraph, however.)
+
+Please refer to http://www.ietf.org/iesg/statement/discuss-criteria.html
+for more information about IESG DISCUSS and COMMENT positions.
+
+
+
+----------------------------------------------------------------------
+DISCUSS:
+----------------------------------------------------------------------
+
+
+I have updated my Discuss for revision -20 of the document by deleting
+points that have been addressed, and annotating with ">>"
+
+Thanks for the work so far.
+
+===
+
+I am convinced that this document will prove to be extremely important
+for the future of the Internet. That maybe makes the bar a little higher
+and means that I would like to know the spec is really good. My baseline
+is that the spec needs to reliably produce interoperable implementations
+and, of course, work.
+
+I've limited my focus to the parts concerned with routing.
+
+Overall, the number of comments I have generated worries me. In part
+this is because you have written a large document in an area that is
+new to me. But I am concerned that this means that the document really
+would benefit from significant attention. My issue is that with the
+number of questions I am raising I am not able to provide a decent
+technical review, and implementers may find this document really hard
+work.
+
+I hope that my comments will help improve the document.
+
+---
+
+Introduction
+
+  to efficiently route messages
+
+"Efficiency" in routing is a concept that may need qualifying. Maybe
+you mean select an optimal path. But even that doesn't help much without
+some explanation of the paradigm.
+
+>> Discussions via email indicated this "fluff" would be removed.
+
+---
+
+I do not believe that this document (and specifically section 9)
+contains information to implement chord-reload without reference to
+[chord]. That makes [chord] a normative reference.
+
+However, rather than that change, I would prefer this document to be
+self-contained, and to include a full implementable description of
+chord-reload.
+
+>> In email exchange I made some specific suggestions. These
+>> do not appear to have been incorporated...
+>>
+>> |  ...issues include:
+>> | - Section 9 starts by listing the differences from [chord]. This can't be
+>> |    useful unless I have read [chord]. Maybe move to 9.10 and note
+>> |    that it is provided for information only?
+>> | - What is a finger table? Maybe rewrite this section using terminology
+>> |    from this document and not terminology from [chord]?
+>> | - Ditto neighbor table
+>> | - What is a DHT ring?
+>> | - Does it matter to the results of the various algorithms how the data
+>> |   is stored? The efficiency of lookup is very interesting, but that is
+>> |   technically an implementation detail.
+
+---
+
+Section 3 gives some good input to management although I think the
+section is misnamed because a large chunk of the text is about how
+the network operates rather than how it is managed.
+
+I think you need to take a look at RFC 5706 for gidance on other
+management concepts you should include. I am personally interested in
+what OAM mechanisms you propose. (Yes, I do see section 5.5.3, but I
+don't believe this is significant OAM in a layer network.)
+
+>> In email I clarified this...
+>>
+>> | forward pointers to other I-Ds might help a lot.
+>> | In general, however, if you are building such a comprehensive new
+architecture, >> | I would ask you to include the architectural description of
+OAM in this document >> | and only punt the protocol details to other documents.
+
+---
+
+Section 3.3
+
+I am surprised that the sending-hop node is added to the Via List (in
+the figure) by the receiving-hop node. This is not optimal and might be
+"entertaining" on multi-access links if such could ever exist.
+
+I would have expected that the sending-hop would add itself prior to
+sending the message. This is what other technologies do.
+
+>> In email I expanded...
+>>
+>> | In this mode, the receiver must process each message in the context
+>> | of the link on which it arrived. Of course this is possible, but it
+>> | complicates an implementation. The sender knows its own identity
+>> | and can add it easily. The receiver has to take the information about
+>> | the incoming link and look up the identity of the remote link end (not
+>> | a huge burden, but...)
+>> |
+>> | Who is to say that P2P links today will not become something more
+>> | exotic tomorrow?
+
+---
+
+Section 3.5.1
+
+I am having trouble understanding how all nodes in an Overlay Instance
+arrange to use the same Overlay Algorithm (which I believe is a
+requirement).
+
+Maybe there is a parameter on a Join?
+Could this section explain?
+
+>> The new text is a help to explaining the intention.
+>>
+>> What is now not clear is what happens if there is a
+>> misconfiguration. How do two nodes believing they are
+>> in the same overlay communicate correctly if they have
+>> been configured with different algorithms?
+
+---
+
+Section 3.6.1
+
+Should the figure in 1.2 show a component for "Bootstrap and
+Configuration"? My issue here is that DNS lives below the Overlay Link
+Service Boundary line. Similarly, HTTP is below the line. In some ways
+the uses of these services is analagous to the use of ARP and DHCP in
+bottstrapping routers and hosts. Can you show how these services fit
+in on the diagrams in 1.2?
+
+>> I don't see any change to address my point. While I appreciate that
+>> the figure might be too crowded, my point (as explained in email)
+>> was that I have to read as far as 3.6.1 before discovering the
+>> missing component/interface.
+>>
+>> A solution would be to add text close to the figure.
+
+---
+
+Section 5.3.2
+
+   version:  The version of the RELOAD protocol being used.  This is a
+      fixed point integer between 0.1 and 25.4.  This document describes
+      version 0.1, with a value of 0x01. [[ Note to RFC Editor:  Please
+      update this to version 1.0 with value of 0x0a and remove this
+      note. ]]
+
+Can you explain why this document has a value in the version field other
+than the value that will be in the RFC? Obviously no-one has implemented
+and deployed a pre-standard version.
+
+>> I suggested alternative text by email
+>>
+>> |    version:  The version of the RELOAD protocol being used.  This is a
+>> |     fixed point integer between 1.0 and 25.4.  This document describes
+>> |     version 1.0 with value of 0x0a.  Messages carrying unrecognized
+>> |     version values MUST be <fill in your text>
+
+---
+
+>> New point
+>>
+>> Section 5.6.3 seems to have been rewritten with the inclusion of some
+>> new RFC 2119 language (amongst other changes). Has this change
+>> received WG last call?
