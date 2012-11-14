@@ -8882,18 +8882,18 @@ Internet-Draft                 RELOAD Base                 November 2012
               Keranen, A., Camarillo, G., and J. Maenpaa, "Host Identity
               Protocol-Based Overlay Networking Environment (HIP BONE)
               Instance Specification for REsource LOcation And Discovery
-              (RELOAD)", draft-ietf-hip-reload-instance-04 (work in
-              progress), October 2011.
+              (RELOAD)", draft-ietf-hip-reload-instance-05 (work in
+              progress), April 2012.
 
    [I-D.ietf-p2psip-diagnostics]
-              Bryan, D., Jiang, X., Even, R., and H. Song, "P2PSIP
-              Overlay Diagnostics", draft-ietf-p2psip-diagnostics-08
-              (work in progress), December 2011.
+              Song, H., Jiang, X., Even, R., and D. Bryan, "P2PSIP
+              Overlay Diagnostics", draft-ietf-p2psip-diagnostics-09
+              (work in progress), August 2012.
 
    [I-D.ietf-p2psip-rpr]
-              Zong, N., Even, R., and Y. Zhang, "An extension to RELOAD
-              to support Relay Peer Routing", draft-ietf-p2psip-rpr-01
-              (work in progress), November 2011.
+              Zong, N., Jiang, X., Even, R., and Y. Zhang, "An extension
+              to RELOAD to support Relay Peer Routing",
+              draft-ietf-p2psip-rpr-03 (work in progress), October 2012.
 
    [I-D.ietf-p2psip-self-tuning]
               Maenpaa, J., Camarillo, G., and J. Hautakorpi, "A Self-
@@ -8906,14 +8906,14 @@ Internet-Draft                 RELOAD Base                 November 2012
 
 
               tuning Distributed Hash Table (DHT) for REsource LOcation
-              And Discovery (RELOAD)", draft-ietf-p2psip-self-tuning-05
-              (work in progress), January 2012.
+              And Discovery (RELOAD)", draft-ietf-p2psip-self-tuning-06
+              (work in progress), July 2012.
 
    [I-D.ietf-p2psip-service-discovery]
               Maenpaa, J. and G. Camarillo, "Service Discovery Usage for
               REsource LOcation And Discovery (RELOAD)",
-              draft-ietf-p2psip-service-discovery-04 (work in progress),
-              January 2012.
+              draft-ietf-p2psip-service-discovery-06 (work in progress),
+              October 2012.
 
    [I-D.ietf-p2psip-sip]
               Jennings, C., Lowekamp, B., Rescorla, E., Baset, S., and
