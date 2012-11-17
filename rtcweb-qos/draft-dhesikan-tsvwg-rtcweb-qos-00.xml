@@ -62,7 +62,7 @@ ipr="trust200902">
     <section title="Introduction">
       <t>DiffServ style packet marking can help provide QoS in some
       environments. There are many use cases where such marking does not help,
-      but it seldom makes things worse, if packets are marked appropriately.  In
+      but it seldom makes things worse if packets are marked appropriately.  In
       other words, when attempting to avoid congestion by marking certain
       traffic flows, say all audio or all audio and video, marking too many
       audio and/or video flows for a given network's capacity can prevent
@@ -77,15 +77,20 @@ ipr="trust200902">
       previous IETF RFCs but simply provides a simple set of
       recommendations for implementors based on the previous
       RFCs.</t>
+
       <t>There are some environments where priority markings
       frequently help. These include:</t>
+      
       <t>1. If the congested link is the broadband uplink in a
       Cable or DSL scenario, often residential routers/NAT support
       preferential treatment based on DSCP.</t>
+      
       <t>2. If the congested link is a local WiFi network, marking
       may help.</t>
+      
       <t>3. In some cellular style deployments, markings may
       help in cases where the network does not remove them.</t>
+      
       <t>Traditionally DSCP values have been thought of as being
       site specific, with each site selecting its own code points
       for each QoS level. However in the RTCWeb use cases, the
@@ -95,6 +100,7 @@ ipr="trust200902">
       RFCs and common usage. These code points are solely defaults.
       Future drafts may define mechanisms for site specific
       mappings to override the values provided in this draft.</t>
+
       <t>This draft defines some inputs that the browser can look
       at to determine how to set the various packet markings and
       defines the a mapping from abstract QoS policies (media type,
@@ -106,8 +112,8 @@ ipr="trust200902">
       <t> This specification does not change or override the advice in any other
       standards about setting packet markings. It simply provides a non-normative 
       summary of them and provides the context of how they relate into
-      the RTCWeb context. It also specified the requirements for the W3C API to
-      understand what it needs to control and how the control splits between
+      the RTCWeb context. This document also specifies the requirements for the W3C WebRTC API to
+      understand what it needs to control, and how the control splits between
       things the JavaScript application running in the browser can control and
       things the browser needs to control. In some cases, such as DSCP where the
       normative RFC leaves open multiple options to choose from, this clarifies
@@ -137,14 +143,13 @@ ipr="trust200902">
     </section>
     <section title="DSCP Mappings">
 
-       <t> Below is a table of DSCP markings for each application type RTCWeb
-   is interested in. These DSCPs for each application type listed are a
+       <t> Below is a table of DSCP markings for each media type RTCWeb
+   is interested in. These DSCPs for each media type listed are a
    reasonable default set of code point values, and currently not
-   mandatory for every usage. For example, some networks may have a
-   policy in place to have Interactive Video use the EF DSCP. </t>
+   mandatory for every usage.  </t>
 
       <texttable anchor="table-dscp">
-        <ttcol align='left'>Application Type</ttcol>
+        <ttcol align='left'>Media Type</ttcol>
         <ttcol align='center'>Low</ttcol>
         <ttcol align='center'>Medium</ttcol>
         <ttcol align='center'>High</ttcol>
@@ -172,7 +177,7 @@ ipr="trust200902">
     </section>
     <section title="QCI Mapping">
       <texttable anchor="table-qci">
-        <ttcol align='left'>Application Type</ttcol>
+        <ttcol align='left'>Media Type</ttcol>
         <ttcol align='center'>Low</ttcol>
         <ttcol align='center'>Medium</ttcol>
         <ttcol align='center'>High</ttcol>
@@ -219,7 +224,7 @@ ipr="trust200902">
         <c>5</c>
         <c>Non-BG</c>
         <c>R 1</c>
-        <c>IMS Signalling</c>
+        <c>IMS Signaling</c>
         <c>6</c>
         <c>Non-BG</c>
         <c>R 7</c>
@@ -233,7 +238,7 @@ ipr="trust200902">
     </section>
     <section title="WiFI Mapping">
       <texttable anchor="table-wifi">
-        <ttcol align='left'></ttcol>
+        <ttcol align='left'>Media Type</ttcol>
         <ttcol align='center'>Low</ttcol>
         <ttcol align='center'>Medium</ttcol>
         <ttcol align='center'>High</ttcol>
@@ -304,15 +309,20 @@ ipr="trust200902">
       </texttable>
     </section>
     <section title="W3C API Implications">
-      <t>To work with this proposal, the W3C specification would
-      need to provide a way to specify the importance of media and
+      <t>To work with this proposal, the W3C specification SHOULD
+      provide a way to specify the importance of media and
       data streams.</t>
-      <t>The W3C API should also provide a way for the application
+      <t>The W3C API SHOULD also provide a way for the application
       to find out the source and destination IP and ports of any
       flow as well as the DSCP value or other markings in use for
       that flow. The JavaScript application can then communicate this to a
       web service that may install a particular policy for that
       flow.</t>
+      <t> The W3C API SHOULD NOT provide a way for the JavaScript to
+   arbitrarily set the marketing to any value of the JavaScript
+   choosing as this reduces the security provided by the browser
+   knowing the media type.
+     </t> 
     </section>
     <section title="Security Considerations">
       <t>TODO - discuss implications of what browser can set and
