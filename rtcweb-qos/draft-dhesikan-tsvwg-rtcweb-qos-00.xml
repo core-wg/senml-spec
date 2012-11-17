@@ -487,6 +487,19 @@
       Paolo Severini, Jim Hasselbrook, Joe Marcus, and Erik Nordmark.</t>
     </section>
 
+   <section title="Document History">
+      <t>Note to RFC Editor: Please remove this section.</t>
+
+      <t> This document was originally an individual submission in RTCWeb
+      WG. The RTCWeb working group selected it to be become a WG document. Later
+      the transport ADs requested that this be moved to the TSVWG WG as that
+      seemed to be a better match. This document is now being submitted as
+      individual submission to the TSVWG with the hope that WG will select it as
+      a WG draft and move it forward to an RFC. </t>
+
+    </section>
+
+
     <section title="Appendix: Code Hints ">
       <t>On windows setting the source interface works but BSD, OSX, Linux use
       weak end-system model and will route out different interface if that
