@@ -51,7 +51,7 @@ ipr="trust200902">
     </author>
     <date day="17" month="November" year="2012" />
     <abstract>
-      <t>Many networks, such as Service Provider and Enterprise
+      <t>Many networks, such as service provider and enterprise
       networks, can provide per packet treatments based on 
       Differentiated Services Code Points (DSCP) on a per hop basis. This document
       provides the recommended DSCP values for browsers to use for
@@ -116,7 +116,10 @@ ipr="trust200902">
     </section>
  
     <section title="Terminology">
-      <t>TODO - add the boiler plate</t>
+        <t>The key words "MUST", "MUST NOT", 
+      "SHOULD", "SHOULD NOT", and "MAY" in this
+      document are to be interpreted as described in <xref
+      target="RFC2119">RFC 2119</xref>.</t>
     </section>
 
     <section title="Inputs">
@@ -677,5 +680,9 @@ main(void) {
         target='http://xml.resource.org/public/rfc/xml/rfc2119.xml' />
       </reference>
     </references>
+     <references title="Informative References">
+      <!-- TBD --> 
+       </references>
+
   </back>
 </rfc>
