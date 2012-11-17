@@ -10,7 +10,7 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="yes"?>
-<rfc category="std" docName="draft-ietf-webrtc-qos-00"
+<rfc category="std" docName="draft-dhesikan-tsvwg-rtcweb-qos-00"
 ipr="trust200902">
   <front>
     <title abbrev="RTCWeb QoS">DSCP and other packet markings for
@@ -49,16 +49,13 @@ ipr="trust200902">
         <email>jmpolk@cisco.com</email>
       </address>
     </author>
-    <date day="15" month="October" year="2012" />
+    <date day="17" month="November" year="2012" />
     <abstract>
       <t>Many networks, such as Service Provider and Enterprise
       networks, can provide per packet treatments based on 
       Differentiated Services Code Points (DSCP) on a per hop basis. This document
-      defines the recommended DSCP values for browsers to use for
+      provides the recommended DSCP values for browsers to use for
       various classes of traffic.</t>
-      <t>This draft is a very early and far from done. It is meant
-      to provide the structure for the idea of how to do this but
-      much discussion is needed about the details.</t>
     </abstract>
   </front>
   <middle>
