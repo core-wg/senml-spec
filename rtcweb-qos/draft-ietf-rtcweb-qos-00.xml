@@ -11,7 +11,7 @@
 <?rfc compact="yes"?>
 <?rfc subcompact="yes"?>
 <rfc category="std" docName="draft-ietf-webrtc-qos-00"
-ipr="noDerivativesTrust200902">
+ipr="trust200902">
   <front>
     <title abbrev="RTCWeb QoS">DSCP and other packet markings for
     RTCWeb QoS</title>
@@ -49,7 +49,7 @@ ipr="noDerivativesTrust200902">
         <email>jmpolk@cisco.com</email>
       </address>
     </author>
-    <date day="14" month="October" year="2012" />
+    <date day="15" month="October" year="2012" />
     <abstract>
       <t>Many networks, such as Service Provider and Enterprise
       networks, can provide per packet treatments based on 
@@ -65,7 +65,7 @@ ipr="noDerivativesTrust200902">
     <section title="Introduction">
       <t>DiffServ style packet marking can help provide QoS in some
       environments. There are many use cases where such marking does not help,
-      but it seldom make things worse, if packets are marked appropriately.  In
+      but it seldom makes things worse, if packets are marked appropriately.  In
       other words, when attempting to avoid congestion by marking certain
       traffic flows, say all audio or all audio and video, marking too many
       audio and/or video flows for a given network's capacity can prevent
@@ -74,7 +74,7 @@ ipr="noDerivativesTrust200902">
       and/or video).
       </t>
       <t>
-        This draft proposes how
+        This draft proposes how a
       browser and other VoIP applications can mark packets. This
       draft does not contradict or redefine any advice from
       previous IETF RFCs but simply provides a simple set of
@@ -87,7 +87,7 @@ ipr="noDerivativesTrust200902">
       preferential treatment based on DSCP.</t>
       <t>2. If the congested link is a local WiFi network, marking
       may help.</t>
-      <t>3. In some some cellular style deployments, markings may
+      <t>3. In some cellular style deployments, markings may
       help in cases where the network does not remove them.</t>
       <t>Traditionally DSCP values have been thought of as being
       site specific, with each site selecting its own code points
@@ -107,12 +107,12 @@ ipr="noDerivativesTrust200902">
     <section title="Relation to Other Standards">
     
       <t> This specification does not change or override the advice in any other
-      standards about setting packet marketings. It simply provides a non
-      normative summary of them and provides the context of how they relate into
+      standards about setting packet markings. It simply provides a non-normative 
+      summary of them and provides the context of how they relate into
       the RTCWeb context. It also specified the requirements for the W3C API to
       understand what it needs to control and how the control splits between
       things the JavaScript application running in the browser can control and
-      things the browser needs to control. In some cases such as DSCP where the
+      things the browser needs to control. In some cases, such as DSCP where the
       normative RFC leaves open multiple options to choose from, this clarifies
       which choice should be used in the RTCWeb context. </t>
 
@@ -131,13 +131,20 @@ ipr="noDerivativesTrust200902">
       The second input is the relative treatment of the stream
       within that session. Many applications have multiple video
       streams and often some are more important than others.
-      Javascript applications can tell the browser whether a
+      JavaScript applications can tell the browser whether a
       particular media stream is high, medium, or low importance to
       the application.</t>
     </section>
     <section title="DSCP Mappings">
+
+       <t> Below is a table of DSCP markings for each application type RTCWeb
+   is interested in. These DSCPs for each application type listed are a
+   reasonable default set of code point values, and currently not
+   mandatory for every usage. For example, some networks may have a
+   policy in place to have Interactive Video use the EF DSCP. </t>
+
       <texttable anchor="table-dscp">
-        <ttcol align='left'></ttcol>
+        <ttcol align='left'>Application Type</ttcol>
         <ttcol align='center'>Low</ttcol>
         <ttcol align='center'>Medium</ttcol>
         <ttcol align='center'>High</ttcol>
@@ -165,7 +172,7 @@ ipr="noDerivativesTrust200902">
     </section>
     <section title="QCI Mapping">
       <texttable anchor="table-qci">
-        <ttcol align='left'></ttcol>
+        <ttcol align='left'>Application Type</ttcol>
         <ttcol align='center'>Low</ttcol>
         <ttcol align='center'>Medium</ttcol>
         <ttcol align='center'>High</ttcol>
@@ -303,13 +310,13 @@ ipr="noDerivativesTrust200902">
       <t>The W3C API should also provide a way for the application
       to find out the source and destination IP and ports of any
       flow as well as the DSCP value or other markings in use for
-      that flow. The JS application can then communicate this to a
+      that flow. The JavaScript application can then communicate this to a
       web service that may install a particular policy for that
       flow.</t>
     </section>
     <section title="Security Considerations">
       <t>TODO - discuss implications of what browser can set and
-      what JS can set</t>
+      what JavaScript can set</t>
     </section>
     <section title="IANA Considerations">
       <t>This specification does not require any actions from
