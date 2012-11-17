@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="US-ASCII"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
-<?rfc toc="yes"?>
+<?rfc toc="no"?>
 <?rfc tocompact="yes"?>
 <?rfc tocdepth="3"?>
 <?rfc tocindent="yes"?>
-<?rfc symrefs="no"?>
+<?rfc symrefs="yes"?>
 <?rfc sortrefs="yes"?>
 <?rfc comments="yes"?>
 <?rfc inline="yes"?>
@@ -70,15 +70,15 @@
 
   <middle>
     <section title="Introduction">
-      <t>DiffServ style packet marking can help provide QoS in some
-      environments. There are many use cases where such marking does not help,
-      but it seldom makes things worse if packets are marked appropriately. In
-      other words, when attempting to avoid congestion by marking certain
-      traffic flows, say all audio or all audio and video, marking too many
-      audio and/or video flows for a given network's capacity can prevent
-      desirable results. Either too much other traffic will be starved, or
-      there is not enough capacity for the preferentially marked packets
-      (i.e., audio and/or video).</t>
+      <t> Differentiated Services Code Points (DSCP)<xref target="RFC2474" />
+      style packet marking can help provide QoS in some environments. There are
+      many use cases where such marking does not help, but it seldom makes
+      things worse if packets are marked appropriately. In other words, when
+      attempting to avoid congestion by marking certain traffic flows, say all
+      audio or all audio and video, marking too many audio and/or video flows
+      for a given network's capacity can prevent desirable results. Either too
+      much other traffic will be starved, or there is not enough capacity for
+      the preferentially marked packets (i.e., audio and/or video).</t>
 
       <t>This draft proposes how a browser and other VoIP applications can
       mark packets. This draft does not contradict or redefine any advice from
@@ -129,7 +129,7 @@
     <section title="Terminology">
       <t>The key words "MUST", "MUST NOT", "SHOULD", "SHOULD NOT", and "MAY"
       in this document are to be interpreted as described in <xref
-      target="RFC2119">RFC 2119</xref>.</t>
+      target="RFC2119" />.</t>
     </section>
 
     <section title="Inputs">
@@ -147,8 +147,11 @@
     <section title="DSCP Mappings">
       <t>Below is a table of DSCP markings for each media type RTCWeb is
       interested in. These DSCPs for each media type listed are a reasonable
-      default set of code point values, and currently not mandatory for every
-      usage.</t>
+      default set of code point values taken from <xref target="RFC4594" />. A
+      web browser SHOULD use these values to mark the appropriate media
+      packets. More information on EF can be found in <xref target="RFC3246"
+      />.  More information on AF can be found in <xref target="RFC2597"
+      />. </t>
 
       <texttable anchor="table-dscp">
         <ttcol align="left">Media Type</ttcol>
@@ -471,6 +474,12 @@
       <t>This specification does not require any actions from IANA.</t>
     </section>
 
+   <section title="Downward References">
+      <t>This specification contains a downwards reference to <xref
+      target="RFC4594"/> however the parts of that RFC used by this
+      specificaiton are suffenteintly stable for this donward reference.</t>
+    </section>
+
     <section title="Acknowledgements">
       <t>Cullen Jennings was one of the authors of this text in the original
       individual submission but was unceremoniously kicked off by the chairs
@@ -614,7 +623,57 @@ main(void) {
                 target="http://www.rfc-editor.org/rfc/rfc4594.txt" type="TXT" />
       </reference>
 
-      <reference anchor="RFC3246">
+ 
+      <reference anchor="RFC2119">
+        <front>
+          <title abbrev="RFC Key Words">Key words for use in RFCs to Indicate
+          Requirement Levels</title>
+
+          <author fullname="Scott Bradner" initials="S." surname="Bradner">
+            <organization>Harvard University</organization>
+
+            <address>
+              <postal>
+                <street>1350 Mass. Ave.</street>
+
+                <street>Cambridge</street>
+
+                <street>MA 02138</street>
+              </postal>
+
+              <phone>- +1 617 495 3864</phone>
+
+              <email>sob@harvard.edu</email>
+            </address>
+          </author>
+
+          <date month="March" year="1997" />
+
+          <area>General</area>
+
+          <keyword>keyword</keyword>
+        </front>
+
+        <seriesInfo name="BCP" value="14" />
+
+        <seriesInfo name="RFC" value="2119" />
+
+        <format octets="4723"
+                target="http://www.rfc-editor.org/rfc/rfc2119.txt" type="TXT" />
+
+        <format octets="17491"
+                target="http://xml.resource.org/public/rfc/html/rfc2119.html"
+                type="HTML" />
+
+        <format octets="5777"
+                target="http://xml.resource.org/public/rfc/xml/rfc2119.xml"
+                type="XML" />
+      </reference>
+    </references>
+
+    <references title="Informative References">
+     
+     <reference anchor="RFC3246">
         <front>
           <title>An Expedited Forwarding PHB (Per-Hop Behavior)</title>
 
@@ -880,55 +939,6 @@ main(void) {
                 target="http://www.rfc-editor.org/rfc/rfc2597.txt" type="TXT" />
       </reference>
 
-      <reference anchor="RFC2119">
-        <front>
-          <title abbrev="RFC Key Words">Key words for use in RFCs to Indicate
-          Requirement Levels</title>
-
-          <author fullname="Scott Bradner" initials="S." surname="Bradner">
-            <organization>Harvard University</organization>
-
-            <address>
-              <postal>
-                <street>1350 Mass. Ave.</street>
-
-                <street>Cambridge</street>
-
-                <street>MA 02138</street>
-              </postal>
-
-              <phone>- +1 617 495 3864</phone>
-
-              <email>sob@harvard.edu</email>
-            </address>
-          </author>
-
-          <date month="March" year="1997" />
-
-          <area>General</area>
-
-          <keyword>keyword</keyword>
-        </front>
-
-        <seriesInfo name="BCP" value="14" />
-
-        <seriesInfo name="RFC" value="2119" />
-
-        <format octets="4723"
-                target="http://www.rfc-editor.org/rfc/rfc2119.txt" type="TXT" />
-
-        <format octets="17491"
-                target="http://xml.resource.org/public/rfc/html/rfc2119.html"
-                type="HTML" />
-
-        <format octets="5777"
-                target="http://xml.resource.org/public/rfc/xml/rfc2119.xml"
-                type="XML" />
-      </reference>
-    </references>
-
-    <references title="Informative References">
-      <!-- TBD -->
     </references>
   </back>
 </rfc>

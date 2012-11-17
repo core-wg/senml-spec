@@ -4,27 +4,23 @@
 Network Working Group                                        S. Dhesikan
 Internet-Draft                                                     Cisco
 Intended status: Standards Track                           D. Druta, Ed.
-Expires: April 15, 2013                                              ATT
+Expires: May 21, 2013                                                ATT
                                                                 P. Jones
                                                                  J. Polk
                                                                    Cisco
-                                                        October 15, 2012
+                                                       November 17, 2012
 
 
              DSCP and other packet markings for RTCWeb QoS
-                        draft-ietf-rtcweb-qos-00
+                   draft-dhesikan-tsvwg-rtcweb-qos-00
 
 Abstract
 
-   Many networks, such as Service Provider and Enterprise networks, can
+   Many networks, such as service provider and enterprise networks, can
    provide per packet treatments based on Differentiated Services Code
-   Points (DSCP) on a per hop basis.  This document defines the
+   Points (DSCP) on a per hop basis.  This document provides the
    recommended DSCP values for browsers to use for various classes of
    traffic.
-
-   This draft is a very early and far from done.  It is meant to provide
-   the structure for the idea of how to do this but much discussion is
-   needed about the details.
 
 Status of this Memo
 
@@ -36,87 +32,42 @@ Status of this Memo
    working documents as Internet-Drafts.  The list of current Internet-
    Drafts is at http://datatracker.ietf.org/drafts/current/.
 
-   Internet-Drafts are draft documents valid for a maximum of six 
-   months and may be updated, replaced, or obsoleted by other documents
-   at any time.  It is inappropriate to use Internet-Drafts as 
-   reference material or to cite them other than as "work in progress."
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on April 15, 2013.
+   This Internet-Draft will expire on May 21, 2013.
 
 Copyright Notice
 
    Copyright (c) 2012 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-
-
-Dhesikan, et al.         Expires April 15, 2013                 [Page 1]
- 
-Internet-Draft                 RTCWeb QoS                   October 2012
-
-
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (http://trustee.ietf.org/license-info) in effect on the date of
    publication of this document.  Please review these documents
-   carefully, as they describe your rights and restrictions with 
-   respect to this document.  Code Components extracted from this 
-   document must include Simplified BSD License text as described in 
-   Section 4.e of the Trust Legal Provisions and are provided without 
-   warranty as described in the Simplified BSD License.
-
-Table of Contents
-
-   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . . . 3
-   2.  Relation to Other Standards . . . . . . . . . . . . . . . . . . 3
-   3.  Terminology . . . . . . . . . . . . . . . . . . . . . . . . . . 4
-   4.  Inputs  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
-   5.  DSCP Mappings . . . . . . . . . . . . . . . . . . . . . . . . . 4
-   6.  QCI Mapping . . . . . . . . . . . . . . . . . . . . . . . . . . 5
-   7.  WiFI Mapping  . . . . . . . . . . . . . . . . . . . . . . . . . 5
-   8.  W3C API Implications  . . . . . . . . . . . . . . . . . . . . . 6
-   9.  Security Considerations . . . . . . . . . . . . . . . . . . . . 6
-   10. IANA Considerations . . . . . . . . . . . . . . . . . . . . . . 6
-   11. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . 6
-   12. Appendix: Code Hints  . . . . . . . . . . . . . . . . . . . . . 7
-   13. Normative References  . . . . . . . . . . . . . . . . . . . . . 9
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . . 9
+   carefully, as they describe your rights and restrictions with respect
 
 
 
+Dhesikan, et al.          Expires May 21, 2013                  [Page 1]
+
+Internet-Draft                 RTCWeb QoS                  November 2012
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Dhesikan, et al.         Expires April 15, 2013                 [Page 2]
- 
-Internet-Draft                 RTCWeb QoS                   October 2012
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
 
 
 1.  Introduction
 
    DiffServ style packet marking can help provide QoS in some
    environments.  There are many use cases where such marking does not
-   help, but it seldom makes things worse, if packets are marked
+   help, but it seldom makes things worse if packets are marked
    appropriately.  In other words, when attempting to avoid congestion
    by marking certain traffic flows, say all audio or all audio and
    video, marking too many audio and/or video flows for a given
@@ -124,8 +75,8 @@ Internet-Draft                 RTCWeb QoS                   October 2012
    other traffic will be starved, or there is not enough capacity for
    the preferentially marked packets (i.e., audio and/or video).
 
-   This draft proposes how a browser and other VoIP applications can 
-   mark packets.  This draft does not contradict or redefine any advice 
+   This draft proposes how a browser and other VoIP applications can
+   mark packets.  This draft does not contradict or redefine any advice
    from previous IETF RFCs but simply provides a simple set of
    recommendations for implementors based on the previous RFCs.
 
@@ -133,13 +84,13 @@ Internet-Draft                 RTCWeb QoS                   October 2012
    These include:
 
    1.  If the congested link is the broadband uplink in a Cable or DSL
-       scenario, often residential routers/NAT support preferential
-       treatment based on DSCP.
+   scenario, often residential routers/NAT support preferential
+   treatment based on DSCP.
 
    2.  If the congested link is a local WiFi network, marking may help.
 
    3.  In some cellular style deployments, markings may help in cases
-       where the network does not remove them.
+   where the network does not remove them.
 
    Traditionally DSCP values have been thought of as being site
    specific, with each site selecting its own code points for each QoS
@@ -156,31 +107,30 @@ Internet-Draft                 RTCWeb QoS                   October 2012
    those packet markings.
 
 
+
+Dhesikan, et al.          Expires May 21, 2013                  [Page 2]
+
+Internet-Draft                 RTCWeb QoS                  November 2012
+
+
 2.  Relation to Other Standards
 
    This specification does not change or override the advice in any
-   other standards about setting packet markings.  It simply provides
-
-
-
-Dhesikan, et al.         Expires April 15, 2013                 [Page 3]
- 
-Internet-Draft                 RTCWeb QoS                   October 2012
-
-
-   a non-normative summary of them and provides the context of how they
-   relate into the RTCWeb context.  It also specified the requirements
-   for the W3C API to understand what it needs to control and how the
-   control splits between things the JavaScript application running in
-   the browser can control and things the browser needs to control.  In
-   some cases, such as DSCP where the normative RFC leaves open multiple
-   options to choose from, this clarifies which choice should be used in
-   the RTCWeb context.
+   other standards about setting packet markings.  It simply provides a
+   non-normative summary of them and provides the context of how they
+   relate into the RTCWeb context.  This document also specifies the
+   requirements for the W3C WebRTC API to understand what it needs to
+   control, and how the control splits between things the JavaScript
+   application running in the browser can control and things the browser
+   needs to control.  In some cases, such as DSCP where the normative
+   RFC leaves open multiple options to choose from, this clarifies which
+   choice should be used in the RTCWeb context.
 
 
 3.  Terminology
 
-   TODO - add the boiler plate
+   The key words "MUST", "MUST NOT", "SHOULD", "SHOULD NOT", and "MAY"
+   in this document are to be interpreted as described in RFC 2119 [1].
 
 
 4.  Inputs
@@ -198,14 +148,29 @@ Internet-Draft                 RTCWeb QoS                   October 2012
 
 5.  DSCP Mappings
 
-   Below is a table of DSCP markings for each application type RTCWeb 
-   is interested in. These DSCPs for each application type listed are a
-   reasonable default set of code point values, and currently not 
-   mandatory for every usage. For example, some networks may have a 
-   policy in place to have Interactive Video use the EF DSCP. 
+   Below is a table of DSCP markings for each media type RTCWeb is
+   interested in.  These DSCPs for each media type listed are a
+   reasonable default set of code point values, and currently not
+   mandatory for every usage.
+
+
+
+
+
+
+
+
+
+
+
+
+Dhesikan, et al.          Expires May 21, 2013                  [Page 3]
+
+Internet-Draft                 RTCWeb QoS                  November 2012
+
 
        +-----------------------+-----------+-----------+-----------+
-       | Application Type      |    Low    |   Medium  |    High   |
+       | Media Type            |    Low    |   Medium  |    High   |
        +-----------------------+-----------+-----------+-----------+
        | Audio                 |  46 (EF)  |  46 (EF)  |  46 (EF)  |
        | Interactive Video     | 38 (AF43) | 36 (AF42) | 34 (AF41) |
@@ -215,20 +180,11 @@ Internet-Draft                 RTCWeb QoS                   October 2012
 
                                   Table 1
 
-   [Editor's Note: the application type is currently inconsistent with 
-                   similar applications defined in [6]. Further 
-                   discussion is likely needed to resolve this.]
-
-
-Dhesikan, et al.         Expires April 15, 2013                 [Page 4]
- 
-Internet-Draft                 RTCWeb QoS                   October 2012
-
 
 6.  QCI Mapping
 
               +-----------------------+-----+--------+------+
-              | Application Type      | Low | Medium | High |
+              | Media Type            | Low | Medium | High |
               +-----------------------+-----+--------+------+
               | Audio                 |  1  |    1   |   1  |
               | Interactive Video     |  2  |    2   |   2  |
@@ -248,7 +204,7 @@ Internet-Draft                 RTCWeb QoS                   October 2012
    | 2     |   GBR  |  4  |              Interactive Video             |
    | 3     |   GBR  |  5  |            Non-Interactive Video           |
    | 4     |   GBR  |  3  |              Real Time Gaming              |
-   | 5     | Non-BG | R 1 |               IMS Signalling               |
+   | 5     | Non-BG | R 1 |                IMS Signaling               |
    | 6     | Non-BG | R 7 |       interactive Voice, video, games      |
    | 7-9   | Non-BG | R 6 |  non interactive video / TCP web, email, / |
    |       |        |     |            Platinum vs gold user           |
@@ -257,10 +213,22 @@ Internet-Draft                 RTCWeb QoS                   October 2012
                                   Table 3
 
 
+
+
+
+
+
+
+
+Dhesikan, et al.          Expires May 21, 2013                  [Page 4]
+
+Internet-Draft                 RTCWeb QoS                  November 2012
+
+
 7.  WiFI Mapping
 
               +-----------------------+-----+--------+------+
-              |                       | Low | Medium | High |
+              | Media Type            | Low | Medium | High |
               +-----------------------+-----+--------+------+
               | Audio                 |  6  |    6   |   6  |
               | Interactive Video     |  5  |    5   |   5  |
@@ -271,15 +239,6 @@ Internet-Draft                 RTCWeb QoS                   October 2012
                                   Table 4
 
    This corresponds to the mappings from TODO REF of
-
-
-
-
-
-Dhesikan, et al.         Expires April 15, 2013                 [Page 5]
- 
-Internet-Draft                 RTCWeb QoS                   October 2012
-
 
    +-------+----+------------------+---------------------+-------------+
    | Value |    |   Traffic Type   |   Access Category   | Designation |
@@ -300,22 +259,31 @@ Internet-Draft                 RTCWeb QoS                   October 2012
 
 8.  W3C API Implications
 
-   To work with this proposal, the W3C specification would need to
-   provide a way to specify the importance of media and data streams.
+   To work with this proposal, the W3C specification SHOULD provide a
+   way to specify the importance of media and data streams.
 
-   The W3C API should also provide a way for the application to find out
+   The W3C API SHOULD also provide a way for the application to find out
    the source and destination IP and ports of any flow as well as the
    DSCP value or other markings in use for that flow.  The JavaScript
    application can then communicate this to a web service that may
    install a particular policy for that flow.
 
-   [Editor's Note: the idea of bundling applications/media needs to be 
-                   further explored.]
+   The W3C API SHOULD NOT provide a way for the JavaScript to
+   arbitrarily set the marketing to any value of the JavaScript choosing
+   as this reduces the security provided by the browser knowing the
+   media type.
+
+
+
+
+Dhesikan, et al.          Expires May 21, 2013                  [Page 5]
+
+Internet-Draft                 RTCWeb QoS                  November 2012
 
 
 9.  Security Considerations
 
-   TODO - discuss implications of what browser can set and what 
+   TODO - discuss implications of what browser can set and what
    JavaScript can set
 
 
@@ -331,11 +299,6 @@ Internet-Draft                 RTCWeb QoS                   October 2012
    chairs when it became a WG version.  Thanks for hints on code to do
    this from Paolo Severini, Jim Hasselbrook, Joe Marcus, and Erik
    Nordmark.
-
-
-Dhesikan, et al.         Expires April 15, 2013                 [Page 6]
- 
-Internet-Draft                 RTCWeb QoS                   October 2012
 
 
 12.  Appendix: Code Hints
@@ -366,6 +329,14 @@ Internet-Draft                 RTCWeb QoS                   October 2012
    Example test program:
 
  #include <sys/types.h>
+
+
+
+Dhesikan, et al.          Expires May 21, 2013                  [Page 6]
+
+Internet-Draft                 RTCWeb QoS                  November 2012
+
+
  #include <sys/socket.h>
  #include <netdb.h>
  #include <netinet/in.h>
@@ -386,14 +357,6 @@ Internet-Draft                 RTCWeb QoS                   October 2012
     struct sockaddr *local_addr = NULL;
     struct sockaddr_in sockin, host;
     int tos = 0x60; /* CS3 */
-
-
-
-Dhesikan, et al.         Expires April 15, 2013                 [Page 7]
- 
-Internet-Draft                 RTCWeb QoS                   October 2012
-
-
     socklen_t socksiz = 0;
     char *buffer = NULL;
 
@@ -423,6 +386,13 @@ Internet-Draft                 RTCWeb QoS                   October 2012
        exit(-1);
     }
 
+
+
+Dhesikan, et al.          Expires May 21, 2013                  [Page 7]
+
+Internet-Draft                 RTCWeb QoS                  November 2012
+
+
     buffer = (char *) malloc(strlen(MSG) + 1);
     if ( buffer == NULL ) {
        fprintf(stderr,"Error allocating memory: %s\n", strerror(errno));
@@ -443,13 +413,6 @@ Internet-Draft                 RTCWeb QoS                   October 2012
        exit(-1);
     }
 
-
-
-Dhesikan, et al.         Expires April 15, 2013                 [Page 8]
- 
-Internet-Draft                 RTCWeb QoS                   October 2012
-
-
     free(buffer); buffer=NULL;
     close(sock); sock=-1;
 
@@ -458,28 +421,37 @@ Internet-Draft                 RTCWeb QoS                   October 2012
 
 
 
-13.  Normative References
+13.  References
 
-   [1]  Babiarz, J., Chan, K., and F. Baker, "Configuration Guidelines
+13.1.  Normative References
+
+   [1]  Bradner, S., "Key words for use in RFCs to Indicate Requirement
+        Levels", BCP 14, RFC 2119, March 1997.
+
+   [2]  Babiarz, J., Chan, K., and F. Baker, "Configuration Guidelines
         for DiffServ Service Classes", RFC 4594, August 2006.
 
-   [2]  Davie, B., Charny, A., Bennet, J., Benson, K., Le Boudec, J.,
+   [3]  Davie, B., Charny, A., Bennet, J., Benson, K., Le Boudec, J.,
         Courtney, W., Davari, S., Firoiu, V., and D. Stiliadis, "An
         Expedited Forwarding PHB (Per-Hop Behavior)", RFC 3246,
         March 2002.
 
-   [3]  Nichols, K., Blake, S., Baker, F., and D. Black, "Definition of
+   [4]  Nichols, K., Blake, S., Baker, F., and D. Black, "Definition of
         the Differentiated Services Field (DS Field) in the IPv4 and
         IPv6 Headers", RFC 2474, December 1998.
 
-   [4]  Heinanen, J., Baker, F., Weiss, W., and J. Wroclawski, "Assured
+   [5]  Heinanen, J., Baker, F., Weiss, W., and J. Wroclawski, "Assured
+
+
+
+Dhesikan, et al.          Expires May 21, 2013                  [Page 8]
+
+Internet-Draft                 RTCWeb QoS                  November 2012
+
+
         Forwarding PHB Group", RFC 2597, June 1999.
 
-   [5]  Bradner, S., "Key words for use in RFCs to Indicate Requirement
-        Levels", BCP 14, RFC 2119, March 1997.
-
-   [6]  Polk, J., Dhesikan, S., "The Session Description Protocol (SDP)
-        'trafficclass' Attribute", "work in progress", July 2012
+13.2.  Informative References
 
 
 Authors' Addresses
@@ -500,11 +472,6 @@ Authors' Addresses
    Cisco
 
    Email: paulej@packetizer.com
-
-
-Dhesikan, et al.         Expires April 15, 2013                 [Page 9]
- 
-Internet-Draft                 RTCWeb QoS                   October 2012
 
 
    James Polk
@@ -533,29 +500,5 @@ Internet-Draft                 RTCWeb QoS                   October 2012
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Dhesikan, et al.         Expires April 17, 2013                [Page 10]
+Dhesikan, et al.          Expires May 21, 2013                  [Page 9]
+
