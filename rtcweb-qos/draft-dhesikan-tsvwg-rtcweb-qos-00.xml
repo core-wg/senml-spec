@@ -1,0 +1,957 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+<?rfc toc="no"?>
+<?rfc tocompact="yes"?>
+<?rfc tocdepth="3"?>
+<?rfc tocindent="yes"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes"?>
+<?rfc comments="yes"?>
+<?rfc inline="yes"?>
+<?rfc compact="yes"?>
+<?rfc subcompact="yes"?>
+<rfc category="std" docName="draft-dhesikan-tsvwg-rtcweb-qos-00"
+     ipr="trust200902">
+  <front>
+    <title abbrev="RTCWeb QoS">DSCP and other packet markings for RTCWeb
+    QoS</title>
+
+    <author fullname="Subha Dhesikan" initials="S." surname="Dhesikan">
+      <organization>Cisco</organization>
+
+      <address>
+        <email>sdhesika@cisco.com</email>
+      </address>
+    </author>
+
+    <author fullname="Dan Druta" initials="D." role="editor" surname="Druta">
+      <organization>ATT</organization>
+
+      <address>
+        <email>dd5826@att.com</email>
+      </address>
+    </author>
+
+    <!--
+   <author fullname="Cullen Jennings" initials="C."
+    surname="Jennings">
+      <organization>Cisco</organization>
+      <address>
+        <email>fluffy@cisco.com</email>
+      </address>
+    </author>
+-->
+
+    <author fullname="Paul Jones" initials="P." surname="Jones">
+      <organization>Cisco</organization>
+
+      <address>
+        <email>paulej@packetizer.com</email>
+      </address>
+    </author>
+
+    <author fullname="James Polk" initials="J." surname="Polk">
+      <organization>Cisco</organization>
+
+      <address>
+        <email>jmpolk@cisco.com</email>
+      </address>
+    </author>
+
+    <date day="17" month="November" year="2012" />
+
+    <abstract>
+      <t>Many networks, such as service provider and enterprise networks, can
+      provide per packet treatments based on Differentiated Services Code
+      Points (DSCP) on a per hop basis. This document provides the recommended
+      DSCP values for browsers to use for various classes of traffic. </t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section title="Introduction">
+      <t> Differentiated Services Code Points (DSCP)<xref target="RFC2474" />
+      style packet marking can help provide QoS in some environments. There are
+      many use cases where such marking does not help, but it seldom makes
+      things worse if packets are marked appropriately. In other words, when
+      attempting to avoid congestion by marking certain traffic flows, say all
+      audio or all audio and video, marking too many audio and/or video flows
+      for a given network's capacity can prevent desirable results. Either too
+      much other traffic will be starved, or there is not enough capacity for
+      the preferentially marked packets (i.e., audio and/or video).</t>
+
+      <t>This draft proposes how a browser and other VoIP applications can
+      mark packets. This draft does not contradict or redefine any advice from
+      previous IETF RFCs but simply provides a simple set of recommendations
+      for implementors based on the previous RFCs.</t>
+
+      <t>There are some environments where priority markings frequently help.
+      These include:</t>
+
+      <t>1. If the congested link is the broadband uplink in a Cable or DSL
+      scenario, often residential routers/NAT support preferential treatment
+      based on DSCP.</t>
+
+      <t>2. If the congested link is a local WiFi network, marking may
+      help.</t>
+
+      <t>3. In some cellular style deployments, markings may help in cases
+      where the network does not remove them.</t>
+
+      <t>Traditionally DSCP values have been thought of as being site
+      specific, with each site selecting its own code points for each QoS
+      level. However in the RTCWeb use cases, the browsers need to set them to
+      something when there is no site specific information. This document
+      describes a reasonable default set of DSCP code point values drawn from
+      existing RFCs and common usage. These code points are solely defaults.
+      Future drafts may define mechanisms for site specific mappings to
+      override the values provided in this draft.</t>
+
+      <t>This draft defines some inputs that the browser can look at to
+      determine how to set the various packet markings and defines the a
+      mapping from abstract QoS policies (media type, priority level) to those
+      packet markings.</t>
+    </section>
+
+    <section title="Relation to Other Standards">
+      <t>This specification does not change or override the advice in any
+      other standards about setting packet markings. It simply provides a
+      non-normative summary of them and provides the context of how they
+      relate into the RTCWeb context. This document also specifies the
+      requirements for the W3C WebRTC API to understand what it needs to
+      control, and how the control splits between things the JavaScript
+      application running in the browser can control and things the browser
+      needs to control. In some cases, such as DSCP where the normative RFC
+      leaves open multiple options to choose from, this clarifies which choice
+      should be used in the RTCWeb context.</t>
+    </section>
+
+    <section title="Terminology">
+      <t>The key words "MUST", "MUST NOT", "SHOULD", "SHOULD NOT", and "MAY"
+      in this document are to be interpreted as described in <xref
+      target="RFC2119" />.</t>
+    </section>
+
+    <section title="Inputs">
+      <t>The first input is the type of the media. The browser provides this
+      input as it knows if the media is audio, video, or data. In this
+      specification, both interactive and streaming media is included. They
+      are treated in different categories as their QoS requirements are
+      slightly different. The second input is the relative treatment of the
+      stream within that session. Many applications have multiple video
+      streams and often some are more important than others. JavaScript
+      applications can tell the browser whether a particular media stream is
+      high, medium, or low importance to the application.</t>
+    </section>
+
+    <section title="DSCP Mappings">
+      <t>Below is a table of DSCP markings for each media type RTCWeb is
+      interested in. These DSCPs for each media type listed are a reasonable
+      default set of code point values taken from <xref target="RFC4594" />. A
+      web browser SHOULD use these values to mark the appropriate media
+      packets. More information on EF can be found in <xref target="RFC3246"
+      />.  More information on AF can be found in <xref target="RFC2597"
+      />. </t>
+
+      <texttable anchor="table-dscp">
+        <ttcol align="left">Media Type</ttcol>
+
+        <ttcol align="center">Low</ttcol>
+
+        <ttcol align="center">Medium</ttcol>
+
+        <ttcol align="center">High</ttcol>
+
+        <c>Audio</c>
+
+        <c>46 (EF)</c>
+
+        <c>46 (EF)</c>
+
+        <c>46 (EF)</c>
+
+        <c>Interactive Video</c>
+
+        <c>38 (AF43)</c>
+
+        <c>36 (AF42)</c>
+
+        <c>34 (AF41)</c>
+
+        <c>Non-Interactive Video</c>
+
+        <c>26 (AF33)</c>
+
+        <c>28 (AF32)</c>
+
+        <c>30 (AF31)</c>
+
+        <c>Data</c>
+
+        <c>8 (CS1)</c>
+
+        <c>0 (BE)</c>
+
+        <c>10 (AF11)</c>
+      </texttable>
+
+      <t></t>
+    </section>
+
+    <section title="QCI Mapping">
+      <texttable anchor="table-qci">
+        <ttcol align="left">Media Type</ttcol>
+
+        <ttcol align="center">Low</ttcol>
+
+        <ttcol align="center">Medium</ttcol>
+
+        <ttcol align="center">High</ttcol>
+
+        <c>Audio</c>
+
+        <c>1</c>
+
+        <c>1</c>
+
+        <c>1</c>
+
+        <c>Interactive Video</c>
+
+        <c>2</c>
+
+        <c>2</c>
+
+        <c>2</c>
+
+        <c>Non-Interactive Video</c>
+
+        <c>8</c>
+
+        <c>6</c>
+
+        <c>4</c>
+
+        <c>Data</c>
+
+        <c>9</c>
+
+        <c>9</c>
+
+        <c>3</c>
+      </texttable>
+
+      <t>This corresponds to the mapping provided in TODO REF which are: QCI
+      values (LTE)</t>
+
+      <texttable anchor="table-qci-ref">
+        <ttcol align="left">Value</ttcol>
+
+        <ttcol align="center"></ttcol>
+
+        <ttcol align="center"></ttcol>
+
+        <ttcol align="center">Use</ttcol>
+
+        <c>1</c>
+
+        <c>GBR</c>
+
+        <c>2</c>
+
+        <c>Interactive Voice</c>
+
+        <c>2</c>
+
+        <c>GBR</c>
+
+        <c>4</c>
+
+        <c>Interactive Video</c>
+
+        <c>3</c>
+
+        <c>GBR</c>
+
+        <c>5</c>
+
+        <c>Non-Interactive Video</c>
+
+        <c>4</c>
+
+        <c>GBR</c>
+
+        <c>3</c>
+
+        <c>Real Time Gaming</c>
+
+        <c>5</c>
+
+        <c>Non-BG</c>
+
+        <c>R 1</c>
+
+        <c>IMS Signaling</c>
+
+        <c>6</c>
+
+        <c>Non-BG</c>
+
+        <c>R 7</c>
+
+        <c>interactive Voice, video, games</c>
+
+        <c>7-9</c>
+
+        <c>Non-BG</c>
+
+        <c>R 6</c>
+
+        <c>non interactive video / TCP web, email, / Platinum vs gold user</c>
+      </texttable>
+    </section>
+
+    <section title="WiFI Mapping">
+      <texttable anchor="table-wifi">
+        <ttcol align="left">Media Type</ttcol>
+
+        <ttcol align="center">Low</ttcol>
+
+        <ttcol align="center">Medium</ttcol>
+
+        <ttcol align="center">High</ttcol>
+
+        <c>Audio</c>
+
+        <c>6</c>
+
+        <c>6</c>
+
+        <c>6</c>
+
+        <c>Interactive Video</c>
+
+        <c>5</c>
+
+        <c>5</c>
+
+        <c>5</c>
+
+        <c>Non-Interactive Video</c>
+
+        <c>4</c>
+
+        <c>4</c>
+
+        <c>4</c>
+
+        <c>Data</c>
+
+        <c>1</c>
+
+        <c>0</c>
+
+        <c>3</c>
+      </texttable>
+
+      <t>This corresponds to the mappings from TODO REF of</t>
+
+      <texttable anchor="table-wifi-ref">
+        <ttcol align="left">Value</ttcol>
+
+        <ttcol align="center"></ttcol>
+
+        <ttcol align="center">Traffic Type</ttcol>
+
+        <ttcol align="center">Access Category (AC)</ttcol>
+
+        <ttcol align="center">Designation</ttcol>
+
+        <c>1</c>
+
+        <c>BK</c>
+
+        <c>Background</c>
+
+        <c>AC_BK</c>
+
+        <c>Background</c>
+
+        <c>2</c>
+
+        <c>-</c>
+
+        <c>(spare)</c>
+
+        <c>AC_BK</c>
+
+        <c>Background</c>
+
+        <c>0</c>
+
+        <c>BE</c>
+
+        <c>Best Effort</c>
+
+        <c>AC_BE</c>
+
+        <c>Best Effort</c>
+
+        <c>3</c>
+
+        <c>EE</c>
+
+        <c>Excellent Effort</c>
+
+        <c>AC_BE</c>
+
+        <c>Best Effort</c>
+
+        <c>4</c>
+
+        <c>CL</c>
+
+        <c>Controlled Load</c>
+
+        <c>AC_VI</c>
+
+        <c>Video</c>
+
+        <c>5</c>
+
+        <c>VI</c>
+
+        <c>Video</c>
+
+        <c>AC_VI</c>
+
+        <c>Video</c>
+
+        <c>6</c>
+
+        <c>VO</c>
+
+        <c>Voice</c>
+
+        <c>AC_VO</c>
+
+        <c>Voice</c>
+
+        <c>7</c>
+
+        <c>NC</c>
+
+        <c>Network Control</c>
+
+        <c>AC_VO</c>
+
+        <c>Voice</c>
+      </texttable>
+    </section>
+
+    <section title="W3C API Implications">
+      <t>To work with this proposal, the W3C specification SHOULD provide a
+      way to specify the importance of media and data streams.</t>
+
+      <t>The W3C API SHOULD also provide a way for the application to find out
+      the source and destination IP and ports of any flow as well as the DSCP
+      value or other markings in use for that flow. The JavaScript application
+      can then communicate this to a web service that may install a particular
+      policy for that flow.</t>
+
+      <t>The W3C API SHOULD NOT provide a way for the JavaScript to
+      arbitrarily set the marketing to any value of the JavaScript choosing as
+      this reduces the security provided by the browser knowing the media
+      type.</t>
+    </section>
+
+    <section title="Security Considerations">
+      <t>TODO - discuss implications of what browser can set and what
+      JavaScript can set</t>
+    </section>
+
+    <section title="IANA Considerations">
+      <t>This specification does not require any actions from IANA.</t>
+    </section>
+
+   <section title="Downward References">
+      <t>This specification contains a downwards reference to <xref
+      target="RFC4594"/> however the parts of that RFC used by this
+      specificaiton are suffenteintly stable for this donward reference.</t>
+    </section>
+
+    <section title="Acknowledgements">
+      <t>Cullen Jennings was one of the authors of this text in the original
+      individual submission but was unceremoniously kicked off by the chairs
+      when it became a WG version. Thanks for hints on code to do this from
+      Paolo Severini, Jim Hasselbrook, Joe Marcus, and Erik Nordmark.</t>
+    </section>
+
+   <section title="Document History">
+      <t>Note to RFC Editor: Please remove this section.</t>
+
+      <t> This document was originally an individual submission in RTCWeb
+      WG. The RTCWeb working group selected it to be become a WG document. Later
+      the transport ADs requested that this be moved to the TSVWG WG as that
+      seemed to be a better match. This document is now being submitted as
+      individual submission to the TSVWG with the hope that WG will select it as
+      a WG draft and move it forward to an RFC. </t>
+
+    </section>
+
+
+    <section title="Appendix: Code Hints ">
+      <t>On windows setting the source interface works but BSD, OSX, Linux use
+      weak end-system model and will route out different interface if that
+      looks like a better route. (TODO - Can someone verify this with specific
+      versions?)</t>
+
+      <t>In windows you might be able to tell something about priority of an
+      interface for ICE purposes with WlanQueryInterface or GetIfTable.</t>
+
+      <t>The specific mechanisms required to set DSCP code points depend on
+      the application platform.</t>
+
+      <t>In windows, setting the DSCP is not easy. See Knowledge Base Article
+      KB248611. TODO - add more information about what can be done for
+      windows.</t>
+
+      <t>For most unix variants, the following program can set DSCP.</t>
+
+      <t>TODO - make this work in V6. For v6 have a look at IPv6_TCLASS or
+      better the tclass part of sin6_flowid for IPv6</t>
+
+      <t>TODO - Can someone test and report back results of program in iOS,
+      Android, Linux, OSX, BSD.</t>
+
+      <t>Example test program:</t>
+
+      <figure>
+        <artwork><![CDATA[
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <unistd.h>
+
+
+#define MSG "Hello, World!"
+
+
+int
+main(void) {
+   int sock = -1;
+   struct sockaddr *local_addr = NULL;
+   struct sockaddr_in sockin, host;
+   int tos = 0x60; /* CS3 */
+   socklen_t socksiz = 0;
+   char *buffer = NULL;
+
+   sock = socket(AF_INET, SOCK_DGRAM, 0);
+   if (sock < 0) {
+      fprintf(stderr,"Error: %s\n", strerror(errno));
+      exit(-1);
+   }
+
+   memset(&sockin, 0, sizeof(sockin));
+   sockin.sin_family = PF_INET;
+   sockin.sin_addr.s_addr = inet_addr("11.1.1.1");
+   socksiz = sizeof(sockin);
+
+   local_addr = (struct sockaddr *) &sockin;
+
+   /* Set ToS/DSCP */
+   if (setsockopt(sock, IPPROTO_IP, IP_TOS,  &tos,
+                  sizeof(tos)) < 0) {
+      fprintf(stderr,"Error setting TOS: %s\n", strerror(errno));
+   }
+
+   /* Bind to a specific local address */
+   if (bind(sock, local_addr, socksiz) < 0) {
+      fprintf(stderr,"Error binding to socket: %s\n", strerror(errno));
+      close(sock); sock=-1;
+      exit(-1);
+   }
+
+   buffer = (char *) malloc(strlen(MSG) + 1);
+   if ( buffer == NULL ) {
+      fprintf(stderr,"Error allocating memory: %s\n", strerror(errno));
+      close( sock ); sock=-1;
+      exit(-1);
+   }
+   strlcpy(buffer, MSG, strlen(MSG) + 1);
+   memset(&host, 0, sizeof(host));
+   host.sin_family = PF_INET;
+   host.sin_addr.s_addr = inet_addr("10.1.1.1");
+   host.sin_port = htons(12345);
+
+   if (sendto(sock, buffer, strlen(buffer), 0,
+              (struct sockaddr *) &host, sizeof(host)) < 0) {
+      fprintf(stderr,"Error sending message: %s\n", strerror(errno));
+      close(sock); sock=-1;
+      free(buffer); buffer=NULL;
+      exit(-1);
+   }
+
+   free(buffer); buffer=NULL;
+   close(sock); sock=-1;
+
+   return 0;
+}
+
+]]></artwork>
+      </figure>
+    </section>
+  </middle>
+
+  <back>
+    <references title="Normative References">
+      <reference anchor="RFC4594">
+        <front>
+          <title>Configuration Guidelines for DiffServ Service Classes</title>
+
+          <author fullname="J. Babiarz" initials="J." surname="Babiarz">
+            <organization></organization>
+          </author>
+
+          <author fullname="K. Chan" initials="K." surname="Chan">
+            <organization></organization>
+          </author>
+
+          <author fullname="F. Baker" initials="F." surname="Baker">
+            <organization></organization>
+          </author>
+
+          <date month="August" year="2006" />
+        </front>
+
+        <seriesInfo name="RFC" value="4594" />
+
+        <format octets="144044"
+                target="http://www.rfc-editor.org/rfc/rfc4594.txt" type="TXT" />
+      </reference>
+
+ 
+      <reference anchor="RFC2119">
+        <front>
+          <title abbrev="RFC Key Words">Key words for use in RFCs to Indicate
+          Requirement Levels</title>
+
+          <author fullname="Scott Bradner" initials="S." surname="Bradner">
+            <organization>Harvard University</organization>
+
+            <address>
+              <postal>
+                <street>1350 Mass. Ave.</street>
+
+                <street>Cambridge</street>
+
+                <street>MA 02138</street>
+              </postal>
+
+              <phone>- +1 617 495 3864</phone>
+
+              <email>sob@harvard.edu</email>
+            </address>
+          </author>
+
+          <date month="March" year="1997" />
+
+          <area>General</area>
+
+          <keyword>keyword</keyword>
+        </front>
+
+        <seriesInfo name="BCP" value="14" />
+
+        <seriesInfo name="RFC" value="2119" />
+
+        <format octets="4723"
+                target="http://www.rfc-editor.org/rfc/rfc2119.txt" type="TXT" />
+
+        <format octets="17491"
+                target="http://xml.resource.org/public/rfc/html/rfc2119.html"
+                type="HTML" />
+
+        <format octets="5777"
+                target="http://xml.resource.org/public/rfc/xml/rfc2119.xml"
+                type="XML" />
+      </reference>
+    </references>
+
+    <references title="Informative References">
+     
+     <reference anchor="RFC3246">
+        <front>
+          <title>An Expedited Forwarding PHB (Per-Hop Behavior)</title>
+
+          <author fullname="B. Davie" initials="B." surname="Davie">
+            <organization></organization>
+          </author>
+
+          <author fullname="A. Charny" initials="A." surname="Charny">
+            <organization></organization>
+          </author>
+
+          <author fullname="J.C.R. Bennet" initials="J.C.R." surname="Bennet">
+            <organization></organization>
+          </author>
+
+          <author fullname="K. Benson" initials="K." surname="Benson">
+            <organization></organization>
+          </author>
+
+          <author fullname="J.Y. Le Boudec" initials="J.Y."
+                  surname="Le Boudec">
+            <organization></organization>
+          </author>
+
+          <author fullname="W. Courtney" initials="W." surname="Courtney">
+            <organization></organization>
+          </author>
+
+          <author fullname="S. Davari" initials="S." surname="Davari">
+            <organization></organization>
+          </author>
+
+          <author fullname="V. Firoiu" initials="V." surname="Firoiu">
+            <organization></organization>
+          </author>
+
+          <author fullname="D. Stiliadis" initials="D." surname="Stiliadis">
+            <organization></organization>
+          </author>
+
+          <date month="March" year="2002" />
+        </front>
+
+        <seriesInfo name="RFC" value="3246" />
+
+        <format octets="33896"
+                target="http://www.rfc-editor.org/rfc/rfc3246.txt" type="TXT" />
+      </reference>
+
+      <reference anchor="RFC2474">
+        <front>
+          <title abbrev="Differentiated Services Field">Definition of the
+          Differentiated Services Field (DS Field) in the IPv4 and IPv6
+          Headers</title>
+
+          <author fullname="Kathleen Nichols" initials="K." surname="Nichols">
+            <organization>Cisco Systems</organization>
+
+            <address>
+              <postal>
+                <street>170 West Tasman Drive</street>
+
+                <city>San Jose</city>
+
+                <region>CA</region>
+
+                <code>95134-1706</code>
+
+                <country>USA</country>
+              </postal>
+
+              <phone>+1 408 525 4857</phone>
+
+              <email>kmn@cisco.com</email>
+            </address>
+          </author>
+
+          <author fullname="Steven Blake" initials="S." surname="Blake">
+            <organization>Torrent Networking Technologies</organization>
+
+            <address>
+              <postal>
+                <street>3000 Aerial Center</street>
+
+                <city>Morrisville</city>
+
+                <region>NC</region>
+
+                <code>27560</code>
+
+                <country>USA</country>
+              </postal>
+
+              <phone>+1 919 468 8466 x232</phone>
+
+              <email>slblake@torrentnet.com</email>
+            </address>
+          </author>
+
+          <author fullname="Fred Baker" initials="F." surname="Baker">
+            <organization>Cisco Systems</organization>
+
+            <address>
+              <postal>
+                <street>519 Lado Drive</street>
+
+                <city>Santa Barbara</city>
+
+                <region>CA</region>
+
+                <code>93111</code>
+
+                <country>USA</country>
+              </postal>
+
+              <phone>+1 408 526 4257</phone>
+
+              <email>fred@cisco.com</email>
+            </address>
+          </author>
+
+          <author fullname="David L. Black" initials="D.L." surname="Black">
+            <organization>EMC Corporation</organization>
+
+            <address>
+              <postal>
+                <street>35 Parkwood Drive</street>
+
+                <city>Hopkinton</city>
+
+                <region>MA</region>
+
+                <code>01748</code>
+
+                <country>USA</country>
+              </postal>
+
+              <phone>+1 508 435 1000 x76140</phone>
+
+              <email>black_david@emc.com</email>
+            </address>
+          </author>
+
+          <date month="December" year="1998" />
+
+          <area>Internet</area>
+
+          <keyword>internet protocol version 4</keyword>
+
+          <keyword>IPv6</keyword>
+
+          <keyword>IPv4</keyword>
+
+          <keyword>internet protocol version 6</keyword>
+
+          <keyword>type of service</keyword>
+        </front>
+
+        <seriesInfo name="RFC" value="2474" />
+
+        <format octets="50576"
+                target="http://www.rfc-editor.org/rfc/rfc2474.txt" type="TXT" />
+
+        <format octets="67719"
+                target="http://xml.resource.org/public/rfc/html/rfc2474.html"
+                type="HTML" />
+
+        <format octets="62259"
+                target="http://xml.resource.org/public/rfc/xml/rfc2474.xml"
+                type="XML" />
+      </reference>
+
+      <reference anchor="RFC2597">
+        <front>
+          <title>Assured Forwarding PHB Group</title>
+
+          <author fullname="Juha Heinanen" initials="J." surname="Heinanen">
+            <organization>Telia Finland</organization>
+
+            <address>
+              <postal>
+                <street>Myyrmaentie 2</street>
+
+                <city>Vantaa</city>
+
+                <code>01600</code>
+
+                <country>FI</country>
+              </postal>
+
+              <email>jh@telia.fi</email>
+            </address>
+          </author>
+
+          <author fullname="Fred Baker" initials="F." surname="Baker">
+            <organization>Cisco Systems</organization>
+
+            <address>
+              <postal>
+                <street>519 Lado Drive</street>
+
+                <city>Santa Barbara</city>
+
+                <region>CA</region>
+
+                <code>93111</code>
+
+                <country>US</country>
+              </postal>
+
+              <email>fred@cisco.com</email>
+            </address>
+          </author>
+
+          <author fullname="Walter Weiss" initials="W." surname="Weiss">
+            <organization>Lucent Technologies</organization>
+
+            <address>
+              <postal>
+                <street>300 Baker Avenue</street>
+
+                <street>Suite 100</street>
+
+                <city>Concord</city>
+
+                <region>MA</region>
+
+                <code>01742-2168</code>
+
+                <country>US</country>
+              </postal>
+
+              <email>wweiss@lucent.com</email>
+            </address>
+          </author>
+
+          <author fullname="J. Wroclawski" initials="J." surname="Wroclawski">
+            <organization>MIT Laboratory for Computer Science</organization>
+
+            <address>
+              <postal>
+                <street>545 Technology Square</street>
+
+                <city>Cambridge</city>
+
+                <region>MA</region>
+
+                <code>02139</code>
+
+                <country>US</country>
+              </postal>
+
+              <email>jtw@lcs.mit.edu</email>
+            </address>
+          </author>
+
+          <date month="June" year="1999" />
+        </front>
+
+        <seriesInfo name="RFC" value="2597" />
+
+        <format octets="24068"
+                target="http://www.rfc-editor.org/rfc/rfc2597.txt" type="TXT" />
+      </reference>
+
+    </references>
+  </back>
+</rfc>

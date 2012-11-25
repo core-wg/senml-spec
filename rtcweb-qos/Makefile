@@ -8,10 +8,10 @@ DIF  := $(patsubst %.xml,%.diff.html,$(SRC))
 PDF  := $(patsubst %.xml,%.pdf,$(SRC))
 
 #all: $(HTML) $(TXT) $(DIF) $(PDF)
-all: $(HTML) $(TXT) $(DIF)
+all: $(HTML) $(TXT) $(DIF) testProg
 
 clean:
-	rm *~ draft*.html draft*pdf draft-*txt
+	rm *~ draft*.html draft*pdf draft-*txt testProg 
 
 #%.html: %.xml
 #	xsltproc -o $@ rfc2629.xslt $^
@@ -28,3 +28,6 @@ clean:
 %.pdf: %.html
 	wkpdf -p letter -s $^ -o $@
 
+
+testProg: test.c
+	cc -o testProg test.c 

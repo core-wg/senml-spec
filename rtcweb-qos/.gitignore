@@ -1,3 +1,4 @@
+testProg
 *~
 draft*.html
 draft*.txt
@@ -5,4 +6,6 @@ draft*.pdf
 foo
 bar
 old
+foo.html
+bar.html
 
