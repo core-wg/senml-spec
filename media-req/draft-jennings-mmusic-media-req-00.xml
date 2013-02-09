@@ -15,7 +15,16 @@
   <front>
     <title abbrev="Media Requirements">Requirements from various WG for MMUSIC</title>
 
-   
+    <author fullname="Eric Rescorla" initials="E.K." surname="Rescorla">
+      <organization> Mozilla </organization>
+
+      <address>
+        <phone>+1 650 678 2350</phone>
+
+        <email>ekr@rtfm.com</email>
+      </address>
+    </author>
+
     <author fullname="Cullen Jennings" initials="C." surname="Jennings">
       <organization>Cisco</organization>
 
@@ -37,6 +46,25 @@
       </address>
     </author>
 
+    <author fullname="Justin Uberti" initials="J." surname="Uberti">
+      <organization>Google</organization>
+
+      <address>
+        <postal>
+          <street>747 6th Ave S</street>
+
+          <city>Kirkland</city>
+
+          <region>WA</region>
+
+          <code>98033</code>
+
+          <country>USA</country>
+        </postal>
+
+        <email>justin@uberti.name</email>
+      </address>
+    </author>
 
     <date day="9" month="February" year="2013" />
 
@@ -79,38 +107,44 @@
 
       <t>High Priority Requirements:<list style="numbers">
           
-	<t>Lots of media flows, but only a few UDP transports flows
+	<t> Support lots of media flows, but use only a few UDP
+	transports flows. For example support audio and multiple
+	cameras using only one or two UDP ports.
 	</t>
 
 	<t>Supports existing and future SIP devices with a single
-	offer/answer </t>
+	offer/answer exchange. </t>
      </list></t>
  
    <t>Other Requirements:<list style="numbers">
    
+	<t>Need a uniform way to deal with new SDP parameters. </t>
+
 	<t>Add/remove one way video flows with minimal chance of glare
 	for RTCWeb applications that know they are working with
-	another side that support this capability </t>
+	another side that support this capability. </t>
 
-	<t>Negotiation when both ends have different capabilities </t>
+	<t>Negotiation when both ends have different capabilities. </t>
 
 	<t>No knowledge of capabilities of the other side before
-	generating the SDP offer </t>
+	generating the SDP offer. </t>
 
-	<t>Need uniform way to deal with new SDP parameters </t>
-
-	<t>Get to small number of UPD transport flow within one
-	signaling roundtrip in cases where both sides implement all
-	the WebRTC requirement </t>
+	<t>Can reduce down to a small number of UDP transport flow within one
+	offer/answer signaling roundtrip in cases where both sides implement all
+	the WebRTC requirement. </t>
 
 	<t>Can set parameters such as resolution, and perhaps
-	bandwidth, for each RTCWeb Track </t>
+	bandwidth, independently for each RTCWeb Track. </t>
 
-	<t>Be able to identify the RTCWeb tracks concept with a stable
-	ID </t>
+	<t>Be able to identify the RTCWeb tracks with an identifier
+	that is stable over the duration of the session. More
+	information can be found in <xref
+	target="I-D.alvestrand-mmusic-msid" />. </t>
 
-	<t>Allow different sources (cameras) to use different codecs
-	</t>
+	<t>Allow different sources (E.g. cameras) to use different
+	codecs. For example, if one camera had hardware encoders for
+	VP8 while another had encoders for H.264, the device may wish
+	to negotiate different codecs. </t>
 
       </list></t>
     </section>
@@ -204,5 +238,29 @@ Requirement Levels</title>
 </reference>
 
     </references>
+   <references title="Informative References">
+
+
+<reference anchor='I-D.alvestrand-mmusic-msid'>
+<front>
+<title>Cross Session Stream Identification in the Session Description Protocol</title>
+
+<author initials='H' surname='Alvestrand' fullname='Harald Alvestrand'>
+    <organization />
+</author>
+
+<date month='December' day='13' year='2012' />
+
+<abstract><t>This document specifies a grouping mechanism for RTP media streams that can be used to specify relations between media streams within different RTP sessions as well as within a single RTP session.  This mechanism is used to signal the association between the RTP concept of SSRC and the WebRTC concept of "media stream" / "media stream track" using SDP signaling.  This document is an input document for discussion.  It should be discussed in the MMUSIC WG list, mmusic@ietf.org.</t></abstract>
+
+</front>
+
+<seriesInfo name='Internet-Draft' value='draft-alvestrand-mmusic-msid-02' />
+<format type='TXT'
+        target='http://www.ietf.org/internet-drafts/draft-alvestrand-mmusic-msid-02.txt' />
+</reference>
+
+    </references>
+
   </back>
 </rfc>
