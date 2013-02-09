@@ -63,10 +63,11 @@
 
 
     <section title="Terminology">
-      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-      "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-      document are to be interpreted as described in <xref
-      target="RFC2119">RFC 2119</xref>. This document generically uses RTP to mean RTP and SRTP.  </t>
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
+      NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
+      "OPTIONAL" in this document are to be interpreted as described
+      in <xref target="RFC2119">RFC 2119</xref>. This document
+      generically uses RTP to mean RTP and SRTP.  </t>
     </section>
 
 
@@ -157,7 +158,8 @@
 <reference anchor='RFC2119'>
 
 <front>
-<title abbrev='RFC Key Words'>Key words for use in RFCs to Indicate Requirement Levels</title>
+<title abbrev='RFC Key Words'>Key words for use in RFCs to Indicate
+Requirement Levels</title>
 <author initials='S.' surname='Bradner' fullname='Scott Bradner'>
 <organization>Harvard University</organization>
 <address>
@@ -174,9 +176,12 @@
 
 <seriesInfo name='BCP' value='14' />
 <seriesInfo name='RFC' value='2119' />
-<format type='TXT' octets='4723' target='http://www.rfc-editor.org/rfc/rfc2119.txt' />
-<format type='HTML' octets='17970' target='http://xml.resource.org/public/rfc/html/rfc2119.html' />
-<format type='XML' octets='5777' target='http://xml.resource.org/public/rfc/xml/rfc2119.xml' />
+<format type='TXT' octets='4723'
+ target='http://www.rfc-editor.org/rfc/rfc2119.txt' />
+<format type='HTML' octets='17970'
+ target='http://xml.resource.org/public/rfc/html/rfc2119.html' />
+<format type='XML' octets='5777'
+ target='http://xml.resource.org/public/rfc/xml/rfc2119.xml' />
 </reference>
 
 
