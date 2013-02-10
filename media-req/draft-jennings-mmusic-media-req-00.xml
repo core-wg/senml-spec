@@ -15,15 +15,6 @@
   <front>
     <title abbrev="Media Requirements">Requirements from various WG for MMUSIC</title>
 
-    <author fullname="Eric Rescorla" initials="E.K." surname="Rescorla">
-      <organization> Mozilla </organization>
-
-      <address>
-        <phone>+1 650 678 2350</phone>
-
-        <email>ekr@rtfm.com</email>
-      </address>
-    </author>
 
     <author fullname="Cullen Jennings" initials="C." surname="Jennings">
       <organization>Cisco</organization>
@@ -66,6 +57,16 @@
       </address>
     </author>
 
+    <author fullname="Eric Rescorla" initials="E.K." surname="Rescorla">
+      <organization> Mozilla </organization>
+
+      <address>
+        <phone>+1 650 678 2350</phone>
+
+        <email>ekr@rtfm.com</email>
+      </address>
+    </author>
+
     <date day="9" month="February" year="2013" />
 
     <abstract>
@@ -101,28 +102,36 @@
 
     <section title="Requirements">
       <t>This section covers the requirements from various WG for
-      setting up up media. Obviously it does not try and cover all the
+      setting up media. Obviously it does not try and cover all the
       requirements but it tries to cover a set that seem relevant to
       decisions around multiplexing onto few UDP ports. </t>
 
       <t>High Priority Requirements:<list style="numbers">
           
-	<t> Support lots of media flows, but use only a few UDP
-	transports flows. For example support audio and multiple
-	cameras using only one or two UDP ports.
+	<t> Support many media flows but minimize the number of
+	transport flows. For instance, all media flows--or perhaps
+        all media flows of a given type--might
+        be multiplexed over a single transport flow.
 	</t>
 
-	<t>Supports existing and future SIP devices with a single
-	offer/answer exchange. </t>
+	<t>Be able to successfully negotiate media with both
+        legacy SIP devices and new devices (whether SIP or
+        RTCWEB) with a single offer/answer exchange.
+        If both endpoints support multiplexed media,
+        then multiplexing should be negotiated. Otherwise,
+        non-multiplexed media should be used.
+        </t>
      </list></t>
  
    <t>Other Requirements:<list style="numbers">
    
-	<t>Need a uniform way to deal with new SDP parameters. </t>
+	<t>Need a uniform way to deal with new SDP parameters. [EKR: ???]</t>
 
-	<t>Add/remove one way video flows with minimal chance of glare
-	for RTCWeb applications that know they are working with
-	another side that support this capability. </t>
+	<t>Two implementations that support muxing should be able to 
+        and or remove one way video flows with either a minimal chance
+        of glare or with simple glare resolution rules.</t>
+
+        <!--  These appear to be redundant with what I rewrote above.
 
 	<t>Negotiation when both ends have different capabilities. </t>
 
@@ -132,19 +141,23 @@
 	<t>Can reduce down to a small number of UDP transport flow within one
 	offer/answer signaling roundtrip in cases where both sides implement all
 	the WebRTC requirement. </t>
+        -->
 
-	<t>Can set parameters such as resolution, and perhaps
-	bandwidth, independently for each RTCWeb Track. </t>
-
-	<t>Be able to identify the RTCWeb tracks with an identifier
-	that is stable over the duration of the session. More
-	information can be found in <xref
-	target="I-D.alvestrand-mmusic-msid" />. </t>
 
 	<t>Allow different sources (E.g. cameras) to use different
 	codecs. For example, if one camera had hardware encoders for
 	VP8 while another had encoders for H.264, the device may wish
 	to negotiate different codecs. </t>
+
+	<t>Be able to to independently set parameters such as resolution
+	bandwidth, independently for each RTCWeb Track, preferably
+        even when they are all muxed over the same transport flow.
+        </t>
+
+	<t>Be able to identify the RTCWeb tracks with an identifier
+	that is stable over the duration of the session. More
+	information can be found in <xref
+	target="I-D.alvestrand-mmusic-msid" />. </t>
 
       </list></t>
     </section>
@@ -157,7 +170,9 @@
 
       <t><list style="numbers">
           
-	<t>Support of non RTP media</t>
+	<t>Support of non RTP media. [EKR: I don't agree with this. Why can't
+        we mux the data channel? It seems like a goal, even if we can't do it,
+        and bundle would let you.]</t>
 
 	<t> Working with SIP proxies or B2BUA that are not compliant
 	with the standards. The reason for this is it is just not
