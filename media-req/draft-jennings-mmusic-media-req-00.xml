@@ -67,7 +67,7 @@
       </address>
     </author>
 
-    <date day="9" month="February" year="2013" />
+    <date day="11" month="February" year="2013" />
 
     <abstract>
       <t>This document outlines some of the requirements driving
@@ -114,29 +114,28 @@
         be multiplexed over a single transport flow.
 	</t>
 
-	<t>Be able to successfully negotiate media with both
-        legacy SIP devices and new devices (whether SIP or
-        RTCWEB) with a single offer/answer exchange.
-        If both endpoints support multiplexed media,
-        then multiplexing should be negotiated. Otherwise,
-        non-multiplexed media should be used.
+	<t>Be able to successfully negotiate media with both legacy
+	SIP devices and new devices (whether SIP or RTCWEB) with a
+	single offer/answer exchange.  If both endpoints support
+	multiplexed media, then multiplexing should be
+	negotiated. Otherwise, non-multiplexed media should be
+	used. In many cases, each endpoints will have no prior knowledge of
+	capabilities of the other endpoint.
         </t>
      </list></t>
  
    <t>Other Requirements:<list style="numbers">
    
-	<t>Need a uniform way to deal with new SDP parameters. [EKR: ???]</t>
-
-	<t>Two implementations that support muxing should be able to 
-        and or remove one way video flows with either a minimal chance
-        of glare or with simple glare resolution rules.</t>
+	<t>Need a uniform way to allow specifications of new SDP
+	parameters to easily explain any implications that multiplexing
+	has on the new parameters in that specification. </t>
 
         <!--  These appear to be redundant with what I rewrote above.
 
 	<t>Negotiation when both ends have different capabilities. </t>
 
 	<t>No knowledge of capabilities of the other side before
-	generating the SDP offer. </t>
+	generating an SDP offer. </t>
 
 	<t>Can reduce down to a small number of UDP transport flow within one
 	offer/answer signaling roundtrip in cases where both sides implement all
@@ -151,13 +150,20 @@
 
 	<t>Be able to to independently set parameters such as resolution
 	bandwidth, independently for each RTCWeb Track, preferably
-        even when they are all muxed over the same transport flow.
+        even when they are all multiplexed over the same transport flow.
         </t>
 
 	<t>Be able to identify the RTCWeb tracks with an identifier
 	that is stable over the duration of the session. More
 	information can be found in <xref
 	target="I-D.alvestrand-mmusic-msid" />. </t>
+
+	<t>For two RTCWeb implementations that both know the other
+	support special signaling for adding and removing one way
+	video flows, an approach that allows adding named video flows
+	with a low chance of glare and remove of named video flows
+	with simple glare resolution rules. </t>
+
 
       </list></t>
     </section>
@@ -170,9 +176,11 @@
 
       <t><list style="numbers">
           
+<!--
 	<t>Support of non RTP media. [EKR: I don't agree with this. Why can't
         we mux the data channel? It seems like a goal, even if we can't do it,
         and bundle would let you.]</t>
+-->
 
 	<t> Working with SIP proxies or B2BUA that are not compliant
 	with the standards. The reason for this is it is just not
