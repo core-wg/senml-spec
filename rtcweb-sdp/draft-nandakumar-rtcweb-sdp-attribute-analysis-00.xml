@@ -131,23 +131,26 @@
     <t>  
       Over the several years, several IETF Working Group documents have extended the base SDP [RFC4566] specification and thus 
       represent a semantic grouping for the attributes thus introduced. The authors believe that a framework based on grouping the SDP
-      attributes per RFC to describe their applicability in the context of RTCWeb serves a better purpose. Hence the following 
-      sections analyzes attributes listed in [IANA_REF] grouped under the IETF document that defines them. 
+      attributes per RFC to describe their applicability in the context of RTCWeb serves a better purpose.
     </t>
     <t>
        Based on the motivations established in the section [SECTION-MOTIVATION], the proposed framework attempts to seggregate the 
-       attributes into one of the following levels.
+       attributes into one of the following categories.
        <list>
-         <t>payload level - Attributes applicable to specific payload type.</t>
-         <t>transport Level - Attributes appplicable to RTP Session(s).</t>
-         <t>source Level - Attributes applicable to each media source.</t>
-         <t>flow Level - Attributes that can be applied to individual media flows.</t> 
-         <t>Media Level - Defines those attributes as applicable to each SDP media stream.</t>
-         <t>Session Level - Attributes that apply to the entire session.</t>         
-         <t>Unknown - Attributes that cannot be easily explained through any of the above.</t>
+         <t>Media Source (MS) - Attributes that could be independently specified per media source.</t>
+         <t>Don't Multiplex (DM) - Attributes that are recommended against session multiplexing.</t>
+         <t>No Change (NC) - Attributes that carry their existing semantics. </t>
+         <t>Repeat (R)  - Attributes that MUST be reported across the media lines if session multiplexing.</t>
        </list>
     </t>
-  
+    <t>
+      The idea behind these categories is to provide recommendations for using the attributes in solving RTCWeb use-cases.
+    </t>  
+    <t>
+      Following sub-sections analyzes attributes listed in [IANA_REF] grouped under the IETF document that defines them. 
+      For each such section, the single-letter acronyms "S", "M" and "B" under the "Current" column specify existing semantics as
+      applicable to either session-level or media-level or both respectively. 
+    </t> 
     <section title="RFC4566">      
      <t>
        RFC4566 defines the Session Description Protocol (SDP) that is intended for describing multimedia sessions for the
@@ -155,19 +158,21 @@
      </t>
       
       <texttable title="RFC4566 Attribute Analysis">
-        <ttcol align='left'>Name</ttcol>
+        <ttcol align='left'>Attr Name</ttcol>
         <ttcol align='left'>Session Mux</ttcol>
-        <ttcol align='left'>category</ttcol>
-        <c>sendrecv,sendonly,recvonly&nbsp;</c><c>Not impacted&nbsp;</c><c>flow&nbsp;</c>
-        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-        <c>bwtype:CT&nbsp;</c><c>Aggregate bandwidth for the conference&nbsp;</c><c>transport&nbsp;</c>
-        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-        <c>bwtype:AS&nbsp;</c><c>Aggregate total of all muxed RTP sessions &nbsp;</c><c>transport&nbsp;</c>
-        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-        <c>cat&nbsp;</c><c>Not impacted&nbsp;</c><c>session&nbsp;</c>
-        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-        <c>ptime&nbsp;</c><c>Not Impacted &nbsp;</c><c>flow&nbsp;</c>
+        <ttcol align='left'>Current</ttcol>
+        <ttcol align='left'>Category</ttcol>
+        <c>sendrecv,sendonly,recvonly&nbsp;</c><c>Not impacted&nbsp;</c><c>B&nbsp;</c><c>MS,&nbsp;NC&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        <c>bwtype:CT&nbsp;</c><c>Aggregate bandwidth for the conference&nbsp;</c><c>S&nbsp;</c><c>NC&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        <c>bwtype:AS&nbsp;</c><c>Aggregate total for all the RTP sessions&nbsp;</c><c>B&nbsp;</c><c>DM&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        <c>cat&nbsp;</c><c>Not impacted&nbsp;</c><c>S&nbsp;</c><c>NC&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        <c>ptime&nbsp;</c><c>Not Impacted &nbsp;</c><c>M&nbsp;</c><c>MS,&nbsp;NC</c>
       </texttable>
+
     </section>
     <section title="RFC4585">      
       <t>
@@ -176,11 +181,13 @@
         efficient feedback-based repai mechanisms to be implemented.
       </t>    
       <texttable title="RFC4585 Attribute Analysis">
-        <ttcol align='left'>Name</ttcol>
+        <ttcol align='left'>Attr Name</ttcol>
         <ttcol align='left'>Session Mux</ttcol>
-        <ttcol align='left'>category</ttcol>
-        <c>rtcp-fb&nbsp;</c><c>Not Impacted&nbsp;</c><c>payload&nbsp;</c>
-        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        <ttcol align='left'>Current</ttcol>
+        <ttcol align='left'>Category</ttcol>
+        <c>rtcp-fb&nbsp;</c><c>Since RTCP feedback are reported per RTP Session,&nbsp;
+                               this attribute should be repeated across m= lines</c><c>M</c><c>R&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
       </texttable>
     </section>
     
@@ -191,13 +198,28 @@
       <texttable title="RFC4586 Attribute Analysis">
         <ttcol align='left'>Name</ttcol>
         <ttcol align='left'>Session Mux</ttcol>
-        <ttcol align='left'>category</ttcol>
-        <c>mid&nbsp;</c><c>Not Impacted&nbsp;</c><c>media,source&nbsp;</c>
-        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-        <c>group&nbsp;</c><c>Not Impacted&nbsp;</c><c>session&nbsp;</c>
-        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        <ttcol align='left'>Current</ttcol>
+        <ttcol align='left'>Category</ttcol>
+        <c>mid:LS&nbsp;</c><c>Complicates sychronization when multiple audio and video lines
+                              are muxed&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
       </texttable>
     </section>
+    
+    <section title="RFC3108">      
+        <t>
+          RFC3108 describes conventions for using the Session Description
+          Protocol (SDP) described  for controlling ATM Bearer Connections, and any associated ATM Adaptation Layer (AAL)
+        </t>    
+        <texttable title="RFC4586 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Category</ttcol>
+          <c>aalType&nbsp;</c><c>Not recommended for legacy interop purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        </texttable>
+     </section>
       
    </section>  
    <section title="IANA Considerations">
