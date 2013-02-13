@@ -10,7 +10,7 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="info" docName="draft-jennings-media-req-00"
+<rfc category="info" docName="draft-jennings-mmusic-media-req-00"
      ipr="noDerivativesTrust200902">
   <front>
     <title abbrev="Media Requirements">Requirements from various WG for MMUSIC</title>
@@ -19,21 +19,20 @@
     <author fullname="Cullen Jennings" initials="C." surname="Jennings">
       <organization>Cisco</organization>
 
-      <address>
+       <address>
         <postal>
-          <street>170 West Tasman Drive</street>
+          <street>400 3rd Avenue SW, Suite 350</street>
 
-          <city>San Jose</city>
+          <city>Calgary</city>
 
-          <region>CA</region>
+          <region>AB</region>
 
-          <code>95134</code>
+          <code>T2P 4H2</code>
 
-          <country>USA</country>
+          <country>Canada</country>
         </postal>
 
-
-        <email>fluffy@cisco.com</email>
+        <email>fluffy@iii.ca</email>
       </address>
     </author>
 
@@ -71,7 +70,7 @@
 
     <abstract>
       <t>This document outlines some of the requirements driving
-      various consideration in the MMUSIC working group to meet the
+      various consideration related to multiplexing in the MMUSIC working group to meet the
       needs of WebRTC, CLUE, and other working groups. </t>
       
       <t> This document is only meant to be used to help drive the
