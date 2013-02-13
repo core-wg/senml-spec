@@ -157,6 +157,11 @@
 	information can be found in <xref
 	target="I-D.alvestrand-mmusic-msid" />. </t>
 
+        <t> Must work for a dual stack client when ICE candidates are used for address family negotiation.</t>
+        
+        <t> Must work when a TURN server is used. </t>
+
+
 <!--
 	<t>For two RTCWeb implementations that both know the other
 	support special signaling for adding and removing one way
@@ -204,7 +209,7 @@
 
 
     <section anchor="Acknowledgements" title="Acknowledgements">
-      <t> Thanks to ...</t>
+      <t> Thanks to text and sugestions from Andy Hutton. </t>
     </section>
 
   </middle>
