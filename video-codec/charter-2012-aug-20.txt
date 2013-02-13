@@ -1,0 +1,195 @@
+
+
+Problem Statement
+
+According to reports from developers of Internet video applications and
+operators of Internet video services, there are no standardized,
+high-quality video codecs that meet all of the following three
+conditions:
+
+1. Are optimized for use in interactive Internet applications.
+
+2. Are published by a recognized standards development organization
+(SDO) and therefore subject to clear change control and IPR disclosure
+rules.
+
+3. Can be widely implemented and easily distributed among application
+developers, service operators, and end users.
+
+There exist codecs that provide high quality encoding of video
+information, but that are not optimized for the actual conditions of the
+Internet; according to reports, this mismatch between design and
+deployment has hindered interoperability of such codecs in interactive
+Internet applications.
+
+There exist codecs that can be widely implemented, but that are not
+standardized under the IPR rules any SDO; according to reports, the
+lack of clarity in their IPR status has hindered adoption of such codecs
+in Internet applications.
+
+There exist codecs that are standardized, but that cannot be widely
+implemented and easily distributed; according to reports, the presence
+of various usage restrictions (e.g., in the form of requirements to pay
+royalty fees, obtain a license, enter into a business agreement, or meet
+other special conditions imposed by a patent holder) has hindered
+adoptions of such codecs in Internet applications.
+
+According to application developers and service operators, a video
+codec that meets both of these conditions would: (1) enable protocol
+designers to more easily specify a mandatory-to-implement codec in
+their protocols and thus improve interoperability; (2) enable
+developers to more easily easily build innovative applications for
+the Internet; (3) enable service operators to more easily deploy
+affordable, high-quality video services on the Internet; and (4)
+enable end users of Internet applications and services to enjoy
+an improved user experience.
+
+Objectives
+
+The goal of this working group is to ensure the existence of a single
+high-quality video codec that can be widely implemented and easily
+distributed among application developers, service operators, and end
+users. At present it appears that ensuring the existence of such a
+codec will require a development effort within the working group.
+
+The core technical considerations for such a codec include, but
+are not necessarily limited to, the following:
+
+1. Designing for use in interactive applications (examples include, but
+are not limited to, point-to-point video calls, multi-party video
+conferencing, telepresence, teleoperation, and in-game video chat).
+
+2. Addressing the real transport conditions of the Internet, such as
+the flexibility to rapidly respond to changing bandwidth availability
+and loss rates, or as otherwise identified and prioritized by the
+working group.
+
+3. Ensuring interoperability and clean integration with the Real-time
+Transport Protocol (RTP), including secure transport via SRTP.
+
+4. Ensuring interoperability with Internet signaling technologies such
+as Session Initiation Protocol (SIP), Session Description Protocol
+(SDP), and Extensible Messaging and Presence Protocol (XMPP); however,
+the result should not depend on the details of any particular signaling
+technology.
+
+Optimizing for very low bit rates (typically below 64 kbps) is out of
+scope because such work might necessitate specialized optimizations.
+
+In addition to the technical objectives, there is one process goal,
+which is
+
+5. Ensuring the work is done under the IPR rules of the IETF.
+
+Although a codec produced by this working group or another standards
+organization might be used as a mandatory-to-implement technology by
+designers of particular Internet protocols, it is explicitly not a goal
+of the working group to produce or select a codec that will be mandated
+for use across the entire IETF or Internet community nor would their be
+any expectation that this would be the only mandatory-to-implement
+codec.
+
+Based on the working group's analysis of the design space, the working
+group might determine that it needs to produce more than one codec, or a
+codec with multiple modes; however, it is not the goal of working group
+to produce more than one codec, and to reduce confusion in the
+marketplace the working group shall endeavor to produce as few codecs as
+possible.
+
+In completing its work, the working group should collaborate with other
+IETF working groups to complete particular tasks. These might include,
+but would not be limited to, the following:
+
+- Within the AVT WG, define the codec's payload format for use with the
+Real-time Transport Protocol (RTP).
+
+- Collaborate with working groups in the Transport Area to identify
+important aspects of packet transmission over the Internet.
+
+- Collaborate with working groups in the Transport Area to understand
+the degree of rate adaptation desirable, and to reflect that
+understanding in the design of a codec that can adjust its
+transmission in a way that minimizes disruption to the video.
+
+- Collaborate with working groups in the RAI Area to ensure that
+information about and negotiation of the codec can be easily
+represented at the signaling layer.
+
+- Collaborate with working groups in the RAI Area such as clue and
+rtcweb to ensure the codec can satisfy all of their use cases.
+
+The working group will coordinate with the ITU-T (Study group 16), with
+the intent of submitting the completed codec RFC for co-publication by
+the ITU-T if the ITU-T finds that appropriate. The working group will
+communicate a detailed description of the requirements and goals to
+other SDOs including the ITU-T and MPEG to help determine if existing
+codecs meet the requirements and goals. Information about codecs being
+standardized will be available to other SDOs in the form of internet
+drafts and the working group welcomes technical feedback from other SDOs
+and experts from other organizations.
+
+The Guidelines for Development of an Audio Codec within the IETF (RFC
+6569) will form the starting point for guidelines and requirements for
+achieving the forgoing objectives for video. The working group will
+modify them as necessary with lessons learned during that process,
+refining them into a new document in accordance with the usual IETF
+procedures once consensus has been achieved.
+
+A codec that can be widely implemented and easily distributed among
+application developers, service operators, and end users is preferred.
+Many existing codecs that might fulfill some or most of the technical
+attributes listed above are encumbered in various ways. For example,
+patent holders might require that those wishing to implement the codec
+in software, deploy the codec in a service, or distribute the codec in
+software or hardware need to request a license, enter into a business
+agreement, pay licensing fees or royalties, or attempt to adhere to
+other special conditions or restrictions.
+
+Because such encumbrances have made it difficult to widely implement and
+easily distribute high-quality video codecs across the entire Internet
+community, the working group prefers unencumbered technologies in a way
+that is consistent with BCP 78 and BCP 79. In particular, the working
+group shall heed the preference stated in BCP 79: "In general, IETF
+working groups prefer technologies with no known IPR claims or, for
+technologies with claims against them, an offer of royalty-free
+licensing." Although this preference cannot guarantee that the working
+group will produce an unencumbered codec, the working group shall follow
+BCP 79, and adhere to the spirit of BCP 79. The working group cannot
+explicitly rule out the possibility of adopting encumbered technologies;
+however, the working group will try to avoid encumbered technologies
+that require royalties or other encumbrances that would prevent such
+technologies from being easy to redistribute and use.
+
+
+Deliverables
+
+1. A set of Codec Standardization Guidelines that define the work
+processes of the working group. This document shall be Informational.
+
+2. A set of technical Requirements. This document shall be
+Informational.
+
+3. Specification of a codec that meets the agreed-upon requirements, in
+the form of an Internet-Draft that defines the codec algorithm along
+with source code for a reference implementation. The text description
+of the codec shall describe the mandatory, recommended, and optional
+portions of the encoder and decoder. It is envisioned that this document
+shall be a Proposed Standard document.
+
+4. Specification of a storage format for non-interactive (HTTP)
+streaming or file transfer of the codec. It is envisioned that this
+document shall be a Proposed Standard document.
+
+Goals and Milestones
+TBD  WGLC on codec standardization guidelines
+TBD  WGLC on requirements, liaise to other SDOs
+TBD  Requirements to IESG (Informational)
+TBD  Liaise requirements RFC to other SDOs
+TBD  Codec standardization guidelines to IESG (Informational)
+TBD  WGLC on codec specification, liaise to other SDOs
+TBD  Submit codec specification to IESG (Standards Track)
+TBD  WGLC on storage format specification
+TBD  Submit storage format specification to IESG (Standards Track)
+TBD  WGLC on Testing document
+TBD  Testing document to IESG
+______________________________

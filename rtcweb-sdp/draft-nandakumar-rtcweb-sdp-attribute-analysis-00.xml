@@ -13,7 +13,7 @@
 <rfc category="info" docName="draft-nandakumar-rtcweb-sdp-attributes-00"
      ipr="trust200902">
   <front>
-    <title abbrev="SDPAttrib">A Framework for analyzing SDP attributes in the context of RTCWeb.</title>
+    <title abbrev="SDP Attribute Multiplexing">A Framework for SDP Attributes when Multiplexing</title>
 
      <author fullname="Suhas Nandakumar" initials="S." surname="Nandakumar">
       <organization>Cisco</organization>
@@ -40,24 +40,22 @@
 
       <address>
         <postal>
-          <street>170 West Tasman Drive</street>
+          <street>400 3rd Avenue SW, Suite 350</street>
 
-          <city>San Jose</city>
+          <city>Calgary</city>
 
-          <region>CA</region>
+          <region>AB</region>
 
-          <code>95134</code>
+          <code>T2P 4H2</code>
 
-          <country>USA</country>
+          <country>Canada</country>
         </postal>
 
-        <phone>+1 408 421-9990</phone>
-
-        <email>fluffy@cisco.com</email>
+        <email>fluffy@iii.ca</email>
       </address>
     </author>
 
-    <date day="14" month="February" year="2013" />
+    <date day="13" month="February" year="2013" />
 
     <area>RAI</area>
 
@@ -65,7 +63,7 @@
       <t>
         Communication sessions in RTCWeb are described and negotiated using Session Description Protocol(SDP)[RFC4566] mechanisms. 
         SDP uses attributes to describes specific aspects of such a session. Since its inception, several attributes have been 
-        introduced into SDP for the aforemenioned purpose.The scope of this document is to provide generic framework for analyzing 
+        introduced into SDP for the aforementioned purpose.The scope of this document is to provide generic framework for analyzing 
         SDP attributes and its applicability in solving use-cases specific to RTCWeb.
       </t>
     </abstract>
@@ -75,7 +73,7 @@
     <section title="Introduction">
       <t> 
         The RTCWeb working group is responsible for defining protocol to support direct interactive multimedia sessions
-        between peers. With in this framework, Session Description protoco (SDP) [RFC4566] is used for describing multi-media session
+        between peers. With in this framework, Session Description protocol (SDP) [RFC4566] is used for describing multi-media session
         capabilities. A multi-media session description needs to convey information such as sources, sinks and encodings 
         corresponding to the media along with transport capabilities required to carry the encoded media to the peer.
         SDP defines several attributes for describing specific aspects of a multimedia session. Given the number of SDP attributes 
@@ -109,7 +107,7 @@
       </t>
       <t>
         Lastly,RTCWeb inter-operability requirements with legacy and future VOIP systems presupposes the need for analyzing the current
-        and future SDP attributes for RTCWeb - VOIP interop multimedia scenarios.
+        and future SDP attributes for RTCWeb - VOIP interoperability multimedia scenarios.
       </t>        
     </section>
     <section title="SDP Attribute Analysis Framework">
@@ -141,6 +139,7 @@
          <t>Don't Multiplex (DM) - Attributes that are recommended against session multiplexing.</t>
          <t>No Change (NC) - Attributes that carry their existing semantics. </t>
          <t>Repeat (R)  - Attributes that MUST be reported across the media lines if session multiplexing.</t>
+
        </list>
     </t>
     <t>
@@ -178,7 +177,7 @@
       <t>
         RFC 4585 defines an extension to the Audio-visual Profile (AVP) that enables receivers to provide,
         statistically, more immediate feedback to the senders and thus allows for short-term adaptation and 
-        efficient feedback-based repai mechanisms to be implemented.
+        efficient feedback-based repair mechanisms to be implemented.
       </t>    
       <texttable title="RFC4585 Attribute Analysis">
         <ttcol align='left'>Attr Name</ttcol>
@@ -331,7 +330,7 @@
           <title>Interactive Connectivity Establishment (ICE):
             A Protocol for Network Address Translator (NAT) Traversal for
             Offer/Answer Protocols</title>         
-          <author fullname="J. Rosenberj" initials="J." surname="Rosenberg">
+          <author fullname="J. Rosenberg" initials="J." surname="Rosenberg">
             <organization></organization>
           </author>     
           <date month="July" year="2006" />
@@ -364,7 +363,7 @@
               Google
             </organization>
           </author>
-          <author fullname="JC. Jennings" initials="C." surname="Jennigs">
+          <author fullname="C. Jennings" initials="C." surname="Jennings">
             <organization>
               Cisco Systems
             </organization>

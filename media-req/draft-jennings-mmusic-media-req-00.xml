@@ -67,7 +67,7 @@
       </address>
     </author>
 
-    <date day="11" month="February" year="2013" />
+    <date day="13" month="February" year="2013" />
 
     <abstract>
       <t>This document outlines some of the requirements driving
@@ -158,12 +158,13 @@
 	information can be found in <xref
 	target="I-D.alvestrand-mmusic-msid" />. </t>
 
+<!--
 	<t>For two RTCWeb implementations that both know the other
 	support special signaling for adding and removing one way
 	video flows, an approach that allows adding named video flows
 	with a low chance of glare and remove of named video flows
 	with simple glare resolution rules. </t>
-
+-->
 
       </list></t>
     </section>
