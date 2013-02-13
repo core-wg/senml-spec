@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+<?xml-stylesheet type="text/xsl" href="rfc2629.xslt" ?>
+<?rfc toc="yes" ?>
+<?rfc symrefs="yes" ?>
+<?rfc iprnotified="yes" ?>
+<?rfc strict="no" ?>
+<?rfc compact="yes" ?>
+<?rfc sortrefs="no" ?>
+<?rfc colonspace="yes" ?>
+<?rfc rfcedstyle="no" ?>
+<?rfc tocdepth="4"?>
+<rfc category="info" docName="draft-nandakumar-rtcweb-sdp-attributes-00"
+     ipr="trust200902">
+  <front>
+    <title abbrev="SDPAttrib">A Framework for analyzing SDP attributes in the context of RTCWeb.</title>
+
+     <author fullname="Suhas Nandakumar" initials="S." surname="Nandakumar">
+      <organization>Cisco</organization>
+
+      <address>
+        <postal>
+          <street>170 West Tasman Drive</street>
+
+          <city>San Jose</city>
+
+          <region>CA</region>
+
+          <code>95134</code>
+
+          <country>USA</country>
+        </postal>
+
+        <email>snandaku@cisco.com</email>
+      </address>
+    </author>
+
+   <author fullname="Cullen Jennings" initials="C." surname="Jennings">
+      <organization>Cisco</organization>
+
+      <address>
+        <postal>
+          <street>170 West Tasman Drive</street>
+
+          <city>San Jose</city>
+
+          <region>CA</region>
+
+          <code>95134</code>
+
+          <country>USA</country>
+        </postal>
+
+        <phone>+1 408 421-9990</phone>
+
+        <email>fluffy@cisco.com</email>
+      </address>
+    </author>
+
+    <date day="14" month="February" year="2013" />
+
+    <area>RAI</area>
+
+    <abstract>
+      <t>
+        Communication sessions in RTCWeb are described and negotiated using Session Description Protocol(SDP)[RFC4566] mechanisms. 
+        SDP uses attributes to describes specific aspects of such a session. Since its inception, several attributes have been 
+        introduced into SDP for the aforemenioned purpose.The scope of this document is to provide generic framework for analyzing 
+        SDP attributes and its applicability in solving use-cases specific to RTCWeb.
+      </t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section title="Introduction">
+      <t> 
+        The RTCWeb working group is responsible for defining protocol to support direct interactive multimedia sessions
+        between peers. With in this framework, Session Description protoco (SDP) [RFC4566] is used for describing multi-media session
+        capabilities. A multi-media session description needs to convey information such as sources, sinks and encodings 
+        corresponding to the media along with transport capabilities required to carry the encoded media to the peer.
+        SDP defines several attributes for describing specific aspects of a multimedia session. Given the number of SDP attributes 
+        registered with IANA [IANA_REF] till date and possibility of defining new attributes in the future, there is need 
+        for future-proof framework to analyze these attributes for their applicability in supporting RTCWeb use-cases.
+      </t>
+      <t>
+        The document starts with providing the motivation for requiring such a framework within the context
+        of RTCWeb. This is followed by introduction to the SDP attribute analysis framework/procedures, following which 
+        several sections applies the framework to the SDP attributes registered with IANA [IANA_REF].
+      </t>
+    </section>
+    <section title="Terminology">
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT",
+        "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+        interpreted as described in <xref target="RFC2119"></xref>.</t>
+      </section>
+    <section title="Motivation">
+      <t>
+        One of the major driving factors motivating the need for a framework to analyze SDP attributes is 
+        media stream multiplexing requirement.This requirement attempts to reduce the number of media transports in order
+        to preserve network resources such as port numbers by multiplexing multiple media streams in a given SDP
+        over same underlying transport.
+        This imposes further restrictions on applicability of these SDP attributes as they are defined 
+        today.
+       </t> 
+      <t>
+        As of today there are close to 180 SDP attributes registered with the IANA and more SHALL be added in the future.
+        There is no clearly defined procedure to establish the validity/applicability of these attribute to the 
+        use-cases defined in the RTCWeb.
+      </t>
+      <t>
+        Lastly,RTCWeb inter-operability requirements with legacy and future VOIP systems presupposes the need for analyzing the current
+        and future SDP attributes for RTCWeb - VOIP interop multimedia scenarios.
+      </t>        
+    </section>
+    <section title="SDP Attribute Analysis Framework">
+    <t>
+     The [IANA_REF] lists the attributes registered with IANA since the inception of Session Description Protocol. Any framework or procedure
+     to analyze these attributes should be able to 1) Be able to clearly explain the semantic applicability of the attribute while describing  
+     RTCWeb Multimedia session and 2) SHOULD be future-proof.
+    </t>
+    <t> 
+     An SDP session description consists of a session-level section followed by zero or more media-level sections that could be 
+     broken down into following high-level categories
+     <list>
+       <t>Descriptions related to media sources and sinks such as media type, encoding schemes, payload types to name a few.</t>
+       <t>Descriptions specifying media transport characteristics like RTP/RTCP port, network addresses, QOS and so on.</t>
+       <t>Session Metadata descriptions such as session timing and origin information.</t>
+       <t>Descriptions establishing relationships across media streams.</t>
+     </list>
+    </t>  
+    <t>  
+      Over the several years, several IETF Working Group documents have extended the base SDP [RFC4566] specification and thus 
+      represent a semantic grouping for the attributes thus introduced. The authors believe that a framework based on grouping the SDP
+      attributes per RFC to describe their applicability in the context of RTCWeb serves a better purpose. Hence the following 
+      sections analyzes attributes listed in [IANA_REF] grouped under the IETF document that defines them. 
+    </t>
+    <t>
+       Based on the motivations established in the section [SECTION-MOTIVATION], the proposed framework attempts to seggregate the 
+       attributes into one of the following levels.
+       <list>
+         <t>payload level - Attributes applicable to specific payload type.</t>
+         <t>transport Level - Attributes appplicable to RTP Session(s).</t>
+         <t>source Level - Attributes applicable to each media source.</t>
+         <t>flow Level - Attributes that can be applied to individual media flows.</t> 
+         <t>Media Level - Defines those attributes as applicable to each SDP media stream.</t>
+         <t>Session Level - Attributes that apply to the entire session.</t>         
+         <t>Unknown - Attributes that cannot be easily explained through any of the above.</t>
+       </list>
+    </t>
+  
+    <section title="RFC4566">      
+     <t>
+       RFC4566 defines the Session Description Protocol (SDP) that is intended for describing multimedia sessions for the
+       purposes of session announcement, session invitation, and other forms of multimedia session initiation      
+     </t>
+      
+      <texttable title="RFC4566 Attribute Analysis">
+        <ttcol align='left'>Name</ttcol>
+        <ttcol align='left'>Session Mux</ttcol>
+        <ttcol align='left'>category</ttcol>
+        <c>sendrecv,sendonly,recvonly&nbsp;</c><c>Not impacted&nbsp;</c><c>flow&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        <c>bwtype:CT&nbsp;</c><c>Aggregate bandwidth for the conference&nbsp;</c><c>transport&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        <c>bwtype:AS&nbsp;</c><c>Aggregate total of all muxed RTP sessions &nbsp;</c><c>transport&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        <c>cat&nbsp;</c><c>Not impacted&nbsp;</c><c>session&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        <c>ptime&nbsp;</c><c>Not Impacted &nbsp;</c><c>flow&nbsp;</c>
+      </texttable>
+    </section>
+    <section title="RFC4585">      
+      <t>
+        RFC 4585 defines an extension to the Audio-visual Profile (AVP) that enables receivers to provide,
+        statistically, more immediate feedback to the senders and thus allows for short-term adaptation and 
+        efficient feedback-based repai mechanisms to be implemented.
+      </t>    
+      <texttable title="RFC4585 Attribute Analysis">
+        <ttcol align='left'>Name</ttcol>
+        <ttcol align='left'>Session Mux</ttcol>
+        <ttcol align='left'>category</ttcol>
+        <c>rtcp-fb&nbsp;</c><c>Not Impacted&nbsp;</c><c>payload&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+      </texttable>
+    </section>
+    
+    <section title="RFC5888">      
+      <t>
+        RFC5888 defines a framework to group "m" lines in the Session Description Protocol (SDP) for different purposes.
+      </t>    
+      <texttable title="RFC4586 Attribute Analysis">
+        <ttcol align='left'>Name</ttcol>
+        <ttcol align='left'>Session Mux</ttcol>
+        <ttcol align='left'>category</ttcol>
+        <c>mid&nbsp;</c><c>Not Impacted&nbsp;</c><c>media,source&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        <c>group&nbsp;</c><c>Not Impacted&nbsp;</c><c>session&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+      </texttable>
+    </section>
+      
+   </section>  
+   <section title="IANA Considerations">
+      <t>This document requires no actions from IANA.</t>
+    </section>
+  </middle>
+
+  <back>
+    <references title="Normative References">
+      <reference anchor="RFC3264">
+        <front>
+          <title>An Offer/Answer Model with Session Description Protocol
+          (SDP)</title>
+
+          <author fullname="J. Rosenberg" initials="J." surname="Rosenberg">
+            <organization></organization>
+          </author>
+
+          <author fullname="H. Schulzrinne" initials="H."
+                  surname="Schulzrinne">
+            <organization></organization>
+          </author>
+
+          <date month="June" year="2002" />
+        </front>
+
+        <seriesInfo name="RFC" value="3264" />
+
+        <format octets="60854"
+                target="http://www.rfc-editor.org/rfc/rfc3264.txt" type="TXT" />
+      </reference>
+      <reference anchor="RFC4566">
+        <front>
+          <title>SDP: Session Description Protocol</title>
+          
+          <author fullname="M. Handley" initials="M." surname="Handley">
+            <organization></organization>
+          </author>
+          
+          <author fullname="V. Jacobson" initials="V."
+            surname="Jacobson">
+            <organization></organization>
+          </author>
+          
+          <author fullname="C. Perkins" initials="C."
+            surname="Perkins">
+            <organization></organization>
+          </author>
+          
+          <date month="July" year="2006" />
+        </front>
+        
+        <seriesInfo name="RFC" value="4566" />
+        
+        <format octets="60854"
+          target="http://http://tools.ietf.org/html/rfc4566.txt" type="TXT" />
+      </reference>
+
+      <reference anchor="RFC2119">
+        <front>
+          <title abbrev="RFC Key Words">Key words for use in RFCs to Indicate
+          Requirement Levels</title>
+
+          <author fullname="Scott Bradner" initials="S." surname="Bradner">
+            <organization>Harvard University</organization>
+
+            <address>
+              <postal>
+                <street>1350 Mass. Ave.</street>
+
+                <street>Cambridge</street>
+
+                <street>MA 02138</street>
+              </postal>
+
+              <phone>- +1 617 495 3864</phone>
+
+              <email>sob@harvard.edu</email>
+            </address>
+          </author>
+
+          <date month="March" year="1997" />
+
+          <area>General</area>
+
+          <keyword>keyword</keyword>
+        </front>
+
+        <seriesInfo name="BCP" value="14" />
+
+        <seriesInfo name="RFC" value="2119" />
+
+        <format octets="4723"
+                target="http://www.rfc-editor.org/rfc/rfc2119.txt" type="TXT" />
+
+        <format octets="17491"
+                target="http://xml.resource.org/public/rfc/html/rfc2119.html"
+                type="HTML" />
+
+        <format octets="5777"
+                target="http://xml.resource.org/public/rfc/xml/rfc2119.xml"
+                type="XML" />
+      </reference>
+    </references>
+
+    <references  title="Informative References">
+      <reference anchor="RFC5245">
+        <front>
+          <title>Interactive Connectivity Establishment (ICE):
+            A Protocol for Network Address Translator (NAT) Traversal for
+            Offer/Answer Protocols</title>         
+          <author fullname="J. Rosenberj" initials="J." surname="Rosenberg">
+            <organization></organization>
+          </author>     
+          <date month="July" year="2006" />
+        </front>        
+        <seriesInfo name="RFC" value="5245" />       
+        <format octets="60854"
+          target="http://tools.ietf.org/html/rfc5245.txt" type="TXT" />
+      </reference>
+      <reference anchor="WEBRTC">
+        <front>
+          <title>
+            WebRTC 1.0: Real-time Communication Between Browsers
+          </title>
+          <author fullname="" initials="" surname="">
+            <organization>
+              W3C
+            </organization>
+          </author>
+          <date year="" month=""/>
+        </front>
+        <seriesInfo name="&lt;http://dev.w3.org/2011/webrtc/editor/webrtc.html&gt;" value=""/>
+      </reference>
+      <reference anchor="JSEP">
+        <front>
+          <title>
+            Javascript Session Establishment Protocol
+          </title>
+          <author fullname="J. Uberti" initials="J." surname="Uberti">
+            <organization>
+              Google
+            </organization>
+          </author>
+          <author fullname="JC. Jennings" initials="C." surname="Jennigs">
+            <organization>
+              Cisco Systems
+            </organization>
+          </author>
+          <date year="2012" month="December"/>
+        </front>
+        <seriesInfo name="Internet-Draft"
+          value="draft-ietf-rtcweb-jsep-01" />      
+        <format target="http://tools.ietf.org/html/draft-ietf-rtcweb-jsep-01.txt"
+          type="TXT" />
+        </reference>
+      <reference anchor="RFC5506">
+        <front>
+          <title>Support for Reduced-Size Real-Time Transport Control Protocol (RTCP):
+            Opportunities and Consequences</title>         
+          <author fullname="I. Johansson" initials="I." surname="Johansson">
+            <organization></organization>
+          </author>     
+          <date month="April" year="2009" />
+        </front>        
+        <seriesInfo name="RFC" value="5506" />       
+        <format octets="60854"
+          target="http://tools.ietf.org/html/rfc5506.txt" type="TXT" />
+      </reference>
+      <reference anchor="RFC3551">
+        <front>
+          <title>RTP Profile for Audio and Video Conferences
+            with Minimal Control</title>         
+          <author fullname=" H. Schulzrinne" initials="H." surname="Schulzrinne">
+            <organization></organization>
+          </author>
+          <author fullname=" S. Casner" initials="S." surname="Casner">
+            <organization></organization>
+          </author>
+          <date month="July" year="2003" />
+        </front>        
+        <seriesInfo name="RFC" value="3551" />       
+        <format octets="60854"
+          target="http://tools.ietf.org/html/rfc3551.txt" type="TXT" />
+      </reference>
+      <reference anchor="RFC3952">
+        <front>
+          <title>Real-time Transport Protocol (RTP) Payload Format
+            for internet Low Bit Rate Codec (iLBC) Speech</title>        
+          <author fullname="A. Duric" initials="A." surname="Duric">
+            <organization></organization>
+          </author>
+          <author fullname="S. Andersen" initials="S." surname="Andersen">
+            <organization></organization>
+          </author>
+          <date month="December" year="2004" />
+        </front>        
+        <seriesInfo name="RFC" value="3952" />       
+        <format octets="60854"
+          target="http://tools.ietf.org/html/rfc3952.txt" type="TXT" />
+      </reference>
+      <reference anchor="RFC4796">
+        <front>
+          <title>The Session Description Protocol (SDP) Content Attribute</title>        
+          <author fullname="J. Hautakorpi" initials="J." surname="Hautakorpi">
+            <organization></organization>
+          </author>
+          <author fullname="G. Camarillo" initials="G." surname="Camarillo">
+            <organization></organization>
+          </author>
+          <date month="February" year="2007" />
+        </front>       
+        <seriesInfo name="RFC" value="4796" />       
+        <format octets="60854"
+          target="http://tools.ietf.org/html/rfc4796.txt" type="TXT" />
+      </reference>
+      <reference anchor="RFC5761">
+        <front>
+          <title>Multiplexing RTP Data and Control Packets on a Single Port</title>        
+          <author fullname="C. Perkins" initials="C." surname="Perkins">
+            <organization></organization>
+          </author>
+          <author fullname="M. Westerlund" initials="M." surname="Westerlund">
+            <organization></organization>
+          </author>
+          <date month="April" year="2010" />
+        </front>
+        <seriesInfo name="RFC" value="5761" />     
+        <format octets="60854"
+          target="http://tools.ietf.org/html/rfc5761.txt" type="TXT" />
+      </reference>
+      <reference anchor="RFC3556">
+        <front>
+          <title>Session Description Protocol (SDP) Bandwidth Modifiers
+            for RTP Control Protocol (RTCP) Bandwidth</title>
+          <author fullname="S. Casner" initials="S." surname="Casner">
+            <organization></organization>
+          </author>
+          <date month="July" year="2003" />
+        </front>
+        <seriesInfo name="RFC" value="3556" />     
+        <format octets="60854"
+          target="http://tools.ietf.org/html/rfc3556.txt" type="TXT" />
+      </reference>
+      <reference anchor="RFC5104">
+        <front>
+          <title>Codec Control Messages in the
+            RTP Audio-Visual Profile with Feedback (AVPF)</title>
+          <author fullname="S. Wenger" initials="S." surname="Wenger">
+            <organization></organization>
+          </author>
+          <author fullname="U. Chandra" initials="U." surname="Chandra">
+            <organization></organization>
+          </author>
+          <author fullname="M. Westerlund" initials="M." surname="Westerlund">
+            <organization></organization>
+          </author>
+          <author fullname="B. Burman" initials="B." surname="Burman">
+            <organization></organization>
+          </author>
+          <date month="February" year="2008" />
+        </front>
+        <seriesInfo name="RFC" value="5104" />
+        <format octets="60854"
+          target="http://tools.ietf.org/html/rfc5104.txt" type="TXT" />
+      </reference>
+      <reference anchor="RFC5888">
+        <front>
+          <title>RTP Payload Format for H.264 Video</title>          
+          <author fullname="G. Camarillo" initials="G." surname="Camarillo">
+            <organization></organization>
+          </author>
+          <author fullname="H. Schulzrinne" initials="H." surname="Schulzrinne">
+            <organization></organization>
+          </author>
+          <date month="June" year="2010" />
+        </front>
+        <seriesInfo name="RFC" value="3984" />       
+        <format octets="60854"
+          target="http://tools.ietf.org/html/rfc3984.txt" type="TXT" />
+      </reference>
+      <reference anchor="draft-spittka-payload-rtp-opus">
+        <front>
+          <title>RTP Payload Format for Opus Speech and Audio Codec</title>        
+          <author fullname=" J. Spittka" initials="J." surname=" Spittka">
+            <organization></organization>
+          </author>
+          <author fullname="K. Vos" initials="K." surname="Vos">
+            <organization></organization>
+          </author>
+          <author fullname="JM. Valin" initials="JM." surname="Valin">
+            <organization></organization>
+          </author>
+          <date month="July" year="2012" />
+        </front>
+        <seriesInfo name="Internet-Draft"
+          value="draft-spittka-payload-rtp-opus-01" />      
+        <format target="http://tools.ietf.org/id/draft-spittka-payload-rtp-opus-01.txt"
+          type="TXT" />       
+      </reference>
+      <reference anchor="draft-ietf-payload-vp8">
+        <front>
+          <title>RTP Payload Format for VP8 Video</title>        
+          <author fullname=" P. Westin" initials="P." surname="Westin">
+            <organization></organization>
+          </author>
+          <author fullname="H. Lundin" initials="H." surname="Lundin">
+            <organization></organization>
+          </author>
+          <author fullname="M. Glover" initials="M." surname="Glover">
+            <organization></organization>
+          </author>
+          <author fullname="J. Uberti" initials="J." surname="Uberti">
+            <organization></organization>
+          </author>
+          <author fullname="F. Galligan" initials="F." surname="Galligan">
+            <organization></organization>
+          </author>
+          <date month="August" year="2012" />
+        </front>
+        <seriesInfo name="Internet-Draft"
+          value="draft-ietf-payload-vp8-05" />      
+        <format target="http://tools.ietf.org/html/draft-ietf-payload-vp8-05"
+          type="TXT" />
+      </reference>
+      <reference anchor="RFC3984">
+        <front>
+          <title>RTP Payload Format for H.264 Video</title>          
+          <author fullname="S. Wenger" initials="S." surname="Wenger">
+            <organization></organization>
+          </author>
+          <author fullname="M.M. Hannuksela" initials="M.M" surname="Hannuksela">
+            <organization></organization>
+          </author>
+          <author fullname="T. Stockhammer" initials="T." surname="Stockhammer">
+            <organization></organization>
+          </author>
+          <author fullname="M. Westerlund" initials="M." surname="Westerlund">
+            <organization></organization>
+          </author>
+          <author fullname="D. Singer" initials="D." surname="Singer">
+            <organization></organization>
+          </author>        
+          <date month="February" year="2005" />
+        </front>
+        <seriesInfo name="RFC" value="3984" />       
+        <format octets="60854"
+          target="http://tools.ietf.org/html/rfc3984.txt" type="TXT" />
+      </reference>
+      <reference anchor="draft-ietf-rtcweb-data-channel">
+        <front>
+          <title>RTCWeb Datagram Connection</title>        
+          <author fullname=" R. Jesup" initials="R." surname="Jesup">
+            <organization></organization>
+          </author>
+          <author fullname="S. Loreto" initials="S." surname="Loreto">
+            <organization></organization>
+          </author>
+          <author fullname="M. Tuexen" initials="M." surname="Tuexen">
+            <organization></organization>
+          </author>
+          <date month="September" year="2012" />
+        </front>
+        <seriesInfo name="Internet-Draft"
+          value="draft-ietf-rtcweb-data-channel-01" />      
+        <format target="http://tools.ietf.org/html/draft-ietf-rtcweb-data-channel-01"
+          type="TXT" />
+      </reference>
+    </references>
+  </back>
+</rfc>
