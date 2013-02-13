@@ -13,7 +13,8 @@
 <rfc category="info" docName="draft-nandakumar-rtcweb-sdp-attributes-00"
      ipr="trust200902">
   <front>
-    <title abbrev="SDP Attribute Multiplexing">A Framework for SDP Attributes when Multiplexing</title>
+    <title abbrev="SDP Attribute Multiplexing">A Framework for SDP Attributes
+    when Multiplexing</title>
 
      <author fullname="Suhas Nandakumar" initials="S." surname="Nandakumar">
       <organization>Cisco</organization>
@@ -61,10 +62,13 @@
 
     <abstract>
       <t>
-        Communication sessions in RTCWeb are described and negotiated using Session Description Protocol(SDP)[RFC4566] mechanisms. 
-        SDP uses attributes to describes specific aspects of such a session. Since its inception, several attributes have been 
-        introduced into SDP for the aforementioned purpose.The scope of this document is to provide generic framework for analyzing 
-        SDP attributes and its applicability in solving use-cases specific to RTCWeb.
+        Communication sessions in RTCWeb are described and negotiated using
+        Session Description Protocol(SDP)[RFC4566] mechanisms.  SDP uses
+        attributes to describes specific aspects of such a session. Since its
+        inception, several attributes have been introduced into SDP for the
+        aforementioned purpose.The scope of this document is to provide generic
+        framework for analyzing SDP attributes and its applicability in solving
+        use-cases specific to RTCWeb.
       </t>
     </abstract>
   </front>
@@ -72,18 +76,25 @@
   <middle>
     <section title="Introduction">
       <t> 
-        The RTCWeb working group is responsible for defining protocol to support direct interactive multimedia sessions
-        between peers. With in this framework, Session Description protocol (SDP) [RFC4566] is used for describing multi-media session
-        capabilities. A multi-media session description needs to convey information such as sources, sinks and encodings 
-        corresponding to the media along with transport capabilities required to carry the encoded media to the peer.
-        SDP defines several attributes for describing specific aspects of a multimedia session. Given the number of SDP attributes 
-        registered with IANA [IANA_REF] till date and possibility of defining new attributes in the future, there is need 
-        for future-proof framework to analyze these attributes for their applicability in supporting RTCWeb use-cases.
+        The RTCWeb working group is responsible for defining protocol to support
+        direct interactive multimedia sessions between peers. With in this
+        framework, Session Description protocol (SDP) [RFC4566] is used for
+        describing multi-media session capabilities. A multi-media session
+        description needs to convey information such as sources, sinks and
+        encodings corresponding to the media along with transport capabilities
+        required to carry the encoded media to the peer.  SDP defines several
+        attributes for describing specific aspects of a multimedia
+        session. Given the number of SDP attributes registered with IANA
+        [IANA_REF] till date and possibility of defining new attributes in the
+        future, there is need for future-proof framework to analyze these
+        attributes for their applicability in supporting RTCWeb use-cases.
       </t>
       <t>
-        The document starts with providing the motivation for requiring such a framework within the context
-        of RTCWeb. This is followed by introduction to the SDP attribute analysis framework/procedures, following which 
-        several sections applies the framework to the SDP attributes registered with IANA [IANA_REF].
+        The document starts with providing the motivation for requiring such a
+        framework within the context of RTCWeb. This is followed by introduction
+        to the SDP attribute analysis framework/procedures, following which
+        several sections applies the framework to the SDP attributes registered
+        with IANA [IANA_REF].
       </t>
     </section>
     <section title="Terminology">
@@ -93,67 +104,88 @@
       </section>
     <section title="Motivation">
       <t>
-        One of the major driving factors motivating the need for a framework to analyze SDP attributes is 
-        media stream multiplexing requirement.This requirement attempts to reduce the number of media transports in order
-        to preserve network resources such as port numbers by multiplexing multiple media streams in a given SDP
-        over same underlying transport.
-        This imposes further restrictions on applicability of these SDP attributes as they are defined 
-        today.
+        One of the major driving factors motivating the need for a framework to
+        analyze SDP attributes is media stream multiplexing requirement.This
+        requirement attempts to reduce the number of media transports in order
+        to preserve network resources such as port numbers by multiplexing
+        multiple media streams in a given SDP over same underlying transport.
+        This imposes further restrictions on applicability of these SDP
+        attributes as they are defined today.
        </t> 
       <t>
-        As of today there are close to 180 SDP attributes registered with the IANA and more SHALL be added in the future.
-        There is no clearly defined procedure to establish the validity/applicability of these attribute to the 
-        use-cases defined in the RTCWeb.
+        As of today there are close to 180 SDP attributes registered with the
+        IANA and more SHALL be added in the future.  There is no clearly defined
+        procedure to establish the validity/applicability of these attribute to
+        the use-cases defined in the RTCWeb.
       </t>
       <t>
-        Lastly,RTCWeb inter-operability requirements with legacy and future VOIP systems presupposes the need for analyzing the current
-        and future SDP attributes for RTCWeb - VOIP interoperability multimedia scenarios.
+        Lastly,RTCWeb inter-operability requirements with legacy and future VOIP
+        systems presupposes the need for analyzing the current and future SDP
+        attributes for RTCWeb - VOIP interoperability multimedia scenarios.
       </t>        
     </section>
     <section title="SDP Attribute Analysis Framework">
     <t>
-     The [IANA_REF] lists the attributes registered with IANA since the inception of Session Description Protocol. Any framework or procedure
-     to analyze these attributes should be able to 1) Be able to clearly explain the semantic applicability of the attribute while describing  
-     RTCWeb Multimedia session and 2) SHOULD be future-proof.
+     The [IANA_REF] lists the attributes registered with IANA since the
+     inception of Session Description Protocol. Any framework or procedure to
+     analyze these attributes should be able to 1) Be able to clearly explain
+     the semantic applicability of the attribute while describing RTCWeb
+     Multimedia session and 2) SHOULD be future-proof.
     </t>
     <t> 
-     An SDP session description consists of a session-level section followed by zero or more media-level sections that could be 
-     broken down into following high-level categories
+     An SDP session description consists of a session-level section followed by
+     zero or more media-level sections that could be broken down into following
+     high-level categories
      <list>
-       <t>Descriptions related to media sources and sinks such as media type, encoding schemes, payload types to name a few.</t>
-       <t>Descriptions specifying media transport characteristics like RTP/RTCP port, network addresses, QOS and so on.</t>
-       <t>Session Metadata descriptions such as session timing and origin information.</t>
+       <t>Descriptions related to media sources and sinks such as media type,
+       encoding schemes, payload types to name a few.</t>
+       <t>Descriptions specifying media transport characteristics like RTP/RTCP
+       port, network addresses, QOS and so on.</t>
+       <t>Session Metadata descriptions such as session timing and origin
+       information.</t>
        <t>Descriptions establishing relationships across media streams.</t>
      </list>
     </t>  
     <t>  
-      Over the several years, several IETF Working Group documents have extended the base SDP [RFC4566] specification and thus 
-      represent a semantic grouping for the attributes thus introduced. The authors believe that a framework based on grouping the SDP
-      attributes per RFC to describe their applicability in the context of RTCWeb serves a better purpose.
+      Over the several years, several IETF Working Group documents have extended
+      the base SDP [RFC4566] specification and thus represent a semantic
+      grouping for the attributes thus introduced. The authors believe that a
+      framework based on grouping the SDP attributes per RFC to describe their
+      applicability in the context of RTCWeb serves a better purpose.
     </t>
     <t>
-       Based on the motivations established in the section [SECTION-MOTIVATION], the proposed framework attempts to seggregate the 
-       attributes into one of the following categories.
+       Based on the motivations established in the section [SECTION-MOTIVATION],
+       the proposed framework attempts to seggregate the attributes into one of
+       the following categories.
        <list>
-         <t>Media Source (MS) - Attributes that could be independently specified per media source.</t>
-         <t>Don't Multiplex (DM) - Attributes that are recommended against session multiplexing.</t>
-         <t>No Change (NC) - Attributes that carry their existing semantics. </t>
-         <t>Repeat (R)  - Attributes that MUST be reported across the media lines if session multiplexing.</t>
+         <t>Media Source (MS) - Attributes that could be independently specified
+         per media source.</t>
+         <t>Don't Multiplex (DM) - Attributes that are recommended against
+         session multiplexing.</t>
+         <t>No Change (NC) - Attributes that carry their existing
+         semantics. </t>
+         <t>Repeat (R) - Attributes that MUST be reported across the media lines
+         if session multiplexing.</t>
 
        </list>
     </t>
     <t>
-      The idea behind these categories is to provide recommendations for using the attributes in solving RTCWeb use-cases.
+      The idea behind these categories is to provide recommendations for using
+      the attributes in solving RTCWeb use-cases.
     </t>  
     <t>
-      Following sub-sections analyzes attributes listed in [IANA_REF] grouped under the IETF document that defines them. 
-      For each such section, the single-letter acronyms "S", "M" and "B" under the "Current" column specify existing semantics as
-      applicable to either session-level or media-level or both respectively. 
+      Following sub-sections analyzes attributes listed in [IANA_REF] grouped
+      under the IETF document that defines them.  For each such section, the
+      single-letter acronyms "S", "M" and "B" under the "Current" column specify
+      existing semantics as applicable to either session-level or media-level or
+      both respectively.
     </t> 
     <section title="RFC4566">      
      <t>
-       RFC4566 defines the Session Description Protocol (SDP) that is intended for describing multimedia sessions for the
-       purposes of session announcement, session invitation, and other forms of multimedia session initiation      
+       RFC4566 defines the Session Description Protocol (SDP) that is intended
+       for describing multimedia sessions for the purposes of session
+       announcement, session invitation, and other forms of multimedia session
+       initiation
      </t>
       
       <texttable title="RFC4566 Attribute Analysis">
@@ -161,46 +193,63 @@
         <ttcol align='left'>Session Mux</ttcol>
         <ttcol align='left'>Current</ttcol>
         <ttcol align='left'>Category</ttcol>
-        <c>sendrecv,sendonly,recvonly&nbsp;</c><c>Not impacted&nbsp;</c><c>B&nbsp;</c><c>MS,&nbsp;NC&nbsp;</c>
+
+        <c>sendrecv,sendonly,recvonly&nbsp;</c><c>Not
+        impacted&nbsp;</c><c>B&nbsp;</c><c>MS,&nbsp;NC&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-        <c>bwtype:CT&nbsp;</c><c>Aggregate bandwidth for the conference&nbsp;</c><c>S&nbsp;</c><c>NC&nbsp;</c>
+
+        <c>bwtype:CT&nbsp;</c><c>Aggregate bandwidth for the
+        conference&nbsp;</c><c>S&nbsp;</c><c>NC&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-        <c>bwtype:AS&nbsp;</c><c>Aggregate total for all the RTP sessions&nbsp;</c><c>B&nbsp;</c><c>DM&nbsp;</c>
+
+        <c>bwtype:AS&nbsp;</c><c>Aggregate total for all the RTP
+        sessions&nbsp;</c><c>B&nbsp;</c><c>DM&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
         <c>cat&nbsp;</c><c>Not impacted&nbsp;</c><c>S&nbsp;</c><c>NC&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-        <c>ptime&nbsp;</c><c>Not Impacted &nbsp;</c><c>M&nbsp;</c><c>MS,&nbsp;NC</c>
+
+        <c>ptime&nbsp;</c><c>Not Impacted
+        &nbsp;</c><c>M&nbsp;</c><c>MS,&nbsp;NC</c>
+
       </texttable>
 
     </section>
     <section title="RFC4585">      
       <t>
-        RFC 4585 defines an extension to the Audio-visual Profile (AVP) that enables receivers to provide,
-        statistically, more immediate feedback to the senders and thus allows for short-term adaptation and 
-        efficient feedback-based repair mechanisms to be implemented.
+        RFC 4585 defines an extension to the Audio-visual Profile (AVP) that
+        enables receivers to provide, statistically, more immediate feedback to
+        the senders and thus allows for short-term adaptation and efficient
+        feedback-based repair mechanisms to be implemented.
       </t>    
       <texttable title="RFC4585 Attribute Analysis">
         <ttcol align='left'>Attr Name</ttcol>
         <ttcol align='left'>Session Mux</ttcol>
         <ttcol align='left'>Current</ttcol>
         <ttcol align='left'>Category</ttcol>
-        <c>rtcp-fb&nbsp;</c><c>Since RTCP feedback are reported per RTP Session,&nbsp;
-                               this attribute should be repeated across m= lines</c><c>M</c><c>R&nbsp;</c>
+
+        <c>rtcp-fb&nbsp;</c><c>Since RTCP feedback are reported per RTP
+        Session,&nbsp; this attribute should be repeated across m=
+        lines</c><c>M</c><c>R&nbsp;</c>
+
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
       </texttable>
     </section>
     
     <section title="RFC5888">      
       <t>
-        RFC5888 defines a framework to group "m" lines in the Session Description Protocol (SDP) for different purposes.
+        RFC5888 defines a framework to group "m" lines in the Session
+        Description Protocol (SDP) for different purposes.
       </t>    
       <texttable title="RFC4586 Attribute Analysis">
         <ttcol align='left'>Name</ttcol>
         <ttcol align='left'>Session Mux</ttcol>
         <ttcol align='left'>Current</ttcol>
         <ttcol align='left'>Category</ttcol>
-        <c>mid:LS&nbsp;</c><c>Complicates sychronization when multiple audio and video lines
-                              are muxed&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+
+        <c>mid:LS&nbsp;</c><c>Complicates sychronization when multiple audio and
+        video lines are muxed&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
       </texttable>
     </section>
@@ -208,15 +257,19 @@
     <section title="RFC3108">      
         <t>
           RFC3108 describes conventions for using the Session Description
-          Protocol (SDP) described  for controlling ATM Bearer Connections, and any associated ATM Adaptation Layer (AAL)
+          Protocol (SDP) described for controlling ATM Bearer Connections, and
+          any associated ATM Adaptation Layer (AAL)
         </t>    
         <texttable title="RFC4586 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Session Mux</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
-          <c>aalType&nbsp;</c><c>Not recommended for legacy interop purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+
+          <c>aalType&nbsp;</c><c>Not recommended for legacy interop
+          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
         </texttable>
      </section>
       
