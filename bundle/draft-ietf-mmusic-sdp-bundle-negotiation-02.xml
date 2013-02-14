@@ -498,7 +498,14 @@ SDP Offer
 
     <section anchor="sec-security" title="Security Considerations" toc="default">
 		<t>
-			TBA
+			This specification does not significantly change the
+			security considerations of SDP which can be found in
+			Section X of TBD.
+		</t>
+                <t>
+			TODO: Think carefully about security analysis of reuse
+			of same SDES key on multiple "m=" lines when the far end
+			does not use BUNDLE and warn developers of any risks.
 		</t>
     </section>
 
