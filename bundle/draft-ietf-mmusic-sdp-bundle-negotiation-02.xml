@@ -144,9 +144,9 @@
 SDP Offer 
 
     v=0
-    o=alice 2890844526 2890844526 IN IP4 host.atlanta.com
+    o=alice 2890844526 2890844526 IN IP4 host.atlanta.example.org
     s=
-    c=IN IP4 host.atlanta.com
+    c=IN IP4 host.atlanta.example.org
     t=0 0
     m=audio 10000 RTP/AVP 97
     a=rtpmap:97 iLBC/8000
@@ -163,9 +163,9 @@ SDP Offer
 SDP Answer 
 
     v=0
-    o=bob 2808844564 2808844564 IN IP4 host.biloxi.com
+    o=bob 2808844564 2808844564 IN IP4 host.biloxi.example.com
     s=
-    c=IN IP4 host.biloxi.com
+    c=IN IP4 host.biloxi.example.com
     t=0 0
     m=audio 20000 RTP/AVP 97
     a=rtpmap:97 iLBC/8000
@@ -194,9 +194,9 @@ SDP Answer
 SDP Offer 
 
     v=0
-    o=alice 2890844526 2890844526 IN IP4 host.atlanta.com
+    o=alice 2890844526 2890844526 IN IP4 host.atlanta.example.org
     s=
-    c=IN IP4 host.atlanta.com
+    c=IN IP4 host.atlanta.example.org
     t=0 0
     m=audio 10000 RTP/AVP 97
     a=rtpmap:97 iLBC/8000
@@ -212,7 +212,7 @@ SDP Offer
 
         <t> Some of the developers of products that do this make the argument
         that this is not a bug and that for SDP to work when not using things
-        like RFC 4961, the port numbers need tobe unique thus it is perfectly
+        like RFC 4961, the port numbers need to be unique thus it is perfectly
         reasonable for their software to make this assumption. The authors are
         not suggesting this is a good way to design an SDP stack but merely
         trying to provide an explanation of why some UAs behave this way and why
@@ -237,9 +237,9 @@ SDP Offer
 SDP Offer 
 
     v=0
-    o=alice 2890844526 2890844526 IN IP4 host.atlanta.com
+    o=alice 2890844526 2890844526 IN IP4 host.atlanta.example.org
     s=
-    c=IN IP4 host.atlanta.com
+    c=IN IP4 host.atlanta.example.org
     t=0 0
     m=audio 49170 RTP/AVP 0
     a=rtcp:53020
@@ -257,7 +257,7 @@ SDP Offer
         specifications. </t>
 
         <t> To mitigate the risk to B2BUAs that generate BUNDLE when they should
-        not, the spec includes a feature where once the initial Offer / Anser is
+        not, the spec includes a feature where once the initial Offer / Answer is
         done and ICE is completed, a second Offer / Answer exchange is done with
         the all the "m=" lines and associated ICE transports set to the actual
         5-tuple in use. This allows any device on Offer / Answer path to be
@@ -440,11 +440,17 @@ SDP Offer
 				When an SDP Answerer receives an SDP Offer, which offers bundled media, and the
 				SDP Answerer accepts the offered bundle group. 
                                 Any "m=" lines that are rejected have their port set to zero as usual. 
+                                An "m=" lines that has been rejected MUST not be used as the
+                                first entry in the USE-BUNDLE group unless 
+                                all the "m=" lines in the group are rejected. 
                                 Any "m=" lines that are not rejected have the port on the "m=" line, as
                                 well as the ICE, 'rtcp' attribute, 'rtcp-mux' and ICE attributes set to 
                                 the value to be used by the single 5-tuple over which all the media 
                                 in the group will use. 
 			</t>
+                        <t> <list> <t> Open Issue: Is there any reason to
+                        include "m=" lines that are rejected in the USE-BUNDLE
+                        group at all? </t> </list> </t>
 			<t>
 				If the SDP Answerer does not accept the "BUNDLE" group in the SDP Offer, it MUST NOT
 				include a session level 'group' attribute, with a "BUNDLE" or "USE-BUNDLE" value, in 
@@ -456,14 +462,14 @@ SDP Offer
                 <section title="SDP Completion Procedures" toc="default">
 			<t>
                           Once the initial Offer / Answer has completed and ICE
-                          has completed, and additional offer/anser exchange MUST
+                          has completed, and additional offer/answer exchange MUST
                           be done. As this is an update to the initial
                           Offer/Answer, the port numbers will reflect the port
                           actually in use. ICE requires this and explains how to
                           do it so when ICE is used, the endpoints simply follow
                           the ICE procedures for this. When ICE is not used,
                           the endpoint that created the original offer MUST
-                          initiate the new Offer / Anser exchange once the initial
+                          initiate the new Offer / Answer exchange once the initial
                           one completes.
                         </t>
 		</section>
@@ -552,7 +558,7 @@ SDP Offer
 			Section X of TBD.
 		</t>
                 <t>
-			TODO: Think carefully about security analysis of reuse
+			Open Issue: Think carefully about security analysis of reuse
 			of same SDES key on multiple "m=" lines when the far end
 			does not use BUNDLE and warn developers of any risks.
 		</t>
@@ -572,9 +578,9 @@ SDP Offer
 SDP Offer (Bundled media offered)
 
     v=0
-    o=alice 2890844526 2890844526 IN IP4 host.atlanta.com
+    o=alice 2890844526 2890844526 IN IP4 host.atlanta.example.org
     s=
-    c=IN IP4 host.atlanta.com
+    c=IN IP4 host.atlanta.example.org
     t=0 0
     a=group:BUNDLE foo bar
     m=audio 10000 RTP/AVP 0 8 97
@@ -598,9 +604,9 @@ SDP Offer (Bundled media offered)
 SDP Answer (Bundled media accepted)
 
     v=0
-    o=bob 2808844564 2808844564 IN IP4 host.biloxi.com
+    o=bob 2808844564 2808844564 IN IP4 host.biloxi.example.com
     s=
-    c=IN IP4 host.biloxi.com
+    c=IN IP4 host.biloxi.example.com
     t=0 0
     a=group:USE-BUNDLE foo bar
     m=audio 20000 RTP/AVP 0
@@ -621,9 +627,9 @@ SDP Answer (Bundled media accepted)
 SDP Answer (Bundled media not accepted)
 
     v=0
-    o=bob 2808844564 2808844564 IN IP4 host.biloxi.com
+    o=bob 2808844564 2808844564 IN IP4 host.biloxi.example.com
     s=
-    c=IN IP4 host.biloxi.com
+    c=IN IP4 host.biloxi.example.com
     t=0 0         
     m=audio 20000 RTP/AVP 0         
     b=AS:200
@@ -641,9 +647,9 @@ SDP Answer (Bundled media not accepted)
 SDP Offer with ICE (Bundled media offered)
 
     v=0
-    o=alice 2890844526 2890844526 IN IP4 host.atlanta.com
+    o=alice 2890844526 2890844526 IN IP4 host.atlanta.example.org
     s=
-    c=IN IP4 host.atlanta.com
+    c=IN IP4 host.atlanta.example.org
     t=0 0
     a=group:BUNDLE foo bar
     m=audio 10000 RTP/AVP 0 8 97
@@ -652,13 +658,13 @@ SDP Offer with ICE (Bundled media offered)
     a=rtpmap:0 PCMU/8000
     a=rtpmap:8 PCMA/8000
     a=rtpmap:97 iLBC/8000
-    a=candidate:1 1 UDP 1694498815 host.atlanta.com 10000 typ host
+    a=candidate:1 1 UDP 1694498815 host.atlanta.example.org 10000 typ host
     m=video 10002 RTP/AVP 31 32
     a=mid:bar
     b=AS:1000
     a=rtpmap:31 H261/90000
     a=rtpmap:32 MPV/90000		 
-    a=candidate:1 1 UDP 1694498815 host.atlanta.com 10002 typ host
+    a=candidate:1 1 UDP 1694498815 host.atlanta.example.org 10002 typ host
 		 
 ]]></artwork>
         </figure>
