@@ -305,6 +305,29 @@
                 
       </texttable>
     </section>
+      
+     <section title="RFC5761">      
+        <t>
+          RFC561 discusses issues that arise when multiplexing RTP data
+          packets and RTP Control Protocol (RTCP) packets on a single UDP port.
+          It updates RFC 3550 and RFC 3551 to describe when such multiplexing
+          is and is not appropriate, and it explains how the Session
+          Description Protocol (SDP) can be used to signal multiplexed
+          sessions.
+        </t>    
+        <texttable title="RFC5761 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Category</ttcol>
+          
+          <c>rtcp-mux&nbsp;</c><c>RTCP muxing should be repeated across all the 
+          m=lines&nbsp;</c><c>M&nbsp;</c><c>R&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+        </texttable>
+      </section>
+      
     
       <section title="RFC3556">      
         <t>
@@ -332,18 +355,32 @@
         </texttable>
       </section>  
     
+      <section title="RFC4574">      
+        <t>
+          RFC4574 defines a new Session Description Protocol (SDP)
+          media-level attribute: "label".  The "label" attribute carries a
+          pointer to a media stream in the context of an arbitrary network
+          application that uses SDP.  The sender of the SDP document can attach
+          the "label" attribute to a particular media stream or streams.  The
+          application can then use the provided pointer to refer to each
+          particular media stream in its context.
+        </t>    
+        <texttable title="RFC4574 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Category</ttcol>
+          
+          <c>label&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>MS,NC&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+        </texttable>
+      </section>
       
       <section title="RFC5432">      
         <t>
-          The offer/answer model for the Session Description Protocol (SDP)
-          assumes that endpoints somehow establish the Quality of Service (QoS)
-          required for the media streams they establish.  Endpoints in closed
-          environments typically agree out-of-band (e.g., using configuration
-          information) regarding which QoS mechanism to use.  However, on the
-          Internet, there is more than one QoS service available.
-          Consequently, there is a need for a mechanism to negotiate which QoS
-          mechanism to use for a particular media stream.  RFC5432 defines such a 
-          mechanism.
+          RFC5432 defines prordures to negotiate QOS mechanisms using the
+          Session Description Protocol (SDP) offer/answer model.
         </t>    
         <texttable title="RFC5432 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -361,6 +398,68 @@
         </texttable>
       </section>  
       
+      <section title="RFC4568">      
+        <t>
+          RFC4568 defines a Session Description Protocol (SDP)
+          cryptographic attribute for unicast media streams.  The attribute
+          describes a cryptographic key and other parameters that serve to
+          configure security for a unicast media stream in either a single
+          message or a roundtrip exchange.
+        </t>    
+        <texttable title="RFC4568 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Category</ttcol>
+          
+          <c>crypto&nbsp;</c><c>Same crypto parameters applies to all m= lines&nbsp;</c>
+          <c>M&nbsp;</c><c>NC&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>       
+          
+        </texttable>
+      </section>
+      
+      <section title="RFC5762">      
+        <t>
+          The Real-time Transport Protocol (RTP) is a widely used transport for
+          real-time multimedia on IP networks.  The Datagram Congestion Control
+          Protocol (DCCP) is a transport protocol that provides desirable
+          services for real-time applications.  RFC5762 specifies a mapping
+          of RTP onto DCCP, along with associated signalling, such that real-
+          time applications can make use of the services provided by DCCP
+        </t>    
+        <texttable title="RFC5762 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Category</ttcol>
+          
+          <c>dccp-service-code&nbsp;</c><c>Not recommended due to DCCP service code
+          mismatch between different media types&nbsp;</c>
+          <c>M&nbsp;</c><c>DM&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>       
+          
+        </texttable>
+      </section>
+      
+      <section title="RFC5506">      
+        <t>
+          RFC5506 discusses benefits and issues that arise when allowing
+          Real-time Transport Protocol (RTCP) packets to be transmitted with
+          reduced size.
+        </t>    
+        <texttable title="RFC5762 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Category</ttcol>
+          
+          <c>rtcp-rsize&nbsp;</c><c>RTCP reduced size MUST be repeated across all the 
+          m=lines&nbsp;</c><c>M&nbsp;</c><c>R&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>       
+          
+        </texttable>
+      </section>
       <section title="RFC3890">      
         <t>
           RFC3890 defines a Session Description Protocol (SDP) Transport
@@ -441,6 +540,81 @@
         </texttable>
       </section>  
       
+      <section title="RFC3605">      
+        <t>
+          The Session Description Protocol (SDP) is used to describe the
+          parameters of media streams used in multimedia sessions.  When a
+          session requires multiple ports, SDP assumes that these ports have
+          consecutive numbers.  However, when the session crosses a network
+          address translation device that also uses port mapping, the ordering
+          of ports can be destroyed by the translation.  To handle this, we
+          propose an extension attribute to SDP.
+        </t>    
+        <texttable title="RFC3605 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Category</ttcol>
+          
+          <c>rtcp&nbsp;</c><c>Case1:Same RTCP port is repeated across the m=lines.
+            Case2:Different RTCP ports renders multiplexing impossible&nbsp;</c><c>M</c>
+          <c>R if Case1, DM if Case2&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+        </texttable>
+      </section>
+      
+      <section title="RFC5576">      
+        <t>
+          RFC5576 defines a mechanism to describe RTP media sources, which are
+          identified by their synchronization source (SSRC) identifiers, in
+          SDP, to associate attributes with these sources, and to express
+          relationships among sources.  It also defines several source-level
+          attributes that can be used to describe properties of media sources.</t>    
+        <texttable title="RFC5583 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Category</ttcol>
+          
+          <c>ssrc&nbsp;</c><c>SSRCs repeated over multiple m=lines complicates
+          multiplexing&nbsp;</c><c>M</c><c>MS,DM&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>ssrc-group&nbsp;</c><c>SSRCs repeated over multiple m=lines complicates
+            multiplexing&nbsp;</c><c>M</c><c>MS,DM&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+        </texttable>
+      </section>
+      
+      <section title="RFC5583">      
+        <t>
+          RFC5583 defines semantics that allow for signaling the decoding
+          dependency of different media descriptions with the same media type
+          in the Session Description Protocol (SDP).  This is required, for
+          example, if media data is separated and transported in different
+          network streams as a result of the use of a layered or multiple
+          descriptive media coding process.
+        </t>    
+        <texttable title="RFC5583 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Category</ttcol>
+          
+          <c>depend lay&nbsp;</c><c>Not recommended for multiplexing m=lines of 
+          different media types&nbsp;</c><c>M</c><c>MS,DM&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>depend mdc&nbsp;</c><c>Not recommended for multiplexing m=lines of 
+            different media types&nbsp;</c><c>M</c><c>MS,DM&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+        </texttable>
+      </section>
+      
+      
       <section title="RFC3407">      
         <t>
           RFC3407 defines a set of Session Description Protocol (SDP)
@@ -468,6 +642,150 @@
         </texttable>
       </section>
 
+      <section title="RFC4583">      
+        <t>
+          This document specifies how to describe Binary Floor Control Protocol
+          (BFCP) streams in Session Description Protocol (SDP) descriptions.
+          User agents using the offer/answer model to establish BFCP streams
+          use this format in their offers and answers
+        </t>    
+        <texttable title="RFC4583 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Category</ttcol>
+          
+          <c>floorctrl&nbsp;</c><c>Not recommended due to incompatible protocol between
+          bfcp transport and RTP media transports&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>       
+          
+          <c>confid&nbsp;</c><c>Not recommended due to incompatible protocol between
+          bfcp transport and RTP media transports&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>userid&nbsp;</c><c>Not recommended due to incompatible protocol between
+          bfcp transport and RTP media transports&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>floorid&nbsp;</c><c>Not recommended due to incompatible protocol between
+          bfcp transport and RTP media transports&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+        </texttable>
+      </section>
+      
+      <section title="RFC5547">      
+        <t>
+          RFC5547 provides a mechanism to negotiate the transfer of one
+          or more files between two endpoints by using the Session Description
+          Protocol (SDP) offer/answer model specified in RFC 3264. 
+        </t>    
+        <texttable title="RFC5547 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Category</ttcol>
+          
+          <c>file-selector&nbsp;</c><c>Not recommended for multiplexing due to
+            differences in the protocol and media types&nbsp;</c>
+          <c>M</c><c>DM&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>file-transfer-id&nbsp;</c><c>Not recommended for multiplexing due to
+            differences in the protocol and media types&nbsp;</c>
+          <c>M</c><c>DM&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c> file-disposition&nbsp;</c><c>Not recommended for multiplexing due to
+            differences in the protocol and media types&nbsp;</c>
+          <c>M</c><c>DM&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c> file-date,file-iconfile-range,&nbsp;</c><c>Not recommended for multiplexing
+            due to differences in the protocol and media types&nbsp;</c>
+          <c>M</c><c>DM&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          
+        </texttable>
+      </section>
+      
+      <section title="draft-ietf-mmusic-media-loopback-27">      
+        <t>
+          This extension adds new SDP media types and
+          attributes, which enable establishment of media sessions where the
+          media is looped back to the transmitter. Such media sessions will
+          serve as monitoring and troubleshooting tools by providing the
+          means for measurement of more advanced VoIP, Real-time Text and
+          Video over IP performance metrics.
+        </t>    
+        <texttable title="draft-ietf-mmusic-media-loopback-27 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Category</ttcol>
+          
+          <c>loopback&nbsp;</c><c>The attribute MUST be repeated across all
+           m=lines multiplexed &nbsp;</c><c>M</c><c>MS,R&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>loopback-source&nbsp;</c><c>The attribute MUST be reported across all
+            m=lines multiplexed&nbsp;</c><c>M</c><c>MS,R&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>loopback-mirrork&nbsp;</c><c>The attribute MUST be reported across all
+            m=lines multiplexed&nbsp;</c><c>M</c><c>MS,R&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+        </texttable>
+      </section>
+      
+      
+      <section title="RFC5760">      
+        <t>
+          RFC5760 specifies an extension to the Real-time Transport
+          Control Protocol (RTCP) to use unicast feedback to a multicast
+          sender.  The proposed extension is useful for single-source multicast
+          sessions such as Source-Specific Multicast (SSM) communication where
+          the traditional model of many-to-many group communication is either
+          not available or not desired.
+        </t>    
+        <texttable title="RFC5760 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Category</ttcol>
+          
+          <c>rtcp-unicast&nbsp;</c><c>The attribute MUST be reported across all
+          m=lines multiplexed&nbsp;</c><c>M</c><c>MS,R&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+            
+        </texttable>
+      </section>
+      
+      <section title="RFC5939">      
+        <t>
+          RFC5938 defines a general SDP Capability Negotiation framework.
+          It also specifies how to provide attributes and transport protocols
+          as capabilities and negotiate them using the framework.  Extensions
+          for other types of capabilities (e.g., media types and media formats)
+          may be provided in other documents.
+          
+        </t>    
+        <texttable title="RFC5939 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Category</ttcol>
+          
+          <c>rtcp-unicast&nbsp;</c><c>The attribute MUST be reported across all
+            m=lines multiplexed&nbsp;</c><c>M</c><c>MS,R&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+        </texttable>
+      </section>
+      
+      
       <section title="RFC4145">      
         <t>
           RFC4145 describes how to express media transport over TCP using
@@ -714,6 +1032,7 @@
         </texttable>
      </section>
       
+      
       <section title="ITU T.38">      
         <t>
          ITU T.38 defines procedures for real-time Group 3 fascimile communications
@@ -734,6 +1053,38 @@
         </texttable>
       </section>
      
+      <section title="RFC4975">      
+        <t>
+          RFC4975 the Message Session Relay Protocol, a protocol for transmitting a
+          series of related instant messages in the context of a session.  Message sessions 
+          are treated like any other media stream when set up via a rendezvous or session creation
+          protocol such as the Session Initiation Protocol.
+        </t>    
+        <texttable title="RFC4975 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Category</ttcol>
+          
+          <c>accept-types&nbsp;</c><c>Not recommended due to incompatible media types&nbsp;</c>
+          <c>M&nbsp;</c><c>DM&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>       
+          
+          <c>accept-wrapped-types&nbsp;</c><c>Not recommended due to incompatible media typess&nbsp;</c>
+          <c>M&nbsp;</c><c>DM&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>max-size&nbsp;</c><c>Not recommended due to incompatible media types&nbsp;</c>
+          <c>M&nbsp;</c><c>DM&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>path&nbsp;</c><c>Not recommended due to incompatible media types&nbsp;</c>
+          <c>M&nbsp;</c><c>DM&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+        </texttable>
+      </section>
+      
       <section title="Historic Use">      
         <t>
           This section specifies analysis for the attributes that are included for historic
