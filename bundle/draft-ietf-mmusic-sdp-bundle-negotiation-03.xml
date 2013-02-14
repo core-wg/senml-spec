@@ -144,9 +144,9 @@
 SDP Offer 
 
     v=0
-    o=alice 2890844526 2890844526 IN IP4 host.atlanta.example.org
+    o=alice 2890844526 2890844526 IN IP4 atlanta.example.org
     s=
-    c=IN IP4 host.atlanta.example.org
+    c=IN IP4 atlanta.example.org
     t=0 0
     m=audio 10000 RTP/AVP 97
     a=rtpmap:97 iLBC/8000
@@ -163,9 +163,9 @@ SDP Offer
 SDP Answer 
 
     v=0
-    o=bob 2808844564 2808844564 IN IP4 host.biloxi.example.com
+    o=bob 2808844564 2808844564 IN IP4 biloxi.example.com
     s=
-    c=IN IP4 host.biloxi.example.com
+    c=IN IP4 biloxi.example.com
     t=0 0
     m=audio 20000 RTP/AVP 97
     a=rtpmap:97 iLBC/8000
@@ -194,9 +194,9 @@ SDP Answer
 SDP Offer 
 
     v=0
-    o=alice 2890844526 2890844526 IN IP4 host.atlanta.example.org
+    o=alice 2890844526 2890844526 IN IP4 atlanta.example.org
     s=
-    c=IN IP4 host.atlanta.example.org
+    c=IN IP4 atlanta.example.org
     t=0 0
     m=audio 10000 RTP/AVP 97
     a=rtpmap:97 iLBC/8000
@@ -237,9 +237,9 @@ SDP Offer
 SDP Offer 
 
     v=0
-    o=alice 2890844526 2890844526 IN IP4 host.atlanta.example.org
+    o=alice 2890844526 2890844526 IN IP4 atlanta.example.org
     s=
-    c=IN IP4 host.atlanta.example.org
+    c=IN IP4 atlanta.example.org
     t=0 0
     m=audio 49170 RTP/AVP 0
     a=rtcp:53020
@@ -578,9 +578,9 @@ SDP Offer
 SDP Offer (Bundled media offered)
 
     v=0
-    o=alice 2890844526 2890844526 IN IP4 host.atlanta.example.org
+    o=alice 2890844526 2890844526 IN IP4 atlanta.example.org
     s=
-    c=IN IP4 host.atlanta.example.org
+    c=IN IP4 atlanta.example.org
     t=0 0
     a=group:BUNDLE foo bar
     m=audio 10000 RTP/AVP 0 8 97
@@ -604,9 +604,9 @@ SDP Offer (Bundled media offered)
 SDP Answer (Bundled media accepted)
 
     v=0
-    o=bob 2808844564 2808844564 IN IP4 host.biloxi.example.com
+    o=bob 2808844564 2808844564 IN IP4 biloxi.example.com
     s=
-    c=IN IP4 host.biloxi.example.com
+    c=IN IP4 biloxi.example.com
     t=0 0
     a=group:USE-BUNDLE foo bar
     m=audio 20000 RTP/AVP 0
@@ -627,9 +627,9 @@ SDP Answer (Bundled media accepted)
 SDP Answer (Bundled media not accepted)
 
     v=0
-    o=bob 2808844564 2808844564 IN IP4 host.biloxi.example.com
+    o=bob 2808844564 2808844564 IN IP4 biloxi.example.com
     s=
-    c=IN IP4 host.biloxi.example.com
+    c=IN IP4 biloxi.example.com
     t=0 0         
     m=audio 20000 RTP/AVP 0         
     b=AS:200
@@ -647,9 +647,9 @@ SDP Answer (Bundled media not accepted)
 SDP Offer with ICE (Bundled media offered)
 
     v=0
-    o=alice 2890844526 2890844526 IN IP4 host.atlanta.example.org
+    o=alice 2890844526 2890844526 IN IP4 atlanta.example.org
     s=
-    c=IN IP4 host.atlanta.example.org
+    c=IN IP4 atlanta.example.org
     t=0 0
     a=group:BUNDLE foo bar
     m=audio 10000 RTP/AVP 0 8 97
@@ -658,13 +658,13 @@ SDP Offer with ICE (Bundled media offered)
     a=rtpmap:0 PCMU/8000
     a=rtpmap:8 PCMA/8000
     a=rtpmap:97 iLBC/8000
-    a=candidate:1 1 UDP 1694498815 host.atlanta.example.org 10000 typ host
+    a=candidate:1 1 UDP 1694498815 atlanta.example.org 10000 typ host
     m=video 10002 RTP/AVP 31 32
     a=mid:bar
     b=AS:1000
     a=rtpmap:31 H261/90000
     a=rtpmap:32 MPV/90000		 
-    a=candidate:1 1 UDP 1694498815 host.atlanta.example.org 10002 typ host
+    a=candidate:1 1 UDP 1694498815 atlanta.example.org 10002 typ host
 		 
 ]]></artwork>
         </figure>
