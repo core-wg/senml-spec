@@ -4,7 +4,10 @@
 <?rfc toc="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc sortrefs="no" ?>
-<rfc ipr="trust200811" category="std" docName="draft-ietf-mmusic-sdp-bundle-negotiation-02.txt" obsoletes="" extends="" submissionType="IETF" xml:lang="en">
+<?rfc symrefs="yes" ?> 
+
+<!-- I suspect the authors may want to chance trust200811 to trust200902 --> 
+<rfc ipr="trust200811" category="std" docName="draft-ietf-mmusic-sdp-bundle-negotiation-03.txt" submissionType="IETF" xml:lang="en">
 <front>
     <title abbrev="Bundled media">
 		Multiplexing Negotiation Using Session Description Protocol (SDP) Port Numbers
@@ -35,7 +38,7 @@
 		</address>
     </author>
 
-    <date year="2013" />
+    <date year="2013" month="february" day="13" />
     <area>Transport</area>
     <workgroup>MMUSIC Working Group</workgroup>
     <keyword>RTP</keyword>
@@ -53,9 +56,9 @@
     <abstract>
 		<t>
 			This specification defines a new SDP Grouping Framework SDP grouping framework 
-			extension, "BUNDLE", that can be used with the Session Description Protocol (SDP) 
+			extension, "BUNDLE" and "USE-BUNDLE", that can be used with the Session Description Protocol (SDP) 
 			Offer/Answer mechanism to negotiate the usage of bundled media, which refers 
-			to the usage of a single 5-tuple for media associated with multiple SDP media 
+			to the usage of a single 5-tuple transport flow for media associated with multiple SDP media 
 			descriptions ("m=" lines).
 		</t>
     </abstract>
@@ -72,17 +75,24 @@
 			descriptions.			
 		</t>		
 		<t>
-			This specification defines a new SDP Grouping Framework SDP grouping framework <xref 
-			format="default" pageno="false" target="RFC5888"/> extension, "BUNDLE", that can be
+			This specification defines two new SDP Grouping Framework SDP grouping framework <xref 
+			format="default" pageno="false" target="RFC5888"/> extension, "BUNDLE" and "USE-BUNDLE", that can be
 			used with the Session Description Protocol (SDP) Offer/Answer mechanism <xref format="default" 
 			pageno="false" target="RFC3264"/> to negotiate the usage of bundled media, which refers 
-			to the usage of a single 5-tuple for media associated with multiple SDP media descriptions 
+			to the usage of a single 5-tuple transport flow for media associated with multiple SDP media descriptions 
 			("m=" lines).
 		</t>
 		<t>
-			When an endpoint generates an SDP Offer or SDP Answer <xref format="default" pageno="false" 
-			target="RFC3264"/>, which includes a "BUNDLE" group, each "m=" line associated with the 
-			group will share a single port number value.
+			When an endpoint generates an SDP Offer <xref format="default" pageno="false" 
+			target="RFC3264"/>, which includes a "BUNDLE" group, 
+                        the endpoint is indicating that it is willing to 
+                        have each "m=" line associated with the 
+			group end up using a single transport port if bundle is negotiated.
+		</t>
+		<t>
+			When an endpoint generates an SDP Answer <xref format="default" pageno="false" 
+			target="RFC3264"/>, which includes a "USE-BUNDLE" group, each "m=" line associated with the 
+			group will end up using a single transport port.
 		</t>
 		<t>
 			As defined in RFC 4566 <xref format="default" pageno="false" target="RFC4566"/>, the 
@@ -101,11 +111,8 @@
 		<t>
 			The mechanism is backward compatible. Entities that do not support the "BUNDLE" grouping 
 			extension, or do not want to enable the mechanism for a given session, are expected to 
-			generate a "normal" SDP Answer, using different port number values for each "m=" line, to 
-			the SDP Offer. The SDP Offerer <xref format="default" pageno="false" target="RFC3264"/>
-			will still use a single port number value for each media, but as the SDP Answerer 
-			<xref format="default" pageno="false" target="RFC3264"/> will use separate ports a single 
-			5-tuple will not be used for media associated with multiple "m=" lines between the endpoints.
+			generate a "normal" SDP Offer and Answer, using different port number values for each "m=" line, to 
+			the SDP Offer.
 		</t>	  
     </section>
 	
@@ -117,8 +124,8 @@
 			format="default"/>.
 		</t>
 		<t>
-			5-tuple: A collection of the following values: source address, source port, 
-			destination address, destination port and protocol.
+			5-tuple: A collection of the following values: source IP address, source transport port, 
+			destination IP address, destination transport port and transport protocol.
 		</t>
 		<t>
 			Bundled media: Two or more RTP streams using a single 5-tuple. The RTCP 
@@ -126,15 +133,6 @@
 			be the same, but can also be different, as the one used by the RTP streams.
 		</t>
 	</section>
-
-    <section title="Conventions" toc="default">
-		<t>
-			The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-			"SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-			document are to be interpreted as described in BCP 14, RFC 2119 <xref
-			format="default" pageno="false" target="RFC2119" />.
-		</t>
-    </section>
 
     <section title="Applicability Statement" toc="default">
 		<t>
@@ -149,39 +147,56 @@
 			This section defines a new SDP Grouping Framework extension, "BUNDLE".
 		</t>
 		<t>
-			The "BUNDLE" extension can be indicated using an SDP session-level 'group'
+			The "BUNDLE" extension in an SDP Offer can be indicated using an SDP session-level 'group'
 			attribute. Each SDP media description ("m=" line) that is grouped together, 
 			using an SDP media-level 'mid' attribute, is part of a specific "BUNDLE" 
-			group.
+			group. 
 		</t>
-    </section>
+         </section>
+
+	<section title="SDP Grouping Framework USE-BUNDLE Extension Semantics" toc="default">
+		<t>
+			This section defines a new SDP Grouping Framework extension, "USE-BUNDLE".
+		</t>
+		<t>
+			The "USE-BUNDLE" extension in an SDP Answer can be indicated using an SDP session-level 'group'
+			attribute. Each SDP media description ("m=" line) that is grouped together, 
+			using an SDP media-level 'mid' attribute, is part of a specific "USE-BUNDLE" 
+			group. The 5-tuple used is the one formed by the transport information from the
+                        mid of the first entry in the BUNDLE group and the first entry of the USE-BUNDLE group. 
+		</t>
+         </section>
 	
     <section title="SDP Offer/Answer Procedures" toc="default">
 		<section anchor="sec-oa-gen" title="General" toc="default">
 			<t>
 				When an SDP Offerer or SDP Answerer generates an SDP Offer or SDP Answer, 
 				that describes bundled media, it MUST insert an SDP session-level 'group' 
-				attribute, with a "BUNDLE" value, and assign SDP media-level 'mid' attribute 
-				values to each "m=" line associated with the "BUNDLE" group.
+				attribute, with a "BUNDLE" value for
+                                Offers or a "USE-BUNDLE" for answers, and assign SDP media-level 'mid' attribute 
+				values to each "m=" line associated with the group.
 			</t>
 			<t>
-				In addition, the entity that generates the SDP Offer or SDP Answer MUST, for 
+				In addition, the entity that generates the SDP Offer MUST also 
+                                generate the rest of the offer in roughly the same ways as if it did not support BUNDLE. For 
 				each "m=" line that is part of the "BUNDLE" group:
 			</t>
 			<t>
-				<list style="symbols">
-					<t>1. Use the same port number value.</t>
-					<t>2. Use the same connection data ("c=" line) value.</t>
-					<t>3. Use the same SDP 'rtcp' attribute value, when used.</t>
-					<t>4. Use the same ICE candidate values, when used.</t>
-					<t>5. Insert an SDP 'rtpc-mux' attribute.</t>
+				<list style="numbers">
+					<t>Use a different port number value.</t>
+					<t>Use the same connection data ("c=" line) value.</t>
+					<t>Use a different port for each SDP 'rtcp' attribute value, when 'rtcp' attribute is used.</t>
+					<t>Use ICE candidate values with different ports and values, when ICE is used.</t>
+					<t>Insert and support an SDP 'rtpc-mux' attribute.</t>
+                                        <t>Use the same DTLS-SRTP fingerprint attribute, when DTLS-SRTP is used</t>
+                                        <t>Use different SDES crypto attribute, when SDES is used</t>
 				</list>				
-			</t>		
-			<t>
-				NOTE: If an entity wants to disable specific media ("m=" line) 
-				associated with a "BUNDLE" group, it will use a zero port number value for 
-				the "m=" line associated with the media.
 			</t>
+                        <t> There are also special rules for handling many
+                        different attributes as defined in TODO
+                        [draft-nandakumar-rtcweb-sdp-attribute-analysis]. It is
+                        not possible to use bundle with some attributes. </t>
+
 		</section>
 			
 		<section title="SDP Offerer Procedures" toc="default">			
@@ -192,74 +207,39 @@
 			</t>
 			<t>
 				If the associated SDP Answer contains an SDP session-level 'group' attribute,
-				with a "BUNDLE" value, and the SDP Answer is created according to the proceudres
-				in <xref format="default" pageno="false" target="sec-oa-gen"/> (the same
-				port number value is used for each "m=" line associated with the "BUNDLE" group, etc), 
-				the SDP Offerer can start using the same 5-tuple for sending and receiving media, 
-				associated with the group, between the entities.
+				with a "USE-BUNDLE" value, 
+				the SDP Offerer can start using the 5-tuple of the first "m=" line in the group 
+                                for sending and receiving media for all the "m=" lines in the group.
 			</t>
 			<t>
 				If the SDP Answer does not include a session-level SDP 'group' attribute, with a 
-				"BUNDLE" value, the SDP Offerer cannot use the same 5-tuple for media associated 
+				"USE-BUNDLE" value, the SDP Offerer cannot use the same 5-tuple for media associated 
 				with multiple "m=" lines.
 			</t>
 			<t>
-				If the SDP Answererer indicates that it will not use bundled media, the SDP Offerer
-				will still use the single port number value for each "m= line" associated with the
-				offered "BUNDLE" group, and it will normally be able to separate each individual media. 
-				The default mechanism for separating media received on a single IP address and port 
-				doing this is by using a 5-tuple based mapping for each individual media. If the SDP 
-				Offerer is aware of the Synchronization Source (SSRC) <xref format="default" pageno="false" 
-				target="RFC3550"/> values that the SDP Answerer will use in the media it sends, and 
-				the SSRC values will be unique for each media, the SDP Offerer can separate media based 
-				on the SSRC values.
-			</t>
-			<t>
-				NOTE: Assuming symmetric media is used, the SDP Offerer can use the port information
-				from the SDP Answer in order to create the 5-tuple mapping for each media.
-			</t>
-			<t>
-				If the SDP Offerer is not able to separate multiple media received on a single 
-				port, it MUST send a new SDP Offer, without offering bundled media, where a separate
-				port number value is provide for each "m=" line of the SDP Offer.
-			</t>
-			<t>
-				If an SDP Offer, offering a "BUNDLE" group, and the SDP Offerer has reasons to
-				believe that the rejection is due to the usage of a single port number value for multiple
-				"m=" lines, the SDP Offerer SHOULD send a new SDP Offer, without a "BUNDLE" group, 
-				where a separate port number value is provide for each "m=" line of the SDP offer.
+				If the SDP Answer indicates that it will not use bundled media, 
+                                SDP usage work in the same way as if BUNLE had not been used. 
 			</t>
 		</section>
 
 		<section title="SDP Answerer Procedures" toc="default">
 			<t>
 				When an SDP Answerer receives an SDP Offer, which offers bundled media, and the
-				SDP Answerer accepts the offered bundle group, the SDP Answerer MUST create an 
-				SDP Answer according to the procedures in <xref format="default" pageno="false" 
-				target="sec-oa-gen"/>.
+				SDP Answerer accepts the offered bundle group. 
+                                Any "m=" lines that are rejected have their port set to zero as usual. 
+                                Any "m=" lines that are not rejected have the port on the "m=" line, as
+                                well as the ICE, 'rtcp' attribute, 'rtcp-mux' and ICE attributes set to 
+                                the value to be used by the single 5-tuple over which all the media 
+                                in the group will use. 
 			</t>
 			<t>
 				If the SDP Answerer does not accept the "BUNDLE" group in the SDP Offer, it MUST NOT
-				include a session-evel 'group' attribute, with a "BUNDLE" value, in 
+				include a session level 'group' attribute, with a "BUNDLE" or "USE-BUNDLE" value, in 
 				the associated SDP Answer. In addition, the SDP Answerer MUST provide separate 
-				port number values for each "m=" line of the SDP Answer.
+				port number values for each "m=" line of the SDP Answer and separate ICE atribute values. 
 			</t>
 		</section>
 		
-		<section title="Bundled SDP Information" toc="default">
-			<section title="General" toc="default">
-				<t>
-					This section describes how SDP information, given for each media description,
-					is calculated into a single value for a "BUNDLE" group.
-				</t>
-			</section>
-			<section title="Bandwidth (b=)" toc="default">
-				<t>
-					The total proposed bandwidth is the sum of the proposed bandwidth for each
-					"m=" line associated with a negotiated BUNDLE group.
-				</t>
-			</section>
-		</section>
     </section>
 
 	<section anchor="sec-rtp" title="Single vs Multiple RTP Sessions" toc="default">
@@ -313,23 +293,24 @@
 		</section>
 		<section anchor="sec-ice-can" title="Candidates" toc="default">
 			<t>
-				When an ICE-enabled SDP Offerer sends an SDP offer, it MUST include ICE candidates 
+				When an ICE-enabled SDP Offerer sends an initial SDP offer, it MUST include ICE candidates 
 				for each "m=" line associated with a "BUNDLE" group. The candidate values MUST be
-				identical for each "m=" line associated with the group. This rule applies 
-				also to subsequent SDP Offers, when the usage of bundled media has already been 
+				different for each "m=" line associated with the group. This rule does not apply 
+                                to subsequent SDP Offers, when the usage of bundled media has already been 
 				negotiated.
 			</t>
 			<t>
 				When an ICE-enabled SDP Answerer receives an SDP Offer, offering a "BUNDLE" group and 
-				ICE, if the SDP Answerer enables ICE, MUST include ICE candidates for each "m=" line of
-				the SDP Answer. This also applies for "m=" lines that are part of a "BUNDLE" group, in 
-				which case the candidate values MUST be identical for each "m=" line associated with
+				ICE, if the SDP Answerer enables ICE, it MUST include ICE candidates for each "m=" line of
+				the SDP Answer. This also applies for "m=" lines that are part of a "USE-BUNDLE" group, in 
+				which case the candidate values MUST be the same for each "m=" line associated with
 				the group. This rule applies also to subsequent SDP Answers, when the usage 
 				of bundled media has already been negotiated.
 			</t>
 			<t>
 				Once the usage of bundled media has been negotiated, ICE connectivity checks and keep-alives 
-				only needs to be performed for the whole "BUNDLE" group, instead of for each individual m= line 
+				only needs to be performed for the 5-tuple used by the "USE-BUNDLE" group, 
+                                instead of for each individual m= line 
 				associated with the group.
 			</t>
 		</section>
@@ -349,9 +330,10 @@
 			shows two SDP Answer alternatives: one where bundled media is accepted, and one where
 			bundled media is rejected (or, not even supported) by the SDP Answerer.
 		</t>
-		<figure>
+          <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
+
 SDP Offer (Bundled media offered)
 
     v=0
@@ -366,13 +348,18 @@ SDP Offer (Bundled media offered)
     a=rtpmap:0 PCMU/8000
     a=rtpmap:8 PCMA/8000
     a=rtpmap:97 iLBC/8000
-    m=video 10000 RTP/AVP 31 32
+    m=video 10002 RTP/AVP 31 32
     a=mid:bar
     b=AS:1000
     a=rtpmap:31 H261/90000
     a=rtpmap:32 MPV/90000
 
-		 
+]]></artwork>
+        </figure>
+        <figure>
+        <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[		 
+
 SDP Answer (Bundled media accepted)
 
     v=0
@@ -380,7 +367,7 @@ SDP Answer (Bundled media accepted)
     s=
     c=IN IP4 host.biloxi.com
     t=0 0
-    a=group:BUNDLE foo bar
+    a=group:USE-BUNDLE foo bar
     m=audio 20000 RTP/AVP 0
     a=mid:foo
     b=AS:200
@@ -390,7 +377,12 @@ SDP Answer (Bundled media accepted)
     b=AS:1000
     a=rtpmap:32 MPV/90000
 
-		 
+]]></artwork>
+        </figure>
+        <figure>
+        <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+
 SDP Answer (Bundled media not accepted)
 
     v=0
@@ -404,7 +396,12 @@ SDP Answer (Bundled media not accepted)
     m=video 30000 RTP/AVP 32         
     b=AS:1000
     a=rtpmap:32 MPV/90000
-		 
+
+]]></artwork>
+        </figure>
+        <figure>
+        <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
 
 SDP Offer with ICE (Bundled media offered)
 
@@ -421,26 +418,22 @@ SDP Offer with ICE (Bundled media offered)
     a=rtpmap:8 PCMA/8000
     a=rtpmap:97 iLBC/8000
     a=candidate:1 1 UDP 1694498815 host.atlanta.com 10000 typ host
-    m=video 10000 RTP/AVP 31 32
+    m=video 10002 RTP/AVP 31 32
     a=mid:bar
     b=AS:1000
     a=rtpmap:31 H261/90000
     a=rtpmap:32 MPV/90000		 
-    a=candidate:1 1 UDP 1694498815 host.atlanta.com 10000 typ host
-
-
-
+    a=candidate:1 1 UDP 1694498815 host.atlanta.com 10002 typ host
 		 
 ]]></artwork>
         </figure>
     </section>
 
-	
-	
+		
     <section title="IANA Considerations" toc="default">
 		<t>
 			This document requests IANA to register the new SDP Grouping semantic
-			extension called BUNDLE.
+			extension called BUNDLE and USE-BUNDLE.
 		</t>
     </section>
 		
@@ -452,12 +445,17 @@ SDP Offer with ICE (Bundled media offered)
 		</t>
 		<t>
 			Thanks to the nice flight crew on AY 021 for providing good sparkling 
-			wine, and a nice working athmosphere, for working on this draft.
+			wine, and a nice working atmosphere, for working on this draft.
 		</t>
     </section>
 
     <section title="Change Log">
 		<t>[RFC EDITOR NOTE: Please remove this section when publishing]</t>
+                <t>Changes from draft-ietf-mmusic-sdp-bundle-negotiation-02
+			<list style="symbols">
+				<t>Moved to use different ports in the "m=" lines of offer.</t>
+			</list>
+		</t>
 		<t>Changes from draft-ietf-mmusic-sdp-bundle-negotiation-01
 			<list style="symbols">
 				<t>No changes. New version due to expiration.</t>
