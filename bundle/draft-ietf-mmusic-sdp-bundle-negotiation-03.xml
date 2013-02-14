@@ -6,8 +6,7 @@
 <?rfc sortrefs="no" ?>
 <?rfc symrefs="yes" ?> 
 
-<!-- I suspect the authors may want to chance trust200811 to trust200902 --> 
-<rfc ipr="trust200811" category="std" docName="draft-ietf-mmusic-sdp-bundle-negotiation-03.txt" submissionType="IETF" xml:lang="en">
+<rfc ipr="trust200902" category="std" docName="draft-ietf-mmusic-sdp-bundle-negotiation-03.txt" submissionType="IETF" xml:lang="en">
 <front>
     <title abbrev="Bundled media">
 		Multiplexing Negotiation Using Session Description Protocol (SDP) Port Numbers
@@ -38,7 +37,7 @@
 		</address>
     </author>
 
-    <date year="2013" month="february" day="13" />
+    <date year="2013" month="february" day="14" />
     <area>Transport</area>
     <workgroup>MMUSIC Working Group</workgroup>
     <keyword>RTP</keyword>
@@ -80,7 +79,11 @@
 			used with the Session Description Protocol (SDP) Offer/Answer mechanism <xref format="default" 
 			pageno="false" target="RFC3264"/> to negotiate the usage of bundled media, which refers 
 			to the usage of a single 5-tuple transport flow for media associated with multiple SDP media descriptions 
-			("m=" lines).
+			("m=" lines). 
+                        The BUNDLE is used in an SDP Offer to indicate the
+                        Offerer supports and would like to use bundled media
+                        while the USE-BUNDLE is used in an SDP Answer to
+                        indicate that Answerer has agreed to use bundled media.
 		</t>
 		<t>
 			When an endpoint generates an SDP Offer <xref format="default" pageno="false" 
@@ -141,9 +144,9 @@
 SDP Offer 
 
     v=0
-    o=alice 2890844526 2890844526 IN IP4 host.atlanta.com
+    o=alice 2890844526 2890844526 IN IP4 atlanta.example.org
     s=
-    c=IN IP4 host.atlanta.com
+    c=IN IP4 atlanta.example.org
     t=0 0
     m=audio 10000 RTP/AVP 97
     a=rtpmap:97 iLBC/8000
@@ -160,9 +163,9 @@ SDP Offer
 SDP Answer 
 
     v=0
-    o=bob 2808844564 2808844564 IN IP4 host.biloxi.com
+    o=bob 2808844564 2808844564 IN IP4 biloxi.example.com
     s=
-    c=IN IP4 host.biloxi.com
+    c=IN IP4 biloxi.example.com
     t=0 0
     m=audio 20000 RTP/AVP 97
     a=rtpmap:97 iLBC/8000
@@ -172,7 +175,7 @@ SDP Answer
 ]]></artwork>
         </figure>
 
-     <t> RFC 4961 specifies a way of doing symmetric RTP but that is an a later
+     <t> RFC 4961 <xref target="RFC4961"/> specifies a way of doing symmetric RTP but that is an a later
      invention to RTP and Bob can not assume that Alice supports RFC 4961. This
      means that Alice may be sending RTP from a different port than 10000 or
      10002 - some implementation simply send the RTP from an ephemeral
@@ -191,9 +194,9 @@ SDP Answer
 SDP Offer 
 
     v=0
-    o=alice 2890844526 2890844526 IN IP4 host.atlanta.com
+    o=alice 2890844526 2890844526 IN IP4 atlanta.example.org
     s=
-    c=IN IP4 host.atlanta.com
+    c=IN IP4 atlanta.example.org
     t=0 0
     m=audio 10000 RTP/AVP 97
     a=rtpmap:97 iLBC/8000
@@ -207,6 +210,14 @@ SDP Offer
         <t> will result in the second "m=" line being considered an SDP error
         because it has the same port as the first line. </t>
 
+        <t> Some of the developers of products that do this make the argument
+        that this is not a bug and that for SDP to work when not using things
+        like RFC 4961, the port numbers need to be unique thus it is perfectly
+        reasonable for their software to make this assumption. The authors are
+        not suggesting this is a good way to design an SDP stack but merely
+        trying to provide an explanation of why some UAs behave this way and why
+        theses devices consider it acceptable. </t>
+
       </section>
 
       <section  title="B2BUA Interoperability" toc="default">
@@ -215,7 +226,7 @@ SDP Offer
         the incoming call leg contains an SDP attribute the B2BUA does not
         understand, the B2BUS still generates that SDP attribute in the Offer
         for the outgoing call leg. Consider an B2BUA that did not understand
-        "a=rtcp" attribute from RFC 3605 yet acted this way. Further assume that
+        "a=rtcp" attribute from RFC 3605 <xref target="RFC3605"/> yet acted this way. Further assume that
         the B2BUA was configured to tear down any call where it did not see any
         RTCP for 5 minutes. In this cases, if the B2BUA received an Offer like: </t>
 
@@ -226,9 +237,9 @@ SDP Offer
 SDP Offer 
 
     v=0
-    o=alice 2890844526 2890844526 IN IP4 host.atlanta.com
+    o=alice 2890844526 2890844526 IN IP4 atlanta.example.org
     s=
-    c=IN IP4 host.atlanta.com
+    c=IN IP4 atlanta.example.org
     t=0 0
     m=audio 49170 RTP/AVP 0
     a=rtcp:53020
@@ -244,6 +255,13 @@ SDP Offer
         tear down the call. It is worth noting that a B2BUA that generated an
         Offer with capabilities it does not understand is not compliant with the
         specifications. </t>
+
+        <t> To mitigate the risk to B2BUAs that generate BUNDLE when they should
+        not, the spec includes a feature where once the initial Offer / Answer is
+        done and ICE is completed, a second Offer / Answer exchange is done with
+        the all the "m=" lines and associated ICE transports set to the actual
+        5-tuple in use. This allows any device on Offer / Answer path to be
+        updated even if it does not understand BUNDLE. </t>
 
         <section  title="3GPP  Impact" toc="default">
           <t> It is very unlikely that the B2BUA issue will be a problem for
@@ -273,7 +291,7 @@ SDP Offer
         pacing requirements. All of this gather can be overlapped with other
         things while the page is loading to minimize the impact. If the client
         only wants to generate TURN or STUN ICE candidates for one of the "m="
-        lines and then use trickle ICE [TODO REF] to get the non host ICE
+        lines and then use trickle ICE <xref target="I-D.rescorla-mmusic-ice-trickle"/> to get the non host ICE
         candidates for the rest of the "m=" lines, it MAY do that and will not
         need any additional gathering time.  </t>
 
@@ -286,11 +304,28 @@ SDP Offer
       </section>
 
       <section  title="Analysis" toc="default">
-        <t> This largely comes down to a question of breaking the UA or the
-        B2BUA cases. The WG should consider things such as 1) in places we
-        imagine this being deployed, how common will breakage be 2) how much
-        effort is it to fix that 3) what are our design principles for SDP that
-        allow us to create and deploy new SDP extensions.  </t>
+        <t> 
+          This largely comes down to a question of breaking the UA or the
+          B2BUA cases. The WG should consider things such as:
+          <list style="numbers">
+
+            <t> In places we imagine this being deployed, how common will
+            breakage be? </t>
+
+            <t> How much effort is it to fix that? </t>
+
+            <t> What are our design principles for SDP that allow us to create
+            and deploy new SDP extensions? </t>
+
+            <t> When does the breakage happen. Will the call just fail or will
+            the call get set up then later fail? </t>
+
+          </list>
+        </t>
+        <t> The port numbers on the "m=" lines of the initial Offer can be the
+        same or different. Deployments can be upgraded to make either way work so
+        neither one is a complete show stopped but the WG needs to pick which
+        one is the "least bad" and move forward.  </t>
       </section>
 
     </section>
@@ -372,9 +407,8 @@ SDP Offer
 				</list>				
 			</t>
                         <t> There are also special rules for handling many
-                        different attributes as defined in TODO
-                        [draft-nandakumar-rtcweb-sdp-attribute-analysis]. It is
-                        not possible to use bundle with some attributes. </t>
+                         attributes as defined in <xref target="I-D.nandakumar-mmusic-sdp-attributes" />. It is
+                        not possible to use bundle with some attributes and features of SDP. </t>
 
 		</section>
 			
@@ -406,11 +440,17 @@ SDP Offer
 				When an SDP Answerer receives an SDP Offer, which offers bundled media, and the
 				SDP Answerer accepts the offered bundle group. 
                                 Any "m=" lines that are rejected have their port set to zero as usual. 
+                                An "m=" lines that has been rejected MUST not be used as the
+                                first entry in the USE-BUNDLE group unless 
+                                all the "m=" lines in the group are rejected. 
                                 Any "m=" lines that are not rejected have the port on the "m=" line, as
                                 well as the ICE, 'rtcp' attribute, 'rtcp-mux' and ICE attributes set to 
                                 the value to be used by the single 5-tuple over which all the media 
                                 in the group will use. 
 			</t>
+                        <t> <list> <t> Open Issue: Is there any reason to
+                        include "m=" lines that are rejected in the USE-BUNDLE
+                        group at all? </t> </list> </t>
 			<t>
 				If the SDP Answerer does not accept the "BUNDLE" group in the SDP Offer, it MUST NOT
 				include a session level 'group' attribute, with a "BUNDLE" or "USE-BUNDLE" value, in 
@@ -419,6 +459,21 @@ SDP Offer
 			</t>
 		</section>
 		
+                <section title="SDP Completion Procedures" toc="default">
+			<t>
+                          Once the initial Offer / Answer has completed and ICE
+                          has completed, and additional offer/answer exchange MUST
+                          be done. As this is an update to the initial
+                          Offer/Answer, the port numbers will reflect the port
+                          actually in use. ICE requires this and explains how to
+                          do it so when ICE is used, the endpoints simply follow
+                          the ICE procedures for this. When ICE is not used,
+                          the endpoint that created the original offer MUST
+                          initiate the new Offer / Answer exchange once the initial
+                          one completes.
+                        </t>
+		</section>
+
     </section>
 
 	<section anchor="sec-rtp" title="Single vs Multiple RTP Sessions" toc="default">
@@ -503,7 +558,7 @@ SDP Offer
 			Section X of TBD.
 		</t>
                 <t>
-			TODO: Think carefully about security analysis of reuse
+			Open Issue: Think carefully about security analysis of reuse
 			of same SDES key on multiple "m=" lines when the far end
 			does not use BUNDLE and warn developers of any risks.
 		</t>
@@ -523,9 +578,9 @@ SDP Offer
 SDP Offer (Bundled media offered)
 
     v=0
-    o=alice 2890844526 2890844526 IN IP4 host.atlanta.com
+    o=alice 2890844526 2890844526 IN IP4 atlanta.example.org
     s=
-    c=IN IP4 host.atlanta.com
+    c=IN IP4 atlanta.example.org
     t=0 0
     a=group:BUNDLE foo bar
     m=audio 10000 RTP/AVP 0 8 97
@@ -549,9 +604,9 @@ SDP Offer (Bundled media offered)
 SDP Answer (Bundled media accepted)
 
     v=0
-    o=bob 2808844564 2808844564 IN IP4 host.biloxi.com
+    o=bob 2808844564 2808844564 IN IP4 biloxi.example.com
     s=
-    c=IN IP4 host.biloxi.com
+    c=IN IP4 biloxi.example.com
     t=0 0
     a=group:USE-BUNDLE foo bar
     m=audio 20000 RTP/AVP 0
@@ -572,9 +627,9 @@ SDP Answer (Bundled media accepted)
 SDP Answer (Bundled media not accepted)
 
     v=0
-    o=bob 2808844564 2808844564 IN IP4 host.biloxi.com
+    o=bob 2808844564 2808844564 IN IP4 biloxi.example.com
     s=
-    c=IN IP4 host.biloxi.com
+    c=IN IP4 biloxi.example.com
     t=0 0         
     m=audio 20000 RTP/AVP 0         
     b=AS:200
@@ -592,9 +647,9 @@ SDP Answer (Bundled media not accepted)
 SDP Offer with ICE (Bundled media offered)
 
     v=0
-    o=alice 2890844526 2890844526 IN IP4 host.atlanta.com
+    o=alice 2890844526 2890844526 IN IP4 atlanta.example.org
     s=
-    c=IN IP4 host.atlanta.com
+    c=IN IP4 atlanta.example.org
     t=0 0
     a=group:BUNDLE foo bar
     m=audio 10000 RTP/AVP 0 8 97
@@ -603,13 +658,13 @@ SDP Offer with ICE (Bundled media offered)
     a=rtpmap:0 PCMU/8000
     a=rtpmap:8 PCMA/8000
     a=rtpmap:97 iLBC/8000
-    a=candidate:1 1 UDP 1694498815 host.atlanta.com 10000 typ host
+    a=candidate:1 1 UDP 1694498815 atlanta.example.org 10000 typ host
     m=video 10002 RTP/AVP 31 32
     a=mid:bar
     b=AS:1000
     a=rtpmap:31 H261/90000
     a=rtpmap:32 MPV/90000		 
-    a=candidate:1 1 UDP 1694498815 host.atlanta.com 10002 typ host
+    a=candidate:1 1 UDP 1694498815 atlanta.example.org 10002 typ host
 		 
 ]]></artwork>
         </figure>
@@ -640,6 +695,8 @@ SDP Offer with ICE (Bundled media offered)
                 <t>Changes from draft-ietf-mmusic-sdp-bundle-negotiation-02
 			<list style="symbols">
 				<t>Moved to use different ports in the "m=" lines of offer.</t>
+				<t>Split BUNDLE into BUNDLE for Offer and USE-BUNDEL for Answer.</t>
+				<t>Added an extra Offer/Answer exchange at the end to update middle boxes.</t>
 			</list>
 		</t>
 		<t>Changes from draft-ietf-mmusic-sdp-bundle-negotiation-01
@@ -670,11 +727,35 @@ SDP Offer with ICE (Bundled media offered)
 		<?rfc include="reference.RFC.3264"?>
 		<?rfc include="reference.RFC.4566"?>
 		<?rfc include="reference.RFC.5888"?>
+
+                <reference anchor="I-D.nandakumar-mmusic-sdp-attributes">
+                  <front>
+                    <title abbrev="SDP Attribute Multiplexing">A Framework for SDP Attributes
+                    when Multiplexing</title>
+                    <author fullname="Suhas Nandakumar" initials="S." surname="Nandakumar">
+                      <organization>Cisco</organization>
+                      <address>
+                      </address>
+                    </author>
+                    <author fullname="Cullen Jennings" initials="C." surname="Jennings">
+                      <organization>Cisco</organization>
+                      <address>
+                      </address>
+                    </author>
+                    <date day="13" month="February" year="2013" />
+                  </front>
+                  <seriesInfo name="Internet-Draft" value="draft-nandakumar-mmusic-sdp-attributes-00" />
+                </reference>
+
     </references>
 
     <references title="Informative References">
 		<?rfc include="reference.RFC.3550"?>
 		<?rfc include="reference.RFC.5245"?>
+		<?rfc include="reference.RFC.4961"?>
+		<?rfc include="reference.RFC.3605"?>
+                <?rfc include="reference.I-D.rescorla-mmusic-ice-trickle"?>
+  
     </references>
   </back>
 </rfc>
