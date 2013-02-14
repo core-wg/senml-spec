@@ -6,8 +6,7 @@
 <?rfc sortrefs="no" ?>
 <?rfc symrefs="yes" ?> 
 
-<!-- I suspect the authors may want to chance trust200811 to trust200902 --> 
-<rfc ipr="trust200811" category="std" docName="draft-ietf-mmusic-sdp-bundle-negotiation-03.txt" submissionType="IETF" xml:lang="en">
+<rfc ipr="trust200902" category="std" docName="draft-ietf-mmusic-sdp-bundle-negotiation-03.txt" submissionType="IETF" xml:lang="en">
 <front>
     <title abbrev="Bundled media">
 		Multiplexing Negotiation Using Session Description Protocol (SDP) Port Numbers
@@ -176,7 +175,7 @@ SDP Answer
 ]]></artwork>
         </figure>
 
-     <t> RFC 4961 specifies a way of doing symmetric RTP but that is an a later
+     <t> RFC 4961 <xref target="RFC4961"/> specifies a way of doing symmetric RTP but that is an a later
      invention to RTP and Bob can not assume that Alice supports RFC 4961. This
      means that Alice may be sending RTP from a different port than 10000 or
      10002 - some implementation simply send the RTP from an ephemeral
@@ -212,8 +211,8 @@ SDP Offer
         because it has the same port as the first line. </t>
 
         <t> Some of the developers of products that do this make the argument
-        that this is not a bug and that for SDP to work when not using thing
-        like 4961, the port numbers need tobe unique thus it perfectly
+        that this is not a bug and that for SDP to work when not using things
+        like RFC 4961, the port numbers need tobe unique thus it is perfectly
         reasonable for their software to make this assumption. The authors are
         not suggesting this is a good way to design an SDP stack but merely
         trying to provide an explanation of why some UAs behave this way and why
@@ -227,7 +226,7 @@ SDP Offer
         the incoming call leg contains an SDP attribute the B2BUA does not
         understand, the B2BUS still generates that SDP attribute in the Offer
         for the outgoing call leg. Consider an B2BUA that did not understand
-        "a=rtcp" attribute from RFC 3605 yet acted this way. Further assume that
+        "a=rtcp" attribute from RFC 3605 <xref target="RFC3605"/> yet acted this way. Further assume that
         the B2BUA was configured to tear down any call where it did not see any
         RTCP for 5 minutes. In this cases, if the B2BUA received an Offer like: </t>
 
@@ -292,7 +291,7 @@ SDP Offer
         pacing requirements. All of this gather can be overlapped with other
         things while the page is loading to minimize the impact. If the client
         only wants to generate TURN or STUN ICE candidates for one of the "m="
-        lines and then use trickle ICE [TODO REF] to get the non host ICE
+        lines and then use trickle ICE <xref target="I-D.rescorla-mmusic-ice-trickle"/> to get the non host ICE
         candidates for the rest of the "m=" lines, it MAY do that and will not
         need any additional gathering time.  </t>
 
@@ -408,8 +407,7 @@ SDP Offer
 				</list>				
 			</t>
                         <t> There are also special rules for handling many
-                         attributes as defined in TODO
-                        [draft-nandakumar-rtcweb-sdp-attribute-analysis]. It is
+                         attributes as defined in <xref target="I-D.nandakumar-mmusic-sdp-attributes" />. It is
                         not possible to use bundle with some attributes and features of SDP. </t>
 
 		</section>
@@ -691,6 +689,8 @@ SDP Offer with ICE (Bundled media offered)
                 <t>Changes from draft-ietf-mmusic-sdp-bundle-negotiation-02
 			<list style="symbols">
 				<t>Moved to use different ports in the "m=" lines of offer.</t>
+				<t>Split BUNDLE into BUNDLE for Offer and USE-BUNDEL for Answer.</t>
+				<t>Added an extra Offer/Answer exchange at the end to update middle boxes.</t>
 			</list>
 		</t>
 		<t>Changes from draft-ietf-mmusic-sdp-bundle-negotiation-01
@@ -721,11 +721,35 @@ SDP Offer with ICE (Bundled media offered)
 		<?rfc include="reference.RFC.3264"?>
 		<?rfc include="reference.RFC.4566"?>
 		<?rfc include="reference.RFC.5888"?>
+
+                <reference anchor="I-D.nandakumar-mmusic-sdp-attributes">
+                  <front>
+                    <title abbrev="SDP Attribute Multiplexing">A Framework for SDP Attributes
+                    when Multiplexing</title>
+                    <author fullname="Suhas Nandakumar" initials="S." surname="Nandakumar">
+                      <organization>Cisco</organization>
+                      <address>
+                      </address>
+                    </author>
+                    <author fullname="Cullen Jennings" initials="C." surname="Jennings">
+                      <organization>Cisco</organization>
+                      <address>
+                      </address>
+                    </author>
+                    <date day="13" month="February" year="2013" />
+                  </front>
+                  <seriesInfo name="Internet-Draft" value="draft-nandakumar-mmusic-sdp-attributes-00" />
+                </reference>
+
     </references>
 
     <references title="Informative References">
 		<?rfc include="reference.RFC.3550"?>
 		<?rfc include="reference.RFC.5245"?>
+		<?rfc include="reference.RFC.4961"?>
+		<?rfc include="reference.RFC.3605"?>
+                <?rfc include="reference.I-D.rescorla-mmusic-ice-trickle"?>
+  
     </references>
   </back>
 </rfc>
