@@ -38,7 +38,7 @@
 		</address>
     </author>
 
-    <date year="2013" month="february" day="13" />
+    <date year="2013" month="february" day="14" />
     <area>Transport</area>
     <workgroup>MMUSIC Working Group</workgroup>
     <keyword>RTP</keyword>
@@ -80,7 +80,11 @@
 			used with the Session Description Protocol (SDP) Offer/Answer mechanism <xref format="default" 
 			pageno="false" target="RFC3264"/> to negotiate the usage of bundled media, which refers 
 			to the usage of a single 5-tuple transport flow for media associated with multiple SDP media descriptions 
-			("m=" lines).
+			("m=" lines). 
+                        The BUNDLE is used in an SDP Offer to indicate the
+                        Offerer supports and would like to use bundled media
+                        while the USE-BUNDLE is used in an SDP Answer to
+                        indicate that Answerer has agreed to use bundled media.
 		</t>
 		<t>
 			When an endpoint generates an SDP Offer <xref format="default" pageno="false" 
@@ -207,6 +211,14 @@ SDP Offer
         <t> will result in the second "m=" line being considered an SDP error
         because it has the same port as the first line. </t>
 
+        <t> Some of the developers of products that do this make the argument
+        that this is not a bug and that for SDP to work when not using thing
+        like 4961, the port numbers need tobe unique thus it perfectly
+        reasonable for their software to make this assumption. The authors are
+        not suggesting this is a good way to design an SDP stack but merely
+        trying to provide an explanation of why some UAs behave this way and why
+        theses devices consider it acceptable. </t>
+
       </section>
 
       <section  title="B2BUA Interoperability" toc="default">
@@ -244,6 +256,13 @@ SDP Offer
         tear down the call. It is worth noting that a B2BUA that generated an
         Offer with capabilities it does not understand is not compliant with the
         specifications. </t>
+
+        <t> To mitigate the risk to B2BUAs that generate BUNDLE when they should
+        not, the spec includes a feature where once the initial Offer / Anser is
+        done and ICE is completed, a second Offer / Answer exchange is done with
+        the all the "m=" lines and associated ICE transports set to the actual
+        5-tuple in use. This allows any device on Offer / Answer path to be
+        updated even if it does not understand BUNDLE. </t>
 
         <section  title="3GPP  Impact" toc="default">
           <t> It is very unlikely that the B2BUA issue will be a problem for
@@ -286,11 +305,28 @@ SDP Offer
       </section>
 
       <section  title="Analysis" toc="default">
-        <t> This largely comes down to a question of breaking the UA or the
-        B2BUA cases. The WG should consider things such as 1) in places we
-        imagine this being deployed, how common will breakage be 2) how much
-        effort is it to fix that 3) what are our design principles for SDP that
-        allow us to create and deploy new SDP extensions.  </t>
+        <t> 
+          This largely comes down to a question of breaking the UA or the
+          B2BUA cases. The WG should consider things such as:
+          <list style="numbers">
+
+            <t> In places we imagine this being deployed, how common will
+            breakage be? </t>
+
+            <t> How much effort is it to fix that? </t>
+
+            <t> What are our design principles for SDP that allow us to create
+            and deploy new SDP extensions? </t>
+
+            <t> When does the breakage happen. Will the call just fail or will
+            the call get set up then later fail? </t>
+
+          </list>
+        </t>
+        <t> The port numbers on the "m=" lines of the initial Offer can be the
+        same or different. Deployments can be upgraded to make either way work so
+        neither one is a complete show stopped but the WG needs to pick which
+        one is the "least bad" and move forward.  </t>
       </section>
 
     </section>
@@ -372,9 +408,9 @@ SDP Offer
 				</list>				
 			</t>
                         <t> There are also special rules for handling many
-                        different attributes as defined in TODO
+                         attributes as defined in TODO
                         [draft-nandakumar-rtcweb-sdp-attribute-analysis]. It is
-                        not possible to use bundle with some attributes. </t>
+                        not possible to use bundle with some attributes and features of SDP. </t>
 
 		</section>
 			
@@ -419,6 +455,21 @@ SDP Offer
 			</t>
 		</section>
 		
+                <section title="SDP Completion Procedures" toc="default">
+			<t>
+                          Once the initial Offer / Answer has completed and ICE
+                          has completed, and additional offer/anser exchange MUST
+                          be done. As this is an update to the initial
+                          Offer/Answer, the port numbers will reflect the port
+                          actually in use. ICE requires this and explains how to
+                          do it so when ICE is used, the endpoints simply follow
+                          the ICE procedures for this. When ICE is not used,
+                          the endpoint that created the original offer MUST
+                          initiate the new Offer / Anser exchange once the initial
+                          one completes.
+                        </t>
+		</section>
+
     </section>
 
 	<section anchor="sec-rtp" title="Single vs Multiple RTP Sessions" toc="default">
