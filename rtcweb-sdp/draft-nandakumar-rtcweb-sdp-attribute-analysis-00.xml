@@ -3,14 +3,13 @@
 <?xml-stylesheet type="text/xsl" href="rfc2629.xslt" ?>
 <?rfc toc="yes" ?>
 <?rfc symrefs="yes" ?>
-<?rfc iprnotified="yes" ?>
 <?rfc strict="no" ?>
 <?rfc compact="yes" ?>
 <?rfc sortrefs="no" ?>
 <?rfc colonspace="yes" ?>
 <?rfc rfcedstyle="no" ?>
 <?rfc tocdepth="4"?>
-<rfc category="info" docName="draft-nandakumar-rtcweb-sdp-attributes-00"
+<rfc category="std" docName="draft-nandakumar-mmusic-sdp-mux-attributes-00"
      ipr="trust200902">
   <front>
     <title abbrev="SDP Attribute Multiplexing">A Framework for SDP Attributes
@@ -56,7 +55,7 @@
       </address>
     </author>
 
-    <date day="13" month="February" year="2013" />
+    <date day="15" month="February" year="2013" />
 
     <area>RAI</area>
 
