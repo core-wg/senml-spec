@@ -37,7 +37,7 @@
 		</address>
     </author>
 
-    <date year="2013" month="february" day="14" />
+    <date year="2013" month="february" day="15" />
     <area>Transport</area>
     <workgroup>MMUSIC Working Group</workgroup>
     <keyword>RTP</keyword>
@@ -256,6 +256,21 @@ SDP Offer
         Offer with capabilities it does not understand is not compliant with the
         specifications. </t>
 
+        <t> Two uses cases that are isometric to this are Traffic Policing and
+        Bandwidth Allocation.  In Traffic policing, B2BUAs use SDP information
+        (e.g.  IP address and port) in order to control traffic gating
+        functions, and to set traffic policing rules.  There might be rules
+        which will trigger a session to be terminated in case media is not sent
+        or received on the ports retrieved from the SDP.  This typically occurs
+        once the session is already established and ongoing. In Bandwidth
+        Allocation, B2BUAs use SDP information (e.g. codecs and media types) in
+        order to control bandwidth allocation functions.  The bandwidth
+        allocation is done per "m=" line, which means that it will not be enough
+        if media associated with all "m=" lines try to use that bandwidth
+        allocated for a single "m=" line.  That may either simply lead to bad
+        user experience, or to termination of the call.
+        </t>
+
         <t> To mitigate the risk to B2BUAs that generate BUNDLE when they should
         not, the spec includes a feature where once the initial Offer / Answer is
         done and ICE is completed, a second Offer / Answer exchange is done with
@@ -421,8 +436,23 @@ SDP Offer
 			<t>
 				If the associated SDP Answer contains an SDP session-level 'group' attribute,
 				with a "USE-BUNDLE" value, 
-				the SDP Offerer can start using the 5-tuple of the first "m=" line in the group 
+				the SDP Offerer can start using the 5-tuple 
+                                of the "m=" line associated with the first mid in the group USE-BUNDLE
                                 for sending and receiving media for all the "m=" lines in the group.
+
+                                As an example, if the SDP had "m=" lines with
+                                ports 1,2,3 and MID values of a,b,c
+                                respectively, and the group attribute looked
+                                like "a=group:USE-BUNDLE b a c", the first MID
+                                in the group is b which corresponds to port
+                                2. It does not matter what the order of the "m="
+                                lines in the SDP is, port 2 would be used
+                                because b was the first item in the
+                                "a=group:USE-BUNDLE" line. This allows the
+                                endpoints to ensure that the "m=" lines used
+                                does not have a port value of zero in all cases
+                                other than the case where all the "m=" lines
+                                have a port value of zero.
 			</t>
 			<t>
 				If the SDP Answer does not include a session-level SDP 'group' attribute, with a 
