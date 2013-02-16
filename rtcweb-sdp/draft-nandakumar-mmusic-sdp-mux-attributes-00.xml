@@ -65,7 +65,7 @@
         Communication sessions in RTCWeb are described and negotiated using
         Session Description Protocol(SDP)[RFC4566] mechanisms.  SDP uses
         attributes to describes specific aspects of such a session.  These
-        attributes have different impacts when using varions multiplexing RTP on
+        attributes have different impacts when using varions of multiplexing RTP on
         a single transport layer flow. 
         The scope of this specification is to provide a
         framework for analyzing the multiplex characteristics for SDP attributes
@@ -80,7 +80,7 @@
         SDP<xref target="RFC4566"/> defines several
         attributes for describing specific aspects of a multimedia
         session. Given the number of SDP attributes registered with IANA
-        [IANA_REF] and the defining new attributes in the
+        <xref target="IANA"></xref>and the defining new attributes in the
         future, there is need for future-proof framework to analyze these
         attributes for their applicability in transport multiplexing use-cases. 
 
@@ -91,7 +91,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         framework. This is followed by introduction
         to the SDP attribute analysis framework/procedures, following which
         several sections applies the framework to the SDP attributes registered
-        with IANA [IANA_REF].
+        with IANA <xref target="IANA"></xref>
       </t>
     </section>
     <section title="Terminology">
@@ -101,21 +101,19 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
       </section>
     <section title="Motivation">
       <t>
-        The time and complications of setting up ICE [TODO REF] and DTLS-SRTP
-        [TODO REF] transports for use by RTP, and conservation of ports,
-        forms an requirement to try and
-        reduce the number of transport level flows needed. This has resulted in
-        the definition of ways to multiplex RTP over a single transport flow
-        in order
-        to preserve network resources such as port numbers.
+        The time and complications of setting up ICE <xref target="RFC5245"></xref> 
+        and DTLS-SRTP [TODO REF] transports for use by RTP, and conservation of ports,
+        forms an requirement to try and reduce the number of transport level flows needed.
+        This has resulted in the definition of ways to multiplex RTP over a single 
+        transport flow in order to preserve network resources such as port numbers.
         This imposes further restrictions on applicability of these SDP
         attributes as they are defined today.
        </t> 
       <t>
         As of today there are close to 180 SDP attributes registered with the
-        IANA and more will be added in the future.  There is no clearly defined
-        procedure to establish the validity/applicability of these attribute to
-        when used with multiplexing.
+        IANA <xref target="IANA"></xref> and more will be added in the future.  
+        There is no clearly defined procedure to establish the validity/applicability of 
+        these attribute when used with multiplexing.
       </t>
     </section>
     <section title="SDP Attribute Analysis Framework">
@@ -139,7 +137,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
        the following categories:
        <list style="hanging">
 
-         <t hangText="NORMAL (was MS/NC)"> Attributes that can be independently
+         <t hangText="NORMAL"> Attributes that can be independently
          specified when multiplexing and retain their original semantics .</t>
 
          <t hangText="BAD (was DM)"> Attributes where multiplexing SHOULD NOT be
@@ -172,11 +170,10 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
       the attributes when multiplexing is being used.
     </t>  
     <t>
-      <xref target="SecCurrAnalysis"/> analyzes attributes listed in [IANA_REF] grouped
-      under the IETF document that defines them.  For each such section, the
-      single-letter acronyms "S", "M","B" and "SR" under the "Current" column specify
-      existing semantics as applicable to either session-level or media-level or
-      both or source-level respectively.
+      <xref target="SecCurrAnalysis"/> analyzes attributes listed in <xref target="IANA">IANA</xref>
+      grouped under the IETF document that defines them.  For each such section, the
+      acronyms "S", "M","B" and "SR" under the "Current" column specify existing semantics
+      as applicable to either session-level or media-level or both or source-level respectively.
     </t> 
     </section> 
 
@@ -360,8 +357,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           
         </texttable>
       </section>
-      
-    
+         
       <section title="RFC3556">      
         <t>
           <xref target="RFC3556">RFC3556</xref> defines an extension to the 
@@ -1552,7 +1548,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
       
       <section title="3GPP TS 24.182">      
         <t>
-          3GPP TS 24.182 specifies IP multimedia subsystem Custom Alerting tones
+          <xref target="3GPP TS 24.182">3GPP TS 24.182</xref> specifies IP multimedia subsystem Custom Alerting tones
         </t>    
         <texttable title="3GPP TS 24.182 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -1569,7 +1565,8 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
       
       <section title="3GPP TS 24.183">      
         <t>
-          3GPP TS 24.183 specifies IP multimedia subsystem Custom Ringing Signal
+          <xref target="3GPP TS 24.183">3GPP TS 24.183</xref>specifies IP multimedia 
+          subsystem Custom Ringing Signal
         </t>    
         <texttable title="3GPP TS 24.183 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -1586,8 +1583,8 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
       
       <section title="3GPP TS 24.229">      
         <t>
-         IP multimedia call control protocol based on Session Initial protocol and
-         Session
+         <xref target="3GPP TS 24.229">3GPP TS 24.229</xref>IP multimedia call control 
+         protocol based on Session Initial protocol and Session Description Protocol.
         </t>    
         <texttable title="3GPP TS 24.229 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -1620,8 +1617,8 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
       
       <section title="ITU T.38">      
         <t>
-         ITU T.38 defines procedures for real-time Group 3 fascimile communications
-         over IP netowrks.
+         ITU T.38<xref target="T.38"></xref> defines procedures for real-time Group 3
+         fascimile communications over IP netowrks.
         </t>    
         <texttable title="Historic Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -1637,9 +1634,10 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </texttable>
       </section>
       
-      <section title="ITU H.248.15">      
+      <section title="ITU-T H.248.15">      
         <t>
-          ITU H.248.15 defines Gateway Control Protocol SDP H.248 package attribute
+          ITU-T H.248.15 <xref target="H.248.15"></xref> defines Gateway Control Protocol 
+          SDP H.248 package attribute
         </t>    
         <texttable title="Historic Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -2482,6 +2480,53 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         <seriesInfo name='Internet-Draft' value='draft-ietf-mmusic-sdp-media-capabilities-17' />
         <format type='TXT' target='http://tools.ietf.org/id/draft-ietf-mmusic-sdp-media-capabilities-17.txt' />
       </reference> 
+      <reference anchor='IANA' target="http://www.iana.org/assignments/sdp-parameters/sdp-parameters.xml">  
+        <front>
+          <title>Session Description Protocol (SDP) Parameters</title>
+          <author/>
+          <date/>
+        </front>
+      </reference> 
+      <reference anchor='T.38' target="http://www.itu.int/rec/T-REC-T.38/e">  
+        <front>
+          <title>Procedures for real-time Group 3 facsimile communication over IP networks</title>
+          <author/>
+          <date/>
+        </front>
+      </reference> 
+      <reference anchor='H.248.15' target="http://www.itu.int/rec/T-REC-H.248.15">  
+        <front>
+          <title> Gateway control protocol: SDP H.248 package attribute</title>
+          <author/>
+          <date/>
+        </front>
+      </reference> 
+      <reference anchor='3GPP TS 24.229' target="http://www.3gpp.org/ftp/Specs/html-info/24229.htm">  
+        <front>
+          <title>IP multimedia call control protocol based on Session Initiation Protocol (SIP)
+            and Session Description Protocol (SDP);</title>
+          <author/>
+          <date/>
+        </front>
+      </reference> 
+      
+      <reference anchor='3GPP TS 24.182' target="http://www.3gpp.org/ftp/Specs/html-info/24182.htm">  
+        <front>
+          <title>IP Multimedia Subsystem (IMS) Customized Alerting Tones (CAT); Protocol specification</title>
+          <author/>
+          <date/>
+        </front>
+      </reference> 
+      
+      <reference anchor='3GPP TS 24.183' target="http://www.3gpp.org/ftp/Specs/html-info/24183.htm">  
+        <front>
+          <title>IP Multimedia Subsystem (IMS) Customized Ringing Signal (CRS); Protocol specification</title>
+          <author/>
+          <date/>
+        </front>
+      </reference> 
+      
+      
     </references>
   </back>
 </rfc>
