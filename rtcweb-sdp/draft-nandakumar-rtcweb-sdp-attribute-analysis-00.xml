@@ -180,10 +180,10 @@
       existing semantics as applicable to either session-level or media-level or
       both or source-level respectively.
     </t> 
-    <section title="RFC4566">      
+     <section title="RFC4566">     
      <t>
-       RFC4566 defines the Session Description Protocol (SDP) that is intended
-       for describing multimedia sessions for the purposes of session
+       <xref target="RFC4566">RFC4566</xref> defines the Session Description Protocol (SDP)
+       that is intended for describing multimedia sessions for the purposes of session
        announcement, session invitation, and other forms of multimedia session
        initiation
      </t>
@@ -265,10 +265,10 @@
     </section>
     <section title="RFC4585">      
       <t>
-        RFC 4585 defines an extension to the Audio-visual Profile (AVP) that
-        enables receivers to provide, statistically, more immediate feedback to
-        the senders and thus allows for short-term adaptation and efficient
-        feedback-based repair mechanisms to be implemented.
+        <xref target="RFC4585">RFC4585</xref> defines an extension to the
+        Audio-visual Profile (AVP) that enables receivers to provide, statistically, 
+        more immediate feedback to the senders and thus allows for short-term 
+        adaptation and efficient feedback-based repair mechanisms to be implemented.
       </t>    
       <texttable title="RFC4585 Attribute Analysis">
         <ttcol align='left'>Attr Name</ttcol>
@@ -290,11 +290,12 @@
       
       <section title="RFC5104">      
         <t>
-          RFC5104 specifies a few extensions to the messages defined in
-          the Audio-Visual Profile with Feedback (AVPF).  They are helpful
-          primarily in conversational multimedia scenarios where centralized
-          multipoint functionalities are in use.  However, some are also usable
-          in smaller multicast environments and point-to-point calls.
+          <xref target="RFC5104">RFC5104</xref> specifies a few extensions to 
+          the messages defined in the Audio-Visual Profile with Feedback (AVPF).
+          They are helpful primarily in conversational multimedia scenarios 
+          where centralized multipoint functionalities are in use. 
+          However, some are also usable in smaller multicast environments
+          and point-to-point calls.
         </t>    
         <texttable title="RFC4585 Attribute Analysis">
           <ttcol align='left'>Attr Name</ttcol>
@@ -316,8 +317,9 @@
     
     <section title="RFC5888">      
       <t>
-        RFC5888 defines a framework to group "m" lines in the Session
-        Description Protocol (SDP) for different purposes.
+        <xref target="RFC5888">RFC5888</xref> defines a framework
+        to group "m" lines in the Session Description Protocol (SDP)
+        for different purposes.
       </t>    
       <texttable title="RFC4586 Attribute Analysis">
         <ttcol align='left'>Name</ttcol>
@@ -338,12 +340,12 @@
       
      <section title="RFC5761">      
         <t>
-          RFC561 discusses issues that arise when multiplexing RTP data
-          packets and RTP Control Protocol (RTCP) packets on a single UDP port.
-          It updates RFC 3550 and RFC 3551 to describe when such multiplexing
-          is and is not appropriate, and it explains how the Session
-          Description Protocol (SDP) can be used to signal multiplexed
-          sessions.
+          <xref target="RFC5761">RFC5761</xref> discusses issues that arise
+          when multiplexing RTP data packets and RTP Control Protocol (RTCP) 
+          packets on a single UDP port. It updates RFC 3550 and RFC 3551 to 
+          describe when such multiplexing is and is not appropriate, and 
+          it explains how the Session Description Protocol (SDP) can be used 
+          to signal multiplexed sessions.
         </t>    
         <texttable title="RFC5761 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -361,10 +363,10 @@
     
       <section title="RFC3556">      
         <t>
-          RFC3556 defines an extension to the Session Description
-          Protocol (SDP) to specify two additional modifiers for the bandwidth
-          attribute.  These modifiers may be used to specify the bandwidth
-          allowed for RTP Control Protocol (RTCP) packets in a Real-time
+          <xref target="RFC3556">RFC3556</xref> defines an extension to the 
+          Session Description Protocol (SDP) to specify two additional modifiers 
+          for the bandwidth attribute.  These modifiers may be used to specify 
+          the bandwidth allowed for RTP Control Protocol (RTCP) packets in a Real-time
           Transport Protocol (RTP) session
         </t>    
         <texttable title="RFC3556 Attribute Analysis">
@@ -387,7 +389,7 @@
     
       <section title="RFC4574">      
         <t>
-          RFC4574 defines a new Session Description Protocol (SDP)
+          <xref target="RFC4574">RFC4574</xref> defines a new Session Description Protocol (SDP)
           media-level attribute: "label".  The "label" attribute carries a
           pointer to a media stream in the context of an arbitrary network
           application that uses SDP.  The sender of the SDP document can attach
@@ -409,7 +411,7 @@
       
       <section title="RFC5432">      
         <t>
-          RFC5432 defines prordures to negotiate QOS mechanisms using the
+          <xref target="RFC5432">RFC5432</xref> defines prordures to negotiate QOS mechanisms using the
           Session Description Protocol (SDP) offer/answer model.
         </t>    
         <texttable title="RFC5432 Attribute Analysis">
@@ -430,7 +432,7 @@
       
       <section title="RFC4568">      
         <t>
-          RFC4568 defines a Session Description Protocol (SDP)
+          <xref target="RFC4568">RFC4568</xref> defines a Session Description Protocol (SDP)
           cryptographic attribute for unicast media streams.  The attribute
           describes a cryptographic key and other parameters that serve to
           configure security for a unicast media stream in either a single
@@ -454,9 +456,9 @@
           The Real-time Transport Protocol (RTP) is a widely used transport for
           real-time multimedia on IP networks.  The Datagram Congestion Control
           Protocol (DCCP) is a transport protocol that provides desirable
-          services for real-time applications.  RFC5762 specifies a mapping
-          of RTP onto DCCP, along with associated signalling, such that real-
-          time applications can make use of the services provided by DCCP
+          services for real-time applications.  <xref target="RFC5762">RFC5762</xref> 
+          specifies a mapping of RTP onto DCCP, along with associated signalling,
+          such that real-time applications can make use of the services provided by DCCP
         </t>    
         <texttable title="RFC5762 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -474,11 +476,11 @@
       
       <section title="RFC6773">      
         <t>
-          RFC6773 document specifies an alternative encapsulation of the Datagram
-          Congestion Control Protocol (DCCP), referred to as DCCP-UDP.  This
-          encapsulation allows DCCP to be carried through the current
-          generation of Network Address Translation (NAT) middleboxes without
-          modification of those middleboxes
+          <xref target="RFC6773">RFC6773</xref> document specifies an alternative 
+          encapsulation of the Datagram Congestion Control Protocol (DCCP), 
+          referred to as DCCP-UDP.  This encapsulation allows DCCP to be carried 
+          through the current generation of Network Address Translation (NAT) middleboxes
+          without modification of those middleboxes
         </t>    
         <texttable title="RFC6773 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -496,9 +498,9 @@
       
       <section title="RFC5506">      
         <t>
-          RFC5506 discusses benefits and issues that arise when allowing
-          Real-time Transport Protocol (RTCP) packets to be transmitted with
-          reduced size.
+          <xref target="RFC5506">RFC5506</xref> discusses benefits and issues that 
+          arise when allowing Real-time Transport Protocol (RTCP) packets to be
+          transmitted with reduced size.
         </t>    
         <texttable title="RFC5762 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -527,7 +529,8 @@
           media source or sink and the media server.  Once this is done, the
           MRCPv2 exchange operates over the control session established above,
           allowing the client to control the media processing resources on the
-          speech resource server.
+          speech resource server. <xref target="RFC6787">RFC6787</xref> defines
+          attributes for this purpose.
         </t>    
         <texttable title="RFC6787 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -544,8 +547,8 @@
       
       <section title="RFC3890">      
         <t>
-          RFC3890 defines a Session Description Protocol (SDP) Transport
-          Independent Application Specific Maximum (TIAS) bandwidth modifier
+          <xref target="RFC3890">RFC3890</xref> defines a Session Description Protocol (SDP) 
+          Transport Independent Application Specific Maximum (TIAS) bandwidth modifier
           that does not include transport overhead; instead an additional
           packet rate attribute is defined.  The transport independent bit-rate
           value together with the maximum packet rate can then be used to
@@ -565,14 +568,14 @@
       
       <section title="RFC5245">      
         <t>
-          RFC5245 describes a protocol for Network Address Translator
-          (NAT) traversal for UDP-based multimedia sessions established with
-          the offer/answer model.  This protocol is called Interactive
-          Connectivity Establishment (ICE).  ICE makes use of the Session
-          Traversal Utilities for NAT (STUN) protocol and its extension,
-          Traversal Using Relay NAT (TURN).  ICE can be used by any protocol
-          utilizing the offer/answer model, such as the Session Initiation
-          Protocol (SIP).
+          <xref target="RFC5245">RFC5245</xref> describes a protocol for 
+          Network Address Translator(NAT) traversal for UDP-based multimedia
+          sessions established with the offer/answer model.  This protocol 
+          is called Interactive Connectivity Establishment (ICE). 
+          ICE makes use of the Session Traversal Utilities for NAT (STUN) protocol 
+          and its extension,Traversal Using Relay NAT (TURN).  ICE can be used
+          by any protocol utilizing the offer/answer model, such as the 
+          Session Initiation Protocol (SIP).
         </t>    
         <texttable title="RFC5245 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -602,7 +605,7 @@
       
       <section title="RFC5285">      
         <t>
-          RFC5285 provides a general mechanism to use the header
+          <xref target="RFC5285">RFC5285</xref> provides a general mechanism to use the header
           extension feature of RTP (the Real-Time Transport Protocol).  It
           provides the option to use a small number of small extensions in each
           RTP packet, where the universe of possible extensions is large and
@@ -629,8 +632,8 @@
           session requires multiple ports, SDP assumes that these ports have
           consecutive numbers.  However, when the session crosses a network
           address translation device that also uses port mapping, the ordering
-          of ports can be destroyed by the translation.  To handle this, we
-          propose an extension attribute to SDP.
+          of ports can be destroyed by the translation.  To handle this, 
+          <xref target="RFC3605">RFC4574</xref> proposes an extension attribute to SDP
         </t>    
         <texttable title="RFC3605 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -648,12 +651,12 @@
       
       <section title="RFC5576">      
         <t>
-          RFC5576 defines a mechanism to describe RTP media sources, which are
-          identified by their synchronization source (SSRC) identifiers, in
-          SDP, to associate attributes with these sources, and to express
+          <xref target="RFC5576">RFC5576</xref> defines a mechanism to describe 
+          RTP media sources, which are identified by their synchronization source (SSRC) 
+          identifiers, in SDP, to associate attributes with these sources, and to express
           relationships among sources.  It also defines several source-level
           attributes that can be used to describe properties of media sources.</t>    
-        <texttable title="RFC5583 Attribute Analysis">
+        <texttable title="RFC5576 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Session Mux</ttcol>
           <ttcol align='left'>Current</ttcol>
@@ -683,9 +686,9 @@
       
       <section title="RFC6236">      
         <t>
-          RFC6236 proposes a new generic session setup attribute to make
-          it possible to negotiate different image attributes such as image
-          size.  A possible use case is to make it possible for a low-end hand-
+          <xref target="RFC6236">RFC6236</xref> proposes a new generic session setup
+          attribute to make it possible to negotiate different image attributes
+          such as image size.  A possible use case is to make it possible for a low-end hand-
           held terminal to display video without the need to rescale the image,
           something that may consume large amounts of memory and processing
           power.  The document also helps to maintain an optimal bitrate for
@@ -706,9 +709,9 @@
       
       <section title="RFC5583">      
         <t>
-          RFC5583 defines semantics that allow for signaling the decoding
-          dependency of different media descriptions with the same media type
-          in the Session Description Protocol (SDP).  This is required, for
+          <xref target="RFC5583">RFC5583</xref> defines semantics that allow for 
+          signaling the decoding dependency of different media descriptions with the
+          same media type in the Session Description Protocol (SDP).  This is required, for
           example, if media data is separated and transported in different
           network streams as a result of the use of a layered or multiple
           descriptive media coding process.
@@ -732,10 +735,10 @@
       
       <section title="RFC6285">      
         <t>
-          RFC6285 describes a method using the existing RTP and RTP
-          Control Protocol (RTCP) machinery that reduces the acquisition delay.
-          In this method, an auxiliary unicast RTP session carrying the
-          Reference Information to the receiver precedes or accompanies the
+          <xref target="RFC6285">RFC6285</xref> describes a method using the 
+          existing RTP and RTP Control Protocol (RTCP) machinery that reduces 
+          the acquisition delay. In this method, an auxiliary unicast RTP session 
+          carrying the Reference Information to the receiver precedes or accompanies the
           multicast stream.  This unicast RTP flow can be transmitted at a
           faster than natural bitrate to further accelerate the acquisition.
           The motivating use case for this capability is multicast applications
@@ -760,9 +763,9 @@
       
       <section title="RFC6230">      
         <t>
-          RFC6230 describes a framework and protocol for application
-          deployment where the application programming logic and media
-          processing are distributed.  This implies that application
+          <xref target="RFC6230">RFC6230</xref> describes a framework and 
+          protocol for application deployment where the application programming 
+          logic and media processing are distributed.  This implies that application
           programming logic can seamlessly gain access to appropriate resources
           that are not co-located on the same physical network entity.  The
           framework uses the Session Initiation Protocol (SIP) to establish an
@@ -785,13 +788,13 @@
       
       <section title="RFC6364">      
         <t>
-          RFC6364 specifies the use of the Session Description Protocol
-          (SDP) to describe the parameters required to signal the Forward Error
-          Correction (FEC) Framework Configuration Information between the
-          sender(s) and receiver(s).  This document also provides examples that
-          show the semantics for grouping multiple source and repair flows
-          together for the applications that simultaneously use multiple
-          instances of the FEC Framework.
+          <xref target="RFC6364">RFC6364</xref> specifies the use of the 
+          Session Description Protocol (SDP) to describe the parameters required 
+          to signal the Forward Error Correction (FEC) Framework Configuration 
+          Information between the sender(s) and receiver(s).  This document 
+          also provides  examples that show the semantics for grouping multiple 
+          source and repair flows together for the applications that simultaneously
+          use multiple instances of the FEC Framework.
         </t>    
         <texttable title="RFC6364 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -812,7 +815,7 @@
       
       <section title="RFC4796">      
         <t>
-          RFC4796 defines a new Session Description Protocol (SDP) media-
+          <xref target="RFC4796">RFC4796</xref> defines a new Session Description Protocol (SDP) media-
           level attribute, 'content'.  The 'content' attribute defines the
           content of the media stream to a more detailed level than the media
           description line.  The sender of an SDP session description can
@@ -834,9 +837,9 @@
       
       <section title="RFC3407">      
         <t>
-          RFC3407 defines a set of Session Description Protocol (SDP)
-          attributes that enables SDP to provide a minimal and backwards
-          compatible capability declaration mechanism.
+          <xref target="RFC3407">RFC3407</xref> defines a set of 
+          Session Description Protocol (SDP) attributes that enables SDP to 
+          provide a minimal and backwards compatible capability declaration mechanism.
         </t>    
         <texttable title="RFC3407 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -861,12 +864,12 @@
 
       <section title="RFC6284">      
         <t>
-          RFC6284 presents a port mapping solution that allows RTP
-          receivers to choose their own ports for an auxiliary unicast session
-          in RTP applications using both unicast and multicast services.  The
-          solution provides protection against denial-of-service or packet
-          amplification attacks that could be used to cause one or more RTP
-          packets to be sent to a victim client
+          <xref target="RFC6284">RFC6284</xref> presents a port mapping solution 
+          that allows RTP receivers to choose their own ports for an auxiliary 
+          unicast session in RTP applications using both unicast and 
+          multicast services.  The solution provides protection against 
+          denial-of-service or packet amplification attacks that could be used to 
+          cause one or more RTP packets to be sent to a victim client
         </t>    
         <texttable title="RFC6284 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -883,7 +886,7 @@
       
       <section title="RFC6714">      
         <t>
-          RFC6714 defines a Message Session Relay Protocol (MSRP)
+          <xref target="RFC6714">RFC6714</xref> defines a Message Session Relay Protocol (MSRP)
           extension, Connection Establishment for Media Anchoring (CEMA).
           Support of this extension is OPTIONAL.  The extension allows
           middleboxes to anchor the MSRP connection, without the need for
@@ -908,7 +911,7 @@
       
       <section title="RFC6679">      
         <t>
-          RFC6679 specifies how Explicit Congestion Notification (ECN) can be
+          <xref target="RFC6679">RFC6679</xref> specifies how Explicit Congestion Notification (ECN) can be
           used with the Real-time Transport Protocol (RTP) running over UDP,
           using the RTP Control Protocol (RTCP) as a feedback mechanism.  It
           defines a new RTCP Extended Report (XR) block for periodic ECN
@@ -932,9 +935,9 @@
 
       <section title="RFC4583">      
         <t>
-          This document specifies how to describe Binary Floor Control Protocol
-          (BFCP) streams in Session Description Protocol (SDP) descriptions.
-          User agents using the offer/answer model to establish BFCP streams
+          <xref target="RFC4583">RFC4583</xref> document specifies how to describe
+          Binary Floor Control Protocol (BFCP) streams in Session Description Protocol (SDP) 
+          descriptions. User agents using the offer/answer model to establish BFCP streams
           use this format in their offers and answers
         </t>    
         <texttable title="RFC4583 Attribute Analysis">
@@ -964,7 +967,7 @@
       
       <section title="RFC5547">      
         <t>
-          RFC5547 provides a mechanism to negotiate the transfer of one
+          <xref target="RFC5547">RFC5547</xref> provides a mechanism to negotiate the transfer of one
           or more files between two endpoints by using the Session Description
           Protocol (SDP) offer/answer model specified in RFC 3264. 
         </t>    
@@ -1000,7 +1003,7 @@
       
       <section title="draft-ietf-mmusic-media-loopback">      
         <t>
-          This extension adds new SDP media types and
+          <xref target="MEDIA_LOOPBACK"></xref> adds new SDP media types and
           attributes, which enable establishment of media sessions where the
           media is looped back to the transmitter. Such media sessions will
           serve as monitoring and troubleshooting tools by providing the
@@ -1030,7 +1033,7 @@
       
       <section title="RFC5760">      
         <t>
-          RFC5760 specifies an extension to the Real-time Transport
+          <xref target="RFC5760">RFC5760</xref> specifies an extension to the Real-time Transport
           Control Protocol (RTCP) to use unicast feedback to a multicast
           sender.  The proposed extension is useful for single-source multicast
           sessions such as Source-Specific Multicast (SSM) communication where
@@ -1052,7 +1055,7 @@
       
       <section title="RFC3611">      
         <t>
-          RFC3611 defines the Extended Report (XR) packet type for the
+          <xref target="RFC3611">RFC3611</xref> defines the Extended Report (XR) packet type for the
           RTP Control Protocol (RTCP), and defines how the use of XR packets
           can be signaled by an application if it employs the Session
           Description Protocol (SDP).
@@ -1072,10 +1075,10 @@
       
       <section title="RFC5939">      
         <t>
-          RFC5938 defines a general SDP Capability Negotiation framework.
-          It also specifies how to provide attributes and transport protocols
-          as capabilities and negotiate them using the framework.  Extensions
-          for other types of capabilities (e.g., media types and media formats)
+          <xref target="RFC5939">RFC5939</xref> defines a general SDP 
+          Capability Negotiation framework. It also specifies how to provide 
+          attributes and transport protocols as capabilities and negotiate them using the framework.
+          Extensions for other types of capabilities (e.g., media types and media formats)
           may be provided in other documents.
           
         </t>    
@@ -1117,7 +1120,8 @@
           Session Description Protocol (SDP) capability negotiation provides a
           general framework for indicating and negotiating capabilities in SDP.
           The base framework defines only capabilities for negotiating
-          transport protocols and attributes.  This draft, extends the
+          transport protocols and attributes.  <xref target="MEDIA_CAP"></xref>
+          , extends the
           framework by defining media capabilities that can be used to
           negotiate media types and their associated parameters.
           
@@ -1151,7 +1155,7 @@
       
       <section title="RFC4567">      
         <t>
-          RFC4567 defines general extensions for Session Description
+          <xref target="RFC4567">RFC4567</xref> defines general extensions for Session Description
           Protocol (SDP) and Real Time Streaming Protocol (RTSP) to carry
           messages, as specified by a key management protocol, in order to
           secure the media.  These extensions are presented as a framework, to
@@ -1174,10 +1178,10 @@
       
       <section title="RFC4572">      
         <t>
-          RFC4572 specifies how to establish secure connection-oriented
-          media transport sessions over the Transport Layer Security (TLS)
-          protocol using the Session Description Protocol (SDP).  It defines a
-          new SDP protocol identifier, 'TCP/TLS'.  It also defines the syntax
+          <xref target="RFC4572">RFC4572</xref> specifies how to establish 
+          secure connection-oriented media transport sessions over the 
+          Transport Layer Security (TLS) protocol using the Session Description Protocol (SDP).
+          It defines a new SDP protocol identifier, 'TCP/TLS'.  It also defines the syntax
           and semantics for an SDP 'fingerprint' attribute that identifies the
           certificate that will be presented for the TLS session.  This
           mechanism allows media transport over TLS connections to be
@@ -1199,10 +1203,10 @@
       
       <section title="RFC4570">      
         <t>
-          RFC4570 describes how to adapt the Session Description Protocol
-          (SDP) to express one or more source addresses as a source filter for
-          one or more destination "connection" addresses.  It defines the
-          syntax and semantics for an SDP "source-filter" attribute that may
+          <xref target="RFC4570">RFC4570</xref> describes how to adapt the 
+          Session Description Protocol (SDP) to express one or more source addresses
+          as a source filter for one or more destination "connection" addresses. 
+          It defines the syntax and semantics for an SDP "source-filter" attribute that may
           reference either IPv4 or IPv6 address(es) as either an inclusive or
           exclusive source list for either multicast or unicast destinations.
           In particular, an inclusive source-filter can be used to specify a
@@ -1231,8 +1235,8 @@
           itself cannot be specified by the same attribute to avoid ambiguity,
           and thus, is required to be derived from the "m=" line of the media
           description.  Deriving the RTCP port from the "m=" line imposes an
-          unnecessary restriction.  RFC6128 removes this restriction by
-          introducing a new SDP attribute..
+          unnecessary restriction.  <xref target="RFC6128">RFC6128</xref>
+          removes this restriction by introducing a new SDP attribute.
         </t>    
         <texttable title="RFC6128 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -1249,7 +1253,7 @@
       
       <section title="RFC6189">      
         <t>
-          RFC6189 defines ZRTP, a protocol for media path Diffie-Hellman
+          <xref target="RFC6189">RFC6189</xref> defines ZRTP, a protocol for media path Diffie-Hellman
           exchange to agree on a session key and parameters for establishing
           unicast Secure Real-time Transport Protocol (SRTP) sessions for Voice
           over IP (VoIP) applications.
@@ -1269,11 +1273,11 @@
       
       <section title="RFC4145">      
         <t>
-          RFC4145 describes how to express media transport over TCP using
-          the Session Description Protocol (SDP).  It defines the SDP 'TCP'
-          protocol identifier, the SDP 'setup' attribute, which describes the
-          connection setup procedure, and the SDP 'connection' attribute, which
-          handles connection reestablishment.
+          <xref target="RFC4145">RFC4145</xref> describes how to express media
+          transport over TCP using the Session Description Protocol (SDP).
+          It defines the SDP 'TCP' protocol identifier, the SDP 'setup' attribute,
+          which describes the connection setup procedure, and the SDP 'connection' 
+          attribute, which handles connection reestablishment.
         </t>    
         <texttable title="RFC4145 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -1291,7 +1295,7 @@
       
       <section title="RFC5159">      
         <t>
-          RFC5159 provides descriptions of Session Description Protocol
+          <xref target="RFC5159">RFC5159</xref> provides descriptions of Session Description Protocol
           (SDP) attributes used by the Open Mobile Alliance's Broadcast Service
           and Content Protection specification.
         </t>    
@@ -1323,7 +1327,7 @@
       
       <section title="RFC6193">      
         <t>
-          RFC6193 specifies how to establish a media session that
+          <xref target="RFC6193">RFC6193</xref> specifies how to establish a media session that
           represents a virtual private network using the Session Initiation
           Protocol for the purpose of on-demand media/application sharing
           between peers.  It extends the protocol identifier of the Session
@@ -1357,8 +1361,9 @@
           The Packet-switched Streaming Service (PSS) and the Multimedia
           Broadcast/Multicast Service (MBMS) defined by 3GPP use the Session
           Description Protocol (SDP) and Real Time Streaming Protocol (RTSP)
-          with some extensions.  RFC6064 provides information about these
-          extensions and registers the RTSP and SDP extensions with IANA.
+          with some extensions.  <xref target="RFC6064">RFC6064</xref>
+          provides information about these extensions and registers the RTSP and 
+          SDP extensions with IANA.
         </t>    
         <texttable title="RFC6064 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -1442,7 +1447,7 @@
       
       <section title="RFC3108">      
         <t>
-          RFC3108 describes conventions for using the Session Description
+          <xref target="RFC3108">RFC3108</xref> describes conventions for using the Session Description
           Protocol (SDP) described for controlling ATM Bearer Connections, and
           any associated ATM Adaptation Layer (AAL)
         </t>    
@@ -1650,7 +1655,7 @@
       
       <section title="RFC4975">      
         <t>
-          RFC4975 the Message Session Relay Protocol, a protocol for transmitting a
+          <xref target="RFC4975">RFC4975</xref> the Message Session Relay Protocol, a protocol for transmitting a
           series of related instant messages in the context of a session.  Message sessions 
           are treated like any other media stream when set up via a rendezvous or session creation
           protocol such as the Session Initiation Protocol.
@@ -2450,6 +2455,34 @@
         </front>
         <seriesInfo name='RFC' value='4795' />
         <format type='TXT' octets='71969' target='http://www.rfc-editor.org/rfc/rfc4795.txt' />
+      </reference>
+      <reference anchor='RFC5159'>
+        
+        <front>
+          <title>Session Description Protocol (SDP) Attributes for Open Mobile Alliance (OMA) Broadcast (BCAST) Service and Content Protection</title>
+          <author initials='L.' surname='Dondeti' fullname='L. Dondeti'>
+            <organization /></author>
+          <author initials='A.' surname='Jerichow' fullname='A. Jerichow'>
+            <organization /></author>
+          <date year='2008' month='March' />
+        </front>
+        <seriesInfo name='RFC' value='5159' />
+        <format type='TXT' octets='13921' target='http://www.rfc-editor.org/rfc/rfc5159.txt' />
+      </reference>
+      <reference anchor='RFC4975'>
+        
+        <front>
+          <title>The Message Session Relay Protocol (MSRP)</title>
+          <author initials='B.' surname='Campbell' fullname='B. Campbell'>
+            <organization /></author>
+          <author initials='R.' surname='Mahy' fullname='R. Mahy'>
+            <organization /></author>
+          <author initials='C.' surname='Jennings' fullname='C. Jennings'>
+            <organization /></author>
+          <date year='2007' month='September' />
+        </front>
+        <seriesInfo name='RFC' value='4975' />
+        <format type='TXT' octets='144254' target='http://www.rfc-editor.org/rfc/rfc4975.txt' />
       </reference>
       <reference anchor='MEDIA_LOOPBACK'>
         
