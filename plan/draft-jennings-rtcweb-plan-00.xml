@@ -21,23 +21,20 @@
 
       <address>
         <postal>
-          <street>170 West Tasman Drive</street>
+          <street>400 3rd Avenue SW, Suite 350</street>
 
-          <city>San Jose</city>
+          <city>Calgary</city>
 
-          <region>CA</region>
+          <region>AB</region>
 
-          <code>95134</code>
+          <code>T2P 4H2</code>
 
-          <country>USA</country>
+          <country>Canada</country>
         </postal>
 
-        <phone>+1 408 421-9990</phone>
-
-        <email>fluffy@cisco.com</email>
+        <email>fluffy@iii.ca</email>
       </address>
     </author>
-
 
     <date day="16" month="February" year="2013" />
 
@@ -50,7 +47,57 @@
 
   <middle>
     <section title="Introduction">
-      <t></t>
+      <t>
+
+The reoccuring theme of this draft is that SDP allready has a way of solving the problems we are looking at and all we should do is use that way and not try and invent something new. 
+
+This does results in lots of m lines but all the laternatives resulted in an nearly equivelent number of ssrc lines so it's really hard to see the big difference. This assumes that it is perfeclty feasiable to transport SDP that much larger than a single MTU. The SIP usage of SDP passed over that long ago. IN the cases where the SDP is passed over web mechaisms, it is easy to use compression. 
+
+
+
+-------- Requirements 
+
+Devices with multiple cameras
+
+Devices display multiple streams of video 
+
+Simulcast 
+
+Layered Codecs 
+
+One way streams 
+
+Mapping W3C PeerConnection items to SDP and RTP 
+
+ICE 
+
+Multiplexing 
+
+
+---- Concepts 
+
+MSID 
+- 32 bit integer 
+- statistically unique 
+- 7 bits syncronization iterm id 
+- 20 bits sync context - random 
+- 2 bits - media type 
+
+
+
+--------------
+
+Tasks 
+
+Content : left , right and way to set in w3c 
+
+CSRC - way to set and get in w3c
+
+New MSID in RTP draft 
+
+
+
+</t>
     </section>
 
  
