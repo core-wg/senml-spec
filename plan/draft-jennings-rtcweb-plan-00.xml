@@ -73,16 +73,31 @@ ICE
 
 Multiplexing 
 
+Syncronization and CNAME and LS group 
+
+Alternative Transmission o same thing. 
+
+Redudant codings 
+
+RSVP QoS - SRF group 
+
+Disagregated Media (FID)
+
+In flight change of codec - once codec at a time FID 
+
+ 
+
+
 
 ---- Concepts 
 
 MSID 
 - 32 bit integer 
-- statistically unique 
-- 7 bits syncronization iterm id 
-- 20 bits sync context - random 
-- 2 bits - media type 
-
+- statistically or programatically unique to 5-tuple 
+- 6 bits syncronization source num  
+-    2 bits - media type 
+- 25 bits sync context - random 
+- 1 bit - side a/b
 
 
 --------------
@@ -93,9 +108,13 @@ Content : left , right and way to set in w3c
 
 CSRC - way to set and get in w3c
 
-New MSID in RTP draft 
+New MSID in RTP Header Extetion raft 
 
+Fix up MSID to algign with this 
 
+Complete Bundle 
+
+Provide guidance for ways to use SDP for reduced glare adding of one way media streams. 
 
 </t>
     </section>
@@ -109,6 +128,17 @@ New MSID in RTP draft
 
       <t>This draft uses the API and terminology described in <xref
       target="webrtc-api"></xref>.</t>
+
+<t>
+Transport flow (5-tuple RTP is flowing over )
+
+PC-Stream 
+
+PC-Track 
+
+
+</t>
+
     </section>
 
 
