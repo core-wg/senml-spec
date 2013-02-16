@@ -49,12 +49,50 @@
     <section title="Introduction">
       <t>
 
-The reoccuring theme of this draft is that SDP allready has a way of solving the problems we are looking at and all we should do is use that way and not try and invent something new. 
+The reoccuring theme of this draft is that SDP allready has a way of solving the
+problems we are looking at and all we should do is use that way and not try and
+invent something new.
 
-This does results in lots of m lines but all the laternatives resulted in an nearly equivelent number of ssrc lines so it's really hard to see the big difference. This assumes that it is perfeclty feasiable to transport SDP that much larger than a single MTU. The SIP usage of SDP passed over that long ago. IN the cases where the SDP is passed over web mechaisms, it is easy to use compression. 
+This does results in lots of m lines but all the laternatives resulted in an
+nearly equivelent number of ssrc lines so it's really hard to see the big
+difference. This assumes that it is perfeclty feasiable to transport SDP that
+much larger than a single MTU. The SIP usage of SDP passed over that long
+ago. IN the cases where the SDP is passed over web mechaisms, it is easy to use
+compression.
 
 
 
+</t>
+    </section>
+
+ 
+
+    <section title="Terminology">
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT",
+      "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+      interpreted as described in <xref target="RFC2119"></xref>.</t>
+
+      <t>This draft uses the API and terminology described in <xref
+      target="webrtc-api"></xref>.</t>
+
+<t>
+Transport flow (5-tuple RTP is flowing over )
+
+PC-Stream 
+
+PC-Track 
+
+
+</t>
+
+    </section>
+
+
+
+<t>
+
+  <section anchor="sec-todo" title="More Sections">
+  
 -------- Requirements 
 
 Devices with multiple cameras
@@ -85,19 +123,76 @@ Disagregated Media (FID)
 
 In flight change of codec - once codec at a time FID 
 
- 
+
+Sequential and parrallel forking at SIP level 
+
+Early media 
+
+Conferncing environments where MCU are do full decode / mix / recode of media
+
+Conferncing environments wher MCU simply muck with header information of media
+and do not decode / recode all the media
 
 
+--- Background 
+
+Multiple codecs accepted on same m line - Consider follwing O/A pair 
+
+Offer
+      v=0
+      o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
+      s=
+      c=IN IP4 host.atlanta.example.com
+      t=0 0
+      m=audio 49170 RTP/AVP 99
+      a=rtpmap:99 iLBC/8000
+      m=video 51372 RTP/AVP 31 32
+      a=rtpmap:31 H261/90000
+      a=rtpmap:32 MPV/90000
+
+Ans
+      v=0
+      o=bob 2808844564 2808844565 IN IP4 host.biloxi.example.com
+      s=
+      c=IN IP4 host.biloxi.example.com
+      t=0 0
+      m=audio 49172 RTP/AVP 99
+      a=rtpmap:99 iLBC/8000
+      m=video 51374 RTP/AVP 31 32
+      a=rtpmap:31 H261/90000
+      a=rtpmap:32 MPV/90000
+
+
+This means that that sender can switch back and forth between H261 and MVP without any further singalling. The receiveiver is receiving both but they are jsut one video meant to be disolayed in a single window. Only one is sent at a time. 
 
 ---- Concepts 
 
-MSID 
+Use what we have 
+
+Allow the sender to provide enough information that the receive can do the right
+thing
+
+
+MSID ( or MID) 
 - 32 bit integer 
 - statistically or programatically unique to 5-tuple 
 - 6 bits syncronization source num  
 -    2 bits - media type 
 - 25 bits sync context - random 
 - 1 bit - side a/b
+
+- layer 1,2,3,4 ..
+- lowres, medres, highres 
+
+--- Solutions 
+
+
+SSRC, CSRC , assumption of roster information out of band 
+
+Clue 3d coordiantes of source and view information 
+
+
+What do do with unrecornized media that is received at PC level 
 
 
 --------------
@@ -108,39 +203,24 @@ Content : left , right and way to set in w3c
 
 CSRC - way to set and get in w3c
 
+way to read SSRC of last RTP packed received in a Track in w3c 
+
+
 New MSID in RTP Header Extetion raft 
 
 Fix up MSID to algign with this 
 
+Add a group for simulcast ?
+
+
+
 Complete Bundle 
 
-Provide guidance for ways to use SDP for reduced glare adding of one way media streams. 
+Provide guidance for ways to use SDP for reduced glare adding of one way media
+streams.
 
 </t>
-    </section>
-
- 
-
-    <section title="Terminology">
-      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT",
-      "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
-      interpreted as described in <xref target="RFC2119"></xref>.</t>
-
-      <t>This draft uses the API and terminology described in <xref
-      target="webrtc-api"></xref>.</t>
-
-<t>
-Transport flow (5-tuple RTP is flowing over )
-
-PC-Stream 
-
-PC-Track 
-
-
-</t>
-
-    </section>
-
+  </section>
 
     <section anchor="sec-sec" title="Security Considerations">
       <t>TBD</t>
