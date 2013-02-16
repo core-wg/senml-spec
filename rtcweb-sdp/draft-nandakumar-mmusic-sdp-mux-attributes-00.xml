@@ -142,11 +142,25 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
          <t hangText="NORMAL (was MS/NC)"> Attributes that can be independently
          specified when multiplexing and retain their original semantics .</t>
 
-         <t hangText="BAD (was DM)"> Attributes where multiplexing SHOULD NOT
-         be used if these attributes are in use. </t>
+         <t hangText="BAD (was DM)"> Attributes where multiplexing SHOULD NOT be
+         used if these attributes are in use in the SDP. </t>
 
-         <t hangText="IDENTICAL (was R)">  Attributes that MUST be identical across all the
-         media lines being multiplexed.</t>
+         <t hangText="IDENTICAL (was R)"> Attributes that MUST be identical
+         across all the media lines being multiplexed.</t>
+
+         <t hangText="SUM"> Attributes can be set as they are normally used but
+         software using them in a multiplex case, MUST apply the sum of all the
+         attributes being multiplexed instead of trying to use each one. This is
+         typically used for bandwidth or other rate limiting attributes to the
+         underlining transport. </t>
+
+         <t hangText="TRANSPORT"> Attributes that can be set normally for
+         multiple items in a multiplexed group but the software MUST pick just
+         one of the attribute of the given type for uwe. The one chosen is the
+         attribute associated with the "m=" lines that represents the information
+         being used for the transport of the RTP. TODO - this is hard to
+         understand. We need to put some examples that explain this in some
+         section outside this list. </t>
 
          <t hangText="SPECIAL"> Attributes where the text in the draft must be
          consulted to see how they are handled when multiplexing. </t>
