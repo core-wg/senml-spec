@@ -64,11 +64,12 @@
       <t>
         Communication sessions in RTCWeb are described and negotiated using
         Session Description Protocol(SDP)[RFC4566] mechanisms.  SDP uses
-        attributes to describes specific aspects of such a session. Since its
-        inception, several attributes have been introduced into SDP for the
-        aforementioned purpose.The scope of this document is to provide generic
-        framework for analyzing SDP attributes and its applicability in solving
-        use-cases specific to RTCWeb.
+        attributes to describes specific aspects of such a session.  These
+        attributes have differnt impacts when using varions multiplexinsg RTP on
+        a single tranpsport layer flow. 
+        The scope of this specification is to provide a
+        framework for analyzing the multiplex characteristis for SDP attributes
+        and proivde multiplexing characterstics of exsiting attributes. 
       </t>
     </abstract>
   </front>
@@ -76,22 +77,17 @@
   <middle>
     <section title="Introduction">
       <t> 
-        The RTCWeb working group is responsible for defining protocol to support
-        direct interactive multimedia sessions between peers. With in this
-        framework, Session Description protocol (SDP) [RFC4566] is used for
-        describing multi-media session capabilities. A multi-media session
-        description needs to convey information such as sources, sinks and
-        encodings corresponding to the media along with transport capabilities
-        required to carry the encoded media to the peer.  SDP defines several
+        SDP<xref target="RFC4566"/> defines several
         attributes for describing specific aspects of a multimedia
         session. Given the number of SDP attributes registered with IANA
-        [IANA_REF] till date and possibility of defining new attributes in the
+        [IANA_REF] and the defining new attributes in the
         future, there is need for future-proof framework to analyze these
-        attributes for their applicability in supporting RTCWeb use-cases.
+        attributes for their applicability in transport multiplexing use-cases. 
+TODO - put in text refering to AVT multiplexing draft and to bundle draft. 
       </t>
       <t>
         The document starts with providing the motivation for requiring such a
-        framework within the context of RTCWeb. This is followed by introduction
+        frameword. This is followed by introduction
         to the SDP attribute analysis framework/procedures, following which
         several sections applies the framework to the SDP attributes registered
         with IANA [IANA_REF].
@@ -104,25 +100,21 @@
       </section>
     <section title="Motivation">
       <t>
-        One of the major driving factors motivating the need for a framework to
-        analyze SDP attributes is media stream multiplexing requirement.This
-        requirement attempts to reduce the number of media transports in order
-        to preserve network resources such as port numbers by multiplexing
-        multiple media streams in a given SDP over same underlying transport.
+        The time and complications of setting up ICE [TODO REF[ and DTLS-SRTP
+        [TODO REF] transports for use by RTP dreivrs a requirement to try and
+        reduce the mnumber of transport level flows needed. This has resulted in
+        the definition of ways to multiplex RTP over a single transport flow
+        in order
+        to preserve network resources such as port numbers.
         This imposes further restrictions on applicability of these SDP
         attributes as they are defined today.
        </t> 
       <t>
         As of today there are close to 180 SDP attributes registered with the
-        IANA and more SHALL be added in the future.  There is no clearly defined
+        IANA and more woill be added in the future.  There is no clearly defined
         procedure to establish the validity/applicability of these attribute to
-        the use-cases defined in the RTCWeb.
+        when used with multiplexing.
       </t>
-      <t>
-        Lastly,RTCWeb inter-operability requirements with legacy and future VOIP
-        systems presupposes the need for analyzing the current and future SDP
-        attributes for RTCWeb - VOIP interoperability multimedia scenarios.
-      </t>        
     </section>
     <section title="SDP Attribute Analysis Framework">
     <t>
