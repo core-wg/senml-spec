@@ -117,19 +117,12 @@ TODO - put in text refering to AVT multiplexing draft and to bundle draft.
       </t>
     </section>
     <section title="SDP Attribute Analysis Framework">
-    <t>
-     The [IANA_REF] lists the attributes registered with IANA since the
-     inception of Session Description Protocol. Any framework or procedure to
-     analyze these attributes should be able to 1) Be able to clearly explain
-     the semantic applicability of the attribute while describing RTCWeb
-     Multimedia session and 2) SHOULD be future-proof.
-    </t>
     <t> 
      An SDP session description consists of a session-level section followed by
      zero or more media-level sections that could be broken down into following
      high-level categories
      <list>
-       <t>Descriptions related to media sources and sinks such as media type,
+       <t>Descriptions related to media content such as media type,
        encoding schemes, payload types to name a few.</t>
        <t>Descriptions specifying media transport characteristics like RTP/RTCP
        port, network addresses, QOS and so on.</t>
@@ -138,17 +131,10 @@ TODO - put in text refering to AVT multiplexing draft and to bundle draft.
        <t>Descriptions establishing relationships across media streams.</t>
      </list>
     </t>  
-    <t>  
-      Over the several years, several IETF Working Group documents have extended
-      the base SDP [RFC4566] specification and thus represent a semantic
-      grouping for the attributes thus introduced. The authors believe that a
-      framework based on grouping the SDP attributes per RFC to describe their
-      applicability in the context of RTCWeb serves a better purpose.
-    </t>
+ 
     <t>
-       Based on the motivations established in the section [SECTION-MOTIVATION],
-       the proposed framework attempts to seggregate the attributes into one of
-       the following categories.
+      The proposed framework attempts to seggregate each attributes into one of
+       the following categories:
        <list>
          <t>Media Source (MS) - Attributes that could be independently specified
          per media source.</t>
