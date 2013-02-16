@@ -140,10 +140,10 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
          <t hangText="NORMAL"> Attributes that can be independently
          specified when multiplexing and retain their original semantics .</t>
 
-         <t hangText="BAD (was DM)"> Attributes where multiplexing SHOULD NOT be
+         <t hangText="BAD"> Attributes where multiplexing SHOULD NOT be
          used if these attributes are in use in the SDP. </t>
 
-         <t hangText="IDENTICAL (was R)"> Attributes that MUST be identical
+         <t hangText="IDENTICAL"> Attributes that MUST be identical
          across all the media lines being multiplexed.</t>
 
          <t hangText="SUM"> Attributes can be set as they are normally used but
@@ -154,7 +154,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
 
          <t hangText="TRANSPORT"> Attributes that can be set normally for
          multiple items in a multiplexed group but the software MUST pick just
-         one of the attribute of the given type for uwe. The one chosen is the
+         one of the attribute of the given type for use. The one chosen is the
          attribute associated with the "m=" lines that represents the information
          being used for the transport of the RTP. TODO - this is hard to
          understand. We need to put some examples that explain this in some
@@ -192,70 +192,82 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         <ttcol align='left'>Current</ttcol>
         <ttcol align='left'>Category</ttcol>
 
-        <c>sendrecv,sendonly,recvonly,inactive&nbsp;</c><c>Not
-        impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL1,&nbsp;NORMAL2&nbsp;</c>
+        <c>sendrecv&nbsp;</c><c>Not impacted&nbsp;</c><c>B&nbsp;</c>
+        <c>NORMAL&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
+        <c>sendonly&nbsp;</c><c>Not impacted&nbsp;</c><c>B&nbsp;</c>
+        <c>NORMAL&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        
+        <c>recvonly&nbsp;</c><c>Not impacted&nbsp;</c><c>B&nbsp;</c>
+        <c>NORMAL&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        
+        <c>inactive&nbsp;</c><c>Not impacted&nbsp;</c><c>B&nbsp;</c>
+        <c>NORMAL&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        
         <c>bwtype:CT&nbsp;</c><c>Aggregate bandwidth for the
-        conference&nbsp;</c><c>S&nbsp;</c><c>NORMAL2&nbsp;</c>
+        conference&nbsp;</c><c>S&nbsp;</c><c>NORMAL</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         <c>bwtype:AS&nbsp;</c><c>Aggregate total for all the RTP
         sessions&nbsp;</c><c>B&nbsp;</c><c>BAD&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-        <c>cat&nbsp;</c><c>Not impacted&nbsp;</c><c>S&nbsp;</c><c>NORMAL2&nbsp;</c>
+        <c>cat&nbsp;</c><c>Not impacted&nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         <c>ptime&nbsp;</c><c>Not Impacted
-        &nbsp;</c><c>M&nbsp;</c><c>NORMAL1,&nbsp;NORMAL2</c>
+        &nbsp;</c><c>M&nbsp;</c><c>NORMAL</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
         <c>maxptime&nbsp;</c><c>Not Impacted
-          &nbsp;</c><c>M&nbsp;</c><c>NORMAL1,&nbsp;NORMAL2</c>
+          &nbsp;</c><c>M&nbsp;</c><c>NORMAL</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         <c>orient&nbsp;</c><c>Not Impacted
-          &nbsp;</c><c>M&nbsp;</c><c>NORMAL1,&nbsp;NORMAL2</c>
+          &nbsp;</c><c>M&nbsp;</c><c>NORMAL</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
         <c>framerate&nbsp;</c><c>Not Impacted 
-          &nbsp;</c><c>M&nbsp;</c><c>NORMAL1,&nbsp;NORMAL2</c>
+          &nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
         <c>quality&nbsp;</c><c>Not Impacted
-          &nbsp;</c><c>M&nbsp;</c><c>NORMAL1,&nbsp;NORMAL2</c>
+          &nbsp;</c><c>M&nbsp;</c><c>NORMAL</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
         <c>rtpmap&nbsp;</c><c>Not Impacted
-          &nbsp;</c><c>M&nbsp;</c><c>NORMAL1,&nbsp;NORMAL2</c>
+          &nbsp;</c><c>M&nbsp;</c><c>NORMAL</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
         <c>fmtp&nbsp;</c><c>Not Impacted
-          &nbsp;</c><c>M&nbsp;</c><c>NORMAL1,&nbsp;NORMAL2</c>
+          &nbsp;</c><c>M&nbsp;</c><c>NORMAL</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
-        <c>keywds&nbsp;</c><c>Not impacted&nbsp;</c><c>S&nbsp;</c><c>NORMAL2&nbsp;</c>
+        <c>keywds&nbsp;</c><c>Not impacted&nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
         <c>type&nbsp;</c><c>Not Impacted
-          &nbsp;</c><c>S&nbsp;</c><c>NORMAL2&nbsp;</c>
+          &nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
         <c>tool&nbsp;</c><c>Not Impacted
-          &nbsp;</c><c>S&nbsp;</c><c>NORMAL2&nbsp;</c>
+          &nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
         <c>charset&nbsp;</c><c>Not Impacted
-          &nbsp;</c><c>S&nbsp;</c><c>NORMAL2&nbsp;</c>
+          &nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
         <c>sdplang&nbsp;</c><c>Not Impacted
-          &nbsp;</c><c>B&nbsp;</c><c>NORMAL2&nbsp;</c>
+          &nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
         <c>lang&nbsp;</c><c>Not Impacted
-          &nbsp;</c><c>B&nbsp;</c><c>NORMAL2&nbsp;</c>
+          &nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
       </texttable>
@@ -278,64 +290,11 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         Session,&nbsp; this attribute should be repeated across m=
         lines</c><c>M</c><c>IDENTICAL&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-        
-        <c>sli,pli,rpsi,app&nbsp;</c><c>Since RTCP feedback are reported per RTP
-          Session,&nbsp; this attribute should be repeated across m=
-          lines</c><c>M</c><c>IDENTICAL&nbsp;</c>
-        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-      </texttable>
-    </section>
-      
-      <section title="RFC5104">      
-        <t>
-          <xref target="RFC5104">RFC5104</xref> specifies a few extensions to 
-          the messages defined in the Audio-Visual Profile with Feedback (AVPF).
-          They are helpful primarily in conversational multimedia scenarios 
-          where centralized multipoint functionalities are in use. 
-          However, some are also usable in smaller multicast environments
-          and point-to-point calls.
-        </t>    
-        <texttable title="RFC4585 Attribute Analysis">
-          <ttcol align='left'>Attr Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
-          <ttcol align='left'>Current</ttcol>
-          <ttcol align='left'>Category</ttcol>
-          
-          <c>ccm&nbsp;</c><c>Since RTCP feedback are reported per RTP
-            Session,&nbsp; this attribute should be repeated across m=
-            lines</c><c>M</c><c>IDENTICAL&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-          
-          <c>fir,tmmbr,tstr,vbcm&nbsp;</c><c>Since RTCP feedback are reported per RTP
-            Session,&nbsp; this attribute should be repeated across m=
-            lines</c><c>M</c><c>IDENTICAL&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-        </texttable>
-      </section>
-    
-    <section title="RFC5888">      
-      <t>
-        <xref target="RFC5888">RFC5888</xref> defines a framework
-        to group "m" lines in the Session Description Protocol (SDP)
-        for different purposes.
-      </t>    
-      <texttable title="RFC4586 Attribute Analysis">
-        <ttcol align='left'>Name</ttcol>
-        <ttcol align='left'>Session Mux</ttcol>
-        <ttcol align='left'>Current</ttcol>
-        <ttcol align='left'>Category</ttcol>
 
-        <c>group:LS&nbsp;</c><c>Complicates sychronization when multiple audio and
-        video streams are muxed&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
-        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-        
-        <c>group:FID&nbsp;</c><c>Semantics of FID are lost if sessions are 
-        multiplexed &nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
-        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-                
       </texttable>
     </section>
       
+     
      <section title="RFC5761">      
         <t>
           <xref target="RFC5761">RFC5761</xref> discusses issues that arise
@@ -358,32 +317,6 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </texttable>
       </section>
          
-      <section title="RFC3556">      
-        <t>
-          <xref target="RFC3556">RFC3556</xref> defines an extension to the 
-          Session Description Protocol (SDP) to specify two additional modifiers 
-          for the bandwidth attribute.  These modifiers may be used to specify 
-          the bandwidth allowed for RTP Control Protocol (RTCP) packets in a Real-time
-          Transport Protocol (RTP) session
-        </t>    
-        <texttable title="RFC3556 Attribute Analysis">
-          <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
-          <ttcol align='left'>Current</ttcol>
-          <ttcol align='left'>Category</ttcol>
-          
-          <c>RS&nbsp;</c><c>Case1:Aggregate total for m=lines of same type. Case2:Muxing
-             m=lines of different types results in inappropriate
-             bandwith allocation&nbsp;</c><c>B</c><c>NORMAL1,BAD for case 2&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-          
-          <c>RR&nbsp;</c><c>Case1:Aggregate total for m=lines of same type. Case2:Muxing
-            m=lines of different types results in inappropriate
-            bandwith allocation&nbsp;</c><c>B</c><c>NORMAL1,BAD for Case2&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-        </texttable>
-      </section>  
-    
       <section title="RFC4574">      
         <t>
           <xref target="RFC4574">RFC4574</xref> defines a new Session Description Protocol (SDP)
@@ -400,7 +333,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>label&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL1,NORMAL2&nbsp;</c>
+          <c>label&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -418,11 +351,11 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>qos-mech-send&nbsp;</c><c>QOS mechanism should be same across all the
-          m=lines multiplexed&nbsp;</c><c>B</c><c>NORMAL1,IDENTICAL&nbsp;</c>
+          m=lines multiplexed&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>qos-mech-recv&nbsp;</c><c>AQOS mechanism should be same across all the
-          m=lines multiplexed&nbsp;</c><c>B</c><c>NORMAL1,IDENTICAL&nbsp;</c>
+          m=lines multiplexed&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
       </section>  
@@ -441,8 +374,8 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>crypto&nbsp;</c><c>Same crypto parameters applies to all m= lines&nbsp;</c>
-          <c>M&nbsp;</c><c>NORMAL2&nbsp;</c>
+          <c>crypto&nbsp;</c><c>media-level crypto parameters MUST be preferred if
+          specified &nbsp;</c><c>M&nbsp;</c><c>TRANSPORT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>       
           
         </texttable>
@@ -535,33 +468,18 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>resource,channel,cmid&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL2&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>       
+          <c>resource&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c> 
+          
+          <c>channel&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c> 
+          
+          <c>&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c> 
           
         </texttable>
       </section>
       
-      
-      <section title="RFC3890">      
-        <t>
-          <xref target="RFC3890">RFC3890</xref> defines a Session Description Protocol (SDP) 
-          Transport Independent Application Specific Maximum (TIAS) bandwidth modifier
-          that does not include transport overhead; instead an additional
-          packet rate attribute is defined.  The transport independent bit-rate
-          value together with the maximum packet rate can then be used to
-          calculate the real bit-rate over the transport actually used.
-        </t>    
-        <texttable title="RFC3890 Attribute Analysis">
-          <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
-          <ttcol align='left'>Current</ttcol>
-          <ttcol align='left'>Category</ttcol>
-          
-          <c>b=TIAS&nbsp;</c><c>Aggregate total across all the m=lines muxed&nbsp;</c>
-          <c>B</c><c>NORMAL1,NORMAL2&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-        </texttable>
-      </section>  
       
       <section title="RFC5245">      
         <t>
@@ -581,22 +499,34 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>ice-lite&nbsp;</c><c>Not Impacted&nbsp;</c>
-          <c>S</c><c>NORMAL2&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>ice-options&nbsp;</c><c>Not Impacted&nbsp;</c>
-          <c>S</c><c>NORMAL2&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>ice-pwd,ice-ufrag&nbsp;</c><c>Same value applies to all the
-          muxed sessions.&nbsp;</c>
-          <c>B</c><c>NORMAL2&nbsp;</c>
+          <c>ice-options&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>candidate,remote-candidates&nbsp;</c><c>Same value applies to all 
-          the muxed sessions&nbsp;</c><c>M</c><c>NORMAL2&nbsp;</c>
+          <c>ice-pwd&nbsp;</c><c>Per media-level attribute MUST be used per 
+          underlying transport flow&nbsp;</c>
+          <c>B</c><c>TRANSPORT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>ice-ufrag&nbsp;</c><c>Per media-level attribute MUST be used per 
+          underlying transport flow&nbsp;</c>
+          <c>B</c><c>TRANSPORT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>candidate&nbsp;</c><c>Same value applies to all 
+          the muxed sessions&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>         
           
+          <c>remote-candidates&nbsp;</c><c>Same value applies to all 
+            the muxed sessions&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c> 
         </texttable>
       </section>  
       
@@ -615,9 +545,8 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>extmap&nbsp;</c><c>Not recommended for multiplexing due to dependencies
-          unknown before hand&nbsp;</c>
-          <c>B</c><c>BAD&nbsp;</c>
+          <c>extmap&nbsp;</c><c>Specific RTP extension document MUST be referred&nbsp;</c>
+          <c>B</c><c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
       </section>  
@@ -640,7 +569,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           
           <c>rtcp&nbsp;</c><c>Case1:Same RTCP port is repeated across the m=lines.
             Case2:Different RTCP ports renders multiplexing impossible&nbsp;</c><c>M</c>
-          <c>R if Case1, BAD if Case2&nbsp;</c>
+          <c>TRANSPORT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -660,21 +589,21 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>ssrc&nbsp;</c><c>SSRCs repeated over multiple m=lines complicates
-          multiplexing&nbsp;</c><c>M</c><c>NORMAL1,BAD&nbsp;</c>
+          multiplexing&nbsp;</c><c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>ssrc-group&nbsp;</c><c>SSRCs repeated over multiple m=lines complicates
-            multiplexing&nbsp;</c><c>M</c><c>NORMAL1,BAD&nbsp;</c>
+          <c>ssrc-group&nbsp;</c><c>Refer to section <xref target="SecssrcgroupAnalysis"></xref>
+          for specific analysis of the grouping semantics&nbsp;</c><c>M</c><c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>cname&nbsp;</c><c>Not Impacted&nbsp;</c><c>SR</c><c>NORMAL2&nbsp;</c>
+          <c>cname&nbsp;</c><c>Not Impacted&nbsp;</c><c>SR</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>previous-ssrc&nbsp;</c><c>SSRCs repeated over multiple m=lines complicates
           multiplexing&nbsp;</c><c>SR</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>fmtp&nbsp;</c><c>Not Impacted&nbsp;</c><c>SR</c><c>NORMAL2&nbsp;</c>
+          <c>fmtp&nbsp;</c><c>Not Impacted&nbsp;</c><c>SR</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           
@@ -698,38 +627,13 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>imageattr&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL2&nbsp;</c>
+          <c>imageattr&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
       </section>
       
-      <section title="RFC5583">      
-        <t>
-          <xref target="RFC5583">RFC5583</xref> defines semantics that allow for 
-          signaling the decoding dependency of different media descriptions with the
-          same media type in the Session Description Protocol (SDP).  This is required, for
-          example, if media data is separated and transported in different
-          network streams as a result of the use of a layered or multiple
-          descriptive media coding process.
-        </t>    
-        <texttable title="RFC5583 Attribute Analysis">
-          <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
-          <ttcol align='left'>Current</ttcol>
-          <ttcol align='left'>Category</ttcol>
-          
-          <c>depend lay&nbsp;</c><c>Not recommended for multiplexing m=lines of 
-          different media types&nbsp;</c><c>M</c><c>NORMAL1,BAD&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-          
-          <c>depend mdc&nbsp;</c><c>Not recommended for multiplexing m=lines of 
-            different media types&nbsp;</c><c>M</c><c>NORMAL1,BAD&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-          
-        </texttable>
-      </section>
-      
+
       <section title="RFC6285">      
         <t>
           <xref target="RFC6285">RFC6285</xref> describes a method using the 
@@ -747,14 +651,9 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>rams-updates&nbsp;</c><c>The attribue MUST be repeated across all the
-          m=lines to indicate the support uniformly&nbsp;</c><c>M&nbsp;</c><c>NORMAL1,IDENTICAL&nbsp;</c>
+          <c>rams-updates&nbsp;</c><c>Not recommended &nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-          
-          <c>rai&nbsp;</c><c>RTCP-FB nack value rai MUST be repeated across all the
-            m=lines&nbsp;</c><c>M&nbsp;</c><c>NORMAL1,IDENTICAL&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-          
+         
         </texttable>
       </section>
       
@@ -775,8 +674,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>cfw-id&nbsp;</c><c>Not recommended due to legacy
-          interop purposes&nbsp;</c><c>M&nbsp;</c><c>NORMAL2&nbsp;</c>
+          <c>cfw-id&nbsp;</c><c>Not Applicable&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -799,12 +697,13 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>fec-source-flow,fec-repair-flow&nbsp;</c><c>Complicates the grouping between 
-          source flows and repair flows&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
+          <c>fec-source-flow&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>repair-window&nbsp;</c><c>Complicates the multiplexing due to
-          potential differences in the repair-window timeouts&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
+          <c>fec-repair-flow&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>repair-window&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -826,7 +725,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>content&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL2&nbsp;</c>
+          <c>content&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -845,17 +744,24 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>sqn&nbsp;</c><c>Not Impacted&nbsp;</c>
-          <c>B</c><c>NORMAL2&nbsp;</c>
+          <c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>csdc&nbsp;</c><c>Mismatch in the offered capability description MAY fail
             multiplexing.&nbsp;</c><c>B</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>cpar,cparmin,cparmax&nbsp;</c><c>Mismatch in the offered capability parameters MAY fail
+          <c>cpar&nbsp;</c><c>Mismatch in the offered capability parameters MAY fail
             multiplexing.&nbsp;</c><c>B</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>     
           
+          <c>cparmin&nbsp;</c><c>Mismatch in the offered capability parameters MAY fail
+            multiplexing.&nbsp;</c><c>B</c><c>BAD&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>  
+          
+          <c>cparmax&nbsp;</c><c>Mismatch in the offered capability parameters MAY fail
+            multiplexing.&nbsp;</c><c>B</c><c>BAD&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>  
         </texttable>
       </section>
 
@@ -874,8 +780,8 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>portmapping-req&nbsp;</c><c>Attribute MUST be repeated across
-          all the m=lines&nbsp;</c><c>M&nbsp;</c><c>NORMAL1,IDENTICAL&nbsp;</c>
+          <c>portmapping-req&nbsp;</c><c>Not recommended, if port mapping is 
+          required by the application&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -900,35 +806,12 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>msrp-cema&nbsp;</c><c>Not recommended due to legacy 
-          interop purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
+          interop purposes&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
       </section>
       
-      <section title="RFC6679">      
-        <t>
-          <xref target="RFC6679">RFC6679</xref> specifies how Explicit Congestion Notification (ECN) can be
-          used with the Real-time Transport Protocol (RTP) running over UDP,
-          using the RTP Control Protocol (RTCP) as a feedback mechanism.  It
-          defines a new RTCP Extended Report (XR) block for periodic ECN
-          feedback, a new RTCP transport feedback message for timely reporting
-          of congestion events, and a Session Traversal Utilities for NAT
-          (STUN) extension used in the optional initialisation method using
-          Interactive Connectivity Establishment (ICE)
-        </t>    
-        <texttable title="RFC6284 Attribute Analysis">
-          <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
-          <ttcol align='left'>Current</ttcol>
-          <ttcol align='left'>Category</ttcol>
-          
-          <c>ecn-capable-rtp&nbsp;</c><c>Attribute MUST be repeated across
-            all the m=lines&nbsp;</c><c>M&nbsp;</c><c>NORMAL1,IDENTICAL&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-          
-        </texttable>
-      </section>
 
       <section title="RFC4583">      
         <t>
@@ -943,20 +826,16 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>floorctrl&nbsp;</c><c>Not recommended due to incompatible protocol between
-          bfcp transport and RTP media transports&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
+          <c>floorctrl&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>       
           
-          <c>confid&nbsp;</c><c>Not recommended due to incompatible protocol between
-          bfcp transport and RTP media transports&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
+          <c>confid&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>userid&nbsp;</c><c>Not recommended due to incompatible protocol between
-          bfcp transport and RTP media transports&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
+          <c>userid&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>floorid&nbsp;</c><c>Not recommended due to incompatible protocol between
-          bfcp transport and RTP media transports&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
+          <c>floorid&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -989,11 +868,15 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c> file-date,file-iconfile-range,&nbsp;</c><c>Not recommended for multiplexing
+          <c> file-date,file-iconfile-range&nbsp;</c><c>Not recommended for multiplexing
             due to differences in the protocol and media types&nbsp;</c>
           <c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
+          <c>file-iconfile-range,&nbsp;</c><c>Not recommended for multiplexing
+            due to differences in the protocol and media types&nbsp;</c>
+          <c>M</c><c>BAD&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
       </section>
@@ -1014,15 +897,15 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>loopback&nbsp;</c><c>The attribute MUST be repeated across all
-           m=lines multiplexed &nbsp;</c><c>M</c><c>NORMAL1,IDENTICAL&nbsp;</c>
+           m=lines multiplexed &nbsp;</c><c>M</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>loopback-source&nbsp;</c><c>The attribute MUST be reported across all
-            m=lines multiplexed&nbsp;</c><c>M</c><c>NORMAL1,IDENTICAL&nbsp;</c>
+            m=lines multiplexed&nbsp;</c><c>M</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>loopback-mirrork&nbsp;</c><c>The attribute MUST be reported across all
-            m=lines multiplexed&nbsp;</c><c>M</c><c>NORMAL1,IDENTICAL&nbsp;</c>
+            m=lines multiplexed&nbsp;</c><c>M</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1044,7 +927,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>rtcp-unicast&nbsp;</c><c>The attribute MUST be reported across all
-          m=lines multiplexed&nbsp;</c><c>M</c><c>NORMAL1,IDENTICAL&nbsp;</c>
+          m=lines multiplexed&nbsp;</c><c>M</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
             
         </texttable>
@@ -1064,7 +947,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>rtcp-xr&nbsp;</c><c>The attribute MUST be reported across all
-            m=lines multiplexed&nbsp;</c><c>B</c><c>NORMAL1,IDENTICAL&nbsp;</c>
+            m=lines multiplexed&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1087,10 +970,10 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           
           <c>pcfg&nbsp;</c><c>Not recommended due to potential mismatch
           in the configuration between m=lines of different media types&nbsp;</c>
-          <c>M</c><c>NORMAL1,IDENTICAL&nbsp;</c>
+          <c>M</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>acfg&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL1,IDENTICAL&nbsp;</c>
+          <c>acfg&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>csup&nbsp;</c><c>Not recommended due to unbound number of 
@@ -1106,7 +989,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>tcap&nbsp;</c><c>Repeat transport capability across all
-           m= lines&nbsp;</c><c>B</c><c>NORMAL1,IDENTICAL&nbsp;</c>
+           m= lines&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1129,22 +1012,22 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>rmcap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL2&nbsp;</c>
+          <c>rmcap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>omcap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL2&nbsp;</c>
+          <c>omcap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>mfcap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL2&nbsp;</c>
+          <c>mfcap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>mscap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL2&nbsp;</c>
+          <c>mscap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>lcfg&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL2&nbsp;</c>
+          <c>lcfg&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>secap&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL2&nbsp;</c>
+          <c>secap&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1167,7 +1050,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>key-mgmt&nbsp;</c><c>Key management protocol MUST be identical
-          across all the m=lines&nbsp;</c><c>B</c><c>NORMAL1,IDENTICAL&nbsp;</c>
+          across all the m=lines&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1192,7 +1075,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>fingerprint&nbsp;</c><c>Fingerprint value MUST be identical
-            across all the m=lines&nbsp;</c><c>B</c><c>NORMAL1,IDENTICAL&nbsp;</c>
+            across all the m=lines&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1215,7 +1098,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>source-filter&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL1,NORMAL2&nbsp;</c>
+          <c>source-filter&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1242,7 +1125,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>multicast-rtcp&nbsp;</c><c>Multicast RTCP port MUST be 
-          identical across all the m=lines&nbsp;</c><c>B</c><c>NORMAL1,IDENTICAL&nbsp;</c>
+          identical across all the m=lines&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1262,7 +1145,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>zrtp-hash&nbsp;</c><c>The hash should be identical across all
-          the m=lines&nbsp;</c><c>M</c><c>NORMAL1,IDENTICAL&nbsp;</c>
+          the m=lines&nbsp;</c><c>M</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1282,11 +1165,16 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>setup,connection&nbsp;</c><c>Not recommended for multiplexing due to possible
+          <c>setup&nbsp;</c><c>Not recommended for multiplexing due to possible
           differences in the protocol and media types&nbsp;</c>
           <c>B</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
+          <c>connection&nbsp;</c><c>Not recommended for multiplexing due to possible
+            differences in the protocol and media types&nbsp;</c>
+          <c>B</c><c>BAD&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
         </texttable>
       </section>
       
@@ -1339,15 +1227,19 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>ike-setup&nbsp;</c><c>Attribute MUST be identical
-            across all the m=lines&nbsp;</c><c>B</c><c>NORMAL1,IDENTICAL&nbsp;</c>
+            across all the m=lines&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>psk-fingerprint&nbsp;</c><c>Attribute MUST be identical
-          across all the m=lines&nbsp;</c><c>B</c><c>NORMAL1,IDENTICAL&nbsp;</c>
+          across all the m=lines&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>ike-esp,ike-esp-udpencap&nbsp;</c><c>Attribute MUST be identical
-          across all the m=lines&nbsp;</c><c>B</c><c>NORMAL1,IDENTICAL&nbsp;</c>
+          across all the m=lines&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>ike-esp-udpencap&nbsp;</c><c>Attribute MUST be identical
+          across all the m=lines&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1394,16 +1286,14 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           
-          <c>framesize</c><c>Case1:Framesize MUST be same across all the video m=lines&nbsp;
-          Case2:Multiplexing with audio m=lines is invalid</c><c>M</c>
-          <c>R if Case1 OR BAD if Case2&nbsp;</c>
+          <c>framesize</c><c>Not Impacted</c><c>M</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>3GPP-Integrity-Key&nbsp;</c><c>Not Impacted</c><c>S</c><c>NORMAL2&nbsp;</c>
+          <c>3GPP-Integrity-Key&nbsp;</c><c>Not Impacted</c><c>S</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>3GPP-SRTP-Config&nbsp;</c><c>Same config SHALL apply to all the m=lines 
-          multiplexed&nbsp;</c><c>M</c><c>NORMAL2&nbsp;</c>
+          multiplexed&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>alt,alt-default-id&nbsp;</c><c>Specifying alternate m=lines when session 
@@ -1592,19 +1482,35 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>secondary-realm,visited realm&nbsp;</c><c>Not recommended due to 
+          <c>secondary-realm&nbsp;</c><c>Not recommended due to 
           interop purposes&nbsp;</c><c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>omr-s-cksum,omr-m-cksum&nbsp;</c><c>Not recommended due to 
+          <c>visited realm&nbsp;</c><c>Not recommended due to 
+          interop purposes&nbsp;</c><c>M</c><c>BAD&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>omr-m-cksum&nbsp;</c><c>Not recommended due to 
             interop purposes&nbsp;</c><c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>omr-s-att,omr-m-att&nbsp;</c><c>Not recommended due to 
+          <c>omr-s-cksum&nbsp;</c><c>Not recommended due to 
           interop purposes&nbsp;</c><c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>omr-s-bw,omr-m-att&nbsp;</c><c>Not recommended due to 
+          <c>omr-m-att&nbsp;</c><c>Not recommended due to 
+          interop purposes&nbsp;</c><c>M</c><c>BAD&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>omr-s-att&nbsp;</c><c>Not recommended due to 
+          interop purposes&nbsp;</c><c>M</c><c>BAD&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>omr-s-bw&nbsp;</c><c>Not recommended due to 
+          interop purposes&nbsp;</c><c>M</c><c>BAD&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>omr-m-att&nbsp;</c><c>Not recommended due to 
           interop purposes&nbsp;</c><c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
@@ -1626,11 +1532,33 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>T38FaxVersion,T38MaxBitRate,T38FaxFillBitRemoval,T38FaxTranscodingMMR,
-           T38FaxTranscodingJBIG,T38FaxRateManagement,T38FaxMaxBuffer,T38FaxMaxDatagram,
-           T38FaxUdpEC&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL2&nbsp;</c>
+          <c>T38FaxVersion&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
+          <c>T38MaxBitRate&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>T38FaxFillBitRemoval&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>T38FaxTranscodingMMR&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>T38FaxTranscodingJBIG&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>T38FaxRateManagement&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>T38FaxMaxBuffer&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>T38FaxMaxDatagram&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>T38FaxUdpEC&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+                   
         </texttable>
       </section>
       
@@ -1695,7 +1623,11 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>rtpred1,rtpred2&nbsp;</c><c>Not Applicable&nbsp;</c>
+          <c>rtpred1&nbsp;</c><c>Not Applicable&nbsp;</c>
+          <c>Not-Applcable</c><c>BAD&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>rtpred2&nbsp;</c><c>Not Applicable&nbsp;</c>
           <c>Not-Applcable</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
@@ -1717,7 +1649,457 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           
         </texttable>
       </section>
+   </section>
+   <section title="bwtype Attribute Analysis" anchor="SecbwtypeAnalysis" >
+   <t>
+    This section specifies handling of specific bandwidth attributes when
+    used in multiplexing scenarios.
+   </t> 
+     <section title="RFC4566">         
+       <texttable title="RFC4566 bwtype Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Category</ttcol>
+         
+         <c>bwtype:CT&nbsp;</c><c>Aggregate bandwidth for the conference&nbsp;</c>
+         <c>S</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+         <c>bwtype:AS&nbsp;</c><c>Aggregate RTP session bandwidth&nbsp;</c>
+         <c>B</c><c>NORMAL(session-level), IDENTICAL(media-level)&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+       </texttable>
+     </section> 
+     <section title="RFC3556">      
+       <t>
+         <xref target="RFC3556">RFC3556</xref> defines an extension to the 
+         Session Description Protocol (SDP) to specify two additional modifiers 
+         for the bandwidth attribute.  These modifiers may be used to specify 
+         the bandwidth allowed for RTP Control Protocol (RTCP) packets in a Real-time
+         Transport Protocol (RTP) session
+       </t>    
+       <texttable title="RFC3556 bwtype Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Category</ttcol>
+         
+         <c>bwtype:RS&nbsp;</c><c>Case1: Application MUST SUM bandwidth from all m=lines of same type
+            and MUST not use default values.Case2:Muxing m=lines of different types results 
+            in inappropriate bandwith allocation&nbsp;</c><c>B</c>
+         <c>NORMAL(Case1),SPECIAL(Case2)&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+         <c>bwtype:RR&nbsp;</c><c>Case1: Application MUST SUM bandwidth from all m=lines of same type
+           and MUST not use default values.Case2:Muxing m=lines of different types results 
+           in inappropriate bandwith allocation&nbsp;</c><c>B</c>
+         <c>NORMAL(Case1),SPECIAL(Case2)&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+                  
+       </texttable>
+     </section> 
+     <section title="RFC3890">      
+       <t>
+         <xref target="RFC3890">RFC3890</xref> defines a Session Description Protocol (SDP) 
+         Transport Independent Application Specific Maximum (TIAS) bandwidth modifier
+         that does not include transport overhead; instead an additional
+         packet rate attribute is defined.  The transport independent bit-rate
+         value together with the maximum packet rate can then be used to
+         calculate the real bit-rate over the transport actually used.
+       </t>    
+       <texttable title="RFC3890 bwtype Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Category</ttcol>
+         
+         <c>bwtype:TIAS&nbsp;</c><c>Application MUST SUM bandwidth from all m=lines of same type
+           and MUST not use default values&nbsp;</c><c>B</c><c>SUM&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+       </texttable>
+     </section>  
+   </section>   
+   <section title="rtcp-fb Attribute Analysis" anchor="SecrtcpfbAnalysis">
+     <t>
+      This section analyzes rtcp-fb SDP attributes <xref target="RTCP-FB"></xref>. 
+     </t>
+     
+     <section title="RFC4585">      
+       <t>
+         <xref target="RFC4585">RFC4585</xref> defines an extension to the
+         Audio-visual Profile (AVP) that enables receivers to provide, statistically, 
+         more immediate feedback to the senders and thus allows for short-term 
+         adaptation and efficient feedback-based repair mechanisms to be implemented.
+       </t>    
+       <texttable title="RFC4585 Attribute Analysis">
+         <ttcol align='left'>Attr Name</ttcol>
+         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Category</ttcol>
+            
+         <c>ack&nbsp;</c><c>Not Impacted </c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+         <c>app&nbsp;</c><c>Not Impacted </c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+         <c>nack&nbsp;</c><c>Not Impacted </c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+         <c>trr-int&nbsp;</c><c>Not Impacted </c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+       </texttable>
+     </section>
+     
+     <section title="RFC5104">      
+       <t>
+         <xref target="RFC5104">RFC5104</xref> specifies a few extensions to 
+         the messages defined in the Audio-Visual Profile with Feedback (AVPF).
+         They are helpful primarily in conversational multimedia scenarios 
+         where centralized multipoint functionalities are in use. 
+         However, some are also usable in smaller multicast environments
+         and point-to-point calls.
+       </t>    
+       <texttable title="RFC5104 Attribute Analysis">
+         <ttcol align='left'>Attr Name</ttcol>
+         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Category</ttcol>
+         
+         <c>ccm&nbsp;</c><c>Not Impacted</c><c>M</c><c>Normal&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+       </texttable>
+     </section>
+   </section>
+   <section title="rtcp-fb &quot;ack/nack&quot; Attribute Analysis" anchor="SecacknackAnalysis">
+     <t>
+       This section analyzes rtcp-fb SDP attributes specific to ack and nack feedback
+       types <xref target="ACK-NACK"></xref>. 
+     </t>
+     <section title="RFC4585">      
+       <t>
+         <xref target="RFC4585">RFC4585</xref> defines an extension to the
+         Audio-visual Profile (AVP) that enables receivers to provide, statistically, 
+         more immediate feedback to the senders and thus allows for short-term 
+         adaptation and efficient feedback-based repair mechanisms to be implemented.
+       </t>    
+       <texttable title="RFC4585 Attribute Analysis">
+         <ttcol align='left'>Attr Name</ttcol>
+         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Category</ttcol>
+         
+         <c>nack sli&nbsp;</c><c>Not Impacted </c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+         <c>nack pli&nbsp;</c><c>Not Impacted </c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+         <c>ack rpsi&nbsp;</c><c>Not Impacted </c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+         <c>ack app&nbsp;</c><c> Feedback parameters MUST be handled in the 
+         app specifc way when multiplexed</c><c>M</c><c>SPECIAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+         <c>nack rpsi&nbsp;</c><c>Not Impacted </c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+         <c>nack app&nbsp;</c><c>Feedback parameters MUST be handled in the 
+           app specifc way when multiplexed</c><c>M</c><c>SPECIAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+       </texttable>
+     </section>
+     <section title="RFC6285">        
+       <texttable title="RFC6285 Attribute Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Category</ttcol>
+         
+         <c>nack rai&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+       </texttable>
+     </section>
+     <section title="RFC6679">      
+       <t>
+         <xref target="RFC6679">RFC6679</xref> specifies how Explicit Congestion Notification (ECN) can be
+         used with the Real-time Transport Protocol (RTP) running over UDP,
+         using the RTP Control Protocol (RTCP) as a feedback mechanism.  It
+         defines a new RTCP Extended Report (XR) block for periodic ECN
+         feedback, a new RTCP transport feedback message for timely reporting
+         of congestion events, and a Session Traversal Utilities for NAT
+         (STUN) extension used in the optional initialisation method using
+         Interactive Connectivity Establishment (ICE)
+       </t>    
+       <texttable title="RFC6679 Attribute Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Category</ttcol>
+         
+         <c>nack ecn&nbsp;</c><c>Complicates ECN marking when m=lines of different
+         types are used&nbsp;</c><c>M&nbsp;</c><c>SPECIAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+       </texttable>
+     </section>
+     <section title="RFC6642">      
+       <t>
+         In a large RTP session using the RTP Control Protocol (RTCP) feedback
+         mechanism defined in RFC 4585 <xref target="RFC4585"></xref>, 
+         a feedback target may experience transient overload if some event
+         causes a large number of receivers to send feedback at once. 
+         This overload is usually avoided by ensuring that feedback reports 
+         are forwarded to all receivers, allowing them to avoid sending duplicate
+         feedback reports.  However, there are cases where it is not recommended to 
+         forward feedback reports, and this may allow feedback implosion. 
+         RFC6642 <xref target="RFC6642"></xref> memo discusses these cases and defines a 
+         new RTCP Third-Party Loss Report that can be used to inform receivers that the 
+         feedback target is aware of some loss event, allowing them to suppress feedback.
+         Associated Session Description Protocol (SDP) signaling is also defined.
+       </t>    
+       <texttable title="RFC6642 Attribute Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Category</ttcol>
+         
+         <c>tllei&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+         <c>pslei&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+       </texttable>
+     </section>
    </section>  
+   <section title="Codec Control Messages Analysis" anchor="SecccmAnalysis">
+     <t>
+       This section analyzes rtcp-fb Codec Control Message <xref target="CCM"></xref>. 
+     </t>
+     <section title="RFC5104">      
+       <texttable title="RFC5104 Attribute Analysis">
+         <ttcol align='left'>Attr Name</ttcol>
+         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Category</ttcol>
+        
+         <c>fir&nbsp;</c><c>Not Impacted</c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+         <c>tmmbr&nbsp;</c><c>Not Impacted</c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+         <c>tstr&nbsp;</c><c>Not Impacted</c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+         <c>vbcm&nbsp;</c><c>Not Impacted</c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+       </texttable>
+     </section> 
+   </section> 
+  <section title="group Attribute Analysis"
+     anchor="SecgroupAnalysis">
+     <t>
+       This section analyzes SDP &quot;group&quot; semantics <xref target="GROUP-SEM"></xref>. 
+     </t>
+     <section title="RFC5888">      
+       <t>
+         <xref target="RFC5888">RFC5888</xref> defines a framework
+         to group "m" lines in the Session Description Protocol (SDP)
+         for different purposes.
+       </t>    
+       <texttable title="RFC5888 Attribute Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Category</ttcol>
+         
+         <c>group:LS&nbsp;</c><c>Not Impacted&nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+         <c>group:FID&nbsp;</c><c>Not Impacted&nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+       </texttable>
+     </section>
+     <section title="RFC3524">      
+       <t>
+         <xref target="RFC3524">RFC3524</xref> defines an extension to the 
+         Session Description Protocol (SDP) grouping framework.  It allows requesting a 
+         group of media streams to be mapped into a single resource reservation flow.
+         The SDP syntax needed is defined, as well as a new "semantics"
+         attribute called Single Reservation Flow (SRF).
+       </t>    
+       <texttable title="RFC3524 Attribute Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Category</ttcol>
+         
+         <c>group:SRF&nbsp;</c><c>Not Impacted&nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+       </texttable>
+     </section>
+     
+     <section title="RFC4091">      
+       <t>
+         <xref target="RFC4091">RFC4091</xref> defines the 
+         Alternative Network Address Types (ANAT) semantics for the 
+         Session Description Protocol (SDP) grouping framework.  The 
+         ANAT semantics allow alternative types of network addresses to 
+         establish a particular media stream.
+       </t>    
+       <texttable title="RFC4091 Attribute Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Category</ttcol>
+         
+         <c>group:ANAT&nbsp;</c><c>Not Impacted &nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+       </texttable>
+     </section>
+     
+     <section title="RFC5956">      
+       <t>
+         <xref target="RFC5956">RFC5956</xref> defines the semantics for 
+         grouping the associated source and FEC-based (Forward Error Correction) 
+         repair flows in the Session Description Protocol (SDP).  The semantics 
+         defined in the document are to be used with the SDP Grouping Framework (RFC 5888).
+         These semantics allow the description of grouping relationships
+         between the source and repair flows when one or more source and/or
+         repair flows are associated in the same group, and they provide
+         support for additive repair flows.  SSRC-level (Synchronization
+         Source) grouping semantics are also defined in this document for
+         Real-time Transport Protocol (RTP) streams using SSRC multiplexing.
+       </t>    
+       <texttable title="RFC5956 Attribute Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Category</ttcol>
+         
+         <c>group:FEC-FR&nbsp;</c><c>Not Impacted&nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+       </texttable>
+     </section>
+     <section title="RFC5583">      
+       <t>
+         <xref target="RFC5583">RFC5583</xref> defines semantics that allow for 
+         signaling the decoding dependency of different media descriptions with the
+         same media type in the Session Description Protocol (SDP).  This is required, for
+         example, if media data is separated and transported in different
+         network streams as a result of the use of a layered or multiple
+         descriptive media coding process.
+       </t>    
+       <texttable title="RFC5583 Attribute Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Category</ttcol>
+         
+         <c>depend lay&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+         <c>depend mdc&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+       </texttable>
+     </section>
+     
+   </section>  
+   <section title="ssrc-group Attribute Analysis"
+     anchor="SecssrcgroupAnalysis">
+    <t>
+     This section analyzes &quot;ssrc-group&quot; semantics<xref target="SSRC-GROUP"></xref>. 
+    </t>
+     <section title="RFC5576">       
+       <texttable title="RFC5576 Attribute Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Category</ttcol>
+         
+         <c>FID&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+         <c>FEC&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+         <c>FEC-FR&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         
+       </texttable>
+     </section> 
+   </section>
+    <section title="QoS Mechanism Token Analysis"
+      anchor="SecqostokenAnalysis">
+      <t>
+        This section analyzes QoS tokes specified with SDP<xref target="QOS"></xref>. 
+      </t>
+      <section title="RFC5432">       
+        <texttable title="RFC5432 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Category</ttcol>
+          
+          <c>rsvp&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>nsis&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        </texttable>
+      </section>  
+    </section>  
+    <section title="k= Attribute Analysis" anchor="Seck=Analysis">    
+      <section title="RFC4566">       
+        <texttable title="RFC5432 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Category</ttcol>
+          
+          <c>k=&nbsp;</c><c>It is NOT recommended to use this attribute&nbsp;</c><c>S</c>
+          <c>BAD&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>  
+    </section>  
+    <section title="content Atribute Analysis" anchor="SeccontentAnalysis">  
+      <section title="RFC4796">       
+        <texttable title="RFC6284 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Category</ttcol>
+        
+         <c>content:slides&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>content:speaker&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>content:main&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>content:sl&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>content:alt&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        
+        </texttable>
+      </section>
+    </section>  
    <section title="IANA Considerations">
       <t>This document requires no actions from IANA.</t>
     </section>
@@ -2389,6 +2771,21 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         <seriesInfo name='RFC' value='6193' />
         <format type='TXT' octets='50201' target='http://www.rfc-editor.org/rfc/rfc6193.txt' />
       </reference>
+      <reference anchor='RFC6642'>
+        
+        <front>
+          <title>RTP Control Protocol (RTCP) Extension for a Third-Party Loss Report</title>
+          <author initials='Q.' surname='Wu' fullname='Q. Wu'>
+            <organization /></author>
+          <author initials='F.' surname='Xia' fullname='F. Xia'>
+            <organization /></author>
+          <author initials='R.' surname='Even' fullname='R. Even'>
+            <organization /></author>
+          <date year='2012' month='June' />
+        </front>
+        <seriesInfo name='RFC' value='6642' />
+        <format type='TXT' octets='29758' target='http://www.rfc-editor.org/rfc/rfc6642.txt' />
+      </reference>
       <reference anchor='RFC6064'>
         
         <front>
@@ -2401,6 +2798,30 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </front>
         <seriesInfo name='RFC' value='6064' />
         <format type='TXT' octets='44810' target='http://www.rfc-editor.org/rfc/rfc6064.txt' />
+      </reference>
+      <reference anchor='RFC4091'>
+        
+        <front>
+          <title>The Alternative Network Address Types (ANAT) Semantics for the Session Description Protocol (SDP) Grouping Framework</title>
+          <author initials='G.' surname='Camarillo' fullname='G. Camarillo'>
+            <organization /></author>
+          <author initials='J.' surname='Rosenberg' fullname='J. Rosenberg'>
+            <organization /></author>
+          <date year='2005' month='June' />
+        </front>
+        <seriesInfo name='RFC' value='4091' />
+        <format type='TXT' octets='12931' target='http://www.rfc-editor.org/rfc/rfc4091.txt' />
+      </reference>
+      <reference anchor='RFC5956'>
+        
+        <front>
+          <title>Forward Error Correction Grouping Semantics in the Session Description Protocol</title>
+          <author initials='A.' surname='Begen' fullname='A. Begen'>
+            <organization /></author>
+          <date year='2010' month='September' />
+        </front>
+        <seriesInfo name='RFC' value='5956' />
+        <format type='TXT' octets='29530' target='http://www.rfc-editor.org/rfc/rfc5956.txt' />
       </reference>
       <reference anchor='RFC3108'>
         
@@ -2428,6 +2849,19 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </front>
         <seriesInfo name='RFC' value='5159' />
         <format type='TXT' octets='13921' target='http://www.rfc-editor.org/rfc/rfc5159.txt' />
+      </reference>
+      <reference anchor='RFC3524'>
+        
+        <front>
+          <title>Mapping of Media Streams to Resource Reservation Flows</title>
+          <author initials='G.' surname='Camarillo' fullname='G. Camarillo'>
+            <organization /></author>
+          <author initials='A.' surname='Monrad' fullname='A. Monrad'>
+            <organization /></author>
+          <date year='2003' month='April' />
+        </front>
+        <seriesInfo name='RFC' value='3524' />
+        <format type='TXT' octets='11249' target='http://www.rfc-editor.org/rfc/rfc3524.txt' />
       </reference>
       <reference anchor='RFC4975'>
         
@@ -2508,25 +2942,69 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <author/>
           <date/>
         </front>
-      </reference> 
-      
+      </reference>      
       <reference anchor='3GPP TS 24.182' target="http://www.3gpp.org/ftp/Specs/html-info/24182.htm">  
         <front>
           <title>IP Multimedia Subsystem (IMS) Customized Alerting Tones (CAT); Protocol specification</title>
           <author/>
           <date/>
         </front>
-      </reference> 
-      
-      <reference anchor='3GPP TS 24.183' target="http://www.3gpp.org/ftp/Specs/html-info/24183.htm">  
+      </reference>   
+     <reference anchor='3GPP TS 24.183' target="http://www.3gpp.org/ftp/Specs/html-info/24183.htm">  
         <front>
           <title>IP Multimedia Subsystem (IMS) Customized Ringing Signal (CRS); Protocol specification</title>
           <author/>
           <date/>
         </front>
+      </reference>  
+      <reference anchor='RTCP-FB'
+        target="http://www.iana.org/assignments/sdp-parameters/sdp-parameters.xml#sdp-parameters-14">  
+        <front>
+          <title>Session Description Protocol (SDP) RTCP Feedback attributes</title>
+          <author/>
+          <date/>
+        </front>
+      </reference>   
+      <reference anchor='ACK-NACK' 
+        target="http://www.iana.org/assignments/sdp-parameters/sdp-parameters.xml#sdp-parameters-15">  
+        <front>
+          <title>Session Description Protocol (SDP) RTCP ACK/NACK Feedback attributes</title>
+          <author/>
+          <date/>
+        </front>
+      </reference>  
+      <reference anchor='CCM' 
+        target="http://www.iana.org/assignments/sdp-parameters/sdp-parameters.xml#sdp-parameters-19">  
+        <front>
+          <title>Session Description Protocol (SDP) RTCP-FB Codec Control Messages</title>
+          <author/>
+          <date/>
+        </front>
       </reference> 
-      
-      
+      <reference anchor='GROUP-SEM' 
+        target="http://www.iana.org/assignments/sdp-parameters/sdp-parameters.xml#sdp-parameters-13">  
+        <front>
+          <title>Session Description Protocol (SDP) &quot;group&quot; semantics</title>
+          <author/>
+          <date/>
+        </front>
+      </reference>   
+      <reference anchor='SSRC-GROUP' 
+        target="http://www.iana.org/assignments/sdp-parameters/sdp-parameters.xml#sdp-parameters-17">  
+        <front>
+          <title>Session Description Protocol (SDP) &quot;ssrc-group&quot; semantics</title>
+          <author/>
+          <date/>
+        </front>
+      </reference>      
+      <reference anchor='QOS' 
+        target="http://www.iana.org/assignments/sdp-parameters/sdp-parameters.xml#sdp-parameters-20">  
+        <front>
+          <title>Session Description Protocol (SDP) QoS Mechanism Tokens</title>
+          <author/>
+          <date/>
+        </front>
+      </reference>    
     </references>
   </back>
 </rfc>
