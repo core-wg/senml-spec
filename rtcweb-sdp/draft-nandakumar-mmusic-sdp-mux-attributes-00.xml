@@ -102,7 +102,8 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
     <section title="Motivation">
       <t>
         The time and complications of setting up ICE [TODO REF] and DTLS-SRTP
-        [TODO REF] transports for use by RTP, and conservation of ports, forms a requirement to try and
+        [TODO REF] transports for use by RTP, and conservation of ports,
+        forms a requirement to try and
         reduce the number of transport level flows needed. This has resulted in
         the definition of ways to multiplex RTP over a single transport flow
         in order
@@ -138,16 +139,16 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
        the following categories:
        <list style="hanging">
 
-         <t hangText="Normal (was MS/NC)"> Attributes that can be independently
+         <t hangText="NORMAL (was MS/NC)"> Attributes that can be independently
          specified when multiplexing and retain their original semantics .</t>
 
-         <t hangText="Bad (was DM)"> Attributes where multiplexing SHOULD NOT
+         <t hangText="BAD (was DM)"> Attributes where multiplexing SHOULD NOT
          be used if these attributes are in use. </t>
 
-         <t hangText="Identical (was R)">  Attributes that MUST be identical across all the
+         <t hangText="IDENTICAL (was R)">  Attributes that MUST be identical across all the
          media lines being multiplexed.</t>
 
-         <t hangText="Special"> Attributes where the text in the draft must be
+         <t hangText="SPECIAL"> Attributes where the text in the draft must be
          consulted to see how they are handled when multiplexing. </t>
 
        </list>
@@ -181,69 +182,69 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         <ttcol align='left'>Category</ttcol>
 
         <c>sendrecv,sendonly,recvonly,inactive&nbsp;</c><c>Not
-        impacted&nbsp;</c><c>B&nbsp;</c><c>MS,&nbsp;NC&nbsp;</c>
+        impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL1,&nbsp;NORMAL2&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         <c>bwtype:CT&nbsp;</c><c>Aggregate bandwidth for the
-        conference&nbsp;</c><c>S&nbsp;</c><c>NC&nbsp;</c>
+        conference&nbsp;</c><c>S&nbsp;</c><c>NORMAL2&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         <c>bwtype:AS&nbsp;</c><c>Aggregate total for all the RTP
-        sessions&nbsp;</c><c>B&nbsp;</c><c>DM&nbsp;</c>
+        sessions&nbsp;</c><c>B&nbsp;</c><c>BAD&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-        <c>cat&nbsp;</c><c>Not impacted&nbsp;</c><c>S&nbsp;</c><c>NC&nbsp;</c>
+        <c>cat&nbsp;</c><c>Not impacted&nbsp;</c><c>S&nbsp;</c><c>NORMAL2&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         <c>ptime&nbsp;</c><c>Not Impacted
-        &nbsp;</c><c>M&nbsp;</c><c>MS,&nbsp;NC</c>
+        &nbsp;</c><c>M&nbsp;</c><c>NORMAL1,&nbsp;NORMAL2</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
         <c>maxptime&nbsp;</c><c>Not Impacted
-          &nbsp;</c><c>M&nbsp;</c><c>MS,&nbsp;NC</c>
+          &nbsp;</c><c>M&nbsp;</c><c>NORMAL1,&nbsp;NORMAL2</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         <c>orient&nbsp;</c><c>Not Impacted
-          &nbsp;</c><c>M&nbsp;</c><c>MS,&nbsp;NC</c>
+          &nbsp;</c><c>M&nbsp;</c><c>NORMAL1,&nbsp;NORMAL2</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
         <c>framerate&nbsp;</c><c>Not Impacted 
-          &nbsp;</c><c>M&nbsp;</c><c>MS,&nbsp;NC</c>
+          &nbsp;</c><c>M&nbsp;</c><c>NORMAL1,&nbsp;NORMAL2</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
         <c>quality&nbsp;</c><c>Not Impacted
-          &nbsp;</c><c>M&nbsp;</c><c>MS,&nbsp;NC</c>
+          &nbsp;</c><c>M&nbsp;</c><c>NORMAL1,&nbsp;NORMAL2</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
         <c>rtpmap&nbsp;</c><c>Not Impacted
-          &nbsp;</c><c>M&nbsp;</c><c>MS,&nbsp;NC</c>
+          &nbsp;</c><c>M&nbsp;</c><c>NORMAL1,&nbsp;NORMAL2</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
         <c>fmtp&nbsp;</c><c>Not Impacted
-          &nbsp;</c><c>M&nbsp;</c><c>MS,&nbsp;NC</c>
+          &nbsp;</c><c>M&nbsp;</c><c>NORMAL1,&nbsp;NORMAL2</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
-        <c>keywds&nbsp;</c><c>Not impacted&nbsp;</c><c>S&nbsp;</c><c>NC&nbsp;</c>
+        <c>keywds&nbsp;</c><c>Not impacted&nbsp;</c><c>S&nbsp;</c><c>NORMAL2&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
         <c>type&nbsp;</c><c>Not Impacted
-          &nbsp;</c><c>S&nbsp;</c><c>NC&nbsp;</c>
+          &nbsp;</c><c>S&nbsp;</c><c>NORMAL2&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
         <c>tool&nbsp;</c><c>Not Impacted
-          &nbsp;</c><c>S&nbsp;</c><c>NC&nbsp;</c>
+          &nbsp;</c><c>S&nbsp;</c><c>NORMAL2&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
         <c>charset&nbsp;</c><c>Not Impacted
-          &nbsp;</c><c>S&nbsp;</c><c>NC&nbsp;</c>
+          &nbsp;</c><c>S&nbsp;</c><c>NORMAL2&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
         <c>sdplang&nbsp;</c><c>Not Impacted
-          &nbsp;</c><c>B&nbsp;</c><c>NC&nbsp;</c>
+          &nbsp;</c><c>B&nbsp;</c><c>NORMAL2&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
         <c>lang&nbsp;</c><c>Not Impacted
-          &nbsp;</c><c>B&nbsp;</c><c>NC&nbsp;</c>
+          &nbsp;</c><c>B&nbsp;</c><c>NORMAL2&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
       </texttable>
@@ -264,12 +265,12 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
 
         <c>rtcp-fb&nbsp;</c><c>Since RTCP feedback are reported per RTP
         Session,&nbsp; this attribute should be repeated across m=
-        lines</c><c>M</c><c>R&nbsp;</c>
+        lines</c><c>M</c><c>IDENTICAL&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
         <c>sli,pli,rpsi,app&nbsp;</c><c>Since RTCP feedback are reported per RTP
           Session,&nbsp; this attribute should be repeated across m=
-          lines</c><c>M</c><c>R&nbsp;</c>
+          lines</c><c>M</c><c>IDENTICAL&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
       </texttable>
     </section>
@@ -291,12 +292,12 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           
           <c>ccm&nbsp;</c><c>Since RTCP feedback are reported per RTP
             Session,&nbsp; this attribute should be repeated across m=
-            lines</c><c>M</c><c>R&nbsp;</c>
+            lines</c><c>M</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>fir,tmmbr,tstr,vbcm&nbsp;</c><c>Since RTCP feedback are reported per RTP
             Session,&nbsp; this attribute should be repeated across m=
-            lines</c><c>M</c><c>R&nbsp;</c>
+            lines</c><c>M</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
       </section>
@@ -314,11 +315,11 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         <ttcol align='left'>Category</ttcol>
 
         <c>group:LS&nbsp;</c><c>Complicates sychronization when multiple audio and
-        video streams are muxed&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+        video streams are muxed&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
         <c>group:FID&nbsp;</c><c>Semantics of FID are lost if sessions are 
-        multiplexed &nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+        multiplexed &nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
                 
       </texttable>
@@ -340,7 +341,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>rtcp-mux&nbsp;</c><c>RTCP muxing should be repeated across all the 
-          m=lines&nbsp;</c><c>M&nbsp;</c><c>R&nbsp;</c>
+          m=lines&nbsp;</c><c>M&nbsp;</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -363,12 +364,12 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           
           <c>RS&nbsp;</c><c>Case1:Aggregate total for m=lines of same type. Case2:Muxing
              m=lines of different types results in inappropriate
-             bandwith allocation&nbsp;</c><c>B</c><c>MS,DM for case 2&nbsp;</c>
+             bandwith allocation&nbsp;</c><c>B</c><c>NORMAL1,BAD for case 2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>RR&nbsp;</c><c>Case1:Aggregate total for m=lines of same type. Case2:Muxing
             m=lines of different types results in inappropriate
-            bandwith allocation&nbsp;</c><c>B</c><c>MS,DM for Case2&nbsp;</c>
+            bandwith allocation&nbsp;</c><c>B</c><c>NORMAL1,BAD for Case2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
       </section>  
@@ -389,7 +390,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>label&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>MS,NC&nbsp;</c>
+          <c>label&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL1,NORMAL2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -407,11 +408,11 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>qos-mech-send&nbsp;</c><c>QOS mechanism should be same across all the
-          m=lines multiplexed&nbsp;</c><c>B</c><c>MS,R&nbsp;</c>
+          m=lines multiplexed&nbsp;</c><c>B</c><c>NORMAL1,IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>qos-mech-recv&nbsp;</c><c>AQOS mechanism should be same across all the
-          m=lines multiplexed&nbsp;</c><c>B</c><c>MS,R&nbsp;</c>
+          m=lines multiplexed&nbsp;</c><c>B</c><c>NORMAL1,IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
       </section>  
@@ -431,7 +432,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>crypto&nbsp;</c><c>Same crypto parameters applies to all m= lines&nbsp;</c>
-          <c>M&nbsp;</c><c>NC&nbsp;</c>
+          <c>M&nbsp;</c><c>NORMAL2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>       
           
         </texttable>
@@ -454,7 +455,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           
           <c>dccp-service-code&nbsp;</c><c>Not recommended due to DCCP service code
           mismatch between different media types&nbsp;</c>
-          <c>M&nbsp;</c><c>DM&nbsp;</c>
+          <c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>       
           
         </texttable>
@@ -476,7 +477,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           
           <c>dccp-port&nbsp;</c><c>Not recommended due to DCCP service code
             mismatch between different media types&nbsp;</c>
-          <c>M&nbsp;</c><c>DM&nbsp;</c>
+          <c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>       
           
         </texttable>
@@ -495,7 +496,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>rtcp-rsize&nbsp;</c><c>RTCP reduced size MUST be repeated across all the 
-          m=lines&nbsp;</c><c>M&nbsp;</c><c>R&nbsp;</c>
+          m=lines&nbsp;</c><c>M&nbsp;</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>       
           
         </texttable>
@@ -524,7 +525,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>resource,channel,cmid&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NC&nbsp;</c>
+          <c>resource,channel,cmid&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>       
           
         </texttable>
@@ -547,7 +548,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>b=TIAS&nbsp;</c><c>Aggregate total across all the m=lines muxed&nbsp;</c>
-          <c>B</c><c>MS,NC&nbsp;</c>
+          <c>B</c><c>NORMAL1,NORMAL2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
       </section>  
@@ -570,20 +571,20 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>ice-lite&nbsp;</c><c>Not Impacted&nbsp;</c>
-          <c>S</c><c>NC&nbsp;</c>
+          <c>S</c><c>NORMAL2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>ice-options&nbsp;</c><c>Not Impacted&nbsp;</c>
-          <c>S</c><c>NC&nbsp;</c>
+          <c>S</c><c>NORMAL2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>ice-pwd,ice-ufrag&nbsp;</c><c>Same value applies to all the
           muxed sessions.&nbsp;</c>
-          <c>B</c><c>NC&nbsp;</c>
+          <c>B</c><c>NORMAL2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>candidate,remote-candidates&nbsp;</c><c>Same value applies to all 
-          the muxed sessions&nbsp;</c><c>M</c><c>NC&nbsp;</c>
+          the muxed sessions&nbsp;</c><c>M</c><c>NORMAL2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>         
           
         </texttable>
@@ -606,7 +607,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           
           <c>extmap&nbsp;</c><c>Not recommended for multiplexing due to dependencies
           unknown before hand&nbsp;</c>
-          <c>B</c><c>DM&nbsp;</c>
+          <c>B</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
       </section>  
@@ -629,7 +630,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           
           <c>rtcp&nbsp;</c><c>Case1:Same RTCP port is repeated across the m=lines.
             Case2:Different RTCP ports renders multiplexing impossible&nbsp;</c><c>M</c>
-          <c>R if Case1, DM if Case2&nbsp;</c>
+          <c>R if Case1, BAD if Case2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -649,21 +650,21 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>ssrc&nbsp;</c><c>SSRCs repeated over multiple m=lines complicates
-          multiplexing&nbsp;</c><c>M</c><c>MS,DM&nbsp;</c>
+          multiplexing&nbsp;</c><c>M</c><c>NORMAL1,BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>ssrc-group&nbsp;</c><c>SSRCs repeated over multiple m=lines complicates
-            multiplexing&nbsp;</c><c>M</c><c>MS,DM&nbsp;</c>
+            multiplexing&nbsp;</c><c>M</c><c>NORMAL1,BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>cname&nbsp;</c><c>Not Impacted&nbsp;</c><c>SR</c><c>NC&nbsp;</c>
+          <c>cname&nbsp;</c><c>Not Impacted&nbsp;</c><c>SR</c><c>NORMAL2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>previous-ssrc&nbsp;</c><c>SSRCs repeated over multiple m=lines complicates
-          multiplexing&nbsp;</c><c>SR</c><c>DM&nbsp;</c>
+          multiplexing&nbsp;</c><c>SR</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>fmtp&nbsp;</c><c>Not Impacted&nbsp;</c><c>SR</c><c>NC&nbsp;</c>
+          <c>fmtp&nbsp;</c><c>Not Impacted&nbsp;</c><c>SR</c><c>NORMAL2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           
@@ -687,7 +688,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>imageattr&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NC&nbsp;</c>
+          <c>imageattr&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -709,11 +710,11 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>depend lay&nbsp;</c><c>Not recommended for multiplexing m=lines of 
-          different media types&nbsp;</c><c>M</c><c>MS,DM&nbsp;</c>
+          different media types&nbsp;</c><c>M</c><c>NORMAL1,BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>depend mdc&nbsp;</c><c>Not recommended for multiplexing m=lines of 
-            different media types&nbsp;</c><c>M</c><c>MS,DM&nbsp;</c>
+            different media types&nbsp;</c><c>M</c><c>NORMAL1,BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -737,11 +738,11 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>rams-updates&nbsp;</c><c>The attribue MUST be repeated across all the
-          m=lines to indicate the support uniformly&nbsp;</c><c>M&nbsp;</c><c>MS,R&nbsp;</c>
+          m=lines to indicate the support uniformly&nbsp;</c><c>M&nbsp;</c><c>NORMAL1,IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>rai&nbsp;</c><c>RTCP-FB nack value rai MUST be repeated across all the
-            m=lines&nbsp;</c><c>M&nbsp;</c><c>MS,R&nbsp;</c>
+            m=lines&nbsp;</c><c>M&nbsp;</c><c>NORMAL1,IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -765,7 +766,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>cfw-id&nbsp;</c><c>Not recommended due to legacy
-          interop purposes&nbsp;</c><c>M&nbsp;</c><c>NC&nbsp;</c>
+          interop purposes&nbsp;</c><c>M&nbsp;</c><c>NORMAL2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -789,11 +790,11 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>fec-source-flow,fec-repair-flow&nbsp;</c><c>Complicates the grouping between 
-          source flows and repair flows&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          source flows and repair flows&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>repair-window&nbsp;</c><c>Complicates the multiplexing due to
-          potential differences in the repair-window timeouts&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          potential differences in the repair-window timeouts&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -815,7 +816,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>content&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NC&nbsp;</c>
+          <c>content&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -834,15 +835,15 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>sqn&nbsp;</c><c>Not Impacted&nbsp;</c>
-          <c>B</c><c>NC&nbsp;</c>
+          <c>B</c><c>NORMAL2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>csdc&nbsp;</c><c>Mismatch in the offered capability description MAY fail
-            multiplexing.&nbsp;</c><c>B</c><c>DM&nbsp;</c>
+            multiplexing.&nbsp;</c><c>B</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>cpar,cparmin,cparmax&nbsp;</c><c>Mismatch in the offered capability parameters MAY fail
-            multiplexing.&nbsp;</c><c>B</c><c>DM&nbsp;</c>
+            multiplexing.&nbsp;</c><c>B</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>     
           
         </texttable>
@@ -864,7 +865,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>portmapping-req&nbsp;</c><c>Attribute MUST be repeated across
-          all the m=lines&nbsp;</c><c>M&nbsp;</c><c>MS,R&nbsp;</c>
+          all the m=lines&nbsp;</c><c>M&nbsp;</c><c>NORMAL1,IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -889,7 +890,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>msrp-cema&nbsp;</c><c>Not recommended due to legacy 
-          interop purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          interop purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -913,7 +914,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>ecn-capable-rtp&nbsp;</c><c>Attribute MUST be repeated across
-            all the m=lines&nbsp;</c><c>M&nbsp;</c><c>MS,R&nbsp;</c>
+            all the m=lines&nbsp;</c><c>M&nbsp;</c><c>NORMAL1,IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -933,19 +934,19 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>floorctrl&nbsp;</c><c>Not recommended due to incompatible protocol between
-          bfcp transport and RTP media transports&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          bfcp transport and RTP media transports&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>       
           
           <c>confid&nbsp;</c><c>Not recommended due to incompatible protocol between
-          bfcp transport and RTP media transports&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          bfcp transport and RTP media transports&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>userid&nbsp;</c><c>Not recommended due to incompatible protocol between
-          bfcp transport and RTP media transports&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          bfcp transport and RTP media transports&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>floorid&nbsp;</c><c>Not recommended due to incompatible protocol between
-          bfcp transport and RTP media transports&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          bfcp transport and RTP media transports&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -965,22 +966,22 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           
           <c>file-selector&nbsp;</c><c>Not recommended for multiplexing due to
             differences in the protocol and media types&nbsp;</c>
-          <c>M</c><c>DM&nbsp;</c>
+          <c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>file-transfer-id&nbsp;</c><c>Not recommended for multiplexing due to
             differences in the protocol and media types&nbsp;</c>
-          <c>M</c><c>DM&nbsp;</c>
+          <c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c> file-disposition&nbsp;</c><c>Not recommended for multiplexing due to
             differences in the protocol and media types&nbsp;</c>
-          <c>M</c><c>DM&nbsp;</c>
+          <c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c> file-date,file-iconfile-range,&nbsp;</c><c>Not recommended for multiplexing
             due to differences in the protocol and media types&nbsp;</c>
-          <c>M</c><c>DM&nbsp;</c>
+          <c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           
@@ -1003,15 +1004,15 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>loopback&nbsp;</c><c>The attribute MUST be repeated across all
-           m=lines multiplexed &nbsp;</c><c>M</c><c>MS,R&nbsp;</c>
+           m=lines multiplexed &nbsp;</c><c>M</c><c>NORMAL1,IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>loopback-source&nbsp;</c><c>The attribute MUST be reported across all
-            m=lines multiplexed&nbsp;</c><c>M</c><c>MS,R&nbsp;</c>
+            m=lines multiplexed&nbsp;</c><c>M</c><c>NORMAL1,IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>loopback-mirrork&nbsp;</c><c>The attribute MUST be reported across all
-            m=lines multiplexed&nbsp;</c><c>M</c><c>MS,R&nbsp;</c>
+            m=lines multiplexed&nbsp;</c><c>M</c><c>NORMAL1,IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1033,7 +1034,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>rtcp-unicast&nbsp;</c><c>The attribute MUST be reported across all
-          m=lines multiplexed&nbsp;</c><c>M</c><c>MS,R&nbsp;</c>
+          m=lines multiplexed&nbsp;</c><c>M</c><c>NORMAL1,IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
             
         </texttable>
@@ -1053,7 +1054,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>rtcp-xr&nbsp;</c><c>The attribute MUST be reported across all
-            m=lines multiplexed&nbsp;</c><c>B</c><c>MS,R&nbsp;</c>
+            m=lines multiplexed&nbsp;</c><c>B</c><c>NORMAL1,IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1076,26 +1077,26 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           
           <c>pcfg&nbsp;</c><c>Not recommended due to potential mismatch
           in the configuration between m=lines of different media types&nbsp;</c>
-          <c>M</c><c>MS,R&nbsp;</c>
+          <c>M</c><c>NORMAL1,IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>acfg&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>MS,R&nbsp;</c>
+          <c>acfg&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL1,IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>csup&nbsp;</c><c>Not recommended due to unbound number of 
-          optional tags&nbsp;</c><c>B</c><c>DM&nbsp;</c>
+          optional tags&nbsp;</c><c>B</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>creq&nbsp;</c><c>Not recommended due to unbound number of 
-            optional tags&nbsp;</c><c>B</c><c>DM&nbsp;</c>
+            optional tags&nbsp;</c><c>B</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>acap&nbsp;</c><c>Not recommended due to potentail mismtach in the
-          attribute capabilities&nbsp;</c><c>B</c><c>DM&nbsp;</c>
+          attribute capabilities&nbsp;</c><c>B</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>tcap&nbsp;</c><c>Repeat transport capability across all
-           m= lines&nbsp;</c><c>B</c><c>MS,R&nbsp;</c>
+           m= lines&nbsp;</c><c>B</c><c>NORMAL1,IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1118,22 +1119,22 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>rmcap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NC&nbsp;</c>
+          <c>rmcap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>omcap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NC&nbsp;</c>
+          <c>omcap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>mfcap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NC&nbsp;</c>
+          <c>mfcap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>mscap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NC&nbsp;</c>
+          <c>mscap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>lcfg&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NC&nbsp;</c>
+          <c>lcfg&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>secap&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NC&nbsp;</c>
+          <c>secap&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1156,7 +1157,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>key-mgmt&nbsp;</c><c>Key management protocol MUST be identical
-          across all the m=lines&nbsp;</c><c>B</c><c>MS,R&nbsp;</c>
+          across all the m=lines&nbsp;</c><c>B</c><c>NORMAL1,IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1181,7 +1182,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>fingerprint&nbsp;</c><c>Fingerprint value MUST be identical
-            across all the m=lines&nbsp;</c><c>B</c><c>MS,R&nbsp;</c>
+            across all the m=lines&nbsp;</c><c>B</c><c>NORMAL1,IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1204,7 +1205,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>source-filter&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>MS,NC&nbsp;</c>
+          <c>source-filter&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL1,NORMAL2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1231,7 +1232,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>multicast-rtcp&nbsp;</c><c>Multicast RTCP port MUST be 
-          identical across all the m=lines&nbsp;</c><c>B</c><c>MS,R&nbsp;</c>
+          identical across all the m=lines&nbsp;</c><c>B</c><c>NORMAL1,IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1251,7 +1252,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>zrtp-hash&nbsp;</c><c>The hash should be identical across all
-          the m=lines&nbsp;</c><c>M</c><c>Ms,R&nbsp;</c>
+          the m=lines&nbsp;</c><c>M</c><c>NORMAL1,IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1273,7 +1274,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           
           <c>setup,connection&nbsp;</c><c>Not recommended for multiplexing due to possible
           differences in the protocol and media types&nbsp;</c>
-          <c>B</c><c>DM&nbsp;</c>
+          <c>B</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -1293,19 +1294,19 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           
           <c>bcastversion&nbsp;</c><c>Not recommended for multiplexing for 
           legacy interop purposes&nbsp;</c>
-          <c>S</c><c>DM&nbsp;</c>
+          <c>S</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>stkmstream&nbsp;</c><c>Not recommended for multiplexing for 
-          legacy interop purposes&nbsp;</c><c>B</c><c>DM&nbsp;</c>
+          legacy interop purposes&nbsp;</c><c>B</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>SRTPAuthentication&nbsp;</c><c>Not recommended for multiplexing for 
-          legacy interop purposes&nbsp;</c><c>M</c><c>DM&nbsp;</c>
+          legacy interop purposes&nbsp;</c><c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>SRTPROCTxRate&nbsp;</c><c>Not recommended for multiplexing for 
-            legacy interop purposes&nbsp;</c><c>M</c><c>DM&nbsp;</c>
+            legacy interop purposes&nbsp;</c><c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1328,15 +1329,15 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>ike-setup&nbsp;</c><c>Attribute MUST be identical
-            across all the m=lines&nbsp;</c><c>B</c><c>MS,R&nbsp;</c>
+            across all the m=lines&nbsp;</c><c>B</c><c>NORMAL1,IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>psk-fingerprint&nbsp;</c><c>Attribute MUST be identical
-          across all the m=lines&nbsp;</c><c>B</c><c>MS,R&nbsp;</c>
+          across all the m=lines&nbsp;</c><c>B</c><c>NORMAL1,IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>ike-esp,ike-esp-udpencap&nbsp;</c><c>Attribute MUST be identical
-          across all the m=lines&nbsp;</c><c>B</c><c>MS,R&nbsp;</c>
+          across all the m=lines&nbsp;</c><c>B</c><c>NORMAL1,IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1359,73 +1360,73 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           
           <c>X-predecbufsize&nbsp;</c><c>Case1:Aggregate total when video m-lines 
           are muxed&nbsp;Case2:Multiplexing with audio m=lines is invalid</c>
-          <c>M</c><c>DM&nbsp;</c>
+          <c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>X-initpredecbufperiod&nbsp;</c><c>Case1:Aggregate total when video m-lines
           are muxed&nbsp;Case2:Multiplexing with audio m=lines is invalid</c>
-          <c>M</c><c>DM&nbsp;</c>
+          <c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>X-initpostdecbufperiod&nbsp;</c><c>Case1:Aggregate total when video m-lines
           are muxed&nbsp;Case2:Multiplexing with audio m=lines is invalid</c>
-          <c>M</c><c>DM&nbsp;</c>
+          <c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>X-decbyterate</c><c>Case1:Aggregate total when video m-lines 
           are muxed&nbsp;Case2:Multiplexing with audio m=lines is invalid</c>
-          <c>M</c><c>DM&nbsp;</c>
+          <c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>3gpp-videopostdecbufsize&nbsp;</c><c>Case1:Aggregate total when video m-lines
           are muxed&nbsp;Case2:Multiplexing with audio m=lines is invalid</c>
-          <c>M</c><c>DM&nbsp;</c>
+          <c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           
           <c>framesize</c><c>Case1:Framesize MUST be same across all the video m=lines&nbsp;
           Case2:Multiplexing with audio m=lines is invalid</c><c>M</c>
-          <c>R if Case1 OR DM if Case2&nbsp;</c>
+          <c>R if Case1 OR BAD if Case2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>3GPP-Integrity-Key&nbsp;</c><c>Not Impacted</c><c>S</c><c>NC&nbsp;</c>
+          <c>3GPP-Integrity-Key&nbsp;</c><c>Not Impacted</c><c>S</c><c>NORMAL2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>3GPP-SRTP-Config&nbsp;</c><c>Same config SHALL apply to all the m=lines 
-          multiplexed&nbsp;</c><c>M</c><c>NC&nbsp;</c>
+          multiplexed&nbsp;</c><c>M</c><c>NORMAL2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>alt,alt-default-id&nbsp;</c><c>Specifying alternate m=lines when session 
           with mulitple m=lines of different types cannot be clearly specified&nbsp;</c>
-          <c>M</c><c>DM&nbsp;</c>
+          <c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>alt-group&nbsp;</c><c>Complicates selection of alternate m=lines 
-          grouped with alt-group on mulitplexing&nbsp;</c><c>M</c><c>DM&nbsp;</c>
+          grouped with alt-group on mulitplexing&nbsp;</c><c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>3GPP-Adaptation-Support&nbsp;</c><c>Not recommended for legacy
-          interop purposes&nbsp;</c><c>M</c><c>DM&nbsp;</c>
+          interop purposes&nbsp;</c><c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>3GPP-QoE-Metricsn&nbsp;</c>
-          <c>Not recommended for legacy interop purposes&nbsp;</c><c>B</c><c>DM&nbsp;</c>
+          <c>Not recommended for legacy interop purposes&nbsp;</c><c>B</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
       
           <c>3GPP-Asset-Informatio&nbsp;</c><c>Not recommended for legacy interop 
-          purposes&nbsp;</c><c>B</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>B</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>mbms-mode&nbsp;</c><c>Not recommended for legacy interop 
-          purposes&nbsp;</c><c>B</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>B</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
    
           <c>mbms-flowid&nbsp;</c><c>Multiplexing multiple m=lines complicates
-          FEC mappings to the transport addresses.&nbsp;</c><c>M</c><c>DM&nbsp;</c>
+          FEC mappings to the transport addresses.&nbsp;</c><c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>mbms-repair&nbsp;</c><c>Not recommended for legacy
-          interop purposes&nbsp;</c><c>B</c><c>DM&nbsp;</c>
+          interop purposes&nbsp;</c><c>B</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1444,93 +1445,93 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
 
           <c>aalType&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>eecid&nbsp;</c><c>Not recommended for legacy interop 
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>aalType&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>capability&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>qosClass&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>bcob&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>stc&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>upcc&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>atmQOSparms&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>atmTrfcDesc&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>abrParms&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>abrSetup&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>bearerType&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>lij&nbsp;</c><c>Not recommended for legacy interop 
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>anycast&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>cache&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>bearerSigIE&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>aalApp&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>cbrRate&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>sbc&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>clkrec&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>fec&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>prtfl&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>structure&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>cpsSDUsize&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>aal2CPS&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>aal2CPSSDUrate&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>aal2sscs3661unassured&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>aal2sscs3661assured&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>aal2sscs3662&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>aal5sscop&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>atmmap&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>silenceSupp&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>ecan&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>gc&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>profileDesc&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>vsel&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>dsel&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>fsel&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>onewaySel&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>codecconfig&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>isup_usi&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>isup_usi&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>chain&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>M&nbsp;</c><c>DM&nbsp;</c>          
+          purposes&nbsp;</c><c>M&nbsp;</c><c>BAD&nbsp;</c>          
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
      </section>
@@ -1546,7 +1547,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>g.3gpp.cat&nbsp;</c><c>Not recommended due to interop
-          purposes&nbsp;</c><c>M</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1563,7 +1564,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>g.3gpp.crs&nbsp;</c><c>Not recommended due to interop
-          purposes&nbsp;</c><c>M</c><c>DM&nbsp;</c>
+          purposes&nbsp;</c><c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1581,23 +1582,23 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>secondary-realm,visited realm&nbsp;</c><c>Not recommended due to 
-          interop purposes&nbsp;</c><c>M</c><c>DM&nbsp;</c>
+          interop purposes&nbsp;</c><c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>omr-s-cksum,omr-m-cksum&nbsp;</c><c>Not recommended due to 
-            interop purposes&nbsp;</c><c>M</c><c>DM&nbsp;</c>
+            interop purposes&nbsp;</c><c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>omr-s-att,omr-m-att&nbsp;</c><c>Not recommended due to 
-          interop purposes&nbsp;</c><c>M</c><c>DM&nbsp;</c>
+          interop purposes&nbsp;</c><c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>omr-s-bw,omr-m-att&nbsp;</c><c>Not recommended due to 
-          interop purposes&nbsp;</c><c>M</c><c>DM&nbsp;</c>
+          interop purposes&nbsp;</c><c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>omr-codecs&nbsp;</c><c>Not recommended due to 
-          interop purposes&nbsp;</c><c>M</c><c>DM&nbsp;</c>
+          interop purposes&nbsp;</c><c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1616,7 +1617,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           
           <c>T38FaxVersion,T38MaxBitRate,T38FaxFillBitRemoval,T38FaxTranscodingMMR,
            T38FaxTranscodingJBIG,T38FaxRateManagement,T38FaxMaxBuffer,T38FaxMaxDatagram,
-           T38FaxUdpEC&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NC&nbsp;</c>
+           T38FaxUdpEC&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL2&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1633,7 +1634,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>h248item&nbsp;</c><c>Not recommended for interop purposes&nbsp;</c>
-          <c>S</c><c>DM&nbsp;</c>
+          <c>S</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1653,19 +1654,19 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>accept-types&nbsp;</c><c>Not recommended due to incompatible media types&nbsp;</c>
-          <c>M&nbsp;</c><c>DM&nbsp;</c>
+          <c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>       
           
           <c>accept-wrapped-types&nbsp;</c><c>Not recommended due to incompatible media typess&nbsp;</c>
-          <c>M&nbsp;</c><c>DM&nbsp;</c>
+          <c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>max-size&nbsp;</c><c>Not recommended due to incompatible media types&nbsp;</c>
-          <c>M&nbsp;</c><c>DM&nbsp;</c>
+          <c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>path&nbsp;</c><c>Not recommended due to incompatible media types&nbsp;</c>
-          <c>M&nbsp;</c><c>DM&nbsp;</c>
+          <c>M&nbsp;</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1683,23 +1684,23 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Category</ttcol>
           
           <c>rtpred1,rtpred2&nbsp;</c><c>Not Applicable&nbsp;</c>
-          <c>Not-Applcable</c><c>DM&nbsp;</c>
+          <c>Not-Applcable</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>PSCid&nbsp;</c><c>Not Applicable&nbsp;</c>
-          <c>Not-Applcable</c><c>DM&nbsp;</c>
+          <c>Not-Applcable</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>bc_service&nbsp;</c><c>Not Applicable&nbsp;</c>
-          <c>Not-Applcable</c><c>DM&nbsp;</c>
+          <c>Not-Applcable</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>bc_program&nbsp;</c><c>Not Applicable&nbsp;</c>
-          <c>Not-Applcable</c><c>DM&nbsp;</c>
+          <c>Not-Applcable</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>bc_service_package&nbsp;</c><c>Not Applicable&nbsp;</c>
-          <c>Not-Applcable</c><c>DM&nbsp;</c>
+          <c>Not-Applcable</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
