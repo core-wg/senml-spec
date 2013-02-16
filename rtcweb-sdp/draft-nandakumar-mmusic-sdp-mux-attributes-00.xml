@@ -65,11 +65,11 @@
         Communication sessions in RTCWeb are described and negotiated using
         Session Description Protocol(SDP)[RFC4566] mechanisms.  SDP uses
         attributes to describes specific aspects of such a session.  These
-        attributes have differnt impacts when using varions multiplexinsg RTP on
-        a single tranpsport layer flow. 
+        attributes have different impacts when using varions multiplexing RTP on
+        a single transport layer flow. 
         The scope of this specification is to provide a
-        framework for analyzing the multiplex characteristis for SDP attributes
-        and proivde multiplexing characterstics of exsiting attributes. 
+        framework for analyzing the multiplex characteristics for SDP attributes
+        and provide multiplexing characteristics of existing attributes. 
       </t>
     </abstract>
   </front>
@@ -83,11 +83,12 @@
         [IANA_REF] and the defining new attributes in the
         future, there is need for future-proof framework to analyze these
         attributes for their applicability in transport multiplexing use-cases. 
-TODO - put in text refering to AVT multiplexing draft and to bundle draft. 
+
+TODO - put in text referring to AVT multiplexing draft and to the bundle draft. 
       </t>
       <t>
         The document starts with providing the motivation for requiring such a
-        frameword. This is followed by introduction
+        framework. This is followed by introduction
         to the SDP attribute analysis framework/procedures, following which
         several sections applies the framework to the SDP attributes registered
         with IANA [IANA_REF].
@@ -100,9 +101,9 @@ TODO - put in text refering to AVT multiplexing draft and to bundle draft.
       </section>
     <section title="Motivation">
       <t>
-        The time and complications of setting up ICE [TODO REF[ and DTLS-SRTP
-        [TODO REF] transports for use by RTP dreivrs a requirement to try and
-        reduce the mnumber of transport level flows needed. This has resulted in
+        The time and complications of setting up ICE [TODO REF] and DTLS-SRTP
+        [TODO REF] transports for use by RTP, and conservation of ports, forms a requirement to try and
+        reduce the number of transport level flows needed. This has resulted in
         the definition of ways to multiplex RTP over a single transport flow
         in order
         to preserve network resources such as port numbers.
@@ -111,7 +112,7 @@ TODO - put in text refering to AVT multiplexing draft and to bundle draft.
        </t> 
       <t>
         As of today there are close to 180 SDP attributes registered with the
-        IANA and more woill be added in the future.  There is no clearly defined
+        IANA and more will be added in the future.  There is no clearly defined
         procedure to establish the validity/applicability of these attribute to
         when used with multiplexing.
       </t>
@@ -121,43 +122,50 @@ TODO - put in text refering to AVT multiplexing draft and to bundle draft.
      An SDP session description consists of a session-level section followed by
      zero or more media-level sections that could be broken down into following
      high-level categories
-     <list>
-       <t>Descriptions related to media content such as media type,
+     <list style="symbols">
+       <t> Descriptions related to media content such as media type,
        encoding schemes, payload types to name a few.</t>
-       <t>Descriptions specifying media transport characteristics like RTP/RTCP
+       <t> Descriptions specifying media transport characteristics like RTP/RTCP
        port, network addresses, QOS and so on.</t>
-       <t>Session Metadata descriptions such as session timing and origin
+       <t> Session Metadata descriptions such as session timing and origin
        information.</t>
-       <t>Descriptions establishing relationships across media streams.</t>
+       <t> Descriptions establishing relationships between media streams.</t>
      </list>
     </t>  
  
     <t>
-      The proposed framework attempts to seggregate each attributes into one of
+      The proposed framework classifies each attributes into one of
        the following categories:
-       <list>
-         <t>Media Source (MS) - Attributes that could be independently specified
-         per media source.</t>
-         <t>Don't Multiplex (DM) - Attributes that are recommended against
-         session multiplexing.</t>
-         <t>No Change (NC) - Attributes that carry their existing
-         semantics. </t>
-         <t>Repeat (R) - Attributes that MUST be reported across the media lines
-         if session multiplexing.</t>
+       <list style="hanging">
+
+         <t hangText="Normal (was MS/NC)"> Attributes that can be independently
+         specified when multiplexing and retain their original semantics .</t>
+
+         <t hangText="Bad (was DM)"> Attributes where multiplexing SHOULD NOT
+         be used if these attributes are in use. </t>
+
+         <t hangText="Identical (was R)">  Attributes that MUST be identical across all the
+         media lines being multiplexed.</t>
+
+         <t hangText="Special"> Attributes where the text in the draft must be
+         consulted to see how they are handled when multiplexing. </t>
 
        </list>
     </t>
     <t>
       The idea behind these categories is to provide recommendations for using
-      the attributes in solving RTCWeb use-cases.
+      the attributes when multiplexing is being used.
     </t>  
     <t>
-      Following sub-sections analyzes attributes listed in [IANA_REF] grouped
+      <xref target="SecCurrAnalysis"/> analyzes attributes listed in [IANA_REF] grouped
       under the IETF document that defines them.  For each such section, the
       single-letter acronyms "S", "M","B" and "SR" under the "Current" column specify
       existing semantics as applicable to either session-level or media-level or
       both or source-level respectively.
     </t> 
+    </section> 
+
+    <section title="Analysis of Existing Attributes" anchor="SecCurrAnalysis" >
      <section title="RFC4566">     
      <t>
        <xref target="RFC4566">RFC4566</xref> defines the Session Description Protocol (SDP)
@@ -320,8 +328,8 @@ TODO - put in text refering to AVT multiplexing draft and to bundle draft.
         <t>
           <xref target="RFC5761">RFC5761</xref> discusses issues that arise
           when multiplexing RTP data packets and RTP Control Protocol (RTCP) 
-          packets on a single UDP port. It updates RFC 3550 and RFC 3551 to 
-          describe when such multiplexing is and is not appropriate, and 
+          packets on a single UDP port. It
+          describes when such multiplexing is and is not appropriate, and 
           it explains how the Session Description Protocol (SDP) can be used 
           to signal multiplexed sessions.
         </t>    
@@ -947,7 +955,7 @@ TODO - put in text refering to AVT multiplexing draft and to bundle draft.
         <t>
           <xref target="RFC5547">RFC5547</xref> provides a mechanism to negotiate the transfer of one
           or more files between two endpoints by using the Session Description
-          Protocol (SDP) offer/answer model specified in RFC 3264. 
+          Protocol (SDP) offer/answer model specified in <xref target="RFC3264"/>. 
         </t>    
         <texttable title="RFC5547 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -1837,20 +1845,7 @@ TODO - put in text refering to AVT multiplexing draft and to bundle draft.
         <format octets="60854"
           target="http://tools.ietf.org/html/rfc5245.txt" type="TXT" />
       </reference>
-      <reference anchor="WEBRTC">
-        <front>
-          <title>
-            WebRTC 1.0: Real-time Communication Between Browsers
-          </title>
-          <author fullname="" initials="" surname="">
-            <organization>
-              W3C
-            </organization>
-          </author>
-          <date year="" month=""/>
-        </front>
-        <seriesInfo name="&lt;http://dev.w3.org/2011/webrtc/editor/webrtc.html&gt;" value=""/>
-      </reference>
+    
       <reference anchor="RFC5506">
         <front>
           <title>Support for Reduced-Size Real-Time Transport Control Protocol (RTCP):
@@ -1864,22 +1859,7 @@ TODO - put in text refering to AVT multiplexing draft and to bundle draft.
         <format octets="60854"
           target="http://tools.ietf.org/html/rfc5506.txt" type="TXT" />
       </reference>
-      <reference anchor="RFC3551">
-        <front>
-          <title>RTP Profile for Audio and Video Conferences
-            with Minimal Control</title>         
-          <author fullname=" H. Schulzrinne" initials="H." surname="Schulzrinne">
-            <organization></organization>
-          </author>
-          <author fullname=" S. Casner" initials="S." surname="Casner">
-            <organization></organization>
-          </author>
-          <date month="July" year="2003" />
-        </front>        
-        <seriesInfo name="RFC" value="3551" />       
-        <format octets="60854"
-          target="http://tools.ietf.org/html/rfc3551.txt" type="TXT" />
-      </reference>
+
       <reference anchor="RFC4796">
         <front>
           <title>The Session Description Protocol (SDP) Content Attribute</title>        
@@ -2422,21 +2402,7 @@ TODO - put in text refering to AVT multiplexing draft and to bundle draft.
         <seriesInfo name='RFC' value='3108' />
         <format type='TXT' octets='248037' target='http://www.rfc-editor.org/rfc/rfc3108.txt' />
       </reference> 
-      <reference anchor='RFC4795'>
-        
-        <front>
-          <title>Link-local Multicast Name Resolution (LLMNR)</title>
-          <author initials='B.' surname='Aboba' fullname='B. Aboba'>
-            <organization /></author>
-          <author initials='D.' surname='Thaler' fullname='D. Thaler'>
-            <organization /></author>
-          <author initials='L.' surname='Esibov' fullname='L. Esibov'>
-            <organization /></author>
-          <date year='2007' month='January' />
-        </front>
-        <seriesInfo name='RFC' value='4795' />
-        <format type='TXT' octets='71969' target='http://www.rfc-editor.org/rfc/rfc4795.txt' />
-      </reference>
+ 
       <reference anchor='RFC5159'>
         
         <front>
