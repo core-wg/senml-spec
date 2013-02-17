@@ -483,6 +483,9 @@ user22.source6.sync4.encoding0.layer0.other0
   <section anchor="sec-solutions" title="Solutions">
   
 <t>
+TODO
+<list style="numbers">
+<t>
 If a sysetem wants to offer to send two cameras, it MUST use a seperate m-block
 for each camera.
 
@@ -525,10 +528,13 @@ content label,
 Applicatons MAY singnall all the SSRC they intend to send but receivers need to
 be carefull in their usage of this as they can change when there is a
 collisions.
+</t>
+</list>
+</t>
 
-
---------
-
+ <section anchor="sec-multi-render" title="Multiple Render">
+ 
+<t>
 There are cases suchs as displaying thumbnails in a video confernce, or a grid
 of secruity cameras, where a receiver is willing to receive several media flows
 of video and display mutliple of this. The proposal here is to create a new
@@ -557,8 +563,10 @@ SSRC to send video to m-block.
 This allows a switchin MCU to know how many thumbnail type streams would be
 apropariate to send to this endpoint.
 
- ---------
-
+</t>
+</section> 
+<section anchor="sec-issues" title="Issues">
+<t>
 How to know what to sync when getting active siwtchin etc ...
 
 
@@ -585,6 +593,7 @@ The fingerprint vs crypto disaster
 
 
 </t>
+ </section>
 
     </section>
 
