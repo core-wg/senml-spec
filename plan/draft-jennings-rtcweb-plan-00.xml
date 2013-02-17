@@ -14,7 +14,7 @@
 <rfc category="info" docName="draft-jennings-rtcweb-plan-00"
      ipr="noDerivativesTrust200902">
   <front>
-    <title abbrev="RTCWeb Plan"> TODO </title>
+    <title abbrev="RTCWeb Plan"> Proposed Plan for Uasge of SDP and RTP </title>
 
     <author fullname="Cullen Jennings" initials="C." surname="Jennings">
       <organization>Cisco</organization>
@@ -36,12 +36,22 @@
       </address>
     </author>
 
-    <date day="16" month="February" year="2013" />
+    <date day="17" month="February" year="2013" />
 
     <area>RAI</area>
 
     <abstract>
-      <t></t>
+      <t> This draft outlines a bunch of the remaining issues in RTCWeb related
+      to how the the W3C APIs map to varios usages ofRTP and the asscoated
+      SDP. It proposes one possibely soltuions to that problem and outlines
+      several chunks of work that would need to be put into other drafts or
+      result in new drafts being written. The underlying design guidline if to,
+      as much as possible, just re-used what is allready defined in existing SDP
+      and RTP specifications. </t>
+      <t> This draft is not intended to become an specifiction but is meant for
+      working group discution to help build the specifications. It is ebing
+      discussed on the webrtc@ietf.org mailing list thought it has topics
+      relating to the CLUE WG, MMUSIC WG, AVT* WG, and WebRTC WG at W3C.</t>
     </abstract>
   </front>
 
@@ -76,11 +86,27 @@ compression.
       target="webrtc-api"></xref>.</t>
 
 <t>
-Transport flow (5-tuple RTP is flowing over )
+Transport-Flow (5-tuple RTP is flowing over )
+
+PC-Track 
+
+PC-Channel 
 
 PC-Stream 
 
-PC-Track 
+m-line 
+
+m-block - a m-line and all the SDP grouped under it that occurs before the next
+m-line in the SDP
+
+Offer 
+
+Answer 
+
+
+
+This draft avoids using terms that implementors do not have a clear idea of
+exactly what they are - for example RTP Session.
 
 
 </t>
@@ -95,43 +121,68 @@ PC-Track
   
 -------- Requirements 
 
+The requirements listed here are a collection of requiements that have come from
+WebRTC, CLUE, and the general community that uses RTP for interactive
+communications based on Offer/Answer. It does not try to meet the needs of
+streaming usages or usages invovling the use of multicast. This list does nto
+try to list every possible requirement but instead outlines the ones that mgith
+influence the design.
+
+
 Devices with multiple cameras
 
-Devices display multiple streams of video 
+Devices that display multiple streams of video 
 
-Simulcast 
+Simulcast - meaning video from a single camera is sent in a few independed
+vidieo streams typically at differnt resoltuions and framerates.
 
-Layered Codecs 
+Layered Codecs such as H.264 SVC 
 
-One way streams 
+One way media flows and bi directional media flows 
 
-Mapping W3C PeerConnection items to SDP and RTP 
+Mapping W3C PeerConnection items to SDP and RTP. It is important that the SDP be
+descriptive enough that both sides can get the same view of variaos lables for
+PC-Tracks, PC-Streams and which PC-Tracks each PC-Stream contains.
 
-ICE 
+Support for ICE 
 
-Multiplexing 
+Support for Multiplexing 
 
-Syncronization and CNAME and LS group 
+Syncronization - It needs to be clear how implemnations deal with synconizaion.
+In particular both CNAME and LS group. The sender needs be able to indiecate
+which Media Flows are intended to be syncronized and which are not.
 
-Alternative Transmission o same thing. 
+Redudant codings - The ability to send some media, such as the audio from a
+micrphone, multiple times. For example it may be sent with a high quality
+wideband codec and a low bandwidth codec. If packets are lost from the high
+bandwidht steam, the low bandwidth stream can be used to fill in the missing
+gaps of audio. This is very simular to simulcast.
 
-Redudant codings 
+Forward Error Correction - Supprot for varios RTP FEC schemes. 
 
-RSVP QoS - SRF group 
+RSVP QoS - Abilyt to signal varions QoS mechissm such SRF group 
 
-Disagregated Media (FID)
+Disagregated Media (FID group) - There is agrowing desire to deal with endpoints
+that are distributed - for example a video phone where the incoming video is
+displayed on the an IP TV but the outgoing video comes from a tablet
+computer. This results in situtations where the SDP sets up a situtation where
+not all the media is going to the same IP address.
 
-In flight change of codec - once codec at a time FID 
+In flight change of codec: Support for system that can negotatei the uses of
+more than one codec for a given media flow and then the sender can arbitrarily
+switch between them when they are sending but they only send with one codec as
+at time.
 
-
-Sequential and parrallel forking at SIP level 
+Sequential and parrallel forking at the SIP level 
 
 Early media 
 
-Conferncing environments where MCU are do full decode / mix / recode of media
+Conferncing environments where MCU are do full decode / mix / recode of media.
+This is refered to as a Transcoding MCU.
 
-Conferncing environments wher MCU simply muck with header information of media
-and do not decode / recode all the media
+Conferncing environments where the MCU simply muck with header information of
+media and do not decode / recode all the media - This is refered to as a
+Wwitching MCU.
 
 
 --- Background 
