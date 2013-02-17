@@ -428,9 +428,15 @@ SDP Offer
     m=video 50004 RTP/AVP 31
     a=label:11
   
+]]></artwork>
+      </figure>
+
+<t>
   Thought not yet defined, it's easy to imaging that BFCP over SCTP over DTLS might look like  
-    
-    m=application 50000 TCP/TLS/BFCP *
+</t>    
+     <figure>
+        <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[    m=application 50000 TCP/TLS/BFCP *
     a=setup:passive
     a=connection:new
     a=fingerprint:SHA-1 \
