@@ -487,7 +487,13 @@ user22.source6.sync4.encoding0.layer0.other0
   <section anchor="sec-solutions" title="Solutions">
   
 <t>
-TODO
+
+This section outlines a set of rules for the usage SDP and RTP that seem to deal
+with the variso problems and issues that have been proposed. Most of these are
+not new and are pretty much how many systems do it today. Some of them are new
+but all the itmers requireing new standardization work are called out in the
+TODO Section-tasks:
+
 <list style="numbers">
 <t>
 If a sysetem wants to offer to send two cameras, it MUST use a seperate m-block
@@ -497,10 +503,10 @@ If a systems wants to receive two streams of video to display in two differnt
 windows or screens, it MUST user seperate m-blocks for each.</t>
 <t>
 
-Unless explicitly signalling otherwise (see section TODO), if a given m-line
-receives media from multiple SSRC, only media from the most recently received
-SSRC SHOULD be rendered and ohre SSRC SHOULD not and if it is video it SHULD be
-rendered in the same window or screen.</t>
+Unless explicitly signalling otherwise (see section TODO ref multi render), if a
+given m-line receives media from multiple SSRC, only media from the most
+recently received SSRC SHOULD be rendered and other SSRC SHOULD not and if it is
+video it SHULD be rendered in the same window or screen.</t>
 <t>
 
 Each PC-Track coresponds to one or more m-blocks. </t>
@@ -521,7 +527,7 @@ PC-Stream have the same CNAME. If a PC-Track is in more than one PC-Stream, then
  all the PC-Streams that the same PC-Track occurs in MUST have the same CNAME.</t>
 <t>
 
-One way media lines MUST use the sendonly or recev only attributes.</t>
+One way media  MUST use the sendonly or recev only attributes.</t>
 <t>
 
 Media lines that are not currently in use but may be used later so the resources
@@ -537,13 +543,28 @@ packets it produces.</t>
 <t>
 
 For each PC-Track, the W3C API MUST provide a way to set and read the CSRC list,
-content label,</t>
-<t>
+content label, and read SSRC of last packet received on a PC-Track.</t>
 
-Applicatons MAY singnall all the SSRC they intend to send but receivers need to
-be carefull in their usage of this as they can change when there is a
-collisions.
+<t> The W3C api should have a constriant or API method to allow a PC-Stream to
+indicate the number of muilt-render video streams it can accept. Each time a new
+steam is received up to the maximuim, a new PC-Track will be created. </t>
+
+<t>
+Applicatons MAY signall all the SSRC they intend to send using the TODO but
+receivers need to be carefull in their usage of this as they can change when
+there is a collisions.
 </t>
+<t> Applications can get out of band "roster information" that maps the names of
+variso speakers or toher information to the MSID and/or SSRCs that users is
+using </t>
+
+<t> Applications SHOUDL use the TODO ref content labels to indicate the purpose
+of the video. Thw aditona content types, main-left, and main-right need to be
+added to support 2 and three screen systems. </t>
+
+<t> The CLUE WG might want to consider adding SDP to singal the 3D location of
+and field of view paraters for captures and renderes. </t>
+
 </list>
 </t>
 
@@ -575,22 +596,39 @@ SSRC that will send to this so it is best to use payload type (PT) numbers that
 are unque for the SDP as the demultiplexing may have to only use the PT if the
 SSRC are unknonw.</t>
 <t>
-
 The receiver displays, in differnt windows, the video from the most recent 16
 SSRC to send video to m-block.</t>
 <t>
-
 This allows a switchin MCU to know how many thumbnail type streams would be
 apropariate to send to this endpoint.
-
 </t>
 </section> 
+
+<section anchor="sec-dirt" title="Dirty Little Secrets">
+<t>
+If SDP offer/asnwers are of type AVP or AVPF, but contains an crypto of
+fingerprint attribute, they should be treated as if they were SAVP or SAVPF
+respecrtively. The Answer should have the same type as the offer but for all
+pratical purposes the implementation shoudl treat it as the secure variant.
+</t>
+<t>
+If SDP offer/asnwers are of type AVP or SAVP, but contains an TBD attribute,
+they should be treated as if they were AVPF or SAVPF respectively. The SDP
+Answer should have the same type as the Offer but for all pratical purposes the
+implementation shoudl treat it as the feedback variant.
+</t>
+<t>
+If an SDP Offer has both a fingerprint and crypto atribute, it means the Offerer
+supports both DTLS-SRTP and SDES and the asnwer should selct one, and return an
+Anser with only an sttibute for the selected keying mechinism.
+</t>
+
+</section> 
+
 <section anchor="sec-issues" title="Issues">
 <t>
 How to know what to sync when getting active siwtchin etc ...</t>
 <t>
-
-
 If you have one m-line offering to receive audio, and you start receiving audio
 from multiple SSRC at the same time, what do you do. For video what do you
 do. If there is RFC 5576 a=ssrc signalling does that change anything.</t>
@@ -606,7 +644,7 @@ Clue 3d coordiantes of source and view information </t>
 What do do with unrecornized media that is received at PC level </t>
 <t>
 
-How does this rlate to "a=lable" in RFC 4574</t>
+How does this relate to "a=lable" in RFC 4574</t>
 <t>
 
 How this relate to msid </t>
