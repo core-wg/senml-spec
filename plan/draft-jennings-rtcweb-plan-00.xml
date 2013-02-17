@@ -92,7 +92,8 @@ PC-Track
 
 PC-Channel 
 
-PC-Stream (Note this has nothing to do with what RTP or ICE might mean by "media strea")
+PC-Stream (Note this has nothing to do with what RTP or ICE might mean by "media
+strea")
 
 m-line 
 
@@ -185,7 +186,8 @@ Wwitching MCU.
 
 --- Background 
 
-The follwing shows some examples of SDP today that any new system needs to be abel to receive and work with in a backwards compatable way. 
+The follwing shows some examples of SDP today that any new system needs to be
+abel to receive and work with in a backwards compatable way.
 
 -- muliple encodings
 
@@ -217,7 +219,10 @@ Ans
       a=rtpmap:32 MPV/90000
 
 
-This means that that sender can switch back and forth between H261 and MVP without any further singalling. The receiveiver is receiving both but they are jsut one video meant to be disolayed in a single window. Only one is sent at a time. 
+This means that that sender can switch back and forth between H261 and MVP
+without any further singalling. The receiveiver is receiving both but they are
+jsut one video meant to be disolayed in a single window. Only one is sent at a
+time.
 
 
 -- FEC
