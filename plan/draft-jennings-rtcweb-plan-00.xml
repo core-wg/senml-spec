@@ -448,17 +448,21 @@ Offer
   <section anchor="sec-concepts" title="Concepts">
   
 <t>
-The bulk of offer / answer based SDP usage is based on the idea is based on the 
+The bulk of offer / answer based SDP usage is based on the idea is based on the </t>
+<t>
 
-Use what we have 
+Use what we have </t>
+<t>
 
 Allow the sender to provide enough information that the receive can do the right
-thing
+thing</t>
+<t>
 
 
 RFC 5576 - SSRC Attribues, allows mutlie SSRC to be singalling in a
 m-block. What does it mean. You can only singlan what sender is going to
-send. Can not reject things.
+send. Can not reject things.</t>
+<t>
 
 MSID ( or MID) 
 - 32 bit integer 
@@ -487,43 +491,54 @@ TODO
 <list style="numbers">
 <t>
 If a sysetem wants to offer to send two cameras, it MUST use a seperate m-block
-for each camera.
-
+for each camera. </t>
+<t>
 If a systems wants to receive two streams of video to display in two differnt
-windows or screens, it MUST user seperate m-blocks for each.
+windows or screens, it MUST user seperate m-blocks for each.</t>
+<t>
 
 Unless explicitly signalling otherwise (see section TODO), if a given m-line
 receives media from multiple SSRC, only media from the most recently received
 SSRC SHOULD be rendered and ohre SSRC SHOULD not and if it is video it SHULD be
-rendered in the same window or screen.
+rendered in the same window or screen.</t>
+<t>
 
-Each PC-Track coresponds to one or more m-blocks. 
+Each PC-Track coresponds to one or more m-blocks. </t>
+<t>
 
 If a camera is sending simulcast video and three resoltuions, each resolution
-MUST get it's own m-block and all the three m-blocks will be grouped using TBD.
+MUST get it's own m-block and all the three m-blocks will be grouped using TBD.</t>
+<t>
 
 If a camera is using a layuered codec with three layers, there MUST be an
-m-block for each later and they will be grouped using TBD.
+m-block for each later and they will be grouped using TBD.</t>
+<t>
 
 To aid in sycnized playback, there is exactly one, and only one,  LS group for each
 PC-Stream. All the m-blocks for all the PC-Tracks in a given PC-Stream and
 sycnroniced so theyt are all put in one LS group. All the PC-Tracks in a given
 PC-Stream have the same CNAME. If a PC-Track is in more than one PC-Stream, then
- all the PC-Streams that the same PC-Track occurs in MUST have the same CNAME.
+ all the PC-Streams that the same PC-Track occurs in MUST have the same CNAME.</t>
+<t>
 
-One way media lines MUST use the sendonly or recev only attributes.
+One way media lines MUST use the sendonly or recev only attributes.</t>
+<t>
 
 Media lines that are not currently in use but may be used later so the resources
-need to be kept allocated SHOULD use the inactive attribute.
+need to be kept allocated SHOULD use the inactive attribute.</t>
+<t>
 
-If a m-line will note be used, or rejected, it MUST have it's prot sert to zero.
+If a m-line will note be used, or rejected, it MUST have it's prot sert to zero.</t>
+<t>
 
 If a video switching MCU produces a virtual "active speaker" media flow, that media flow should
 have it's own SSRC but include the SSRC of the current speakes video in the CSRC
-packets it produces.
+packets it produces.</t>
+<t>
 
 For each PC-Track, the W3C API MUST provide a way to set and read the CSRC list,
-content label,
+content label,</t>
+<t>
 
 Applicatons MAY singnall all the SSRC they intend to send but receivers need to
 be carefull in their usage of this as they can change when there is a
@@ -539,10 +554,12 @@ There are cases suchs as displaying thumbnails in a video confernce, or a grid
 of secruity cameras, where a receiver is willing to receive several media flows
 of video and display mutliple of this. The proposal here is to create a new
 media level attribute called muliple-render that includes an integer that
-indicates how many streams can be rendered at the same time.
+indicates how many streams can be rendered at the same time.</t>
+<t>
 
 As an example, a system that could display 16 thumbnails at the same time, and
-was willing to receive H261 or H264 might offer
+was willing to receive H261 or H264 might offer</t>
+<t>
 
 Offer
        m=video 52886 RTP/AVP 98 99
@@ -551,14 +568,17 @@ Offer
        a=rtpmap:99 H264/90000
        a=fmtp:99 profile-level-id=4de00a; packetization-mode=0;
                   mst-mode=NI-T; sprop-parameter-sets={sps0},{pps0};
-
+</t>
+<t>
 When combinging this with multiplexing, the answer will often not have all the
 SSRC that will send to this so it is best to use payload type (PT) numbers that
 are unque for the SDP as the demultiplexing may have to only use the PT if the
-SSRC are unknonw.
+SSRC are unknonw.</t>
+<t>
 
 The receiver displays, in differnt windows, the video from the most recent 16
-SSRC to send video to m-block.
+SSRC to send video to m-block.</t>
+<t>
 
 This allows a switchin MCU to know how many thumbnail type streams would be
 apropariate to send to this endpoint.
@@ -567,31 +587,40 @@ apropariate to send to this endpoint.
 </section> 
 <section anchor="sec-issues" title="Issues">
 <t>
-How to know what to sync when getting active siwtchin etc ...
+How to know what to sync when getting active siwtchin etc ...</t>
+<t>
 
 
 If you have one m-line offering to receive audio, and you start receiving audio
 from multiple SSRC at the same time, what do you do. For video what do you
-do. If there is RFC 5576 a=ssrc signalling does that change anything.
+do. If there is RFC 5576 a=ssrc signalling does that change anything.</t>
+<t>
 
-SSRC, CSRC , assumption of roster information out of band 
+SSRC, CSRC , assumption of roster information out of band </t>
+<t>
 
-Clue 3d coordiantes of source and view information 
-
-
-What do do with unrecornized media that is received at PC level 
-
-How does this rlate to "a=lable" in RFC 4574
-
-How this relate to msid 
-
-The AVP vs AFPF disaster 
-
-The SAVP vs AVP disaster
-
-The fingerprint vs crypto disaster 
+Clue 3d coordiantes of source and view information </t>
+<t>
 
 
+What do do with unrecornized media that is received at PC level </t>
+<t>
+
+How does this rlate to "a=lable" in RFC 4574</t>
+<t>
+
+How this relate to msid </t>
+<t>
+
+The AVP vs AFPF disaster </t>
+<t>
+
+The SAVP vs AVP disaster</t>
+<t>
+
+The fingerprint vs crypto disaster </t>
+<t>
+MORE
 </t>
  </section>
 
