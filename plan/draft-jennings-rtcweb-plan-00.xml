@@ -115,10 +115,9 @@ exactly what they are - for example RTP Session.
     </section>
 
 
-  <section anchor="sec-todo" title="More Sections">
+  <section anchor="sec-req" title="Requirements">
   
 <t>
--------- Requirements 
 
 The requirements listed here are a collection of requiements that have come from
 WebRTC, CLUE, and the general community that uses RTP for interactive
@@ -183,9 +182,14 @@ Conferncing environments where the MCU simply muck with header information of
 media and do not decode / recode all the media - This is refered to as a
 Wwitching MCU.
 
+</t>
 
---- Background 
+    </section>
 
+
+  <section anchor="sec-existing" title="Existing SDP">
+  
+<t>
 The follwing shows some examples of SDP today that any new system needs to be
 abel to receive and work with in a backwards compatable way.
 
@@ -329,8 +333,6 @@ Offer (RFC4588)
           a=mid:2
 
 
--- SVC 
-
 
 -- BFCP 
 
@@ -367,6 +369,8 @@ TODO
    m=video 50004 RTP/AVP 31
    a=label:11
 
+
+-- SVC 
 
 -- Layerd coding depndency
 
@@ -436,8 +440,15 @@ Offer
 
 
 
----- Concepts 
+</t>
 
+    </section>
+
+
+  <section anchor="sec-concepts" title="Concepts">
+  
+<t>
+The bulk of offer / answer based SDP usage is based on the idea is based on the 
 Use what we have 
 
 Allow the sender to provide enough information that the receive can do the right
@@ -457,10 +468,20 @@ MSID ( or MID)
 - 1 bit - side a/b
 
 - layer 1,2,3,4 ..
-- lowres, medres, highres 
+- low res, medium res, highres 
+- creates a mapping between stable ID that can be chosen by offerer and the the SSRC used by other side to send to offer 
 
---- Solutions 
+user22.source6.sync4.encoding0.layer0.other0
 
+
+</t>
+
+    </section>
+
+
+  <section anchor="sec-solutions" title="Solutions">
+  
+<t>
 If you have one m-line offering to receive audio, and you start receiving audio
 from multiple SSRC at the same time, what do you do. For video what do you
 do. If there is RFC 5576 a=ssrc signalling does that change anything.
@@ -482,8 +503,26 @@ The SAVP vs AVP disaster
 
 The fingerprint vs crypto disaster 
 
---------------
 
+---- Examples 
+</t>
+
+    </section>
+
+
+  <section anchor="sec-examples" title="Examples">
+  
+<t>
+
+--------------
+</t>
+
+    </section>
+
+
+  <section anchor="sec-tasks" title="tasks">
+  
+<t>
 Tasks 
 
 Content : left , right and way to set in w3c 
