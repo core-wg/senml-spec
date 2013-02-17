@@ -114,11 +114,9 @@ exactly what they are - for example RTP Session.
     </section>
 
 
-
-<t>
-
   <section anchor="sec-todo" title="More Sections">
   
+<t>
 -------- Requirements 
 
 The requirements listed here are a collection of requiements that have come from
@@ -287,6 +285,7 @@ streams.
     <section title="Open Issues">
       <t></t>
     </section>
+
   </middle>
 
   <back>
