@@ -14,7 +14,7 @@
 <rfc category="info" docName="draft-jennings-rtcweb-plan-00"
      ipr="noDerivativesTrust200902">
   <front>
-    <title abbrev="RTCWeb Plan"> Proposed Plan for Uasge of SDP and RTP </title>
+    <title abbrev="RTCWeb Plan"> Proposed Plan for Usage of SDP and RTP </title>
 
     <author fullname="Cullen Jennings" initials="C." surname="Jennings">
       <organization>Cisco</organization>
@@ -42,407 +42,503 @@
 
     <abstract>
       <t> This draft outlines a bunch of the remaining issues in RTCWeb related
-      to how the the W3C APIs map to varios usages ofRTP and the asscoated
-      SDP. It proposes one possibely soltuions to that problem and outlines
+      to how the the W3C APIs map to various usages of RTP and the asscociated
+      SDP. It proposes one possible solution to that problem and outlines
       several chunks of work that would need to be put into other drafts or
-      result in new drafts being written. The underlying design guidline if to,
-      as much as possible, just re-used what is allready defined in existing SDP
-      and RTP specifications. </t>
+      result in new drafts being written. The underlying design guidline is to,
+      as much as possible, re-use what is already defined in existing 
+      SDP [RFC4566] and RTP [RFC3550] specifications. </t>
       <t> This draft is not intended to become an specifiction but is meant for
-      working group discution to help build the specifications. It is ebing
-      discussed on the webrtc@ietf.org mailing list thought it has topics
+      working group discussion to help build the specifications. It is being
+      discussed on the webrtc@ietf.org mailing list though it has topics
       relating to the CLUE WG, MMUSIC WG, AVT* WG, and WebRTC WG at W3C.</t>
     </abstract>
   </front>
 
   <middle>
     <section title="Introduction">
-      <t>
-
-The reoccuring theme of this draft is that SDP allready has a way of solving the
-problems we are looking at and all we should do is use that way and not try and
-invent something new.
-
-This does results in lots of m lines but all the laternatives resulted in an
-nearly equivelent number of ssrc lines so it's really hard to see the big
-difference. This assumes that it is perfeclty feasiable to transport SDP that
-much larger than a single MTU. The SIP usage of SDP passed over that long
-ago. IN the cases where the SDP is passed over web mechaisms, it is easy to use
-compression.
-
-
-
-</t>
+     <t>The reoccuring theme of this draft is that SDP <xref target="RFC4566"></xref> already has a way 
+        of solving the problems being discussed at the RTCWeb WG and we SHUOLD not try to invent something
+        new but rather re-use the exisitng methods instead.
+     </t>   
+      <t> This does results in lots of m lines but all the alternatives resulted in an
+        nearly equivalent number of ssrc lines with a possibility of redefining most of the media level attributes. 
+        So it's really hard to see the big difference.This assumes that it is perfeclty feasible to 
+        transport SDP that much larger than a single MTU. The SIP <xref target="RFC3261"></xref> 
+        usage of SDP has successfully passed over this long ago. In the cases where the SDP is passed over 
+        web mechanisms, it is easy to use compression and it is more of an optimization criteria 
+        than a limiting issue.   
+    </t>
     </section>
-
- 
 
     <section title="Terminology">
       <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT",
       "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
       interpreted as described in <xref target="RFC2119"></xref>.</t>
-
       <t>This draft uses the API and terminology described in <xref
       target="webrtc-api"></xref>.</t>
-
-<t>
-Transport-Flow (5-tuple RTP is flowing over )
-
-PC-Track 
-
-PC-Channel 
-
-PC-Stream (Note this has nothing to do with what RTP or ICE might mean by "media
-strea")
-
-m-line 
-
-m-block - a m-line and all the SDP grouped under it that occurs before the next
-m-line in the SDP
-
-Offer 
-
-Answer 
-
-
-
-This draft avoids using terms that implementors do not have a clear idea of
-exactly what they are - for example RTP Session. 
-
-
-</t>
-
-    </section>
-
+      <t>
+        Transport-Flow: 5 Tuple representing a RTP association.
+      </t>  
+      <t>
+        5-tuple: A collection of the following values: source IP address, source trasport port,
+        destination IP address, destination transport port and transport protocol.
+      </t> 
+      <t>
+        PC-Track: A source of media (audio and/or video) that is contained in a PC-Stream. A PC-Track represents
+        content comprising one or more PC-Channels.
+      </t>  
+      <t>
+        PC-Channel: Smallest unit of a PC-Track representing inter-related media aspects such as stero or 5.1 audio signal
+      </t> 
+      <t>
+        PC-Stream: Represents stream of data of audio and/or video added to a Peer Connection by local or remote media source(s).
+        A PC-Stream is made up of zero or more PC-Tracks.
+      </t>  
+      <t>
+        m-line: An <xref target="RFC4566">RFC4566</xref> media description identifier that starts with "m=" field and conveys 
+        following values:media type,transport port,transport protocol and media format descriptions.
+      </t>  
+      <t>
+        m-block: An <xref target="RFC4566">RFC4566</xref>  media description that starts with an m-line and is terminated
+        by either the next m-line or by the end of the session description.
+      </t>  
+      <t>
+        Offer: An <xref target="RFC3264"></xref> SDP message generated by the pariticipant who wishes to initiate a multimedia
+        communication session. An Offer describes participants capabilities for engaging in a multimedia session.
+      </t>  
+      <t>
+        Answer: An <xref target="RFC3264"></xref> SDP message generated by the pariticipant in response to an Offer.
+        An Answer describes participants capabilities in continuing with the multimedia session with in the contstraints 
+        of the Offer.
+      </t> 
+      <t hangText="Note">
+        This draft avoids using terms that implementors do not have a clear idea of
+        exactly what they are - for example RTP Session.
+      </t> 
+  </section>
 
   <section anchor="sec-req" title="Requirements">
-  
-<t>
-
-The requirements listed here are a collection of requiements that have come from
-WebRTC, CLUE, and the general community that uses RTP for interactive
-communications based on Offer/Answer. It does not try to meet the needs of
-streaming usages or usages invovling the use of multicast. This list does nto
-try to list every possible requirement but instead outlines the ones that mgith
-influence the design.
-
-
-Devices with multiple cameras
-
-Devices that display multiple streams of video 
-
-Simulcast - meaning video from a single camera is sent in a few independed
-vidieo streams typically at differnt resoltuions and framerates.
-
-Layered Codecs such as H.264 SVC 
-
-One way media flows and bi directional media flows 
-
-Mapping W3C PeerConnection items to SDP and RTP. It is important that the SDP be
-descriptive enough that both sides can get the same view of variaos lables for
-PC-Tracks, PC-Streams and which PC-Tracks each PC-Stream contains.
-
-Support for ICE 
-
-Support for Multiplexing 
-
-Syncronization - It needs to be clear how implemnations deal with synconizaion.
-In particular both CNAME and LS group. The sender needs be able to indiecate
-which Media Flows are intended to be syncronized and which are not.
-
-Redudant codings - The ability to send some media, such as the audio from a
-micrphone, multiple times. For example it may be sent with a high quality
-wideband codec and a low bandwidth codec. If packets are lost from the high
-bandwidht steam, the low bandwidth stream can be used to fill in the missing
-gaps of audio. This is very simular to simulcast.
-
-Forward Error Correction - Supprot for varios RTP FEC schemes. 
-
-RSVP QoS - Abilyt to signal varions QoS mechissm such SRF group 
-
-Disagregated Media (FID group) - There is agrowing desire to deal with endpoints
-that are distributed - for example a video phone where the incoming video is
-displayed on the an IP TV but the outgoing video comes from a tablet
-computer. This results in situtations where the SDP sets up a situtation where
-not all the media is going to the same IP address.
-
-In flight change of codec: Support for system that can negotatei the uses of
-more than one codec for a given media flow and then the sender can arbitrarily
-switch between them when they are sending but they only send with one codec as
-at time.
-
-Sequential and parrallel forking at the SIP level 
-
-Early media 
-
-Conferncing environments where MCU are do full decode / mix / recode of media.
-This is refered to as a Transcoding MCU.
-
-Conferncing environments where the MCU simply muck with header information of
-media and do not decode / recode all the media - This is refered to as a
-Wwitching MCU.
-
-</t>
-
-    </section>
-
-
+  <t>
+  The requirements listed here are a collection of requirements that have come from
+  WebRTC, CLUE, and the general community that uses RTP for interactive
+  communications based on Offer/Answer. It does not try to meet the needs of
+  streaming usages or usages involving multicast. This list does not also
+  try to list every possible requirement but instead outlines the ones that might
+  influence the design. 
+  <list style="symbols">
+    <t>
+      Devices with multiple cameras
+    </t>  
+    <t>
+      Devices that display mulitple streams of video
+    </t>
+    <t>
+      Simulcast, wherein a video from a single camera is sent in a few independent
+      video streams typically at different resolutions and framerates.
+    </t>
+    <t>
+      Layered Codec such as H.264 SVC
+    </t>
+    <t>
+      One way media flows and bi-directional media flows
+    </t>
+    <t>
+      Mapping W3C PeerConnection (PC) aspects into SDP and RTP. It is important that the SDP be
+      descriptive enough that both sides can get the same view of various identifiers for
+      PC-Tracks, PC-Streams and their inter-relatioships.
+    </t>
+    <t>
+      Support of Interactive Connectivity Establishment (ICE) <xref target="RFC5245"></xref>
+    </t>
+    <t>
+      Support of Multiplexing such as SSRC Mutiplexing, RTP Session Multiplexing
+    </t>
+    <t>
+      Synchronization - It needs to be clear how implemnations deal with synconizaion.
+      In particular both CNAME and LS group. The sender needs be able to indiecate
+      which Media Flows are intended to be syncronized and which are not.     
+    </t>
+    <t>
+      Redudant codings - The ability to send some media, such as the audio from a
+      microphone, multiple times. For example it may be sent with a high quality
+      wideband codec and a low bandwidth codec. If packets are lost from the high
+      bandwidth steam, the low bandwidth stream can be used to fill in the missing
+      gaps of audio. This is very simular to simulcast.      
+   </t>
+    <t>
+      Forward Error Correction - Support for various RTP FEC schemes. 
+    </t>
+    <t>
+      RSVP QoS - Abilyt to signal varions QoS mechissm such SRF group 
+    </t>
+    <t>
+      Disagregated Media (FID group) - There is a growing desire to deal with endpoints
+      that are distributed - for example a video phone where the incoming video is
+      displayed on the an IP TV but the outgoing video comes from a tablet
+      computer. This results in situtations where the SDP sets up a session with
+      not all the media transmitted to a single IP address.     
+    </t>
+    <t>
+      In flight change of codec: Support for system that can negotiate the uses of
+      more than one codec for a given media flow and then the sender can arbitrarily
+      switch between them when they are sending but they only send with one codec as
+      at time.
+    </t>
+    <t>
+      Support for Sequential and Parallel forking at the SIP level      
+    </t>
+    <t>
+      Support for Early Media
+    </t>
+    <t>
+      Conferencing environments with Transcoding MCU that decodes/mixes/recodes
+      the media    
+    </t>
+    <t>
+      Conferencing environments with Switching MCU where the MCU mucks the header
+      information of the media and do not decode/recode all the media
+    </t>
+  </list>
+  </t>
+  </section>
+    
   <section anchor="sec-existing" title="Existing SDP">
+  <t>
+   The following shows some examples of SDP today that any new system needs to be
+   able to receive and work with in a backwards compatable way.
+  </t>
+   <section anchor="sec-mulenc" title="Multiple Encodings">
+    <t> 
+     Multiple codecs accepted on same m-line.
+    </t> 
+     <figure>
+       <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+
+SDP Offer 
+
+     v=0
+     o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
+     s=
+     c=IN IP4 host.atlanta.example.com
+     t=0 0
+     m=audio 49170 RTP/AVP 99
+     a=rtpmap:99 iLBC/8000
+     m=video 51372 RTP/AVP 31 32
+     a=rtpmap:31 H261/90000
+     a=rtpmap:32 MPV/90000
+    
+]]></artwork>
+     </figure>
+     <figure>
+       <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+
+SDP Answer 
+
+     v=0
+     o=bob 2808844564 2808844565 IN IP4 host.biloxi.example.com
+     s=
+     c=IN IP4 host.biloxi.example.com
+     t=0 0
+     m=audio 49172 RTP/AVP 99
+     a=rtpmap:99 iLBC/8000
+     m=video 51374 RTP/AVP 31 32
+     a=rtpmap:31 H261/90000
+     a=rtpmap:32 MPV/90000
+    
+]]></artwork>
+     </figure>
+     
+    <t>
+      This means that that sender can switch back and forth between H261 and MVP
+      without any further singalling. The receiver MUST be capable of receving both
+      the formats and at any point only one video format is sent, thus implying
+      one video meant to be displayed.    
+    </t>  
+   </section>
+   <section anchor="sec-fec" title="Forward Error Correction">
+      <t> 
+        Multiple m-blocks identified with respective &quot;mid&quot; grouped to indicate 
+        FEC operation.
+      </t> 
+      <figure>
+        <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+
+SDP Offer 
+
+    v=0
+    o=ali 1122334455 1122334466 IN IP4 fec.example.com
+    s=Raptor RTP FEC Example
+    t=0 0
+    a=group:FEC-FR S1 R1
+    m=video 30000 RTP/AVP 100
+    c=IN IP4 233.252.0.1/127
+    a=rtpmap:100 MP2T/90000
+    a=fec-source-flow: id=0
+    a=mid:S1
+    m=application 30000 RTP/AVP 110
+    c=IN IP4 233.252.0.2/127
+    a=rtpmap:110 raptorfec/90000
+    a=fmtp:110 raptor-scheme-id=1; Kmax=8192; T=128;
+    P=A; repair-window=200000
+    a=mid:R1
+    
+]]></artwork>
+      </figure>
+   </section>
+    <section anchor="sec-samecodecdiffsettings" title="Same Video Codec With Different Settings">
+      <t> 
+        This example shows a single codec,say H.264, signaled with different settings.
+      </t> 
+      <figure>
+        <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+
+SDP Offer 
+
+    v=0
+    m=video 49170 RTP/AVP 100 99 98
+    a=rtpmap:98 H264/90000
+    a=fmtp:98 profile-level-id=42A01E; packetization-mode=0;
+    sprop-parameter-sets=Z0IACpZTBYmI,aMljiA==
+    a=rtpmap:99 H264/90000
+    a=fmtp:99 profile-level-id=42A01E; packetization-mode=1;
+    sprop-parameter-sets=Z0IACpZTBYmI,aMljiA==
+    a=rtpmap:100 H264/90000
+    a=fmtp:100 profile-level-id=42A01E; packetization-mode=2;
+    sprop-parameter-sets=Z0IACpZTBYmI,aMljiA==;
+    sprop-interleaving-depth=45; sprop-deint-buf-req=64000;
+    sprop-init-buf-time=102478; deint-buf-cap=128000
+]]></artwork>
+      </figure>
+    </section> 
+    <section anchor="sec-diffcodecdiffresolutions" 
+      title="Different Video Codecs With Different Resolutions Formats">
+      <t>
+        Below SDP shows various ways to specify resolutions for video codecs
+        signalled.
+      </t>
+      <figure>
+        <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+
+SDP Offer 
+
+    m=video 49170/2 RTP/AVP 31
+    a=rtpmap:31 H261/90000
+    a=fmtp:31 CIF=2;QCIF=1;D=1
+    
+    m=video 49170/2 RTP/AVP 98 99
+    a=rtpmap:98 jpeg2000/27000000
+    a=rtpmap:99 jpeg2000/90000
+    a=fmtp:98 sampling=YCbCr-4:2:0;width=128;height=128
+    a=fmtp:99 sampling=YCbCr-4:2:0;width=128;height=128
+    
+    m=video 5555 RTP/AVP 97 98
+    a=rtpmap:97 H264-RCDO/90000
+    a=fmtp:97 profile-level-id=008016;max-mbps=42000;max-smbps=323500
+    a=rtpmap:98 H264/90000
+    a=fmtp:98 profile-level-id=428016;max-mbps=35000;max-smbps=323500
+]]></artwork>
+      </figure>
+    </section> 
+    <section anchor="sec-rtx" title="Retransmission">
+     <t>
+       <xref target="RFC4588"></xref> retransmission flow example.
+     </t> 
+     <figure>
+        <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+
+SDP Offer 
+
+    v=0
+    o=mascha 2980675221 2980675778 IN IP4 host.example.net
+    c=IN IP4 192.0.2.0
+    a=group:FID 1 2
+    a=group:FID 3 4
+    m=audio 49170 RTP/AVPF 96
+    a=rtpmap:96 AMR/8000
+    a=fmtp:96 octet-align=1
+    a=rtcp-fb:96 nack
+    a=mid:1
+    m=audio 49172 RTP/AVPF 97
+    a=rtpmap:97 rtx/8000
+    a=fmtp:97 apt=96;rtx-time=3000
+    a=mid:2
+    m=video 49174 RTP/AVPF 98
+    a=rtpmap:98 MP4V-ES/90000
+    a=rtcp-fb:98 nack
+    a=fmtp:98 profile-level-id=8;config=01010000012000884006682C209\
+    0A21F
+    a=mid:3
+    m=video 49176 RTP/AVPF 99
+    a=rtpmap:99 rtx/90000
+    a=fmtp:99 apt=98;rtx-time=3000
+    a=mid:4
+]]></artwork>
+      </figure>
+    </section>  
+    <section anchor="sec-lipsync" title="Lip Sync Group">
+     <t>
+      <xref target="RFC5888"></xref> grouping semantics for Lip Synchronization
+      between audio and video
+     </t> 
+      
+      <figure>
+        <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+
+SDP Offer 
+
+    v=0
+    o=Laura 289083124 289083124 IN IP4 one.example.com
+    c=IN IP4 192.0.2.1
+    t=0 0
+    a=group:LS 1 2
+    m=audio 30000 RTP/AVP 0
+    a=mid:1
+    m=video 30002 RTP/AVP 31
+    a=mid:2
+]]></artwork>
+      </figure>
+    </section>  
+    <section anchor="sec-bfcp" title="BFCP">
+      <figure>
+        <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+
+SDP Offer 
+
+    m=application 50000 TCP/TLS/BFCP *
+    a=setup:passive
+    a=connection:new
+    a=fingerprint:SHA-1 \
+    4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB
+    a=floorctrl:s-only
+    a=confid:4321
+    a=userid:1234
+    a=floorid:1 m-stream:10
+    a=floorid:2 m-stream:11
+    m=audio 50002 RTP/AVP 0
+    a=label:10
+    m=video 50004 RTP/AVP 31
+    a=label:11
   
-<t>
-The follwing shows some examples of SDP today that any new system needs to be
-abel to receive and work with in a backwards compatable way.
+  Thought not yet defined, it's easy to imaging that BFCP over SCTP over DTLS might look like  
+    
+    m=application 50000 TCP/TLS/BFCP *
+    a=setup:passive
+    a=connection:new
+    a=fingerprint:SHA-1 \
+    4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB
+    a=floorctrl:s-only
+    a=confid:4321
+    a=userid:1234
+    a=floorid:1 m-stream:10
+    a=floorid:2 m-stream:11
+    m=audio 50002 RTP/AVP 0
+    a=label:10
+    m=video 50004 RTP/AVP 31
+    a=label:11
+    
+]]></artwork>
+      </figure>
+    </section>   
+    <section anchor="sec-llc" title="Layered coding depndency">
+     <t>
+       <xref target="RFC5583"></xref> &quot;depend&quot; attribute is shown here
+       to indicate dependecny between layers represnted by the individual
+       m-blocks
+     </t> 
+      <figure>
+        <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
 
--- muliple encodings
+SDP Offer 
 
+    a=group:DDP L1 L2 L3
+    m=video 20000 RTP/AVP 96 97 98
+    a=rtpmap:96 H264/90000
+    a=fmtp:96 profile-level-id=4de00a; packetization-mode=0;
+    mst-mode=NI-T; sprop-parameter-sets={sps0},{pps0};
+    a=rtpmap:97 H264/90000
+    a=fmtp:97 profile-level-id=4de00a; packetization-mode=1;
+    mst-mode=NI-TC; sprop-parameter-sets={sps0},{pps0};
+    a=rtpmap:98 H264/90000
+    a=fmtp:98 profile-level-id=4de00a; packetization-mode=2;
+    mst-mode=I-C; init-buf-time=156320;
+    sprop-parameter-sets={sps0},{pps0};
+    a=mid:L1
+    m=video 20002 RTP/AVP 99 100
+    a=rtpmap:99 H264-SVC/90000
+    a=fmtp:99 profile-level-id=53000c; packetization-mode=1;
+    mst-mode=NI-T; sprop-parameter-sets={sps1},{pps1};
+    a=rtpmap:100 H264-SVC/90000
+    a=fmtp:100 profile-level-id=53000c; packetization-mode=2;
+    mst-mode=I-C; sprop-parameter-sets={sps1},{pps1};
+    a=mid:L2
+    a=depend:99 lay L1:96,97; 100 lay L1:98
+    m=video 20004 RTP/AVP 101
+    a=rtpmap:101 H264-SVC/90000
+    a=fmtp:101 profile-level-id=53001F; packetization-mode=1;
+    mst-mode=NI-T; sprop-parameter-sets={sps2},{pps2};
+    a=mid:L3
+    a=depend:101 lay L1:96,97 L2:99
+]]></artwork>
+      </figure>
+    </section>   
+    <section anchor="sec-ssrc" title="SSRC Signaling">
+      <figure>
+        <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
 
-Multiple codecs accepted on same m line - Consider follwing O/A pair 
+SDP Offer 
 
-Offer
-      v=0
-      o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
-      s=
-      c=IN IP4 host.atlanta.example.com
-      t=0 0
-      m=audio 49170 RTP/AVP 99
-      a=rtpmap:99 iLBC/8000
-      m=video 51372 RTP/AVP 31 32
-      a=rtpmap:31 H261/90000
-      a=rtpmap:32 MPV/90000
+    m=video 49170 RTP/AVP 96
+    a=rtpmap:96 H264/90000
+    a=ssrc:12345 cname:user@example.com
+    a=ssrc:67890 cname:user@example.com
+]]></artwork>
+      </figure>
+      <t>
+        This indicates what the sender will send. It's at best a guese because in the
+        case of ssrc collision, it's all wrong. It does not allow one to reject a
+        stream. It does not mean that both streams are displayed at the same time. 
+      </t>
+      
+    </section>  
+    <section anchor="sec-content" title="Content Signaling">
+     <t>
+      <xref target="RFC4796"></xref> &quot;content&quot; attribute is used to 
+       specify the semantics of content represnted by the video streams.
+     </t>
+      <figure>
+        <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
 
-Ans
-      v=0
-      o=bob 2808844564 2808844565 IN IP4 host.biloxi.example.com
-      s=
-      c=IN IP4 host.biloxi.example.com
-      t=0 0
-      m=audio 49172 RTP/AVP 99
-      a=rtpmap:99 iLBC/8000
-      m=video 51374 RTP/AVP 31 32
-      a=rtpmap:31 H261/90000
-      a=rtpmap:32 MPV/90000
-
-
-This means that that sender can switch back and forth between H261 and MVP
-without any further singalling. The receiveiver is receiving both but they are
-jsut one video meant to be disolayed in a single window. Only one is sent at a
-time.
-
-
--- FEC
-A typical Forward Error Corrrection 
-
-Offer
-  v=0
-   o=ali 1122334455 1122334466 IN IP4 fec.example.com
-   s=Raptor RTP FEC Example
-   t=0 0
-   a=group:FEC-FR S1 R1
-   m=video 30000 RTP/AVP 100
-   c=IN IP4 233.252.0.1/127
-   a=rtpmap:100 MP2T/90000
-   a=fec-source-flow: id=0
-   a=mid:S1
-   m=application 30000 RTP/AVP 110
-   c=IN IP4 233.252.0.2/127
-   a=rtpmap:110 raptorfec/90000
-   a=fmtp:110 raptor-scheme-id=1; Kmax=8192; T=128;
-           P=A; repair-window=200000
-   a=mid:R1
-
-
--- Video codec with some differnt setting 
-
-Offer
-      m=video 49170 RTP/AVP 100 99 98
-      a=rtpmap:98 H264/90000
-      a=fmtp:98 profile-level-id=42A01E; packetization-mode=0;
-                sprop-parameter-sets=Z0IACpZTBYmI,aMljiA==
-      a=rtpmap:99 H264/90000
-      a=fmtp:99 profile-level-id=42A01E; packetization-mode=1;
-                sprop-parameter-sets=Z0IACpZTBYmI,aMljiA==
-      a=rtpmap:100 H264/90000
-      a=fmtp:100 profile-level-id=42A01E; packetization-mode=2;
-                 sprop-parameter-sets=Z0IACpZTBYmI,aMljiA==;
-                 sprop-interleaving-depth=45; sprop-deint-buf-req=64000;
-                 sprop-init-buf-time=102478; deint-buf-cap=128000
-
-
--- Differnt video codecs set the resoltuions differnt ways 
-
-todo - fix up payload numbers
-
-Offer 
-      m=video 49170/2 RTP/AVP 31
-      a=rtpmap:31 H261/90000
-      a=fmtp:31 CIF=2;QCIF=1;D=1
-
-      m=video 49170/2 RTP/AVP 98 99
-      a=rtpmap:98 jpeg2000/27000000
-      a=rtpmap:99 jpeg2000/90000
-      a=fmtp:98 sampling=YCbCr-4:2:0;width=128;height=128
-      a=fmtp:99 sampling=YCbCr-4:2:0;width=128;height=128
-
-      m=video 5555 RTP/AVP 97 98
-      a=rtpmap:97 H264-RCDO/90000
-      a=fmtp:97 profile-level-id=008016;max-mbps=42000;max-smbps=323500
-      a=rtpmap:98 H264/90000
-      a=fmtp:98 profile-level-id=428016;max-mbps=35000;max-smbps=323500
-
-
--- Retranmistion schemes 
-
-The FID group can be used to indicate m-block is a retansmition of another 
-
-Offer (RFC4588)
-   v=0
-   o=mascha 2980675221 2980675778 IN IP4 host.example.net
-   c=IN IP4 192.0.2.0
-   a=group:FID 1 2
-   a=group:FID 3 4
-   m=audio 49170 RTP/AVPF 96
-   a=rtpmap:96 AMR/8000
-   a=fmtp:96 octet-align=1
-   a=rtcp-fb:96 nack
-   a=mid:1
-   m=audio 49172 RTP/AVPF 97
-   a=rtpmap:97 rtx/8000
-   a=fmtp:97 apt=96;rtx-time=3000
-   a=mid:2
-   m=video 49174 RTP/AVPF 98
-   a=rtpmap:98 MP4V-ES/90000
-   a=rtcp-fb:98 nack
-   a=fmtp:98 profile-level-id=8;config=01010000012000884006682C209\
-   0A21F
-   a=mid:3
-   m=video 49176 RTP/AVPF 99
-   a=rtpmap:99 rtx/90000
-   a=fmtp:99 apt=98;rtx-time=3000
-   a=mid:4
-
--- Indication of LIP Sync 
-
-         v=0
-          o=Laura 289083124 289083124 IN IP4 one.example.com
-          c=IN IP4 192.0.2.1
-          t=0 0
-          a=group:LS 1 2
-          m=audio 30000 RTP/AVP 0
-          a=mid:1
-          m=video 30002 RTP/AVP 31
-          a=mid:2
-
-
-
--- BFCP 
-
-  m=application 50000 TCP/TLS/BFCP *
-   a=setup:passive
-   a=connection:new
-   a=fingerprint:SHA-1 \
-        4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB
-   a=floorctrl:s-only
-   a=confid:4321
-   a=userid:1234
-   a=floorid:1 m-stream:10
-   a=floorid:2 m-stream:11
-   m=audio 50002 RTP/AVP 0
-   a=label:10
-   m=video 50004 RTP/AVP 31
-   a=label:11
-
-Thought not yet defined, it's easy to imaging that BFCP over SCTP over DTLS might look like 
-
-TODO 
-  m=application 50000 TCP/TLS/BFCP *
-   a=setup:passive
-   a=connection:new
-   a=fingerprint:SHA-1 \
-        4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB
-   a=floorctrl:s-only
-   a=confid:4321
-   a=userid:1234
-   a=floorid:1 m-stream:10
-   a=floorid:2 m-stream:11
-   m=audio 50002 RTP/AVP 0
-   a=label:10
-   m=video 50004 RTP/AVP 31
-   a=label:11
-
-
--- SVC 
-
--- Layerd coding depndency
-
-Note the "a=depend"
-
-Offer 
-      a=group:DDP L1 L2 L3
-      m=video 20000 RTP/AVP 96 97 98
-      a=rtpmap:96 H264/90000
-      a=fmtp:96 profile-level-id=4de00a; packetization-mode=0;
-       mst-mode=NI-T; sprop-parameter-sets={sps0},{pps0};
-      a=rtpmap:97 H264/90000
-      a=fmtp:97 profile-level-id=4de00a; packetization-mode=1;
-       mst-mode=NI-TC; sprop-parameter-sets={sps0},{pps0};
-      a=rtpmap:98 H264/90000
-      a=fmtp:98 profile-level-id=4de00a; packetization-mode=2;
-       mst-mode=I-C; init-buf-time=156320;
-       sprop-parameter-sets={sps0},{pps0};
-      a=mid:L1
-      m=video 20002 RTP/AVP 99 100
-      a=rtpmap:99 H264-SVC/90000
-      a=fmtp:99 profile-level-id=53000c; packetization-mode=1;
-       mst-mode=NI-T; sprop-parameter-sets={sps1},{pps1};
-      a=rtpmap:100 H264-SVC/90000
-      a=fmtp:100 profile-level-id=53000c; packetization-mode=2;
-       mst-mode=I-C; sprop-parameter-sets={sps1},{pps1};
-      a=mid:L2
-      a=depend:99 lay L1:96,97; 100 lay L1:98
-      m=video 20004 RTP/AVP 101
-      a=rtpmap:101 H264-SVC/90000
-      a=fmtp:101 profile-level-id=53001F; packetization-mode=1;
-       mst-mode=NI-T; sprop-parameter-sets={sps2},{pps2};
-      a=mid:L3
-      a=depend:101 lay L1:96,97 L2:99
-
-
--- SSRC signalling of names 
-
-This indicates what the sender will send. It's at best a guese because in the
-case of ssrc collision, it's all wrong. It does not allow one to reject a
-stream. It does not mean that both streams are displayed at the same time.
-
-   m=video 49170 RTP/AVP 96
-   a=rtpmap:96 H264/90000
-   a=ssrc:12345 cname:user@example.com
-   a=ssrc:67890 cname:user@example.com
-
--- Content signgalling 
-
-Has RFC4796 a=content
-
-Offer
-       v=0
-       o=Alice 292742730 29277831 IN IP4 131.163.72.4
-       s=Second lecture from information technology
-       c=IN IP4 131.164.74.2
-       t=0 0
-       m=video 52886 RTP/AVP 31
-       a=rtpmap:31 H261/9000
-       a=content:slides
-       m=video 53334 RTP/AVP 31
-       a=rtpmap:31 H261/9000
-       a=content:speaker
-       m=video 54132 RTP/AVP 31
-       a=rtpmap:31 H261/9000
-       a=content:sl
-
-
-
-</t>
-
-    </section>
+SDP Offer 
+ v=0
+    o=Alice 292742730 29277831 IN IP4 131.163.72.4
+    s=Second lecture from information technology
+    c=IN IP4 131.164.74.2
+    t=0 0
+    m=video 52886 RTP/AVP 31
+    a=rtpmap:31 H261/9000
+    a=content:slides
+    m=video 53334 RTP/AVP 31
+    a=rtpmap:31 H261/9000
+    a=content:speaker
+    m=video 54132 RTP/AVP 31
+    a=rtpmap:31 H261/9000
+    a=content:sl
+]]></artwork>
+      </figure>
+    </section>  
+  </section>
 
 
   <section anchor="sec-concepts" title="Concepts">
@@ -520,7 +616,7 @@ The fingerprint vs crypto disaster
     </section>
 
 
-  <section anchor="sec-tasks" title="tasks">
+<section anchor="sec-tasks" title="tasks">
   
 <t>
 Tasks 
@@ -668,9 +764,6 @@ streams.
 
     
    <references title="Informative References">
- 
-   
-
       <reference anchor="webrtc-api">
         <front>
           <title>WebRTC 1.0: Real-time Communication Between Browsers</title>
@@ -721,6 +814,131 @@ streams.
         <format target="http://www.ietf.org/internet-drafts/draft-ietf-rtcweb-use-cases-and-requirements-06.txt"
                 type="TXT" />
       </reference>
+     <reference anchor='RFC3550'>     
+       <front>
+         <title>RTP: A Transport Protocol for Real-Time Applications</title>
+         <author initials='H.' surname='Schulzrinne' fullname='H. Schulzrinne'>
+           <organization /></author>
+         <author initials='S.' surname='Casner' fullname='S. Casner'>
+           <organization /></author>
+         <author initials='R.' surname='Frederick' fullname='R. Frederick'>
+           <organization /></author>
+         <author initials='V.' surname='Jacobson' fullname='V. Jacobson'>
+           <organization /></author>
+         <date year='2003' month='July' />
+       </front>
+       <seriesInfo name='STD' value='64' />
+       <seriesInfo name='RFC' value='3550' />
+       <format type='TXT' octets='259985' target='http://www.rfc-editor.org/rfc/rfc3550.txt' />
+       <format type='PS' octets='630740' target='http://www.rfc-editor.org/rfc/rfc3550.ps' />
+       <format type='PDF' octets='504117' target='http://www.rfc-editor.org/rfc/rfc3550.pdf' />
+     </reference>
+     <reference anchor='RFC3261'>
+       
+       <front>
+         <title>SIP: Session Initiation Protocol</title>
+         <author initials='J.' surname='Rosenberg' fullname='J. Rosenberg'>
+           <organization /></author>
+         <author initials='H.' surname='Schulzrinne' fullname='H. Schulzrinne'>
+           <organization /></author>
+         <author initials='G.' surname='Camarillo' fullname='G. Camarillo'>
+           <organization /></author>
+         <author initials='A.' surname='Johnston' fullname='A. Johnston'>
+           <organization /></author>
+         <author initials='J.' surname='Peterson' fullname='J. Peterson'>
+           <organization /></author>
+         <author initials='R.' surname='Sparks' fullname='R. Sparks'>
+           <organization /></author>
+         <author initials='M.' surname='Handley' fullname='M. Handley'>
+           <organization /></author>
+         <author initials='E.' surname='Schooler' fullname='E. Schooler'>
+           <organization /></author>
+         <date year='2002' month='June' />
+         <abstract>
+           <t>This document describes Session Initiation Protocol (SIP), an application-layer control (signaling) protocol for creating, modifying, and terminating sessions with one or more participants.  These sessions include Internet telephone calls, multimedia distribution, and multimedia conferences. [STANDARDS-TRACK]</t></abstract></front>
+       
+       <seriesInfo name='RFC' value='3261' />
+       <format type='TXT' octets='647976' target='http://www.rfc-editor.org/rfc/rfc3261.txt' />
+     </reference>
+     <reference anchor='RFC5245'>
+       
+       <front>
+         <title>Interactive Connectivity Establishment (ICE): A Protocol for Network Address Translator (NAT) Traversal for Offer/Answer Protocols</title>
+         <author initials='J.' surname='Rosenberg' fullname='J. Rosenberg'>
+           <organization /></author>
+         <date year='2010' month='April' />
+         <abstract>
+           <t>This document describes a protocol for Network Address Translator (NAT) traversal for UDP-based multimedia sessions established with the offer/answer model.  This protocol is called Interactive Connectivity Establishment (ICE).  ICE makes use of the Session Traversal Utilities for NAT (STUN) protocol and its extension, Traversal Using Relay NAT (TURN).  ICE can be used by any protocol utilizing the offer/answer model, such as the Session Initiation Protocol (SIP). [STANDARDS-TRACK]</t></abstract></front>
+       
+       <seriesInfo name='RFC' value='5245' />
+       <format type='TXT' octets='285120' target='http://www.rfc-editor.org/rfc/rfc5245.txt' />
+     </reference>
+     <reference anchor='RFC4588'>
+       
+       <front>
+         <title>RTP Retransmission Payload Format</title>
+         <author initials='J.' surname='Rey' fullname='J. Rey'>
+           <organization /></author>
+         <author initials='D.' surname='Leon' fullname='D. Leon'>
+           <organization /></author>
+         <author initials='A.' surname='Miyazaki' fullname='A. Miyazaki'>
+           <organization /></author>
+         <author initials='V.' surname='Varsa' fullname='V. Varsa'>
+           <organization /></author>
+         <author initials='R.' surname='Hakenberg' fullname='R. Hakenberg'>
+           <organization /></author>
+         <date year='2006' month='July' />
+         <abstract>
+           <t>RTP retransmission is an effective packet loss recovery technique for real-time applications with relaxed delay bounds.  This document describes an RTP payload format for performing retransmissions.  Retransmitted RTP packets are sent in a separate stream from the original RTP stream.  It is assumed that feedback from receivers to senders is available.  In particular, it is assumed that Real-time Transport Control Protocol (RTCP) feedback as defined in the extended RTP profile for RTCP-based feedback (denoted RTP/AVPF) is available in this memo. [STANDARDS-TRACK]</t></abstract></front>
+       
+       <seriesInfo name='RFC' value='4588' />
+       <format type='TXT' octets='76630' target='http://www.rfc-editor.org/rfc/rfc4588.txt' />
+     </reference>
+     <reference anchor='RFC5888'>
+       
+       <front>
+         <title>The Session Description Protocol (SDP) Grouping Framework</title>
+         <author initials='G.' surname='Camarillo' fullname='G. Camarillo'>
+           <organization /></author>
+         <author initials='H.' surname='Schulzrinne' fullname='H. Schulzrinne'>
+           <organization /></author>
+         <date year='2010' month='June' />
+         <abstract>
+           <t>In this specification, we define a framework to group "m" lines in the Session Description Protocol (SDP) for different purposes.  This framework uses the "group" and "mid" SDP attributes, both of which are defined in this specification.  Additionally, we specify how to use the framework for two different purposes: for lip synchronization and for receiving a media flow consisting of several media streams on different transport addresses.  This document obsoletes RFC 3388. [STANDARDS-TRACK]</t></abstract></front>
+       
+       <seriesInfo name='RFC' value='5888' />
+       <format type='TXT' octets='43924' target='http://www.rfc-editor.org/rfc/rfc5888.txt' />
+     </reference>
+     <reference anchor='RFC5583'>
+       
+       <front>
+         <title>Signaling Media Decoding Dependency in the Session Description Protocol (SDP)</title>
+         <author initials='T.' surname='Schierl' fullname='T. Schierl'>
+           <organization /></author>
+         <author initials='S.' surname='Wenger' fullname='S. Wenger'>
+           <organization /></author>
+         <date year='2009' month='July' />
+         <abstract>
+           <t>This memo defines semantics that allow for signaling the decoding dependency of different media descriptions with the same media type in the Session Description Protocol (SDP). This is required, for example, if media data is separated and transported in different network streams as a result of the use of a layered or multiple descriptive media coding process.&lt;/t>&lt;t> A new grouping type "DDP" -- decoding dependency -- is defined, to be used in conjunction with RFC 3388 entitled "Grouping of Media Lines in the Session Description Protocol". In addition, an attribute is specified describing the relationship of the media streams in a "DDP" group indicated by media identification attribute(s) and media format description(s). [STANDARDS-TRACK]</t></abstract></front>
+       
+       <seriesInfo name='RFC' value='5583' />
+       <format type='TXT' octets='40214' target='http://www.rfc-editor.org/rfc/rfc5583.txt' />
+     </reference>
+     <reference anchor='RFC4796'>
+       
+       <front>
+         <title>The Session Description Protocol (SDP) Content Attribute</title>
+         <author initials='J.' surname='Hautakorpi' fullname='J. Hautakorpi'>
+           <organization /></author>
+         <author initials='G.' surname='Camarillo' fullname='G. Camarillo'>
+           <organization /></author>
+         <date year='2007' month='February' />
+         <abstract>
+           <t>This document defines a new Session Description Protocol (SDP) media- level attribute, 'content'.  The 'content' attribute defines the content of the media stream to a more detailed level than the media description line.  The sender of an SDP session description can attach the 'content' attribute to one or more media streams.  The receiving application can then treat each media stream differently (e.g., show it on a big or small screen) based on its content. [STANDARDS-TRACK]</t></abstract></front>
+       
+       <seriesInfo name='RFC' value='4796' />
+       <format type='TXT' octets='22886' target='http://www.rfc-editor.org/rfc/rfc4796.txt' />
+     </reference>
     </references>
   </back>
 </rfc>
