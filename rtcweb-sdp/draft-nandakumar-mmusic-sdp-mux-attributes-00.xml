@@ -208,14 +208,6 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         <c>NORMAL&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         
-        <c>bwtype:CT&nbsp;</c><c>Aggregate bandwidth for the
-        conference&nbsp;</c><c>S&nbsp;</c><c>NORMAL</c>
-        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
-        <c>bwtype:AS&nbsp;</c><c>Aggregate total for all the RTP
-        sessions&nbsp;</c><c>B&nbsp;</c><c>BAD&nbsp;</c>
-        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
         <c>cat&nbsp;</c><c>Not impacted&nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
@@ -853,29 +845,28 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>file-selector&nbsp;</c><c>Not recommended for multiplexing due to
-            differences in the protocol and media types&nbsp;</c>
-          <c>M</c><c>BAD&nbsp;</c>
+          <c>file-selector&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>file-transfer-id&nbsp;</c><c>Not recommended for multiplexing due to
-            differences in the protocol and media types&nbsp;</c>
-          <c>M</c><c>BAD&nbsp;</c>
+          <c>file-transfer-id&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c> file-disposition&nbsp;</c><c>Not recommended for multiplexing due to
-            differences in the protocol and media types&nbsp;</c>
-          <c>M</c><c>BAD&nbsp;</c>
+          <c> file-disposition&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c> file-date,file-iconfile-range&nbsp;</c><c>Not recommended for multiplexing
-            due to differences in the protocol and media types&nbsp;</c>
-          <c>M</c><c>BAD&nbsp;</c>
+          <c> file-date,file-iconfile-range&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>file-iconfile-range,&nbsp;</c><c>Not recommended for multiplexing
-            due to differences in the protocol and media types&nbsp;</c>
-          <c>M</c><c>BAD&nbsp;</c>
+          <c> file-iconfile-range&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>file-iconfile-range&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -896,16 +887,17 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>loopback&nbsp;</c><c>The attribute MUST be repeated across all
+          <c>loopback rtp-pkt-loopback&nbsp;</c><c>The attribute MUST be repeated across all
            m=lines multiplexed &nbsp;</c><c>M</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>loopback-source&nbsp;</c><c>The attribute MUST be reported across all
-            m=lines multiplexed&nbsp;</c><c>M</c><c>IDENTICAL&nbsp;</c>
+          <c>loopback rtp-media-loopback&nbsp;</c><c>Not Impacted &nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>loopback-mirrork&nbsp;</c><c>The attribute MUST be reported across all
-            m=lines multiplexed&nbsp;</c><c>M</c><c>IDENTICAL&nbsp;</c>
+          <c>loopback-source&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>loopback-mirror&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -968,24 +960,24 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>pcfg&nbsp;</c><c>Not recommended due to potential mismatch
-          in the configuration between m=lines of different media types&nbsp;</c>
-          <c>M</c><c>IDENTICAL&nbsp;</c>
+          <c>pcfg&nbsp;</c><c>Depends on capability being negotiated  &nbsp;</c>
+          <c>M</c><c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>acfg&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>IDENTICAL&nbsp;</c>
+          <c>acfg&nbsp;</c><c>Depends on capability being negotiated &nbsp;</c><c>M</c>
+          <c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>csup&nbsp;</c><c>Not recommended due to unbound number of 
-          optional tags&nbsp;</c><c>B</c><c>BAD&nbsp;</c>
+          <c>csup&nbsp;</c><c>Depends on capability being negotiated&nbsp;</c><c>B</c>
+          <c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>creq&nbsp;</c><c>Not recommended due to unbound number of 
-            optional tags&nbsp;</c><c>B</c><c>BAD&nbsp;</c>
+          <c>creq&nbsp;</c><c>Depends on capability being negotiateds&nbsp;</c><c>B</c>
+           <c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>acap&nbsp;</c><c>Not recommended due to potentail mismtach in the
-          attribute capabilities&nbsp;</c><c>B</c><c>BAD&nbsp;</c>
+           <c>acap&nbsp;</c><c>Depends on capability being negotiated&nbsp;</c><c>B</c>
+           <c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>tcap&nbsp;</c><c>Repeat transport capability across all
@@ -1000,11 +992,9 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           Session Description Protocol (SDP) capability negotiation provides a
           general framework for indicating and negotiating capabilities in SDP.
           The base framework defines only capabilities for negotiating
-          transport protocols and attributes.  <xref target="MEDIA_CAP"></xref>
-          , extends the
-          framework by defining media capabilities that can be used to
-          negotiate media types and their associated parameters.
-          
+          transport protocols and attributes. <xref target="MEDIA_CAP"></xref>
+          extends the framework by defining media capabilities that can be used to
+          negotiate media types and their associated parameters.          
         </t>    
         <texttable title="RFC5939 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -1098,7 +1088,8 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>source-filter&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
+          <c>source-filter&nbsp;</c><c>he attribute MUST be repeated across all
+            m=lines multiplexed&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1144,8 +1135,8 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>zrtp-hash&nbsp;</c><c>The hash should be identical across all
-          the m=lines&nbsp;</c><c>M</c><c>IDENTICAL&nbsp;</c>
+          <c>zrtp-hash&nbsp;</c><c>Complicates if all the m=lines are not
+          authenticated&nbsp;</c><c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
@@ -1234,7 +1225,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           across all the m=lines&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>ike-esp,ike-esp-udpencap&nbsp;</c><c>Attribute MUST be identical
+          <c>ike-esp&nbsp;</c><c>Attribute MUST be identical
           across all the m=lines&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
@@ -1243,6 +1234,9 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
         </texttable>
+        <t hangText="Note"> In the case of session multiplexed with multiple m=lines,
+        this SHOULD create only one IPSEC association for all the m=lines.
+        </t>
       </section>
       
       <section title="RFC6064">      
@@ -2101,37 +2095,18 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
       </section>
     </section>  
    <section title="IANA Considerations">
-      <t>This document requires no actions from IANA.</t>
+      <t>TBD</t>
+      <t> Future versions of this specification will ask the IANA to expand to attribute tables
+      to include an extra column specfying categories from this draft. </t>
     </section>
     <section title="Security Considerations">
-      <t>TODO </t>
+      <t>All the attributes which involve security key needs a careful review to ensure 
+      two-time pad vulnerability is not created</t>
     </section>
   </middle>
 
   <back>
     <references title="Normative References">
-      <reference anchor="RFC3264">
-        <front>
-          <title>An Offer/Answer Model with Session Description Protocol
-          (SDP)</title>
-
-          <author fullname="J. Rosenberg" initials="J." surname="Rosenberg">
-            <organization></organization>
-          </author>
-
-          <author fullname="H. Schulzrinne" initials="H."
-                  surname="Schulzrinne">
-            <organization></organization>
-          </author>
-
-          <date month="June" year="2002" />
-        </front>
-
-        <seriesInfo name="RFC" value="3264" />
-
-        <format octets="60854"
-                target="http://www.rfc-editor.org/rfc/rfc3264.txt" type="TXT" />
-      </reference>
       <reference anchor="RFC4566">
         <front>
           <title>SDP: Session Description Protocol</title>
@@ -2158,26 +2133,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         <format octets="60854"
           target="http://http://tools.ietf.org/html/rfc4566.txt" type="TXT" />
       </reference>
-      <reference anchor='RFC4585'>
-        
-        <front>
-          <title>Extended RTP Profile for Real-time Transport Control Protocol (RTCP)-Based Feedback (RTP/AVPF)</title>
-          <author initials='J.' surname='Ott' fullname='J. Ott'>
-            <organization /></author>
-          <author initials='S.' surname='Wenger' fullname='S. Wenger'>
-            <organization /></author>
-          <author initials='N.' surname='Sato' fullname='N. Sato'>
-            <organization /></author>
-          <author initials='C.' surname='Burmeister' fullname='C. Burmeister'>
-            <organization /></author>
-          <author initials='J.' surname='Rey' fullname='J. Rey'>
-            <organization /></author>
-          <date year='2006' month='July' />
-          </front>       
-        <seriesInfo name='RFC' value='4585' />
-        <format type='TXT' octets='117762' target='http://www.rfc-editor.org/rfc/rfc4585.txt' />
-      </reference>
-
+      
       <reference anchor="RFC2119">
         <front>
           <title abbrev="RFC Key Words">Key words for use in RFCs to Indicate
@@ -2226,6 +2182,49 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
     </references>
 
     <references  title="Informative References">
+      <reference anchor="RFC3264">
+        <front>
+          <title>An Offer/Answer Model with Session Description Protocol
+            (SDP)</title>
+          
+          <author fullname="J. Rosenberg" initials="J." surname="Rosenberg">
+            <organization></organization>
+          </author>
+          
+          <author fullname="H. Schulzrinne" initials="H."
+            surname="Schulzrinne">
+            <organization></organization>
+          </author>
+          
+          <date month="June" year="2002" />
+        </front>
+        
+        <seriesInfo name="RFC" value="3264" />
+        
+        <format octets="60854"
+          target="http://www.rfc-editor.org/rfc/rfc3264.txt" type="TXT" />
+      </reference>
+      <reference anchor='RFC4585'>
+        
+        <front>
+          <title>Extended RTP Profile for Real-time Transport Control Protocol (RTCP)-Based Feedback (RTP/AVPF)</title>
+          <author initials='J.' surname='Ott' fullname='J. Ott'>
+            <organization /></author>
+          <author initials='S.' surname='Wenger' fullname='S. Wenger'>
+            <organization /></author>
+          <author initials='N.' surname='Sato' fullname='N. Sato'>
+            <organization /></author>
+          <author initials='C.' surname='Burmeister' fullname='C. Burmeister'>
+            <organization /></author>
+          <author initials='J.' surname='Rey' fullname='J. Rey'>
+            <organization /></author>
+          <date year='2006' month='July' />
+        </front>       
+        <seriesInfo name='RFC' value='4585' />
+        <format type='TXT' octets='117762' target='http://www.rfc-editor.org/rfc/rfc4585.txt' />
+      </reference>
+      
+      
       <reference anchor="RFC5245">
         <front>
           <title>Interactive Connectivity Establishment (ICE):
