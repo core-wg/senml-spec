@@ -449,6 +449,7 @@ Offer
   
 <t>
 The bulk of offer / answer based SDP usage is based on the idea is based on the 
+
 Use what we have 
 
 Allow the sender to provide enough information that the receive can do the right
@@ -482,6 +483,85 @@ user22.source6.sync4.encoding0.layer0.other0
   <section anchor="sec-solutions" title="Solutions">
   
 <t>
+If a sysetem wants to offer to send two cameras, it MUST use a seperate m-block
+for each camera.
+
+If a systems wants to receive two streams of video to display in two differnt
+windows or screens, it MUST user seperate m-blocks for each.
+
+Unless explicitly signalling otherwise (see section TODO), if a given m-line
+receives media from multiple SSRC, only media from the most recently received
+SSRC SHOULD be rendered and ohre SSRC SHOULD not and if it is video it SHULD be
+rendered in the same window or screen.
+
+Each PC-Track coresponds to one or more m-blocks. 
+
+If a camera is sending simulcast video and three resoltuions, each resolution
+MUST get it's own m-block and all the three m-blocks will be grouped using TBD.
+
+If a camera is using a layuered codec with three layers, there MUST be an
+m-block for each later and they will be grouped using TBD.
+
+To aid in sycnized playback, there is exactly one, and only one,  LS group for each
+PC-Stream. All the m-blocks for all the PC-Tracks in a given PC-Stream and
+sycnroniced so theyt are all put in one LS group. All the PC-Tracks in a given
+PC-Stream have the same CNAME. If a PC-Track is in more than one PC-Stream, then
+ all the PC-Streams that the same PC-Track occurs in MUST have the same CNAME.
+
+One way media lines MUST use the sendonly or recev only attributes.
+
+Media lines that are not currently in use but may be used later so the resources
+need to be kept allocated SHOULD use the inactive attribute.
+
+If a m-line will note be used, or rejected, it MUST have it's prot sert to zero.
+
+If a video switching MCU produces a virtual "active speaker" media flow, that media flow should
+have it's own SSRC but include the SSRC of the current speakes video in the CSRC
+packets it produces.
+
+For each PC-Track, the W3C API MUST provide a way to set and read the CSRC list,
+content label,
+
+Applicatons MAY singnall all the SSRC they intend to send but receivers need to
+be carefull in their usage of this as they can change when there is a
+collisions.
+
+
+--------
+
+There are cases suchs as displaying thumbnails in a video confernce, or a grid
+of secruity cameras, where a receiver is willing to receive several media flows
+of video and display mutliple of this. The proposal here is to create a new
+media level attribute called muliple-render that includes an integer that
+indicates how many streams can be rendered at the same time.
+
+As an example, a system that could display 16 thumbnails at the same time, and
+was willing to receive H261 or H264 might offer
+
+Offer
+       m=video 52886 RTP/AVP 98 99
+       a=muliple-render:16
+       a=rtpmap:98 H261/90000
+       a=rtpmap:99 H264/90000
+       a=fmtp:99 profile-level-id=4de00a; packetization-mode=0;
+                  mst-mode=NI-T; sprop-parameter-sets={sps0},{pps0};
+
+When combinging this with multiplexing, the answer will often not have all the
+SSRC that will send to this so it is best to use payload type (PT) numbers that
+are unque for the SDP as the demultiplexing may have to only use the PT if the
+SSRC are unknonw.
+
+The receiver displays, in differnt windows, the video from the most recent 16
+SSRC to send video to m-block.
+
+This allows a switchin MCU to know how many thumbnail type streams would be
+apropariate to send to this endpoint.
+
+ ---------
+
+How to know what to sync when getting active siwtchin etc ...
+
+
 If you have one m-line offering to receive audio, and you start receiving audio
 from multiple SSRC at the same time, what do you do. For video what do you
 do. If there is RFC 5576 a=ssrc signalling does that change anything.
@@ -504,7 +584,6 @@ The SAVP vs AVP disaster
 The fingerprint vs crypto disaster 
 
 
----- Examples 
 </t>
 
     </section>
