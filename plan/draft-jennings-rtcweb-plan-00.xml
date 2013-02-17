@@ -629,10 +629,19 @@ MORE
 
   <section anchor="sec-examples" title="Examples">
   
-<t>
+<t> (TODO for each of these do the offer and answer) </t>
 
---------------
-</t>
+<t> Example of a video cleint joing a video confenrce. The client can produce and
+receive two steams of video, one from the slides and the other of the
+person. The videi of the person is syncronized with the the audio. In adtion,
+the client can display up to 10 thumbnails of video. The main vide is smulcast
+at HD size and a thmbnail size.  </t>
+
+<t> Example of a three screen video endpoint connecting to a two screen system
+which ends up selecting the left and middle screens.  </t>
+
+<t> Example of an audio client that support SRTP-DTLS and SDES connecting to a
+client that support SRTP-DTLS. </t>
 
     </section>
 
@@ -640,7 +649,7 @@ MORE
   <section anchor="sec-tasks" title="tasks">
   
 <t>
-Tasks 
+Tasks
 
 Content : left , right and way to set in w3c 
 
