@@ -214,8 +214,7 @@
           two different windows or screens, it MUST user separate m-blocks for
           each.</t>
 
-          <t>Unless explicitly signalled otherwise (see section TODO ref multi
-          render), if a given m-line receives media from multiple SSRCs, only
+          <t>Unless explicitly signalled otherwise (see <xref target="sec-multi-render"/>), if a given m-line receives media from multiple SSRCs, only
           media from the most recently received SSRC SHOULD be rendered and
           other SSRC SHOULD not and if it is video it SHOULD be rendered in the
           same window or screen.</t>
@@ -260,14 +259,14 @@
           new PC-Track will be created.</t>
 
           <t>Applications MAY signal all the SSRC they intend to send using the
-          TODO, but receivers need to be careful in their usage of the SSRC in signaling, as the SSRC
+          RFC 5576, but receivers need to be careful in their usage of the SSRC in signaling, as the SSRC
           can change when there is a collision and it takes time before that will be updated in signaling. </t>
 
           <t>Applications can get out of band "roster information" that maps the
           names of various speakers or other information to the MSID and/or SSRCs
           that a user is using</t>
 
-          <t>Applications SHOULD use the TODO ref content labels to indicate the
+          <t>Applications SHOULD use the RFC 4574 content labels to indicate the
           purpose of the video. The additional content types, main-left and
           main-right, need to be added to support two- and three-screen systems.</t>
 
@@ -436,7 +435,6 @@ SDP Offer
     </section>
 
     <section anchor="sec-examples" title="Examples">
-      <t>(TODO for each of these do the offer and answer)</t>
 
       <t>Example of a video client joining a video conference. The client can
       produce and receive two streams of video, one from the slides and the other
