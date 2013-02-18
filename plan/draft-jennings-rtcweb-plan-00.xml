@@ -86,7 +86,7 @@
       <t>Transport-Flow: 5 Tuple representing a RTP association.</t>
 
       <t>5-tuple: A collection of the following values: source IP address,
-      source trasport port, destination IP address, destination transport port
+      source transport port, destination IP address, destination transport port
       and transport protocol.</t>
 
       <t>PC-Track: A source of media (audio and/or video) that is contained in a
@@ -162,12 +162,12 @@
           with a high quality wideband codec and a low bandwidth codec. If
           packets are lost from the high bandwidth steam, the low bandwidth
           stream can be used to fill in the missing gaps of audio. This is
-          very simular to simulcast.</t>
+          very similar to simulcast.</t>
 
           <t>Forward Error Correction - Support for various RTP FEC
           schemes.</t>
 
-          <t>RSVP QoS - Ability to signal varions QoS mechanism such SRF
+          <t>RSVP QoS - Ability to signal various QoS mechanism such SRF
           group</t>
 
           <t>Desegregated Media (FID group) - There is a growing desire to
@@ -214,7 +214,7 @@
           each unless explicitly signaled to otherwise (see <xref
           target="sec-multi-render"/>). </t>
 
-          <t>Unless explicitly signalled otherwise (see <xref
+          <t>Unless explicitly signaled otherwise (see <xref
           target="sec-multi-render"/>), if a given m-line receives media from
           multiple SSRCs, only media from the most recently received SSRC SHOULD
           be rendered and other SSRC SHOULD NOT and if it is video it SHOULD be
@@ -285,7 +285,7 @@
           <t> The port number that RTP is received on provides the primary
           mechanism for correlating it to the correct m-line. However, when the port does not uniquely male the RTP packet to the correct m-block (such as in multiplexing and other cases), the next thing that can be looked at is the PT
           number. Finally there are cases where SSRC can be used if that was
-          signalled. </t>
+          signaled. </t>
 
           <t> There are some complications when using SSRC for correlation with
           signaling. First, the offerer may end up receiving RTP packets before
@@ -295,9 +295,9 @@
           in the SSRC should be set. Numerous attempts to
           provide a way to do this have been made, but they have all been rejected for various
           reasons, so this situation is unlikely to change. The second issue is that the
-          signalled SSRC can change, particularly in collision cases, and there
+          signaled SSRC can change, particularly in collision cases, and there
           is no good way to know when SSRC are changing, such that the currently
-          signalled SSRC usage maps to the actual RTP SSRC usage. Finally SSRC
+          signaled SSRC usage maps to the actual RTP SSRC usage. Finally SSRC
           does not always provide correlation information between media flows - take for
           example trying to look at SSRC to tell that an audio media flow and
           video media flow came from the same camera. The nice thing about SSRC
@@ -482,7 +482,7 @@ SDP Offer
     
       <t>
         SDP Answer from the server indicating two video stream with the speaker and the 
-        slides. Also signalled is the lip-sync for speakers audio and video streams.
+        slides. Also signaled is the lip-sync for speakers audio and video streams.
       </t>
       
       <figure>
@@ -563,7 +563,7 @@ SDP Answer
         <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
 
-SDP Offer - with support for SRTP-DTLS and SDES signalled
+SDP Offer - with support for SRTP-DTLS and SDES signaled
 
 [TODO - populate proper fmtp values for thumbnail size] 
      v=0
@@ -787,7 +787,7 @@ SDP Offer
       <section anchor="sec-diffcodecdiffresolutions"
                title="Different Video Codecs With Different Resolutions Formats">
         <t>The SDP below shows various ways to specify resolutions for video
-        codecs signalled.</t>
+        codecs signaled.</t>
 
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
