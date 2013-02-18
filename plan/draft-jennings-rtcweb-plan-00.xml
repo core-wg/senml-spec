@@ -674,7 +674,7 @@ user22.source6.sync4.encoding0.layer0.other0
 
       <section anchor="sec-multi-render" title="Multiple Render">
         <t>There are cases such as displaying thumbnails in a video confernce,
-        or a grid of secruity cameras, where a receiver is willing to receive
+        or a grid of security cameras, where a receiver is willing to receive
         several media flows of video and display mutliple of this.  The proposal
         here is to create a new media level attribute called muliple-render that
         includes an integer that indicates how many streams can be rendered at
@@ -740,7 +740,7 @@ SDP Offer
 
         <t>Clue 3d coordiantes of source and view information</t>
 
-        <t>What do do with unrecornized media that is received at PC level</t>
+        <t>What do do with unrecognized media that is received at PC level</t>
 
         <t>How does this relate to "a=lable" in RFC 4574</t>
 
@@ -759,15 +759,70 @@ SDP Offer
     <section anchor="sec-examples" title="Examples">
       <t>(TODO for each of these do the offer and answer)</t>
 
-      <t>Example of a video client joing a video conference. The client can
+      <t>Example of a video client joining a video conference. The client can
       produce and receive two streams of video, one from the slides and the other
       of the person. The video of the person is synchronized with the
       audio. In addition, the client can display up to 10 thumbnails of video.
-      The main video is smulcast at HD size and a thmbnail size.</t>
+      The main video is smulcast at HD size and a thumbnail size.</t>
 
+      <figure>
+        <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+
+SDP Offer - Client send simulcast video with 2 resolutions in 2 m-blocks indicated by a=group:simulcast 
+and indicating lip-sync for the audio and video m-blocks. Also indicating it can accept 10 streams for rendering
+with a=multi-render
+
+[TODO - populate proper fmtp values for thumbmail size] or [indicate the resolutions via imageattr ??? ask CJ]
+
+     v=0
+     o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
+     s=
+     c=IN IP4 host.atlanta.example.com
+     t=0 0
+     a=group:LS 1,2,3
+     a=group:simulcast 2,3
+     m=audio 49170 RTP/AVP 99
+     a=mid:1
+     a=rtpmap:99 iLBC/8000
+     m=video 51372 RTP/AVP 96
+     a=mid:2
+     a=rtpmap:96 H264/90000
+     a=fmtp:96 profile-level-id=428014; max-fs=3600; max-mbps=108000; max-br=14000
+     m=video 51372 RTP/AVP 97
+     a=mid:3
+     a=multi-render:10
+     a=rtpmap:97 H264/90000
+     a=fmtp:97 profile-level-id=428014; max-fs=3600l max-mbps=108000; max-br=14000
+
+    
+SDP Answer from the server indicating video stream contents as speaker and slides.
+Also signalled is the lip-sync for speakers audio and video streams.
+
+     v=0
+     o=bob 2808844564 2808844565 IN IP4 host.biloxi.example.com
+     s=
+     c=IN IP4 host.biloxi.example.com
+     t=0 0
+     a=group:LS a,b
+     m=audio 49172 RTP/AVP 99
+     a=mid:a
+     a=rtpmap:99 iLBC/8000
+     m=video 51374 RTP/AVP 96
+     a=mid:b
+     a=content:speaker
+     a=rtpmap:96 H265/90000
+     m=video 51376 RTP/AVP 97
+     a=mid:c
+     a=content:slides
+     a=rtpmap:97 H264/90000
+
+]]></artwork>
+      </figure>
+      
       <t>Example of a three screen video endpoint connecting to a two screen
       system which ends up selecting the left and middle screens.</t>
-
+     
       <t>Example of an audio client that support SRTP-DTLS and SDES connecting
       to a client that support SRTP-DTLS.</t>
     </section>
