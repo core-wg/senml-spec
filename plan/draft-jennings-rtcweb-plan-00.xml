@@ -773,7 +773,8 @@ SDP Offer - Client send simulcast video with 2 resolutions in 2 m-blocks indicat
 and indicating lip-sync for the audio and video m-blocks. Also indicating it can accept 10 streams for rendering
 with a=multi-render
 
-[TODO - populate proper fmtp values for thumbmail size] or [indicate the resolutions via imageattr ??? ask CJ]
+[TODO - populate proper fmtp values for thumbmail size] or 
+     [Indicate the resolutions via imageattr ??? ask CJ]
 
      v=0
      o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
@@ -811,7 +812,7 @@ Also signalled is the lip-sync for speakers audio and video streams.
      m=video 51374 RTP/AVP 96
      a=mid:b
      a=content:speaker
-     a=rtpmap:96 H265/90000
+     a=rtpmap:96 H264/90000
      m=video 51376 RTP/AVP 97
      a=mid:c
      a=content:slides
@@ -825,6 +826,49 @@ Also signalled is the lip-sync for speakers audio and video streams.
      
       <t>Example of an audio client that support SRTP-DTLS and SDES connecting
       to a client that support SRTP-DTLS.</t>
+      <figure>
+        <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+
+SDP Offer - with support for SRTP-DTLS and SDES signalled
+
+[TODO - populate proper fmtp values for thumbmail size] or [indicate the resolutions via imageattr ??? ask CJ]
+
+     v=0
+     o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
+     s=
+     c=IN IP4 host.atlanta.example.com
+     t=0 0
+     m=audio 49170 RTP/AVP 99
+     a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7:70:9d:1f:66:79:a8:07
+     a=crypto:1 AES_CM_128_HMAC_SHA1_80
+       inline:d0RmdmcmVCspeEc3QGZiNWpVLFJhQX1cfHAwJSoj|2^20|1:32
+     a=rtpmap:99 iLBC/8000
+     m=video 51372 RTP/AVP 31
+     a=fingerprint:sha-1 92:81:49:83:4a:23:0a:0f:1f:9d:f7:c0:c7:70:9d:1f:66:79:a8:07
+     a=crypto:1 AES_CM_128_HMAC_SHA1_32
+       inline:NzB4d1BINUAvLEw6UzF3WSJ+PSdFcGdUJShpX1Zj|2^20|1:32
+     a=rtpmap:96 H261/90000
+     
+    
+SDP Answer signaling only SDES 
+
+     v=0
+     o=bob 2808844564 2808844565 IN IP4 host.biloxi.example.com
+     s=
+     c=IN IP4 host.biloxi.example.com
+     t=0 0
+     m=audio 49172 RTP/AVP 99
+     a=crypto:1 AES_CM_128_HMAC_SHA1_80
+       inline:d0RmdmcmVCspeEc3QGZiNWpVLFJhQX1cfHAwJSoj|2^20|1:32
+     a=rtpmap:99 iLBC/8000
+     m=video 51374 RTP/AVP 31
+     a=crypto:1 AES_CM_128_HMAC_SHA1_80
+       inline:d0RmdmcmVCspeEc3QGZiNWpVLFJhQX1cfHAwJSoj|2^20|1:32
+     a=rtpmap:96 H261/90000
+
+]]></artwork>
+      </figure>
     </section>
 
     <section anchor="sec-tasks" title="tasks">
