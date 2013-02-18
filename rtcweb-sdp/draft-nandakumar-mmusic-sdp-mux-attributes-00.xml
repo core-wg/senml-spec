@@ -2140,7 +2140,7 @@
 ]]></artwork>
      </figure>
    <t>
-    In thsi example, "a=crypto" attribute is defined for both the audio and
+    In this example, "a=crypto" attribute is defined for both the audio and
     the video m=lines.The one that MUST be used for the multiplexed RTP Session is 
     the one that corresponds to m=line with mid "two" even though the audio m=line with 
     mid "one" occurs ahead of it. This is due to BUNDLE grouping semantics 
