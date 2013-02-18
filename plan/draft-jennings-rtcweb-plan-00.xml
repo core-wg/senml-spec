@@ -64,7 +64,7 @@
       but rather re-use the existing methods instead.</t>
 
       <t>This does results in lots of m lines but all the alternatives resulted
-      in an nearly equivalent number of ssrc lines with a possibility of
+      in an nearly equivalent number of SSRC lines with a possibility of
       redefining most of the media level attributes. So it's really hard to see
       the big difference.This assumes that it is perfectly feasible to transport
       SDP that much larger than a single MTU. The SIP <xref
@@ -150,8 +150,7 @@
           <t>Support of Interactive Connectivity Establishment (ICE) <xref
           target="RFC5245"></xref></t>
 
-          <t>Support of Multiplexing such as SSRC Multiplexing, RTP Session
-          Multiplexing</t>
+          <t>Support of Multiplexing.</t>
 
           <t>Synchronization - It needs to be clear how implementations deal
           with synchronization, in particular usages of both CNAME and LS group.
@@ -208,11 +207,12 @@
         <list
           style="numbers">
           <t>If a system wants to offer to send two cameras, it MUST use a
-          separate m-block for each camera.</t>
+          separate m-block for each camera. In cases such as FEC, simulcast, SVC, it will use more than one m-block per camera. </t>
 
           <t>If a systems wants to receive two streams of video to display in
           two different windows or screens, it MUST user separate m-blocks for
-          each.</t>
+          each unless explicitly signaled to otherwise (see <xref
+          target="sec-multi-render"/>). </t>
 
           <t>Unless explicitly signalled otherwise (see <xref
           target="sec-multi-render"/>), if a given m-line receives media from
@@ -224,11 +224,11 @@
 
           <t>If a camera is sending simulcast video and three resolutions, each
           resolution MUST get its own m-block and all the three m-blocks will
-          be grouped using TBD.</t>
+          be grouped. Open Issues: use FID or define a new group? </t>
 
           <t>If a camera is using a layered codec with three layers, there
           MUST be an m-block for each, and they will be grouped using
-          TBD.</t>
+          standard SDP for grouping layers.</t>
 
           <t>To aid in synchronized playback, there is exactly one, and only one, LS
           group for each PC-Stream. All the m-blocks for all the PC-Tracks in a
@@ -271,7 +271,7 @@
           purpose of the video. The additional content types, main-left and
           main-right, need to be added to support two- and three-screen systems.</t>
 
-          <t>The CLUE WG might want to consider adding SDP to signal the 3D
+          <t>The CLUE WG might want to consider SDP to signal the 3D
           location and field of view parameters for captures and
           renderers.</t> 
 
@@ -413,7 +413,7 @@ SDP Offer
         but for all practical purposes the implementation should treat it as the
         secure variant.</t>
 
-        <t>If SDP offer/answers are of type AVP or SAVP, but contain a TBD
+        <t>If SDP offer/answers are of type AVP or SAVP, but contain a rtcp
         attribute, they should be treated as if they were AVPF or SAVPF
         respectively. The SDP Answer should have the same type as the Offer but
         for all practical purposes the implementation should treat it as the
@@ -605,7 +605,7 @@ SDP Answer signaling only SDES
       </figure>
     </section>
 
-    <section anchor="sec-tasks" title="tasks">
+    <section anchor="sec-tasks" title="Tasks">
       
       <t> This section outlines work that needs to be done in various
       specifications to make the proposal here actually happen. </t>
