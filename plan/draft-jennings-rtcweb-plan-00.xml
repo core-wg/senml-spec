@@ -33,6 +33,26 @@
         <email>fluffy@iii.ca</email>
       </address>
     </author>
+    
+    <author fullname="Suhas Nandakumar" initials="S." surname="Nandakumar">
+      <organization>Cisco</organization>
+      
+      <address>
+        <postal>
+          <street>170 West Tasman Drive</street>
+
+          <city>San Jose</city>
+
+          <region>CA</region>
+
+          <code>95134</code>
+
+          <country>USA</country>
+        </postal>
+
+        <email>snandaku@cisco.com</email>
+      </address>
+    </author>
 
     <date day="17" month="February" year="2013" />
 
@@ -150,10 +170,10 @@
           <t>Support of Multiplexing such as SSRC Mutiplexing, RTP Session
           Multiplexing</t>
 
-          <t>Synchronization - It needs to be clear how implemnations deal
-          with synconizaion. In particular both CNAME and LS group. The sender
-          needs be able to indiecate which Media Flows are intended to be
-          syncronized and which are not.</t>
+          <t>Synchronization - It needs to be clear how implementations deal
+          with synchronization, in particular usages of both CNAME and LS group.
+          The sender needs be able to indiecate which Media Flows are intended 
+          to be syncronized and which are not.</t>
 
           <t>Redudant codings - The ability to send some media, such as the
           audio from a microphone, multiple times. For example it may be sent
@@ -577,50 +597,50 @@ user22.source6.sync4.encoding0.layer0.other0
 -->
 
     <section anchor="sec-solutions" title="Solutions">
-      <t>This section outlines a set of rules for the usage SDP and RTP that
-      seem to deal with the variso problems and issues that have been
-      proposed. Most of these are not new and are pretty much how many systems
-      do it today. Some of them are new but all the itmers requireing new
+      <t>This section outlines a set of rules for the usage of SDP and RTP that
+      seems to deal with the various problems and issues that have been
+      discussed. Most of these are not new and are pretty much how many systems
+      do it today. Some of them are new but all the items requiring new
       standardization work are called out in the TODO Section-tasks: <list
           style="numbers">
-          <t>If a sysetem wants to offer to send two cameras, it MUST use a
+          <t>If a system wants to offer to send two cameras, it MUST use a
           seperate m-block for each camera.</t>
 
           <t>If a systems wants to receive two streams of video to display in
           two differnt windows or screens, it MUST user seperate m-blocks for
           each.</t>
 
-          <t>Unless explicitly signalling otherwise (see section TODO ref multi
-          render), if a given m-line receives media from multiple SSRC, only
+          <t>Unless explicitly signalled otherwise (see section TODO ref multi
+          render), if a given m-line receives media from multiple SSRCs, only
           media from the most recently received SSRC SHOULD be rendered and
-          other SSRC SHOULD not and if it is video it SHULD be rendered in the
+          other SSRC SHOULD not and if it is video it SHOULD be rendered in the
           same window or screen.</t>
 
-          <t>Each PC-Track coresponds to one or more m-blocks.</t>
+          <t>Each PC-Track corresponds to one or more m-blocks.</t>
 
           <t>If a camera is sending simulcast video and three resoltuions, each
           resolution MUST get it's own m-block and all the three m-blocks will
           be grouped using TBD.</t>
 
-          <t>If a camera is using a layuered codec with three layers, there
-          MUST be an m-block for each later and they will be grouped using
+          <t>If a camera is using a layered codec with three layers, there
+          MUST be an m-block for each and they will be grouped using
           TBD.</t>
 
-          <t>To aid in sycnized playback, there is exactly one, and only one, LS
+          <t>To aid in synchronized playback, there is exactly one, and only one, LS
           group for each PC-Stream. All the m-blocks for all the PC-Tracks in a
-          given PC-Stream and sycnroniced so theyt are all put in one LS
+          given PC-Stream are synchronized so they are all put in one LS
           group. All the PC-Tracks in a given PC-Stream have the same CNAME.  If
-          a PC-Track is in more than one PC-Stream, then all the PC-Streams that
-          the same PC-Track occurs in MUST have the same CNAME.</t>
+          a PC-Track appears in more than one PC-Stream, then all the PC-Streams 
+          with that PC-Track MUST have the same CNAME. </t>
 
-          <t>One way media MUST use the sendonly or recev only attributes.</t>
+          <t>One way media MUST use the sendonly or recevonly attributes.</t>
 
           <t>Media lines that are not currently in use but may be used later so
           the resources need to be kept allocated SHOULD use the inactive
           attribute.</t>
 
           <t>If a m-line will note be used, or rejected, it MUST have it's
-          prot sert to zero.</t>
+          port set to zero.</t>
 
           <t>If a video switching MCU produces a virtual "active speaker" media
           flow, that media flow should have it's own SSRC but include the SSRC
@@ -635,25 +655,25 @@ user22.source6.sync4.encoding0.layer0.other0
           can accept. Each time a new steam is received up to the maximuim, a
           new PC-Track will be created.</t>
 
-          <t>Applicatons MAY signall all the SSRC they intend to send using the
+          <t>Applications MAY signal all the SSRC they intend to send using the
           TODO but receivers need to be carefull in their usage of this as they
           can change when there is a collisions.</t>
 
           <t>Applications can get out of band "roster information" that maps the
-          names of variso speakers or toher information to the MSID and/or SSRCs
+          names of various speakers or toher information to the MSID and/or SSRCs
           that users is using</t>
 
-          <t>Applications SHOUDL use the TODO ref content labels to indicate the
-          purpose of the video. Thw aditona content types, main-left, and
+          <t>Applications SHOULD use the TODO ref content labels to indicate the
+          purpose of the video. Thw additonal content types, main-left, and
           main-right need to be added to support 2 and three screen systems.</t>
 
           <t>The CLUE WG might want to consider adding SDP to singal the 3D
-          location of and field of view paraters for captures and
-          renderes.</t>
+          location of and field of view parameters for captures and
+          renderers.</t>
         </list></t>
 
       <section anchor="sec-multi-render" title="Multiple Render">
-        <t>There are cases suchs as displaying thumbnails in a video confernce,
+        <t>There are cases such as displaying thumbnails in a video confernce,
         or a grid of secruity cameras, where a receiver is willing to receive
         several media flows of video and display mutliple of this.  The proposal
         here is to create a new media level attribute called muliple-render that
@@ -662,15 +682,24 @@ user22.source6.sync4.encoding0.layer0.other0
 
         <t>As an example, a system that could display 16 thumbnails at the same
         time, and was willing to receive H261 or H264 might offer</t>
+        <figure>
+          <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
 
-        <t>Offer m=video 52886 RTP/AVP 98 99 a=muliple-render:16 a=rtpmap:98
-        H261/90000 a=rtpmap:99 H264/90000 a=fmtp:99 profile-level-id=4de00a;
+SDP Offer 
+ m=video 52886 RTP/AVP 98 99 
+ a=muliple-render:16 
+ a=rtpmap:98 H261/90000
+ a=rtpmap:99 H264/90000 
+ a=fmtp:99 profile-level-id=4de00a;
         packetization-mode=0; mst-mode=NI-T;
-        sprop-parameter-sets={sps0},{pps0};</t>
-
-        <t>When combinging this with multiplexing, the answer will often not
+        sprop-parameter-sets={sps0},{pps0};
+ ]]></artwork>
+        </figure>      
+       
+        <t>When combining this with multiplexing, the answer will often not
         have all the SSRC that will send to this so it is best to use payload
-        type (PT) numbers that are unque for the SDP as the demultiplexing may
+        type (PT) numbers that are unique for the SDP as the demultiplexing may
         have to only use the PT if the SSRC are unknonw.</t>
 
         <t>The receiver displays, in differnt windows, the video from the most
@@ -683,7 +712,7 @@ user22.source6.sync4.encoding0.layer0.other0
       <section anchor="sec-dirt" title="Dirty Little Secrets">
         <t>If SDP offer/asnwers are of type AVP or AVPF, but contains an crypto
         of fingerprint attribute, they should be treated as if they were SAVP or
-        SAVPF respecrtively. The Answer should have the same type as the offer
+        SAVPF respectively. The Answer should have the same type as the offer
         but for all pratical purposes the implementation shoudl treat it as the
         secure variant.</t>
 
@@ -694,8 +723,8 @@ user22.source6.sync4.encoding0.layer0.other0
         feedback variant.</t>
 
         <t>If an SDP Offer has both a fingerprint and crypto atribute, it means
-        the Offerer supports both DTLS-SRTP and SDES and the asnwer should selct
-        one, and return an Anser with only an sttibute for the selected keying
+        the Offerer supports both DTLS-SRTP and SDES and the asnwer should select
+        one, and return an Answer with only an attribute for the selected keying
         mechinism.</t>
       </section>
 
@@ -730,11 +759,11 @@ user22.source6.sync4.encoding0.layer0.other0
     <section anchor="sec-examples" title="Examples">
       <t>(TODO for each of these do the offer and answer)</t>
 
-      <t>Example of a video cleint joing a video confenrce. The client can
-      produce and receive two steams of video, one from the slides and the other
-      of the person. The videi of the person is syncronized with the the
-      audio. In adtion, the client can display up to 10 thumbnails of video.
-      The main vide is smulcast at HD size and a thmbnail size.</t>
+      <t>Example of a video client joing a video conference. The client can
+      produce and receive two streams of video, one from the slides and the other
+      of the person. The video of the person is synchronized with the
+      audio. In addition, the client can display up to 10 thumbnails of video.
+      The main video is smulcast at HD size and a thmbnail size.</t>
 
       <t>Example of a three screen video endpoint connecting to a two screen
       system which ends up selecting the left and middle screens.</t>
