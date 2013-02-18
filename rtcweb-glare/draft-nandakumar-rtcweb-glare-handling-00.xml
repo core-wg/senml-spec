@@ -6,7 +6,7 @@
 <?rfc sortrefs="no" ?>
 <?rfc symrefs="yes" ?> 
 
-<rfc ipr="trust200902" category="info" docName="draft-ietf-rtcweb-glare-handling-00.txt" submissionType="IETF" xml:lang="en">
+<rfc ipr="trust200902" category="info" docName="draft-nandakumar-rtcweb-glare-handling-00.txt" submissionType="IETF" xml:lang="en">
 <front>
     <title abbrev="Glareless Media">
 		Glareless addition of media to existing RTCWeb Sessions
@@ -50,7 +50,7 @@
       </address>
   </author>
   
-  <date day="19" month="February" year="2013" />
+  <date day="18" month="February" year="2013" />
   
   <area>RAI</area>
   
@@ -66,7 +66,7 @@
 		  add new media in a glareless fashion.
 		</t> 
      <t>
-      There are varios ways this problem might be solved - this
+      There are various ways this problem might be solved - this
       draft sketches out one possible solution to the problem. 
      </t>
     </abstract>
@@ -93,9 +93,12 @@
 		   </t>   
     </section>
     <section title="Terminology">
+
       <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT",
       "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
       interpreted as described in <xref target="RFC2119"></xref>.</t>
+
+
       <t>m-line: An <xref target="RFC4566">RFC4566</xref> media description
         identifier that starts with "m=" field and conveys following values:media
         type,transport port,transport protocol and media format descriptions.</t>
@@ -233,7 +236,7 @@
            m-blocks for that User Agent.
          </t>
          <t>
-           Subsequent Offer/Answer exchanges after the initial exchange MAY NOT use complete
+           Subsequent Offer/Answer exchanges after the initial exchange might not use complete
            SDP messages to indicate updates to the session, say  adding a new video stream. 
            One approach proposed in this document involves exchange of "m-blocks" that 
            describe the capabilities of the newly added media.
@@ -406,11 +409,18 @@ end note
      On the other hand, this solution works best in all the cases where the first side can
      easily predict what the far side's answer will be. Given that the Offerer offering
      a capability that is supposed to fail on purpose is a rarity and also given the 
-     higher chances of Offer(s) being accepted in practice, we beleive this solution should
+     higher chances of Offer(s) being accepted in practice, we believe this solution should
      enable successful glareless media addition with high frequency.		
     </t>    
   </section>
 
+   <section anchor="sec-sec" title="Security Considerations">
+      <t>TBD</t>
+    </section>
+
+    <section title="IANA Considerations">
+      <t>This document requires no actions from IANA.</t>
+    </section>
 	
 </middle>
 
