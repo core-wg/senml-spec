@@ -56,7 +56,7 @@
       </address>
     </author>
 
-    <date day="15" month="February" year="2013" />
+    <date day="18" month="February" year="2013" />
 
     <area>RAI</area>
 
@@ -207,7 +207,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
       
       <texttable title="RFC4566 Attribute Analysis">
         <ttcol align='left'>Attr Name</ttcol>
-        <ttcol align='left'>Session Mux</ttcol>
+        <ttcol align='left'>Notes</ttcol>
         <ttcol align='left'>Current</ttcol>
         <ttcol align='left'>Category</ttcol>
 
@@ -293,7 +293,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
       </t>    
       <texttable title="RFC4585 Attribute Analysis">
         <ttcol align='left'>Attr Name</ttcol>
-        <ttcol align='left'>Session Mux</ttcol>
+        <ttcol align='left'>Notes</ttcol>
         <ttcol align='left'>Current</ttcol>
         <ttcol align='left'>Category</ttcol>
 
@@ -317,7 +317,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC5761 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -340,7 +340,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC4574 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -357,7 +357,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC5432 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -381,7 +381,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC4568 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -403,7 +403,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC5762 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -425,7 +425,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC6773 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -445,7 +445,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC5762 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -475,7 +475,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC6787 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -505,7 +505,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC5245 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -553,7 +553,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC5285 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -572,7 +572,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC3605 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -593,7 +593,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           attributes that can be used to describe properties of media sources.</t>    
         <texttable title="RFC5576 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -634,7 +634,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC6236 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -658,7 +658,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC6285 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -681,7 +681,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC6230 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -704,7 +704,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC6364 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -732,7 +732,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC6284 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -750,7 +750,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC3407 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -787,7 +787,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC6284 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -812,7 +812,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC6714 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -833,7 +833,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC4583 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -860,7 +860,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC5547 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -902,7 +902,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="draft-ietf-mmusic-media-loopback Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -933,7 +933,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC5760 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -953,7 +953,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC3611 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -975,7 +975,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC5939 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -1017,7 +1017,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC5939 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -1054,7 +1054,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC4567 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -1079,7 +1079,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC4572 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -1103,7 +1103,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC4570 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -1130,7 +1130,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC6128 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -1150,7 +1150,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC6189 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -1171,7 +1171,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC4145 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -1196,7 +1196,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC5159 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -1232,7 +1232,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC4572 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -1269,7 +1269,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC6064 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -1353,7 +1353,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC4586 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
 
@@ -1455,7 +1455,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="3GPP TS 24.182 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -1473,7 +1473,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="3GPP TS 24.183 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -1491,7 +1491,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="3GPP TS 24.229 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -1541,7 +1541,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="Historic Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -1582,7 +1582,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="Historic Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -1602,7 +1602,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="RFC4975 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -1632,7 +1632,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         </t>    
         <texttable title="Unknowns Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -1671,7 +1671,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
      <section title="RFC4566">         
        <texttable title="RFC4566 bwtype Analysis">
          <ttcol align='left'>Name</ttcol>
-         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Notes</ttcol>
          <ttcol align='left'>Current</ttcol>
          <ttcol align='left'>Category</ttcol>
          
@@ -1694,7 +1694,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
        </t>    
        <texttable title="RFC3556 bwtype Analysis">
          <ttcol align='left'>Name</ttcol>
-         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Notes</ttcol>
          <ttcol align='left'>Current</ttcol>
          <ttcol align='left'>Category</ttcol>
          
@@ -1723,7 +1723,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
        </t>    
        <texttable title="RFC3890 bwtype Analysis">
          <ttcol align='left'>Name</ttcol>
-         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Notes</ttcol>
          <ttcol align='left'>Current</ttcol>
          <ttcol align='left'>Category</ttcol>
          
@@ -1747,7 +1747,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
        </t>    
        <texttable title="RFC4585 Attribute Analysis">
          <ttcol align='left'>Attr Name</ttcol>
-         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Notes</ttcol>
          <ttcol align='left'>Current</ttcol>
          <ttcol align='left'>Category</ttcol>
             
@@ -1776,7 +1776,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
        </t>    
        <texttable title="RFC5104 Attribute Analysis">
          <ttcol align='left'>Attr Name</ttcol>
-         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Notes</ttcol>
          <ttcol align='left'>Current</ttcol>
          <ttcol align='left'>Category</ttcol>
          
@@ -1799,7 +1799,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
        </t>    
        <texttable title="RFC4585 Attribute Analysis">
          <ttcol align='left'>Attr Name</ttcol>
-         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Notes</ttcol>
          <ttcol align='left'>Current</ttcol>
          <ttcol align='left'>Category</ttcol>
          
@@ -1827,7 +1827,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
      <section title="RFC6285">        
        <texttable title="RFC6285 Attribute Analysis">
          <ttcol align='left'>Name</ttcol>
-         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Notes</ttcol>
          <ttcol align='left'>Current</ttcol>
          <ttcol align='left'>Category</ttcol>
          
@@ -1849,7 +1849,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
        </t>    
        <texttable title="RFC6679 Attribute Analysis">
          <ttcol align='left'>Name</ttcol>
-         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Notes</ttcol>
          <ttcol align='left'>Current</ttcol>
          <ttcol align='left'>Category</ttcol>
          
@@ -1876,7 +1876,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
        </t>    
        <texttable title="RFC6642 Attribute Analysis">
          <ttcol align='left'>Name</ttcol>
-         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Notes</ttcol>
          <ttcol align='left'>Current</ttcol>
          <ttcol align='left'>Category</ttcol>
          
@@ -1896,7 +1896,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
      <section title="RFC5104">      
        <texttable title="RFC5104 Attribute Analysis">
          <ttcol align='left'>Attr Name</ttcol>
-         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Notes</ttcol>
          <ttcol align='left'>Current</ttcol>
          <ttcol align='left'>Category</ttcol>
         
@@ -1927,7 +1927,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
        </t>    
        <texttable title="RFC5888 Attribute Analysis">
          <ttcol align='left'>Name</ttcol>
-         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Notes</ttcol>
          <ttcol align='left'>Current</ttcol>
          <ttcol align='left'>Category</ttcol>
          
@@ -1949,7 +1949,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
        </t>    
        <texttable title="RFC3524 Attribute Analysis">
          <ttcol align='left'>Name</ttcol>
-         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Notes</ttcol>
          <ttcol align='left'>Current</ttcol>
          <ttcol align='left'>Category</ttcol>
          
@@ -1969,11 +1969,11 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
        </t>    
        <texttable title="RFC4091 Attribute Analysis">
          <ttcol align='left'>Name</ttcol>
-         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Notes</ttcol>
          <ttcol align='left'>Current</ttcol>
          <ttcol align='left'>Category</ttcol>
          
-         <c>group:ANAT&nbsp;</c><c>Not Impacted &nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
+         <c>group:ANAT&nbsp;</c><c>Not Impacted &nbsp;</c><c>S&nbsp;</c><c>BAD&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
          
        </texttable>
@@ -1994,7 +1994,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
        </t>    
        <texttable title="RFC5956 Attribute Analysis">
          <ttcol align='left'>Name</ttcol>
-         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Notes</ttcol>
          <ttcol align='left'>Current</ttcol>
          <ttcol align='left'>Category</ttcol>
          
@@ -2014,7 +2014,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
        </t>    
        <texttable title="RFC5583 Attribute Analysis">
          <ttcol align='left'>Name</ttcol>
-         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Notes</ttcol>
          <ttcol align='left'>Current</ttcol>
          <ttcol align='left'>Category</ttcol>
          
@@ -2036,7 +2036,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
      <section title="RFC5576">       
        <texttable title="RFC5576 Attribute Analysis">
          <ttcol align='left'>Name</ttcol>
-         <ttcol align='left'>Session Mux</ttcol>
+         <ttcol align='left'>Notes</ttcol>
          <ttcol align='left'>Current</ttcol>
          <ttcol align='left'>Category</ttcol>
          
@@ -2060,7 +2060,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
       <section title="RFC5432">       
         <texttable title="RFC5432 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -2076,7 +2076,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
       <section title="RFC4566">       
         <texttable title="RFC5432 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
@@ -2091,7 +2091,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
       <section title="RFC4796">       
         <texttable title="RFC6284 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Session Mux</ttcol>
+          <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
         
