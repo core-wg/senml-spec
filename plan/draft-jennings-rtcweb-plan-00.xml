@@ -5,7 +5,7 @@
 <?rfc toc="yes" ?>
 <?rfc symrefs="yes" ?>
 <?rfc strict="yes" ?>
-<?rfc compact="yes" ?>
+<?rfc compact="no" ?>
 <?rfc sortrefs="yes" ?>
 <?rfc colonspace="no" ?>
 <?rfc rfcedstyle="no" ?>
@@ -202,7 +202,10 @@
       seems to deal with the various problems and issues that have been
       discussed. Most of these are not new and are pretty much how many systems
       do it today. Some of them are new, but all the items requiring new
-      standardization work are called out in the TODO Section-tasks: <list
+      standardization work are called out in the <xref target="sec-tasks"/>. </t>
+      <t>
+        Approach:
+        <list
           style="numbers">
           <t>If a system wants to offer to send two cameras, it MUST use a
           separate m-block for each camera.</t>
@@ -248,7 +251,7 @@
           of the current speaker's video in the CSRC packets it produces.</t>
 
           <t>For each PC-Track, the W3C API MUST provide a way to set and read
-          the CSRC list, set and read the content label, and read the SSRC of last packet received on
+          the CSRC list, set and read the content RFC 4574 "label", and read the SSRC of last packet received on
           a PC-Track.</t>
 
           <t>The W3C api should have a constraint or API method to allow a
@@ -422,32 +425,14 @@ SDP Offer
         mechanism.</t>
       </section>
 
+<!-- 
       <section anchor="sec-issues" title="Issues">
-        <t>How to know what to sync when getting active switching etc ...</t>
-
-        <t>If you have one m-line offering to receive audio, and you start
-        receiving audio from multiple SSRC at the same time, what do you do?
-        What do you do in the case of video? If there is RFC 5576 a=ssrc signaling does
-        that change anything.</t>
-
-        <t>SSRC, CSRC, assumption of roster information out of band</t>
-
-        <t>Clue 3d coordinates of source and view information</t>
-
+      
         <t>What do do with unrecognized media received at PC level</t>
 
-        <t>How does this relate to "a=label" in RFC 4574</t>
-
-        <t>How this relate to msid</t>
-
-        <t>The AVP vs AFPF disaster</t>
-
-        <t>The SAVP vs AVP disaster</t>
-
-        <t>The fingerprint vs crypto disaster</t>
-
-        <t>MORE</t>
       </section>
+-->
+
     </section>
 
     <section anchor="sec-examples" title="Examples">
@@ -622,34 +607,42 @@ SDP Answer signaling only SDES
 
     <section anchor="sec-tasks" title="tasks">
       
-      <t> 
+      <t> This section outlines work that needs to be done in various
+      specifications to make the proposal here actually happen. </t>
 
-TODO 
-
-This section outlines work that needs to be done in various specifications to make the proposal here actually happen. </t>
       <t>Tasks:
-      <list>
+      <list style="numbers">
         <t>
-          Content: left, right and way to set in w3c 
+          Write a draft to add left, right to the SDP content attribute. Add the
+          stuff to the W3C API to read and write this on a track.
         </t>
+
         <t>
-          CSRC: way to set and get in w3c way to read 
+          Extend the W3C API to be able to set and read the CSRC list for a PC-Track.
         </t>
+
         <t>
-          way to read SSRC of last RTP packed received in a Track in w3c
+           Extend the W3C API to be able to read SSRC of last RTP packed received.
         </t>
+
         <t>
-          New MSID in RTP Header Extension draft
+          Write an RTP Header Extension draft to carey MSID. 
         </t>
+
         <t>
-          Fix up MSID to align with this
+          Fix up MSID draft to align with this proposal. 
         </t>
+
         <t>
-          Add a group for simulcast ?
+          Add a SDP group to signal multiple m-block as are simulcast of same video content. 
         </t>
+
         <t>
-          Complete Bundle Provide guidance for ways to use SDP for reduced glare
-          adding of one way media streams.</t>
+          Complete the bundle draft. </t>
+
+          <t> Provide guidance for ways to use SDP for reduced glare when adding
+          of one way media streams.</t>
+
       </list>
       </t>
       
@@ -664,16 +657,17 @@ This section outlines work that needs to be done in various specifications to ma
     </section>
 
     <section title="Acknowledgments">
-      <t>TODO - suhas , ekr </t>
+      <t> I would like to thank Suhas Nandakumar, Eric Rescorla, and Lyndsay
+      Campbell for help with this draft. </t>
     </section>
 
     <section title="Open Issues">
-      <t> The overall solution is complicated considerably by the fact that WebRTC allows a PC-Track to be used in more than one
-      PC-Stream but requires only one copy of the RTP data for the track to
-      be sent.  I am not aware of any use
-      case for this and think it should be removed. If a PC-Track needs to be
-      synchronized with two different things, they should all go in one PC-Stream
-      instead of two. </t>
+      <t> The overall solution is complicated considerably by the fact that
+      WebRTC allows a PC-Track to be used in more than one PC-Stream but
+      requires only one copy of the RTP data for the track to be sent.  I am not
+      aware of any use case for this and think it should be removed. If a
+      PC-Track needs to be synchronized with two different things, they should
+      all go in one PC-Stream instead of two. </t>
     </section>
 
     <section anchor="sec-existing" title="Existing SDP">
