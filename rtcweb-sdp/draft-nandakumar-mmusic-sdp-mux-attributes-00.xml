@@ -135,7 +135,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
     </t>
     <t>
      <list style="symbols">
-       <t> Attibutes related to media content such as media type,
+       <t> Attributes related to media content such as media type,
        encoding schemes, payload types to name a few.</t>
        <t> Attributes specifying media transport characteristics like RTP/RTCP
        port, network addresses, QOS and so on.</t>
@@ -389,7 +389,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>       
         </texttable>
 
-	<t>[TODO: should this be NORMAL?]</t>
+	<t>Open Isuse: should this be NORMAL</t>
       </section>
       
       <section title="RFC5762">      
@@ -606,7 +606,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           for specific analysis of the grouping semantics&nbsp;</c><c>M</c><c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>cname&nbsp;</c><c>Not Impacted [TODO: what are the rules for CNAME duplication
+          <c>cname&nbsp;</c><c>Not Impacted [Open Issues: what are the rules for CNAME duplication
 	  across sessions?]&nbsp;</c><c>SR</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
@@ -1294,11 +1294,10 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>3gpp-videopostdecbufsize&nbsp;</c><c>Case1:Aggregate total when video m-lines
-          are muxed&nbsp;Case2:Multiplexing with audio m=lines is invalid</c>
+          are muxed. Case2:Multiplexing with audio m=lines is invalid</c>
           <c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-          
-          
+         
           <c>framesize</c><c>Not Impacted</c><c>M</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
@@ -1680,7 +1679,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
          
          <c>bwtype:AS&nbsp;</c><c>Aggregate RTP session bandwidth&nbsp;</c>
-         <c>B</c><c>NORMAL(session-level), IDENTICAL(media-level)&nbsp;</c>
+         <c>B</c><c>NORMAL,SUM&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
        </texttable>
      </section> 
@@ -1698,16 +1697,12 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
          <ttcol align='left'>Current</ttcol>
          <ttcol align='left'>Category</ttcol>
          
-         <c>bwtype:RS&nbsp;</c><c>Case1: Application MUST SUM bandwidth from all m=lines of same type
-            and MUST not use default values.Case2:Muxing m=lines of different types results 
-            in inappropriate bandwith allocation&nbsp;</c><c>B</c>
-         <c>NORMAL(Case1),SPECIAL(Case2)&nbsp;</c>
+         <c>bwtype:RS&nbsp;</c><c>&nbsp;</c><c>B</c>
+         <c>NORMAL,SUM;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
          
-         <c>bwtype:RR&nbsp;</c><c>Case1: Application MUST SUM bandwidth from all m=lines of same type
-           and MUST not use default values.Case2:Muxing m=lines of different types results 
-           in inappropriate bandwith allocation&nbsp;</c><c>B</c>
-         <c>NORMAL(Case1),SPECIAL(Case2)&nbsp;</c>
+         <c>bwtype:RR&nbsp;</c><c>&nbsp;</c><c>B</c>
+         <c>NORMAL,SUM&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
                   
        </texttable>
@@ -1728,7 +1723,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
          <ttcol align='left'>Category</ttcol>
          
          <c>bwtype:TIAS&nbsp;</c><c>Application MUST SUM bandwidth from all m=lines of same type
-           and MUST not use default values&nbsp;</c><c>B</c><c>SUM&nbsp;</c>
+           and MUST NOT use default values&nbsp;</c><c>B</c><c>SUM&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
        </texttable>
      </section>  
@@ -2116,7 +2111,7 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
    <section title="IANA Considerations">
       <t>TBD</t>
       <t> Future versions of this specification will ask the IANA to expand to attribute tables
-      to include an extra column specfying categories from this draft. </t>
+      to include an extra column specifying categories from this draft. </t>
     </section>
     <section title="Security Considerations">
       <t>All the attributes which involve security key needs a careful review to ensure 
