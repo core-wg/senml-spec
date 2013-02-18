@@ -445,7 +445,7 @@
           arise when allowing Real-time Transport Protocol (RTCP) packets to be
           transmitted with reduced size.
         </t>    
-        <texttable title="RFC5762 Attribute Analysis">
+        <texttable title="RFC5506 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
@@ -732,7 +732,7 @@
           receiving application can then treat each media stream differently
           (e.g., show it on a big or small screen) based on its content.
         </t>    
-        <texttable title="RFC6284 Attribute Analysis">
+        <texttable title="RFC4796 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
@@ -1017,7 +1017,7 @@
           extends the framework by defining media capabilities that can be used to
           negotiate media types and their associated parameters.          
         </t>    
-        <texttable title="RFC5939 Attribute Analysis">
+        <texttable title="draft-ietf-mmusic-sdp-media-capabilities Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
@@ -1232,7 +1232,7 @@
           Internet Key Exchange Protocol (IKE) for media sessions in the SDP
           offer/answer model.
         </t>    
-        <texttable title="RFC4572 Attribute Analysis">
+        <texttable title="RFC6193 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
@@ -1352,7 +1352,7 @@
           Protocol (SDP) described for controlling ATM Bearer Connections, and
           any associated ATM Adaptation Layer (AAL)
         </t>    
-        <texttable title="RFC4586 Attribute Analysis">
+        <texttable title="RFC3108 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
@@ -2028,7 +2028,7 @@
    <section title="ssrc-group Attribute Analysis"
      anchor="SecssrcgroupAnalysis">
     <t>
-     This section analyzes &quot;ssrc-group&quot; semantics<xref target="SSRC-GROUP"></xref>. 
+     This section analyzes &quot;ssrc-group&quot; semantics <xref target="SSRC-GROUP"></xref>. 
     </t>
      <section title="RFC5576">       
        <texttable title="RFC5576 Attribute Analysis">
@@ -2071,7 +2071,7 @@
     </section>  
     <section title="k= Attribute Analysis" anchor="Seck=Analysis">    
       <section title="RFC4566">       
-        <texttable title="RFC5432 Attribute Analysis">
+        <texttable title="RFC4566 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
@@ -2086,7 +2086,7 @@
     </section>  
     <section title="content Atribute Analysis" anchor="SeccontentAnalysis">  
       <section title="RFC4796">       
-        <texttable title="RFC6284 Attribute Analysis">
+        <texttable title="RFC4796 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
