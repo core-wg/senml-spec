@@ -727,10 +727,18 @@ user22.source6.sync4.encoding0.layer0.other0
             An example MSID for a device identifer of 12345123451234512345,
             syncronization group of 1, and a media flow id of 3 would be:
             <list> 
-              <t> a=msid:12345123451234512345 a:1 t:3 </t>
+              <t> a=msid:12345123451234512345 s:1 f:3 </t>
             </list>
           </t>
-          <t> Note: The 64 bit size for the device identifeir was chosen as it
+          <t> When the MSID is used in an answer, the MSID also has the remote
+          device identifier included. In the case where the device ID of
+          thedevice sending the answer was 22222333334444455555, the MSID woudld
+          looke like:  <list> 
+              <t> a=msid:12345123451234512345 s:1 f:3 r:22222333334444455555</t>
+            </list>
+          </t>
+
+          <t> Note: The 64 bit size for the device identifier was chosen as it
           allows less than one in a million chance of collison with greater than
           10,000 flows (actually it allows this with more like 6 million
           flows). Much smaller numbers could be used but 32 bits is probably too
@@ -749,6 +757,10 @@ user22.source6.sync4.encoding0.layer0.other0
           remote PC-Tracks in a single PC-Stream. If there is LS group
           information but no MSID, a PC-Stream for each LS group MUST be created
           and the PC-Tracks put in the aproperate PC-Stream.  </t>
+
+          <t> The W3C specs should be udpate to have the ID attribute of the
+          MS-Stream be the MSID with no flow identifer, and the the ID attribute
+          of the MS-Track be the MSID. </t>
 
         </section>
 
