@@ -823,8 +823,50 @@ Also signalled is the lip-sync for speakers audio and video streams.
       
       <t>Example of a three screen video endpoint connecting to a two screen
       system which ends up selecting the left and middle screens.</t>
-     
-      <t>Example of an audio client that support SRTP-DTLS and SDES connecting
+  
+      <figure>
+        <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+
+SDP Offer
+
+     v=0
+     o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
+     s=
+     c=IN IP4 host.atlanta.example.com
+     t=0 0
+     a=rtcp-fb
+     m=audio 49170 RTP/SAVPF 99
+     a=content:left
+     a=rtpmap:99 iLBC/8000
+     m=video 51372 RTP/SAVPF 31
+     a=content:main
+     a=rtpmap:96 H261/90000
+     m=video 51374 RTP/SAVPF 31
+     a=content:right
+     a=rtpmap:96 H261/90000
+    
+SDP Answer 
+
+     v=0
+     o=bob 2808844564 2808844565 IN IP4 host.biloxi.example.com
+     s=
+     c=IN IP4 host.biloxi.example.com
+     t= 0 0
+     a=rtcp-fb
+     m=audio 49170 RTP/SAVPF 99
+     a=content:left
+     a=rtpmap:99 iLBC/8000
+     m=video 51372 RTP/SAVPF 31
+     a=content:main
+     a=rtpmap:96 H261/90000
+     m=video 0 RTP/SAVPF 31
+     a=content:right
+     a=rtpmap:96 H261/90000
+    
+]]></artwork>
+      </figure>
+      <t>Example of an client that support SRTP-DTLS and SDES connecting
       to a client that support SRTP-DTLS.</t>
       <figure>
         <artwork align="left" alt="" height="" name="" type="" width=""
@@ -832,8 +874,7 @@ Also signalled is the lip-sync for speakers audio and video streams.
 
 SDP Offer - with support for SRTP-DTLS and SDES signalled
 
-[TODO - populate proper fmtp values for thumbmail size] or [indicate the resolutions via imageattr ??? ask CJ]
-
+[TODO - populate proper fmtp values for thumbmail size] 
      v=0
      o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
      s=
