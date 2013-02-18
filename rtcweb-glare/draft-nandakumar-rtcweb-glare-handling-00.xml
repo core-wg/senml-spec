@@ -214,7 +214,7 @@
       </t>
       <figure>
         <artwork alt="Glareless One-Way Video Add"
-          src="GlarelessOneWay.png"><![CDATA[
+          src="Glareless.png"  width="100%" ><![CDATA[
 title Glareless One-Way Video Add
 participant Alice_PC
 participant Alice_JS
