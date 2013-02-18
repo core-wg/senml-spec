@@ -54,7 +54,7 @@
       </address>
     </author>
 
-    <date day="17" month="February" year="2013" />
+    <date day="18" month="February" year="2013" />
 
     <area>RAI</area>
 
@@ -672,6 +672,86 @@ user22.source6.sync4.encoding0.layer0.other0
           renderers.</t>
         </list></t>
 
+        <section anchor="sec-msid" title="Correlation and Multiplexing">
+
+          <t> When receivng RTP, the port number it is received on is primary
+          mechism to correlate it to the correct m-line. However wehn doing
+          multiplexing and in othe rcases this can not be used. In the cases
+          where the port does not quinquily map the the RTP packet to the
+          correct m-block, the next thing that can be looked at is the PT
+          number. Finally thre are cases wehre SSRC can be used if that was
+          signalled. </t>
+
+          <t> There are some complications when using SSRC for correlation with
+          signalling. Frist, the offerer may end up receiving RTP packets before
+          they receive the singalling with the SSRC correlation
+          information. This is because the sender of the RTP chooses the SSRC
+          and tehre is no way for the receiver to singall how some of the bits
+          in the SSRC shoudl be set. There have been numerous attenedpts and
+          providing a way to do this and they have all been rejected for varios
+          reasons so this is not likley to change. The second issue is that the
+          signalled SSRC can change, particuallry in collions cases, and there
+          is no good way to know when SSRC are changing that the current
+          signalled SSRC usage maps to the actual RTP SSRC usage. Finally SSRC
+          do not provide correlation infoamtion between media flows - take for
+          example trying to look at at SSRC to tell that an audio media flow and
+          video media flow came from the same camera. The nice thing about SSRC
+          is that they are also included in the RTP. </t>
+
+          <t> The proposal here is to extend the MSID draft to meet these needs
+          so that each media flow has a unique MSID and that the MSID has some
+          level of intrnal structure to allow variso forms of correlation
+          including what WebRTC needs to be able to recreate the MS-Stream /
+          MS-Track heirarchy to be the same on both sides. In adtion, this works
+          propose creating an optional RTP header extention that could be used
+          to cary the MSID for a media flow in the RTP packets. This is not
+          absolutely needed for the WebRTC use cases but it helps in the case
+          where media arriveverrs before signalling and it helps resolve a
+          broader category of web conferncing use cases. </t>
+
+          <t> The MSID consists of three things and can extended to have
+          more. It has a device identifier that corespsonds to a unique
+          identifer of the device that created the offer, one or more
+          syncronization contexts identifer which is a number that helps
+          correlate different media flows that are syncronized, and a media flow
+          identifer. The syncronization identifer and flow identifier are scoped
+          within the context of the device identifer but the device identifier
+          is globally unique. The sugested device identifer is a 64 bit random
+          number. The syncronization group is an integer that is the same for
+          all media flows with this device identifier that are meant to be
+          syncronized. Right now there can be more than one syncronization
+          idetifier but the open issues propose removeing this. The flow
+          identifer is an integer that unquiely identifies this media flow
+          within the context of the device identifier.  </t>
+          <t>
+            An example MSID for a device identifer of 12345123451234512345,
+            syncronization group of 1, and a media flow id of 3 would be:
+            <list> 
+              <t> a=msid:12345123451234512345 a:1 t:3 </t>
+            </list>
+          </t>
+          <t> Note: The 64 bit size for the device identifeir was chosen as it
+          allows less than one in a million chance of collison with greater than
+          10,000 flows (actually it allows this with more like 6 million
+          flows). Much smaller numbers could be used but 32 bits is probably too
+          small. More discution on the size of this and the color of the bike
+          shed is needed. </t>
+
+          <t> When used in the WebRTC context, each PeerConnection shoudl
+          generate a unqiue device identifier. Each PC-Stream in the
+          PeerConnection will get a a unique sycnronization group idetentifer,
+          and each PC-Track in the Peer Connection will get a unique flow
+          idetifier. Together these will be used to form the MSID. The MSID MUST
+          be included in the SDP offer or answer as this allow the WebRTC
+          connection on the remote side to form the correct structure of remote
+          PC-Streams and PC-Tracks. If a WebRTC client receives an Offer with no
+          MSID information and no LS group information, it MUST put all the
+          remote PC-Tracks in a single PC-Stream. If there is LS group
+          information but no MSID, a PC-Stream for each LS group MUST be created
+          and the PC-Tracks put in the aproperate PC-Stream.  </t>
+
+        </section>
+
       <section anchor="sec-multi-render" title="Multiple Render">
         <t>There are cases such as displaying thumbnails in a video confernce,
         or a grid of security cameras, where a receiver is willing to receive
@@ -948,7 +1028,12 @@ SDP Answer signaling only SDES
     </section>
 
     <section title="Open Issues">
-      <t></t>
+      <t> The way that WebRTC allwows a PC-Track to be in more than one
+      PC-Stream yet there to only be one copy of the RTP data for the track to
+      be send really complicated the overall soltuion. I am not aware of any use
+      case for this and think it should be removed. If a PC-Track needs to be
+      sycnronized with two differnt things, they should all go in one PC-Stream
+      instead of two. </t>
     </section>
   </middle>
 
