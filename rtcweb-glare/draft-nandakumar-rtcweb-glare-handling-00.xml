@@ -81,7 +81,7 @@
         an SDP answer accepting the offer or it MAY reject the offer. Once the session is setup,
         at any time, either agent MAY generate a new offer that updates the session. However, it
         MUST NOT generate a new offer if it has received an offer which it has not yet been answered or
-        rejected.If an agent receives an offer after having sent one, but before receiving an 
+        rejected. If an agent receives an offer after having sent one, but before receiving an 
         answer to it,the situation is considered as "glare" condition.
        </t> 	
 		   <t>
@@ -154,6 +154,24 @@
     </section>
 
     <section title="Solution">
+
+      <t>
+Need to outline the solution here 
+
+basic idea
+- set up an initially data channel sort of normally 
+
+- after that each side can send new m-block to the other side. 
+
+- The m-blocks are "opportunistically acknowledged on sending side 
+
+- when the block get to both side, the JS on both sides needs to reorder the
+m-blocks to be in the right order for the local SDP
+
+
+ </t>
+
+
       <section title="Requirements">
       <t>
        Following represent the basic ideas and the requirements for the proposed solution to perform
