@@ -58,7 +58,7 @@
     <section title="Introduction">
       <t>The reoccuring theme of this draft is that SDP <xref
       target="RFC4566"></xref> already has a way of solving the problems being
-      discussed at the RTCWeb WG and we SHUOLD not try to invent something new
+      discussed at the RTCWeb WG and we not try to invent something new
       but rather re-use the exisitng methods instead.</t>
 
       <t>This does results in lots of m lines but all the alternatives resulted
@@ -70,6 +70,7 @@
       long ago. In the cases where the SDP is passed over web mechanisms, it is
       easy to use compression and it is more of an optimization criteria than a
       limiting issue.</t>
+
     </section>
 
     <section title="Terminology">
@@ -190,48 +191,9 @@
           <t>Conferencing environments with Switching MCU where the MCU mucks
           the header information of the media and do not decode/recode all the
           media</t>
+
         </list></t>
     </section>
-
-    <!--
-  <section anchor="sec-concepts" title="Concepts">
-  
-<t>
-The bulk of offer / answer based SDP usage is based on the idea is based on the </t>
-<t>
-
-Use what we have </t>
-<t>
-
-Allow the sender to provide enough information that the receive can do the right
-thing</t>
-<t>
-
-
-RFC 5576 - SSRC Attribues, allows mutlie SSRC to be singalling in a
-m-block. What does it mean. You can only singlan what sender is going to
-send. Can not reject things.</t>
-<t>
-
-MSID ( or MID) 
-- 32 bit integer 
-- statistically or programatically unique to 5-tuple 
-- 6 bits syncronization source num  
--    2 bits - media type 
-- 25 bits sync context - random 
-- 1 bit - side a/b
-
-- layer 1,2,3,4 ..
-- low res, medium res, highres 
-- creates a mapping between stable ID that can be chosen by offerer and the the SSRC used by other side to send to offer 
-
-user22.source6.sync4.encoding0.layer0.other0
-
-
-</t>
-
-    </section>
--->
 
     <section anchor="sec-solutions" title="Solutions">
       <t>This section outlines a set of rules for the usage of SDP and RTP that
@@ -307,6 +269,10 @@ user22.source6.sync4.encoding0.layer0.other0
           <t>The CLUE WG might want to consider adding SDP to singal the 3D
           location of and field of view parameters for captures and
           renderers.</t>
+
+          <t> The W3C API allows a "label" to be set for the PC-Track. This MUST
+          be mapped to the SDP label attribute. </t>
+
         </list></t>
 
         <section anchor="sec-msid" title="Correlation and Multiplexing">
@@ -494,20 +460,17 @@ SDP Offer
       audio. In addition, the client can display up to 10 thumbnails of video.
       The main video is smulcast at HD size and a thumbnail size.</t>
 
-<t>
-SDP Offer - Client send simulcast video with 2 resolutions in 2 m-blocks
-indicated by a=group:simulcast and indicating lip-sync for the audio and video
-m-blocks. Also indicating it can accept 10 streams for rendering with
-a=multi-render
-</t>
+      <t>
+        SDP Offer - Client send simulcast video with 2 resolutions in 2 m-blocks
+        indicated by a=group:simulcast and indicating lip-sync for the audio and video
+        m-blocks. Also indicating it can accept 10 streams for rendering with
+        a=multi-render
+      </t>
 
       <figure>
         <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-
-
 [TODO - populate proper fmtp values for thumbmail size] or 
-     [Indicate the resolutions via imageattr ??? ask CJ]
 
      v=0
      o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
@@ -533,12 +496,12 @@ a=multi-render
 ]]></artwork>
       </figure>
     
-<t>
-SDP Answer from the server indicating video stream contents as speaker and
-slides.  Also signalled is the lip-sync for speakers audio and video streams.
-</t>
-
-  <figure>
+      <t>
+        SDP Answer from the server indicating video stream contents as speaker and
+        slides.  Also signalled is the lip-sync for speakers audio and video streams.
+      </t>
+      
+      <figure>
         <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
 
@@ -608,8 +571,10 @@ SDP Answer
     
 ]]></artwork>
       </figure>
+
       <t>Example of an client that support SRTP-DTLS and SDES connecting
       to a client that support SRTP-DTLS.</t>
+
       <figure>
         <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
@@ -657,11 +622,34 @@ SDP Answer signaling only SDES
     </section>
 
     <section anchor="sec-tasks" title="tasks">
-      <t>Tasks Content : left , right and way to set in w3c CSRC - way to set
-      and get in w3c way to read SSRC of last RTP packed received in a Track in
-      w3c New MSID in RTP Header Extetion raft Fix up MSID to algign with this
-      Add a group for simulcast ? Complete Bundle Provide guidance for ways to
-      use SDP for reduced glare adding of one way media streams.</t>
+      
+      <t> This section outlines work that needs to be done in various specifcation to mmake the propsal here actually happen. </t>
+      <t>Tasks:
+      <list>
+        <t>
+          Content : left , right and way to set in w3c 
+        </t>
+        <t>
+          CSRC - way to set and get in w3c way to read
+        </t>
+        <t>
+          way to read SSRC of last RTP packed received in a Track in w3c
+        </t>
+        <t>
+          New MSID in RTP Header Extetion draft
+        </t>
+        <t>
+          Fix up MSID to algign with this
+        </t>
+        <t>
+          Add a group for simulcast ?
+        </t>
+        <t>
+          Complete Bundle Provide guidance for ways to use SDP for reduced glare
+          adding of one way media streams.</t>
+      </list>
+      </t>
+      
     </section>
 
     <section anchor="sec-sec" title="Security Considerations">
@@ -673,7 +661,7 @@ SDP Answer signaling only SDES
     </section>
 
     <section title="Acknowledgments">
-      <t></t>
+      <t>TODO - suhas , ekr </t>
     </section>
 
     <section title="Open Issues">
@@ -684,8 +672,6 @@ SDP Answer signaling only SDES
       sycnronized with two differnt things, they should all go in one PC-Stream
       instead of two. </t>
     </section>
-
-
 
     <section anchor="sec-existing" title="Existing SDP">
       <t>The following shows some examples of SDP today that any new system
@@ -739,6 +725,7 @@ SDP Answer
         and MVP without any further singalling. The receiver MUST be capable
         of receving both the formats and at any point only one video format is
         sent, thus implying one video meant to be displayed.</t>
+
       </section>
 
       <section anchor="sec-fec" title="Forward Error Correction">
