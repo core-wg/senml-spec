@@ -65,10 +65,10 @@
 		  This specification describes procedures for parties involved in an ongoing RTCWeb session to
 		  add new media in a glareless fashion.
 		</t> 
-                <t>
-                  There are varios ways this problem might be solved - this
-                  draft sketches out one possible solution to the problem. 
-                </t>
+     <t>
+      There are varios ways this problem might be solved - this
+      draft sketches out one possible solution to the problem. 
+     </t>
     </abstract>
 </front>
 
@@ -129,7 +129,7 @@
         </t>
         <t>
          Each initiate the addition of their respective camera streams to their current 
-         session almost the same time. This is done by each side sending the RFC3264 Offer
+         session almost the same time. This is done by each side sending the Offer
          with appropriate media descriptions.
         </t>
         <t>
@@ -154,24 +154,67 @@
     </section>
 
     <section title="Solution">
-
-      <t>
-Need to outline the solution here 
-
-basic idea
-- set up an initially data channel sort of normally 
-
-- after that each side can send new m-block to the other side. 
-
-- The m-blocks are "opportunistically acknowledged on sending side 
-
-- when the block get to both side, the JS on both sides needs to reorder the
-m-blocks to be in the right order for the local SDP
-
-
- </t>
-
-
+       <t>
+         Here is the basic outline of the solution described herein.     
+         <list style="numbers">
+           <t>
+            Participants setup an initial RTCWeb session using normal Offer/Answer procedures.
+            This can by any combination of audio, video or data-channel sessions.
+           </t>
+           <t>
+            Whenever participants decide to add new media, a m-block describing the
+            capabilities of media stream is generated and exchanged with the peer.
+           </t>
+           <t>
+             Each sender "Opportunistically" acknowledges the m-block with an
+             Answer that it is expecting for the m-blocks sent. This triggers
+             the completion of Offer/Answer state machine at the senders thus
+             not resulting in any outstanding Offers.
+             In this specification, the Answer used for this purpose is called
+             "ExpectedAnswer" since this is not the real answer from the Answerer.
+           </t>
+           <t>
+             When the m-blocks reach the Answerer's Javascript application, the 
+             application needs to re-order the m-blocks to be in the right order 
+             for the local SDP
+           </t>
+           <t>
+            Once re-ordered to match the order of m-blocks in the local SDP, the Offer is
+            installed with the Peer Connection at the Answerer,as remote description, to 
+            generate an Answer
+           </t>
+           <t>
+             On obtaining the Answer, the Answerer's Javascript application extracts the m-block,
+             sends it to the Offerer as response.
+           </t>
+           <t>
+             On receiving the response m-blocks from the Answerer, the Offerer needs to re-order
+             the m-blocks to be in the right order for the Offerer's local SDP.
+           </t>
+           <t>
+            The Offerer's Javascript application then will generate an updated Offer with the
+            m-blocks received and re-ordered, to be applied as remote description to generate
+            an Answer. This is done to apply the real Answer from the Answerer and overwrite 
+            any number of "ExpectedAnswers" applied in the interim. The term "Overlapping Zone"
+            is used to indicate time between initial m-block Offer and the final m-block Answer.
+            During this time, the end-points at the either end MAY be executing one or more
+            iterations of m-block exchanges". 
+           </t>
+           <t style="hangText">
+             There could be few limitations that might result in the failure while 
+             converting the m-block Answer to an Offer at the Offerer as described in the section
+             <xref target="sec-applicability"></xref>
+           </t>
+           <t>
+            The Offerer's Javascript application will extract m-blocks from the generated Answer
+            to match it with its local SDP to ensure that a successful m-block Offer/Answer exchange
+            did happen. If not, the on-going session is terminated.
+           </t>
+           <t>
+           </t>
+         </list>
+       </t>
+      
       <section title="Requirements">
       <t>
        Following represent the basic ideas and the requirements for the proposed solution to perform
@@ -182,11 +225,11 @@ m-blocks to be in the right order for the local SDP
           implies an RTP transport association has been successfully setup between the peers.
          </t>
          <t>
-          The JavaScript applications have their own copy of the most recent successfully negotiated
+          The Javascript applications have their own copy of the most recent successfully negotiated
           SDP with the local ordering of m-blocks preserved.
          </t>
          <t>
-           The JavaScript application is responsible for maintaining the appropriate ordering of the
+           The Javascript application is responsible for maintaining the appropriate ordering of the
            m-blocks for that User Agent.
          </t>
          <t>
@@ -196,14 +239,14 @@ m-blocks to be in the right order for the local SDP
            describe the capabilities of the newly added media.
          </t>
          <t>
-           The JavaScript application MUST be capable of generating complete SDP Offer or Answer
+           The Javascript application MUST be capable of generating complete SDP Offer or Answer
            from the session updates exchanged so as to supply the same to the User Agent or to
            negotiate the same with the peer, if needed.
          </t>
          <t>
            The end-points MUST support at least one way to identify the m-blocks. In this specification
-           mid [TODO MID REF] is used for this purpose and it is open to other identification approaches
-           sich as MSID [TODO MSID REF]
+           mid <xref target="RFC5888"></xref> is used for this purpose and it is open to other 
+           identification approaches such as msid <xref target="I-D.alvestrand-mmusic-msid"></xref>
          </t>
        </list>
       </t>
@@ -352,14 +395,21 @@ end note
       </section>
   </section> 
      
-  <section title="Applicability Statement">
+  <section anchor="sec-applicability" title="Applicability Statement">
 		<t>
-			TODO
-
-Limitations of needing to create offer from answer. Does not really working with many types of negotiation. This works best where the first side can easily product what the far sides answer will be. 
- 
-		</t>		
-    </section>
+		 As mentioned earlier, generating an Offer from the Answer created in response to m-block
+		 received from the Answerer might fail due to possible mismatches in the configurations 
+		 between Offered m-block, applied Expected Answer and the actual Answer received 
+		 from the Answerer.
+		</t>
+    <t>
+     On the other hand, this solution works best in all the cases where the first side can
+     easily predict what the far side's answer will be. Given that the Offerer offering
+     a capability that is supposed to fail on purpose is a rarity and also given the 
+     higher chances of Offer(s) being accepted in practice, we beleive this solution should
+     enable successful glareless media addition with high frequency.		
+    </t>    
+  </section>
 
 	
 </middle>
@@ -367,19 +417,46 @@ Limitations of needing to create offer from answer. Does not really working with
 <back>
     <references title="Normative References">
 		<?rfc include="reference.RFC.2119"?>		
-		<?rfc include="reference.RFC.3264"?>
-		<?rfc include="reference.RFC.4566"?>
-		<?rfc include="reference.RFC.5888"?>
     </references>
 
     <references title="Informative References">
-		<?rfc include="reference.RFC.3550"?>
-		<?rfc include="reference.RFC.5245"?>
-		<?rfc include="reference.RFC.4961"?>
-		<?rfc include="reference.RFC.3605"?>
-    <?rfc include="reference.RFC.3261"?>  
-                <?rfc include="reference.I-D.rescorla-mmusic-ice-trickle"?>
-  
+      <?rfc include="reference.RFC.3264"?>
+      <?rfc include="reference.RFC.4566"?>
+    <?rfc include="reference.RFC.3261"?>
+      <reference anchor='RFC5888'>
+        
+        <front>
+          <title>The Session Description Protocol (SDP) Grouping Framework</title>
+          <author initials='G.' surname='Camarillo' fullname='G. Camarillo'>
+            <organization /></author>
+          <author initials='H.' surname='Schulzrinne' fullname='H. Schulzrinne'>
+            <organization /></author>
+          <date year='2010' month='June' />
+          <abstract>
+            <t>In this specification, we define a framework to group "m" lines in the Session Description Protocol (SDP) for different purposes.  This framework uses the "group" and "mid" SDP attributes, both of which are defined in this specification.  Additionally, we specify how to use the framework for two different purposes: for lip synchronization and for receiving a media flow consisting of several media streams on different transport addresses.  This document obsoletes RFC 3388. [STANDARDS-TRACK]</t></abstract></front>
+        
+        <seriesInfo name='RFC' value='5888' />
+        <format type='TXT' octets='43924' target='http://www.rfc-editor.org/rfc/rfc5888.txt' />
+      </reference>
+      
+      <reference anchor='I-D.alvestrand-mmusic-msid'>
+        <front>
+          <title>Cross Session Stream Identification in the Session Description Protocol</title>
+          
+          <author initials='H' surname='Alvestrand' fullname='Harald Alvestrand'>
+            <organization />
+          </author>
+          
+          <date month='December' day='13' year='2012' />
+          
+          <abstract><t>This document specifies a grouping mechanism for RTP media streams that can be used to specify relations between media streams within different RTP sessions as well as within a single RTP session.  This mechanism is used to signal the association between the RTP concept of SSRC and the WebRTC concept of "media stream" / "media stream track" using SDP signaling.  This document is an input document for discussion.  It should be discussed in the MMUSIC WG list, mmusic@ietf.org.</t></abstract>
+          
+        </front>
+        
+        <seriesInfo name='Internet-Draft' value='draft-alvestrand-mmusic-msid-02' />
+        <format type='TXT'
+          target='http://www.ietf.org/internet-drafts/draft-alvestrand-mmusic-msid-02.txt' />
+      </reference>
     </references>
   </back>
 </rfc>
