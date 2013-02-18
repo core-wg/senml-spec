@@ -109,11 +109,22 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
         This imposes further restrictions on applicability of these SDP
         attributes as they are defined today.
        </t> 
+       <t>
+	 The specific problem is that there are attribute combinations which
+	 make sense when specified on independent m-lines -- as with
+	 classical SDP -- that do not make sense when those m-lines are
+	 then multiplexed over the same transport. To give an obvious
+	 example, ICE permits each m-mline to have an independently
+	 specified ice-ufrag attribute. However, if the media from
+	 multiple m-lines is multiplexed over the same ICE component,
+	 then the meaning of media-level ice-ufrag attributes becomes
+	 muddled.
+       </t>
       <t>
-        As of today there are close to 180 SDP attributes registered with the
-        IANA <xref target="IANA"></xref> and more will be added in the future.  
-        There is no clearly defined procedure to establish the validity/applicability of 
-        these attribute when used with multiplexing.
+        As of today there are close to 180 SDP attributes registered
+	with the IANA <xref target="IANA"></xref> and more will be added in
+	the future.  There is no clearly defined procedure to establish the
+	validity/applicability of these attribute when used with multiplexing.
       </t>
     </section>
     <section title="SDP Attribute Analysis Framework">
@@ -121,48 +132,49 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
      An SDP session description consists of a session-level section followed by
      zero or more media-level sections that could be broken down into following
      high-level categories
+    </t>
+    <t>
      <list style="symbols">
-       <t> Descriptions related to media content such as media type,
+       <t> Attibutes related to media content such as media type,
        encoding schemes, payload types to name a few.</t>
-       <t> Descriptions specifying media transport characteristics like RTP/RTCP
+       <t> Attributes specifying media transport characteristics like RTP/RTCP
        port, network addresses, QOS and so on.</t>
-       <t> Session Metadata descriptions such as session timing and origin
+       <t> Attributes Metadata descriptions such as session timing and origin
        information.</t>
-       <t> Descriptions establishing relationships between media streams.</t>
+       <t> Attributes establishing relationships between media streams.</t>
      </list>
     </t>  
  
     <t>
-      The proposed framework classifies each attributes into one of
+      The proposed framework classifies each attribute into one of
        the following categories:
        <list style="hanging">
 
          <t hangText="NORMAL"> Attributes that can be independently
          specified when multiplexing and retain their original semantics .</t>
-
+	 <t></t>
          <t hangText="BAD"> Attributes where multiplexing SHOULD NOT be
          used if these attributes are in use in the SDP. </t>
-
+	 <t></t>
          <t hangText="IDENTICAL"> Attributes that MUST be identical
          across all the media lines being multiplexed.</t>
-
+	 <t></t>
          <t hangText="SUM"> Attributes can be set as they are normally used but
          software using them in a multiplex case, MUST apply the sum of all the
          attributes being multiplexed instead of trying to use each one. This is
          typically used for bandwidth or other rate limiting attributes to the
          underlining transport. </t>
-
+	 <t></t>
          <t hangText="TRANSPORT"> Attributes that can be set normally for
          multiple items in a multiplexed group but the software MUST pick just
          one of the attribute of the given type for use. The one chosen is the
          attribute associated with the "m=" lines that represents the information
          being used for the transport of the RTP. TODO - this is hard to
          understand. We need to put some examples that explain this in some
-         section outside this list. </t>
-
+         section outside this list.</t>
+	 <t></t>
          <t hangText="SPECIAL"> Attributes where the text in the draft must be
          consulted to see how they are handled when multiplexing. </t>
-
        </list>
     </t>
     <t>
@@ -171,9 +183,16 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
     </t>  
     <t>
       <xref target="SecCurrAnalysis"/> analyzes attributes listed in <xref target="IANA">IANA</xref>
-      grouped under the IETF document that defines them.  For each such section, the
-      acronyms "S", "M","B" and "SR" under the "Current" column specify existing semantics
-      as applicable to either session-level or media-level or both or source-level respectively.
+      grouped under the IETF document that defines them. The "Current" column indicates
+      whether the attribute is currently specified as:
+    </t>
+    <t>
+      <list style="symbols">
+	<t>S -- Session level</t>
+	<t>M -- Media level</t>
+	<t>B -- Both</t>
+	<t>SR -- Source-level (for a single SSRC)</t>
+      </list>
     </t> 
     </section> 
 
@@ -366,11 +385,11 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>crypto&nbsp;</c><c>media-level crypto parameters MUST be preferred if
-          specified &nbsp;</c><c>M&nbsp;</c><c>TRANSPORT&nbsp;</c>
+          <c>crypto&nbsp;</c><c></c><c>M&nbsp;</c><c>TRANSPORT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>       
-          
         </texttable>
+
+	<t>[TODO: should this be NORMAL?]</t>
       </section>
       
       <section title="RFC5762">      
@@ -512,14 +531,15 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <c>B</c><c>TRANSPORT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>candidate&nbsp;</c><c>Same value applies to all 
-          the muxed sessions&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
+          <c>candidate&nbsp;</c><c>Per media-level attribute MUST be used per 
+          underlying transport flow&nbsp;</c><c></c><c>TRANSPORT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>         
           
-          <c>remote-candidates&nbsp;</c><c>Same value applies to all 
-            the muxed sessions&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
+          <c>remote-candidates&nbsp;</c><c>Per media-level attribute MUST be used per 
+          underlying transport flow&nbsp;</c><c>M</c><c>TRANSPORT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c> 
         </texttable>
+
       </section>  
       
       <section title="RFC5285">      
@@ -545,13 +565,10 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
       
       <section title="RFC3605">      
         <t>
-          The Session Description Protocol (SDP) is used to describe the
-          parameters of media streams used in multimedia sessions.  When a
-          session requires multiple ports, SDP assumes that these ports have
-          consecutive numbers.  However, when the session crosses a network
-          address translation device that also uses port mapping, the ordering
-          of ports can be destroyed by the translation.  To handle this, 
-          <xref target="RFC3605">RFC4574</xref> proposes an extension attribute to SDP
+	  Originally, SDP assumed that RTP and RTCP were carried on consecutive
+	  ports. However, this is not always true when NATs are involved.
+	  <xref target="RFC3605"/> specifies an early mechanism to
+	  indicate the RTCP port.
         </t>    
         <texttable title="RFC3605 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -580,15 +597,17 @@ TODO - put in text referring to AVT multiplexing draft and to the bundle draft.
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
           
-          <c>ssrc&nbsp;</c><c>SSRCs repeated over multiple m=lines complicates
-          multiplexing&nbsp;</c><c>M</c><c>BAD&nbsp;</c>
+          <c>ssrc&nbsp;</c><c>SSRCs repeated over multiple m=lines is forbidden
+	  if the m-lines are in the same RTP session.
+          &nbsp;</c><c>M</c><c>BAD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>ssrc-group&nbsp;</c><c>Refer to section <xref target="SecssrcgroupAnalysis"></xref>
           for specific analysis of the grouping semantics&nbsp;</c><c>M</c><c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
-          <c>cname&nbsp;</c><c>Not Impacted&nbsp;</c><c>SR</c><c>NORMAL&nbsp;</c>
+          <c>cname&nbsp;</c><c>Not Impacted [TODO: what are the rules for CNAME duplication
+	  across sessions?]&nbsp;</c><c>SR</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           
           <c>previous-ssrc&nbsp;</c><c>SSRCs repeated over multiple m=lines complicates
