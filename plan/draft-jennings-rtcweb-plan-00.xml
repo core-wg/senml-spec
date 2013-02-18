@@ -214,10 +214,11 @@
           two different windows or screens, it MUST user separate m-blocks for
           each.</t>
 
-          <t>Unless explicitly signalled otherwise (see <xref target="sec-multi-render"/>), if a given m-line receives media from multiple SSRCs, only
-          media from the most recently received SSRC SHOULD be rendered and
-          other SSRC SHOULD not and if it is video it SHOULD be rendered in the
-          same window or screen.</t>
+          <t>Unless explicitly signalled otherwise (see <xref
+          target="sec-multi-render"/>), if a given m-line receives media from
+          multiple SSRCs, only media from the most recently received SSRC SHOULD
+          be rendered and other SSRC SHOULD NOT and if it is video it SHOULD be
+          rendered in the same window or screen.</t>
 
           <t>Each PC-Track corresponds to one or more m-blocks.</t>
 
@@ -435,6 +436,7 @@ SDP Offer
     </section>
 
     <section anchor="sec-examples" title="Examples">
+
 
       <t>Example of a video client joining a video conference. The client can
       produce and receive two streams of video, one from the slides and the other
@@ -1153,9 +1155,9 @@ SDP Offer
         </front>
 
         <seriesInfo name="Internet-Draft"
-                    value="draft-ietf-rtcweb-use-cases-and-requirements-06" />
+                    value="draft-ietf-rtcweb-use-cases-and-requirements-10" />
 
-        <format target="http://www.ietf.org/internet-drafts/draft-ietf-rtcweb-use-cases-and-requirements-06.txt"
+        <format target="http://www.ietf.org/internet-drafts/draft-ietf-rtcweb-use-cases-and-requirements-10.txt"
                 type="TXT" />
       </reference>
 
