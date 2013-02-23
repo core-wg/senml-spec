@@ -272,9 +272,9 @@ add msid to example
 	<figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-Microphone -->    m=audio     >  RTP session
-
-Camera     -->    m=video     >  RTP session
+Microphone -->    m=audio    -->    Speaker      >  5-Tuple
+			          
+Camera     -->    m=video    -->    Window       >  5-Tuple
 		   ]]></artwork>
         </figure>      
       </section>
@@ -283,20 +283,34 @@ Camera     -->    m=video     >  RTP session
 	<figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-Microphone -->    m=audio     \ 
-                               > RTP session	    
-Camera     -->    m=video     /
+Microphone -->    m=audio    -->    Speaker       \ 
+                                                   > 5-Tuple	    
+Camera     -->    m=video    -->    Window       /
 		   ]]></artwork>
         </figure>      
       </section>
 
-      <section title="One Audio, One Video, Bundle/multiplexing">
+
+      <section title="One Audio, One Video, Simulcast, Bundle/multiplexing">
 	<figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-Microphone -->    m=audio     \ 
-                               > RTP session	    
-Camera     -->    m=video     /
+Microphone -->    m=audio    -->    Speaker       \ 
+                                                   |
+Camera     +->    m=video    -\                     > 5-Tuple
+           |                   ?->  Window         |
+           +->    m=video    -/                   /
+		   ]]></artwork>
+        </figure>      
+      </section>
+
+      <section title="One Audio, One Video, Bundle/multiplexing, Lip-Sync">
+	<figure>
+          <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+Microphone -->    m=audio    -->     Speaker       \             
+                                                    > 5-Tuple, Lip-Sync
+Camera     -->    m=video    -->     Window        /           group
 		   ]]></artwork>
         </figure>      
       </section>
@@ -305,13 +319,13 @@ Camera     -->    m=video     /
 	<figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-Microphone -->    m=audio              \     
-                                        |
-Camera     -->    m=video               |
-                                         >  RTP session
-Camera     -->    m=video               |
-Camera            a=multiple-render:5   |
-...                                     /
+Microphone -->    m=audio    -->       Speaker          \     
+                                                         |
+Camera     -->    m=video    -->       Window            |
+                                                          >  5-Tuple
+Camera     -->    m=video    -->       5 Small Windows   |
+Camera            a=multiple-render:5                    |
+...                                                      /
 		   ]]></artwork>
         </figure>      
 	<t>
@@ -324,16 +338,19 @@ Camera            a=multiple-render:5   |
 	<figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-Microphone -->    m=audio              \       \
-                                        |       >  Lip-Sync group
-Camera     -->    m=video               |      /
-                                         >  RTP session
-Camera     -->    m=video               |
-Camera            a=multiple-render:5   |
-...                                     /
+Microphone -->    m=audio    -->       Speaker          \   \  Lip-sync
+                                                         |   > group
+Camera     -->    m=video    -->       Window            |  /  
+                                                          >  5-Tuple
+Camera     -->    m=video    -->       5 Small Windows   |
+Camera            a=multiple-render:5                    |
+...                                                      /
 		   ]]></artwork>
         </figure>      
       </section>
+
+
+      
     </section>
     
     <section anchor="sec-solutions" title="Solutions">
