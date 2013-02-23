@@ -209,6 +209,129 @@ add msid to example
         </list></t>
     </section>
 
+    <section title="Overview" anchor="sec-overview">
+      <t>
+	The basic unit of description in SDP is the m-line/m-block and
+	this document continues with that assumption. In general,
+	different cameras, microphones, etc. are carried on different
+	m-lines. There are two major exceptions to this rule:
+      </t>
+      <t>
+	<list style="symbols">
+	  <t>Multiple sources which are semantically equivalent and
+	  multiplexed on a time-wise basis.
+	  For instance, if an MCU mixes multiple camera feeds but only
+	  some subset is displayed at a time, they can all appear on the same
+	  m-line.</t>
+	  <t>Multiple versions of the same content, as in simulcast or
+	  layered encoding.
+	  </t>
+	</list>
+      </t>
+      <t>
+	By contrast, multiple sources which are semantically distinct
+	cannot appear on the same m-line because that does not allow
+	for clear negotiation of which sources are acceptable, or
+	which sets of RTP SSRCs correspond to which flow.
+      </t>
+      <t>
+	The second basic assumption is that SSRCs cannot be safely
+	used to associate RTP flows with information in the SDP.
+	There are two reasons for this. First, in an offer/answer
+	setting, RTP can appear at the offerer before the answer
+	is received; if SSRC information from the offerer is required,
+	then thes RTP packets cannot be interpreted.
+	Second the reason for this is that RTP permits SSRCs to be changed
+	at any time---and indeed some systems such as 3GPP rely on
+	this ability.
+      </t>
+      <t>
+	This assumption makes clear why the two exceptions to the
+	"one flow per m-line" rule work. In the case of time-based
+	multiplexing (multirender) of camera sources, all the cameras are equivalent
+	from the receiver's perspective; he merely needs to know which
+	ones to display now and he does that based on which ones have
+	been most recently received. In the case of multiple versions
+	of the same content, payload types can be used to distinguish
+	the different versions. Note that this means that simulcast
+	and time-based multiplexing cannot be used together. [TODO: should we
+	solve this.]
+      </t>
+    </section>
+
+    <section title="Example Mappings">
+      <t>
+	This section shows a number of sample mappings in
+	abstract form.
+      </t>
+      <section title="One Audio, One Video, No bundle/multiplexing">
+	<figure>
+          <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+Microphone -->    m=audio     >  RTP session
+
+Camera     -->    m=video     >  RTP session
+		   ]]></artwork>
+        </figure>      
+      </section>
+
+      <section title="One Audio, One Video, Bundle/multiplexing">
+	<figure>
+          <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+Microphone -->    m=audio     \ 
+                               > RTP session	    
+Camera     -->    m=video     /
+		   ]]></artwork>
+        </figure>      
+      </section>
+
+      <section title="One Audio, One Video, Bundle/multiplexing">
+	<figure>
+          <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+Microphone -->    m=audio     \ 
+                               > RTP session	    
+Camera     -->    m=video     /
+		   ]]></artwork>
+        </figure>      
+      </section>
+
+      <section title="One Audio, One Active Video, 5 Thumbnails, Bundle/multiplexing">
+	<figure>
+          <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+Microphone -->    m=audio              \     
+                                        |
+Camera     -->    m=video               |
+                                         >  RTP session
+Camera     -->    m=video               |
+Camera            a=multiple-render:5   |
+...                                     /
+		   ]]></artwork>
+        </figure>      
+	<t>
+	  Note that in this case the payload types must be distinct between
+	  the two video m-lines, because that is what is used to demultiplex.
+	</t>
+      </section>
+
+      <section title="One Audio, One Active Video, 5 Thumbnails, Main Speaker Lip-Sync, Bundle/multiplexing">
+	<figure>
+          <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+Microphone -->    m=audio              \       \
+                                        |       >  Lip-Sync group
+Camera     -->    m=video               |      /
+                                         >  RTP session
+Camera     -->    m=video               |
+Camera            a=multiple-render:5   |
+...                                     /
+		   ]]></artwork>
+        </figure>      
+      </section>
+    </section>
+    
     <section anchor="sec-solutions" title="Solutions">
       <t>This section outlines a set of rules for the usage of SDP and RTP that
       seems to deal with the various problems and issues that have been
