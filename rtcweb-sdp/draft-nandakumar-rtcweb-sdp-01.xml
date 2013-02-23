@@ -1778,7 +1778,7 @@ Alice->Bob: One-Way H.264 Video with Bob selected video stream encodings
           <c><xref target="RFC3984"></xref></c>
           <c>a=remote-ssrc:54321 recv:off</c>
           <c><xref target="draft-lennox-mmusic-sdp-source-selection"></xref> Stream-2, Encoding-1 Not Accepted</c>
-          <c>a=ssrc:67890 recv:on</c>
+          <c>a=remote-ssrc:67890 recv:on</c>
           <c><xref target="draft-lennox-mmusic-sdp-source-selection"></xref>  Stream-2,Encoding-2 Accepted</c>
           <c>a=recvonly</c>
           <c><xref target="RFC3264"></xref> - Receive Only Video Stream 2</c> 
