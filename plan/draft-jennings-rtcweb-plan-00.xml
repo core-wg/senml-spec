@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="US-ASCII"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
 <?xml-stylesheet type="text/xsl" href="rfc2629.xslt" ?>
@@ -13,6 +14,16 @@
 
 <rfc category="info" docName="draft-jennings-rtcweb-plan-00"
      ipr="noDerivativesTrust200902">
+
+<!-- 
+
+add receivonly on thrumbnai example 
+
+make clear most recent sender wind mult render 
+
+
+-->
+
   <front>
     <title abbrev="RTCWeb Plan">Proposed Plan for Usage of SDP and RTP</title>
 
@@ -895,9 +906,6 @@ SDP Offer
 ]]></artwork>
         </figure>
 
-        <t>Thought not yet defined, it's easy to imaging that BFCP over SCTP
-        over DTLS might look like</t>
-
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[    m=application 50000 TCP/TLS/BFCP *
@@ -918,6 +926,63 @@ SDP Offer
 ]]></artwork>
         </figure>
       </section>
+
+    <section anchor="sec-rtx" title="RTX">
+        <figure>
+          <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+
+SDP Offer with SSRC muliplexing 
+
+   v=0
+   o=mascha 2980675221 2980675778 IN IP4 host.example.net
+   c=IN IP4 192.0.2.0
+   m=video 49170 RTP/AVPF 96 97
+   a=rtpmap:96 MP4V-ES/90000
+   a=rtcp-fb:96 nack
+   a=fmtp:96 profile-level-id=8;config=01010000012000884006682C209\
+   0A21F
+   a=rtpmap:97 rtx/90000
+   a=fmtp:97 apt=96;rtx-time=3000
+  
+]]></artwork>
+        </figure>
+
+    <figure>
+          <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+
+SDP Offer with session muliplexing 
+
+   v=0
+   o=mascha 2980675221 2980675778 IN IP4 host.example.net
+   c=IN IP4 192.0.2.0
+   a=group:FID 1 2
+   a=group:FID 3 4
+   m=audio 49170 RTP/AVPF 96
+   a=rtpmap:96 AMR/8000
+   a=fmtp:96 octet-align=1
+   a=rtcp-fb:96 nack
+   a=mid:1
+   m=audio 49172 RTP/AVPF 97
+   a=rtpmap:97 rtx/8000
+   a=fmtp:97 apt=96;rtx-time=3000
+   a=mid:2
+   m=video 49174 RTP/AVPF 98
+   a=rtpmap:98 MP4V-ES/90000
+   a=rtcp-fb:98 nack
+   a=fmtp:98 profile-level-id=8;config=01010000012000884006682C209\
+   0A21F
+   a=mid:3
+   m=video 49176 RTP/AVPF 99
+   a=rtpmap:99 rtx/90000
+   a=fmtp:99 apt=98;rtx-time=3000
+   a=mid:4
+  
+]]></artwork>
+        </figure>
+
+    </section>
 
       <section anchor="sec-llc" title="Layered coding dependency">
         <t><xref target="RFC5583"></xref> "depend" attribute is shown here to
