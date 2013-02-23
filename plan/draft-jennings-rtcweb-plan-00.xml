@@ -64,7 +64,7 @@ add msid to example
 
       <t>This draft is not intended to become an specification but is meant for
       working group discussion to help build the specifications. It is being
-      discussed on the webrtc@ietf.org mailing list though it has topics
+      discussed on the rtcweb@ietf.org mailing list though it has topics
       relating to the CLUE WG, MMUSIC WG, AVT* WG, and WebRTC WG at W3C. </t>
     </abstract>
   </front>
@@ -72,18 +72,18 @@ add msid to example
   <middle>
     <section title="Introduction">
       <t>The reoccurring theme of this draft is that SDP <xref
-      target="RFC4566"></xref> already has a way of solving the problems being
+      target="RFC4566"></xref> already has a way of solving many of the problems being
       discussed at the RTCWeb WG and we not try to invent something new
       but rather re-use the existing methods instead.</t>
 
       <t>This does results in lots of m lines but all the alternatives resulted
       in an nearly equivalent number of SSRC lines with a possibility of
       redefining most of the media level attributes. So it's really hard to see
-      the big difference.This assumes that it is perfectly feasible to transport
+      the big benefits. This assumes that it is perfectly feasible to transport
       SDP that much larger than a single MTU. The SIP <xref
       target="RFC3261"></xref> usage of SDP has successfully passed over this
       long ago. In the cases where the SDP is passed over web mechanisms, it is
-      easy to use compression and it is more of an optimization criteria than a
+      easy to use compression and the size of SDP is more of an optimization criteria than a
       limiting issue.</t>
 
     </section>
@@ -141,11 +141,11 @@ add msid to example
       have come from WebRTC, CLUE, and the general community that uses RTP for
       interactive communications based on Offer/Answer. It does not try to
       meet the needs of streaming usages or usages involving multicast. This
-      list does not also try to list every possible requirement but instead
+      list also does not try to list every possible requirement but instead
       outlines the ones that might influence the design. <list style="symbols">
-          <t>Devices with multiple cameras</t>
+          <t>Devices with multiple audio and/or video sources</t>
 
-          <t>Devices that display multiple streams of video</t>
+          <t>Devices that display multiple streams of video and/or render multiple streams of audio</t>
 
           <t>Simulcast, wherein a video from a single camera is sent in a few
           independent video streams typically at different resolutions and
@@ -155,6 +155,8 @@ add msid to example
 
           <t>One way media flows and bi-directional media flows</t>
 
+          <t> Support asymmetry, i.e. to send a different number of type of media streams that you receive. </t>
+
           <t>Mapping W3C PeerConnection (PC) aspects into SDP and RTP. It is
           important that the SDP be descriptive enough that both sides can get
           the same view of various identifiers for PC-Tracks, PC-Streams and
@@ -163,7 +165,7 @@ add msid to example
           <t>Support of Interactive Connectivity Establishment (ICE) <xref
           target="RFC5245"></xref></t>
 
-          <t>Support of Multiplexing.</t>
+          <t> Support of multiplexing multiple media flows, possible of different media types, on same 5-tuple. </t>
 
           <t>Synchronization - It needs to be clear how implementations deal
           with synchronization, in particular usages of both CNAME and LS group.
@@ -180,7 +182,7 @@ add msid to example
           <t>Forward Error Correction - Support for various RTP FEC
           schemes.</t>
 
-          <t>RSVP QoS - Ability to signal various QoS mechanism such SRF
+          <t>RSVP QoS - Ability to signal various QoS mechanism such Single Reservation Flow (SRF)
           group</t>
 
           <t>Desegregated Media (FID group) - There is a growing desire to
@@ -194,6 +196,8 @@ add msid to example
           the uses of more than one codec for a given media flow and then the
           sender can arbitrarily switch between them when they are sending but
           they only send with one codec as at time.</t>
+
+          <t> Distinguish simulcast (e.g. multiple encoding of same source) from multiple different sources </t>
 
           <t>Support for Sequential and Parallel forking at the SIP level</t>
 
@@ -272,7 +276,7 @@ add msid to example
           can accept. Each time a new steam is received up to the maximum, a
           new PC-Track will be created.</t>
 
-          <t>Applications MAY signal all the SSRC they intend to send using the
+          <t>Applications MAY signal all the SSRC they intend to send using
           RFC 5576, but receivers need to be careful in their usage of the SSRC in signaling, as the SSRC
           can change when there is a collision and it takes time before that will be updated in signaling. </t>
 
@@ -280,7 +284,7 @@ add msid to example
           names of various speakers or other information to the MSID and/or SSRCs
           that a user is using</t>
 
-          <t>Applications SHOULD use the RFC 4574 content labels to indicate the
+          <t>Applications SHOULD use RFC 4574 content labels to indicate the
           purpose of the video. The additional content types, main-left and
           main-right, need to be added to support two- and three-screen systems.</t>
 
@@ -327,7 +331,7 @@ add msid to example
           where media arrives before signaling and it helps resolve a
           broader category of web conferencing use cases. </t>
 
-          <t> The MSID consists of three things and can extended to have
+          <t> The MSID consists of three things and can be extended to have
           more. It has a device identifier, which corresponds to a unique
           identifier of the device that created the offer; one or more
           synchronization context identifiers, which is a number that helps
@@ -342,6 +346,9 @@ add msid to example
           be preferable. The flow identifier is an integer that uniquely
           identifies this media flow within the context of the device
           identifier.  </t>
+
+          <t> Open Issues: how to know if the MSID RTP Header Extension should be included in the RTP? </t> 
+
           <t>
             An example MSID for a device identifier of 12345123451234512345,
             synchronization group of 1, and a media flow id of 3 would be:
@@ -411,6 +418,12 @@ SDP Offer
         know all the SSRC that will send to this m-block so it is best to use payload
         type (PT) numbers that are unique for the SDP: the demultiplexing may
         have to only use the PT if the SSRC are unknown.</t>
+
+        <t> The intention is that the most recently sent SSRC are the ones that
+        are rendered. Some switching MCU will likely only send the correct
+        number of SSRC and not change the SSRC but will instead update the CSRC
+        as the switching MCU select a different participant to include in the
+        particular video stream. </t>
 
         <t>The receiver displays, in different windows, the video from the most
         recent 16 SSRC to send video to m-block.</t>
@@ -670,7 +683,7 @@ SDP Answer signaling only SDES
     </section>
 
     <section title="Acknowledgments">
-      <t> I would like to thank Suhas Nandakumar, Eric Rescorla, and Lyndsay
+      <t> I would like to thank Suhas Nandakumar, Eric Rescorla, Charles Eckel, Mo Zanaty, and Lyndsay
       Campbell for help with this draft. </t>
     </section>
 
