@@ -687,6 +687,9 @@ SDP Answer Simple - Suhas
         means the Offerer supports both DTLS-SRTP and SDES and the answer should
         select one and return an Answer with only an attribute for the selected
         keying mechanism.</t>
+
+        <t> These may not look appealing but the alternative is to make cap-neg
+        mandatory to implement in WebRTC. </t>
       </section>
 
       <section anchor="sec-issues" title="Issues">
