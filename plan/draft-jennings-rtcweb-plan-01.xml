@@ -70,17 +70,50 @@ add msid to example
   </front>
 
   <middle>
-    <section title="Introduction">
+    <section title="Overview">
       <t>The reoccurring theme of this draft is that SDP <xref
       target="RFC4566"></xref> already has a way of solving many of the problems
       being discussed at the RTCWeb WG and we not try to invent something new
       but rather re-use the existing methods for describing RTP <xref
       target="RFC3550" /> media flows.</t>
 
-      <t>This does results in lots of m lines but all the alternatives resulted
-      in an nearly equivalent number of SSRC lines with a possibility of
+      <t> The general theory is that, roughly speaking, is that m-line corespond
+      to flow of packets that can be handled by the applicaiton in the same
+      way. This often results in more m-lines that there are media sources such
+      as micrphones or cameras. Forward Error Correction (FEC) is done with
+      multiple M-lines as shown in RFC TODO. Retrasnmission (RTX) is done with
+      mutilpel m-lines as shown in RFC TODO. Layered coding is done wth mutiple
+      m-lines as shown in RFC TODO. Simulcast, which is really just multiple
+      vidoe stream from same camera, much like layered codin but with no
+      interstream dependency, is done with mutiiple m-lines modeles after the
+      Layered coding in RFC TODO. </t>
+
+      <t> The signifianct adition to SDP semantics is an multi-render media
+      level attribute that allows a device to indicate that it makes sense to
+      simultanosly use multiple stream of video that will be simultanosly
+      displayed but share the same SDP chracterristics and semanntics such that
+      they can all be negotated under a single m-line. When using features like
+      RTX, FEC, and Simulcast in a multireder sitituation, there needs to be a
+      way to correlate a given related media flows with the correct "base"
+      media-flow. This is acomplished by having the related flows cary, in the
+      CSRC, the SSRC of their base flow.  </t>
+
+      <t> This draft also propose that advanced usages, including WebRTC to
+      WebRTC scenereos, use a Media Stream Identifier (MSID) that is signalled
+      in SDP and also attempt to negotation the usage of a RTP header extention
+      to include the MSID in the RTP packet. This resolves many long term issues. </t>
+
+      <t>This does results in lots of m lines but all the alternatives designs resulted
+      in an roughly equivalent number of SSRC lines with a possibility of
       redefining most of the media level attributes. So it's really hard to see
-      the big benefits. This assumes that it is perfectly feasible to transport
+      the big benefits defining something new over what we have. 
+
+      One of the concerns about this aproach is the time to collect all the ICE
+      candiates needed for the intitial offer. Section TODO provides mitigations
+      to reduce the number of ports needed to be the same as an alternative SSRC
+      based design.
+
+      This assumes that it is perfectly feasible to transport
       SDP that much larger than a single MTU. The SIP <xref
       target="RFC3261"></xref> usage of SDP has successfully passed over this
       long ago. In the cases where the SDP is passed over web mechanisms, it is
@@ -138,12 +171,14 @@ add msid to example
     </section>
 
     <section anchor="sec-req" title="Requirements">
+
       <t>The requirements listed here are a collection of requirements that
       have come from WebRTC, CLUE, and the general community that uses RTP for
       interactive communications based on Offer/Answer. It does not try to
       meet the needs of streaming usages or usages involving multicast. This
       list also does not try to list every possible requirement but instead
       outlines the ones that might influence the design. <list style="symbols">
+
           <t>Devices with multiple audio and/or video sources</t>
 
           <t>Devices that display multiple streams of video and/or render
