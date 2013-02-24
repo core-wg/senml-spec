@@ -674,7 +674,6 @@ a=multi-render:3
 a=rtcp-mux
 a=msid:34567345673456734567 s:1 f:2
 a=rtpmap:97 uplfec/90000
-a=imageattr:97 [x=720,y=576]
 a=candidate:0 1 UDP 2113667327 192.168.1.4 62541 typ host	
 m=video 62545 RTP/SAVPF 98
 a=mid:vid3	
