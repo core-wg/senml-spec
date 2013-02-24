@@ -638,7 +638,7 @@ Offer
 
 v=0	
 o=alice 20519 0 IN IP4 0.0.0.0	
-s=	ULP FEC
+s=ULP FEC
 t=0 0	
 a=ice-ufrag:074c6550	
 a=ice-pwd:a28a397a4c3f31747d1ee3474af08a068	
@@ -653,9 +653,11 @@ a=rtpmap:96 H264/90000
 a=fmtp:96 profile-level-id=428014; max-fs=36001
        max-mbps=108000; max-br=14000
 a=candidate:0 1 UDP  2113667327 192.168.1.4 62537 typ host
-a=candidate:1 1 UDP  694302207 24.23.204.141 62537 typ srflx raddr 192.168.1.4 rport 62537
+a=candidate:1 1 UDP  694302207 24.23.204.141 62537 
+                     typ srflx raddr 192.168.1.4 rport 62537
 a=candidate:0 2 UDP 2113667326 192.168.1.4 64678 typ host
-a=candidate:1 2 UDP  1694302206 24.23.204.141 64678 typ srflx raddr 192.168.1.4 rport 64678
+a=candidate:1 2 UDP  1694302206 24.23.204.141 64678 
+                     typ rflx raddr 192.168.1.4 rport 64678
 m=video 62541 RTP/SAVPF 97
 a=mid:vid2	
 a=rtpmap:97 uplfec/90000
@@ -680,7 +682,7 @@ a=candidate:0 1 UDP 2113667327 192.168.1.4 62545 typ host
 SDP Answer Complex - Suhas 
 v=0	
 o=Bob 20519 0 IN IP4 0.0.0.0	
-s=	ULP FEC
+s=ULP FEC
 t=0 0	
 a=ice-ufrag:c300d85b	
 a=ice-pwd:de4e99bd291c325921d5d47efbabd9a2	
@@ -695,9 +697,11 @@ a=rtpmap:96 H264/90000
 a=fmtp:96 profile-level-id=428014; max-fs=36001
        max-mbps=108000; max-br=14000
 a=candidate:0 1 UDP 2113667327 192.168.1.7 42537 typ host
-a=candidate:1 1 UDP 1694302207 98.248.92.77 42537 typ srflx raddr 192.168.1.7 rport 42537
+a=candidate:1 1 UDP 1694302207 98.248.92.77 42537
+                    typ srflx raddr 192.168.1.7 rport 42537
 a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host
-a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065
+a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 
+                    typ srflx raddr 192.168.1.7 rport 60065
 m=video 42539 RTP/SAVPF 97
 a=mid:vid2	
 a=rtpmap:97 uplfec/90000
@@ -708,9 +712,11 @@ a=rtpmap:98 H264/90000
 a=fmtp:98 profile-level-id=428014; 
        max-fs=3600; max-mbps=108000; max-br=14000
 a=candidate:0 1 UDP 2113667327 192.168.1.7 42537 typ host	
-a=candidate:1 1 UDP 1694302207 98.248.92.77 42537 typ srflx raddr 192.168.1.7 rport 42537
+a=candidate:1 1 UDP 1694302207 98.248.92.77 42537 
+                    typ srflx raddr 192.168.1.7 rport 42537
 a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host
-a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065
+a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 
+                    typ srflx raddr 192.168.1.7 rport 60065
 
  ]]></artwork>
         </figure>  
@@ -725,7 +731,7 @@ a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rp
 SDP Answer Complex
 v=0	
 o=Bob 20519 0 IN IP4 0.0.0.0	
-s=	ULP FEC
+s=ULP FEC
 t=0 0	
 a=ice-ufrag:c300d85b	
 a=ice-pwd:de4e99bd291c325921d5d47efbabd9a2	
@@ -739,9 +745,11 @@ a=rtpmap:96 H264/90000
 a=fmtp:96 profile-level-id=428014; max-fs=36001
        max-mbps=108000; max-br=14000
 a=candidate:0 1 UDP 2113667327 192.168.1.7 42537 typ host
-a=candidate:1 1 UDP 1694302207 98.248.92.77 42537 typ srflx raddr 192.168.1.7 rport 42537
+a=candidate:1 1 UDP 1694302207 98.248.92.77 42537 
+                    typ srflx raddr 192.168.1.7 rport 42537
 a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host
-a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065
+a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 
+                    typ srflx raddr 192.168.1.7 rport 60065
 m=video 0 RTP/SAVPF 97
 a=mid:vid2	
 a=rtpmap:97 uplfec/90000
@@ -752,9 +760,11 @@ a=rtpmap:98 H264/90000
 a=fmtp:98 profile-level-id=428014; 
        max-fs=3600; max-mbps=108000; max-br=14000
 a=candidate:0 1 UDP 2113667327 192.168.1.7 42537 typ host	
-a=candidate:1 1 UDP 1694302207 98.248.92.77 42537 typ srflx raddr 192.168.1.7 rport 42537
+a=candidate:1 1 UDP 1694302207 98.248.92.77 42537 
+                    typ srflx raddr 192.168.1.7 rport 42537
 a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host
-a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065
+a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 
+                    typ srflx raddr 192.168.1.7 rport 60065
  ]]></artwork>
         </figure>  
 
