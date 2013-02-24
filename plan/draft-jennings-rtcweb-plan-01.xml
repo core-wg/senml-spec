@@ -622,10 +622,14 @@ a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:
 c= IN IP4 24.23.204.141	
 a=group:BUNDLE vid1 vid2 
 
-m=video 62537 RTP/SAVPF 96 98
+m=video 62537 RTP/SAVPF 96 98 99 100
 a=mid:vid1	
 a=rtpmap:96 H264/90000	
 a=rtpmap:98 H261/90000
+a=rtpmap:99 rtx/90000
+a=fmtp:99 apt=96;rtx-time=3000
+a=rtpmap:100 rtx/90000
+a=fmtp:100 apt=98;rtx-time=3000
 a=ssrc:12345 cname:user1@host1.example.com	
 a=ssrc:12345 imageattr:* [x=720,y=576]	
 a=ssrc:12345 framerate:30	
