@@ -614,9 +614,9 @@ SDP Offer
 
         <section title="Complex MultiRender Example">
 
-          <t> The follwing shows a single multi render m-line that can display
-          up to three video stream, and send 3 streams, and support 2 layers of
-          simulcast with FEC on the high resoltion layer and bundle. Note that
+          <t> The following shows a single multi render m-line that can display
+          up to three video streams, and send 3 streams, and support 2 layers of
+          simulcast with FEC on the high resolution layer and bundle. Note that
           only host candiates are provided for the FEC and lower resolution
           simulcast so if the device is behind a NAT, those streams will not be
           used. </t>
@@ -625,13 +625,44 @@ SDP Offer
             <artwork align="left" alt="" height="" name="" type="" width=""
                      xml:space="preserve"><![CDATA[
 
-SDP Offer - Suhas 
+[TODO - populate proper fmtp values for lower resolution]
+Offer
 
+v=0	
+o=alice 20519 0 IN IP4 0.0.0.0	
+s=	ULP FEC
+t=0 0	
+a=ice-ufrag:074c6550	
+a=ice-pwd:a28a397a4c3f31747d1ee3474af08a068	
+a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:
+                    c9:c7:70:9d:1f:66:79:a8:07	
+c= IN IP4 24.23.204.141	
+a=group:BUNDLE vid1 vid3
+a=group:FEC vid1 vid2
+m=video 62537 RTP/SAVPF 96
+a=mid:vid1	
+a=rtpmap:96 H264/90000	
+a=fmtp:96 profile-level-id=428014; max-fs=36001
+       max-mbps=108000; max-br=14000
+a=candidate:0 1 UDP  2113667327 192.168.1.4 62537 typ host
+a=candidate:1 1 UDP  694302207 24.23.204.141 62537 typ srflx raddr 192.168.1.4 rport 62537
+a=candidate:0 2 UDP 2113667326 192.168.1.4 64678 typ host
+a=candidate:1 2 UDP  1694302206 24.23.204.141 64678 typ srflx raddr 192.168.1.4 rport 64678
+m=video 62541 RTP/SAVPF 97
+a=mid:vid2	
+a=rtpmap:97 uplfec/90000
+a=candidate:0 1 UDP 2113667327 192.168.1.4 62541 typ host	
+m=video 62545 RTP/SAVPF 98
+a=mid:vid3	
+a=rtpmap:98 H264/90000
+a=fmtp:98 profile-level-id=428014; 
+       max-fs=3600; max-mbps=108000; max-br=14000
+a=candidate:0 1 UDP 2113667327 192.168.1.4 62545 typ host	
  ]]></artwork>
         </figure>  
 
         <t> The follwing shows an answer to the above offer that accepts
-        everything and plans to send video from fivve differnt cameras in to
+        everything and plans to send video from five different cameras in to
         this m-line (but only three at a time). </t>
 
           <figure>
@@ -639,6 +670,39 @@ SDP Offer - Suhas
                      xml:space="preserve"><![CDATA[
 
 SDP Answer Complex - Suhas 
+v=0	
+o=Bob 20519 0 IN IP4 0.0.0.0	
+s=	ULP FEC
+t=0 0	
+a=ice-ufrag:c300d85b	
+a=ice-pwd:de4e99bd291c325921d5d47efbabd9a2	
+a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:
+                    c9:c7:70:9d:1f:66:79:a8:07
+c= IN IP4 98.248.92.77	
+a=group:BUNDLE vid1 vid3
+a=group:FEC vid1 vid2
+m=video 42537 RTP/SAVPF 96
+a=mid:vid1	
+a=rtpmap:96 H264/90000	
+a=fmtp:96 profile-level-id=428014; max-fs=36001
+       max-mbps=108000; max-br=14000
+a=candidate:0 1 UDP 2113667327 192.168.1.7 42537 typ host
+a=candidate:1 1 UDP 1694302207 98.248.92.77 42537 typ srflx raddr 192.168.1.7 rport 42537
+a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host
+a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065
+m=video 42539 RTP/SAVPF 97
+a=mid:vid2	
+a=rtpmap:97 uplfec/90000
+a=candidate:0 1 UDP 2113667327 192.168.1.7 42539 typ host	
+m=video 42537 RTP/SAVPF 98
+a=mid:vid3	
+a=rtpmap:98 H264/90000
+a=fmtp:98 profile-level-id=428014; 
+       max-fs=3600; max-mbps=108000; max-br=14000
+a=candidate:0 1 UDP 2113667327 192.168.1.7 42537 typ host	
+a=candidate:1 1 UDP 1694302207 98.248.92.77 42537 typ srflx raddr 192.168.1.7 rport 42537
+a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host
+a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065
 
  ]]></artwork>
         </figure>  
@@ -650,9 +714,39 @@ SDP Answer Complex - Suhas
           <figure>
             <artwork align="left" alt="" height="" name="" type="" width=""
                      xml:space="preserve"><![CDATA[
-
-SDP Answer Simple - Suhas 
-
+SDP Answer Complex
+v=0	
+o=Bob 20519 0 IN IP4 0.0.0.0	
+s=	ULP FEC
+t=0 0	
+a=ice-ufrag:c300d85b	
+a=ice-pwd:de4e99bd291c325921d5d47efbabd9a2	
+a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:
+                    c9:c7:70:9d:1f:66:79:a8:07
+c= IN IP4 98.248.92.77	
+a=group:BUNDLE vid1 vid3
+m=video 42537 RTP/SAVPF 96
+a=mid:vid1	
+a=rtpmap:96 H264/90000	
+a=fmtp:96 profile-level-id=428014; max-fs=36001
+       max-mbps=108000; max-br=14000
+a=candidate:0 1 UDP 2113667327 192.168.1.7 42537 typ host
+a=candidate:1 1 UDP 1694302207 98.248.92.77 42537 typ srflx raddr 192.168.1.7 rport 42537
+a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host
+a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065
+m=video 0 RTP/SAVPF 97
+a=mid:vid2	
+a=rtpmap:97 uplfec/90000
+a=candidate:0 1 UDP 2113667327 192.168.1.7 42539 typ host	
+m=video 42537 RTP/SAVPF 98
+a=mid:vid3	
+a=rtpmap:98 H264/90000
+a=fmtp:98 profile-level-id=428014; 
+       max-fs=3600; max-mbps=108000; max-br=14000
+a=candidate:0 1 UDP 2113667327 192.168.1.7 42537 typ host	
+a=candidate:1 1 UDP 1694302207 98.248.92.77 42537 typ srflx raddr 192.168.1.7 rport 42537
+a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host
+a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065
  ]]></artwork>
         </figure>  
 
