@@ -49,7 +49,7 @@ add msid to example
       </address>
     </author>
     
-    <date day="18" month="February" year="2013" />
+    <date day="24" month="February" year="2013" />
 
     <area>RAI</area>
 
@@ -575,6 +575,11 @@ Camera            a=multiple-render:5                  |
           existing in all offers or answers they receive - particularly when
           working with SIP endpoints. </t>
 
+          <t> When using multiplexing, the SDP MUST be distinct enough the
+          combination of payload type number and SSRC allows for unique
+          demultiplexing of all the media on the same transport flow without use
+          of MSID thought the MSID can help in several use cases. </t>
+
         </section>
 
       <section anchor="sec-multi-render" title="Multiple Render">
@@ -620,7 +625,7 @@ SDP Offer
         <t>This allows a switching MCU to know how many thumbnail type streams
         would be appropriate to send to this endpoint.</t>
 
-        <section  anchor="sec-mult-render-example" title="Complex MultiRender Example">
+        <section  anchor="sec-mult-render-example" title="Complex Multi Render Example">
 
           <t> The following shows a single multi render m-line that can display
           up to three video streams, and send 3 streams, and support 2 layers of
@@ -632,9 +637,10 @@ SDP Offer
           <figure>
             <artwork align="left" alt="" height="" name="" type="" width=""
                      xml:space="preserve"><![CDATA[
+TODO - make multirender 
 
-[TODO - populate proper fmtp values for lower resolution]
-Offer
+
+SDP Offer
 
 v=0	
 o=alice 20519 0 IN IP4 0.0.0.0	
@@ -649,12 +655,13 @@ a=group:BUNDLE vid1 vid2 vid3
 a=group:FEC vid1 vid2
 a=group:SIMULCAST vid1 vid3
 m=video 62537 RTP/SAVPF 96
-a=mid:vid1	
+a=mid:vid1
+a=multi-render:3	
 a=rtcp-mux
 a=msid:12345123451234512345 s:1 f:1
 a=rtpmap:96 VP8/90000	
 a=fmtp:96 max-fr=30;max-fs=3600;
-a=imageattr:96 [x=720,y=576]
+a=imageattr:96 [x=1280,y=720]
 a=candidate:0 1 UDP  2113667327 192.168.1.4 62537 typ host
 a=candidate:1 1 UDP  694302207 24.23.204.141 62537 
                      typ srflx raddr 192.168.1.4 rport 62537
@@ -663,6 +670,7 @@ a=candidate:1 2 UDP  1694302206 24.23.204.141 64678
                      typ rflx raddr 192.168.1.4 rport 64678
 m=video 62541 RTP/SAVPF 97
 a=mid:vid2	
+a=multi-render:3	
 a=rtcp-mux
 a=msid:34567345673456734567 s:1 f:2
 a=rtpmap:97 uplfec/90000
@@ -670,11 +678,12 @@ a=imageattr:97 [x=720,y=576]
 a=candidate:0 1 UDP 2113667327 192.168.1.4 62541 typ host	
 m=video 62545 RTP/SAVPF 98
 a=mid:vid3	
+a=multi-render:3	
 a=rtcp-mux
 a=msid:333444558899000991122 s:1 f:3
 a=rtpmap:98 VP8/90000
-a=fmtp:98 max-fr=15;max-fs=400;
-a=imageattr:96 [x=352,y=240]
+a=fmtp:98 max-fr=15;max-fs=300;
+a=imageattr:96 [x=320,y=240]
 a=candidate:0 1 UDP 2113667327 192.168.1.4 62545 typ host	
  ]]></artwork>
         </figure>  
@@ -687,7 +696,8 @@ a=candidate:0 1 UDP 2113667327 192.168.1.4 62545 typ host
             <artwork align="left" alt="" height="" name="" type="" width=""
                      xml:space="preserve"><![CDATA[
 
-SDP Answer Complex - Suhas 
+SDP Answer Complex 
+
 v=0	
 o=Bob 20519 0 IN IP4 0.0.0.0	
 s=ULP FEC
@@ -702,11 +712,12 @@ a=group:FEC vid1 vid2
 a=group:SIMULCAST vid1 vid3
 m=video 42537 RTP/SAVPF 96
 a=mid:vid1	
+a=multi-render:3	
 a=rtcp-mux
 a=msid:54321543215432154321 s:1 f:1 r:12345123451234512345
 a=rtpmap:96 VP8/90000	
 a=fmtp:96 max-fr=30;max-fs=3600;
-a=imageattr:96 [x-720,y=576]
+a=imageattr:96 [x=1280,y=720]
 a=candidate:0 1 UDP 2113667327 192.168.1.7 42537 typ host
 a=candidate:1 1 UDP 1694302207 98.248.92.77 42537
                     typ srflx raddr 192.168.1.7 rport 42537
@@ -715,18 +726,19 @@ a=candidate:1 2 UDP 1694302206 98.248.92.77 60065
                     typ srflx raddr 192.168.1.7 rport 60065
 m=video 42539 RTP/SAVPF 97
 a=mid:vid2	
+a=multi-render:3	
 a=rtcp-mux
-a=msid:11111122222233333444444 s:1 f:1 r:34567345673456734567
+a=msid:11111122222233333444444 s:1 f:2 r:34567345673456734567
 a=rtpmap:97 uplfec/90000
-a=imageattr:97 [x=720,y=576]
 a=candidate:0 1 UDP 2113667327 192.168.1.7 42539 typ host	
 m=video 42537 RTP/SAVPF 98
 a=mid:vid3	
+a=multi-render:3	
 a=rtcp-mux
-a=msid:777777888888999999111111 s:1 f:1 r:333444558899000991122
+a=msid:777777888888999999111111 s:1 f:3 r:333444558899000991122
 a=rtpmap:98 VP8/90000
-a=fmtp:98 max-fr=15;max-fs=400;
-a=imageattr:98 [x=352,y=240]
+a=fmtp:98 max-fr=15;max-fs=300;
+a=imageattr:98 [x=320,y=240]
 a=candidate:0 1 UDP 2113667327 192.168.1.7 42537 typ host	
 a=candidate:1 1 UDP 1694302207 98.248.92.77 42537 
                     typ srflx raddr 192.168.1.7 rport 42537
@@ -739,12 +751,13 @@ a=candidate:1 2 UDP 1694302206 98.248.92.77 60065
 
 
         <t> The following shows an answer to the above by a client that does not
-        support simulcast or FEC. </t>
+        support simulcast, FEC, bundle, or msid. </t>
 
           <figure>
             <artwork align="left" alt="" height="" name="" type="" width=""
                      xml:space="preserve"><![CDATA[
-SDP Answer Complex
+SDP Answer Simnple
+
 v=0	
 o=Bob 20519 0 IN IP4 0.0.0.0	
 s=ULP FEC
@@ -758,10 +771,8 @@ m=video 42537 RTP/SAVPF 96
 a=mid:vid1	
 a=rtcp-mux
 a=recvonly
-a=msid:54321543215432154321 s:1 f:1 r:12345123451234512345
 a=rtpmap:96 VP8/90000	
 a=fmtp:96 max-fr=30;max-fs=3600;
-a=imageattr:96 [x=720,y=576]
 a=candidate:0 1 UDP 2113667327 192.168.1.7 42537 typ host
 a=candidate:1 1 UDP 1694302207 98.248.92.77 42537 
                     typ srflx raddr 192.168.1.7 rport 42537
@@ -809,9 +820,12 @@ a=fmtp:98 profile-level-id=428014;
         mandatory to implement in WebRTC. </t>
       </section>
 
-      <section anchor="sec-issues" title="Issues">
+      <section anchor="sec-issues" title="Open Issues">
       
-        <t>What do do with unrecognized media received at W3C PC level</t>
+        <t>What do do with unrecognized media received at W3C PerrConnection
+        level? Sugestion is it creates a new track in whatever stream the MSID
+        would indicate if present and the defualt stream if no MSID header
+        extention in the RTP. </t>
 
       </section>
 
@@ -833,7 +847,8 @@ a=fmtp:98 profile-level-id=428014;
     <section anchor="sec-examples" title="Examples">
 
 
-<t> 2 camera, 2 simulcast streams </t>
+<!-- 
+      <t> 2 camera, 2 simulcast streams </t>
 
   <figure>
         <artwork align="left" alt="" height="" name="" type="" width=""
@@ -954,6 +969,7 @@ a=rtcp-fb:120 ccm fir
 ]]></artwork>
       </figure>
 
+-->
 
       <t>Example of a video client joining a video conference. The client can
       produce and receive two streams of video, one from the slides and the
@@ -971,8 +987,6 @@ a=rtcp-fb:120 ccm fir
       <figure>
         <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-[TODO - populate proper fmtp values for thumbnail size] or 
-
      v=0
      o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
      s=
