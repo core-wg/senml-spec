@@ -652,9 +652,9 @@ m=video 62537 RTP/SAVPF 96
 a=mid:vid1	
 a=rtcp-mux
 a=msid:12345123451234512345 s:1 f:1
-a=rtpmap:96 H264/90000	
-a=fmtp:96 profile-level-id=428014; max-fs=36001
-       max-mbps=108000; max-br=14000
+a=rtpmap:96 VP8/90000	
+a=fmtp:96 max-fr=30;max-fs=3600;
+a=imageattr:96 [x=720,y=576]
 a=candidate:0 1 UDP  2113667327 192.168.1.4 62537 typ host
 a=candidate:1 1 UDP  694302207 24.23.204.141 62537 
                      typ srflx raddr 192.168.1.4 rport 62537
@@ -666,14 +666,15 @@ a=mid:vid2
 a=rtcp-mux
 a=msid:34567345673456734567 s:1 f:2
 a=rtpmap:97 uplfec/90000
+a=imageattr:97 [x=720,y=576]
 a=candidate:0 1 UDP 2113667327 192.168.1.4 62541 typ host	
 m=video 62545 RTP/SAVPF 98
 a=mid:vid3	
 a=rtcp-mux
 a=msid:333444558899000991122 s:1 f:3
-a=rtpmap:98 H264/90000
-a=fmtp:98 profile-level-id=428014; 
-       max-fs=3600; max-mbps=108000; max-br=14000
+a=rtpmap:98 VP8/90000
+a=fmtp:98 max-fr=15;max-fs=400;
+a=imageattr:96 [x=352,y=240]
 a=candidate:0 1 UDP 2113667327 192.168.1.4 62545 typ host	
  ]]></artwork>
         </figure>  
@@ -703,9 +704,9 @@ m=video 42537 RTP/SAVPF 96
 a=mid:vid1	
 a=rtcp-mux
 a=msid:54321543215432154321 s:1 f:1 r:12345123451234512345
-a=rtpmap:96 H264/90000	
-a=fmtp:96 profile-level-id=428014; max-fs=36001
-       max-mbps=108000; max-br=14000
+a=rtpmap:96 VP8/90000	
+a=fmtp:96 max-fr=30;max-fs=3600;
+a=imageattr:96 [x-720,y=576]
 a=candidate:0 1 UDP 2113667327 192.168.1.7 42537 typ host
 a=candidate:1 1 UDP 1694302207 98.248.92.77 42537
                     typ srflx raddr 192.168.1.7 rport 42537
@@ -717,14 +718,15 @@ a=mid:vid2
 a=rtcp-mux
 a=msid:11111122222233333444444 s:1 f:1 r:34567345673456734567
 a=rtpmap:97 uplfec/90000
+a=imageattr:97 [x=720,y=576]
 a=candidate:0 1 UDP 2113667327 192.168.1.7 42539 typ host	
 m=video 42537 RTP/SAVPF 98
 a=mid:vid3	
 a=rtcp-mux
 a=msid:777777888888999999111111 s:1 f:1 r:333444558899000991122
-a=rtpmap:98 H264/90000
-a=fmtp:98 profile-level-id=428014; 
-       max-fs=3600; max-mbps=108000; max-br=14000
+a=rtpmap:98 VP8/90000
+a=fmtp:98 max-fr=15;max-fs=400;
+a=imageattr:98 [x=352,y=240]
 a=candidate:0 1 UDP 2113667327 192.168.1.7 42537 typ host	
 a=candidate:1 1 UDP 1694302207 98.248.92.77 42537 
                     typ srflx raddr 192.168.1.7 rport 42537
@@ -755,10 +757,11 @@ c= IN IP4 98.248.92.77
 m=video 42537 RTP/SAVPF 96
 a=mid:vid1	
 a=rtcp-mux
+a=recvonly
 a=msid:54321543215432154321 s:1 f:1 r:12345123451234512345
-a=rtpmap:96 H264/90000	
-a=fmtp:96 profile-level-id=428014; max-fs=36001
-       max-mbps=108000; max-br=14000
+a=rtpmap:96 VP8/90000	
+a=fmtp:96 max-fr=30;max-fs=3600;
+a=imageattr:96 [x=720,y=576]
 a=candidate:0 1 UDP 2113667327 192.168.1.7 42537 typ host
 a=candidate:1 1 UDP 1694302207 98.248.92.77 42537 
                     typ srflx raddr 192.168.1.7 rport 42537
