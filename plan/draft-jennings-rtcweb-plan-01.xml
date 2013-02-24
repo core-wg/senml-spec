@@ -1958,7 +1958,7 @@ SDP Offer
             media type in the Session Description Protocol (SDP). This is
             required, for example, if media data is separated and transported
             in different network streams as a result of the use of a layered
-            or multiple descriptive media coding process.&lt;/t&gt;&lt;t&gt; A
+            or multiple descriptive media coding process. A
             new grouping type "DDP" -- decoding dependency -- is defined, to
             be used in conjunction with RFC 3388 entitled "Grouping of Media
             Lines in the Session Description Protocol". In addition, an
