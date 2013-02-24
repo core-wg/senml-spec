@@ -1694,14 +1694,16 @@ Alice->Bob: One-Way H.264 Video with Bob selected video stream encodings
           <c><xref target="RFC4566"></xref></c>
           <c>a=rtpmap:96 H264/90000</c>
           <c><xref target="RFC3984"></xref></c>
-          <c>a=ssrc:12345 cname:user1@host1.example.com</c>
-          <c><xref target="RFC5576"></xref>  Camera-1,Encoding-1 SSRC</c>
+          <c>a=ssrc:12345 cname:axzo1278npDlAzM73</c>
+          <c><xref target="RFC5576"></xref> <xref target="draft-rescorla-avtcore-6222bis"></xref>
+            Camera-1,Encoding-1 SSRC with Session CNAME</c>
           <c>a=ssrc:12345 imageattr:* [x=720,y=576]</c>
           <c><xref target="RFC5576"></xref>  Camera-1,Encoding-1 Resolution</c>
           <c>a=ssrc:12345 framerate:30</c>
           <c><xref target="RFC5576"></xref>  Camera-1,Encoding-1 Framerate</c>
-          <c>a=ssrc:67890 cname:user2@host2.example.com</c>
-          <c><xref target="RFC5576"></xref>  Camera-1,Encoding-2 SSRC</c>
+          <c>a=ssrc:67890 cname:1NyKLomPs897HnrtU</c>
+          <c><xref target="RFC5576"></xref> <xref target="draft-rescorla-avtcore-6222bis"></xref>
+            Camera-1,Encoding-2 SSRC with Session CNAME</c>
           <c>a=ssrc:67890 imageattr:* [x=176,y=144]</c>
           <c><xref target="RFC5576"></xref>  Camera-1,Encoding-2 Resolution</c>
           <c>a=ssrc:67890 framerate:15</c>
@@ -1718,14 +1720,16 @@ Alice->Bob: One-Way H.264 Video with Bob selected video stream encodings
           <c><xref target="RFC4566"></xref></c>
           <c>a=rtpmap:97 H264/90000</c>
           <c><xref target="RFC3984"></xref></c>
-          <c>a=ssrc:54321 cname:user1@host1.example.com</c>
-          <c><xref target="RFC5576"></xref>  Camera-2,Encoding-1 SSRC</c>
+          <c>a=ssrc:54321 cname:o1278npDLOPzlAzM7</c>
+          <c><xref target="RFC5576"></xref> <xref target="draft-rescorla-avtcore-6222bis"></xref>  
+            Camera-2,Encoding-1 SSRC with Session CNAME</c>
           <c>a=ssrc:54321 imageattr:* [x=352,y=288]</c>
           <c><xref target="RFC5576"></xref>  Camera-2,Encoding-1 Resolution</c>
           <c>a=ssrc:54321 framerate:30</c>
           <c><xref target="RFC5576"></xref>  Camera-2,Encoding-1 Framerate</c>
-          <c>a=ssrc:98760 cname:user2@host2.example.com</c>
-          <c><xref target="RFC5576"></xref>  Camera-2,Encoding-2 SSRC</c>
+          <c>a=ssrc:98760 cname:Yt54Jut99JgFvB23Q</c>
+          <c><xref target="RFC5576"></xref> <xref target="draft-rescorla-avtcore-6222bis"></xref>
+            Camera-2,Encoding-2 SSRC with Session CNAME</c>
           <c>a=ssrc:98760 imageattr:* [x=176,y=144]</c>
           <c><xref target="RFC5576"></xref>  Camera-2,Encoding-2 Resolution</c>
           <c>a=ssrc:98760 framerate:15</c>
@@ -2673,6 +2677,24 @@ end note
         <format target="http://tools.ietf.org/html/draft-lennox-mmusic-sdp-source-selection-05"
           type="TXT" />
       </reference>
+      <reference anchor="draft-rescorla-avtcore-6222bis">
+        <front>
+          <title> Guidelines for Choosing RTP Control Protocol (RTCP)
+            Canonical Names (CNAMEs)</title>        
+          <author fullname="Eric Rescorla" initials="E." surname="Rescorla">
+            <organization></organization>
+          </author>
+          <author fullname="Ali Begen" initials="A." surname="Begen">
+            <organization></organization>
+          </author>
+          <date month="October" year="2012" />
+        </front>
+        <seriesInfo name="Internet-Draft"
+          value="draft-rescorla-avtcore-6222bis-00" />      
+        <format target="http://tools.ietf.org/html/draft-rescorla-avtcore-6222bis-00"
+          type="TXT" />
+      </reference>
+      
     </references>
   </back>
 </rfc>
