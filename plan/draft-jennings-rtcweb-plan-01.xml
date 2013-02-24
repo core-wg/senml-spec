@@ -222,8 +222,7 @@ add msid to example
       </t>
       <t>
 	<list style="symbols">
-	  <t>Multiple sources which are semantically equivalent and
-	  multiplexed on a time-wise basis.
+	  <t>Multiple sources which are multiplexed on a time-wise basis.
 	  For instance, if an MCU mixes multiple camera feeds but only
 	  some subset is displayed at a time, they can all appear on the same
 	  m-line.</t>
@@ -233,7 +232,9 @@ add msid to example
 	</list>
       </t>
       <t>
-	By contrast, multiple sources which are semantically distinct
+	By contrast, multiple sources which need distinct handling
+	(e.g., can't be substituted for each other on a 
+	"most recently received" basis)
 	cannot appear on the same m-line because that does not allow
 	for clear negotiation of which sources are acceptable, or
 	which sets of RTP SSRCs correspond to which flow.
