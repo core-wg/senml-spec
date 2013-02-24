@@ -540,7 +540,7 @@ Camera            a=multiple-render:5                  |
           device identifier included. In the case where the device ID of
           the device sending the answer was 22222333334444455555, the MSID would
           look like:  <list> 
-              <t> a=msid:12345123451234512345 s:1 f:3 r:22222333334444455555</t>
+            <t> a=msid:22222333334444455555 s:1 f:3 r:12345123451234512345</t>
             </list>
           </t>
 
@@ -645,10 +645,13 @@ a=ice-pwd:a28a397a4c3f31747d1ee3474af08a068
 a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:
                     c9:c7:70:9d:1f:66:79:a8:07	
 c= IN IP4 24.23.204.141	
-a=group:BUNDLE vid1 vid3
+a=group:BUNDLE vid1 vid2 vid3
 a=group:FEC vid1 vid2
+a=group:SIMULCAST vid1 vid3
 m=video 62537 RTP/SAVPF 96
 a=mid:vid1	
+a=rtcp-mux
+a=msid:12345123451234512345 s:1 f:1
 a=rtpmap:96 H264/90000	
 a=fmtp:96 profile-level-id=428014; max-fs=36001
        max-mbps=108000; max-br=14000
@@ -660,10 +663,14 @@ a=candidate:1 2 UDP  1694302206 24.23.204.141 64678
                      typ rflx raddr 192.168.1.4 rport 64678
 m=video 62541 RTP/SAVPF 97
 a=mid:vid2	
+a=rtcp-mux
+a=msid:34567345673456734567 s:1 f:2
 a=rtpmap:97 uplfec/90000
 a=candidate:0 1 UDP 2113667327 192.168.1.4 62541 typ host	
 m=video 62545 RTP/SAVPF 98
 a=mid:vid3	
+a=rtcp-mux
+a=msid:333444558899000991122 s:1 f:3
 a=rtpmap:98 H264/90000
 a=fmtp:98 profile-level-id=428014; 
        max-fs=3600; max-mbps=108000; max-br=14000
@@ -689,10 +696,13 @@ a=ice-pwd:de4e99bd291c325921d5d47efbabd9a2
 a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:
                     c9:c7:70:9d:1f:66:79:a8:07
 c= IN IP4 98.248.92.77	
-a=group:BUNDLE vid1 vid3
+a=group:BUNDLE vid1 vid2 vid3
 a=group:FEC vid1 vid2
+a=group:SIMULCAST vid1 vid3
 m=video 42537 RTP/SAVPF 96
 a=mid:vid1	
+a=rtcp-mux
+a=msid:54321543215432154321 s:1 f:1 r:12345123451234512345
 a=rtpmap:96 H264/90000	
 a=fmtp:96 profile-level-id=428014; max-fs=36001
        max-mbps=108000; max-br=14000
@@ -704,10 +714,14 @@ a=candidate:1 2 UDP 1694302206 98.248.92.77 60065
                     typ srflx raddr 192.168.1.7 rport 60065
 m=video 42539 RTP/SAVPF 97
 a=mid:vid2	
+a=rtcp-mux
+a=msid:11111122222233333444444 s:1 f:1 r:34567345673456734567
 a=rtpmap:97 uplfec/90000
 a=candidate:0 1 UDP 2113667327 192.168.1.7 42539 typ host	
 m=video 42537 RTP/SAVPF 98
 a=mid:vid3	
+a=rtcp-mux
+a=msid:777777888888999999111111 s:1 f:1 r:333444558899000991122
 a=rtpmap:98 H264/90000
 a=fmtp:98 profile-level-id=428014; 
        max-fs=3600; max-mbps=108000; max-br=14000
@@ -738,9 +752,10 @@ a=ice-pwd:de4e99bd291c325921d5d47efbabd9a2
 a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:
                     c9:c7:70:9d:1f:66:79:a8:07
 c= IN IP4 98.248.92.77	
-a=group:BUNDLE vid1 vid3
 m=video 42537 RTP/SAVPF 96
 a=mid:vid1	
+a=rtcp-mux
+a=msid:54321543215432154321 s:1 f:1 r:12345123451234512345
 a=rtpmap:96 H264/90000	
 a=fmtp:96 profile-level-id=428014; max-fs=36001
        max-mbps=108000; max-br=14000
@@ -752,19 +767,14 @@ a=candidate:1 2 UDP 1694302206 98.248.92.77 60065
                     typ srflx raddr 192.168.1.7 rport 60065
 m=video 0 RTP/SAVPF 97
 a=mid:vid2	
+a=rtcp-mux
 a=rtpmap:97 uplfec/90000
-a=candidate:0 1 UDP 2113667327 192.168.1.7 42539 typ host	
-m=video 42537 RTP/SAVPF 98
+m=video 0 RTP/SAVPF 98
 a=mid:vid3	
+a=rtcp-mux
 a=rtpmap:98 H264/90000
 a=fmtp:98 profile-level-id=428014; 
        max-fs=3600; max-mbps=108000; max-br=14000
-a=candidate:0 1 UDP 2113667327 192.168.1.7 42537 typ host	
-a=candidate:1 1 UDP 1694302207 98.248.92.77 42537 
-                    typ srflx raddr 192.168.1.7 rport 42537
-a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host
-a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 
-                    typ srflx raddr 192.168.1.7 rport 60065
  ]]></artwork>
         </figure>  
 
