@@ -16,11 +16,11 @@
 
 <!-- 
 
-add receivonly on thrumbnai example 
+add receive only on thumbnail example 
 
-make clear most recent sender wind mult render 
+make clear most recent sender wind multi render 
 
-example with changeing SSRC and how to correlate 
+example with changing SSRC and how to correlate 
 
 add msid to example 
 
@@ -77,32 +77,32 @@ add msid to example
       but rather re-use the existing methods for describing RTP <xref
       target="RFC3550" /> media flows.</t>
 
-      <t> The general theory is that, roughly speaking, is that m-line corespond
-      to flow of packets that can be handled by the applicaiton in the same
+      <t> The general theory is that, roughly speaking, is that m-line correspond
+      to flow of packets that can be handled by the application in the same
       way. This often results in more m-lines that there are media sources such
-      as micrphones or cameras. Forward Error Correction (FEC) is done with
-      multiple M-lines as shown in RFC TODO. Retrasnmission (RTX) is done with
-      mutilpel m-lines as shown in RFC TODO. Layered coding is done wth mutiple
+      as microphones or cameras. Forward Error Correction (FEC) is done with
+      multiple M-lines as shown in RFC TODO. Retransmission (RTX) is done with
+      multiple m-lines as shown in RFC TODO. Layered coding is done with multiple
       m-lines as shown in RFC TODO. Simulcast, which is really just multiple
-      vidoe stream from same camera, much like layered codin but with no
-      interstream dependency, is done with mutiiple m-lines modeles after the
+      video stream from same camera, much like layered coding but with no
+      inter m-line dependency, is done with multiple m-lines modeles after the
       Layered coding in RFC TODO. </t>
 
-      <t> The signifianct adition to SDP semantics is an multi-render media
+      <t> The significant addition to SDP semantics is an multi-render media
       level attribute that allows a device to indicate that it makes sense to
-      simultanosly use multiple stream of video that will be simultanosly
-      displayed but share the same SDP chracterristics and semanntics such that
-      they can all be negotated under a single m-line. When using features like
-      RTX, FEC, and Simulcast in a multireder sitituation, there needs to be a
+      simultaneously use multiple stream of video that will be simultaneously
+      displayed but share the same SDP characteristics and semantics such that
+      they can all be negotiated under a single m-line. When using features like
+      RTX, FEC, and Simulcast in a multireder situation, there needs to be a
       way to correlate a given related media flows with the correct "base"
-      media-flow. This is acomplished by having the related flows cary, in the
+      media-flow. This is accomplished by having the related flows cary, in the
       CSRC, the SSRC of their base flow. 
       If you just want to see what the SDP might look like, see the example in
       <xref target="sec-mult-render-example" />. </t>
 
       <t> This draft also propose that advanced usages, including WebRTC to
-      WebRTC scenereos, use a Media Stream Identifier (MSID) that is signalled
-      in SDP and also attempt to negotation the usage of a RTP header extention
+      WebRTC scenarios, use a Media Stream Identifier (MSID) that is signalled
+      in SDP and also attempt to negotiation the usage of a RTP header extension
       to include the MSID in the RTP packet. This resolves many long term issues. </t>
 
       <t>This does results in lots of m lines but all the alternatives designs resulted
@@ -110,8 +110,8 @@ add msid to example
       redefining most of the media level attributes. So it's really hard to see
       the big benefits defining something new over what we have. 
 
-      One of the concerns about this aproach is the time to collect all the ICE
-      candiates needed for the intitial offer. Section TODO provides mitigations
+      One of the concerns about this approach is the time to collect all the ICE
+      candidates needed for the initial offer. Section TODO provides mitigations
       to reduce the number of ports needed to be the same as an alternative SSRC
       based design.
 
@@ -258,7 +258,7 @@ add msid to example
 	The basic unit of description in SDP is the m-line/m-block and this
 	document continues with that assumption. In general, different cameras,
 	microphones, etc. are carried on different m-lines. The exceptions to
-	this rule is when using the multi-render extention in which case:
+	this rule is when using the multi-render extension in which case:
       </t>
       <t>
 	<list style="symbols">
@@ -280,13 +280,13 @@ add msid to example
 	associate RTP flows with information in the SDP.  There are two reasons
 	for this. First, in an offer/answer setting, RTP can appear at the
 	offerer before the answer is received; if SSRC information from the
-	offerer is required, then thes RTP packets cannot be interpreted.
+	offerer is required, then these RTP packets cannot be interpreted.
 	The second reason  is that RTP permits SSRCs to be changed at
 	any time.
       </t>
       <t>
 	This assumption makes clear why the two exceptions to the "one flow per
-	m-line" rule work. In the case of time-based multiplexing (multirender)
+	m-line" rule work. In the case of time-based multiplexing (multi render)
 	of camera sources, all the cameras are equivalent from the receiver's
 	perspective; he merely needs to know which ones to display now and he
 	does that based on which ones have been most recently received. In the
@@ -569,10 +569,10 @@ Camera            a=multiple-render:5                  |
           the MS-Track be the MSID. </t>
 
           <t> In addition, the SDP will attempt to negotatiate sending the MSID
-          in the RTP using a RTP Header Extention. WebRTC clients SHOULD also
+          in the RTP using a RTP Header Extension. WebRTC clients SHOULD also
           include the a=ssrc attributes if they know which SSRC they plan to
           send but they can not rely on this not changing, being compete, or
-          existing in all offers or answers they receive - particularlarly when
+          existing in all offers or answers they receive - particularly when
           working with SIP endpoints. </t>
 
         </section>
@@ -625,7 +625,7 @@ SDP Offer
           <t> The following shows a single multi render m-line that can display
           up to three video streams, and send 3 streams, and support 2 layers of
           simulcast with FEC on the high resolution layer and bundle. Note that
-          only host candiates are provided for the FEC and lower resolution
+          only host candidates are provided for the FEC and lower resolution
           simulcast so if the device is behind a NAT, those streams will not be
           used. </t>
 
@@ -678,7 +678,7 @@ a=candidate:0 1 UDP 2113667327 192.168.1.4 62545 typ host
  ]]></artwork>
         </figure>  
 
-        <t> The follwing shows an answer to the above offer that accepts
+        <t> The following shows an answer to the above offer that accepts
         everything and plans to send video from five different cameras in to
         this m-line (but only three at a time). </t>
 
@@ -736,7 +736,7 @@ a=candidate:1 2 UDP 1694302206 98.248.92.77 60065
         </figure>  
 
 
-        <t> The follwing shows an answer to the above by a client that does not
+        <t> The following shows an answer to the above by a client that does not
         support simulcast or FEC. </t>
 
           <figure>
@@ -814,12 +814,12 @@ a=fmtp:98 profile-level-id=428014;
 
       <section anchor="sec-confusions" title="Confusions">
       
-        <t> You can decrypt DTLS-SRTP media before receeiving an answer, you
-        can't determin if it is secure or not till you have the fingerprint and
-        have verfied it </t>
+        <t> You can decrypt DTLS-SRTP media before receiving an answer, you
+        can't determine if it is secure or not till you have the fingerprint and
+        have verified it </t>
 
-        <t> You can use RTCP-FB to do things like PLI wihtout signalling the
-        SSRC. The PLI packets gets the sernder SSRC from the incoming media that
+        <t> You can use RTCP-FB to do things like PLI without signaling the
+        SSRC. The PLI packets gets the sender SSRC from the incoming media that
         is trying to signal the PLI for. </t>
 
       </section>
@@ -1155,10 +1155,10 @@ SDP Answer signaling only SDES
         <t> Change W3C API to say that a PC-Track can be in only one
         PeerConnection or make an object inside the PeerConnection for each
         track in the PC that can be used to set constraints and settings and get
-        informaoiton related to the RTP flow. </t>
+        information related to the RTP flow. </t>
 
         <t> Sort out how to tell a PC-Track, particularly one menat for
-        receiving infrmation, that it can do simulcat, layered coding, RTX, FEC,
+        receiving information, that it can do simulcast, layered coding, RTX, FEC,
         etc. </t>
 
       </list>
@@ -1439,7 +1439,7 @@ SDP Offer
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
 
-SDP Offer with SSRC muliplexing 
+SDP Offer with SSRC multiplexing 
 
    v=0
    o=mascha 2980675221 2980675778 IN IP4 host.example.net
@@ -1459,7 +1459,7 @@ SDP Offer with SSRC muliplexing
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
 
-SDP Offer with session muliplexing 
+SDP Offer with session multiplexing 
 
    v=0
    o=mascha 2980675221 2980675778 IN IP4 host.example.net
