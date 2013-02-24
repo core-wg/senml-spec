@@ -73,20 +73,21 @@ add msid to example
     <section title="Overview">
       <t>The reoccurring theme of this draft is that SDP <xref
       target="RFC4566"></xref> already has a way of solving many of the problems
-      being discussed at the RTCWeb WG and we not try to invent something new
+      being discussed at the RTCWeb WG and we SHOULD not try to invent something new
       but rather re-use the existing methods for describing RTP <xref
       target="RFC3550" /> media flows.</t>
 
-      <t> The general theory is that, roughly speaking, is that m-line correspond
+      <t> The general theory is that, roughly speaking,  the m-line corresponds
       to flow of packets that can be handled by the application in the same
-      way. This often results in more m-lines that there are media sources such
+      way. This often results in more m-lines than there are media sources such
       as microphones or cameras. Forward Error Correction (FEC) is done with
       multiple M-lines as shown in <xref target="RFC4756"></xref>. Retransmission 
       (RTX) is done with multiple m-lines as shown in <xref target="RFC4588"></xref>. 
       Layered coding is done with multiple m-lines as shown in <xref target="RFC5583"></xref>. 
-      Simulcast, which is really just multiple video stream from same camera, much 
+      Simulcast, which is really just multiple video stream from the same camera, much 
       like layered coding but with no inter m-line dependency, is done with multiple
-      m-lines modeles after the Layered coding in <xref target="RFC5583"></xref>. </t>
+      m-lines modeled after the Layered coding defined in in <xref target="RFC5583"></xref>. 
+      </t>
 
       <t> The significant addition to SDP semantics is an multi-render media
       level attribute that allows a device to indicate that it makes sense to
@@ -94,15 +95,14 @@ add msid to example
       displayed but share the same SDP characteristics and semantics such that
       they can all be negotiated under a single m-line. When using features like
       RTX, FEC, and Simulcast in a multireder situation, there needs to be a
-      way to correlate a given related media flows with the correct "base"
-      media-flow. This is accomplished by having the related flows cary, in the
-      CSRC, the SSRC of their base flow. 
-      If you just want to see what the SDP might look like, see the example in
-      <xref target="sec-mult-render-example" />. </t>
+      way to correlate a given related media flow with the correct "base"
+      media-flow. This is accomplished by having the related flows carry, in the
+      CSRC, the SSRC of their base flow. An example SDP might look like as provided
+      in the example <xref target="sec-mult-render-example" />. </t>
 
       <t> This draft also propose that advanced usages, including WebRTC to
-      WebRTC scenarios, use a Media Stream Identifier (MSID) that is signalled
-      in SDP and also attempt to negotiation the usage of a RTP header extension
+      WebRTC scenarios, uses a Media Stream Identifier (MSID) that is signalled
+      in SDP and also attempts to negotiate the usage of a RTP header extension
       to include the MSID in the RTP packet. This resolves many long term issues. </t>
 
       <t>This does results in lots of m lines but all the alternatives designs resulted
@@ -255,10 +255,10 @@ add msid to example
 
     <section title="Overview" anchor="sec-overview">
       <t>
-	The basic unit of description in SDP is the m-line/m-block and this
-	document continues with that assumption. In general, different cameras,
-	microphones, etc. are carried on different m-lines. The exceptions to
-	this rule is when using the multi-render extension in which case:
+	     The basic unit of media description in SDP is the m-line/m-block and this
+	     document continues with that assumption. In general, different cameras,
+	     microphones, etc. are carried on different m-lines. The exceptions to
+	     this rule is when using the multi-render extension in which case:
       </t>
       <t>
 	<list style="symbols">
@@ -405,8 +405,8 @@ Camera            a=multiple-render:5                  |
           SVC, each repair stream, layer, or simulcast media flow will get an m-block per media flow. </t>
 
           <t>If a systems wants to receive two streams of video to display in
-          two different windows or screens, it MUST user separate m-blocks for
-          each unless explicitly signaled to otherwise (see <xref
+          two different windows or screens, it MUST use separate m-blocks for
+          each unless explicitly signaled to be otherwise (see <xref
           target="sec-multi-render"/>). </t>
 
           <t>Unless explicitly signaled otherwise (see <xref
@@ -447,7 +447,7 @@ Camera            a=multiple-render:5                  |
           the CSRC list, set and read the content RFC 4574 "label", and read the
           SSRC of last packet received on a PC-Track.</t>
 
-          <t>The W3C api should have a constraint or API method to allow a
+          <t>The W3C API should have a constraint or API method to allow a
           PC-Stream to indicate the number of multi-render video streams it can
           accept. Each time a new stream is received up to the maximum, a new
           PC-Track will be created.</t>
@@ -575,10 +575,10 @@ Camera            a=multiple-render:5                  |
           existing in all offers or answers they receive - particularly when
           working with SIP endpoints. </t>
 
-          <t> When using multiplexing, the SDP MUST be distinct enough the
+          <t> When using multiplexing, the SDP MUST be distinct enough where the
           combination of payload type number and SSRC allows for unique
           demultiplexing of all the media on the same transport flow without use
-          of MSID thought the MSID can help in several use cases. </t>
+          of MSID though the MSID can help in several use cases. </t>
 
         </section>
 
@@ -608,9 +608,9 @@ SDP Offer
         </figure>      
        
         <t>When combining this muliple-render feature with multiplexing, the
-        answer will might not know all the SSRC that will send to this m-block
+        answer will might not know all the SSRCs that will be send to this m-block
         so it is best to use payload type (PT) numbers that are unique for the
-        SDP: the demultiplexing may have to only use the PT if the SSRC are
+        SDP: the demultiplexing may have to only use the PT if the SSRCs are
         unknown.</t>
 
         <t> The intention is that the most recently sent SSRC are the ones that
@@ -990,7 +990,7 @@ a=rtcp-fb:120 ccm fir
      c=IN IP4 host.atlanta.example.com
      t=0 0
      a=group:LS 1,2,3
-     a=group:simulcast 2,3
+     a=group:SIMULCAST 2,3
      m=audio 49170 RTP/AVP 99
      a=mid:1
      a=rtpmap:99 iLBC/8000
@@ -1009,7 +1009,7 @@ a=rtcp-fb:120 ccm fir
       </figure>
     
       <t>
-        SDP Answer from the server indicating two video stream with the speaker
+        SDP Answer from the server indicating two video streams with the speaker
         and the slides. Also signaled is the lip-sync for speakers audio and
         video streams.
       </t>
@@ -1170,7 +1170,7 @@ SDP Answer signaling only SDES
         track in the PC that can be used to set constraints and settings and get
         information related to the RTP flow. </t>
 
-        <t> Sort out how to tell a PC-Track, particularly one menat for
+        <t> Sort out how to tell a PC-Track, particularly one meant for
         receiving information, that it can do simulcast, layered coding, RTX, FEC,
         etc. </t>
 
