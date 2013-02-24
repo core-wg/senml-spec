@@ -96,7 +96,9 @@ add msid to example
       RTX, FEC, and Simulcast in a multireder sitituation, there needs to be a
       way to correlate a given related media flows with the correct "base"
       media-flow. This is acomplished by having the related flows cary, in the
-      CSRC, the SSRC of their base flow.  </t>
+      CSRC, the SSRC of their base flow. 
+      If you just want to see what the SDP might look like, see the example in
+      <xref target="sec-mult-render-example" />. </t>
 
       <t> This draft also propose that advanced usages, including WebRTC to
       WebRTC scenereos, use a Media Stream Identifier (MSID) that is signalled
@@ -130,7 +132,8 @@ add msid to example
       <t>This draft uses the API and terminology described in <xref
       target="webrtc-api"></xref>.</t>
 
-      <t>Transport-Flow: 5 Tuple representing a RTP association.</t>
+      <t>Transport-Flow: An transport 5 Tuple representing the UDP source and
+      destination IP address and port over which RTP is flowing.</t>
 
       <t>5-tuple: A collection of the following values: source IP address,
       source transport port, destination IP address, destination transport port
@@ -140,18 +143,15 @@ add msid to example
       PC-Stream. A PC-Track represents content comprising one or more
       PC-Channels.</t>
 
-      <t>PC-Channel: Smallest unit of a PC-Track representing inter-related
-      media aspects such as stereo or 5.1 audio signal</t>
-
       <t>PC-Stream: Represents stream of data of audio and/or video added to a
       Peer Connection by local or remote media source(s). A PC-Stream is made up
       of zero or more PC-Tracks.</t>
 
-      <t>m-line: An <xref target="RFC4566">RFC4566</xref> media description
+      <t>m-line: An <xref target="RFC4566">SDP</xref> media description
       identifier that starts with "m=" field and conveys following values:media
       type,transport port,transport protocol and media format descriptions.</t>
 
-      <t>m-block: An <xref target="RFC4566">RFC4566</xref> media description
+      <t>m-block: An <xref target="RFC4566">SDP</xref> media description
       that starts with an m-line and is terminated by either the next m-line or
       by the end of the session description.</t>
 
@@ -276,7 +276,7 @@ add msid to example
 	correspond to which flow.
       </t>
       <t>
-	The second basic assumption is that SSRCs cannot be safely used to
+	The second basic assumption is that SSRCs cannot always be safely used to
 	associate RTP flows with information in the SDP.  There are two reasons
 	for this. First, in an offer/answer setting, RTP can appear at the
 	offerer before the answer is received; if SSRC information from the
@@ -290,7 +290,8 @@ add msid to example
 	of camera sources, all the cameras are equivalent from the receiver's
 	perspective; he merely needs to know which ones to display now and he
 	does that based on which ones have been most recently received. In the
-	case of multiple versions of the same content, payload types or payload types plus SSRC can be used
+	case of multiple versions of the same content, 
+        payload types or payload types plus SSRC can be used
 	to distinguish the different versions. 
       </t>
     </section>
@@ -460,7 +461,7 @@ Camera            a=multiple-render:5                  |
           names of various speakers or other information to the MSID and/or
           SSRCs that a user is using</t>
 
-          <t>Applications SHOULD use RFC 4574 content labels to indicate the
+          <t>Applications MAY use RFC 4574 content labels to indicate the
           purpose of the video. The additional content types, main-left and
           main-right, need to be added to support two- and three-screen
           systems.</t>
@@ -619,7 +620,7 @@ SDP Offer
         <t>This allows a switching MCU to know how many thumbnail type streams
         would be appropriate to send to this endpoint.</t>
 
-        <section title="Complex MultiRender Example">
+        <section  anchor="sec-mult-render-example" title="Complex MultiRender Example">
 
           <t> The follwing shows a single multi render m-line that can display
           up to three video stream, and send 3 streams, and support 2 layers of
