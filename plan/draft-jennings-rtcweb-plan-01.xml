@@ -612,7 +612,54 @@ SDP Offer
         <t>This allows a switching MCU to know how many thumbnail type streams
         would be appropriate to send to this endpoint.</t>
 
-        
+        <section title="Complex MultiRender Example">
+
+          <t> The follwing shows a single multi render m-line that can display
+          up to three video stream, and send 3 streams, and support 2 layers of
+          simulcast with FEC on the high resoltion layer and bundle. Note that
+          only host candiates are provided for the FEC and lower resolution
+          simulcast so if the device is behind a NAT, those streams will not be
+          used. </t>
+
+          <figure>
+            <artwork align="left" alt="" height="" name="" type="" width=""
+                     xml:space="preserve"><![CDATA[
+
+SDP Offer - Suhas 
+
+ ]]></artwork>
+        </figure>  
+
+        <t> The follwing shows an answer to the above offer that accepts
+        everything and plans to send video from fivve differnt cameras in to
+        this m-line (but only three at a time). </t>
+
+          <figure>
+            <artwork align="left" alt="" height="" name="" type="" width=""
+                     xml:space="preserve"><![CDATA[
+
+SDP Answer Complex - Suhas 
+
+ ]]></artwork>
+        </figure>  
+
+
+        <t> The follwing shows an answer to the above by a client that does not
+        support simulcast or FEC. </t>
+
+          <figure>
+            <artwork align="left" alt="" height="" name="" type="" width=""
+                     xml:space="preserve"><![CDATA[
+
+SDP Answer Simple - Suhas 
+
+ ]]></artwork>
+        </figure>  
+
+
+
+        </section>
+
       </section>
 
       <section anchor="sec-dirt" title="Dirty Little Secrets">
