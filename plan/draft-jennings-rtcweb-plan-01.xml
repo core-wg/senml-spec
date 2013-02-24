@@ -414,7 +414,7 @@ Camera            a=multiple-render:5                    |
 
           <t>The W3C api should have a constraint or API method to allow a
           PC-Stream to indicate the number of multi-render video streams it
-          can accept. Each time a new steam is received up to the maximum, a
+          can accept. Each time a new stream is received up to the maximum, a
           new PC-Track will be created.</t>
 
           <t>Applications MAY signal all the SSRC they intend to send using
