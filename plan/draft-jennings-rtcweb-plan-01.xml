@@ -111,7 +111,7 @@ add msid to example
       the big benefits defining something new over what we have. 
 
       One of the concerns about this approach is the time to collect all the ICE
-      candidates needed for the initial offer. Section TODO provides mitigations
+      candidates needed for the initial offer. <xref target="sec-mult-render-example" /> provides mitigations
       to reduce the number of ports needed to be the same as an alternative SSRC
       based design.
 
