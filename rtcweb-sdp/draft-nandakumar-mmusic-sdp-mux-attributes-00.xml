@@ -10,7 +10,7 @@
 <?rfc rfcedstyle="no" ?>
 <?rfc tocdepth="4"?>
 
-<rfc category="std" docName="draft-nandakumar-mmusic-sdp-mux-attributes-00"
+<rfc category="std" docName="draft-nandakumar-mmusic-sdp-mux-attributes-01"
      ipr="trust200902">
   <front>
     <title abbrev="SDP Attribute Multiplexing">A Framework for SDP Attributes
@@ -56,7 +56,7 @@
       </address>
     </author>
 
-    <date day="18" month="February" year="2013" />
+    <date day="24" month="February" year="2013" />
 
     <area>RAI</area>
 
@@ -2110,7 +2110,56 @@
         </texttable>
       </section>
     </section>  
-   <section  anchor="sec-transport" title="TRANSPORT Category Example">
+   
+    <section  anchor="sec-pay" title="Payload Formats">
+
+      <section title="RFC5109">      
+        <t>
+          <xref target="RFC5109">RFC4145</xref> describes a payload format for
+          generic Forward Error Correction (FEC) for media data encapsulated in
+          RTP.  It is based on the exclusive-or (parity) operation.  The payload
+          format allows end systems to apply protection using various protection
+          lengths and levels, in addition to using various protection group
+          sizes to adapt to different media and channel characteristics.  It
+          enables complete recovery of the protected packets or partial recovery
+          of the critical parts of the payload depending on the packet loss
+          situation.
+        </t>  
+  
+        <texttable title="RFC5109 Payload Format Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Category</ttcol>
+          
+          <c>audio/ulpfec&nbsp;</c><c>Not recommended for multiplexing due to reuse of SSRCs&nbsp;</c>
+          <c>M</c><c>BAD&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+         <c>video/ulpfec&nbsp;</c><c>Not recommended for multiplexing due to reuse of SSRCs&nbsp;</c>
+          <c>M</c><c>BAD&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+         <c>text/ulpfec&nbsp;</c><c>Not recommended for multiplexing due to reuse of SSRCs&nbsp;</c>
+          <c>M</c><c>BAD&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+         <c>application/ulpfec&nbsp;</c><c>Not recommended for multiplexing due to reuse of SSRCs&nbsp;</c>
+          <c>M</c><c>BAD&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        
+        </texttable>
+
+        <t> Draft draft-lennox-payload-ulp-ssrc-mux proposes a simple fix to
+        make it possible to use ULP with multipelxing and ULP is allowed when
+        used with that. </t>
+
+      </section>
+
+      </section>
+
+     <section  anchor="sec-transport" title="TRANSPORT Category Example">
     <t>
      The example below explains the usage of "TRANSPORT" category for  RFC4586 "crypto" 
      parameter when SDP Port number based multiplexing is performed for audio and
@@ -2237,6 +2286,22 @@
     </references>
 
     <references  title="Informative References">
+
+
+<reference anchor='RFC5109'>
+
+<front>
+<title>RTP Payload Format for Generic Forward Error Correction</title>
+<author initials='A.' surname='Li' fullname='A. Li'>
+<organization /></author>
+<date year='2007' month='December' />
+<abstract>
+<t>This document specifies a payload format for generic Forward Error Correction (FEC) for media data encapsulated in RTP.  It is based on the exclusive-or (parity) operation.  The payload format described in this document allows end systems to apply protection using various protection lengths and levels, in addition to using various protection group sizes to adapt to different media and channel characteristics.  It enables complete recovery of the protected packets or partial recovery of the critical parts of the payload depending on the packet loss situation.  This scheme is completely compatible with non-FEC-capable hosts, so the receivers in a multicast group that do not implement FEC can still work by simply ignoring the protection data.  This specification obsoletes RFC 2733 and RFC 3009.  The FEC specified in this document is not backward compatible with RFC 2733 and RFC 3009. [STANDARDS-TRACK]</t></abstract></front>
+
+<seriesInfo name='RFC' value='5109' />
+<format type='TXT' octets='100538' target='http://www.rfc-editor.org/rfc/rfc5109.txt' />
+</reference>
+
       <reference anchor="RFC3264">
         <front>
           <title>An Offer/Answer Model with Session Description Protocol
@@ -3151,6 +3216,7 @@
           <date/>
         </front>
       </reference>    
+
     </references>
   </back>
 </rfc>
