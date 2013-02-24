@@ -781,7 +781,7 @@ a=candidate:1 2 UDP 1694302206 98.248.92.77 60065
         but for all practical purposes the implementation should treat it as the
         secure variant.</t>
 
-        <t>If SDP offer/answers are of type AVP or SAVP, but contain a rtcp
+        <t>If SDP offer/answers are of type AVP or SAVP, but contain an a=rtcp-fb
         attribute, they should be treated as if they were AVPF or SAVPF
         respectively. The SDP Answer should have the same type as the Offer but
         for all practical purposes the implementation should treat it as the
@@ -807,9 +807,6 @@ a=candidate:1 2 UDP 1694302206 98.248.92.77 60065
         <t> You can decrypt DTLS-SRTP media before receeiving an answer, you
         can't determin if it is secure or not till you have the fingerprint and
         have verfied it </t>
-
-        <t> You can often get ICE conenctivity before the offerer gets the
-        answer. </t>
 
         <t> You can use RTCP-FB to do things like PLI wihtout signalling the
         SSRC. The PLI packets gets the sernder SSRC from the incoming media that
@@ -1120,39 +1117,39 @@ SDP Answer signaling only SDES
 
       <t>Tasks:
       <list style="numbers">
-        <t>
-          Write a draft to add left, right to the SDP content attribute. Add the
-          stuff to the W3C API to read and write this on a track.
-        </t>
+        
+  
+        <t> Extend the W3C API to be able to set and read the CSRC list for a
+        PC-Track. </t>
+        
+        <t> Extend the W3C API to be able to read SSRC of last RTP packed
+        received.  </t>
+        
+        <t> Write an RTP Header Extension draft to cary the MSID.  </t>
 
-        <t>
-          Extend the W3C API to be able to set and read the CSRC list for a
-          PC-Track.
-        </t>
+        <t> Fix up MSID draft to align with this proposal.  </t>
+        
+        <t> Write a draft to add left, right to the SDP content attribute. Add
+        the stuff to the W3C API to read and write this on a track.  </t>
 
-        <t>
-           Extend the W3C API to be able to read SSRC of last RTP packed
-           received.
-        </t>
+        <t> Write a draft on SDP "SIMULCAST" group to signal multiple m-block as are simulcast of same
+        video content.  </t>
+        
+        <t> Complete the bundle draft. </t>
 
-        <t>
-          Write an RTP Header Extension draft to cary MSID.
-        </t>
+        <t> Provide guidance for ways to use SDP for reduced glare when adding
+        of one way media streams. </t>
 
-        <t>
-          Fix up MSID draft to align with this proposal.
-        </t>
+        <t> Write a draft defining the multi render attribute. </t>
 
-        <t>
-          Add a SDP group to signal multiple m-block as are simulcast of same
-          video content.
-        </t>
+        <t> Change W3C API to say that a PC-Track can be in only one
+        PeerConnection or make an object inside the PeerConnection for each
+        track in the PC that can be used to set constraints and settings and get
+        informaoiton related to the RTP flow. </t>
 
-        <t>
-          Complete the bundle draft. </t>
-
-          <t> Provide guidance for ways to use SDP for reduced glare when adding
-          of one way media streams.</t>
+        <t> Sort out how to tell a PC-Track, particularly one menat for
+        receiving infrmation, that it can do simulcat, layered coding, RTX, FEC,
+        etc. </t>
 
       </list>
       </t>
