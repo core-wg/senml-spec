@@ -617,7 +617,8 @@ s=
 t=0 0	
 a=ice-ufrag:074c6550	
 a=ice-pwd:a28a397a4c3f31747d1ee3474af08a068	
-a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7:70:9d:1f:66:79:a8:07	
+a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:
+                    c9:c7:70:9d:1f:66:79:a8:07	
 c= IN IP4 24.23.204.141	
 a=group:BUNDLE vid1 vid2 
 
@@ -660,7 +661,8 @@ s=
 t=0 0	
 a=ice-ufrag:c300d85b	
 a=ice-pwd:de4e99bd291c325921d5d47efbabd9a2	
-a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7:70:9d:1f:66:79:a8:07	
+a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:
+                    f7:c9:c7:70:9d:1f:66:79:a8:07	
 c= IN IP4 98.248.92.771	
 a=rtcp-mux	
 a=group:BUNDLE vid1 vid2 
@@ -700,7 +702,8 @@ s=
 t=0 0	
 a=ice-ufrag:c300d85b	
 a=ice-pwd:de4e99bd291c325921d5d47efbabd9a2	
-a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7:70:9d:1f:66:79:a8:07	
+a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:
+                    f7:c9:c7:70:9d:1f:66:79:a8:07	
 c= IN IP4 98.248.92.771	
 a=rtcp-mux	
 
