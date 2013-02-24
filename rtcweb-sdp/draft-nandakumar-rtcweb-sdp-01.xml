@@ -359,7 +359,7 @@ end note
           <c><xref target="RFC5245"></xref> - Host ICE Candidate for Opus Stream</c>
           <c>a=ccandidate:1 1 UDP 1694302207 98.248.92.77 49203 typ srflx raddr 192.168.1.7 rport 49203</c>
           <c><xref target="RFC5245"></xref> - Server Reflexive ICE Candidate for the above host candidate</c>
-          <c>a=candidate:candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
           <c><xref target="RFC5245"></xref> - Second Host Candidate </c>
           <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065</c>
           <c><xref target="RFC5245"></xref> -Server Reflexive Candidate for the Second Host Candidate</c>
@@ -566,7 +566,7 @@ Alice->Bob: Two-way Opus Audio and VP8 Video
           <c><xref target="RFC5245"></xref></c>
           <c>a=ccandidate:1 1 UDP 1694302207 98.248.92.77 49203 typ srflx raddr 192.168.1.7 rport 49203</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065</c>
           <c><xref target="RFC5245"></xref></c>
@@ -753,7 +753,7 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over a single 5-tuple
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP 1694302207 98.248.92.77 49203 typ srflx raddr 192.168.1.7 rport 49203</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065</c>
           <c><xref target="RFC5245"></xref></c>
@@ -775,9 +775,9 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over a single 5-tuple
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP 1694302207 98.248.92.77 49203 typ srflx raddr 192.168.1.7 rport 49203</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 56607 typ host</c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 56607 typ srflx raddr 192.168.1.7 rport 56607</c>
+          <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065</c>
           <c><xref target="RFC5245"></xref></c>
         </texttable>
         <texttable anchor="table_3_3" title="5.3 SDP Updated Offer w/Bundle">
@@ -843,18 +843,18 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over a single 5-tuple
           <c><xref target="RFC5761"></xref></c>          
           <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 54609 typ host</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:1 1 UDP  1694302207 24.23.204.141 54609 typ srflx raddr 192.168.1.4 rport 54609</c>
+          <c>a=candidate:1 1 UDP  694302207 24.23.204.141 54609 typ srflx raddr 192.168.1.4 rport 54609</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:0 2 2113667326 192.168.1.4 54721 typ host</c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.4 64678 typ host</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:1 2 UDP 1694302206 24.23.204.141 54721 typ srflx raddr 192.168.1.4 rport 54721</c>
+          <c>a=candidate:1 2 UDP  1694302206 24.23.204.141 64678 typ srflx raddr 192.168.1.4 rport 64678</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=rtcp-fb:120 nack pli</c>
           <c><xref target="RFC5104"></xref></c>
           <c>a=rtcp-fb:120 ccm fir</c>
           <c><xref target="RFC5104"></xref></c>
         </texttable>
-        <texttable anchor="table_3_4" title="5.3 SDP Answer w/BUNDLE for updated Offer">
+        <texttable anchor="table_3_4" title="5.3 SDP Answer w/BUNDLE">
           <ttcol align='left'>SDP Contents </ttcol>
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
@@ -874,15 +874,15 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over a single 5-tuple
           <c>a=rtcp-rsize</c>
           <c><xref target="RFC5506"></xref></c>
           <c>a=group:BUNDLE foo bar</c>
-          <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref> Bob supports grouping of m= lines and indicates his interest in the same as well</c>            
+          <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref> Bob supports grouping of m=lines and indicates his interest in the same as well</c>            
           <c>m=audio 49203 RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=mid:foo</c>
-          <c><xref target="RFC5888"></xref> Audio m=line part of the BUNDLE group</c>
-          <c>c=IN IP4 98.248.92.77</c>
+          <c><xref target="RFC5888"></xref> Audio m=line part of the BUNDLE group</c>    
+          <c>c= IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
           <c>b=AS:200</c>
-          <c><xref target="RFC4566"></xref></c>          
+          <c><xref target="RFC4566"></xref></c>
           <c>a=rtpmap:109 opus/48000</c>
           <c><xref target="draft-spittka-payload-rtp-opus"></xref></c>
           <c>a=ptime:20</c>
@@ -895,17 +895,17 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over a single 5-tuple
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP 1694302207 98.248.92.77 49203 typ srflx raddr 192.168.1.7 rport 49203</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065</c>
           <c><xref target="RFC5245"></xref></c>
           <c>m=video 49203 RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref> </c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=mid:bar</c>
-          <c>c= IN IP4 98.248.92.771</c>
           <c><xref target="RFC5888"></xref> Video m=line part of the BUNDLE group with the port from audio line repeated </c>
           <c>b=AS:1000</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>c= IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=rtpmap:120 VP8/90000</c>
           <c><xref target="draft-ietf-payload-vp8"></xref></c>
@@ -917,9 +917,9 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over a single 5-tuple
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP 1694302207 98.248.92.77 49203 typ srflx raddr 192.168.1.7 rport 49203</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 56607 typ host</c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 56607 typ srflx raddr 192.168.1.7 rport 56607</c>
+          <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065</c>
           <c><xref target="RFC5245"></xref></c>
         </texttable>
         </section>
@@ -1001,11 +1001,11 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over a single 5-tuple
           <c><xref target="RFC5761"></xref></c>          
           <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 10000 typ host</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:1 1 UDP  1694302207 24.23.204.141 10000 typ srflx raddr 192.168.1.4 rport 10000</c>
+          <c>a=candidate:1 1 UDP  694302207 24.23.204.141 10000 typ srflx raddr 192.168.1.4 rport 10000</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:0 2 2113667326 192.168.1.4 54721 typ host</c>
+          <c>a=candidate:0 2 2113667326 192.168.1.4 64678 typ host</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:1 2 UDP 1694302206 24.23.204.141 54721 typ srflx raddr 192.168.1.4 rport 54721</c>
+          <c>a=candidate:1 2 UDP 1694302206 24.23.204.141 64678 typ srflx raddr 192.168.1.4 rport 64678</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=rtcp-fb:120 nack pli</c>
           <c><xref target="RFC5104"></xref></c>
@@ -1053,7 +1053,7 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over a single 5-tuple
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP 1694302207 98.248.92.77 20000 typ srflx raddr 192.168.1.7 rport 20000</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065</c>
           <c><xref target="RFC5245"></xref></c>
@@ -1074,9 +1074,9 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over a single 5-tuple
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP 1694302207 98.248.92.77 20000 typ srflx raddr 192.168.1.7 rport 20000</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 56607 typ host</c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 56607 typ srflx raddr 192.168.1.7 rport 56607</c>
+          <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065</c>
           <c><xref target="RFC5245"></xref></c>
         </texttable>
       </section>
@@ -1206,7 +1206,7 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over 2 different RTP sessions.
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP 1694302207 98.248.92.77 53214 typ srflx raddr 192.168.1.7 rport 53214</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065</c>
           <c><xref target="RFC5245"></xref></c>
@@ -1515,7 +1515,7 @@ Alice->Bob: Two-way Opus Audio, VP8 Video
           <c><xref target="RFC5245"></xref></c>
           <c>a=ccandidate:1 1 UDP 1694302207 98.248.92.77 49203 typ srflx raddr 192.168.1.7 rport 49203</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065</c>
           <c><xref target="RFC5245"></xref></c>
@@ -1627,7 +1627,7 @@ Alice->Bob: Two-way Opus Audio, VP8 Video
           <c><xref target="RFC5245"></xref></c>
           <c>a=ccandidate:1 1 UDP 1694302207 98.248.92.77 49203 typ srflx raddr 192.168.1.7 rport 49203</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065</c>
           <c><xref target="RFC5245"></xref></c>
@@ -2189,7 +2189,7 @@ end note
           <c><xref target="RFC5245"></xref></c>
           <c>a=ccandidate:1 1 UDP 1694302207 98.248.92.77 49203 typ srflx raddr 192.168.1.7 rport 49203</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065</c>
           <c><xref target="RFC5245"></xref></c>
