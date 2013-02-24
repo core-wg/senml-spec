@@ -567,6 +567,13 @@ Camera            a=multiple-render:5                  |
           MS-Stream be the MSID with no flow identifier, and the ID attribute of
           the MS-Track be the MSID. </t>
 
+          <t> In addition, the SDP will attempt to negotatiate sending the MSID
+          in the RTP using a RTP Header Extention. WebRTC clients SHOULD also
+          include the a=ssrc attributes if they know which SSRC they plan to
+          send but they can not rely on this not changing, being compete, or
+          existing in all offers or answers they receive - particularlarly when
+          working with SIP endpoints. </t>
+
         </section>
 
       <section anchor="sec-multi-render" title="Multiple Render">
