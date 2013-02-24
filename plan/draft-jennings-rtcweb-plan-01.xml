@@ -72,9 +72,10 @@ add msid to example
   <middle>
     <section title="Introduction">
       <t>The reoccurring theme of this draft is that SDP <xref
-      target="RFC4566"></xref> already has a way of solving many of the problems being
-      discussed at the RTCWeb WG and we not try to invent something new
-      but rather re-use the existing methods instead.</t>
+      target="RFC4566"></xref> already has a way of solving many of the problems
+      being discussed at the RTCWeb WG and we not try to invent something new
+      but rather re-use the existing methods for describing RTP <xref
+      target="RFC3550" /> media flows.</t>
 
       <t>This does results in lots of m lines but all the alternatives resulted
       in an nearly equivalent number of SSRC lines with a possibility of
@@ -83,8 +84,8 @@ add msid to example
       SDP that much larger than a single MTU. The SIP <xref
       target="RFC3261"></xref> usage of SDP has successfully passed over this
       long ago. In the cases where the SDP is passed over web mechanisms, it is
-      easy to use compression and the size of SDP is more of an optimization criteria than a
-      limiting issue.</t>
+      easy to use compression and the size of SDP is more of an optimization
+      criteria than a limiting issue.</t>
 
     </section>
 
@@ -145,7 +146,8 @@ add msid to example
       outlines the ones that might influence the design. <list style="symbols">
           <t>Devices with multiple audio and/or video sources</t>
 
-          <t>Devices that display multiple streams of video and/or render multiple streams of audio</t>
+          <t>Devices that display multiple streams of video and/or render
+          multiple streams of audio</t>
 
           <t>Simulcast, wherein a video from a single camera is sent in a few
           independent video streams typically at different resolutions and
@@ -155,7 +157,8 @@ add msid to example
 
           <t>One way media flows and bi-directional media flows</t>
 
-          <t> Support asymmetry, i.e. to send a different number of type of media streams that you receive. </t>
+          <t> Support asymmetry, i.e. to send a different number of type of
+          media streams that you receive. </t>
 
           <t>Mapping W3C PeerConnection (PC) aspects into SDP and RTP. It is
           important that the SDP be descriptive enough that both sides can get
@@ -165,7 +168,8 @@ add msid to example
           <t>Support of Interactive Connectivity Establishment (ICE) <xref
           target="RFC5245"></xref></t>
 
-          <t> Support of multiplexing multiple media flows, possible of different media types, on same 5-tuple. </t>
+          <t> Support of multiplexing multiple media flows, possible of
+          different media types, on same 5-tuple. </t>
 
           <t>Synchronization - It needs to be clear how implementations deal
           with synchronization, in particular usages of both CNAME and LS group.
@@ -182,22 +186,23 @@ add msid to example
           <t>Forward Error Correction - Support for various RTP FEC
           schemes.</t>
 
-          <t>RSVP QoS - Ability to signal various QoS mechanism such Single Reservation Flow (SRF)
-          group</t>
+          <t>RSVP QoS - Ability to signal various QoS mechanism such Single
+          Reservation Flow (SRF) group</t>
 
-          <t>Desegregated Media (FID group) - There is a growing desire to
-          deal with endpoints that are distributed - for example a video phone
-          where the incoming video is displayed on the an IP TV but the
-          outgoing video comes from a tablet computer. This results in
-          situations where the SDP sets up a session with not all the media
-          transmitted to a single IP address.</t>
+          <t>Desegregated Media (FID group) - There is a growing desire to deal
+          with endpoints that are distributed - for example a video phone where
+          the incoming video is displayed on the an IP TV but the outgoing video
+          comes from a tablet computer. This results in situations where the SDP
+          sets up a session with not all the media transmitted to a single IP
+          address.</t>
 
           <t>In flight change of codec: Support for system that can negotiate
           the uses of more than one codec for a given media flow and then the
           sender can arbitrarily switch between them when they are sending but
           they only send with one codec as at time.</t>
 
-          <t> Distinguish simulcast (e.g. multiple encoding of same source) from multiple different sources </t>
+          <t> Distinguish simulcast (e.g. multiple encoding of same source) from
+          multiple different sources </t>
 
           <t>Support for Sequential and Parallel forking at the SIP level</t>
 
@@ -215,51 +220,47 @@ add msid to example
 
     <section title="Overview" anchor="sec-overview">
       <t>
-	The basic unit of description in SDP is the m-line/m-block and
-	this document continues with that assumption. In general,
-	different cameras, microphones, etc. are carried on different
-	m-lines. There are two major exceptions to this rule:
+	The basic unit of description in SDP is the m-line/m-block and this
+	document continues with that assumption. In general, different cameras,
+	microphones, etc. are carried on different m-lines. There are two major
+	exceptions to this rule:
       </t>
       <t>
 	<list style="symbols">
-	  <t>Multiple sources which are semantically equivalent and
-	  multiplexed on a time-wise basis.
-	  For instance, if an MCU mixes multiple camera feeds but only
-	  some subset is displayed at a time, they can all appear on the same
-	  m-line.</t>
-	  <t>Multiple versions of the same content, as in simulcast or
-	  layered encoding.
+	  <t>Multiple sources which are semantically equivalent and multiplexed
+	  on a time-wise basis.  For instance, if an MCU mixes multiple camera
+	  feeds but only some subset is displayed at a time, they can all appear
+	  on the same m-line.</t>
+	  <t>Multiple versions of the same content, as in simulcast or layered
+	  encoding.
 	  </t>
 	</list>
       </t>
       <t>
-	By contrast, multiple sources which are semantically distinct
-	cannot appear on the same m-line because that does not allow
-	for clear negotiation of which sources are acceptable, or
-	which sets of RTP SSRCs correspond to which flow.
+	By contrast, multiple sources which are semantically distinct cannot
+	appear on the same m-line because that does not allow for clear
+	negotiation of which sources are acceptable, or which sets of RTP SSRCs
+	correspond to which flow.
       </t>
       <t>
-	The second basic assumption is that SSRCs cannot be safely
-	used to associate RTP flows with information in the SDP.
-	There are two reasons for this. First, in an offer/answer
-	setting, RTP can appear at the offerer before the answer
-	is received; if SSRC information from the offerer is required,
-	then thes RTP packets cannot be interpreted.
-	Second the reason for this is that RTP permits SSRCs to be changed
-	at any time---and indeed some systems such as 3GPP rely on
-	this ability.
+	The second basic assumption is that SSRCs cannot be safely used to
+	associate RTP flows with information in the SDP.  There are two reasons
+	for this. First, in an offer/answer setting, RTP can appear at the
+	offerer before the answer is received; if SSRC information from the
+	offerer is required, then thes RTP packets cannot be interpreted.
+	Second the reason for this is that RTP permits SSRCs to be changed at
+	any time---and indeed some systems such as 3GPP rely on this ability.
       </t>
       <t>
-	This assumption makes clear why the two exceptions to the
-	"one flow per m-line" rule work. In the case of time-based
-	multiplexing (multirender) of camera sources, all the cameras are equivalent
-	from the receiver's perspective; he merely needs to know which
-	ones to display now and he does that based on which ones have
-	been most recently received. In the case of multiple versions
-	of the same content, payload types can be used to distinguish
-	the different versions. Note that this means that simulcast
-	and time-based multiplexing cannot be used together. [TODO: should we
-	solve this.]
+	This assumption makes clear why the two exceptions to the "one flow per
+	m-line" rule work. In the case of time-based multiplexing (multirender)
+	of camera sources, all the cameras are equivalent from the receiver's
+	perspective; he merely needs to know which ones to display now and he
+	does that based on which ones have been most recently received. In the
+	case of multiple versions of the same content, payload types can be used
+	to distinguish the different versions. Note that this means that
+	simulcast and time-based multiplexing cannot be used together. [TODO:
+	should we solve this.]
       </t>
     </section>
 
@@ -308,9 +309,9 @@ Camera     +->    m=video    -\                     > 5-Tuple
 	<figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-Microphone -->    m=audio    -->     Speaker       \             
-                                                    > 5-Tuple, Lip-Sync
-Camera     -->    m=video    -->     Window        /           group
+Microphone -->    m=audio    -->     Speaker     \             
+                                                  > 5-Tuple, Lip-Sync
+Camera     -->    m=video    -->     Window      /           group
 		   ]]></artwork>
         </figure>      
       </section>
@@ -334,17 +335,18 @@ Camera            a=multiple-render:5                    |
 	</t>
       </section>
 
-      <section title="One Audio, One Active Video, 5 Thumbnails, Main Speaker Lip-Sync, Bundle/multiplexing">
+      <section title="One Audio, One Active Video, 
+                      5 Thumbnails, Main Speaker Lip-Sync, Bundle/multiplexing">
 	<figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-Microphone -->    m=audio    -->       Speaker          \   \  Lip-sync
-                                                         |   > group
-Camera     -->    m=video    -->       Window            |  /  
-                                                          >  5-Tuple
-Camera     -->    m=video    -->       5 Small Windows   |
-Camera            a=multiple-render:5                    |
-...                                                      /
+Microphone -->    m=audio    -->       Speaker        \   \  Lip-sync
+                                                       |   > group
+Camera     -->    m=video    -->       Window          |  /  
+                                                        >  5-Tuple
+Camera     -->    m=video    -->       5 Small Windows |
+Camera            a=multiple-render:5                  |
+...                                                   /
 		   ]]></artwork>
         </figure>      
       </section>
@@ -358,13 +360,15 @@ Camera            a=multiple-render:5                    |
       seems to deal with the various problems and issues that have been
       discussed. Most of these are not new and are pretty much how many systems
       do it today. Some of them are new, but all the items requiring new
-      standardization work are called out in the <xref target="sec-tasks"/>. </t>
+      standardization work are called out in the <xref
+      target="sec-tasks"/>. </t>
       <t>
         Approach:
         <list
           style="numbers">
           <t>If a system wants to offer to send two cameras, it MUST use a
-          separate m-block for each camera. In cases such as FEC, simulcast, SVC, it will use more than one m-block per camera. </t>
+          separate m-block for each camera. In cases such as FEC, simulcast,
+          SVC, it will use more than one m-block per camera. </t>
 
           <t>If a systems wants to receive two streams of video to display in
           two different windows or screens, it MUST user separate m-blocks for
@@ -380,19 +384,19 @@ Camera            a=multiple-render:5                    |
           <t>Each PC-Track corresponds to one or more m-blocks.</t>
 
           <t>If a camera is sending simulcast video and three resolutions, each
-          resolution MUST get its own m-block and all the three m-blocks will
-          be grouped. Open Issues: use FID or define a new group? </t>
+          resolution MUST get its own m-block and all the three m-blocks will be
+          grouped. Open Issues: use FID or define a new group? </t>
 
           <t>If a camera is using a layered codec with three layers, there
           MUST be an m-block for each, and they will be grouped using
           standard SDP for grouping layers.</t>
 
-          <t>To aid in synchronized playback, there is exactly one, and only one, LS
-          group for each PC-Stream. All the m-blocks for all the PC-Tracks in a
-          given PC-Stream are synchronized so they are all put in one LS
-          group. All the PC-Tracks in a given PC-Stream have the same CNAME.  If
-          a PC-Track appears in more than one PC-Stream, then all the PC-Streams 
-          with that PC-Track MUST have the same CNAME. </t>
+          <t>To aid in synchronized playback, there is exactly one, and only
+          one, LS group for each PC-Stream. All the m-blocks for all the
+          PC-Tracks in a given PC-Stream are synchronized so they are all put in
+          one LS group. All the PC-Tracks in a given PC-Stream have the same
+          CNAME.  If a PC-Track appears in more than one PC-Stream, then all the
+          PC-Streams with that PC-Track MUST have the same CNAME. </t>
 
           <t>One way media MUST use the sendonly or recvonly attributes.</t>
 
@@ -408,29 +412,30 @@ Camera            a=multiple-render:5                    |
           of the current speaker's video in the CSRC packets it produces.</t>
 
           <t>For each PC-Track, the W3C API MUST provide a way to set and read
-          the CSRC list, set and read the content RFC 4574 "label", and read the SSRC of last packet received on
-          a PC-Track.</t>
+          the CSRC list, set and read the content RFC 4574 "label", and read the
+          SSRC of last packet received on a PC-Track.</t>
 
           <t>The W3C api should have a constraint or API method to allow a
-          PC-Stream to indicate the number of multi-render video streams it
-          can accept. Each time a new stream is received up to the maximum, a
-          new PC-Track will be created.</t>
+          PC-Stream to indicate the number of multi-render video streams it can
+          accept. Each time a new stream is received up to the maximum, a new
+          PC-Track will be created.</t>
 
-          <t>Applications MAY signal all the SSRC they intend to send using
-          RFC 5576, but receivers need to be careful in their usage of the SSRC in signaling, as the SSRC
-          can change when there is a collision and it takes time before that will be updated in signaling. </t>
+          <t>Applications MAY signal all the SSRC they intend to send using RFC
+          5576, but receivers need to be careful in their usage of the SSRC in
+          signaling, as the SSRC can change when there is a collision and it
+          takes time before that will be updated in signaling. </t>
 
           <t>Applications can get out of band "roster information" that maps the
-          names of various speakers or other information to the MSID and/or SSRCs
-          that a user is using</t>
+          names of various speakers or other information to the MSID and/or
+          SSRCs that a user is using</t>
 
           <t>Applications SHOULD use RFC 4574 content labels to indicate the
           purpose of the video. The additional content types, main-left and
-          main-right, need to be added to support two- and three-screen systems.</t>
+          main-right, need to be added to support two- and three-screen
+          systems.</t>
 
-          <t>The CLUE WG might want to consider SDP to signal the 3D
-          location and field of view parameters for captures and
-          renderers.</t> 
+          <t>The CLUE WG might want to consider SDP to signal the 3D location
+          and field of view parameters for captures and renderers.</t>
 
           <t> The W3C API allows a "label" to be set for the PC-Track. This MUST
           be mapped to the SDP label attribute. </t>
@@ -440,36 +445,38 @@ Camera            a=multiple-render:5                    |
         <section anchor="sec-msid" title="Correlation and Multiplexing">
 
           <t> The port number that RTP is received on provides the primary
-          mechanism for correlating it to the correct m-line. However, when the port does not uniquely male the RTP packet to the correct m-block (such as in multiplexing and other cases), the next thing that can be looked at is the PT
-          number. Finally there are cases where SSRC can be used if that was
-          signaled. </t>
+          mechanism for correlating it to the correct m-line. However, when the
+          port does not uniquely male the RTP packet to the correct m-block
+          (such as in multiplexing and other cases), the next thing that can be
+          looked at is the PT number. Finally there are cases where SSRC can be
+          used if that was signaled. </t>
 
           <t> There are some complications when using SSRC for correlation with
           signaling. First, the offerer may end up receiving RTP packets before
-         receiving the signaling with the SSRC correlation
-          information. This is because the sender of the RTP chooses the SSRC;
-          there is no way for the receiver to signal how some of the bits
-          in the SSRC should be set. Numerous attempts to
-          provide a way to do this have been made, but they have all been rejected for various
-          reasons, so this situation is unlikely to change. The second issue is that the
-          signaled SSRC can change, particularly in collision cases, and there
-          is no good way to know when SSRC are changing, such that the currently
-          signaled SSRC usage maps to the actual RTP SSRC usage. Finally SSRC
-          does not always provide correlation information between media flows - take for
-          example trying to look at SSRC to tell that an audio media flow and
-          video media flow came from the same camera. The nice thing about SSRC
-          is that they are also included in the RTP. </t>
+          receiving the signaling with the SSRC correlation information. This is
+          because the sender of the RTP chooses the SSRC; there is no way for
+          the receiver to signal how some of the bits in the SSRC should be
+          set. Numerous attempts to provide a way to do this have been made, but
+          they have all been rejected for various reasons, so this situation is
+          unlikely to change. The second issue is that the signaled SSRC can
+          change, particularly in collision cases, and there is no good way to
+          know when SSRC are changing, such that the currently signaled SSRC
+          usage maps to the actual RTP SSRC usage. Finally SSRC does not always
+          provide correlation information between media flows - take for example
+          trying to look at SSRC to tell that an audio media flow and video
+          media flow came from the same camera. The nice thing about SSRC is
+          that they are also included in the RTP. </t>
 
           <t> The proposal here is to extend the MSID draft to meet these needs:
           each media flow would have a unique MSID and the MSID would have some
-          level of internal structure, which would allow various forms of correlation,
-          including what WebRTC needs to be able to recreate the MS-Stream /
-          MS-Track hierarchy to be the same on both sides. In addition, this work
-          proposes creating an optional RTP header extension that could be used
-          to carry the MSID for a media flow in the RTP packets. This is not
-          absolutely needed for the WebRTC use cases but it helps in the case
-          where media arrives before signaling and it helps resolve a
-          broader category of web conferencing use cases. </t>
+          level of internal structure, which would allow various forms of
+          correlation, including what WebRTC needs to be able to recreate the
+          MS-Stream / MS-Track hierarchy to be the same on both sides. In
+          addition, this work proposes creating an optional RTP header extension
+          that could be used to carry the MSID for a media flow in the RTP
+          packets. This is not absolutely needed for the WebRTC use cases but it
+          helps in the case where media arrives before signaling and it helps
+          resolve a broader category of web conferencing use cases. </t>
 
           <t> The MSID consists of three things and can be extended to have
           more. It has a device identifier, which corresponds to a unique
@@ -487,7 +494,8 @@ Camera            a=multiple-render:5                    |
           identifies this media flow within the context of the device
           identifier.  </t>
 
-          <t> Open Issues: how to know if the MSID RTP Header Extension should be included in the RTP? </t> 
+          <t> Open Issues: how to know if the MSID RTP Header Extension should
+          be included in the RTP? </t>
 
           <t>
             An example MSID for a device identifier of 12345123451234512345,
@@ -505,18 +513,18 @@ Camera            a=multiple-render:5                    |
           </t>
 
           <t> Note: The 64 bit size for the device identifier was chosen as it
-          allows less than a one in a million chance of collision with greater than
-          10,000 flows (actually it allows this probability with more like 6 million
-          flows). Much smaller numbers could be used but 32 bits is probably too
-          small. More discussion on the size of this and the color of the bike
-          shed is needed. </t> 
+          allows less than a one in a million chance of collision with greater
+          than 10,000 flows (actually it allows this probability with more like
+          6 million flows). Much smaller numbers could be used but 32 bits is
+          probably too small. More discussion on the size of this and the color
+          of the bike shed is needed. </t>
 
           <t> When used in the WebRTC context, each PeerConnection should
           generate a unique device identifier. Each PC-Stream in the
           PeerConnection will get a a unique synchronization group identifier,
           and each PC-Track in the Peer Connection will get a unique flow
-          identifier. Together these will be used to form the MSID. The MSID MUST
-          be included in the SDP offer or answer so that the WebRTC
+          identifier. Together these will be used to form the MSID. The MSID
+          MUST be included in the SDP offer or answer so that the WebRTC
           connection on the remote side can form the correct structure of remote
           PC-Streams and PC-Tracks. If a WebRTC client receives an Offer with no
           MSID information and no LS group information, it MUST put all the
@@ -525,20 +533,21 @@ Camera            a=multiple-render:5                    |
           and the PC-Tracks put in the appropriate PC-Stream.  </t>
 
           <t> The W3C specs should be updated to have the ID attribute of the
-          MS-Stream be the MSID with no flow identifier, and the ID attribute
-          of the MS-Track be the MSID. </t>
+          MS-Stream be the MSID with no flow identifier, and the ID attribute of
+          the MS-Track be the MSID. </t>
 
         </section>
 
       <section anchor="sec-multi-render" title="Multiple Render">
-        <t>There are cases - such as a grid of security cameras or thumbnails in a video conference - where a receiver is willing to receive and display
-        several media flows of video. The proposal
-        here is to create a new media level attribute called multiple-render that
-        includes an integer that indicates how many streams can be rendered at
-        the same time.</t>
+        <t>There are cases - such as a grid of security cameras or thumbnails in
+        a video conference - where a receiver is willing to receive and display
+        several media flows of video. The proposal here is to create a new media
+        level attribute called multiple-render that includes an integer that
+        indicates how many streams can be rendered at the same time.</t>
 
         <t>As an example, a system that could display 16 thumbnails at the same
         time and was willing to receive H261 or H264 might offer</t>
+
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
@@ -554,10 +563,11 @@ SDP Offer
  ]]></artwork>
         </figure>      
        
-        <t>When combining this muliple-render feature with multiplexing, the answer will might not
-        know all the SSRC that will send to this m-block so it is best to use payload
-        type (PT) numbers that are unique for the SDP: the demultiplexing may
-        have to only use the PT if the SSRC are unknown.</t>
+        <t>When combining this muliple-render feature with multiplexing, the
+        answer will might not know all the SSRC that will send to this m-block
+        so it is best to use payload type (PT) numbers that are unique for the
+        SDP: the demultiplexing may have to only use the PT if the SSRC are
+        unknown.</t>
 
         <t> The intention is that the most recently sent SSRC are the ones that
         are rendered. Some switching MCU will likely only send the correct
@@ -573,8 +583,8 @@ SDP Offer
       </section>
 
       <section anchor="sec-dirt" title="Dirty Little Secrets">
-        <t>If SDP offer/answers are of type AVP or AVPF but contain a crypto
-        of fingerprint attribute, they should be treated as if they were SAVP or
+        <t>If SDP offer/answers are of type AVP or AVPF but contain a crypto of
+        fingerprint attribute, they should be treated as if they were SAVP or
         SAVPF respectively. The Answer should have the same type as the offer
         but for all practical purposes the implementation should treat it as the
         secure variant.</t>
@@ -585,19 +595,33 @@ SDP Offer
         for all practical purposes the implementation should treat it as the
         feedback variant.</t>
 
-        <t>If an SDP Offer has both a fingerprint and a crypto attribute, it means
-        the Offerer supports both DTLS-SRTP and SDES and the answer should select
-        one and return an Answer with only an attribute for the selected keying
-        mechanism.</t>
+        <t>If an SDP Offer has both a fingerprint and a crypto attribute, it
+        means the Offerer supports both DTLS-SRTP and SDES and the answer should
+        select one and return an Answer with only an attribute for the selected
+        keying mechanism.</t>
       </section>
 
-<!-- 
       <section anchor="sec-issues" title="Issues">
       
-        <t>What do do with unrecognized media received at PC level</t>
+        <t>What do do with unrecognized media received at W3C PC level</t>
 
       </section>
--->
+
+      <section anchor="sec-confusions" title="Confusions">
+      
+        <t> You can decrypt DTLS-SRTP media before receeiving an answer, you
+        can't determin if it is secure or not till you have the fingerprint and
+        have verfied it </t>
+
+        <t> You can often get ICE conenctivity before the offerer gets the
+        answer. </t>
+
+        <t> You can use RTCP-FB to do things like PLI wihtout signalling the
+        SSRC. The PLI packets gets the sernder SSRC from the incoming media that
+        is trying to signal the PLI for. </t>
+
+      </section>
+
 
     </section>
 
@@ -727,16 +751,16 @@ a=rtcp-fb:120 ccm fir
 
 
       <t>Example of a video client joining a video conference. The client can
-      produce and receive two streams of video, one from the slides and the other
-      of the person. The video of the person is synchronized with the
+      produce and receive two streams of video, one from the slides and the
+      other of the person. The video of the person is synchronized with the
       audio. In addition, the client can display up to 10 thumbnails of video.
       The main video is simulcast at HD size and a thumbnail size.</t>
 
       <t>
         SDP Offer - Client send simulcast video with 2 resolutions in 2 m-blocks
-        indicated by a=group:simulcast and indicating lip-sync for the audio and video
-        m-blocks. Also indicating it can accept 10 streams for rendering with
-        a=multi-render
+        indicated by a=group:simulcast and indicating lip-sync for the audio and
+        video m-blocks. Also indicating it can accept 10 streams for rendering
+        with a=multi-render
       </t>
 
       <figure>
@@ -769,8 +793,9 @@ a=rtcp-fb:120 ccm fir
       </figure>
     
       <t>
-        SDP Answer from the server indicating two video stream with the speaker and the 
-        slides. Also signaled is the lip-sync for speakers audio and video streams.
+        SDP Answer from the server indicating two video stream with the speaker
+        and the slides. Also signaled is the lip-sync for speakers audio and
+        video streams.
       </t>
       
       <figure>
@@ -906,23 +931,26 @@ SDP Answer signaling only SDES
         </t>
 
         <t>
-          Extend the W3C API to be able to set and read the CSRC list for a PC-Track.
+          Extend the W3C API to be able to set and read the CSRC list for a
+          PC-Track.
         </t>
 
         <t>
-           Extend the W3C API to be able to read SSRC of last RTP packed received.
+           Extend the W3C API to be able to read SSRC of last RTP packed
+           received.
         </t>
 
         <t>
-          Write an RTP Header Extension draft to carey MSID. 
+          Write an RTP Header Extension draft to cary MSID.
         </t>
 
         <t>
-          Fix up MSID draft to align with this proposal. 
+          Fix up MSID draft to align with this proposal.
         </t>
 
         <t>
-          Add a SDP group to signal multiple m-block as are simulcast of same video content. 
+          Add a SDP group to signal multiple m-block as are simulcast of same
+          video content.
         </t>
 
         <t>
@@ -945,8 +973,8 @@ SDP Answer signaling only SDES
     </section>
 
     <section title="Acknowledgments">
-      <t> I would like to thank Suhas Nandakumar, Eric Rescorla, Charles Eckel, Mo Zanaty, and Lyndsay
-      Campbell for help with this draft. </t>
+      <t> I would like to thank Suhas Nandakumar, Eric Rescorla, Charles Eckel,
+      Mo Zanaty, and Lyndsay Campbell for help with this draft. </t>
     </section>
 
     <section title="Open Issues">
@@ -1006,9 +1034,9 @@ SDP Answer
 ]]></artwork>
         </figure>
 
-        <t>This means that a sender can switch back and forth between H261
-        and MVP without any further signaling. The receiver MUST be capable
-        of receiving both formats. At any point in time, only one video format is
+        <t>This means that a sender can switch back and forth between H261 and
+        MVP without any further signaling. The receiver MUST be capable of
+        receiving both formats. At any point in time, only one video format is
         sent, thus implying that only one video is meant to be displayed. </t>
 
       </section>
@@ -1468,6 +1496,7 @@ SDP Offer
         http://dev.w3.org/2011/webrtc/editor/webrtc.html</annotation>
       </reference>
 
+<!--
       <reference anchor="I-D.ietf-rtcweb-use-cases-and-requirements">
         <front>
           <title>Web Real-Time Communication Use-cases and
@@ -1502,6 +1531,7 @@ SDP Offer
         <format target="http://www.ietf.org/internet-drafts/draft-ietf-rtcweb-use-cases-and-requirements-10.txt"
                 type="TXT" />
       </reference>
+-->
 
       <reference anchor="RFC3550">
         <front>
