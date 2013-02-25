@@ -2,6 +2,14 @@
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
 <?xml-stylesheet type="text/xsl" href="rfc2629.xslt" ?>
 
+<!-- 
+make clear most recent sender wins with  multi render 
+
+example with changing SSRC and how to correlate 
+
+add msid to example 
+-->
+
 <?rfc toc="yes" ?>
 <?rfc symrefs="yes" ?>
 <?rfc strict="yes" ?>
@@ -13,18 +21,6 @@
 
 <rfc category="info" docName="draft-jennings-rtcweb-plan-00"
      ipr="noDerivativesTrust200902">
-
-<!-- 
-
-add receive only on thumbnail example 
-
-make clear most recent sender wins with  multi render 
-
-example with changing SSRC and how to correlate 
-
-add msid to example 
-
--->
 
   <front>
     <title abbrev="RTCWeb Plan">Proposed Plan for Usage of SDP and RTP</title>
