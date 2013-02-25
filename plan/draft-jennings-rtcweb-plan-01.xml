@@ -287,7 +287,7 @@ add msid to example
        c=IN IP4 192.0.2.1
        a=rtpmap:101 ulpfec/8000
        a=mid:4
-         ]]></artwork>
+]]></artwork>
 	</figure>
 	<t>
 	  When FEC is expressed this way,
@@ -1280,7 +1280,7 @@ SDP Answer signaling only SDES
        inline:d0RmdmcmVCspeEc3QGZiNWpVLFJhQX1cfHAwJSoj|2^20|1:32
      a=rtpmap:99 iLBC/8000
 
-     m=video 51374 RTP/AVP 36
+     m=video 51374 RTP/AVP 96
      a=crypto:1 AES_CM_128_HMAC_SHA1_80
        inline:d0RmdmcmVCspeEc3QGZiNWpVLFJhQX1cfHAwJSoj|2^20|1:32
      a=rtpmap:96 H261/90000
