@@ -1121,7 +1121,7 @@ a=rtcp-fb:120 ccm fir
      a=imageattr:98 [x=1080,y=720]
      a=content:slides
 
-     m=video 51372 RTP/AVP 99               <- This is the simulcast of main video 
+     m=video 51372 RTP/AVP 99              <- This is the simulcast of main video 
      a=mid:3
      a=rtpmap:99 VP8/90000
      a=fmtp:99 max-fr=15;max-fs=300;
