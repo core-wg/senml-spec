@@ -716,7 +716,7 @@ Camera            a=multi-render:5                  |
 Offer 
 
  m=video 52886 RTP/AVP 98 99 
- a=muliple-render:16 
+ a=multi-render:16 
  a=rtpmap:98 H261/90000
  a=rtpmap:99 H264/90000 
  a=fmtp:99 profile-level-id=4de00a;
@@ -725,7 +725,7 @@ Offer
  ]]></artwork>
         </figure>      
        
-        <t>When combining this muliple-render feature with multiplexing, the
+        <t>When combining this multi-render feature with multiplexing, the
         answer will might not know all the SSRCs that will be send to this m-block
         so it is best to use payload type (PT) numbers that are unique for the
         SDP: the demultiplexing may have to only use the PT if the SSRCs are
