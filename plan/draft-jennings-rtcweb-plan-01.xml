@@ -269,7 +269,7 @@ add msid to example
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-		   [TODO: Tweak this so it's not multicast.]
+[TODO: Tweak this so it's not multicast.]
        v=0
        o=adam 289083124 289083124 IN IP4 host.example.com
        s=ULP FEC Seminar
@@ -1095,39 +1095,39 @@ a=rtcp-fb:120 ccm fir
                    xml:space="preserve"><![CDATA[
 
      v=0
-     o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
+     o=alice 2890844526 2890844527 IN IP4 host.example.com
      s=
      c=IN IP4 host.atlanta.example.com
      t=0 0
      a=group:LS 1,2,3
      a=group:SIMULCAST 2,3
 
-     m=audio 49170 RTP/AVP 96               <- This is the Audio 
+     m=audio 49170 RTP/AVP 96      <- This is the Audio 
      a=mid:1
      a=rtpmap:96 iLBC/8000
      a=content:main
 
-     m=video 51372 RTP/AVP 97               <- This is the main video 
+     m=video 51372 RTP/AVP 97      <- This is the main video 
      a=mid:2
      a=rtpmap:97 VP8/90000
      a=fmtp:97 max-fr=30;max-fs=3600;
      a=imageattr:97 [x=1080,y=720]
      a=content:main
 
-     m=video 51372 RTP/AVP 98               <- This is the slides 
+     m=video 51372 RTP/AVP 98       <- This is the slides 
      a=mid:2
      a=rtpmap:98 VP8/90000
      a=fmtp:98 max-fr=30;max-fs=3600;
      a=imageattr:98 [x=1080,y=720]
      a=content:slides
 
-     m=video 51372 RTP/AVP 99              <- This is the simulcast of main video 
+     m=video 51372 RTP/AVP 99       <- This is the simulcast of main
      a=mid:3
      a=rtpmap:99 VP8/90000
      a=fmtp:99 max-fr=15;max-fs=300;
      a=imageattr:99 [x=320,y=240]
 
-     m=video 51372 RTP/AVP 100              <- This is the 10 thumbnails 
+     m=video 51372 RTP/AVP 100      <- This is the 10 thumbnails 
      a=mid:4
      a=multi-render:10
      a=recvonly
