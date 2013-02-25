@@ -707,14 +707,14 @@ Camera            a=multiple-render:5                  |
         level attribute called multiple-render that includes an integer that
         indicates how many streams can be rendered at the same time.</t>
 
-        <t>As an example, a system that could display 16 thumbnails at the same
+        <t>As an example of a m-block, a system that could display 16 thumbnails at the same
         time and was willing to receive H261 or H264 might offer</t>
 
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
+Offer 
 
-SDP Offer 
  m=video 52886 RTP/AVP 98 99 
  a=muliple-render:16 
  a=rtpmap:98 H261/90000
@@ -769,6 +769,7 @@ c= IN IP4 24.23.204.141
 a=group:BUNDLE vid1 vid2 vid3
 a=group:FEC vid1 vid2
 a=group:SIMULCAST vid1 vid3
+
 m=video 62537 RTP/SAVPF 96
 a=mid:vid1
 a=multi-render:3	
@@ -783,6 +784,7 @@ a=candidate:1 1 UDP  694302207 24.23.204.141 62537
 a=candidate:0 2 UDP 2113667326 192.168.1.4 64678 typ host
 a=candidate:1 2 UDP  1694302206 24.23.204.141 64678 
                      typ rflx raddr 192.168.1.4 rport 64678
+
 m=video 62541 RTP/SAVPF 97
 a=mid:vid2	
 a=multi-render:3	
@@ -790,6 +792,7 @@ a=rtcp-mux
 a=msid:34567345673456734567 s:1 f:2
 a=rtpmap:97 uplfec/90000
 a=candidate:0 1 UDP 2113667327 192.168.1.4 62541 typ host	
+
 m=video 62545 RTP/SAVPF 98
 a=mid:vid3	
 a=multi-render:3	
@@ -823,6 +826,7 @@ c= IN IP4 98.248.92.77
 a=group:BUNDLE vid1 vid2 vid3
 a=group:FEC vid1 vid2
 a=group:SIMULCAST vid1 vid3
+
 m=video 42537 RTP/SAVPF 96
 a=mid:vid1	
 a=multi-render:3	
@@ -837,6 +841,7 @@ a=candidate:1 1 UDP 1694302207 98.248.92.77 42537
 a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host
 a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 
                     typ srflx raddr 192.168.1.7 rport 60065
+
 m=video 42539 RTP/SAVPF 97
 a=mid:vid2	
 a=multi-render:3	
@@ -844,6 +849,7 @@ a=rtcp-mux
 a=msid:11111122222233333444444 s:1 f:2 r:34567345673456734567
 a=rtpmap:97 uplfec/90000
 a=candidate:0 1 UDP 2113667327 192.168.1.7 42539 typ host	
+
 m=video 42537 RTP/SAVPF 98
 a=mid:vid3	
 a=multi-render:3	
@@ -880,6 +886,7 @@ a=ice-pwd:de4e99bd291c325921d5d47efbabd9a2
 a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:
                     c9:c7:70:9d:1f:66:79:a8:07
 c= IN IP4 98.248.92.77	
+
 m=video 42537 RTP/SAVPF 96
 a=mid:vid1	
 a=rtcp-mux
@@ -892,10 +899,12 @@ a=candidate:1 1 UDP 1694302207 98.248.92.77 42537
 a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host
 a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 
                     typ srflx raddr 192.168.1.7 rport 60065
+
 m=video 0 RTP/SAVPF 97
 a=mid:vid2	
 a=rtcp-mux
 a=rtpmap:97 uplfec/90000
+
 m=video 0 RTP/SAVPF 98
 a=mid:vid3	
 a=rtcp-mux
@@ -1157,13 +1166,16 @@ TODO - fix this ans
      c=IN IP4 host.biloxi.example.com
      t=0 0
      a=group:LS a,b
+
      m=audio 49172 RTP/AVP 99
      a=mid:a
      a=rtpmap:99 iLBC/8000
+
      m=video 51374 RTP/AVP 96
      a=mid:b
      a=content:speaker
      a=rtpmap:96 H264/90000
+
      m=video 51376 RTP/AVP 97
      a=mid:c
      a=content:slides
@@ -1375,8 +1387,10 @@ Offer
      s=
      c=IN IP4 host.atlanta.example.com
      t=0 0
+
      m=audio 49170 RTP/AVP 99
      a=rtpmap:99 iLBC/8000
+
      m=video 51372 RTP/AVP 31 32
      a=rtpmap:31 H261/90000
      a=rtpmap:32 MPV/90000
@@ -1395,8 +1409,10 @@ Answer
      s=
      c=IN IP4 host.biloxi.example.com
      t=0 0
+
      m=audio 49172 RTP/AVP 99
      a=rtpmap:99 iLBC/8000
+
      m=video 51374 RTP/AVP 31 32
      a=rtpmap:31 H261/90000
      a=rtpmap:32 MPV/90000
@@ -1426,11 +1442,13 @@ Offer
     s=Raptor RTP FEC Example
     t=0 0
     a=group:FEC-FR S1 R1
+
     m=video 30000 RTP/AVP 100
     c=IN IP4 233.252.0.1/127
     a=rtpmap:100 MP2T/90000
     a=fec-source-flow: id=0
     a=mid:S1
+
     m=application 30000 RTP/AVP 110
     c=IN IP4 233.252.0.2/127
     a=rtpmap:110 raptorfec/90000
@@ -1453,6 +1471,7 @@ Offer
 Offer 
 
     v=0
+
     m=video 49170 RTP/AVP 100 99 98
     a=rtpmap:98 H264/90000
     a=fmtp:98 profile-level-id=42A01E; packetization-mode=0;
@@ -1471,25 +1490,26 @@ Offer
 
       <section anchor="sec-diffcodecdiffresolutions"
                title="Different Video Codecs With Different Resolutions Formats">
-        <t>The SDP below shows various ways to specify resolutions for video
+        <t>The SDP below shows some m-blocks with various ways to specify resolutions for video
         codecs signaled <xref target="RFC4566"></xref>.</t>
 
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
+Offer 
 
-SDP Offer 
-
-    m=video 49170/2 RTP/AVP 31
+    m=video 49170 RTP/AVP 31
     a=rtpmap:31 H261/90000
     a=fmtp:31 CIF=2;QCIF=1;D=1
     
-    m=video 49170/2 RTP/AVP 98 99
-    a=rtpmap:98 jpeg2000/27000000
+    m=video 49172 RTP/AVP 99
     a=rtpmap:99 jpeg2000/90000
-    a=fmtp:98 sampling=YCbCr-4:2:0;width=128;height=128
     a=fmtp:99 sampling=YCbCr-4:2:0;width=128;height=128
-    
+
+    m=video 49174 RTP/AVP 96
+    a=rtpmap:96 VP8/90000	
+    a=fmtp:96 max-fr=30;max-fs=3600; 
+    a=imageattr:96 [x=1280,y=720]    
 
 ]]></artwork>
         </figure>
