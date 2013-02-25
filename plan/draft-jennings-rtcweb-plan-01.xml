@@ -265,6 +265,8 @@ add msid to example
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
+Offer 
+
        v=0
        o=adam 289083124 289083124 IN IP4 host.example.com
        s=ULP FEC Seminar
@@ -272,13 +274,17 @@ add msid to example
        c=IN IP4 192.0.2.0
        a=group:FEC 1 2
        a=group:FEC 3 4
+
        m=audio 30000 RTP/AVP 0
        a=mid:1
+
        m=audio 30002 RTP/AVP 100
        a=rtpmap:100 ulpfec/8000
        a=mid:2
+
        m=video 30004 RTP/AVP 31
        a=mid:3
+
        m=video 30004 RTP/AVP 101
        c=IN IP4 192.0.2.1
        a=rtpmap:101 ulpfec/8000
@@ -803,8 +809,7 @@ a=candidate:0 1 UDP 2113667327 192.168.1.4 62545 typ host
           <figure>
             <artwork align="left" alt="" height="" name="" type="" width=""
                      xml:space="preserve"><![CDATA[
-
-SDP Answer Complex
+Answer 
 
 v=0	
 o=Bob 20519 0 IN IP4 0.0.0.0	
@@ -864,7 +869,7 @@ a=candidate:1 2 UDP 1694302206 98.248.92.77 60065
           <figure>
             <artwork align="left" alt="" height="" name="" type="" width=""
                      xml:space="preserve"><![CDATA[
-SDP Answer 
+Answer 
 
 v=0	
 o=Bob 20519 0 IN IP4 0.0.0.0	
@@ -1009,7 +1014,7 @@ a=candidate:0 1 UDP 2113667327 192.168.1.4 62539 typ host
  <figure>
         <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-Answer with Simulcast and Bundle support 
+Answer 
 
 v=0	
 o=bob 16833 0 IN IP4 0.0.0.0	
@@ -1050,7 +1055,7 @@ a=rtcp-fb:120 ccm fir
  <figure>
         <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-Answer without Simulcast or bundle support 
+Answer 
 
 v=0	
 o=bob 16833 0 IN IP4 0.0.0.0	
@@ -1088,6 +1093,7 @@ a=rtcp-fb:120 ccm fir
       <figure>
         <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
+Offer
 
      v=0
      o=alice 2890844526 2890844527 IN IP4 host.example.com
@@ -1142,6 +1148,7 @@ a=rtcp-fb:120 ccm fir
       <figure>
         <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
+Answer 
 
 TODO - fix this ans 
      v=0
@@ -1171,8 +1178,7 @@ TODO - fix this ans
       <figure>
         <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-
-SDP Offer
+Offer
 
      v=0
      o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
@@ -1201,7 +1207,7 @@ SDP Offer
    <figure>
         <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[  
-SDP Answer 
+Answer 
 
      v=0
      o=bob 2808844564 2808844565 IN IP4 host.biloxi.example.com
@@ -1234,8 +1240,7 @@ SDP Answer
       <figure>
         <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-
-SDP Offer - with support for SRTP-DTLS and SDES signaled
+Offer 
 
      v=0
      o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
@@ -1262,8 +1267,7 @@ SDP Offer - with support for SRTP-DTLS and SDES signaled
    <figure>
         <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[      
-    
-SDP Answer signaling only SDES 
+Answer 
 
      v=0
      o=bob 2808844564 2808844565 IN IP4 host.biloxi.example.com
@@ -1364,8 +1368,7 @@ SDP Answer signaling only SDES
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-
-SDP Offer 
+Offer 
 
      v=0
      o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
@@ -1385,7 +1388,7 @@ SDP Offer
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
 
-SDP Answer 
+Answer 
 
      v=0
      o=bob 2808844564 2808844565 IN IP4 host.biloxi.example.com
@@ -1416,8 +1419,7 @@ SDP Answer
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-
-SDP Offer 
+Offer 
 
     v=0
     o=ali 1122334455 1122334466 IN IP4 fec.example.com
@@ -1448,8 +1450,7 @@ SDP Offer
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-
-SDP Offer 
+Offer 
 
     v=0
     m=video 49170 RTP/AVP 100 99 98
@@ -1501,8 +1502,7 @@ SDP Offer
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-
-SDP Offer 
+Offer 
 
     v=0
     o=Laura 289083124 289083124 IN IP4 one.example.com
@@ -1573,8 +1573,7 @@ SDP Offer
     <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-
-SDP Offer with session multiplexing 
+Offer
 
    v=0
    o=mascha 2980675221 2980675778 IN IP4 host.example.net
@@ -1612,8 +1611,7 @@ SDP Offer with session multiplexing
        <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-
-SDP Offer with SSRC multiplexing 
+SDP
 
    v=0
    o=mascha 2980675221 2980675778 IN IP4 host.example.net
@@ -1706,9 +1704,9 @@ SDP Offer
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
+Offer 
 
-SDP Offer 
- v=0
+    v=0
     o=Alice 292742730 29277831 IN IP4 131.163.72.4
     s=Second lecture from information technology
     c=IN IP4 131.164.74.2
