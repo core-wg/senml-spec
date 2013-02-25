@@ -90,14 +90,14 @@ add msid to example
       simultaneously use multiple stream of video that will be simultaneously
       displayed but share the same SDP characteristics and semantics such that
       they can all be negotiated under a single m-line. When using features like
-      RTX, FEC, and Simulcast in a multireder situation, there needs to be a
+      RTX, FEC, and Simulcast in a multi-render situation, there needs to be a
       way to correlate a given related media flow with the correct "base"
       media-flow. This is accomplished by having the related flows carry, in the
       CSRC, the SSRC of their base flow. An example SDP might look like as provided
       in the example <xref target="sec-mult-render-example" />. </t>
 
       <t> This draft also propose that advanced usages, including WebRTC to
-      WebRTC scenarios, uses a Media Stream Identifier (MSID) that is signalled
+      WebRTC scenarios, uses a Media Stream Identifier (MSID) that is signaled
       in SDP and also attempts to negotiate the usage of a RTP header extension
       to include the MSID in the RTP packet. This resolves many long term issues. </t>
 
@@ -317,7 +317,7 @@ Offer
 	    media over the same 5-tuple.</t>
 
 	    <t></t>
-	    <t hangText="multi-rendering:"></t>
+	    <t hangText="multi-render:"></t>
 	    <t>The ability to have large numbers of multiple similar media flows 
 	    (e.g., multiple cameras).
 	    The paradigmatic case here is multiple video thumbnails.</t>
@@ -475,7 +475,7 @@ Microphone -->    m=audio    -->       Speaker          \
 Camera     -->    m=video    -->       Window            |
                                                           >  5-Tuple
 Camera     -->    m=video    -->       5 Small Windows   |
-Camera            a=multiple-render:5                    |
+Camera            a=multi-render:5                    |
 ...                                                      /
 		   ]]></artwork>
         </figure>      
@@ -495,7 +495,7 @@ Microphone -->    m=audio    -->       Speaker        \   \  Lip-sync
 Camera     -->    m=video    -->       Window          |  /  
                                                         >  5-Tuple
 Camera     -->    m=video    -->       5 Small Windows |
-Camera            a=multiple-render:5                  |
+Camera            a=multi-render:5                  |
 ...                                                   /
 		   ]]></artwork>
         </figure>      
@@ -686,7 +686,7 @@ Camera            a=multiple-render:5                  |
           MS-Stream be the MSID with no flow identifier, and the ID attribute of
           the MS-Track be the MSID. </t>
 
-          <t> In addition, the SDP will attempt to negotatiate sending the MSID
+          <t> In addition, the SDP will attempt to negotiate sending the MSID
           in the RTP using a RTP Header Extension. WebRTC clients SHOULD also
           include the a=ssrc attributes if they know which SSRC they plan to
           send but they can not rely on this not changing, being compete, or
@@ -704,7 +704,7 @@ Camera            a=multiple-render:5                  |
         <t>There are cases - such as a grid of security cameras or thumbnails in
         a video conference - where a receiver is willing to receive and display
         several media flows of video. The proposal here is to create a new media
-        level attribute called multiple-render that includes an integer that
+        level attribute called multi-render that includes an integer that
         indicates how many streams can be rendered at the same time.</t>
 
         <t>As an example of a m-block, a system that could display 16 thumbnails at the same
@@ -945,9 +945,9 @@ a=fmtp:98 profile-level-id=428014;
       <section anchor="sec-issues" title="Open Issues">
       
         <t>What do do with unrecognized media received at W3C PerrConnection
-        level? Sugestion is it creates a new track in whatever stream the MSID
-        would indicate if present and the defualt stream if no MSID header
-        extention in the RTP. </t>
+        level? Suggestion is it creates a new track in whatever stream the MSID
+        would indicate if present and the default stream if no MSID header
+        extension in the RTP. </t>
 
       </section>
 
@@ -1540,7 +1540,7 @@ Offer
       </section>
 
       <section anchor="sec-bfcp" title="BFCP">
-       <t> <xref target="RFC4583"></xref> defines SDP foramt for Binary
+       <t> <xref target="RFC4583"></xref> defines SDP format for Binary
        Floor Control Protocol (BFCP) as shown below</t> 
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
