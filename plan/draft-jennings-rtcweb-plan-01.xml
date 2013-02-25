@@ -253,12 +253,129 @@ add msid to example
         </list></t>
     </section>
 
-    <section title="Overview" anchor="sec-overview">
+    <section title="Background/Solution Overview">
       <t>
-	     The basic unit of media description in SDP is the m-line/m-block and this
-	     document continues with that assumption. In general, different cameras,
-	     microphones, etc. are carried on different m-lines. The exceptions to
-	     this rule is when using the multi-render extension in which case:
+	The basic unit of media description in SDP is the m-line/m-block.
+	This allows any entity defined by a single m-block to be
+	individually negotiated. This negotiation applies not only
+	to individual sources (e.g., cameras) but also to individual
+	components that come from a single source, such as layers
+	in SVC.
+      </t>
+      <t>
+	For example, consider negotiation of FEC as defined in
+	<xref target="RFC4756"/>. 
+      </t>
+        <figure>
+          <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+		   [TODO: Tweak this so it's not multicast.]
+       v=0
+       o=adam 289083124 289083124 IN IP4 host.example.com
+       s=ULP FEC Seminar
+       t=0 0
+       c=IN IP4 224.2.17.12/127
+       a=group:FEC 1 2
+       a=group:FEC 3 4
+       m=audio 30000 RTP/AVP 0
+       a=mid:1
+       m=audio 30002 RTP/AVP 100
+       a=rtpmap:100 ulpfec/8000
+       a=mid:2
+       m=video 30004 RTP/AVP 31
+       a=mid:3
+       m=video 30004 RTP/AVP 101
+       c=IN IP4 224.2.17.13/127
+       a=rtpmap:101 ulpfec/8000
+       a=mid:4
+         ]]></artwork>
+	</figure>
+	<t>
+	  When FEC is expressed this way,
+	  the answerer can selectively accept or reject the various
+	  streams by setting the port in the m-line to zero.
+	  RTX <xref target="RFC4588"></xref>, layered coding <xref target="RFC5583"></xref>,
+	  and Simulcast are all handled the same way.
+	  Note that while it is also possible to represent FEC and SVC using
+	  source-specific attributes <xref target="RFC5576"/>,
+	  that mechanism is less flexible because it does not permit
+	  selective acceptance and rejection as described in
+	  [RFC 5576; Section 8]. Most deployed systems which
+	  implement FEC, layered coding, etc. do so with each
+	  component on a separate m-line.
+	</t>
+	<t>
+	  Unfortunately, this strategy runs into problems when
+	  combined with two new features that are desired for
+	  WebRTC:
+	</t>
+	<t>
+	  <list style="hanging">
+	    <t hangText ="m-line multiplexing (bundle):"></t>
+	    <t>The ability to send media described in multiple
+	    media over the same 5-tuple.</t>
+
+	    <t></t>
+	    <t hangText="multi-rendering:"></t>
+	    <t>The ability to have large numbers of multiple similar media flows 
+	    (e.g., multiple cameras).
+	    The paradigmatic case here is multiple video thumbnails.</t>
+	  </list>
+	</t>
+	<t>
+	  Obviously, this strategy does not scale to large numbers
+	  For instance, consider the case where
+	  we want to be able to transmit 35 video thumbnails (this is large,
+	  but not insane). In the model described above, each of these
+	  flows would need its own m-line and its own set of codecs.
+	  If each side supports three separate codecs (e.g.,
+	  H.261, H.263, and VP8), then we have just consumed 105
+	  payload types, which exceeds the available dynamic payload
+	  space.
+	</t>
+	<t>
+	  In order to resolve this issue, it is necessary to have multiple
+	  flows (e.g., multiple thumbnails) indicated by the same m-line
+	  and using the same set of payload types (see Section XXX for
+	  proposed syntax for this.) Because each source has its own
+	  SSRC, it is possible to divide the RTP packets into individual
+	  flows. However, this solution still leaves us with two problems:
+	</t>
+	<t>
+	  <list style="symbols">
+	    <t>How to individually address specific RTP flows in order to,
+	    for instance, order them on a page or display flow-specific
+	    captions.</t>
+	    
+	    <t>How to determine the relationship between multiple variants
+	    of the same stream. For instance, if we have multiple cameras
+	    each of which is present in a layered encoding, we need to
+	    be able to determine which layers go together.
+	    </t>
+	  </list>
+	</t>
+	<t>
+	  For reasons described in <xref target="sec-overall-design"/>,
+	  the SSRC is not suitable for individually addressing RTP flows.
+	  Instead, we introduce a new identifier, the MSID, which can
+	  be carried both in the SDP and the RTP and therefore can
+	  be used to correlate SDP elements to RTP elements.
+	  See <xref target="sec-msid"/>
+	</t>
+	<t>
+	  By contrast, we can use RTP-only mechanisms to express
+	  the correlation between RTP flows: while all the flows
+	  associated with a given camera have distinct SSIDs,
+	  we can use the CSRC to indicate which flows belong
+	  together. This is described in <xref target="sec-multi-render"/>
+	</t>
+    </section>
+    <section title="Overall Design" anchor="sec-overall-design">
+      <t>
+	The basic unit of media description in SDP is the m-line/m-block and this
+	document continues with that assumption. In general, different cameras,
+	microphones, etc. are carried on different m-lines. The exceptions to
+	this rule is when using the multi-render extension in which case:
       </t>
       <t>
 	<list style="symbols">
