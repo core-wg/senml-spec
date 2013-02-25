@@ -1529,8 +1529,10 @@ Offer
     c=IN IP4 192.0.2.1
     t=0 0
     a=group:LS 1 2
+
     m=audio 30000 RTP/AVP 0
     a=mid:1
+
     m=video 30002 RTP/AVP 31
     a=mid:2
 ]]></artwork>
@@ -1543,8 +1545,7 @@ Offer
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-
-SDP Offer 
+Offer 
 
     m=application 50000 TCP/TLS/BFCP *
     a=setup:passive
@@ -1556,8 +1557,10 @@ SDP Offer
     a=userid:1234
     a=floorid:1 m-stream:10
     a=floorid:2 m-stream:11
+
     m=audio 50002 RTP/AVP 0
     a=label:10
+
     m=video 50004 RTP/AVP 31
     a=label:11
   
@@ -1566,7 +1569,10 @@ SDP Offer
 
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
-                   xml:space="preserve"><![CDATA[    m=application 50000 TCP/TLS/BFCP *
+                   xml:space="preserve"><![CDATA[    
+Answer
+
+    m=application 50000 TCP/TLS/BFCP *
     a=setup:passive
     a=connection:new
     a=fingerprint:SHA-1 \
@@ -1576,8 +1582,10 @@ SDP Offer
     a=userid:1234
     a=floorid:1 m-stream:10
     a=floorid:2 m-stream:11
+
     m=audio 50002 RTP/AVP 0
     a=label:10
+
     m=video 50004 RTP/AVP 31
     a=label:11
     
@@ -1600,21 +1608,25 @@ Offer
    c=IN IP4 192.0.2.0
    a=group:FID 1 2
    a=group:FID 3 4
+
    m=audio 49170 RTP/AVPF 96
    a=rtpmap:96 AMR/8000
    a=fmtp:96 octet-align=1
    a=rtcp-fb:96 nack
    a=mid:1
+
    m=audio 49172 RTP/AVPF 97
    a=rtpmap:97 rtx/8000
    a=fmtp:97 apt=96;rtx-time=3000
    a=mid:2
+
    m=video 49174 RTP/AVPF 98
    a=rtpmap:98 MP4V-ES/90000
    a=rtcp-fb:98 nack
    a=fmtp:98 profile-level-id=8;config=01010000012000884006682C209\
-   0A21F
+      0A21F
    a=mid:3
+
    m=video 49176 RTP/AVPF 99
    a=rtpmap:99 rtx/90000
    a=fmtp:99 apt=98;rtx-time=3000
@@ -1636,11 +1648,12 @@ SDP
    v=0
    o=mascha 2980675221 2980675778 IN IP4 host.example.net
    c=IN IP4 192.0.2.0
+
    m=video 49170 RTP/AVPF 96 97
    a=rtpmap:96 MP4V-ES/90000
    a=rtcp-fb:96 nack
    a=fmtp:96 profile-level-id=8;config=01010000012000884006682C209\
-   0A21F
+     0A21F
    a=rtpmap:97 rtx/90000
    a=fmtp:97 apt=96;rtx-time=3000
   
@@ -1658,35 +1671,37 @@ SDP
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-
-SDP Offer 
+Offer 
 
     a=group:DDP L1 L2 L3
+
     m=video 20000 RTP/AVP 96 97 98
     a=rtpmap:96 H264/90000
     a=fmtp:96 profile-level-id=4de00a; packetization-mode=0;
-    mst-mode=NI-T; sprop-parameter-sets={sps0},{pps0};
+      mst-mode=NI-T; sprop-parameter-sets={sps0},{pps0};
     a=rtpmap:97 H264/90000
     a=fmtp:97 profile-level-id=4de00a; packetization-mode=1;
-    mst-mode=NI-TC; sprop-parameter-sets={sps0},{pps0};
+      mst-mode=NI-TC; sprop-parameter-sets={sps0},{pps0};
     a=rtpmap:98 H264/90000
     a=fmtp:98 profile-level-id=4de00a; packetization-mode=2;
-    mst-mode=I-C; init-buf-time=156320;
-    sprop-parameter-sets={sps0},{pps0};
+      mst-mode=I-C; init-buf-time=156320;
+      sprop-parameter-sets={sps0},{pps0};
     a=mid:L1
+
     m=video 20002 RTP/AVP 99 100
     a=rtpmap:99 H264-SVC/90000
     a=fmtp:99 profile-level-id=53000c; packetization-mode=1;
-    mst-mode=NI-T; sprop-parameter-sets={sps1},{pps1};
+      mst-mode=NI-T; sprop-parameter-sets={sps1},{pps1};
     a=rtpmap:100 H264-SVC/90000
     a=fmtp:100 profile-level-id=53000c; packetization-mode=2;
-    mst-mode=I-C; sprop-parameter-sets={sps1},{pps1};
+      mst-mode=I-C; sprop-parameter-sets={sps1},{pps1};
     a=mid:L2
     a=depend:99 lay L1:96,97; 100 lay L1:98
+
     m=video 20004 RTP/AVP 101
     a=rtpmap:101 H264-SVC/90000
     a=fmtp:101 profile-level-id=53001F; packetization-mode=1;
-    mst-mode=NI-T; sprop-parameter-sets={sps2},{pps2};
+      mst-mode=NI-T; sprop-parameter-sets={sps2},{pps2};
     a=mid:L3
     a=depend:101 lay L1:96,97 L2:99
 ]]></artwork>
@@ -1701,8 +1716,7 @@ SDP Offer
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-
-SDP Offer 
+Offer 
 
     m=video 49170 RTP/AVP 96
     a=rtpmap:96 H264/90000
@@ -1731,12 +1745,15 @@ Offer
     s=Second lecture from information technology
     c=IN IP4 131.164.74.2
     t=0 0
+
     m=video 52886 RTP/AVP 31
     a=rtpmap:31 H261/9000
     a=content:slides
+
     m=video 53334 RTP/AVP 31
     a=rtpmap:31 H261/9000
     a=content:speaker
+
     m=video 54132 RTP/AVP 31
     a=rtpmap:31 H261/9000
     a=content:sl
