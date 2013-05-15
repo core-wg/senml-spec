@@ -7,8 +7,7 @@ TXT  := $(patsubst %.xml,%.txt,$(SRC))
 DIF  := $(patsubst %.xml,%.diff.html,$(SRC))
 PDF  := $(patsubst %.xml,%.pdf,$(SRC))
 
-all: $(HTML) $(TXT) $(DIF) $(PDF)
-#all: $(HTML) $(TXT) $(DIF)
+all: $(HTML) $(TXT) $(DIF) 
 
 clean:
 	rm *~ draft*.html draft*pdf draft-*txt
@@ -17,14 +16,14 @@ clean:
 #	xsltproc -o $@ rfc2629.xslt $^
 
 %.html: %.xml
-	/Users/ccg-cteo/HTML5/ietf/binaries/xml2rfc/xml2rfc-1.36/xml2rfc.tcl $^ $@
+	xml2rfc $^ $@
 
 
 %.txt: %.xml
-	/Users/ccg-cteo/HTML5/ietf/binaries/xml2rfc/xml2rfc-1.36/xml2rfc.tcl $^ $@
+	xml2rfc $^ $@
 
 %.diff.html: %.txt
-	/Users/ccg-cteo/HTML5/ietf/binaries/xml2rfc/xml2rfc-1.36/htmlwdiff  $^.old $^ >  $@
+	htmlwdiff  $^.old $^ >  $@
 
 %.pdf: %.html
 	wkpdf -p letter -s $^ -o $@
