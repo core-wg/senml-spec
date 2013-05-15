@@ -11,7 +11,8 @@
 <rfc category="std" docName="draft-jennings-sipcore-rfc4474bis-00"
      ipr="pre5378Trust200902">
   <front>
-    <title abbrev="SIP Identity">TODO</title>
+    <title abbrev="SIP Identity">Enhancements for Authenticated Identity Management in the
+                   Session Initiation Protocol (SIP)</title>
 
     <author fullname="Jon Peterson" initials="J." surname="Peterson">
       <organization>NeuStar</organization>
@@ -213,9 +214,8 @@
       may be neither practical nor affordable, given the difficulties of
       establishing a Public Key Infrastructure (PKI) that extends to
       end-users, and moreover, given the potentially large number of SIP user
-      agents (phones, PCs, laptops, PDAs, gaming</t>
-
-      <t>devices) that may be employed by a single user. In such environments,
+      agents (phones, PCs, laptops, PDAs, gaming
+      devices) that may be employed by a single user. In such environments,
       synchronizing keying material across multiple devices may be very
       complex and requires quite a good deal of additional endpoint behavior.
       Managing several certificates for the various devices is also quite
@@ -355,9 +355,8 @@
       in the From header field MUST correspond exactly to one of the mapped
       URIs associated with the 'username' given in the Proxy-Authorization
       header. Various exceptions to such policies might arise for cases like
-      anonymity; if the AoR asserted in the From</t>
-
-      <t>header field uses a form like 'sip:anonymous@example.com', then the
+      anonymity; if the AoR asserted in the From
+      header field uses a form like 'sip:anonymous@example.com', then the
       'example.com' proxy should authenticate that the user is a valid user in
       the domain and insert the signature over the From header field as
       usual.</t>
@@ -550,9 +549,8 @@
       requests, through an 'outbound' proxy (the authentication service). The
       best way to accomplish this is using pre-loaded Route headers and loose
       routing. For a given domain, if an entity that can instantiate the
-      authentication service role is not in the path of dialog-forming</t>
-
-      <t>requests, identity for mid-dialog requests in the backwards direction
+      authentication service role is not in the path of dialog-forming
+      requests, identity for mid-dialog requests in the backwards direction
       cannot be provided.</t>
 
       <t>As a recipient of a request, a user agent that can verify signed
@@ -1067,9 +1065,8 @@
       Request-URI in SIP than in the From header field, since the UAC has no
       option but to provide a TEL URI alone when the remote domain to which a
       request is sent is unknown. The local domain, however, is usually known
-      by the UAC, and accordingly it can</t>
-
-      <t>form a proper From header field containing a SIP URI with a username
+      by the UAC, and accordingly it can
+      form a proper From header field containing a SIP URI with a username
       in TEL URI form. Implementations that intend to send their requests
       through an authentication service SHOULD put telephone numbers in the
       From header field into SIP or SIPS URIs whenever possible.</t>
@@ -1213,9 +1210,8 @@
         the valid host, which has exactly the same end result. Although it is
         possible that an intermediary-based authentication service could
         guarantee that no Via hops are inserted between the sending user agent
-        and the authentication service, it could not</t>
-
-        <t>prevent an attacker from adding a Via hop after the authentication
+        and the authentication service, it could not
+       prevent an attacker from adding a Via hop after the authentication
         service, and thereby preempting responses. It is necessary for the
         proper operation of SIP for subsequent intermediaries to be capable of
         inserting such Via header fields, and thus it cannot be prevented. As
@@ -1360,9 +1356,8 @@
         UAC cannot act as an authentication service itself. Accordingly, when
         a direct connection and TLS are not possible, a UAC should use the
         SIPS mechanism, Digest 'auth-int' for body integrity, or both when it
-        can. The ultimate decision to add an Identity header to a</t>
-
-        <t>request lies with the authentication service, of course; domain
+        can. The ultimate decision to add an Identity header to a
+        request lies with the authentication service, of course; domain
         policy must identify those cases where the UAC's security association
         with the authentication service is too weak.</t>
       </section>
@@ -1563,7 +1558,7 @@
         verifier does not possess a root certificate. This response code is
         defined by the following information, which has been added to the
         method and response-code sub-registry under
-        &gt;http://www.iana.org/assignments/sip-parameters</t>
+        http://www.iana.org/assignments/sip-parameters</t>
 
         <figure>
           <artwork><![CDATA[
