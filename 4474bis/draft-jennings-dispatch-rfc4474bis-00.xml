@@ -58,7 +58,7 @@
     </author>
 
     <author fullname="Eric Rescorla" initials="E.K." surname="Rescorla">
-      <organization>Mozilla</organization>
+      <organization>RTFM, Inc.</organization>
 
       <address>
         <postal>
@@ -104,14 +104,14 @@
 
           <t>SPAM has increased.</t>
 
-          <t>A clearer understanding has evolved of the use of B2BUA including
+          <t>A clearer understanding has evolved of the use of B2BUAs including
           standardization such as the STRAW WG.</t>
 
-          <t>Multipart mime has failed as a SIP extension mechanism.</t>
+          <t>Multipart MIME has failed as a SIP extension mechanism.</t>
 
           <t>Widespread identity providers such as Facebook have emerged.</t>
 
-          <t>Techniques non-carrier entities to verify phone numbers and then
+          <t>Techniques for non-carrier entities to verify phone numbers and then
           use them for addressing (such as Apple's iMessage) have been shown to
           be commercially feasible.</t>
 
@@ -126,7 +126,7 @@
 
           <t>The world is in the a huge transition to mobile devices. Even the
           most limited modern mobile devices have user interface and
-          computation capabilities that greatly exceed a 2002 era SIP
+          computational capabilities that greatly exceed a 2002-era SIP
           phone.</t>
         </list></t>
 
@@ -134,14 +134,14 @@
       evolution of mobile devices and internet, and a political will to change
       make this the right time to consider an expansion of the scope of 4474
       to solve the following problems: <list style="symbols">
+
           <t>Assert strong identity for domain scoped names such as
           alice@example.com</t>
 
           <t>Assert strong identity for E.164 numbers such as +1 408
           555-1212</t>
 
-          <t>Provide organization attributes such as the identify is a
-          "Bank".</t>
+          <t>Provide organization attributes such as "this is a Bank".</t>
 
           <t>Work for calls crossing even the most adverse networks such as
           the PSTN.</t>
@@ -161,11 +161,11 @@
 
       <t>The core problem in a global identity system with delegated names is
       understanding who is authorized to make assertions about a given name.
-      The proposal is to solve that problem with a too pronged approach.</t>
+      The proposal is to solve that problem with a two pronged approach.</t>
 
       <t>First have responsibility for a number delegated down from the root
       in a series of delegation sub delegation towards the user. For example,
-      the north american number operator may assign a portion of the +1 space
+      the North American number operator may assign a portion of the +1 space
       to a service provider. That service provider may assign a sub space to a
       company and that company may assign a number to a user. At each level of
       delegation, cryptographic credentials could be provided that allow the
@@ -174,17 +174,18 @@
       from the top down.</t>
 
       <t>The other prong to solving the problem is called "claims" and works
-      in a bottom up approach. The end user of a number basically claims it
-      and some trust system validates this claim. The validation may be as
+      via a bottom up approach. The end user of a number basically claims it
+      and some trusted system validates this claim. The validation may be as
       simple as sending a SMS to the number or more complicated such as the
       VIPR system.</t>
 
       <t>The delegation approach creates an easier user experience but is
-      harder to deploy from a business incentive point of view so the approach
+      harder to deploy from a business incentive point of view so our approach
       is to do both and work down from the top and up from the bottom with a
       meet in the middle approach to coverage of the full name space.</t>
 
-      <t>User agents that have a delegation or a claim for a name can create
+      <t>User agents that have a credential (whether of the 
+      delegation or claim variety) for a name can create
       two types of assertions: replay assertions and reliance assertions.
       These two assertion are signed over a different set of the call
       information and protect against different types of attacks. Some
@@ -239,7 +240,7 @@
         telephone number in the From header field value agrees with the subject
         of the certificate. Verification services must of course trust the
         certificate authority that issued the certificate in question. To
-        implement this change to the Identity-Info header, we must account two
+        implement this change to the Identity-Info header, we must allow for two
         possibilities for the conveyance of a telephone number in a request:
         appearing within a tel URI or appearing as the user portion of a SIP
         URI. Therefore, we must prescribe verification service behind in the
