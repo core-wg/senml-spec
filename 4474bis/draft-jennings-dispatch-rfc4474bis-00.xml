@@ -290,13 +290,15 @@
         transit, or if the reliance assurance should be available.</t>
 
         <t>There are a number of ways to implement this change to the signature
-        in the Identity header field. One possibility is to implement a new
-        header, which we might call "Identity-Reliance", which contains a
-        signature over a canonical representation of the reliance field. We
-        might then change the semantics of the Identity header field to include
-        a signature over the From header field value, other headers needed for
-        replay protection, as well as the contents of the Identity-Reliance
-        header. There are however several similar alternatives we might
+        in the Identity header field. One possibility is to design two 
+        new headers, which we might call "Identity-Reliance" and "Identity-Replay"
+        with the reliance signature being over a canonical representation of the
+        reliance field and then the Identity-Replay header covering the
+        From header field value, other headers needed for
+        replay protection, and well as the contents of the Identity-Reliance
+        header. It might also be possible to preserve the existing
+        Identity header as the reliance header.
+        There are however several similar alternatives we might
         consider, and some analysis will be required to identify the best
         option.</t>
 
