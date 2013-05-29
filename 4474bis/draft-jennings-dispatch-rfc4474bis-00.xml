@@ -94,10 +94,9 @@
 
   <middle>
     <section anchor="sec-preamble" title="Preamble">
-      <t>The sip-identity drafts that lead to <xref target="RFC4474">RFC 4474</xref>
-      were first published in 2002. Since that point many things have changed
-      that impact that design.
-      <list style="symbols">
+      <t>The sip-identity drafts that lead to <xref target="RFC4474">RFC
+      4474</xref> were first published in 2002. Since that point many things
+      have changed that impact that design. <list style="symbols">
           <t>The DNS root has been signed.</t>
 
           <t>SPAM has increased.</t>
@@ -122,16 +121,15 @@
           interface has improved.</t>
 
           <t>The world is in the a huge transition to mobile devices. Even the
-          most limited modern mobile devices have user interface and computation
-          capabilities that greatly exceed a 2002 era SIP phone.</t>
+          most limited modern mobile devices have user interface and
+          computation capabilities that greatly exceed a 2002 era SIP
+          phone.</t>
         </list></t>
 
       <t>The authors believe that the confluence of changing technology, the
-      evolution of mobile devices and internet, and a political will to change make
-      this the right time to consider an expansion of the scope of 4474 to solve
-      the following problems:
-
-      <list style="symbols">
+      evolution of mobile devices and internet, and a political will to change
+      make this the right time to consider an expansion of the scope of 4474
+      to solve the following problems: <list style="symbols">
           <t>Assert strong identity for domain scoped names such as
           alice@example.com</t>
 
@@ -151,7 +149,6 @@
 
           <t>Work with evolving non SIP based communications systems such as
           WebRTC.</t>
-
         </list></t>
 
       <t>We believe it is possible to solve all of these in a way that is
@@ -178,40 +175,135 @@
       simple as sending a SMS to the number or more complicated such as the
       VIPR system.</t>
 
-      <t> The delegation approach creates an easier user experience but is
+      <t>The delegation approach creates an easier user experience but is
       harder to deploy from a business incentive point of view so the approach
       is to do both and work down from the top and up from the bottom with a
-      meet in the middle approach to coverage of the full name space. </t>
+      meet in the middle approach to coverage of the full name space.</t>
 
-      <t>User agents that have a delegation or a claim for a name can create two
-      types of assertions: replay assertions and reliance assertions. These two
-      assertion are signed over a different set of the call information and
-      protect against different types of attacks. Some networks might modify the
-      signaling in ways that impact one of these assertions but not the other.
-      </t>
+      <t>User agents that have a delegation or a claim for a name can create
+      two types of assertions: replay assertions and reliance assertions.
+      These two assertion are signed over a different set of the call
+      information and protect against different types of attacks. Some
+      networks might modify the signaling in ways that impact one of these
+      assertions but not the other.</t>
 
       <t>The assertions are passed from the caller to the callee for
-      verification. This can be done by either passing the assertion along with
-      the signaling, or alternatively passing it through a web based rendezvous
-      service where the caller saves the assertion on the rendezvous service and
-      the callee retrieves it from the rendezvous service. There are some call
-      signaling environments, such as when a call passes through the PSTN, where
-      it is not possible to transfer the assertion in the call signaling
-      path. The rendezvous service is in place to make things work in this
-      environment thought some privacy information around who is calling who is
-      reveled to the rendezvous service.  </t>
+      verification. This can be done by either passing the assertion along
+      with the signaling, or alternatively passing it through a web based
+      rendezvous service where the caller saves the assertion on the
+      rendezvous service and the callee retrieves it from the rendezvous
+      service. There are some call signaling environments, such as when a call
+      passes through the PSTN, where it is not possible to transfer the
+      assertion in the call signaling path. The rendezvous service is in place
+      to make things work in this environment thought some privacy information
+      around who is calling who is reveled to the rendezvous service.</t>
 
-      <t> To summarize the work proposed and changes from RFC 4474. 
+      <t>To summarize the work proposed and changes from RFC 4474. <list
+          style="numbers">
+          <t>Add a delegation approach for E.164 numbers.</t>
 
-      <list style="numbers">
-        <t>Add a delegation approach for E.164 numbers.</t>
-        <t>Add a claims approach. </t>
-        <t>Provide two types of assertions instead of one. </t>
-        <t>Add an out of band rendezvous service to pass assertions. </t>
+          <t>Add a claims approach.</t>
 
-      </list>
-      </t>
+          <t>Provide two types of assertions instead of one.</t>
 
+          <t>Add an out of band rendezvous service to pass assertions.</t>
+        </list></t>
+    </section>
+
+    <section anchor="sec-prop" title="Scope of Proposed Changes">
+      <section anchor="sec-prop-id-info"
+               title="Changes to the Identity-Info Header">
+
+        <t>Currently, RFC4474 restricts the subject of the certificate to a
+        domain name, and accordingly the RFC4474 Identity-Info header contains a
+        URI which designates a certificate whose subject (more precisely,
+        subjectAltName) must correspond to the domain of the URI in the From
+        header field value of the SIP request. Per the analysis in
+        [I-D.draft-peterson-secure-origin-ps], we propose to relax this to allow
+        designating an alternative authority for telephone numbers, when
+        telephone numbers appear in the From header field value.</t>
+
+        <t>These changes will allow the Identity-Info URI to point to the
+        certificate with authority over the calling telephone number. A
+        verification service will therefore authorize a SIP request when the
+        telephone number in the From header field value agrees with the subject
+        of the certificate. Verification services must of course trust the
+        certificate authority that issued the certificate in question. To
+        implement this change to the Identity-Info header, we must account two
+        possibilities for the conveyance of a telephone number in a request:
+        appearing within a tel URI or appearing as the user portion of a SIP
+        URI. Therefore, we must prescribe verification service behind in the
+        case where the From header field value URI contains a telephone user
+        part followed by a domain -- which should the verification service
+        expect to find in a certificate?</t>
+
+        <t>There are also a few other potential changes within the scope of a
+        revision to the Identity-Info header. We might consider implementing
+        enough flexibility in the URI to allow a model more like the IdP model
+        described in [I-D.draft-rescorla-rtcweb-generic-idp-00]; this could be
+        useful as RTCWeb sees increasing deployment. We also should consider any
+        implications of the signing of the DNSSEC root and the DANE
+        specifications to the existing Identity-Info uses with domain name. At a
+        high level, it is not expected that the proposed changes will radically
+        alter the semantics of Identity-Info.</t>
+
+        <t>Although deployment of RFC4474 to date has been essentially
+        non-existent, we will during this revision process consider any
+        realistic backwards compatibility concerns.</t>
+      </section>
+
+      <section anchor="sec-prop-id-header"
+               title="Changes to the Identity Header">
+
+        <t>Per the analysis in [I-D.draft-peterson-secure-origin-ps], we propose
+        to change the signature mechanism that RFC44474 specified for the
+        Identity header: in particular, to replace this signature mechanism with
+        one that is more likely to survive end-to-end in SIP networks where
+        intermediaries act as back-to-back user agents rather than proxy
+        servers.</t>
+
+        <t>To accomplish this, we propose creating two distinct signatures
+        within SIP requests: a replay assurance and a reliance assurance. The
+        replay assurance prevents impersonation attacks by providing a signature
+        over the From header field value and certain other headers which will
+        allow a verification service to detect a cut-and-paste attack. The
+        reliance assurance protects against men-in-the-middle unilaterally
+        changing other parameters of the call: these include the target of
+        future requests (Contact header field) and the entirely of the SDP,
+        including the target IP address and ports which, if unprotected, can
+        allow a man-in-the-middle to impersonate an intended
+        listener. Verification services behavior would change to allow them to
+        decide, based on their configuration in a deployment environment,
+        whether the replay assurance alone can realistically survive network
+        transit, or if the reliance assurance should be available.</t>
+
+        <t>There are a number of ways to implement this change to the signature
+        in the Identity header field. One possibility is to implement a new
+        header, which we might call "Identity-Reliance", which contains a
+        signature over a canonical representation of the reliance field. We
+        might then change the semantics of the Identity header field to include
+        a signature over the From header field value, other headers needed for
+        replay protection, as well as the contents of the Identity-Reliance
+        header. There are however several similar alternatives we might
+        consider, and some analysis will be required to identify the best
+        option.</t>
+
+        <t>In order to preserve critical security parameters even in adverse
+        network conditions, the replay assurance integrity protection must
+        always cover security parameters of the SDP required to negotiate
+        media-level security. There may be other exception cases, or
+        extensibility mechanisms, worth considering here. In cases where the
+        From header field value of a SIP request contains a SIP URI with a
+        telephone number user part, we will also consider replay assurance
+        canonicalizations that do not cover the domain portion of the URI.</t>
+
+        <t>We will furthermore give due consideration to changes in SIP
+        architecture and deployment since the publication of RFC4474, including
+        the ongoing work in the STRAW working group.</t>
+
+        <t>As with Identity-Info, any necessary consideration will be given to
+        backwards compatibility of the Identity header.</t>
+      </section>
     </section>
 
     <section anchor="sec-1" title="Introduction">
@@ -251,7 +343,8 @@
       <t>In this document, the key words "MUST", "MUST NOT", "REQUIRED",
       "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT
       RECOMMENDED", "MAY", and "OPTIONAL" are to be interpreted as described
-      in <xref target="RFC2119">RFC 2119</xref> and <xref target="RFC6919">RFC 6919</xref>.</t>
+      in <xref target="RFC2119">RFC 2119</xref> and <xref target="RFC6919">RFC
+      6919</xref>.</t>
     </section>
 
     <section anchor="sec-3" title="Background">
@@ -307,16 +400,16 @@
       authorization policies would apply.</t>
 
       <t>Ideally, then, SIP user agents should have some way of proving to
-      recipients of SIP requests that their local domain has authenticated them
-      and authorized the population of the From header field. This document
-      proposes a mediated authentication architecture for SIP in which requests
-      are sent to a server in the user's local domain, which authenticates such
-      requests (using the same practices by which the domain would authenticate
-      REGISTER requests). Once a message has been authenticated, the local
-      domain then needs some way to communicate to other SIP entities that the
-      sending user has been authenticated and its use of the From header field
-      has been authorized. This document addresses how that imprimatur of
-      authentication can be shared.</t>
+      recipients of SIP requests that their local domain has authenticated
+      them and authorized the population of the From header field. This
+      document proposes a mediated authentication architecture for SIP in
+      which requests are sent to a server in the user's local domain, which
+      authenticates such requests (using the same practices by which the
+      domain would authenticate REGISTER requests). Once a message has been
+      authenticated, the local domain then needs some way to communicate to
+      other SIP entities that the sending user has been authenticated and its
+      use of the From header field has been authorized. This document
+      addresses how that imprimatur of authentication can be shared.</t>
 
       <t><xref target="RFC3261">RFC 3261</xref> already describes an
       architecture very similar to this in Section 26.3.2.2, in which a user
@@ -418,8 +511,8 @@
 
       <t>SIP entities that act as an authentication service MUST add a Date
       header field to SIP requests if one is not already present (see <xref
-      target="sec-syntax"/> for information on how the Date header
-      field assists verifiers). Similarly, authentication services MUST add a
+      target="sec-syntax"></xref> for information on how the Date header field
+      assists verifiers). Similarly, authentication services MUST add a
       Content- Length header field to SIP requests if one is not already
       present; this can help verifiers to double-check that they are hashing
       exactly as many bytes of message-body as the authentication service when
@@ -442,7 +535,7 @@
       domain(s) for which it is responsible). If the identity field uses the
       TEL URI scheme, the policy of the authentication service determines
       whether or not it is responsible for this identity; see <xref
-      target="sec-identity-tel"/> for more information. If the
+      target="sec-identity-tel"></xref> for more information. If the
       authentication service is not responsible for the identity in question,
       it SHOULD process and forward the request normally, but it MUST NOT add
       an Identity header; see below for more information on authentication
@@ -512,7 +605,7 @@
       Name". However, the display-name is not always present, and in many
       environments the requisite operational procedures for display-name
       validation may not exist. For more information, see <xref
-      target="sec-display-name"/>.</t>
+      target="sec-display-name"></xref>.</t>
 
       <t>Step 3:</t>
 
@@ -530,7 +623,7 @@
       authentication service MUST verify that the Date header falls within the
       validity period of its certificate. For more information on the security
       properties associated with the Date header field value, see <xref
-      target="sec-syntax"/>.</t>
+      target="sec-syntax"></xref>.</t>
 
       <t>Step 4:</t>
 
@@ -540,7 +633,7 @@
       service MUST also add an Identity-Info header. The Identity-Info header
       contains a URI from which its certificate can be acquired. Details on
       the generation of both of these headers are provided in <xref
-      target="sec-syntax"/>.</t>
+      target="sec-syntax"></xref>.</t>
 
       <t>Finally, the authentication service MUST forward the message
       normally.</t>
@@ -628,30 +721,30 @@
       valid back to a trusted certification authority (CA), and that it does
       not appear on revocation lists. Once the certificate is acquired, it
       MUST be validated following the procedures in <xref target="RFC3280">RFC
-      3280</xref>. If the certificate cannot be validated (it is
-      self-signed and untrusted, or signed by an untrusted or unknown
-      certificate authority, expired, or revoked), the verifier MUST send a
-      437 'Unsupported Certificate' response.</t>
+      3280</xref>. If the certificate cannot be validated (it is self-signed
+      and untrusted, or signed by an untrusted or unknown certificate
+      authority, expired, or revoked), the verifier MUST send a 437
+      'Unsupported Certificate' response.</t>
 
       <t>Step 2:</t>
 
       <t>The verifier MUST follow the process described in <xref
-      target="sec-security-subordination"/> to determine if the signer is
-      authoritative for the URI in the From header field.</t>
+      target="sec-security-subordination"></xref> to determine if the signer
+      is authoritative for the URI in the From header field.</t>
 
       <t>Step 3:</t>
 
       <t>The verifier MUST verify the signature in the Identity header field,
       following the procedures for generating the hashed digest-string
-      described in <xref target="sec-syntax"/>. If a verifier
-      determines that the signature on the message does not correspond to the
+      described in <xref target="sec-syntax"></xref>. If a verifier determines
+      that the signature on the message does not correspond to the
       reconstructed digest- string, then a 438 'Invalid Identity Header'
       response MUST be returned.</t>
 
       <t>Step 4:</t>
 
       <t>The verifier MUST validate the Date, Contact, and Call-ID headers in
-      the manner described in <xref target="sec-security-digest"/>;
+      the manner described in <xref target="sec-security-digest"></xref>;
       recipients that wish to verify Identity signatures MUST support all of
       the operations described there. It must furthermore ensure that the
       value of the Date header falls within the validity period of the
@@ -668,7 +761,7 @@
       this integrity. TLS would be one such mechanism, which is attractive
       because it MUST be supported by SIP proxy servers, but is potentially
       problematic because it is a hop-by-hop mechanism. See <xref
-      target="sec-secure-connect-auth-serv"/> for more information about
+      target="sec-secure-connect-auth-serv"></xref> for more information about
       securing the channel between the UAC and the authentication service.</t>
 
       <t>When a UAC sends a request, it MUST accurately populate the From
@@ -676,9 +769,9 @@
       it is authorized to claim. In a request, it MUST set the URI portion of
       its From header to match a SIP, SIPS, or TEL URI AoR that it is
       authorized to use in the domain (including anonymous URIs, as described
-      in <xref target="RFC3323">RFC 3323</xref>). In general, UACs SHOULD
-      NOT use the TEL URI form in the From header field (see <xref
-      target="sec-identity-tel"/>).</t>
+      in <xref target="RFC3323">RFC 3323</xref>). In general, UACs SHOULD NOT
+      use the TEL URI form in the From header field (see <xref
+      target="sec-identity-tel"></xref>).</t>
 
       <t>Note that this document defines a number of new 4xx response codes.
       If user agents support these response codes, they will be able to
@@ -754,15 +847,15 @@
 
           <t>The Date header field, with exactly one space each for each SP
           and the weekday and month items case set as shown in BNF in <xref
-          target="RFC3261">RFC 3261</xref>. RFC
-          3261 specifies that the BNF for weekday and month is a choice
-          amongst a set of tokens. The <xref target="RFC2234">RFC 2234</xref>
-          rules for the BNF specify that tokens are case sensitive. However,
-          when used to construct the canonical string defined here, the first
-          letter of each week and month MUST be capitalized, and the remaining
-          two letters must be lowercase. This matches the capitalization
-          provided in the definition of each token. All requests that use the
-          Identity mechanism MUST contain a Date header.</t>
+          target="RFC3261">RFC 3261</xref>. RFC 3261 specifies that the BNF
+          for weekday and month is a choice amongst a set of tokens. The <xref
+          target="RFC2234">RFC 2234</xref> rules for the BNF specify that
+          tokens are case sensitive. However, when used to construct the
+          canonical string defined here, the first letter of each week and
+          month MUST be capitalized, and the remaining two letters must be
+          lowercase. This matches the capitalization provided in the
+          definition of each token. All requests that use the Identity
+          mechanism MUST contain a Date header.</t>
 
           <t>The addr-spec component of the Contact header field value. If the
           request does not contain a Contact header, this field MUST be empty
@@ -781,8 +874,9 @@
 
       <t>For more information on the security properties of these headers, and
       why their inclusion mitigates replay attacks, see <xref
-      target="sec-security-considerations"/> and <xref target="RFC3893"/>. The precise formulation of
-      this digest-string is, therefore (following the ABNF<xref target="RFC4234"/> in <xref
+      target="sec-security-considerations"></xref> and <xref
+      target="RFC3893"></xref>. The precise formulation of this digest-string
+      is, therefore (following the ABNF<xref target="RFC4234"></xref> in <xref
       target="RFC3261">RFC 3261</xref>):</t>
 
       <figure>
@@ -811,10 +905,10 @@
       follows: compute the results of signing this string with
       sha1WithRSAEncryption as described in <xref target="RFC3370">RFC
       3370</xref> and base64 encode the results as specified in <xref
-      target="RFC3548">RFC 3548</xref>. A 1024-bit or longer RSA key MUST
-      be used. The result is placed in the Identity header field. For detailed
+      target="RFC3548">RFC 3548</xref>. A 1024-bit or longer RSA key MUST be
+      used. The result is placed in the Identity header field. For detailed
       examples of the usage of this algorithm, see <xref
-      target="sec-test-examples"/>.</t>
+      target="sec-test-examples"></xref>.</t>
 
       <t>The 'absoluteURI' portion of the Identity-Info header MUST contain a
       URI which dereferences to a resource containing the certificate of the
@@ -896,7 +990,7 @@
       Also, the example certificates in this section have placed their domain
       name subject in the subjectAltName field; in practice, certificate
       authorities may place domain names in other locations in the certificate
-      (see <xref target="sec-security-subordination"/> for more
+      (see <xref target="sec-security-subordination"></xref> for more
       information).</t>
 
       <t>Note that all examples in this section use the 'rsa-sha1'
@@ -1246,10 +1340,10 @@
     <section anchor="sec-12" title="Privacy Considerations">
       <t>The identity mechanism presented in this document is compatible with
       the standard SIP practices for privacy described in <xref
-      target="RFC3323">RFC 3323</xref>. A SIP proxy server can act both as
-      a privacy service and as an authentication service. Since a user agent
-      can provide any From header field value that the authentication service
-      is willing to authorize, there is no reason why private SIP URIs that
+      target="RFC3323">RFC 3323</xref>. A SIP proxy server can act both as a
+      privacy service and as an authentication service. Since a user agent can
+      provide any From header field value that the authentication service is
+      willing to authorize, there is no reason why private SIP URIs that
       contain legitimate domains (e.g., sip:anonymous@example.com) cannot be
       signed by an authentication service. The construction of the Identity
       header is the same for private URIs as it is for any other sort of
@@ -1273,15 +1367,15 @@
       cannot be applied after authentication services without a resulting
       integrity violation.</t>
 
-      <t><xref target="RFC3325">RFC 3325</xref> defines the "id"
-      priv-value token, which is specific to the P-Asserted-Identity header.
-      The sort of assertion provided by the P-Asserted-Identity header is very
-      different from the Identity header presented in this document. It
-      contains additional information about the sender of a message that may
-      go beyond what appears in the From header field; P-Asserted-Identity
-      holds a definitive identity for the sender that is somehow known to a
-      closed network of intermediaries that presumably the network will use
-      this identity for billing or security purposes. The danger of this
+      <t><xref target="RFC3325">RFC 3325</xref> defines the "id" priv-value
+      token, which is specific to the P-Asserted-Identity header. The sort of
+      assertion provided by the P-Asserted-Identity header is very different
+      from the Identity header presented in this document. It contains
+      additional information about the sender of a message that may go beyond
+      what appears in the From header field; P-Asserted-Identity holds a
+      definitive identity for the sender that is somehow known to a closed
+      network of intermediaries that presumably the network will use this
+      identity for billing or security purposes. The danger of this
       network-specific information leaking outside of the closed network
       motivated the "id" priv-value token. The "id" priv-value token has no
       implications for the Identity header, and privacy services MUST NOT
@@ -1293,8 +1387,10 @@
       requests that has privacy implications.</t>
     </section>
 
-    <section anchor="sec-security-considerations" title="Security Considerations">
-      <section anchor="sec-security-digest" title="Handling of digest-string Elements">
+    <section anchor="sec-security-considerations"
+             title="Security Considerations">
+      <section anchor="sec-security-digest"
+               title="Handling of digest-string Elements">
         <t>This document describes a mechanism that provides a signature over
         the Contact, Date, Call-ID, CSeq, To, and From header fields of SIP
         requests. While a signature over the From header field would be
@@ -1304,10 +1400,10 @@
         general, the considerations related to the security of these headers
         are the same as those given in <xref target="RFC3261">RFC 3261</xref>
         for including headers in tunneled 'message/sip' MIME bodies (see
-        Section 23 in particular). The following section details the individual
-        security properties obtained by including each of these header fields
-        within the signature; collectively, this set of header fields provides
-        the necessary properties to prevent impersonation.</t>
+        Section 23 in particular). The following section details the
+        individual security properties obtained by including each of these
+        header fields within the signature; collectively, this set of header
+        fields provides the necessary properties to prevent impersonation.</t>
 
         <t>The From header field indicates the identity of the sender of the
         message, and the SIP address-of-record URI in the From header field is
@@ -1445,7 +1541,7 @@
         an impersonator who attempted to replay a message with an Identity
         header, changing only the display-name in the From header field, would
         be detected by the other replay protection mechanisms described in
-        <xref target="sec-security-digest"/>.</t>
+        <xref target="sec-security-digest"></xref>.</t>
 
         <t>Of course, an authentication service can enforce policies about the
         display-name even if the display-name is not signed. The exact
@@ -1519,7 +1615,8 @@
         authentication service is too weak.</t>
       </section>
 
-      <section anchor="sec-security-subordination" title="Domain Names and Subordination">
+      <section anchor="sec-security-subordination"
+               title="Domain Names and Subordination">
         <t>When a verifier processes a request containing an Identity-Info
         header, it must compare the domain portion of the URI in the From
         header field of the request with the domain name that is the subject
@@ -1560,12 +1657,12 @@
 
         <t>A verifier MUST evaluate the correspondence between the user's
         identity and the signing certificate by following the procedures
-        defined in <xref target="RFC2818">RFC 2818</xref>, Section 3.1.
-        While <xref target="RFC2818">RFC 2818</xref> deals with the use of
-        HTTP in TLS, the procedures described are applicable to verifying
-        identity if one substitutes the "hostname of the server" in HTTP for
-        the domain portion of the user's identity in the From header field of
-        a SIP request with an Identity header.</t>
+        defined in <xref target="RFC2818">RFC 2818</xref>, Section 3.1. While
+        <xref target="RFC2818">RFC 2818</xref> deals with the use of HTTP in
+        TLS, the procedures described are applicable to verifying identity if
+        one substitutes the "hostname of the server" in HTTP for the domain
+        portion of the user's identity in the From header field of a SIP
+        request with an Identity header.</t>
 
         <t>Because the domain certificates that can be used by authentication
         services need to assert only the hostname of the authentication
@@ -1586,9 +1683,9 @@
         justified such trust.</t>
 
         <t>For further information on certificate security and practices, see
-        <xref target="RFC3280">RFC 3280</xref>. The Security
-        Considerations of <xref target="RFC3280">RFC 3280</xref> are
-        applicable to this document.</t>
+        <xref target="RFC3280">RFC 3280</xref>. The Security Considerations of
+        <xref target="RFC3280">RFC 3280</xref> are applicable to this
+        document.</t>
       </section>
 
       <section anchor="sec-13.5"
@@ -1653,7 +1750,7 @@
 
       <section anchor="sec-14.1" title="Header Field Names">
         <t>This document specifies two new SIP headers: Identity and Identity-
-        Info. Their syntax is given in <xref target="sec-syntax"/>.
+        Info. Their syntax is given in <xref target="sec-syntax"></xref>.
         These headers are defined by the following information, which has been
         added to the header sub-registry under
         http://www.iana.org/assignments/sip-parameters</t>
@@ -1671,12 +1768,12 @@
       <section anchor="sec-14.2"
                title="428 'Use Identity Header' Response Code">
         <t>This document registers a new SIP response code, which is described
-        in <xref target="sec-verifier-behavior"/>. It is sent when a verifier
-        receives a SIP request that lacks an Identity header in order to
-        indicate that the request should be re-sent with an Identity header.
-        This response code is defined by the following information, which has
-        been added to the method and response-code sub-registry under
-        http://www.iana.org/assignments/sip-parameters</t>
+        in <xref target="sec-verifier-behavior"></xref>. It is sent when a
+        verifier receives a SIP request that lacks an Identity header in order
+        to indicate that the request should be re-sent with an Identity
+        header. This response code is defined by the following information,
+        which has been added to the method and response-code sub-registry
+        under http://www.iana.org/assignments/sip-parameters</t>
 
         <figure>
           <artwork><![CDATA[
@@ -1688,7 +1785,7 @@
 
       <section anchor="sec-14.3" title="436 'Bad Identity-Info' Response Code">
         <t>This document registers a new SIP response code, which is described
-        in <xref target="sec-verifier-behavior"/>. It is used when the
+        in <xref target="sec-verifier-behavior"></xref>. It is used when the
         Identity-Info header contains a URI that cannot be dereferenced by the
         verifier (either the URI scheme is unsupported by the verifier, or the
         resource designated by the URI is otherwise unavailable). This
@@ -1707,8 +1804,8 @@
       <section anchor="sec-14.4"
                title="437 'Unsupported Certificate' Response Code">
         <t>This document registers a new SIP response code, which is described
-        in <xref target="sec-verifier-behavior"/>. It is used when the verifier
-        cannot validate the certificate referenced by the URI of the
+        in <xref target="sec-verifier-behavior"></xref>. It is used when the
+        verifier cannot validate the certificate referenced by the URI of the
         Identity-Info header, because, for example, the certificate is
         self-signed, or signed by a root certificate authority for whom the
         verifier does not possess a root certificate. This response code is
@@ -1727,11 +1824,11 @@
       <section anchor="sec-14.5"
                title="438 'Invalid Identity Header' Response Code">
         <t>This document registers a new SIP response code, which is described
-        in <xref target="sec-verifier-behavior"/>. It is used when the verifier
-        receives a message with an Identity signature that does not correspond
-        to the digest-string calculated by the verifier. This response code is
-        defined by the following information, which has been added to the
-        method and response-code sub-registry under
+        in <xref target="sec-verifier-behavior"></xref>. It is used when the
+        verifier receives a message with an Identity signature that does not
+        correspond to the digest-string calculated by the verifier. This
+        response code is defined by the following information, which has been
+        added to the method and response-code sub-registry under
         http://www.iana.org/assignments/sip-parameters</t>
 
         <figure>
@@ -1764,7 +1861,7 @@
       </section>
 
       <section anchor="sec-apendix-a" title="Acknowledgements">
-        <t>The authors would like to thank </t>
+        <t>The authors would like to thank</t>
       </section>
 
       <section anchor="sec-apendix-c" title="Original RFC 4474 Requirements">
@@ -2169,23 +2266,39 @@
     </references>
 
     <references title="Informative References">
+      <reference anchor="RFC4474">
+        <front>
+          <title>Enhancements for Authenticated Identity Management in the
+          Session Initiation Protocol (SIP)</title>
 
+          <author fullname="J. Peterson" initials="J." surname="Peterson">
+            <organization></organization>
+          </author>
 
-<reference anchor='RFC4474'>
+          <author fullname="C. Jennings" initials="C." surname="Jennings">
+            <organization></organization>
+          </author>
 
-<front>
-<title>Enhancements for Authenticated Identity Management in the Session Initiation Protocol (SIP)</title>
-<author initials='J.' surname='Peterson' fullname='J. Peterson'>
-<organization /></author>
-<author initials='C.' surname='Jennings' fullname='C. Jennings'>
-<organization /></author>
-<date year='2006' month='August' />
-<abstract>
-<t>The existing security mechanisms in the Session Initiation Protocol (SIP) are inadequate for cryptographically assuring the identity of the end users that originate SIP requests, especially in an interdomain context.  This document defines a mechanism for securely identifying originators of SIP messages.  It does so by defining two new SIP header fields, Identity, for conveying a signature used for validating the identity, and Identity-Info, for conveying a reference to the certificate of the signer. [STANDARDS-TRACK]</t></abstract></front>
+          <date month="August" year="2006" />
 
-<seriesInfo name='RFC' value='4474' />
-<format type='TXT' octets='104952' target='http://www.rfc-editor.org/rfc/rfc4474.txt' />
-</reference>
+          <abstract>
+            <t>The existing security mechanisms in the Session Initiation
+            Protocol (SIP) are inadequate for cryptographically assuring the
+            identity of the end users that originate SIP requests, especially
+            in an interdomain context. This document defines a mechanism for
+            securely identifying originators of SIP messages. It does so by
+            defining two new SIP header fields, Identity, for conveying a
+            signature used for validating the identity, and Identity-Info, for
+            conveying a reference to the certificate of the signer.
+            [STANDARDS-TRACK]</t>
+          </abstract>
+        </front>
+
+        <seriesInfo name="RFC" value="4474" />
+
+        <format octets="104952"
+                target="http://www.rfc-editor.org/rfc/rfc4474.txt" type="TXT" />
+      </reference>
 
       <reference anchor="RFC3325">
         <front>
@@ -2447,25 +2560,46 @@
                 target="http://www.rfc-editor.org/rfc/rfc3263.txt" type="TXT" />
       </reference>
 
+      <reference anchor="RFC6919">
+        <front>
+          <title>Further Key Words for Use in RFCs to Indicate Requirement
+          Levels</title>
 
-<reference anchor='RFC6919'>
+          <author fullname="R. Barnes" initials="R." surname="Barnes">
+            <organization></organization>
+          </author>
 
-<front>
-<title>Further Key Words for Use in RFCs to Indicate Requirement Levels</title>
-<author initials='R.' surname='Barnes' fullname='R. Barnes'>
-<organization /></author>
-<author initials='S.' surname='Kent' fullname='S. Kent'>
-<organization /></author>
-<author initials='E.' surname='Rescorla' fullname='E. Rescorla'>
-<organization /></author>
-<date year='1 2013' month='April' />
-<abstract>
-<t>RFC 2119 defines a standard set of key words for describing requirements of a specification. Many IETF documents have found that these words cannot accurately capture the nuanced requirements of their specification. This document defines additional key words that can be used to address alternative requirements scenarios. Authors who follow these guidelines should incorporate this phrase near the beginning of their document:&lt;/t>&lt;t> The key words "MUST (BUT WE KNOW YOU WON\'T)", "SHOULD CONSIDER", "REALLY SHOULD NOT", "OUGHT TO", "WOULD PROBABLY", "MAY WISH TO", "COULD", "POSSIBLE", and "MIGHT" in this document are to be interpreted as described in RFC 6919.</t></abstract></front>
+          <author fullname="S. Kent" initials="S." surname="Kent">
+            <organization></organization>
+          </author>
 
-<seriesInfo name='RFC' value='6919' />
-<format type='TXT' octets='11076' target='http://www.rfc-editor.org/rfc/rfc6919.txt' />
-</reference>
+          <author fullname="E. Rescorla" initials="E." surname="Rescorla">
+            <organization></organization>
+          </author>
 
+          <date month="April" year="1 2013" />
+
+          <abstract>
+            <t>RFC 2119 defines a standard set of key words for describing
+            requirements of a specification. Many IETF documents have found
+            that these words cannot accurately capture the nuanced
+            requirements of their specification. This document defines
+            additional key words that can be used to address alternative
+            requirements scenarios. Authors who follow these guidelines should
+            incorporate this phrase near the beginning of their
+            document:&lt;/t&gt;&lt;t&gt; The key words "MUST (BUT WE KNOW YOU
+            WON\'T)", "SHOULD CONSIDER", "REALLY SHOULD NOT", "OUGHT TO",
+            "WOULD PROBABLY", "MAY WISH TO", "COULD", "POSSIBLE", and "MIGHT"
+            in this document are to be interpreted as described in RFC
+            6919.</t>
+          </abstract>
+        </front>
+
+        <seriesInfo name="RFC" value="6919" />
+
+        <format octets="11076"
+                target="http://www.rfc-editor.org/rfc/rfc6919.txt" type="TXT" />
+      </reference>
 
       <reference anchor="RFC2234">
         <front>
