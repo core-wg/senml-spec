@@ -8,6 +8,9 @@
 <?rfc sortrefs="yes" ?>
 <?rfc rfcedstyle="no" ?>
 <?rfc tocdepth="4"?>
+
+<!-- TODO - A bunch of the refs are wrong and still numeric - search for [ -->
+
 <rfc category="std" docName="draft-jennings-dispatch-rfc4474bis-00"
      ipr="pre5378Trust200902">
   <front>
@@ -218,9 +221,9 @@
         domain name, and accordingly the RFC4474 Identity-Info header contains a
         URI which designates a certificate whose subject (more precisely,
         subjectAltName) must correspond to the domain of the URI in the From
-        header field value of the SIP request. Per the analysis in
-        [I-D.draft-peterson-secure-origin-ps], we propose to relax this to allow
-        designating an alternative authority for telephone numbers, when
+        header field value of the SIP request. Per the analysis in <xref
+        target="I-D.peterson-secure-origin-ps" />, we propose to relax this to
+        allow designating an alternative authority for telephone numbers, when
         telephone numbers appear in the From header field value.</t>
 
         <t>These changes will allow the Identity-Info URI to point to the
@@ -255,7 +258,8 @@
       <section anchor="sec-prop-id-header"
                title="Changes to the Identity Header">
 
-        <t>Per the analysis in [I-D.draft-peterson-secure-origin-ps], we propose
+        <t>Per the analysis in <xref
+        target="I-D.peterson-secure-origin-ps" />, we propose
         to change the signature mechanism that RFC44474 specified for the
         Identity header: in particular, to replace this signature mechanism with
         one that is more likely to survive end-to-end in SIP networks where
@@ -2681,6 +2685,183 @@
                 target="http://xml.resource.org/public/rfc/xml/rfc2234.xml"
                 type="XML" />
       </reference>
+
+
+
+
+  <reference anchor="I-D.cooper-iab-secure-origin-00">
+       <front>
+    <!-- The abbreviated title is used in the page header - it is only necessary if the 
+         full title is longer than 39 characters -->
+
+    <title abbrev="Secure Origin">Secure Call Origin Identification</title>
+
+    <!--add 'role="editor"' below for the editors if appropriate -->
+
+    <!-- Another author who claims to be an editor -->
+
+    <author fullname="Alissa Cooper" initials="A." surname="Cooper">
+      <organization>CDT</organization>
+
+      <address>
+        <postal>
+          <street>1634 Eye St. NW, Suite 1100</street>
+
+          <city>Washington</city>
+
+          <region>DC</region>
+
+          <code>20006</code>
+
+          <country>USA</country>
+        </postal>
+
+        <email>acooper@cdt.org</email>
+
+        <!-- uri and facsimile elements may also be added -->
+      </address>
+    </author>
+
+    <author fullname="Hannes Tschofenig" initials="H." surname="Tschofenig">
+      <organization>Nokia Siemens Networks</organization>
+      <address>
+        <email>hannes.tschofenig@gmx.net</email>
+      </address>
+    </author>
+
+        <author fullname="Jon Peterson" initials="J." surname="Peterson">
+      <organization>NeuStar</organization>
+      <address>
+        <email>jon.peterson@neustar.biz</email>
+      </address>
+    </author>
+
+        <author fullname="Bernard Aboba" initials="B." surname="Aboba">
+      <organization>Microsoft</organization>
+      <address>
+        <email>bernard.aboba@gmail.com</email>
+      </address>
+    </author>
+
+    <date day="30" month="November" year="2012"/>
+
+ 
+    <area>General</area>
+
+    <workgroup>Network Working Group</workgroup>
+
+    <abstract>
+      <t>A number of parties have suggested creating mandates such that
+                   networks receiving voice calls would be capable of securely
+                   identifying the call origin. This
+                   document provides insights about the capabilities and limitations of
+                   supporting call origin identification in a secure and privacy-
+                   friendly way in the PSTN and for IP-based real-time communications.</t>
+    </abstract>
+  </front>
+
+        <seriesInfo name="Internet-Draft"
+                    value="draft-cooper-iab-secure-origin-00" />
+
+        <format target="http://www.ietf.org/internet-drafts/draft-cooper-iab-secure-origin00.txt"
+                type="TXT" />
+      </reference>
+
+
+   <reference anchor="I-D.peterson-secure-origin-ps">
+       
+
+ <front>
+    <!-- The abbreviated title is used in the page header - it is only necessary if the 
+         full title is longer than 39 characters -->
+
+    <title abbrev="Secure Origin Identification">Secure Origin Identification: Problem Statement, Requirements, and Roadmap</title>
+
+        <author initials="J." surname="Peterson" fullname="Jon Peterson">
+            <organization abbrev="NeuStar, Inc.">NeuStar, Inc.</organization>
+            <address>
+                <postal>
+                    <street>1800 Sutter St Suite 570</street>
+                    <city>Concord</city>
+                    <region>CA</region>
+                    <code>94520</code>
+                    <country>US</country>
+                </postal>
+                <email>jon.peterson@neustar.biz</email>
+            </address>
+        </author>
+
+    
+   <author initials="H." surname="Schulzrinne" fullname="Henning Schulzrinne">
+            <organization>Columbia University</organization>
+            <address>
+                <postal>
+                    <street>Department of Computer Science</street>
+                    <street>450 Computer Science Building</street>
+                    <city>New York</city>
+                    <region>NY</region>
+                    <code>10027</code>
+                    <country>US</country>
+                </postal>
+                <phone>+1 212 939 7004</phone>
+                <email>hgs+ecrit@cs.columbia.edu</email>
+                <uri>http://www.cs.columbia.edu</uri>
+            </address>                  
+    </author>
+    
+     <author fullname="Hannes Tschofenig" initials="H." surname="Tschofenig">
+      <organization>Nokia Siemens Networks</organization>
+      <address>
+        <postal>
+          <street>Linnoitustie 6</street>
+          <city>Espoo</city>
+          <region></region>
+          <code>02600</code>
+          <country>Finland</country>
+        </postal>
+        <phone>+358 (50) 4871445</phone>
+        <email>Hannes.Tschofenig@gmx.net</email>
+        <uri>http://www.tschofenig.priv.at</uri>
+      </address>
+    </author>
+
+
+ <date year="2013" month="May" day="27"/>
+
+    <!--    <area>
+    Security
+    </area>-->
+
+    <keyword>SIP</keyword>
+
+    <keyword>XMPP</keyword>
+
+    <keyword>Secure Origin Identification</keyword>
+
+    <keyword>Communication Security</keyword>
+    
+    <keyword>RTCWeb</keyword>
+
+    <keyword>Problem Statement</keyword>
+
+    <keyword>Real-Time Communication</keyword>
+
+    <abstract>
+      <t>Over the past decade, SIP has become a major signaling protocol for voice communications, one which has replaced many traditional telephony deployments. However, interworking SIP with the traditional telephone network has ultimately reduced the security of Caller ID systems. Given the widespread interworking of SIP with the telephone network, the lack of effective standards for identifying the calling party in a SIP session has granted attackers new powers as they impersonate or obscure calling party numbers when orchestrating bulk commercial calling schemes, hacking voicemail boxes or even circumventing multi-factor authentication systems trusted by banks. This document therefore examines the reasons why providing identity for telephone numbers on the Internet has proven so difficult, and shows how changes in the last decade may provide us with new strategies for attaching a secure identity to SIP sessions.</t>
+    </abstract>
+  </front>
+
+
+
+        <seriesInfo name="Internet-Draft"
+                    value="draft-peterson-sipping-retarget-00" />
+
+        <format target="http://www.ietf.org/internet-drafts/draft-peterson-secure-origin-ps-00.txt"
+                type="TXT" />
+      </reference>
+
+
+
     </references>
   </back>
 </rfc>
