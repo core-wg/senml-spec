@@ -8,7 +8,7 @@
 <?rfc sortrefs="yes" ?>
 <?rfc rfcedstyle="no" ?>
 <?rfc tocdepth="4"?>
-<rfc category="std" docName="draft-jennings-sipcore-rfc4474bis-00"
+<rfc category="std" docName="draft-jennings-dispatch-rfc4474bis-00"
      ipr="pre5378Trust200902">
   <front>
     <title abbrev="SIP Identity">Authenticated Identity Management in the
@@ -76,7 +76,7 @@
       </address>
     </author>
 
-    <date day="16" month="May" year="2013" />
+    <date day="28" month="May" year="2013" />
 
     <area>RAI</area>
 
