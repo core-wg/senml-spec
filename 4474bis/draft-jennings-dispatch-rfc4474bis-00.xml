@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="US-ASCII"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
 <?xml-stylesheet type="text/xsl" href="rfc2629.xslt" ?>
-<?rfc toc="no" ?>
+<?rfc toc="yes" ?>
 <?rfc symrefs="yes" ?>
 <?rfc strict="yes" ?>
 <?rfc compact="yes" ?>
@@ -79,7 +79,7 @@
       </address>
     </author>
 
-    <date day="28" month="May" year="2013" />
+    <date day="29" month="May" year="2013" />
 
     <area>RAI</area>
 
@@ -111,16 +111,18 @@
 
           <t>Widespread identity providers such as Facebook have emerged.</t>
 
-          <t>Techniques for end user assertion of ownership of phones number, such as Apples IMessage,
-           are in commercial use.</t>
+          <t>Techniques non-carrier entities to verify phone numbers and then
+          use them for addressing (such as Apple's iMessage) have been shown to
+          be commercially feasible.</t>
 
-          <t>Substantial portions of comercial, government, and personal voice
+          <t>Substantial portions of commercial, government, and personal voice
           communications rely on SIP at some stage in the communications.</t>
 
-          <t>The cost of operating large databases has fallen.</t>
+          <t>The cost of operating large databases has fallen and outsourced
+          versions of these databases have become cheaply available. </t>
 
-          <t>The understanding of the how to link security with the user
-          interface has improved.</t>
+          <t>Extensive experience and user research has improved our
+          understanding of how to present security information to users.</t>
 
           <t>The world is in the a huge transition to mobile devices. Even the
           most limited modern mobile devices have user interface and
@@ -190,16 +192,23 @@
       assertions but not the other.</t>
 
       <t>The assertions are passed from the caller to the callee for
-      verification. This can be done by either passing the assertion along
-      with the signaling, or alternatively passing it through a web based
-      rendezvous service where the caller saves the assertion on the
-      rendezvous service and the callee retrieves it from the rendezvous
+      verification. This can be done by either passing the assertion along with
+      the signaling, or alternatively passing it through a web based Call Detail
+      Service (CDS) where the caller saves the assertion on the Call Detail
+      Service and the callee retrieves it from the Call Detail Service
       service. There are some call signaling environments, such as when a call
       passes through the PSTN, where it is not possible to transfer the
-      assertion in the call signaling path. The rendezvous service is in place
+      assertion in the call signaling path. The Call Detail Service is in place
       to make things work in this environment thought some privacy information
-      around who is calling who is reveled to the rendezvous service.</t>
+      around who is calling who is reveled to the Call Detail Service service.
+      An outline for this design is described in <xref
+      target="I-D.rescorla-callerid-fallback" />.</t>
 
+    </section>
+
+    <section anchor="sec-prop" title="Scope of Proposed Changes">
+
+      <!--
       <t>To summarize the work proposed and changes from RFC 4474. <list
           style="numbers">
           <t>Add a delegation approach for E.164 numbers.</t>
@@ -210,9 +219,8 @@
 
           <t>Add an out of band rendezvous service to pass assertions.</t>
         </list></t>
-    </section>
+      -->
 
-    <section anchor="sec-prop" title="Scope of Proposed Changes">
       <section anchor="sec-prop-id-info"
                title="Changes to the Identity-Info Header">
 
@@ -2853,7 +2861,7 @@
 
 
         <seriesInfo name="Internet-Draft"
-                    value="draft-peterson-sipping-retarget-00" />
+                    value="draft-peterson-secure-origin-ps-00" />
 
         <format target="http://www.ietf.org/internet-drafts/draft-peterson-secure-origin-ps-00.txt"
                 type="TXT" />
@@ -2879,6 +2887,73 @@
 <format type='TXT'
         target='http://www.ietf.org/internet-drafts/draft-rescorla-rtcweb-generic-idp-01.txt' />
 </reference>
+
+
+
+
+
+
+
+
+<reference anchor='I-D.rescorla-callerid-fallback'>
+
+
+ <front>
+    <title abbrev="Caller-ID Fallback">Secure Caller-ID Fallback Mode</title>
+
+    <author fullname="Eric Rescorla" initials="E.K." surname="Rescorla">
+      <organization>RTFM, Inc.</organization>
+
+      <address>
+        <postal>
+          <street>2064 Edgewood Drive</street>
+
+          <city>Palo Alto</city>
+
+          <region>CA</region>
+
+          <code>94303</code>
+
+          <country>USA</country>
+        </postal>
+
+        <phone>+1 650 678 2350</phone>
+
+        <email>ekr@rtfm.com</email>
+      </address>
+    </author>
+
+    <date day="29" month="May" year="2013" />
+
+    <area>RAI</area>
+
+<!--    <workgroup>RTCWEB</workgroup> -->
+
+    <abstract>
+      <t>
+        A major challenge with RFC 4474-style identity assertions has been
+        that SIP operates in highly mediated and interworked environments.
+        SIP requests may pass through gateways, policy enforcement devices
+        or other entities that receive SIP requests and effectively act as user agents, 
+        re-initiating a request.  In these circumstances, intermediaries may 
+        recreate the fields protected by the RFC4474 signature, making end-to
+        end integrity impossible.  This document describes a mechanism for two 
+        compliant endpoints to exchange authentication data even in the face of
+        intermediaries which remove all additional call signaling meta-data.
+      </t>
+    </abstract>
+  
+  </front>
+
+ 
+<seriesInfo name='Internet-Draft' value='draft-rescorla-callerid-fallback-00' />
+<format type='TXT'
+        target='http://www.ietf.org/internet-drafts/draft-rescorla-callerid-fallback-00.txt' />
+</reference>
+
+
+
+
 
 
     </references>
