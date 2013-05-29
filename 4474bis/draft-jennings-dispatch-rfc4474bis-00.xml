@@ -111,16 +111,15 @@
 
           <t>Widespread identity providers such as Facebook have emerged.</t>
 
-          <t>Techniques for end user assertion of ownership of phones number
-          have be shown to be commercially feasible.</t>
+          <t>Techniques for end user assertion of ownership of phones number, such as Apples IMessage,
+           are in commercial use.</t>
 
-          <t>Nearly all comercial, government, and personal voice
+          <t>Substantial portions of comercial, government, and personal voice
           communications rely on SIP at some stage in the communications.</t>
 
-          <t>The cost of operating web scale databases has fallen to be
-          incredibly small.</t>
+          <t>The cost of operating large databases has fallen.</t>
 
-          <t>The understanding of the how to link security with the users
+          <t>The understanding of the how to link security with the user
           interface has improved.</t>
 
           <t>The world is in the a huge transition to mobile devices. Even the
@@ -243,7 +242,7 @@
         <t>There are also a few other potential changes within the scope of a
         revision to the Identity-Info header. We might consider implementing
         enough flexibility in the URI to allow a model more like the IdP model
-        described in [I-D.draft-rescorla-rtcweb-generic-idp-00]; this could be
+        described in <xref target="I-D.rescorla-rtcweb-generic-idp" />; this could be
         useful as RTCWeb sees increasing deployment. We also should consider any
         implications of the signing of the DNSSEC root and the DANE
         specifications to the existing Identity-Info uses with domain name. At a
@@ -2860,6 +2859,26 @@
                 type="TXT" />
       </reference>
 
+
+
+<reference anchor='I-D.rescorla-rtcweb-generic-idp'>
+<front>
+<title>RTCWEB Generic Identity Provider Interface</title>
+
+<author initials='E' surname='Rescorla' fullname='Eric Rescorla'>
+    <organization />
+</author>
+
+<date month='March' day='12' year='2012' />
+
+<abstract><t>Security for RTCWEB communications requires that the communicating endpoints be able to authenticate each other.  While authentication may be mediated by the calling service, there are settings in which this is undesirable.  This document describes a generic mechanism for leveraging existing identity providers (IdPs) such as BrowserID or OAuth to provide this authentication service.</t></abstract>
+
+</front>
+
+<seriesInfo name='Internet-Draft' value='draft-rescorla-rtcweb-generic-idp-01' />
+<format type='TXT'
+        target='http://www.ietf.org/internet-drafts/draft-rescorla-rtcweb-generic-idp-01.txt' />
+</reference>
 
 
     </references>
