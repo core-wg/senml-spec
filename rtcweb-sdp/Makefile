@@ -17,14 +17,14 @@ clean:
 #	xsltproc -o $@ rfc2629.xslt $^
 
 %.html: %.xml
-	/Users/ccg-cteo/HTML5/ietf/binaries/xml2rfc/xml2rfc-1.36/xml2rfc.tcl $^ $@
+	/Users/suhas/html5/webrtc/docs/ietf-binaries/xml2rfc/xml2rfc-1.36/xml2rfc.tcl $^ $@
 
 
 %.txt: %.xml
-	/Users/ccg-cteo/HTML5/ietf/binaries/xml2rfc/xml2rfc-1.36/xml2rfc.tcl $^ $@
+	/Users/suhas/html5/webrtc/docs/ietf-binaries/xml2rfc/xml2rfc-1.36/xml2rfc.tcl $^ $@
 
 %.diff.html: %.txt
-	/Users/ccg-cteo/HTML5/ietf/binaries/xml2rfc/xml2rfc-1.36/htmlwdiff  $^.old $^ >  $@
+	/Users/suhas/html5/webrtc/docs/ietf-binaries/xml2rfc/xml2rfc-1.36/htmlwdiff  $^.old $^ >  $@
 
 %.pdf: %.html
 	wkpdf -p letter -s $^ -o $@

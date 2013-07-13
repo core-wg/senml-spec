@@ -247,7 +247,7 @@ end note
         </t>
         <t hangText="Authors' Note">
           The exact SDP parameters specified for Data-Channel is still under the 
-          WG discussion and is expected to be updated once a decission is made.
+          WG discussion and is expected to be updated once the final decision is reached..
         </t>
         <texttable anchor="table_1_1" title="5.1 SDP Offer">
           <ttcol align='left'>SDP Contents </ttcol>
@@ -270,27 +270,29 @@ end note
           <c><xref target="RFC5506"></xref> - Alice intends to use reduced size RTCP for this session</c>          
           <c>m=audio 54609 RTP/SAVPF 0 109 98</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=rtpmap:0 PCMU/8000</c>
-          <c><xref target="RFC3551"></xref></c>  
-          <c>a=rtpmap:109 opus/48000</c>
-          <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
+          <c><xref target="RFC3551"></xref> G.711 Audio Codec</c>  
+          <c>a=rtpmap:109 opus/48000/2</c>
+          <c><xref target="draft-ietf-payload-rtp-opus"></xref> - Opus Codec 48khz, 2 channels</c>
           <c>a=ptime:20</c>
-          <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
+          <c><xref target="draft-ietf-payload-rtp-opus"></xref> - Opus packetization of 20ms</c>
           <c>a=rtpmap:98 iLBC/8000
              a=fmtp:98 mode=20</c>
-          <c><xref target="RFC3952"></xref></c>
+          <c><xref target="RFC3952"></xref> - Internet Low Bitrate Codec</c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref> - Alice can send and recv audio</c>  
           <c>a=rtcp-mux</c>
           <c><xref target="RFC5761"></xref> - Alice can perform RTP/RTCP Muxing on port 54609</c>                   
-          <c>b=AS:256</c>
-          <c><xref target="RFC4566"></xref></c>
-          <c>b=RS:0</c>
-          <c><xref target="RFC3556"></xref></c>
-          <c>b=RR:0</c>
-          <c><xref target="RFC3556"></xref></c>
+          <c>b=AS:64</c>
+          <c><xref target="RFC4566"></xref> - Audio Session B/W of 64kbps</c>
+          <c>b=RS:800</c>
+          <c><xref target="RFC3556"></xref> - RTCP b/w allocated to active data senders</c>
+          <c>b=RR:2400</c>
+          <c><xref target="RFC3556"></xref> - RTCP b/w allocated to receivers</c>
           <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 54609 typ host</c>
           <c><xref target="RFC5245"></xref> - Host ICE Candidate</c>
           <c>a=candidate:1 1 UDP  694302207 24.23.204.141 54609 typ srflx raddr 192.168.1.4 rport 54609</c>
@@ -303,18 +305,26 @@ end note
           <c><xref target="RFC5104"></xref> - Indicates NACK RTCP feedback support</c>          
           <c>m=video  62537 RTP/SAVPF 99 120</c>
           <c><xref target="RFC4566"></xref> </c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=rtpmap:99 H264/90000</c>
-          <c><xref target="RFC3984"></xref></c>
+          <c><xref target="RFC3984"></xref> - H.264 Video Codec</c>
           <c>a=fmtp:99 profile-level-id=4d0028;packetization-mode=1</c>
           <c><xref target="RFC3984"></xref></c>        
           <c>a=rtpmap:120 VP8/90000</c>
-          <c><xref target="draft-ietf-payload-vp8"></xref></c>
+          <c><xref target="draft-ietf-payload-vp8"></xref> - VP8 video codec</c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref> - Alice can send and recv video</c> 
           <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref> - Alice can perform RTP/RTCP Muxing on port 62537</c>          
+          <c><xref target="RFC5761"></xref> - Alice can perform RTP/RTCP Muxing on port 62537</c>
+          <c>b=AS:256</c>
+          <c><xref target="RFC4566"></xref> - Audio Session B/W of 256kbps</c>
+          <c>b=RS:800</c>
+          <c><xref target="RFC3556"></xref> - RTCP b/w allocated to active data senders</c>
+          <c>b=RR:2400</c>
+          <c><xref target="RFC3556"></xref> - RTCP b/w allocated to receivers</c>          
           <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 62537 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP  1694302207 24.23.204.141 62537 typ srflx raddr 192.168.1.4 rport 62537</c>
@@ -341,8 +351,6 @@ end note
           <c><xref target="draft-ietf-mmusic-sctp-sdp"></xref></c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref> - Alice can send and recv non-media data</c> 
-          <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref> - Alice can perform RTP/RTCP Muxing on port 56966</c>
           <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 56966 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP 1694302207 24.23.204.141 56966 typ srflx raddr 192.168.1.7 rport 56966</c>
@@ -351,8 +359,6 @@ end note
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 2 UDP 1694302206 24.23.204.141 51641 typ srflx raddr 192.168.1.7 rport 51641</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=rtcp-fb:5000 nack </c>
-          <c><xref target="RFC5104"></xref> - Indicates NACK feedback support for the data-channel</c>
         </texttable>  
         <texttable anchor="table_1_2" title="5.1 SDP Answer">
           <ttcol align='left'>SDP Contents </ttcol>
@@ -375,16 +381,24 @@ end note
           <c><xref target="RFC5506"></xref> - Alice intends to use reduced size RTCP for this session</c>          
           <c>m=audio 49203 RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>c= IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=rtpmap:109 opus/48000</c>
-          <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
+          <c>a=rtpmap:109 opus/48000/2</c>
+          <c><xref target="draft-ietf-payload-rtp-opus"></xref> - Bob accepts only Opus Codec</c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref> - Bob can send and recv audio</c>  
           <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref> - Bob can perform RTP/RTCP Muxing on port 49203</c>                   
+          <c><xref target="RFC5761"></xref> - Bob can perform RTP/RTCP Muxing on port 49203</c>
+          <c>b=AS:64</c>
+          <c><xref target="RFC4566"></xref> - Audio Session b/w of 64kbps</c>
+          <c>b=RS:800</c>
+          <c><xref target="RFC3556"></xref> - RTCP b/w allocated to active data senders</c>
+          <c>b=RR:2400</c>
+          <c><xref target="RFC3556"></xref> - RTCP b/w allocated to receivers</c>                   
           <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 49203 typ host</c>
           <c><xref target="RFC5245"></xref> - Host ICE Candidate for Opus Stream</c>
           <c>a=ccandidate:1 1 UDP 1694302207 98.248.92.77 49203 typ srflx raddr 192.168.1.7 rport 49203</c>
@@ -392,19 +406,27 @@ end note
           <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
           <c><xref target="RFC5245"></xref> - Second Host Candidate </c>
           <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065</c>
-          <c><xref target="RFC5245"></xref> -Server Reflexive Candidate for the Second Host Candidate</c>
+          <c><xref target="RFC5245"></xref> - Server Reflexive Candidate for the Second Host Candidate</c>
           <c>m=video  63130 RTP/SAVPF 99</c>
           <c><xref target="RFC4566"></xref> </c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c= IN IP4 98.248.92.771</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=rtpmap:99 H264/90000</c>
-          <c><xref target="RFC3984"></xref></c>
+          <c><xref target="RFC3984"></xref> - Bob accepts H.264 Video Codec.</c>
           <c>a=fmtp:99 profile-level-id=4d0028;packetization-mode=1</c>
           <c><xref target="RFC3984"></xref></c>        
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref> - Bob can send and recv video</c> 
           <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref> - Bob can perform RTP/RTCP Muxing on port 63130</c>          
+          <c><xref target="RFC5761"></xref> - Bob can perform RTP/RTCP Muxing on port 63130</c>
+          <c>b=AS:256</c>
+          <c><xref target="RFC4566"></xref> - Audio Session B/W of 256kbps</c>
+          <c>b=RS:800</c>
+          <c><xref target="RFC3556"></xref> - RTCP b/w allocated to active data senders</c>
+          <c>b=RR:2400</c>                              
+          <c><xref target="RFC3556"></xref> - RTCP b/w allocated to receivers</c>
           <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 63130 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP 1694302207 98.248.92.77 63130 typ srflx raddr 192.168.1.7 rport 63130</c>
@@ -427,8 +449,6 @@ end note
           <c><xref target="draft-ietf-mmusic-sctp-sdp"></xref></c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref> - Bob can send and recv non-media data</c> 
-          <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref> - Bob can perform RTP/RTCP Muxing on port 55700</c>
           <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 55700 typ host</c>
           <c><xref target="RFC5245"></xref> - Refer 4.1 SDP Offer</c>
           <c>a=candidate:1 1 UDP 1694302207 98.248.92.77 55700 typ srflx raddr 192.168.1.7 rport 55700</c>
@@ -437,8 +457,6 @@ end note
           <c><xref target="RFC5245"></xref> Refer 4.1 SDP Offer</c>
           <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 58137 typ srflx raddr 192.168.1.7 rport 581371</c>
           <c><xref target="RFC5245"></xref> Refer 4.1 SDP Offer</c>
-          <c>a=rtcp-fb:5000 nack </c>
-          <c><xref target="RFC5104"></xref> - Indicates NACK feedback support for the data-channel</c>
         </texttable>  
    </section> 
     <section anchor="sec.successful-session-remove-datachannel"
@@ -448,8 +466,9 @@ end note
         </t>
         <t hangText="Note">
           There is an ongoing discussion with in the working group to allow addition 
-          and deletion of streams with using only media lines. Once a final decision
-          is made, the following example shall be updated to reflect the same.
+          and deletion of streams using partial Offer/Answer exchanges based on
+          m=lines. Once a final decision is reached, the following example shall be 
+          updated to reflect the same.
         </t>
         <figure>
           <artwork alt="Successful-Session Remove Data"
@@ -457,7 +476,7 @@ end note
 title WebRTC Session (Audio,Video,Datachannel) - Drop Datachannel
 note right of Alice
     Alice & Bob are in a two-way audio,video and datachannel session.
-   Alice decides to stop the datachannel stream
+    Alice decides to stop the datachannel stream
 end note
 Alice->Bob: Offer(Audio:Opus Video:VP8, Application: Drop)
 Bob->Alice: Answer(Audio:Opus Video:VP8, Application:Drop)
@@ -470,8 +489,8 @@ Alice->Bob: Two-way Opus Audio and VP8 Video
         <texttable anchor="table_2_1" title="5.2 SDP Updated Offer w/DataChannel Drop">
           <ttcol align='left'>SDP Contents </ttcol>
           <ttcol align='left'>RFC#/Notes</ttcol>
-          <c>v=0</c>
-         <c><xref target="RFC4566"></xref></c>
+          <c>v=1</c>
+          <c><xref target="RFC4566"></xref> Incremented version to indicate the update</c>
           <c>o=alice 20519 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
           <c>s=</c>
@@ -488,11 +507,13 @@ Alice->Bob: Two-way Opus Audio and VP8 Video
           <c><xref target="RFC5506"></xref></c>          
           <c>m=audio 54609 RTP/SAVPF 0 109 98</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=rtpmap:0 PCMU/8000</c>
           <c><xref target="RFC3551"></xref></c>  
-          <c>a=rtpmap:109 opus/48000</c>
+          <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
@@ -502,7 +523,7 @@ Alice->Bob: Two-way Opus Audio and VP8 Video
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref></c>  
           <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref></c>                   
+          <c><xref target="RFC5761"></xref></c> 
           <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 54609 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP  694302207 24.23.204.141 54609 typ srflx raddr 192.168.1.4 rport 54609</c>
@@ -515,6 +536,8 @@ Alice->Bob: Two-way Opus Audio and VP8 Video
           <c><xref target="RFC5104"></xref></c>          
           <c>m=video  62537 RTP/SAVPF 99 120</c>
           <c><xref target="RFC4566"></xref> </c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=rtpmap:99 H264/90000</c>
@@ -526,7 +549,7 @@ Alice->Bob: Two-way Opus Audio and VP8 Video
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref></c> 
           <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref></c>          
+          <c><xref target="RFC5761"></xref></c>
           <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 62537 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP  1694302207 24.23.204.141 62537 typ srflx raddr 192.168.1.4 rport 62537</c>
@@ -553,13 +576,11 @@ Alice->Bob: Two-way Opus Audio and VP8 Video
           <c><xref target="draft-ietf-mmusic-sctp-sdp"></xref></c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref></c> 
-          <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref></c>
         </texttable>  
         <texttable anchor="table_2_2" title="5.2 SDP Updated Answer">
           <ttcol align='left'>SDP Contents </ttcol>
           <ttcol align='left'>RFC#/Notes</ttcol>
-          <c>v=0</c>
+          <c>v=1</c>
           <c><xref target="RFC4566"></xref></c>
           <c>o=bob 16833 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -577,9 +598,11 @@ Alice->Bob: Two-way Opus Audio and VP8 Video
           <c><xref target="RFC5506"></xref></c>          
           <c>m=audio 49203 RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>c= IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=rtpmap:109 opus/48000</c>
+          <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
@@ -595,20 +618,20 @@ Alice->Bob: Two-way Opus Audio and VP8 Video
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>m=video  63130 RTP/SAVPF 99 120</c>
+          <c>m=video  63130 RTP/SAVPF 99</c>
           <c><xref target="RFC4566"></xref> </c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c= IN IP4 98.248.92.771</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=rtpmap:99 H264/90000</c>
           <c><xref target="RFC3984"></xref></c>
           <c>a=fmtp:99 profile-level-id=4d0028;packetization-mode=1</c>
           <c><xref target="RFC3984"></xref></c>        
-          <c>a=rtpmap:120 VP8/90000</c>
-          <c><xref target="draft-ietf-payload-vp8"></xref></c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref></c> 
           <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref></c>          
+          <c><xref target="RFC5761"></xref></c>
           <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 63130 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP 1694302207 98.248.92.77 63130 typ srflx raddr 192.168.1.7 rport 63130</c>
@@ -631,18 +654,30 @@ Alice->Bob: Two-way Opus Audio and VP8 Video
           <c><xref target="draft-ietf-mmusic-sctp-sdp"></xref></c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref></c> 
-          <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref></c>
         </texttable>  
       </section> 
       <section anchor="successful-2way-bundle"
-        title="Secure Two-Way Audio,Video w/BUNDLE Support Unknown">
-        <t>This use-case demonstrates a successfull audio and video multiplexing scenario 
-          with SDP BUNDLE negotiation where tAlice is unsure of the Bob's BUNDLE support.
-          The initial Offer from Alice contains unique Bundle Address and the subsequent
-          Offer from Alice to perform Bundle Address Synchronization re
-          Table below also illustrates, a subsequent SDP Offer, which is used to perform
-          Bundle Address Synchronization.
+        title="Secure Two-Way Audio,Video with BUNDLE Support Unknown">
+        <t>
+          This use-case demonstrates a successfull audio and video media streams
+          multiplexing scenario using SDP BUNDLE negotiation framework 
+          <xref target="draft-ietf-mmusic-sdp-bundle-negotiation"/>
+        </t> 
+        <t>
+         Since Alice is unsure of the Bob's support for BUNDLE framework, the SDP
+         example below shows
+         <list style="symbols">
+           <t> An SDP Offer, in which the Alice assigns unique addresses to
+               each "m=" line in the BUNDLE group, and requests the Answerer to
+               select the Offerer's BUNDLE address. </t>
+           <t> An SDP Answer, in which the Bob selects the BUNDLE
+               address for the Offerer, and assigns its own local BUNDLE address
+               to each "m=" line in the BUNDLE group. </t>
+           <t> A subsequent SDP Offer from Alice, which is used to perform a BUNDLE
+               Address Synchronization (BAS).</t>      
+         </list>
+         Once the Offer/Answer exchange completes, both Alice and Bob each end up using
+         single RTP Session for both the Media Streams.
         </t>
         <figure>
           <artwork alt="Successful-Session 2 Way BUNDLE"
@@ -679,18 +714,22 @@ Alice->Bob: Updated Offer(Audio:Opus Video:VP8) for Bundle Address Synchronzatio
           <c><xref target="RFC4566"></xref></c>
           <c>a=mid:foo</c>
           <c><xref target="RFC5888"></xref> Audio m=line part of BUNDLE group with a unique port number</c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
           <c>b=AS:200</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=rtpmap:109 opus/48000</c>
+          <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref></c>  
           <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref></c>                   
+          <c><xref target="RFC5761"></xref></c>
+          <c>a=ssrc:11111</c>
+          <c><xref target="RFC5576"></xref></c>                   
           <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 54609 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP  694302207 24.23.204.141 54609 typ srflx raddr 192.168.1.4 rport 54609</c>
@@ -699,22 +738,24 @@ Alice->Bob: Updated Offer(Audio:Opus Video:VP8) for Bundle Address Synchronzatio
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 2 UDP  1694302206 24.23.204.141 64678 typ srflx raddr 192.168.1.4 rport 64678</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=rtcp-fb:109 nack</c>
-          <c><xref target="RFC5104"></xref></c>          
           <c>m=video 62537 RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=mid:bar</c>
           <c><xref target="RFC5888"></xref> Video m=line part of the Bundle group with a unique port number</c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>b=AS:1000</c>
+          <c>b=AS:1756</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=rtpmap:120 VP8/90000</c>
           <c><xref target="draft-ietf-payload-vp8"></xref></c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref></c> 
           <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref></c>          
+          <c><xref target="RFC5761"></xref></c>
+          <c>a=ssrc:22222</c>
+          <c><xref target="RFC5576"></xref></c>           
           <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 62537 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP  1694302207 24.23.204.141 62537 typ srflx raddr 192.168.1.4 rport 62537</c>
@@ -723,10 +764,6 @@ Alice->Bob: Updated Offer(Audio:Opus Video:VP8) for Bundle Address Synchronzatio
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 2 UDP 1694302206 24.23.204.141 54721 typ srflx raddr 192.168.1.4 rport 54721</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=rtcp-fb:120 nack pli</c>
-          <c><xref target="RFC5104"></xref></c>
-          <c>a=rtcp-fb:120 ccm fir</c>
-          <c><xref target="RFC5104"></xref></c>
         </texttable>  
         <texttable anchor="table_3_2" title="5.3 SDP Answer w/BUNDLE">
           <ttcol align='left'>SDP Contents </ttcol>
@@ -752,20 +789,24 @@ Alice->Bob: Updated Offer(Audio:Opus Video:VP8) for Bundle Address Synchronzatio
           BUNDLE semantics.</c>            
           <c>m=audio 49203 RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=mid:foo</c>
           <c><xref target="RFC5888"></xref> Audio m=line part of the BUNDLE group</c>    
           <c>c= IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
           <c>b=AS:200</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=rtpmap:109 opus/48000</c>
+          <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref></c>  
           <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref></c>                   
+          <c><xref target="RFC5761"></xref></c>
+          <c>a=ssrc:33333</c>
+          <c><xref target="RFC5576"></xref></c>                    
           <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 49203 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP 1694302207 98.248.92.77 49203 typ srflx raddr 192.168.1.7 rport 49203</c>
@@ -779,7 +820,9 @@ Alice->Bob: Updated Offer(Audio:Opus Video:VP8) for Bundle Address Synchronzatio
           <c>a=mid:bar</c>
           <c><xref target="RFC5888"></xref> Video m=line part of the BUNDLE group with 
           the port from audio line repeated </c>
-          <c>b=AS:1000</c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
+          <c>b=AS:1756</c>
           <c><xref target="RFC4566"></xref></c>
           <c>c= IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
@@ -788,9 +831,11 @@ Alice->Bob: Updated Offer(Audio:Opus Video:VP8) for Bundle Address Synchronzatio
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref></c> 
           <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref></c>          
+          <c><xref target="RFC5761"></xref></c>
+          <c>a=ssrc:44444</c>
+          <c><xref target="RFC5576"></xref></c>           
           <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 49203 typ host</c>
-          <c><xref target="RFC5245"></xref></c>
+          <c><xref target="RFC5245"></xref> - Candidate lines identical with the audio m-line.</c>
           <c>a=candidate:1 1 UDP 1694302207 98.248.92.77 49203 typ srflx raddr 192.168.1.7 rport 49203</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
@@ -798,7 +843,7 @@ Alice->Bob: Updated Offer(Audio:Opus Video:VP8) for Bundle Address Synchronzatio
           <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 typ srflx raddr 192.168.1.7 rport 60065</c>
           <c><xref target="RFC5245"></xref></c>
         </texttable>
-        <texttable anchor="table_3_3" title="5.3 SDP Updated Offer w/Bundle">
+        <texttable anchor="table_3_3" title="5.3 SDP Offer for BAS">
           <ttcol align='left'>SDP Contents </ttcol>
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
@@ -818,25 +863,27 @@ Alice->Bob: Updated Offer(Audio:Opus Video:VP8) for Bundle Address Synchronzatio
           <c>a=rtcp-rsize</c>
           <c><xref target="RFC5506"></xref></c>
           <c>a=group:BUNDLE foo bar</c>
-          <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref>
-             Alice supports grouping of m=lines</c>           
+          <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref></c>           
           <c>m=audio 54609 RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=mid:foo</c>
-          <c><xref target="RFC5888"></xref> Audio m=line part of BUNDLE group with a
-             unique port number</c>
+          <c><xref target="RFC5888"></xref>  - Port number finalized as Bundle Address.</c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
           <c>b=AS:200</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=rtpmap:109 opus/48000</c>
+          <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref></c>  
           <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref></c>                   
+          <c><xref target="RFC5761"></xref></c>
+          <c>a=ssrc:11111</c>
+          <c><xref target="RFC5576"></xref></c>                    
           <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 54609 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP  694302207 24.23.204.141 54609 typ srflx raddr 192.168.1.4 rport 54609</c>
@@ -845,44 +892,40 @@ Alice->Bob: Updated Offer(Audio:Opus Video:VP8) for Bundle Address Synchronzatio
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 2 UDP  1694302206 24.23.204.141 64678 typ srflx raddr 192.168.1.4 rport 64678</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=rtcp-fb:109 nack</c>
-          <c><xref target="RFC5104"></xref></c>          
           <c>m=video 54609 RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>a=mid:bar</c>
-          <c><xref target="RFC5888"></xref > Video m=line part of the BUNDLE group with
-              port from audio line repeated </c>
+          <c><xref target="RFC5888"></xref > - Same Bundle address from the audio m=line </c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>b=AS:1000</c>
+          <c>b=AS:1756</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=rtpmap:120 VP8/90000</c>
           <c><xref target="draft-ietf-payload-vp8"></xref></c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref></c> 
           <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref></c>          
+          <c><xref target="RFC5761"></xref></c>
+          <c>a=ssrc:22222</c>
+          <c><xref target="RFC5576"></xref></c>           
           <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 54609 typ host</c>
-          <c><xref target="RFC5245"></xref></c>
+          <c><xref target="RFC5245"></xref> - Candidate lines identical with the audio m-line. </c>
           <c>a=candidate:1 1 UDP  694302207 24.23.204.141 54609 typ srflx raddr 192.168.1.4 rport 54609</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:0 2 UDP 2113667326 192.168.1.4 64678 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 2 UDP  1694302206 24.23.204.141 64678 typ srflx raddr 192.168.1.4 rport 64678</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=rtcp-fb:120 nack pli</c>
-          <c><xref target="RFC5104"></xref></c>
-          <c>a=rtcp-fb:120 ccm fir</c>
-          <c><xref target="RFC5104"></xref></c>
         </texttable>        
         </section>
       <section anchor="successful-2way-bundle-one-exchange"
         title="Secure Two-Way Audio,Video w/BUNDLE Support Known">
-        <t>This use-case demonstrates a successfull audio and video multiplexing scenario 
-          with SDP BUNDLE negotiation. Alice (Offerer) knows about Bob's (Answerer) BUNDLE
-          support before hand.
-        </t>
-        <figure>
+        <t> This use-case is a successful audio and video stream multiplexing scenario,
+         with Alice and Bob aware of each others support for SDP BUNDLE framework 
+         <xref target="draft-ietf-mmusic-sdp-bundle-negotiation"/>.</t> 
+    <figure>
           <artwork alt="Successful-Session 2 Way BUNDLE Support Known"
             src="Two-WayBundle_Preknown.png"><![CDATA[
 title WebRTC Session - 2-Way Secure Audio,Video with BUNDLE Support Known
@@ -915,20 +958,24 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over a single 5-tuple
           Alice supports grouping of m=lines under BUNDLE semantics.</c>           
           <c>m=audio 10000 RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=mid:foo</c>
-          <c><xref target="RFC5888"></xref> Audio m=line part of BUNDLE group with a unique port number</c>
+          <c><xref target="RFC5888"></xref> - Audio m=line part of BUNDLE group</c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
           <c>b=AS:200</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=rtpmap:109 opus/48000</c>
+          <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref></c>  
           <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref></c>                   
+          <c><xref target="RFC5761"></xref></c>
+          <c>a=ssrc:11111</c>
+          <c><xref target="RFC5576"></xref></c>                    
           <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 10000 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP  694302207 24.23.204.141 10000 typ srflx raddr 192.168.1.4 rport 10000</c>
@@ -937,13 +984,12 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over a single 5-tuple
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 2 UDP  1694302206 24.23.204.141 64678 typ srflx raddr 192.168.1.4 rport 64678</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=rtcp-fb:109 nack</c>
-          <c><xref target="RFC5104"></xref></c>          
           <c>m=video 10000 RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>a=mid:bar</c>
-          <c><xref target="RFC5888"></xref> Video m=line part of the BUNDLE group 
-              with audio port repeated</c>
+          <c><xref target="RFC5888"></xref> - Video m=line with Bundle address same as the audio m=line</c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
           <c>b=AS:1000</c>
@@ -953,7 +999,9 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over a single 5-tuple
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref></c> 
           <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref></c>          
+          <c><xref target="RFC5761"></xref></c>
+          <c>a=ssrc:22222</c>
+          <c><xref target="RFC5576"></xref></c>           
           <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 10000 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP  694302207 24.23.204.141 10000 typ srflx raddr 192.168.1.4 rport 10000</c>
@@ -962,10 +1010,6 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over a single 5-tuple
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 2 UDP 1694302206 24.23.204.141 64678 typ srflx raddr 192.168.1.4 rport 64678</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=rtcp-fb:120 nack pli</c>
-          <c><xref target="RFC5104"></xref></c>
-          <c>a=rtcp-fb:120 ccm fir</c>
-          <c><xref target="RFC5104"></xref></c>
         </texttable>  
         <texttable anchor="table_4_2" title="5.4 SDP Answer w/BUNDLE">
           <ttcol align='left'>SDP Contents </ttcol>
@@ -987,24 +1031,28 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over a single 5-tuple
           <c>a=rtcp-rsize</c>
           <c><xref target="RFC5506"></xref></c>
           <c>a=group:BUNDLE foo bar</c>
-          <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref> Bob supports 
+          <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref> - Bob supports 
           BUNDLE semantics.</c>            
           <c>m=audio 20000 RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=mid:foo</c>
-          <c><xref target="RFC5888"></xref> Audio m=line part of the BUNDLE group</c> 
+          <c><xref target="RFC5888"></xref> - Audio m=line part of the BUNDLE group</c> 
           <c>b=AS:200</c>
           <c><xref target="RFC4566"></xref></c>
           <c>c= IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=rtpmap:109 opus/48000</c>
+          <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref></c>  
           <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref></c>                   
+          <c><xref target="RFC5761"></xref></c>
+          <c>a=ssrc:33333</c>
+          <c><xref target="RFC5576"></xref></c>                    
           <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 20000 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP 1694302207 98.248.92.77 20000 typ srflx raddr 192.168.1.7 rport 20000</c>
@@ -1015,10 +1063,12 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over a single 5-tuple
           <c><xref target="RFC5245"></xref></c>
           <c>m=video 20000 RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>a=mid:bar</c>
-          <c><xref target="RFC5888"></xref>Video m=line part of the BUNDLE group with the
-             port from audio line repeated </c>
-          <c>b=AS:200</c>
+          <c><xref target="RFC5888"></xref> - Video m=line with Bundle address 
+          same as the audio m=line </c>
+          <c>b=AS:1000</c>
           <c><xref target="RFC4566"></xref></c>
           <c>c= IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref> </c>
@@ -1027,7 +1077,9 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over a single 5-tuple
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref></c> 
           <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref></c>          
+          <c><xref target="RFC5761"></xref></c>
+          <c>a=ssrc:44444</c>
+          <c><xref target="RFC5576"></xref></c>           
           <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 20000 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP 1694302207 98.248.92.77 20000 typ srflx raddr 192.168.1.7 rport 20000</c>
@@ -1042,8 +1094,9 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over a single 5-tuple
         title="Secure Two-Way Audio,Video w/BUNDLE Unsupported">
         <t> This use-case illustrates SDP Offer/Answer exchange when the far-end (Bob)
           either doesn't support media bundling or doesn't want to group m=lines over
-          a single 5-tuple.
-        </t>
+          a single 5-tuple.</t>
+        <t> On successful Offer/Answer exchange, Alice and Bob each end up using separate
+        RTP sessions for audio and video media streams respectively.</t>
         <figure>
           <artwork alt="Successful-Session 2 Way BUNDLE Unsupported"
             src="Two-WayBundle_unsupported.png"><![CDATA[
@@ -1077,6 +1130,8 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over 2 different RTP sessions.
               Alice supports grouping of m=lines under BUNDLE semantics</c>           
           <c>m=audio 55232 RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=mid:foo</c>
           <c><xref target="RFC5888"></xref> Audio m=line part of BUNDLE group with a 
           unique port number</c>
@@ -1084,14 +1139,16 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over 2 different RTP sessions.
           <c><xref target="RFC4566"></xref></c>
           <c>b=AS:200</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=rtpmap:109 opus/48000</c>
+          <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref></c>  
           <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref></c>                   
+          <c><xref target="RFC5761"></xref></c>
+          <c>a=ssrc:11111</c>
+          <c><xref target="RFC5576"></xref></c>                    
           <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 55232 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP  694302207 24.23.204.141 55232 typ srflx raddr 192.168.1.4 rport 55232</c>
@@ -1100,10 +1157,10 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over 2 different RTP sessions.
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 2 UDP  1694302206 24.23.204.141 64678 typ srflx raddr 192.168.1.4 rport 64678</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=rtcp-fb:109 nack</c>
-          <c><xref target="RFC5104"></xref></c>          
           <c>m=video 54332 RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>a=mid:bar</c>
           <c><xref target="RFC5888"></xref> Video m=line part of the BUNDLE group with a 
           unique port number</c>
@@ -1116,7 +1173,9 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over 2 different RTP sessions.
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref></c> 
           <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref></c>          
+          <c><xref target="RFC5761"></xref></c>
+          <c>a=ssrc:22222</c>
+          <c><xref target="RFC5576"></xref></c>           
           <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 54332 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP  1694302207 24.23.204.141 54332 typ srflx raddr 192.168.1.4 rport 54332</c>
@@ -1125,10 +1184,6 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over 2 different RTP sessions.
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 2 UDP 1694302206 24.23.204.141 54721 typ srflx raddr 192.168.1.4 rport 54721</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=rtcp-fb:120 nack pli</c>
-          <c><xref target="RFC5104"></xref></c>
-          <c>a=rtcp-fb:120 ccm fir</c>
-          <c><xref target="RFC5104"></xref></c>
         </texttable>  
         <texttable anchor="table_5_2" title="5.5 SDP Answer without BUNDLE">
           <ttcol align='left'>SDP Contents </ttcol>
@@ -1151,18 +1206,18 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over 2 different RTP sessions.
           <c><xref target="RFC5506"></xref></c>
           <c>m=audio 53214 RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>b=AS:200</c>
           <c><xref target="RFC4566"></xref></c>
           <c>c= IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=rtpmap:109 opus/48000</c>
+          <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref></c>  
-          <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref></c>                   
           <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 53214 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP 1694302207 98.248.92.77 53214 typ srflx raddr 192.168.1.7 rport 53214</c>
@@ -1173,7 +1228,9 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over 2 different RTP sessions.
           <c><xref target="RFC5245"></xref></c>
           <c>m=video 58679 RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>b=AS:200</c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
+          <c>b=AS:2000</c>
           <c><xref target="RFC4566"></xref></c>
           <c>c= IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref> </c>
@@ -1181,8 +1238,6 @@ Alice->Bob: Two-way Opus Audio, H.264 Video over 2 different RTP sessions.
           <c><xref target="draft-ietf-payload-vp8"></xref></c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref></c> 
-          <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref></c>          
           <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 58679 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP 1694302207 98.248.92.77 58679 typ srflx raddr 192.168.1.7 rport 58679</c>
@@ -1240,9 +1295,11 @@ end note
           <c><xref target="RFC5506"></xref></c>          
           <c>m=audio 54609 RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=rtpmap:109 opus/48000</c>
+          <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
@@ -1253,11 +1310,11 @@ end note
           <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 54609 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:0 2 UDP 2113667326 192.168.1.4 64678 typ host</c>
-          <c><xref target="RFC5245"></xref></c>
-          <c>a=rtcp-fb:109 nack</c>
           <c><xref target="RFC5104"></xref></c>          
           <c>m=video 62537 RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref> </c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=rtpmap:120 VP8/90000</c>
@@ -1272,12 +1329,10 @@ end note
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:0 2 UDP 2113667326 192.168.1.4 54721 typ host</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=rtcp-fb:120 nack pli</c>
-          <c><xref target="RFC5104"></xref></c>
-          <c>a=rtcp-fb:120 ccm fir</c>
-          <c><xref target="RFC5104"></xref></c>
           <c>m=video 62539 RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref> </c>
+          <c>a=msid:mb ta </c>
+          <c> Identifies RTCMediaStream ID (mb) and RTCMediaStreamTrack ID (ta) </c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=rtpmap:120 VP8/90000</c>
@@ -1292,10 +1347,6 @@ end note
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:0 2 UDP 2113667326 192.168.1.4 54723 typ host</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=rtcp-fb:120 nack pli</c>
-          <c><xref target="RFC5104"></xref></c>
-          <c>a=rtcp-fb:120 ccm fir</c>
-          <c><xref target="RFC5104"></xref></c>
         </texttable>  
         <texttable anchor="table_6_2" title="5.6 SDP Answer">
           <ttcol align='left'>SDP Contents </ttcol>
@@ -1318,9 +1369,11 @@ end note
           <c><xref target="RFC5506"></xref></c>          
           <c>m=audio 49203 RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
+           <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>c= IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=rtpmap:109 opus/48000</c>
+          <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
@@ -1334,6 +1387,8 @@ end note
           <c><xref target="RFC5245"></xref></c>
           <c>m=video 63130 RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref> </c>
+           <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c= IN IP4 98.248.92.771</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=rtpmap:120 VP8/90000</c>
@@ -1348,12 +1403,10 @@ end note
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 56607 typ host</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=rtcp-fb:120 nack pli</c>
-          <c><xref target="RFC5104"></xref></c>
-          <c>a=rtcp-fb:120 ccm fir</c>
-          <c><xref target="RFC5104"></xref></c>
           <c>m=video 63133 RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref> </c>
+           <c>a=msid:mb ta </c>
+          <c> Identifies RTCMediaStream ID (mb) and RTCMediaStreamTrack ID (ta) </c>
           <c>c= IN IP4 98.248.92.771</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=rtpmap:120 VP8/90000</c>
@@ -1368,12 +1421,9 @@ end note
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 56609 typ host</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=rtcp-fb:120 nack pli</c>
-          <c><xref target="RFC5104"></xref></c>
-          <c>a=rtcp-fb:120 ccm fir</c>
-          <c><xref target="RFC5104"></xref></c>
         </texttable>  
       </section> 
+<!--      
       <section anchor="sec.successful-session-add-new-media"
         title="Add New Media (video)">
         <t>This scenario describes the message exchanges when Alice decides
@@ -1418,7 +1468,7 @@ Alice->Bob: Two-way Opus Audio, VP8 Video
           <c><xref target="RFC4566"></xref></c>
           <c>a=rtpmap:0 PCMU/8000</c>
           <c><xref target="RFC3551"></xref></c>  
-          <c>a=rtpmap:109 opus/48000</c>
+          <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
@@ -1465,7 +1515,7 @@ Alice->Bob: Two-way Opus Audio, VP8 Video
           <c><xref target="RFC4566"></xref></c>
           <c>c= IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=rtpmap:109 opus/48000</c>
+          <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
@@ -1510,7 +1560,7 @@ Alice->Bob: Two-way Opus Audio, VP8 Video
           <c><xref target="RFC4566"></xref></c>
           <c>a=rtpmap:0 PCMU/8000</c>
           <c><xref target="RFC3551"></xref></c>  
-          <c>a=rtpmap:109 opus/48000</c>
+          <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
@@ -1577,7 +1627,7 @@ Alice->Bob: Two-way Opus Audio, VP8 Video
           <c><xref target="RFC4566"></xref></c>
           <c>c= IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=rtpmap:109 opus/48000</c>
+          <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
@@ -1612,17 +1662,22 @@ Alice->Bob: Two-way Opus Audio, VP8 Video
           <c>a=candidate:1 2 UDP 1694302206 98.248.92.77 56607 typ srflx raddr 192.168.1.7 rport 56607</c>
           <c><xref target="RFC5245"></xref></c>
         </texttable>
-      </section> 
+      </section>
+-->
+       
       <section anchor="sec.successful-session-simulcast"
-        title="Successful Simulcast with 2 Encodings, 2 Cameras bundle-only">
-        <t> This section shows an Offer/Answer exchange with audio and two video streams each of which
-        can send two resolutions.One video stream supports VP8, while the other supports H.264. 
-        All the video is bundle-only.
+        title="Sendonly Simulcast w/2 cameras and 2 encodings per camera">
+        <t> This SDP below shows Offer/Answer exchange with audio and two video streams
+         each of which can send two different resolutions. </t>
+        <t> One video stream supports VP8, while the other supports H.264. </t> 
+        <t> bundle-only framework is used along with BUNDLE grouping framework 
+            to enable multiplexing of all the 5 streams (audio stream + 4 video streams)
+            over a single RTP Session.
         </t>
         <figure>
           <artwork alt="Successful-Session Simulcast"
             src="SessionSimulcast.png"><![CDATA[
-title 2 Way Successful Simulcast
+title 1 Way Successful Simulcast
 note right of Alice
 Alice offers 2 sendonly video streams with 2 simulcast encodings per stream
 end note
@@ -1630,7 +1685,7 @@ Alice->Bob: Offer(Audio:Opus,Video1:VP8,Video2:H.264) with bundle-only for video
 note left of Bob
 Bob accepts Alice's offer and 2 encodings per stream
 end note
-Alice->Bob: One-Way 2 H.264 and 2 VP8 video streams.
+Alice->Bob: One-Way 1 Opus, 2 H.264 and 2 VP8 video streams.
 ]]></artwork>
         </figure>
         <texttable anchor="table_8_1" title="5.8 SDP Offer">
@@ -1655,23 +1710,25 @@ Alice->Bob: One-Way 2 H.264 and 2 VP8 video streams.
           Alice supports grouping of m=lines under BUNDLE semantics</c>
           <c>m=audio 54609 RTP/SAVPF 0 109</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=mid:m0</c>
           <c><xref target="RFC5888"></xref> Audio m=line part of BUNDLE group 
           with a unique port number</c>
-          <c>a=msid:ma ta</c>
-          <c>Add appropriate reference when available</c>
           <c>a=rtpmap:0 PCMU/8000</c>
-          <c><xref target="RFC3551"></xref></c>  
-          <c>a=rtpmap:109 opus/48000</c>
+          <c><xref target="RFC3551"></xref></c>
+          <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=sendonly</c>
           <c><xref target="RFC3264"></xref></c>  
           <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref></c>                   
+          <c><xref target="RFC5761"></xref></c>
+          <c>a=ssrc:11111</c>
+          <c><xref target="RFC5576"/></c>                   
           <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 54609 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP  694302207 24.23.204.141 54609 typ srflx raddr 192.168.1.4 rport 54609</c>
@@ -1681,13 +1738,13 @@ Alice->Bob: One-Way 2 H.264 and 2 VP8 video streams.
           <c>a=candidate:1 2 UDP  1694302206 24.23.204.141 64678 typ srflx raddr 192.168.1.4 rport 64678</c>
           <c><xref target="RFC5245"></xref></c>
           <c>m=video 0 RTP/SAVPF 98 100</c>
-          <c> bundle-only video line with port number set to zero  </c>
+          <c> bundle-only video line with port number set to zero</c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=mid:m1</c>
           <c><xref target="RFC5888"></xref> Video m=line part of BUNDLE group</c>
-          <c>a=msid:ma tb</c>
-          <c>Add appropriate reference when available</c>
           <c>a=rtpmap:98 VP8/90000</c>
           <c><xref target="draft-ietf-payload-vp8"></xref></c>
           <c>a=rtpmap:100 VP8/90000</c>
@@ -1713,22 +1770,24 @@ Alice->Bob: One-Way 2 H.264 and 2 VP8 video streams.
           <c><xref target="RFC5576"></xref> <xref target="draft-rescorla-avtcore-6222bis"></xref>
             Camera-1,Encoding-2 SSRC with Session CNAME</c>          
           <c>a=sendonly</c>
-          <c><xref target="RFC3264"></xref> - Send only video stream</c> 
+          <c><xref target="RFC3264"></xref> - Send only video stream</c>
+          <c>a=rtcp-mux</c>
+          <c><xref target="RFC5761"></xref></c> 
           <c>a=bundle-only</c>
           <c>Add reference to unified plan when available</c> 
-          <c>m=video 0 RTP/SAVPF 101 103</c>
+          <c>m=video 0 RTP/SAVPF 98 100</c>
           <c> bundle-only video line with port number set to zero  </c>
+          <c>a=msid:ma tc </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tc) </c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=mid:m2</c>
           <c><xref target="RFC5888"></xref> Video m=line part of BUNDLE group</c>
-          <c>a=msid:ma tc</c>
-          <c>Add appropriate reference when available</c>
-          <c>a=rtpmap:101 H264/90000</c>
+          <c>a=rtpmap:98 H264/90000</c>
           <c><xref target="RFC3984"></xref></c>
-          <c>a=rtpmap:103 H264/90000</c>
+          <c>a=rtpmap:100 H264/90000</c>
           <c><xref target="RFC3984"></xref></c>
-          <c>a=fmtp:101 profile-level-id=4d0028;packetization-mode=1;max-fr=30 </c>
+          <c>a=fmtp:98 profile-level-id=4d0028;packetization-mode=1;max-fr=30 </c>
           <c><xref target="RFC3984"></xref>Camera-2,Encoding-1 Resolution</c>
           <c>a=fmtp:100 profile-level-id=4d0028;packetization-mode=1;max-fr=15</c>
           <c><xref target="RFC3984"></xref>Camera-1,Encoding-2 Resolution</c>
@@ -1745,7 +1804,9 @@ Alice->Bob: One-Way 2 H.264 and 2 VP8 video streams.
           <c><xref target="RFC5576"></xref> <xref target="draft-rescorla-avtcore-6222bis"></xref>
             Camera-1,Encoding-2 SSRC with Session CNAME</c>          
           <c>a=sendonly</c>
-          <c><xref target="RFC3264"></xref> - Send only video stream</c> 
+          <c><xref target="RFC3264"></xref> - Send only video stream</c>
+          <c>a=rtcp-mux</c>
+          <c><xref target="RFC5761"></xref></c>  
           <c>a=bundle-only</c>
           <c> Add reference to unified plan when available </c> 
         </texttable>
@@ -1769,25 +1830,27 @@ Alice->Bob: One-Way 2 H.264 and 2 VP8 video streams.
           <c>a=group:BUNDLE m0 m1 m2</c>
           <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref> 
           Alice supports grouping of m=lines under BUNDLE semantics</c>
-          <c>m=audio 54609 RTP/SAVPF 0 109 98</c>
+          <c>m=audio 54609 RTP/SAVPF 0 109</c>
           <c><xref target="RFC4566"></xref></c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=mid:m0</c>
           <c><xref target="RFC5888"></xref> Audio m=line part of BUNDLE group 
           with a unique port number</c>
-          <c>a=msid:ma ta</c>
-          <c>Add appropriate reference when available</c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=rtpmap:0 PCMU/8000</c>
-          <c><xref target="RFC3551"></xref></c>  
-          <c>a=rtpmap:109 opus/48000</c>
+          <c><xref target="RFC3551"></xref></c>
+          <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=sendonly</c>
           <c><xref target="RFC3264"></xref></c>  
           <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref></c>                   
+          <c><xref target="RFC5761"></xref></c> 
+          <c>a=ssrc:22222</c>
+          <c><xref target="RFC5576"/></c>                  
           <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 54609 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP  694302207 24.23.204.141 54609 typ srflx raddr 192.168.1.4 rport 54609</c>
@@ -1798,12 +1861,12 @@ Alice->Bob: One-Way 2 H.264 and 2 VP8 video streams.
           <c><xref target="RFC5245"></xref></c>
           <c>m=video 54609 RTP/SAVPF 98 100</c>
           <c> BUNDLE accepted with port repeated from the audio port </c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=mid:m1</c>
           <c><xref target="RFC5888"></xref> Video m=line part of BUNDLE group</c>
-          <c>a=msid:ma tb</c>
-          <c>Add appropriate reference when available</c>
           <c>a=rtpmap:98 VP8/90000</c>
           <c><xref target="draft-ietf-payload-vp8"></xref></c>
           <c>a=rtpmap:100 VP8/90000</c>
@@ -1838,21 +1901,23 @@ Alice->Bob: One-Way 2 H.264 and 2 VP8 video streams.
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 2 UDP  1694302206 24.23.204.141 64678 typ srflx raddr 192.168.1.4 rport 64678</c>
           <c><xref target="RFC5245"></xref></c> 
+          <c>a=rtcp-mux </c>
+          <c><xref target="RFC5576"/> </c>
           <c>a=bundle-only</c>
           <c>Add reference to unified plan when available</c> 
-           <c>m=video 54609 RTP/SAVPF 98 100</c>
+          <c>m=video 54609 RTP/SAVPF 98 100</c>
           <c> BUNDLE accepted with port repeated from the audio port </c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma tc </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tc) </c>
           <c>a=mid:m2</c>
           <c><xref target="RFC5888"></xref> Video m=line part of BUNDLE group</c>
-          <c>a=msid:ma tc</c>
-          <c>Add appropriate reference when available</c>
-          <c>a=rtpmap:101 H264/90000</c>
+          <c>a=rtpmap:98 H264/90000</c>
           <c><xref target="RFC3984"></xref></c>
-          <c>a=rtpmap:103 H264/90000</c>
+          <c>a=rtpmap:10 H264/90000</c>
           <c><xref target="RFC3984"></xref></c>
-          <c>a=fmtp:101 profile-level-id=4d0028;packetization-mode=1;max-fr=30 </c>
+          <c>a=fmtp:98 profile-level-id=4d0028;packetization-mode=1;max-fr=30 </c>
           <c><xref target="RFC3984"></xref>Camera-2,Encoding-1 Resolution</c>
           <c>a=fmtp:100 profile-level-id=4d0028;packetization-mode=1;max-fr=15</c>
           <c><xref target="RFC3984"></xref>Camera-1,Encoding-2 Resolution</c>
@@ -1878,15 +1943,17 @@ Alice->Bob: One-Way 2 H.264 and 2 VP8 video streams.
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 2 UDP  1694302206 24.23.204.141 64678 typ srflx raddr 192.168.1.4 rport 64678</c>
           <c><xref target="RFC5245"></xref></c> 
+          <c>a=rtcp-mux </c>
+          <c><xref target="RFC5576"/></c>
           <c>a=bundle-only</c>
           <c> Add reference to unified plan when available </c> 
         </texttable>
       </section>  
       <section anchor="sec.successful-session-svc"
-        title="Successful SVC Video Stream - bundle-only Offer">
-        <t> This section shows an SDP Offer that has an audio and a single video
-            stream.  The video stream that is layered coding at 3 different
-            resolutions based on [RFC5583].  The video m=lines shows 3 streams
+        title="Successful SVC Video Stream">
+        <t> This section shows an SDP Offer/Answer for a session with an audio and a single video
+            stream.  The video stream is layered coding at 3 different
+            resolutions based on <xref target="RFC5583"/>. The video m=line shows 3 streams
             with last stream (payload 100) dependent on streams with payload 96
             and 97 for decoding.
         </t>
@@ -1902,11 +1969,11 @@ note left of Bob
 Bob accepts Alice's Offered Codec operation points
 end note
 Bob->Alice: Answer(Video: H.264) bundle-only
-Alice->Bob: One-Way H.264 Video with encodings per instructed by Bob
+Alice->Bob: One-Way H.264 Video with codec points as indicated by Bob.
 
 ]]></artwork>
         </figure>
-        <texttable anchor="table_9_1" title="5.9 SDP Offer">
+        <texttable anchor="table_9_1" title="5.9 SDP Offer with SVC">
           <ttcol align='left'>SDP Contents </ttcol>
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
@@ -1928,16 +1995,16 @@ Alice->Bob: One-Way H.264 Video with encodings per instructed by Bob
           Alice supports grouping of m=lines under BUNDLE semantics</c>
           <c>m=audio 54609 RTP/SAVPF 0 109 </c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=mid:m0</c>
           <c><xref target="RFC5888"></xref> Audio m=line part of BUNDLE group 
           with a unique port number</c>
-          <c>a=msid:ma ta</c>
-          <c>Add appropriate reference when available</c>
           <c>a=rtpmap:0 PCMU/8000</c>
           <c><xref target="RFC3551"></xref></c>  
-          <c>a=rtpmap:109 opus/48000</c>
+          <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
@@ -1955,6 +2022,8 @@ Alice->Bob: One-Way H.264 Video with encodings per instructed by Bob
           <c><xref target="RFC5245"></xref></c>  
           <c>m=video 0 RTP/SAVPF 96 97 100</c>
           <c>bundle-only video line with port number set to zero</c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tc) </c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=mid:m1</c>
@@ -1966,42 +2035,25 @@ Alice->Bob: One-Way H.264 Video with encodings per instructed by Bob
           <c>a=rtpmap:96 H264/90000</c>
           <c><xref target="RFC3984"></xref></c>
           <c>a=fmtp:96 profile-level-id=4d0028;packetization-mode=1;max-fr=30;max-fs=8040</c>
-          <c><xref target="RFC3984"></xref></c>
+          <c><xref target="RFC3984"></xref>H.264 Layer 1</c>
           <c>a=rtpmap:97 H264/90000</c>
           <c><xref target="RFC3984"></xref></c>
-          <c>a=fmtp:96 profile-level-id=4d0028;packetization-mode=1;max-fr=15;max-fs=1200</c>
-          <c><xref target="RFC3984"></xref></c>
+          <c>a=fmtp:97 profile-level-id=4d0028;packetization-mode=1;max-fr=15;max-fs=1200</c>
+          <c><xref target="RFC3984"></xref> H.264 Layer 2</c>
           <c>a=rtpmap:100 H264-SVC/90000</c>
           <c><xref target="RFC3984"></xref></c>
           <c>a=fmtp:100 profile-level-id=4d0028;packetization-mode=1;max-fr=30;max-fs=8040</c>
           <c><xref target="RFC3984"></xref></c>
           <c>a=depend:100 lay m1:96,97;</c>
-          <c><xref target="RFC5583"></xref></c>
+          <c><xref target="RFC5583"></xref>Layer 3 dependent on layers 1 and 2</c>
           <c>a=sendonly</c>
           <c><xref target="RFC3264"></xref> - Send only video stream</c> 
           <c>a=rtcp-mux</c>
           <c><xref target="RFC5761"></xref></c> 
           <c>a=bundle-only</c>
           <c> Add reference to unified plan when available </c>
-        </texttable>   
-      </section>
-      <section anchor="sec.successful-simulcast-rtx"
-        title="Simulcast Video Stream with Retransmission - bundle-only Offer">
-        <t> This section shows an SDP offer that has an audio and a single video
-            stream.The video stream that is simulcast at two resolutions and
-            has <xref target="RFC4588"></xref> style re-transmission flows.
-        </t>
-        <figure>
-          <artwork alt="Successful-Session Simulcast RTX"
-            src="SessionSimulcastRTX.png"><![CDATA[
-title Simulcast Streams with Retransmission
-note right of Alice
-Alice offers single audio and simulcasted video stream
-end note
-Alice->Bob: Offer(Audio:Opus Video:VP8 with 2 resolutions and RTX Stream) bundle-only
-]]></artwork>
-        </figure>
-        <texttable anchor="table_10_1" title="5.10 SDP Offer">
+        </texttable>
+        <texttable anchor="table_9_2" title="5.9 SDP Answer with SVC">
           <ttcol align='left'>SDP Contents </ttcol>
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
@@ -2023,16 +2075,16 @@ Alice->Bob: Offer(Audio:Opus Video:VP8 with 2 resolutions and RTX Stream) bundle
           Alice supports grouping of m=lines under BUNDLE semantics</c>
           <c>m=audio 54609 RTP/SAVPF 0 109 </c>
           <c><xref target="RFC4566"></xref></c>
-          <c>c= IN IP4 24.23.204.141</c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
+          <c>c= IN IP4 24.23.204.142</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=mid:m0</c>
           <c><xref target="RFC5888"></xref> Audio m=line part of BUNDLE group 
           with a unique port number</c>
-          <c>a=msid:ma ta</c>
-          <c>Add appropriate reference when available</c>
           <c>a=rtpmap:0 PCMU/8000</c>
           <c><xref target="RFC3551"></xref></c>  
-          <c>a=rtpmap:109 opus/48000</c>
+          <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
@@ -2040,6 +2092,114 @@ Alice->Bob: Offer(Audio:Opus Video:VP8 with 2 resolutions and RTX Stream) bundle
           <c><xref target="RFC3264"></xref></c>  
           <c>a=rtcp-mux</c>
           <c><xref target="RFC5761"></xref></c>                   
+          <c>a=candidate:0 1 UDP  2113667327 192.168.1.5 54609 typ host</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=candidate:1 1 UDP  694302207 24.23.204.142 54609 typ srflx raddr 192.168.1.5 rport 54609</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.5 64678 typ host</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=candidate:1 2 UDP  1694302206 24.23.204.142 64678 typ srflx raddr 192.168.1.5 rport 64678</c>
+          <c><xref target="RFC5245"></xref></c>  
+          <c>m=video 54609 RTP/SAVPF 96 100</c>
+          <c> BUNDLE accepted Bundle address same as audio m=line.</c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
+          <c>c= IN IP4 24.23.204.142</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=mid:m1</c>
+          <c><xref target="RFC5888"></xref> Video m=line part of BUNDLE group</c>
+          <c>b=AS:2500</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=rtpmap:96 H264/90000</c>
+          <c><xref target="RFC3984"></xref></c>
+          <c>a=fmtp:96 profile-level-id=4d0028;packetization-mode=1;max-fr=30;max-fs=8040</c>
+          <c><xref target="RFC3984"></xref>H.264 Layer 1</c>
+          <c>a=rtpmap:100 H264-SVC/90000</c>
+          <c><xref target="RFC3984"></xref></c>
+          <c>a=fmtp:100 profile-level-id=4d0028;packetization-mode=1;max-fr=30;max-fs=8040</c>
+          <c><xref target="RFC3984"></xref></c>
+          <c>a=depend:100 lay m1:96;</c>
+          <c><xref target="RFC5583"></xref> Bob chooses 2 Codec Operation points</c>
+          <c>a=candidate:0 1 UDP  2113667327 192.168.1.5 54609 typ host</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=candidate:1 1 UDP  694302207 24.23.204.142 54609 typ srflx raddr 192.168.1.5 rport 54609</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.5 64678 typ host</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=candidate:1 2 UDP  1694302206 24.23.204.142 64678 typ srflx raddr 192.168.1.5 rport 64678</c>
+          <c><xref target="RFC5245"></xref></c>  
+          <c>a=recvonly</c>
+          <c><xref target="RFC3264"></xref> - Receive only video stream</c> 
+          <c>a=rtcp-mux</c>
+          <c><xref target="RFC5761"></xref></c> 
+          <c>a=bundle-only</c>
+          <c> Add reference to unified plan when available </c>
+        </texttable>     
+      </section>
+      <section anchor="sec.successful-simulcast-rtx"
+        title="Successful Simulcast Video Streams with Retransmisson">
+        <t> This section shows an SDP Offer/Answer exchange for a simulcast scenario
+            with 2 two resolutions and has <xref target="RFC4588"></xref> 
+            style re-transmission flows.
+        </t>
+        <figure>
+          <artwork alt="Successful-Session Simulcast RTX"
+            src="SessionSimulcastRTX.png"><![CDATA[
+title Simulcast Streams with Retransmission
+note right of Alice
+Alice offers single audio and simulcasted video stream
+end note
+Alice->Bob: Offer(Audio:Opus Video:VP8 with 2 resolutions and RTX Stream) bundle-only
+note right of Bob
+Bob accepts all the streams offered by Alice
+end note
+Bob->Alice: Answer(Audio:Opus Video:VP8 with 2 resolutions and RTX Stream) bundle-only
+note right of Alice
+Successful 2 way simulcast session with associated retransmission streams
+end note
+]]></artwork>
+        </figure>
+        <texttable anchor="table_10_1" title="5.10 SDP Offer w/Simulcast, RTX">
+          <ttcol align='left'>SDP Contents </ttcol>
+          <ttcol align='left'>RFC#/Notes</ttcol>
+          <c>v=0</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>o=alice 20519 0 IN IP4 0.0.0.0</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>s=</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>t=0 0</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=ice-ufrag:074c6550</c>
+          <c><xref target="RFC5245"></xref></c>          
+          <c>a=ice-pwd:a28a397a4c3f31747d1ee3474af08a068</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7:70:9d:1f:66:79:a8:07</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=group:BUNDLE m0 m1 </c>
+          <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref> 
+          Alice supports grouping of m=lines under BUNDLE semantics</c>
+          <c>m=audio 54609 RTP/SAVPF 0 109 </c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
+          <c>c= IN IP4 24.23.204.141</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=mid:m0</c>
+          <c><xref target="RFC5888"></xref> Audio m=line part of BUNDLE group 
+          with a unique port number</c>
+          <c>a=rtpmap:0 PCMU/8000</c>
+          <c><xref target="RFC3551"></xref></c>  
+          <c>a=rtpmap:109 opus/48000/2</c>
+          <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
+          <c>a=ptime:20</c>
+          <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
+          <c>a=sendonly</c>
+          <c><xref target="RFC3264"></xref></c>  
+          <c>a=rtcp-mux</c>
+          <c><xref target="RFC5761"></xref></c>
+          <c>a=ssrc:11111</c>
+          <c><xref target="RFC5576"/></c>                   
           <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 54609 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP  694302207 24.23.204.141 54609 typ srflx raddr 192.168.1.4 rport 54609</c>
@@ -2050,13 +2210,13 @@ Alice->Bob: Offer(Audio:Opus Video:VP8 with 2 resolutions and RTX Stream) bundle
           <c><xref target="RFC5245"></xref></c>  
           <c>m=video 0 RTP/SAVPF 98 100 101 103</c>
           <c>bundle-only video line with port number set to zero</c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=mid:m1</c>
           <c><xref target="RFC5888"></xref> Audio m=line part of BUNDLE group</c>
-          <c>a=msid:ma tb</c>
-          <c>Add appropriate reference when available</c>
-          <c>b=AS:2500</c>
+          <c>b=AS:1756</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=rtpmap:98 VP8/90000</c>
           <c><xref target="draft-ietf-payload-vp8"></xref></c>
@@ -2074,31 +2234,28 @@ Alice->Bob: Offer(Audio:Opus Video:VP8 with 2 resolutions and RTX Stream) bundle
           <c><xref target="RFC4588"></xref></c>
           <c>a=fmtp:103 apt=100;rtx-time=3000</c>
           <c><xref target="RFC4588"></xref></c>
+          <c>a=ssrc-group:SIMULCAST 12345 78990 </c>
+          <c> Simulcast group </c>
+          <c>a=ssrc-group:FID 12345 34567 </c>
+          <c><xref target="RFC5888"/> </c>
+          <c>a=ssrc-group:FID 78990 90887 </c>
+          <c><xref target="RFC5888"/></c>
+          <c>a=ssrc:12345</c>
+          <c><xref target="RFC5576"></xref></c>
+          <c>a=ssrc:78990</c>
+          <c><xref target="RFC5576"/></c>
+          <c>a=ssrc:34567</c>
+          <c><xref target="RFC5576"/></c>
+          <c>a=ssrc:90887</c>
+          <c><xref target="RFC5576"/></c>
           <c>a=sendrecv</c>
-          <c><xref target="RFC3264"></xref></c> 
+          <c><xref target="RFC3264"/></c> 
           <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref></c> 
+          <c><xref target="RFC5761"/></c> 
           <c>a=bundle-only</c>
           <c> Add reference to unified plan when available </c>
-        </texttable>   
-      </section>
-      <section anchor="sec.successful-simulcast-fec"
-        title="Simulcast Video Stream with Forward Error Correction  bundle-only Offer">
-        <t> This section shows an SDP offer that has an audio and a single video
-            stream.  The video stream that is simulcast at two resolutions and
-             has <xref target="RFC5956"></xref>  style FEC flows.
-         </t>    
-        <figure>
-          <artwork alt="Successful-Session Simulcast FEC"
-            src="SessionSimulcastFEC.png"><![CDATA[
-title Simulcast Streams with Forward Error Correction
-note right of Alice
-Alice offers single audio and simulcasted video stream
-end note
-Alice->Bob: Offer(Audio:Opus Video:VP8 with 2 resolutions with FEC Streams) bundle-only
-]]></artwork>
-        </figure>
-        <texttable anchor="table_10_2" title="5.11 SDP Offer">
+        </texttable>
+        <texttable anchor="table_10_2" title="5.10 SDP Answer w/Simulcast, RTX">
           <ttcol align='left'>SDP Contents </ttcol>
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
@@ -2120,23 +2277,157 @@ Alice->Bob: Offer(Audio:Opus Video:VP8 with 2 resolutions with FEC Streams) bund
           Alice supports grouping of m=lines under BUNDLE semantics</c>
           <c>m=audio 54609 RTP/SAVPF 0 109 </c>
           <c><xref target="RFC4566"></xref></c>
-          <c>c= IN IP4 24.23.204.141</c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
+          <c>c= IN IP4 24.23.204.142</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=mid:m0</c>
           <c><xref target="RFC5888"></xref> Audio m=line part of BUNDLE group 
           with a unique port number</c>
-          <c>a=msid:ma ta</c>
-          <c>Add appropriate reference when available</c>
           <c>a=rtpmap:0 PCMU/8000</c>
           <c><xref target="RFC3551"></xref></c>  
-          <c>a=rtpmap:109 opus/48000</c>
+          <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=sendonly</c>
           <c><xref target="RFC3264"></xref></c>  
           <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref></c>                   
+          <c><xref target="RFC5761"></xref></c>
+          <c>a=ssrc:33333</c>
+          <c><xref target="RFC5576"/></c>                   
+          <c>a=candidate:0 1 UDP  2113667327 192.168.1.5 54609 typ host</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=candidate:1 1 UDP  694302207 24.23.204.142 54609 typ srflx raddr 192.168.1.5 rport 54609</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.5 64678 typ host</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=candidate:1 2 UDP  1694302206 24.23.204.142 64678 typ srflx raddr 192.168.1.5 rport 64678</c>
+          <c><xref target="RFC5245"></xref></c>  
+          <c>m=video 54609 RTP/SAVPF 98 100 101 103</c>
+          <c>BUNDLE accepted with Bundle address identical to audio m-line</c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
+          <c>c= IN IP4 24.23.204.142</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=mid:m1</c>
+          <c><xref target="RFC5888"></xref> Video m=line part of BUNDLE group</c>
+          <c>b=AS:1756</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=rtpmap:98 VP8/90000</c>
+          <c><xref target="draft-ietf-payload-vp8"></xref></c>
+          <c>a=rtpmap:100 VP8/90000</c>
+          <c><xref target="draft-ietf-payload-vp8"></xref></c>
+          <c>a=rtpmap:101 VP8/90000</c>
+          <c><xref target="draft-ietf-payload-vp8"></xref></c>
+          <c>a=rtpmap:103 VP8/90000</c>
+          <c><xref target="draft-ietf-payload-vp8"></xref></c>  
+          <c>a=fmtp:98 max-fr=30;max-fs=8040</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=fmtp:100 max-fr=15;max-fs=1200</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=fmtp:101 apt=98;rtx-time=3000</c>
+          <c><xref target="RFC4588"></xref></c>
+          <c>a=fmtp:103 apt=100;rtx-time=3000</c>
+          <c><xref target="RFC4588"></xref></c>
+          <c>a=candidate:0 1 UDP  2113667327 192.168.1.5 54609 typ host</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=candidate:1 1 UDP  694302207 24.23.204.142 54609 typ srflx raddr 192.168.1.5 rport 54609</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.5 64678 typ host</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=candidate:1 2 UDP  1694302206 24.23.204.142 64678 typ srflx raddr 192.168.1.5 rport 64678</c>
+          <c><xref target="RFC5245"></xref></c>  
+          <c>a=ssrc-group:SIMULCAST 54321 77656 </c>
+          <c> Simulcast group </c>
+          <c>a=ssrc-group:FID 54321 88776 </c>
+          <c><xref target="RFC5888"/> </c>
+          <c>a=ssrc-group:FID 77656 12908 </c>
+          <c><xref target="RFC5888"/></c>
+          <c>a=ssrc:54321</c>
+          <c><xref target="RFC5576"/></c>
+          <c>a=ssrc:77656</c>
+          <c><xref target="RFC5576"/></c>
+          <c>a=ssrc:88776</c>
+          <c><xref target="RFC5576"/></c>
+          <c>a=ssrc:12908</c>
+          <c><xref target="RFC5576"/></c>
+          <c>a=sendrecv</c>
+          <c><xref target="RFC3264"></xref></c> 
+          <c>a=rtcp-mux</c>
+          <c><xref target="RFC5761"></xref></c> 
+          <c>a=bundle-only</c>
+          <c> Add reference to unified plan when available </c>
+        </texttable>   
+      </section>
+      <section anchor="sec.successful-simulcast-rtxreject"
+        title="Successful 1-way Simulcast with 2 resolutions and RTX - One resolution rejected">
+        <t> This section shows an SDP Offer/Answer exchange for a simulcast scenario
+            with 2 two resolutions and has <xref target="RFC4588"></xref> 
+            style re-transmission flows.
+        </t>
+        <t>
+          It also showcases when Bob rejects one of the Simulcast Video Stream which
+          results in the rejection of the associated repair stream implicitly
+        </t>
+        <figure>
+          <artwork alt="Successful-Session Simulcast RTX"
+            src="SessionSimulcastRTXReject.png"><![CDATA[
+title Simulcast Streams with Retransmission
+note right of Alice
+Alice offers single audio and simulcasted video stream
+end note
+Alice->Bob: Offer(Audio:Opus Video:VP8 with 2 resolutions and RTX Streams) bundle-only
+note right of Bob
+Bob accepts one simulcast,rtx and rejects the other
+end note
+Bob->Alice: Answer(Audio:Opus Video:VP8 with 1 resolution and the RTX Stream) bundle-only
+note right of Alice
+Successful 1 way session with 1 Video Stream and the associated RTX Stream
+end note
+]]></artwork>
+        </figure>
+        <texttable anchor="table_11_1" title="5.11 SDP Offer w/Simulcast, RTX">
+          <ttcol align='left'>SDP Contents </ttcol>
+          <ttcol align='left'>RFC#/Notes</ttcol>
+          <c>v=0</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>o=alice 20519 0 IN IP4 0.0.0.0</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>s=</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>t=0 0</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=ice-ufrag:074c6550</c>
+          <c><xref target="RFC5245"></xref></c>          
+          <c>a=ice-pwd:a28a397a4c3f31747d1ee3474af08a068</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7:70:9d:1f:66:79:a8:07</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=group:BUNDLE m0 m1 </c>
+          <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref> 
+          Alice supports grouping of m=lines under BUNDLE semantics</c>
+          <c>m=audio 54609 RTP/SAVPF 0 109 </c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
+          <c>c= IN IP4 24.23.204.141</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=mid:m0</c>
+          <c><xref target="RFC5888"></xref> Audio m=line part of BUNDLE group 
+          with a unique port number</c>
+          <c>a=rtpmap:0 PCMU/8000</c>
+          <c><xref target="RFC3551"></xref></c>  
+          <c>a=rtpmap:109 opus/48000/2</c>
+          <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
+          <c>a=ptime:20</c>
+          <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
+          <c>a=sendonly</c>
+          <c><xref target="RFC3264"></xref></c>  
+          <c>a=rtcp-mux</c>
+          <c><xref target="RFC5761"></xref></c>
+          <c>a=ssrc:11111</c>
+          <c><xref target="RFC5576"/></c>                   
           <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 54609 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP  694302207 24.23.204.141 54609 typ srflx raddr 192.168.1.4 rport 54609</c>
@@ -2147,12 +2438,224 @@ Alice->Bob: Offer(Audio:Opus Video:VP8 with 2 resolutions with FEC Streams) bund
           <c><xref target="RFC5245"></xref></c>  
           <c>m=video 0 RTP/SAVPF 98 100 101 103</c>
           <c>bundle-only video line with port number set to zero</c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=mid:m1</c>
           <c><xref target="RFC5888"></xref> Audio m=line part of BUNDLE group</c>
-          <c>a=msid:ma tb</c>
-          <c>Add appropriate reference when available</c>
+          <c>b=AS:1756</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=rtpmap:98 VP8/90000</c>
+          <c><xref target="draft-ietf-payload-vp8"></xref></c>
+          <c>a=rtpmap:100 VP8/90000</c>
+          <c><xref target="draft-ietf-payload-vp8"></xref></c>
+          <c>a=rtpmap:101 VP8/90000</c>
+          <c><xref target="draft-ietf-payload-vp8"></xref></c>
+          <c>a=rtpmap:103 VP8/90000</c>
+          <c><xref target="draft-ietf-payload-vp8"></xref></c>  
+          <c>a=fmtp:98 max-fr=30;max-fs=8040</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=fmtp:100 max-fr=15;max-fs=1200</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=fmtp:101 apt=98;rtx-time=3000</c>
+          <c><xref target="RFC4588"></xref></c>
+          <c>a=fmtp:103 apt=100;rtx-time=3000</c>
+          <c><xref target="RFC4588"></xref></c>
+          <c>a=ssrc-group:SIMULCAST 12345 78990 </c>
+          <c> Simulcast group </c>
+          <c>a=ssrc-group:FID 12345 34567 </c>
+          <c><xref target="RFC5888"/> </c>
+          <c>a=ssrc-group:FID 78990 90887 </c>
+          <c><xref target="RFC5888"/></c>
+          <c>a=ssrc:12345</c>
+          <c><xref target="RFC5576"/></c>
+          <c>a=ssrc:78990</c>
+          <c><xref target="RFC5576"/></c>
+          <c>a=ssrc:34567</c>
+          <c><xref target="RFC5576"/></c>
+          <c>a=ssrc:90887</c>
+          <c><xref target="RFC5576"/></c>
+          <c>a=sendonly</c>
+          <c><xref target="RFC3264"></xref></c> 
+          <c>a=rtcp-mux</c>
+          <c><xref target="RFC5761"></xref></c> 
+          <c>a=bundle-only</c>
+          <c> Add reference to unified plan when available </c>
+        </texttable>
+        <texttable anchor="table_11_2" title="5.11 SDP Answer no Simulcast">
+          <ttcol align='left'>SDP Contents </ttcol>
+          <ttcol align='left'>RFC#/Notes</ttcol>
+          <c>v=0</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>o=alice 20519 0 IN IP4 0.0.0.0</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>s=</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>t=0 0</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=ice-ufrag:074c6550</c>
+          <c><xref target="RFC5245"></xref></c>          
+          <c>a=ice-pwd:a28a397a4c3f31747d1ee3474af08a068</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7:70:9d:1f:66:79:a8:07</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=group:BUNDLE m0 m1 </c>
+          <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref> 
+          Alice supports grouping of m=lines under BUNDLE semantics</c>
+          <c>m=audio 54609 RTP/SAVPF 0 109 </c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
+          <c>c= IN IP4 24.23.204.142</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=mid:m0</c>
+          <c><xref target="RFC5888"></xref> Audio m=line part of BUNDLE group 
+          with a unique port number</c>
+          <c>a=rtpmap:0 PCMU/8000</c>
+          <c><xref target="RFC3551"></xref></c>  
+          <c>a=rtpmap:109 opus/48000/2</c>
+          <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
+          <c>a=ptime:20</c>
+          <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
+          <c>a=recvonly</c>
+          <c><xref target="RFC3264"></xref></c>  
+          <c>a=rtcp-mux</c>
+          <c><xref target="RFC5761"></xref></c>
+          <c>a=ssrc:33333</c>
+          <c><xref target="RFC5576"/></c>                   
+          <c>a=candidate:0 1 UDP  2113667327 192.168.1.5 54609 typ host</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=candidate:1 1 UDP  694302207 24.23.204.142 54609 typ srflx raddr 192.168.1.5 rport 54609</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.5 64678 typ host</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=candidate:1 2 UDP  1694302206 24.23.204.142 64678 typ srflx raddr 192.168.1.5 rport 64678</c>
+          <c><xref target="RFC5245"></xref></c>  
+          <c>m=video 54609 RTP/SAVPF 98 101 </c>
+          <c>BUNDLE accepted with Bundle address identical to audio m-line</c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
+          <c>c= IN IP4 24.23.204.142</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=mid:m1</c>
+          <c><xref target="RFC5888"></xref> Video m=line part of BUNDLE group</c>
+          <c>b=AS:1756</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=rtpmap:98 VP8/90000</c>
+          <c><xref target="draft-ietf-payload-vp8"></xref></c>
+          <c>a=rtpmap:101 VP8/90000</c>
+          <c><xref target="draft-ietf-payload-vp8"></xref></c>
+          <c>a=fmtp:98 max-fr=30;max-fs=8040</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=fmtp:101 apt=98;rtx-time=3000</c>
+          <c><xref target="RFC4588"></xref></c>
+          <c>a=candidate:0 1 UDP  2113667327 192.168.1.5 54609 typ host</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=candidate:1 1 UDP  694302207 24.23.204.142 54609 typ srflx raddr 192.168.1.5 rport 54609</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.5 64678 typ host</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=candidate:1 2 UDP  1694302206 24.23.204.142 64678 typ srflx raddr 192.168.1.5 rport 64678</c>
+          <c><xref target="RFC5245"></xref></c>  
+          <c>a=ssrc-group:FID 54321 88776 </c>
+          <c><xref target="RFC5888"/> </c>
+          <c>a=ssrc:54321</c>
+          <c><xref target="RFC5576"/></c>
+          <c>a=ssrc:88776</c>
+          <c><xref target="RFC5576"/></c>
+          <c>a=recvonly</c>
+          <c><xref target="RFC3264"></xref></c> 
+          <c>a=rtcp-mux</c>
+          <c><xref target="RFC5761"></xref></c> 
+          <c>a=bundle-only</c>
+          <c> Add reference to unified plan when available </c>
+        </texttable>   
+      </section>
+      <section anchor="sec.successful-simulcast-fec"
+        title="Simulcast Video Stream with Forward Error Correction">
+        <t> This section shows an SDP Offer/Answer exchange for Simulcast
+            video stream at two resolutions and and has <xref target="RFC5956"></xref>  
+            style FEC flows.
+         </t> 
+         <t>
+           On completion of Offer/Answer exchange, one audio stream, 2 simulcast video
+           streams and 2 associated FEC streams are sent over a single 5-Tuple as part
+           of bundle-only and BUNDLE framework.
+         </t>   
+        <figure>
+          <artwork alt="Successful-Session Simulcast FEC"
+            src="SessionSimulcastFEC.png"><![CDATA[
+title Simulcast Streams with Forward Error Correction
+note right of Alice
+Alice offers single audio and simulcasted video stream
+end note
+Alice->Bob: Offer(Audio:Opus Video:VP8 with 2 resolutions with FEC Streams) bundle-only
+note right of Bob
+Bob accepts simulcast stream as well as FEC streams
+end note
+Bob->Alice: Answer(Audio:Opus Video:VP8 with 2 resolutions with FEC Streams) bundle-only
+note right of Alice
+Successful Session with 4 video streams (Simulcast + FEC) and 1 Audio Stream
+]]></artwork>
+        </figure>
+        <texttable anchor="table_12_1" title="5.12 SDP Offer">
+          <ttcol align='left'>SDP Contents </ttcol>
+          <ttcol align='left'>RFC#/Notes</ttcol>
+          <c>v=0</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>o=alice 20519 0 IN IP4 0.0.0.0</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>s=</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>t=0 0</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=ice-ufrag:074c6550</c>
+          <c><xref target="RFC5245"></xref></c>          
+          <c>a=ice-pwd:a28a397a4c3f31747d1ee3474af08a068</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7:70:9d:1f:66:79:a8:07</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=group:BUNDLE m0 m1 </c>
+          <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref> 
+          Alice supports grouping of m=lines under BUNDLE semantics</c>
+          <c>m=audio 54609 RTP/SAVPF 0 109 </c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
+          <c>c= IN IP4 24.23.204.141</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=mid:m0</c>
+          <c><xref target="RFC5888"></xref> Audio m=line part of BUNDLE group 
+          with a unique port number</c>
+          <c>a=rtpmap:0 PCMU/8000</c>
+          <c><xref target="RFC3551"></xref></c>  
+          <c>a=rtpmap:109 opus/48000/2</c>
+          <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
+          <c>a=ptime:20</c>
+          <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
+          <c>a=sendonly</c>
+          <c><xref target="RFC3264"></xref></c>  
+          <c>a=rtcp-mux</c>
+          <c><xref target="RFC5761"></xref></c>      
+          <c>a=ssrc:11111</c>
+          <c><xref target="RFC5576"></xref></c>                   
+          <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 54609 typ host</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=candidate:1 1 UDP  694302207 24.23.204.141 54609 typ srflx raddr 192.168.1.4 rport 54609</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.4 64678 typ host</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=candidate:1 2 UDP  1694302206 24.23.204.141 64678 typ srflx raddr 192.168.1.4 rport 64678</c>
+          <c><xref target="RFC5245"></xref></c>  
+          <c>m=video 0 RTP/SAVPF 98 100 101 103</c>
+          <c>bundle-only video line with port number set to zero</c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
+          <c>c= IN IP4 24.23.204.141</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=mid:m1</c>
+          <c><xref target="RFC5888"></xref> Video m=line part of BUNDLE group</c>
           <c>b=AS:2500</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=rtpmap:98 VP8/90000</c>
@@ -2171,6 +2674,116 @@ Alice->Bob: Offer(Audio:Opus Video:VP8 with 2 resolutions with FEC Streams) bund
           <c><xref target="RFC5956"></xref></c>
           <c>a=fmtp:103 L=5; D=10; repair-window=200000</c>
           <c><xref target="RFC5956"></xref></c>
+          <c>a=ssrc-group:SIMULCAST 12345 78990 </c>
+          <c> Simulcast group </c>
+          <c>a=ssrc-group:FEC-FR 12345 34567 </c>
+          <c><xref target="RFC5888"/> </c>
+          <c>a=ssrc-group:FEC-FR 78990 90887 </c>
+          <c><xref target="RFC5888"/></c>
+          <c>a=ssrc:12345</c>
+          <c><xref target="RFC5576"/></c>
+          <c>a=ssrc:78990</c>
+          <c><xref target="RFC5576"/></c>
+          <c>a=ssrc:34567</c>
+          <c><xref target="RFC5576"/></c>
+          <c>a=ssrc:90887</c>
+          <c><xref target="RFC5576"/></c>
+          <c>a=sendrecv</c>
+          <c><xref target="RFC3264"></xref></c> 
+          <c>a=rtcp-mux</c>
+          <c><xref target="RFC5761"></xref></c> 
+          <c>a=bundle-only</c>
+          <c> Add reference to unified plan when available </c>
+        </texttable> 
+        <texttable anchor="table_12_2" title="5.12 SDP Offer">
+          <ttcol align='left'>SDP Contents </ttcol>
+          <ttcol align='left'>RFC#/Notes</ttcol>
+          <c>v=0</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>o=alice 20519 0 IN IP4 0.0.0.0</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>s=</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>t=0 0</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=ice-ufrag:074c6550</c>
+          <c><xref target="RFC5245"></xref></c>          
+          <c>a=ice-pwd:a28a397a4c3f31747d1ee3474af08a068</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7:70:9d:1f:66:79:a8:07</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=group:BUNDLE m0 m1 </c>
+          <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref> 
+          Alice supports grouping of m=lines under BUNDLE semantics</c>
+          <c>m=audio 54609 RTP/SAVPF 0 109 </c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
+          <c>c= IN IP4 24.23.204.141</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=mid:m0</c>
+          <c><xref target="RFC5888"></xref> Audio m=line part of BUNDLE group 
+          with a unique port number</c>
+          <c>a=rtpmap:0 PCMU/8000</c>
+          <c><xref target="RFC3551"></xref></c>  
+          <c>a=rtpmap:109 opus/48000/2</c>
+          <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
+          <c>a=ptime:20</c>
+          <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
+          <c>a=sendonly</c>
+          <c><xref target="RFC3264"></xref></c>  
+          <c>a=rtcp-mux</c>
+          <c><xref target="RFC5761"></xref></c>
+          <c>a=ssrc:33333</c>
+          <c><xref target="RFC5576"></xref></c>                                      
+          <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 54609 typ host</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=candidate:1 1 UDP  694302207 24.23.204.141 54609 typ srflx raddr 192.168.1.4 rport 54609</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.4 64678 typ host</c>
+          <c><xref target="RFC5245"></xref></c>
+          <c>a=candidate:1 2 UDP  1694302206 24.23.204.141 64678 typ srflx raddr 192.168.1.4 rport 64678</c>
+          <c><xref target="RFC5245"></xref></c>  
+          <c>m=video 54609 RTP/SAVPF 98 100 101 103</c>
+          <c>BUNDLE accepted with Bundle Address identical to audio m=line.</c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
+          <c>c= IN IP4 24.23.204.141</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=mid:m1</c>
+          <c><xref target="RFC5888"></xref> Video m=line part of BUNDLE group</c>
+          <c>b=AS:2500</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=rtpmap:98 VP8/90000</c>
+          <c><xref target="draft-ietf-payload-vp8"></xref></c>
+          <c>a=rtpmap:100 VP8/90000</c>
+          <c><xref target="draft-ietf-payload-vp8"></xref></c>
+          <c>a=rtpmap:101 1d-interleaved-parityfec/90000</c>
+          <c><xref target="RFC5956"></xref></c>
+          <c>a=rtpmap:103 1d-interleaved-parityfec/90000</c>
+          <c><xref target="RFC5956"></xref></c>  
+          <c>a=fmtp:98 max-fr=30;max-fs=8040</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=fmtp:100 max-fr=15;max-fs=1200</c>
+          <c><xref target="RFC4566"></xref></c>
+          <c>a=fmtp:101 L=5; D=10; repair-window=200000</c>
+          <c><xref target="RFC5956"></xref></c>
+          <c>a=fmtp:103 L=5; D=10; repair-window=200000</c>
+          <c><xref target="RFC5956"></xref></c>
+          <c>a=ssrc-group:SIMULCAST 54321 77656 </c>
+          <c> Simulcast group </c>
+          <c>a=ssrc-group:FEC-FR 54321 88776 </c>
+          <c><xref target="RFC5888"/> </c>
+          <c>a=ssrc-group:FEC-FR 77656 12908 </c>
+          <c><xref target="RFC5888"/></c>
+          <c>a=ssrc:54321</c>
+          <c><xref target="RFC5576"/></c>
+          <c>a=ssrc:77656</c>
+          <c><xref target="RFC5576"/></c>
+          <c>a=ssrc:88776</c>
+          <c><xref target="RFC5576"/></c>
+          <c>a=ssrc:12908</c>
+          <c><xref target="RFC5576"/></c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref></c> 
           <c>a=rtcp-mux</c>
@@ -2185,9 +2798,7 @@ Alice->Bob: Offer(Audio:Opus Video:VP8 with 2 resolutions with FEC Streams) bund
     <t>
      In this section, we attempt to provide session descriptions showcasing inter-operability
      between a WebRTC end-point and a Legacy VOIP end-point. The ideas included in here 
-     are not fully baked into the standards and might be controversial in nature. The hope here is
-     to demonstrate a plausible SDP composition to enchance seamless inter-operability between the
-     aforementioned communication systems.
+     are not fully baked into the standards yet.
     </t>
       <section anchor="successful-2way-webrtc-voip"
         title="Successful legacy Interop Fallaback with bundle-only">
@@ -2210,7 +2821,7 @@ title Successful 2-Way WebRTC <-> VOIP Interop
 note right of Alice
 Alice is a multistream capable WebRTC end-point & Bob is behind a legacy VOIP system
 end note
-Alice->Bob: Offer(Audio:Opus Video:2 VP8 Streams) with bundle-only offer
+Alice->Bob: Offer(Audio:Opus Video: 2 VP8, 2 H2.64 Streams) with bundle-only offer
 note right of Alice
 Alice marks both the video streams as bundle-only
 end note
@@ -2222,7 +2833,7 @@ end note
 Alice->Bob: Two-way Opus Audio
 ]]></artwork>
         </figure>
-       <texttable anchor="table_10_3" title="6.1 SDP bundle-only Offer">
+       <texttable anchor="table_13_1" title="6.1 SDP Simulcast bundle-only">
           <ttcol align='left'>SDP Contents </ttcol>
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
@@ -2249,11 +2860,11 @@ Alice->Bob: Two-way Opus Audio
           <c>a=mid:m0</c>
           <c><xref target="RFC5888"></xref> Audio m=line part of BUNDLE group 
           with a unique port number</c>
-          <c>a=msid:ma ta</c>
-          <c>Add appropriate reference when available</c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=rtpmap:0 PCMU/8000</c>
           <c><xref target="RFC3551"></xref></c>  
-          <c>a=rtpmap:109 opus/48000</c>
+          <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
@@ -2275,8 +2886,8 @@ Alice->Bob: Two-way Opus Audio
           <c><xref target="RFC4566"></xref></c>
           <c>a=mid:m1</c>
           <c><xref target="RFC5888"></xref> Video m=line part of BUNDLE group</c>
-          <c>a=msid:ma tb</c>
-          <c>Add appropriate reference when available</c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>a=rtpmap:98 VP8/90000</c>
           <c><xref target="draft-ietf-payload-vp8"></xref></c>
           <c>a=rtpmap:100 VP8/90000</c>
@@ -2309,8 +2920,8 @@ Alice->Bob: Two-way Opus Audio
           <c><xref target="RFC4566"></xref></c>
           <c>a=mid:m2</c>
           <c><xref target="RFC5888"></xref> Video m=line part of BUNDLE group</c>
-          <c>a=msid:ma tc</c>
-          <c>Add appropriate reference when available</c>
+          <c>a=msid:ma tc </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tc) </c>
           <c>a=rtpmap:101 H264/90000</c>
           <c><xref target="RFC3984"></xref></c>
           <c>a=rtpmap:103 H264/90000</c>
@@ -2334,7 +2945,7 @@ Alice->Bob: Two-way Opus Audio
           <c>a=bundle-only</c>
           <c> Add reference to unified plan when available </c> 
         </texttable>
-        <texttable anchor="table_10_4" title="5.8 SDP Anwer">
+        <texttable anchor="table_13_2" title="6.2 SDP Anwer">
           <ttcol align='left'>SDP Contents </ttcol>
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
@@ -2351,20 +2962,16 @@ Alice->Bob: Two-way Opus Audio
           <c><xref target="RFC5245"></xref></c>
           <c>a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7:70:9d:1f:66:79:a8:07</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>m=audio 54609 RTP/SAVPF 0 109 98</c>
+          <c>m=audio 54609 RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=rtpmap:0 PCMU/8000</c>
-          <c><xref target="RFC3551"></xref></c>  
-          <c>a=rtpmap:109 opus/48000</c>
+          <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=sendonly</c>
           <c><xref target="RFC3264"></xref></c>  
-          <c>a=rtcp-mux</c>
-          <c><xref target="RFC5761"></xref></c>                   
           <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 54609 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 1 UDP  694302207 24.23.204.141 54609 typ srflx raddr 192.168.1.4 rport 54609</c>
