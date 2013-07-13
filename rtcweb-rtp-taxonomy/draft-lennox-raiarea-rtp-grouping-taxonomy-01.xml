@@ -1,0 +1,995 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+]>
+<?rfc toc="yes"?>
+<?rfc tocompact="yes"?>
+<?rfc tocdepth="3"?>
+<?rfc tocindent="yes"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes"?>
+<?rfc comments="yes"?>
+<?rfc inline="yes"?>
+<?rfc compact="yes"?>
+<?rfc subcompact="no"?>
+
+<rfc category="info" docName="draft-lennox-raiarea-rtp-grouping-taxonomy-01"
+     ipr="trust200902">
+  <front>
+    <title abbrev="RTP Grouping Taxonomy">A Taxonomy of Grouping Semantics and Mechanisms for Real-Time Transport Protocol (RTP) Sources</title>
+
+    <author fullname="Jonathan Lennox" initials="J." surname="Lennox">
+      <organization abbrev="Vidyo">Vidyo, Inc.</organization>
+
+      <address>
+        <postal>
+          <street>433 Hackensack Avenue</street>
+          <street>Seventh Floor</street>
+          <city>Hackensack</city>
+          <region>NJ</region>
+          <code>07601</code>
+          <country>US</country>
+        </postal>
+
+        <email>jonathan@vidyo.com</email>
+      </address>
+    </author>
+
+    <author fullname="Kevin Gross" initials="K." surname="Gross">
+      <organization abbrev="AVA">AVA Networks, LLC</organization>
+
+      <address>
+        <postal>
+          <street/>
+          <city>Boulder</city>
+          <region>CO</region>
+          <country>US</country>
+        </postal>
+
+        <email>kevin.gross@avanw.com</email>
+      </address>
+    </author>
+    
+    <author fullname="Suhas Nandakumar" initials="S" surname="Nandakumar">
+	  <organization>Cisco Systems</organization>
+
+	  <address>
+		<postal>
+		  <street>170 West Tasman Drive</street>
+		  <city>San Jose</city>
+		  <region>CA</region>
+		  <code>95134</code>
+		  <country>US</country>
+		</postal>
+
+		<email>snandaku@cisco.com</email>
+	  </address>
+	</author>
+
+    
+    <author fullname="Gonzalo Salgueiro" initials="G" surname="Salgueiro">
+      <organization>Cisco Systems</organization>
+
+      <address>
+        <postal>
+          <street>7200-12 Kit Creek Road</street>
+          <city>Research Triangle Park</city>
+          <region>NC</region>
+          <code>27709</code>
+          <country>US</country>
+        </postal>
+
+        <email>gsalguei@cisco.com</email>
+      </address>
+    </author>
+    
+    <author fullname="Bo Burman" initials="B." surname="Burman">
+      <organization>Ericsson</organization>
+      
+      <address>
+        <postal>
+          <street>Farogatan 6</street>
+          <city>SE-164 80 Kista</city>
+          <country>Sweden</country>
+        </postal>
+          
+        <phone>+46 10 714 13 11</phone>
+        <email>bo.burman@ericsson.com</email>
+      </address>
+    </author>
+    
+
+
+	<!-- Add more authors here! -->
+
+    <date year="2013" />
+    
+    <area>Real Time Applications and Infrastructure (RAI)</area>
+
+    <keyword>I-D</keyword>
+
+    <keyword>Internet-Draft</keyword>
+
+    <!-- TODO: more keywords -->
+
+    <abstract>
+      <t>The terminology about, and associations among, Real-Time Transport Protocol (RTP) sources can be complex and somewhat opaque. This document describes a number of existing and proposed relationships among RTP sources, and attempts to define common terminology for discussing protocol entities and their relationships.</t>
+
+	  <t>This document is still very rough, but is submitted in the hopes of making future discussion productive.</t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section anchor="introduction" title="Introduction">
+	  <t>
+	    The existing taxonomy of sources in RTP is often regarded as confusing and inconsistent.  Consequently, a deep understanding of how the different terms relate to each other becomes a real challenge. Frequently cited examples of this confusion are (1) how different protocols that make use of RTP use the same terms to signify different things and (2) how the complexities addressed at one layer are often glossed over or ignored at another.
+	  </t>
+
+	  <t>
+	   This document attempts to provide some clarity by reviewing the semantics of 
+	   various aspects of sources in RTP. As an organizing mechanism, it approaches this
+	   by describing various ways that RTP sources can be grouped and associated together.
+	  </t>
+    </section>
+    
+    <section title="Concepts">
+      <t>
+        This section defines concepts that serve to identify various
+        components in a given RTP usage. For each concept an attempt is 
+        made to list any alternate definitions and usages that co-exist today
+        along with various characteristics that further describes the concept.      
+      </t>
+      <t hangText="Note">
+         All references to ControLling mUltiple streams for tElepresence (CLUE) in this document map to <xref target="I-D.ietf-clue-framework"/> and all references to Web Real-Time Communications (WebRTC) map to <xref target="I-D.ietf-rtcweb-overview"/>.
+      </t>
+      <section anchor="endpoint" title="End Point">
+        <t>
+           A single entity sending or receiving RTP packets.
+           It may be decomposed into several functional blocks, but as long as it
+           behaves as a single RTP stack entity it is classified as a single
+           "End Point".
+         </t>
+         <section title="Alternate Usages">
+           <t>
+             The CLUE Working Group (WG) uses the terms "Media Provider" and "Media Consumer" to describes aspects of End Point pertaining to sending and receiving functionalities.
+           </t>
+         </section>
+         <section title="Characteristics">
+           <t>
+             End Points are identified via Canonical Names (CNAMEs) <xref target="RFC3550"/>, which are intended to be globally unique and stable for the duration of a Communication Session (See <xref target="commsession"/> for a definition of this term).
+          </t>
+         </section>
+      </section>     
+      <section anchor="capturedevice" title="Capture Device">
+	    <t>
+	      The physical source of stream of media data of one type such as camera or
+	      microphone.
+	    </t> 
+	     <section title="Alternate Usages">
+	       <t>
+	         The CLUE WG  uses the term  "Capture Device" to identify a physical 
+	         capture device.
+	       </t>
+	       <t>
+	         WebRTC WG uses the term "Recording Device" to refer to the locally available 
+	         capture devices in an end-system.
+	       </t>
+	     </section>
+	     <section title="Charateristics">
+	       <t>
+	        <list style="symbols">
+            <t> 
+             A Capture Device is identified either by hardware/manufacturer ID
+             or via a session-scoped device identifier as mandated by the application
+             usage.
+            </t>    
+            <t> 
+             A Capture Device always corresponds to a Media Source (See 
+             <xref target="mediasource"/> for a definition of this term) but vice-versa might not always be true. For example, in the cases of output from a media production function (i.e., an audio mixer) or a video editing function which can represent data from several Media Sources.
+            </t>  
+            </list>
+           </t>
+	     </section> 
+	  </section>
+      <section anchor="mediasource" title="Media Source">
+	    <t> 
+	       A Media Source logically defines the source of a raw stream of media data as generated either by a single capture device or by a conceptual source. A Media Source represents an Audio Source or a Video Source.
+	    </t>
+	    <section title="Alternate Usages">
+	      <t>
+	       The CLUE WG uses the term "Media Capture" for this purpose. A CLUE Media Capture is identified via indexed notation. The terms Audio Capture and Video Capture are used to identify Audio Sources and Video Sources respectively. Concepts such as "Capture Scene", "Capture Scene Entry" and "Capture" provide a flexible framework to represent media captured spanning spatial regions.
+	      </t>
+	      <t>
+	       The WebRTC WG defines the term "RtcMediaStreamTrack" to refer to a Media Source.  An "RtcMediaStreamTrack" is identified by the ID attribute on it.
+	      </t>
+	      <t>
+	       Typically a Media Source is mapped to a single m=line via the Session Description Protocol (SDP) <xref target="RFC4566"/> unless mechanisms such as Source-Specific attributes are in place <xref target="RFC5576"/>. In the latter cases, an m=line can represent either multiple Media Sources or multiple Media Streams (See <xref target="mediastream"/> for a definition of this term).
+	      </t>
+	    </section>
+	    <section title="Characteristics">
+	      <t>
+	       <list style="symbols">
+           <t> 
+            A Media Source represents a real-time source of raw stream of audio or 
+            video media data.
+           </t>
+           <t> 
+            At any point, it can represent a physical capture source or conceptual source.
+           </t>
+           <t>
+            Typically raw media from a Media Source is compressed via the application of an appropriate encoding mechanism, thus creating an RTP payload for Media Streams (See <xref target="mediastream"/> for a definition of this term).
+           </t>
+           <t>
+            Multiple transformations can be applied to the data from a Media Source, thus 
+            creating several Media Streams.
+           </t>  
+           <t>
+            Some notable transformations are described in <xref target="equivalence"/>.
+           </t>
+           </list>
+         </t>
+	    </section>
+	  </section>
+    
+      <section anchor="mediastream" title="Media Stream">
+	    <t>
+	       Media from a Media Source is encoded and packetized to produce one or
+	       more Media Streams representing a sequence of RTP packets. 
+	    </t>
+	    <section title="Alternate Usages">
+	      <t>
+	       The term "Stream" is used by the CLUE WG to define a encoded Media Source sent 
+	       via RTP. "Capture Encoding", "Encoding Groups" are defined to capture specific
+	       details of the encoding scheme.
+	      </t>
+	      <t>
+	       RFC3550 <xref target="RFC3550"/> uses the term Source for this purpose.
+	      </t>
+	      <t>
+	       The equivalent mapping of Media Stream in SDP <xref target="RFC4566"/> is 
+	       defined per usage. For example, each m=line can describe one Media Stream and
+	       hence one Media Source OR a single m=line can describe properties for 
+	       multiple Media Streams (via <xref target="RFC5576"/> mechanisms for example).
+	       </t>
+	    </section>
+	    <section title="Characeristics">
+	     <t>
+	      <list style="symbols">
+          <t> 
+           Each Media Stream is identified by a unique Synchronization source (SSRC) <xref target="RFC3550"/> that is carried in every RTP and Real-time Transport Control Protocol (RTCP) packet header.
+          </t>
+          <t>
+           At any given point, an Media Stream can have one and only SSRC.
+          </t>
+          <t>
+           Each Media Stream defines a unique RTP sequence numbering and timing space.
+          </t>
+          <t> 
+           Several Media Streams could potentially map to a single Media Source via the source transformations (See <xref target="equivalence"/>). 
+          </t>
+          <t>
+           Several Media Streams can be carried over a single RTP Session. 
+          </t>
+         </list>
+         </t>  
+	    </section>
+	  </section>
+	  <section anchor="provider" title="Media Provider">
+	    <t>
+	      A Media Provider is a logical component within the RTP Stack that is responsible
+          for encoding the media data from one or more Media Sources to generate
+          RTP Payload for the outbound Media Streams.
+	    </t>
+	    <section title="Alternate Usages">
+	    <t>
+	      Within the SDP usage, an m=line describes the necessary configuration required
+	      for encoding purposes.
+	    </t> 
+	    <t>
+	      CLUE's "Capture Encoding" provides specific encoding configuration for this
+	      purpose.
+	    </t>
+	    <t>
+	      WebRTC WG uses the term "RtcMediaStreamTrack" to qualify as source of the 
+	      media data that is encoded via the Media Provider.
+	    </t>
+	    </section>
+	    <section title="Characteristics">
+	     <t>
+	      <list style="symbols">
+	      <t>
+           A Media Source can be multiply encoded by a given Media Provider on-the-fly by allowing various encoded representations.
+          </t>
+         </list>
+        </t>
+	    </section>
+	  </section>
+	  <section anchor="rtpsession" title="RTP Session">
+	    <t>  
+	     An RTP session is an association among a group of participants
+	     communicating with RTP. It is a group communications channel which can 
+	     potentially carry a number of Media Streams. Within an RTP session, every
+	     participant finds out meta-data and control information (over
+	     RTCP) about all the Media Streams in the RTP session. The bandwidth
+	     of the RTCP control channel is shared within an RTP Session.
+	    </t>
+	    <section title="Alternate Usages">
+	     <t>
+	      Within the context of SDP a singe m=line can map to a single RTP Session or 
+	      multiple m=lines can map to a single RTP Session. 
+	      The latter is enabled via multiplexing schemes such as BUNDLE
+	      <xref target="I-D.ietf-mmusic-sdp-bundle-negotiation"/>, for example,
+	      that allows mapping of multiple m=lines to a single RTP Session.
+	     </t>
+	    </section>
+	    <section title="Characteristics">
+	     <t>
+	      <list style="symbols">
+	      <t>
+	        Typically an RTP Session can carry one ore more Media Streams, the latter
+	        is also termed "SSRC Multiplexing".
+	      </t>
+          <t> 
+            Each RTP Session is carried by a single underlying Media Transport unless 
+            multiple RTP sessions are multiplexed over a single Transport Flow. Such a scheme is alternatively called "Session Multiplexing" in the RTP context <xref target="I-D.westerlund-avtcore-transport-multiplexing"></xref>.
+          </t>
+          <t>
+             An RTP Session shares a single SSRC space as defined in RFC3550 <xref target="RFC3550"/>. That is, those End Points can see an SSRC identifier transmitted by any of the other End Points. An End Point can receive an SSRC either as SSRC or as a Contributing source (CSRC) in RTP and RTCP packets, as defined by the endpoints' network interconnection topology.
+          </t>
+          <t> 
+             Multiple RTP Sessions can be related to one another via mechanisms defined
+             in <xref target="relationships"/>.
+          </t>
+         </list>
+         </t>
+	   </section>
+	  </section>
+	  <section anchor="mediatransport" title="Media Transport">
+	    <t> 
+	     A Media Transport defines an end-to-end transport association for carrying one 
+	     or more RTP Sessions. The combination of a network address and port
+         uniquely identifies such a transport association, for example an IP
+         address and a UDP port.
+	    </t>
+	    <section title="Characteristics">
+	     <t>
+	      <list style="symbols">
+          <t>
+            Media Transport transmits RTP Packets from a source transport address to a 
+            destination transport address.
+          </t>
+          <t>
+            RTP may depend upon the lower-layer protocol to provide mechanism such as ports to multiplex the RTP and RTCP packets of an RTP Session.
+          </t>
+          </list>
+         </t>  
+	    </section>
+	  </section>  
+	  <section anchor="renderdevice" title="Rendering Device">
+	    <t> Represents a physical rendering device such display or speaker.</t>
+	    <section title="Characteristics">
+	     <t>
+	       <list style="symbols">
+	       <t>
+            An End Point can potentially have multiple rendering devices of each type.
+           </t>
+           <t>
+            Incoming Media Streams are decoded by one or more Media Renderers to provide a 
+            representation suitable for rendering the media data over one or more 
+            Rendering Devices, as defined by the application usage or system-wide 
+            configuration.
+           </t>
+           </list>
+         </t>
+	    </section>
+	  </section>
+	  <section anchor="renderer" title="Media Renderer">
+	     <t>
+	      A Media Renderer is a logical component within the RTP Stack that is responsible
+          for decoding the RTP Payload within the incoming Media Streams to generate
+          media data suitable for eventual rendering.
+	    </t>
+	    <section title="Alternate Usages">
+	    <t>
+	      Within the context of SDP, an m=line describes the necessary configuration required to decode either one or more incoming Media Streams. 
+	    </t> 
+	    <t>
+	      The WebRTC WG uses the term "RtcMediaStreamTrack" to qualify the media data decoded via the Media Renderer corresponding to the incoming Media Stream.
+	    </t>
+	    </section>
+	    <section title="Characteristics">
+	     <t>
+	      <list style="symbols">
+	      <t>
+            The output from the Media Renderer is usually rendered to a Rendering Device
+            via appropriate mechanisms as explained in <xref target="renderdevice"/>
+           </t> 
+	      <t>
+            Incoming Media Streams decoded by the Media Renderer are typically identified
+            via the SSRC.
+          </t>
+         </list>
+        </t>
+	    </section>
+	  </section>
+	  <section title="Participant">
+        <t>
+         A participant is an entity reachable by a single signaling address,
+         and is thus related more to the signaling context than to the media
+         context.
+        </t>
+
+        <section title="Characteristics">
+          <t><list style="symbols">
+              <t>
+               A single signaling-addressable entity, using an
+               application-specific signaling address space, for example a SIP
+               URI.
+               </t>
+
+              <t>
+               A participant can have several associated transport flows,
+               including several separate local transport addresses for those
+               transport flows.
+               </t>
+
+              <t>A participant can have several multimedia sessions.</t>
+            </list></t>
+        </section>
+      </section>
+	  <section anchor="multimediasession" title="Multimedia Session">
+	    <t> 
+	    A multimedia session is an association among a group of participants
+	    engaged in the conversation via one or more RTP Sessions. It defines
+	    logical relationships among Media Sources that appear in multiple
+	    RTP Sessions.
+	    </t>
+	    <section title="Alternate Usages">
+	    <t>
+	     RFC4566 <xref target="RFC4566"/>  defines a multimedia session as a set of 
+	     multimedia senders and receivers and the data streams flowing from 
+	     senders to receivers.
+	    </t>
+	    <t>
+	     RFC3550 <xref target="RFC3550"/> defines it as set of concurrent RTP sessions 
+	     among a common group of participants.  For example, a videoconference
+         (which is a multimedia session) may contain an audio RTP session
+         and a video RTP session.
+	    </t>
+	    </section>
+	    <section title="Characteristics">
+	     <t>
+	      <list style="symbols">
+          <t> 
+           Participants in RTP multimedia sessions are identified via mechanisms
+           such as RTCP CNAME or other application level identifiers as appropriate.</t>
+          <t> 
+           A multimedia session can be composed of several parallel RTP Sessions with
+           potentially multiple Media Streams per RTP Session.
+          </t>
+          <t> 
+           Each participant in a multimedia sessions can have multitude of  
+           Media Captures and Media Rendering devices.
+          </t>     
+         </list>
+        </t>
+	    </section>
+	  </section>  
+      <section anchor="commsession" title="Communication Session">
+	    <t>
+	     A communication session is an association among group of
+        participants communicating with each other via a set of multimedia
+        sessions.
+        </t>
+        <section title="Alternate Usages">
+          <t>
+           The Session Description Protocol RFC4566 <xref target="RFC4566"/>defines a multimedia session as a set of multimedia senders and receivers and the data streams flowing from senders to receivers. In that definition it is however not clear if a multimedia session includes both the sender's and the receiver's view of the same RTP Stream.
+          </t>
+        </section>
+        <section title="Characteristics">
+          <t>
+           <list style="symbols">
+          <t>
+           Each participant in a Communication Session is identified via
+           an application-specific signaling address.
+           </t>
+           <t>
+            A Communication Session is composed of at least one
+            multimedia session per participant, involving one or more
+            parallel RTP Sessions with potentially multiple Media Streams per
+            RTP Session.
+           </t>
+           </list>
+           For example, in a full mesh communication, the
+           Communication Session consists of a set of separate Multimedia
+           Sessions between each pair of Participants. Another example is a
+           centralized conference, where the Communication Session consists of
+           a set of Multimedia Sessions between each Participant and the
+           conference handler.
+         </t>
+        </section>
+	  </section>  	  
+    </section>
+    
+    <section anchor="relationships" title="Relationships">
+      <t>
+       This section provides various relationships that can co-exist between the 
+       aforementioned concepts in a given RTP usage. Using Unified Modeling Language (UML) class diagrams <xref target="UML"/>, <xref target="fig-media-source"/> below depicts general relations between a Media Source, its Media Provider(s) and the resulting Media Stream(s).
+      </t>
+      <t>
+      <list style="empty">
+        <t>
+         Note: The RTCP Stream related to the RTP Stream is not shown in
+         the figure.
+         </t>
+       </list>
+      </t>
+      <figure anchor="fig-media-source" title="Media Source Relations" align="center">
+        <artwork align="center"><![CDATA[+--------------+  <<uses>>  +-------------------------+
+| Media Source |- - - - - ->| Synchronization Context |
++--------------+            +-------------------------+
+      < > 1..*
+       |
+       | 0..*
++--------------+
+|              |<>-+ 0..*
+|    Media     |
+|   Provider   |
+|              |---+ 0..*
++--------------+
+      < > 1
+       |
+       | 0..*
++----------------+ 0..*     1 +-------------+
+|  Media Stream  |----------<>| RTP Session |
++----------------+            +-------------+
+]]></artwork>
+      </figure>
+
+      <t>
+       Media sources can have a large variety of relationships
+       among them.  These relationships can apply both between sources
+       within a single RTP Session, and between Media Sources that occur in 
+       multiple RTP Session.
+       Ways of relating them typically involve groups: a
+       set of Media Sources has some relationship that applies to
+       all those in the group, and no others.  (Relationships that involve
+       arbitrary non-grouping associations among Media sources,
+       such that e.g., A relates to B and B to C, but A and C are unrelated,
+       are uncommon if not nonexistent.)
+       In many cases, the semantics of groups are not simply that the
+       the members form an undifferentiated group, but rather that members of
+       the group have certain roles.
+      </t> 
+      <section anchor="syncontext" title="Synchronization Context">
+        <t>
+        A synchronization context defines requirement on a strong timing
+        relationship between the related entities, typically requiring
+        alignment of clock sources. Such relationship can be identified in
+        multiple ways as listed below. A single Media Source can only belong
+        to a single Synchronization Context, since it is assumed that a single
+        Media Source can only have a single media clock and requiring
+        alignment to several Synchronization Contexts will effectively merge
+        those into a single Synchronization Context.
+        </t>
+
+        <t>
+         A single Multimedia session can contain media from one or more
+        Synchronization Contexts. An example of that is a Multimedia Session
+        containing one set of audio and video for communication purposes
+        belonging to one Synchronization context, and another set of audio and
+        video for presentation purposes (like playing a video file) that has
+        no strong timing relationship and need not be strictly synchronized
+        with the audio and video used for communication.</t>
+          <section title="RTCP CNAME">
+            <t> 
+              RFC3550 <xref target="RFC3550"/> describes Inter-media synchronization
+              between RTP Sessions based on RTCP CNAME, RTP and Network Time Protocol (NTP) <xref target="RFC5905"/> timestamps.  
+            </t>
+          </section>
+          <section title="Clock Source Signaling">
+            <t> 
+              <xref target="I-D.ietf-avtcore-clksrc"/> provides a mechanism to signal
+              the clock source in SDP, thus allowing a synchronized context to be defined.
+            </t>
+          </section>
+          <section title="CLUE Scenes">
+            <t>
+              In CLUE "Capture Scene", "Capture Scene Entry" and "Captures" define an 
+              implied synchronization context.
+            </t>
+          </section>
+          <section  title="Implicitly via RtcMediaStream">
+            <t>
+             The WebRTC WG defines "RtcMediaStream" with one or more "RtcMediaStreamTracks".
+             All tracks in a "RTCMediaStream" are intended to be synchronized when 
+             rendered.
+            </t>
+          </section>
+          <section title="Explicitly via SDP Mechanisms">
+            <t>
+             RFC5888 <xref target="RFC5888"/> defines m=line grouping mechanism called
+             "Lip Synchronization (LS)" for establishing the synchronization requirement
+             across m=lines when they map to individual sources.
+            </t>
+             <t> 
+             RFC5576 <xref target="RFC5576"/> extends the above mechanism when multiple
+             media sources are described by a single m=line.
+            </t>
+          </section>
+      </section>
+      <section anchor="containment" title="Containment Context">
+       <t> A containment relationship allows composing of multiple concepts into a
+           larger concept.
+       </t>
+       <section anchor="ssrcmux" title="Media Stream Multiplexing">
+        <t>
+         Multiple Media Streams can be contained within a single RTP Session via unique
+         SSRC per Media Stream. <xref target="I-D.ietf-mmusic-sdp-bundle-negotiation"/>
+         provides SDP based signaling mechanism to enable this across several m=lines.
+        </t>
+        <t>
+          RFC5576 <xref target="RFC5576"/> enables the same for multiple
+          Media Sources described in a single m=line.
+        </t>   
+       </section>
+       <section anchor="sessionmux" title="RTP Session Multiplexing">
+         <t>
+          <xref target="I-D.westerlund-avtcore-transport-multiplexing"/>, for example, describes a mechanism that allow several RTP Sessions to be carried over a single underlying Media Transport.
+         </t>
+       </section>
+       <section anchor="rtcpeerconnection" title="Multiple Media Sources in a WebRTC PeerConnection">
+         <t>
+           The WebRTC WG defines a containment object named "RTCPeerConnection" that can
+           potentially contain several Media Sources mapped to a single RTP Session or
+           spread across several RTP Sessions.
+        </t>
+       </section>    
+      </section>
+      <section anchor="equivalence" title="Equivalence Context">
+         <t> 
+            In this relationship different instances of a concept are treated to be
+            equivalent for the purposes of relating them to the Media Source. 
+          </t>
+          <t>
+           <xref target="fig-rtp-stream"/> below depicts in UML notation the
+           general relation between a Media Provider and its Media Stream(s),
+           including the Media Stream specializations Source Stream and RTP Repair
+        Stream.</t>
+
+        <figure anchor="fig-rtp-stream" title="Media Stream Relations" align="center">
+          <artwork align="center"><![CDATA[              +--------------+
+              |              |<>-+ 0..*
+              |    Media     |
+              |   Provider   |
+              |              |---+ 0..*
+              +--------------+
+                    < > 1
+                     |
+                     | 0..*
+              +--------------+ 0..*  1 +-----------------+
+              | Media Stream |<>-------| Media Transport |
+              +--------------+         +-----------------+
+                /\        /\
+               +--+      +--+
+                |          |
+        +-------+          +-------+
+        |                          |
++--------------+            +--------------+ 1
+|    Primary   |<>----------|    Repair    |<>-+
+|    Stream    | 1..*  0..* |    Stream    |---+
++--------------+            +--------------+ 0..*
+
+
+]]></artwork>
+        </figure>
+
+        <t>
+         This relation can in combination with <xref
+         target="fig-media-source"/> be used to achieve a set of
+         functionalities, described below.
+        </t>
+        <section anchor="simulcast" title="Simulcast">
+	      <t>
+	       A Media Source represented as multiple independent Encodings
+           constitutes a simulcast of that Media Source. The figure below
+           represents an example of a Media Source that is encoded into three
+           separate simulcast streams that are in turn sent on the same
+           transport flow.
+         </t>
+
+          <figure anchor="fig-sim" title="Example of Media Source Simulcast" align="center">
+            <artwork align="center"><![CDATA[                    +----------------+
+                    |  Media Source  |
+                    +----------------+
+                     < >    < >    < >
+                      |      |      |
+         +------------+      |      +--------------+
+         |                   |                     |
++----------------+   +----------------+   +----------------+
+| Media Provider |   | Media Provider |   | Media Provider |
++----------------+   +----------------+   +----------------+
+       < >                  < >                   < >
+        |                    |                     |
+        |                    |                     |
++----------------+   +----------------+   +----------------+
+|  Media Stream  |   |  Media Stream  |   |  Media Stream  |
++----------------+   +----------------+   +----------------+
+       < >                  < >                   < >
+        |                    |                     |
+        +---------------+    |    +----------------+
+                        |    |    |
+                   +-------------------+
+                   |  Media Transport  |
+                   +-------------------+
+]]></artwork>
+          </figure>
+	      </section>
+	      <section anchor="svc" title="Layered MultiStream Transmission">
+	      <t>
+	       Multi-stream transmission (MST) is a mechanism by which different
+           portions of a layered encoding of a media stream are sent using
+           separate Media Streams (sometimes in separate RTP sessions).
+           MSTs are useful for receiver control of layered media.
+          </t>
+          <t>
+           A Media Source represented as multiple dependent Encodings
+           constitutes a Media Source that has layered dependency. The figure
+           below represents an example of a Media Source that is encoded into
+           three dependent layers, where two layers are sent on the same
+           transport flow and the third layer is sent on a separate transport
+           flow.
+          </t>
+
+          <figure anchor="fig-ddp"
+                  title="Example of Media Source Layered Dependency" align="center">
+            <artwork align="center"><![CDATA[                    +----------------+
+                    |  Media Source  |
+                    +----------------+
+                      < >   < >   < >
+                       |     |     |
+        +--------------+     |     +--------------+
+        |                    |                    |
++----------------+   +----------------+   +---------------+
+| Media Provider |<>-| Media Provider |<>-| Media Provider|
++----------------+   +----------------+   +---------------+
+       < >                  < >                  < >
+        |                    |                    |
+        |                    |                    |
++----------------+   +----------------+   +----------------+
+|  Media Stream  |   |  Media Stream  |   |  Media Stream  |
++----------------+   +----------------+   +----------------+
+      < >                  < >                   < >
+       |                    |                     |
+       +------+      +------+                     |
+              |      |                            |
+         +-----------------+              +-----------------+
+         | Media Transport |              | Media Transport |
+         +-----------------+              +-----------------+
+]]></artwork>
+          </figure>
+	      </section>
+	      <section anchor="repair" title="Robustness and Repair">
+	      <t>
+	       A Media Source may be protected by repair streams during
+           transport. Several approaches listed below can achieve the
+           same result
+	       <list style="symbols">
+           <t>Duplication of the original Media Stream</t>
+           <t>Duplication of the original Media Stream with a time offset,</t>
+           <t>forward error correction (FEC) techniques, and.</t>
+           <t>retransmission of lost packets (either globally or selectively).</t>
+           </list>
+          </t>
+
+	      <t>
+            The figure below represents an example where a Media Source is protected by an RTX
+           flow. In this example the primary Media Stream and the RTP RTX Stream
+           share the same Media Transport.
+          </t>
+
+          <figure anchor="fig-rtx"
+                  title="Example of Media Source Retransmission Flows" align="center">
+            <artwork align="center"><![CDATA[+----------------+
+|  Media Source  |
++----------------+
+       < >
+        |
++----------------+
+| Media Provider |
++----------------+
+       < >
+        |
++---------------+   +-----------+
+| Primary Media |<>-| RTX Media |
+|    Stream     |   |  Stream   |
++---------------+   +-----------+
+       < >               < >
+        |                 |
+        +------+   +------+
+               |   |
+        +-----------------+
+        | Media Transport |
+        +-----------------+
+]]></artwork>
+          </figure>
+          <t>
+           The figure below represents an example where two Media Sources are protected
+           by individual FEC flows as well as one additional FEC flow that protects the 
+           set of both Media Sources (a FEC group). There are several possible ways to
+           map those Media Streams to one or more Media Transport, but that is omitted 
+           from the figure for clarity.
+           </t>
+
+          <figure anchor="fig-fec" title="Example of Media Source FEC Flows" align="center">
+            <artwork align="center"><![CDATA[+----------+                                         +----------+
+|   Media  |                                         |  Media   |
+|  Source  |                                         |  Source  |
++----------+                                         +----------+
+    < >                                                  < >
+     |                                                    |
++----------+                                         +----------+
+|  Media   |                                         |  Media   |
+| Provider |                                         | Provider |
++----------+                                         +----------+
+    < >  +-------------------+    +-------------------+  < > 
+     |   |                   |    |                   |   |
+     |   |                  < >  < >                  |   |
++---------+   +--------+   +--------+   +--------+   +---------+
+| Primary |<>-|  RTP   |-<>|  RTP   |<>-|  RTP   |-<>| Primary |
+|  Media  |   |  FEC   |   |  FEC   |   |  FEC   |   |  Media  |
+| Stream  |   | Stream |   | Stream |   | Stream |   |  Stream |
++---------+   +--------+   +--------+   +--------+   +---------+
+]]></artwork>
+          </figure>
+          </section>
+		   <section anchor="fid" title="SDP FID Semantics">
+	       <t>
+             RFC5888 <xref target="RFC5888"/> defines m=line grouping mechanism called
+             "FID" for establishing the equivalence of Media Streams across
+             the m=lines under grouping.
+            </t>
+             <t> 
+             RFC5576 <xref target="RFC5576"/> extends the above mechanism when multiple
+             media sources are described by a single m=line.
+            </t>
+		  </section>
+	  </section>
+	  
+	  <section title="Session Context">
+        <t>
+         There are different ways to construct a Communication Session. The
+         general relation in UML notation between a Communication Session,
+         Participants, Multimedia Sessions and RTP Sessions is outlined
+         below.
+        </t>
+
+        <figure anchor="fig-sessions" title="Session Relations" align="center">
+          <artwork align="center"><![CDATA[               +---------------+
+               | Communication |
+               |    Session    |
+               +---------------+
+            0..* < >       < > 1..*
+                  |         |
+       +----------+         +----------+
+  1..* |                             | 1..*
++-------------+ 1     0..* +--------------------+
+| Participant |<>--------->| Multimedia Session |
++-------------+            +--------------------+
+      < > 1                         < > 1
+       |                             | 0..*
+       |                      +-------------+
+       |                      | RTP Session |
+       |                      +-------------+
+       |                            < > 1
+       | 0..*                        | 0..*
++----------------+ 1    0..* +--------------+
+| Transport Flow |---------<>| Media Stream |
++----------------+           +--------------+
+
+]]></artwork>
+        </figure>
+
+        <t>
+          Several different flavors of Session can be possible as listed
+          <list>
+           <t> Point-to-Point Session </t>
+           <t> Full Mesh Session </t>
+           <t> Centralized Conference Session </t>
+          </list>
+         </t>
+      </section>
+    </section>
+    <section anchor="security" title="Security Considerations">
+	  <t>This document simply tries to clarify the confusion prevalent in RTP taxonomy because of inconsistent usage by multiple technologies and protocols making use of the RTP protocol.  It does not introduce any new security considerations beyond those already well documented in the RTP protocol <xref target="RFC3550"/> and each of the many respective specifications of the various protocols making use of it.</t>
+
+	  <t>Hopefully having a well-defined common terminology and understanding of the complexities of the RTP architecture will help lead us to better standards, avoiding security problems.</t>
+    </section>
+    
+    <section title="Acknowledgement">
+      <t>
+      This document has many concepts borrowed from several documents such as WebRTC <xref target="I-D.ietf-rtcweb-overview"/>, CLUE <xref target="I-D.ietf-clue-framework"/>, Multiplexing Architecture <xref target="I-D.westerlund-avtcore-transport-multiplexing"></xref>. The authors would like to thank all the authors of each of those documents.
+      </t>
+      <t>The authors would also like to acknowledge the insights, guidance and contributions of Magnus Westerlund, Roni Even, Colin Perkins, Keith Drage, and Harald Alvestrand.
+       </t> 
+    </section>
+
+    <section title="Open Issues">
+	  <t>Much of the terminology is still a matter of dispute.</t>
+
+	  <t>It might be useful to distinguish between a single endpoint's view of a
+	  source, or RTP session, or multimedia session, versus the full
+	  set of sessions and every endpoint that's communicating in them,
+	  with the signaling that established them.</t> 
+
+	  <t>(Sure to be many more...)</t>
+    </section>
+
+    <section anchor="iana" title="IANA Considerations">
+
+	  <t>This document makes no request of IANA.</t>
+
+	</section>
+  </middle>
+
+  <back>
+    
+    <references title="Normative References">
+          
+	  <?rfc include="reference.RFC.3550"?> 
+	  
+      <reference anchor="UML">
+        <front>
+          <title>OMG Unified Modeling Language (OMG UML), Superstructure, V2.2</title>
+          <author>
+            <organization abbrev="OMG">Object Management Group</organization>
+          </author>
+          <date month="February" year="2009"/>
+        </front>
+        <seriesInfo name="OMG" value="formal/2009-02-02"/>
+        <format type="PDF" target="http://www.omg.org/spec/UML/2.2/Superstructure/PDF/"/>
+      </reference>
+
+    </references>
+
+    <references title="Informative References">
+	  
+	  <?rfc include="reference.RFC.3264"?>
+	  
+	  <?rfc include="reference.RFC.4566"?>
+
+	  <?rfc include="reference.RFC.6222"?>
+
+      <?rfc include="reference.RFC.5576"?>
+	  
+	  <?rfc include="reference.RFC.5888"?>
+	  
+	  <?rfc include="reference.RFC.5905"?>
+	  
+	  <?rfc include="reference.I-D.ietf-clue-framework"?>
+
+	  <?rfc include="reference.I-D.ietf-rtcweb-overview"?>
+	  
+	  <?rfc include="reference.I-D.ietf-mmusic-sdp-bundle-negotiation"?>
+	  
+	  <?rfc include="reference.I-D.ietf-avtcore-clksrc"?>
+	  
+      <?rfc include="reference.I-D.westerlund-avtcore-transport-multiplexing"?>
+
+    </references>
+
+	
+
+    <section title="Changes From Earlier Versions">
+      <t>NOTE TO RFC EDITOR: Please remove this section prior to publication.</t>
+    
+     <section title="Changes From Draft -00">
+        <t><list style="symbols">
+            <t>Too many to list</t>
+            <t>Added new authors </t>
+            <t>Updated content organization and presentation</t>
+        </list></t>
+      </section>
+    </section>
+    
+  </back>
+</rfc>
