@@ -57,7 +57,7 @@
       </address>
     </author>
 
-    <date day="23" month="February" year="2013" />
+    <date day="12" month="July" year="2013" />
 
     <area>RAI</area>
 
@@ -280,9 +280,10 @@ end note
           <c><xref target="draft-ietf-payload-rtp-opus"></xref> - Opus Codec 48khz, 2 channels</c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref> - Opus packetization of 20ms</c>
-          <c>a=rtpmap:98 iLBC/8000
-             a=fmtp:98 mode=20</c>
+          <c>a=rtpmap:98 iLBC/8000 </c>
           <c><xref target="RFC3952"></xref> - Internet Low Bitrate Codec</c>
+          <c>a=fmtp:98 mode=20</c>
+          <c><xref target="RFC3952"></xref> </c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref> - Alice can send and recv audio</c>  
           <c>a=rtcp-mux</c>
@@ -517,9 +518,10 @@ Alice->Bob: Two-way Opus Audio and VP8 Video
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
-          <c>a=rtpmap:98 iLBC/8000
-            a=fmtp:98 mode=20</c>
-          <c><xref target="RFC3952"></xref></c>
+          <c>a=rtpmap:98 iLBC/8000 </c>
+          <c><xref target="RFC3952"></xref> - Internet Low Bitrate Codec</c>
+          <c>a=fmtp:98 mode=20</c>
+          <c><xref target="RFC3952"></xref> </c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref></c>  
           <c>a=rtcp-mux</c>
