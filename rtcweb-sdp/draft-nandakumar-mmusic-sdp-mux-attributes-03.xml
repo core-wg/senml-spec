@@ -1510,60 +1510,72 @@
 
       <section title="RFC3108 - ATM SDP">
         <t>
-          <xref target="RFC3108">RFC3108</xref> describes conventions for using the Session Description
-          Protocol (SDP) described for controlling ATM Bearer Connections, and
-          any associated ATM Adaptation Layer (AAL)
-        </t>
+          <xref target="RFC3108">RFC3108</xref> describes conventions for using the 
+          Session Description Protocol (SDP) for characterizing ATM bearer connections 
+          using an AAL1, AAL2 or AAL5 adaptation layers.
+        </t>   
+       <t hangText="Note">
+        For AAL1 and AAL5,  bearer connections are meant to transport single media 
+        streams. For AAL2, multiple media streams may be multiplexed into a 
+        bearer connection. For all adaptation types (AAL1, AAL2 and AAL5), 
+        bearer connections may be bundled into a single media group.
+        In all cases addressed by RFC3108, a real-time media stream 
+        (voice, video, voiceband data, pseudo-wire and others) or a multiplex of  
+        media streams is mapped directly into an ATM connection. RFC3108 does not 
+        address cases where ATM serves as a low-level transport pipe for IP packets 
+        which in turn may carry one or more real-time (e.g. VoIP) media sessions 
+        with a life-cycle different from that of the underlying ATM transport
+       </t>
         <texttable title="RFC3108 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>aalType&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>eecid&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>aalType&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>capability&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>qosClass&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>bcob&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>stc&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>upcc&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>atmQOSparms&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>atmTrfcDesc&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>abrParms&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>abrSetup&nbsp;</c><c>nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>bearerType&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>lij&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>anycast&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>cache&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>bearerSigIE&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>aalApp&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>cbrRate&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>sbc&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>clkrec&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>fec&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>prtfl&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>structure&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>cpsSDUsize&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>aal2CPS&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>aal2CPSSDUrate&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>aal2sscs3661unassured&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>aal2sscs3661assured&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>aal2sscs3662&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>aal5sscop&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>atmmap&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>silenceSupp&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>ecan&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>gc&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>profileDesc&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>vsel&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>dsel&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>fsel&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>onewaySel&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>codecconfig&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>isup_usi&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>isup_usi&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
-          <c>chain&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c><c>TBD&nbsp;</c>
+          <c>aalType&nbsp;</c><c>Not Impacted &nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>eecid&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aalType&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>capability&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>qosClass&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>bcob&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>stc&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>upcc&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>atmQOSparms&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>atmTrfcDesc&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>abrParms&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>abrSetup&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>bearerType&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>lij&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>anycast&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>cache&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>bearerSigIE&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aalApp&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>cbrRate&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>sbc&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>clkrec&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>fec&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>prtfl&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>structure&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>cpsSDUsize&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2CPS&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2CPSSDUrate&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2sscs3661unassured&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2sscs3661assured&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2sscs3662&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal5sscop&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>atmmap&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>silenceSupp&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>ecan&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>gc&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>profileDesc&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>vsel&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>dsel&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>fsel&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>onewaySel&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>codecconfig&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>isup_usi&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>isup_usi&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>chain&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
      </section>
@@ -2276,7 +2288,7 @@
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
          <c>text/ulpfec&nbsp;</c><c>Not recommended for multiplexing due to reuse of SSRCs&nbsp;</c>
-          <c>M</c><c>NOT RECOMMEDED&nbsp;</c>
+          <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
          <c>application/ulpfec&nbsp;</c><c>Not recommended for multiplexing due to reuse of SSRCs&nbsp;</c>
@@ -2329,14 +2341,14 @@
            Rohan Mahy(5.45), Eric Burger(5.22), Christian Huitema(5.13), Christer Holmberg(5.22,5.40,5.41),
            Richard Ejzak (5.42,5.43,5.44),Colin Perkins(5.7,5.8), Magnus westerlund(5.3,5.9,6.1,6.2,6.3,8.3),
            Subha Dhesikan(5.5,12.1), Dan Wing(5.6,5.34,5.37), Eric Rescorla (5.11),
-           Ali C Begen(5.1,5.16,5.18,8.2,5.33,13.1)
+           Ali C Begen(5.1,5.16,5.18,8.2,5.33,13.1), Rajesh Kumar(5.39)
       </t>
     </section>
     <section title="Change Log">
       <t>[RFC EDITOR NOTE: Please remove this section when publishing]</t>
       <t>Changes from draft-nandakumar-mmusic-mux-attributes-02
         <list style="symbols">
-          <t>Updated Sections 5.3,5.5,5.6,5.7,5.9,5.8,5.11,5.13,5.22,5.34,5.37,5.40,
+          <t>Updated Sections 5.3,5.5,5.6,5.7,5.9,5.8,5.11,5.13,5.22,5.34,5.37, 5.39, 5.40,
               5.41,5.42,5.43,5.44,5.45,6.1,6.2,6.3,8,3,12.1 based on the inputs from 
               the respective RFC Authors.
           </t>

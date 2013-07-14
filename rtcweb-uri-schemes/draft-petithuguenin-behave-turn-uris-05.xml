@@ -3,7 +3,7 @@
 <?rfc strict="no" ?>
 <?rfc symrefs="yes" ?>
 <?rfc toc="yes" ?>
-<rfc category="std" docName="draft-petithuguenin-behave-turn-uris-04" ipr="noModificationTrust200902">
+<rfc category="std" docName="draft-petithuguenin-behave-turn-uris-05" ipr="trust200902">
 	<front>
 		<title abbrev="TURN URIs">Traversal Using Relays around NAT (TURN) Uniform Resource Identifiers</title>
 
@@ -63,14 +63,14 @@
 			</address>
 		</author>
 
-		<date day="30" month="April" year="2013"/>
+		<date day="12" month="July" year="2013"/>
 		<area>TSV</area>
 		<workgroup>BEHAVE</workgroup>
 
 		<abstract>
 			<t>
 				This document specifies the syntax of Uniform Resource Identifier (URI) schemes for the Traversal Using Relays around NAT (TURN) protocol.
-				It defines two URI schemes that can be used to provision the configuration values needed by the resolution mechanism defined in <xref target="RFC5928"/>.
+				It defines two URI schemes to provision the <xref target="RFC5928">TURN Resolution Mechanism</xref>.
 			</t>
 		</abstract>
 	</front>
@@ -103,22 +103,14 @@
 		</section>
 
 		<section anchor="section.terminology" title="Terminology">
-			<t>The key words "MUST", "MUST NOT", "REQUIRED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <xref target="RFC2119"/>.</t>
+			<t>
+				The key words "MUST", "MUST NOT", "REQUIRED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <xref target="RFC2119"/> when they appear in ALL CAPS.
+				When these words are not in ALL CAPS (such as "should" or "Should"), they have their usual english meanings, and are not to be interpreted as RFC 2119 key words.
+			</t>
 		</section>
 
 		<section anchor="section.definition" title="Definitions of the TURN and TURNS URI">
 			<section anchor="section.definition.syntax" title="URI Scheme Syntax">
-				<t>The "turn" URI takes the following form (the syntax below is non-normative):</t>
-
-				<t>
-					<list>
-						<t>turn:&lt;host&gt;:&lt;port&gt;</t>
-						<t>turns:&lt;host&gt;:&lt;port&gt;</t>
-					</list>
-				</t>
-
-				<t>Note that the &lt;port&gt; part and the preceding ":" (colon) character, is OPTIONAL.</t>
-
 				<t>A TURN/TURNS URI has the following formal ABNF syntax <xref target="RFC5234"/>:</t>
 
 				<figure>
@@ -154,7 +146,7 @@ reg-name      = *( unreserved / pct-encoded / sub-delims )]]>
 				</figure>
 
 				<t>
-					&lt;unreserved&gt;, &lt;sub-delims&gt;, and &lt;pct-encoded&gt; are specified in <xref target="RFC3986"/>.
+					&lt;unreserved&gt;, &lt;pct-encoded&gt;, and &lt;sub-delims&gt; are specified in <xref target="RFC3986"/>.
 					The core rules &lt;DIGIT&gt; and &lt;HEXDIGIT&gt; are used as described in Appendix B of RFC 5234 <xref target="RFC5234"/>.
 				</t>
 
@@ -191,13 +183,17 @@ reg-name      = *( unreserved / pct-encoded / sub-delims )]]>
 			<section anchor="section.impl-status.turnuri" title="turnuri">
 				<t>
 					<list style="hanging">
+						<t hangText="Organization: ">Impedance Mismatch</t>
 						<t hangText="Name: ">turnuri 0.3.4</t>
 						<t hangText="Description: ">A reference implementation of this document and of <xref target="RFC5928">RFC 5928</xref>.</t>
 						<t hangText="Level of maturity: ">Beta.</t>
 						<t hangText="Coverage: ">Fully implements this specification and RFC 5928.</t>
 						<t hangText="Licensing: ">AGPL3</t>
-						<t hangText="Contact: ">Marc Petit-Huguenin &lt;marc@petit-huguenin.org&gt;.</t>
-						<t hangText="URL: ">http://debian.implementers.org/stable/source/turnuri.tar.gz</t>
+						<t hangText="Implementation experience: "/>
+						<t hangText="Contact: ">
+							Marc Petit-Huguenin &lt;marc@petit-huguenin.org&gt;.
+							http://debian.implementers.org/stable/source/turnuri.tar.gz
+						</t>
 					</list>
 				</t>
 			</section>
@@ -205,13 +201,16 @@ reg-name      = *( unreserved / pct-encoded / sub-delims )]]>
 			<section anchor="section.impl-status.libjingle" title="libjingle">
 				<t>
 					<list style="hanging">
+						<t hangText="Organization: ">Google Inc.</t>
 						<t hangText="Name: ">libjingle 0.7.1</t>
 						<t hangText="Description: ">Libjingle is a set of components provided by Google to implement Jingle protocols XEP-166 (http://xmpp.org/extensions/xep-0166.html) and XEP-167 (http://xmpp.org/extensions/xep-0167.html).</t>
 						<t hangText="Level of maturity: ">Beta.</t>
 						<t hangText="Coverage: ">Implements draft-petithuguenin-behave-turn-uris-01 without IPv6.</t>
 						<t hangText="Licensing: ">BSD 3-clauses license.</t>
-						<t hangText="Contact: ">https://code.google.com/p/chromium/</t>
-						<t hangText="URL: ">https://code.google.com/p/chromium/codesearch#chromium/src/third_party/libjingle/source/talk/app/webrtc/peerconnection.cc</t>
+						<t hangText="Contact: ">
+							https://code.google.com/p/chromium/
+							https://code.google.com/p/chromium/codesearch#chromium/src/third_party/libjingle/source/talk/app/webrtc/peerconnection.cc
+						</t>
 					</list>
 				</t>
 			</section>
@@ -219,13 +218,16 @@ reg-name      = *( unreserved / pct-encoded / sub-delims )]]>
 			<section anchor="section.impl-status.firefox" title="Firefox">
 				<t>
 					<list style="hanging">
+						<t hangText="Organization: ">Mozilla</t>
 						<t hangText="Name: ">Firefox Aurora 21</t>
 						<t hangText="Description: ">Mozilla Firefox is a free and open source web browser.</t>
 						<t hangText="Level of maturity: ">Beta.</t>
 						<t hangText="Coverage: ">Implements draft-petithuguenin-behave-turn-uri-03 without RFC 5928.</t>
-						<t hangText="Licensing: ">Mozilla Public License, v. 2.0.</t>
-						<t hangText="Contact: ">http://www.mozilla.org/en-US/firefox/channel/</t>
-						<t hangText="URL: ">http://hg.mozilla.org/mozilla-central/rev/6b5016ab9ebb</t>
+						<t hangText="Licensing: ">Mozilla Public License, v2.0.</t>
+						<t hangText="Contact: ">
+							http://www.mozilla.org/en-US/firefox/channel/
+							http://hg.mozilla.org/mozilla-central/rev/6b5016ab9ebb
+						</t>
 					</list>
 				</t>
 			</section>
@@ -283,9 +285,9 @@ reg-name      = *( unreserved / pct-encoded / sub-delims )]]>
 		</section>
 
 		<section anchor="section.acknowledgements" title="Acknowledgements">
-			<t>Thanks to Margaret Wasserman, Magnus Westerlund, Juergen Schoenwaelder, Sean Turner, Ted Hardie, Dave Thaler, Alfred E. Heggestad, Eilon Yardeni, Dan Wing, Alfred Hoenes, and Jim Kleck for their comments, suggestions and questions that helped to improve the draft-petithuguenin-behave-turn-uri-bis document.</t>
+			<t>Thanks to Margaret Wasserman, Magnus Westerlund, Juergen Schoenwaelder, Sean Turner, Ted Hardie, Dave Thaler, Alfred E. Heggestad, Eilon Yardeni, Dan Wing, Alfred Hoenes, and Jim Kleck for the comments, suggestions and questions that helped improve the draft-petithuguenin-behave-turn-uri-bis document.</t>
 			<t>Many thanks to Cullen Jennings for his detailed review and thoughtful comments on the draft-nandakumar-rtcweb-turn-uri document.</t>
-			<t>Thanks to Bjoern Hoehrmann for his comments, suggestions and questions that helped to improve the this document.</t>
+			<t>Thanks to Bjoern Hoehrmann and Dan Wing for the comments, suggestions and questions that helped improve this document.</t>
 			<t>The &lt;turn-port&gt; and &lt;turn-host&gt; ABNF productions have been copied from the &lt;port&gt; and &lt;host&gt; ABNF productions from <xref target="RFC3986"/>.</t>
 		</section>
 	</middle>
@@ -542,7 +544,7 @@ reg-name      = *( unreserved / pct-encoded / sub-delims )]]>
 						<organization/>
 					</author>
 
-					<date day="12" month="April" year="2013"/>
+					<date day="2" month="June" year="2013"/>
 
 					<abstract>
 						<t>
@@ -558,8 +560,8 @@ reg-name      = *( unreserved / pct-encoded / sub-delims )]]>
 					</abstract>
 				</front>
 
-				<seriesInfo name="Internet-Draft" value="draft-sheffer-running-code-04"/>
-				<format target="http://www.ietf.org/internet-drafts/draft-sheffer-running-code-04.txt" type="TXT"/>
+				<seriesInfo name="Internet-Draft" value="draft-sheffer-running-code-06"/>
+				<format target="http://www.ietf.org/internet-drafts/draft-sheffer-running-code-06.txt" type="TXT"/>
 			</reference>
 		</references>
 
@@ -583,36 +585,48 @@ reg-name      = *( unreserved / pct-encoded / sub-delims )]]>
 			</texttable>
 		</section>
 
+		<section title="Design Notes">
+			<t>
+				<list style="symbols">
+					<t>
+						The ABNF duplicates some definitions from <xref target="RFC3986"/> instead of referencing them.
+						This was done because the definitions in RFC 3986 are for hierarchical URIs, so using these references in an opaque URI proved confusing.
+					</t>
+
+					<t>
+						One recurring comment was to stop using the suffix "s" on URI scheme, and to move the secure option to a parameter (e.g. ";proto=tls").
+						We decided against this idea because the STUN URI does not have a ";proto=" parameter and we would have lost the symmetry between the TURN and STUN URIs.
+						A more detailed account of the reasoning behind this is available at &lt;http://blog.marc.petit-huguenin.org/2012/09/on-design-of-stun-and-turn-uri-formats.html&gt;
+					</t>
+
+					<t>Following the advice of RFC 4395 section 2.2., and because the TURN URI does not describe a hierarchical structure, the TURN URIs are opaque URIs.</t>
+
+					<t>
+						&lt;password&gt; is not used in the URIs because it is deprecated.
+						&lt;username&gt; is not used in the URIs because it is not used to guide the resolution mechanism.
+					</t>
+
+					<t>As discussed at IETF 72 in Dublin, there is no generic parameters in the URI to prevent compatibility issues.</t>
+				</list>
+			</t>
+		</section>
+
 		<section title="Release notes">
 			<t>This section must be removed before publication as an RFC.</t>
 
-			<section title="Design Notes">
+			<section title="Modifications between petithuguenin-behave-turn-uris-05 and petithuguenin-behave-turn-uris-04">
 				<t>
 					<list style="symbols">
-						<t>
-							One recurring comment was to stop using the suffix "s" on URI scheme, and to move the secure option to a parameter (e.g. ";proto=tls").
-							We decided against this idea because the STUN URI does not have a ";proto=" parameter and we would have lost the symmetry between the TURN and STUN URIs.
-							A more detailed account of the reasoning behind this is available at &lt;http://blog.marc.petit-huguenin.org/2012/09/on-design-of-stun-and-turn-uri-formats.html&gt;
-						</t>
-
-						<t>
-							Following the advice of RFC 4395 section 2.2., and because the TURN URI does not describe a hierarchical structure, the TURN URIs are opaque URIs.
-						</t>
-
-						<t>
-							&lt;password&gt; is not used in the URIs because it is deprecated.
-							&lt;username&gt; is not used in the URIs because it is not used to guide the resolution mechanism.
-						</t>
-
-						<t>As discussed in Dublin, there is no generic parameters in the URI to prevent compatibility issues.</t>
-					</list>
-				</t>
-			</section>
-
-			<section title="Modifications between petithuguenin-behave-turn-uris-04 and petithuguenin-behave-turn-uris-03">
-				<t>
-					<list style="symbols">
-						<t>Added implementation status (from draft-sheffer-running-code) for turnuri, Chromium and Firefox.</t>
+						<t>Simplify the abstract.</t>
+						<t>Change boilerplate from noModificationTrust200902 to trust200902.</t>
+						<t>Update RFC 2119 boilerplate to http://trac.tools.ietf.org/group/iesg/trac/wiki/Draft2119BoilerplateSuggestions</t>
+						<t>Remove non-normative text in "Definitions of the TURN and TURNS URI" section.</t>
+						<t>Reorder ABNF production references in the text to match the ABNF definition order.</t>
+						<t>Add a design note explaining the reason for duplicating the ABNF productions from RFC 3986.</t>
+						<t>Move the Design Notes section from the Release Notes appendix to its own appendix to keep them in the RFC-to-be.</t>
+						<t>s/in Dublin/at IETF 72 in Dublin/</t>
+						<t>Updated acknowledgment section.</t>
+						<t>Updated Implementation Status section with new template.</t>
 					</list>
 				</t>
 			</section>
