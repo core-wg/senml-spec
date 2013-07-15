@@ -36,7 +36,7 @@
       </address>
     </author>
 
-    <date day="25" month="April" year="2013" />
+    <date day="15" month="July" year="2013" />
 
     <area>MMUSIC</area>
 
@@ -629,7 +629,6 @@
           <c>channel&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -722,7 +721,7 @@
 
           <c>rtcp&nbsp;</c><c>Case1:Same RTCP port is repeated across the m=lines.
             Case2:Different RTCP ports renders multiplexing impossible&nbsp;</c><c>M</c>
-          <c>TRANSPORT&nbsp;</c>
+          <c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -902,22 +901,24 @@
           <c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>csdc&nbsp;</c><c>Mismatch in the offered capability description MAY fail
-            multiplexing.&nbsp;</c><c>B</c><c>TBD&nbsp;</c>
+          <c>cdsc&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>cpar&nbsp;</c><c>Mismatch in the offered capability parameters MAY fail
-            multiplexing.&nbsp;</c><c>B</c><c>TBD&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          <c>cpar&nbsp;</c><c>Represents encapsulating attribute&nbsp;</c><c>B</c>
+          <c>TBD&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>cparmin&nbsp;</c><c>Mismatch in the offered capability parameters MAY fail
-            multiplexing.&nbsp;</c><c>B</c><c>TBD&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          <c>cparmin&nbsp;</c><c>Represents encapsulating attribute&nbsp;</c><c>B</c>
+          <c>TBD&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>cparmax&nbsp;</c><c>Mismatch in the offered capability parameters MAY fail
-            multiplexing.&nbsp;</c><c>B</c><c>TBD&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          <c>cparmax&nbsp;</c><c>Represents encapsulating attribute&nbsp;</c><c>B</c>
+          <c>TBD&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
+         <t hangText="Note">
+          For attributes that encapsulate other attributes, the negotiation procedures
+          decides the final selection of the attribute from the one or more attributes 
+          encapsulated. Multiplexing of media lines with encapsulating attributes
+          requires further analysis.
+        </t>
       </section>
 
       <section title="RFC6284 - Port Mapping between Unicast and Multicast RTP Sessions">
@@ -1130,26 +1131,29 @@
           <c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>csup&nbsp;</c><c>Depends on capability being negotiated&nbsp;</c><c>B</c>
-          <c>SPECIAL&nbsp;</c>
+          <c>csup&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>creq&nbsp;</c><c>Depends on capability being negotiateds&nbsp;</c><c>B</c>
-           <c>SPECIAL&nbsp;</c>
+          <c>creq&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-           <c>acap&nbsp;</c><c>Depends on capability being negotiated&nbsp;</c><c>B</c>
-           <c>SPECIAL&nbsp;</c>
+           <c>acap&nbsp;</c><c>Represents encapsulation attribute&nbsp;</c><c>B</c>
+           <c>TBD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>tcap&nbsp;</c><c>Repeat transport capability across all
-           m= lines&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          <c>tcap&nbsp;</c><c>Represents encapsulation attribute&nbsp;</c><c>B</c>
+          <c>TBD&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
+        <t hangText="Note">
+          For attributes that encapsulate other attributes, the negotiation procedures
+          decides the final selection of the attribute from the one or more attributes 
+          encapsulated. Multiplexing of media lines with encapsulating attributes
+          requires further analysis.
+        </t>
       </section>
 
-      <section title="draft-ietf-mmusic-sdp-media-capabilities">
+      <section title="RFC6871 - SDP Media Capabilities Negotiation">
         <t>
           Session Description Protocol (SDP) capability negotiation provides a
           general framework for indicating and negotiating capabilities in SDP.
@@ -1173,16 +1177,22 @@
           <c>mfcap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>mscap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
+          <c>mscap&nbsp;</c><c>mscap represents encapsulating attribute&nbsp;</c>
+          <c>B</c><c>TBD&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>lcfg&nbsp;</c><c>Need to revisit this later&nbsp;</c><c>B</c><c>TBD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>lcfg&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
-          <c>secap&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
+          <c>sescap&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
+        <t hangText="Note">
+          For attributes that encapsulate other attributes, the negotiation procedures
+          decides the final selection of the attribute from the one or more attributes 
+          encapsulated. Multiplexing of media lines with encapsulating attributes
+          requires further analysis.
+        </t>
       </section>
 
       <section title="RFC4567 - Key Management Extensions for SDP and RTSP">
@@ -1514,17 +1524,18 @@
           Session Description Protocol (SDP) for characterizing ATM bearer connections 
           using an AAL1, AAL2 or AAL5 adaptation layers.
         </t>   
-       <t hangText="Note">
-        For AAL1 and AAL5,  bearer connections are meant to transport single media 
-        streams. For AAL2, multiple media streams may be multiplexed into a 
-        bearer connection. For all adaptation types (AAL1, AAL2 and AAL5), 
-        bearer connections may be bundled into a single media group.
-        In all cases addressed by RFC3108, a real-time media stream 
-        (voice, video, voiceband data, pseudo-wire and others) or a multiplex of  
-        media streams is mapped directly into an ATM connection. RFC3108 does not 
-        address cases where ATM serves as a low-level transport pipe for IP packets 
-        which in turn may carry one or more real-time (e.g. VoIP) media sessions 
-        with a life-cycle different from that of the underlying ATM transport
+        <t hangText="Note">
+         For AAL1, AAL2 and AAL5, bearer connections can be used to transport 
+         single media streams. In addition, for AAL1 and AAL2, multiple media streams 
+         may be multiplexed into a bearer connection. For all adaptation types 
+         (AAL1, AAL2 and AAL5), bearer connections may be bundled into a single media group.
+         In all cases addressed by RFC3108, a real-time media stream 
+         (voice, video, voiceband data, pseudo-wire and others) or a 
+         multiplex of  media streams is mapped directly into an ATM connection. 
+         RFC3108 does not address cases where  ATM serves as a low-level transport pipe 
+         for IP packets which in turn may carry one or more real-time (e.g. VoIP) 
+         media sessions with a life-cycle different from that of the underlying 
+         ATM transport.
        </t>
         <texttable title="RFC3108 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -1532,50 +1543,50 @@
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>aalType&nbsp;</c><c>Not Impacted &nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>eecid&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>aalType&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>capability&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>qosClass&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>bcob&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>stc&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>upcc&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>atmQOSparms&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>atmTrfcDesc&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>abrParms&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>abrSetup&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>bearerType&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>lij&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>anycast&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>cache&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>bearerSigIE&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>aalApp&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>cbrRate&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>sbc&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>clkrec&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>fec&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>prtfl&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>structure&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>cpsSDUsize&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>aal2CPS&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>aal2CPSSDUrate&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>aal2sscs3661unassured&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>aal2sscs3661assured&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>aal2sscs3662&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>aal5sscop&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>atmmap&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>silenceSupp&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>ecan&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>gc&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>profileDesc&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>vsel&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>dsel&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>fsel&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>onewaySel&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>codecconfig&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>isup_usi&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>isup_usi&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>chain&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aalType&nbsp;</c><c>Not Impacted &nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>eecid&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aalType&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>capability&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>qosClass&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>bcob&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>stc&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>upcc&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>atmQOSparms&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>atmTrfcDesc&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>abrParms&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>abrSetup&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>bearerType&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>lij&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>anycast&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>cache&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>bearerSigIE&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aalApp&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>cbrRate&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>sbc&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>clkrec&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>fec&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>prtfl&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>structure&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>cpsSDUsize&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2CPS&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2CPSSDUrate&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2sscs3661unassured&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2sscs3661assured&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2sscs3662&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal5sscop&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>atmmap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>silenceSupp&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>ecan&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>gc&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>profileDesc&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>vsel&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>dsel&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>fsel&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>onewaySel&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>codecconfig&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>isup_usi&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>isup_usi&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>chain&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
      </section>
@@ -2341,14 +2352,14 @@
            Rohan Mahy(5.45), Eric Burger(5.22), Christian Huitema(5.13), Christer Holmberg(5.22,5.40,5.41),
            Richard Ejzak (5.42,5.43,5.44),Colin Perkins(5.7,5.8), Magnus westerlund(5.3,5.9,6.1,6.2,6.3,8.3),
            Subha Dhesikan(5.5,12.1), Dan Wing(5.6,5.34,5.37), Eric Rescorla (5.11),
-           Ali C Begen(5.1,5.16,5.18,8.2,5.33,13.1), Rajesh Kumar(5.39)
+           Ali C Begen(5.1,5.16,5.18,8.2,5.33,13.1), Rajesh Kumar(5.39), Flemming Andreasen(5.28,5.29,5.20)
       </t>
     </section>
     <section title="Change Log">
       <t>[RFC EDITOR NOTE: Please remove this section when publishing]</t>
       <t>Changes from draft-nandakumar-mmusic-mux-attributes-02
         <list style="symbols">
-          <t>Updated Sections 5.3,5.5,5.6,5.7,5.9,5.8,5.11,5.13,5.22,5.34,5.37, 5.39, 5.40,
+          <t>Updated Sections 5.3,5.5,5.6,5.7,5.9,5.8,5.11,5.13,5.20,5.22,5.28,5.29,5.34,5.37,5.39,5.40,
               5.41,5.42,5.43,5.44,5.45,6.1,6.2,6.3,8,3,12.1 based on the inputs from 
               the respective RFC Authors.
           </t>
