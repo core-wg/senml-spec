@@ -6,7 +6,8 @@
 <?rfc sortrefs="no" ?>
 <?rfc symrefs="yes" ?> 
 
-<rfc ipr="trust200902" category="std" docName="draft-nandakumar-mmusic-rtcweb-grouping" submissionType="IETF" xml:lang="en">
+<rfc ipr="trust200902" category="std" docName="draft-nandakumar-mmusic-rtcweb-grouping" 
+submissionType="IETF" xml:lang="en">
 <front>
     <title abbrev="SSRC Group Simulcast">
 		SSRC Group Based Simulcast Signaling
@@ -28,28 +29,6 @@
         </postal>
 
         <email>snandaku@cisco.com</email>
-      </address>
-    </author>
-    
-     <author fullname="Cullen Jennings" initials="C." surname="Jennings">
-      <organization>Cisco</organization>
-
-      <address>
-        <postal>
-          <street>170 West Tasman Drive</street>
-
-          <city>San Jose</city>
-
-          <region>CA</region>
-
-          <code>95134</code>
-
-          <country>USA</country>
-        </postal>
-
-        <phone>+1 408 421-9990</phone>
-
-        <email>fluffy@cisco.com</email>
       </address>
     </author>
     
@@ -119,7 +98,14 @@
    			information (over RTCP) about all the Media Streams in the RTP
    			session.  The bandwidth of the RTCP control channel is shared within
    			an RTP Session.
-   		</t>	
+   		</t>
+   		<t>
+   		 Media Transport:
+   		    A Media Transport defines an end-to-end transport association for carrying one
+            or more RTP Sessions. The combination of a network address and port
+            uniquely identifies such a transport association, for example an IP
+            address and a UDP port.
+         </t>	
 	</section>
 
     <section title="Introduction" toc="default">
@@ -133,11 +119,33 @@
         other destinations without having to recode the video at the 
         conference bridge.
       </t>
+      <t>
+       <xref target="I-D.westerlund-avtcore-rtp-simulcast"/> describes 
+       different encodings of a media content to be combination of the following:
+       <list style="symbols">
+         <t> Bit-rate:  The difference is the amount of bits spent to encode the
+      media thus giving different quality. </t>
+         <t> Codec: Different media codecs are used to ensure that different
+      receivers that do not have a common set of decoders can decode at
+      least one of the versions.  This can include codec configuration
+      options that are not compatible, like video encoder profiles, or
+      the capability of receiving the transport packetization. </t>
+      <t>  Sampling:  Different sampling of media, in spatial as well as in
+      temporal domain, may be used to suit different rendering
+      capabilities or needs at the receiving endpoints, as well as a
+      method to achieve different bit-rates.  For video streams, spatial
+      sampling affects image resolution and temporal sampling affects
+      video frame rate.  For audio, spatial sampling relates to the
+      number of audio channels and temporal sampling affects audio
+      bandwidth.  Obviously, a difference in sampling may result in
+      difference in bit-rate. </t>
+       </list> 
+      </t>
 	   <t>	
 		In any application that needs to send multiple encodings, there is a 
 		potential need for simulcast. The purpose of this document is to discuss 
 		suitable signaling solution in SDP for describing and negotiating 
-		simulcast streams, within the context on Real Time Transport Protocol.
+		simulcast streams, within the context of the Real Time Transport Protocol(RTP).
        </t>
     </section>
 
@@ -177,6 +185,16 @@
              proposed for  a=ssrc attribute line, to specify send multiple resolutions, 
              for example.
            </t>
+           <t>
+             For the receiver control of selecting the simulcast stream to receive, the mechanisms
+             defined in <xref target="I-D.lennox-mmusic-sdp-source-selection"/> is proposed.
+           </t>
+           <t>
+             When multicast topology is used to distribute RTP/RTCP packets, having
+             same multicast address across all the m=lines is proposed when multiplexing
+             framework such as BUNDLE <xref target="I-D.ietf-mmusic-sdp-bundle-negotiation"/>
+             is in operation.
+           </t>
         </list> 
       </t>
       <t>
@@ -191,7 +209,7 @@
         <t>
           This document extends a=ssrc attribute <xref target="RFC5576"/> by 
           introducing <xref target="RFC6236"/> imageattr enabling specification of
-          multi-resolution simulcast streams for a give media source.
+          multi-resolution simulcast streams for a given media source.
         </t>
       </section>
        <section title="The SIMUCAST ssrc-group attribute" toc="default">
@@ -277,15 +295,66 @@ a=ssrc-group:SIMULCAST 111111 22222
 	<section title="Offer/Answer Consideration">
 	  <t>
 	     The Offer/Answer model for this specification adheres to the model as applicable
-	     to Source-Specific Media SDP attributes and its extensions.
+	     to Source-Specific Media SDP attributes <xref target="RFC5576"/> and its extensions
+	     <xref target="I-D.lennox-mmusic-sdp-source-selection"/>.
 	   </t>
 	</section>	
+	<section anchor="simulmux" title="Simulcast and Multiplexing ">
+	  <t>
+	    Multiplexing in RTP can be achieved in several ways as listed:
+	    <list style="symbol">
+	      <t> Payload Type based Multiplexing </t>
+	      <t> Media Stream Multiplexing based on SSRC in a Single RTP Session </t>
+	      <t> RTP Session Multiplexing over a single Media Transport.</t>
+	    </list>
+	  </t>
+	  <t>
+	   The proposed solution in this document assumes Media Stream Multiplexing
+	   to transport the simulcast encodings from several media sources 
+	   with in a single RTP Session,whenever possible. Such a solution can be envisioned
+	   by the usage of multiplexing frameworks, such as, BUNDLE 
+	   <xref target="I-D.ietf-mmusic-sdp-bundle-negotiation"/>. In the absence of such
+	   a framework, each media source gets its own RTP Session with its associated 
+	   simulcast encodings multiplexed based on their respective SSRCs.
+	  </t>  
+	</section>
+	<section anchor="simultopo" title="Simulcast under Multicast RTP Topology ">
+	  <t>
+	   <xref target="RFC5117"/> describes several underlying network topologies
+	   supported by RTP. In this section the operation of the solution under 
+	   multicast topologies is analyzed.
+	  </t>
+	   <t> 
+	    The proposed solution enables right behavior for RTCP reporting across 
+	    the members of the group, since all the sources and their simulcast streams
+	    form a single RTP Session under the BUNDLE multiplexing framework.
+	  </t> 
+	   <t>
+	    In the scenarios where using a single 5-tuple for all the media sources 
+	    is not possible, carrying each source with its simulcast encodings in its own 
+	    RTP Session ensures correct behavior.
+	  </t>    
+ 	  <t>
+ 	    Allowing media sources to send different simulcast encodings to different multicast 
+ 	    group addresses is not directly enabled within the solution proposed. 
+ 	    Such a situation might arise to enable the receivers to selectively choose the
+ 	    multicast groups based on their receiving capabilities or interests.
+ 	    However, the mechanisms defined in 
+ 	    <xref target="I-D.lennox-mmusic-sdp-source-selection"/> enables receiver
+ 	    control  to selectively choose the simulcast streams of interest.
+	   </t>
+	</section>
     <section title="IANA Considerations" toc="default">
 		<t>
+		  TBD
 		</t>
     </section>
 		
     <section anchor="sec-acks" title="Acknowledgements" toc="default">
+       <t>
+         I would like to thanks Cullen Jennings for his inputs and review on the proposed
+         solution.
+       </t>
     </section>
 
 </middle>
@@ -301,7 +370,10 @@ a=ssrc-group:SIMULCAST 111111 22222
         <?rfc include="reference.RFC.5117"?>
         <?rfc include="reference.RFC.3550"?>
         <?rfc include="reference.I-D.lennox-mmusic-sdp-source-selection"?>
-        
+        <?rfc include="reference.I-D.westerlund-avtcore-rtp-simulcast"?>
+        <?rfc include="reference.I-D.lennox-raiarea-rtp-grouping-taxonomy"?> 
+        <?rfc include="reference.I-D.ietf-mmusic-sdp-bundle-negotiation"?> 
+               
     </references>
 
   </back>
