@@ -2,6 +2,14 @@
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
 <?xml-stylesheet type="text/xsl" href="rfc2629.xslt" ?>
 
+<!-- 
+make clear most recent sender wins with  multi render 
+
+example with changing SSRC and how to correlate 
+
+add msid to example 
+-->
+
 <?rfc toc="yes" ?>
 <?rfc symrefs="yes" ?>
 <?rfc strict="yes" ?>
@@ -11,20 +19,8 @@
 <?rfc rfcedstyle="no" ?>
 <?rfc tocdepth="4"?>
 
-<rfc category="info" docName="draft-jennings-rtcweb-plan-00"
+<rfc category="info" docName="draft-jennings-rtcweb-plan-01"
      ipr="noDerivativesTrust200902">
-
-<!-- 
-
-add receive only on thumbnail example 
-
-make clear most recent sender wind multi render 
-
-example with changing SSRC and how to correlate 
-
-add msid to example 
-
--->
 
   <front>
     <title abbrev="RTCWeb Plan">Proposed Plan for Usage of SDP and RTP</title>
@@ -49,7 +45,7 @@ add msid to example
       </address>
     </author>
     
-    <date day="24" month="February" year="2013" />
+    <date day="25" month="February" year="2013" />
 
     <area>RAI</area>
 
@@ -94,14 +90,14 @@ add msid to example
       simultaneously use multiple stream of video that will be simultaneously
       displayed but share the same SDP characteristics and semantics such that
       they can all be negotiated under a single m-line. When using features like
-      RTX, FEC, and Simulcast in a multireder situation, there needs to be a
+      RTX, FEC, and Simulcast in a multi-render situation, there needs to be a
       way to correlate a given related media flow with the correct "base"
       media-flow. This is accomplished by having the related flows carry, in the
       CSRC, the SSRC of their base flow. An example SDP might look like as provided
       in the example <xref target="sec-mult-render-example" />. </t>
 
       <t> This draft also propose that advanced usages, including WebRTC to
-      WebRTC scenarios, uses a Media Stream Identifier (MSID) that is signalled
+      WebRTC scenarios, uses a Media Stream Identifier (MSID) that is signaled
       in SDP and also attempts to negotiate the usage of a RTP header extension
       to include the MSID in the RTP packet. This resolves many long term issues. </t>
 
@@ -269,26 +265,31 @@ add msid to example
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-		   [TODO: Tweak this so it's not multicast.]
+Offer 
+
        v=0
        o=adam 289083124 289083124 IN IP4 host.example.com
        s=ULP FEC Seminar
        t=0 0
-       c=IN IP4 224.2.17.12/127
+       c=IN IP4 192.0.2.0
        a=group:FEC 1 2
        a=group:FEC 3 4
+
        m=audio 30000 RTP/AVP 0
        a=mid:1
+
        m=audio 30002 RTP/AVP 100
        a=rtpmap:100 ulpfec/8000
        a=mid:2
+
        m=video 30004 RTP/AVP 31
        a=mid:3
+
        m=video 30004 RTP/AVP 101
-       c=IN IP4 224.2.17.13/127
+       c=IN IP4 192.0.2.1
        a=rtpmap:101 ulpfec/8000
        a=mid:4
-         ]]></artwork>
+]]></artwork>
 	</figure>
 	<t>
 	  When FEC is expressed this way,
@@ -316,7 +317,7 @@ add msid to example
 	    media over the same 5-tuple.</t>
 
 	    <t></t>
-	    <t hangText="multi-rendering:"></t>
+	    <t hangText="multi-render:"></t>
 	    <t>The ability to have large numbers of multiple similar media flows 
 	    (e.g., multiple cameras).
 	    The paradigmatic case here is multiple video thumbnails.</t>
@@ -356,7 +357,7 @@ add msid to example
 	</t>
 	<t>
 	  For reasons described in <xref target="sec-overall-design"/>,
-	  the SSRC is not suitable for individually addressing RTP flows.
+	  the SSRC learned visa SDP is not suitable for individually addressing RTP flows.
 	  Instead, we introduce a new identifier, the MSID, which can
 	  be carried both in the SDP and the RTP and therefore can
 	  be used to correlate SDP elements to RTP elements.
@@ -474,7 +475,7 @@ Microphone -->    m=audio    -->       Speaker          \
 Camera     -->    m=video    -->       Window            |
                                                           >  5-Tuple
 Camera     -->    m=video    -->       5 Small Windows   |
-Camera            a=multiple-render:5                    |
+Camera            a=multi-render:5                    |
 ...                                                      /
 		   ]]></artwork>
         </figure>      
@@ -494,7 +495,7 @@ Microphone -->    m=audio    -->       Speaker        \   \  Lip-sync
 Camera     -->    m=video    -->       Window          |  /  
                                                         >  5-Tuple
 Camera     -->    m=video    -->       5 Small Windows |
-Camera            a=multiple-render:5                  |
+Camera            a=multi-render:5                  |
 ...                                                   /
 		   ]]></artwork>
         </figure>      
@@ -685,7 +686,7 @@ Camera            a=multiple-render:5                  |
           MS-Stream be the MSID with no flow identifier, and the ID attribute of
           the MS-Track be the MSID. </t>
 
-          <t> In addition, the SDP will attempt to negotatiate sending the MSID
+          <t> In addition, the SDP will attempt to negotiate sending the MSID
           in the RTP using a RTP Header Extension. WebRTC clients SHOULD also
           include the a=ssrc attributes if they know which SSRC they plan to
           send but they can not rely on this not changing, being compete, or
@@ -703,19 +704,19 @@ Camera            a=multiple-render:5                  |
         <t>There are cases - such as a grid of security cameras or thumbnails in
         a video conference - where a receiver is willing to receive and display
         several media flows of video. The proposal here is to create a new media
-        level attribute called multiple-render that includes an integer that
+        level attribute called multi-render that includes an integer that
         indicates how many streams can be rendered at the same time.</t>
 
-        <t>As an example, a system that could display 16 thumbnails at the same
+        <t>As an example of a m-block, a system that could display 16 thumbnails at the same
         time and was willing to receive H261 or H264 might offer</t>
 
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
+Offer 
 
-SDP Offer 
  m=video 52886 RTP/AVP 98 99 
- a=muliple-render:16 
+ a=multi-render:16 
  a=rtpmap:98 H261/90000
  a=rtpmap:99 H264/90000 
  a=fmtp:99 profile-level-id=4de00a;
@@ -724,7 +725,7 @@ SDP Offer
  ]]></artwork>
         </figure>      
        
-        <t>When combining this muliple-render feature with multiplexing, the
+        <t>When combining this multi-render feature with multiplexing, the
         answer will might not know all the SSRCs that will be send to this m-block
         so it is best to use payload type (PT) numbers that are unique for the
         SDP: the demultiplexing may have to only use the PT if the SSRCs are
@@ -768,6 +769,7 @@ c= IN IP4 24.23.204.141
 a=group:BUNDLE vid1 vid2 vid3
 a=group:FEC vid1 vid2
 a=group:SIMULCAST vid1 vid3
+
 m=video 62537 RTP/SAVPF 96
 a=mid:vid1
 a=multi-render:3	
@@ -782,6 +784,7 @@ a=candidate:1 1 UDP  694302207 24.23.204.141 62537
 a=candidate:0 2 UDP 2113667326 192.168.1.4 64678 typ host
 a=candidate:1 2 UDP  1694302206 24.23.204.141 64678 
                      typ rflx raddr 192.168.1.4 rport 64678
+
 m=video 62541 RTP/SAVPF 97
 a=mid:vid2	
 a=multi-render:3	
@@ -789,6 +792,7 @@ a=rtcp-mux
 a=msid:34567345673456734567 s:1 f:2
 a=rtpmap:97 uplfec/90000
 a=candidate:0 1 UDP 2113667327 192.168.1.4 62541 typ host	
+
 m=video 62545 RTP/SAVPF 98
 a=mid:vid3	
 a=multi-render:3	
@@ -808,8 +812,7 @@ a=candidate:0 1 UDP 2113667327 192.168.1.4 62545 typ host
           <figure>
             <artwork align="left" alt="" height="" name="" type="" width=""
                      xml:space="preserve"><![CDATA[
-
-SDP Answer Complex
+Answer 
 
 v=0	
 o=Bob 20519 0 IN IP4 0.0.0.0	
@@ -823,6 +826,7 @@ c= IN IP4 98.248.92.77
 a=group:BUNDLE vid1 vid2 vid3
 a=group:FEC vid1 vid2
 a=group:SIMULCAST vid1 vid3
+
 m=video 42537 RTP/SAVPF 96
 a=mid:vid1	
 a=multi-render:3	
@@ -837,6 +841,7 @@ a=candidate:1 1 UDP 1694302207 98.248.92.77 42537
 a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host
 a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 
                     typ srflx raddr 192.168.1.7 rport 60065
+
 m=video 42539 RTP/SAVPF 97
 a=mid:vid2	
 a=multi-render:3	
@@ -844,6 +849,7 @@ a=rtcp-mux
 a=msid:11111122222233333444444 s:1 f:2 r:34567345673456734567
 a=rtpmap:97 uplfec/90000
 a=candidate:0 1 UDP 2113667327 192.168.1.7 42539 typ host	
+
 m=video 42537 RTP/SAVPF 98
 a=mid:vid3	
 a=multi-render:3	
@@ -869,7 +875,7 @@ a=candidate:1 2 UDP 1694302206 98.248.92.77 60065
           <figure>
             <artwork align="left" alt="" height="" name="" type="" width=""
                      xml:space="preserve"><![CDATA[
-SDP Answer 
+Answer 
 
 v=0	
 o=Bob 20519 0 IN IP4 0.0.0.0	
@@ -880,6 +886,7 @@ a=ice-pwd:de4e99bd291c325921d5d47efbabd9a2
 a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:
                     c9:c7:70:9d:1f:66:79:a8:07
 c= IN IP4 98.248.92.77	
+
 m=video 42537 RTP/SAVPF 96
 a=mid:vid1	
 a=rtcp-mux
@@ -892,10 +899,12 @@ a=candidate:1 1 UDP 1694302207 98.248.92.77 42537
 a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host
 a=candidate:1 2 UDP 1694302206 98.248.92.77 60065 
                     typ srflx raddr 192.168.1.7 rport 60065
+
 m=video 0 RTP/SAVPF 97
 a=mid:vid2	
 a=rtcp-mux
 a=rtpmap:97 uplfec/90000
+
 m=video 0 RTP/SAVPF 98
 a=mid:vid3	
 a=rtcp-mux
@@ -936,9 +945,9 @@ a=fmtp:98 profile-level-id=428014;
       <section anchor="sec-issues" title="Open Issues">
       
         <t>What do do with unrecognized media received at W3C PerrConnection
-        level? Sugestion is it creates a new track in whatever stream the MSID
-        would indicate if present and the defualt stream if no MSID header
-        extention in the RTP. </t>
+        level? Suggestion is it creates a new track in whatever stream the MSID
+        would indicate if present and the default stream if no MSID header
+        extension in the RTP. </t>
 
       </section>
 
@@ -988,10 +997,10 @@ a=fmtp:99 apt=96;rtx-time=3000
 a=rtpmap:100 rtx/90000
 a=fmtp:100 apt=98;rtx-time=3000
 a=ssrc:12345 cname:user1@host1.example.com	
-a=ssrc:12345 imageattr:* [x=720,y=576]	
+a=ssrc:12345 imageattr:* [x=1280,y=720]	
 a=ssrc:12345 framerate:30	
 a=ssrc:67890 cname:user1@host1.example.com	
-a=ssrc:67890 imageattr:* [x=176,y=144]	
+a=ssrc:67890 imageattr:* [x=320,y=240]	
 a=ssrc:67890 framerate:15	
 a=sendonly	
 a=candidate:0 1 UDP 2113667327 192.168.1.4 62537 typ host	
@@ -1001,10 +1010,10 @@ a=mid:vid2
 c= IN IP4 24.23.204.141	
 a=rtpmap:97 H264/90000	
 a=ssrc:54321 cname:user1@host1.example.com	
-a=ssrc:54321 imageattr:* [x=352,y=288]	
+a=ssrc:54321 imageattr:* [x=1080,y=720]	
 a=ssrc:54321 framerate:30	
 a=ssrc:98760 cname:user1@host1.example.com	
-a=ssrc:98760 imageattr:* [x=176,y=144]	
+a=ssrc:98760 imageattr:* [x=320,y=240]	
 a=ssrc:98760 framerate:15	
 a=candidate:0 1 UDP 2113667327 192.168.1.4 62539 typ host	
 
@@ -1014,7 +1023,7 @@ a=candidate:0 1 UDP 2113667327 192.168.1.4 62539 typ host
  <figure>
         <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-Answer with Simulcast and Bundle support 
+Answer 
 
 v=0	
 o=bob 16833 0 IN IP4 0.0.0.0	
@@ -1042,7 +1051,7 @@ a=rtpmap:97 H264/90000
 a=remote-ssrc:54321 recv:off
 a=remote-ssrc:67890 recv:on
 a=ssrc:64123 cname:user2@host2.example.com	
-a=ssrc:64123 imageattr:* [x=176,y=144]	
+a=ssrc:64123 imageattr:* [x=320,y=240]	
 a=ssrc:64123 framerate:15	
 a=candidate:0 1 UDP 2113667327 192.168.1.7 55123 typ host	
 a=rtcp-fb:120 nack pli	
@@ -1055,7 +1064,7 @@ a=rtcp-fb:120 ccm fir
  <figure>
         <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-Answer without Simulcast or bundle support 
+Answer 
 
 v=0	
 o=bob 16833 0 IN IP4 0.0.0.0	
@@ -1090,41 +1099,55 @@ a=rtcp-fb:120 ccm fir
       audio. In addition, the client can display up to 10 thumbnails of video.
       The main video is simulcast at HD size and a thumbnail size.</t>
 
-      <t>
-        SDP Offer - Client send simulcast video with 2 resolutions in 2 m-blocks
-        indicated by a=group:simulcast and indicating lip-sync for the audio and
-        video m-blocks. Also indicating it can accept 10 streams for rendering
-        with a=multi-render
-      </t>
-
       <figure>
         <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
+Offer
 
      v=0
-     o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
+     o=alice 2890844526 2890844527 IN IP4 host.example.com
      s=
      c=IN IP4 host.atlanta.example.com
      t=0 0
      a=group:LS 1,2,3
      a=group:SIMULCAST 2,3
-     m=audio 49170 RTP/AVP 99
+
+     m=audio 49170 RTP/AVP 96      <- This is the Audio 
      a=mid:1
-     a=rtpmap:99 iLBC/8000
-     m=video 51372 RTP/AVP 96
+     a=rtpmap:96 iLBC/8000
+     a=content:main
+
+     m=video 51372 RTP/AVP 97      <- This is the main video 
      a=mid:2
-     a=rtpmap:96 VP8/90000
-     a=fmtp:96 max-fr=30;max-fs=3600;
-     a=imageattr:96 [x=720,y=576]
-     m=video 51372 RTP/AVP 97
-     a=mid:3
-     a=multi-render:10
      a=rtpmap:97 VP8/90000
-     a=fmtp:97 max-fr=15;max-fs=400;
-     a=imageattr:97 [x=352,y=240]
+     a=fmtp:97 max-fr=30;max-fs=3600;
+     a=imageattr:97 [x=1080,y=720]
+     a=content:main
+
+     m=video 51372 RTP/AVP 98       <- This is the slides 
+     a=mid:2
+     a=rtpmap:98 VP8/90000
+     a=fmtp:98 max-fr=30;max-fs=3600;
+     a=imageattr:98 [x=1080,y=720]
+     a=content:slides
+
+     m=video 51372 RTP/AVP 99       <- This is the simulcast of main
+     a=mid:3
+     a=rtpmap:99 VP8/90000
+     a=fmtp:99 max-fr=15;max-fs=300;
+     a=imageattr:99 [x=320,y=240]
+
+     m=video 51372 RTP/AVP 100      <- This is the 10 thumbnails 
+     a=mid:4
+     a=multi-render:10
+     a=recvonly
+     a=rtpmap:100 VP8/90000
+     a=fmtp:100 max-fr=15;max-fs=300;
+     a=imageattr:100 [x=320,y=240]
 ]]></artwork>
       </figure>
-    
+
+<!--    
       <t>
         SDP Answer from the server indicating two video streams with the speaker
         and the slides. Also signaled is the lip-sync for speakers audio and
@@ -1134,20 +1157,25 @@ a=rtcp-fb:120 ccm fir
       <figure>
         <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
+Answer 
 
+TODO - fix this ans 
      v=0
      o=bob 2808844564 2808844565 IN IP4 host.biloxi.example.com
      s=
      c=IN IP4 host.biloxi.example.com
      t=0 0
      a=group:LS a,b
+
      m=audio 49172 RTP/AVP 99
      a=mid:a
      a=rtpmap:99 iLBC/8000
+
      m=video 51374 RTP/AVP 96
      a=mid:b
      a=content:speaker
      a=rtpmap:96 H264/90000
+
      m=video 51376 RTP/AVP 97
      a=mid:c
      a=content:slides
@@ -1155,15 +1183,14 @@ a=rtcp-fb:120 ccm fir
 
 ]]></artwork>
       </figure>
-      
+-->      
       <t>Example of a three-screen video endpoint connecting to a two-screen
       system which ends up selecting the left and middle screens.</t>
   
       <figure>
         <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-
-SDP Offer
+Offer
 
      v=0
      o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
@@ -1171,17 +1198,28 @@ SDP Offer
      c=IN IP4 host.atlanta.example.com
      t=0 0
      a=rtcp-fb
-     m=audio 49170 RTP/SAVPF 99
-     a=content:left
-     a=rtpmap:99 iLBC/8000
-     m=video 51372 RTP/SAVPF 31
+
+     m=audio 49100 RTP/SAVPF 96
+     a=rtpmap:96 iLBC/8000
+
+     m=video 49102 RTP/SAVPF 97
      a=content:main
-     a=rtpmap:96 H261/90000
-     m=video 51374 RTP/SAVPF 31
-     a=content:right
-     a=rtpmap:96 H261/90000
+     a=rtpmap:97 H261/90000
+
+     m=video 49104 RTP/SAVPF 98
+     a=content:left
+     a=rtpmap:98 H261/90000
     
-SDP Answer 
+     m=video 49106 RTP/SAVPF 99
+     a=content:right
+     a=rtpmap:99 H261/90000
+]]></artwork>
+      </figure>
+
+   <figure>
+        <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[  
+Answer 
 
      v=0
      o=bob 2808844564 2808844565 IN IP4 host.biloxi.example.com
@@ -1189,15 +1227,21 @@ SDP Answer
      c=IN IP4 host.biloxi.example.com
      t= 0 0
      a=rtcp-fb
-     m=audio 49170 RTP/SAVPF 99
-     a=content:left
-     a=rtpmap:99 iLBC/8000
-     m=video 51372 RTP/SAVPF 31
+
+     m=audio 50100 RTP/SAVPF 96
+     a=rtpmap:96 iLBC/8000
+
+     m=video 50102 RTP/SAVPF 97
      a=content:main
-     a=rtpmap:96 H261/90000
-     m=video 0 RTP/SAVPF 31
+     a=rtpmap:97 H261/90000
+
+     m=video 50104 RTP/SAVPF 98
+     a=content:left
+     a=rtpmap:98 H261/90000
+    
+     m=video 0 RTP/SAVPF 99
      a=content:right
-     a=rtpmap:96 H261/90000
+     a=rtpmap:99 H261/90000
     
 ]]></artwork>
       </figure>
@@ -1208,40 +1252,47 @@ SDP Answer
       <figure>
         <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-
-SDP Offer - with support for SRTP-DTLS and SDES signaled
+Offer 
 
      v=0
      o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
      s=
      c=IN IP4 host.atlanta.example.com
      t=0 0
+
      m=audio 49170 RTP/AVP 99
      a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d
                          :f7:c9:c7:70:9d:1f:66:79:a8:07
      a=crypto:1 AES_CM_128_HMAC_SHA1_80
        inline:d0RmdmcmVCspeEc3QGZiNWpVLFJhQX1cfHAwJSoj|2^20|1:32
      a=rtpmap:99 iLBC/8000
-     m=video 51372 RTP/AVP 31
+
+     m=video 51372 RTP/AVP 96
      a=fingerprint:sha-1 92:81:49:83:4a:23:0a:0f:1f:9d:f7:
                           c0:c7:70:9d:1f:66:79:a8:07
      a=crypto:1 AES_CM_128_HMAC_SHA1_32
        inline:NzB4d1BINUAvLEw6UzF3WSJ+PSdFcGdUJShpX1Zj|2^20|1:32
      a=rtpmap:96 H261/90000
-     
-    
-SDP Answer signaling only SDES 
+]]></artwork>
+      </figure>
+
+   <figure>
+        <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[      
+Answer 
 
      v=0
      o=bob 2808844564 2808844565 IN IP4 host.biloxi.example.com
      s=
      c=IN IP4 host.biloxi.example.com
      t=0 0
+
      m=audio 49172 RTP/AVP 99
      a=crypto:1 AES_CM_128_HMAC_SHA1_80
        inline:d0RmdmcmVCspeEc3QGZiNWpVLFJhQX1cfHAwJSoj|2^20|1:32
      a=rtpmap:99 iLBC/8000
-     m=video 51374 RTP/AVP 31
+
+     m=video 51374 RTP/AVP 96
      a=crypto:1 AES_CM_128_HMAC_SHA1_80
        inline:d0RmdmcmVCspeEc3QGZiNWpVLFJhQX1cfHAwJSoj|2^20|1:32
      a=rtpmap:96 H261/90000
@@ -1329,16 +1380,17 @@ SDP Answer signaling only SDES
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-
-SDP Offer 
+Offer 
 
      v=0
      o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
      s=
      c=IN IP4 host.atlanta.example.com
      t=0 0
+
      m=audio 49170 RTP/AVP 99
      a=rtpmap:99 iLBC/8000
+
      m=video 51372 RTP/AVP 31 32
      a=rtpmap:31 H261/90000
      a=rtpmap:32 MPV/90000
@@ -1350,15 +1402,17 @@ SDP Offer
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
 
-SDP Answer 
+Answer 
 
      v=0
      o=bob 2808844564 2808844565 IN IP4 host.biloxi.example.com
      s=
      c=IN IP4 host.biloxi.example.com
      t=0 0
+
      m=audio 49172 RTP/AVP 99
      a=rtpmap:99 iLBC/8000
+
      m=video 51374 RTP/AVP 31 32
      a=rtpmap:31 H261/90000
      a=rtpmap:32 MPV/90000
@@ -1381,19 +1435,20 @@ SDP Answer
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-
-SDP Offer 
+Offer 
 
     v=0
     o=ali 1122334455 1122334466 IN IP4 fec.example.com
     s=Raptor RTP FEC Example
     t=0 0
     a=group:FEC-FR S1 R1
+
     m=video 30000 RTP/AVP 100
     c=IN IP4 233.252.0.1/127
     a=rtpmap:100 MP2T/90000
     a=fec-source-flow: id=0
     a=mid:S1
+
     m=application 30000 RTP/AVP 110
     c=IN IP4 233.252.0.2/127
     a=rtpmap:110 raptorfec/90000
@@ -1413,10 +1468,10 @@ SDP Offer
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-
-SDP Offer 
+Offer 
 
     v=0
+
     m=video 49170 RTP/AVP 100 99 98
     a=rtpmap:98 H264/90000
     a=fmtp:98 profile-level-id=42A01E; packetization-mode=0;
@@ -1435,25 +1490,26 @@ SDP Offer
 
       <section anchor="sec-diffcodecdiffresolutions"
                title="Different Video Codecs With Different Resolutions Formats">
-        <t>The SDP below shows various ways to specify resolutions for video
+        <t>The SDP below shows some m-blocks with various ways to specify resolutions for video
         codecs signaled <xref target="RFC4566"></xref>.</t>
 
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
+Offer 
 
-SDP Offer 
-
-    m=video 49170/2 RTP/AVP 31
+    m=video 49170 RTP/AVP 31
     a=rtpmap:31 H261/90000
     a=fmtp:31 CIF=2;QCIF=1;D=1
     
-    m=video 49170/2 RTP/AVP 98 99
-    a=rtpmap:98 jpeg2000/27000000
+    m=video 49172 RTP/AVP 99
     a=rtpmap:99 jpeg2000/90000
-    a=fmtp:98 sampling=YCbCr-4:2:0;width=128;height=128
     a=fmtp:99 sampling=YCbCr-4:2:0;width=128;height=128
-    
+
+    m=video 49174 RTP/AVP 96
+    a=rtpmap:96 VP8/90000	
+    a=fmtp:96 max-fr=30;max-fs=3600; 
+    a=imageattr:96 [x=1280,y=720]    
 
 ]]></artwork>
         </figure>
@@ -1466,16 +1522,17 @@ SDP Offer
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-
-SDP Offer 
+Offer 
 
     v=0
     o=Laura 289083124 289083124 IN IP4 one.example.com
     c=IN IP4 192.0.2.1
     t=0 0
     a=group:LS 1 2
+
     m=audio 30000 RTP/AVP 0
     a=mid:1
+
     m=video 30002 RTP/AVP 31
     a=mid:2
 ]]></artwork>
@@ -1483,13 +1540,12 @@ SDP Offer
       </section>
 
       <section anchor="sec-bfcp" title="BFCP">
-       <t> <xref target="RFC4583"></xref> defines SDP foramt for Binary
+       <t> <xref target="RFC4583"></xref> defines SDP format for Binary
        Floor Control Protocol (BFCP) as shown below</t> 
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-
-SDP Offer 
+Offer 
 
     m=application 50000 TCP/TLS/BFCP *
     a=setup:passive
@@ -1501,8 +1557,10 @@ SDP Offer
     a=userid:1234
     a=floorid:1 m-stream:10
     a=floorid:2 m-stream:11
+
     m=audio 50002 RTP/AVP 0
     a=label:10
+
     m=video 50004 RTP/AVP 31
     a=label:11
   
@@ -1511,7 +1569,10 @@ SDP Offer
 
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
-                   xml:space="preserve"><![CDATA[    m=application 50000 TCP/TLS/BFCP *
+                   xml:space="preserve"><![CDATA[    
+Answer
+
+    m=application 50000 TCP/TLS/BFCP *
     a=setup:passive
     a=connection:new
     a=fingerprint:SHA-1 \
@@ -1521,8 +1582,10 @@ SDP Offer
     a=userid:1234
     a=floorid:1 m-stream:10
     a=floorid:2 m-stream:11
+
     m=audio 50002 RTP/AVP 0
     a=label:10
+
     m=video 50004 RTP/AVP 31
     a=label:11
     
@@ -1538,29 +1601,32 @@ SDP Offer
     <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-
-SDP Offer with session multiplexing 
+Offer
 
    v=0
    o=mascha 2980675221 2980675778 IN IP4 host.example.net
    c=IN IP4 192.0.2.0
    a=group:FID 1 2
    a=group:FID 3 4
+
    m=audio 49170 RTP/AVPF 96
    a=rtpmap:96 AMR/8000
    a=fmtp:96 octet-align=1
    a=rtcp-fb:96 nack
    a=mid:1
+
    m=audio 49172 RTP/AVPF 97
    a=rtpmap:97 rtx/8000
    a=fmtp:97 apt=96;rtx-time=3000
    a=mid:2
+
    m=video 49174 RTP/AVPF 98
    a=rtpmap:98 MP4V-ES/90000
    a=rtcp-fb:98 nack
    a=fmtp:98 profile-level-id=8;config=01010000012000884006682C209\
-   0A21F
+      0A21F
    a=mid:3
+
    m=video 49176 RTP/AVPF 99
    a=rtpmap:99 rtx/90000
    a=fmtp:99 apt=98;rtx-time=3000
@@ -1577,17 +1643,17 @@ SDP Offer with session multiplexing
        <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-
-SDP Offer with SSRC multiplexing 
+SDP
 
    v=0
    o=mascha 2980675221 2980675778 IN IP4 host.example.net
    c=IN IP4 192.0.2.0
+
    m=video 49170 RTP/AVPF 96 97
    a=rtpmap:96 MP4V-ES/90000
    a=rtcp-fb:96 nack
    a=fmtp:96 profile-level-id=8;config=01010000012000884006682C209\
-   0A21F
+     0A21F
    a=rtpmap:97 rtx/90000
    a=fmtp:97 apt=96;rtx-time=3000
   
@@ -1605,35 +1671,37 @@ SDP Offer with SSRC multiplexing
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-
-SDP Offer 
+Offer 
 
     a=group:DDP L1 L2 L3
+
     m=video 20000 RTP/AVP 96 97 98
     a=rtpmap:96 H264/90000
     a=fmtp:96 profile-level-id=4de00a; packetization-mode=0;
-    mst-mode=NI-T; sprop-parameter-sets={sps0},{pps0};
+      mst-mode=NI-T; sprop-parameter-sets={sps0},{pps0};
     a=rtpmap:97 H264/90000
     a=fmtp:97 profile-level-id=4de00a; packetization-mode=1;
-    mst-mode=NI-TC; sprop-parameter-sets={sps0},{pps0};
+      mst-mode=NI-TC; sprop-parameter-sets={sps0},{pps0};
     a=rtpmap:98 H264/90000
     a=fmtp:98 profile-level-id=4de00a; packetization-mode=2;
-    mst-mode=I-C; init-buf-time=156320;
-    sprop-parameter-sets={sps0},{pps0};
+      mst-mode=I-C; init-buf-time=156320;
+      sprop-parameter-sets={sps0},{pps0};
     a=mid:L1
+
     m=video 20002 RTP/AVP 99 100
     a=rtpmap:99 H264-SVC/90000
     a=fmtp:99 profile-level-id=53000c; packetization-mode=1;
-    mst-mode=NI-T; sprop-parameter-sets={sps1},{pps1};
+      mst-mode=NI-T; sprop-parameter-sets={sps1},{pps1};
     a=rtpmap:100 H264-SVC/90000
     a=fmtp:100 profile-level-id=53000c; packetization-mode=2;
-    mst-mode=I-C; sprop-parameter-sets={sps1},{pps1};
+      mst-mode=I-C; sprop-parameter-sets={sps1},{pps1};
     a=mid:L2
     a=depend:99 lay L1:96,97; 100 lay L1:98
+
     m=video 20004 RTP/AVP 101
     a=rtpmap:101 H264-SVC/90000
     a=fmtp:101 profile-level-id=53001F; packetization-mode=1;
-    mst-mode=NI-T; sprop-parameter-sets={sps2},{pps2};
+      mst-mode=NI-T; sprop-parameter-sets={sps2},{pps2};
     a=mid:L3
     a=depend:101 lay L1:96,97 L2:99
 ]]></artwork>
@@ -1648,8 +1716,7 @@ SDP Offer
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
-
-SDP Offer 
+Offer 
 
     m=video 49170 RTP/AVP 96
     a=rtpmap:96 H264/90000
@@ -1671,19 +1738,22 @@ SDP Offer
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
+Offer 
 
-SDP Offer 
- v=0
+    v=0
     o=Alice 292742730 29277831 IN IP4 131.163.72.4
     s=Second lecture from information technology
     c=IN IP4 131.164.74.2
     t=0 0
+
     m=video 52886 RTP/AVP 31
     a=rtpmap:31 H261/9000
     a=content:slides
+
     m=video 53334 RTP/AVP 31
     a=rtpmap:31 H261/9000
     a=content:speaker
+
     m=video 54132 RTP/AVP 31
     a=rtpmap:31 H261/9000
     a=content:sl

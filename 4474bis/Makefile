@@ -6,14 +6,10 @@ TXT  := $(patsubst %.xml,%.txt,$(SRC))
 DIF  := $(patsubst %.xml,%.diff.html,$(SRC))
 PDF  := $(patsubst %.xml,%.pdf,$(SRC))
 
-all: $(HTML) $(TXT) $(DIF) $(PDF)
-#all: $(HTML) $(TXT) $(DIF)
+all: $(HTML) $(TXT) $(DIF) 
 
 clean:
-	rm *~ draft*.html draft*pdf draft*txt
-
-#%.html: %.xml
-#	xsltproc -o $@ rfc2629.xslt $^
+	rm *~ draft*.html draft*pdf draft-*txt
 
 %.html: %.xml
 	xml2rfc --html $^ -o $@
