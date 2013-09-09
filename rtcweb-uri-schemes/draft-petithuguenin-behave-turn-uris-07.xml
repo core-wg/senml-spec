@@ -3,7 +3,7 @@
 <?rfc strict="no" ?>
 <?rfc symrefs="yes" ?>
 <?rfc toc="yes" ?>
-<rfc category="std" docName="draft-petithuguenin-behave-turn-uris-06" ipr="trust200902">
+<rfc category="std" docName="draft-petithuguenin-behave-turn-uris-07" ipr="trust200902">
 	<front>
 		<title abbrev="TURN URIs">Traversal Using Relays around NAT (TURN) Uniform Resource Identifiers</title>
 
@@ -63,7 +63,7 @@
 			</address>
 		</author>
 
-		<date day="18" month="August" year="2013"/>
+		<date day="09" month="September" year="2013"/>
 		<area>TSV</area>
 		<workgroup>BEHAVE</workgroup>
 
@@ -105,7 +105,7 @@
 		<section anchor="section.terminology" title="Terminology">
 			<t>
 				The key words "MUST", "MUST NOT", "REQUIRED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <xref target="RFC2119"/> when they appear in ALL CAPS.
-				When these words are not in ALL CAPS (such as "should" or "Should"), they have their usual english meanings, and are not to be interpreted as RFC 2119 key words.
+				When these words are not in ALL CAPS (such as "should" or "Should"), they have their usual English meanings, and are not to be interpreted as RFC 2119 key words.
 			</t>
 		</section>
 
@@ -158,6 +158,7 @@ reg-name      = *( unreserved / pct-encoded / sub-delims )]]>
 
 			<section anchor="section.definition.semantics" title="URI Scheme Semantics">
 				<t>
+					The "turn" and "turns" URI schemes are used to designate a TURN server (also known as a relay) on Internet hosts accessible using the TURN protocol.
 					The TURN protocol supports sending messages over UDP, TCP or TLS-over-TCP.
 					The "turns" URI scheme MUST be used when TURN is run over TLS-over-TCP (or in the future DTLS-over-UDP) and the "turn" scheme MUST be used otherwise.
 				</t>
@@ -243,14 +244,13 @@ reg-name      = *( unreserved / pct-encoded / sub-delims )]]>
 		</section>
 
 		<section anchor="section.security" title="Security Considerations">
-			<t>Security considerations for the resolution mechanism are discussed in <xref target="RFC5928"/>.</t>
+			<t>
+				Security considerations for the resolution mechanism are discussed in Section 5 of <xref target="RFC5928"/>.
+				Note that this section contains normative text defining authentication procedures to be followed by turn clients when TLS is used.
+			</t>
 
 			<t>The "turn" and "turns" URI schemes do not introduce any specific security issues beyond the security considerations discussed in <xref target="RFC3986"/>.</t>
 
-			<t>
-				Security considerations for the resolution mechanism are discussed in Section 5 of <xref target="RFC5928"/>.
-				Note that that section contains normative text defining authentication procedures to be followed by turn clients when TLS is used.
-			</t>
 		</section>
 
 		<section anchor="section.iana" title="IANA Considerations">
@@ -265,7 +265,7 @@ reg-name      = *( unreserved / pct-encoded / sub-delims )]]>
 				<t>Applications/protocols that use this URI scheme name:</t>
 				<t>
 					<list>
-						<t>The "turn" URI scheme is intended to be used by applications that might need access to a TURN server.</t>
+						<t>The "turn" URI scheme is intended to be used by applications with a need to identify a TURN server to be used for NAT traversal.</t>
 					</list>
 				</t>
 				<t>Interoperability considerations: N/A</t>
@@ -285,7 +285,7 @@ reg-name      = *( unreserved / pct-encoded / sub-delims )]]>
 				<t>Applications/protocols that use this URI scheme name:</t>
 				<t>
 					<list>
-						<t>The "turns" URI scheme is intended to be used by applications that might need access to a TURN server over a secure connection.</t>
+						<t>The "turns" URI scheme is intended to be used by applications with a need to identify a TURN server to be used for NAT traversal over a secure connection.</t>
 					</list>
 				</t>
 
@@ -622,14 +622,12 @@ reg-name      = *( unreserved / pct-encoded / sub-delims )]]>
 		<section title="Release notes">
 			<t>This section must be removed before publication as an RFC.</t>
 
-			<section title="Modifications between petithuguenin-behave-turn-uris-06 and petithuguenin-behave-turn-uris-05">
+			<section title="Modifications between petithuguenin-behave-turn-uris-07 and petithuguenin-behave-turn-uris-06">
 				<t>
 					<list style="symbols">
-						<t>Remove the &lt;IP-literal&gt;, &lt;IPv4address&gt;, and &lt;reg-name&gt; ABNF productions and other dependant productions, added references to RFC 3986, and modified the design note to warn developers against using a hierarchical URI parser.</t>
-						<t>Update the normative reference for RFC 6982, refresh the boilerplate, moved the download links into the name item.</t>
-						<t>Modify the release notes to add "auth" to the list of parameters not supported.</t>
-						<t>Add clarification that RFC 5766 and 5928 are the references for finding the default port.</t>
-						<t>Add paragraph in security section making clear tha reading RFC 5928 section 5 is essential.</t>
+						<t>Updated the applications/protocols entry in the scheme registration form.</t>
+						<t>Merged the first and last paragraphs of the security section.</t>
+						<t>Repeated the description of what turn/turns URIs actually identify in the semantics section so it is reachable from the URI registration.</t>
 					</list>
 				</t>
 			</section>
