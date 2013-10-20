@@ -4,7 +4,7 @@ SRC  := $(wildcard draft-*.xml)
 HTML := $(patsubst %.xml,%.html,$(SRC))
 TXT  := $(patsubst %.xml,%.txt,$(SRC))
 DIF  := $(patsubst %.xml,%.diff.html,$(SRC))
-PDF  := $(patsubst %.xml,%.pdf,$(SRC))
+#PDF  := $(patsubst %.xml,%.pdf,$(SRC))
 
 all: $(HTML) $(TXT) $(DIF) 
 
@@ -20,6 +20,6 @@ clean:
 %.diff.html: %.txt
 	htmlwdiff  $^.old $^ >  $@
 
-%.pdf: %.html
-	wkpdf -p letter -s $^ -o $@
+#%.pdf: %.html
+#	wkpdf -p letter -s $^ -o $@
 
