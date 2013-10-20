@@ -9,10 +9,10 @@
 <?rfc rfcedstyle="no" ?>
 <?rfc tocdepth="4"?>
 
-<rfc category="std" docName="draft-jennings-perpass-secure-rai-cloud-00."
-     ipr="pre5378Trust200902">
+<rfc category="std" docName="draft-jennings-perpass-secure-rai-cloud-00"
+     ipr="trust200902">
   <front>
-    <title abbrev="SIP Identity">An Archatecture for a Secure Cloud Comllboration System</title>
+    <title abbrev="SIP Identity">An Architecture for a Secure Cloud Collaboration System</title>
 
  
     <author fullname="Cullen Jennings" initials="C." surname="Jennings">
@@ -41,13 +41,17 @@
     <area>RAI</area>
 
     <abstract>
-      <t></t>
+      <t> This draft outlines an architecture for building cloud
+      collaboration systems where the users retain possession of the keys
+      to decrypt the data and the cloud servers never see the keys. </t>
     </abstract>
   </front>
 
   <middle>
     <section title="Preamble">
-      <t>The </t>
+      <t> This draft failed to render in ASCII, you have to go read
+      the PDF version. Sorry - will fix some time later if anyone
+      cares.  </t>
  
     </section>
   </middle>
