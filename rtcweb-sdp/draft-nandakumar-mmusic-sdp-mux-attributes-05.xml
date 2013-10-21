@@ -10,7 +10,7 @@
 <?rfc rfcedstyle="no" ?>
 <?rfc tocdepth="4"?>
 
-<rfc category="std" docName="draft-nandakumar-mmusic-sdp-mux-attributes-03"
+<rfc category="std" docName="draft-nandakumar-mmusic-sdp-mux-attributes-05"
      ipr="trust200902">
   <front>
     <title abbrev="SDP Attribute Multiplexing">A Framework for SDP Attributes
@@ -36,7 +36,7 @@
       </address>
     </author>
 
-    <date day="15" month="July" year="2013" />
+    <date day="18" month="October" year="2013" />
 
     <area>MMUSIC</area>
 
@@ -260,17 +260,16 @@
          <t hangText="TRANSPORT"> Attributes that can be set normally for
          multiple items in a multiplexed group but the software MUST pick just
          one of the attribute of the given type for use. The one chosen is the
-         attribute associated with the "m=" lines that represents the information
+         attribute associated with the "m=" line that represents the information
          being used for the transport of the RTP.</t>
      <t>&nbsp;</t>
      <t>
       In the example below, "a=crypto" attribute is defined for both the audio and
-      the video m=lines.The one that MUST be used for the multiplexed RTP Session is
-      the one that corresponds to m=line with mid "two" even though the audio m=line with
-      mid "one" appears ahead of it in the SDP. This is due to BUNDLE grouping semantics
-      <xref target="I-D.ietf-mmusic-sdp-bundle-negotiation"></xref> which
-      mandates the values from m=line corresponding to the mid appearing first on the
-      a=group:BUNDLE line to be considered for setting up the RTP Transport.
+      the video m=lines. The video media line's a=crypto attribute is chosen since
+      its mid value (bar) appears first in the a=group:BUNDLE line. This is due to
+      BUNDLE grouping semantic <xref target="I-D.ietf-mmusic-sdp-bundle-negotiation"></xref>
+      which mandates the values from m=line corresponding to the mid appearing first
+      on the a=group:BUNDLE line to be considered for setting up the RTP Transport.
      <figure>
        <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
@@ -281,14 +280,14 @@
      s=
      c=IN IP4 host.atlanta.example.com
      t=0 0
-     a=group:BUNDLE two,one
+     a=group:BUNDLE bar foo
      m=audio 49172 RTP/AVP 99
-     a=mid:one
+     a=mid:foo
      a=crypto:1 AES_CM_128_HMAC_SHA1_80
        inline:d0RmdmcmVCspeEc3QGZiNWpVLFJhQX1cfHAwJSoj|2^20|1:32
      a=rtpmap:99 iLBC/8000
      m=video 51374 RTP/AVP 31
-     a=mid:two
+     a=mid:bar
      a=crypto:1 AES_CM_128_HMAC_SHA1_80
        inline:EcGZiNWpFJhQXdspcl1ekcmVCNWpVLcfHAwJSoj|2^20|1:32
      a=rtpmap:96 H261/90000
@@ -315,7 +314,7 @@
     </t>
     <t>
       <xref target="SecCurrAnalysis"/> analyzes attributes listed in <xref target="IANA">IANA</xref>
-      grouped under the IETF document that defines them. The "Current" column indicates
+      grouped under the IETF document that defines them. The "Level" column indicates
       whether the attribute is currently specified as:
     </t>
     <t>
@@ -340,7 +339,7 @@
       <texttable title="RFC4566 Attribute Analysis">
         <ttcol align='left'>Attr Name</ttcol>
         <ttcol align='left'>Notes</ttcol>
-        <ttcol align='left'>Current</ttcol>
+        <ttcol align='left'>Level</ttcol>
         <ttcol align='left'>Category</ttcol>
 
         <c>sendrecv&nbsp;</c><c>Not impacted&nbsp;</c><c>B&nbsp;</c>
@@ -426,15 +425,92 @@
       <texttable title="RFC4585 Attribute Analysis">
         <ttcol align='left'>Attr Name</ttcol>
         <ttcol align='left'>Notes</ttcol>
-        <ttcol align='left'>Current</ttcol>
+        <ttcol align='left'>Level</ttcol>
         <ttcol align='left'>Category</ttcol>
 
-        <c>rtcp-fb&nbsp;</c><c>Since RTCP feedback are reported per RTP
-        Session,&nbsp; this attribute should be repeated across m=
-        lines</c><c>M</c><c>IDENTICAL&nbsp;</c>
+        <c>rtcp-fb&nbsp;</c><c>RTCP reporting happens per RTP Session.</c>
+        <c>M</c><c>IDENTICAL&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
       </texttable>
+      <t>
+        <list style="hanging">
+          <t>OPEN ISSUE:Below SDP examples show 3 scenarios on implications
+          of allowing Payload Types to be repated or not repeated within
+          the BUNDLEd m= lines.</t>
+        </list>
+       </t>
+      <t>
+       Scenario1: Payload Types are not shared and rtcp-fb is mandated
+       for all the multiplexed m=lines. This scenario leads into
+       assigning category "NOT IMPACTED" for rtcp-fb and its paramters
+       since RTCP reporting happens per PayloadType with in a BUNDLED
+       RTP Session, thus allowing for unique reporting.
+      </t>
+<figure>
+<artwork align="left" alt="" height="" name="" type="" width=""
+          xml:space="preserve"><![CDATA[
+a=group:BUNDLE audio video
+m=audio 3456 RTP/AVP 97
+a=mid:audio
+a=rtpmap:97 iLBC/8000
+m=video 3456 RTP/AVP 98
+a=mid:video
+a=rtpmap:98 VP8/90000
+a-rtcp-fb:98 nack rpsi
+]]></artwork>
+</figure>
+      <t>
+       Scenario2: Payload Types are shared and rtcp-fb is repeated
+       across all the multiplexed m= lines with same feedback type
+       (nack). This leads to assigning category "IDENTICAL" to
+       rtcp-fb which allows NACK and NACK RPSI reporting to be done
+       for PT 98 in this example.
+      </t>
+<figure>
+<artwork align="left" alt="" height="" name="" type="" width=""
+          xml:space="preserve"><![CDATA[
+a=group:BUNDLE audio video
+m=audio 3456 RTP/AVP 98
+a=mid:audio
+a=rtpmap:98 iLBC/8000
+a=rtcp-fb:98 nack
+m=video 3456 RTP/AVP 98
+a=mid:video
+a=rtpmap:98 VP8/90000
+a-rtcp-fb:98 nack rpsi
+]]></artwork>
+</figure>
+      <t>In the below case, audio media line has rtcp-fb ack and video
+       video media line has rtcp-fb nack with Payload types shared.
+       With such a configuration, positive acks are reported for video stream
+       even it was not intended and negative acks are reported for audio
+       stream unintended.</t>
+<figure>
+<artwork align="left" alt="" height="" name="" type="" width=""
+          xml:space="preserve"><![CDATA[
+// PTs are shared and have different feedback types
+a=group:BUNDLE audio video
+m=audio 3456 RTP/AVP 98
+a=mid:audio
+a=rtpmap:98 iLBC/8000
+a=rtcp-fb ack                  // Positive ACK
+m=video 3456 RTP/AVP 98
+a=mid:video
+a=rtpmap:98 VP8/90000
+a-rtcp-fb:98 nack rpsi        // Nack ACK
+]]></artwork>
+</figure>
+      <t>
+        <list style="hanging">
+          <t>OPEN ISSUE: Should BUNDLE disallow PT to be repeated ??
+          What does it mean if PTs are shared in the context of rtcp-fb ??.
+          Magnus pointed out that RTCP FB reporting MUST happen per (PT+Media Source)
+          when BUNDLED. If this is allowed, the category of "IDENTICAL" applies
+          with rtcp-fb for all m= lines and update BUNDLE spec to mandate the
+          behavior. Does this sound fine ?</t>
+        </list>
+      </t>
     </section>
 
 
@@ -450,7 +526,7 @@
         <texttable title="RFC5761 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>rtcp-mux&nbsp;</c><c>RTCP muxing should be repeated across all the
@@ -462,7 +538,8 @@
 
       <section title="RFC4574 - SDP Label Attribute ">
         <t>
-          <xref target="RFC4574">RFC4574</xref> defines a new Session Description Protocol (SDP)
+          <xref target="RFC4574">RFC4574</xref> defines a new
+          Session Description Protocol (SDP)
           media-level attribute: "label".  The "label" attribute carries a
           pointer to a media stream in the context of an arbitrary network
           application that uses SDP.  The sender of the SDP document can attach
@@ -473,7 +550,7 @@
         <texttable title="RFC4574 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>label&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
@@ -484,21 +561,26 @@
 
       <section title="RFC5432 - QoS Mechanism Selection in SDP">
         <t>
-          <xref target="RFC5432">RFC5432</xref> defines prordures to negotiate QOS mechanisms using the
-          Session Description Protocol (SDP) offer/answer model.
+          <xref target="RFC5432">RFC5432</xref> defines prordures to negotiate
+          QOS mechanisms using the Session Description Protocol (SDP)
+          offer/answer model.
         </t>
         <texttable title="RFC5432 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>qos-mech-send&nbsp;</c><c>Since QOS mechanism are signaled per flow, multiplexing multiple 
-          m=lines has no impact on per m=line QOS mechanism.&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
+          <c>qos-mech-send&nbsp;</c>
+          <c>Since QOS mechanism are signaled per flow, multiplexing multiple
+          m=lines has no impact on per m=line QOS mechanism.&nbsp;</c>
+          <c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>qos-mech-recv&nbsp;</c><c>Since QOS mechanism are signaled per flow, multiplexing multiple 
-          m=lines has no impact on per m=line QOS mechanism.&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
+          <c>qos-mech-recv&nbsp;</c>
+          <c>Since QOS mechanism are signaled per flow, multiplexing multiple
+          m=lines has no impact on per m=line QOS mechanism.&nbsp;</c>
+          <c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
       </section>
@@ -514,10 +596,10 @@
         <texttable title="RFC4568 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>crypto&nbsp;</c><c>The multiplexing scheme MUST ensure unique SSRCs across all the 
+          <c>crypto&nbsp;</c><c>The multiplexing scheme MUST ensure unique SSRCs across all the
           media lines multiplexed. In that case, cryptographic keys corresponding to the underlying
           transport is used.</c><c>M&nbsp;</c><c>TRANSPORT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
@@ -543,14 +625,14 @@
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>dccp-service-code&nbsp;</c><c>If RFC 6773 is not being used in addition to RFC 5762, 
+          <c>dccp-service-code&nbsp;</c><c>If RFC 6773 is not being used in addition to RFC 5762,
          the port in the m= line is a DCCP port. DCCP being  a connection oriented protocol,
          does not allow multiple connections on the same 5-tuple.&nbsp;</c>
           <c>M&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c><c>&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
         <t hangText="Note">If RFC 6773 is being used in addition to RFC 5762 and provided
-         that DCCP-in-UDP layer has additional demultiplexing, then it may be 
+         that DCCP-in-UDP layer has additional demultiplexing, then it may be
          possible to use different DCCP service codes for each DCCP flow, given
          each uses a different DCCP port. Although doing so might conflict with the
          media type of the m= line. None of this is standardised yet and it
@@ -570,7 +652,7 @@
         <texttable title="RFC6773 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>dccp-port&nbsp;</c><c> Multiplexing MUST NOT be performed due to potential
@@ -590,7 +672,7 @@
         <texttable title="RFC5506 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>rtcp-rsize&nbsp;</c><c>RTCP reduced size MUST be repeated across all the
@@ -620,15 +702,19 @@
         <texttable title="RFC6787 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>resource&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>resource&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c>
+          <c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>channel&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>channel&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c>
+          <c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
+          <c>&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c>
+          <c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -649,14 +735,10 @@
         <texttable title="RFC5245 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>ice-lite&nbsp;</c><c>Not Impacted&nbsp;</c>
-          <c>S</c><c>NORMAL&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
-          <c>ice-options&nbsp;</c><c>Not Impacted&nbsp;</c>
           <c>S</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
@@ -675,7 +757,7 @@
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
           <c>candidate&nbsp;</c><c>Per media-level attribute MUST be used per
-          underlying transport flow&nbsp;</c><c></c><c>TRANSPORT&nbsp;</c>
+          underlying transport flow&nbsp;</c><c>M</c><c>TRANSPORT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
           <c>remote-candidates&nbsp;</c><c>Per media-level attribute MUST be used per
@@ -697,7 +779,7 @@
         <texttable title="RFC5285 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>extmap&nbsp;</c><c>Specific RTP extension document MUST be referred&nbsp;</c>
@@ -716,12 +798,12 @@
         <texttable title="RFC3605 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>rtcp&nbsp;</c><c>Case1:Same RTCP port is repeated across the m=lines.
             Case2:Different RTCP ports renders multiplexing impossible&nbsp;</c><c>M</c>
-          <c>IDENTICAL&nbsp;</c>
+          <c>TRANSPORT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -730,30 +812,35 @@
       <section title="RFC5576 - Source-Specific SDP Attributes">
         <t>
           <xref target="RFC5576">RFC5576</xref> defines a mechanism to describe
-          RTP media sources, which are identified by their synchronization source (SSRC)
-          identifiers, in SDP, to associate attributes with these sources, and to express
-          relationships among sources.  It also defines several source-level
-          attributes that can be used to describe properties of media sources.</t>
+          RTP media sources, which are identified by their synchronization
+          source (SSRC) identifiers, in SDP, to associate attributes with
+          these sources, and to express relationships among sources. It also
+          defines several source-level attributes that can be used to describe
+          properties of media sources.</t>
         <texttable title="RFC5576 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>ssrc&nbsp;</c><c>SSRCs repeated over multiple m=lines is forbidden
-	  if the m-lines are in the same RTP session.
+	        if the m-lines are in the same RTP session.
           &nbsp;</c><c>M</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>ssrc-group&nbsp;</c><c>Refer to section <xref target="SecssrcgroupAnalysis"></xref>
-          for specific analysis of the grouping semantics&nbsp;</c><c>M</c><c>SPECIAL&nbsp;</c>
+          <c>ssrc-group&nbsp;</c>
+          <c>Refer to section <xref target="SecssrcgroupAnalysis"></xref>
+          for specific analysis of the grouping semantics&nbsp;</c><c>M</c>
+          <c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>cname&nbsp;</c><c>Not Impacted [Open Issues: what are the rules for CNAME duplication
+          <c>cname&nbsp;</c>
+          <c>Not Impacted [Open Issues: what are the rules for CNAME duplication
 	  across sessions?]&nbsp;</c><c>SR</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>previous-ssrc&nbsp;</c><c>SSRCs repeated over multiple m=lines complicates
+          <c>previous-ssrc&nbsp;</c>
+          <c>SSRCs repeated over multiple m=lines complicates
           multiplexing&nbsp;</c><c>SR</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
@@ -762,26 +849,45 @@
 
 
         </texttable>
+        <t>
+          <list style="hanging">
+            <t>OPEN ISSUE:LNX: There has been concern on how to deal with SSRC
+              values repeated across the multiplexed m= lines. Lennox suggested
+              to possible options to deal with it. The simpler is to say that
+              individual SSRC values
+              in a=ssrc attributes MUST NOT be repeated across bundled m-lines,
+              but other than that the behavior is normal. The more complicated
+              is to say that SSRC attributes MAY be repeated across bundled
+              m-lines, iff the media stream satisfies more than one m-line.
+              In this case, it's up to the individual source attributes to
+              define what's allowed.</t>
+             <t>
+              Should BUNDLE allow SSRCs to be repeated ? If so, should the
+              category for the source attributes be SPECIAL and update
+              RFC5576 to add text to define multiplexing scenarios.</t>
+          </list>
+        </t>
       </section>
 
       <section title="RFC6236 - Image Attributes in SDP">
         <t>
-          <xref target="RFC6236">RFC6236</xref> proposes a new generic session setup
-          attribute to make it possible to negotiate different image attributes
-          such as image size.  A possible use case is to make it possible for a low-end hand-
-          held terminal to display video without the need to rescale the image,
-          something that may consume large amounts of memory and processing
-          power.  The document also helps to maintain an optimal bitrate for
-          video as only the image size that is desired by the receiver is
-          transmitted.
+          <xref target="RFC6236">RFC6236</xref> proposes a new generic session
+          setup attribute to make it possible to negotiate different image attributes
+          such as image size.  A possible use case is to make it possible for a
+          low-end hand-held terminal to display video without the need to
+          rescale the image,something that may consume large amounts of memory
+          and processing power. The document also helps to maintain an optimal
+          bitrate for video as only the image size that is desired by the
+          receiver is transmitted.
         </t>
         <texttable title="RFC6236 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>imageattr&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>imageattr&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c>
+          <c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -802,7 +908,7 @@
         <texttable title="RFC6285 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>rams-updates&nbsp;</c><c>Not recommended &nbsp;</c><c>M&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
@@ -825,7 +931,7 @@
         <texttable title="RFC6230 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>cfw-id&nbsp;</c><c>Not Applicable&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -848,16 +954,19 @@
         <texttable title="RFC6364 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>fec-source-flow&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>fec-source-flow&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c>
+          <c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>fec-repair-flow&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>fec-repair-flow&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c>
+          <c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>repair-window&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>repair-window&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c>
+          <c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -865,18 +974,19 @@
 
       <section title="RFC4796 - Content Attribute">
         <t>
-          <xref target="RFC4796">RFC4796</xref> defines a new Session Description Protocol (SDP) media-
-          level attribute, 'content'.  The 'content' attribute defines the
-          content of the media stream to a more detailed level than the media
-          description line.  The sender of an SDP session description can
-          attach the 'content' attribute to one or more media streams.  The
-          receiving application can then treat each media stream differently
-          (e.g., show it on a big or small screen) based on its content.
+          <xref target="RFC4796">RFC4796</xref> defines a new Session Description
+          Protocol (SDP) media-level attribute, 'content'.  The 'content'
+          attribute defines the content of the media stream to a more detailed
+          level than the media description line.  The sender of an SDP session
+          description can attach the 'content' attribute to one or more
+          media streams.  The receiving application can then treat each media
+          stream differently (e.g., show it on a big or small screen) based on
+          its content.
         </t>
         <texttable title="RFC4796 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>content&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -894,31 +1004,29 @@
         <texttable title="RFC3407 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>sqn&nbsp;</c><c>Not Impacted&nbsp;</c>
-          <c>B</c><c>NORMAL&nbsp;</c>
+         <c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>cdsc&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
+          <c>csdc&nbsp;</c><c>Mismatch in the offered capability description MAY fail
+            multiplexing.&nbsp;</c><c>B</c><c>TBD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>cpar&nbsp;</c><c>Represents encapsulating attribute&nbsp;</c><c>B</c>
-          <c>TBD&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          <c>cpar&nbsp;</c><c>Mismatch in the offered capability parameters MAY fail
+            multiplexing.&nbsp;</c><c>B</c><c>TBD&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>cparmin&nbsp;</c><c>Represents encapsulating attribute&nbsp;</c><c>B</c>
-          <c>TBD&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          <c>cparmin&nbsp;</c><c>Mismatch in the offered capability parameters MAY fail
+            multiplexing.&nbsp;</c><c>B</c><c>TBD&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>cparmax&nbsp;</c><c>Represents encapsulating attribute&nbsp;</c><c>B</c>
-          <c>TBD&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          <c>cparmax&nbsp;</c><c>Mismatch in the offered capability parameters MAY fail
+            multiplexing.&nbsp;</c><c>B</c><c>TBD&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
-         <t hangText="Note">
-          For attributes that encapsulate other attributes, the negotiation procedures
-          decides the final selection of the attribute from the one or more attributes 
-          encapsulated. Multiplexing of media lines with encapsulating attributes
-          requires further analysis.
-        </t>
       </section>
 
       <section title="RFC6284 - Port Mapping between Unicast and Multicast RTP Sessions">
@@ -933,11 +1041,12 @@
         <texttable title="RFC6284 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>portmapping-req&nbsp;</c><c>Not recommended, if port mapping is
-          required by the application&nbsp;</c><c>M&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          required by the application&nbsp;</c><c>M&nbsp;</c>
+          <c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -945,8 +1054,9 @@
 
       <section title="RFC6714 - MSRP-CEMA">
         <t>
-          <xref target="RFC6714">RFC6714</xref> defines a Message Session Relay Protocol (MSRP)
-          extension, Connection Establishment for Media Anchoring (CEMA).
+          <xref target="RFC6714">RFC6714</xref> defines a
+          Message Session Relay Protocol (MSRP) extension,
+          Connection Establishment for Media Anchoring (CEMA).
           Support of this extension is OPTIONAL.  The extension allows
           middleboxes to anchor the MSRP connection, without the need for
           middleboxes to modify the MSRP messages; thus, it also enables secure
@@ -958,7 +1068,7 @@
         <texttable title="RFC6714 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>msrp-cema&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -978,11 +1088,13 @@
         <texttable title="RFC4583 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>floorctrl&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          <c>floorctrl&nbsp;</c>
+          <c>Must be repeated across all the multiplexed m=lines&nbsp;</c>
+          <c>M&nbsp;</c><c>IDENTICAL&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c>
 
           <c>confid&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
@@ -990,22 +1102,25 @@
           <c>userid&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>floorid&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          <c>floorid&nbsp;</c>
+          <c>The floorid MUST be unique across the multiplexed m=lines&nbsp;</c>
+          <c>M&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
       </section>
 
       <section title="RFC5547 - SDP Offer/Answer for File Transfer">
         <t>
-          <xref target="RFC5547">RFC5547</xref> provides a mechanism to negotiate the transfer of one
-          or more files between two endpoints by using the Session Description
-          Protocol (SDP) offer/answer model specified in <xref target="RFC3264"/>.
+          <xref target="RFC5547">RFC5547</xref> provides a mechanism to negotiate
+          the transfer of one or more files between two endpoints by using
+          the Session Description Protocol (SDP) offer/answer model specified
+          in <xref target="RFC3264"/>.
         </t>
         <texttable title="RFC5547 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>file-selector&nbsp;</c><c>Not Impacted&nbsp;</c>
@@ -1047,20 +1162,23 @@
         <texttable title="draft-ietf-mmusic-media-loopback Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>loopback rtp-pkt-loopback&nbsp;</c><c>The attribute MUST be repeated across all
-           m=lines multiplexed &nbsp;</c><c>M</c><c>IDENTICAL&nbsp;</c>
+          <c>loopback rtp-pkt-loopback&nbsp;</c><c>Not Impacted &nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>loopback rtp-media-loopback&nbsp;</c><c>Not Impacted &nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
+          <c>loopback rtp-media-loopback&nbsp;</c><c>Not Impacted &nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>loopback-source&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
+          <c>loopback-source&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c>
+          <c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>loopback-mirror&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
+          <c>loopback-mirror&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c>
+          <c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -1078,7 +1196,7 @@
         <texttable title="RFC5760 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>rtcp-unicast&nbsp;</c><c>The attribute MUST be reported across all
@@ -1098,7 +1216,7 @@
         <texttable title="RFC3611 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>rtcp-xr&nbsp;</c><c>The attribute MUST be reported across all
@@ -1120,7 +1238,7 @@
         <texttable title="RFC5939 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>pcfg&nbsp;</c><c>Depends on capability being negotiated  &nbsp;</c>
@@ -1131,29 +1249,26 @@
           <c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>csup&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
+          <c>csup&nbsp;</c><c>Depends on capability being negotiated&nbsp;</c><c>B</c>
+          <c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>creq&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
+          <c>creq&nbsp;</c><c>Depends on capability being negotiateds&nbsp;</c><c>B</c>
+           <c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-           <c>acap&nbsp;</c><c>Represents encapsulation attribute&nbsp;</c><c>B</c>
-           <c>TBD&nbsp;</c>
+           <c>acap&nbsp;</c><c>Depends on capability being negotiated&nbsp;</c><c>B</c>
+           <c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>tcap&nbsp;</c><c>Represents encapsulation attribute&nbsp;</c><c>B</c>
-          <c>TBD&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          <c>tcap&nbsp;</c><c>Repeat transport capability across all
+           m= lines&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
-        <t hangText="Note">
-          For attributes that encapsulate other attributes, the negotiation procedures
-          decides the final selection of the attribute from the one or more attributes 
-          encapsulated. Multiplexing of media lines with encapsulating attributes
-          requires further analysis.
-        </t>
       </section>
 
-      <section title="RFC6871 - SDP Media Capabilities Negotiation">
+      <section title="draft-ietf-mmusic-sdp-media-capabilities">
         <t>
           Session Description Protocol (SDP) capability negotiation provides a
           general framework for indicating and negotiating capabilities in SDP.
@@ -1165,7 +1280,7 @@
         <texttable title="draft-ietf-mmusic-sdp-media-capabilities Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>rmcap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
@@ -1177,22 +1292,16 @@
           <c>mfcap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>mscap&nbsp;</c><c>mscap represents encapsulating attribute&nbsp;</c>
-          <c>B</c><c>TBD&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
-          <c>lcfg&nbsp;</c><c>Need to revisit this later&nbsp;</c><c>B</c><c>TBD&nbsp;</c>
+          <c>mscap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>sescap&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
+          <c>lcfg&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>secap&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
-        <t hangText="Note">
-          For attributes that encapsulate other attributes, the negotiation procedures
-          decides the final selection of the attribute from the one or more attributes 
-          encapsulated. Multiplexing of media lines with encapsulating attributes
-          requires further analysis.
-        </t>
       </section>
 
       <section title="RFC4567 - Key Management Extensions for SDP and RTSP">
@@ -1208,7 +1317,7 @@
         <texttable title="RFC4567 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>key-mgmt&nbsp;</c><c>Key management protocol MUST be identical
@@ -1233,7 +1342,7 @@
         <texttable title="RFC4572 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>fingerprint&nbsp;</c><c>Fingerprint value MUST be identical
@@ -1257,7 +1366,7 @@
         <texttable title="RFC4570 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>source-filter&nbsp;</c><c>he attribute MUST be repeated across all
@@ -1284,7 +1393,7 @@
         <texttable title="RFC6128 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>multicast-rtcp&nbsp;</c><c>Multicast RTCP port MUST be
@@ -1304,7 +1413,7 @@
         <texttable title="RFC6189 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>zrtp-hash&nbsp;</c><c>Complicates if all the m=lines are not
@@ -1335,7 +1444,7 @@
 ]]></artwork>
      </figure>
          </t>
-        
+
       </section>
 
       <section title="RFC4145 - Connection-Oriented Media ">
@@ -1349,15 +1458,15 @@
         <texttable title="RFC4145 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>setup&nbsp;</c><c>Should be identical across all m=lines&nbsp;</c>
-          <c>B</c><c>R&nbsp;</c>
+          <c>B</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
           <c>connection&nbsp;</c><c>Should be identical across all m=lines&nbsp;</c>
-          <c>B</c><c>R&nbsp;</c>
+          <c>B</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -1372,22 +1481,22 @@
         <texttable title="RFC5159 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>bcastversion&nbsp;</c><c>Might cause legacy interop issues&nbsp;</c>
+          <c>bcastversion&nbsp;</c><c>&nbsp;</c>
           <c>S</c><c>TBD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>stkmstream&nbsp;</c><c>Might cause legacy interop purposes&nbsp;</c>
+          <c>stkmstream&nbsp;</c><c>&nbsp;</c>
           <c>B</c><c>TBD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>SRTPAuthentication&nbsp;</c><c> Might cause legacy interop issues&nbsp;</c>
+          <c>SRTPAuthentication&nbsp;</c><c>&nbsp;</c>
           <c>M</c><c>TBD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>SRTPROCTxRate&nbsp;</c><c>Might cause legacy interop issues&nbsp;</c>
+          <c>SRTPROCTxRate&nbsp;</c><c>&nbsp;</c>
           <c>M</c><c>TBD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
@@ -1407,7 +1516,7 @@
         <texttable title="RFC6193 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>ike-setup&nbsp;</c><c>Attribute MUST be identical
@@ -1427,7 +1536,7 @@
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
-        <t hangText="Note"> With the above SDP constraints, a session multiplexed with 
+        <t hangText="Note"> With the above SDP constraints, a session multiplexed with
         multiple m=lines will use only one IPSec association for all of the m= lines.
         </t>
       </section>
@@ -1444,7 +1553,7 @@
         <texttable title="RFC6064 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>X-predecbufsize&nbsp;</c><c>Case1:Aggregate total when video m-lines
@@ -1491,104 +1600,109 @@
           grouped with alt-group on mulitplexing&nbsp;</c><c>M</c><c>TBD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>3GPP-Adaptation-Support&nbsp;</c><c>Not recommended for legacy
-          interop purposes&nbsp;</c><c>M</c><c>TBD&nbsp;</c>
+          <c>3GPP-Adaptation-Support&nbsp;</c><c>&nbsp;</c><c>M</c><c>TBD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
           <c>3GPP-QoE-Metricsn&nbsp;</c>
-          <c>Not recommended for legacy interop purposes&nbsp;</c><c>B</c><c>TBD&nbsp;</c>
+          <c>&nbsp;</c><c>B</c><c>TBD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>3GPP-Asset-Informatio&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>B</c><c>TBD&nbsp;</c>
+          <c>3GPP-Asset-Informatio&nbsp;</c><c>&nbsp;</c><c>B</c><c>TBD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>mbms-mode&nbsp;</c><c>Not recommended for legacy interop
-          purposes&nbsp;</c><c>B</c><c>TBD&nbsp;</c>
+          <c>mbms-mode&nbsp;</c><c>&nbsp;</c><c>B</c><c>TBD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
           <c>mbms-flowid&nbsp;</c><c>Multiplexing multiple m=lines complicates
           FEC mappings to the transport addresses.&nbsp;</c><c>M</c><c>TBD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>mbms-repair&nbsp;</c><c>Not recommended for legacy
-          interop purposes&nbsp;</c><c>B</c><c>TBD&nbsp;</c>
+          <c>mbms-repair&nbsp;</c><c>&nbsp;</c><c>B</c><c>TBD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
+        <t>
+          <list>
+            <t>OPEN ISSUE:MW: These paramters are defined for the declarative
+            usage in RTSP or multicast/broadcast and dont have O/A defintions.
+            Does BUNDLE apply only to O/A usage ?</t>
+          </list>
+        </t>
       </section>
 
       <section title="RFC3108 - ATM SDP">
         <t>
-          <xref target="RFC3108">RFC3108</xref> describes conventions for using the 
-          Session Description Protocol (SDP) for characterizing ATM bearer connections 
-          using an AAL1, AAL2 or AAL5 adaptation layers.
-        </t>   
-        <t hangText="Note">
-         For AAL1, AAL2 and AAL5, bearer connections can be used to transport 
-         single media streams. In addition, for AAL1 and AAL2, multiple media streams 
-         may be multiplexed into a bearer connection. For all adaptation types 
-         (AAL1, AAL2 and AAL5), bearer connections may be bundled into a single media group.
-         In all cases addressed by RFC3108, a real-time media stream 
-         (voice, video, voiceband data, pseudo-wire and others) or a 
-         multiplex of  media streams is mapped directly into an ATM connection. 
-         RFC3108 does not address cases where  ATM serves as a low-level transport pipe 
-         for IP packets which in turn may carry one or more real-time (e.g. VoIP) 
-         media sessions with a life-cycle different from that of the underlying 
-         ATM transport.
-       </t>
+          <xref target="RFC3108">RFC3108</xref> describes conventions for using
+          the Session Description Protocol (SDP) described for controlling
+          ATM Bearer Connections, and any associated ATM Adaptation Layer (AAL)
+        </t>
         <texttable title="RFC3108 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>aalType&nbsp;</c><c>Not Impacted &nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>eecid&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>aalType&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>capability&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>qosClass&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>bcob&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>stc&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>upcc&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>atmQOSparms&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>atmTrfcDesc&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>abrParms&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>abrSetup&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>bearerType&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>lij&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>anycast&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>cache&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>bearerSigIE&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>aalApp&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>cbrRate&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>sbc&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>clkrec&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>fec&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>prtfl&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>structure&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>cpsSDUsize&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>aal2CPS&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>aal2CPSSDUrate&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>aal2sscs3661unassured&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>aal2sscs3661assured&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>aal2sscs3662&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>aal5sscop&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>atmmap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>silenceSupp&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>ecan&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>gc&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>profileDesc&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>vsel&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>dsel&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>fsel&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>onewaySel&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>codecconfig&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>isup_usi&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>isup_usi&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>chain&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aalType&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>eecid&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aalType&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>capability&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>qosClass&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>bcob&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>stc&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>upcc&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>atmQOSparms&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>atmTrfcDesc&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>abrParms&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>abrSetup&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>bearerType&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>lij&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>anycast&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>cache&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>bearerSigIE&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aalApp&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>cbrRate&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>sbc&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>clkrec&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>fec&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>prtfl&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>structure&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>cpsSDUsize&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2CPS&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2CPSSDUrate&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2sscs3661unassured&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2sscs3661assured&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2sscs3662&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal5sscop&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>atmmap&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>silenceSupp&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>ecan&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>gc&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>profileDesc&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>vsel&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>dsel&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>fsel&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>onewaySel&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>codecconfig&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>isup_usi&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>isup_usi&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>chain&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
+        <t hangText="Note">RFC3108 describes conventions for using the
+          Session Description Protocol (SDP) for characterizing ATM bearer
+          connections using an AAL1, AAL2 or AAL5 adaptation layers. For AAL1,
+          AAL2 and AAL5, bearer connections can be used to transport single
+          media streams. In addition, for AAL1 and AAL2, multiple media streams
+          may be multiplexed into a bearer connection. For all adaptation types
+          (AAL1, AAL2 and AAL5), bearer connections may be bundled into a
+          single media group. In all cases addressed by RFC3108, a real-time
+          media stream (voice, video, voiceband data, pseudo-wire and others) or
+          a multiplex of  media streams is mapped directly into an ATM connection.
+          RFC3108 does not address cases where  ATM serves as a
+          low-level transport pipe for IP packets which in turn may carry one
+          or more real-time (e.g. VoIP) media sessions with a life-cycle
+          different from that of the underlying ATM transport.
+        </t>
      </section>
 
       <section title="3GPP TS 24.182">
@@ -1598,7 +1712,7 @@
         <texttable title="3GPP TS 24.182 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>g.3gpp.cat&nbsp;</c><c>Usage defined for the IP Multimedia Subsystem&nbsp;</c>
@@ -1615,7 +1729,7 @@
         <texttable title="3GPP TS 24.183 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>g.3gpp.crs&nbsp;</c><c>Usage defined for the IP Multimedia Subsystem&nbsp;</c>
@@ -1632,7 +1746,7 @@
         <texttable title="3GPP TS 24.229 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>secondary-realm&nbsp;</c><c>Per media-level attribute MUST be used per
@@ -1675,7 +1789,7 @@
         <texttable title="Historic Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>T38FaxVersion&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
@@ -1705,7 +1819,7 @@
           <c>T38FaxUdpEC&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
-         <t hangText="Note"> The ITU T.38 attributes are clearly unaffected by multiplexing and 
+         <t hangText="Note"> The ITU T.38 attributes are clearly unaffected by multiplexing and
           are specific to the working of the fax protocol itself.</t>
       </section>
 
@@ -1717,18 +1831,18 @@
         <texttable title="Historic Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>h248item&nbsp;</c><c>It is also only applicable for signaling the inclusion of
-          H.248 extension packages to a gateway via the local and remote descriptors.  The 
-          attribute itself is unaffected by multiplexing, but the packaged referenced in a 
+          H.248 extension packages to a gateway via the local and remote descriptors.  The
+          attribute itself is unaffected by multiplexing, but the packaged referenced in a
           specific use of the attribute may be impacted.  Further analysis  of each package
           is needed to determine if there is an issue.  This is only a concern in
           environments using a decomposed server/gateway with H.248 signaled between them.
-          The ITU-T will need to do further analysis of various packages when they specify 
+          The ITU-T will need to do further analysis of various packages when they specify
           how to signal the use of multiplexing to a gateway.&nbsp;</c>
-          <c>B</c><c>SPECIAL&nbsp;</c>
+         <c>B</c><c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -1744,7 +1858,7 @@
         <texttable title="RFC4975 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>accept-types&nbsp;</c><c>Not Impacted&nbsp;</c>
@@ -1774,7 +1888,7 @@
         <texttable title="Unknowns Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>rtpred1&nbsp;</c><c>Not Applicable&nbsp;</c>
@@ -1813,7 +1927,7 @@
        <texttable title="RFC4566 bwtype Analysis">
          <ttcol align='left'>Name</ttcol>
          <ttcol align='left'>Notes</ttcol>
-         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Level</ttcol>
          <ttcol align='left'>Category</ttcol>
 
          <c>bwtype:CT&nbsp;</c><c>Aggregate bandwidth for the conference&nbsp;</c>
@@ -1824,8 +1938,8 @@
          As a session attribute, it specifies the session aggregate unless media-level
          b=RR and/or b=RS attributes are used. Under this interpretation the multiplexing
          scheme has no impact and belongs to NORMAL category. For the media level usage,
-         the aggregate of individual bandwidth values is considered.&nbsp;</c><c>B</c><c>NORMAL, SUM&nbsp;</c>
-         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         the aggregate of individual bandwidth values is considered.&nbsp;</c><c>B</c>
+         <c>NORMAL, SUM&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
        </texttable>
      </section>
      <section title="RFC3556 - SDP Bandwidth Modifiers for RTCP Bandwidth">
@@ -1839,15 +1953,15 @@
        <texttable title="RFC3556 bwtype Analysis">
          <ttcol align='left'>Name</ttcol>
          <ttcol align='left'>Notes</ttcol>
-         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Level</ttcol>
          <ttcol align='left'>Category</ttcol>
 
-         <c>bwtype:RS&nbsp;</c><c>Session level usage represents session aggregate and
+         <c>bwtype:RS&nbsp;</c><c>S level usage represents session aggregate and
          media level usage indicates SUM of the individual values while multiplexing&nbsp;</c>
          <c>B</c><c>NORMAL,SUM</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-         <c>bwtype:RR&nbsp;</c><c>Session level usage represents session aggregate and
+         <c>bwtype:RR&nbsp;</c><c>S level usage represents session aggregate and
          media level usage indicates SUM of the individual values while multiplexing&nbsp;</c>
          <c>B</c><c>NORMAL,SUM&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
@@ -1866,7 +1980,7 @@
        <texttable title="RFC3890 bwtype Analysis">
          <ttcol align='left'>Name</ttcol>
          <ttcol align='left'>Notes</ttcol>
-         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Level</ttcol>
          <ttcol align='left'>Category</ttcol>
 
          <c>bwtype:TIAS&nbsp;</c><c>The usage of TIAS is not clearly defined Offer/Answer
@@ -1877,14 +1991,15 @@
          <c>&nbsp;</c><c>&nbsp;</c>
        </texttable>
        <t hangText="Note"> The intention of TIAS is that the media level bit-rate is
-       multiplied with the known per-packet overhead for the selected transport and 
-       the maxprate value to determine the worst case bit-rate from the transport 
+       multiplied with the known per-packet overhead for the selected transport and
+       the maxprate value to determine the worst case bit-rate from the transport
        to more accurately capture the required usage.
-       Summing TIAS values independently across m=lines and multiplying the computed sum with
-       maxprate and the per-packet overhead would inflate the value significantly.Instead
-       performing multiplication and adding the individual values is a more appropriate
-       usage.This still ignores the fact that this is a send side declaration, and 
-       not intended for receiver negotiation.
+       Summing TIAS values independently across m=lines and multiplying the
+       computed sum with maxprate and the per-packet overhead would inflate the
+       value significantly. Instead performing multiplication and adding the
+       individual values is a more appropriate usage. This still ignores the
+       fact that this is a send side declaration, and not intended for
+       receiver negotiation.
        </t>
      </section>
    </section>
@@ -1903,19 +2018,39 @@
        <texttable title="RFC4585 Attribute Analysis">
          <ttcol align='left'>Attr Name</ttcol>
          <ttcol align='left'>Notes</ttcol>
-         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Level</ttcol>
          <ttcol align='left'>Category</ttcol>
 
-         <c>ack&nbsp;</c><c>Not Impacted </c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>ack rpsi&nbsp;</c><c>Not Impacted </c><c>M</c><c>NORMAL&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-         <c>app&nbsp;</c><c>Not Impacted </c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>ack app&nbsp;</c>
+         <c>Feedback parameters MUST be handled in the app specifc
+         way when multiplexed</c>
+         <c>M</c><c>SPECIAL&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
          <c>nack&nbsp;</c><c>Not Impacted </c><c>M</c><c>NORMAL&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-         <c>trr-int&nbsp;</c><c>Not Impacted </c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>nack pli&nbsp;</c><c>Not Impacted </c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+         <c>nack sli&nbsp;</c><c>Not Impacted </c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+         <c>nack rpsi&nbsp;</c><c>Not Impacted </c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+         <c>nack app&nbsp;</c>
+         <c>Feedback parameters MUST be handled in the app specifc
+         way when multiplexed</c>
+         <c>M</c><c>SPECIAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+         <c>trr-int&nbsp;</c>
+         <c>This attribute applies to RTP Session as a whole</c>
+         <c>M</c><c>IDENTICAL&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
        </texttable>
      </section>
@@ -1932,50 +2067,10 @@
        <texttable title="RFC5104 Attribute Analysis">
          <ttcol align='left'>Attr Name</ttcol>
          <ttcol align='left'>Notes</ttcol>
-         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Level</ttcol>
          <ttcol align='left'>Category</ttcol>
 
          <c>ccm&nbsp;</c><c>Not Impacted</c><c>M</c><c>Normal&nbsp;</c>
-         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-       </texttable>
-     </section>
-   </section>
-   <section title="rtcp-fb &quot;ack/nack&quot; Attribute Analysis" anchor="SecacknackAnalysis">
-     <t>
-       This section analyzes rtcp-fb SDP attributes specific to ack and nack feedback
-       types <xref target="ACK-NACK"></xref>.
-     </t>
-     <section title="RFC4585 - RTP/AVPF">
-       <t>
-         <xref target="RFC4585">RFC4585</xref> defines an extension to the
-         Audio-visual Profile (AVP) that enables receivers to provide, statistically,
-         more immediate feedback to the senders and thus allows for short-term
-         adaptation and efficient feedback-based repair mechanisms to be implemented.
-       </t>
-       <texttable title="RFC4585 Attribute Analysis">
-         <ttcol align='left'>Attr Name</ttcol>
-         <ttcol align='left'>Notes</ttcol>
-         <ttcol align='left'>Current</ttcol>
-         <ttcol align='left'>Category</ttcol>
-
-         <c>nack sli&nbsp;</c><c>Not Impacted </c><c>M</c><c>NORMAL&nbsp;</c>
-         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
-         <c>nack pli&nbsp;</c><c>Not Impacted </c><c>M</c><c>NORMAL&nbsp;</c>
-         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
-         <c>ack rpsi&nbsp;</c><c>Not Impacted </c><c>M</c><c>NORMAL&nbsp;</c>
-         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
-         <c>ack app&nbsp;</c><c> Feedback parameters MUST be handled in the
-         app specifc way when multiplexed</c><c>M</c><c>SPECIAL&nbsp;</c>
-         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
-         <c>nack rpsi&nbsp;</c><c>Not Impacted </c><c>M</c><c>NORMAL&nbsp;</c>
-         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
-         <c>nack app&nbsp;</c><c>Feedback parameters MUST be handled in the
-           app specifc way when multiplexed</c><c>M</c><c>SPECIAL&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
        </texttable>
      </section>
@@ -1983,7 +2078,7 @@
        <texttable title="RFC6285 Attribute Analysis">
          <ttcol align='left'>Name</ttcol>
          <ttcol align='left'>Notes</ttcol>
-         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Level</ttcol>
          <ttcol align='left'>Category</ttcol>
 
          <c>nack rai&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -2005,7 +2100,7 @@
        <texttable title="RFC6679 Attribute Analysis">
          <ttcol align='left'>Name</ttcol>
          <ttcol align='left'>Notes</ttcol>
-         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Level</ttcol>
          <ttcol align='left'>Category</ttcol>
 
          <c>ecn-capable-rtp&nbsp;</c><c>ECN markup are enabled at the RTP Session level&nbsp;</c>
@@ -2032,39 +2127,36 @@
        <texttable title="RFC6642 Attribute Analysis">
          <ttcol align='left'>Name</ttcol>
          <ttcol align='left'>Notes</ttcol>
-         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Level</ttcol>
          <ttcol align='left'>Category</ttcol>
 
-         <c>tllei&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+         <c>nack tllei&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c>
+         <c>NORMAL&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-         <c>pslei&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+         <c>nack pslei&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c>
+         <c>NORMAL&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
        </texttable>
      </section>
-   </section>
-   <section title="Codec Control Messages Analysis" anchor="SecccmAnalysis">
-     <t>
-       This section analyzes rtcp-fb Codec Control Message <xref target="CCM"></xref>.
-     </t>
      <section title="RFC5104 - Codec Control Messages in AVPF">
        <texttable title="RFC5104 Attribute Analysis">
          <ttcol align='left'>Attr Name</ttcol>
          <ttcol align='left'>Notes</ttcol>
-         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Level</ttcol>
          <ttcol align='left'>Category</ttcol>
 
-         <c>fir&nbsp;</c><c>Not Impacted</c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>ccm fir&nbsp;</c><c>Not Impacted</c><c>M</c><c>NORMAL&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-         <c>tmmbr&nbsp;</c><c>Not Impacted</c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>ccm tmmbr&nbsp;</c><c>Not Impacted</c><c>M</c><c>NORMAL&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-         <c>tstr&nbsp;</c><c>Not Impacted</c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>ccm tstr&nbsp;</c><c>Not Impacted</c><c>M</c><c>NORMAL&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-         <c>vbcm&nbsp;</c><c>Not Impacted</c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>ccm vbcm&nbsp;</c><c>Not Impacted</c><c>M</c><c>NORMAL&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
        </texttable>
      </section>
@@ -2083,7 +2175,7 @@
        <texttable title="RFC5888 Attribute Analysis">
          <ttcol align='left'>Name</ttcol>
          <ttcol align='left'>Notes</ttcol>
-         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Level</ttcol>
          <ttcol align='left'>Category</ttcol>
 
          <c>group:LS&nbsp;</c><c>Not Impacted&nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -2105,7 +2197,7 @@
        <texttable title="RFC3524 Attribute Analysis">
          <ttcol align='left'>Name</ttcol>
          <ttcol align='left'>Notes</ttcol>
-         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Level</ttcol>
          <ttcol align='left'>Category</ttcol>
 
          <c>group:SRF&nbsp;</c><c>Not Impacted&nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -2125,7 +2217,7 @@
        <texttable title="RFC4091 Attribute Analysis">
          <ttcol align='left'>Name</ttcol>
          <ttcol align='left'>Notes</ttcol>
-         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Level</ttcol>
          <ttcol align='left'>Category</ttcol>
 
          <c>group:ANAT&nbsp;</c><c>Not Impacted &nbsp;</c><c>S&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
@@ -2150,7 +2242,7 @@
        <texttable title="RFC5956 Attribute Analysis">
          <ttcol align='left'>Name</ttcol>
          <ttcol align='left'>Notes</ttcol>
-         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Level</ttcol>
          <ttcol align='left'>Category</ttcol>
 
          <c>group:FEC-FR&nbsp;</c><c>Not Impacted&nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -2170,7 +2262,7 @@
        <texttable title="RFC5583 Attribute Analysis">
          <ttcol align='left'>Name</ttcol>
          <ttcol align='left'>Notes</ttcol>
-         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Level</ttcol>
          <ttcol align='left'>Category</ttcol>
 
          <c>depend lay&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
@@ -2178,8 +2270,13 @@
 
          <c>depend mdc&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
        </texttable>
+       <t>
+        <list style="hanging">
+          <t>OPEN ISSUE:Eckel: If PTs are not unique across the m=lines BUNDLED,
+          how should this be handled ?</t>
+        </list>
+       </t>
      </section>
 
    </section>
@@ -2192,7 +2289,7 @@
        <texttable title="RFC5576 Attribute Analysis">
          <ttcol align='left'>Name</ttcol>
          <ttcol align='left'>Notes</ttcol>
-         <ttcol align='left'>Current</ttcol>
+         <ttcol align='left'>Level</ttcol>
          <ttcol align='left'>Category</ttcol>
 
          <c>FID&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
@@ -2216,13 +2313,14 @@
         <texttable title="RFC5432 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>rsvp&nbsp;</c><c>Not Impacted, since QOS mechanisms are applied per flow.&nbsp;</c>
-          <c>B</c><c>NORMAL&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         <c>B</c><c>NORMAL&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>nsis&nbsp;</c><c>Not Impacted, since QOS mechanisms are applied per flow.&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
+          <c>nsis&nbsp;</c><c>Not Impacted, since QOS mechanisms are applied per flow.&nbsp;</c>
+          <c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
       </section>
@@ -2232,7 +2330,7 @@
         <texttable title="RFC4566 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>k=&nbsp;</c><c>It is NOT recommended to use this attribute&nbsp;</c><c>S</c>
@@ -2247,7 +2345,7 @@
         <texttable title="RFC4796 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
          <c>content:slides&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -2287,7 +2385,7 @@
         <texttable title="RFC5109 Payload Format Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
           <c>audio/ulpfec&nbsp;</c><c>Not recommended for multiplexing due to reuse of SSRCs&nbsp;</c>
@@ -2299,7 +2397,7 @@
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
          <c>text/ulpfec&nbsp;</c><c>Not recommended for multiplexing due to reuse of SSRCs&nbsp;</c>
-          <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>M</c><c>NOT RECOMMEDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
          <c>application/ulpfec&nbsp;</c><c>Not recommended for multiplexing due to reuse of SSRCs&nbsp;</c>
@@ -2341,27 +2439,63 @@
       </figure>
     </section>
     <section title="Security Considerations">
-      <t>All the attributes which involve security key needs a careful review to ensure
-      two-time pad vulnerability is not created</t>
+      <t>All the attributes which involve security key needs a careful review to
+      ensure two-time pad vulnerability is not created</t>
     </section>
       <section title="Acknowledgments">
-      <t> I would like to thank Cullen Jennings for suggesting the categories, contributing text
-          and helping review the draft. 
-       </t>   
-       <t> I would like also to thank following experts on their inputs and reviews as listed - 
-           Rohan Mahy(5.45), Eric Burger(5.22), Christian Huitema(5.13), Christer Holmberg(5.22,5.40,5.41),
-           Richard Ejzak (5.42,5.43,5.44),Colin Perkins(5.7,5.8), Magnus westerlund(5.3,5.9,6.1,6.2,6.3,8.3),
-           Subha Dhesikan(5.5,12.1), Dan Wing(5.6,5.34,5.37), Eric Rescorla (5.11),
-           Ali C Begen(5.1,5.16,5.18,8.2,5.33,13.1), Rajesh Kumar(5.39), Flemming Andreasen(5.28,5.29,5.20)
-      </t>
+       <t>I would like to thank Cullen Jennings for suggesting the categories,
+       contributing text and helping review the draft. I would also link to
+       thank Magnus, Christer and Dan on suggesting stuctural changes helping
+       improve the document readability.
+       </t>
+
+       <t>I would like also to thank following experts on their inputs and
+        reviews as listed - Rohan Mahy(5.45), Eric Burger(5.22),
+        Christian Huitema(5.13), Christer Holmberg(5.22,5.40,5.41),
+        Richard Ejzak (5.36,5.42,5.43,5.44,), Colin Perkins(5.7,5.8),
+        Magnus westerlund(5.3,5.9,6.1,6.2,6.3,8.3,5.2,7,8,9),
+        Roni Evens(5.12,5.27,8.4), Subha Dhesikan(5.5,12.1),
+        Dan Wing(5.6,5.11,5.30,5.34,5.37),
+        Ali C Begen(5.1,5.16,5.18,5.21,5.33,8.2,13.1,10.4,15.1),
+        Bo Burman (7.2,7.6), Charles Eckel(5.14,5.23,5.24,10.5),
+        Paul Kyzivat(5.24), Ian Johansson (5.11),
+        Saravanan Shanmugham(5.10), Paul E Jones(5.25), Rajesh Kumar (5.39),
+        Jonathan Lennox (5.31,5,14,11.1), Mo Zanaty(5.4,5.19,10.1,10.5)</t>
     </section>
     <section title="Change Log">
       <t>[RFC EDITOR NOTE: Please remove this section when publishing]</t>
+      <t>Changes from draft-nandakumar-mmusic-mux-attributes-04
+        <list style="symbols">
+          <t>
+             Added few OPEN ISSUES that needs to be discussed.
+          </t>
+          <t>
+           Updated sections 5.10,5.23,5,24,5,25,7.2,9.1,5.12,5.27,8.4,
+           5.44,5.11,5.4,5.19,10.1,10.5,5.21,10.4,15.1
+          </t>
+          <t>
+           Updated Table Column name Current to Level and improved TRANSPORT
+           category explantion on suggestions form Dan Wing.
+          </t>
+          <t>
+           Grouped all the rtcp-fb attribute analysis under a single section
+           as suggested by Magnus/
+          </t>
+        </list>
+      </t>
+
+      <t>Changes from draft-nandakumar-mmusic-mux-attributes-03
+        <list style="symbols">
+          <t> Maintainence change to clean up grammatical nits and wordings.
+          </t>
+        </list>
+      </t>
+
       <t>Changes from draft-nandakumar-mmusic-mux-attributes-02
         <list style="symbols">
-          <t>Updated Sections 5.3,5.5,5.6,5.7,5.9,5.8,5.11,5.13,5.20,5.22,5.28,5.29,5.34,5.37,5.39,5.40,
-              5.41,5.42,5.43,5.44,5.45,6.1,6.2,6.3,8,3,12.1 based on the inputs from 
-              the respective RFC Authors.
+          <t>Updated Sections 5.3,5.5,5.6,5.7,5.9,5.8,5.11,5.13,5.22,5.34,
+          5.37,5.40,5.41,5.42,5.43,5.44,5.45,6.1,6.2,6.3,8,3,12.1 based on the
+          inputs from the respective RFC Authors.
           </t>
         </list>
       </t>
@@ -2467,7 +2601,19 @@
 <organization /></author>
 <date year='2007' month='December' />
 <abstract>
-<t>This document specifies a payload format for generic Forward Error Correction (FEC) for media data encapsulated in RTP.  It is based on the exclusive-or (parity) operation.  The payload format described in this document allows end systems to apply protection using various protection lengths and levels, in addition to using various protection group sizes to adapt to different media and channel characteristics.  It enables complete recovery of the protected packets or partial recovery of the critical parts of the payload depending on the packet loss situation.  This scheme is completely compatible with non-FEC-capable hosts, so the receivers in a multicast group that do not implement FEC can still work by simply ignoring the protection data.  This specification obsoletes RFC 2733 and RFC 3009.  The FEC specified in this document is not backward compatible with RFC 2733 and RFC 3009. [STANDARDS-TRACK]</t></abstract></front>
+<t>This document specifies a payload format for generic Forward Error
+  Correction (FEC) for media data encapsulated in RTP.  It is based on the
+  exclusive-or (parity) operation.  The payload format described in this
+  document allows end systems to apply protection using various protection
+  lengths and levels, in addition to using various protection group sizes to
+  adapt to different media and channel characteristics.  It enables complete
+  recovery of the protected packets or partial recovery of the critical parts
+  of the payload depending on the packet loss situation.  This scheme is
+  completely compatible with non-FEC-capable hosts, so the receivers in a
+  multicast group that do not implement FEC can still work by simply ignoring
+  the protection data.  This specification obsoletes RFC 2733 and RFC 3009.
+  The FEC specified in this document is not backward compatible with RFC
+  2733 and RFC 3009. [STANDARDS-TRACK]</t></abstract></front>
 
 <seriesInfo name='RFC' value='5109' />
 <format type='TXT' octets='100538' target='http://www.rfc-editor.org/rfc/rfc5109.txt' />
@@ -2498,7 +2644,8 @@
       <reference anchor='RFC4585'>
 
         <front>
-          <title>Extended RTP Profile for Real-time Transport Control Protocol (RTCP)-Based Feedback (RTP/AVPF)</title>
+          <title>Extended RTP Profile for Real-time Transport Control Protocol
+            (RTCP)-Based Feedback (RTP/AVPF)</title>
           <author initials='J.' surname='Ott' fullname='J. Ott'>
             <organization /></author>
           <author initials='S.' surname='Wenger' fullname='S. Wenger'>
@@ -2533,8 +2680,8 @@
 
       <reference anchor="RFC5506">
         <front>
-          <title>Support for Reduced-Size Real-Time Transport Control Protocol (RTCP):
-            Opportunities and Consequences</title>
+          <title>Support for Reduced-Size Real-Time Transport Control Protocol
+            (RTCP): Opportunities and Consequences</title>
           <author fullname="I. Johansson" initials="I." surname="Johansson">
             <organization></organization>
           </author>
@@ -2577,7 +2724,7 @@
       </reference>
       <reference anchor="RFC3556">
         <front>
-          <title>Session Description Protocol (SDP) Bandwidth Modifiers
+          <title>S Description Protocol (SDP) Bandwidth Modifiers
             for RTP Control Protocol (RTCP) Bandwidth</title>
           <author fullname="S. Casner" initials="S." surname="Casner">
             <organization></organization>
@@ -2641,7 +2788,8 @@
       <reference anchor='RFC5432'>
 
         <front>
-          <title>Quality of Service (QoS) Mechanism Selection in the Session Description Protocol (SDP)</title>
+          <title>Quality of Service (QoS) Mechanism Selection in the
+            Session Description Protocol (SDP)</title>
           <author initials='J.' surname='Polk' fullname='J. Polk'>
             <organization /></author>
           <author initials='S.' surname='Dhesikan' fullname='S. Dhesikan'>
@@ -2656,7 +2804,7 @@
       <reference anchor='RFC4568'>
 
         <front>
-          <title>Session Description Protocol (SDP) Security Descriptions for Media Streams</title>
+          <title>S Description Protocol (SDP) Security Descriptions for Media Streams</title>
           <author initials='F.' surname='Andreasen' fullname='F. Andreasen'>
             <organization /></author>
           <author initials='M.' surname='Baugher' fullname='M. Baugher'>
@@ -2684,7 +2832,8 @@
       <reference anchor='RFC6773'>
 
         <front>
-          <title>DCCP-UDP: A Datagram Congestion Control Protocol UDP Encapsulation for NAT Traversal</title>
+          <title>DCCP-UDP: A Datagram Congestion Control Protocol UDP
+            Encapsulation for NAT Traversal</title>
           <author initials='T.' surname='Phelan' fullname='T. Phelan'>
             <organization /></author>
           <author initials='G.' surname='Fairhurst' fullname='G. Fairhurst'>
@@ -2713,7 +2862,8 @@
       <reference anchor='RFC3890'>
 
         <front>
-          <title>A Transport Independent Bandwidth Modifier for the Session Description Protocol (SDP)</title>
+          <title>A Transport Independent Bandwidth Modifier for the
+            Session Description Protocol (SDP)</title>
           <author initials='M.' surname='Westerlund' fullname='M. Westerlund'>
             <organization /></author>
           <date year='2004' month='September' />
@@ -2724,7 +2874,8 @@
       <reference anchor='RFC3605'>
 
         <front>
-          <title>Real Time Control Protocol (RTCP) attribute in Session Description Protocol (SDP)</title>
+          <title>Real Time Control Protocol (RTCP) attribute in
+            Session Description Protocol (SDP)</title>
           <author initials='C.' surname='Huitema' fullname='C. Huitema'>
             <organization /></author>
           <date year='2003' month='October' />
@@ -2748,7 +2899,8 @@
       <reference anchor='RFC5576'>
 
         <front>
-          <title>Source-Specific Media Attributes in the Session Description Protocol (SDP)</title>
+          <title>Source-Specific Media Attributes in the
+            Session Description Protocol (SDP)</title>
           <author initials='J.' surname='Lennox' fullname='J. Lennox'>
             <organization /></author>
           <author initials='J.' surname='Ott' fullname='J. Ott'>
@@ -2764,7 +2916,8 @@
       <reference anchor='RFC6236'>
 
         <front>
-          <title>Negotiation of Generic Image Attributes in the Session Description Protocol (SDP)</title>
+          <title>Negotiation of Generic Image Attributes in the
+            Session Description Protocol (SDP)</title>
           <author initials='I.' surname='Johansson' fullname='I. Johansson'>
             <organization /></author>
           <author initials='K.' surname='Jung' fullname='K. Jung'>
@@ -2777,7 +2930,8 @@
       <reference anchor='RFC5583'>
 
         <front>
-          <title>Signaling Media Decoding Dependency in the Session Description Protocol (SDP)</title>
+          <title>Signaling Media Decoding Dependency in the
+            Session Description Protocol (SDP)</title>
           <author initials='T.' surname='Schierl' fullname='T. Schierl'>
             <organization /></author>
           <author initials='S.' surname='Wenger' fullname='S. Wenger'>
@@ -2824,7 +2978,8 @@
       <reference anchor='RFC6364'>
 
         <front>
-          <title>Session Description Protocol Elements for the Forward Error Correction (FEC) Framework</title>
+          <title>S Description Protocol Elements for the Forward Error Correction
+           (FEC) Framework</title>
           <author initials='A.' surname='Begen' fullname='A. Begen'>
             <organization /></author>
           <date year='2011' month='October' />
@@ -2835,7 +2990,7 @@
       <reference anchor='RFC3407'>
 
         <front>
-          <title>Session Description Protocol (SDP) Simple Capability Declaration</title>
+          <title>S Description Protocol (SDP) Simple Capability Declaration</title>
           <author initials='F.' surname='Andreasen' fullname='F. Andreasen'>
             <organization /></author>
           <date year='2002' month='October' />
@@ -2861,7 +3016,8 @@
       <reference anchor='RFC6714'>
 
         <front>
-          <title>Connection Establishment for Media Anchoring (CEMA) for the Message Session Relay Protocol (MSRP)</title>
+          <title>Connection Establishment for Media Anchoring (CEMA) for the
+           Message Session Relay Protocol (MSRP)</title>
           <author initials='C.' surname='Holmberg' fullname='C. Holmberg'>
             <organization /></author>
           <author initials='S.' surname='Blau' fullname='S. Blau'>
@@ -2896,7 +3052,7 @@
       <reference anchor='RFC4583'>
 
         <front>
-          <title>Session Description Protocol (SDP) Format for Binary Floor Control Protocol (BFCP) Streams</title>
+          <title>S Description Protocol (SDP) Format for Binary Floor Control Protocol (BFCP) Streams</title>
           <author initials='G.' surname='Camarillo' fullname='G. Camarillo'>
             <organization /></author>
           <date year='2006' month='November' />
@@ -2907,7 +3063,8 @@
       <reference anchor='RFC5547'>
 
         <front>
-          <title>A Session Description Protocol (SDP) Offer/Answer Mechanism to Enable File Transfer</title>
+          <title>A Session Description Protocol (SDP) Offer/Answer Mechanism to
+            Enable File Transfer</title>
           <author initials='M.' surname='Garcia-Martin' fullname='M. Garcia-Martin'>
             <organization /></author>
           <author initials='M.' surname='Isomaki' fullname='M. Isomaki'>
@@ -2926,7 +3083,8 @@
       <reference anchor='RFC5760'>
 
         <front>
-          <title>RTP Control Protocol (RTCP) Extensions for Single-Source Multicast Sessions with Unicast Feedback</title>
+          <title>RTP Control Protocol (RTCP) Extensions for Single-Source
+            Multicast Sessions with Unicast Feedback</title>
           <author initials='J.' surname='Ott' fullname='J. Ott'>
             <organization /></author>
           <author initials='J.' surname='Chesterfield' fullname='J. Chesterfield'>
@@ -2956,7 +3114,7 @@
       <reference anchor='RFC5939'>
 
         <front>
-          <title>Session Description Protocol (SDP) Capability Negotiation</title>
+          <title>S Description Protocol (SDP) Capability Negotiation</title>
           <author initials='F.' surname='Andreasen' fullname='F. Andreasen'>
             <organization /></author>
           <date year='2010' month='September' />
@@ -2967,7 +3125,8 @@
       <reference anchor='RFC4567'>
 
         <front>
-          <title>Key Management Extensions for Session Description Protocol (SDP) and Real Time Streaming Protocol (RTSP)</title>
+          <title>Key Management Extensions for Session Description Protocol (SDP)
+           and Real Time Streaming Protocol (RTSP)</title>
           <author initials='J.' surname='Arkko' fullname='J. Arkko'>
             <organization /></author>
           <author initials='F.' surname='Lindholm' fullname='F. Lindholm'>
@@ -2986,7 +3145,9 @@
       <reference anchor='RFC4572'>
 
         <front>
-          <title>Connection-Oriented Media Transport over the Transport Layer Security (TLS) Protocol in the Session Description Protocol (SDP)</title>
+          <title>Connection-Oriented Media Transport over the
+            Transport Layer Security (TLS) Protocol in the
+            Session Description Protocol (SDP)</title>
           <author initials='J.' surname='Lennox' fullname='J. Lennox'>
             <organization /></author>
           <date year='2006' month='July' />
@@ -2997,7 +3158,7 @@
       <reference anchor='RFC4570'>
 
         <front>
-          <title>Session Description Protocol (SDP) Source Filters</title>
+          <title>S Description Protocol (SDP) Source Filters</title>
           <author initials='B.' surname='Quinn' fullname='B. Quinn'>
             <organization /></author>
           <author initials='R.' surname='Finlayson' fullname='R. Finlayson'>
@@ -3010,7 +3171,8 @@
       <reference anchor='RFC6128'>
 
         <front>
-          <title>RTP Control Protocol (RTCP) Port for Source-Specific Multicast (SSM) Sessions</title>
+          <title>RTP Control Protocol (RTCP) Port for
+            Source-Specific Multicast (SSM) Sessions</title>
           <author initials='A.' surname='Begen' fullname='A. Begen'>
             <organization /></author>
           <date year='2011' month='February' />
@@ -3049,7 +3211,8 @@
       <reference anchor='RFC6193'>
 
         <front>
-          <title>Media Description for the Internet Key Exchange Protocol (IKE) in the Session Description Protocol (SDP)</title>
+          <title>Media Description for the Internet Key Exchange Protocol (IKE)
+           in the Session Description Protocol (SDP)</title>
           <author initials='M.' surname='Saito' fullname='M. Saito'>
             <organization /></author>
           <author initials='D.' surname='Wing' fullname='D. Wing'>
@@ -3079,7 +3242,8 @@
       <reference anchor='RFC6064'>
 
         <front>
-          <title>SDP and RTSP Extensions Defined for 3GPP Packet-Switched Streaming Service and Multimedia Broadcast/Multicast Service</title>
+          <title>SDP and RTSP Extensions Defined for 3GPP Packet-Switched
+            Streaming Service and Multimedia Broadcast/Multicast Service</title>
           <author initials='M.' surname='Westerlund' fullname='M. Westerlund'>
             <organization /></author>
           <author initials='P.' surname='Frojdh' fullname='P. Frojdh'>
@@ -3092,7 +3256,8 @@
       <reference anchor='RFC4091'>
 
         <front>
-          <title>The Alternative Network Address Types (ANAT) Semantics for the Session Description Protocol (SDP) Grouping Framework</title>
+          <title>The Alternative Network Address Types (ANAT) Semantics for the
+            Session Description Protocol (SDP) Grouping Framework</title>
           <author initials='G.' surname='Camarillo' fullname='G. Camarillo'>
             <organization /></author>
           <author initials='J.' surname='Rosenberg' fullname='J. Rosenberg'>
@@ -3105,7 +3270,8 @@
       <reference anchor='RFC5956'>
 
         <front>
-          <title>Forward Error Correction Grouping Semantics in the Session Description Protocol</title>
+          <title>Forward Error Correction Grouping Semantics in the
+            Session Description Protocol</title>
           <author initials='A.' surname='Begen' fullname='A. Begen'>
             <organization /></author>
           <date year='2010' month='September' />
@@ -3116,7 +3282,8 @@
       <reference anchor='RFC3108'>
 
         <front>
-          <title>Conventions for the use of the Session Description Protocol (SDP) for ATM Bearer Connections</title>
+          <title>Conventions for the use of the Session Description Protocol
+            (SDP) for ATM Bearer Connections</title>
           <author initials='R.' surname='Kumar' fullname='R. Kumar'>
             <organization /></author>
           <author initials='M.' surname='Mostafa' fullname='M. Mostafa'>
@@ -3130,7 +3297,7 @@
       <reference anchor='RFC5159'>
 
         <front>
-          <title>Session Description Protocol (SDP) Attributes for Open Mobile Alliance (OMA) Broadcast (BCAST) Service and Content Protection</title>
+          <title>S Description Protocol (SDP) Attributes for Open Mobile Alliance (OMA) Broadcast (BCAST) Service and Content Protection</title>
           <author initials='L.' surname='Dondeti' fullname='L. Dondeti'>
             <organization /></author>
           <author initials='A.' surname='Jerichow' fullname='A. Jerichow'>
@@ -3156,7 +3323,8 @@
       <reference anchor='RFC5763'>
 
         <front>
-          <title>Framework for Establishing a Secure Real-time Transport Protocol (SRTP) Security Context Using Datagram Transport Layer Security (DTLS)</title>
+          <title>Framework for Establishing a Secure Real-time Transport Protocol
+           (SRTP) Security Context Using Datagram Transport Layer Security (DTLS)</title>
           <author initials='J.' surname='Fischl' fullname='J. Fischl'>
             <organization /></author>
           <author initials='H.' surname='Tschofenig' fullname='H. Tschofenig'>
@@ -3284,7 +3452,7 @@
       <reference anchor='MEDIA_CAP'>
 
         <front>
-          <title>Session Description Protocol (SDP) Media Capabilities Negotiation</title>
+          <title>S Description Protocol (SDP) Media Capabilities Negotiation</title>
           <author initials='H.' surname='Kaplan' fullname='R. Gilman'>
             <organization /></author>
           <author initials='K.' surname='Hedayat' fullname=' R. Even'>
@@ -3298,7 +3466,7 @@
       </reference>
       <reference anchor='IANA' target="http://www.iana.org/assignments/sdp-parameters/sdp-parameters.xml">
         <front>
-          <title>Session Description Protocol (SDP) Parameters</title>
+          <title>S Description Protocol (SDP) Parameters</title>
           <author/>
           <date/>
         </front>
@@ -3319,7 +3487,8 @@
       </reference>
       <reference anchor='3GPP TS 24.229' target="http://www.3gpp.org/ftp/Specs/html-info/24229.htm">
         <front>
-          <title>IP multimedia call control protocol based on Session Initiation Protocol (SIP)
+          <title>IP multimedia call control protocol based on
+           Session Initiation Protocol (SIP)
             and Session Description Protocol (SDP);</title>
           <author/>
           <date/>
@@ -3327,14 +3496,16 @@
       </reference>
       <reference anchor='3GPP TS 24.182' target="http://www.3gpp.org/ftp/Specs/html-info/24182.htm">
         <front>
-          <title>IP Multimedia Subsystem (IMS) Customized Alerting Tones (CAT); Protocol specification</title>
+          <title>IP Multimedia Subsystem (IMS) Customized Alerting Tones (CAT);
+           Protocol specification</title>
           <author/>
           <date/>
         </front>
       </reference>
      <reference anchor='3GPP TS 24.183' target="http://www.3gpp.org/ftp/Specs/html-info/24183.htm">
         <front>
-          <title>IP Multimedia Subsystem (IMS) Customized Ringing Signal (CRS); Protocol specification</title>
+          <title>IP Multimedia Subsystem (IMS) Customized Ringing Signal (CRS);
+           Protocol specification</title>
           <author/>
           <date/>
         </front>
@@ -3342,7 +3513,7 @@
       <reference anchor='RTCP-FB'
         target="http://www.iana.org/assignments/sdp-parameters/sdp-parameters.xml#sdp-parameters-14">
         <front>
-          <title>Session Description Protocol (SDP) RTCP Feedback attributes</title>
+          <title>S Description Protocol (SDP) RTCP Feedback attributes</title>
           <author/>
           <date/>
         </front>
@@ -3350,7 +3521,7 @@
       <reference anchor='ACK-NACK'
         target="http://www.iana.org/assignments/sdp-parameters/sdp-parameters.xml#sdp-parameters-15">
         <front>
-          <title>Session Description Protocol (SDP) RTCP ACK/NACK Feedback attributes</title>
+          <title>S Description Protocol (SDP) RTCP ACK/NACK Feedback attributes</title>
           <author/>
           <date/>
         </front>
@@ -3358,7 +3529,7 @@
       <reference anchor='CCM'
         target="http://www.iana.org/assignments/sdp-parameters/sdp-parameters.xml#sdp-parameters-19">
         <front>
-          <title>Session Description Protocol (SDP) RTCP-FB Codec Control Messages</title>
+          <title>S Description Protocol (SDP) RTCP-FB Codec Control Messages</title>
           <author/>
           <date/>
         </front>
@@ -3366,7 +3537,7 @@
       <reference anchor='GROUP-SEM'
         target="http://www.iana.org/assignments/sdp-parameters/sdp-parameters.xml#sdp-parameters-13">
         <front>
-          <title>Session Description Protocol (SDP) &quot;group&quot; semantics</title>
+          <title>S Description Protocol (SDP) &quot;group&quot; semantics</title>
           <author/>
           <date/>
         </front>
@@ -3374,7 +3545,7 @@
       <reference anchor='SSRC-GROUP'
         target="http://www.iana.org/assignments/sdp-parameters/sdp-parameters.xml#sdp-parameters-17">
         <front>
-          <title>Session Description Protocol (SDP) &quot;ssrc-group&quot; semantics</title>
+          <title>S Description Protocol (SDP) &quot;ssrc-group&quot; semantics</title>
           <author/>
           <date/>
         </front>
@@ -3382,7 +3553,7 @@
       <reference anchor='QOS'
         target="http://www.iana.org/assignments/sdp-parameters/sdp-parameters.xml#sdp-parameters-20">
         <front>
-          <title>Session Description Protocol (SDP) QoS Mechanism Tokens</title>
+          <title>S Description Protocol (SDP) QoS Mechanism Tokens</title>
           <author/>
           <date/>
         </front>
