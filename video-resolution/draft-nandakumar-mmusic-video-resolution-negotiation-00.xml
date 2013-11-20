@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- comment -->
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd"[]>
+<?rfc toc="yes" ?>
+<?rfc compact="yes" ?>
+<?rfc sortrefs="no" ?>
+<?rfc symrefs="yes" ?>
+
+<rfc ipr="trust200902" category="std" docName="draft-nandakumar-mmusic-video-resolution-negotiation-00"
+submissionType="IETF" xml:lang="en">
+<front>
+    <title abbrev="Video Resolution Negotiation">
+		Video Resolution Negotiation Using SDP
+	</title>
+	 <author fullname="Suhas Nandakumar" initials="S." surname="Nandakumar">
+      <organization>Cisco</organization>
+
+      <address>
+        <postal>
+          <street>170 West Tasman Drive</street>
+
+          <city>San Jose</city>
+
+          <region>CA</region>
+
+          <code>95134</code>
+
+          <country>USA</country>
+        </postal>
+
+        <email>snandaku@cisco.com</email>
+      </address>
+    </author>
+    <author fullname="Christer Holmberg" initials="C." surname="Holmberg">
+      <organization>Ericsson</organization>
+    </author>
+
+    <date year="2013" month="November" day="11" />
+    <area>Transport</area>
+    <workgroup>MMUSIC Working Group</workgroup>
+    <keyword>RTP</keyword>
+    <keyword>SDP</keyword>
+	<keyword>Multiplexing</keyword>
+    <keyword>RTCWEB</keyword>
+    <keyword>WEB</keyword>
+    <keyword>Browser</keyword>
+
+    <abstract>
+		<t>
+       With the rise in realtime communication applications supporting video,
+       there is a need for receivers of the video to setup  appropriate
+       expectations on their receive capacity for handling various video
+       resolutions. Negotiating maximum video receive resolution by an end-point
+       is important to ensure a successful multimedia session that the end-point
+       can decode and eventually render the received video stream.
+       This document proposes SDP <xref target="RFC4566"/> based
+       Offer/Answer mechanism <xref target="RFC3264"/>
+       to negotiate the maximum video width and height (video resolution) that
+       an EndPoint is capable of receiving.
+     </t>
+    </abstract>
+</front>
+
+<middle>
+<section title="Terminology" toc="default">
+		<t>
+			The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+			"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+			interpreted as described in RFC 2119.
+		</t>
+	</section>
+
+    <section title="Introduction" toc="default">
+      <t>
+        Offlate, multimedia sessions are increasingly supporting video by default.
+        This is further fueled with the advent of technology standards such as RTCWeb,
+        CLUE. In order to successfully decode the incoming video stream, the decoder
+        at the EndPoint must be capable of handling the recieved video resolution,
+        amongst other things. This document defines a new media-level
+        SDP <xref target="RFC4566"/> attribute to setup maximum receive video resolution
+        and <xref target="RFC3264"/> Offer/Answer procedures for successfully
+        negotiating the same.
+      </t>
+    </section>
+
+    <section title="Specification of the 'videoattr' SDP syntax " toc="default">
+      <t>
+       This section defines the SDP video attribute which can
+       be used in an SDP Offer/Answer exchange to indicate
+       various maximum recieve video image resolution supported by an
+       EndPoint.
+      </t>
+      <section title="Attribute Syntax" toc="default">
+        <t>
+         In this section, the syntax of the 'videoattr' attribute is
+         described.  The 'videoattr' attribute is a media-level attribute.
+         The section is split up in two parts: the first gives an overall view
+         of the syntax, and the second describes how the syntax is used.
+        </t>
+        <section title="Overall View of Syntax" toc="default">
+        The syntax for the image attribute is in ABNF [RFC5234]:
+<figure>
+<artwork type="abnf"><![CDATA[
+       video-attr = "videoattr:" PT 1*2(1*WSP max-resolution)
+       PT = 1*DIGIT / "*"
+       max-resolition = "[" "x=" xyrange "," "y=" xyrange  "]"
+                  ; x is the max horizontal image size range (pixel count)
+                  ; y is the max vertical image size range (pixel count)
+]]></artwork>
+</figure>
+         </section>
+        </section>
+         <section title="Offer/Answer Rules" toc="default">
+          <t>
+             An EndPoint supporting this mechanism indicates the maximum
+             horizontal and vertical image size ranges that it is capable
+             of handling while decoding and rendering the recieved
+             video stream. This mechanism also implies that the reciever
+             is capable of decoding video resolutions lower than the
+             negotiated maximum resolution.
+          </t>
+          <t>
+            In the <xref target="RFC3264"/> usage, an SDP Answerer MUST NOT include
+            the 'videoattr' attribute in the SDP Answer unless the attribute is specified
+            in the associated SDP Offer.
+          </t>
+          <t>
+            If the SDP Answerer is not capable of sending any resolution lesser than or
+            equal to Offered resolution, it MUST NOT include the 'videoattr' attribute in
+            the SDP Answer.
+          </t>
+         </section>
+      </section>
+       <section title="SDP Examples" toc="default">
+         <t>
+          The example SDP below shows an Offer that is capable of receiving upto
+          [720,576] video resolution for the VP8 codec with Payload Type 96.
+         </t>
+        <figure title="Figure 1">
+         <artwork><![CDATA[
+m=video 62537 RTP/SAVPF 96
+a=rtpmap:96 VP8/90000
+a=videoattr:96 [x=720, y=576]
+a=sendrecv
+]]></artwork>
+      </figure>
+        <t>
+          The example SDP below shows an Answer to the above SDP which is capable
+          of receiving only upto [640,480] video image resolution.
+         </t>
+        <figure title="Figure 1">
+         <artwork><![CDATA[
+m=video 62537 RTP/SAVPF 96
+a=rtpmap:96 VP8/90000
+a=videoattr:96 [x=640, y=480]
+a=sendrecv
+]]></artwork>
+      </figure>
+   </section>
+	  <section title="IANA Considerations" toc="default">
+		<t>
+      TBD
+		</t>
+    </section>
+    <section anchor="sec-acks" title="Acknowledgements" toc="default">
+       <t>
+         TBD
+       </t>
+    </section>
+
+</middle>
+
+<back>
+    <references title="Normative References">
+
+     <reference anchor="RFC3264">
+        <front>
+          <title>An Offer/Answer Model with Session Description Protocol
+            (SDP)</title>
+
+          <author fullname="J. Rosenberg" initials="J." surname="Rosenberg">
+            <organization></organization>
+          </author>
+
+          <author fullname="H. Schulzrinne" initials="H."
+            surname="Schulzrinne">
+            <organization></organization>
+          </author>
+
+          <date month="June" year="2002" />
+        </front>
+
+        <seriesInfo name="RFC" value="3264" />
+
+        <format octets="60854"
+          target="http://www.rfc-editor.org/rfc/rfc3264.txt" type="TXT"/>
+        </reference>
+      <reference anchor="RFC4566">
+        <front>
+          <title>SDP: Session Description Protocol</title>
+
+          <author fullname="M. Handley" initials="M." surname="Handley">
+            <organization></organization>
+          </author>
+
+          <author fullname="V. Jacobson" initials="V."
+            surname="Jacobson">
+            <organization></organization>
+          </author>
+
+          <author fullname="C. Perkins" initials="C."
+            surname="Perkins">
+            <organization></organization>
+          </author>
+
+          <date month="July" year="2006" />
+        </front>
+
+        <seriesInfo name="RFC" value="4566" />
+
+        <format octets="60854"
+          target="http://http://tools.ietf.org/html/rfc4566.txt" type="TXT" />
+      </reference>
+    </references>
+
+  </back>
+</rfc>
