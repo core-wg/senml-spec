@@ -8,7 +8,7 @@
 <?rfc colonspace="yes" ?>
 <?rfc rfcedstyle="no" ?>
 <?rfc tocdepth="4"?>
-<rfc category="info" docName="draft-jennings-vipr-overview-05"
+<rfc category="info" docName="draft-jennings-vipr-overview-06"
      ipr="trust200902">
   <front>
     <title abbrev="VIPR Overview">Verification Involving PSTN Reachability:
@@ -158,13 +158,17 @@
       transport is realized. That model is required in order to allow
       innovative new services to be deployed.</t>
 	  
-	  <t>Despite the advantages of the VIPR system, its open, peer-to-peer character
-	  makes it vulnerable to certain security and privacy vulnerabilities (see especially <xref target="malicious"/>). After consideration of potential 
-	  countermeasures, the VIPR working group elected not to pursue VIPR for standardization.
-	  This document therefore describes VIPR for informational purposes, as VIPR has seen
-	  some field deployment, and it is furthermore believed that the techniques utilized by VIPR might be
-	  reused in new standard architectures in the future.
+	  <t>Despite the advantages of the VIPR system, its open, peer-to-peer
+	  character makes it vulnerable to certain security and privacy
+	  vulnerabilities (see especially <xref target="malicious"/>). After
+	  consideration of potential countermeasures, the VIPR working group
+	  elected not to pursue VIPR for standardization.  This document
+	  therefore describes VIPR for informational purposes, as VIPR has seen
+	  some field deployment, and it is furthermore believed that the
+	  techniques utilized by VIPR might be reused in new standard
+	  architectures in the future.
 	  </t>
+
     </section>
     
      <!-- Conventions  and Terminology -->
@@ -1303,7 +1307,13 @@ to an IP address by using an Attach request.
     <references title="Normative References">
       <?rfc include="reference.RFC.2119"?>
 
-      <?rfc include="reference.RFC.3261"?>
+   
+    </references>
+
+
+    <references title="Informative References">
+
+   <?rfc include="reference.RFC.3261"?>
 
       <?rfc include="reference.I-D.ietf-p2psip-base"?>  
       
@@ -1318,10 +1328,7 @@ to an IP address by using an Attach request.
       <?rfc include="reference.I-D.petithuguenin-vipr-pvp"?>
       
       <?rfc include="reference.I-D.petithuguenin-vipr-proportional-quota"?>
-    </references>
 
-
-    <references title="Informative References">
        <?rfc include="reference.RFC.2543"?>
            
             <?rfc include="reference.RFC.3263"?>
