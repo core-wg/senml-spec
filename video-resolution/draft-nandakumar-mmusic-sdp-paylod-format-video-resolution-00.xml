@@ -38,7 +38,7 @@ submissionType="IETF" xml:lang="en">
       </address>
     </author>
 
-    <date year="2013" month="November" day="20" />
+    <date year="2013" month="December" day="7" />
     <area>Transport</area>
     <workgroup>MMUSIC Working Group</workgroup>
     <keyword>RTP</keyword>
@@ -87,32 +87,32 @@ submissionType="IETF" xml:lang="en">
 
     <section anchor="sec.ptparams"  title="Payload Format Parameters" toc="default">
       <t>
-       The optional media subtype parameters max-recv-width and max-recv-height
+       The media subtype parameters max-recv-width and max-recv-height
        specified below MAY be used to signal the capabilities of a receiver implementation.
        These parameters MUST NOT be used for any other purposes.
       </t>
       <section title="Media Type Registration" toc="default">
         <t>
-          New Optional Parameters
+          New Parameters
           <list style="numbers">
             <t> max-recv-width: The value of max-recv-width is an integer indicating
               maximum horizontal image range in pixels. When max-recv-width is
-              signaled, the receiver MUST be able to decode any horizontal image
-              resolutions up to the signaled value.
+              signaled, the sender MUST NOT send any media with horizontal image 
+              resolutions higher than the value requested by the receiver.
             </t>
             <t> max-recv-height: The value of max-recv-height is an integer indicating
               maximum vertical image range in pixels. When max-recv-height is
-              signaled, the receiver MUST be able to decode any vertical image
-              resolutions up to the signaled value.
+              signaled, the sender MUST NOT send any media with vertical image
+              resolutions higher than the value requested by the receiver.
             </t>
           </list>
         </t>
       </section>
     </section>
     <section anchor="sec.sdp"  title="SDP Parameters" toc="default">
-      <section title="Mapping of optional parameters to SDP" toc="default">
+      <section title="Mapping of the parameters to SDP" toc="default">
         <t>
-          The optional parameters max-recv-width, max-recv-height when present,
+          The parameters max-recv-width, max-recv-height when present,
           MUST be included in the "a=fmtp" line of SDP. These parameters are
           expressed as a media type string, in the form of a semicolon separated
           list of parameter=value pairs.
@@ -123,13 +123,13 @@ submissionType="IETF" xml:lang="en">
           implicitly downgradable from the media sender's perspective, i.e, they
           express the upper limit for a media sender's possible behavior. Thus a media
           sender MAY select to set its encoder using only lower/lesser or equal values
-          of these parameters.
+          of these parameters when sending media.
         </t>
       </section>
       <section title="Usage with SDP offer/answer" toc="default">
         <t>
-          The interpretation of the optional parameters max-recv-width and
-          max-recv-height depends on the direction attribute. When the
+          The interpretation of the parameters max-recv-width and
+          max-recv-height depends on the SDP direction attribute. When the
           direction is sendrecv or recvonly, the value of this parameter
           indicates the ranges of horizontal and vertical image resolutions
           the media receiver is capable of rendering successfully. When the
@@ -140,7 +140,7 @@ submissionType="IETF" xml:lang="en">
           If the media sender is not capable of sending any resolution
           lower than or equal to the values requested by the media receiver either
           in the SDP Offer or in the SDP Answer, the Offer/Answer procedure is
-          considered as failure.
+          considered as failed.
         </t>
         <t>
           An SDP Answerer MUST NOT include these parameters in the SDP Answer
@@ -161,7 +161,7 @@ submissionType="IETF" xml:lang="en">
           receiving up to [720,576] video image resolution for the VP8 codec
           with Payload Type 96.
         </t>
-        <figure title="Figure 1">
+        <figure title="SDP Offer">
         <artwork><![CDATA[
 m=video 62537 RTP/SAVPF 96
 a=rtpmap:96 VP8/90000
@@ -175,7 +175,7 @@ a=sendrecv
           than or equal to [720,576] and which is capable of receiving only up to
           [640,480] video image resolutions.
         </t>
-        <figure title="Figure 1">
+        <figure title="SDP Answer">
         <artwork><![CDATA[
 m=video 62537 RTP/SAVPF 96
 a=rtpmap:96 VP8/90000
@@ -190,7 +190,7 @@ a=sendrecv
           receiving up to [720,576] video image resolution for the H.264 codec
           with Payload Type 100.
         </t>
-        <figure title="Figure 1">
+        <figure title="SDP Offer">
         <artwork><![CDATA[
 m=video 62537 RTP/SAVPF 100
 a=rtpmap:100 H264/90000
@@ -201,9 +201,10 @@ a=sendrecv
        </figure>
         <t>
           The example SDP below shows the Answer rejecting the above SDP Offer,
-          since the receiver is unable to support the Offerer's requested image resolutions.
+          since the receiver of the SDP is unable to support the Offerer's requested 
+          image resolutions for sending the media.
         </t>
-        <figure title="Figure 1">
+        <figure title="SDP Answer">
          <artwork><![CDATA[
 m=video 0 RTP/SAVPF 100
 a=rtpmap:100 H264/90000
@@ -214,7 +215,7 @@ a=rtpmap:100 H264/90000
 	  <section anchor="sec.iana" title="IANA Considerations" toc="default">
 		<t>
       The parameters specified in <xref target="sec.ptparams"/>
-      of this document shall to be registered with IANA.
+      of this document will be registered with the IANA.
 		</t>
     </section>
     <section anchor="sec.acks" title="Acknowledgements" toc="default">
