@@ -36,7 +36,7 @@
       </address>
     </author>
 
-    <date day="10" month="December" year="2013" />
+    <date day="11" month="December" year="2013" />
 
     <area>MMUSIC</area>
 
@@ -488,7 +488,7 @@
 
       <section title="RFC5432 - QoS Mechanism Selection in SDP">
         <t>
-          <xref target="RFC5432">RFC5432</xref> defines prordures to negotiate
+          <xref target="RFC5432">RFC5432</xref> defines procedures to negotiate
           QOS mechanisms using the Session Description Protocol (SDP)
           offer/answer model.
         </t>
@@ -543,7 +543,7 @@
           real-time multimedia on IP networks.  The Datagram Congestion Control
           Protocol (DCCP) is a transport protocol that provides desirable
           services for real-time applications.  <xref target="RFC5762">RFC5762</xref>
-          specifies a mapping of RTP onto DCCP, along with associated signalling,
+          specifies a mapping of RTP onto DCCP, along with associated signaling,
           such that real-time applications can make use of the services provided by DCCP
         </t>
         <texttable title="RFC5762 Attribute Analysis">
@@ -562,7 +562,7 @@
          that DCCP-in-UDP layer has additional demultiplexing, then it may be
          possible to use different DCCP service codes for each DCCP flow, given
          each uses a different DCCP port. Although doing so might conflict with the
-         media type of the m= line. None of this is standardised yet and it
+         media type of the m= line. None of this is standardized yet and it
          wouldn't work as explained. Hence multiplexing MUST NOT be performed even in this
          alternate scenario.
         </t>
@@ -573,8 +573,8 @@
           <xref target="RFC6773">RFC6773</xref> document specifies an alternative
           encapsulation of the Datagram Congestion Control Protocol (DCCP),
           referred to as DCCP-UDP.  This encapsulation allows DCCP to be carried
-          through the current generation of Network Address Translation (NAT) middleboxes
-          without modification of those middleboxes
+          through the current generation of Network Address Translation (NAT) middle boxes
+          without modification of those middle boxes
         </t>
         <texttable title="RFC6773 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -964,9 +964,9 @@
           Message Session Relay Protocol (MSRP) extension,
           Connection Establishment for Media Anchoring (CEMA).
           Support of this extension is OPTIONAL.  The extension allows
-          middleboxes to anchor the MSRP connection, without the need for
-          middleboxes to modify the MSRP messages; thus, it also enables secure
-          end-to-end MSRP communication in networks where such middleboxes are
+          middle boxes to anchor the MSRP connection, without the need for
+          middle boxes to modify the MSRP messages; thus, it also enables secure
+          end-to-end MSRP communication in networks where such middle boxes are
           deployed.  This document also defines a Session Description Protocol
           (SDP) attribute, 'msrp-cema', that MSRP endpoints use to indicate
           support of the CEMA extension.
@@ -1056,7 +1056,7 @@
         </texttable>
       </section>
 
-      <section title="RFC6489 - SDP & RTP Media Loopback Extension">
+      <section title="RFC6489 - SDP and RTP Media Loopback Extension">
         <t>
           <xref target="MEDIA_LOOPBACK"></xref> adds new SDP media types and
           attributes, which enable establishment of media sessions where the
@@ -1607,7 +1607,7 @@
 
       <section title="3GPP TS 24.182">
         <t>
-          <xref target="3GPP TS 24.182">3GPP TS 24.182</xref> specifies IP multimedia subsystem Custom Alerting tones
+          <xref target="3GPPTS24.182">3GPP TS 24.182</xref> specifies IP multimedia subsystem Custom Alerting tones
         </t>
         <texttable title="3GPP TS 24.182 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -1623,7 +1623,7 @@
 
       <section title="3GPP TS 24.183">
         <t>
-          <xref target="3GPP TS 24.183">3GPP TS 24.183</xref>specifies IP multimedia
+          <xref target="3GPPTS24.183">3GPP TS 24.183</xref>specifies IP multimedia
           subsystem Custom Ringing Signal
         </t>
         <texttable title="3GPP TS 24.183 Attribute Analysis">
@@ -1640,7 +1640,7 @@
 
       <section title="3GPP TS 24.229">
         <t>
-         <xref target="3GPP TS 24.229">3GPP TS 24.229</xref>IP multimedia call control
+         <xref target="3GPPTS24.229">3GPP TS 24.229</xref>IP multimedia call control
          protocol based on Session Initial protocol and Session Description Protocol.
         </t>
         <texttable title="3GPP TS 24.229 Attribute Analysis">
@@ -1684,7 +1684,7 @@
       <section title="ITU T.38">
         <t>
          ITU T.38<xref target="T.38"></xref> defines procedures for real-time Group 3
-         fascimile communications over IP netowrks.
+         facsimile communications over IP networks.
         </t>
         <texttable title="Historic Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -1925,7 +1925,7 @@
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
          <c>ack app&nbsp;</c>
-         <c>Feedback parameters MUST be handled in the app specifc
+         <c>Feedback parameters MUST be handled in the app specific
          way when multiplexed</c>
          <c>M</c><c>SPECIAL&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
@@ -1943,7 +1943,7 @@
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
          <c>nack app&nbsp;</c>
-         <c>Feedback parameters MUST be handled in the app specifc
+         <c>Feedback parameters MUST be handled in the app specific
          way when multiplexed</c>
          <c>M</c><c>SPECIAL&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
@@ -1994,7 +1994,7 @@
          defines a new RTCP Extended Report (XR) block for periodic ECN
          feedback, a new RTCP transport feedback message for timely reporting
          of congestion events, and a Session Traversal Utilities for NAT
-         (STUN) extension used in the optional initialisation method using
+         (STUN) extension used in the optional initialization method using
          Interactive Connectivity Establishment (ICE)
        </t>
        <texttable title="RFC6679 Attribute Analysis">
@@ -2181,7 +2181,7 @@
    <section title="ssrc-group Attribute Analysis"
      anchor="SecssrcgroupAnalysis">
     <t>
-     This section analyzes &quot;ssrc-group&quot; semantics <xref target="SSRC-GROUP"></xref>.
+     This section analyzes "ssrc-group" semantics <xref target="SSRC-GROUP"></xref>.
     </t>
      <section title="RFC5576 - Source-Specific SDP Attributes">
        <texttable title="RFC5576 Attribute Analysis">
@@ -2295,7 +2295,7 @@
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
          <c>text/ulpfec&nbsp;</c><c>Not recommended for multiplexing due to reuse of SSRCs&nbsp;</c>
-          <c>M</c><c>NOT RECOMMEDED&nbsp;</c>
+          <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
          <c>application/ulpfec&nbsp;</c><c>Not recommended for multiplexing due to reuse of SSRCs&nbsp;</c>
@@ -2306,43 +2306,57 @@
         </texttable>
 
         <t> Draft draft-lennox-payload-ulp-ssrc-mux proposes a simple fix to
-        make it possible to use ULP with multipelxing and ULP is allowed when
+        make it possible to use ULP with multiplexing and ULP is allowed when
         used with that. </t>
 
       </section>
 
       </section>
   
-     <section  anchor="dscp-mux" title="Multiplexing Media Streams and DSCP Markings">
-     <t>
-     This section provides recommendations for multiplexing multiple media streams 
-     with DSCP markings over a single 5-tuple.
-     <list>
-       <t>
-        RECOMMENDATION 1: Media Streams with markings from different DSCP Per Hop Behavior
-        group (PHB) MUST NOT be multiplexed. For example, a media stream with DSCP Marking
-        EF MUST NOT be multiplexed with a media stream marked with AF PHB group.
-       </t>
-       <t>
-        RECOMMENDATION 2: Media Streams having DSCP markings with different classes under 
-        the same PHB group MUST NOT be multiplexed. For example, media streams with
-        AF4X (AF41, AF42) class markings MUST NOT be multiplexed with media streams having
-        AF3X (AF31, AF32) class markings.
-       </t> 
-       <t>
-        RECOMMENDATION 3: Media Streams that belong to the same PHB group and have
-        the same class within that group can be multiplexed. Thus media streams that 
-        all belong to the EF group or all that belong to the AF4X class can be multiplexed,
-        for example.
-       </t>
-     </list>
-     </t>
-     <t>
-      As an practical example, if an audio media stream is multiplexed with an video
-      media stream that belong to the same synchronization group, it is implied that
-      the implementations MUST follow the DSCP markings from the RECOMMENDATION 3.
-     </t>
-     </section>
+      <section  anchor="dscp-mux" title="Multiplexing Media Streams and DSCP Markings">
+        <t> Note: This section does not yet have WG consensus but is included
+        as a proposal to the WG. There are two options being proposed, Option A
+        and B. The authors sugest A. </t>
+
+        <section title="Option A">
+          <t>
+            This section provides three rules for multiplexing multiple media streams 
+            with DSCP markings over a single 5-tuple.
+            <list>
+              <t>
+                Rule 1: Media Streams with markings from different DSCP Per Hop Behavior
+                group (PHB) MUST NOT be multiplexed. For example, a media stream with DSCP Marking
+                EF MUST NOT be multiplexed with a media stream marked with AF PHB group.
+              </t>
+              <t>
+                Rule 2: Media Streams having DSCP markings with different classes under 
+                the same PHB group MUST NOT be multiplexed. For example, media streams with
+                AF4X (AF41, AF42) class markings MUST NOT be multiplexed with media streams having
+                AF3X (AF31, AF32) class markings.
+              </t> 
+              <t>
+                Rule 3: Media Streams that belong to the same PHB group and have
+                the same class within that group MAY be multiplexed. Thus media streams that 
+                all belong to the EF group or all that belong to the AF4x class can be multiplexed,
+                for example.
+              </t>
+            </list>
+          </t>
+          <t>
+            For WebRTC applications following the advice in <xref target="I-D.dhesikan-tsvwg-rtcweb-qos"/>,
+            the above rules end up allowing the audio and video to be bundled
+            multiplexed in many, but not all, cases.
+          </t>
+        </section>
+
+        <section title="Option B">
+          <t>  
+            Media Streams MAY be multiplexed regardless of what the setting of the DSCP Per Hop Behavior
+            group (PHB).
+          </t>
+        </section>
+
+      </section>
 
    <section title="IANA Considerations">
       <t> IANA shall register categories from this specification by expanding the
@@ -2373,7 +2387,7 @@
       <section title="Acknowledgments">
        <t>I would like to thank Cullen Jennings for suggesting the categories,
        contributing text and helping review the draft. I would also link to
-       thank Magnus, Christer and Dan on suggesting stuctural changes helping
+       thank Magnus, Christer and Dan on suggesting structural changes helping
        improve the document readability.
        </t>
 
@@ -2403,7 +2417,7 @@
           </t>
           <t>
            Updated Table Column name Current to Level and improved TRANSPORT
-           category explantion on suggestions form Dan Wing.
+           category explanation on suggestions form Dan Wing.
           </t>
           <t>
            Grouped all the rtcp-fb attribute analysis under a single section
@@ -2414,7 +2428,7 @@
 
       <t>Changes from draft-nandakumar-mmusic-mux-attributes-03
         <list style="symbols">
-          <t> Maintainence change to clean up grammatical nits and wordings.
+          <t> Maintenance change to clean up grammatical nits and wordings.
           </t>
         </list>
       </t>
@@ -3413,7 +3427,7 @@
           <date/>
         </front>
       </reference>
-      <reference anchor='3GPP TS 24.229' target="http://www.3gpp.org/ftp/Specs/html-info/24229.htm">
+      <reference anchor='3GPPTS24.229' target="http://www.3gpp.org/ftp/Specs/html-info/24229.htm">
         <front>
           <title>IP multimedia call control protocol based on
            Session Initiation Protocol (SIP)
@@ -3422,7 +3436,7 @@
           <date/>
         </front>
       </reference>
-      <reference anchor='3GPP TS 24.182' target="http://www.3gpp.org/ftp/Specs/html-info/24182.htm">
+      <reference anchor='3GPPTS24.182' target="http://www.3gpp.org/ftp/Specs/html-info/24182.htm">
         <front>
           <title>IP Multimedia Subsystem (IMS) Customized Alerting Tones (CAT);
            Protocol specification</title>
@@ -3430,7 +3444,7 @@
           <date/>
         </front>
       </reference>
-     <reference anchor='3GPP TS 24.183' target="http://www.3gpp.org/ftp/Specs/html-info/24183.htm">
+     <reference anchor='3GPPTS24.183' target="http://www.3gpp.org/ftp/Specs/html-info/24183.htm">
         <front>
           <title>IP Multimedia Subsystem (IMS) Customized Ringing Signal (CRS);
            Protocol specification</title>
@@ -3486,6 +3500,38 @@
           <date/>
         </front>
       </reference>
+
+
+<reference anchor='I-D.dhesikan-tsvwg-rtcweb-qos'>
+<front>
+<title>DSCP and other packet markings for RTCWeb QoS</title>
+
+<author initials='S' surname='Dhesikan' fullname='Subha Dhesikan'>
+    <organization />
+</author>
+
+<author initials='D' surname='Druta' fullname='Dan Druta'>
+    <organization />
+</author>
+
+<author initials='P' surname='Jones' fullname='Paul Jones'>
+    <organization />
+</author>
+
+<author initials='J' surname='Polk' fullname='James Polk'>
+    <organization />
+</author>
+
+<date month='July' day='15' year='2013' />
+
+<abstract><t>Many networks, such as service provider and enterprise networks, can provide per packet treatments based on Differentiated Services Code Points (DSCP) on a per hop basis.  This document provides the recommended DSCP values for browsers to use for various classes of traffic.</t></abstract>
+
+</front>
+
+<seriesInfo name='Internet-Draft' value='draft-dhesikan-tsvwg-rtcweb-qos-02' />
+<format type='TXT'
+        target='http://www.ietf.org/internet-drafts/draft-dhesikan-tsvwg-rtcweb-qos-02.txt' />
+</reference>
 
     </references>
   </back>
