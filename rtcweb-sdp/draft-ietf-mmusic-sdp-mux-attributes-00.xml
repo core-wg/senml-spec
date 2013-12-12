@@ -2315,36 +2315,31 @@
   
       <section  anchor="dscp-mux" title="Multiplexing Media Streams and DSCP Markings">
         <t> Note: This section does not yet have WG consensus but is included
-        as a proposal to the WG. There are two options being proposed, Option A
-        and B. The authors sugest A. </t>
+        as a proposal to the WG. There are two options being proposed, A
+        and B. The authors suggest A. </t>
 
         <section title="Option A">
           <t>
-            This section provides three rules for multiplexing multiple media streams 
+            This section provides two rules for multiplexing multiple media streams 
             with DSCP markings over a single 5-tuple.
             <list>
               <t>
-                Rule 1: Media Streams with markings from different DSCP Per Hop Behavior
-                group (PHB) MUST NOT be multiplexed. For example, a media stream with DSCP Marking
-                EF MUST NOT be multiplexed with a media stream marked with AF PHB group.
+                Rule 1: Media Streams with markings from different service classes 
+                MUST NOT be multiplexed. For example, a media stream with DSCP Marking EF 
+                MUST NOT be multiplexed with a media stream marked with AF class.
+                Likewise, a media stream with DSCP marking AF3x MUST NOT be multiplexed 
+                with a media stream marked with AF4x.
               </t>
               <t>
-                Rule 2: Media Streams having DSCP markings with different classes under 
-                the same PHB group MUST NOT be multiplexed. For example, media streams with
-                AF4X (AF41, AF42) class markings MUST NOT be multiplexed with media streams having
-                AF3X (AF31, AF32) class markings.
-              </t> 
-              <t>
-                Rule 3: Media Streams that belong to the same PHB group and have
-                the same class within that group MAY be multiplexed. Thus media streams that 
-                all belong to the EF group or all that belong to the AF4x class can be multiplexed,
-                for example.
+                Rule 2: Media Streams that belong to the same service class, even with 
+                different drop precedence, MAY be multiplexed. Thus media streams that all 
+                belong to the EF group or all that belong to the AF4X class can be multiplexed.
               </t>
             </list>
           </t>
           <t>
             For WebRTC applications following the advice in <xref target="I-D.dhesikan-tsvwg-rtcweb-qos"/>,
-            the above rules end up allowing the audio and video to be bundled
+            the above rules end up allowing the audio and video to be
             multiplexed in many, but not all, cases.
           </t>
         </section>
