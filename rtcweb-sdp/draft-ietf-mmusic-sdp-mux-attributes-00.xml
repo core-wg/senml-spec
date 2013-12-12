@@ -765,7 +765,7 @@
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
           <c>previous-ssrc&nbsp;</c>
-          <c>SSSRCs,if repeated across bundled m=lines, it MUST represent the same 
+          <c>SSSRCs,if repeated across bundled m=lines, it MUST represent the same
           underlying RTP stream&nbsp;</c><c>SR</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
@@ -2312,7 +2312,7 @@
       </section>
 
       </section>
-  
+
       <section  anchor="dscp-mux" title="Multiplexing Media Streams and DSCP Markings">
         <t> Note: This section does not yet have WG consensus but is included
         as a proposal to the WG. There are two options being proposed, A
@@ -2320,19 +2320,19 @@
 
         <section title="Option A">
           <t>
-            This section provides two rules for multiplexing multiple media streams 
+            This section provides two rules for multiplexing multiple media streams
             with DSCP markings over a single 5-tuple.
             <list>
               <t>
-                Rule 1: Media Streams with markings from different service classes 
-                MUST NOT be multiplexed. For example, a media stream with DSCP Marking EF 
+                Rule 1: Media Streams with markings from different service classes
+                MUST NOT be multiplexed. For example, a media stream with DSCP Marking EF
                 MUST NOT be multiplexed with a media stream marked with AF class.
-                Likewise, a media stream with DSCP marking AF3x MUST NOT be multiplexed 
+                Likewise, a media stream with DSCP marking AF3x MUST NOT be multiplexed
                 with a media stream marked with AF4x.
               </t>
               <t>
-                Rule 2: Media Streams that belong to the same service class, even with 
-                different drop precedence, MAY be multiplexed. Thus media streams that all 
+                Rule 2: Media Streams that belong to the same service class, even with
+                different drop precedence, MAY be multiplexed. Thus media streams that all
                 belong to the EF group or all that belong to the AF4X class can be multiplexed.
               </t>
             </list>
@@ -2345,7 +2345,7 @@
         </section>
 
         <section title="Option B">
-          <t>  
+          <t>
             Media Streams MAY be multiplexed regardless of their DSCP service class
             markings.
           </t>
@@ -2391,16 +2391,30 @@
         Christian Huitema(5.13), Christer Holmberg(5.22,5.40,5.41),
         Richard Ejzak (5.36,5.42,5.43,5.44,), Colin Perkins(5.7,5.8),
         Magnus westerlund(5.3,5.9,6.1,6.2,6.3,8.3,5.2,7,8,9),
-        Roni Evens(5.12,5.27,8.4), Subha Dhesikan(5.5,12.1),
+        Roni Evens(5.12,5.27,8.4), Subha Dhesikan(5.5,12.1,14),
         Dan Wing(5.6,5.11,5.30,5.34,5.37),
         Ali C Begen(5.1,5.16,5.18,5.21,5.33,8.2,13.1,10.4,15.1),
         Bo Burman (7.2,7.6), Charles Eckel(5.14,5.23,5.24,10.5),
         Paul Kyzivat(5.24), Ian Johansson (5.11),
         Saravanan Shanmugham(5.10), Paul E Jones(5.25), Rajesh Kumar (5.39),
-        Jonathan Lennox (5.31,5,14,11.1), Mo Zanaty(5.4,5.19,10.1,10.5)</t>
+        Jonathan Lennox (5.31,5,14,11.1), Mo Zanaty(5.4,5.19,10.1,10.5),
+        David Black (14)</t>
     </section>
     <section title="Change Log">
       <t>[RFC EDITOR NOTE: Please remove this section when publishing]</t>
+       <t>Changes from draft-nandakumar-mmusic-mux-attributes-05
+        <list style="symbols">
+          <t>
+            Renamed the document to be a WG document.
+          </t>
+          <t>
+            Added Section 14.
+          </t>
+          <t>
+           Updated Open Issues based on IETF88 discussions.
+          </t>
+        </list>
+      </t>
       <t>Changes from draft-nandakumar-mmusic-mux-attributes-04
         <list style="symbols">
           <t>
