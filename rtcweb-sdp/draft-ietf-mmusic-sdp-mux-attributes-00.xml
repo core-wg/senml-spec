@@ -2346,8 +2346,8 @@
 
         <section title="Option B">
           <t>  
-            Media Streams MAY be multiplexed regardless of what the setting of the DSCP Per Hop Behavior
-            group (PHB).
+            Media Streams MAY be multiplexed regardless of their DSCP service class
+            markings.
           </t>
         </section>
 
