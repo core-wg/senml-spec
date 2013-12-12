@@ -1607,7 +1607,7 @@
 
       <section title="3GPP TS 24.182">
         <t>
-          <xref target="3GPPTS24.182">3GPP TS 24.182</xref> specifies IP multimedia subsystem Custom Alerting tones
+          <xref target="R3GPPTS24.182">3GPP TS 24.182</xref> specifies IP multimedia subsystem Custom Alerting tones
         </t>
         <texttable title="3GPP TS 24.182 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -1623,7 +1623,7 @@
 
       <section title="3GPP TS 24.183">
         <t>
-          <xref target="3GPPTS24.183">3GPP TS 24.183</xref>specifies IP multimedia
+          <xref target="R3GPPTS24.183">3GPP TS 24.183</xref>specifies IP multimedia
           subsystem Custom Ringing Signal
         </t>
         <texttable title="3GPP TS 24.183 Attribute Analysis">
@@ -1640,7 +1640,7 @@
 
       <section title="3GPP TS 24.229">
         <t>
-         <xref target="3GPPTS24.229">3GPP TS 24.229</xref>IP multimedia call control
+         <xref target="R3GPPTS24.229">3GPP TS 24.229</xref>IP multimedia call control
          protocol based on Session Initial protocol and Session Description Protocol.
         </t>
         <texttable title="3GPP TS 24.229 Attribute Analysis">
@@ -2223,7 +2223,7 @@
         </texttable>
       </section>
     </section>
-    <section title="k= Attribute Analysis" anchor="Seck=Analysis">
+    <section title="k= Attribute Analysis" anchor="SeckAnalysis">
       <section title="RFC4566 SDP: Session Description Protocol">
         <texttable title="RFC4566 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -3427,7 +3427,7 @@
           <date/>
         </front>
       </reference>
-      <reference anchor='3GPPTS24.229' target="http://www.3gpp.org/ftp/Specs/html-info/24229.htm">
+      <reference anchor='R3GPPTS24.229' target="http://www.3gpp.org/ftp/Specs/html-info/24229.htm">
         <front>
           <title>IP multimedia call control protocol based on
            Session Initiation Protocol (SIP)
@@ -3436,7 +3436,7 @@
           <date/>
         </front>
       </reference>
-      <reference anchor='3GPPTS24.182' target="http://www.3gpp.org/ftp/Specs/html-info/24182.htm">
+      <reference anchor='R3GPPTS24.182' target="http://www.3gpp.org/ftp/Specs/html-info/24182.htm">
         <front>
           <title>IP Multimedia Subsystem (IMS) Customized Alerting Tones (CAT);
            Protocol specification</title>
@@ -3444,7 +3444,7 @@
           <date/>
         </front>
       </reference>
-     <reference anchor='3GPPTS24.183' target="http://www.3gpp.org/ftp/Specs/html-info/24183.htm">
+     <reference anchor='R3GPPTS24.183' target="http://www.3gpp.org/ftp/Specs/html-info/24183.htm">
         <front>
           <title>IP Multimedia Subsystem (IMS) Customized Ringing Signal (CRS);
            Protocol specification</title>
