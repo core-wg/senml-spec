@@ -1,8 +1,8 @@
 ---
 title: "Trustable Cloud Systems - Strategies and Recommendations"
-abbrev: Trust Cloud
-docname: Trust-Cloud-00
-date: 2014-01-14
+abbrev: Trustable Cloud
+docname: draft-jennings-perpass-secure-rai-cloud-01
+date: 2014-01-15
 category: info
 ipr: trust200902
 
@@ -144,4 +144,4 @@ is concerned :-
 
 # Acknowledgements
 * Design motivated by SiRiUS (Goh, Shacham, Modadugu & Boneh)
-* Thanks to EKR, Richard Barnes
+* Thanks to Eric Rescorla, Richard Barnes
