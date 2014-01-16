@@ -16,21 +16,25 @@ author:
     name: Suhas Nandakumar
     email: snandaku@cisco.com
 
+
 normative:
+
+informative:
+  I-D.barnes-pervasive-problem:
 
 --- abstract
 
 The Internet technical community is looking at ways to address pervasive attacks
-as described in several other internet drafts. There are many systems that need
-to be secured against such attacks but this paper considers one possible way to
-secure cloud based collaborations systems. At a high level, this paper sugests
-that users or enterprises could run a key server that managed the keys to access
-their content. The cloud service provider would not have access to decrypt the
-data stored in the cloud keys but various users of the cloud service could get
-the keys to encrypt and decrypt the contents of collaborations session
+as described in several other internet drafts. {{I-D.barnes-pervasive-problem}} 
+describes threat model to characterize various pervasive attacks on the Internet
+communications. There are many systems that need to be secured against such attacks 
+but this paper considers one possible way to secure cloud based collaborations systems. 
+At a high level, this paper sugests that users or enterprises could run a key server that
+manages the keys to access their content. The cloud service provider would not have 
+access to decrypt the data stored in the cloud but various users of the cloud service 
+could get the keys to encrypt and decrypt the contents of collaboration sessions
 facilitated by the cloud service. This does not protect the meta data of who is
 talking to who but can help protect the content of the conversations.
-
 
 --- middle
 
@@ -102,11 +106,11 @@ anonymizing un-encrypted data as much as possible.
 
 This section outlines the guiding principles that define the roles of Identity
 Providers and Certificate Authorities in establishing end to end trust
-relationship, key management and content freshness issues.
+relationship and key management issues.
 
 Its very hard to design systems where you do not trust your Identity Provider
-(IdP). The approach here is to sperate the identity provider from the cloud
-provider and allow the identity provider to be run by someone you can trust. For
+(IdP). The approach here is to separate the Identity Provider from the cloud
+provider and allow the Identity Provider to be run by someone you can trust. For
 example, an enterprise may run it's own IdP for it's employees.
 
 * One has to trust their Identity Provider.
@@ -134,7 +138,7 @@ that we can trust. The CA
 * If the CA creates bad certificates, which it can, the security of the whole
   system can be compromised but the goal is to be able to detect this.
 
-Things do go wrong, devices get lost, and any practical system need sot be able
+Things do go wrong, devices get lost, and any practical system need to be able
 to deal with this. The approach for Key Revocation is:
 
 * Relies on the Identity Providers and Cloud Service cooperating to get rid of
@@ -150,7 +154,7 @@ data for that content with the new private key.
 There is also the ability to check Key Continuity as follows:
 
 * Any times a client detects a key has changed for a user, it can inform the
-user, identity provider, and cloud service to try and detect compromises
+user, Identity Provider, and Cloud Service to try and detect compromises
 
 * Any time the Certificate changes for an Identity Provider or Cloud Service the
  Client can inform the user and the Identity provider.
