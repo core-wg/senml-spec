@@ -256,7 +256,7 @@
            <t> DTLS fingerprint for SRTP (a=fingerprint) </t>
            <t> RTP/RTCP Multiplexing (a=rtcp-mux) </t>
            <t> RTCP Feedback support (a=rtcp-fb) </t>
-           <t> Host, server-reflexive and relayed ICE candidates (a=candidate) </t>
+           <t> Host and server-reflexive candidate lines (a=candidate) </t>
            <t> SRTP Setup framework parameters (a=setup) </t>
          </list>
           For more details, readers are recommended to refer to the 
@@ -318,9 +318,9 @@ Alice<->Bob: Two-way Opus Audio (preferred codec)
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20518 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20518 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref> - Session Origin Information</c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -385,9 +385,9 @@ Alice<->Bob: Two-way Opus Audio (preferred codec)
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=bob 16833 0 IN IP4 0.0.0.0</c>
+          <c>o=-  16833 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref> - Session Origin Information</c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -442,7 +442,7 @@ Alice<->Bob: Two-way Opus Audio (preferred codec)
           <c>a=ssrc:54321 cname:NWs1ao1HmN4Xa5/yvY7</c>
           <c><xref target="RFC5576"></xref></c>
           <c>a=rtcp-rsize</c>
-          <c><xref target="RFC5506"></xref> - Alice intends to use reduced size RTCP 
+          <c><xref target="RFC5506"></xref> - Bob intends to use reduced size RTCP
              for this session</c>
           <c>a=ice-options:trickle</c>
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
@@ -471,9 +471,9 @@ Alice->Bob: Two-way Opus Audio, H.264 Video
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20518 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20518 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref> - Session Origin Information</c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -546,12 +546,6 @@ Alice->Bob: Two-way Opus Audio, H.264 Video
           <c><xref target="RFC4145"></xref> - Alice can perform DTLS before Answer arrives</c>
           <c>a=rtcp-mux</c>
           <c><xref target="RFC5761"></xref> - Alice can perform RTP/RTCP Muxing on port 62537</c>
-          <c>b=AS:256</c>
-          <c><xref target="RFC4566"></xref> - Audio Session B/W of 256kbps</c>
-          <c>b=RS:800</c>
-          <c><xref target="RFC3556"></xref> - RTCP b/w allocated to active data senders</c>
-          <c>b=RR:2400</c>
-          <c><xref target="RFC3556"></xref> - RTCP b/w allocated to receivers</c>
           <c>a=ice-ufrag:074c6550</c>
           <c><xref target="RFC5245"></xref> - ICE user fragment</c>
           <c>a=ice-pwd:a28a397a4c3f31747d1ee3474af08a068</c>
@@ -591,9 +585,9 @@ Alice->Bob: Two-way Opus Audio, H.264 Video
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=bob 16833 0 IN IP4 0.0.0.0</c>
+          <c>o=-  16833 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref> - Session Origin Information</c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -636,7 +630,7 @@ Alice->Bob: Two-way Opus Audio, H.264 Video
           <c>a=ssrc:1366788312 cname:1f0fcgEocUG/yvY7</c>
           <c><xref target="RFC5576"></xref></c>
           <c>a=rtcp-rsize</c>
-          <c><xref target="RFC5506"></xref> - Alice intends to use reduced size RTCP 
+          <c><xref target="RFC5506"></xref> - Bob intends to use reduced size RTCP
              for this session</c>
           <c>a=ice-options:trickle</c>
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
@@ -681,7 +675,7 @@ Alice->Bob: Two-way Opus Audio, H.264 Video
           <c>a=ssrc:3229706345 cname:Q/NWs1ao1HmN4Xa5</c>
           <c><xref target="RFC5576"></xref></c>
           <c>a=rtcp-rsize</c>
-          <c><xref target="RFC5506"></xref> - Alice intends to use reduced size RTCP 
+          <c><xref target="RFC5506"></xref> - Bob intends to use reduced size RTCP
              for this session</c>
           <c>a=ice-options:trickle</c>
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>   
@@ -707,9 +701,9 @@ Alice->Bob: Two-way SCTP based Data-Channel
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20518 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20518 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref> - Session Origin Information</c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -749,9 +743,9 @@ Alice->Bob: Two-way SCTP based Data-Channel
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=bob 16833 0 IN IP4 0.0.0.0</c>
+          <c>o=-  16833 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref> - Session Origin Information</c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -808,9 +802,9 @@ Alice->Bob: One-way Opus Audio (preferred codec)]]></artwork>
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20518 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20518 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref> - Session Origin Information</c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -855,8 +849,7 @@ Alice->Bob: One-way Opus Audio (preferred codec)]]></artwork>
           <c>a=ssrc:3229706345 cname:Q/NWs1ao1HmN4Xa5</c>
           <c><xref target="RFC5576"></xref></c>
           <c>a=rtcp-rsize</c>
-          <c><xref target="RFC5506"></xref> - Alice intends to use reduced size RTCP 
-             for this session</c>
+          <c><xref target="RFC5506"></xref></c>
           <c>a=ice-options:trickle</c>
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>   
         </texttable>
@@ -865,9 +858,9 @@ Alice->Bob: One-way Opus Audio (preferred codec)]]></artwork>
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=bob 16833 0 IN IP4 0.0.0.0</c>
+          <c>o=-  16833 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref> - Session Origin Information</c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -910,8 +903,7 @@ Alice->Bob: One-way Opus Audio (preferred codec)]]></artwork>
           <c>a=ssrc:1366781083 cname:EocUG1f0fcg/yvY7</c>
           <c><xref target="RFC5576"></xref></c>
           <c>a=rtcp-rsize</c>
-          <c><xref target="RFC5506"></xref> - Alice intends to use reduced size RTCP 
-             for this session</c>
+          <c><xref target="RFC5506"></xref></c>
           <c>a=ice-options:trickle</c>
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>   
         </texttable>
@@ -941,9 +933,9 @@ Alice->Bob: Opus audio stream and telephone-event stream]]></artwork>
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20518 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20518 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref> - Session Origin Information</c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -992,8 +984,7 @@ Alice->Bob: Opus audio stream and telephone-event stream]]></artwork>
           <c>a=ssrc:3229706345 cname:Q/NWs1ao1HmN4Xa5</c>
           <c><xref target="RFC5576"></xref></c>
           <c>a=rtcp-rsize</c>
-          <c><xref target="RFC5506"></xref> - Alice intends to use reduced size RTCP 
-             for this session</c>
+          <c><xref target="RFC5506"></xref></c>
           <c>a=ice-options:trickle</c>
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=audio 54609 UDP/TLS/RTP/SAVPF 126</c>
@@ -1031,8 +1022,7 @@ Alice->Bob: Opus audio stream and telephone-event stream]]></artwork>
           <c>a=ssrc:9032206345 cname:L/N9lk1ao1HmN4Xa5</c>
           <c><xref target="RFC5576"></xref></c>
           <c>a=rtcp-rsize</c>
-          <c><xref target="RFC5506"></xref> - Alice intends to use reduced size RTCP 
-             for this session</c>
+          <c><xref target="RFC5506"></xref></c>
           <c>a=ice-options:trickle</c>
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           </texttable>
@@ -1041,9 +1031,9 @@ Alice->Bob: Opus audio stream and telephone-event stream]]></artwork>
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=bob 16833 0 IN IP4 0.0.0.0</c>
+          <c>o=-  16833 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref> - Session Origin Information</c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -1162,9 +1152,9 @@ end note
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20519 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20519 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -1190,7 +1180,7 @@ end note
           <c><xref target="RFC4145"></xref> - Alice can perform DTLS before Answer arrives</c>
           <c>a=rtcp-mux</c>
           <c><xref target="RFC5761"></xref></c>
-           <c>a=ice-ufrag:074c6550</c>
+          <c>a=ice-ufrag:074c6550</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=ice-pwd:a28a397a4c3f31747d1ee3474af08a068</c>
           <c><xref target="RFC5245"></xref></c>
@@ -1205,11 +1195,10 @@ end note
           <c>a=ssrc:6345903220 cname:L/k1aN9lo1HmN4Xa5</c>
           <c><xref target="RFC5576"></xref></c>
           <c>a=rtcp-rsize</c>
-          <c><xref target="RFC5506"></xref> - Alice intends to use reduced size RTCP 
-             for this session</c>
+          <c><xref target="RFC5506"></xref></c>
           <c>a=ice-options:trickle</c>
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
-          <c>m=video 62537 UDP/TLS/RTP/SAVPF 120</c>
+          <c>m=video 54609 UDP/TLS/RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref> </c>
           <c>a=mid:video</c>
           <c><xref target="RFC5888"></xref></c>
@@ -1227,16 +1216,16 @@ end note
           <c><xref target="RFC4145"></xref> - Alice can perform DTLS before Answer arrives</c>
           <c>a=rtcp-mux</c>
           <c><xref target="RFC5761"></xref></c>
-          <c>a=ice-ufrag:6550074c</c>
+          <c>a=ice-ufrag:074c6550</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=ice-pwd:1747d1ee3474af08a068a28a397a4c3f3</c>
+          <c>a=ice-pwd:a28a397a4c3f31747d1ee3474af08a068</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=fingerprint:sha-1 1f:ef:6d:f7:c9:c7:70:9d:1f:66:79:a8:07:99:41:49:83:4a:97:0e</c>
+          <c>a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7:70:9d:1f:66:79:a8:07</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 62537 typ host</c>
+          <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 54609 typ host</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:0 2 UDP 2113667326 192.168.1.4 54721 typ host</c>
-          <c><xref target="RFC5245"></xref></c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.4 64678 typ host</c>
+          <c><xref target="RFC5104"></xref></c>
           <c>a=rtcp-fb:120 nack</c>
           <c><xref target="RFC5104"></xref> </c>
           <c>a=rtcp-fb:120 nack pli</c>
@@ -1246,8 +1235,7 @@ end note
           <c>a=ssrc:3429951804 cname:Q/NWs1ao1HmN4Xa5</c>
           <c><xref target="RFC5576"></xref></c>
           <c>a=rtcp-rsize</c>
-          <c><xref target="RFC5506"></xref> - Alice intends to use reduced size RTCP 
-             for this session</c>
+          <c><xref target="RFC5506"></xref></c>
           <c>a=ice-options:trickle</c>
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>   
         </texttable>
@@ -1256,9 +1244,9 @@ end note
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=bob 16833 0 IN IP4 0.0.0.0</c>
+          <c>o=-  16833 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -1300,7 +1288,7 @@ end note
           <c><xref target="RFC5506"></xref></c>
           <c>a=ice-options:trickle</c>
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
-          <c>m=video 63130 UDP/TLS/RTP/SAVPF 120</c>
+          <c>m=video 49203 UDP/TLS/RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref> </c>
           <c>a=mid:video</c>
           <c><xref target="RFC5888"></xref></c>
@@ -1318,15 +1306,15 @@ end note
           <c><xref target="RFC4145"></xref> - Bob carries out DTLS Handshake in parallel</c>
           <c>a=rtcp-mux</c>
           <c><xref target="RFC5761"></xref></c>
-          <c>a=ice-ufrag:85bc300d</c>
+          <c>a=ice-ufrag:c300d85b</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=ice-pwd:325921d5d47efbabd9ade4e99bd291c2</c>
+          <c>a=ice-pwd:de4e99bd291c325921d5d47efbabd9a2</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=fingerprint:sha-1 ef:6d:f7:c9:c7:70:9d:1h:99:41:49:83:4a:97:0e:1f:1f:66:79:a8:07</c>
+          <c>a=fingerprint:sha-1 99:41:49:83:4a:97:0e:1f:ef:6d:f7:c9:c7:70:9d:1f:66:79:a8:07</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 63130 typ host</c>
+          <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 49203 typ host</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 56607 typ host</c>
+          <c>a=candidate:0 2 UDP 2113667326 192.168.1.7 60065 typ host</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=ssrc:1366781083 cname:EocUG1f0fcg/yvY7</c>
           <c><xref target="RFC5576"></xref></c>
@@ -1346,9 +1334,8 @@ end note
            <t> An SDP Offer, in which the Alice assigns unique addresses to
                each "m=" line in the BUNDLE group, and requests the Answerer to
                select the Offerer's BUNDLE address. </t>
-           <t> An SDP Answer, in which the Bob selects the BUNDLE
-               address for the Offerer, and assigns its own local BUNDLE address
-               to each "m=" line in the BUNDLE group. </t>
+           <t> An SDP Answer, in which the Bob indicates its support for BUNDLE, and
+               assigns its own BUNDLE address for the BUNDLED m= lines. </t>
            <t> A subsequent SDP Offer from Alice, which is used to perform a BUNDLE
                Address Synchronization (BAS).</t>
          </list>
@@ -1380,9 +1367,9 @@ Alice <-> Bob: 2Way Call with Audio and Video Multiplexed
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20518 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20518 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -1480,9 +1467,9 @@ Alice <-> Bob: 2Way Call with Audio and Video Multiplexed
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=bob 16833 0 IN IP4 0.0.0.0</c>
+          <c>o=-  16833 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -1538,8 +1525,6 @@ Alice <-> Bob: 2Way Call with Audio and Video Multiplexed
           the port from audio line repeated </c>
           <c>a=msid:ma tb </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
-          <c>b=AS:1756</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>c= IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=rtpmap:120 VP8/90000</c>
@@ -1582,9 +1567,9 @@ Alice <-> Bob: 2Way Call with Audio and Video Multiplexed
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20518 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20518 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -1707,9 +1692,9 @@ Alice <-> Bob: 2Way Call with Audio and Video Multiplexed
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20518 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20518 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -1802,9 +1787,9 @@ Alice <-> Bob: 2Way Call with Audio and Video Multiplexed
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=bob 16833 0 IN IP4 0.0.0.0</c>
+          <c>o=-  16833 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -1896,7 +1881,7 @@ Alice <-> Bob: 2Way Call with Audio and Video Multiplexed
       </section>
 -->      
       <section anchor="avd-2way"
-        title="Audio, Video and Data BUNDLE">
+        title="Audio, Video and Data Session">
         <t>
          This example show-cases SDP for negotiating a session with Audio, Video
          and data streams between Alice and Bob with
@@ -1925,9 +1910,9 @@ Alice<->Bob: Two way Audio, Video and Data multiplexed
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20518 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20518 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref> </c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -1972,9 +1957,9 @@ Alice<->Bob: Two way Audio, Video and Data multiplexed
           <c>a=ssrc:11111 cname:Q/NWs1ao1HmN4Xa5</c>
           <c><xref target="RFC5576"></xref></c>
           <c>a=rtcp-rsize</c>
+          <c><xref target="RFC5506"></xref></c>
           <c>a=ice-options:trickle</c>
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
-          <c><xref target="RFC5506"></xref></c>
           <c>m=video 54609 UDP/TLS/RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref> </c>
           <c>a=msid:ma tb </c>
@@ -2049,9 +2034,9 @@ Alice<->Bob: Two way Audio, Video and Data multiplexed
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=bob 16833 0 IN IP4 0.0.0.0</c>
+          <c>o=-  16833 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref> - Session Origin Information</c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -2060,7 +2045,8 @@ Alice<->Bob: Two way Audio, Video and Data multiplexed
           <c>a=group:BUNDLE audio video data</c>
           <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref> </c>
           <c>a=ice-options:trickle</c>
-          <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
+          <c><xref target="draft-ivov-mmusic-trickle-ice"></xref> Bob's trickle support support
+          is indicated at the session level</c>
           <c>m=audio 49203 UDP/TLS/RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
           <c>a=msid:ma ta </c>
@@ -2199,9 +2185,9 @@ Alice->Bob: Two-way Opus Audio and VP8 Video
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=1</c>
           <c><xref target="RFC4566"></xref> Incremented version to indicate the update</c>
-          <c>o=alice 20519 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20519 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -2290,9 +2276,9 @@ Alice->Bob: Two-way Opus Audio and VP8 Video
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=1</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=bob 16833 0 IN IP4 0.0.0.0</c>
+          <c>o=-  16833 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -2371,8 +2357,8 @@ Alice->Bob: Two-way Opus Audio and VP8 Video
           This use-case illustrates SDP Offer/Answer exchange when the far-end (Bob)
           either doesn't support media bundling or doesn't want to group m=lines over
           a single 5-tuple.</t>
-        <t> On successful Offer/Answer exchange, Alice and Bob each end up using separate
-        RTP streams for audio and video media streams respectively.</t>
+        <t> On successful Offer/Answer exchange, Alice and Bob each end up using unique
+        5-tuple for audio and video media streams respectively.</t>
         <figure>
           <artwork alt="Successful-Session 2 Way BUNDLE Unsupported"
             src="2waybundlerej.svg"><![CDATA[
@@ -2396,9 +2382,9 @@ Alice <-> Bob: 2Way Call with Audio and Video on different addresses.
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20518 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20518 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -2495,9 +2481,9 @@ Alice <-> Bob: 2Way Call with Audio and Video on different addresses.
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=bob 16833 0 IN IP4 0.0.0.0</c>
+          <c>o=-  16833 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -2574,11 +2560,12 @@ Alice <-> Bob: 2Way Call with Audio and Video on different addresses.
         </texttable>
       </section>
        <section anchor="av-d-not-bundle"
-        title="Audio, Video, Data Not in BUNDLE">
+        title="Audio, Video BUNDLED but Data Not BUNDLED">
         <t>
          This example show-cases SDP for negotiating a session with Audio, Video
          and data streams between Alice and Bob but with data stream not part of
-         the BUNDLE group.
+         the BUNDLE group. This is shown by assigning unique port for data media
+         sections.
         </t>
         <figure>
           <artwork alt="Successful-Session 2 Way SAVPF"
@@ -2601,9 +2588,9 @@ Alice<->Bob: Two way Audio, Video multiplexed except Data
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20518 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20518 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref> </c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -2692,7 +2679,7 @@ Alice<->Bob: Two way Audio, Video multiplexed except Data
           <c><xref target="RFC5576"></xref></c>
           <c>a=rtcp-rsize</c>
           <c><xref target="RFC5506"></xref></c>
-          <c>m=application 54110 DTLS/SCTP 5000</c>
+          <c>m=application 10000 DTLS/SCTP 5000</c>
           <c><xref target="draft-ietf-rtcweb-data-channel"></xref> </c>
           <c>c= IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
@@ -2712,9 +2699,9 @@ Alice<->Bob: Two way Audio, Video multiplexed except Data
           <c><xref target="RFC5245"></xref></c>
           <c>a=fingerprint:sha-1 0e:1f:ef:6d:f7:c9:c7:70:99:41:49:83:4a:97:9d:1f:66:79:a8:07</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 54110 typ host</c>
+          <c>a=candidate:0 1 UDP  2113667327 192.168.1.4 10000 typ host</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:1 1 UDP  694302207 24.23.204.141 54110 typ srflx raddr 192.168.1.4 rport 54110</c>
+          <c>a=candidate:1 1 UDP  694302207 24.23.204.141 10000 typ srflx raddr 192.168.1.4 rport 10000</c>
           <c><xref target="RFC5245"></xref></c>
         </texttable>
         <texttable anchor="table_av-nob-d-2way_2" title="5.2.10 SDP Answer">
@@ -2722,9 +2709,9 @@ Alice<->Bob: Two way Audio, Video multiplexed except Data
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=bob 16833 0 IN IP4 0.0.0.0</c>
+          <c>o=-  16833 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref> - Session Origin Information</c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -2812,7 +2799,7 @@ Alice<->Bob: Two way Audio, Video multiplexed except Data
           <c><xref target="RFC5576"></xref></c>
           <c>a=rtcp-rsize</c>
           <c><xref target="RFC5506"></xref></c>
-          <c>m=application 10000 DTLS/SCTP 5000</c>
+          <c>m=application 20000 DTLS/SCTP 5000</c>
           <c><xref target="draft-ietf-mmusic-sctp-sdp"></xref> </c>
           <c>c= IN IP4 98.248.92.771</c>
           <c><xref target="RFC4566"></xref></c>
@@ -2832,14 +2819,14 @@ Alice<->Bob: Two way Audio, Video multiplexed except Data
           <c><xref target="RFC5245"></xref> - Session Level ICE password</c>
           <c>a=fingerprint:sha-1 6d:f7:c9:c7:70:9d:1f:66:79:a8:07:99:41:49:83:4a:97:0e:1f:ef</c>
           <c><xref target="RFC5245"></xref> </c>
-          <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 10000 typ host</c>
+          <c>a=candidate:0 1 UDP 2113667327 192.168.1.7 20000 typ host</c>
           <c><xref target="RFC5245"></xref></c>
-          <c>a=candidate:1 1 UDP 1694302207 98.248.92.77 10000 typ srflx raddr 192.168.1.7 rport 10000</c>
+          <c>a=candidate:1 1 UDP 1694302207 98.248.92.77 20000 typ srflx raddr 192.168.1.7 rport 20000</c>
           <c><xref target="RFC5245"></xref></c>
         </texttable>
    </section>
    <section anchor="a-video-add"
-        title="Audio Only, Add Video and BUNDLE">
+        title="Audio Only then Add Video and BUNDLE">
         <t>
          This example involves 2 Offer/Answer exchanges. First one setting up
          Audio-only session followed by an updated Offer/Answer exchange to add
@@ -2880,9 +2867,9 @@ Alice<->Bob: Two way Opus Audio and VP8 Video session
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20518 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20518 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref> </c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -2937,9 +2924,9 @@ Alice<->Bob: Two way Opus Audio and VP8 Video session
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=bob 16833 0 IN IP4 0.0.0.0</c>
+          <c>o=-  16833 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref> - Session Origin Information</c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -2993,9 +2980,9 @@ Alice<->Bob: Two way Opus Audio and VP8 Video session
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=1</c>
           <c><xref target="RFC4566"> Version number incremented</xref></c>
-          <c>o=alice 20518 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20518 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref> </c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -3090,9 +3077,9 @@ Alice<->Bob: Two way Opus Audio and VP8 Video session
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=1</c>
           <c><xref target="RFC4566"></xref> Version number incremented</c>
-          <c>o=bob 16833 0 IN IP4 0.0.0.0</c>
+          <c>o=-  16833 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref> - Session Origin Information</c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -3185,9 +3172,11 @@ Alice<->Bob: Two way Opus Audio and VP8 Video session
      </section>
      <section title="MultiResolution, RTX, FEC Examples">
      <t>
-      This section deals with scenarios dealing with multiresolution negotiation
+      This section deals with scenarios related to multiresolution negotiation
       such as layered coding, simulcast, along with techniques that deal with
       providing robustness against transmission errors such as FEC and RTX.
+      Also to note, meachnisms such as FEC and RTX could be envisioned in the
+      above basic scenarios as well.
      </t>
       	 <section anchor="sec.successful-session-simulcast"
         title="Sendonly Simulcast w/2 cameras and 2 encodings per camera">
@@ -3218,9 +3207,9 @@ Alice->Bob: One-Way 1 Opus, 2 H.264 and 2 VP8 video streams, all mulitplexed
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20519 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20519 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -3368,9 +3357,9 @@ Alice->Bob: One-Way 1 Opus, 2 H.264 and 2 VP8 video streams, all mulitplexed
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20519 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20519 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -3539,9 +3528,9 @@ Alice->Bob: One-Way H.264 Video with codec points as indicated by Bob.
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20519 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20519 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -3641,9 +3630,9 @@ Alice->Bob: One-Way H.264 Video with codec points as indicated by Bob.
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20519 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20519 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -3767,9 +3756,9 @@ Alice<->Bob: 2 Way Audio and Simulcast Video with RTX Streams
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20519 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20519 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -3827,8 +3816,6 @@ Alice<->Bob: 2 Way Audio and Simulcast Video with RTX Streams
           <c><xref target="RFC4566"></xref></c>
           <c>a=mid:m1</c>
           <c><xref target="RFC5888"></xref> Audio m=line part of BUNDLE group</c>
-          <c>b=AS:1756</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtpmap:98 VP8/90000</c>
           <c><xref target="draft-ietf-payload-vp8"></xref></c>
           <c>a=rtpmap:100 VP8/90000</c>
@@ -3879,9 +3866,9 @@ Alice<->Bob: 2 Way Audio and Simulcast Video with RTX Streams
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20519 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20519 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -4040,9 +4027,9 @@ end note
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20519 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20519 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -4150,9 +4137,9 @@ end note
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20519 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20519 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -4250,9 +4237,8 @@ end note
          style FEC flows.
          </t>
          <t>
-           On completion of Offer/Answer exchange, one audio stream, 2 simulcast video
-           streams and 2 associated FEC streams are sent over a single 5-Tuple as part
-           of bundle-only and BUNDLE framework.
+           On completion of Offer/Answer exchange we end up one audio stream, 2 simulcast video
+           streams and 2 associated FEC streams are sent over a single 5-tuple.
          </t>
         <figure>
           <artwork alt="Successful-Session Simulcast FEC"
@@ -4279,9 +4265,9 @@ Successful Session with 4 video streams (Simulcast + FEC) and 1 Audio Stream
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20519 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20519 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -4389,9 +4375,9 @@ Successful Session with 4 video streams (Simulcast + FEC) and 1 Audio Stream
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20519 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20519 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -4518,7 +4504,7 @@ Successful Session with 4 video streams (Simulcast + FEC) and 1 Audio Stream
          related to RTP Header extension, Legacy Interop scenarios and more.
         </t>
       	<section anchor="sec.av.rtp_ext_vad"
-        	title="Audio Session Voice Activity Detection">
+        	title="Audio Session - Voice Activity Detection">
         	<t>
         	  This example shows Alice indicating the support of the RTP header extension
         	  to include the audio-level of the audio sample carried in the RTP packet.
@@ -4538,17 +4524,17 @@ Bob accepts and indicates his support as well
 end note
 Alice<->Bob: Two-way Opus Audio
 note right of Alice
- Per packet audio-level is included
+ Per packet audio-level is included in the RTP header.
 end note]]></artwork>
         </figure>
-        <texttable anchor="t_2way-audio-vad_1" title="5.4.2 SDP Offer">
+        <texttable anchor="t_2way-audio-vad_1" title="5.4.1 SDP Offer">
           <ttcol align='left'>SDP Contents </ttcol>
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20518 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20518 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref> </c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -4603,14 +4589,14 @@ end note]]></artwork>
           <c>a=rtcp-rsize</c>
           <c><xref target="RFC5506"></xref></c>
         </texttable>
-        <texttable anchor="t_2way-audio-vad_2" title="5.4.2 SDP Answer">
+        <texttable anchor="t_2way-audio-vad_2" title="5.4.1 SDP Answer">
           <ttcol align='left'>SDP Contents </ttcol>
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=bob 16833 0 IN IP4 0.0.0.0</c>
+          <c>o=-  16833 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref> - Session Origin Information</c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -4676,29 +4662,29 @@ end note]]></artwork>
         	<figure>
           <artwork alt="Session 2 Way Audio with VAD"
             src="2way-aconf-vad.svg"><![CDATA[
-title 2-Way Audio with VAD
+title Audio Conference with VAD Support
 
-Alice->Bob: Offer(Audio:Opus,PCMU,PCMA)
+Alice->Mixer: Offer(Audio:Opus,PCMU,PCMA)
 note right of Alice
-Alice indicates support for including audio-level
+Alice indicates its interest to audio levels for the contributing sources
 end note
-Bob->Alice: Answer(Audio:Opus,PCMU,PCMA)
+Mixer->Alice: Answer(Audio:Opus,PCMU,PCMA)
 note left of Bob
-Bob accepts and indicates his support as well
+Mixer indicates it can provide audio-levels per CSRC
 end note
-Alice<->Bob: Two-way Opus Audio
+Alice<->Mixer: Two-way Opus Audio
 note right of Alice
- Per packet audio-level is included
+ Audio levels per CSRC is included in the RTP Header
 end note]]></artwork>
         </figure>
-        <texttable anchor="t_2way-aconf-vad_1" title="5.4.3 SDP Offer">
+        <texttable anchor="t_2way-aconf-vad_1" title="5.4.2 SDP Offer">
           <ttcol align='left'>SDP Contents </ttcol>
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20518 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20518 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref> - Session Origin Information</c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -4753,14 +4739,14 @@ end note]]></artwork>
           <c>a=rtcp-rsize</c>
           <c><xref target="RFC5506"></xref></c>
         </texttable>
-        <texttable anchor="t_2way-aconf-vad_2" title="5.4.3 SDP Answer">
+        <texttable anchor="t_2way-aconf-vad_2" title="5.4.2 SDP Answer">
           <ttcol align='left'>SDP Contents </ttcol>
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=bob 16833 0 IN IP4 0.0.0.0</c>
+          <c>o=-  16833 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref> - Session Origin Information</c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -4854,14 +4840,14 @@ end note
 Alice<->Bob: Two-way Opus Audio
 ]]></artwork>
         </figure>
-       <texttable anchor="t_legacy_interop_1_1" title="5.4.4 SDP Simulcast bundle-only">
+       <texttable anchor="t_legacy_interop_1_1" title="5.4.3 SDP Simulcast bundle-only">
           <ttcol align='left'>SDP Contents </ttcol>
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20519 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20519 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -4887,7 +4873,7 @@ Alice<->Bob: Two-way Opus Audio
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=rtcp-fb:109 nack</c>
           <c><xref target="RFC5104"></xref> </c>
-          <c>a=sendonly</c>
+          <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref></c>
           <c>a=setup:actpass</c>
           <c><xref target="RFC4145"></xref> - Alice can perform DTLS before Answer arrives</c>
@@ -4968,14 +4954,14 @@ Alice<->Bob: Two-way Opus Audio
           <c>a=rtcp-rsize</c>
           <c><xref target="RFC5506"></xref></c>
         </texttable>
-        <texttable anchor="t_legacy_interop_1_2" title="5.4.4 SDP Anwer">
+        <texttable anchor="t_legacy_interop_1_2" title="5.4.3 SDP Anwer">
           <ttcol align='left'>SDP Contents </ttcol>
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20519 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20519 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -4991,7 +4977,7 @@ Alice<->Bob: Two-way Opus Audio
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=rtcp-fb:109 nack</c>
           <c><xref target="RFC5104"></xref> </c>
-          <c>a=sendonly</c>
+          <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref></c>
           <c>a=setup:active</c>
 		  <c><xref target="RFC4145"></xref> - Bob carries out DTLS Handshake in parallel</c>
@@ -5009,6 +4995,8 @@ Alice<->Bob: Two-way Opus Audio
           <c><xref target="RFC5245"></xref></c>
           <c>a=candidate:1 2 UDP  1694302206 24.23.204.141 64678 typ srflx raddr 192.168.1.4 rport 64678</c>
           <c><xref target="RFC5245"></xref></c>
+          <c>a=rtcp-rsize</c>
+          <c><xref target="RFC5506"></xref></c>
           <c>m=video 0 UDP/TLS/RTP/SAVPF 98 100</c>
           <c> Bob doesn't recognize bundle-only and hence rejects the video stream </c>
           <c>c= IN IP4 24.23.204.141</c>
@@ -5099,9 +5087,9 @@ end note
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=alice 20518 0 IN IP4 0.0.0.0</c>
+          <c>o=- 20518 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
@@ -5213,9 +5201,9 @@ end note
           <ttcol align='left'>RFC#/Notes</ttcol>
           <c>v=0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>o=bob 16833 0 IN IP4 0.0.0.0</c>
+          <c>o=-  16833 0 IN IP4 0.0.0.0</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>s=</c>
+          <c>s=-</c>
           <c><xref target="RFC4566"></xref></c>
           <c>t=0 0</c>
           <c><xref target="RFC4566"></xref></c>
