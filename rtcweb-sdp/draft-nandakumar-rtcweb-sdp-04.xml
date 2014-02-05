@@ -2424,7 +2424,7 @@ Alice->Bob: Two-way Opus Audio and VP8 Video
       </section>
 -->
       	<section anchor="successful-2way-bundle-unsupported"
-        title="Secure Two-Way Audio,Video w/BUNDLE Unsupported">
+        title="Two-Way Audio,Video w/BUNDLE Unsupported">
         <t>
           This use-case illustrates SDP Offer/Answer exchange when the far-end (Bob)
           either doesn't support media bundling or doesn't want to group m=lines over
