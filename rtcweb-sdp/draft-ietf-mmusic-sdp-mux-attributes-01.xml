@@ -361,7 +361,8 @@
         <c>NORMAL&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-        <c>cat&nbsp;</c><c>Not impacted&nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
+        <c>cat&nbsp;</c><c>Not impacted&nbsp;</c><c>S&nbsp;</c>
+        <c>NORMAL&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         <c>ptime&nbsp;</c><c>Not Impacted
@@ -392,7 +393,8 @@
           &nbsp;</c><c>M&nbsp;</c><c>NORMAL</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-        <c>keywds&nbsp;</c><c>Not impacted&nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
+        <c>keywds&nbsp;</c><c>Not impacted&nbsp;</c><c>S&nbsp;</c>
+        <c>NORMAL&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         <c>type&nbsp;</c><c>Not Impacted
@@ -432,15 +434,15 @@
         <ttcol align='left'>Category</ttcol>
         <c>rtcp-fb&nbsp;</c><c>The combination of a particular Codec-Configuration along
         with the m=line identify the scope and applicability of a given RTCP feedback to a
-        particular source RTP Stream.</c>
+        particular RTP Stream.</c>
         <c>M</c><c>NORMAL&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
       </texttable>
       <t hangText="Note">
        Since RTCP feedback attributes are Payload Type (PT) scoped, the Codec-Configuration
-       for a given PT further defines multiplexing requirements. For more details on the implications
-       of Codec-Configuration for transport multiplexing,readers are recommended to the
+       for a given PT further defines multiplexing requirements. For more details on the implications of Codec-Configuration for transport multiplexing,
+       readers are recommended to the
        draft <xref target="I-D.ietf-mmusic-sdp-bundle-negotiation"></xref>.
       </t>
     </section>
@@ -517,7 +519,7 @@
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
         <t hangText="Note">
-         Analysis of impact of multiplexing wjen multiple DSCP code points are defined per flow
+         Multiplexing consideration when multiple DSCP code points are defined per flow
          can be found in <xref target="dscp-mux"/>
         </t>
       </section>
@@ -561,13 +563,14 @@
           <ttcol align='left'>Current</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>dccp-service-code&nbsp;</c><c>If RFC6773 is not being used in addition to RFC5762,
+          <c>dccp-service-code&nbsp;</c><c> If RFC6773 is not being used in addition to RFC5762,
          the port in the m= line is a DCCP port. DCCP being a connection oriented protocol,
          does not allow multiple connections on the same 5-tuple.&nbsp;</c>
           <c>M&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c><c>&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
-        <t hangText="Note">If RFC6773 is being used in addition to RFC5762 and provided
+        <t hangText="Note">
+         If RFC6773 is being used in addition to RFC5762 and provided
          that DCCP-in-UDP layer has additional demultiplexing, then it may be
          possible to use different DCCP service codes for each DCCP flow, given
          each uses a different DCCP port. Although doing so might conflict with the
@@ -599,14 +602,12 @@
         </texttable>
         <t hangText="Note">
          Since RFC6773 is about tunnelling DCCP in UDP, with the UDP port being the port
-         of the DCCP en-/de-capsulation service. This encapsulation allows arbitrary DCCP packets to
-         be encapsulated and the DCCP port choosen MAY conflict with port chosen for the RTP traffic.
+         of the DCCP en-/de-capsulation service. This encapsulation allows arbitrary DCCP packets to be encapsulated and the DCCP port choosen MAY conflict with the
+         port chosen for the RTP traffic.
         </t>
         <t>
-         For multiplexing several DCCP-in-UDP encapsulations on the same UDP port, with no RTP traffic
-         on the same port implies collapsing several DCCP port spaces together. This MAY or MAY NOT work
-         depending on the nature of DCCP encapsulations and ports choses thus rendering it to be very
-         application dependant.
+         For multiplexing several DCCP-in-UDP encapsulations on the same UDP port, with no RTP traffic on the same port implies collapsing several DCCP port spaces together.
+         This MAY or MAY NOT work depending on the nature of DCCP encapsulations and ports choses thus rendering it to be very application dependant.
         </t>
       </section>
 
@@ -749,7 +750,7 @@
           <ttcol align='left'>Category</ttcol>
 
           <c>rtcp&nbsp;</c><c>Identical attribute value MUST be used since the RTCP port affects
-          the entire multiplexed RTP session.&nbsp;</c><c>M</c>
+          the entire RTP session.&nbsp;</c><c>M</c>
           <c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
@@ -944,13 +945,16 @@
           <c>csdc&nbsp;</c><c>Not Impacted.&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>cpar&nbsp;</c><c>Refer to <xref target="encap"/>&nbsp;</c><c>B</c><c>SPECIAL&nbsp;</c>
+          <c>cpar&nbsp;</c><c>Refer to <xref target="encap"/>&nbsp;</c>
+          <c>B</c><c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>cparmin&nbsp;</c><c>Refer to <xref target="encap"/>&nbsp;</c><c>B</c><c>SPECIAL&nbsp;</c>
+          <c>cparmin&nbsp;</c><c>Refer to <xref target="encap"/>&nbsp;</c>
+          <c>B</c><c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>cparmax&nbsp;</c><c>Refer to <xref target="encap"/>&nbsp;</c><c>B</c><c>SPECIAL&nbsp;</c>
+          <c>cparmax&nbsp;</c><c>Refer to <xref target="encap"/>&nbsp;</c>
+          <c>B</c><c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
       </section>
@@ -997,7 +1001,8 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>msrp-cema&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>msrp-cema&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c>
+          <c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -1022,15 +1027,15 @@
           <c>M&nbsp;</c><c>IDENTICAL&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>confid&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          <c>confid&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c>
+          <c>NORMAL&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
           <c>userid&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
           <c>floorid&nbsp;</c>
-          <c>The floorid MUST be unique across the multiplexed m=lines&nbsp;</c>
-          <c>M&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          <c>The floorid MUST be globally unique&nbsp;</c>
+          <c>M&nbsp;</c><c>NORMAL&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -1146,8 +1151,7 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>rtcp-xr&nbsp;</c><c>The attribute MUST be reported across all
-            m=lines multiplexed&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
+          <c>rtcp-xr&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -1195,7 +1199,7 @@
         </texttable>
       </section>
 
-      <section title="RFC6781">
+      <section title="RFC6781 - SDP Media Capabilities Negotiation">
         <t>
           Session Description Protocol (SDP) capability negotiation provides a
           general framework for indicating and negotiating capabilities in SDP.
@@ -1274,8 +1278,8 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>fingerprint&nbsp;</c><c>Fingerprint value MUST be identical
-            across all the m=lines&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
+          <c>fingerprint&nbsp;</c><c>Fingerprint value from the m=line defining the
+          underlying transport is chosen&nbsp;</c><c>B</c><c>TRANSPORT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -1298,7 +1302,7 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>source-filter&nbsp;</c><c>he attribute MUST be repeated across all
+          <c>source-filter&nbsp;</c><c>The attribute MUST be repeated across all
             m=lines multiplexed&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
@@ -1390,11 +1394,11 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>setup&nbsp;</c><c>Should be identical across all m=lines&nbsp;</c>
+          <c>setup&nbsp;</c><c>MUST be identical across all m=lines&nbsp;</c>
           <c>B</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>connection&nbsp;</c><c>Should be identical across all m=lines&nbsp;</c>
+          <c>connection&nbsp;</c><c>MUST be identical across all m=lines&nbsp;</c>
           <c>B</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
@@ -1413,20 +1417,20 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>bcastversion&nbsp;</c><c>&nbsp;</c>
-          <c>S</c><c>TBD&nbsp;</c>
+          <c>bcastversion&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>stkmstream&nbsp;</c><c>&nbsp;</c>
-          <c>B</c><c>TBD&nbsp;</c>
+          <c>stkmstream&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>SRTPAuthentication&nbsp;</c><c>&nbsp;</c>
-          <c>M</c><c>TBD&nbsp;</c>
+          <c>SRTPAuthentication&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>SRTPROCTxRate&nbsp;</c><c>&nbsp;</c>
-          <c>M</c><c>TBD&nbsp;</c>
+          <c>SRTPROCTxRate&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -1485,71 +1489,76 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>X-predecbufsize&nbsp;</c><c>Case1:Aggregate total when video m-lines
-          are muxed&nbsp;Case2:Multiplexing with audio m=lines is invalid</c>
+          <c>X-predecbufsize&nbsp;</c><c>Refer to notes below&nbsp;</c>
           <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>X-initpredecbufperiod&nbsp;</c><c>Case1:Aggregate total when video m-lines
-          are muxed&nbsp;Case2:Multiplexing with audio m=lines is invalid</c>
+          <c>X-initpredecbufperiod&nbsp;</c><c>Refer to notes below&nbsp;</c>
           <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>X-initpostdecbufperiod&nbsp;</c><c>Case1:Aggregate total when video m-lines
-          are muxed&nbsp;Case2:Multiplexing with audio m=lines is invalid</c>
+          <c>X-initpostdecbufperiod&nbsp;</c><c>Refer to notes below&nbsp;</c>
           <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>X-decbyterate</c><c>Case1:Aggregate total when video m-lines
-          are muxed&nbsp;Case2:Multiplexing with audio m=lines is invalid</c>
+          <c>X-decbyterate</c><c>Refer to notes below&nbsp;</c>
           <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>3gpp-videopostdecbufsize&nbsp;</c><c>Case1:Aggregate total when video m-lines
-          are muxed. Case2:Multiplexing with audio m=lines is invalid</c>
+          <c>3gpp-videopostdecbufsize&nbsp;</c><c>Refer to notes below&nbsp;</c>
           <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>framesize</c><c>Not Impacted</c><c>M</c><c>NORMAL&nbsp;</c>
+          <c>framesize</c><c>Refer to notes below&nbsp;</c><c>M</c>
+          <c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>3GPP-Integrity-Key&nbsp;</c><c>Not Impacted</c><c>S</c><c>NORMAL&nbsp;</c>
+          <c>3GPP-Integrity-Key&nbsp;</c><c>Refer to notes below&nbsp;</c><c>S</c>
+          <c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>3GPP-SRTP-Config&nbsp;</c><c>Same config SHALL apply to all the m=lines
-          multiplexed&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
+          <c>3GPP-SRTP-Config&nbsp;</c><c>Refer to notes below&nbsp;&nbsp;</c><c>M</c>
+          <c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>alt,alt-default-id&nbsp;</c><c>Specifying alternate m=lines when session
-          with mulitple m=lines of different types cannot be clearly specified&nbsp;</c>
-          <c>M</c><c>TBD&nbsp;</c>
+          <c>alt,alt-default-id&nbsp;</c><c>Refer to notes below&nbsp;</c>
+          <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>alt-group&nbsp;</c><c>Complicates selection of alternate m=lines
-          grouped with alt-group on mulitplexing&nbsp;</c><c>M</c><c>TBD&nbsp;</c>
+          <c>alt-group&nbsp;</c><c>Refer to notes below&nbsp;</c><c>M</c>
+          <c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>3GPP-Adaptation-Support&nbsp;</c><c>&nbsp;</c><c>M</c><c>TBD&nbsp;</c>
+          <c>3GPP-Adaptation-Support&nbsp;</c><c>Refer to notes below&nbsp;&nbsp;</c><c>M</c>
+          <c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>3GPP-QoE-Metricsn&nbsp;</c>
-          <c>&nbsp;</c><c>B</c><c>TBD&nbsp;</c>
+          <c>3GPP-QoE-Metrics&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c><c>B</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>3GPP-Asset-Informatio&nbsp;</c><c>&nbsp;</c><c>B</c><c>TBD&nbsp;</c>
+          <c>3GPP-Asset-Informatio&nbsp;</c><c>Refer to notes below&nbsp;</c><c>B</c>
+          <c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>mbms-mode&nbsp;</c><c>&nbsp;</c><c>B</c><c>TBD&nbsp;</c>
+          <c>mbms-mode&nbsp;</c><c>Refer to notes below&nbsp;</c><c>B</c>
+          <c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>mbms-flowid&nbsp;</c><c>Multiplexing multiple m=lines complicates
-          FEC mappings to the transport addresses.&nbsp;</c><c>M</c><c>TBD&nbsp;</c>
+          <c>mbms-flowid&nbsp;</c><c>MRefer to notes below&nbsp;</c><c>M</c>
+          <c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>mbms-repair&nbsp;</c><c>&nbsp;</c><c>B</c><c>TBD&nbsp;</c>
+          <c>mbms-repair&nbsp;</c><c>Refer to notes below&nbsp;</c><c>B</c>
+          <c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
+        <t hangText="Notes">
+         <xref target="RFC6064"/> defines SDP attributes that are applicable in
+         the declarative usage of SDP alone. For purposes of this document, only the Offer/Answer
+         usage of SDP is considered as mandated by  <xref target="I-D.ietf-mmusic-sdp-bundle-negotiation"></xref>.
+        </t>
       </section>
 
       <section title="RFC3108 - ATM SDP">
@@ -1564,50 +1573,50 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>aalType&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>eecid&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>aalType&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>capability&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>qosClass&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>bcob&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>stc&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>upcc&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>atmQOSparms&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>atmTrfcDesc&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>abrParms&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>abrSetup&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>bearerType&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>lij&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>anycast&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>cache&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>bearerSigIE&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>aalApp&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>cbrRate&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>sbc&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>clkrec&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>fec&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>prtfl&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>structure&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>cpsSDUsize&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>aal2CPS&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>aal2CPSSDUrate&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>aal2sscs3661unassured&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>aal2sscs3661assured&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>aal2sscs3662&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>aal5sscop&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>atmmap&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>silenceSupp&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>ecan&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>gc&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>profileDesc&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>vsel&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>dsel&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>fsel&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>onewaySel&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>codecconfig&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>isup_usi&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>isup_usi&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>chain&nbsp;</c><c>NOT IMPACTED</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aalType&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>eecid&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aalType&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>capability&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>qosClass&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>bcob&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>stc&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>upcc&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>atmQOSparms&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>atmTrfcDesc&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>abrParms&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>abrSetup&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>bearerType&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>lij&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>anycast&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>cache&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>bearerSigIE&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aalApp&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>cbrRate&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>sbc&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>clkrec&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>fec&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>prtfl&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>structure&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>cpsSDUsize&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2CPS&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2CPSSDUrate&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2sscs3661unassured&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2sscs3661assured&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2sscs3662&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal5sscop&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>atmmap&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>silenceSupp&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>ecan&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>gc&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>profileDesc&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>vsel&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>dsel&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>fsel&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>onewaySel&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>codecconfig&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>isup_usi&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>isup_usi&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>chain&nbsp;</c><c>Not Impacted</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
         <t hangText="Note">RFC3108 describes conventions for using the
@@ -1813,12 +1822,12 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>rtpred1&nbsp;</c><c>Not Applicable&nbsp;</c>
-          <c>Not-Applcable</c><c>TBD&nbsp;</c>
+          <c>rtpred1&nbsp;</c><c>Historc attributes.&nbsp;</c>
+          <c>Not-Applcable</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>rtpred2&nbsp;</c><c>Not Applicable&nbsp;</c>
-          <c>Not-Applcable</c><c>TBD&nbsp;</c>
+          <c>rtpred2&nbsp;</c><c>Historic attributes.&nbsp;</c>
+          <c>Not-Applcable</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
           <c>PSCid&nbsp;</c><c>Not Applicable&nbsp;</c>
@@ -1856,12 +1865,14 @@
          <c>S</c><c>NORMAL&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-         <c>bwtype:AS&nbsp;</c><c> There are 2 interpretations for this attribute
-         As a session attribute, it specifies the session aggregate unless media-level
-         b=RR and/or b=RS attributes are used. Under this interpretation the multiplexing
-         scheme has no impact and belongs to NORMAL category. For the media level usage,
-         the aggregate of individual bandwidth values is considered.&nbsp;</c><c>B</c>
-         <c>NORMAL, SUM&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         <c>bwtype:AS&nbsp;</c><c> As a session attribute, it specifies the session
+          aggregate unless media-level b=RR and/or b=RS attributes are used.
+          Under this interpretation the multiplexing scheme has no impact and thus NORMAL category applies.&nbsp;</c>
+         <c>B</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         <c>bwtype:AS&nbsp;</c><c> For the media level usage,the aggregate of individual bandwidth values is considered.&nbsp;</c><c>B</c>
+         <c>SUM&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
        </texttable>
      </section>
      <section title="RFC3556 - SDP Bandwidth Modifiers for RTCP Bandwidth">
@@ -1878,12 +1889,12 @@
          <ttcol align='left'>Level</ttcol>
          <ttcol align='left'>Category</ttcol>
 
-         <c>bwtype:RS&nbsp;</c><c>S level usage represents session aggregate and
+         <c>bwtype:RS&nbsp;</c><c>Session level usage represents session aggregate and
          media level usage indicates SUM of the individual values while multiplexing&nbsp;</c>
          <c>B</c><c>NORMAL,SUM</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-         <c>bwtype:RR&nbsp;</c><c>S level usage represents session aggregate and
+         <c>bwtype:RR&nbsp;</c><c>Session level usage represents session aggregate and
          media level usage indicates SUM of the individual values while multiplexing&nbsp;</c>
          <c>B</c><c>NORMAL,SUM&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
@@ -1906,10 +1917,10 @@
          <ttcol align='left'>Category</ttcol>
 
          <c>bwtype:TIAS&nbsp;</c><c>The usage of TIAS is not clearly defined Offer/Answer
-         usage.&nbsp;</c><c>B</c><c>TBD&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         usage.&nbsp;</c><c>B</c><c>SPECIAL&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c>
          <c>maxprate&nbsp;</c><c>The usage of TIAS and maxprate is not well defined under
-         multiplexing&nbsp;</c><c>B</c><c>TBD&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         multiplexing&nbsp;</c><c>B</c><c>SPECIAL&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c>
        </texttable>
        <t hangText="Note"> The intention of TIAS is that the media level bit-rate is
@@ -2187,15 +2198,16 @@
          <ttcol align='left'>Level</ttcol>
          <ttcol align='left'>Category</ttcol>
 
-         <c>depend lay&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>depend lay&nbsp;</c><c>Not Impacted &nbsp;</c><c>M</c>
+         <c>NORMAL&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
          <c>depend mdc&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
        </texttable>
        <t>
-       If the Payload Type is not unique across the bundled m=lines, it MUST represent
-       the same Codec-Configuration.
+        If the Payload Type is not unique across the bundled m=lines, it MUST represent
+        the same Codec-Configuration as defined in <xref target="I-D.ietf-mmusic-sdp-bundle-negotiation"></xref>.
        </t>
      </section>
 
