@@ -536,16 +536,14 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>crypto&nbsp;</c><c>The multiplexing scheme MUST ensure unique SSRCs across all the
-          media lines multiplexed. In that case, cryptographic keys corresponding to the
-          media description chosen to derive the transport attributes MUST be used.</c>
-          <c>M&nbsp;</c><c>TRANSPORT&nbsp;</c>
+          <c>crypto&nbsp;</c><c>Refer to section 6.2.5 of <xref target="I-D.ietf-mmusic-sdp-bundle-negotiation"></xref></c>
+          <c>M&nbsp;</c><c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-          <c>crypto&nbsp;</c><c>If the multiplexing scheme cannot ensure unique SSRCs across all
-          the media lines, multiplexing MUST NOT be performed.</c><c>M&nbsp;</c>
-          <c>NOT RECOMMENDED&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
-
+        <t hangText="Note">
+          If the multiplexing scheme cannot ensure unique SSRCs across all
+          the media lines, multiplexing MUST NOT be performed.
+        </t>
       </section>
 
       <section title="RFC5762 - RTP over DCCP">
@@ -1170,28 +1168,28 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>pcfg&nbsp;</c><c>Depends on capability being negotiated  &nbsp;</c>
+          <c>pcfg&nbsp;</c><c>Refer to section <xref target="encap"/> &nbsp;</c>
           <c>M</c><c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>acfg&nbsp;</c><c>Depends on capability being negotiated &nbsp;</c><c>M</c>
+          <c>acfg&nbsp;</c><c>Refer to section <xref target="encap"/>&nbsp;</c><c>M</c>
           <c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>csup&nbsp;</c><c>Depends on capability being negotiated&nbsp;</c><c>B</c>
-          <c>SPECIAL&nbsp;</c>
+          <c>csup&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c>
+          <c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>creq&nbsp;</c><c>Depends on capability being negotiateds&nbsp;</c><c>B</c>
+          <c>creq&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c>
+           <c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+           <c>acap&nbsp;</c><c>Refer to section <xref target="encap"/>&nbsp;</c><c>B</c>
            <c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-           <c>acap&nbsp;</c><c>Depends on capability being negotiated&nbsp;</c><c>B</c>
-           <c>SPECIAL&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
-          <c>tcap&nbsp;</c><c>Repeat transport capability across all
-           m= lines&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
+          <c>tcap&nbsp;</c><c>Refer to section <xref target="encap"/>&nbsp;</c>
+          <c>B</c><c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -1221,13 +1219,15 @@
           <c>mfcap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>mscap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
+          <c>mscap&nbsp;</c><c>Refer to section <xref target="encap"/>&nbsp;</c>
+          <c>B</c><c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>lcfg&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
+          <c>lcfg&nbsp;</c><c>Refer to section <xref target="encap"/>&nbsp;</c>
+          <c>B</c><c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>secap&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
+          <c>sescap&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -2334,7 +2334,7 @@
       </section>
 
       </section>
-  
+
       <section  anchor="dscp-mux" title="Multiplexing Media Streams and DSCP Markings">
         <t>
          Note: This section does not yet have WG consensus but is included
@@ -2344,19 +2344,19 @@
 
         <section title="Option A">
           <t>
-            This section provides two rules for multiplexing multiple media streams 
+            This section provides two rules for multiplexing multiple media streams
             with DSCP markings over a single 5-tuple.
             <list>
               <t>
-                Rule 1: Media Streams with markings from different service classes 
-                MUST NOT be multiplexed. For example, a media stream with DSCP Marking EF 
+                Rule 1: Media Streams with markings from different service classes
+                MUST NOT be multiplexed. For example, a media stream with DSCP Marking EF
                 MUST NOT be multiplexed with a media stream marked with AF class.
-                Likewise, a media stream with DSCP marking AF3x MUST NOT be multiplexed 
+                Likewise, a media stream with DSCP marking AF3x MUST NOT be multiplexed
                 with a media stream marked with AF4x.
               </t>
               <t>
-                Rule 2: Media Streams that belong to the same service class, even with 
-                different drop precedence, MAY be multiplexed. Thus media streams that all 
+                Rule 2: Media Streams that belong to the same service class, even with
+                different drop precedence, MAY be multiplexed. Thus media streams that all
                 belong to the EF group or all that belong to the AF4X class can be multiplexed.
               </t>
             </list>
@@ -2369,7 +2369,7 @@
         </section>
 
         <section title="Option B">
-          <t>  
+          <t>
             Media Streams MAY be multiplexed regardless of what the setting of the DSCP Per Hop Behavior
             group (PHB).
           </t>
@@ -2378,33 +2378,170 @@
       </section>
       <section  anchor="encap" title="Multiplexing Considerations for Encapsulating Attributes">
           <t>
-           <xref target="RFC3407"/> and <xref target="RFC6781"/> define certain attributes that encapsulate
-           other SDP attributes as part of the framework for indicating and negotiating capabilities
-           in SDP. While multiplexing media descriptions with these attributes the multiplexing
-           behavior is defined by the attributes that are encapsulated.
+           This sections deals with recommendations for defining the multiplexing charactersitics of the SDP attributes that encaspsulate other SDP attributes.
+           Such attributes as of today, for example,  are defined in <xref target="RFC3407"/>,
+           <xref target="RFC5939"/> and <xref target="RFC6781"/> as part of a generic framework for indicating and negotiating transport, media and related capabilities in SDP.
           </t>
           <t>
-           For the SDP example below, the bandwidth SDP attribute defines the multiplexing
-           behavior of the cpar encapsulating attribute.
+           The behavior of such attributes under multiplexing is defined by the
+           attributes they encapsulate which are made known once the negotiation process
+           is completed.
+          </t>
+          <t>
+           Example 1: Below SDP example captures the following aspects.
+           <list style="numbers">
+             <t>
+              The Offerer offers audio and video streams with several different
+              RTP profiles (AVP, SAVP, SAVPF) as potential configurations.
+             </t>
+             <t>
+              ANSWER - 1 corresponds to the SDP answer where the Answerer accepts
+              RTP/SAVPF as the default profile for both the media streams. In this
+              scenario both the media streams can be successfully multiplexed.
+             </t>
+             <t>
+              In ANSWER - 2 SDP, the Answerer accepts the profile RTP/SAVPF
+              for the audio stream and RTP/AVPF for the video stream. This scenario
+              results in the failure of the multiplexing as defined in the
+              section 7.2 of the BUNDLE specifcation <xref target="I-D.ietf-mmusic-sdp-bundle-negotiation"></xref>.
+            </t>
+           </list>
            <figure>
                <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
 v=0
-o=- 25678 753849 IN IP4 128.96.41.1
+o=- 25678 753849 IN IP4 192.0.2.1
 s=
-c=IN IP4 128.96.41.1
 t=0 0
-m=audio 3456 RTP/AVP 18 96
-a=rtpmap:96 telephone-event
-a=fmtp:96 0-15,32-35
-a=sqn: 0
-a=cdsc: 1 audio RTP/AVP 0 18 96
-a=cpar: a=fmtp:96 0-16,32-35
-a=cdsc: 4 image udptl t38
-a=cdsc: 5 image tcp t38
+c=IN IP4 192.0.2.1
+m=audio 3456 RTP/AVP 98
+a=tcap:1 RTP/SAVPF
+a=rtpmap:98 OPUS/48000/2
+a=pcfg:1 t=1
+
+m=video 51372 RTP/AVP 101
+a=rtpmap:101 H264/90000
+a=tcap:2 RTP/SAVPF RTP/AVPF
+a=pcfg:2 t=2|3
+
+
+ANSWER - 1
+-----------
+v=0
+o=- 24351 621814 IN IP4 192.0.2.2
+s=
+m=audio 3456 RTP/SAVPF 98
+a=rtpmap:98 OPUS/48000/2
+a=acfg:1 t=1
+
+m=video 51372 RTP/SAVPF 101
+a=rtpmap:101 H264/90000
+a=acfg:2 t=2
+
+ANSWER - 2
+-----------
+v=0
+o=- 24351 621814 IN IP4 192.0.2.2
+s=
+m=audio 3456 RTP/SAVPF 98
+a=rtpmap:98 OPUS/48000/2
+a=acfg:1 t=1
+
+m=video 51372 RTP/AVPF 101
+a=rtpmap:101 H264/90000
+a=acfg:2 t=3
+
 ]]></artwork>
            </figure>
           </t>
+          <t>
+           Example 2: Below SDP example captures the following aspects.
+           <list style="numbers">
+             <t>
+              Offerer offers use of plain RTP and Secure RTP as alternatives.
+              For the Secure RTP stream, it can be established using either
+              DTLS-SRTP or SDP security descriptions
+             </t>
+             <t>
+              ANSWER - 1 corresponds to the SDP answer where the Answerer accepts
+              DTLS based encryption for both the audio and video streams.
+             </t>
+             <t>
+              In ANSWER - 2 SDP, the Answerer accepts plain RTP for the audio
+              stream and DTLS based encryption for the video stream.
+              This scenario leads to unsuccesfull multiplexing of the media
+              streams.
+            </t>
+           </list>
+           <figure>
+               <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+OFFER
+-----
+v=0
+o=- 25678 753849 IN IP4 192.0.2.1
+s=
+t=0 0
+c=IN IP4 192.0.2.1
+a=acap:1 setup:actpass
+a=acap:2 fingerprint: SHA-1 \
+          4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB
+a=tcap:1 UDP/TLS/RTP/SAVP RTP/SAVP
+m=audio 59000 RTP/AVP 98
+a=rtpmap:98 AMR/8000
+a=acap:3 crypto:1 AES_CM_128_HMAC_SHA1_32
+         inline:NzB4d1BINUAvLEw6UzF3WSJ+PSdFcGdUJShpX1Zj|2^20|1:32
+a=pcfg:1 t=1 a=1,2
+a=pcfg:2 t=2 a=3
+
+m=video 59123 RTP/AVP 100
+a=rtpmap:100 VP8/90000
+a=pcfg:3 t=1 a=1,2
+
+
+ANSWER - 1
+-----------
+v=0
+o=- 24351 621814 IN IP4 192.0.2.2
+s=
+t=0 0
+c=IN IP4 192.0.2.2
+
+m=audio 54568 UDP/TLS/RTP/SAVP 98
+a=rtpmap:98 AMR/8000
+a=acfg:1 t=1 a=1,2
+
+m=video 54968 UDP/TLS/RTP/SAVP 100
+a=rtpmap:100 VP8/90000
+a=acfg:3 t=1 a=1,2
+
+
+ANSWER - 2
+-----------
+v=0
+o=- 24351 621814 IN IP4 192.0.2.2
+s=
+t=0 0
+c=IN IP4 192.0.2.2
+m=audio 54568 RTP/AVP 98
+a=rtpmap:98 AMR/8000
+
+m=video 54968 UDP/TLS/RTP/SAVP 100
+a=rtpmap:100 VP8/90000
+a=setup:active
+a=fingerprint: SHA-1 \
+    FF:FF:FF:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB
+a=acfg:3 t=1 a=1,2
+
+]]></artwork>
+           </figure>
+          </t>
+       <t>
+        In conclusion, the mutliplexing behavior of the encapsulating attributes are
+        defined based on the multiplexing behavior of the attributes they encapsulate.
+        Thus care should be taken in determing if certain combinations of these attributes
+        can be used in the contex of multplexing.
+       </t>
       </section>
 
    <section title="IANA Considerations">
