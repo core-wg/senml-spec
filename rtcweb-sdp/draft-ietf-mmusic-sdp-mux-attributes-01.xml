@@ -432,7 +432,7 @@
         <ttcol align='left'>Notes</ttcol>
         <ttcol align='left'>Level</ttcol>
         <ttcol align='left'>Category</ttcol>
-        <c>rtcp-fb&nbsp;</c><c>The combination of a particular Codec-Configuration along
+        <c>rtcp-fb&nbsp;</c><c>The combination of a particular Payload Type along
         with the m=line identify the scope and applicability of a given RTCP feedback to a
         particular RTP Stream.</c>
         <c>M</c><c>NORMAL&nbsp;</c>
@@ -440,10 +440,9 @@
 
       </texttable>
       <t hangText="Note">
-       Since RTCP feedback attributes are Payload Type (PT) scoped, the Codec-Configuration
-       for a given PT further defines multiplexing requirements. For more details on the implications of Codec-Configuration for transport multiplexing,
-       readers are recommended to the
-       draft <xref target="I-D.ietf-mmusic-sdp-bundle-negotiation"></xref>.
+       Since RTCP feedback attributes are Payload Type (PT) scoped, the usage of
+       identical Payload Type values across multiplexed m=lines is described in
+       <xref target="I-D.ietf-mmusic-sdp-bundle-negotiation"></xref>.
       </t>
     </section>
 
@@ -2206,8 +2205,8 @@
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
        </texttable>
        <t>
-        If the Payload Type is not unique across the bundled m=lines, it MUST represent
-        the same Codec-Configuration as defined in <xref target="I-D.ietf-mmusic-sdp-bundle-negotiation"></xref>.
+        The usage of identical Payload Type values across multiplexed m=lines is described in
+        <xref target="I-D.ietf-mmusic-sdp-bundle-negotiation"></xref>.
        </t>
      </section>
 
@@ -2392,12 +2391,11 @@
           <t>
            This sections deals with recommendations for defining the multiplexing charactersitics of the SDP attributes that encaspsulate other SDP attributes.
            Such attributes as of today, for example,  are defined in <xref target="RFC3407"/>,
-           <xref target="RFC5939"/> and <xref target="RFC6781"/> as part of a generic framework for indicating and negotiating transport, media and related capabilities in SDP.
+           <xref target="RFC5939"/> and <xref target="RFC6781"/> as part of a generic framework for indicating and negotiating transport, media and media format related capabilities in the SDP.
           </t>
           <t>
-           The behavior of such attributes under multiplexing is defined by the
-           attributes they encapsulate which are made known once the negotiation process
-           is completed.
+           The behavior of such attributes under multiplexing is in turn defined by the
+           multiplexing behavior of the attributes they encapsulate which are made known once the negotiation process is completed.
           </t>
           <t>
            Example 1: Below SDP example captures the following aspects.
@@ -2476,13 +2474,16 @@ a=acfg:2 t=3
              </t>
              <t>
               ANSWER - 1 corresponds to the SDP answer where the Answerer accepts
-              DTLS based encryption for both the audio and video streams.
+              DTLS based encryption for both the audio and video streams. This
+              scenario can lead to successfull multiplexing of the audio and the
+              video streams.
              </t>
              <t>
               In ANSWER - 2 SDP, the Answerer accepts plain RTP for the audio
               stream and DTLS based encryption for the video stream.
-              This scenario leads to unsuccesfull multiplexing of the media
-              streams.
+              This scenario results in unsuccesfull multiplexing of the media
+              streams since the encryption scheme applies to the entire RTP Session
+              and cannot be applied to video media stream alone when multiplexed.
             </t>
            </list>
            <figure>
@@ -2551,8 +2552,8 @@ a=acfg:3 t=1 a=1,2
        <t>
         In conclusion, the mutliplexing behavior of the encapsulating attributes are
         defined based on the multiplexing behavior of the attributes they encapsulate.
-        Thus care should be taken in determing if certain combinations of these attributes
-        can be used in the contex of multplexing.
+        Thus care should be taken in determining if certain combinations of these attributes
+        can be used in the context of transport multplexing.
        </t>
       </section>
 
