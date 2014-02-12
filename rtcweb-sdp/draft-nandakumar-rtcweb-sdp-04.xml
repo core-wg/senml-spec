@@ -57,12 +57,12 @@
       </address>
     </author>
 
-    <date day="26" month="January" year="2014" />
+    <date day="12" month="February" year="2014" />
 
     <area>RAI</area>
 
     <abstract>
-      <t> The Web Real-Time Communication (WebRTC) <xref target="WEBRTC"></xref>
+      <t> The Web Real-Time Communication <xref target="WebRTC"></xref>
           working group is charged to provide protocol support for direct interactive
           rich communication using audio, video and data between two peers' web browsers.
           With in the WebRTC framework, Session Description protocol (SDP)
@@ -70,8 +70,8 @@
           between the peers. Such a negotiation happens based on the SDP Offer/Answer exchange
           mechanism described in the RFC 3264 <xref target="RFC3264"></xref>.
       </t>
-      <t> This documents provides an informational reference in describing the role of
-          SDP and Offer/Answer exchange for the most common WebRTC use-cases.
+      <t> This document provides an informational reference in describing the role of
+          SDP and the Offer/Answer exchange mechanism for the most common WebRTC use-cases.
       </t>
       <t hangText="Note"> This SDP examples provided in this document is still a work in
          progress, but it aims to align closest to the evolving standards work.
@@ -121,7 +121,7 @@
       </t>
       <t>
         Below figure introduces high-level breakup of SDP into components that semantically
-        describe a multimedia session, in our case, a WebRTC session <xref target="WEBRTC"></xref>.
+        describe a multimedia session, in our case, a WebRTC session <xref target="WebRTC"></xref>.
         It by no means captures everything about SDP and hence, should be used for
         informational purposes only.
       </t>
@@ -130,7 +130,7 @@
           src="sdp.png"></artwork>
       </figure>
       <t>
-        <xref target="WEBRTC"></xref> proposes JavaScript application to fully specify and
+        <xref target="WebRTC"></xref> proposes JavaScript application to fully specify and
         control the signaling plane of a multimedia session as described in the JSEP specification
         <xref target="JSEP"></xref>. JSEP provides mechanisms to create session
         characterization and media definition information to conduct the session
@@ -259,7 +259,7 @@
            <t> Host and server-reflexive candidate lines (a=candidate) </t>
            <t> SRTP Setup framework parameters (a=setup) </t>
            <t> RTCP attribute (a=rtcp) </t>
-           <t> RTP header extension indicate audio-levels from client to the mixer</t>
+           <t> RTP header extension indicating audio-levels from client to the mixer</t>
          </list>
           For more details, readers are recommended to refer to the 
           Javascript Session Exchange Protocol(JSEP) <xref target="JSEP"></xref>
@@ -5242,7 +5242,7 @@ Alice<->Bob: Two-way Opus Audio
           In the scenario desribed below, Alice sends <xref target="RFC3264"></xref> Offer with two
           sets of media descriptions per media type.
           <list>
-            <t> One set that correponds to <xref target="WEBRTC"></xref> compliant 
+            <t> One set that correponds to <xref target="WebRTC"></xref> compliant 
             UDP/TLS/RTP/SAVPF based audio and video descriptions.
             </t>
             <t> Another set with RTP/AVP based audio and video descriptions for the 
@@ -5465,8 +5465,9 @@ end note
       <t>[RFC EDITOR NOTE: Please remove this section when publishing]</t>
       <t>Changes from draft-nandakumar-rtcweb-sdp-03
         <list style="symbols">
-          <t> Aligned more closely with JSP version -05 </t>
+          <t> Aligned more closely with JSEP version -05 </t>
           <t> Added Conventions to help readability </t>
+          <t> Add more examples to clarify BUNDLE use-cases </t>
         </list>
       </t>
       <t>Changes from draft-nandakumar-rtcweb-sdp-02
@@ -5616,7 +5617,7 @@ end note
         <format octets="60854"
           target="http://tools.ietf.org/html/rfc5245.txt" type="TXT" />
       </reference>
-      <reference anchor="WEBRTC">
+      <reference anchor="WebRTC">
         <front>
           <title>
             WebRTC 1.0: Real-time Communication Between Browsers
