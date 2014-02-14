@@ -14,7 +14,7 @@
      ipr="trust200902">
   <front>
     <title abbrev="SDP Attribute Multiplexing">A Framework for SDP Attributes
-    under Multiplexing</title>
+    when Multiplexing</title>
 
      <author fullname="Suhas Nandakumar" initials="S." surname="Nandakumar">
       <organization>Cisco</organization>
@@ -36,7 +36,7 @@
       </address>
     </author>
 
-    <date day="8" month="February" year="2014" />
+    <date day="14" month="February" year="2014" />
 
     <area>MMUSIC</area>
 
@@ -689,21 +689,25 @@
           <c>S</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>ice-pwd&nbsp;</c><c>Per media-level attribute MUST be used per
+          <c>ice-pwd&nbsp;</c><c>ice-pwd MUST be the one that
+          corresponds to the m=line chosen for setting up the
           underlying transport flow&nbsp;</c>
           <c>B</c><c>TRANSPORT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>ice-ufrag&nbsp;</c><c>Per media-level attribute MUST be used per
+          <c>ice-ufrag&nbsp;</c><c>ice-ufrag MUST be the one that
+          corresponds to the m=line chosen for setting up the
           underlying transport flow&nbsp;</c>
           <c>B</c><c>TRANSPORT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>candidate&nbsp;</c><c>Per media-level attribute MUST be used per
+          <c>candidate&nbsp;</c><c>ice candidate MUST be the one that
+          corresponds to the m=line chosen for setting up the
           underlying transport flow&nbsp;</c><c>M</c><c>TRANSPORT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>remote-candidates&nbsp;</c><c>Per media-level attribute MUST be used per
+          <c>remote-candidates&nbsp;</c><c>ice remote candidate MUST be the 
+          one that corresponds to the m=line chosen for setting up the
           underlying transport flow&nbsp;</c><c>M</c><c>TRANSPORT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
@@ -1061,15 +1065,11 @@
           <c>M</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c> file-date,file-iconfile-range&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c> file-date&nbsp;</c><c>Not Impacted&nbsp;</c>
           <c>M</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
           <c> file-iconfile-range&nbsp;</c><c>Not Impacted&nbsp;</c>
-          <c>M</c><c>NORMAL&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
-          <c>file-iconfile-range&nbsp;</c><c>Not Impacted&nbsp;</c>
           <c>M</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
@@ -1528,10 +1528,6 @@
           <c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>3GPP-QoE-Metrics&nbsp;</c>
-          <c>Refer to notes below&nbsp;</c><c>B</c><c>NOT RECOMMENDED&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
           <c>3GPP-Asset-Informatio&nbsp;</c><c>Refer to notes below&nbsp;</c><c>B</c>
           <c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
@@ -1547,6 +1543,47 @@
           <c>mbms-repair&nbsp;</c><c>Refer to notes below&nbsp;</c><c>B</c>
           <c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3GPP-QoE-Metrics:Corruption duration&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c><c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3GPP-QoE-Metrics:Rebuffering duration&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c><c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3GPP-QoE-Metrics:Initial buffering duration&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c><c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3GPP-QoE-Metrics:Successive loss of RTP packets&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c><c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3GPP-QoE-Metrics:Frame rate deviation&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c><c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3GPP-QoE-Metrics:Jitter duration&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c><c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3GPP-QoE-Metrics:Content Switch Time&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c><c>B</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3GPP-QoE-Metrics:Average Codec Bitrat&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c><c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3GPP-QoE-Metrics:Codec Information&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c><c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3GPP-QoE-Metrics:Buffer Status&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c><c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
 
         </texttable>
         <t hangText="Notes">
@@ -1817,7 +1854,7 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>rtpred1&nbsp;</c><c>Historc attributes.&nbsp;</c>
+          <c>rtpred1&nbsp;</c><c>Historic attributes.&nbsp;</c>
           <c>Not-Applcable</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
@@ -2385,6 +2422,9 @@
       </section>
       <section  anchor="encap" title="Multiplexing Considerations for Encapsulating Attributes">
           <t>
+           NOTE: The analysis given below is still Work-In-Progress and will be updated soon.
+          </t>
+          <t>
            This sections deals with recommendations for defining the multiplexing charactersitics of the SDP attributes that encaspsulate other SDP attributes.
            Such attributes as of today, for example,  are defined in <xref target="RFC3407"/>,
            <xref target="RFC5939"/> and <xref target="RFC6781"/> as part of a generic framework for indicating and negotiating transport, media and media format related capabilities in the SDP.
@@ -2601,11 +2641,45 @@ a=acfg:3 t=1 a=1,2
         Bo Burman (7.2,7.6), Charles Eckel(5.14,5.23,5.24,9.1,8.5),
         Paul Kyzivat(5.24), Ian Johansson(5.15), Saravanan Shanmugham(5.10),
         Paul E Jones(5.25), Rajesh Kumar(5.39), Jonathan Lennox(5.31,5,14,11.1),
-        Mo Zanaty(5.4,5.19,8.1,8.3,8.5,12.1), Christian Huitema (5.13)
+        Mo Zanaty(5.4,5.19,8.1,8.3,8.5,12.1), Christian Huitema (5.13),
+        Qin Wu (5.38 PM-Dir review).
       </t>
     </section>
     <section title="Change Log">
       <t>[RFC EDITOR NOTE: Please remove this section when publishing]</t>
+      <t>Changes from draft-ietf-mmusic-sdp-mux-attributes-00
+        <list style="symbols">
+          <t>
+            Added Section 15 to provide recommendations on multiplexing
+            SDP encapsulating attributes. Also updated sections 5.20,
+            5.28, 5.29 to refer to Section 15.
+          </t>
+          <t>
+            Updated Section 5.38 to incorporate PM-dir review inputs from
+            Qin Wu
+          </t>
+          <t>
+            Updated Sections 5.2,5.14,8.5 to refer to BUNDLE draft for more clarity.
+          </t>
+          <t>
+            Fixed few nits regarding sentence clarity and fill-in the NOTES
+            section where information was lacking.
+          </t>
+        </list>
+      </t>
+      <t>Changes from draft-nandakumar-mmusic-mux-attributes-05
+        <list style="symbols">
+          <t>
+            Renamed the document to be a WG document.
+          </t>
+          <t>
+           Added Section 14.
+          </t>
+          <t>
+           Updated Open Issues based on IETF88 discussions.
+          </t>
+        </list>
+      </t>
       <t>Changes from draft-nandakumar-mmusic-mux-attributes-04
         <list style="symbols">
           <t>
