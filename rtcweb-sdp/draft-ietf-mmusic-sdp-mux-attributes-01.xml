@@ -748,9 +748,9 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>rtcp&nbsp;</c><c>Identical attribute value MUST be used since the RTCP port affects
+          <c>rtcp&nbsp;</c><c>TRANSPORT attribute value MUST be used since the RTCP port affects
           the entire RTP session.&nbsp;</c><c>M</c>
-          <c>IDENTICAL&nbsp;</c>
+          <c>TRANSPORT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
