@@ -298,6 +298,102 @@
      </figure>
    </t>
    <t>&nbsp;</t>
+    <t hangText="INHERIT"> Attributes whose multiplexing behavior is
+    inherited from the attribute that is being encapsulated </t>
+    <t>&nbsp;</t>
+    <t>
+      In the example SDP Offer below, acap is assigned the INHERIT category
+      indicating its multiplexing behavior corresponds to the ptime's category
+      (i.e NORMAL)
+    <figure>
+       <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+
+     v=0
+     o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
+     s=
+     c=IN IP4 host.atlanta.example.com
+     t=0 0
+     a=group:BUNDLE foo bar
+     m=audio 49172 RTP/AVP 99
+     a=mid:foo
+     a=rtpmap:99 iLBC/8000
+     a=acap:1 ptime:20
+     a=pcfg:1 a=1
+     m=audio 49184 RTP/AVP 100
+     a=mid:bar
+     a=rtpmap:100 opus/48000/2
+     a=acap:2 ptime:30
+     a=pcfg:3 a=2
+
+]]></artwork>
+     </figure>
+   </t>
+    <t>&nbsp;</t>
+    <t hangText="IDENTICAL-PER-PT"> Attributes that MUST be identical across
+    all the media descriptions if they refer to the same RTP Payload Type.</t>
+    <t>&nbsp;</t>
+    <t>
+      For the example below, the RTP Payload Type 99 is used for both the
+      video media descriptions since the codec configuration parameters
+      conveyed in rtpmap, ftmp attributes match throughout.
+    <figure>
+       <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+
+     v=0
+     o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
+     s=
+     c=IN IP4 host.atlanta.example.com
+     t=0 0
+     a=group:BUNDLE foo bar
+     m=video 49172 RTP/AVP 99
+     a=mid:foo
+     a=rtpmap:99 H264/90000
+     a=fmtp:99 profile-level-id=428014;
+              max-fs=3600;max-mbps=108000;max-br=14000
+     a=acap:1 ptime:20
+     a=pcfg:1 a=1
+     m=video 49172 RTP/AVP 99
+     a=mid:bar
+     a=rtpmap:99 H264/90000
+     a=ftmp:99 profile-level-id=428014;
+               max-fs=3600;max-mbps=108000;max-br=14000
+     a=acap:2 ptime:30
+     a=pcfg:3 a=2
+
+]]></artwork>
+     </figure>
+   </t>
+    <t>&nbsp;</t>
+      <t>
+      As a counter example, the below SDP assigns unique RTP payload types for
+      each of the video media descriptions due to mismatch in the fmtp
+      parameters.
+    <figure>
+       <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+
+     v=0
+     o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
+     s=
+     c=IN IP4 host.atlanta.example.com
+     t=0 0
+     a=group:BUNDLE foo bar
+     m=video 49172 RTP/AVP 99
+     a=mid:foo
+     a=rtpmap:99 H264/90000
+     a=fmtp:99 profile-level-id=428014;
+               max-fs=3600;max-mbps=108000;max-br=14000
+     m=video 49172 RTP/AVP 100
+     a=mid:bar
+     a=rtpmap:100 H264/90000
+     a=ftmp:100 profile-level-id=428029;
+                max-fs=8192;max-mbps=245760;max-br=50000
+]]></artwork>
+     </figure>
+   </t>
+    <t>&nbsp;</t>
     <t hangText="SPECIAL"> Attributes where the text in the source draft must be
       consulted for further handling when multiplexed. </t>
       <t>&nbsp;</t>
@@ -1669,7 +1765,7 @@
 
       <section title="3GPP TS 24.182">
         <t>
-          <xref target="R3GPPTS24.182">3GPP TS 24.182</xref> specifies IP multimedia subsystem Custom Alerting tones
+          <xref target="3GPPTS24.182"></xref> specifies IP multimedia subsystem Custom Alerting tones
         </t>
         <texttable title="3GPP TS 24.182 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -1685,7 +1781,7 @@
 
       <section title="3GPP TS 24.183">
         <t>
-          <xref target="R3GPPTS24.183">3GPP TS 24.183</xref>specifies IP multimedia
+          <xref target="3GPPTS24.183"></xref>specifies IP multimedia
           subsystem Custom Ringing Signal
         </t>
         <texttable title="3GPP TS 24.183 Attribute Analysis">
@@ -1702,7 +1798,7 @@
 
       <section title="3GPP TS 24.229">
         <t>
-         <xref target="R3GPPTS24.229">3GPP TS 24.229</xref>IP multimedia call control
+         <xref target="3GPPTS24.229"/>IP multimedia call control
          protocol based on Session Initial protocol and Session Description Protocol.
         </t>
         <texttable title="3GPP TS 24.229 Attribute Analysis">
@@ -1748,7 +1844,7 @@
          ITU T.38<xref target="T.38"></xref> defines procedures for real-time Group 3
          facsimile communications over IP networks.
         </t>
-        <texttable title="Historic Attribute Analysis">
+        <texttable title="ITU T.38 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Level</ttcol>
@@ -1790,7 +1886,7 @@
           ITU-T H.248.15 <xref target="H.248.15"></xref> defines Gateway Control Protocol
           SDP H.248 package attribute
         </t>
-        <texttable title="Historic Attribute Analysis">
+        <texttable title="ITU-T H.248.15 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Level</ttcol>
@@ -1841,11 +1937,38 @@
 
         </texttable>
       </section>
-
-      <section title="Historical">
+      <section title="IMS Based IPTV Specification">
         <t>
-          This section specifies analysis for the attributes that are included for historic
-          usage alone by the <xref target="IANA"></xref>.
+        <xref target="IMS-IPTV"/> describes the procedures on the functional entities
+        and call flows for the protocols and their possible enhancements to support IPTV services.
+        </t>
+        <texttable title="IMS Based IPTV Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+         <c>PSCid&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>bc_service&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>bc_program&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>bc_service_package&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+      <section title="Others">
+        <t>
+        This section deals with SDP attributes that represent historic usage.
         </t>
         <texttable title="Unknowns Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -1853,28 +1976,12 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>rtpred1&nbsp;</c><c>Historic attributes.&nbsp;</c>
+          <c>rtpred1&nbsp;</c><c>Historic attribute.&nbsp;</c>
           <c>Not-Applcable</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>rtpred2&nbsp;</c><c>Historic attributes.&nbsp;</c>
+          <c>rtpred2&nbsp;</c><c>Historic attribute.&nbsp;</c>
           <c>Not-Applcable</c><c>NOT RECOMMENDED&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
-          <c>PSCid&nbsp;</c><c>Not Impacted&nbsp;</c>
-          <c>S</c><c>NORMAL&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
-          <c>bc_service&nbsp;</c><c>Not Impacted&nbsp;</c>
-          <c>M</c><c>NORMAL&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
-          <c>bc_program&nbsp;</c><c>Not Impacted&nbsp;</c>
-          <c>M</c><c>NORMAL&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
-          <c>bc_service_package&nbsp;</c><c>Not Impacted&nbsp;</c>
-          <c>M</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -3719,7 +3826,18 @@ a=acfg:3 t=1 a=1,2
           <date/>
         </front>
       </reference>
-      <reference anchor='R3GPPTS24.229' target="http://www.3gpp.org/ftp/Specs/html-info/24229.htm">
+      <reference anchor='IMS-IPTV'
+       target="http://www.etsi.org/deliver/etsi_ts/183000_183099/183063/03.05.02_60/ts_183063v030502p.pdf">
+        <front>
+          <title> Telecommunications and Internet converged Services and
+          Protocols for Advanced Networking (TISPAN); IMS-based IPTV stage 3
+          specification</title>
+          <author/>
+          <date/>
+        </front>
+      </reference>
+
+      <reference anchor='3GPPTS24.229' target="http://www.3gpp.org/ftp/Specs/html-info/24229.htm">
         <front>
           <title>IP multimedia call control protocol based on
            Session Initiation Protocol (SIP)
@@ -3728,7 +3846,7 @@ a=acfg:3 t=1 a=1,2
           <date/>
         </front>
       </reference>
-      <reference anchor='R3GPPTS24.182' target="http://www.3gpp.org/ftp/Specs/html-info/24182.htm">
+      <reference anchor='3GPPTS24.182' target="http://www.3gpp.org/ftp/Specs/html-info/24182.htm">
         <front>
           <title>IP Multimedia Subsystem (IMS) Customized Alerting Tones (CAT);
            Protocol specification</title>
@@ -3736,7 +3854,7 @@ a=acfg:3 t=1 a=1,2
           <date/>
         </front>
       </reference>
-     <reference anchor='R3GPPTS24.183' target="http://www.3gpp.org/ftp/Specs/html-info/24183.htm">
+     <reference anchor='3GPPTS24.183' target="http://www.3gpp.org/ftp/Specs/html-info/24183.htm">
         <front>
           <title>IP Multimedia Subsystem (IMS) Customized Ringing Signal (CRS);
            Protocol specification</title>
