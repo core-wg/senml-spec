@@ -706,7 +706,7 @@
           underlying transport flow&nbsp;</c><c>M</c><c>TRANSPORT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>remote-candidates&nbsp;</c><c>ice remote candidate MUST be the 
+          <c>remote-candidates&nbsp;</c><c>ice remote candidate MUST be the
           one that corresponds to the m=line chosen for setting up the
           underlying transport flow&nbsp;</c><c>M</c><c>TRANSPORT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
@@ -748,8 +748,7 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>rtcp&nbsp;</c><c>TRANSPORT attribute value MUST be used since the RTCP port affects
-          the entire RTP session.&nbsp;</c><c>M</c>
+          <c>rtcp&nbsp;</c><c>RTCP attribute value from the m=line defining the underlying transport is chosen&nbsp;</c><c>M</c>
           <c>TRANSPORT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
@@ -941,7 +940,7 @@
           <c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>csdc&nbsp;</c><c>Not Impacted.&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
+          <c>cdsc&nbsp;</c><c>Not Impacted.&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
           <c>cpar&nbsp;</c><c>Refer to <xref target="encap"/>&nbsp;</c>
@@ -1194,12 +1193,12 @@
         </texttable>
       </section>
 
-      <section title="RFC6781 - SDP Media Capabilities Negotiation">
+      <section title="RFC6871 - SDP Media Capabilities Negotiation">
         <t>
           Session Description Protocol (SDP) capability negotiation provides a
           general framework for indicating and negotiating capabilities in SDP.
           The base framework defines only capabilities for negotiating
-          transport protocols and attributes. <xref target="RFC6781"></xref>
+          transport protocols and attributes. <xref target="RFC6871"></xref>
           extends the framework by defining media capabilities that can be used to
           negotiate media types and their associated parameters.
         </t>
@@ -1297,8 +1296,8 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>source-filter&nbsp;</c><c>The attribute MUST be repeated across all
-            m=lines multiplexed&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
+          <c>source-filter&nbsp;</c><c>source-fiter value from the m=line defining the underlying transport is chosen&nbsp;</c>
+          <c>B</c><c>TRANSPORT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -1862,20 +1861,20 @@
           <c>Not-Applcable</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>PSCid&nbsp;</c><c>Not Applicable&nbsp;</c>
-          <c>Not-Applcable</c><c>TBD&nbsp;</c>
+          <c>PSCid&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>bc_service&nbsp;</c><c>Not Applicable&nbsp;</c>
-          <c>Not-Applcable</c><c>TBD&nbsp;</c>
+          <c>bc_service&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>bc_program&nbsp;</c><c>Not Applicable&nbsp;</c>
-          <c>Not-Applcable</c><c>TBD&nbsp;</c>
+          <c>bc_program&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>bc_service_package&nbsp;</c><c>Not Applicable&nbsp;</c>
-          <c>Not-Applcable</c><c>TBD&nbsp;</c>
+          <c>bc_service_package&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -2427,7 +2426,7 @@
           <t>
            This sections deals with recommendations for defining the multiplexing charactersitics of the SDP attributes that encaspsulate other SDP attributes.
            Such attributes as of today, for example,  are defined in <xref target="RFC3407"/>,
-           <xref target="RFC5939"/> and <xref target="RFC6781"/> as part of a generic framework for indicating and negotiating transport, media and media format related capabilities in the SDP.
+           <xref target="RFC5939"/> and <xref target="RFC6871"/> as part of a generic framework for indicating and negotiating transport, media and media format related capabilities in the SDP.
           </t>
           <t>
            The behavior of such attributes under multiplexing is in turn defined by the
@@ -2647,6 +2646,25 @@ a=acfg:3 t=1 a=1,2
     </section>
     <section title="Change Log">
       <t>[RFC EDITOR NOTE: Please remove this section when publishing]</t>
+      <t>Changes from draft-ietf-mmusic-sdp-mux-attributes-01
+        <list style="symbols">
+          <t>
+            Updated category assignment IMS IPTV attributes and RFC4570
+            based on IETF89 discussions.
+          </t>
+          <t>
+            Updated Section 5.38 to incorporate PM-dir review inputs from
+            Qin Wu
+          </t>
+          <t>
+            Updated Sections 5.2,5.14,8.5 to refer to BUNDLE draft for more clarity.
+          </t>
+          <t>
+            Fixed few nits regarding sentence clarity and fill-in the NOTES
+            section where information was lacking.
+          </t>
+        </list>
+      </t>
       <t>Changes from draft-ietf-mmusic-sdp-mux-attributes-00
         <list style="symbols">
           <t>
@@ -3665,7 +3683,7 @@ a=acfg:3 t=1 a=1,2
         <format target="http://tools.ietf.org/html/draft-ietf-avt-multiplexing-rtp-01.txt"
           type="TXT" />
       </reference>
-      <reference anchor='RFC6781'>
+      <reference anchor='RFC6871'>
 
         <front>
           <title>Session Description Protocol (SDP) Media Capabilities Negotiation</title>
