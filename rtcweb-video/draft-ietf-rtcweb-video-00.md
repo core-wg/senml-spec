@@ -5,9 +5,13 @@ docname: draft-ietf-rtcweb-video-00
 date: 2014-04-11
 category: std
 ipr: trust200902
-toc: yes
-sortrefs: yes
-symrefs: yes
+
+coding: us-ascii
+
+pi:
+  toc: yes
+  sortrefs: yes
+  symrefs: yes
 
 author:
  -
@@ -25,14 +29,28 @@ normative:
   RFC6562:
   RFC4175:
   RFC4421:
-  RFC6184:     
+
   H264:
     title: "Advanced video coding for generic audiovisual services"
     date: April 2013 
     author: 
       org: ITU-T Recommendation H.264
-    footnote: http://www.itu.int/rec/T-REC-H.264-201304-I
+    #target: http://www.itu.int/rec/T-REC-H.264-201304-I
+  RFC6184:     
+
+  RFC6386:
+  I-D.ietf-payload-vp8:   
    
+  H265:
+    title: "High efficiency video coding"
+    date: April 2013 
+    author: 
+      org: ITU-T Recommendation H.265
+    #target: http://www.itu.int/rec/T-REC-H.265-201304-I
+  I-D.ietf-payload-rtp-h265:
+
+  I-D.grange-vp9-bitstream:
+
 
 informative:
   I-D.ietf-rtcweb-security:
@@ -113,8 +131,9 @@ All codecs MUST support at least 10 frames per second (fps) and SHOULD support
 VP8 
 -------------------------
 
-If VP8 is supported, then it MUST support the bilinear and none
-      reconstruction filters
+If VP8, defined in {{RFC6386}} is supported, then the device MUST support the
+payload formats defined in {{I-D.ietf-payload-vp8}}. In addition it MUST support
+the bilinear and none reconstruction filters
 
 
 H.264 
@@ -130,9 +149,19 @@ Open Issue: What packetization modes MUST be supported?
 VP9
 -------------------------
 
+If VP9, as defined in {{I-D.grange-vp9-bitstream}}, is supported, then the
+device MUST support the payload formats defined in TODO. Open Issue - the
+grange-vp9-bitstream draft does not really specify VP9 at all, is there a better
+reference?
+
+
 
 H.265 
 -------------------------
+
+If {{H265}} is supported, then the device MUST support the payload formats
+defined in {{I-D.ietf-payload-rtp-h265}}. 
+
 
 
 Uncompressed Video 
