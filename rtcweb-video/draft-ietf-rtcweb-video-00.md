@@ -61,7 +61,7 @@ informative:
 
 This specification provides the requirements and consideration for WebRTC
 applications to process video. It specifies the video processing that is
-required, the codecs, and types of RTP packtization that need to be supported.
+required, the codecs, and types of RTP packetization that need to be supported.
 
 --- middle
 
@@ -93,7 +93,7 @@ The section provides guidance on pre or post processing recommendations for
 handling video.
 
 To support a quality experience with no application level adjustment from the
- Javascript running in the browsers, WebRTC endpoints are REQUIRED to support:
+Javascript running in the browsers, WebRTC endpoints are REQUIRED to support:
 
 * auto focus or a camera that does not require focus adjustment for use
 
@@ -175,7 +175,7 @@ to a local machine visions system which typically work better with uncompressed
 video.
 
 Devices which support uncompressed video MUST support the payload formats
-defined in {{RFC4421}} and {{RFC4175}}. 
+defined in {{RFC4421}} and {{RFC4175}}.
 
 
 
@@ -197,18 +197,17 @@ Consensus on Mandatory to Implement video codecs. The WG has agree not to
 discuss this topic until September 29, 2014 so that the WG can focus on getting
 other work done. Please, save your comment on this section until that time.
 
-There is a strong need for some minimim set of mandatory to implement (MTI)
-video codecs or there will be interoperability failures when one WebRTC
-compliant endpoint trying to communicate with another WebRTC compliant end point
-that does nto have any codec in common. The working group discussed this
-extensively and deeply considered many issues including patents, availability of
-implementation, quality and efficiency of codecs, hardware and software
-implementations, power consumption, and many other issues. A wide range of
-codecs were considered and the WG does feel that at least one MTI codec is
-required.
+There is a need for some minimum set of mandatory to implement (MTI) video
+codecs or there will be interoperability failures when one WebRTC compliant
+endpoint trying to communicate with another WebRTC compliant end point that does
+not have any codec in common. The working group discussed this extensively and
+deeply considered many issues including patents, availability of implementation,
+quality and efficiency of codecs, hardware and software implementations, power
+consumption, and many other issues. A wide range of codecs were considered and
+the WG does feel that at least one MTI codec is required.
 
-The current status of the WG is the four options that might
-be able to achieve consensus are:
+The current status of the WG is the four options that might be able to achieve
+consensus are:
 
 1. All entities MUST support H. 264
 
