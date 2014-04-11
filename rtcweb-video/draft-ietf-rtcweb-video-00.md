@@ -20,7 +20,7 @@ author:
     email: adam@nostrum.com
     phone: +1 650 903 0800 x863
     org: Mozilla 
-    #street: FIX
+    street: FIX
     city: Dallas
     country: US
 
