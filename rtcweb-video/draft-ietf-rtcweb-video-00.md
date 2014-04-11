@@ -23,13 +23,20 @@ author:
 normative:
   RFC2119:
   RFC6562:
-
-informative:
-  I-D.ietf-rtcweb-audio:
-  I-D.ietf-rtcweb-security:
-  I-D.ietf-rtcweb-security-arch:
   RFC4175:
   RFC4421:
+  RFC6184:     
+  H264:
+    title: "Advanced video coding for generic audiovisual services"
+    date: April 2013 
+    author: 
+      org: ITU-T Recommendation H.264
+    footnote: http://www.itu.int/rec/T-REC-H.264-201304-I
+   
+
+informative:
+  I-D.ietf-rtcweb-security:
+  I-D.ietf-rtcweb-security-arch:
 
 
 --- abstract
@@ -42,7 +49,8 @@ required, the codecs, and types of RTP packtization that need to be supported.
 
 
 
-# Introduction
+Introduction
+============
 
 WebRTC endpoints can use interactive video.The video might come from a camera,
 screen recording, stored file, or other source. This specification defines how
@@ -51,7 +59,8 @@ algorithms WebRTC devices need to support.
 
 
 
-# Terminology
+Terminology
+===========
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
@@ -59,7 +68,8 @@ interpreted as described in {{RFC2119}}.
 
 
 
-# Pre and Post Processing 
+Pre and Post Processing 
+=======================
 
 The section provides guidance on pre or post processing recommendations for
 handling video.
@@ -75,31 +85,58 @@ To support a quality experience with no application level adjustment from the
  
 Unless specified otherwise by the SDP or Codec, the color space SHOULD be TBD.
 
+TODO
 
 
-# Screen Source Video
+Screen Source Video
+===================
 
 If the video source is some portion of a computer screen for desktop or
 application sharing, then some additional consideration are needed as described
 in this section.
 
+TODO
 
 
-# Codec Specific Considerations
+Codec Specific Considerations
+=============================
 
 WebRTC endpoint are not required to support all the codecs in this section, but
 if they do support one of these codecs, then they need to meet the requirements
 specified in the subsection for that codec.
 
-## VP8 
+All codecs MUST support at least 10 frames per second (fps) and SHOULD support
+30 fps and MUST support a minimum resolution of 320X240.
 
-## H.264 
 
-## VP9
 
-## H.265 
+VP8 
+-------------------------
 
-## Uncompressed Video 
+If VP8 is supported, then it MUST support the bilinear and none
+      reconstruction filters
+
+
+H.264 
+-------------------------
+
+If {{H264}} is supported, then the device MUST support the payload formats
+defined in {{RFC6184}}. In addition, Constrained Baseline Profile Level 1.2 MUST
+be supported and H.264 Constrained High Profile Level 1.3 is RECOMMENDED.
+
+Open Issue: What packetization modes MUST be supported?
+
+
+VP9
+-------------------------
+
+
+H.265 
+-------------------------
+
+
+Uncompressed Video 
+-------------------------
 
 A typical data rate for uncompressed HD video may be around 1.5 Gbps but this is
 still useful for applications that are not running across the internet or
@@ -113,14 +150,18 @@ defined in {{RFC4421}} and {{RFC4175}}.
 
 
 
-# Dealing with Packet Loss 
+Dealing with Packet Loss 
+========================
 
 This section provides recommendations on how to encode video to be robust to
 packet loss.
 
+TODO
 
 
-# Mandatory to Implement Video Codecs
+
+Mandatory to Implement Video Codecs
+===================================
 
 Note: This section is here purely as a placeholder and there is not yet WG
 Consensus on Mandatory to Implement video codecs. The WG has agree not to
@@ -151,7 +192,8 @@ least one of H.264 and VP8
 
 
 
-# Security Considerations
+Security Considerations
+=======================
 
 This specification does not introduce any new mechanisms or security concerns
 beyond what the other documents it references. In WebRTC, video is protected
@@ -162,13 +204,16 @@ appropriate for their application based on {{RFC6562}}.
 
 
 
-# IANA Considerations
+IANA Considerations
+===================
 
 This document requires no actions from IANA.
 
 
 
-# Acknowledgements
+Acknowledgements
+================
 
 The authors would like to thank <GET YOUR NAME HERE - PLEASE SEND
-COMMENTS>. Thanks to Cullen Jennings for providing text and review.
+COMMENTS>. Thanks to Cullen Jennings for providing text and review. This draft
+includes text from draft-cbran-rtcweb-codec.
