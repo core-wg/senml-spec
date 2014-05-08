@@ -1,5 +1,5 @@
 ---
-title: "Requirments for Secure RTP Media Switch"
+title: "Requirements for Secure RTP Media Switch"
 abbrev: Secure Media Switch Requirements
 docname: draft-ietf-rtcweb-video-00
 date: 2014-04-19
@@ -33,7 +33,7 @@ informative:
 
 --- abstract
 
-This draft outlines the requirements for enabling media switches to form a multimeida multi-user conferences without needing to have the
+This draft outlines the requirements for enabling media switches to form a multimedia multi-user conferences without needing to have the
 keys used to encrypt the media in the conference.
 
 --- middle
@@ -43,27 +43,27 @@ keys used to encrypt the media in the conference.
 Introduction
 ============
 
-Modern audio / video conferncing systems often "switch" video streams, and sometimes audio streams, insteald
-of mixing them. Assuming 10 participants on a confenrce call, all participants send
-vidoe from their camera to the a centralized siwtch. The switch
+Modern audio / video conferencing systems often "switch" video streams, and sometimes audio streams, instead
+of mixing them. Assuming 10 participants on a conference call, all participants send
+video from their camera to the a centralized switch. The switch
 picks the active speaker and sends that video to all other endpoints. If
 the endpoints also wish to display a thumbnail sized video of all the
 participants, that is also sent as sperate video streams that are rendered
-seperattly by each endpoint.
+separately by each endpoint.
 
 Systems such as this are typically decomposed into a controller that deals with
-the singalling and keeps track of who is in the conferce and one or
+the signaling and keeps track of who is in the conference and one or
 more media switches that receive and transmit the audio and video to
 all the partipants using SRTP. It does not matter where the controller
 is located but it is desirable to use a media switch that is as close
-to the particpants as possible to reduce latency of the media as well
-as locted in a location with suffeicent bandwidth. This results in
-situtaitons where it is nice to be able to locat the media switch in a
-data cetner that is nor particularly trusted, or to be able to pay for
-use of media switches operatored by other parties.
+to the participants as possible to reduce latency of the media as well
+as located in a location with sufficient bandwidth. This results in
+situations where it is nice to be able to locate the media switch in a
+data center that is nor particularly trusted, or to be able to pay for
+use of media switches operated by other parties.
 
-This draft outlines the requirements for enabling media swtiches to preform the fucitons they need without having to acquire or use the  media keys needed to decrypt the
-media they are switching. This enables deployments where the privacy of the media is guranteed even when a different service is being used for the actual media switching.
+This draft outlines the requirements for enabling media switches to preform the functions they need without having to acquire or use the  media keys needed to decrypt the
+media they are switching. This enables deployments where the privacy of the media is guaranteed even when a different service is being used for the actual media switching.
 
 
 
@@ -75,10 +75,10 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 document are to be interpreted as described in {{RFC2119}}.
 
 
-Switched Media Archatecture
+Switched Media Architecture
 ============================
 
-TODO - explain what audio and video come from the particpants to the
+TODO - explain what audio and video come from the participants to the
 switch, what the switch does, and what goes out to clients
 
 In traditional conferencing systems, the conferencing media infrastructure fully decrypts, decodes and processes RTP media streams received from one or more participants prior to forwarding the newly encoded and encrypted RTP media streams to the rest of participants. The conferencing media infrastructure consists of various conference servers acting as RTP mixers [RTP reference] and maintaining independent and persistent SRTP sessions with each endpoint. Each SRTP session has its persistent SSRCs, SRTP keys and SRTP contexts. Each endpoint exchanges media with one of the media servers shielding the endpoints from knowledge of other RTP transmitters and receivers in the conference (include Figure 1). 
@@ -135,8 +135,8 @@ RTP header manipulation
 
 TODO - dig into the next level of detail of what parts of the header
 get changed by the switch and why - make sure to be clear there are
-other RTP mixer archtectures - refernce magnus draft - but this is a
-common one used by moder systems due to rduced cost
+other RTP mixer architectures - reference Magnus draft - but this is a
+common one used by moder systems due to reduced cost
 
 A conferencing switch might need to modify some of the RTP header fields to map between different values picked by different endpoints prior to switching. An example is the RTP payload type values which for SIP endpoints calling into the conference are picked by the endpoints. Different endpoints are likely to pick different values for the same media format. The conferencing switch is responsible for mapping between such different values. In the case of RTP payload types, the conference infrastructure might be able to send a SIP reinvite to renegotiate the RTP payload type value down to a shared value hence avoiding the remapping. This mechanism does not always work as endpoints can choose to use asymmetric payload types. Renegotiation also adds complexity and delays to the conferencing infrastructure. Other RTP header fields such as RTP extension headers can also be modified, deleted or added as they are negotiated separately with each participants. 
 
@@ -156,26 +156,23 @@ Below is the set of RTP header fields along with whether a conferencing switch m
 - Extension Header (ExtHDR): The media switch is likely modify this field either to change its value or to delete it completely
         
 
-Requirments
+Requirements
 ===========
 
 TODO
 
 The following are the security solution requirements for media switches that enable media privacy to be maintained across participants. 
 
-1- Solution needs to maintain all current SRTP security properties.
+1. Solution needs to maintain all current SRTP security properties.
 
-2- Solution need to extend replay attacks protection to cover cross-participants replay prevention. Packets sent between the media switch and participant A cannot be retransmitted to participant B undetected.
-
-
-3- Keys used for encryption and authentication of RTP payloads and other information deemed unsuitable for accessibility by the media switching infrastructure must not be generated by or accessible to the switching infrsatructure. 
-
-4- The media switching infrastructure must be capable, if authorized, of changing any part of an RTP header except for the RTP sequence number and SSRC. This in turn mandates that the switching infrastructure must have access to the keys used for the authentication of RTP header fields other than SSRC and RTP sequence number when a proper authorization is in place. 
-
-5- The above two requirements mandate a split key and split authentication model for SRTP. Instead of the current single SRTP master key, this document requires two independent SRTP master keys. The first is an end to end key that is used for the encryption of the RTP payload and other information requiring end to end encryption. The end to end key is also used for the authentication of the RTP payload, the RTP sequence number and SSRC as well as any other information requiring end to end authentication . The second key is hop by hop key used for the authentication of RTP header fields that might be modified by the switch as well as any other information requiring hop by hop authentication (e.g. RTCP packet authentication). The hop by hop key can also be used for encryption of information that the switch is authorized to access and modify such as encrypted RTCP packets. {include a split key-authentication model utilization diagram)
+2.  Solution need to extend replay attacks protection to cover cross-participants replay prevention. Packets sent between the media switch and participant A cannot be retransmitted to participant B undetected.
 
 
+3.  Keys used for encryption and authentication of RTP payloads and other information deemed unsuitable for accessibility by the media switching infrastructure must not be generated by or accessible to the switching infrastructure. 
 
+4.  The media switching infrastructure must be capable, if authorized, of changing any part of an RTP header except for the RTP sequence number and SSRC. This in turn mandates that the switching infrastructure must have access to the keys used for the authentication of RTP header fields other than SSRC and RTP sequence number when a proper authorization is in place. 
+
+5.  The above two requirements mandate a split key and split authentication model for SRTP. Instead of the current single SRTP master key, this document requires two independent SRTP master keys. The first is an end to end key that is used for the encryption of the RTP payload and other information requiring end to end encryption. The end to end key is also used for the authentication of the RTP payload, the RTP sequence number and SSRC as well as any other information requiring end to end authentication . The second key is hop by hop key used for the authentication of RTP header fields that might be modified by the switch as well as any other information requiring hop by hop authentication (e.g. RTCP packet authentication). The hop by hop key can also be used for encryption of information that the switch is authorized to access and modify such as encrypted RTCP packets. {include a split key-authentication model utilization diagram)
 
 
 
@@ -184,13 +181,11 @@ Split key-authentication model diagram
 
 
 
+6. The SRTP master keys must not be generated by the switching infrastructure
 
+7. The switching infrastructure must not be involved in the distribution of the SRTP master keys to participants nor in the authentication of the participants identities for the purpose of key distribution
 
-6- The SRTP master keys must not be generated by the switching infrsatructre
-
-7- The switching infrastructure must not be involved in the distribution of the SRTP master keys to participants nor in the authentication of the participants identities for the purpose of key distribution
-
-8- The media switching infrastructure must be able to switch an already active SRTP stream to a new receiver while guaranteeing the timely synchronization between the SRTP transmitter and its old and new receivers. Of special interest is the RoC part pf the SRTP context due to its dynamic nature. It is important to note that the media switching infrastructure can not change RTP sequence numbers as that would require packet re-encryption.  (include diagram showing the synchronization requirement)
+8. The media switching infrastructure must be able to switch an already active SRTP stream to a new receiver while guaranteeing the timely synchronization between the SRTP transmitter and its old and new receivers. Of special interest is the RoC part pf the SRTP context due to its dynamic nature. It is important to note that the media switching infrastructure can not change RTP sequence numbers as that would require packet re-encryption.  (include diagram showing the synchronization requirement)
 
 
 
@@ -206,7 +201,7 @@ Security Considerations
 =======================
 
 This specification is all about new requirements for a system for
-securing RTP headers seperatley from the RTP body.
+securing RTP headers separately from the RTP body.
 
 
 
