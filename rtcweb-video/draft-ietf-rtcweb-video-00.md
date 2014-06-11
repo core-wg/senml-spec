@@ -15,36 +15,37 @@ pi:
 
 author:
  -
-    ins: A. Roach
+    ins: A. B. Roach
     name: Adam Roach
     email: adam@nostrum.com
     phone: +1 650 903 0800 x863
-    org: Mozilla 
-    street: FIX
+    org: Mozilla
+    street: \
     city: Dallas
     country: US
 
 normative:
   RFC2119:
   RFC6562:
+
   RFC4175:
   RFC4421:
 
   H264:
     title: "Advanced video coding for generic audiovisual services"
-    date: April 2013 
-    author: 
+    date: April 2013
+    author:
       org: ITU-T Recommendation H.264
     #target: http://www.itu.int/rec/T-REC-H.264-201304-I
-  RFC6184:     
+  RFC6184:
 
   RFC6386:
-  I-D.ietf-payload-vp8:   
-   
+  I-D.ietf-payload-vp8:
+
   H265:
     title: "High efficiency video coding"
-    date: April 2013 
-    author: 
+    date: April 2013
+    author:
       org: ITU-T Recommendation H.265
     #target: http://www.itu.int/rec/T-REC-H.265-201304-I
   I-D.ietf-payload-rtp-h265:
@@ -60,8 +61,9 @@ informative:
 --- abstract
 
 This specification provides the requirements and consideration for WebRTC
-applications to process video. It specifies the video processing that is
-required, the codecs, and types of RTP packetization that need to be supported.
+applications to send and receive video across a network. It specifies the
+video processing that is required, codecs and their parameters, and types of
+RTP packetization that need to be supported.
 
 --- middle
 
@@ -70,10 +72,11 @@ required, the codecs, and types of RTP packetization that need to be supported.
 Introduction
 ============
 
-WebRTC endpoints can use interactive video.The video might come from a camera,
-screen recording, stored file, or other source. This specification defines how
-the video is used and special considerations for processing the video as well as
-algorithms WebRTC devices need to support.
+One of the major functions of WebRTC endpoints is the ability to send and
+receive interactive video. The video might come from a camera, a screen
+recording, a stored file, or some other source. This specification defines how
+the video is used and discusses special considerations for processing the video.
+It also covers the video-related algorithms WebRTC devices need to support.
 
 
 
@@ -86,85 +89,95 @@ interpreted as described in {{RFC2119}}.
 
 
 
-Pre and Post Processing 
+Pre and Post Processing
 =======================
 
-The section provides guidance on pre or post processing recommendations for
-handling video.
+This section provides guidance on pre- or post-processing of video streams.
+
+Unless specified otherwise by the SDP or Codec, the color space SHOULD be TBD.
+
+TODO: What color space is our default?
+
+Camera Source Video
+-------------------
 
 To support a quality experience with no application level adjustment from the
 Javascript running in the browsers, WebRTC endpoints are REQUIRED to support:
 
-* auto focus or a camera that does not require focus adjustment for use
+* Automatic focus, if applicable for the camera in use
 
-* auto white balance 
+* Automatic white balance
 
-* auto light level control 
- 
-Unless specified otherwise by the SDP or Codec, the color space SHOULD be TBD.
+* Automatic light level control
 
-TODO
+
+TODO: What other processing should be specified here?
 
 
 Screen Source Video
-===================
+-------------------
 
-If the video source is some portion of a computer screen for desktop or
-application sharing, then some additional consideration are needed as described
-in this section.
+If the video source is some portion of a computer screen (e.g., desktop or
+application sharing), then the considerations in this section also apply.
 
-TODO
+TODO: What do we need to specify here?
 
 
-Codec Specific Considerations
-=============================
 
-WebRTC endpoint are not required to support all the codecs in this section, but
-if they do support one of these codecs, then they need to meet the requirements
-specified in the subsection for that codec.
+Codec Considerations
+====================
+
+WebRTC endpoints are not required to support all the codecs in this section.
+
+However, to foster interoperability between endpoints that have codecs in
+common, if they do support one of the listed codecs, then they need to meet
+the requirements specified in the subsection for that codec.
 
 All codecs MUST support at least 10 frames per second (fps) and SHOULD support
-30 fps and MUST support a minimum resolution of 320X240.
+30 fps. All codecs MUST support a minimum resolution of 320X240.
+
+TODO: These are strawman values. Are they adequate?
 
 
-
-VP8 
+VP8
 -------------------------
 
-If VP8, defined in {{RFC6386}} is supported, then the device MUST support the
-payload formats defined in {{I-D.ietf-payload-vp8}}. In addition it MUST support
-the bilinear and none reconstruction filters
+If VP8, defined in {{RFC6386}}, is supported, then the endpoint MUST support
+the payload formats defined in {{I-D.ietf-payload-vp8}}. In addition it MUST
+support the 'bilinear' and 'none' reconstruction filters.
 
 
-H.264 
+H.264
 -------------------------
 
 If {{H264}} is supported, then the device MUST support the payload formats
-defined in {{RFC6184}}. In addition, Constrained Baseline Profile Level 1.2 MUST
-be supported and H.264 Constrained High Profile Level 1.3 is RECOMMENDED.
+defined in {{RFC6184}}. In addition, they MUST support Constrained Baseline
+Profile Level 1.2, and they SHOULD support H.264 Constrained High Profile
+Level 1.3.
 
-Open Issue: What packetization modes MUST be supported?
+TODO: What packetization modes MUST be supported?
 
 
 VP9
 -------------------------
 
 If VP9, as defined in {{I-D.grange-vp9-bitstream}}, is supported, then the
-device MUST support the payload formats defined in TODO. Open Issue - the
-grange-vp9-bitstream draft does not really specify VP9 at all, is there a better
-reference?
+device MUST support the payload formats defined in TODO. 
+
+TODO: The grange-vp9-bitstream draft does not really specify VP9 at all, is
+there a better reference?
 
 
 
-H.265 
+H.265
 -------------------------
 
 If {{H265}} is supported, then the device MUST support the payload formats
-defined in {{I-D.ietf-payload-rtp-h265}}. 
+defined in {{I-D.ietf-payload-rtp-h265}}.
 
 
-
-Uncompressed Video 
+{::comment}
+Uncompressed Video
 -------------------------
 
 A typical data rate for uncompressed HD video may be around 1.5 Gbps but this is
@@ -175,28 +188,32 @@ to a local machine visions system which typically work better with uncompressed
 video.
 
 Devices which support uncompressed video MUST support the payload formats
-defined in {{RFC4421}} and {{RFC4175}}.
+defined in {{RFC4175}} and the color sampling modes described in {{RFC4421}}.
+{:/comment}
 
 
-
-Dealing with Packet Loss 
+Dealing with Packet Loss
 ========================
 
 This section provides recommendations on how to encode video to be robust to
 packet loss.
 
-TODO
+TODO: What do we want to require in terms of FEC, RTX, interleaving, etc?
 
 
-
-Mandatory to Implement Video Codecs
-===================================
+Mandatory to Implement Video Codec
+==================================
 
 Note: This section is here purely as a placeholder and there is not yet WG
-Consensus on Mandatory to Implement video codecs. The WG has agree not to
+Consensus on Mandatory to Implement video codecs. The WG has agreed not to
 discuss this topic until September 29, 2014 so that the WG can focus on getting
-other work done. Please, save your comment on this section until that time.
+other work done. Please, save your comments on this topic until that time.
 
+The currently recorded working group consensus is that all implementations
+MUST support a single, specified mandatory-to-implement codec. The remaining
+decision point is a selection of this single codec.
+
+{::comment}
 There is a need for some minimum set of mandatory to implement (MTI) video
 codecs or there will be interoperability failures when one WebRTC compliant
 endpoint trying to communicate with another WebRTC compliant end point that does
@@ -217,7 +234,7 @@ consensus are:
 
 4. Browsers MUST support both H.264 and VP8, other entities MUST support at
 least one of H.264 and VP8
-
+{:/comment}
 
 
 Security Considerations
