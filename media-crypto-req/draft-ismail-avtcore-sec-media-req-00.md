@@ -133,6 +133,7 @@ ToDo- Convert diagram 3 into text
 
 1234567890123456789012345678901234567890123456789012345678901234567890
 
+Time 1
 (Prev Seaker)      ______________           (Active Speaker)
  User A >a>a>a>a>a>|            |>a>a>a>a>a> User C
         <c<c<c<c<c<|            |<c<c<c<c<c<
@@ -142,6 +143,23 @@ ToDo- Convert diagram 3 into text
                    |____________|
 
 
+Time 2             ______________           (Prev Seaker)  
+ User A <b<b<b<b<b<|            |>b>ab>ab>b>b> User C
+                   |            |<c<c<c<c<c<
+                   | RTP        |
+(Active Speaker)   | Forwarding |
+ User B <c<c<c<c<c<|            |>b>b>b>b>b> User D
+        >b>b>b>b>b>|____________|
+
+
+Time 3
+(Active Speaker)   ______________           
+ User A >a>a>a>a>a>|            |>a>a>a>a>a> User C
+        <b<b<b<b<b<|            |
+                   | RTP        |
+(Prev Seaker)      | Forwarding |
+ User B <a<a<a<a<a<|            |>a>a>a>a>a> User D
+        >b>b>b>b>b>|____________|
 
 
 
