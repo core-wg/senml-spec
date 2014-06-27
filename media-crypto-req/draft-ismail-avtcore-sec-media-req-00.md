@@ -89,10 +89,12 @@ In traditional conferencing systems, the conferencing media infrastructure fully
 
 ToDo - Convert diagram 1 into text
 
-
-
-
-
+              
+ User A <-----< Encrypt    Decrypt <------ User C
+                    ^         v               
+                 Media/RTP Process
+                    v         v                  
+ User B <-----< Encrypt    Encrypt >-----> User D
 
 
 
@@ -108,6 +110,11 @@ ToDo- Convert diagram 2 into text
 
 
 
+ User A <----------\           /------< User C
+                    ^         v               
+                  RTP Forwarding
+                    v         v                  
+ User B  <---------/           \------> User D
 
 
 
@@ -123,6 +130,17 @@ In such media switching architectures, endpoints can receive media from differen
 
 
 ToDo- Convert diagram 3 into text
+
+1234567890123456789012345678901234567890123456789012345678901234567890
+
+(Prev Seaker)      ______________           (Active Speaker)
+ User A >a>a>a>a>a>|            |>a>a>a>a>a> User C
+        <c<c<c<c<c<|            |<c<c<c<c<c<
+                   | RTP        |
+                   | Forwarding |
+ User B <c<c<c<c<c<|            |>c>c>c>c>c> User D
+                   |____________|
+
 
 
 
