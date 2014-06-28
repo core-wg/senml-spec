@@ -226,53 +226,49 @@ TODO - add figure 4
 
 
 SRTP context synchronization diagram
-
-           
 TODO add figure 5 
+123456789012345678901234567890123456789012345678901234567890123456789012
 
+>x>x>x>x> is video from user X flowing in direciton of arrorws
 
 Time 1
-
-Conext C Instantiated
-    (Prev Seaker)      ______________           (Active Speaker)
+    (Prev Seaker)                               (Active Speaker)
+C Context Instantiated ______________  A Context Instantiated
      User A >a>a>a>a>a>|            |>a>a>a>a>a> User C
             <c<c<c<c<c<|            |<c<c<c<c<c<
                        | RTP        |
                        | Forwarding |
      User B <c<c<c<c<c<|            |>c>c>c>c>c> User D
-                       |____________|   D Contxt Out of Sync
-                                        D Context Instantiated
+C Context Instantiated |____________|  C Context Instantiated
 
 
-
-
-Time 2                 ______________           (Prev Seaker)  
+Time 2                                          (Prev Seaker)  
+C Context Out of Sync                  A Context Out of Sync 
+B Context Instantiated ______________  B Context Instantiated 
      User A <b<b<b<b<b<|            |>b>b>b>b>b> User C
                        |            |<c<c<c<c<c<
                        | RTP        |
     (Active Speaker)   | Forwarding |
      User B <c<c<c<c<c<|            |>b>b>b>b>b> User D
-            >b>b>b>b>b>|____________|
-    
-
+            >b>b>b>b>b>|____________|  C Context Out of Sync 
+C Context Up to Date                   B Context Instantiated 
 
 
 Time 3
-
     (Active Speaker)   
-D Contxt Out of Sync                    D Contxt Syncronized
-D Context Up to Date   ______________   D Contxt Out of Sync         
+C Context Out of Sync                   A Context Syncronized
+B Context Up to Date   ______________   B Context Out of Sync         
      User A >a>a>a>a>a>|            |>a>a>a>a>a> User C
             <b<b<b<b<b<|            |
                        | RTP        |
     (Prev Seaker)      | Forwarding |
      User B <a<a<a<a<a<|            |>a>a>a>a>a> User D
-            >b>b>b>b>b>|____________|   D Contxt Out of Sync   
-D Context Up to Date                    D Contxt Out of Sync   
-D Context Instantiated                  D Context Instantiated  
+            >b>b>b>b>b>|____________|   C Context Out of Sync   
+C Context Out of Sync(TODO CHECK)       B Context Out of Sync   
+A Context Instantiated                  A Context Instantiated  
 
 
-123456789012345678901234567890123456789012345678901234567890123456789012
+
 
 
 Security Considerations
