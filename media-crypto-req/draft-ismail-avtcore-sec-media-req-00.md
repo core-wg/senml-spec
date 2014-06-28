@@ -112,7 +112,7 @@ In such media switching architectures, endpoints can receive media from differen
 
 ~~~~~~~~~~
 Time 1
-(Prev Seaker)      ______________           (Active Speaker)
+(Prev Speaker)     ______________           (Active Speaker)
  User A >a>a>a>a>a>|            |>a>a>a>a>a> User C
         <c<c<c<c<c<|            |<c<c<c<c<c<
                    | RTP        |
@@ -122,7 +122,7 @@ Time 1
 ~~~~~~~~~~
 
 ~~~~~~~~~~
-Time 2             ______________           (Prev Seaker)  
+Time 2             ______________           (Prev Speaker)  
  User A <b<b<b<b<b<|            |>b>b>b>b>b> User C
                    |            |<c<c<c<c<c<
                    | RTP        |
@@ -137,7 +137,7 @@ Time 3
  User A >a>a>a>a>a>|            |>a>a>a>a>a> User C
         <b<b<b<b<b<|            |
                    | RTP        |
-(Prev Seaker)      | Forwarding |
+(Prev Speaker)     | Forwarding |
  User B <a<a<a<a<a<|            |>a>a>a>a>a> User D
         >b>b>b>b>b>|____________|
 ~~~~~~~~~~
