@@ -246,26 +246,33 @@ Conext C Instantiated
 
 
 
-Time 2             ______________           (Prev Seaker)  
- User A <b<b<b<b<b<|            |>b>b>b>b>b> User C
-                   |            |<c<c<c<c<c<
-                   | RTP        |
-(Active Speaker)   | Forwarding |
- User B <c<c<c<c<c<|            |>b>b>b>b>b> User D
-        >b>b>b>b>b>|____________|
+Time 2                 ______________           (Prev Seaker)  
+     User A <b<b<b<b<b<|            |>b>b>b>b>b> User C
+                       |            |<c<c<c<c<c<
+                       | RTP        |
+    (Active Speaker)   | Forwarding |
+     User B <c<c<c<c<c<|            |>b>b>b>b>b> User D
+            >b>b>b>b>b>|____________|
+    
+
 
 
 Time 3
-(Active Speaker)   ______________           
- User A >a>a>a>a>a>|            |>a>a>a>a>a> User C
-        <b<b<b<b<b<|            |
-                   | RTP        |
-(Prev Seaker)      | Forwarding |
- User B <a<a<a<a<a<|            |>a>a>a>a>a> User D
-        >b>b>b>b>b>|____________|
+
+    (Active Speaker)   
+D Contxt Out of Sync                    D Contxt Syncronized
+D Context Up to Date   ______________   D Contxt Out of Sync         
+     User A >a>a>a>a>a>|            |>a>a>a>a>a> User C
+            <b<b<b<b<b<|            |
+                       | RTP        |
+    (Prev Seaker)      | Forwarding |
+     User B <a<a<a<a<a<|            |>a>a>a>a>a> User D
+            >b>b>b>b>b>|____________|   D Contxt Out of Sync   
+D Context Up to Date                    D Contxt Out of Sync   
+D Context Instantiated                  D Context Instantiated  
 
 
-
+123456789012345678901234567890123456789012345678901234567890123456789012
 
 
 Security Considerations
