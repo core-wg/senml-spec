@@ -271,3 +271,12 @@ Acknowledgements
 The authors would like to thank <GET YOUR NAME HERE - PLEASE SEND
 COMMENTS>. 
 
+
+Informative References
+======================
+
+[RTP-TOP]   Westerlund, M., and Wenger, S., "RTP Topologies", Work in Progress, May 2014.
+
+[RFC7201]   Westerlund, M., and Perkins, C., "Options for Securing RTP Sessions", RFC 7201, April 2014.
+
+
