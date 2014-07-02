@@ -80,7 +80,7 @@ In traditional conferencing systems, the conferencing media infrastructure fully
 
 When receivers have homogenous coding capabilities and can receive multiple streams each, a media switcher can avoid processing media and (selectively) forward streams while manipulating only the necessary parts of the RTP headers prior to forwarding to receivers.  The RTP payload part of streams from transmitters is forwarded without any processing or changes.  
 
-A media switcher can act like a Scalable RTP Translator Forwarding Unit, maintaining the SSRCs of the transmitting endpoints rather than generating their own persistent SSRCs towards every receiving endpoint (figure 2). Though this is not the only viable embodiment of a media switching architecture, this is the most relevant for the security requirements discussed in this document.
+In this case, a media switcher can act like a Scalable RTP Translator Forwarding Unit, maintaining the SSRCs of the transmitting endpoints rather than generating their own persistent SSRCs towards every receiving endpoint (figure 2). Though this is not the only viable embodiment of a media switching architecture, this is the most relevant for the security requirements discussed in this document.
 
 ~~~~~~~~~~
    +---+      +--------------------+      +---+
