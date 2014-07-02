@@ -43,7 +43,7 @@ keys used to encrypt the media in the conference.
 Introduction
 ============
 
-Modern audio and video conferencing systems include RTP middleboxes that can often "switch" video and audio streams without mixing them.   When receivers have homogenous coding capabilities and can receive multiple streams each, such Media Switching mixers [RTP-TOP] avoid the need to decode and re-encode media for the purpose of compositing video or mixing audio.  Instead they can forward encoded media as it was sent by the transmitter.  
+Modern audio and video conferencing systems include RTP middleboxes that can often "switch" video and audio streams without mixing them.   When receivers have homogenous coding capabilities and can receive multiple streams each, such Media Switching mixers avoid the need to decode and re-encode media for the purpose of compositing video or mixing audio [RTP-TOP].  Instead they can forward encoded media as it was sent by the transmitter.  
 
 Such Media Switching mixers may selectively forward only certain transmitted stream(s) at any given time, such as the video and audio stream from the currently active speaker. When a Media Switching mixer provides the receiver with only the latest speaker(s), it selects the source from the different transmitter’s RTP sessions and must rewrite the RTP header when forwarding them into the receiver’s session [RTP-TOP].  Thus, Media Switching mixers have to be trusted to decrypt and re-encrypt all of the present SRTP context to perform these header rewrites.
 
