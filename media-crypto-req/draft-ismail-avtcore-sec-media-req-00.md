@@ -70,23 +70,27 @@ In traditional conferencing systems, the conferencing media infrastructure fully
    | A |<---- | Encrypt    Decrypt |<---- | C |
    +---+      |   ^          v     |      +---+
               |  Traditional MCU   |
-              |    or RTP Mixer    |
+              |     or  Mixer      |
    +---+      |   v          v     |      +---+
    | B |<---- | Encrypt    Encrypt | ---->| D |
    +---+      +--------------------+      +---+
 ~~~~~~~~~~
-{: #figmcu title="Traditional MCU or RTP Mixer"}
+{: #figmcu title="Traditional MCU or Mixer"}
 
 
-On the other hand conferencing systems that aim at reducing the cost and complexity of their media infrastructure tend to switch media among participants rather than process media for each participant. The switching infrastructure receives RTP media streams from participants, selects which streams to be forwarded to which participants then manipulates the necessary parts of the RTP headers prior to forwarding the streams. The main distinction here is the fact that the media switches forward the RTP payload part of the media streams received from endpoints without any processing or changes.  The media switches typically act as RTP translators maintaining the SSRCs of the transmitting endpoints rather than generating their own persistent SSRCs towards every receiving endpoint (include figure 2). Though this is not the only viable embodiment of a media switching architecture, this is the most relevant for the security requirements discussed in this document.
+When receivers have homogenous coding capabilities and can receive multiple streams each, a media switcher can avoid processing media and (selectively) forward streams while manipulating only the necessary parts of the RTP headers prior to forwarding to receivers.  The RTP payload part of streams from transmitters is forwarded without any processing or changes.  
 
+A media switcher can act like a Scalable RTP Translator Forwarding Unit, maintaining the SSRCs of the transmitting endpoints rather than generating their own persistent SSRCs towards every receiving endpoint (figure 2). Though this is not the only viable embodiment of a media switching architecture, this is the most relevant for the security requirements discussed in this document.
 
 ~~~~~~~~~~
- User A <----------\           /------< User C
-                    ^         v               
-                  RTP Forwarding
-                    v         v                  
- User B  <---------/           \------> User D
+   +---+      +--------------------+      +---+
+   | A |<---- |                    |<---- | C |
+   +---+      |                    |      +---+
+              |   RTP Translator   |
+              |  Forwarding Unit   |
+   +---+      |                    |      +---+
+   | B |<---- |                    | ---->| D |
+   +---+      +--------------------+      +---+
 ~~~~~~~~~~
 {: #figstfu title="Scalable Translator Forwarding Unit"}
 
