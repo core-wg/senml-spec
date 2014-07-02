@@ -43,28 +43,13 @@ keys used to encrypt the media in the conference.
 Introduction
 ============
 
-Modern audio / video conferencing systems often "switch" video streams, and sometimes audio streams, instead
-of mixing them. Assuming 10 participants on a conference call, all participants send
-video from their camera to the a centralized switch. The switch
-picks the active speaker and sends that video to all other endpoints. If
-the endpoints also wish to display a thumbnail sized video of all the
-participants, that is also sent as sperate video streams that are rendered
-separately by each endpoint.
+Modern audio and video conferencing systems include RTP middleboxes that can often "switch" video and audio streams without mixing them.   When receivers have homogenous coding capabilities and can receive multiple streams each, such Media Switching mixers [RTP-TOP] avoid the need to decode and re-encode media for the purpose of compositing video or mixing audio.  Instead they can forward encoded media as it was sent by the transmitter.  
 
-Systems such as this are typically decomposed into a controller that deals with
-the signaling and keeps track of who is in the conference and one or
-more media switches that receive and transmit the audio and video to
-all the partipants using SRTP. It does not matter where the controller
-is located but it is desirable to use a media switch that is as close
-to the participants as possible to reduce latency of the media as well
-as located in a location with sufficient bandwidth. This results in
-situations where it is nice to be able to locate the media switch in a
-data center that is nor particularly trusted, or to be able to pay for
-use of media switches operated by other parties.
+Such Media Switching mixers may selectively forward only certain transmitted stream(s) at any given time, such as the video and audio stream from the currently active speaker. When a Media Switching mixer provides the receiver with only the latest speaker(s), it selects the source from the different transmitter’s RTP sessions and must rewrite the RTP header when forwarding them into the receiver’s RTP session [RTP-TOP].  Thus, Media Switching mixers have to be trusted to decrypt and re-encrypt all of the present SRTP context to perform these header rewrites.
 
-This draft outlines the requirements for enabling media switches to preform the functions they need without having to acquire or use the  media keys needed to decrypt the
-media they are switching. This enables deployments where the privacy of the media is guaranteed even when a different service is being used for the actual media switching.
+Modern audio and video conferencing systems have decomposed media switching mixer devices into a) a controller that deals with the signaling and keeps track of who is in the conference and b) one or more Media Switches that receive, rewrite headers and transmit streams to receivers.  In scalable systems, media switches may be deployed in many distributed locations to optimize bandwidth or latency and may be rented on demand from third-parties to meet peak loading needs. Therefore, there is a need to locate Media Switches in data centers and/or be operated by third-parties not otherwise trusted with decryption or encryption of audio and video media.  
 
+This draft outlines the requirements for enabling Media Switches to perform the functions they need to – including header rewites and authenticating transmitters and receivers – without having to acquire or use the keys needed to decrypt the audio and video media in SRTP. This enables deployments where the privacy of the media can be assured even when a third-party service is used for media switching.
 
 
 Terminology
