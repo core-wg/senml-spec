@@ -63,17 +63,19 @@ document are to be interpreted as described in {{RFC2119}}.
 Switched Media Architecture
 ============================
 
-In traditional conferencing systems, the conferencing media infrastructure fully decrypts, decodes and processes RTP media streams received from one or more participants prior to forwarding the newly encoded and encrypted RTP media streams to the rest of participants. The conferencing media infrastructure consists of various conference servers acting as RTP mixers [RTP reference] and maintaining independent and persistent SRTP sessions with each endpoint. Each SRTP session has its persistent SSRCs, SRTP keys and SRTP contexts. Each endpoint exchanges media with one of the media servers shielding the endpoints from knowledge of other RTP transmitters and receivers in the conference (include Figure 1). 
-
+In traditional conferencing systems, the conferencing media infrastructure fully decrypts, decodes and processes RTP media streams received from one or more transmitters prior to forwarding the newly encoded (transcoded, composited and/or mixed) and encrypted RTP media streams to the rest of receivers.  Media Switching (RTP) mixers, which may or may not need to transcode, composite or mix the media, maintain independent and persistent SRTP sessions with each endpoint [RTP-TOP]. More specifically, each endpoint establishes a point-to-point SRTP session with conferencing media infrastructure, which has its own persistent SSRCs, SRTP keys and SRTP contexts (Figure 1).
 
 ~~~~~~~~~~
- User A <-----< Encrypt     Decrypt <------ User C
-                   ^          v               
-                 Media/RTP Process
-                   v          v                  
- User B <-----< Encrypt     Encrypt >-----> User D
+   +---+      +--------------------+      +---+
+   | A |<---- | Encrypt    Decrypt |<---- | C |
+   +---+      |   ^          v     |      +---+
+              |  Traditional MCU   |
+              |    or RTP Mixer    |
+   +---+      |   v          v     |      +---+
+   | B |<---- | Encrypt    Encrypt | ---->| D |
+   +---+      +--------------------+      +---+
 ~~~~~~~~~~
-{: #figmcu title="Classic MCU"}
+{: #figmcu title="Traditional MCU or RTP Mixer"}
 
 
 On the other hand conferencing systems that aim at reducing the cost and complexity of their media infrastructure tend to switch media among participants rather than process media for each participant. The switching infrastructure receives RTP media streams from participants, selects which streams to be forwarded to which participants then manipulates the necessary parts of the RTP headers prior to forwarding the streams. The main distinction here is the fact that the media switches forward the RTP payload part of the media streams received from endpoints without any processing or changes.  The media switches typically act as RTP translators maintaining the SSRCs of the transmitting endpoints rather than generating their own persistent SSRCs towards every receiving endpoint (include figure 2). Though this is not the only viable embodiment of a media switching architecture, this is the most relevant for the security requirements discussed in this document.
