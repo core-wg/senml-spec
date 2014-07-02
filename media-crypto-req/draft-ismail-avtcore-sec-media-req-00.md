@@ -78,9 +78,6 @@ document are to be interpreted as described in {{RFC2119}}.
 Switched Media Architecture
 ============================
 
-TODO - explain what audio and video come from the participants to the
-switch, what the switch does, and what goes out to clients
-
 In traditional conferencing systems, the conferencing media infrastructure fully decrypts, decodes and processes RTP media streams received from one or more participants prior to forwarding the newly encoded and encrypted RTP media streams to the rest of participants. The conferencing media infrastructure consists of various conference servers acting as RTP mixers [RTP reference] and maintaining independent and persistent SRTP sessions with each endpoint. Each SRTP session has its persistent SSRCs, SRTP keys and SRTP contexts. Each endpoint exchanges media with one of the media servers shielding the endpoints from knowledge of other RTP transmitters and receivers in the conference (include Figure 1). 
 
 
@@ -150,11 +147,6 @@ As stated before one of the objectives of media switching architecture is the sc
 RTP header manipulation
 =======================
 
-TODO - dig into the next level of detail of what parts of the header
-get changed by the switch and why - make sure to be clear there are
-other RTP mixer architectures - reference Magnus draft - but this is a
-common one used by moder systems due to reduced cost
-
 A conferencing switch might need to modify some of the RTP header fields to map between different values picked by different endpoints prior to switching. An example is the RTP payload type values which for SIP endpoints calling into the conference are picked by the endpoints. Different endpoints are likely to pick different values for the same media format. The conferencing switch is responsible for mapping between such different values. In the case of RTP payload types, the conference infrastructure might be able to send a SIP reinvite to renegotiate the RTP payload type value down to a shared value hence avoiding the remapping. This mechanism does not always work as endpoints can choose to use asymmetric payload types. Renegotiation also adds complexity and delays to the conferencing infrastructure. Other RTP header fields such as RTP extension headers can also be modified, deleted or added as they are negotiated separately with each participants. 
 
 On the other hand two of the RTP fields must not be modified by media switches that do not have access to the media encryption keys. These two fields are the SSRC and the RTP sequence number. Both fields are used in the calculation of the SRTP cipher's IV thus requiring a total re-encryption upon modification.
@@ -175,8 +167,6 @@ Below is the set of RTP header fields along with whether a conferencing switch m
 
 Requirements
 ===========
-
-TODO
 
 The following are the security solution requirements for media switches that enable media privacy to be maintained across participants. 
 
@@ -252,7 +242,7 @@ B Context Up to Date   ______________   B Context Out of Sync
     (Prev Speaker)     | Forwarding |
      User B <a<a<a<a<a<|            |>a>a>a>a>a> User D
             >b>b>b>b>b>|____________|   C Context Out of Sync   
-C Context Out of Sync(TODO CHECK)       B Context Out of Sync   
+C Context Out of Sync                   B Context Out of Sync   
 A Context Instantiated                  A Context Instantiated  
 ~~~~~~~~~~
 {: #figcontext title="SRTP context synchronization"}
