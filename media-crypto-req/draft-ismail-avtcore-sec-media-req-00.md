@@ -51,13 +51,13 @@ keys used to provide confidentiality and integrity for the media in the conferen
 Introduction
 ============
 
-Modern audio and video conferencing systems include RTP middleboxes that can often "switch" video and audio streams without mixing them.   When receivers have homogenous coding capabilities and can receive multiple streams each, such Media Switching mixers avoid the need to decode and re-encode media for the purpose of compositing video or mixing audio [RTP-TOP].  Instead they can forward encoded media as it was sent by the transmitter.  
+Modern audio and video conferencing systems include RTP middleboxes that can often "switch" video and audio streams without mixing them.   When receivers have homogenous coding capabilities and can receive multiple streams each, such media switchers avoid the need to decode and re-encode media for the purpose of compositing video or mixing audio.  Instead they can forward encoded media as it was sent by the transmitter.  In this case, a media switching device can behave more like a media switching RTP Translator [RTP-TOP], or scalable RTP Translator Forwarding Switch (RTFS). 
 
-Such Media Switching mixers may selectively forward only certain transmitted stream(s) at any given time, such as the video and audio stream from the currently active speaker. When a Media Switching Mixer provides the receiver with only the latest speaker(s), it selects the source from the different transmitter’s RTP sessions and must rewrite the RTP header when forwarding them into the receiver’s session [RTP-TOP].  Thus, Media Switching mixers have had to be trusted to decrypt and re-encrypt all of the present SRTP context to perform these header rewrites.
+Such media switching/RTFS devices may selectively forward only certain transmitted stream(s) at any given time, such as the video and audio stream from the currently active speaker.  When a media switching device provides the receiver with only the latest speaker(s), it must rewrite part of the RTP header.   Media switching/RTFS devices using current SRTP standards have to be trusted to decrypt and re-encrypt all of the present SRTP streams to perform these header rewrites and maintain SRTP context synchronization between transmitters and receivers.
 
-Modern audio and video conferencing systems have decomposed media switching mixer devices into a) a controller that deals with the signaling and keeps track of who is in the conference and b) one or more Media Switches that receive, rewrite headers and transmit streams to receivers.  In scalable systems, media switches may be deployed in many distributed locations to optimize bandwidth or latency and may be rented on demand from third-parties to meet peak loading needs. Therefore, there is a need to locate Media Switches in data centers and/or be operated by third-parties not otherwise trusted with decryption or encryption of audio and video media.  
+Modern audio and video conferencing systems have also decomposed media switching mixer devices into a) a controller that deals with the signaling and keeps track of who is in the conference and b) one or more Media Switches that receive, rewrite headers and transmit streams to receivers.  In scalable systems, media switches may be deployed in many distributed locations to optimize bandwidth or latency and may be rented on demand from third-parties to meet peak loading needs. Therefore, there is a need to locate Media Switches in data centers and/or be operated by third-parties not otherwise trusted with decryption or encryption of audio and video media.  
 
-This draft outlines the requirements for enabling Media Switches to perform the functions they need to – including header rewites and authenticating transmitters and receivers – without having to acquire or use the keys needed to decrypt the audio and video media in SRTP. This enables deployments where the privacy of the media can be assured even when a third-party service is used for media switching.
+This draft outlines the requirements for enabling Media Switches to perform the functions they need to – including header rewites and authenticating transmitters and receivers – without having to acquire or use the keys to provide confidentiality and integrity for the audio media in SRTP. This enables deployments where the privacy of the media can be assured even when a third-party service is used for media switching.
 
 
 Terminology
@@ -68,8 +68,8 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 document are to be interpreted as described in {{RFC2119}}.
 
 
-Switched Media Architecture
-============================
+Media Switching/RTFS Architecture
+=================================
 
 In traditional conferencing systems, the conferencing media infrastructure fully decrypts, decodes and processes RTP media streams received from one or more transmitters prior to forwarding the newly encoded (transcoded, composited and/or mixed) and encrypted RTP media streams to the rest of receivers.  Media Switching Mixers, which may or may not need to transcode, composite or mix the media, maintain independent and persistent SRTP sessions with each endpoint [RTP-TOP]. More specifically, each endpoint establishes a point-to-point SRTP session with conferencing media infrastructure, which has its own persistent SSRCs, SRTP keys and SRTP contexts (reference the figure below).
 
@@ -88,22 +88,22 @@ In traditional conferencing systems, the conferencing media infrastructure fully
 
 When receivers have homogenous coding capabilities and can receive multiple streams each, a media switcher can avoid processing media and (selectively) forward streams while manipulating only the necessary parts of the RTP headers prior to forwarding to receivers.  The RTP payload part of streams from transmitters is forwarded without any processing or changes.  
 
-In this case, a media switcher can act like a scalable RTP Translator Forwarding Unit, maintaining the SSRCs of the transmitting endpoints rather than generating their own persistent SSRCs towards every receiving endpoint (reference the figure below). Though this is not the only viable embodiment of a media switching architecture, this is the most relevant for the requirements discussed in this document.
+In this case, a media switching device can behave more like a scalable RTP Translator Forwarding Switch (RTFS), maintaining the SSRCs of the transmitting endpoints rather than generating their own persistent SSRCs towards every receiving endpoint (reference the figure below). Though this is not the only viable embodiment of a media switching architecture, this is the most relevant for the requirements discussed in this document.
 
 ~~~~~~~~~~
    +---+      +--------------------+      +---+
    | A |<---- |                    |<---- | C |
    +---+      |                    |      +---+
               |   RTP Translator   |
-              |  Forwarding Unit   |
+              |  Forwarding Switch |
    +---+      |                    |      +---+
    | B |<---- |                    | ---->| D |
    +---+      +--------------------+      +---+
 ~~~~~~~~~~
-{: #figstfu title="Scalable Translator Forwarding Unit"}
+{: #figstfu title="Scalable Translator Forwarding Switch"}
 
 
-These media switches may selectively forward only certain transmitted stream(s) at any given time, such as the video and audio stream from the currently active speaker.  In this case, endpoints receive different RTP video streams that are generated by different transmitters, each with its own SSRC, SRTP key and SRTP context.  All these streams are rendered to the end user as a single video source representing the most active speaker. Moreover, endpoints do not receive the same RTP streams all the times.  For example, in the figure below, endpoints A, B and D receive the video streams from endpoint C, the currently active speaker, which is actually receiving video from endpoint A, the previous active speaker. Later, when endpoint B becomes the active speaker, then endpoints A, C and D will start to receive video from B, which continues to receive video from endpoint C.  In the final time slot, when Endpoint A becomes the active speaker, the process continues. 
+These media switching/RTFS devices may selectively forward only certain transmitted stream(s) at any given time, such as the video and audio stream from the currently active speaker.  In this case, endpoints receive different RTP video streams that are generated by different transmitters, each with its own SSRC, SRTP key and SRTP context.  All these streams are rendered to the end user as a single video source representing the most active speaker. Moreover, endpoints do not receive the same RTP streams all the times.  For example, in the figure below, endpoints A, B and D receive the video streams from endpoint C, the currently active speaker, which is actually receiving video from endpoint A, the previous active speaker. Later, when endpoint B becomes the active speaker, then endpoints A, C and D will start to receive video from B, which continues to receive video from endpoint C.  In the final time slot, when Endpoint A becomes the active speaker, the process continues. 
 
 ~~~~~~~~~~
 Time 1
@@ -113,7 +113,7 @@ Time 1
                        | RTP        |
                        | Translator |
                        | Forwarding |
- Endpoint B <c<c<c<c<c<|            |>c>c>c>c>c> Endpoint D
+ Endpoint B <c<c<c<c<c<| Switch     |>c>c>c>c>c> Endpoint D
                        |____________|
 ~~~~~~~~~~
 
@@ -124,7 +124,7 @@ Time 2                 ______________           (Prev Speaker)
                        | RTP        |
                        | Translator |
 (Active Speaker)       | Forwarding |
- Endpoint B <c<c<c<c<c<|            |>b>b>b>b>b> Endpoint D
+ Endpoint B <c<c<c<c<c<| Switch     |>b>b>b>b>b> Endpoint D
             >b>b>b>b>b>|____________|
 ~~~~~~~~~~
 
@@ -136,13 +136,13 @@ Time 3
                        | RTP        |
                        | Translator |
 (Prev Speaker)         | Forwarding |
- Endpoint B <a<a<a<a<a<|            |>a>a>a>a>a> Endpoint D
+ Endpoint B <a<a<a<a<a<| Switch     |>a>a>a>a>a> Endpoint D
             >b>b>b>b>b>|____________|
 ~~~~~~~~~~
-{: #figmedia title="Media Flow for Active Speakers"}
+{: #figmedia title="RTFS Media Flow for Active Speakers"}
 
 
-Meeting the objective of scalability and simplicity in this media switching architecture starts with minimizing/eliminating the media processing performed by the RTP Translator Forwarding Unit, but can also to be extended to cryptography, where crypto processing and crypto state maintained by the RTP Translator Forwarding Unit are minimized. 
+Meeting the objective of scalability and simplicity in this media switching architecture starts with minimizing/eliminating the media processing performed by the media switching/RTFS, but can also to be extended to cryptography, where crypto processing and crypto state maintained by the RTP Translator Forwarding Unit are minimized. 
 With the advent of cloud-based services, it is essential to enable deployments where the privacy of the media can be assured even when a third-party service is used for conference switching.  Then enterprises can use cloud-based, third-party conferencing services while restricting such from accessing and manipulation of their media content. The ability to eliminate the need of media switches to decrypt and re-encrypt packets is not merely a scalability and simplicity requirement, but is also a core security requirement in cloud-based conference switching.
 
 
