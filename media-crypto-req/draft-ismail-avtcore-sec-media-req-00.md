@@ -57,7 +57,7 @@ Such media switching/RTFS devices may selectively forward only certain transmitt
 
 Modern audio and video conferencing systems have also decomposed media switching mixer devices into a) a controller that deals with the signaling and keeps track of who is in the conference and b) one or more media switching devices that receive, rewrite headers and transmit streams to receivers.  In scalable systems, media switching devices may be deployed in many distributed locations to optimize bandwidth or latency and may be rented on demand from third-parties to meet peak loading needs. Therefore, there is a need to locate switching devices in data centers and/or be operated by third-parties not otherwise trusted with decryption or encryption of audio and video media.  
 
-This draft outlines the requirements for enabling media switching/RTFS devices to perform the functions they need to – including header rewites and authenticating transmitters and receivers – without having to acquire or use the keys to provide confidentiality and integrity for the media in SRTP. This enables deployments where the privacy of the media can be assured even when a third-party service is used for switching media.
+This draft outlines the requirements for enabling media switching/RTFS devices to perform only the functions they need to – including header rewites and authenticating transmitters and receivers – without having to acquire or use the keys to provide confidentiality and integrity for the media in SRTP. This enables deployments where the privacy of the media can be assured even when a third-party service is used for switching media.
 
 
 Terminology
