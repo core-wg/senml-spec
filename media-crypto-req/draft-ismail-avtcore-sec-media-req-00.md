@@ -51,9 +51,10 @@ normative:
   RFC2119:
 
 informative:
+  RFC7201:
   I-D.ietf-rtcweb-security:
+  I-D.ietf-avtcore-rtp-topologies-update:
   I-D.ietf-rtcweb-security-arch:
-
 
 --- abstract
 
@@ -66,11 +67,11 @@ This draft outlines the requirements for enabling media switches to form a multi
 Introduction
 ============
 
-Modern audio and video conferencing systems include RTP middleboxes that can often "switch" video and audio streams without mixing them.   When receivers have homogenous coding capabilities and can receive multiple streams each, such media switchers avoid the need to decode and re-encode media for the purpose of compositing video or mixing audio.  Instead they can forward encoded media as it was sent by the transmitter.  In this case, a media switching device can behave more like a media switching RTP Translator [RTP-TOP], which we will label an RTP Translator Forwarding Switch (RTFS). 
+Modern audio and video conferencing systems include RTP middleboxes that can often "switch" video and audio streams without mixing them.   When receivers have homogenous coding capabilities and can receive multiple streams each, such media switchers avoid the need to decode and re-encode media for the purpose of compositing video or mixing audio.  Instead they can forward encoded media as it was sent by the transmitter.  In this case, a media switching device can behave more like a media switching RTP Translator {{I-D.ietf-avtcore-rtp-topologies-update}}, which we will label an RTP Translator Forwarding Switch (RTFS). 
 
 Modern audio and video conferencing systems have also decomposed switching infrastructure into a) a controller that deals with the signaling and keeps track of who is in the conference and b) one or more media switching devices that receive, rewrite headers and transmit streams to receivers.  In scalable systems, media switching devices may be deployed in many distributed locations to optimize bandwidth or latency and may be rented on demand from third-parties to meet peak loading needs. Therefore, there is a need to locate switching devices in data centers and/or be operated by third-parties not otherwise trusted with decryption or encryption of audio and video media.  
 
-This draft outlines the requirements for enabling media switching/RTFS devices to perform only the functions they need to – including header rewites and authenticating transmitters and receivers – without having to acquire or use the keys to provide confidentiality and integrity for the media in SRTP. This enables deployments where the privacy of the media can be assured even when a third-party service is used for switching media.
+This draft outlines the requirements for enabling media switching/RTFS devices to perform only the functions they need to, including header rewites and authenticating transmitters and receivers, without having to acquire or use the keys to provide confidentiality and integrity for the media in SRTP. This enables deployments where the privacy of the media can be assured even when a third-party service is used for switching media.
 
 
 Terminology
@@ -84,7 +85,7 @@ document are to be interpreted as described in {{RFC2119}}.
 Media Switching/RTFS Architecture
 =================================
 
-In traditional conferencing systems, the conferencing media infrastructure fully decrypts, decodes and processes RTP media streams received from one or more transmitters prior to forwarding the newly encoded (transcoded, composited and/or mixed) and encrypted RTP media streams to the rest of receivers.  Media Switching Mixers, which may need to composite or mix media, maintain independent and persistent SRTP sessions with each endpoint [RTP-TOP]. More specifically, each endpoint establishes a point-to-point SRTP session with conferencing media infrastructure, which has its own persistent SSRCs, SRTP keys and SRTP contexts (reference the figure below) [RFC7201].
+In traditional conferencing systems, the conferencing media infrastructure fully decrypts, decodes and processes RTP media streams received from one or more transmitters prior to forwarding the newly encoded (transcoded, composited and/or mixed) and encrypted RTP media streams to the rest of receivers.  Media Switching Mixers, which may need to composite or mix media, maintain independent and persistent SRTP sessions with each endpoint {{I-D.ietf-avtcore-rtp-topologies-update}}. More specifically, each endpoint establishes a point-to-point SRTP session with conferencing media infrastructure, which has its own persistent SSRCs, SRTP keys and SRTP contexts (reference the figure below) {{RFC7201}}.
 
 ~~~~~~~~~~
    +---+      +--------------------+      +---+
@@ -225,7 +226,7 @@ be used to accomplish the RTP forwarding objectives above.  We do not
 show the control interactions that would be necessary to distribute the 
 requisit keys among the participants.
 
-[[ TODO: Flesh out this example case further]]
+TODO: Flesh out this example case further
 
 ~~~~~~~~~~
 Note that media from endpoints are flowing in direction of the arrows.
@@ -295,13 +296,3 @@ Acknowledgements
 
 The authors would like to thank Eric Rescorla and Cullen Jennings for their inputs. <GET YOUR NAME HERE - PLEASE SEND
 COMMENTS>. 
-
-
-Informative References
-======================
-
-[RTP-TOP]   Westerlund, M., and Wenger, S., "RTP Topologies", Work in Progress, May 2014.
-
-[RFC7201]   Westerlund, M., and Perkins, C., "Options for Securing RTP Sessions", RFC 7201, April 2014.
-
-
