@@ -10,7 +10,7 @@
 <?rfc rfcedstyle="no" ?>
 <?rfc tocdepth="4"?>
 
-<rfc category="std" docName="draft-ietf-mmusic-sdp-mux-attributes-01"
+<rfc category="std" docName="draft-ietf-mmusic-sdp-mux-attributes-02"
      ipr="trust200902">
   <front>
     <title abbrev="SDP Attribute Multiplexing">A Framework for SDP Attributes
@@ -36,7 +36,7 @@
       </address>
     </author>
 
-    <date day="14" month="February" year="2014" />
+    <date day="03" month="July" year="2014" />
 
     <area>MMUSIC</area>
 
@@ -151,17 +151,17 @@
     </t>
     <t>
       With the above semantic grouping as the reference, the proposed framework classifies
-      each attribute into one of the categories as described the following sub-sections.
-    </t>
-    <section title="Category: NORMAL">
-         <t>
-          Attributes that can be independently specified when multiplexing and
-          retain their original semantics.
-         </t>
+      each attribute into one of the following categories:
+     </t> 
+       <section title="Category: NORMAL">
+         <t>Attributes that can be independently specified when multiplexing and retain 
+         their original semantics.</t>
+         <t>&nbsp;</t>
          <t>
           In the example given below, the direction and label attributes are independently
           specified for audio and video m=lines. These attributes are not impacted
           by multiplexing these media streams over a single transport layer flow.
+        </t>
          <figure>
        <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
@@ -180,19 +180,20 @@
      a=rtpmap:31 H261/90000
 ]]></artwork>
      </figure>
-   </t>
-   </section>
-	 <section title="Category: NOT RECOMMENDED">
-      <t >
-        Attributes that are recommended against
-        multiplexing since their usage under multiplexing might lead to
-        incorrect behavior.
-      </t>
-      <t>
-        Example: Multiplexing media descriptions having attribute zrtp-hash defined
-        with the media descriptions lacking it, would either complicate the handling of
-        multiplexed streams or might fail multiplexing altogether.
-        <figure>
+	 <t>&nbsp;</t>
+    </section>
+    <section title="Category: NOT RECOMMENDED">  
+          <t>
+          Attributes that are recommended against multiplexing since their usage under 
+          multiplexing might lead to incorrect behavior.
+         </t>
+         <t>&nbsp;</t>
+         <t>
+          Example: Multiplexing media descriptions having attribute zrtp-hash defined
+          with the media descriptions lacking it, would either complicate the handling of
+          multiplexed streams or might fail multiplexing altogether.
+         </t> 
+          <figure>
        <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
      v=0
@@ -210,19 +211,19 @@
      a=rtpmap:31 H261/90000
 ]]></artwork>
      </figure>
-      </t>
-   </section>
-   <section title="Category: IDENTICAL">
-      <t>
-        Attributes that MUST be identical across all the media descriptions
-        being multiplexed.
-      </t>
-      <t>
-       Attributes such as rtcp-mux fall into this category.
-       Since RTCP reporting is done per RTP Session, RTCP Multiplexing
-       MUST to enabled for both the audio and video m=lines in the
-       example below if they are transported over a single 5-tuple.
-       <figure>
+	 <t>&nbsp;</t>
+    </section>
+    <section title="Category: IDENTICAL">  
+         <t>Attributes that MUST be identical across all the media descriptions 
+         being multiplexed.</t>
+         <t>&nbsp;</t>
+         <t>
+          Attributes such as rtcp-mux fall into this category.
+          Since RTCP reporting is done per RTP Session, RTCP Multiplexing
+          MUST to enabled for both the audio and video m=lines in the
+          example below if they are transported over a single 5-tuple.
+         </t> 
+          <figure>
        <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
      v=0
@@ -237,23 +238,23 @@
      a=rtcp-mux
 ]]></artwork>
      </figure>
-      </t>
-    </section>
-    <section title ="Category: SUM">
-      <t>
-        Attributes can be set as they are normally used but
-        software using them in a multiplex case, MUST apply the sum of all the
-        attributes being multiplexed instead of trying to use each one. This is
-        typically used for bandwidth or other rate limiting attributes to the
-        underlining transport.
-      </t>
-      <t>
-        The software parsing the SDP sample below, should use the aggregate
-        Application Specific (AS) bandwidth value from the individual media descriptions
-        to determine the AS value for the multiplexed session.
-        Thus the calculated AS value would be 256+64 bytes for the given example.
-        <figure>
-        <artwork align="left" alt="" height="" name="" type="" width=""
+     <t>&nbsp;</t>
+   </section>
+    <section title="Category: SUM">
+         <t>Attributes can be set as they are normally used but
+         software using them in a multiplex case, MUST apply the sum of all the
+         attributes being multiplexed instead of trying to use each one. This is
+         typically used for bandwidth or other rate limiting attributes to the
+         underlining transport. </t>
+         <t>&nbsp;</t>
+         <t>
+          The software parsing the SDP sample below, should use the aggregate
+          Application Specific (AS) bandwidth value from the individual media descriptions
+          to determine the AS value for the multiplexed session.
+          Thus the calculated AS value would be 256+64 bytes for the given example.
+         </t> 
+          <figure>
+       <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
       v=0
       o=mhandley 2890844526 2890842807 IN IP4 126.16.64.4
@@ -265,16 +266,15 @@
       b=AS:256
 ]]></artwork>
      </figure>
-    </t>
-    </section>
-    <section title = "Category: TRANSPORT">
-      <t>
-        Attributes that can be set normally for
-        multiple items in a multiplexed group but the software MUST pick just
-        one of the attribute of the given type for use. The one chosen is the
-        attribute associated with the "m=" line that represents the information
-        being used for the transport of the RTP.
-      </t>
+   <t>&nbsp;</t>
+  </section>
+  <section title="Category: TRANSPORT">
+         <t> Attributes that can be set normally for
+         multiple items in a multiplexed group but the software MUST pick just
+         one of the attribute of the given type for use. The one chosen is the
+         attribute associated with the "m=" line that represents the information
+         being used for the transport of the RTP.</t>
+     <t>&nbsp;</t>
      <t>
       In the example below, "a=crypto" attribute is defined for both the audio and
       the video m=lines. The video media line's a=crypto attribute is chosen since
@@ -282,6 +282,7 @@
       BUNDLE grouping semantic <xref target="I-D.ietf-mmusic-sdp-bundle-negotiation"></xref>
       which mandates the values from m=line corresponding to the mid appearing first
       on the a=group:BUNDLE line to be considered for setting up the RTP Transport.
+    </t>
      <figure>
        <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
@@ -305,139 +306,106 @@
      a=rtpmap:96 H261/90000
 ]]></artwork>
      </figure>
-   </t>
+   <t>&nbsp;</t>
   </section>
   <section title="Category: INHERIT">
-    <t>
-     Attributes whose multiplexing behavior is
-     inherited from the attribute that is being encapsulated.
-     </t>
-    <t>
-      In the example SDP Offer below, acap is assigned the INHERIT category
-      indicating its multiplexing behavior corresponds to the ptime's category
-      (i.e NORMAL)
+       <t> Attributes that encapsulate other SDP attributes and
+       their multiplexing characteristics are inherited from the attributes they encapsulate.
+       Such attributes as of today, are defined in [RFC3407], [RFC5939] and [RFC6871] as part
+       of a generic framework for indicating and negotiating transport, media and media format
+       related capabilities in the SDP. </t>
+   <t>&nbsp;</t>
     <figure>
-       <artwork align="left" alt="" height="" name="" type="" width=""
-                   xml:space="preserve"><![CDATA[
-
-     v=0
-     o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
-     s=
-     c=IN IP4 host.atlanta.example.com
-     t=0 0
-     a=group:BUNDLE foo bar
-     m=audio 49172 RTP/AVP 99
-     a=mid:foo
-     a=rtpmap:99 iLBC/8000
-     a=acap:1 ptime:20
-     a=pcfg:1 a=1
-     m=audio 49184 RTP/AVP 100
-     a=mid:bar
-     a=rtpmap:100 opus/48000/2
-     a=acap:2 ptime:30
-     a=pcfg:3 a=2
-
-]]></artwork>
-     </figure>
-   </t>
+        <artwork align="left" alt="" height="" name="" type="" width=""
+                 xml:space="preserve"><![CDATA[
+       v=0
+       o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
+       s=
+       c=IN IP4 host.atlanta.example.com
+       t=0 0
+       m=video 3456 RTP/AVP 100
+       a=rtpmap:100 VP8/90000
+       a=fmtp:100 max-fr=30;max-fs=8040
+       a=sqn: 0
+       a=cdsc: 1 video RTP/AVP 100
+       a=cpar: a=rtcp-mux
+       m=video 3456 RTP/AVP 101
+       a=rtpmap:101 VP8/90000
+       a=fmtp:100 max-fr=15;max-fs=1200
+       a=cdsc: 2 video RTP/AVP 101
+       a=cpar: a=rtcp-mux
+    ]]></artwork>
+    </figure>
+      <t>
+       In the above example , the category IDENTICAL is inherited for the cpar
+       encapsulated rtcp-mux attribute.
+     </t>
+   <t>&nbsp;</t>
   </section>
   <section title="Category: IDENTICAL-PER-PT">
-    <t>
-     Attributes that MUST be identical across all the media descriptions
-     if they refer to the same RTP Payload Type. Such attributes also
-     imply the same Codec Configuration as defined in
-     <xref target="I-D.ietf-mmusic-sdp-bundle-negotiation"></xref>
-    </t>
-    <t>
-      For the example below, the RTP Payload Type of 99 is allowed for both the
-      video media descriptions since the codec configuration parameters
-      conveyed in rtpmap, ftmp attributes match throughout.
-    <figure>
-       <artwork align="left" alt="" height="" name="" type="" width=""
-                   xml:space="preserve"><![CDATA[
-
+      <t> Attributes that define the RTP payload configuration
+       on per Payload Type basis and MUST have identical values across all the media descriptions
+       for a given RTP Payload Type when repeated.</t>
+   <t>&nbsp;</t>
+   <t>
+       In the SDP example below, Payload Types 96 and 97 are repeated across
+       all the video m= lines and all the payload specific parameters (ex: rtpmap,
+       fmtp) are identical.
+    </t>   
+       <figure>
+           <artwork align="left" alt="" height="" name="" type="" width=""
+               xml:space="preserve"><![CDATA[
+                   
      v=0
      o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
      s=
      c=IN IP4 host.atlanta.example.com
      t=0 0
-     a=group:BUNDLE foo bar
-     m=video 49172 RTP/AVP 99
-     a=mid:foo
-     a=rtpmap:99 H264/90000
-     a=fmtp:99 profile-level-id=428014;
-              max-fs=3600;max-mbps=108000;max-br=14000
-     a=acap:1 ptime:20
-     a=pcfg:1 a=1
-     m=video 49172 RTP/AVP 99
-     a=mid:bar
-     a=rtpmap:99 H264/90000
-     a=ftmp:99 profile-level-id=428014;
-               max-fs=3600;max-mbps=108000;max-br=14000
-     a=acap:2 ptime:30
-     a=pcfg:3 a=2
-
-]]></artwork>
-     </figure>
-   </t>
-    <t>
-      As a counter example, the below SDP assigns unique RTP payload types for
-      each of the video media descriptions due to mismatch in the fmtp
-      parameters.
-    <figure>
-       <artwork align="left" alt="" height="" name="" type="" width=""
-                   xml:space="preserve"><![CDATA[
-
-     v=0
-     o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
-     s=
-     c=IN IP4 host.atlanta.example.com
-     t=0 0
-     a=group:BUNDLE foo bar
-     m=video 49172 RTP/AVP 99
-     a=mid:foo
-     a=rtpmap:99 H264/90000
-     a=fmtp:99 profile-level-id=428014;
-               max-fs=3600;max-mbps=108000;max-br=14000
-     m=video 49172 RTP/AVP 100
-     a=mid:bar
-     a=rtpmap:100 H264/90000
-     a=ftmp:100 profile-level-id=428029;
-                max-fs=8192;max-mbps=245760;max-br=50000
-]]></artwork>
-     </figure>
-   </t>
-   </section>
-   <section title="Category: SPECIAL">
-    <t>
-      Attributes where the text in the source draft must be
-      consulted for further handling when multiplexed.
-    </t>
-    <t>
-      As an example, for the attribute extmap, the specification
-      defining the extension MUST be referred to understand the
-      multiplexing implications.
-    </t>
+     a=group:BUNDLE cam1, cam2
+     m = video 96 97
+     a=mid:cam1
+     a=rtpmap:96 H264/90000
+     a=fmtp:96 profile-level-id=42400d; max-fs=3600; max-fps=3000;
+     max-mbps=108000; max-br=1000
+     a=rtpmap:97 H264/90000
+     a=fmtp:97 profile-level-id=42400a; max-fs=240; max-fps=3000;
+     max-mbps=7200; max-br=200
+     m = video  96 97
+     a=mid:cam2
+     a=rtpmap:96 H264/90000
+     a=fmtp:96 profile-level-id=42400d; max-fs=3600; max-fps=3000;
+     max-mbps=108000; max-br=1000
+     a=rtpmap:97 H264/90000
+     a=fmtp:97 profile-level-id=42400a; max-fs=240; max-fps=3000;
+     max-mbps=7200; max-br=200
+]]>
+</artwork>
+</figure>
+   <t>&nbsp;</t>
   </section>
-  <section title="Guidelines">
-    <t>
-      <xref target="SecCurrAnalysis"/> analyzes attributes listed in <xref target="IANA">IANA</xref> grouped under the IETF document that defines them.
+   <section title="Category: SPECIAL">
+    <t> Attributes where the text in the source draft must be
+      consulted for further handling when multiplexed. </t>
+    <t> As an example, for the attribute extmap, the specification
+    defining the extension MUST be referred to understand the multiplexing implications.
     </t>
-    <t>
-      The "Level" column indicatewhether the attribute is currently specified as:
+   </section>
+  </section>
+
+    <section title="Analysis of Existing Attributes" anchor="SecCurrAnalysis" >
+      <t>
+      This section analyzes attributes listed in <xref target="IANA">IANA</xref>
+      grouped under the IETF document that defines them. The "Level" column indicates
+      whether the attribute is currently specified as:
     </t>
     <t>
       <list style="symbols">
-	      <t>S -- Session level</t>
-	      <t>M -- Media level</t>
-	      <t>B -- Both</t>
-	      <t>SR -- Source-level (for a single SSRC)</t>
+         <t>S -- Session level</t>
+         <t>M -- Media level</t>
+         <t>B -- Both</t>
+         <t>SR -- Source-level (for a single SSRC)</t>
       </list>
     </t>
-    </section>
-    </section>
-
-    <section title="Analysis of Existing Attributes" anchor="SecCurrAnalysis" >
      <section title="RFC4566 - SDP: Session Description Protocol">
      <t>
        <xref target="RFC4566">RFC4566</xref> defines the Session Description Protocol (SDP)
@@ -472,32 +440,37 @@
         <c>NORMAL&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-        <c>ptime&nbsp;</c><c>Not Impacted
-        &nbsp;</c><c>M&nbsp;</c><c>NORMAL</c>
+        <c>ptime&nbsp;</c><c> The attribute value must be same
+        for a given codec configuration&nbsp;</c>
+        <c>M&nbsp;</c><c>IDENTICAL-PER-PT</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-        <c>maxptime&nbsp;</c><c>Not Impacted
-          &nbsp;</c><c>M&nbsp;</c><c>NORMAL</c>
+        <c>maxptime&nbsp;</c><c>The attribute value must be same
+        for a given codec configuration&nbsp;</c>
+        <c>M&nbsp;</c><c>IDENTICAL-PER-PT</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         <c>orient&nbsp;</c><c>Not Impacted
           &nbsp;</c><c>M&nbsp;</c><c>NORMAL</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-        <c>framerate&nbsp;</c><c>Not Impacted
-          &nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+        <c>framerate&nbsp;</c><c>The attribute value must be same
+        for a given codec configuration&nbsp;</c><c>M&nbsp;</c>
+        <c>IDENTICAL-PER-PT&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         <c>quality&nbsp;</c><c>Not Impacted
           &nbsp;</c><c>M&nbsp;</c><c>NORMAL</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-        <c>rtpmap&nbsp;</c><c>Not Impacted
-          &nbsp;</c><c>M&nbsp;</c><c>NORMAL</c>
+        <c>rtpmap&nbsp;</c><c>The attribute value must be same
+        for a given codec configuration&nbsp;</c><c>M&nbsp;</c>
+        <c>IDENTICAL-PER-PT</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-        <c>fmtp&nbsp;</c><c>Not Impacted
-          &nbsp;</c><c>M&nbsp;</c><c>NORMAL</c>
+        <c>fmtp&nbsp;</c><c>The attribute value must be same
+        for a given codec configuration&nbsp;</c><c>M&nbsp;</c>
+        <c>IDENTICAL-PER-PT</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         <c>keywds&nbsp;</c><c>Not impacted&nbsp;</c><c>S&nbsp;</c>
@@ -813,7 +786,7 @@
           underlying transport flow&nbsp;</c><c>M</c><c>TRANSPORT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>remote-candidates&nbsp;</c><c>ice remote candidate MUST be the
+          <c>remote-candidates&nbsp;</c><c>ice remote candidate MUST be the 
           one that corresponds to the m=line chosen for setting up the
           underlying transport flow&nbsp;</c><c>M</c><c>TRANSPORT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
@@ -855,8 +828,9 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>rtcp&nbsp;</c><c>RTCP attribute value from the m=line defining the underlying transport is chosen&nbsp;</c><c>M</c>
-          <c>TRANSPORT&nbsp;</c>
+          <c>rtcp&nbsp;</c><c>Identical attribute value MUST be used since the RTCP port affects
+          the entire RTP session.&nbsp;</c><c>M</c>
+          <c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -876,7 +850,7 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>ssrc&nbsp;</c><c>Refer to Notes below&nbsp;</c><c>M</c><c>SPECIAL&nbsp;</c>
+          <c>ssrc&nbsp;</c><c>Refer to Notes below&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
           <c>ssrc-group&nbsp;</c>
@@ -887,14 +861,15 @@
 
           <c>cname&nbsp;</c>
           <c>Not Impacted [Open Issues: what are the rules for CNAME duplication
-	      across sessions?]&nbsp;</c><c>SR</c><c>NORMAL&nbsp;</c>
+	        across sessions?]&nbsp;</c><c>SR</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
           <c>previous-ssrc&nbsp;</c>
-          <c>Refer to notes below&nbsp;</c><c>SR</c><c>SPECIAL&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c><c>SR</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>fmtp&nbsp;</c><c>Not Impacted&nbsp;</c><c>SR</c><c>NORMAL&nbsp;</c>
+          <c>fmtp&nbsp;</c><c>The attribute value must be same
+          for a given codec configuration&nbsp;</c><c>SR</c><c>IDENTICAL-PER-PT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
         <t hangText="Note">
@@ -922,8 +897,9 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>imageattr&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c>
-          <c>NORMAL&nbsp;</c>
+          <c>imageattr&nbsp;</c><c>The attribute value must be same
+          for a given codec configuration&nbsp;</c><c>M&nbsp;</c>
+          <c>IDENTICAL-PER-PT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -993,16 +969,16 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>fec-source-flow&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c>
-          <c>NORMAL&nbsp;</c>
+          <c>fec-source-flow&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c>
+          <c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>fec-repair-flow&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c>
-          <c>NORMAL&nbsp;</c>
+          <c>fec-repair-flow&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c>
+          <c>SPECIA:&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>repair-window&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c>
-          <c>NORMAL&nbsp;</c>
+          <c>repair-window&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c>
+          <c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -1050,19 +1026,23 @@
           <c>cdsc&nbsp;</c><c>Not Impacted.&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>cpar&nbsp;</c><c>Mulitplexing behavior is determined by the
-           category assignment of the enscapsulated attribute.&nbsp;</c>
+          <c>cpar&nbsp;</c><c>Refer to <xref target="encap"/>&nbsp;</c>
           <c>B</c><c>INHERIT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>cparmin&nbsp;</c><c>Refer to <xref target="encap"/>&nbsp;</c>
+          <c>cparmin&nbsp;</c><c>Refer to notes below &nbsp;</c>
           <c>B</c><c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>cparmax&nbsp;</c><c>Refer to <xref target="encap"/>&nbsp;</c>
+          <c>cparmax&nbsp;</c><c>Refer to notes below&nbsp;</c>
           <c>B</c><c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
+         <t hangText="Note"> Since the attributes (a=cparmin and a=cparmax) defines 
+          minimum and maximum numerical values associated with the attributed 
+          described in a=cpar, it is recommended to consult the document 
+          defining the attribute for dealing under media stream multiplexing.
+        </t>
       </section>
 
       <section title="RFC6284 - Port Mapping between Unicast and Multicast RTP Sessions">
@@ -1275,11 +1255,11 @@
           <ttcol align='left'>Category</ttcol>
 
           <c>pcfg&nbsp;</c><c>Refer to section <xref target="encap"/> &nbsp;</c>
-          <c>M</c><c>SPECIAL&nbsp;</c>
+          <c>M</c><c>INHERIT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
           <c>acfg&nbsp;</c><c>Refer to section <xref target="encap"/>&nbsp;</c><c>M</c>
-          <c>SPECIAL&nbsp;</c>
+          <c>INHERIT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
           <c>csup&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c>
@@ -1290,19 +1270,18 @@
            <c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-           <c>acap&nbsp;</c><c> Mulitplexing behavior is determined by the
-           category assignment of the enscapsulated attribute &nbsp;</c><c>B</c>
+           <c>acap&nbsp;</c><c>Refer to section <xref target="encap"/>&nbsp;</c><c>B</c>
            <c>INHERIT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>tcap&nbsp;</c><c>NOT IMPACTED &nbsp;</c>
-          <c>B</c><c>NORMAL&nbsp;</c>
+          <c>tcap&nbsp;</c><c>Refer to section <xref target="encap"/>&nbsp;</c>
+          <c>B</c><c>INHERIT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
       </section>
 
-      <section title="RFC6871 - SDP Media Capabilities Negotiation">
+      <section title="RFC6871- SDP Media Capabilities Negotiation">
         <t>
           Session Description Protocol (SDP) capability negotiation provides a
           general framework for indicating and negotiating capabilities in SDP.
@@ -1311,32 +1290,34 @@
           extends the framework by defining media capabilities that can be used to
           negotiate media types and their associated parameters.
         </t>
-        <texttable title="draft-ietf-mmusic-sdp-media-capabilities Attribute Analysis">
+        <texttable title="Session Description Protocol (SDP) Media Capabilities Negotiation">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>rmcap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
-          <c>omcap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
-          <c>mfcap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
-          <c>mscap&nbsp;</c><c>Mulitplexing behavior is determined by the
-           category assignment of the enscapsulated attribute.&nbsp;</c>
+          <c>rmcap&nbsp;</c><c>Refer to section <xref target="encap"/>&nbsp;</c>
           <c>B</c><c>INHERIT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>lcfg&nbsp;</c><c>Refer to section <xref target="encap"/>&nbsp;</c>
-          <c>B</c><c>SPECIAL&nbsp;</c>
+          <c>omcap&nbsp;</c><c>Refer to section <xref target="encap"/>&nbsp;</c>
+          <c>B</c><c>INHERIT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>mfcap&nbsp;</c><c>Refer to section <xref target="encap"/>&nbsp;</c>
+          <c>B</c><c>INHERIT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>mscap&nbsp;</c><c>Refer to section <xref target="encap"/>&nbsp;</c>
+          <c>B</c><c>INHERIT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>lcfg&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
           <c>sescap&nbsp;</c><c>Refer to section <xref target="encap"/>&nbsp;</c>
-          <c>S</c><c>SPECIAL&nbsp;</c>
+          <c>S</c><c>INHERIT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -1407,8 +1388,8 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>source-filter&nbsp;</c><c>source-fiter value from the m=line defining the underlying transport is chosen&nbsp;</c>
-          <c>B</c><c>TRANSPORT&nbsp;</c>
+          <c>source-filter&nbsp;</c><c>The attribute MUST be repeated across all
+            m=lines multiplexed&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -1614,8 +1595,9 @@
           <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>framesize</c><c>Refer to notes below&nbsp;</c><c>M</c>
-          <c>NOT RECOMMENDED&nbsp;</c>
+          <c>framesize</c><c>The attribute value must be same
+          for a given codec configuration&nbsp;</c><c>M</c>
+          <c>IDENTICAL-PER-PT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
           <c>3GPP-Integrity-Key&nbsp;</c><c>Refer to notes below&nbsp;</c><c>S</c>
@@ -1780,7 +1762,7 @@
 
       <section title="3GPP TS 24.182">
         <t>
-          <xref target="3GPPTS24.182"></xref> specifies IP multimedia subsystem Custom Alerting tones
+          <xref target="R3GPPTS24.182">3GPP TS 24.182</xref> specifies IP multimedia subsystem Custom Alerting tones
         </t>
         <texttable title="3GPP TS 24.182 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -1796,7 +1778,7 @@
 
       <section title="3GPP TS 24.183">
         <t>
-          <xref target="3GPPTS24.183"></xref>specifies IP multimedia
+          <xref target="R3GPPTS24.183">3GPP TS 24.183</xref>specifies IP multimedia
           subsystem Custom Ringing Signal
         </t>
         <texttable title="3GPP TS 24.183 Attribute Analysis">
@@ -1813,7 +1795,7 @@
 
       <section title="3GPP TS 24.229">
         <t>
-         <xref target="3GPPTS24.229"/>IP multimedia call control
+         <xref target="R3GPPTS24.229">3GPP TS 24.229</xref>IP multimedia call control
          protocol based on Session Initial protocol and Session Description Protocol.
         </t>
         <texttable title="3GPP TS 24.229 Attribute Analysis">
@@ -1859,7 +1841,7 @@
          ITU T.38<xref target="T.38"></xref> defines procedures for real-time Group 3
          facsimile communications over IP networks.
         </t>
-        <texttable title="ITU T.38 Attribute Analysis">
+        <texttable title="Historic Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Level</ttcol>
@@ -1901,7 +1883,7 @@
           ITU-T H.248.15 <xref target="H.248.15"></xref> defines Gateway Control Protocol
           SDP H.248 package attribute
         </t>
-        <texttable title="ITU-T H.248.15 Attribute Analysis">
+        <texttable title="Historic Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Level</ttcol>
@@ -1952,38 +1934,11 @@
 
         </texttable>
       </section>
-      <section title="IMS Based IPTV Specification">
+
+      <section title="Historical">
         <t>
-        <xref target="IMS-IPTV"/> describes the procedures on the functional entities
-        and call flows for the protocols and their possible enhancements to support IPTV services.
-        </t>
-        <texttable title="IMS Based IPTV Attribute Analysis">
-          <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Notes</ttcol>
-          <ttcol align='left'>Level</ttcol>
-          <ttcol align='left'>Category</ttcol>
-
-         <c>PSCid&nbsp;</c><c>Not Impacted&nbsp;</c>
-          <c>S</c><c>NORMAL&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
-          <c>bc_service&nbsp;</c><c>Not Impacted&nbsp;</c>
-          <c>S</c><c>NORMAL&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
-          <c>bc_program&nbsp;</c><c>Not Impacted&nbsp;</c>
-          <c>S</c><c>NORMAL&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
-          <c>bc_service_package&nbsp;</c><c>Not Impacted&nbsp;</c>
-          <c>S</c><c>NORMAL&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
-        </texttable>
-      </section>
-      <section title="Others">
-        <t>
-        This section deals with SDP attributes that represent historic usage.
+          This section specifies analysis for the attributes that are included for historic
+          usage alone by the <xref target="IANA"></xref>.
         </t>
         <texttable title="Unknowns Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -1991,12 +1946,28 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>rtpred1&nbsp;</c><c>Historic attribute.&nbsp;</c>
+          <c>rtpred1&nbsp;</c><c>Historic attributes.&nbsp;</c>
           <c>Not-Applcable</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>rtpred2&nbsp;</c><c>Historic attribute.&nbsp;</c>
+          <c>rtpred2&nbsp;</c><c>Historic attributes.&nbsp;</c>
           <c>Not-Applcable</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>PSCid&nbsp;</c><c>Not Applicable&nbsp;</c>
+          <c>Not-Applcable</c><c>TBD&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>bc_service&nbsp;</c><c>Not Applicable&nbsp;</c>
+          <c>Not-Applcable</c><c>TBD&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>bc_program&nbsp;</c><c>Not Applicable&nbsp;</c>
+          <c>Not-Applcable</c><c>TBD&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>bc_service_package&nbsp;</c><c>Not Applicable&nbsp;</c>
+          <c>Not-Applcable</c><c>TBD&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -2351,11 +2322,14 @@
          <ttcol align='left'>Level</ttcol>
          <ttcol align='left'>Category</ttcol>
 
-         <c>depend lay&nbsp;</c><c>Not Impacted &nbsp;</c><c>M</c>
-         <c>NORMAL&nbsp;</c>
+         <c>depend lay&nbsp;</c><c>The attribute value must be same
+        for a given codec configuration &nbsp;</c><c>M</c>
+         <c>IDENTICAL-PER-PT&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-         <c>depend mdc&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>depend mdc&nbsp;</c><c>The attribute value must be same
+         for a given codec configuration&nbsp;</c><c>M</c>
+         <c>IDENTICAL-PER-PT&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
        </texttable>
        <t>
@@ -2539,43 +2513,263 @@
             group (PHB).
           </t>
         </section>
-
       </section>
       <section  anchor="encap" title="Multiplexing Considerations for Encapsulating Attributes">
           <t>
-           NOTE: The analysis given below is still Work-In-Progress and will be updated soon.
-          </t>
-          <t>
-           This sections deals with recommendations for defining the multiplexing charactersitics of the SDP attributes that encaspsulate other SDP attributes.
-           Such attributes as of today, for example,  are defined in <xref target="RFC3407"/>,
-           <xref target="RFC5939"/> and <xref target="RFC6871"/> as part of a generic framework for indicating and negotiating transport, media and media format related capabilities in the SDP.
+           This sections deals with recommendations for defining the multiplexing characteristics
+           of the SDP attributes that encapsulate other SDP attributes/parameters. Such
+           attributes as of today, for example, are defined in [RFC3407], [RFC5939] and [RFC6871]
+           as part of a generic framework for indicating and negotiating transport, media and
+           media format related capabilities in the SDP.
           </t>
           <t>
            The behavior of such attributes under multiplexing is in turn defined by the
-           multiplexing behavior of the attributes they encapsulate which are made known once the negotiation process is completed.
+           multiplexing behavior of the attributes they encapsulate which are made known
+           once the Offer/Answer negotiation process is completed.
           </t>
-          <t>
-           Example 1: Below SDP example captures the following aspects.
-           <list style="numbers">
-             <t>
-              The Offerer offers audio and video streams with several different
-              RTP profiles (AVP, SAVP, SAVPF) as potential configurations.
+          <section title="RFC3407 - cpar Attribute Analysis">
+             <t> RFC3407 capability parameter attribute (a=cpar) encapsulates b= (bandwidth) or an a= attribute. For bandwidth attribute encapsulation, the category SUM is inherited. For the case of  a= attribute, the category corresponding to the SDP attribute being referenced is inherited.
              </t>
-             <t>
-              ANSWER - 1 corresponds to the SDP answer where the Answerer accepts
-              RTP/SAVPF as the default profile for both the media streams. In this
-              scenario both the media streams can be successfully multiplexed.
+              <t>
+              <figure>
+                  <artwork align="left" alt="" height="" name="" type="" width=""
+                      xml:space="preserve"><![CDATA[
+ v=0
+ o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
+ s=
+ c=IN IP4 host.atlanta.example.com
+ t=0 0
+ m=video 3456 RTP/AVP 100
+ a=rtpmap:100 VP8/90000
+ a=sqn: 0
+ a=cdsc: 1 video RTP/AVP 100
+ a=cpar: a=rtcp-mux
+ m=video 3456 RTP/AVP 101
+ a=rtpmap:101 VP8/90000
+ a=fmtp:100 max-fr=15;max-fs=1200
+ a=cdsc: 2 video RTP/AVP 101
+ a=cpar: a=rtcp-mux
+ ]]></artwork>
+              </figure>
              </t>
-             <t>
-              In ANSWER - 2 SDP, the Answerer accepts the profile RTP/SAVPF
-              for the audio stream and RTP/AVPF for the video stream. This scenario
-              results in the failure of the multiplexing as defined in the
-              section 7.2 of the BUNDLE specifcation <xref target="I-D.ietf-mmusic-sdp-bundle-negotiation"></xref>.
+             <t> In the above example ,the category IDENTICAL is inherited for the cpar
+              encapsulated rtcp-mux attribute.</t>
+          <t>&nbsp;</t>
+         </section>
+          <section title="RFC5939 Analysis">
+              <t> 
+                <xref target="RFC5939"/> defines a general SDP capability negotiation framework. It also specifies how to provide transport protocols and SDP attributes as capabilities and negotiate them using the framework.
+              </t>
+              <t>
+                  For this purpose,  <xref target="RFC5939"/> defines the following
+                  <list style="symbols">
+                      <t>
+                        A set of capabilities for the session and its associated media stream
+                        components, supported by each side. The attribute ("a=acap") defines
+                        how to list an attribute name and its associated value (if any) as a
+                        capability. The attribute ("a=tcap") that defines how to list transport
+                        protocols (e.g., "RTP/AVP") as capabilities.
+                      </t>
+                      <t>
+                        A set of potential configurations indicating which combinations of
+                        those capabilities can be used for the session and its associated
+                        media stream components.  Potential configurations are not ready
+                        for use.  Instead, they provide an alternative that may be used,
+                        subject to further negotiation.
+                      </t>
+                      <t>
+                        An actual configuration for the session and its associated media
+                        stream components, that specifies which combinations of session
+                        parameters and media stream components can be used currently and
+                        with what parameters.  Use of an actual configuration does not
+                        require any further negotiation.
+                      </t>
+                      <t>
+                        A negotiation process that takes the set of actual and potential
+                        configurations (combinations of capabilities) as input and
+                        provides the negotiated actual configurations as output.
+                      </t>  
+                  </list>
+              </t>
+              <section title="Recommendations">
+                <t>
+                   This section provides recommendations for entities generating and processing
+                   SDP under the generic capability negotiation framework as defined in <xref target="RFC5939"/>
+                   under the context of media stream multiplexing.
+                </t>
+                <t>
+                  These recommendations are provided for the purposes of enabling the 
+                  Offerer to make sure that the generated potential configurations between the
+                  multiplexed streams can (easily) be negotiated to be consistent between
+                  those streams.
+                </t>
+                <section title="Recommendation-1: Transport Capability Analysis">
+                <t>
+                     When a transport capability is proposed as a potential configuration under a
+                     given media description, it is recommended that all the media descriptions
+                     under multiplexing have the same potential configuration number for the
+                     given transport capability.
+                </t>     
+            <figure title="">
+            <artwork><![CDATA[
+a=tcap:1 RTP/SAVPF
+a=tcap:2 RTP/SAVP
+a=group:BUNDLE audio video
+m= audio
+a=mid:audio
+a=pcfg:1 t=1 
+a=pcfg:2
+m= video
+a=mid:video
+a=pcfg:1 t=1 
+a=pcfg:2 t=2
+]]></artwork>
+          </figure>
+                  <t>
+                     In the example above, the potential configurations that Offer
+                     transport protocol capability of RTP/SAVPF has the same configuration
+                     number "1"  in both the audio and video media descriptions.
+                  </t>          
+                </section>  
+                <section title="Recommendation-2: Attribute Capability Analysis">  
+                  <t>
+                     For attribute capabilities which are offered as potential configurations
+                     that encapsulate attributes whose value MUST be IDENTICAL under
+                     multiplexing, it is recommended that all the media descriptions under
+                     multiplexing have the same potential configuration number for the given
+                     attribute capability.
+                  </t>
+<figure title="">
+            <artwork><![CDATA[
+a=acap:1 a=rtcp-mux
+a=acap:2 a=crypto:1 AES_CM_128_HMAC_SHA1_80
+       inline:EcGZiNWpFJhQXdspcl1ekcmVCNWpVLcfHAwJSoj|2^20|1:32
+a=group:BUNDLE audio video
+m= audio 49172 RTP/AVP 99
+a=mid:audio
+a=pcfg:1 a=1
+a=pcfg:2
+m= video 560024 RTP/AVP 100
+a=mid:video
+a=pcfg:1 a=1 
+a=pcfg:2 a=2
+]]></artwork>
+          </figure> 
+                <t>
+                  In the example above, the potential configuration number 1
+                  is repeated while referring to attribute capability a=rtcp-mux, since
+                  the behavior is IDENTICAL for the attribute a=rtcp-mux under
+                  multiplexing.
+                </t>  
+              </section>
+              
+                <section title="Recommendation-3: Sescap Attribute Analysis">
+                 <t>
+                    It is recommended that any bundled media descriptions/configurations are also acceptable combinations of media streams/configurations as specified by "sescap" attribute.
+                 </t>
+                </section>
+                <section title="Recommendation-4: Capability Extension Attributes">
+                 <t>
+                    Since it is nearly impossible to define a generic mechanism for various
+                    capability extensions , this document does't provide procedures for
+                    dealing with the capability extension attributes. However, Section
+                    <xref target="med-cap-analysis"/> provide analysis of media capability extension 
+                    attributes as defined in <xref target="RFC6871"/>.
+                 </t>
+                </section>    
+              </section>
+          </section>
+          <section title = "RFC6871 Analysis" anchor="med-cap-analysis">
+           <t>
+            <xref target="RFC6871"/> extends capability negotiation framework described in 
+            <xref target="RFC5939"/> by defining media capabilities that can be used to indicate 
+            and negotiate media types and their associated format parameters.
             </t>
-           </list>
-           <figure>
-               <artwork align="left" alt="" height="" name="" type="" width=""
-                   xml:space="preserve"><![CDATA[
+            <t>
+            Building upon the analysis from the previous section, following recommendation is  
+            provided for dealing with the attributes defined in <xref target="RFC6871"/> under
+            multiplexing
+           </t>
+           <section title="Recommendation-5: Attribute Capability Under Shared Payload Type">
+                 <t>
+                     For attribute capabilities which are offered as potential configurations
+                     that encapsulate attributes whose value MUST be IDENTICAL-PER-PT under
+                     multiplexing, it is recommended that all the media descriptions under
+                     multiplexing have the same potential configuration number for the given
+                     attribute capability
+                 </t>
+                 <t>
+                  The attributes (a=rmcap, a=mfcap) follow the above recommendations under
+                  mutliplexing
+                 </t> 
+                 <figure title="">
+            <artwork><![CDATA[
+v=0
+o=- 25678 753849 IN IP4 192.0.2.1
+s=
+c=IN IP4 192.0.2.1
+t=0 0
+a=creq:med-v0
+m=audio 54322 RTP/AVP 96
+a=rtpmap:96 AMR-WB/16000/1
+a=fmtp:96 mode-change-capability=1; max-red=220;
+mode-set=0,2,4,7
+a=rmcap:1,3 audio AMR-WB/16000/1
+a=rmcap:2 audio AMR/8000/1
+a=mfcap:1,2 mode-change-capability=1
+a=mfcap:3 mode-change-capability=2
+a=pcfg:1 m=1 pt=1:96
+a=pcfg:2 m=2 pt=2:97
+a=pcfg:3 m=3 pt=3:98
+
+m=audio 54322 RTP/AVP 96
+a=rtpmap:96 AMR-WB/16000/1
+a=fmtp:96 mode-change-capability=1; max-red=220;
+mode-set=0,2,4,7
+a=rmcap:4 audio AMR/8000/1
+a=rmcap:5 audio OPUS/48000/2
+a=mfcap:5 minptime=40
+a=mfcap:4 mode-change-capability=1
+a=pcfg:1 m=4 pt=4:97
+a=pcfg:4 m=5 pt=5:101
+]]>
+        </artwork>
+        </figure> 
+            <t>
+                In the example above, the potential configuration number 1
+                is repeated when referring to media and media format capability
+                used for the Payload Type 97. This implies that both the media
+                capability 2 and 4 along with their media format capabilities
+                MUST refer to the same Codec configuration , as per the definition
+                of IDENTICAL-PER-PT 
+              </t>
+            </section>  
+          </section> 
+          <section title="Recommendation-6: Offer/Answer Negotiation Expectations">
+                 <t>
+                     For attributes encapsulated via "a=acap", "a=omcap", "a=mscap" capability attributes 
+                     and presented as part of potential/actual configurations during the Offer/Answer 
+                     negotiation prodecure, the negotiation MUST ensure that the multiplexing behavior of
+                     these capabilities inherit from the behavior of the attribute being encapsulated.
+                </t>
+                <t>
+                  Example 1: Below SDP example captures the following aspects.
+                  <list style="symbols">
+                    <t> 
+                      The Offerer offers audio and video streams with several different RTP profiles (AVP,   
+                      SAVP, SAVPF) as potential configurations.
+                    </t>
+                    <t> 
+                      Valid Answer that corresponds to the SDP answer where the Answerer accepts RTP/SAVPF as the default profile for both the media streams. In this scenario both the media streams can be successfully multiplexed.
+                    </t>
+                    <t>   
+                      Invalid Answer wherein the Answerer accepts the profile RTP/SAVPF for the audio stream and RTP/AVPF for the video stream. This scenario results in the failure of the multiplexing as defined in the section 7.2 of the BUNDLE specification [I-D.ietf-mmusic-sdp-bundle-negotiation]. 
+                    </t>
+                    </list>
+                   </t>   
+                <figure title="">
+            <artwork><![CDATA[
+<Offer-SDP>
 v=0
 o=- 25678 753849 IN IP4 192.0.2.1
 s=
@@ -2585,15 +2779,12 @@ m=audio 3456 RTP/AVP 98
 a=tcap:1 RTP/SAVPF
 a=rtpmap:98 OPUS/48000/2
 a=pcfg:1 t=1
-
 m=video 51372 RTP/AVP 101
 a=rtpmap:101 H264/90000
 a=tcap:2 RTP/SAVPF RTP/AVPF
 a=pcfg:2 t=2|3
 
-
-ANSWER - 1
------------
+<Valid Answer>
 v=0
 o=- 24351 621814 IN IP4 192.0.2.2
 s=
@@ -2605,8 +2796,7 @@ m=video 51372 RTP/SAVPF 101
 a=rtpmap:101 H264/90000
 a=acfg:2 t=2
 
-ANSWER - 2
------------
+<Invalid Answer>
 v=0
 o=- 24351 621814 IN IP4 192.0.2.2
 s=
@@ -2616,102 +2806,10 @@ a=acfg:1 t=1
 
 m=video 51372 RTP/AVPF 101
 a=rtpmap:101 H264/90000
-a=acfg:2 t=3
-
-]]></artwork>
-           </figure>
-          </t>
-          <t>
-           Example 2: Below SDP example captures the following aspects.
-           <list style="numbers">
-             <t>
-              Offerer offers use of plain RTP and Secure RTP as alternatives.
-              For the Secure RTP stream, it can be established using either
-              DTLS-SRTP or SDP security descriptions
-             </t>
-             <t>
-              ANSWER - 1 corresponds to the SDP answer where the Answerer accepts
-              DTLS based encryption for both the audio and video streams. This
-              scenario can lead to successfull multiplexing of the audio and the
-              video streams.
-             </t>
-             <t>
-              In ANSWER - 2 SDP, the Answerer accepts plain RTP for the audio
-              stream and DTLS based encryption for the video stream.
-              This scenario results in unsuccesfull multiplexing of the media
-              streams since the encryption scheme applies to the entire RTP Session
-              and cannot be applied to video media stream alone when multiplexed.
-            </t>
-           </list>
-           <figure>
-               <artwork align="left" alt="" height="" name="" type="" width=""
-                   xml:space="preserve"><![CDATA[
-OFFER
------
-v=0
-o=- 25678 753849 IN IP4 192.0.2.1
-s=
-t=0 0
-c=IN IP4 192.0.2.1
-a=acap:1 setup:actpass
-a=acap:2 fingerprint: SHA-1 \
-          4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB
-a=tcap:1 UDP/TLS/RTP/SAVP RTP/SAVP
-m=audio 59000 RTP/AVP 98
-a=rtpmap:98 AMR/8000
-a=acap:3 crypto:1 AES_CM_128_HMAC_SHA1_32
-         inline:NzB4d1BINUAvLEw6UzF3WSJ+PSdFcGdUJShpX1Zj|2^20|1:32
-a=pcfg:1 t=1 a=1,2
-a=pcfg:2 t=2 a=3
-
-m=video 59123 RTP/AVP 100
-a=rtpmap:100 VP8/90000
-a=pcfg:3 t=1 a=1,2
-
-
-ANSWER - 1
------------
-v=0
-o=- 24351 621814 IN IP4 192.0.2.2
-s=
-t=0 0
-c=IN IP4 192.0.2.2
-
-m=audio 54568 UDP/TLS/RTP/SAVP 98
-a=rtpmap:98 AMR/8000
-a=acfg:1 t=1 a=1,2
-
-m=video 54968 UDP/TLS/RTP/SAVP 100
-a=rtpmap:100 VP8/90000
-a=acfg:3 t=1 a=1,2
-
-
-ANSWER - 2
------------
-v=0
-o=- 24351 621814 IN IP4 192.0.2.2
-s=
-t=0 0
-c=IN IP4 192.0.2.2
-m=audio 54568 RTP/AVP 98
-a=rtpmap:98 AMR/8000
-
-m=video 54968 UDP/TLS/RTP/SAVP 100
-a=rtpmap:100 VP8/90000
-a=setup:active
-a=fingerprint: SHA-1 \
-    FF:FF:FF:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB
-a=acfg:3 t=1 a=1,2
-
-]]></artwork>
-           </figure>
-          </t>
-       <t>
-        In conclusion, the mutliplexing behavior of the encapsulating attributes are
-        defined based on the multiplexing behavior of the attributes they encapsulate.
-        Thus care should be taken in determining if certain combinations of these attributes
-        can be used in the context of transport multplexing.
-       </t>
+a=acfg:2 t=3]]>
+        </artwork>
+        </figure>
+      </section>   
       </section>
 
    <section title="IANA Considerations">
@@ -2722,7 +2820,7 @@ a=acfg:3 t=1 a=1,2
       <figure>
         <artwork align="center"><![CDATA[
 +---------------------+
-| Category  |
+| Category            |
 +---------------------+
 | NORMAL              |
 +---------------------+
@@ -2733,7 +2831,7 @@ a=acfg:3 t=1 a=1,2
 | TRANSPORT           |
 +---------------------+
 | INHERIT             |
-+---------------------+
+----------------------+
 | IDENTICAL-PER-PT    |
 +---------------------+
 | SPECIAL             |
@@ -2751,8 +2849,8 @@ a=acfg:3 t=1 a=1,2
        <t>
        	I would like to thank Cullen Jennings for suggesting the categories,
         contributing text and reviewing the draft. I would also link to
-        thank Magnus, Christer and Dan on suggesting structural changes helping
-        improve the document readability.
+        thank Magnus, Christer, Jonathan Lennox, Bo Burman,
+        and Dan on suggesting structural changes helping improve the document readability.
        </t>
        <t>
        	I would like also to thank following experts on their inputs and
@@ -2775,19 +2873,24 @@ a=acfg:3 t=1 a=1,2
       <t>Changes from draft-ietf-mmusic-sdp-mux-attributes-01
         <list style="symbols">
           <t>
-            Updated category assignment IMS IPTV attributes and RFC4570
-            based on IETF89 discussions.
+            Updated section 15 to provide detailed recommendation on dealing
+            with encapsulating attributes. Also updated sections 5.20,
+            5.28, 5.29 to refer to Section 15.
           </t>
           <t>
-            Added new categories INHERIT and IDENTICAL-PER-PT.
+            Added new categories IDENTICAL-PER-PT and INHERIT 
           </t>
           <t>
-            Updated sections 5.20, 5.28 and 5.29 to reflect INHERIT category
-            assignment.
+            Updated Sections 16 to add the new categories.
           </t>
           <t>
-            Removed category TBD.
+            Updated Sections 5.1, 5.14, 5.15, 5.38, 8.5 to reflect the
+            category IDENTICAL-PER-PT.
           </t>
+          <t>
+            Reformatted section 4 to add individual categories to their 
+            own sections.
+          </t> 
         </list>
       </t>
       <t>Changes from draft-ietf-mmusic-sdp-mux-attributes-00
@@ -3820,7 +3923,7 @@ a=acfg:3 t=1 a=1,2
             <organization /></author>
           <date year='2013' month='Febrauary' />
         </front>
-        <seriesInfo name='RFC' value='6781' />
+        <seriesInfo name='RFC' value='6871' />
         <format type='TXT' target='https://tools.ietf.org/html/rfc6871.txt' />
       </reference>
       <reference anchor='IANA' target="http://www.iana.org/assignments/sdp-parameters/sdp-parameters.xml">
@@ -3844,18 +3947,7 @@ a=acfg:3 t=1 a=1,2
           <date/>
         </front>
       </reference>
-      <reference anchor='IMS-IPTV'
-       target="http://www.etsi.org/deliver/etsi_ts/183000_183099/183063/03.05.02_60/ts_183063v030502p.pdf">
-        <front>
-          <title> Telecommunications and Internet converged Services and
-          Protocols for Advanced Networking (TISPAN); IMS-based IPTV stage 3
-          specification</title>
-          <author/>
-          <date/>
-        </front>
-      </reference>
-
-      <reference anchor='3GPPTS24.229' target="http://www.3gpp.org/ftp/Specs/html-info/24229.htm">
+      <reference anchor='R3GPPTS24.229' target="http://www.3gpp.org/ftp/Specs/html-info/24229.htm">
         <front>
           <title>IP multimedia call control protocol based on
            Session Initiation Protocol (SIP)
@@ -3864,7 +3956,7 @@ a=acfg:3 t=1 a=1,2
           <date/>
         </front>
       </reference>
-      <reference anchor='3GPPTS24.182' target="http://www.3gpp.org/ftp/Specs/html-info/24182.htm">
+      <reference anchor='R3GPPTS24.182' target="http://www.3gpp.org/ftp/Specs/html-info/24182.htm">
         <front>
           <title>IP Multimedia Subsystem (IMS) Customized Alerting Tones (CAT);
            Protocol specification</title>
@@ -3872,7 +3964,7 @@ a=acfg:3 t=1 a=1,2
           <date/>
         </front>
       </reference>
-     <reference anchor='3GPPTS24.183' target="http://www.3gpp.org/ftp/Specs/html-info/24183.htm">
+     <reference anchor='R3GPPTS24.183' target="http://www.3gpp.org/ftp/Specs/html-info/24183.htm">
         <front>
           <title>IP Multimedia Subsystem (IMS) Customized Ringing Signal (CRS);
            Protocol specification</title>
