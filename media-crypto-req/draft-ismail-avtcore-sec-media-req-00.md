@@ -225,7 +225,7 @@ be used to accomplish the RTP forwarding objectives above.  We do not
 show the control interactions that would be necessary to distribute the 
 requisit keys among the participants.
 
-[[ TODO: Flesh out this example case in a new figure]]
+[[ TODO: Flesh out this example case further]]
 
 ~~~~~~~~~~
 Note that media from endpoints are flowing in direction of the arrows.
