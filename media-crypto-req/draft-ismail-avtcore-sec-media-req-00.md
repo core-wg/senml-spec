@@ -156,7 +156,7 @@ Time 3
 
 
 Meeting the objective of scalability and simplicity in this media switching architecture starts with minimizing/eliminating the media processing performed by the media switching device, but can also to be extended to cryptography, where crypto processing and crypto state maintained by the media switching/RTFS devices are minimized. 
-With the advent of cloud-based services, it is essential to enable deployments where the privacy of the media can be assured even when a third-party service is used for conference switching.  Then enterprises can use cloud-based, third-party conferencing services while restricting such from accessing and manipulation of their media content. The ability to eliminate the need of media switching/RTFS devices to decrypt and re-encrypt packets is not merely a scalability and simplicity requirement, but is also a core security requirement in cloud-based conference switching.
+With the advent of cloud-based services, it is essential to enable deployments where the privacy of the media can be assured even when a third-party service is used for conference switching.  Then enterprises can use cloud-based, third-party conferencing services while restricting such from accessing and manipulation of their media content. The ability to eliminate the need of media switching/RTFS devices to decrypt and re-encrypt packets is not merely a scalability and simplicity requirement, but is also a core security requirement in cloud-based conferencing services.
 
 
 RTP header manipulation
