@@ -1,8 +1,8 @@
 ---
 title: "Requirements for Secure RTP Media Switching"
 abbrev: Secure Media Switching Requirements
-docname: draft-ietf-rtcweb-video-00
-date: 2014-04-19
+docname: draft-ismail-avtcore-media-req-00
+date: 2014-07-04
 category: info
 ipr: trust200902
 
