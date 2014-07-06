@@ -2,7 +2,7 @@
 title: "Trustable Cloud Systems - Strategies and Recommendations"
 abbrev: Trustable Cloud
 docname: draft-jennings-perpass-secure-rai-cloud-01
-date: 2014-01-15
+date: 2014-07-04
 category: info
 ipr: trust200902
 
