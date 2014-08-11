@@ -1,31 +1,45 @@
+xml2rfc ?= xml2rfc -v
+kramdown-rfc2629 ?= kramdown-rfc2629
+idnits ?= idnits
 
+draft := draft-nandakumar-rtcweb-sdp-04
 
-SRC  := $(wildcard draft-*.xml)
+current_ver := $(shell git tag | grep "$(draft)" | tail -1 | sed -e"s/.*-//")
+ifeq "${current_ver}" ""
+next_ver ?= 00
+else
+next_ver ?= $(shell printf "%.2d" $$((1$(current_ver)-99)))
+endif
+next := $(draft)-$(next_ver)
 
-HTML := $(patsubst %.xml,%.html,$(SRC))
-TXT  := $(patsubst %.xml,%.txt,$(SRC))
-DIF  := $(patsubst %.xml,%.diff.html,$(SRC))
-PDF  := $(patsubst %.xml,%.pdf,$(SRC))
+.PHONY: latest submit clean
 
-all: $(HTML) $(TXT) $(DIF) $(PDF)
-#all: $(HTML) $(TXT) $(DIF)
+latest: $(draft).txt $(draft).html $(draft).pdf
+
+submit: $(next).txt
+
+idnits: $(next).txt
+	$(idnits) $<
 
 clean:
-	rm *~ draft*.html draft*pdf draft-*txt
+	-rm -f $(draft).txt $(draft).html
+	-rm -f $(next).txt $(next).html
+	-rm -f $(draft)-[0-9][0-9].xml
 
-#%.html: %.xml
-#	xsltproc -o $@ rfc2629.xslt $^
+$(next).xml: $(draft).xml
+	sed -e"s/$(basename $<)-latest/$(basename $@)/" $< > $@
 
-%.html: %.xml
-	/Users/suhas/html5/webrtc/docs/ietf-binaries/xml2rfc/xml2rfc-1.36/xml2rfc.tcl $^ $@
-
+#%.xml: %.md
+#	$(kramdown-rfc2629) $< > $@
 
 %.txt: %.xml
-	/Users/suhas/html5/webrtc/docs/ietf-binaries/xml2rfc/xml2rfc-1.36/xml2rfc.tcl $^ $@
+	$(xml2rfc) $< $@
 
-%.diff.html: %.txt
-	/Users/suhas/html5/webrtc/docs/ietf-binaries/xml2rfc/xml2rfc-1.36/htmlwdiff  $^.old $^ >  $@
+%.html: %.xml
+	$(xml2rfc) --html $< $@
 
 %.pdf: %.html
 	wkpdf -p letter -s $^ -o $@
 
+upload: $(draft).html $(draft).txt
+	python upload-draft.py $(draft).html
