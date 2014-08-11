@@ -300,8 +300,6 @@
         	 Alice offering Opus, PCMU, PCMA and Bob accepting all the audio codecs
         	 offered.
             </t>
-            <list style="hanging">
-       </list>
         	<figure>
           <artwork alt="Successful-Session 2 Way Audio SAVPF"
             src="2way-audio.svg"><![CDATA[
@@ -332,12 +330,12 @@ Alice<->Bob: Two-way Opus Audio (preferred codec)
           <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref></c>
           <c>m=audio 54609 UDP/TLS/RTP/SAVPF 109 0 8</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>c=IN IP4 24.23.204.141</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=mid:audio</c>
           <c><xref target="RFC5888"></xref></c>
           <c>a=msid:ma ta </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
-          <c>c=IN IP4 24.23.204.141</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref> - Port for RTCP data</c>
           <c>a=rtpmap:109 opus/48000/2</c>
@@ -397,12 +395,12 @@ Alice<->Bob: Two-way Opus Audio (preferred codec)
           <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref></c>
           <c>m=audio 49203 UDP/TLS/RTP/SAVPF 109 0 8</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>c=IN IP4 98.248.92.77</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=mid:audio</c>
           <c><xref target="RFC5888"></xref></c>
           <c>a=msid:ma ta </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
-          <c>c=IN IP4 98.248.92.77</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref> - Port for RTCP data</c>
           <c>a=rtpmap:109 opus/48000/2</c>
@@ -481,19 +479,19 @@ Alice->Bob: Two-way Opus Audio, H.264 Video
           <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref></c>
           <c>m=audio 54609 UDP/TLS/RTP/SAVPF 109 0 8</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>c=IN IP4 24.23.204.141</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=mid:audio</c>
           <c><xref target="RFC5888"></xref></c>
           <c>a=msid:ma ta </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
-          <c>c=IN IP4 24.23.204.141</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref> - Port for RTCP data</c>
           <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref> - Opus Codec 48khz, 2 channels</c>
           <c>a=ptime:20</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref> - Opus packetization of 20ms</c>
-		  <c>a=rtpmap:0 PCMU/8000</c>
+		      <c>a=rtpmap:0 PCMU/8000</c>
           <c><xref target="RFC3551"></xref> PCMU Audio Codec</c>
           <c>a=rtpmap:8 PCMA/8000</c>
           <c><xref target="RFC3551"></xref> PCMA Audio Codec</c>
@@ -530,12 +528,12 @@ Alice->Bob: Two-way Opus Audio, H.264 Video
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=video 54609 UDP/TLS/RTP/SAVPF 99 120</c>
           <c><xref target="RFC4566"></xref> </c>
+          <c>c=IN IP4 24.23.204.141</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=mid:video</c>
           <c><xref target="RFC5888"></xref></c>
           <c>a=msid:ma tb </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
-          <c>c=IN IP4 24.23.204.141</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref> - Port for RTCP data</c>
           <c>a=rtpmap:99 H264/90000</c>
@@ -546,7 +544,7 @@ Alice->Bob: Two-way Opus Audio, H.264 Video
           <c><xref target="draft-ietf-payload-vp8"></xref> - VP8 video codec</c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref> - Alice can send and recv video</c>
-		  <c>a=setup:actpass</c>
+		      <c>a=setup:actpass</c>
           <c><xref target="RFC4145"></xref> - Alice can perform DTLS before Answer arrives</c>
           <c>a=rtcp-mux</c>
           <c><xref target="RFC5761"></xref> - Alice can perform RTP/RTCP Muxing on port 62537</c>
@@ -601,12 +599,12 @@ Alice->Bob: Two-way Opus Audio, H.264 Video
           <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref></c>
           <c>m=audio 49203 UDP/TLS/RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>c=IN IP4 98.248.92.77</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=mid:audio</c>
           <c><xref target="RFC5888"></xref></c>
           <c>a=msid:ma ta </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
-          <c>c=IN IP4 98.248.92.77</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref> - Port for RTCP data</c>
           <c>a=rtpmap:109 opus/48000/2</c>
@@ -644,12 +642,12 @@ Alice->Bob: Two-way Opus Audio, H.264 Video
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=video 49203 UDP/TLS/RTP/SAVPF 99</c>
           <c><xref target="RFC4566"></xref> </c>
+          <c>c=IN IP4 98.248.92.77</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=mid:video</c>
           <c><xref target="RFC5888"></xref></c>
           <c>a=msid:ma tb </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
-          <c>c=IN IP4 98.248.92.77</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref> - Port for RTCP data</c>
           <c>a=rtpmap:99 H264/90000</c>
@@ -658,7 +656,7 @@ Alice->Bob: Two-way Opus Audio, H.264 Video
           <c><xref target="RFC3984"></xref></c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref> - Bob can send and recv video</c>
-  		  <c>a=setup:active</c>
+  		    <c>a=setup:active</c>
           <c><xref target="RFC4145"></xref> - Bob carries out DTLS Handshake in parallel</c>
           <c>a=rtcp-mux</c>
           <c><xref target="RFC5761"></xref> - Bob can perform RTP/RTCP Muxing on port 63130</c>
@@ -691,7 +689,7 @@ Alice->Bob: Two-way Opus Audio, H.264 Video
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>   
         </texttable>
       	</section>
-      	<section anchor="2way-dc"
+      	<section 
         	title="Two-Way Data Only Session">
         	<t>
         	This scenario illustrates SDP negotiated to setup a data-only session based
@@ -737,7 +735,7 @@ Alice->Bob: Two-way SCTP based Data-Channel
           <c><xref target="draft-ietf-mmusic-sctp-sdp"></xref> - One data stream of type chat</c>
           <c>a=webrtc-Datachannel:5000 stream=1;label="channel 1";subprotocol="chat";</c>
           <c><xref target="draft-ietf-mmusic-sctp-sdp"></xref></c>
-		  <c>a=setup:actpass</c>
+		      <c>a=setup:actpass</c>
           <c><xref target="RFC4145"></xref> - Alice can perform DTLS before Answer arrives</c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref> - Alice can send and recv non-media data</c>
@@ -824,12 +822,12 @@ Alice->Bob: One-way Opus Audio (preferred codec)]]></artwork>
           <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref></c>
           <c>m=audio 54609 UDP/TLS/RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>c=IN IP4 24.23.204.141</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=mid:audio</c>
           <c><xref target="RFC5888"></xref></c>
           <c>a=msid:ma ta </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
-          <c>c=IN IP4 24.23.204.141</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref> - Port for RTCP data</c>
           <c>a=rtpmap:109 opus/48000/2</c>
@@ -884,12 +882,12 @@ Alice->Bob: One-way Opus Audio (preferred codec)]]></artwork>
           <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref></c>
           <c>m=audio 49203 UDP/TLS/RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>c=IN IP4 98.248.92.77</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=mid:audio</c>
           <c><xref target="RFC5888"></xref></c>
           <c>a=msid:ma ta </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
-          <c>c=IN IP4 98.248.92.77</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref> - Port for RTCP data</c>
           <c>a=rtpmap:109 opus/48000/2</c>
@@ -963,12 +961,12 @@ Alice->Bob: Opus audio stream and telephone-event stream]]></artwork>
           <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref></c>
           <c>m=audio 54609 UDP/TLS/RTP/SAVPF 109 0 8</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>c=IN IP4 24.23.204.141</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=mid:audio</c>
           <c><xref target="RFC5888"></xref></c>
           <c>a=msid:ma ta </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
-          <c>c=IN IP4 24.23.204.141</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref> - Port for RTCP data</c>
           <c>a=rtpmap:109 opus/48000/2</c>
@@ -1011,12 +1009,12 @@ Alice->Bob: Opus audio stream and telephone-event stream]]></artwork>
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=audio 54609 UDP/TLS/RTP/SAVPF 126</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>c=IN IP4 24.23.204.141</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=mid:dtmf</c>
           <c><xref target="RFC5888"></xref></c>
           <c>a=msid:ma tb </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
-          <c>c=IN IP4 24.23.204.141</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref> - Port for RTCP data</c>
           <c>a=rtpmap:126 telephone-event/8000</c>
@@ -1041,7 +1039,7 @@ Alice->Bob: Opus audio stream and telephone-event stream]]></artwork>
           <c><xref target="RFC5245"></xref> </c>
           <c>a=candidate:1 2 UDP  1694302206 24.23.204.141 64678 typ srflx raddr 192.168.1.4 rport 64678</c>
           <c><xref target="RFC5245"></xref> </c>
-         <c>a=rtcp-fb:109 nack</c>
+          <c>a=rtcp-fb:109 nack</c>
           <c><xref target="RFC5104"></xref> - Indicates NACK RTCP feedback support</c>
           <c>a=ssrc:9032206345 cname:L/N9lk1ao1HmN4Xa5</c>
           <c><xref target="RFC5576"></xref></c>
@@ -1067,12 +1065,12 @@ Alice->Bob: Opus audio stream and telephone-event stream]]></artwork>
           <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref></c>
           <c>m=audio 49203 UDP/TLS/RTP/SAVPF 109 </c>
           <c><xref target="RFC4566"></xref></c>
+          <c>c=IN IP4 98.248.92.77</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=mid:audio</c>
           <c><xref target="RFC5888"></xref></c>
           <c>a=msid:ma ta </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
-          <c>c=IN IP4 98.248.92.77</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref> - Port for RTCP data</c>
           <c>a=rtpmap:109 opus/48000/2</c>
@@ -1110,12 +1108,12 @@ Alice->Bob: Opus audio stream and telephone-event stream]]></artwork>
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=audio 49203 UDP/TLS/RTP/SAVPF 126</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>c=IN IP4 98.248.92.77</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=mid:dtmf</c>
           <c><xref target="RFC5888"></xref></c>
           <c>a=msid:ma tb </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
-          <c>c=IN IP4 98.248.92.77</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref> - Port for RTCP data</c>
           <c>a=rtpmap:126 telephone-event/8000</c>
@@ -1194,12 +1192,12 @@ end note
           <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref></c>
           <c>m=audio 54609 UDP/TLS/RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>c=IN IP4 24.23.204.141</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=mid:audio</c>
           <c><xref target="RFC5888"></xref></c>
           <c>a=msid:ma ta </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
-          <c>c=IN IP4 24.23.204.141</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref> - Port for RTCP data</c>
           <c>a=rtpmap:109 opus/48000/2</c>
@@ -1234,12 +1232,12 @@ end note
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=video 54609 UDP/TLS/RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref> </c>
+          <c>c=IN IP4 24.23.204.141</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=mid:video</c>
           <c><xref target="RFC5888"></xref></c>
           <c>a=msid:ma tb </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
-          <c>c=IN IP4 24.23.204.141</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref> - Port for RTCP data</c>
           <c>a=rtpmap:120 VP8/90000</c>
@@ -1292,12 +1290,12 @@ end note
           <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref></c>
           <c>m=audio 49203 UDP/TLS/RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>c=IN IP4 98.248.92.77</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=mid:audio</c>
           <c><xref target="RFC5888"></xref></c>
           <c>a=msid:ma ta </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
-          <c>c=IN IP4 98.248.92.77</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref> - Port for RTCP data</c>
           <c>a=rtpmap:109 opus/48000/2</c>
@@ -1330,12 +1328,12 @@ end note
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=video 49203 UDP/TLS/RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref> </c>
-          <c>a=mid:video</c>
-          <c><xref target="RFC5888"></xref></c>
-           <c>a=msid:ma tb </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c=IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=mid:video</c>
+          <c><xref target="RFC5888"></xref></c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref> - Port for RTCP data</c>
           <c>a=rtpmap:120 VP8/90000</c>
@@ -1422,13 +1420,13 @@ Alice <-> Bob: 2Way Call with Audio and Video Multiplexed
               Alice supports grouping of m=lines under BUNDLE semantics</c>
           <c>m=audio 54609 UDP/TLS/RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>c=IN IP4 24.23.204.141</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=mid:audio</c>
           <c><xref target="RFC5888"></xref> Audio m=line part of BUNDLE group with a 
           unique port number</c>
           <c>a=msid:ma ta </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
-          <c>c=IN IP4 24.23.204.141</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=rtpmap:109 opus/48000/2</c>
@@ -1467,12 +1465,12 @@ Alice <-> Bob: 2Way Call with Audio and Video Multiplexed
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=video 62537 UDP/TLS/RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>c=IN IP4 24.23.204.141</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=mid:video</c>
           <c><xref target="RFC5888"></xref> Video m=line part of the Bundle group with a unique port number</c>
           <c>a=msid:ma tb </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
-          <c>c=IN IP4 24.23.204.141</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:54721 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref> - Port for RTCP data</c>
           <c>a=rtpmap:120 VP8/90000</c>
@@ -1528,12 +1526,12 @@ Alice <-> Bob: 2Way Call with Audio and Video Multiplexed
             Bob supports BUNDLE semantics.</c>
           <c>m=audio 49203 UDP/TLS/RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>c=IN IP4 98.248.92.77</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=msid:ma ta </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=mid:audio</c>
           <c><xref target="RFC5888"></xref> Audio m=line part of the BUNDLE group</c>
-          <c>c=IN IP4 98.248.92.77</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref> - Port for RTCP data</c>
           <c>a=rtpmap:109 opus/48000/2</c>
@@ -1572,13 +1570,13 @@ Alice <-> Bob: 2Way Call with Audio and Video Multiplexed
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=video 49203 UDP/TLS/RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref> </c>
+          <c>c=IN IP4 98.248.92.77</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=mid:video</c>
           <c><xref target="RFC5888"></xref> Video m=line part of the BUNDLE group with
           the port from audio line repeated </c>
           <c>a=msid:ma tb </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
-          <c>c=IN IP4 98.248.92.77</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref> - Port for RTCP data</c>
           <c>a=rtpmap:120 VP8/90000</c>
@@ -1633,12 +1631,12 @@ Alice <-> Bob: 2Way Call with Audio and Video Multiplexed
           <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref></c>
           <c>m=audio 54609 UDP/TLS/RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>c=IN IP4 24.23.204.141</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=msid:ma ta </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=mid:audio</c>
           <c><xref target="RFC5888"></xref>  - Port number finalized as Bundle Address.</c>
-          <c>c=IN IP4 24.23.204.141</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=rtpmap:109 opus/48000/2</c>
@@ -1677,12 +1675,12 @@ Alice <-> Bob: 2Way Call with Audio and Video Multiplexed
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=video 54609 UDP/TLS/RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>c=IN IP4 24.23.204.141</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=msid:ma tb </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>a=mid:video</c>
           <c><xref target="RFC5888"></xref > - Same Bundle address from the audio m=line </c>
-          <c>c=IN IP4 24.23.204.141</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=rtpmap:120 VP8/90000</c>
@@ -1982,10 +1980,10 @@ Alice<->Bob: Two way Audio, Video and Data multiplexed
           <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref> </c>
           <c>m=audio 54609 UDP/TLS/RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=msid:ma ta </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>c=IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:audio</c>
@@ -2026,10 +2024,10 @@ Alice<->Bob: Two way Audio, Video and Data multiplexed
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=video 54609 UDP/TLS/RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref> </c>
-          <c>a=msid:ma tb </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c=IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:video</c>
@@ -2115,10 +2113,10 @@ Alice<->Bob: Two way Audio, Video and Data multiplexed
           is indicated at the session level</c>
           <c>m=audio 49203 UDP/TLS/RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=msid:ma ta </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>c=IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:audio</c>
@@ -2157,10 +2155,10 @@ Alice<->Bob: Two way Audio, Video and Data multiplexed
           <c><xref target="RFC5506"></xref></c>
           <c>m=video  49203 UDP/TLS/RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref> </c>
-          <c>a=msid:ma tb </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c=IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:video</c>
@@ -2469,13 +2467,13 @@ Alice <-> Bob: 2Way Call with Audio and Video on different addresses.
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>    
           <c>m=audio 55232 UDP/TLS/RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>c=IN IP4 24.23.204.141</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=msid:ma ta </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=mid:audio</c>
           <c><xref target="RFC5888"></xref> Audio m=line part of BUNDLE group with a
           unique port number</c>
-          <c>c=IN IP4 24.23.204.141</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=rtpmap:109 opus/48000/2</c>
@@ -2512,13 +2510,13 @@ Alice <-> Bob: 2Way Call with Audio and Video on different addresses.
           <c><xref target="RFC5506"></xref></c>
           <c>m=video 54332 UDP/TLS/RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>c=IN IP4 24.23.204.141</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=msid:ma tb </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>a=mid:video</c>
           <c><xref target="RFC5888"></xref> Video m=line part of the BUNDLE group with a
           unique port number</c>
-          <c>c=IN IP4 24.23.204.141</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:54721 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=rtpmap:120 VP8/90000</c>
@@ -2571,10 +2569,10 @@ Alice <-> Bob: 2Way Call with Audio and Video on different addresses.
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=audio 53214 UDP/TLS/RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=msid:ma ta </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>c=IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=rtpmap:109 opus/48000/2</c>
@@ -2607,10 +2605,10 @@ Alice <-> Bob: 2Way Call with Audio and Video on different addresses.
           <c><xref target="RFC5506"></xref></c>
           <c>m=video 58679 UDP/TLS/RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=msid:ma tb </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c=IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref> </c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>a=rtcp:56507 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=rtpmap:120 VP8/90000</c>
@@ -2687,10 +2685,10 @@ Alice<->Bob: Two way Audio, Video multiplexed except Data
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>   
           <c>m=audio 54609 UDP/TLS/RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=msid:ma ta </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>c=IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:audio</c>
@@ -2729,10 +2727,10 @@ Alice<->Bob: Two way Audio, Video multiplexed except Data
           <c><xref target="RFC5506"></xref></c>
           <c>m=video 54609 UDP/TLS/RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref> </c>
-          <c>a=msid:ma tb </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c=IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:video</c>
@@ -2813,10 +2811,10 @@ Alice<->Bob: Two way Audio, Video multiplexed except Data
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=audio 49203 UDP/TLS/RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=msid:ma ta </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>c=IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:audio</c>
@@ -2855,10 +2853,10 @@ Alice<->Bob: Two way Audio, Video multiplexed except Data
           <c><xref target="RFC5506"></xref></c>
           <c>m=video 49203 UDP/TLS/RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref> </c>
-          <c>a=msid:ma tb </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c=IN IP4 98.248.92.771</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:video</c>
@@ -2978,10 +2976,10 @@ Alice<->Bob: Two way Opus Audio and VP8 Video session
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=audio 54609 UDP/TLS/RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=msid:ma ta </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>c=IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:audio</c>
@@ -3038,12 +3036,12 @@ Alice<->Bob: Two way Opus Audio and VP8 Video session
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=audio 49203 UDP/TLS/RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>c=IN IP4 98.248.92.77</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level</c>
           <c><xref target="RFC6464"></xref></c>
           <c>a=msid:ma ta </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
-          <c>c=IN IP4 98.248.92.77</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:audio</c>
@@ -3099,12 +3097,12 @@ Alice<->Bob: Two way Opus Audio and VP8 Video session
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=audio 54609 UDP/TLS/RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>c=IN IP4 24.23.204.141</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level</c>
           <c><xref target="RFC6464"></xref></c>
           <c>a=msid:ma ta </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
-          <c>c=IN IP4 24.23.204.141</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:audio</c>
@@ -3141,10 +3139,10 @@ Alice<->Bob: Two way Opus Audio and VP8 Video session
           <c><xref target="RFC5506"></xref></c>
           <c>m=video 54609 UDP/TLS/RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref> </c>
-          <c>a=msid:ma tb </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c=IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:video</c>
@@ -3201,10 +3199,10 @@ Alice<->Bob: Two way Opus Audio and VP8 Video session
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=audio 49203 UDP/TLS/RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=msid:ma ta </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>c=IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:audio</c>
@@ -3243,10 +3241,10 @@ Alice<->Bob: Two way Opus Audio and VP8 Video session
           <c><xref target="RFC5506"></xref></c>
           <c>m=video 49203 UDP/TLS/RTP/SAVPF 120</c>
           <c><xref target="RFC4566"></xref> </c>
-          <c>a=msid:ma tb </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c=IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:video</c>
@@ -3338,10 +3336,10 @@ Alice->Bob: One-Way 1 Opus, 2 H.264 and 2 VP8 video streams, all mulitplexed
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=audio 54609 UDP/TLS/RTP/SAVPF 109</c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=msid:ma ta </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>c=IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:m0</c>
@@ -3381,10 +3379,10 @@ Alice->Bob: One-Way 1 Opus, 2 H.264 and 2 VP8 video streams, all mulitplexed
           <c><xref target="RFC5506"></xref></c>
           <c>m=video 0 UDP/TLS/RTP/SAVPF 98 100</c>
           <c> bundle-only video line with port number set to zero</c>
-          <c>a=msid:ma tb </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c=IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:m1</c>
@@ -3431,10 +3429,10 @@ Alice->Bob: One-Way 1 Opus, 2 H.264 and 2 VP8 video streams, all mulitplexed
           <c><xref target="RFC5506"></xref></c>
           <c>m=video 0 UDP/TLS/RTP/SAVPF 101 102</c>
           <c> bundle-only video line with port number set to zero  </c>
-          <c>a=msid:ma tc </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tc) </c>
           <c>c=IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma tc </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tc) </c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:m2</c>
@@ -3539,10 +3537,10 @@ Alice->Bob: One-Way 1 Opus, 2 H.264 and 2 VP8 video streams, all mulitplexed
           <c><xref target="RFC5506"></xref></c>
           <c>m=video 49203 UDP/TLS/RTP/SAVPF 98 100</c>
           <c> BUNDLE accepted with port repeated from the audio port </c>
-          <c>a=msid:ma tb </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c=IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:m1</c>
@@ -3675,15 +3673,15 @@ Alice->Bob: One-Way H.264 Video with codec points as indicated by Bob.
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=audio 54609 UDP/TLS/RTP/SAVPF 109 </c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=msid:ma ta </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>c=IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:m0</c>
           <c><xref target="RFC5888"></xref> Audio m=line part of BUNDLE group
-          with a unique port number</c>
+            with a unique port number</c>
           <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level</c>
@@ -3718,10 +3716,10 @@ Alice->Bob: One-Way H.264 Video with codec points as indicated by Bob.
           <c><xref target="RFC5506"></xref></c>
           <c>m=video 0 UDP/TLS/RTP/SAVPF 96 97 100</c>
           <c>bundle-only video line with port number set to zero</c>
-          <c>a=msid:ma tb </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tc) </c>
           <c>c=IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tc) </c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:m1</c>
@@ -3778,20 +3776,20 @@ Alice->Bob: One-Way H.264 Video with codec points as indicated by Bob.
           <c><xref target="MSID"></xref></c>
           <c>a=group:BUNDLE m0 m1 </c>
           <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref>
-          Alice supports grouping of m=lines under BUNDLE semantics</c>
+            Alice supports grouping of m=lines under BUNDLE semantics</c>
           <c>a=ice-options:trickle</c>
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=audio 49203 UDP/TLS/RTP/SAVPF 109 </c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=msid:ma ta </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>c=IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:m0</c>
           <c><xref target="RFC5888"></xref> Audio m=line part of BUNDLE group
-          with a unique port number</c>
+            with a unique port number</c>
           <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level</c>
@@ -3824,10 +3822,10 @@ Alice->Bob: One-Way H.264 Video with codec points as indicated by Bob.
           <c><xref target="RFC5506"></xref></c>
           <c>m=video 54609 UDP/TLS/RTP/SAVPF 96 100</c>
           <c> BUNDLE accepted Bundle address same as audio m=line.</c>
-          <c>a=msid:ma tb </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c=IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>a=rtcp:56503 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:m1</c>
@@ -3915,15 +3913,15 @@ Alice<->Bob: 2 Way Audio and Simulcast Video with RTX Streams
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=audio 54609 UDP/TLS/RTP/SAVPF 109 </c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=msid:ma ta </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>c=IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:m0</c>
           <c><xref target="RFC5888"></xref> Audio m=line part of BUNDLE group
-          with a unique port number</c>
+            with a unique port number</c>
           <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level</c>
@@ -3958,10 +3956,10 @@ Alice<->Bob: 2 Way Audio and Simulcast Video with RTX Streams
           <c><xref target="RFC5506"></xref></c>
           <c>m=video 0 UDP/TLS/RTP/SAVPF 98 100 101 103</c>
           <c>bundle-only video line with port number set to zero</c>
-          <c>a=msid:ma tb </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c=IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:m1</c>
@@ -4031,10 +4029,10 @@ Alice<->Bob: 2 Way Audio and Simulcast Video with RTX Streams
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=audio 49203 UDP/TLS/RTP/SAVPF 109 </c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=msid:ma ta </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>c=IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:m0</c>
@@ -4074,10 +4072,10 @@ Alice<->Bob: 2 Way Audio and Simulcast Video with RTX Streams
           <c><xref target="RFC5506"></xref></c>
           <c>m=video 49203 UDP/TLS/RTP/SAVPF 98 100 101 103</c>
           <c>BUNDLE accepted with Bundle address identical to audio m-line</c>
-          <c>a=msid:ma tb </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c=IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:m1</c>
@@ -4198,10 +4196,10 @@ end note
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=audio 54609 UDP/TLS/RTP/SAVPF 109 </c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=msid:ma ta </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>c=IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:m0</c>
@@ -4241,10 +4239,10 @@ end note
           <c><xref target="RFC5506"></xref></c>
           <c>m=video 0 UDP/TLS/RTP/SAVPF 98 100 101 103</c>
           <c>bundle-only video line with port number set to zero</c>
-          <c>a=msid:ma tb </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c=IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:m1</c>
@@ -4314,10 +4312,10 @@ end note
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=audio 49203 UDP/TLS/RTP/SAVPF 109 </c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=msid:ma ta </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>c=IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=rtcp:49203 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:m0</c>
@@ -4353,10 +4351,10 @@ end note
           <c><xref target="RFC5506"></xref></c>
           <c>m=video 49203 UDP/TLS/RTP/SAVPF 98 101 </c>
           <c>BUNDLE accepted with Bundle address identical to audio m-line</c>
-          <c>a=msid:ma tb </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c=IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:m1</c>
@@ -4443,20 +4441,20 @@ Successful Session with 4 video streams (Simulcast + FEC) and 1 Audio Stream
           <c><xref target="MSID"></xref></c>
           <c>a=group:BUNDLE m0 m1 </c>
           <c><xref target="draft-ietf-mmusic-sdp-bundle-negotiation"></xref>
-          Alice supports grouping of m=lines under BUNDLE semantics</c>
+            Alice supports grouping of m=lines under BUNDLE semantics</c>
           <c>a=ice-options:trickle</c>
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=audio 54609 UDP/TLS/RTP/SAVPF 109 </c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=msid:ma ta </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>c=IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:m0</c>
           <c><xref target="RFC5888"></xref> Audio m=line part of BUNDLE group
-          with a unique port number</c>
+            with a unique port number</c>
           <c>a=rtpmap:109 opus/48000/2</c>
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level</c>
@@ -4491,10 +4489,10 @@ Successful Session with 4 video streams (Simulcast + FEC) and 1 Audio Stream
           <c><xref target="RFC5506"></xref></c>
           <c>m=video 0 UDP/TLS/RTP/SAVPF 98 100 101 103</c>
           <c>bundle-only video line with port number set to zero</c>
-          <c>a=msid:ma tb </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c=IN IP4 24.23.204.141</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:m1</c>
@@ -4564,10 +4562,10 @@ Successful Session with 4 video streams (Simulcast + FEC) and 1 Audio Stream
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=audio 49203 UDP/TLS/RTP/SAVPF 109 </c>
           <c><xref target="RFC4566"></xref></c>
-          <c>a=msid:ma ta </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>c=IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma ta </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:m0</c>
@@ -4607,10 +4605,10 @@ Successful Session with 4 video streams (Simulcast + FEC) and 1 Audio Stream
           <c><xref target="RFC5506"></xref></c>
           <c>m=video 49203 UDP/TLS/RTP/SAVPF 98 100 101 103</c>
           <c>BUNDLE accepted with Bundle Address identical to audio m=line.</c>
-          <c>a=msid:ma tb </c>
-          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>c=IN IP4 98.248.92.77</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>a=msid:ma tb </c>
+          <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (tb) </c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=mid:m1</c>
@@ -4653,7 +4651,7 @@ Successful Session with 4 video streams (Simulcast + FEC) and 1 Audio Stream
           <c><xref target="RFC5761"></xref></c>
           <c>a=bundle-only</c>
           <c><xref target="draft-roach-mmusic-unified-plan"/> </c>
-           <c>a=ice-ufrag:074c6550</c>
+          <c>a=ice-ufrag:074c6550</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=ice-pwd:a28a397a4c3f31747d1ee3474af08a068</c>
           <c><xref target="RFC5245"></xref></c>
@@ -4726,12 +4724,12 @@ end note]]></artwork>
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=audio 54609 UDP/TLS/RTP/SAVPF 109 0 8</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>c=IN IP4 24.23.204.141</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=mid:audio</c>
           <c><xref target="RFC5888"></xref></c>
           <c>a=msid:ma ta </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
-          <c>c=IN IP4 24.23.204.141</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level</c>
@@ -4790,12 +4788,12 @@ end note]]></artwork>
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=audio 49203 UDP/TLS/RTP/SAVPF 109 0 98</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>c=IN IP4 98.248.92.77</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=mid:audio</c>
           <c><xref target="RFC5888"></xref></c>
           <c>a=msid:ma ta </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
-          <c>c=IN IP4 98.248.92.77</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level</c>
@@ -4813,7 +4811,7 @@ end note]]></artwork>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref> - Bob can send and recv audio</c>
           <c>a=setup:active</c>
-		  <c><xref target="RFC4145"></xref> - Bob carries out DTLS Handshake in parallel</c>
+		      <c><xref target="RFC4145"></xref> - Bob carries out DTLS Handshake in parallel</c>
           <c>a=rtcp-mux</c>
           <c><xref target="RFC5761"></xref> - Bob can perform RTP/RTCP Muxing on port 49203</c>
           <c>a=ice-ufrag:c300d85b</c>
@@ -4880,12 +4878,12 @@ end note]]></artwork>
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=audio 54609 UDP/TLS/RTP/SAVPF 109 0 8</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>c=IN IP4 24.23.204.141</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=mid:audio</c>
           <c><xref target="RFC5888"></xref></c>
           <c>a=msid:ma ta </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
-          <c>c=IN IP4 24.23.204.141</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:64678 IN IP4 24.23.204.141</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=extmap:1/recvonly urn:ietf:params:rtp-hdrext:csrc-audio-level</c>
@@ -4946,12 +4944,12 @@ end note]]></artwork>
           <c><xref target="draft-ivov-mmusic-trickle-ice"></xref></c>
           <c>m=audio 49203 UDP/TLS/RTP/SAVPF 109 0 98</c>
           <c><xref target="RFC4566"></xref></c>
+          <c>c=IN IP4 98.248.92.77</c>
+          <c><xref target="RFC4566"></xref></c>
           <c>a=mid:audio</c>
           <c><xref target="RFC5888"></xref></c>
           <c>a=msid:ma ta </c>
           <c> Identifies RTCMediaStream ID (ma) and RTCMediaStreamTrack ID (ta) </c>
-          <c>c=IN IP4 98.248.92.77</c>
-          <c><xref target="RFC4566"></xref></c>
           <c>a=rtcp:60065 IN IP4 98.248.92.77</c>
           <c><xref target="RFC3605"></xref></c>
           <c>a=extmap:1/sendonly urn:ietf:params:rtp-hdrext:csrc-audio-level</c>
@@ -4969,7 +4967,7 @@ end note]]></artwork>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref> - Bob can send and recv audio</c>
           <c>a=setup:active</c>
-		  <c><xref target="RFC4145"></xref> - Bob carries out DTLS Handshake in parallel</c>
+		      <c><xref target="RFC4145"></xref> - Bob carries out DTLS Handshake in parallel</c>
           <c>a=rtcp-mux</c>
           <c><xref target="RFC5761"></xref> - Bob can perform RTP/RTCP Muxing on port 49203</c>
           <c>a=ice-ufrag:c300d85b</c>
@@ -5182,7 +5180,7 @@ Alice<->Bob: Two-way Opus Audio
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref></c>
           <c>a=setup:active</c>
-		  <c><xref target="RFC4145"></xref> - Bob carries out DTLS Handshake in parallel</c>
+		      <c><xref target="RFC4145"></xref> - Bob carries out DTLS Handshake in parallel</c>
           <c>a=ice-ufrag:ufrag:c300d85b</c>
           <c><xref target="RFC5245"></xref></c>
           <c>a=ice-pwd:de4e99bd291c325921d5d47efbabd9a2</c>
