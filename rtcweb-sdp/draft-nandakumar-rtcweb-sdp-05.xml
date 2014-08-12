@@ -57,7 +57,7 @@
       </address>
     </author>
 
-    <date day="15" month="August" year="2014" />
+    <date day="12" month="August" year="2014" />
 
     <area>RAI</area>
 
@@ -3433,7 +3433,7 @@ Alice->Bob: One-Way 1 Opus, 2 H.264 and 2 VP8 video streams, all mulitplexed
           <c><xref target="RFC3984"></xref>Camera-2,Encoding-1 Resolution</c>
           <c>a=fmtp:102 profile-level-id=4d0028;packetization-mode=1;max-fr=15</c>
           <c><xref target="RFC3984"></xref>Camera-1,Encoding-2 Resolution</c>
-          <c>a=simulcast: send 101; 102</c>
+          <c>a=simulcast: send 101;102</c>
           <c><xref target="draft-westerlund-avtcore-rtp-simulcast"></xref></c>
           <c>a=ssrc:67890 cname:axzo1278npDlAzM73</c>
           <c><xref target="RFC5576"></xref> <xref target="draft-rescorla-avtcore-6222bis"></xref>
@@ -3973,7 +3973,7 @@ Alice<->Bob: 2 Way Audio and Simulcast Video with RTX Streams
           <c>a=fmtp:103 apt=100;rtx-time=3000</c>
           <c><xref target="RFC4588"></xref></c>
           <c>a=simulast: send 98;100 </c>
-          <c> Simulcast group </c>
+          <c><xref target="draft-westerlund-avtcore-rtp-simulcast"></xref></c>
           <c>a=ssrc-group:FID 12345 34567 </c>
           <c><xref target="RFC5888"/> </c>
           <c>a=ssrc-group:FID 78990 90887 </c>
@@ -5450,11 +5450,19 @@ end note
     </section>
     <section title="Acknowledgments">
       <t>
-        We would like to thanks Justin Uberti for his detailed review and inputs.
+        We would like to thanks Justin Uberti, Chris Flo for his detailed review and inputs.
+        
       </t>
     </section>
     <section title="Change Log">
       <t>[RFC EDITOR NOTE: Please remove this section when publishing]</t>
+      <t>Changes from draft-nandakumar-rtcweb-sdp-04
+          <list style="symbols">
+              <t> Interim version of the draft to avert expiry </t>
+              <t> Corrected placement of c= line as per RFC4566 </t>
+              <t> Updated simulcast SDP to reflect draft-westerlund-avtcore-rtp-simulcast-04</t>
+          </list>
+      </t>
       <t>Changes from draft-nandakumar-rtcweb-sdp-03
         <list style="symbols">
           <t> Aligned more closely with JSEP version -05 </t>
