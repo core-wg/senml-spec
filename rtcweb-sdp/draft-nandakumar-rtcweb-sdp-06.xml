@@ -3445,16 +3445,31 @@ Alice                                                   Bob
         <figure>
           <artwork alt="Successful-Session Simulcast"
             src="1waysimulcast.svg"><![CDATA[
-title 1 Way Successful Simulcast w/BUNDLE
+       1 Way Successful Simulcast w/BUNDLE
 
-note right of Alice
-Alice offers 2 sendonly video streams with 2 simulcast encodings per stream
-end note
-Alice->Bob: Offer(Audio:Opus,Video1:VP8,Video2:H.264) with bundle-only for video
-note left of Bob
-Bob accepts Alice's offer and 2 encodings per stream
-end note
-Alice->Bob: One-Way 1 Opus, 2 H.264 and 2 VP8 video streams, all mulitplexed
+Alice                                            Bob
+|                                                 |
+|                                                 |
+|Alice offers 2 sendonly video streams            |
+|with 2 simulcast encodings per stream            |
+|and bundle-only for video                        |
+|                                                 |
+|                                                 |
+|Offer(Audio:Opus,Video1:VP8,Video2:H.264)        |
+|------------------------------------------------>|
+|                                                 |
+|                                                 |
+|                                                 |
+|Answer(Audio:Opus Video1:VP8,Video2:H.264)       |
+|<------------------------------------------------|
+|                                                 |
+|One-Way 1 Opus, 2 H.264 and 2 VP8 video streams, |
+| all multiplexed                                 |
+|.................................................|
+|                                                 |
+|                                                 |
+
+
 ]]></artwork>
         </figure>
         <texttable anchor="table_1waysimulcast_1" title="5.3.1 SDP Offer">
@@ -3785,16 +3800,32 @@ Alice->Bob: One-Way 1 Opus, 2 H.264 and 2 VP8 video streams, all mulitplexed
         <figure>
           <artwork alt="Successful-Session SVC"
             src="svc.svg"><![CDATA[
-title SVC Session - 3 Layers w/BUNDLE
-note right of Alice
-Alice offers 3 sendonly video stream with 3 layers of SVC
-end note
-Alice->Bob: Offer(Audio:Opus Video: H.264 SVC) bundle-only
-note left of Bob
-Bob accepts Alice's Offered Codec operation points
-end note
-Bob->Alice: Answer(Video: H.264) bundle-only
-Alice->Bob: One-Way H.264 Video with codec points as indicated by Bob.
+        SVC Session - 3 Layers w/BUNDLE
+
+Alice                                            Bob
+|                                                 |
+|                                                 |
+|                                                 |
+|Alice offers 3 sendonly video streams            |
+|with 3 layers of SVC                             |
+|and bundle-only for video                        |
+|                                                 |
+|Offer(Video:H.264 SVC)                           |
+|------------------------------------------------>|
+|                                                 |
+|                                                 |Bob accepts Alice's offered Codec
+|                                                 |operation points
+|                                                 |
+|                                                 |
+|Answer(Video:H.264)                              |
+|<------------------------------------------------|
+|                                                 |
+|One-Way  H.264 SVC video streams                 |
+|.................................................|
+|                                                 |
+|                                                 |
+|                                                 |
+
 
 ]]></artwork>
         </figure>
@@ -4023,19 +4054,28 @@ Alice->Bob: One-Way H.264 Video with codec points as indicated by Bob.
         <figure>
           <artwork alt="Successful-Session Simulcast RTX"
             src="simulcastrtx.svg"><![CDATA[
-title Simulcast Streams with Retransmission
+      Simulcast Streams with Retransmission
 
-note right of Alice
-Alice offers single audio and simulcasted video stream
-end note
-Alice->Bob: Offer(Audio:Opus Video:VP8 with 2 resolutions and RTX Stream) bundle-only
-note left of Bob
-Bob accepts all the streams offered by Alice
-end note
+Alice                                                    Bob
+|                                                         |
+|                                                         |
+|Alice offers single audio and simulcasted video streams  |
+|                                                         |
+|                                                         |
+|Offer(Audio:Opus Video:VP8 with 2 resolutions & RTX Stream)
+|-------------------------------------------------------->|
+|                                                         |
+|                                                         |
+|Answer (Bob accepts Alice's offer)                       |
+|<--------------------------------------------------------|
+|                                                         |
+|                                                         |
+|One-Way 1 Opus, 2 VP8 and RTX video streams,all muxed    |
+|.........................................................|
+|                                                         |
+|                                                         |
+|                                                         |
 
-Bob->Alice: Answer(Audio:Opus Video:VP8 with 2 resolutions and RTX Stream) bundle-only
-
-Alice<->Bob: 2 Way Audio and Simulcast Video with RTX Streams
 ]]></artwork>
         </figure>
         <texttable anchor="table_simulcastrtx_1" title="5.3.3 SDP Offer w/Simulcast, RTX">
@@ -4301,23 +4341,35 @@ Alice<->Bob: 2 Way Audio and Simulcast Video with RTX Streams
         <figure>
           <artwork alt="Successful-Session Simulcast RTX"
             src="simulcastrtxrej.svg"><![CDATA[
-title Simulcast Streams with Retransmission Rejected
+     Simulcast Streams with Retransmission Rejected
 
-note right of Alice
-Alice offers sendonly single audio and simulcasted video stream.
-end note
-Alice->Bob: Offer(Audio:Opus Video:VP8 with 2 resolutions and RTX Streams) bundle-only
+Alice                                                    Bob
+|                                                         |
+|                                                         |
+|                                                         |
+|Alice offers single audio and simulcasted video streams  |
+| with bundle-only for video                              |
+|                                                         |
+|                                                         |
+|Offer(Audio:Opus Video:VP8 with 2 resolutions & RTX Stream)
+|-------------------------------------------------------->|
+|                                                         |
+|                                                         |
+|                                                         |Bob accepts one simulcast,
+|                                                         |rtx and rejects the other
+|                                                         |
+|                                                         |
+|                                                         |
+|Answer(Audio:Opus Video:VP8 with 1 res & RTX Stream)     |
+|<--------------------------------------------------------|
+|                                                         |
+|                                                         |
+|1-way audio,video session and its associated RTX stream,
+| all multiplexed                                         |
+|.........................................................|
+|                                                         |
+|                                                         |
 
-note left of Bob
-Bob accepts one simulcast,rtx and rejects the other
-end note
-Bob->Alice: Answer(Audio:Opus Video:VP8 with 1 resolution and the RTX Stream) bundle-only
-
-Alice->Bob: 1 Way Audio, Video Session
-note right of Alice
-Only 1 Video stream and its associated RTX stream
-is sent to Bob
-end note
 
 ]]></artwork>
         </figure>
@@ -4556,21 +4608,32 @@ end note
         <figure>
           <artwork alt="Successful-Session Simulcast FEC"
             src="simulcastfec.svg"><![CDATA[
-title Simulcast Streams with Forward Error Correction
+      Simulcast Streams with Forward Error Correction
 
-note right of Alice
-Alice offers sendonly single audio and simulcasted video stream
-end note
-Alice->Bob: Offer(Audio:Opus Video:VP8 with 2 resolutions with FEC Streams) bundle-only
+Alice                                                            Bob
+|                                                               |
+|                                                               |
+|                                                               |
+|Alice offers single audio and simulcasted video streams        |
+|with bundle-only                                               |
+|                                                               |
+|                                                               |
+|Offer(Audio:Opus Video:VP8 with 2 resolutions with FEC Streams)|
+|-------------------------------------------------------------->|
+|                                                               |
+|                                                               |Bob accepts Alice's offer
+|                                                               |
+|                                                               |
+|Answer(Audio:Opus Video:VP8 with 2 resolutions with FEC Streams)
+|<--------------------------------------------------------------|
+|                                                               |
+|One-Way Audio,Video session with 4 video streams(Simulcast     |
+| and FEC) all multiplexed                                      |
+|...............................................................|
+|                                                               |
+|                                                               |
+|                                                               |
 
-note left of Bob
-Bob accepts simulcast stream as well as FEC streams
-end note
-Bob->Alice: Answer(Audio:Opus Video:VP8 with 2 resolutions with FEC Streams) bundle-only
-
-Alice->Bob: 1 Way Audio, Video Session
-note right of Alice
-Successful Session with 4 video streams (Simulcast + FEC) and 1 Audio Stream
 ]]></artwork>
         </figure>
         <texttable anchor="table_12_1" title="5.3.5 SDP Offer">
