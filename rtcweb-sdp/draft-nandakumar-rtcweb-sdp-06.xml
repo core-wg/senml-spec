@@ -302,7 +302,7 @@
             </t>
         	<figure>
           <artwork alt="Successful-Session 2 Way Audio SAVPF"
-              type="call-flow" src="2way-audio.svg"><![CDATA[
+              type="call-flow" align="left"><![CDATA[
         2-Way Audio Only Session
 
 Alice                                Bob
@@ -4900,20 +4900,34 @@ Alice                                                            Bob
         	<figure>
           <artwork alt="Session 2 Way Audio with VAD"
             src="2way-audio-vad.svg"><![CDATA[
-title 2-Way Audio with VAD
-
-Alice->Bob: Offer(Audio:Opus,PCMU,PCMA)
-note right of Alice
-Alice indicates support for including audio-level
-end note
-Bob->Alice: Answer(Audio:Opus,PCMU,PCMA)
-note left of Bob
-Bob accepts and indicates his support as well
-end note
-Alice<->Bob: Two-way Opus Audio
-note right of Alice
- Per packet audio-level is included in the RTP header.
-end note]]></artwork>
+           2-Way Audio with VAD
+ 
+ Alice                                    Bob
+ |                                         |
+ |                                         |
+ |Alice indicates support for including    |
+ |audio level in RTP header                |
+ |                                         |
+ |Offer(Audio:Opus,PCMU,PCMA)              |
+ |---------------------------------------->|
+ |                                         |
+ |                                         |
+ |Answer(Audio:Opus,PCMU,PCMA)             |
+ |<----------------------------------------|
+ |                                         |
+ |                                         |Bob accepts and indicates
+ |                                         |his support as well
+ |                                         |
+ |                                         |
+ |Two way Opus Audio                       |
+ |.........................................|
+ |                                         |
+ |Per packet audio-level is included in the|
+ |RTP header                               |
+ |                                         |
+ 
+ 
+]]></artwork>
         </figure>
         <texttable anchor="t_2way-audio-vad_1" title="5.4.1 SDP Offer">
           <ttcol align='left'>SDP Contents </ttcol>
@@ -5054,20 +5068,35 @@ end note]]></artwork>
         	<figure>
           <artwork alt="Session 2 Way Audio with VAD"
             src="2way-aconf-vad.svg"><![CDATA[
-title Audio Conference with VAD Support
 
-Alice->Mixer: Offer(Audio:Opus,PCMU,PCMA)
-note right of Alice
-Alice indicates its interest to audio levels for the contributing sources
-end note
-Mixer->Alice: Answer(Audio:Opus,PCMU,PCMA)
-note left of Bob
-Mixer indicates it can provide audio-levels per CSRC
-end note
-Alice<->Mixer: Two-way Opus Audio
-note right of Alice
- Audio levels per CSRC is included in the RTP Header
-end note]]></artwork>
+     Audio Conference with VAD Support
+
+Alice                                    Mixer
+|                                         |
+|                                         |
+|Alice indicates her interest to audio    |
+|levels for the contributing sources      |
+|                                         |
+|Offer(Audio:Opus,PCMU,PCMA)              |
+|---------------------------------------->|
+|                                         |
+|                                         |
+|Answer(Audio:Opus,PCMU,PCMA)             |
+|<----------------------------------------|
+|                                         |
+|                                         |Mixer indicates it can
+|                                         |provide audio-levels
+|                                         |
+|                                         |
+|Two way Opus Audio                       |
+|.........................................|
+|                                         |
+|Audio-levels per CSRRS is included in the|
+|RTP header                               |
+|                                         |
+
+
+]]></artwork>
         </figure>
         <texttable anchor="t_2way-aconf-vad_1" title="5.4.2 SDP Offer">
           <ttcol align='left'>SDP Contents </ttcol>
@@ -5221,21 +5250,33 @@ end note]]></artwork>
     <figure>
           <artwork alt="2-Way Legacy Interop"
             src="legacy_interop_1.svg"><![CDATA[
-title Successful 2-Way WebRTC <-> VOIP Interop
+         Successful 2-Way WebRTC <-> VOIP Interop
 
-note right of Alice
-Alice is a multistream capable WebRTC end-point & Bob is behind a legacy VOIP system
-end note
-Alice->Bob: Offer(Audio:Opus Video: 2 VP8, 2 H2.64 Streams) with bundle-only offer
-note right of Alice
-Alice marks both the video streams as bundle-only
-end note
-Bob->Alice: Answer(Audio:Opus)
-note left of Bob
- Bob accepts only Audio stream since he doesn't recognize
- bundle-only streams
-end note
-Alice<->Bob: Two-way Opus Audio
+Alice                                                          Bob
+|                                                             |
+|                                                             |
+|Alice is a multistream capable WebRTC end-point              |
+|& Bob is behind a legacy VOIP system                         |
+|                                                             |
+|Offer(Audio:Opus Video:2 VP8,2 H2.64 Streams) with bundle-only
+|------------------------------------------------------------>|
+|Alice marks both the video streams as bundle-only            |
+|                                                             |
+|                                                             |
+|Answer(Audio:Opus)                                           |
+|<------------------------------------------------------------|
+|                                                             |Bob accepts only Audio
+|                                                             |stream since he doesn't
+|                                                             |recogmize bundle-only
+|                                                             |streams
+|                                                             |
+|                                                             |
+|Two way Opus Audio                                           |
+|.............................................................|
+|                                                             |
+|                                                             |
+|                                                             |
+
 ]]></artwork>
         </figure>
        <texttable anchor="t_legacy_interop_1_1" title="5.4.3 SDP Simulcast bundle-only">
@@ -5471,25 +5512,39 @@ Alice<->Bob: Two-way Opus Audio
         <figure>
           <artwork alt="Successful-Session 2 Way SAVP VOIP"
             src="legacy_interop_2.svg"><![CDATA[
-title Successful 2-Way WebRTC <-> VOIP Interop
-note right of Alice
-Alice is on a WebRTC end-point & Bob is behind a legacy VOIP system
-end note
-Alice->Bob: Offer(Audio:Opus Video:VP8)
-note right of Alice
- Alice includes 2 copies of media descriptions
- 1. WebRTC compliant media description (UDP/TLS/RTP/SAVPF)
- 2. Legacy compliant media description (RTP/AVP)
-end note
-Bob->Alice: Answer(Audio:Opus Video:VP8)
-note right of Bob
- Bob recognizes"legacy compliant" media description from Alice.
- and accepts the same.
-end note
-Alice->Bob: Two-way Opus Audio, VP8 Video
-note right of Alice
-  Session also suports RTP/RTCP Mux, RTCP feedback (nack,pli)
-end note
+           Successful 2-Way WebRTC <-> VOIP Interop
+
+Alice                                                           Bob
+|                                                                |
+|                                                                |
+|Alice is a legacy VOIP End-point & Bob is a WebRTC End-Point    |
+|& Bob is WebRTC End-point                                       |
+|                                                                |
+|                                                                |
+|              Offer(Audio:Opus Video:H.264)                     |
+|--------------------------------------------------------------->|
+|                                                                |
+|                                                                |
+|Alice includes 2 copies of media descriptions                   |
+|1. WebRTC compliant media description (UDP/TLS/RTP/SAVPF)       |
+|2. Legacy compliant media description (RTP/AVP)                 |
+|                                                                |
+|                                                                |
+|             Answer(Audio:Opus, Video:H.264)                    |
+|<---------------------------------------------------------------|
+|                                                                |
+|                                                                |
+|                                                                |Bob recognizes
+|                                                                |"legacy compliant"
+|                                                                |media description
+|                                                                |from Alice.
+|                                                                |
+|                                                                |
+|             Two way Opus Audio, H.264 Video                    |
+|................................................................|
+|       Session also suports RTP/RTCP Mux, RTCP Feedback         |
+|                                                                |
+
 ]]></artwork>
         </figure>
         <texttable anchor="t_legacy2_1" title="5.4.5 SDP Offer">
