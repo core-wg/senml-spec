@@ -131,8 +131,6 @@
       </figure>
       <figure title="Semantic Components of SDP" anchor="fig.sdp.semantics">
           <artwork><![CDATA[
-              
-                                                
                                                         +---------------------+
                                                         |        v=           |
                                                         +---------------------+
@@ -142,7 +140,6 @@
         |                                               +---------------------+
         |                                               |        t=           |
         |                                               +---------------------+
-        |
         |
         |
         |                                               +---------------------+
@@ -169,11 +166,10 @@
         |                                               |      a=sendrecv..   |
         |                                               +---------------------+
 +---------------+
-|  Semantic     |
-| Components of |
+|    SEMANTIC   |
+| COMPONENTS OF |
 |     SDP       |
 +---------------+
-        |
         |                                               +---------------------+
         |                                               |      a=crypto       |
         |                                               +---------------------+
@@ -193,8 +189,8 @@
         |                                               |      a=rtcp-fb      |
         |                                               +---------------------+
         |           +---------------------+             +---------------------+
-        ====        | Qos,Grouping        |             |                     |
-                    | Descriptions        |  =====      |       a=group       |
+        ====        |   Qos,Grouping      |             |                     |
+                    |   Descriptions      |  =====      |       a=group       |
                     +---------------------+             +----------------------
                                                         +---------------------+
                                                         |       a=rtcpmux     |
@@ -279,7 +275,6 @@
       <t>
         The examples given in this document follow the conventions listed
         below:
-
       </t>
       <t>
       <list style="symbols">
@@ -351,8 +346,8 @@
          in most of the examples to maintain uniformity.
         </t>
         <t>
-          In the actual use that values that represent SSRCs, ICE candidate foundations,
-          WebRTC Mediastream and MediaStreamTrack Ids can be much larger and random than 
+          In the actual use thE values that represent SSRCs, ICE candidate foundations,
+          WebRTC Mediastream and MediaStreamTrack Ids cOULD be much larger and random than
           the ones shown in the examples.
         </t>
        </list>
@@ -384,12 +379,11 @@
 Alice                                Bob
 |                                     |
 |                                     |
-|                                     |
-|Offer(Audio:Opus,PCMU,PCMA)          |
+|    Offer(Audio:Opus,PCMU,PCMA)      |
 |------------------------------------>|
 |                                     |
 |                                     |
-|Answer(Audio:Opus,PCMU,PCMA)         |
+|   Answer(Audio:Opus,PCMU,PCMA)      |
 |<------------------------------------|
 |                                     |
 |                                     |
@@ -397,6 +391,7 @@ Alice                                Bob
 |.....................................|
 |                                     |
 |                                     |
+
 ]]></artwork>
         </figure>
         <texttable anchor="t_2way-audio_1" title="5.2.1 SDP Offer">
@@ -539,25 +534,23 @@ Alice                                Bob
         	  the video session <xref target="RFC5104"></xref>.
         	</t>
         	<figure>
-          <artwork alt="Successful-Session 2 Way SAVPF"
-            src="2way-av.svg"><![CDATA[
+           <artwork alt="Successful-Session 2 Way SAVPF">
+<![CDATA[
          2-Way Audio,Video Session
 
 Alice                                       Bob
-|                                            |
 |                                            |
 |                                            |
 |Offer(Audio:Opus,PCMU,PCMA Video:H.264,VP8) |
 |------------------------------------------->|
 |                                            |
 |                                            |
-|Answer(Audio:Opus,Video:H.264)              |
+|      Answer(Audio:Opus,Video:H.264)        |
 |<-------------------------------------------|
 |                                            |
 |                                            |
-|Two-way Opus Audio, H.264 Video             |
+|     Two-way Opus Audio, H.264 Video        |
 |............................................|
-|                                            |
 |                                            |
 
 ]]></artwork>
@@ -756,7 +749,7 @@ Alice                                       Bob
           <c><xref target="RFC3984"></xref></c>
           <c>a=sendrecv</c>
           <c><xref target="RFC3264"></xref> - Bob can send and recv video</c>
-  		    <c>a=setup:active</c>
+          <c>a=setup:active</c>
           <c><xref target="RFC4145"></xref> - Bob carries out DTLS Handshake in parallel</c>
           <c>a=rtcp-mux</c>
           <c><xref target="RFC5761"></xref> - Bob can perform RTP/RTCP Muxing on port 63130</c>
@@ -796,23 +789,23 @@ Alice                                       Bob
         	on SCTP Data Channel, thus enabling use-cases such as file-transfer for example.
         	</t>
         	<figure>
-          <artwork alt="Successful-Data Only Session"
-            src="2way-dc.svg"><![CDATA[
+          <artwork alt="Successful-Data Only Session">
+<![CDATA[
       2-Way DataChannel Session
       
 Alice                             Bob
 |                                 |
 |                                 |
 |                                 |
-|Offer(DataChannel)               |
+|      Offer(DataChannel)         |
 |-------------------------------->|
 |                                 |
 |                                 |
-|Answer(DataChannel)              |
+|      Answer(DataChannel)        |
 |<--------------------------------|
 |                                 |
 |                                 |
-|Two-way SCTP based DataChannel   |
+| Two-way SCTP based DataChannel  |
 |.................................|
 |                                 |
 |                                 |
@@ -907,26 +900,25 @@ Alice                             Bob
          	the SDP direction attribute to a=sendonly in the Answer.
             </t>
         	<figure>
-          <artwork alt="Audio On Hold"
-            src="audioonhold.svg"><![CDATA[
+          <artwork alt="Audio On Hold">
+<![CDATA[
            Audio On Hold
 
-Alice                              Bob
+Alice                             Bob
 |                                 |
 |                                 |
-|                                 |
-|Offer(Audio:Opus)                |
+|      Offer(Audio:Opus)          |
 |-------------------------------->|
 |                                 |
 |                                 |
-|Answer(Audio:Opus,a=sendonly)    |
+|  Answer(Audio:Opus,a=sendonly)  |
 |<--------------------------------|
 |                                 |
 |                                 |
-|One-way Opus Audio               |
+|      One-way Opus Audio         |
 |.................................|
 |                                 |
-|                                 |
+|
 ]]></artwork>
         </figure>
         <texttable anchor="t_audio_on_hold_1" title="5.2.4 SDP Offer">
@@ -1059,23 +1051,23 @@ Alice                              Bob
               for the other stream.
             </t>
         	<figure>
-          <artwork alt="Audio With DTMF"
-            src="audiodtmf.svg"><![CDATA[
+            <artwork alt="Audio With DTMF">
+<![CDATA[
             Audio Session with DTMF
 
 Alice                                               Bob
 |                                                   |
 |                                                   |
 |                                                   |
-|Offer(Audio:Opus,PCMU,PCMA Audio:telephone-event)  |
+|  Offer(Audio:Opus,PCMU,PCMA Audio:telephone-event)|
 |-------------------------------------------------->|
 |                                                   |
 |                                                   |
-|Answer(Audio:Opus, Audio:telephone-event)          |
+|    Answer(Audio:Opus, Audio:telephone-event)      |
 |<--------------------------------------------------|
 |                                                   |
 |                                                   |
-|Opus audio stream and telephone-event stream       |
+|   Opus audio stream and telephone-event stream    |
 |...................................................|
 |                                                   |
             ]]></artwork>
@@ -1291,8 +1283,8 @@ Alice                                               Bob
         	video stream.
         	</t>
         <figure>
-          <artwork alt="One Way Audio Video Session"
-            src="onewayav.svg"><![CDATA[
+          <artwork alt="One Way Audio Video Session">
+<![CDATA[
 
    1 Way Audio & Video Session - Document Camera
 
@@ -1304,17 +1296,17 @@ Alice                                                 Bob
 |Alice Offers sendonly audio and video streams.        |
 |The video stream corresponds to her presentation slides
 |                                                      |
-|Offer(Audio:Opus, Video: VP8)                         |
+|           Offer(Audio:Opus, Video: VP8)              |
 |----------------------------------------------------->|
 |                                                      |
 |                                                      |
-|(Audio:Opus, Video: VP8)                              |
+|            (Audio:Opus, Video: VP8)                  |
 |<-----------------------------------------------------|
 |                                                      |
 |                                                      |
-|One-way Opus Audio, VP8 Video                         |
+|          One-way Opus Audio, VP8 Video               |
 |......................................................|
-|Bob can hear Alice and see her presentation slides.   |
+|   Bob can hear Alice and see her presentation slides.|
 |                                                      |
 |                                                      |
 
@@ -1528,42 +1520,41 @@ Alice                                                 Bob
          single RTP Session for both the Media Streams.
         </t>
         <figure>
-          <artwork alt="Successful-Session 2 Way BUNDLE"
-            src="2waybundle.svg"><![CDATA[
+          <artwork alt="Successful-Session 2 Way BUNDLE">
+<![CDATA[
    
    2-Way Secure Audio,Video with BUNDLE support unknown
 
 Alice                                                   Bob
 |                                                      |
 |                                                      |
-|                                                      |
 |Alice offers BUNDLE support with unique address       |
 |for the audio and video m-line                        |
 |                                                      |
 |                                                      |
-|Offer(Audio:Opus Video:VP8)                           |
+|          Offer(Audio:Opus Video:VP8)                 |
 |----------------------------------------------------->|
 |                                                      |
 |                                                      |Bob supports BUNDLE
 |                                                      |
-|Answer(Audio:Opus Video:VP8)                          |
+|          Answer(Audio:Opus Video:VP8)                |
 |<-----------------------------------------------------|
 |                                                      |
-|                                                      |Bob uses identical addresses
-|                                                      |across the m=lines
+|                                                      |Bob uses identical
+|                                                      |addresses across
+|                                                      |the m=lines
 |                                                      |
 |                                                      |
-|Updated Offer for Bundle Address Synchronzation.      |
+|  Updated Offer for Bundle Address Synchronzation.    |
 |----------------------------------------------------->|
 |                                                      |
 |                                                      |
-|Answer (Bob accepts the updted offer)                 |
+|       Answer (Bob accepts the updted offer)          |
 |<-----------------------------------------------------|
 |                                                      |
 |                                                      |
-|2Way Call with Audio and Video Multiplexed            |
+|    2 Way Call with Audio and Video Multiplexed       |
 |......................................................|
-|                                                      |
 |                                                      |
 
 
@@ -2113,28 +2104,28 @@ Alice <-> Bob: 2Way Call with Audio and Video Multiplexed
          <xref target="draft-ietf-mmusic-sdp-bundle-negotiation"/> support known
         </t>
         <figure>
-          <artwork alt="Successful-Session 2 Way SAVPF"
-            src="avd-2way.svg"><![CDATA[
+          <artwork alt="Successful-Session 2 Way SAVPF">
+<![CDATA[
+    
     Audio, Video, Data with BUNDLE support known
 
 Alice                                       Bob
-|                                            |
 |                                            |
 |                                            |
 |Alice indicates BUNDLE support with identical
 |address across all the m=lines              |
 |                                            |
 |                                            |
-|Offer(Audio:Opus Video:VP8 Data)            |
+|     Offer(Audio:Opus Video:VP8 Data)       |
 |------------------------------------------->|
 |                                            |
 |                                            |
-|Answer(Audio:Opus,Video:VP8 Data)           |
+|    Answer(Audio:Opus,Video:VP8 Data)       |
 |<-------------------------------------------|
 |                                            |
 |                                            |Bob does the same
 |                                            |
-|Two-way Audio,Video, Data multiplexed       |
+|    Two-way Audio,Video, Data multiplexed   |
 |............................................|
 |                                            |
 |                                            |
@@ -2605,8 +2596,8 @@ Alice->Bob: Two-way Opus Audio and VP8 Video
         <t> On successful Offer/Answer exchange, Alice and Bob each end up using unique
         5-tuple for audio and video media streams respectively.</t>
         <figure>
-          <artwork alt="Successful-Session 2 Way BUNDLE Unsupported"
-            src="2waybundlerej.svg"><![CDATA[
+          <artwork alt="Successful-Session 2 Way BUNDLE Unsupported">
+<![CDATA[
 
    2-Way Secure Audio,Video with BUNDLE Unsupported
 
@@ -2618,24 +2609,24 @@ Alice                                                 Bob
 |for the audio and video m-line                        |
 |                                                      |
 |                                                      |
-|Offer(Audio:Opus Video:VP8)                           |
+|           Offer(Audio:Opus Video:VP8)                |
 |----------------------------------------------------->|
 |                                                      |
 |                                                      |Bob doesn't support
 |                                                      |BUNDLE
 |                                                      |
-|Answer(Audio:Opus Video:VP8)                          |
+|           Answer(Audio:Opus Video:VP8)               |
 |<-----------------------------------------------------|
 |                                                      |
-|                                                      |Bob uses unique addresses
-|                                                      |across the m=lines
+|                                                      |Bob uses unique
+|                                                      |addresses across
+|                                                      |the m=lines
 |                                                      |
-|                                                      |
-|Updated Offer for Bundle Address Synchronzation.      |
+|    Updated Offer for Bundle Address Synchronzation.  |
 |----------------------------------------------------->|
 |                                                      |
 |                                                      |
-|Answer (Bob accepts the updted offer)                 |
+|        Answer (Bob accepts the updted offer)         |
 |<-----------------------------------------------------|
 |                                                      |
 |                                                      |
@@ -2849,29 +2840,25 @@ Alice                                                 Bob
          sections.
         </t>
         <figure>
-          <artwork alt="Successful-Session 2 Way SAVPF"
-            src="av-d-nob-2way.svg"><![CDATA[
+          <artwork alt="Successful-Session 2 Way SAVPF">
+<![CDATA[
        Audio, Video, with Data out of BUNDLE
 
-Alice                                                   Bob
+Alice                                                 Bob
 |                                                      |
 |                                                      |
+|Alice wants to multiplex audio, video but not data    |
 |                                                      |
-|Alice wants to multiplex audio, video but not data   |
 |                                                      |
-|                                                      |
-|Offer(Audio:Opus Video:VP8, Data(not in BUNDLE))      |
+|  Offer(Audio:Opus Video:VP8, Data(not in BUNDLE))    |
 |----------------------------------------------------->|
 |                                                      |
 |                                                      |
-|Answer(Audio:Opus Video:VP8, Data)                    |
+|       Answer(Audio:Opus Video:VP8, Data)             |
 |<-----------------------------------------------------|
 |                                                      |
 |                                                      |
-|                                                      |Bob does the same
-|                                                      |
-|                                                      |
-|2Way Call with Audio, Video Multiplexed except data   |
+|2 Way Call with Audio, Video Multiplexed except data  |
 |......................................................|
 |                                                      |
 
@@ -3137,37 +3124,35 @@ Alice                                                   Bob
          is BUNDLED with the audio stream.
         </t>
         <figure>
-          <artwork alt="AudioOnly-AddVideo"
-            src="a-only-add-v.png"><![CDATA[
+          <artwork alt="AudioOnly-AddVideo">
+<![CDATA[
         Audio Only , Add Video and BUNDLE
 
-Alice                                                   Bob
+Alice                                                 Bob
 |                                                      |
 |                                                      |
+|        Alice indicates support for BUNDLE            |
 |                                                      |
-|Alice indicates support for BUNDLE                    |
-|                                                      |
-|Offer(Audio:Opus)                                     |
+|                Offer(Audio:Opus)                     |
 |----------------------------------------------------->|
 |                                                      |
 |                                                      |Bob supports BUNDLE
 |                                                      |
-|Answer(Audio:Opus)                                    |
+|                Answer(Audio:Opus)                    |
 |<-----------------------------------------------------|
 |                                                      |
 |                                                      |
-|Updated Offer(Audio:Opus, Video:VP8)                  |
+|        Updated Offer(Audio:Opus, Video:VP8)          |
 |----------------------------------------------------->|
 |                                                      |
-|Alice adds video stream to BUNDLE with Audio          |
+|     Alice adds video stream to BUNDLE with Audio     |
 |                                                      |
-|Updated Answer(Audio:Opus, Video:VP8)                 |
+|        Updated Answer(Audio:Opus, Video:VP8)         |
 |<-----------------------------------------------------|
 |                                                      |
-|Bob accepts the updated offer                         |
-|2Way Call with Audio and Video Multiplexed            |
+|       Bob accepts the updated offer                  |
+|   2Way Call with Audio and Video Multiplexed         |
 |......................................................|
-|                                                      |
 |                                                      |
 |                                                      |
 
@@ -3519,24 +3504,23 @@ Alice                                                   Bob
             over a single RTP Session.
         </t>
         <figure>
-          <artwork alt="Successful-Session Simulcast"
-            src="1waysimulcast.svg"><![CDATA[
+          <artwork alt="Successful-Session Simulcast">
+<![CDATA[
        1 Way Successful Simulcast w/BUNDLE
 
 Alice                                            Bob
 |                                                 |
 |                                                 |
-|Alice offers 2 sendonly video streams            |
-|with 2 simulcast encodings per stream            |
-|and bundle-only for video                        |
+|     Alice offers 2 sendonly video streams       |
+|     with 2 simulcast encodings per stream       |
+|           and bundle-only for video             |
 |                                                 |
 |                                                 |
-|Offer(Audio:Opus,Video1:VP8,Video2:H.264)        |
+|   Offer(Audio:Opus,Video1:VP8,Video2:H.264)     |
 |------------------------------------------------>|
 |                                                 |
 |                                                 |
-|                                                 |
-|Answer(Audio:Opus Video1:VP8,Video2:H.264)       |
+|    Answer(Audio:Opus Video1:VP8,Video2:H.264)   |
 |<------------------------------------------------|
 |                                                 |
 |One-Way 1 Opus, 2 H.264 and 2 VP8 video streams, |
@@ -3874,31 +3858,29 @@ Alice                                            Bob
             and 97 for decoding.
         </t>
         <figure>
-          <artwork alt="Successful-Session SVC"
-            src="svc.svg"><![CDATA[
+          <artwork alt="Successful-Session SVC">
+<![CDATA[
         SVC Session - 3 Layers w/BUNDLE
 
 Alice                                            Bob
 |                                                 |
 |                                                 |
+|      Alice offers 3 sendonly video streams      |
+|      with 3 layers of SVC and bundle-only       |
+|               for video streams.                |
 |                                                 |
-|Alice offers 3 sendonly video streams            |
-|with 3 layers of SVC                             |
-|and bundle-only for video                        |
-|                                                 |
-|Offer(Video:H.264 SVC)                           |
+|            Offer(Video:H.264 SVC)               |
 |------------------------------------------------>|
 |                                                 |
-|                                                 |Bob accepts Alice's offered Codec
+|                                                 |Bob accepts Alice's
+|                                                 |offered Codec
 |                                                 |operation points
 |                                                 |
-|                                                 |
-|Answer(Video:H.264)                              |
+|             Answer(Video:H.264)                 |
 |<------------------------------------------------|
 |                                                 |
 |One-Way  H.264 SVC video streams                 |
 |.................................................|
-|                                                 |
 |                                                 |
 |                                                 |
 
@@ -4128,8 +4110,8 @@ Alice                                            Bob
          style re-transmission flows.
         </t>
         <figure>
-          <artwork alt="Successful-Session Simulcast RTX"
-            src="simulcastrtx.svg"><![CDATA[
+          <artwork alt="Successful-Session Simulcast RTX">
+<![CDATA[
       Simulcast Streams with Retransmission
 
 Alice                                                    Bob
@@ -4142,13 +4124,12 @@ Alice                                                    Bob
 |-------------------------------------------------------->|
 |                                                         |
 |                                                         |
-|Answer (Bob accepts Alice's offer)                       |
+|          Answer (Bob accepts Alice's offer)             |
 |<--------------------------------------------------------|
 |                                                         |
 |                                                         |
 |One-Way 1 Opus, 2 VP8 and RTX video streams,all muxed    |
 |.........................................................|
-|                                                         |
 |                                                         |
 |                                                         |
 
@@ -4415,12 +4396,11 @@ Alice                                                    Bob
           results in the rejection of the associated repair stream implicitly
         </t>
         <figure>
-          <artwork alt="Successful-Session Simulcast RTX"
-            src="simulcastrtxrej.svg"><![CDATA[
+          <artwork alt="Successful-Session Simulcast RTX">
+<![CDATA[
      Simulcast Streams with Retransmission Rejected
 
 Alice                                                    Bob
-|                                                         |
 |                                                         |
 |                                                         |
 |Alice offers single audio and simulcasted video streams  |
@@ -4430,13 +4410,11 @@ Alice                                                    Bob
 |Offer(Audio:Opus Video:VP8 with 2 resolutions & RTX Stream)
 |-------------------------------------------------------->|
 |                                                         |
-|                                                         |
 |                                                         |Bob accepts one simulcast,
 |                                                         |rtx and rejects the other
 |                                                         |
 |                                                         |
-|                                                         |
-|Answer(Audio:Opus Video:VP8 with 1 res & RTX Stream)     |
+|   Answer(Audio:Opus Video:VP8 with 1 res & RTX Stream)  |
 |<--------------------------------------------------------|
 |                                                         |
 |                                                         |
@@ -4682,8 +4660,8 @@ Alice                                                    Bob
            streams and 2 associated FEC streams are sent over a single 5-tuple.
          </t>
         <figure>
-          <artwork alt="Successful-Session Simulcast FEC"
-            src="simulcastfec.svg"><![CDATA[
+          <artwork alt="Successful-Session Simulcast FEC">
+<![CDATA[
       Simulcast Streams with Forward Error Correction
 
 Alice                                                            Bob
@@ -4697,8 +4675,8 @@ Alice                                                            Bob
 |Offer(Audio:Opus Video:VP8 with 2 resolutions with FEC Streams)|
 |-------------------------------------------------------------->|
 |                                                               |
-|                                                               |Bob accepts Alice's offer
-|                                                               |
+|                                                               |Bob accepts
+|                                                               |Alice's offer
 |                                                               |
 |Answer(Audio:Opus Video:VP8 with 2 resolutions with FEC Streams)
 |<--------------------------------------------------------------|
@@ -4974,8 +4952,7 @@ Alice                                                            Bob
         	  to include the audio-level of the audio sample carried in the RTP packet.
         	</t>
         	<figure>
-          <artwork alt="Session 2 Way Audio with VAD"
-            src="2way-audio-vad.svg"><![CDATA[
+          <artwork alt="Session 2 Way Audio with VAD"><![CDATA[
            2-Way Audio with VAD
  
  Alice                                    Bob
@@ -4984,18 +4961,18 @@ Alice                                                            Bob
  |Alice indicates support for including    |
  |audio level in RTP header                |
  |                                         |
- |Offer(Audio:Opus,PCMU,PCMA)              |
+ |     Offer(Audio:Opus,PCMU,PCMA)         |
  |---------------------------------------->|
  |                                         |
  |                                         |
- |Answer(Audio:Opus,PCMU,PCMA)             |
+ |     Answer(Audio:Opus,PCMU,PCMA)        |
  |<----------------------------------------|
  |                                         |
- |                                         |Bob accepts and indicates
- |                                         |his support as well
+ |                                         |Bob accepts and
+ |                                         |indicates his
+ |                                         |support as well
  |                                         |
- |                                         |
- |Two way Opus Audio                       |
+ |     Two way Opus Audio                  |
  |.........................................|
  |                                         |
  |Per packet audio-level is included in the|
@@ -5142,13 +5119,12 @@ Alice                                                            Bob
         	  of individual participants.
         	</t>
         	<figure>
-          <artwork alt="Session 2 Way Audio with VAD"
-            src="2way-aconf-vad.svg"><![CDATA[
+          <artwork alt="Session 2 Way Audio with VAD">
+<![CDATA[
 
      Audio Conference with VAD Support
 
 Alice                                    Mixer
-|                                         |
 |                                         |
 |Alice indicates her interest to audio    |
 |levels for the contributing sources      |
@@ -5160,14 +5136,13 @@ Alice                                    Mixer
 |Answer(Audio:Opus,PCMU,PCMA)             |
 |<----------------------------------------|
 |                                         |
-|                                         |Mixer indicates it can
-|                                         |provide audio-levels
-|                                         |
-|                                         |
+|                                         |Mixer indicates
+|                                         |it can provide
+|                                         |audio-levels
 |Two way Opus Audio                       |
 |.........................................|
 |                                         |
-|Audio-levels per CSRRS is included in the|
+|Audio-levels per CSRCS is included in the|
 |RTP header                               |
 |                                         |
 
@@ -5324,32 +5299,30 @@ Alice                                    Mixer
           </list>
         </t>
     <figure>
-          <artwork alt="2-Way Legacy Interop"
-            src="legacy_interop_1.svg"><![CDATA[
+          <artwork alt="2-Way Legacy Interop">
+<![CDATA[
          Successful 2-Way WebRTC <-> VOIP Interop
 
-Alice                                                          Bob
+Alice                                                        Bob
 |                                                             |
 |                                                             |
-|Alice is a multistream capable WebRTC end-point              |
-|& Bob is behind a legacy VOIP system                         |
+|       Alice is a multistream capable WebRTC end-point       |
+|          & Bob is behind a legacy VOIP system               |
 |                                                             |
 |Offer(Audio:Opus Video:2 VP8,2 H2.64 Streams) with bundle-only
 |------------------------------------------------------------>|
-|Alice marks both the video streams as bundle-only            |
+|     Alice marks both the video streams as bundle-only       |
 |                                                             |
 |                                                             |
-|Answer(Audio:Opus)                                           |
+|                  Answer(Audio:Opus)                         |
 |<------------------------------------------------------------|
-|                                                             |Bob accepts only Audio
-|                                                             |stream since he doesn't
-|                                                             |recogmize bundle-only
-|                                                             |streams
+|                                                             |Bob accepts Audio
+|                                                             |stream alone since
+|                                                             |he doesn't recognize
+|                                                             |bundle-only streams
 |                                                             |
-|                                                             |
-|Two way Opus Audio                                           |
+|                   Two way Opus Audio                        |
 |.............................................................|
-|                                                             |
 |                                                             |
 |                                                             |
 
@@ -5564,8 +5537,9 @@ Alice                                                          Bob
      	aforementioned communication systems.
         </t>
         <t>
-          In the scenario desribed below, Alice sends <xref target="RFC3264"></xref> Offer with two
-          sets of media descriptions per media type.
+          In the scenario desribed below, Alice is a legacy end-point which sends
+          <xref target="RFC3264"></xref> Offer with two sets of media descriptions
+          per media type.
           <list>
             <t> One set that correponds to <xref target="WebRTC"></xref> compliant 
             UDP/TLS/RTP/SAVPF based audio and video descriptions.
@@ -5579,22 +5553,22 @@ Alice                                                          Bob
           </list>
         </t>
         <t>
-          On the other hand, Bob being a Legacy VOIP end-point, recognizes only the 
-          media descriptions with RTP/AVP as the application protocol.
-          The security and fedback requirements for the session are either handled by a 
-          intermediate gateway or with some
-          combination of Bob's capabilities and the intermediate gateway.
+          On the other hand, Bob being a WebRTC end-point, recognizes accepts
+          the media descriptions with RTP/AVP profile.
+          The security and feedback requirements for the session are either handled by a
+          intermediate gateway or with some combination of Alice's capabilities and
+          the intermediate gateway.
         </t>
         <figure>
-          <artwork alt="Successful-Session 2 Way SAVP VOIP"
-            src="legacy_interop_2.svg"><![CDATA[
+          <artwork alt="Successful-Session 2 Way SAVP VOIP">
+<![CDATA[
            Successful 2-Way WebRTC <-> VOIP Interop
 
 Alice                                                           Bob
 |                                                                |
 |                                                                |
-|Alice is a legacy VOIP End-point & Bob is a WebRTC End-Point    |
-|& Bob is WebRTC End-point                                       |
+|  Alice is a legacy VOIP End-point & Bob is a WebRTC End-Point  |
+|                                                                |
 |                                                                |
 |                                                                |
 |              Offer(Audio:Opus Video:H.264)                     |
@@ -5609,8 +5583,7 @@ Alice                                                           Bob
 |             Answer(Audio:Opus, Video:H.264)                    |
 |<---------------------------------------------------------------|
 |                                                                |
-|                                                                |
-|                                                                |Bob recognizes
+|                                                                |Bob accepts
 |                                                                |"legacy compliant"
 |                                                                |media description
 |                                                                |from Alice.
@@ -5803,6 +5776,12 @@ Alice                                                           Bob
     </section>
     <section title="Change Log">
       <t>[RFC EDITOR NOTE: Please remove this section when publishing]</t>
+      <t>Changes from draft-nandakumar-rtcweb-sdp-05
+          <list style="symbols">
+              <t> Added Ascii chart for all the SDP Eaxamples </t>
+              <t> Improved text and updated SDP Examples for Simulcast and FEC</t>
+         </list>
+      </t>
       <t>Changes from draft-nandakumar-rtcweb-sdp-04
           <list style="symbols">
               <t> Interim version of the draft to avert expiry </t>
