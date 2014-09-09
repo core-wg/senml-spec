@@ -156,7 +156,7 @@
    
    <section title="Security Considerations" anchor="sec.security">
      	<t>
-     		The new proto identifiers media registered by this document in the SDP
+     		The new proto identifiers registered by this document in the SDP
    			parameters registry maintained by IANA is primarily for use by the
    			offer/answer model of the Session Description Protocol <xref target="RFC3264"/>
    			for the negotiation and establishment of RTP based Media over the TCP 
