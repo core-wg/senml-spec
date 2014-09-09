@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+<!ENTITY RFC2119 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY RFC4571 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4571.xml">
+<!ENTITY RFC3711 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3711.xml">
+<!ENTITY RFC5124 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5124.xml">
+<!ENTITY RFC4566 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4566.xml">
+<!ENTITY RFC3550 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3550.xml">
+<!ENTITY RFC3264 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3264.xml">
+<!ENTITY RFC4585 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4585.xml">
+<!ENTITY RFC4347 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4347.xml">
+]>
+
+<?xml-stylesheet type="text/xsl" href="rfc2629.xslt" ?>
+<?rfc toc="yes" ?>
+<?rfc symrefs="yes" ?>
+<?rfc strict="yes" ?>
+<?rfc compact="yes" ?>
+<?rfc sortrefs="yes" ?>
+<?rfc colonspace="yes" ?>
+<?rfc rfcedstyle="no" ?>
+<!-- Don't change this. It breaks stuff -->
+<?rfc tocdepth="4"?>
+<rfc category="std" docName="draft-nandakumar-mmusic-proto-iana-registration-00"
+     ipr="pre5378Trust200902">
+  <front>
+    <title abbrev="SDP Proto Registrations">IANA registration of SDP 'proto' attribute 
+    for transporting RTP Media over TCP under various RTP profiles.</title>
+
+    <author fullname="Suhas Nandakumar" initials="S." surname="Nandakumar">
+      <organization>Cisco Systems Inc</organization>
+
+      <address>
+        <postal>
+          <street>707 Tasman Drive</street>
+
+          <city>San Jose</city>
+
+          <region>CA</region>
+
+          <code>95134</code>
+
+          <country>USA</country>
+        </postal>
+        
+        <email>snandaku@cisco.com</email>
+      </address>
+    </author>
+
+    <date day="8" month="September" year="2014" />
+
+    <area>RAI</area>
+
+    <workgroup>MMUSIC</workgroup>
+
+    <abstract>
+      <t>
+        RTP provides end-to-end network transport functions suitable for
+   		applications transmitting real-time data, such as audio, video or
+   		simulation data, over multicast or unicast network services. The data
+   		transport is augmented by a control protocol (RTCP) to allow monitoring 
+   		of the data delivery in a manner scalable to large multicast networks,
+   		and to provide minimal control and identification functionality.
+   	  </t> 
+   	   <t>
+   	   	This  document describes how to express RTP media transport over TCP 
+   	   	in SDP (Session Description Protocol) under various configurations. 
+   	   	This document defines 'TCP/RTP/AVPF', 'TCP/RTP/SAVP', 'TCP/RTP/SAVPF', 
+   	   	'TCP/TLS/RTP/SAVP', 'TCP/TLS/RTP/SAVPF' protocol identifiers for SDP.
+      </t>
+    </abstract>
+  </front>
+
+  <middle>
+
+    <section title="Overview" anchor="sec.overview">
+      <t>
+         [RFC4571] defines a method for framing Real-time Transport Protocol
+         (RTP) and RTP Control Protocol (RTCP) packets onto connection-
+         oriented transport (such as TCP).  The RTP specification [RFC3550] establishes a 
+         registry of profile names for use by higher-level control protocols, 
+         such as the Session Description Protocol (SDP), to refer to transport methods.
+         This document describes the following new SDP transport protocol identifiers for
+         transporting RTP Media over TCP.
+      </t>
+      <t>
+          TCP/RTP/AVPF: to describe RTP Media with RTCP-based Feedback 
+          <xref target="RFC4585"/> over TCP.
+      </t>
+      <t>
+          TCP/RTP/SAVP: to describe Secure RTP Media <xref target="RFC3711"/> 
+          over TCP.
+      </t>
+      <t>
+          TCP/RTP/SAVPF: to describe Secure RTP Media with RTCP-based Feedback 
+          <xref target="RFC5124"/> over TCP.
+      </t>
+      <t>
+          TCP/TLS/RTP/SAVP: to describe Secure RTP Media <xref target="RFC3711"/> 
+          on top of DTLS <xref target="RFC4347"/> over TCP.
+      </t>
+      <t>
+          TCP/TLS/RTP/SAVPF: to describe Secure RTP Media with RTCP-based
+          Feedback <xref target="RFC5124"/> on top of DTLS over TCP.
+      </t>
+    </section>
+
+    <section anchor="sec-term" title="Terminology">
+      <t>
+        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+        "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+        document are to be interpreted as described in <xref
+        target="RFC2119">RFC 2119</xref>.
+      </t>
+    </section>
+
+    <section title="Protocol Identifier" anchor="sec.proto-identifiers">
+        <t>
+            The 'm' line in SDP specifies, among other items, the transport
+            protocol to be used for the media in the session.  See the "Media
+            Descriptions" section of SDP <xref target="RFC4566"/> for a discussion
+            on transport protocol identifiers.
+        </t>
+        <t>
+            This specification defines new protocol identifiers 'TCP/RTP/AVPF', 
+            'TCP/RTP/SAVP', 'TCP/RTP/SAVPF', 'TCP/TLS/RTP/SAVP',
+            'TCP/TLS/RTP/SAVPF' which indicates that the media described will
+            use TCP as the transport protocol.
+            <list style="symbols">
+                <t>
+                    When a RTP/AVPF or RTP/SAVP or RTP/SAVPF stream is transported over the
+                    TCP transport, the proto identifier SHALL be 'TCP/RTP/AVPF',
+                    'TCP/RTP/SAVP' or 'TCP/RTP/SAVPF' respectively.
+                </t>
+                <t>
+                    When RTP/SAVP or RTP/SAVPF stream is transport over DTLS with
+                    TCP transport, the proto identifier SHALL be 'TCP/TLS/RTP/SAVP'
+                    or 'TCP/TLS/RTP/SAVPF' respectively.
+                </t>
+            </list>
+        </t>
+        <t>
+            An 'm' line that specifies these new proto identifiers MUST further qualify
+            the application-layer protocol using an fmt identifier.
+        </t>
+      </section>
+      <section title="IANA Considerations">
+        <t>
+            This document describes five new proto values: 'TCP/RTP/AVPF', 'TCP/RTP/SAVP',
+            'TCP/RTP/SAVPF', 'TCP/TLS/RTP/SAVP', 'TCP/TLS/RTP/SAVPF' as defined in the
+            section <xref target="sec.proto-identifiers"/>. These proto
+            values should be registered by the IANA under "Session Description
+            Protocol (SDP) Parameters" under "proto".
+        </t>
+       </section>
+   
+   <section title="Security Considerations" anchor="sec.security">
+     	<t>
+     		The new proto identifiers media registered by this document in the SDP
+   			parameters registry maintained by IANA is primarily for use by the
+   			offer/answer model of the Session Description Protocol <xref target="RFC3264"/>
+   			for the negotiation and establishment of RTP based Media over the TCP 
+   			transport. These additional SDP proto identifiers does not introduce
+   			any security considerations beyond those detailed in Section 7 of 
+   			RFC 4566 [RFC4566].	
+     	</t>  
+   </section>
+   
+    <section title="Acknowledgements">
+      <t>
+        Cullen Jennings.
+      </t>
+    </section>
+  </middle>
+
+  <back>
+
+    <references title="Normative References">
+      &RFC2119;
+    </references>  
+   <references title="Informative References">
+   	  &RFC4571;
+   	  &RFC4566;
+   	  &RFC3550;
+   	  &RFC3711;
+   	  &RFC5124;
+   	  &RFC3264;
+   	  &RFC4585;
+   	  &RFC4347;
+    </references>
+  </back>
+</rfc>
