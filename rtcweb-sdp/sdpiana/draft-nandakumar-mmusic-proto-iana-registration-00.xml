@@ -2,6 +2,7 @@
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
 <!ENTITY RFC2119 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
 <!ENTITY RFC4571 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4571.xml">
+<!ENTITY RFC4572 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4572.xml">
 <!ENTITY RFC3711 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3711.xml">
 <!ENTITY RFC5124 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5124.xml">
 <!ENTITY RFC4566 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4566.xml">
@@ -9,6 +10,8 @@
 <!ENTITY RFC3264 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3264.xml">
 <!ENTITY RFC4585 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4585.xml">
 <!ENTITY RFC4347 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4347.xml">
+<!ENTITY RFC5246 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5246.xml">
+
 ]>
 
 <?xml-stylesheet type="text/xsl" href="rfc2629.xslt" ?>
@@ -75,13 +78,21 @@
 
     <section title="Overview" anchor="sec.overview">
       <t>
-         [RFC4571] defines a method for framing Real-time Transport Protocol
-         (RTP) and RTP Control Protocol (RTCP) packets onto connection-
-         oriented transport (such as TCP).  The RTP specification [RFC3550] establishes a 
-         registry of profile names for use by higher-level control protocols, 
-         such as the Session Description Protocol (SDP), to refer to transport methods.
-         This document describes the following new SDP transport protocol identifiers for
-         transporting RTP Media over TCP.
+          SDP (Session Description Protocol) <xref target="RFC4566"> provides a
+          general-purpose format for describing multimedia sessions in announcements
+          or invitations.  RFC4145 [RFC4145] specifies a general mechanism for
+          describing and establishing TCP (Transmission Control Protocol)
+          streams with <xref arget="RFC4571"> defining a method for framing
+          Real-time Transport Protocol (RTP) and RTP Control Protocol (RTCP)
+          packets onto connection- oriented transport (such as TCP) .
+          <xref target="RFC4572"/> extends <xref target="RFC4145"/> for describing
+          TCP-based media streams that are protected using TLS (Transport Layer Security).
+       </t>
+       <t>
+         The RTP specification [RFC3550] establishes a registry of profile names for use
+         by higher-level control protocols, such as the Session Description Protocol (SDP),
+         to refer to transport methods.This document describes the following new SDP transport
+         protocol identifiers for transporting RTP Media over TCP.
       </t>
       <t>
           TCP/RTP/AVPF: to describe RTP Media with RTCP-based Feedback 
@@ -97,11 +108,11 @@
       </t>
       <t>
           TCP/TLS/RTP/SAVP: to describe Secure RTP Media <xref target="RFC3711"/> 
-          on top of DTLS <xref target="RFC4347"/> over TCP.
+          on top of TLS <xref target="RFC5246"/> over TCP.
       </t>
       <t>
           TCP/TLS/RTP/SAVPF: to describe Secure RTP Media with RTCP-based
-          Feedback <xref target="RFC5124"/> on top of DTLS over TCP.
+          Feedback <xref target="RFC5124"/> on top of TLS over TCP.
       </t>
     </section>
 
@@ -133,7 +144,7 @@
                     'TCP/RTP/SAVP' or 'TCP/RTP/SAVPF' respectively.
                 </t>
                 <t>
-                    When RTP/SAVP or RTP/SAVPF stream is transport over DTLS with
+                    When RTP/SAVP or RTP/SAVPF stream is transport over tTLS with
                     TCP transport, the proto identifier SHALL be 'TCP/TLS/RTP/SAVP'
                     or 'TCP/TLS/RTP/SAVPF' respectively.
                 </t>
