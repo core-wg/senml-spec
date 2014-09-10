@@ -11,6 +11,7 @@
 <!ENTITY RFC4585 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4585.xml">
 <!ENTITY RFC4347 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4347.xml">
 <!ENTITY RFC5246 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5246.xml">
+<!ENTITY RFC4145 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4145.xml">
 
 ]>
 
@@ -18,7 +19,7 @@
 <?rfc toc="yes" ?>
 <?rfc symrefs="yes" ?>
 <?rfc strict="yes" ?>
-<?rfc compact="yes" ?>
+<?rfc subcompact="no" ?>
 <?rfc sortrefs="yes" ?>
 <?rfc colonspace="yes" ?>
 <?rfc rfcedstyle="no" ?>
@@ -78,19 +79,19 @@
 
     <section title="Overview" anchor="sec.overview">
       <t>
-          SDP (Session Description Protocol) <xref target="RFC4566"> provides a
+          SDP (Session Description Protocol) <xref target="RFC4566"/> provides a
           general-purpose format for describing multimedia sessions in announcements
-          or invitations.  RFC4145 [RFC4145] specifies a general mechanism for
+          or invitations.  <xref target="RFC4145"/> specifies a general mechanism for
           describing and establishing TCP (Transmission Control Protocol)
-          streams with <xref arget="RFC4571"> defining a method for framing
+          streams with <xref target="RFC4571"/> defining a method for framing
           Real-time Transport Protocol (RTP) and RTP Control Protocol (RTCP)
-          packets onto connection- oriented transport (such as TCP) .
+          packets onto connection-oriented transport (such as TCP) .
           <xref target="RFC4572"/> extends <xref target="RFC4145"/> for describing
           TCP-based media streams that are protected using TLS (Transport Layer Security).
        </t>
        <t>
-         The RTP specification [RFC3550] establishes a registry of profile names for use
-         by higher-level control protocols, such as the Session Description Protocol (SDP),
+         The RTP specification <xref target="RFC3550"/> establishes a registry of profile names 
+         for use by higher-level control protocols, such as the Session Description Protocol (SDP),
          to refer to transport methods.This document describes the following new SDP transport
          protocol identifiers for transporting RTP Media over TCP.
       </t>
@@ -137,7 +138,7 @@
             'TCP/RTP/SAVP', 'TCP/RTP/SAVPF', 'TCP/TLS/RTP/SAVP',
             'TCP/TLS/RTP/SAVPF' which indicates that the media described will
             use TCP as the transport protocol.
-            <list style="symbols">
+            <list style="" >
                 <t>
                     When a RTP/AVPF or RTP/SAVP or RTP/SAVPF stream is transported over the
                     TCP transport, the proto identifier SHALL be 'TCP/RTP/AVPF',
@@ -167,19 +168,20 @@
    
    <section title="Security Considerations" anchor="sec.security">
      	<t>
-     		The new proto identifiers registered by this document in the SDP
+     		The new "proto" identifiers registered by this document in the SDP
    			parameters registry maintained by IANA is primarily for use by the
    			offer/answer model of the Session Description Protocol <xref target="RFC3264"/>
    			for the negotiation and establishment of RTP based Media over the TCP 
-   			transport. These additional SDP proto identifiers does not introduce
+   			transport. These additional SDP "proto" identifiers does not introduce
    			any security considerations beyond those detailed in Section 7 of 
-   			RFC 4566 [RFC4566].	
+   			<xref target="RFC4566"/>.	
      	</t>  
    </section>
    
     <section title="Acknowledgements">
       <t>
-        Cullen Jennings.
+        Author would like to thank Cullen Jennings for his early reviews and suggested
+        improvements.
       </t>
     </section>
   </middle>
@@ -191,6 +193,9 @@
     </references>  
    <references title="Informative References">
    	  &RFC4571;
+   	  &RFC4145;
+   	  &RFC4572;
+   	  &RFC5246;
    	  &RFC4566;
    	  &RFC3550;
    	  &RFC3711;
