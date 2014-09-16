@@ -2840,9 +2840,14 @@ a=acfg:2 t=3]]>
       </figure>
     </section>
       <section title="Security Considerations">
-       <t>
-        All the attributes which involve security key needs a careful review to
-        ensure two-time pad vulnerability is not created.
+	<t> 
+	  This document does not add any new security considerations
+	  beyond the existing considerations in the RFC for protocols
+	  that are being multiplexed together. </t>
+	<t>
+	  The ways that SRTP streams are keyed is not believed to
+	  create any two-time pad vulnerability for the currently
+	  defined SRTP keying mechanism.
        </t>
       </section>
       <section title="Acknowledgments">
