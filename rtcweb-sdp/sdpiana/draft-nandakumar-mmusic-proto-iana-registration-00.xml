@@ -51,7 +51,7 @@
       </address>
     </author>
 
-    <date day="8" month="September" year="2014" />
+    <date day="18" month="September" year="2014" />
 
     <area>RAI</area>
 
@@ -85,15 +85,16 @@
           describing and establishing TCP (Transmission Control Protocol)
           streams with <xref target="RFC4571"/> defining a method for framing
           Real-time Transport Protocol (RTP) and RTP Control Protocol (RTCP)
-          packets onto connection-oriented transport (such as TCP) .
+          packets onto a connection-oriented transport (such as TCP) .
           <xref target="RFC4572"/> extends <xref target="RFC4145"/> for describing
           TCP-based media streams that are protected using TLS (Transport Layer Security).
        </t>
        <t>
-         The RTP specification <xref target="RFC3550"/> establishes a registry of profile names 
-         for use by higher-level control protocols, such as the Session Description Protocol (SDP),
-         to refer to transport methods.This document describes the following new SDP transport
-         protocol identifiers for transporting RTP Media over TCP.
+         The RTP specification <xref target="RFC3550"/> establishes a registry of 
+         profile names for use by higher-level control protocols, such as the 
+         Session Description Protocol (SDP), to refer to transport methods. This 
+         document describes the following new SDP transport protocol identifiers 
+         for transporting RTP Media over TCP.
       </t>
       <t>
           TCP/RTP/AVPF: to describe RTP Media with RTCP-based Feedback 
@@ -140,14 +141,24 @@
             use TCP as the transport protocol.
             <list style="" >
                 <t>
-                    When a RTP/AVPF or RTP/SAVP or RTP/SAVPF stream is transported over the
-                    TCP transport, the proto identifier SHALL be 'TCP/RTP/AVPF',
-                    'TCP/RTP/SAVP' or 'TCP/RTP/SAVPF' respectively.
+                    When a RTP/AVPF stream is transported over the TCP transport,
+                    the proto identifier SHALL be 'TCP/RTP/AVPF'.
                 </t>
                 <t>
-                    When RTP/SAVP or RTP/SAVPF stream is transport over tTLS with
-                    TCP transport, the proto identifier SHALL be 'TCP/TLS/RTP/SAVP'
-                    or 'TCP/TLS/RTP/SAVPF' respectively.
+                    When a RTP/SAVP stream is transported over the TCP transport,
+                    the proto identifier SHALL be  'TCP/RTP/SAVP'.
+                </t>
+                <t>
+                    When a RTP/SAVPF stream is transported over the TCP transport,
+                    the proto identifier SHALL be  'TCP/RTP/SAVPF'.
+                </t>
+                <t>
+                    When RTP/SAVP stream is transport over TLS with TCP transport,
+                    the proto identifier SHALL be 'TCP/TLS/RTP/SAVP'.
+                </t>
+                <t>
+                    When RTP/SAVPF stream is transport over TLS with TCP transport,
+                    the proto identifier SHALL be 'TCP/TLS/RTP/SAVPF'.
                 </t>
             </list>
         </t>
@@ -180,8 +191,8 @@
    
     <section title="Acknowledgements">
       <t>
-        Author would like to thank Cullen Jennings for his early reviews and suggested
-        improvements.
+        Author would like to thank Cullen Jennings and Alissa Cooper for their early reviews
+        and suggested improvements.
       </t>
     </section>
   </middle>
@@ -190,13 +201,13 @@
 
     <references title="Normative References">
       &RFC2119;
-    </references>  
-   <references title="Informative References">
-   	  &RFC4571;
-   	  &RFC4145;
+      &RFC4571;
    	  &RFC4572;
+      &RFC4566;
+    </references>
+   <references title="Informative References">
+   	  &RFC4145;
    	  &RFC5246;
-   	  &RFC4566;
    	  &RFC3550;
    	  &RFC3711;
    	  &RFC5124;
