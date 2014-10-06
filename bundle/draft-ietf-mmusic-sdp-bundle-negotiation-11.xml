@@ -4,7 +4,7 @@
 <?rfc toc="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc sortrefs="no" ?>
-<rfc ipr="trust200902" category="std" docName="draft-ietf-mmusic-sdp-bundle-negotiation-10.txt" updates="3264" submissionType="IETF" xml:lang="en">
+<rfc ipr="trust200902" category="std" docName="draft-ietf-mmusic-sdp-bundle-negotiation-11.txt" updates="3264" submissionType="IETF" xml:lang="en">
 <front>
     <title abbrev="Bundled media">
 		Negotiating Media Multiplexing Using the Session Description Protocol (SDP)
@@ -78,6 +78,11 @@
 			allows an answerer to assign a non-zero port value to an "m=" line in an SDP answer, even
 			if the "m=" line in the associated SDP offer contained a zero port value.
 		</t>
+		<t>
+			This specification also defines a new RTP SDES item, and a new RTP header extension, that
+			can be used to carry a value that associates RTP/RTCP packets with a specific media
+			description.
+		</t>
     </abstract>
 </front>
 
@@ -106,9 +111,9 @@
 			media associated with a BUNDLE group. 
 		</t>
 		<t>
-			Once the offerer and the answerer have negotiated a BUNDLE group, and the associated BUNDLE addresses, 
-			each endpoint can assign its BUNDLE address to each "m=" line within, and use the address to send and receive
-			all media associated with, the BUNDLE group.
+			Once the offerer and the answerer have negotiated a BUNDLE group, they assign their respective 
+			BUNDLE address to each "m=" line in the BUNDLE group. The BUNDLE address is used to send and 
+			receive all media associated with the BUNDLE group.
 		</t>
 		<t>
 			NOTE: As defined in RFC 4566 <xref format="default" pageno="false" target="RFC4566"/>, the 
@@ -120,6 +125,11 @@
 			This specification also updates sections 5.1, 8.1 and 8.2 of RFC 3264 <xref format="default" pageno="false" 
 			target="RFC3264"/>. The update allows an answerer to assign a non-zero port value to an "m=" line in an 
 			SDP answer, even if the "m=" line in the associated SDP offer contained a zero port value.
+		</t>
+		<t>
+			This specification also defines a new RTP SDES item, and a new RTP header extension, that
+			can be used to carry a value that associates RTP/RTCP packets with a specific media
+			description.
 		</t>
 		<t>
 			SDP bodies can contain multiple BUNDLE groups. A given BUNDLE address MUST only be associated
@@ -177,12 +187,12 @@
 		</t>
 		<t>
 			BUNDLE group: A set of "m=" lines, created using an SDP Offer/Answer
-			exchange, for which each endpoint use a single 5-tuple is to send and 
+			exchange, for which each endpoint uses a single 5-tuple to send and 
 			receive media. Each endpoint uses its BUNDLE address,
 			associated with the BUNDLE group, to send and receive the media.
 		</t>
 		<t>
-			Bundled "m=" line: An "m=" line, which SDP 'mid' attribute value
+			Bundled "m=" line: An "m=" line, whose SDP 'mid' attribute value
 			is placed in a SDP 'group:BUNDLE' attribute mid value list in an 
 			offer or answer.
 		</t>
@@ -238,7 +248,7 @@
 				with a "BUNDLE" semantics value <xref format="default" pageno="false" 
 				target="RFC5888"/>. An SDP "mid" attribute is assigned to each
 				bundled "m=" line, and the "mid" attribute value is listed in the
-				'group:BUNDLE' attribute mid value list. Each "m=" line, which mid
+				'group:BUNDLE' attribute mid value list. Each "m=" line, whose mid
 				value is listed in the mid value list, is associated with a given BUNDLE
 				group.
 			</t>
@@ -395,6 +405,10 @@
 				in [<xref format="default" pageno="false" target="sec-sdp-cons"/>] when
 				creating offers and answers.
 			</t>
+			<t>
+				SDP bodies can contain multiple BUNDLE groups. The procedures in this 
+				section apply independently to a given BUNDLE group.		
+			</t>
 		</section>
 		<section anchor="sec-sdp-oa-ino" title="Generating the Initial SDP Offer" toc="default">
 			<section anchor="sec-sdp-oa-ino-gen" title="General" toc="default">
@@ -422,7 +436,7 @@
 				</t>
 				<t>
 					If the offerer wants to request that the answerer accepts a given "m=" line only if
-					the the answerer keeps the "m=" line within the BUNDLE group, the offerer MUST:
+					the answerer keeps the "m=" line within the BUNDLE group, the offerer MUST:
 					<list style="symbols">
 						<t>
 							Associate an SDP 'bundle-only' attribute [<xref target="sec-sdp-oa-ino-req" pageno="false" 
@@ -465,7 +479,7 @@
 						</t>
 						<t>
 							The answerer MUST NOT include an "m=" line within a BUNDLE group, unless
-							the offerer requested to "m=" line to be within a BUNDLE group in the 
+							the offerer requested the "m=" line to be within that BUNDLE group in the 
 							associated offer.
 						</t>
 					</list>
@@ -501,11 +515,17 @@
 					</list>
 				</t>
 				<t>
-					If a bundled "m=" line in an offer has an associated SDP 'bundle-only'
-					attribute, and if the answerer keeps the "m=" line within the BUNDLE
-					group, the answerer MUST process the "m=" line as any other bundled
-					"m=" line in the offer. The answerer MUST NOT include a 'bundle-only'
-					attribute in an answer.
+					If the answerer keeps a bundle-only "m=" line within the BUNDLE group,
+					it follows the procedures (assigns the answerer BUNDLE address to the "m=" 
+					line etc) for any other "m=" line kept within the BUNDLE group.
+				</t>
+				<t>
+					If the answerer does not want to keep a bundle-only "m=" line within the
+					BUNDLE group, it MUST reject the "m=" line [<xref target="sec-sdp-oa-ans-rej" 
+					pageno="false" format="default"/>].
+				</t>
+				<t>
+					The answerer MUST NOT include a 'bundle-only' attribute in an answer."
 				</t>
 				<t>
 					NOTE: If a bundled "m=" line in an offer contains a port zero value, but the "m=" line does not contain
@@ -519,7 +539,7 @@
 					In an offer, the address (unique or shared) assigned to the bundled "m=" line associated with the offerer 
 					suggested BUNDLE mid indicates the address that the offerer wants the answer to select as the offerer 
 					BUNDLE address [<xref target="sec-sdp-oa-ino-req" pageno="false" format="default"/>]. The answerer
-					MUST check whether the "m=" line fulfills the following criteria:
+					MUST check whether the "m=" line fulfils the following criteria:
 					<list style="symbols">
 						<t>
 							The answerer will not move the "m=" line out of the BUNDLE group
@@ -618,10 +638,7 @@
 					MUST check that any bundled "m=" line in the answer was indicated as bundled in the
 					associated offer. If there is no mismatch, the offerer MUST apply the offerer BUNDLE 
 					address, selected by the answerer [<xref format="default" pageno="false" 
-					target="sec-sdp-oa-ans-off"/>], to each bundled "m=" line. The offerer MUST assign the 
-					address to each bundled "m=" line (excluding a bundled "m=" line added to a BUNDLE group, 
-					to which the offerer MAY assign a unique address [<xref format="default" pageno="false" 
-					target="sec-sdp-oa-mod-add"/>]) in any subsequent offer.					
+					target="sec-sdp-oa-ans-off"/>], to each bundled "m=" line. 									
 				</t>
 				<t>
 					NOTE: As the answerer might reject one or more bundled "m=" lines, or move a bundled
@@ -638,7 +655,7 @@
 				<t>
 					When an offerer receives an answer, if the answer contains a BUNDLE group, the offerer MUST 
 					check whether the offerer BUNDLE address, selected by the answerer [<xref format="default" pageno="false" 
-					target="sec-sdp-oa-ans-off"/>], matches was assigned to each bundled "m=" line (excluding any
+					target="sec-sdp-oa-ans-off"/>], matches what was assigned to each bundled "m=" line (excluding any
 					bundled "m=" line that was rejected, or moved out of the BUNDLE group, by the answer) 
 					in the associated offer. If there is a mismatch, the offerer SHOULD as soon as possible
 					generate a subsequent offer, in which it assigns the offerer BUNDLE address to each
@@ -737,9 +754,7 @@
 					<list style="symbols">
 						<t>
 							Assign a unique address, which the offerer wants the answerer to select as
-							the offerer BUNDLE address, to a bundled "m=" line (added to the BUNDLE group
-							in a previous offer/answer transaction, or requested to be added to the 
-							BUNDLE group in the current offer); and
+							the offerer BUNDLE address, to a bundled "m=" line; and
 						</t>
 						<t>
 							Indicate that the offerer wants the answerer to select the unique address as the
@@ -795,20 +810,26 @@
 			</section>						
 			<section title="Moving A Media Description Out Of A BUNDLE Group" anchor="sec-sdp-oa-mod-mov" toc="default">				
 				<t>
-					When an offerer generates an offer, in which it wants to move a bundled "m=" line (added to
-					the BUNDLE group in a previous offer/answer transaction), the offerer:
+					When an offerer generates an offer, in which it wants to move a bundled "m=" line out
+					of a BUNDLE group it was added to in a previous offer/answer transaction, the offerer:
 					<list style="symbols">
 						<t>
 							MUST assign a unique address to the "m=" line;
 						</t>
 						<t>
 							MUST NOT place a mid value associated with the "m=" line in the SDP 'group:BUNDLE' 
-							attribute mid list associated with the BUNDLE group; and
+							attribute mid list associated with that BUNDLE group; and
 						</t>
 						<t>
 							MUST NOT associate an SDP 'bundle-only' attribute with the "m=" line.
 						</t>
 					</list>
+				</t>
+				<t>
+					NOTE: If an "m=" line, when being moved out of a BUNDLE group, is added to 
+					another BUNDLE group, the offerer applies the procedures in 
+					[<xref target="sec-sdp-oa-mod-add" pageno="false" format="default"/>] to 
+					the "m=" line.
 				</t>
 				<t>
 					[<xref target="sec-example-off-mov" pageno="false" format="default"/>] 
@@ -854,7 +875,7 @@
 			<t>
 				In addition, if a received packet can be associated with more than one
 				bundled "m=" line, there MUST exist a publically available specification which 
-				describes a mechanism how to associated the received packet with the correct "m=" line.
+				describes a mechanism how to associate the received packet with the correct "m=" line.
 			</t>
 		</section>
 		<section anchor="sec-packets-id-sds" title="STUN, DTLS, SRTP" toc="default">
@@ -908,12 +929,12 @@
 							codec configuration [<xref format="default" pageno="false" target="sec-rtp-sessions-pt"/>].</t>
 							<t>The "proto" value in each bundled "m=" line MUST be identical (e.g. RTP/AVPF).</t>
 							<t>A given SSRC SHOULD NOT transmit RTP packets using payload types that 
-							originates from different bundled "m=" lines.</t>
+							originate from different bundled "m=" lines.</t>
 						</list>				
 					</t>		
 					<t>
 						NOTE: The last bullet above is to avoid sending multiple media types from the same SSRC. 
-						If transmission of multiple media types are done with time overlap RTP and RTCP fails 
+						If transmission of multiple media types are done with time overlap, RTP and RTCP fail 
 						to function. Even if done in proper sequence this causes RTP Timestamp rate switching 
 						issues [ref to draft-ietf-avtext-multiple-clock-rates].
 					</t>
@@ -926,7 +947,7 @@
 						numbers MUST share an identical codec configuration. This means that the codecs MUST share the same media type, 
 						encoding name, clock rate and any parameter that can affect the codec configuration and packetization. 
 						<xref format="default" pageno="false" target="I-D.mmusic-sdp-mux-attributes"/> lists SDP
-						attributes, which attribute values must be identical for all codecs that use the same payload type value.
+						attributes, whose attribute values must be identical for all codecs that use the same payload type value.
 					</t>
 			</section>
 		</section>
@@ -950,7 +971,7 @@
 				</t>
 				<t>
 					An offerer and answerer can in an offer and answer inform each other which SSRC values they will use 
-					inside sent RTP/RTCP packets by, by assigning an SDP 'ssrc' attribute <xref format="default" pageno="false" 
+					inside sent RTP/RTCP packets, by assigning an SDP 'ssrc' attribute <xref format="default" pageno="false" 
 					target="RFC5576"/> to each bundled "m=" line which contains a payload type value that is also used inside 
 					another bundled "m=" line. As the SSRC values will be carried inside the RTP/RTCP packets, the offerer and 
 					answerer can then use that information to associate received RTP packets with the correct "m=" line. However, an 
@@ -985,7 +1006,7 @@
 							This section describes how an offerer and answerer can use the SDP 'rtcp-mux' attribute
 							<xref format="default" pageno="false" target="RFC5761"/> and the SDP 'rtcp' attribute
 							<xref format="default" pageno="false" target="RFC3605"/> to negotiate usage of RTP/RTCP 
-							multiplexing for RTP based associated with a BUNDLE group.
+							multiplexing for RTP based media associated with a BUNDLE group.
 						</t>
 				</section>			
 				<section title="Generating the Initial SDP Offer" anchor="sec-rtprtcp-mux-oa-ino" toc="default">
@@ -1035,7 +1056,7 @@
 							to each bundled "m=" line in the answer [<xref format="default" pageno="false" 
 							target="sec-rtprtcp-mux-oa-ans"/>], the answerer follows the procedures
 							for RTP/RTCP multiplexing defined in <xref format="default" pageno="false" 
-							target="RFC5245"/>.
+							target="RFC5761"/>.
 						</t>
 						<t>
 							If the answerer does not accept the usage of RTP/RTCP multiplexing
@@ -1210,9 +1231,12 @@
 		</section>
 		<section anchor="sec-3264-new-8_2" title="New text replacing section 8.2 (2nd paragraph) of RFC 3264" toc="default">
 			<t>
-				A stream that is offered with a port of zero MUST by default be marked 
-				with port zero in the answer, unless an extension mechanism, which 
-				specifies semantics for the usage of a non-zero port value, is used.
+				A stream that is offered with a port of zero MUST by default be
+				marked with port zero in the answer, unless an extension mechanism,
+				which specifies semantics for the usage of a non-zero port value, is
+				used. If the stream is marked with port zero in the answer, the answer 
+				MAY omit (like the offer) all attributes present previously, and MAY list 
+				just a single media format from amongst those in the offer."
 			</t>
 		</section>		
 		<section anchor="sec-3264-old-8_4" title="Original text of section 8.4 (6th paragraph) of RFC 3264" toc="default">
@@ -1255,9 +1279,9 @@
 		<section title="General" anchor="sec-receiver-id-gen" toc="default">
 			<t>
 				SDP Offerers and Answerers <xref format="default" pageno="false" target="RFC3264"/> can assign 
-				values, mid values, to SDP Media Descriptions (m= lines) within SDP Offers and Answers, using 
+				mid values to SDP Media Descriptions (m= lines) within SDP Offers and Answers, using 
 				the procedures in <xref format="default" pageno="false" target="RFC5888"/>. Each mid value
-				uniquely references an m= line.
+				uniquely identifies an m= line.
 			</t>
 			<t>
 				This section defines a new RTP SDES item <xref format="default" pageno="false" target="RFC3550"/>, 'MID',
@@ -1278,6 +1302,7 @@
 				the scope of this document.			
 			</t>
 			<t>
+				<xref format="default" pageno="false" target="RFC3550"/> defines general procedures regarding the RTCP transmission interval.
 				The RTP MID SDES item SHOULD be sent in the first few RTCP packets sent on joining the session, and SHOULD be 
 				sent regularly thereafter. The exact number of RTCP packets in which this SDES item is sent is 
 				intentionally not specified here, as it will depend on the expected packet loss rate, the RTCP reporting interval, 
@@ -1310,6 +1335,10 @@
 				<t>
 					The mid value payload is UTF-8 encoded, as in SDP.
 				</t>
+				<t>
+					[RFC EDITOR NOTE: Please replace TBD with the assigned SDES 
+					identifier value.]
+				</t>			
 		</section>		
 		<section title="RTP MID Header Extension" anchor="sec-receiver-id-rtp-he" toc="default">
 				<t>
@@ -1317,8 +1346,10 @@
 					can be encoded using either the one-byte or two-byte header <xref format="default" 
 					pageno="false" target="RFC5285"/>. The mid value payload is UTF-8 encoded, as in SDP.
 				</t>			
-		</section>		
-		<section title="IANA Considerations" anchor="sec-receiver-id-iana" toc="default">
+		</section>
+	</section>
+	<section title="IANA Considerations" anchor="sec-receiver-id-iana" toc="default">
+		<section title="New SDES item" anchor="sec-receiver-id-iana-sdes-item" toc="default">
 			<t>
 				[RFC EDITOR NOTE: Please replace RFCXXXX with the RFC number 
 				of this document.]
@@ -1341,6 +1372,8 @@
 
 				]]></artwork>
 			</figure>
+		</section>
+		<section title="New RTP Header Extension URI" anchor="sec-receiver-id-iana-rtp-uri" toc="default">
 			<t>			
 				This document defines a new extension URI in the RTP Compact Header
 				Extensions subregistry of the Real-Time Transport Protocol (RTP)
@@ -1357,7 +1390,28 @@
 				]]></artwork>
 			</figure>
 		</section>
-    </section>
+		<section title="New SDP Attribute" anchor="sec-receiver-id-iana-sdp-attribute" toc="default">
+			<t>			
+				This document defines a new SDP media-level attribute,
+				according to the following data:
+			</t>
+			<figure>
+				<artwork align="left"><![CDATA[
+
+	Attribute name:   	bundle-only
+	Type of attribute:  Media-level
+	Subject to charset: No
+	Purpose:            Request a media description to be accepted
+						in the answer only if kept within a BUNDLE group
+						by the answerer
+	Appropriate values:	N/A
+	Contact name:      	Christer Holmberg
+	Contact e-mail:		christer.holmberg@ericsson.com
+
+				]]></artwork>
+			</figure>
+		</section>
+	</section>
 	
     <section title="Security Considerations" anchor="sec-security" toc="default">
 		<t>
@@ -1366,7 +1420,7 @@
 			pageno="false" target="RFC5888"/> apply to the BUNDLE extension.
 		</t>
 		<t>
-			When the BUNDLE extension is used the a single set of security credentials
+			When the BUNDLE extension is used a single set of security credentials
 			might be used for all media streams associated with a BUNDLE group. If
 			the security credentials are compromised, an attacker will have 
 			access to all media content.
@@ -1746,7 +1800,7 @@ SDP Answer (2)
 			proposal.
 		</t>
 		<t>
-			Thanks to Paul Kyzivat, Martin Thompson and Flemming Andreasen for 
+			Thanks to Paul Kyzivat, Martin Thomson and Flemming Andreasen for 
 			taking the time to read the text along the way, and providing useful 
 			feedback.
 		</t>
@@ -1754,7 +1808,16 @@ SDP Answer (2)
 
     <section title="Change Log">
 		<t>[RFC EDITOR NOTE: Please remove this section when publishing]</t>
-				<t>Changes from draft-ietf-mmusic-sdp-bundle-negotiation-09
+		<t>Changes from draft-ietf-mmusic-sdp-bundle-negotiation-10
+			<list style="symbols">
+				<t>SDP bundle-only attribute added to IANA Considerations.</t>
+				<t>SDES item and RTP header extension added to Abstract and Introduction.</t>
+				<t>Modification to text updating section 8.2 of RFC 3264.</t>
+				<t>Reference corrections.</t>
+				<t>Editorial corrections.</t>
+			</list>
+		</t>		
+		<t>Changes from draft-ietf-mmusic-sdp-bundle-negotiation-09
 			<list style="symbols">
 				<t>Terminology change: "bundle-only attribute assigned to m= line" to 
 				"bundle-only attribute associated with m= line".</t>

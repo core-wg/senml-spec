@@ -1,0 +1,185 @@
+
+Appendix A.  Design Considerations
+
+   Note: There is not yet WG consensus on if the offer should have
+   different ports in the "m=" lines or the same port.  Previous version
+   of this draft showed it as the same and this version shows it as
+   different ports to illustrate the changes.
+
+   There are three primary issues to consider when selecting if the "m="
+   lines should have similar or different ports.  They are 1)
+   interoperability with existing UAs 2) interoperability with B2BUA
+   that create offers for features they do not support; and 3) time to
+   gather candidates when using ICE;.  This section will explain these
+   issues and impact on the design.
+
+A.1.  UA Interoperability
+
+   Consider the following offer / answer exchange where Alice make an
+   offer to Bob:
+
+
+   SDP Offer
+
+       v=0
+       o=alice 2890844526 2890844526 IN IP4 atlanta.example.org
+       s=
+       c=IN IP4 atlanta.example.org
+       t=0 0
+       m=audio 10000 RTP/AVP 97
+       a=rtpmap:97 iLBC/8000
+
+
+   SDP Answer
+
+       v=0
+       o=bob 2808844564 2808844564 IN IP4 biloxi.example.com
+       s=
+       c=IN IP4 biloxi.example.com
+       t=0 0
+       m=audio 20000 RTP/AVP 97
+       a=rtpmap:97 iLBC/8000
+       m=video 20002 RTP/AVP 97
+       a=rtpmap:97 H261/90000
+
+
+   RFC 4961 [RFC4961] specifies a way of doing symmetric RTP but that is
+   an a later invention to RTP and Bob can not assume that Alice
+   supports RFC 4961.  This means that Alice may be sending RTP from a
+   different port than 10000 or 10002 - some implementation simply send
+   the RTP from an ephemeral port.  When Bob's endpoint receives an RTP
+   packet, the only way that Bob know if it should be passed to the
+   video or audio codec is by looking at the port it was received on.
+   This lead some SDP implementations to use the fact that each "m="
+   line had a different port number to use that port number as an index
+   to find the correct m line in the SDP.  As a result, some
+   implementations that do support symmetric RTP and ICE still use a SDP
+   data structure where SDP with "m=" lines with the same port such as:
+
+
+   SDP Offer
+
+       v=0
+       o=alice 2890844526 2890844526 IN IP4 atlanta.example.org
+       s=
+       c=IN IP4 atlanta.example.org
+       t=0 0
+       m=audio 10000 RTP/AVP 97
+       a=rtpmap:97 iLBC/8000
+       m=video 10000 RTP/AVP 98
+       a=rtpmap:98 H261/90000
+
+
+   will result in the second "m=" line being considered an SDP error
+   because it has the same port as the first line.
+
+   Some of the developers of products that do this make the argument
+   that this is not a bug and that for SDP to work when not using things
+   like RFC 4961, the port numbers need to be unique thus it is
+   perfectly reasonable for their software to make this assumption.  The
+   authors are not suggesting this is a good way to design an SDP stack
+   but merely trying to provide an explanation of why some UAs behave
+   this way and why theses devices consider it acceptable.
+
+A.2.  B2BUA Interoperability
+
+   Some back to back user agents may be configured in a mode where if
+   the incoming call leg contains an SDP attribute the B2BUA does not
+   understand, the B2BUS still generates that SDP attribute in the Offer
+   for the outgoing call leg.  Consider an B2BUA that did not understand
+   "a=rtcp" attribute from RFC 3605 [RFC3605] yet acted this way.
+   Further assume that the B2BUA was configured to tear down any call
+   where it did not see any RTCP for 5 minutes.  In this cases, if the
+   B2BUA received an Offer like:
+
+
+   SDP Offer
+
+       v=0
+       o=alice 2890844526 2890844526 IN IP4 atlanta.example.org
+       s=
+       c=IN IP4 atlanta.example.org
+       t=0 0
+       m=audio 49170 RTP/AVP 0
+       a=rtcp:53020
+
+
+
+   It would be looking for RTCP on port 49172 but would not see any
+   because the RTCP would be on port 53020 and after five minutes, it
+   would tear down the call.  Similarly, an SBC that did not understand
+   BUNDLE yet put BUNDLE in it's offer may be looking for media on the
+   wrong port and tear down the call.  It is worth noting that a B2BUA
+   that generated an Offer with capabilities it does not understand is
+   not compliant with the specifications.
+
+   To mitigate the risk to B2BUAs that generate BUNDLE when they should
+   not, the spec includes a feature where once the initial Offer /
+   Answer is done and ICE is completed, a second Offer / Answer exchange
+   is done with the all the "m=" lines and associated ICE transports set
+   to the actual 5-tuple in use.  This allows any device on Offer /
+
+
+
+Holmberg & Alvestrand    Expires August 18, 2013               [Page 14]
+
+Internet-Draft                Bundled media                february 2013
+
+
+   Answer path to be updated even if it does not understand BUNDLE.
+
+A.2.1.  3GPP  Impact
+
+   It is very unlikely that the B2BUA issue will be a problem for 3GPP
+   deployments.  If any B2BUA in the path of the call, either in home or
+   roaming network, removes the "BUNDLE" group attribute from the offer,
+   BUNDLE will not be negotiated and this will not be a problem.  It is
+   extremely unlikely that unknown headers would be allowed to flow all
+   the way between the endpoints as that would allow users to tunnel
+   arbitrary data over the headers and likely end up with fee data
+   transport between the devices.  Some element of the call signaling
+   path will groom the signaling and remove unknown or un acceptable
+   things such as this when they are coming from the end users
+   equipment.
+
+   Even in cases where both endpoint support BUNDLE and the IMS B2BUAs
+   implement this specification, there are cases where the IMS network
+   will desire to remove BUNDLE because it makes it easier to provide
+   different QoS to the media associated with different "m=" lines.
+
+A.3.  Candidate Gathering
+
+   When using ICE, an candidate needs to be gathered for each port.
+   This takes approximately 20 ms extra for each extra "m=" line due to
+   the NAT pacing requirements.  All of this gather can be overlapped
+   with other things while the page is loading to minimize the impact.
+   If the client only wants to generate TURN or STUN ICE candidates for
+   one of the "m=" lines and then use trickle ICE
+   [I-D.rescorla-mmusic-ice-trickle] to get the non host ICE candidates
+   for the rest of the "m=" lines, it MAY do that and will not need any
+   additional gathering time.
+
+   Some people have suggested a TURN extension to get a bunch of TURN
+   allocation at once.  This would only provide a single STUN result so
+   in cases where the other end did not support BUNDLE, may cause more
+   use of the TURN server but would be quick in the cases where both
+   sides supported BUNDLE and would fall back to a successful call in
+   the other cases.
+
+A.4.  Analysis
+
+   This largely comes down to a question of breaking the UA or the B2BUA
+   cases.  The WG should consider things such as:
+   1.  In places we imagine this being deployed, how common will
+       breakage be?
+   2.  How much effort is it to fix that?
+   3.  What are our design principles for SDP that allow us to create
+       and deploy new SDP extensions?
+   4.  When does the breakage happen.  Will the call just fail or will
+       the call get set up then later fail?
+
+   The port numbers on the "m=" lines of the initial Offer can be the
+   same or different.  Deployments can be upgraded to make either way
+   work so neither one is a complete show stopped but the WG needs to
+   pick which one is the "least bad" and move forward.
+
