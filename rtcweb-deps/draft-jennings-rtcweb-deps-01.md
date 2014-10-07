@@ -170,6 +170,15 @@ Right now video normatively depends on
 {{I-D.grange-vp9-bitstream}}, 
 {{I-D.ietf-payload-rtp-h265}}, 
 
+The drafts webrtc currently normatively depends on that are not WG drafts are:
+
+{{I-D.grange-vp9-bitstream}}, 
+{{I-D.hutton-httpbis-connect-protocol}}, 
+{{I-D.patil-tram-alpn}}, 
+{{I-D.petithuguenin-tram-turn-dtls}}, 
+{{I-D.reddy-mmusic-ice-happy-eyeballs}},
+
+
 
 A few key drafts that the informatively depends on:
 {{I-D.ietf-mmusic-trickle-ice}}, 
