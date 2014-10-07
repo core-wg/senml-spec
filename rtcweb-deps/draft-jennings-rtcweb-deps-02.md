@@ -1,7 +1,7 @@
 ---
 title: "WebRTC Dependencies"
 abbrev: WebRTC Dependencies
-docname: draft-jennings-rtcweb-deps-01
+docname: draft-jennings-rtcweb-deps-02
 date: 2014-10-07
 category: info
 ipr: trust200902
@@ -59,7 +59,7 @@ normative:
   I-D.ietf-tsvwg-sctp-dtls-encaps:
   I-D.ietf-tsvwg-sctp-ndata:
   I-D.ietf-tsvwg-sctp-prpolicies:
-  I-D.patil-tram-alpn:
+  I-D.ietf-tram-alpn:
   I-D.petithuguenin-tram-turn-dtls:
   I-D.reddy-mmusic-ice-happy-eyeballs:
   RFC2119:
@@ -129,29 +129,24 @@ on
 
 These IETF drafts in turn normatively depend on the following drafts:
 {{I-D.ietf-payload-rtp-opus}}, 
-
 {{I-D.ietf-tsvwg-sctp-ndata}}, 
 {{I-D.ietf-rtcweb-data-protocol}}, 
 {{I-D.ietf-tsvwg-sctp-dtls-encaps}}, 
 {{I-D.ietf-rtcweb-security}}, 
 {{I-D.ietf-tsvwg-sctp-prpolicies}}, 
 {{I-D.ietf-mmusic-sctp-sdp}}, 
-
 {{I-D.ietf-mmusic-msid}}, 
 {{I-D.ietf-mmusic-sctp-sdp}}, 
 {{I-D.ietf-mmusic-sdp-bundle-negotiation}}, 
 {{I-D.ietf-mmusic-sdp-mux-attributes}}, 
-
 {{I-D.ietf-avtcore-multi-media-rtp-session}}, 
 {{I-D.ietf-avtcore-rtp-circuit-breakers}}, 
 {{I-D.ietf-avtcore-rtp-multi-stream-optimisation}}, 
 {{I-D.ietf-avtcore-rtp-multi-stream}}, 
-
 {{I-D.ietf-avtcore-6222bis}} (now {{RFC7022}}),
 {{I-D.ietf-rtcweb-stun-consent-freshness}}, 
-
 {{I-D.hutton-httpbis-connect-protocol}}, 
-{{I-D.patil-tram-alpn}}, 
+{{I-D.ietf-tram-alpn}}, 
 {{I-D.ietf-tls-applayerprotoneg}} (now {{RFC7301}}),
 {{I-D.ietf-httpbis-http2}}, 
 {{I-D.ietf-httpbis-header-compression}}, 
@@ -159,28 +154,22 @@ These IETF drafts in turn normatively depend on the following drafts:
 {{I-D.ietf-tsvwg-rtcweb-qos}}, 
 {{I-D.reddy-mmusic-ice-happy-eyeballs}}, 
 {{I-D.ietf-rtcweb-alpn}}, 
-
-{{I-D.ietf-payload-vp8}}, 
-
+{{I-D.ietf-payload-vp8}}.
 
 Right now security normatively depends on
-{{I-D.ietf-rtcweb-overview }}, 
+{{I-D.ietf-rtcweb-overview }}.
 
 Right now video normatively depends on
 {{I-D.grange-vp9-bitstream}}, 
-{{I-D.ietf-payload-rtp-h265}}, 
+{{I-D.ietf-payload-rtp-h265}}.
 
 The drafts webrtc currently normatively depends on that are not WG drafts are:
-
 {{I-D.grange-vp9-bitstream}}, 
 {{I-D.hutton-httpbis-connect-protocol}}, 
-{{I-D.patil-tram-alpn}}, 
 {{I-D.petithuguenin-tram-turn-dtls}}, 
-{{I-D.reddy-mmusic-ice-happy-eyeballs}},
+{{I-D.reddy-mmusic-ice-happy-eyeballs}}.
 
-
-
-A few key drafts that the informatively depends on:
+A few key drafts that the work informatively depends on:
 {{I-D.ietf-mmusic-trickle-ice}}, 
 {{I-D.nandakumar-rtcweb-sdp}}, 
 {{I-D.ietf-avtcore-multiplex-guidelines}}, 
@@ -197,9 +186,57 @@ A few key drafts that the informatively depends on:
 {{I-D.lennox-payload-ulp-ssrc-mux}}, 
 {{I-D.ietf-avtcore-multiplex-guidelines}}, 
 {{I-D.ietf-avtcore-srtp-ekt}}, 
-{{I-D.ietf-rtcweb-use-cases-and-requirements}}, 
-
+{{I-D.ietf-rtcweb-use-cases-and-requirements}}.
 
 Something audio should ref but does not yet:
 {{I-D.ietf-rtcweb-audio-codecs-for-interop}}
+
+Time Estimates
+-
+
+The following table has some very rough estimates of when the draft will become an
+RFC. Historically these dates have often taken much longer than the estimates
+so take with a large dose of salt.
+
+| Draft Name  | ETA |
+|  {{I-D.grange-vp9-bitstream}}  |   TBD    |
+|  {{I-D.hutton-httpbis-connect-protocol}}  |   TBD    |
+|  {{I-D.ietf-avtcore-6222bis}}  |   DONE    |
+|  {{I-D.ietf-avtcore-multi-media-rtp-session}}  |   TBD    |
+|  {{I-D.ietf-avtcore-rtp-circuit-breakers}}  |   TBD    |
+|  {{I-D.ietf-avtcore-rtp-multi-stream-optimisation}}  |   ???? ???    |
+|  {{I-D.ietf-avtcore-rtp-multi-stream}}  |   TBD    |
+|  {{I-D.ietf-httpbis-header-compression}}  |   TBD    |
+|  {{I-D.ietf-httpbis-http2}}  |   TBD    |
+|  {{I-D.ietf-mmusic-msid}}  |   TBD    |
+|  {{I-D.ietf-mmusic-sctp-sdp}}  |   TBD    |
+|  {{I-D.ietf-mmusic-sdp-bundle-negotiation}}  |   TBD    |
+|  {{I-D.ietf-mmusic-sdp-mux-attributes}}  |   TBD    |
+|  {{I-D.ietf-payload-rtp-h265}}  |   TBD    |
+|  {{I-D.ietf-payload-rtp-opus}}  |   TBD    |
+|  {{I-D.ietf-payload-vp8}}  |   TBD    |
+|  {{I-D.ietf-rtcweb-alpn}}  |   TBD    |
+|  {{I-D.ietf-rtcweb-audio}}  |   TBD    |
+|  {{I-D.ietf-rtcweb-constraints-registry}}  |   TBD    |
+|  {{I-D.ietf-rtcweb-data-channel}}  |   TBD    |
+|  {{I-D.ietf-rtcweb-data-protocol}}  |   TBD    |
+|  {{I-D.ietf-rtcweb-data-protocol}}  |   TBD    |
+|  {{I-D.ietf-rtcweb-jsep}}  |   2015 Oct    |
+|  {{I-D.ietf-rtcweb-overview }}  |   TBD    |
+|  {{I-D.ietf-rtcweb-overview}}  |   TBD    |
+|  {{I-D.ietf-rtcweb-rtp-usage}}  |   TBD    |
+|  {{I-D.ietf-rtcweb-security-arch}}  |   TBD    |
+|  {{I-D.ietf-rtcweb-security}}  |   TBD    |
+|  {{I-D.ietf-rtcweb-security}}  |   TBD    |
+|  {{I-D.ietf-rtcweb-stun-consent-freshness}}  |   TBD    |
+|  {{I-D.ietf-rtcweb-transports}}  |   TBD    |
+|  {{I-D.ietf-rtcweb-video}}  |   TBD    |
+|  {{I-D.ietf-tls-applayerprotoneg}}  |   DONE    |
+|  {{I-D.ietf-tsvwg-rtcweb-qos}}  |   TBD    |
+|  {{I-D.ietf-tsvwg-sctp-dtls-encaps}}  |   TBD    |
+|  {{I-D.ietf-tsvwg-sctp-ndata}}  |   TBD    |
+|  {{I-D.ietf-tsvwg-sctp-prpolicies}}  |   TBD    |
+|  {{I-D.ietf-tram-alpn}}  |   TBD    |
+|  {{I-D.petithuguenin-tram-turn-dtls}}  |   TBD    |
+|  {{I-D.reddy-mmusic-ice-happy-eyeballs}}  |   TBD    |
 
