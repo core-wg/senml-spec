@@ -63,7 +63,6 @@ normative:
   I-D.petithuguenin-tram-turn-dtls:
   I-D.reddy-mmusic-ice-happy-eyeballs:
   RFC2119:
-  RFC2119:
   RFC3264:
   RFC3388:
   RFC5245:
@@ -71,6 +70,16 @@ normative:
   RFC7064:
   RFC7065:
   RFC7301:
+  I-D.nandakumar-rtcweb-stun-uri:
+  I-D.petithuguenin-behave-turn-uris:
+  I-D.ietf-avtcore-avp-codecs:
+  I-D.ietf-avtcore-srtp-encrypted-header-ext:
+  I-D.ietf-avtext-multiple-clock-rates:
+  RFC7064:
+  RFC7065:
+  RFC7007:
+  RFC6904:
+  RFC7160:
 
 informative:
   I-D.alvestrand-rtcweb-gateways:
@@ -196,12 +205,9 @@ Time Estimates
 
 The following table has some very rough estimates of when the draft will become an
 RFC. Historically these dates have often taken much longer than the estimates
-so take with a large dose of salt.
+so take this with a large dose of salt.
 
 | Draft Name  | ETA |
-|  {{I-D.grange-vp9-bitstream}}  |   TBD    |
-|  {{I-D.hutton-httpbis-connect-protocol}}  |   TBD    |
-|  {{I-D.ietf-avtcore-6222bis}}  |   DONE    |
 |  {{I-D.ietf-avtcore-multi-media-rtp-session}}  |   TBD    |
 |  {{I-D.ietf-avtcore-rtp-circuit-breakers}}  |   TBD    |
 |  {{I-D.ietf-avtcore-rtp-multi-stream-optimisation}}  |   ???? ???    |
@@ -231,12 +237,32 @@ so take with a large dose of salt.
 |  {{I-D.ietf-rtcweb-stun-consent-freshness}}  |   TBD    |
 |  {{I-D.ietf-rtcweb-transports}}  |   TBD    |
 |  {{I-D.ietf-rtcweb-video}}  |   TBD    |
-|  {{I-D.ietf-tls-applayerprotoneg}}  |   DONE    |
 |  {{I-D.ietf-tsvwg-rtcweb-qos}}  |   TBD    |
 |  {{I-D.ietf-tsvwg-sctp-dtls-encaps}}  |   TBD    |
 |  {{I-D.ietf-tsvwg-sctp-ndata}}  |   TBD    |
 |  {{I-D.ietf-tsvwg-sctp-prpolicies}}  |   TBD    |
 |  {{I-D.ietf-tram-alpn}}  |   TBD    |
+|  {{I-D.grange-vp9-bitstream}}  |   TBD    |
+|  {{I-D.hutton-httpbis-connect-protocol}}  |   TBD    |
 |  {{I-D.petithuguenin-tram-turn-dtls}}  |   TBD    |
 |  {{I-D.reddy-mmusic-ice-happy-eyeballs}}  |   TBD    |
+|  {{I-D.ietf-tls-applayerprotoneg}}  |   {{RFC7301}}    |
+|  {{I-D.ietf-avtcore-6222bis}}  |   {{RFC7022}}    |
+|  {{I-D.nandakumar-rtcweb-stun-uri}}  |   {{RFC7064}}    |
+|  {{I-D.petithuguenin-behave-turn-uris}}  |   {{RFC7065}}    |
+|  {{I-D.ietf-avtcore-avp-codecs}}  |   {{RFC7007}}    |
+|  {{I-D.ietf-avtcore-srtp-encrypted-header-ext}}  |   {{RFC6904}}    |
+|  {{I-D.ietf-avtext-multiple-clock-rates}}  |   {{RFC7160}}    |
+
+
+
+
+
+
+
+
+
+
+
+
 
