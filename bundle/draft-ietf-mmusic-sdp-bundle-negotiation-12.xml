@@ -66,21 +66,32 @@
 
     <abstract>
 		<t>
-			This specification defines a new SDP Grouping Framework extension, 'BUNDLE'. The
-			extension can be used with the Session Description Protocol (SDP) Offer/Answer
-			mechanism to negotiate the usage of a single 5-tuple for sending and receiving media
-			associated with multiple SDP media descriptions ("m="). This is referred to as bundled media.
-			This specification also defines a new SDP attribute, 'bundle-only', which can be used to
+			This specification defines a new SDP Grouping Framework
+			extension, 'BUNDLE'. The extension can be used with the
+			Session Description Protocol (SDP) Offer/Answer
+			mechanism to negotiate the usage of a single 5-tuple for
+			sending and receiving media associated with multiple SDP
+			media descriptions ("m="). This is referred to as
+			bundled media.
+		</t>
+		<t>
+			Both endpoints can negotiate the use of bundle and to
+			support that negotiations, this specification defines a
+			new SDP attribute, 'bundle-only', which can be used to
 			request that specific media is only used if bundled.
+			This specification also updates sections 5.1, 8.1 and
+			8.2 of RFC 3264 to allows an answerer to assign a
+			non-zero port value to an "m=" line in an SDP answer,
+			even if the "m=" line in the associated SDP offer
+			contained a zero port value.
 		</t>
 		<t>
-			This specification also updates sections 5.1, 8.1 and 8.2 of RFC 3264. The update
-			allows an answerer to assign a non-zero port value to an "m=" line in an SDP answer, even
-			if the "m=" line in the associated SDP offer contained a zero port value.
-		</t>
-		<t>
-			This specification also defines a new RTP SDES item, and a new RTP header extension, that
-			can be used to carry a value that associates RTP/RTCP packets with a specific media
+			There are multiple ways to correlate the bundled RTP
+			packets with the appropriate media descriptions. This
+			specification defines a new RTP SDES item and a new RTP
+			header extension that provides an additional way to do
+			this correlation by using them to carry a value that
+			associates the RTP/RTCP packets with a specific media
 			description.
 		</t>
     </abstract>
@@ -89,31 +100,29 @@
 <middle>
     <section title="Introduction" toc="default">
 		<t>
-			In the IETF RTCWEB WG, a need to use a single 5-tuple for sending and receiving media 
-			associated with multiple SDP media descriptions ("m=" lines) has been identified. This 
-			would e.g. allow the usage of a single set of Interactive Connectivity Establishment 
+			This specification defines a way to use a single 5-tuple for sending and receiving media 
+			associated with multiple SDP media descriptions ("m=" lines) . This 
+			allows the usage of a single set of Interactive Connectivity Establishment 
 			(ICE) <xref format="default" pageno="false" target="RFC5245"/> candidates for multiple 
-			media descriptions.
-		</t>		
-		<t>
+			media descriptions. 
 			This specification defines a new SDP Grouping Framework <xref format="default" pageno="false" 
-			target="RFC5888"/> extension , 'BUNDLE'. The extension can be used with the Session Description 
+			target="RFC5888"/> extension called 'BUNDLE'. The extension can be used with the Session Description 
 			Protocol (SDP) Offer/Answer mechanism <xref format="default" pageno="false" target="RFC3264"/> 
 			to negotiate the usage of a single 5-tuple for sending and receiving media associated with 
-			multiple SDP media descriptions ("m="). This is referred to as bundled media. This specification 
-			also defines a new SDP attribute, 'bundle-only', which can be used to request that specific media 
-			is only used if bundled.
+			multiple SDP media descriptions ("m="). This is referred
+                        to as bundled media.
 		</t>
 		<t>
 			The offerer and answerer <xref format="default" pageno="false" target="RFC3264"/> use
 			the BUNDLE extension to negotiate the 5-tuples (BUNDLE addresses), one for the offerer (offerer BUNDLE
 			address) and one for the answerer (answerer BUNDLE address) to be used for the bundled 
 			media associated with a BUNDLE group. 
-		</t>
-		<t>
 			Once the offerer and the answerer have negotiated a BUNDLE group, they assign their respective 
 			BUNDLE address to each "m=" line in the BUNDLE group. The BUNDLE address is used to send and 
 			receive all media associated with the BUNDLE group.
+                        This specification 
+			also defines a new SDP attribute, 'bundle-only', which can be used to request that specific media 
+			is only used if bundled. 
 		</t>
 		<t>
 			NOTE: As defined in RFC 4566 <xref format="default" pageno="false" target="RFC4566"/>, the 
@@ -1417,13 +1426,15 @@
 		<t>
 			The security considerations defined in <xref format="default" 
 			pageno="false" target="RFC3264"/> and <xref format="default" 
-			pageno="false" target="RFC5888"/> apply to the BUNDLE extension.
+			pageno="false" target="RFC5888"/> apply to the BUNDLE
+                        extension. Bundle does not change which information
+                        flows over the network but only changes which ports that
+                        information if flowing on and thus has very little
+                        impact on the security of the RTP sessions. 
 		</t>
 		<t>
-			When the BUNDLE extension is used a single set of security credentials
-			might be used for all media streams associated with a BUNDLE group. If
-			the security credentials are compromised, an attacker will have 
-			access to all media content.
+			When the BUNDLE extension is used, a single set of security credentials
+			might be used for all media streams associated with a BUNDLE group. 
 		</t>
     </section>
 	

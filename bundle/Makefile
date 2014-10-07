@@ -4,6 +4,7 @@ SRC  := $(wildcard draft-*.xml)
 
 HTML := $(patsubst %.xml,%.html,$(SRC))
 TXT  := $(patsubst %.xml,%.txt,$(SRC))
+RAW  := $(patsubst %.xml,%.raw.txt,$(SRC))
 DIF  := $(patsubst %.xml,%.diff.html,$(SRC))
 PDF  := $(patsubst %.xml,%.pdf,$(SRC))
 
@@ -16,13 +17,15 @@ clean:
 #	xsltproc -o $@ rfc2629.xslt $^
 
 %.html: %.xml
-	xml2rfc $^ $@
+	xml2rfc --html $^ 
 
+%.raw.txt: %.xml
+	xml2rfc --raw $^ 
 
 %.txt: %.xml
-	xml2rfc $^ $@
+	xml2rfc --text $^ 
 
-%.diff.html: %.txt
+%.diff.html: %.raw.txt
 	htmlwdiff  $^.old $^ >  $@
 
 %.pdf: %.html
