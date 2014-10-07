@@ -81,75 +81,75 @@ on
 {{I-D.ietf-rtcweb-security}}.
 
 These IETF drafts in turn normatively depend on the following drafts:
-{{draft-ietf-payload-rtp-opus
+{{ietf-payload-rtp-opus}}, 
 
+{{ietf-tsvwg-sctp-ndata}}, 
+{{ietf-rtcweb-data-protocol}}, 
+{{ietf-tsvwg-sctp-dtls-encaps}}, 
+{{ietf-rtcweb-security}}, 
+{{ietf-tsvwg-sctp-prpolicies}}, 
+{{ietf-mmusic-sctp-sdp}}, 
 
-ietf-tsvwg-sctp-ndata
-ietf-rtcweb-data-protocol
-ietf-tsvwg-sctp-dtls-encaps
-ietf-rtcweb-security
-ietf-rtcweb-security-arch
-ietf-rtcweb-jsep
-ietf-tsvwg-sctp-prpolicies
-ietf-mmusic-sctp-sdp
-ietf-tsvwg-sctp-dtls-encaps
+{{ietf-mmusic-msid}}, 
+{{ietf-mmusic-sctp-sdp}}, 
+{{ietf-mmusic-sdp-bundle-negotiation}}, 
+{{ietf-mmusic-sdp-mux-attributes}}, 
 
-ietf-mmusic-msid
-ietf-mmusic-sctp-sdp
-ietf-mmusic-sdp-bundle-negotiation
-ietf-mmusic-sdp-mux-attributes
-ietf-rtcweb-audio
-ietf-rtcweb-data-protocol
-ietf-rtcweb-rtp-usage]
-ietf-rtcweb-security
-ietf-rtcweb-security-arch
+{{ietf-avtcore-multi-media-rtp-session}}, 
+{{ietf-avtcore-rtp-circuit-breakers}}, 
+{{ietf-avtcore-rtp-multi-stream-optimisation}}, 
+{{ietf-avtcore-rtp-multi-stream}}, 
 
-ietf-avtcore-multi-media-rtp-session
-ietf-avtcore-rtp-circuit-breakers
-ietf-avtcore-rtp-multi-stream-optimisation
-ietf-avtcore-rtp-multi-stream
+{{ietf-avtcore-6222bis}} (now RFC 7022),
+{{ietf-rtcweb-stun-consent-freshness}}, 
 
-ietf-rtcweb-security
-ietf-avtcore-6222bis
-ietf-rtcweb-rtp-usage
-ietf-rtcweb-stun-consent-freshness
+{{hutton-httpbis-connect-protocol}}, 
+{{patil-tram-alpn}}, 
+{{ietf-tls-applayerprotoneg}} (now RFC 7301),
+{{ietf-httpbis-http2}}, 
+{{ietf-httpbis-header-compression}}, 
+{{petithuguenin-tram-turn-dtls}}, 
+{{ietf-tsvwg-rtcweb-qos}}, 
+{{reddy-mmusic-ice-happy-eyeballs}}, 
+{{ietf-rtcweb-alpn}}, 
 
-hutton-httpbis-connect-protocol
-ietf-tsvwg-rtcweb-qos
-reddy-mmusic-ice-happy-eyeballs
-draft-ietf-rtcweb-alpn
-
-grange-vp9-bitstream
-ietf-payload-rtp-h265
-ietf-payload-vp8
+{{ietf-payload-vp8}}, 
 
 
 Right now security normatively depends on
-{{ietf-rtcweb-overview 
+{{ietf-rtcweb-overview }}, 
 
-
+Right now video normatively depends on
+{{grange-vp9-bitstream}}, 
+{{ietf-payload-rtp-h265}}, 
 
 
 A few key drafts that the informatively depends on:
-ietf-mmusic-trickle-ice
-nandakumar-rtcweb-sdp
-ietf-avtcore-multiplex-guidelines
-ietf-avtcore-rtp-topologies-update
-ietf-avtext-rtp-grouping-taxonomy
-ietf-rmcat-cc-requirements
-ietf-rtcweb-use-cases-and-requirements
-ietf-tsvwg-rtcweb-qos
-ietf-avtcore-6222bis 
-kaufman-rtcweb-security-ui
-alvestrand-rtcweb-gateways
-hutton-rtcweb-nat-firewall-considerations
-ietf-dart-dscp-rtp 
+{{ietf-tls-applayerprotoneg}}, 
+{{ietf-mmusic-trickle-ice}}, 
+{{nandakumar-rtcweb-sdp}}, 
+{{ietf-avtcore-multiplex-guidelines}}, 
+{{ietf-avtcore-rtp-topologies-update}}, 
+{{ietf-avtext-rtp-grouping-taxonomy}}, 
+{{ietf-rmcat-cc-requirements}}, 
+{{ietf-rtcweb-use-cases-and-requirements}}, 
+{{ietf-tsvwg-rtcweb-qos}}, 
+{{ietf-avtcore-6222bis}}, 
+{{kaufman-rtcweb-security-ui}}, 
+{{alvestrand-rtcweb-gateways}}, 
+{{hutton-rtcweb-nat-firewall-considerations}}, 
+{{ietf-dart-dscp-rtp}}, 
+{{roach-mmusic-unified-plan}}, 
+{{westerlund-avtcore-multiplex-architecture}}, 
+{{lennox-payload-ulp-ssrc-mux}}, 
+{{ietf-avtcore-multiplex-guidelines}}, 
+{{ietf-avtcore-srtp-ekt}}, 
+{{ietf-rtcweb-overview}},
+{{ietf-rtcweb-use-cases-and-requirements}}, 
 
 
-Missing:
+Something should ref:
+{{ietf-rtcweb-audio-codecs-for-interop}}
 
-draft-ietf-rtcweb-audio-codecs-for-interop-00.txt
-draft-ietf-rtcweb-overview-11.txt
-draft-ietf-rtcweb-stun-consent-freshness-07.txt
-draft-ietf-rtcweb-use-cases-and-requirements-14.txt
+
 
