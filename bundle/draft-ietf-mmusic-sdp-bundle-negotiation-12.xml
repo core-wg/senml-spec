@@ -125,29 +125,25 @@
 			is only used if bundled. 
 		</t>
 		<t>
-			NOTE: As defined in RFC 4566 <xref format="default" pageno="false" target="RFC4566"/>, the 
+		        As defined in RFC 4566 <xref format="default" pageno="false" target="RFC4566"/>, the 
 			semantics of assigning the same port value to multiple "m=" lines are undefined, and there is no 
 			grouping defined by such means. Instead, an explicit grouping mechanism needs to be used to 
 			express the intended semantics. This specification provides such an extension.
-		</t>
-		<t>
 			This specification also updates sections 5.1, 8.1 and 8.2 of RFC 3264 <xref format="default" pageno="false" 
 			target="RFC3264"/>. The update allows an answerer to assign a non-zero port value to an "m=" line in an 
 			SDP answer, even if the "m=" line in the associated SDP offer contained a zero port value.
 		</t>
 		<t>
-			This specification also defines a new RTP SDES item, and a new RTP header extension, that
+			This specification also defines a new RTP SDES item and
+                        a new RTP header extension that
 			can be used to carry a value that associates RTP/RTCP packets with a specific media
-			description.
+			description. This can be used to correlate a RTP packet
+                        with the correct media. 
 		</t>
 		<t>
 			SDP bodies can contain multiple BUNDLE groups. A given BUNDLE address MUST only be associated
 			with a single BUNDLE group.
-		</t>
-		<t>
 			The procedures in this specification apply independently to a given BUNDLE group.
-		</t>
-		<t>
 			All Real-time Transport Protocol (RTP) <xref format="default" 
 			pageno="false" target="RFC3550"/> based media flows 
 			associated with a single BUNDLE group belong to a single RTP session 
@@ -166,7 +162,7 @@
     <section title="Terminology" toc="default">
 		<t>
 			5-tuple: A collection of the following values: source address, source port, 
-			destination address, destination port and protocol.
+			destination address, destination port, and protocol.
 		</t>
 		<t>
 			Unique address: An IP address and IP port combination that is assigned to 
