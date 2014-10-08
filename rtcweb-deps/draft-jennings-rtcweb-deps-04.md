@@ -23,7 +23,7 @@ author:
 
 normative:
   I-D.grange-vp9-bitstream:
-  I-D.hutton-httpbis-connect-protocol:
+  I-D.ietf-httpbis-tunnel-protocol:
   I-D.ietf-avtcore-6222bis:
   I-D.ietf-avtcore-multi-media-rtp-session:
   I-D.ietf-avtcore-rtp-circuit-breakers:
@@ -156,7 +156,7 @@ These IETF drafts in turn normatively depend on the following drafts:
 {{I-D.ietf-avtcore-rtp-multi-stream}}, 
 {{I-D.ietf-avtcore-6222bis}} (now {{RFC7022}}),
 {{I-D.ietf-rtcweb-stun-consent-freshness}}, 
-{{I-D.hutton-httpbis-connect-protocol}}, 
+{{I-D.ietf-httpbis-tunnel-protocol}},
 {{I-D.ietf-tram-alpn}}, 
 {{I-D.ietf-tls-applayerprotoneg}} (now {{RFC7301}}),
 {{I-D.ietf-httpbis-http2}}, 
@@ -176,7 +176,6 @@ Right now video normatively depends on
 
 The drafts webrtc currently normatively depends on that are not WG drafts are:
 {{I-D.grange-vp9-bitstream}}, 
-{{I-D.hutton-httpbis-connect-protocol}}, 
 {{I-D.reddy-mmusic-ice-happy-eyeballs}}.
 
 A few key drafts that the work informatively depends on:
@@ -209,7 +208,7 @@ RFC. Historically these dates have often taken much longer than the estimates
 so take this with a large dose of salt.
 
 | Draft Name  | ETA |
-|  {{I-D.hutton-httpbis-connect-protocol}}  |       |
+|  {{I-D.ietf-httpbis-tunnel-protocol}} |   2015 June    |
 |  {{I-D.reddy-mmusic-ice-happy-eyeballs}}  |       |
 |  {{I-D.ietf-avtcore-multi-media-rtp-session}}  |       |
 |  {{I-D.ietf-avtcore-rtp-circuit-breakers}}  |       |
@@ -229,13 +228,10 @@ so take this with a large dose of salt.
 |  {{I-D.ietf-rtcweb-constraints-registry}}  |       |
 |  {{I-D.ietf-rtcweb-data-channel}}  |       |
 |  {{I-D.ietf-rtcweb-data-protocol}}  |       |
-|  {{I-D.ietf-rtcweb-data-protocol}}  |       |
 |  {{I-D.ietf-rtcweb-jsep}}  |   2015 Oct    |
-|  {{I-D.ietf-rtcweb-overview }}  |       |
 |  {{I-D.ietf-rtcweb-overview}}  |       |
 |  {{I-D.ietf-rtcweb-rtp-usage}}  |       |
 |  {{I-D.ietf-rtcweb-security-arch}}  |       |
-|  {{I-D.ietf-rtcweb-security}}  |       |
 |  {{I-D.ietf-rtcweb-security}}  |       |
 |  {{I-D.ietf-rtcweb-stun-consent-freshness}}  |       |
 |  {{I-D.ietf-rtcweb-transports}}  |       |
