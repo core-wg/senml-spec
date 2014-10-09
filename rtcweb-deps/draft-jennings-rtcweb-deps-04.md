@@ -23,14 +23,17 @@ author:
 
 normative:
   I-D.grange-vp9-bitstream:
-  I-D.ietf-httpbis-tunnel-protocol:
   I-D.ietf-avtcore-6222bis:
+  I-D.ietf-avtcore-avp-codecs:
   I-D.ietf-avtcore-multi-media-rtp-session:
   I-D.ietf-avtcore-rtp-circuit-breakers:
   I-D.ietf-avtcore-rtp-multi-stream-optimisation:
   I-D.ietf-avtcore-rtp-multi-stream:
+  I-D.ietf-avtcore-srtp-encrypted-header-ext:
+  I-D.ietf-avtext-multiple-clock-rates:
   I-D.ietf-httpbis-header-compression:
   I-D.ietf-httpbis-http2:
+  I-D.ietf-httpbis-tunnel-protocol:
   I-D.ietf-mmusic-msid:
   I-D.ietf-mmusic-sctp-sdp:
   I-D.ietf-mmusic-sdp-bundle-negotiation:
@@ -55,32 +58,29 @@ normative:
   I-D.ietf-rtcweb-transports:
   I-D.ietf-rtcweb-video:
   I-D.ietf-tls-applayerprotoneg:
+  I-D.ietf-tram-alpn:
+  I-D.ietf-tram-stun-dtls:
   I-D.ietf-tsvwg-rtcweb-qos:
   I-D.ietf-tsvwg-sctp-dtls-encaps:
   I-D.ietf-tsvwg-sctp-ndata:
   I-D.ietf-tsvwg-sctp-prpolicies:
-  I-D.ietf-tram-alpn:
+  I-D.nandakumar-rtcweb-stun-uri:
+  I-D.petithuguenin-behave-turn-uris:
   I-D.petithuguenin-tram-turn-dtls:
   I-D.reddy-mmusic-ice-happy-eyeballs:
-  I-D.ietf-tram-stun-dtls:
   RFC2119:
   RFC3264:
   RFC3388:
   RFC5245:
+  RFC6904:
+  RFC7007:
   RFC7022:
   RFC7064:
-  RFC7065:
-  RFC7301:
-  I-D.nandakumar-rtcweb-stun-uri:
-  I-D.petithuguenin-behave-turn-uris:
-  I-D.ietf-avtcore-avp-codecs:
-  I-D.ietf-avtcore-srtp-encrypted-header-ext:
-  I-D.ietf-avtext-multiple-clock-rates:
   RFC7064:
   RFC7065:
-  RFC7007:
-  RFC6904:
+  RFC7065:
   RFC7160:
+  RFC7301:
   RFC7350:
 
 informative:
@@ -213,16 +213,16 @@ so take this with a large dose of salt.
 |  {{I-D.ietf-avtcore-rtp-multi-stream}}  |       |
 |  {{I-D.ietf-avtcore-srtp-encrypted-header-ext}}  |   {{RFC6904}}    |
 |  {{I-D.ietf-avtext-multiple-clock-rates}}  |   {{RFC7160}}    |
-|  {{I-D.ietf-httpbis-header-compression}}  |       |
-|  {{I-D.ietf-httpbis-http2}}  |       |
-|  {{I-D.ietf-httpbis-tunnel-protocol}} |   2015 June    |
+|  {{I-D.ietf-httpbis-header-compression}}  |  2015 Feb     |
+|  {{I-D.ietf-httpbis-http2}}  |   2015 Feb    |
+|  {{I-D.ietf-httpbis-tunnel-protocol}} |   2015 April    |
 |  {{I-D.ietf-mmusic-msid}}  |       |
 |  {{I-D.ietf-mmusic-sctp-sdp}}  |       |
 |  {{I-D.ietf-mmusic-sdp-bundle-negotiation}}  |       |
 |  {{I-D.ietf-mmusic-sdp-mux-attributes}}  |       |
-|  {{I-D.ietf-payload-rtp-h265}}  |       |
-|  {{I-D.ietf-payload-rtp-opus}}  |       |
-|  {{I-D.ietf-payload-vp8}}  |       |
+|  {{I-D.ietf-payload-rtp-h265}}  |    2015 Jan   |
+|  {{I-D.ietf-payload-rtp-opus}}  |    2015 Mar   |
+|  {{I-D.ietf-payload-vp8}}  |  2014 Dec   |
 |  {{I-D.ietf-rtcweb-alpn}}  |       |
 |  {{I-D.ietf-rtcweb-audio}}  |       |
 |  {{I-D.ietf-rtcweb-constraints-registry}}  |       |
@@ -246,16 +246,4 @@ so take this with a large dose of salt.
 |  {{I-D.nandakumar-rtcweb-stun-uri}}  |   {{RFC7064}}    |
 |  {{I-D.petithuguenin-behave-turn-uris}}  |   {{RFC7065}}    |
 |  {{I-D.reddy-mmusic-ice-happy-eyeballs}}  |       |
-
-
-
-
-
-
-
-
-
-
-
-
 

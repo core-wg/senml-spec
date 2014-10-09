@@ -278,14 +278,10 @@
 				The 'bundle-only' attribute can be associated with a bundled "m=" line in an offer, to
 				request that the answerer only accepts the "m=" line if the answerer keeps the "m=" line
 				within the associated BUNDLE group.
-			</t>
-			<t>
 				In order to ensure that an answerer that does not supports the BUNDLE extension always
 				rejects a 'bundle-only' "m=" line, the offerer can assign a zero port value to the "m="
 				line. According to <xref target="RFC4566" pageno="false" format="default"/> an answerer 
 				will reject such "m=" line.
-			</t>
-			<t>
 				The usage of the 'bundle-only' attribute is only defined for a bundled "m=" line within
 				an offer. Other usage is unspecified.
 			</t>
@@ -931,8 +927,16 @@
 						<list style="symbols">
 							<t>A specific payload type value can be used in multiple bundled "m=" lines 
 							if each codec associated with the payload type number shares an identical 
-							codec configuration [<xref format="default" pageno="false" target="sec-rtp-sessions-pt"/>].</t>
-							<t>The "proto" value in each bundled "m=" line MUST be identical (e.g. RTP/AVPF).</t>
+							codec configuration
+                                                        [<xref format="default"
+                                                        pageno="false"
+                                                        target="sec-rtp-sessions-pt"/>].</t>
+
+							<t>The "proto" value in
+                                                        each bundled "m=" line
+                                                        MUST be identical
+                                                        (e.g. RTP/AVPF).</t>
+
 							<t>A given SSRC SHOULD NOT transmit RTP packets using payload types that 
 							originate from different bundled "m=" lines.</t>
 						</list>				
