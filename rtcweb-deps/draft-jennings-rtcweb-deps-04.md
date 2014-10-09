@@ -2,7 +2,7 @@
 title: "WebRTC Dependencies"
 abbrev: WebRTC Dependencies
 docname: draft-jennings-rtcweb-deps-04
-date: 2014-10-08
+date: 2014-10-09
 category: info
 ipr: trust200902
 
@@ -66,7 +66,6 @@ normative:
   I-D.ietf-tsvwg-sctp-prpolicies:
   I-D.nandakumar-rtcweb-stun-uri:
   I-D.petithuguenin-behave-turn-uris:
-  I-D.petithuguenin-tram-turn-dtls:
   I-D.reddy-mmusic-ice-happy-eyeballs:
   RFC2119:
   RFC3264:
@@ -162,7 +161,6 @@ These IETF drafts in turn normatively depend on the following drafts:
 {{I-D.ietf-tsvwg-sctp-dtls-encaps}}, 
 {{I-D.ietf-tsvwg-sctp-ndata}}, 
 {{I-D.ietf-tsvwg-sctp-prpolicies}}, 
-{{I-D.petithuguenin-tram-turn-dtls}}, 
 {{I-D.reddy-mmusic-ice-happy-eyeballs}}.
 
 Right now security normatively depends on
