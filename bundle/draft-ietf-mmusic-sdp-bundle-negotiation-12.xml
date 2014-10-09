@@ -526,7 +526,7 @@
 					pageno="false" format="default"/>].
 				</t>
 				<t>
-					The answerer MUST NOT include a 'bundle-only' attribute in an answer."
+					The answerer MUST NOT include a 'bundle-only' attribute in an answer.
 				</t>
 				<t>
 					NOTE: If a bundled "m=" line in an offer contains a port zero value, but the "m=" line does not contain
@@ -869,20 +869,21 @@
 		<section title="General" anchor="sec-protocol-id-gen" toc="default">
 			<t>
 				If bundled "m=" lines represent different transport protocols, there MUST
-				exist a publically available specification which describes a mechanism, for this 
-				specific transport protocol combination, how to associate a received packet with
+				exist a publicly available specification which describes a mechanism for this 
+				specific transport protocol combination that
+                                describes how to associate a received packet with
 				the correct transport protocol.
 			</t>
 			<t>
 				In addition, if a received packet can be associated with more than one
 				bundled "m=" line, there MUST exist a publically available specification which 
-				describes a mechanism how to associate the received packet with the correct "m=" line.
+				describes a mechanism for associating the received packet with the correct "m=" line.
 			</t>
 		</section>
 		<section anchor="sec-packets-id-sds" title="STUN, DTLS, SRTP" toc="default">
 			<t>
 				Section 5.1.2 of <xref format="default" pageno="false" target="RFC5764"/> describes a 
-				mechanism how to identify the protocol among the STUN, DTLS and SRTP protocols (in any combination). 
+				mechanism to identify the protocol among the STUN, DTLS and SRTP protocols (in any combination). 
 				If an offer or answerer in offers or answers include bundled "m=" lines that represent these protocols, 
 				the offerer or answerer MUST support the mechanism described in <xref format="default" pageno="false" 
 				target="RFC5764"/>, and no explicit negotiation is required in order to indicate support 
@@ -892,9 +893,9 @@
 				<xref format="default" pageno="false" target="RFC5764"/> does not describe how to identify 
 				different protocols transported on DTLS, only how to identify the DTLS protocol itself. If 
 				multiple protocols are transported on DTLS, there MUST exist a specification describing a 
-				mechanism how to identify each individual protocol. In addition, if a received DTLS packet 
+				mechanism for identify each individual protocol. In addition, if a received DTLS packet 
 				can be associated with more than one "m=" line, there MUST exist a specification which
-				describes a mechanism how to associate the received DTLS packet with the correct "m=" line.
+				describes a mechanism for associating the received DTLS packet with the correct "m=" line.
 			</t>
 			<t>
 				[<xref format="default" pageno="false" target="sec-rtp-pt"/>] describes how to associate a received 
@@ -948,7 +949,7 @@
 						issues [ref to draft-ietf-avtext-multiple-clock-rates].
 					</t>
 			</section>
-			<section anchor="sec-rtp-sessions-pt" title="Payload Type (PT) Value Re-usage" toc="default">
+			<section anchor="sec-rtp-sessions-pt" title="Payload Type (PT) Value Reuse" toc="default">
 					<t>
 						Multiple bundled "m=" lines might represent RTP based media. As all RTP based 
 						media associated with a BUNDLE group belong to the same RTP session, in order for a given payload type 
