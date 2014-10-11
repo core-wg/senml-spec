@@ -328,12 +328,20 @@
    <t>&nbsp;</t>
   </section>
   <section title="Category: INHERIT">
-       <t> Attributes that encapsulate other SDP attributes and their
-       multiplexing characteristics are inherited from the attributes
-       they encapsulate.  Such attributes as of today, are defined in
-       [RFC3407], [RFC5939] and [RFC6871] as part of a generic
+       <t> Attributes that encapsulate other SDP attributes or parameters.
+       These attributes inherit their multiplexing characteristics   from the
+       attributes or parameters they encapsulate. Such attributes as of today, 
+       are defined in [RFC3407], [RFC5939] and [RFC6871] as part of a generic
        framework for indicating and negotiating transport, media and
        media format related capabilities in the SDP. </t>
+      <t> The inheritance manifests itself when the encapsulated attribute or 
+        parameter is being leveraged. In the case of SDP Capability Negotiation 
+        [RFC5939] for example, this occurs when a capability (encapsulating attribute)
+        is used as part of a configuration; the configuration inherits the multiplexing 
+        Category of each of its constituent (encapsulated) attributes and parameters. 
+        This in turn may place constraints on what constitutes a valid configuartion 
+        from a multiplexing point of view, e.g. because some attributes must be 
+        IDENTICAL (see Section 15 for further details).</t> 
    <t>&nbsp;</t>
     <figure>
         <artwork align="left" alt="" height="" name="" type="" width=""
@@ -537,19 +545,11 @@
         <ttcol align='left'>Notes</ttcol>
         <ttcol align='left'>Level</ttcol>
         <ttcol align='left'>Category</ttcol>
-        <c>rtcp-fb&nbsp;</c><c>The combination of a particular Payload
-        Type along with the m=line identify the scope and
-        applicability of a given RTCP feedback to a particular RTP
-        Stream.</c> <c>M</c><c>NORMAL&nbsp;</c>
+        <c>rtcp-fb&nbsp;</c><c>Since RTCP feedback attributes are Payload Type
+        (PT) scoped, their values MUST be identical for a given PT across
+        the multiplexed m=lines.</c><c>M</c><c>IDENTICAL-PER-PT&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
       </texttable>
-      <t hangText="Note">
-       Since RTCP feedback attributes are Payload Type (PT) scoped,
-       the usage of identical Payload Type values across multiplexed
-       m=lines is described in <xref
-       target="I-D.ietf-mmusic-sdp-bundle-negotiation"></xref>.
-      </t>
     </section>
 
      <section title="RFC5761 - Multiplexing RTP and RTCP">
@@ -645,15 +645,11 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>crypto&nbsp;</c><c>Refer to section 6.2.5 of <xref
-          target="I-D.ietf-mmusic-sdp-bundle-negotiation"></xref></c>
-          <c>M&nbsp;</c><c>SPECIAL&nbsp;</c>
+          <c>crypto&nbsp;</c><c>crypto attribute must be the one that corresponds 
+          to the m=line chosen for setting up the underlying transport flow </c>
+          <c>M&nbsp;</c><c>TRANSPORT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
-        <t hangText="Note">
-          If the multiplexing scheme cannot ensure unique SSRCs across
-          all the media lines, multiplexing MUST NOT be performed.
-        </t>
       </section>
 
       <section title="RFC5762 - RTP over DCCP">
@@ -1106,8 +1102,8 @@
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
          <t hangText="Note"> Since the attributes (a=cparmin and
-         a=cparmax) defines minimum and maximum numerical values
-         associated with the attributed described in a=cpar, it is
+         a=cparmax) define minimum and maximum numerical values
+         associated with the attributes described in a=cpar, it is
          recommended to consult the document defining the attribute
          for dealing under media stream multiplexing.
         </t>
@@ -1332,13 +1328,12 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>pcfg&nbsp;</c><c>Refer to section <xref target="encap"/> &nbsp;</c>
-          <c>M</c><c>INHERIT&nbsp;</c>
+          <c>pcfg&nbsp;</c><c>Refer to Section <xref target="encap"/> &nbsp;</c>
+          <c>M</c><c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>acfg&nbsp;</c><c>Refer to 
-	  section <xref target="encap"/>&nbsp;</c><c>M</c>
-          <c>INHERIT&nbsp;</c>
+          <c>acfg&nbsp;</c><c>Refer to Section <xref target="encap"/>&nbsp;</c>
+          <c>M</c><c>SPECIAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
           <c>csup&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c>
@@ -1349,8 +1344,8 @@
            <c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-           <c>acap&nbsp;</c><c>Refer to section <xref target="encap"/>&nbsp;</c><c>B</c>
-           <c>INHERIT&nbsp;</c>
+           <c>acap&nbsp;</c><c>Refer to section <xref target="encap"/>&nbsp;</c>
+           <c>B</c><c>INHERIT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
           <c>tcap&nbsp;</c><c>Refer to section <xref target="encap"/>&nbsp;</c>
@@ -1376,31 +1371,38 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>rmcap&nbsp;</c><c>Refer to section <xref target="encap"/>&nbsp;</c>
-          <c>B</c><c>INHERIT&nbsp;</c>
+          <c>rmcap&nbsp;</c><c>Refer to Section <xref target="encap"/>&nbsp;</c>
+          <c>B</c><c>IDENTICAL-PER-PT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>omcap&nbsp;</c><c>Refer to section <xref target="encap"/>&nbsp;</c>
-          <c>B</c><c>INHERIT&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
-          <c>mfcap&nbsp;</c><c>Refer to section <xref target="encap"/>&nbsp;</c>
-          <c>B</c><c>INHERIT&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
-          <c>mscap&nbsp;</c><c>Refer to section <xref target="encap"/>&nbsp;</c>
-          <c>B</c><c>INHERIT&nbsp;</c>
-          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
-          <c>lcfg&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>omcap&nbsp;</c><c>Not Impacted&nbsp;</c>
           <c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>sescap&nbsp;</c><c>Refer to section <xref target="encap"/>&nbsp;</c>
-          <c>S</c><c>INHERIT&nbsp;</c>
+          <c>mfcap&nbsp;</c><c>Refer to Section <xref target="encap"/>&nbsp;</c>
+          <c>B</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>mscap&nbsp;</c><c>Refer to Section <xref target="encap"/>&nbsp;</c>
+          <c>B</c><c>INHERIT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>lcfg&nbsp;</c><c>Refer to Section <xref target="encap"/>&nbsp;</c>
+          <c>B</c><c>SPECIAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>sescap&nbsp;</c><c>Refer to Section <xref target="encap"/>&nbsp;</c>
+          <c>S</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
+        <t hangText="Note"> The "sescap" attribute is NOT RECOMMENDED for use with 
+          multiplexing. The reason is that it requires the use of unique configuration 
+          numbers across the entire SDP (per [RFC6871]) as opposed to within a media 
+          description only (per [RFC5939]). As described in Section 15, the use of 
+          identical configuration numbers between multiplxed (bundled) media descriptions
+          is the default way of indicating compatible configurations in a bundle. 
+        </t>
       </section>
 
       <section title="RFC4567 - Key Management Extensions for SDP and RTSP">
@@ -2723,38 +2725,42 @@
                         by each side. The attribute ("a=acap") defines
                         how to list an attribute name and its
                         associated value (if any) as a capability. The
-                        attribute ("a=tcap") that defines how to list
+                        attribute ("a=tcap") defines how to list
                         transport protocols (e.g., "RTP/AVP") as
                         capabilities.
                       </t>
                       <t>
-                        A set of potential configurations indicating
-                        which combinations of those capabilities can
-                        be used for the session and its associated
-                        media stream components.  Potential
-                        configurations are not ready for use.
-                        Instead, they provide an alternative that may
-                        be used, subject to further negotiation.
+                        A set of potential configurations ("a=pcfg") provided
+                        by the offerer to indicate whcich combination of those
+                        capabilities can be used for the session and its 
+                        associated media stream components.  Potential
+                        configurations are not ready for use until fully 
+                        negotiated. They provide an alternative that may
+                        be used, subject to SDP capability negotiation 
+                        procedures. In particular the answerer may choose 
+                        one of the potential configurations for use as part 
+                        of the current Offer/Answer exchange.
                       </t>
                       <t>
-                        An actual configuration for the session and
-                        its associated media stream components, that
-                        specifies which combinations of session
-                        parameters and media stream components can be
-                        used currently and with what parameters.  Use
+                        An actual configuration ("a=acfg") for the session 
+                        and its associated media stream components. The 
+                        actual configuration identifies the potential 
+                        configuration that was negotiated for use. Use
                         of an actual configuration does not require
                         any further negotiation.
                       </t>
                       <t>
-                        A negotiation process that takes the set of
-                        actual and potential configurations
+                        A negotiation process that takes the current
+                        actual and the set of potential configurations
                         (combinations of capabilities) as input and
                         provides the negotiated actual configurations
-                        as output.
+                        as output. In <xref target="RFC5939"/> the 
+                        negotiation process is done independently for 
+                        each media description.
                       </t>  
                   </list>
               </t>
-              <section title="Recommendations">
+              <section title="Recommendation - Procedures for Potential Configuration Pairing">
                 <t>
                    This section provides recommendations for entities
                    generating and processing SDP under the generic
@@ -2767,17 +2773,59 @@
                   of enabling the Offerer to make sure that the
                   generated potential configurations between the
                   multiplexed streams can (easily) be negotiated to be
-                  consistent between those streams.
+                  consistent between those streams. In particular, the
+                  procedures aim to simply Answerer's procedure to choose
+                  potential configurations that are consistent across
+                  all the bundled media descriptions.
                 </t>
-                <section title="Recommendation-1: Transport Capability Analysis">
-                <t>
-                     When a transport capability is proposed as a
-                     potential configuration under a given media
-                     description, it is recommended that all the media
-                     descriptions under multiplexing have the same
-                     potential configuration number for the given
-                     transport capability.
-                </t>     
+                <t> A potential configuration selects a set of attributes 
+                and parameters that become part of the media description 
+                when negotiated. When multiplexing media descriptions with 
+                potential configurations specified, there may be a need 
+                for coordinating this selection between multiplexed media 
+                descriptions ensuring right multiplexing behavior.</t>
+                <t> Although it is possible to analyze the various potential 
+                configurations in bundled media descriptions to find combinations 
+                that satisfy such constraints, it can quickly become complicated 
+                to do so. </t>
+                <t> The procedures defined in <xref target="RFC5939"/> state 
+                that each potential configuration in the SDP has a unique 
+                configuration number, however the scope of uniqueness is 
+                limited to each media description. To make it simple for the 
+                answerer to chose valid combinations of potential configurations 
+                across media descriptions in a given bundle group, we provide a 
+                simple rule for constructiong potential configurations:-
+                  <list style="symbols">
+                    <t> Let m-bundle be the set of media descriptions that form 
+                    a given bundle .</t>
+                    <t> Let m-bundle-pcfg be the set of media descriptions in 
+                    m-bundle that include one or more potential configurations.</t>
+                    <t> Each media description in m-bundle-pcfg MUST have at 
+                    least one potential configuration with the same configuration 
+                    number (e.g. "1").</t>
+                    <t> For each potential configuration with configuration number x 
+                    in m-bundle-pcfg, the offerer MUST ensure that if the answerer 
+                    chooses configuration number x in each of the media descriptions 
+                    in m-bundle-pcfg, then the resulting SDP will have all multiplexing 
+                    constraints satisfied for those media descriptions.</t>
+                    <t> Since it is nearly impossible to define a generic
+                    mechanism for various capability extensions , this
+                    document does't provide procedures for dealing
+                    with the capability extension attributes. However,
+                    Section <xref target="med-cap-analysis"/> provide
+                    analysis of media capability extension attributes
+                    as defined in <xref target="RFC6871"/>. </t>
+                    </list>
+                  </t>  
+                  <t> The above allows the answerer to easily find multiplexing compatible 
+                  combinations of potential configurations:- The answerer simply choses a 
+                  potential configuration (number) that is present in all of the media 
+                  descriptions with potential configurations in the bundle.</t> 
+                  <t> Note that it is still possible for the offerer to provide additional 
+                  potential configurations with independent configuration numbers. The 
+                  answerer will have to perform more complicated analysis to determine 
+                  valid multiplexed combinations of those.</t> 
+                <section title="Example: Transport Capability Multiplexing">     
             <figure title="">
             <artwork><![CDATA[
 a=tcap:1 RTP/SAVPF
@@ -2795,22 +2843,13 @@ a=pcfg:2 t=2
           </figure>
                   <t>
                      In the example above, the potential
-                     configurations that Offer transport protocol
+                     configurations that offer transport protocol
                      capability of RTP/SAVPF has the same
                      configuration number "1" in both the audio and
                      video media descriptions.
                   </t>          
                 </section>  
-                <section title="Recommendation-2: Attribute Capability Analysis">  
-                  <t>
-                     For attribute capabilities which are offered as
-                     potential configurations that encapsulate
-                     attributes whose value MUST be IDENTICAL under
-                     multiplexing, it is recommended that all the
-                     media descriptions under multiplexing have the
-                     same potential configuration number for the given
-                     attribute capability.
-                  </t>
+                <section title="Example: Attribute Capability Multiplexing">  
 <figure title="">
             <artwork><![CDATA[
 a=acap:1 a=rtcp-mux
@@ -2834,27 +2873,7 @@ a=pcfg:2 a=2
                   IDENTICAL for the attribute a=rtcp-mux under
                   multiplexing.
                 </t>  
-              </section>
-              
-                <section title="Recommendation-3: Sescap Attribute Analysis">
-                 <t>
-                    It is recommended that any bundled media
-                    descriptions/configurations are also acceptable
-                    combinations of media streams/configurations as
-                    specified by "sescap" attribute.
-                 </t>
-                </section>
-                <section title="Recommendation-4: Capability Extension Attributes">
-                 <t>
-                    Since it is nearly impossible to define a generic
-                    mechanism for various capability extensions , this
-                    document does't provide procedures for dealing
-                    with the capability extension attributes. However,
-                    Section <xref target="med-cap-analysis"/> provide
-                    analysis of media capability extension attributes
-                    as defined in <xref target="RFC6871"/>.
-                 </t>
-                </section>    
+              </section>    
               </section>
           </section>
           <section title = "RFC6871 Analysis" anchor="med-cap-analysis">
@@ -2863,24 +2882,17 @@ a=pcfg:2 a=2
             framework described in <xref target="RFC5939"/> by
             defining media capabilities that can be used to indicate
             and negotiate media types and their associated format
-            parameters.
+            parameters. It also allows indication of latent configurations 
+            and session capabilities (the latter of which is not recommended for 
+            use with bundled media as described in Section 5.29).
             </t>
             <t>
             Building upon the analysis from the previous section,
-            following recommendation is provided for dealing with the
+            following example  is provided for dealing with the
             attributes defined in <xref target="RFC6871"/> under
             multiplexing
            </t>
-           <section title="Recommendation-5: Attribute Capability Under Shared Payload Type">
-                 <t>
-                     For attribute capabilities which are offered as
-                     potential configurations that encapsulate
-                     attributes whose value MUST be IDENTICAL-PER-PT
-                     under multiplexing, it is recommended that all
-                     the media descriptions under multiplexing have
-                     the same potential configuration number for the
-                     given attribute capability
-                 </t>
+           <section title="Example: Attribute Capability Under Shared Payload Type">
                  <t>
                   The attributes (a=rmcap, a=mfcap) follow the above
                   recommendations under mutliplexing
@@ -2924,92 +2936,50 @@ a=pcfg:4 m=5 pt=5:101
                 format capability used for the Payload Type 97. This
                 implies that both the media capability 2 and 4 along
                 with their media format capabilities MUST refer to the
-                same Codec configuration , as per the definition of
+                same codec configuration , as per the definition of
                 IDENTICAL-PER-PT
+              </t>
+            </section> 
+            <section title="Recommendation: Dealing with Payload Type Numbers">
+              <t>
+                RFC 6871 defines a new payload type ("pt") parameter to be used 
+                with the potential, actual and latent configuration parameters. 
+                The parameter associates RTP payload type numbers with the 
+                referenced RTP-based media format capabilities ("a=rmcap") defined 
+                in [RFC6871] and is appropriate only when the transport protocol 
+                uses RTP. This means that the same payload type number can be 
+                assigned as part of potential or actual configurations in different 
+                media descriptions in a bundle. There are rules for the usage of 
+                identical Payload Type values across multiplexed m=lines as 
+                described in [I-D.ietf-mmusic-sdp-bundle-negotiation], which MUST be 
+                followed here as well. As described in Section 15.2, the use of 
+                identical configuration numbers for compatible configurations in 
+                different media descriptions that are part of the bundle provides a 
+                way to ensure that the answerer can easily pick compatible 
+                configurations here as well. 
+              </t>  
+            </section> 
+            <section title="Recommendation: Dealing with Latent Configurations">
+              <t>
+                RFC 6871 adds the notion of a latent configurations, which provides 
+                configuration information that may be used to guide a subsequent 
+                offer/exchange, e.g. by adding another media stream or use alternative 
+                codec combinations not currently offered. Latent configurations have 
+                configuration numbers which cannot overlap with the potential configuration 
+                numbers [RFC6871]. Supported combinations of potential and latent 
+                configurations are indicated by use of the "a=sescap" attribute 
+                (from [RFC6871]), however use of this attribute is not recommended 
+                with bundled media, since it requires the use of unique configuration 
+                numbers across the SDP. Taken together, this means there is no 
+                well-defined way to indicate supported combinations of latent 
+                configurations, or combinations of latent and potential 
+                configurations with bundled media. It is still allowed to 
+                use the latent configuration attribute, however the limitations 
+                above will apply.  To determine valid combinations, actual 
+                negotiation will have to be attempted subsequently instead. 
               </t>
             </section>  
           </section> 
-          <section title="Recommendation-6: Offer/Answer Negotiation Expectations">
-                 <t>
-                     For attributes encapsulated via "a=acap",
-                     "a=omcap", "a=mscap" capability attributes and
-                     presented as part of potential/actual
-                     configurations during the Offer/Answer
-                     negotiation prodecure, the negotiation MUST
-                     ensure that the multiplexing behavior of these
-                     capabilities inherit from the behavior of the
-                     attribute being encapsulated.
-                </t>
-                <t>
-                  Example 1: Below SDP example captures the following
-                  aspects.
-                  <list style="symbols">
-                    <t> 
-                      The Offerer offers audio and video streams with
-                      several different RTP profiles (AVP, SAVP,
-                      SAVPF) as potential configurations.
-                    </t>
-                    <t> 
-                      Valid Answer that corresponds to the SDP answer
-                      where the Answerer accepts RTP/SAVPF as the
-                      default profile for both the media streams. In
-                      this scenario both the media streams can be
-                      successfully multiplexed.
-                    </t>
-                    <t>   
-                      Invalid Answer wherein the Answerer accepts the
-                      profile RTP/SAVPF for the audio stream and
-                      RTP/AVPF for the video stream. This scenario
-                      results in the failure of the multiplexing as
-                      defined in the section 7.2 of the BUNDLE
-                      specification
-                      [I-D.ietf-mmusic-sdp-bundle-negotiation].
-                    </t>
-                    </list>
-                   </t>   
-                <figure title="">
-            <artwork><![CDATA[
-<Offer-SDP>
-v=0
-o=- 25678 753849 IN IP4 192.0.2.1
-s=
-t=0 0
-c=IN IP4 192.0.2.1
-m=audio 3456 RTP/AVP 98
-a=tcap:1 RTP/SAVPF
-a=rtpmap:98 OPUS/48000/2
-a=pcfg:1 t=1
-m=video 51372 RTP/AVP 101
-a=rtpmap:101 H264/90000
-a=tcap:2 RTP/SAVPF RTP/AVPF
-a=pcfg:2 t=2|3
-
-<Valid Answer>
-v=0
-o=- 24351 621814 IN IP4 192.0.2.2
-s=
-m=audio 3456 RTP/SAVPF 98
-a=rtpmap:98 OPUS/48000/2
-a=acfg:1 t=1
-
-m=video 51372 RTP/SAVPF 101
-a=rtpmap:101 H264/90000
-a=acfg:2 t=2
-
-<Invalid Answer>
-v=0
-o=- 24351 621814 IN IP4 192.0.2.2
-s=
-m=audio 3456 RTP/SAVPF 98
-a=rtpmap:98 OPUS/48000/2
-a=acfg:1 t=1
-
-m=video 51372 RTP/AVPF 101
-a=rtpmap:101 H264/90000
-a=acfg:2 t=3]]>
-        </artwork>
-        </figure>
-      </section>   
       </section>
 
    <section title="IANA Considerations">
