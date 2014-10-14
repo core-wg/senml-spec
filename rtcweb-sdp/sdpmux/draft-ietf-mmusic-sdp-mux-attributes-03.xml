@@ -625,8 +625,10 @@
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
         <t hangText="Note">
-         Multiplexing consideration when multiple DSCP code points are
-         defined per flow can be found in <xref target="dscp-mux"/>
+          For scenarios that involves having different DSCP for packets 
+          being transmitted over the same 5-tuple, i.e. what is
+          being in the same bundle, has issues as discussed  in 
+          <xref target="I.D-draft-ietf-dart-dscp-rtp"/>
         </t>
       </section>
 
@@ -2611,52 +2613,6 @@
       </section>
 
       </section>
-
-      <section  anchor="dscp-mux" title="Multiplexing Media Streams and DSCP Markings">
-        <t>
-         Note: This section does not yet have WG consensus but is
-         included as a proposal to the WG. There are two options being
-         proposed, A and B. The authors suggest A.
-        </t>
-
-        <section title="Option A">
-          <t>
-            This section provides two rules for multiplexing multiple
-            media streams with DSCP markings over a single 5-tuple.
-            <list>
-              <t>
-                Rule 1: Media Streams with markings from different
-                service classes MUST NOT be multiplexed. For example,
-                a media stream with DSCP Marking EF MUST NOT be
-                multiplexed with a media stream marked with AF class.
-                Likewise, a media stream with DSCP marking AF3x MUST
-                NOT be multiplexed with a media stream marked with
-                AF4x.
-              </t>
-              <t>
-                Rule 2: Media Streams that belong to the same service
-                class, even with different drop precedence, MAY be
-                multiplexed. Thus media streams that all belong to the
-                EF group or all that belong to the AF4X class can be
-                multiplexed.
-              </t>
-            </list>
-          </t>
-          <t>
-            For WebRTC applications following the advice in <xref
-            target="I-D.dhesikan-tsvwg-rtcweb-qos"/>, the above rules
-            end up allowing the audio and video to be multiplexed in
-            many, but not all, cases.
-          </t>
-        </section>
-
-        <section title="Option B">
-          <t>
-            Media Streams MAY be multiplexed regardless of what the
-            setting of the DSCP Per Hop Behavior group (PHB).
-          </t>
-        </section>
-      </section>
       <section  anchor="encap" title="Multiplexing Considerations for Encapsulating Attributes">
           <t>
            This sections deals with recommendations for defining the
@@ -2992,13 +2948,13 @@ a=pcfg:4 m=5 pt=5:101
           <ttcol align='left'>SDP Name</ttcol>
           <ttcol align='left'>Category</ttcol>
           <c>CT&nbsp;</c><c>NORMAL&nbsp;</c>
-		  <c>AS&nbsp;</c><c>SUM&nbsp;</c>
+		      <c>AS&nbsp;</c><c>SUM&nbsp;</c>
           <c>RS&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>RR&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>TIAS&nbsp;</c><c>SPECIAL&nbsp;</c>
         </texttable>
     	</section>
-        <section title="Table: att-field (session level) ">
+        <section title="Table: att-field ">
         <texttable align="left">
           <ttcol align='left'>SDP Name</ttcol>
           <ttcol align='left'>Category</ttcol>
@@ -3027,12 +2983,6 @@ a=pcfg:4 m=5 pt=5:101
           <c>bc_service_package&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>sescap&nbsp;</c><c>INHERIT&nbsp;</c>
           <c>rtsp-ice-d-m&nbsp;</c><c>INHERIT&nbsp;</c>
-        </texttable>
-    	</section>
-    	<section title="Table: att-field (both session and media level)">
-      	<texttable align="left">
-          <ttcol align='left'>SDP Name</ttcol>
-          <ttcol align='left'>Category</ttcol>
           <c>recvonly&nbsp;</c><c>NORMAL&nbsp;</c>
 		      <c>sendrecv&nbsp;</c><c>SUM&nbsp;</c>
           <c>sendonly&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -3088,12 +3038,6 @@ a=pcfg:4 m=5 pt=5:101
           <c>ts-refclk&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>mediaclk&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>calgextmap&nbsp;</c><c>NORMAL&nbsp;</c>
-        </texttable>
-    	</section>
-      <section title="Table: att-field (media level only)">
-        <texttable align="left">
-          <ttcol align='left'>SDP Name</ttcol>
-          <ttcol align='left'>Category</ttcol>
           <c>ptime&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>orient&nbsp;</c><c>SUM&nbsp;</c>
           <c>orient:portrait&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -3246,12 +3190,6 @@ a=pcfg:4 m=5 pt=5:101
           <c>T38ModemType&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>cs-correlation&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>rtcpidms&nbsp;</c><c>NORMAL&nbsp;</c>
-        </texttable>
-      </section>
-      <section title="Table: att-field (source level)">
-        <texttable align="left">
-          <ttcol align='left'>SDP Name</ttcol>
-          <ttcol align='left'>Category</ttcol>
           <c>cname&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>previous-ssrc&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>fmtp&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -3374,7 +3312,7 @@ a=pcfg:4 m=5 pt=5:101
           <c>icap-v0&nbsp;</c><c>NORMAL&nbsp;</c>
         </texttable>
       </section>
-      <section title="Timestamp Reference Clock Source Parameters">
+      <section title="Table: Timestamp Reference Clock Source Parameters">
         <texttable align="left">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Category</ttcol>
@@ -3617,10 +3555,7 @@ a=pcfg:4 m=5 pt=5:101
     </references>
 
     <references  title="Informative References">
-
-
 <reference anchor='RFC5109'>
-
 <front>
 <title>RTP Payload Format for Generic Forward Error Correction</title>
 <author initials='A.' surname='Li' fullname='A. Li'>
@@ -4623,6 +4558,22 @@ classes of traffic.</t></abstract>
 <format type='TXT'
         target='http://www.ietf.org/internet-drafts/draft-dhesikan-tsvwg-rtcweb-qos-02.txt' />
 </reference>
+<reference anchor="I.D-draft-ietf-dart-dscp-rtp">
+        <front>
+          <title>The Session Description Protocol (SDP) Content Attribute</title>
+          <author fullname="David Black" initials="D." surname="Black">
+            <organization></organization>
+          </author>
+          <author fullname="Paul Jones" initials="P." surname="Jones">
+            <organization></organization>
+          </author>
+          <date month="September" year="2014" />
+        </front>
+        <seriesInfo name='Internet-Draft' value='draft-ietf-dart-dscp-rtp-07' />
+        <format type='TXT'
+        target='http://www.ietf.org/id/draft-ietf-dart-dscp-rtp-07.txt' />
+
+      </reference>
 
     </references>
   </back>
