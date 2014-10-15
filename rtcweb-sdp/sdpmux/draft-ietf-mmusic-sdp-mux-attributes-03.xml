@@ -1707,6 +1707,10 @@
           <c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
+          <c>3GPP-SDP-Auth&nbsp;</c><c>Refer to notes below&nbsp;</c><c>S</c>
+          <c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
           <c>3GPP-SRTP-Config&nbsp;</c><c>Refer to notes below&nbsp;&nbsp;</c><c>M</c>
           <c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
@@ -2975,80 +2979,82 @@ a=pcfg:4 m=5 pt=5:101
           <c>ice-options&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>bcastversion&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>3GPP-Integrity-Key&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
-          <c>3GPP-SDP-Auth&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>alt-group&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>3GPP-SDP-Auth&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>alt-group&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>PSCid&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>bc_service&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>bc_program&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>bc_service_package&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>sescap&nbsp;</c><c>INHERIT&nbsp;</c>
-          <c>rtsp-ice-d-m&nbsp;</c><c>INHERIT&nbsp;</c>
+          <c>sescap&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>rtsp-ice-d-m&nbsp;</c><c>******&nbsp;</c>
           <c>recvonly&nbsp;</c><c>NORMAL&nbsp;</c>
-		      <c>sendrecv&nbsp;</c><c>SUM&nbsp;</c>
+		      <c>sendrecv&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>sendonly&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>sdplang&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>lang&nbsp;</c><c>SPECIAL&nbsp;</c>
+          <c>lang&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>h248item&nbsp;</c><c>SPECIAL&nbsp;</c>
           <c>sqn&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>cdsc&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>cpar&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>cparmin&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>cparmax&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>cpar&nbsp;</c><c>INHERIT&nbsp;</c>
+          <c>cparmin&nbsp;</c><c>SPECIAL&nbsp;</c>
+          <c>cparmax&nbsp;</c><c>SPECIAL&nbsp;</c>
           <c>rtcp-xr&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>maxprate&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>setup&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>connection&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>key-mgmt&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>source-filter&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>maxprate&nbsp;</c><c>SPECIAL&nbsp;</c>
+          <c>setup&nbsp;</c><c>IDENTICAL&nbsp;</c>
+          <c>connection&nbsp;</c><c>IDENTICAL&nbsp;</c>
+          <c>key-mgmt&nbsp;</c><c>IDENTICAL&nbsp;</c>
+          <c>source-filter&nbsp;</c><c>IDENTICAL&nbsp;</c>
           <c>inactive&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>fingerprint&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>flute-tsi&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>flute-ch&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>FEC-declaration&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>FEC-OTI-extension&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>content-desc&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>ice-pwd&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>ice-ufrag&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>stkmstream*&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>fingerprint&nbsp;</c><c>TRANSPORT&nbsp;</c>
+          <c>flute-tsi&nbsp;</c><c>*****&nbsp;</c>
+          <c>flute-ch&nbsp;</c><c>*****&nbsp;</c>
+          <c>FEC-declaration&nbsp;</c><c>*****&nbsp;</c>
+          <c>FEC-OTI-extension&nbsp;</c><c>*****&nbsp;</c>
+          <c>content-desc&nbsp;</c><c>*****&nbsp;</c>
+          <c>ice-pwd&nbsp;</c><c>TRANSPORT&nbsp;</c>
+          <c>ice-ufrag&nbsp;</c><c>TRANSPORT&nbsp;</c>
+          <c>stkmstream&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>qos-mech-send&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>qos-mech-recv&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>csup&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>creq&nbsp;</c><c>NORMAL&nbsp;</c>	
-          <c>acap&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>tcap&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>3GPP-QoE-Metrics&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>3GPP-Asset-Information&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>creq&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>acap&nbsp;</c><c>INHERIT&nbsp;</c>
+          <c>tcap&nbsp;</c><c>INHERIT&nbsp;</c>
+          <c>3GPP-QoE-Metrics&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>3GPP-Asset-Information&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>mbms-mode&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>mbms-repair&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>ike-setup&nbsp;</c><c>NORMAL&nbsp;</c>
-		      <c>psk-fingerprint&nbsp;</c><c>NORMAL&nbsp;</c>
-		      <c>multicast-rtcp&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>rmcap&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>ike-setup&nbsp;</c><c>IDENTICAL&nbsp;</c>
+		      <c>psk-fingerprint&nbsp;</c><c>IDENTICAL&nbsp;</c>
+		      <c>multicast-rtcp&nbsp;</c><c>IDENTICAL&nbsp;</c>
+          <c>rmcap&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
           <c>omcap&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>mfcap&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>mscap&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>bcap&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>ccap&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>3gpp_sync_info&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>3gpp_sync_info&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>etag&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>range&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>control&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>mtag&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>ts-refclk&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>mediaclk&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>calgextmap&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>ptime&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>orient&nbsp;</c><c>SUM&nbsp;</c>
+          <c>mfcap&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>mscap&nbsp;</c><c>INHERIT&nbsp;</c>
+          <c>bcap&nbsp;</c><c>*****&nbsp;</c>
+          <c>ccap&nbsp;</c><c>*****&nbsp;</c>
+          <c>icap&nbsp;</c><c>*****&nbsp;</c>
+          <c>3gpp_sync_info&nbsp;</c><c>*****&nbsp;</c>
+          <c>3gpp_MaxRecvSDUSize&nbsp;</c><c>******&nbsp;</c>
+          <c>etag&nbsp;</c><c>*****&nbsp;</c>
+          <c>duplication-delay&nbsp;</c><c>*****&nbsp;</c>
+          <c>range&nbsp;</c><c>*****&nbsp;</c>
+          <c>control&nbsp;</c><c>*****&nbsp;</c>
+          <c>mtag&nbsp;</c><c>****&nbsp;</c>
+          <c>ts-refclk&nbsp;</c><c>*****&nbsp;</c>
+          <c>mediaclk&nbsp;</c><c>*****&nbsp;</c>
+          <c>calgextmap&nbsp;</c><c>******&nbsp;</c>
+          <c>ptime&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>orient&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>orient:portrait&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>orient:landscape&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>orient:seascape&nbsp;</c><c>SPECIAL&nbsp;</c>
-          <c>framerate&nbsp;</c><c>SPECIAL&nbsp;</c>
+          <c>orient:seascape&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>framerate&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
           <c>quality&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>rtpmap&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>fmtp&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>rtpred1&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>rtpred2&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>rtpmap&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>fmtp&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>rtpred1&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>rtpred2&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>T38FaxVersion&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>T38MaxBitRate&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>T38MaxBitRate&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -3058,17 +3064,17 @@ a=pcfg:4 m=5 pt=5:101
           <c>T38FaxMaxBuffer&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>T38FaxMaxDatagram&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>T38FaxUdpEC&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>maxptime&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>des&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>curr&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>conf&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>mid&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>rtcp&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>rtcp-fb&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>maxptime&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>des&nbsp;</c><c>*****&nbsp;</c>
+          <c>curr&nbsp;</c><c>*****&nbsp;</c>
+          <c>conf&nbsp;</c><c>******&nbsp;</c>
+          <c>mid&nbsp;</c><c>*****&nbsp;</c>
+          <c>rtcp&nbsp;</c><c>IDENTICAL&nbsp;</c>
+          <c>rtcp-fb&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
           <c>label&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>T38VendorInfo&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>crypto&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>eecid&nbsp;</c><c>NORMAL&nbsp;</c>  
+          <c>crypto&nbsp;</c><c>TRANSPORT&nbsp;</c>
+          <c>eecid&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>aalType&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>capability&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>qosClass&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -3111,7 +3117,7 @@ a=pcfg:4 m=5 pt=5:101
           <c>isup_usi&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>uiLayer1_Prot&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>chain&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>floorctrl&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>floorctrl&nbsp;</c><c>IDENTICAL&nbsp;</c>
           <c>confid&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>userid&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>floorid&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -3121,80 +3127,78 @@ a=pcfg:4 m=5 pt=5:101
           <c>accept-wrapped-types&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>max-size&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>path&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>dccp-service-code&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>rtcp-mux&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>candidate&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>dccp-service-code&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>rtcp-mux&nbsp;</c><c>IDENTICAL&nbsp;</c>
+          <c>candidate&nbsp;</c><c>TRANSPORT&nbsp;</c>
           <c>ice-mismatch&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>remote-candidates&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>remote-candidates&nbsp;</c><c>TRANSPORT&nbsp;</c>
           <c>SRTPAuthentication&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>SRTPROCTxRate&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>rtcp-rsize&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>rtcp-rsize&nbsp;</c><c>IDENTICAL&nbsp;</c>
           <c>file-selector&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>file-transfer-id&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>file-disposition&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>file-date&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>file-icon&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>file-range&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>depend&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>ssrc&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>ssrc-group&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>rtcp-unicast&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>pcfg&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>acfg&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>zrtp-hash&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>X-predecbufsize&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>X-initpredecbufperiod&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>X-initpostdecbufperiod&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>X-decbyterate&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>3gpp-videopostdecbufsize&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>framesize&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>3GPP-SRTP-Config&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>alt&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>alt-default-id&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>3GPP-Adaption-Support&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>mbms-flowid&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>fec-source-flow&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>fec-repair-flow&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>repair-window&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>rams-updates&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>imageattr&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>depend&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>ssrc&nbsp;</c><c>*****&nbsp;</c>
+          <c>ssrc-group&nbsp;</c><c>*****&nbsp;</c>
+          <c>rtcp-unicast&nbsp;</c><c>IDENTICAL&nbsp;</c>
+          <c>pcfg&nbsp;</c><c>SPECIAL&nbsp;</c>
+          <c>acfg&nbsp;</c><c>SPECIAL&nbsp;</c>
+          <c>zrtp-hash&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>X-predecbufsize&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>X-initpredecbufperiod&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>X-initpostdecbufperiod&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>X-decbyterate&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>3gpp-videopostdecbufsize&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>framesize&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>3GPP-SRTP-Config&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>alt&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>alt-default-id&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>3GPP-Adaption-Support&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>mbms-flowid&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>fec-source-flow&nbsp;</c><c>*****&nbsp;</c>
+          <c>fec-repair-flow&nbsp;</c><c>*****&nbsp;</c>
+          <c>repair-window&nbsp;</c><c>*****&nbsp;</c>
+          <c>rams-updates&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>imageattr&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
           <c>cfw-id&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>portmapping-req&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>portmapping-req&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>g.3gpp.cat&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>g.3gpp.crs&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>enc-capable-rtp&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>visited-realm&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>secondary-realm&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>ecm-capable-rtp&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>visited-realm&nbsp;</c><c>TRANSPORT&nbsp;</c>
+          <c>secondary-realm&nbsp;</c><c>TRANSPORT&nbsp;</c>
           <c>omr-s-cksum&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>omr-m-ksum&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>omr-m-Cksum&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>omr-codecs&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>omr-codecs&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>omr-m-att&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>omr-m-bw&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>omr-s-bw&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>msrcp-cema&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>dccp-port&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>dccp-port&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>resource&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>channel&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>cmid&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>cmid&nbsp;</c><c>*****&nbsp;</c>
           <c>content&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>lcfg&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>lcfg&nbsp;</c><c>SPECIAL&nbsp;</c>
           <c>loopback&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>loopback-source&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>loopback-mirror&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>chatroom&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>altc&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>T38FaxMaxIFP&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>T38FaxUdpECDepth&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>T38FaxUdpFECMaxSpan&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>T38ModemType&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>chatroom&nbsp;</c><c>*****&nbsp;</c>
+          <c>altc&nbsp;</c><c>*****&nbsp;</c>
+          <c>T38FaxMaxIFP&nbsp;</c><c>*****&nbsp;</c>
+          <c>T38FaxUdpECDepth&nbsp;</c><c>*****&nbsp;</c>
+          <c>T38FaxUdpFECMaxSpan&nbsp;</c><c>*****&nbsp;</c>
+          <c>T38ModemType&nbsp;</c><c>*****&nbsp;</c>
           <c>cs-correlation&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>rtcpidms&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>cname&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>previous-ssrc&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>fmtp&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>ts-refclk&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>mediaclk&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>fmtp&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
         </texttable>
       </section>
       <section title="Table: content SDP Parameters">
@@ -3215,37 +3219,37 @@ a=pcfg:4 m=5 pt=5:101
           <c>LS&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>FID&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>SRF&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>ANAT&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>ANAT&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>FEC&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>FEC-FR&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>CS&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>DDP&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>DUP&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>CS&nbsp;</c><c>*****&nbsp;</c>
+          <c>DDP&nbsp;</c><c>******&nbsp;</c>
+          <c>DUP&nbsp;</c><c>*****&nbsp;</c>
         </texttable>
       </section>
       <section title="Table: 'rtcp-fb' Attribute Values">
         <texttable align="left">
           <ttcol align='left'>Value Name</ttcol>
           <ttcol align='left'>Category</ttcol>
-          <c>ack&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>app&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>ccm&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>nack&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>trr-int&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>ack&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>app&nbsp;</c><c>SPECIAL&nbsp;</c>
+          <c>ccm&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>nack&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>trr-int&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
         </texttable>
       </section>
       <section title="Table: 'ack' and 'nack' Attribute Values">
         <texttable align="left">
           <ttcol align='left'>Value Name</ttcol>
           <ttcol align='left'>Category</ttcol>
-          <c>sli&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>pli&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>rpsi&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>app&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>rai&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>tllei&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>pslei&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>ecn&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>sli&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>pli&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>rpsi&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>app&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>rai&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>tllei&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>pslei&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>ecn&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
         </texttable>
       </section>
       <section title="Table: 'depend' SDP Attribute Values">
@@ -3260,10 +3264,10 @@ a=pcfg:4 m=5 pt=5:101
         <texttable align="left">
           <ttcol align='left'>Token</ttcol>
           <ttcol align='left'>Category</ttcol>
-          <c>callerid&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>uuie&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>dtmf&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>external&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>callerid&nbsp;</c><c>*****&nbsp;</c>
+          <c>uuie&nbsp;</c><c>*****&nbsp;</c>
+          <c>dtmf&nbsp;</c><c>*****&nbsp;</c>
+          <c>external&nbsp;</c><c>*****&nbsp;</c>
         </texttable>
       </section>
       <section title="Table: Semantics for the 'ssrc-group' SDP Attribute">
@@ -3273,24 +3277,24 @@ a=pcfg:4 m=5 pt=5:101
           <c>FID&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>FEC&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>FEC-FR&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>DUP&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>DUP&nbsp;</c><c>*****&nbsp;</c>
         </texttable>
       </section>
       <section title="Table: SDP/RTSP key management protocol identifiers">
         <texttable align="left">
           <ttcol align='left'>Value Name</ttcol>
           <ttcol align='left'>Category</ttcol>
-          <c>mikey&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>mikey&nbsp;</c><c>*****&nbsp;</c>
         </texttable>
       </section>
       <section title="Table: Codec Control Messages">
         <texttable align="left">
           <ttcol align='left'>Value Name</ttcol>
           <ttcol align='left'>Category</ttcol>
-          <c>fir&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>tmmbr&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>tstr&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>vbcm&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>fir&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>tmmbr&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>tstr&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>vbcm&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
         </texttable>
       </section>
       <section title="Table: QoS Mechanism Tokens">
@@ -3305,33 +3309,33 @@ a=pcfg:4 m=5 pt=5:101
         <texttable align="left">
           <ttcol align='left'>QoS Mechanism</ttcol>
           <ttcol align='left'>Category</ttcol>
-          <c>cap-v0&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>med-v0&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>bcap-v0&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>ccap-v0&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>icap-v0&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>cap-v0&nbsp;</c><c>*****&nbsp;</c>
+          <c>med-v0&nbsp;</c><c>*****&nbsp;</c>
+          <c>bcap-v0&nbsp;</c><c>*****&nbsp;</c>
+          <c>ccap-v0&nbsp;</c><c>*****&nbsp;</c>
+          <c>icap-v0&nbsp;</c><c>*****&nbsp;</c>
         </texttable>
       </section>
       <section title="Table: Timestamp Reference Clock Source Parameters">
         <texttable align="left">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Category</ttcol>
-          <c>ntp&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>ptp&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>gps&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>gal&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>glonass&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>local&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>private&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>ntp&nbsp;</c><c>*****&nbsp;</c>
+          <c>ptp&nbsp;</c><c>*****&nbsp;</c>
+          <c>gps&nbsp;</c><c>*****&nbsp;</c>
+          <c>gal&nbsp;</c><c>*****&nbsp;</c>
+          <c>glonass&nbsp;</c><c>*****&nbsp;</c>
+          <c>local&nbsp;</c><c>*****&nbsp;</c>
+          <c>private&nbsp;</c><c>*****&nbsp;</c>
         </texttable>
       </section>
       <section title="Table: Media Clock Source Parameters">
         <texttable align="left">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Category</ttcol>
-          <c>sender&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>direct&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>IEEE1722&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>sender&nbsp;</c><c>*****&nbsp;</c>
+          <c>direct&nbsp;</c><c>*****&nbsp;</c>
+          <c>IEEE1722&nbsp;</c><c>*****&nbsp;</c>
         </texttable>
       </section>
     </section>
