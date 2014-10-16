@@ -513,6 +513,26 @@
           &nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
+		<c>type:broadcast&nbsp;</c><c>Not Impacted
+          &nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+		<c>type:H332&nbsp;</c><c>Not Impacted
+          &nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+		<c>type:meeting&nbsp;</c><c>Not Impacted
+          &nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+		<c>type:moderated&nbsp;</c><c>Not Impacted
+          &nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+		<c>type:test&nbsp;</c><c>Not Impacted
+          &nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
         <c>tool&nbsp;</c><c>Not Impacted
           &nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
@@ -813,6 +833,10 @@
           <c>ice-options&nbsp;</c><c>Not Impacted&nbsp;</c>
           <c>S</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>ice-mismatch&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
           <c>ice-pwd&nbsp;</c><c>ice-pwd MUST be the one that
           corresponds to the m=line chosen for setting up the
@@ -933,6 +957,35 @@
          target="I-D.ietf-mmusic-sdp-bundle-negotiation"></xref>
         </t>
       </section>
+      
+      <section title="RFC7273 - RTP Clock Source Signalling">
+        <t>
+          <xref target="RFC7273"/> specifies
+          Session Description Protocol (SDP) signalling that identifies 
+          timestamp reference clock sources and SDP signalling that identifies 
+          the media clock sources in a multimedia session.</t>
+        <texttable title="RFC7273 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>ts-refclk&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S, M, SR</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>mediaclk&nbsp;</c>
+          <c>Not Impacted&nbsp;</c><c>S,, M, SR</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        </texttable>
+        <t hangText="Note">
+         If SSRCs are repeated across m=lines being multiplexed, they
+         MUST all represent the same underlying RTP Source. For more
+         details on implications of SSRC values with in the context of
+         multiplexing please refer to <xref
+         target="I-D.ietf-mmusic-sdp-bundle-negotiation"></xref>
+        </t>
+      </section>
 
       <section title="RFC6236 - Image Attributes in SDP">
         <t>
@@ -955,6 +1008,25 @@
           <c>imageattr&nbsp;</c><c>The attribute value must be same
           for a given codec configuration&nbsp;</c><c>M&nbsp;</c>
           <c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+	   <section title="RFC7197 - Image Attributes in SDP">
+        <t>
+          <xref target="RFC7197"/> This document defines an attribute to 
+          indicate the presence of temporally redundant media streams and the
+          duplication delay in the Session Description Protocol
+        </t>
+        <texttable title="RFC7197 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>duplication-delay&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c>
+          <c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -1405,6 +1477,37 @@
           identical configuration numbers between multiplxed (bundled) media descriptions
           is the default way of indicating compatible configurations in a bundle. 
         </t>
+      </section>
+
+	  <section title="RFC7006 - Miscellaneous Capabilities Negotiation in the
+                   Session Description Protocol (SDP)">
+        <t>
+         <xref target="RFC7006"/> extends the SDP capability negotiation framework to 
+         allow endpoints to negotiate three additional SDP capabilities.  In
+         particular, this memo provides a mechanism to negotiate bandwidth 
+         ("b=" line), connection data ("c=" line), and session or media titles 
+         ("i=" line for each session or media).
+        </t>
+        <texttable title="Miscellaneous Capabilities Negotiation in the
+                   Session Description Protocol (SDP)">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>bcap&nbsp;</c><c>Inherit the category SUM as applicable to b= attribute&nbsp;</c>
+          <c>B</c><c>INHERIT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>ccap&nbsp;</c><c>The connection address type MUST be identical across
+          all the multiplexed m= lines.&nbsp;</c>
+          <c>B</c><c>IDENTICAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>icap&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>B</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        </texttable>
       </section>
 
       <section title="RFC4567 - Key Management Extensions for SDP and RTSP">
@@ -2443,7 +2546,8 @@
          <ttcol align='left'>Level</ttcol>
          <ttcol align='left'>Category</ttcol>
 
-         <c>group:FEC-FR&nbsp;</c><c>Not Impacted&nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
+         <c>group:FEC-FR&nbsp;</c><c>Not Impacted&nbsp;</c><c>S&nbsp;</c>
+         <c>NORMAL&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
        </texttable>
@@ -2474,12 +2578,27 @@
          <c>IDENTICAL-PER-PT&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
        </texttable>
-       <t>
-        The usage of identical Payload Type values across multiplexed m=lines is described in
-        <xref target="I-D.ietf-mmusic-sdp-bundle-negotiation"></xref>.
-       </t>
      </section>
-
+	 <section title="RFC7104 - Duplication Grouping Semantics in the Session Description Protocol">
+       <t>
+         <xref target="RFC7104"/> defines the semantics for
+   		  grouping redundant streams in the Session Description Protocol (SDP).
+   		  The semantics defined in this document are to be used with the SDP
+   	      Grouping Framework. Grouping semantics at the Synchronization Source
+   		  (SSRC) level are also defined in this document for RTP streams using
+   		  SSRC multiplexing.
+       </t>
+       <texttable title="RFC7104 Attribute Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Notes</ttcol>
+         <ttcol align='left'>Level</ttcol>
+         <ttcol align='left'>Category</ttcol>
+         
+         <c>group:DUP&nbsp;</c><c>Not Impacted&nbsp;</c><c>S&nbsp;</c>
+         <c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+    	</texttable>
+     </section>
    </section>
    <section title="ssrc-group Attribute Analysis"
      anchor="SecssrcgroupAnalysis">
@@ -2493,16 +2612,28 @@
          <ttcol align='left'>Level</ttcol>
          <ttcol align='left'>Category</ttcol>
 
-         <c>FID&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>ssrc-group:FID&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-         <c>FEC&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>ssrc-group:FEC&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-         <c>FEC-FR&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
+         <c>ssrc-groupFEC-FR&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
        </texttable>
+     </section>
+     <section title="RFC7104 - Duplication Grouping Semantics in the Session Description Protocol">
+       <texttable title="RFC7104 Attribute Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Notes</ttcol>
+         <ttcol align='left'>Level</ttcol>
+         <ttcol align='left'>Category</ttcol>
+
+         <c>ssrc-group:DUP&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c>
+         <c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        </texttable>
      </section>
    </section>
     <section title="QoS Mechanism Token Analysis"
@@ -2939,7 +3070,7 @@ a=pcfg:4 m=5 pt=5:101
                 negotiation will have to be attempted subsequently instead. 
               </t>
             </section>  
-          </section> 
+          </section>
       </section>
 
    <section title="IANA Considerations">
@@ -4418,7 +4549,6 @@ and RFC 3009. [STANDARDS-TRACK]</t></abstract></front>
           type="TXT" />
       </reference>
       <reference anchor='RFC6871'>
-
         <front>
           <title>Session Description Protocol (SDP) Media Capabilities Negotiation</title>
           <author initials='R.' surname='Gimlan' fullname='Robert RGilman'>
@@ -4431,6 +4561,65 @@ and RFC 3009. [STANDARDS-TRACK]</t></abstract></front>
         </front>
         <seriesInfo name='RFC' value='6871' />
         <format type='TXT' target='https://tools.ietf.org/html/rfc6871.txt' />
+      </reference>
+      <reference anchor='RFC7006'>
+        <front>
+          <title> Miscellaneous Capabilities Negotiation in the
+                   Session Description Protocol (SDP)</title>
+          <author initials='M.' surname='Garcia-Martin' fullname=' Miguel A. Garcia-Martin'>
+            <organization /></author>
+          <author initials='S.' surname='Veikkolainen' fullname='Simo Veikkolainen'>
+            <organization /></author>
+          <author initials='R.' surname='Gimlan' fullname='Robert Gilman'>
+            <organization /></author>
+          <date year='2013' month='September' />
+        </front>
+        <seriesInfo name='RFC' value='7006' />
+        <format type='TXT' target='https://tools.ietf.org/html/rfc7006.txt' />
+      </reference>
+      <reference anchor='RFC7104'>
+        <front>
+          <title>Duplication Grouping Semantics in the Session Description Protocol</title>
+          <author initials='A.' surname='Begen' fullname='Ali Begen'>
+            <organization /></author>
+          <author initials='Y.' surname='Cai' fullname=' Yiqun Cai'>
+            <organization /></author>
+          <author initials='H.' surname='Ou' fullname='Heidi Ou'>
+            <organization /></author>
+          <date year='2013' month='Febrauary' />
+        </front>
+        <seriesInfo name='RFC' value='7104' />
+        <format type='TXT' target='https://tools.ietf.org/html/rfc7104.txt' />
+      </reference>
+      <reference anchor='RFC7197'>
+        <front>
+          <title>plication Delay Attribute in the Session Description Protocol</title>
+          <author initials='A.' surname='Begen' fullname='Ali Begen'>
+            <organization /></author>
+          <author initials='Y.' surname='Cai' fullname=' Yiqun Cai'>
+            <organization /></author>
+          <author initials='H.' surname='Ou' fullname='Heidi Ou'>
+            <organization /></author>
+          <date year='2014' month='April' />
+        </front>
+        <seriesInfo name='RFC' value='7197' />
+        <format type='TXT' target='https://tools.ietf.org/html/rfc7197.txt' />
+      </reference>
+      <reference anchor='RFC7273'>
+        <front>
+          <title>plication Delay Attribute in the Session Description Protocol</title>
+          <author initials='A.' surname='Williams' fullname='Aidan Williams'>
+            <organization /></author>
+          <author initials='K.' surname='Gross' fullname='Kevin Gross'>
+            <organization /></author>
+          <author initials='R.' surname='van Brandenburg' fullname='Ray van Brandenburg'>
+            <organization /></author>
+          <author initials='H.' surname='Stokking' fullname='Hans Stokking'>
+            <organization /></author>
+          <date year='2014' month='June' />
+        </front>
+        <seriesInfo name='RFC' value='7273' />
+        <format type='TXT' target='https://tools.ietf.org/html/rfc7273.txt' />
       </reference>
       <reference anchor='IANA' target="http://www.iana.org/assignments/sdp-parameters/sdp-parameters.xml">
         <front>
