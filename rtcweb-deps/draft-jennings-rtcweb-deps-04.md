@@ -2,7 +2,7 @@
 title: "WebRTC Dependencies"
 abbrev: WebRTC Dependencies
 docname: draft-jennings-rtcweb-deps-04
-date: 2014-10-09
+date: 2014-10-10
 category: info
 ipr: trust200902
 
@@ -81,6 +81,8 @@ normative:
   RFC7160:
   RFC7301:
   RFC7350:
+  I-D.ietf-mmusic-trickle-ice:
+  
 
 informative:
   I-D.alvestrand-rtcweb-gateways:
@@ -90,7 +92,6 @@ informative:
   I-D.ietf-avtcore-srtp-ekt:
   I-D.ietf-avtext-rtp-grouping-taxonomy:
   I-D.ietf-dart-dscp-rtp:
-  I-D.ietf-mmusic-trickle-ice:
   I-D.ietf-rmcat-cc-requirements:
   I-D.ietf-rtcweb-audio-codecs-for-interop:
   I-D.ietf-rtcweb-use-cases-and-requirements:
@@ -174,6 +175,9 @@ The drafts webrtc currently normatively depends on that are not WG drafts are:
 {{I-D.grange-vp9-bitstream}}, 
 {{I-D.reddy-mmusic-ice-happy-eyeballs}}.
 
+Right now transports normatively depends on
+{{I-D.reddy-mmusic-ice-happy-eyeballs}}.
+
 A few key drafts that the work informatively depends on:
 {{I-D.alvestrand-rtcweb-gateways}}, 
 {{I-D.hutton-rtcweb-nat-firewall-considerations}}, 
@@ -214,6 +218,7 @@ so take this with a large dose of salt.
 |  {{I-D.ietf-httpbis-header-compression}}  |  2015 Feb     |
 |  {{I-D.ietf-httpbis-http2}}  |   2015 Feb    |
 |  {{I-D.ietf-httpbis-tunnel-protocol}} |   2015 April    |
+|  {{I-D.ietf-mmusic-trickle-ice}}  |       |
 |  {{I-D.ietf-mmusic-msid}}  |       |
 |  {{I-D.ietf-mmusic-sctp-sdp}}  |       |
 |  {{I-D.ietf-mmusic-sdp-bundle-negotiation}}  |       |
