@@ -2258,6 +2258,23 @@
           are specific to the working of the fax protocol itself.</t>
       </section>
 
+      <section title="ITU-T-REC.Q1970">
+        <t>
+         <xref target="ITU-T-REC.Q1970"></xref> defines BICC IP bearer 
+         control protocol.
+        </t>
+       <texttable title="ITU-T-REC.Q1970 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+        <c>ipbcp&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+      </texttable> 
+      </section>
+        
       <section title="ITU-T H.248.15">
         <t>
           ITU-T H.248.15 <xref target="H.248.15"></xref> defines Gateway Control Protocol
@@ -4874,6 +4891,14 @@ and RFC 3009. [STANDARDS-TRACK]</t></abstract></front>
           <date/>
         </front>
       </reference>
+     <reference anchor='ITU-T-REC.Q1970' 
+      target="https://www.itu.int/rec/T-REC-Q.1970-200609-I/en">
+        <front>
+          <title> Q.1970 : BICC IP bearer control protocol</title>
+          <author/>
+          <date/>
+        </front>
+      </reference> 
       <reference anchor='R3GPPTS24.229' target="http://www.3gpp.org/ftp/Specs/html-info/24229.htm">
         <front>
           <title>IP multimedia call control protocol based on
