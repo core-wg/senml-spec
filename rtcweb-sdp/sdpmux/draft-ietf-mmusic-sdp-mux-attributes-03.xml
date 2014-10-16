@@ -1462,6 +1462,10 @@
           <c>B</c><c>INHERIT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
+          <c>cap-v0&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>B</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
         </texttable>
       </section>
 
@@ -1505,6 +1509,10 @@
           <c>S</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
+          <c>med-v0&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
         </texttable>
         <t hangText="Note"> The "sescap" attribute is NOT RECOMMENDED for use with 
           multiplexing. The reason is that it requires the use of unique configuration 
@@ -1531,16 +1539,31 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>bcap&nbsp;</c><c>Inherit the category SUM as applicable to b= attribute&nbsp;</c>
+          <c>bcap&nbsp;</c><c>Inherit the category SUM as 
+          applicable to b= attribute&nbsp;</c>
           <c>B</c><c>INHERIT&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>ccap&nbsp;</c><c>The connection address type MUST be identical across
+          <c>bcap-vo&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>B</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>ccap&nbsp;</c><c>The connection address type 
+          MUST be identical across
           all the multiplexed m= lines.&nbsp;</c>
           <c>B</c><c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
+          <c>ccap-vo&nbsp;</c><c>Not Impacted.&nbsp;</c>
+          <c>B</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+
           <c>icap&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>B</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>icap-vo&nbsp;</c><c>Not Impacted&nbsp;</c>
           <c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
@@ -1572,7 +1595,6 @@
           identical across all the m=lines&nbsp;</c><c>B</c>
           <c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
-
 
         </texttable>
       </section>
@@ -1773,7 +1795,19 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>cs-correlation&nbsp;</c><c>Not Impacted.&nbsp;</c>
+          <c>cs-correlation:callerid&nbsp;</c><c>Not Impacted.&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>cs-correlation:uuie&nbsp;</c><c>Not Impacted.&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>cs-correlation:dtmf&nbsp;</c><c>Not Impacted.&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>cs-correlation:external&nbsp;</c><c>Not Impacted.&nbsp;</c>
           <c>M</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
         </texttable>
@@ -3293,18 +3327,18 @@ a=pcfg:4 m=5 pt=5:101
           <c>omcap&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>mfcap&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
           <c>mscap&nbsp;</c><c>INHERIT&nbsp;</c>
-          <c>bcap&nbsp;</c><c>*****&nbsp;</c>
-          <c>ccap&nbsp;</c><c>*****&nbsp;</c>
-          <c>icap&nbsp;</c><c>*****&nbsp;</c>
+          <c>bcap&nbsp;</c><c>INHERIT&nbsp;</c>
+          <c>ccap&nbsp;</c><c>IDENTICAL&nbsp;</c>
+          <c>icap&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>3gpp_sync_info&nbsp;</c><c>*****&nbsp;</c>
           <c>3gpp_MaxRecvSDUSize&nbsp;</c><c>******&nbsp;</c>
           <c>etag&nbsp;</c><c>*****&nbsp;</c>
-          <c>duplication-delay&nbsp;</c><c>*****&nbsp;</c>
+          <c>duplication-delay&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>range&nbsp;</c><c>*****&nbsp;</c>
           <c>control&nbsp;</c><c>*****&nbsp;</c>
           <c>mtag&nbsp;</c><c>****&nbsp;</c>
-          <c>ts-refclk&nbsp;</c><c>*****&nbsp;</c>
-          <c>mediaclk&nbsp;</c><c>*****&nbsp;</c>
+          <c>ts-refclk&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>mediaclk&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>calgextmap&nbsp;</c><c>******&nbsp;</c>
           <c>ptime&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
           <c>orient&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -3526,10 +3560,10 @@ a=pcfg:4 m=5 pt=5:101
         <texttable align="left">
           <ttcol align='left'>Token</ttcol>
           <ttcol align='left'>Category</ttcol>
-          <c>callerid&nbsp;</c><c>*****&nbsp;</c>
-          <c>uuie&nbsp;</c><c>*****&nbsp;</c>
-          <c>dtmf&nbsp;</c><c>*****&nbsp;</c>
-          <c>external&nbsp;</c><c>*****&nbsp;</c>
+          <c>callerid&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>uuie&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>dtmf&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>external&nbsp;</c><c>NORMAL&nbsp;</c>
         </texttable>
       </section>
       <section title="Table: Semantics for the 'ssrc-group' SDP Attribute">
@@ -3539,7 +3573,7 @@ a=pcfg:4 m=5 pt=5:101
           <c>FID&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>FEC&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>FEC-FR&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>DUP&nbsp;</c><c>*****&nbsp;</c>
+          <c>DUP&nbsp;</c><c>NORMAL&nbsp;</c>
         </texttable>
       </section>
       <section title="Table: SDP/RTSP key management protocol identifiers">
