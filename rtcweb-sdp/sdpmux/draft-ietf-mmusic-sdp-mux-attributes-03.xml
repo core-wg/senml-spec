@@ -595,6 +595,42 @@
         </texttable>
       </section>
 
+      <section title="RFC3312 - Integration of Resource Management
+                 and Session Initiation Protocol (SIP)">
+        <t>
+          <xref target="RFC3312"/>  defines a generic framework for 
+          preconditions, which are extensible through IANA registration.  
+          This document also discusses how network quality of service can be 
+          made a precondition for establishment of sessions initiated by the 
+          Session Initiation Protocol (SIP).  These preconditions require that 
+          the participant reserve network resources before continuing with the 
+          session.
+        </t>
+        <texttable title="RFC3312 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>des&nbsp;</c><c>Refer to notes below&nbsp;</c>
+          <c>M&nbsp;</c><c>NOT RECOMMEDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>conf&nbsp;</c><c>Refer to notes below&nbsp;</c>
+          <c>M&nbsp;</c><c>NOT RECOMMEDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>curr&nbsp;</c><c>Refer to notes below&nbsp;</c>
+          <c>M&nbsp;</c><c>NOT RECOMMEDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        </texttable>
+        <t hangText="Note">
+         A mismatched set of Preconditions across media descriptions
+         might result in Session establishment failures due to inability
+         to meet the right resource reservations requested.
+        </t>
+      </section>
+
       <section title="RFC4574 - SDP Label Attribute ">
         <t>
           <xref target="RFC4574">RFC4574</xref> defines a new Session
@@ -1528,9 +1564,15 @@
           <ttcol align='left'>Category</ttcol>
 
           <c>key-mgmt&nbsp;</c><c>Key management protocol MUST be
-          identical across all the
-          m=lines&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
+          identical across all the m=lines&nbsp;</c><c>B</c>
+          <c>IDENTICAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>mikey&nbsp;</c><c>Key management protocol MUST be
+          identical across all the m=lines&nbsp;</c><c>B</c>
+          <c>IDENTICAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
 
         </texttable>
       </section>
@@ -1693,6 +1735,69 @@
         </texttable>
       </section>
 
+      <section title="RFC6947 - The Session Description Protocol (SDP)
+                Alternate Connectivity (ALTC) Attribute">
+        <t>
+          <xref target="RFC6947"/> proposes a mechanism that allows 
+          the same SDP offer to carry multiple IP addresses of different address 
+          families (e.g., IPv4 and IPv6).  The proposed attribute, the "altc" attribute, 
+          solves the backward-compatibility problem that plagued Alternative Network 
+          Address Types (ANAT) due to their syntax.
+        </t>
+        <texttable title="RFC6947 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>altc&nbsp;</c><c>The IP Address and port chosen from the
+          m= line that corresponds to the BUNDLE address.&nbsp;</c>
+          <c>M</c><c>TRANSPORT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        </texttable>
+      </section>
+
+      <section title="RFC7195 - SDP Extension for Setting Audio and Video 
+        Media Streams over Circuit-Switched Bearers in 
+        the Public Switched Telephone Network (PSTN)">
+        <t>
+          <xref target="RFC7195"/> describes use cases, requirements, and 
+          protocol extensions for using the Session Description Protocol 
+          (SDP) offer/answer model for establishing audio and video media 
+          streams over circuit-switched bearers in the Public Switched 
+          Telephone Network (PSTN).
+        </t>
+        <texttable title="RFC7195 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>cs-correlation&nbsp;</c><c>Not Impacted.&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        </texttable>
+      </section>
+
+      <section title="RFC7272 - Inter-Destination Media Synchronization (IDMS)
+                 Using the RTP Control Protocol (RTCP)">
+        <t>
+          <xref target="RFC7272"/> defines a new RTP Control Protocol 
+          (RTCP) Packet Type and an RTCP Extended Report (XR) Block Type 
+          to be used for achieving Inter-Destination Media Synchronization 
+          (IDMS).
+        </t>
+        <texttable title="RFC7272 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>rtcp-idms&nbsp;</c><c>Not Impacted.&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        </texttable>
+      </section>
       <section title="RFC5159 - OMA BCAST SDP Attributes">
         <t>
           <xref target="RFC5159">RFC5159</xref> provides descriptions
@@ -2062,32 +2167,58 @@
           <ttcol align='left'>Level</ttcol>
           <ttcol align='left'>Category</ttcol>
 
-          <c>T38FaxVersion&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
+          <c>T38FaxVersion&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>T38MaxBitRate&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
+          <c>T38MaxBitRate&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>T38FaxFillBitRemoval&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
+          <c>T38FaxFillBitRemoval&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>T38FaxTranscodingMMR&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
+          <c>T38FaxTranscodingMMR&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>T38FaxTranscodingJBIG&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
+          <c>T38FaxTranscodingJBIG&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>T38FaxRateManagement&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
+          <c>T38FaxRateManagement&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>T38FaxMaxBuffer&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
+          <c>T38FaxMaxBuffer&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>T38FaxMaxDatagram&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
+          <c>T38FaxMaxDatagram&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>T38FaxUdpEC&nbsp;</c><c>Not Impacted&nbsp;</c><c>S</c><c>NORMAL&nbsp;</c>
+          <c>T38FaxUdpEC&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>T38FaxMaxIFP&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>T38FaxUdpECDepth&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>T38FaxUdpFECMaxSpan&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>T38ModemType&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
         </texttable>
          <t hangText="Note"> The ITU T.38 attributes are clearly unaffected by multiplexing and
           are specific to the working of the fax protocol itself.</t>
@@ -3854,11 +3985,27 @@ and RFC 3009. [STANDARDS-TRACK]</t></abstract></front>
         <format octets="60854"
           target="http://tools.ietf.org/html/rfc5104.txt" type="TXT" />
       </reference>
+      <reference anchor='RFC3312'>
+        <front>
+          <title>Integration of Resource Management
+                 and Session Initiation Protocol (SIP)</title>
+          <author initials='G.' surname='Camarillo' fullname='Gonzalo Camarillo'>
+            <organization /></author>
+          <author initials='W.' surname='Marshall' fullname='Bill Marshall'>
+            <organization /></author>
+          <author initials='J.' surname='Rosenberg' fullname='Jonathan Rosenberg'>
+            <organization /></author>
+            
+          <date year='2002' month='October' />
+        </front>
+        <seriesInfo name='RFC' value='3312' />
+        <format type='TXT' target='http://www.rfc-editor.org/rfc/rfc3312.txt' />
+      </reference>
       <reference anchor='RFC5888'>
 
         <front>
           <title>The Session Description Protocol (SDP) Grouping Framework</title>
-          <author initials='G.' surname='Camarillo' fullname='G. Camarillo'>
+          <author initials='G.' surname='Camarillo' fullname='Gonzalo Camarillo'>
             <organization /></author>
           <author initials='H.' surname='Schulzrinne' fullname='H. Schulzrinne'>
             <organization /></author>
@@ -3868,6 +4015,24 @@ and RFC 3009. [STANDARDS-TRACK]</t></abstract></front>
         <seriesInfo name='RFC' value='5888' />
         <format type='TXT' octets='43924' target='http://www.rfc-editor.org/rfc/rfc5888.txt' />
       </reference>
+      <reference anchor='RFC6947'>
+        <front>
+          <title>The Session Description Protocol (SDP)
+                Alternate Connectivity (ALTC) Attribute</title>
+          <author initials='M.' surname='Boucadair' fullname='Mohamed Boucadair'>
+            <organization /></author>
+          <author initials='H.' surname='Kaplan' fullname='Hadriel Kaplan'>
+            <organization /></author>
+          <author initials='R.' surname='Gilman' fullname='Robert  Gilman'>
+            <organization /></author>
+          <author initials='S.' surname='Veikkolainen' fullname='Simo Veikkolainen'>
+            <organization /></author>  
+          <date year='2013' month='May'/>
+        </front>
+        <seriesInfo name='RFC' value='3312' />
+        <format type='TXT' target='http://www.rfc-editor.org/rfc/rfc3312.txt' />
+      </reference>
+      
       <reference anchor='RFC4574'>
 
         <front>
@@ -4576,6 +4741,39 @@ and RFC 3009. [STANDARDS-TRACK]</t></abstract></front>
         </front>
         <seriesInfo name='RFC' value='7006' />
         <format type='TXT' target='https://tools.ietf.org/html/rfc7006.txt' />
+      </reference>
+      <reference anchor='RFC7195'>
+        <front>
+          <title> Session Description Protocol (SDP) Extension for 
+            Setting Audio and Video Media Streams over Circuit-Switched Bearers in 
+            the Public Switched Telephone Network (PSTN)</title>
+          <author initials='M.' surname='Garcia-Martin' fullname=' Miguel A. Garcia-Martin'>
+            <organization /></author>
+          <author initials='S.' surname='Veikkolainen' fullname='Simo Veikkolainen'>
+            <organization /></author>
+          <date year='2014' month='May' />
+        </front>
+        <seriesInfo name='RFC' value='7195' />
+        <format type='TXT' target='https://tools.ietf.org/html/rfc7195.txt' />
+      </reference>
+      <reference anchor='RFC7272'>
+        <front>
+          <title> Inter-Destination Media Synchronization (IDMS)
+                 Using the RTP Control Protocol (RTCP)</title>
+          <author initials='R.' surname='van Brandenburg' fullname='Ray van Brandenburg'>
+            <organization /></author>
+          <author initials='H.' surname='Stokking' fullname='Hans Stokking'>
+            <organization /></author>  
+          <author initials='O.' surname='van Deventer' fullname='M. Oskar van Deventer'>
+            <organization /></author>
+          <author initials='F.' surname='Boronat' fullname='Fernando Boronat'>
+            <organization /></author>
+          <author initials='K.' surname='Gross' fullname='Kevin Gross'>
+            <organization /></author>   
+          <date year='2014' month='June' />
+        </front>
+        <seriesInfo name='RFC' value='7272' />
+        <format type='TXT' target='https://tools.ietf.org/html/rfc7272.txt' />
       </reference>
       <reference anchor='RFC7104'>
         <front>
