@@ -488,7 +488,12 @@
     multiplexing implications.
     </t>
    </section>
-  </section>
+   <section title="Category: TBD">
+    <t> Attributes that have not been analyzed under the proposed multiplexing
+      framework yet.
+    </t>
+   </section>
+   </section>
 
     <section title="Analysis of Existing Attributes" anchor="SecCurrAnalysis" >
       <t>
@@ -663,8 +668,7 @@
         </texttable>
       </section>
 
-      <section title="RFC3312 - Integration of Resource Management
-                 and Session Initiation Protocol (SIP)">
+      <section title="RFC3312 - Integration of Resource Management and (SIP)">
         <t>
           <xref target="RFC3312"/>  defines a generic framework for 
           preconditions, which are extensible through IANA registration.  
@@ -1219,15 +1223,15 @@
           <ttcol align='left'>Category</ttcol>
 
           <c>fec-source-flow&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c>
-          <c>SPECIAL&nbsp;</c>
+          <c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
           <c>fec-repair-flow&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c>
-          <c>SPECIA:&nbsp;</c>
+          <c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
           <c>repair-window&nbsp;</c><c>&nbsp;</c><c>M&nbsp;</c>
-          <c>SPECIAL&nbsp;</c>
+          <c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -1844,8 +1848,7 @@
         </texttable>
       </section>
 
-      <section title="RFC6947 - The Session Description Protocol (SDP)
-                Alternate Connectivity (ALTC) Attribute">
+      <section title="RFC6947 - The SDP ALTC Attribute">
         <t>
           <xref target="RFC6947"/> proposes a mechanism that allows 
           the same SDP offer to carry multiple IP addresses of different 
@@ -2988,8 +2991,7 @@
          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
        </texttable>
      </section>
-	 <section title="RFC7104 - Duplication Grouping Semantics in the 
-    Session Description Protocol">
+	 <section title="RFC7104 - Duplication Grouping Semantics in the  SDP">
        <t>
          <xref target="RFC7104"/> defines the semantics for
    		  grouping redundant streams in the Session Description Protocol (SDP).
@@ -3036,8 +3038,7 @@
 
        </texttable>
      </section>
-     <section title="RFC7104 - Duplication Grouping Semantics in the 
-      Session Description Protocol">
+     <section title="RFC7104 - Duplication Grouping Semantics in the SDP">
        <texttable title="RFC7104 Attribute Analysis">
          <ttcol align='left'>Name</ttcol>
          <ttcol align='left'>Notes</ttcol>
@@ -3487,13 +3488,12 @@ a=pcfg:4 m=5 pt=5:101
                 offer/exchange, e.g. by adding another media stream or use alternative 
                 codec combinations not currently offered. Latent configurations have 
                 configuration numbers which cannot overlap with the potential configuration 
-                numbers [RFC6871]. Supported combinations of potential and latent 
-                configurations are indicated by use of the "a=sescap" attribute 
-                (from [RFC6871]), however use of this attribute is not recommended 
-                with bundled media, since it requires the use of unique configuration 
-                numbers across the SDP. Taken together, this means there is no 
-                well-defined way to indicate supported combinations of latent 
-                configurations, or combinations of latent and potential 
+                numbers <xref target="RFC6871"/>. Supported combinations of potential and 
+                latent configurations are indicated by use of the "a=sescap" attribute, 
+                however use of this attribute is not recommended with bundled media, 
+                since it requires the use of unique configuration numbers across the SDP. 
+                Taken together, this means there is no well-defined way to indicate supported 
+                combinations of latent configurations, or combinations of latent and potential 
                 configurations with bundled media. It is still allowed to 
                 use the latent configuration attribute, however the limitations 
                 above will apply.  To determine valid combinations, actual 
@@ -3519,7 +3519,7 @@ a=pcfg:4 m=5 pt=5:101
 
        <section title="Table: SDP bwtype">
 
-         <t> The following values are to be added to the "SDP bwtype" registry
+         <t> The following values are to be added to the 'SDP bwtype' registry
          in the "Session Description Protocol (SDP) Parameters. The references
          should be updated to point at this RFC as well as the previous
          references. </t>
@@ -3538,9 +3538,15 @@ registry) </t>
     	</section>
 
         <section title="Table: att-field ">
+
+          <t> The following values are to be added to the 'att-field' registry
+         in the "Session Description Protocol (SDP) Parameters. The references
+         should be updated to point at this RFC as well as the previous
+         references. </t>
+
         <texttable align="left">
           <ttcol align='left'>SDP Name</ttcol>
-          <ttcol align='left'>Category</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
           <c>cat&nbsp;</c><c>NORMAL&nbsp;</c>
 		      <c>keywds&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>type&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -3565,7 +3571,7 @@ registry) </t>
           <c>bc_program&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>bc_service_package&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>sescap&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
-          <c>rtsp-ice-d-m&nbsp;</c><c>******&nbsp;</c>
+          <c>rtsp-ice-d-m&nbsp;</c><c>TBD&nbsp;</c>
           <c>recvonly&nbsp;</c><c>NORMAL&nbsp;</c>
 		      <c>sendrecv&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>sendonly&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -3585,11 +3591,11 @@ registry) </t>
           <c>source-filter&nbsp;</c><c>IDENTICAL&nbsp;</c>
           <c>inactive&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>fingerprint&nbsp;</c><c>TRANSPORT&nbsp;</c>
-          <c>flute-tsi&nbsp;</c><c>*****&nbsp;</c>
-          <c>flute-ch&nbsp;</c><c>*****&nbsp;</c>
-          <c>FEC-declaration&nbsp;</c><c>*****&nbsp;</c>
-          <c>FEC-OTI-extension&nbsp;</c><c>*****&nbsp;</c>
-          <c>content-desc&nbsp;</c><c>*****&nbsp;</c>
+          <c>flute-tsi&nbsp;</c><c>TBD&nbsp;</c>
+          <c>flute-ch&nbsp;</c><c>TBD&nbsp;</c>
+          <c>FEC-declaration&nbsp;</c><c>TBD&nbsp;</c>
+          <c>FEC-OTI-extension&nbsp;</c><c>TBD&nbsp;</c>
+          <c>content-desc&nbsp;</c><c>TBD&nbsp;</c>
           <c>ice-pwd&nbsp;</c><c>TRANSPORT&nbsp;</c>
           <c>ice-ufrag&nbsp;</c><c>TRANSPORT&nbsp;</c>
           <c>stkmstream&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -3615,11 +3621,11 @@ registry) </t>
           <c>icap&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>3gpp_sync_info&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>3gpp_MaxRecvSDUSize&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>etag&nbsp;</c><c>*****&nbsp;</c>
+          <c>etag&nbsp;</c><c>TBD&nbsp;</c>
           <c>duplication-delay&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>range&nbsp;</c><c>*****&nbsp;</c>
-          <c>control&nbsp;</c><c>*****&nbsp;</c>
-          <c>mtag&nbsp;</c><c>****&nbsp;</c>
+          <c>range&nbsp;</c><c>TBD&nbsp;</c>
+          <c>control&nbsp;</c><c>TBD&nbsp;</c>
+          <c>mtag&nbsp;</c><c>TBD&nbsp;</c>
           <c>ts-refclk&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>mediaclk&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>calgextmap&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -3721,8 +3727,8 @@ registry) </t>
           <c>file-icon&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>file-range&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>depend&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
-          <c>ssrc&nbsp;</c><c>*****&nbsp;</c>
-          <c>ssrc-group&nbsp;</c><c>*****&nbsp;</c>
+          <c>ssrc&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>ssrc-group&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>rtcp-unicast&nbsp;</c><c>IDENTICAL&nbsp;</c>
           <c>pcfg&nbsp;</c><c>SPECIAL&nbsp;</c>
           <c>acfg&nbsp;</c><c>SPECIAL&nbsp;</c>
@@ -3740,7 +3746,7 @@ registry) </t>
           <c>mbms-flowid&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>fec-source-flow&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>fec-repair-flow&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>repair-window&nbsp;</c><c>*****&nbsp;</c>
+          <c>repair-window&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>rams-updates&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>imageattr&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
           <c>cfw-id&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -3767,7 +3773,7 @@ registry) </t>
           <c>loopback&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>loopback-source&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>loopback-mirror&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>chatroom&nbsp;</c><c>*****&nbsp;</c>
+          <c>chatroom&nbsp;</c><c>TBD&nbsp;</c>
           <c>altc&nbsp;</c><c>TRANSPORT&nbsp;</c>
           <c>T38FaxMaxIFP&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>T38FaxUdpECDepth&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -3781,9 +3787,15 @@ registry) </t>
         </texttable>
       </section>
       <section title="Table: content SDP Parameters">
+
+         <t> The following values are to be added to the 'content SDP Parameters' 
+         registry in the "Session Description Protocol (SDP) Parameters. 
+         The references should be updated to point at this RFC as well as 
+         the previous references. </t>
+
         <texttable align="left">
           <ttcol align='left'>SDP Name</ttcol>
-          <ttcol align='left'>Category</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
           <c>slides&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>speaker&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>sl&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -3792,24 +3804,38 @@ registry) </t>
         </texttable>
       </section>
       <section title="Table: Semantics for the 'group' SDP Attribute">
+
+        <t> The following values are to be added to the 
+         Semantics for the "group" SDP Attribute registry in the 
+         "Session Description Protocol (SDP) Parameters. 
+         The references should be updated to point at this RFC as well as 
+         the previous references. </t>
+
         <texttable align="left">
           <ttcol align='left'>Token</ttcol>
-          <ttcol align='left'>Category</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
           <c>LS&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>FID&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>SRF&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>ANAT&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>FEC&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>FEC-FR&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>CS&nbsp;</c><c>*****&nbsp;</c>
-          <c>DDP&nbsp;</c><c>******&nbsp;</c>
-          <c>DUP&nbsp;</c><c>*****&nbsp;</c>
+          <c>CS&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>DDP&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>DUP&nbsp;</c><c>NORMAL&nbsp;</c>
         </texttable>
       </section>
       <section title="Table: 'rtcp-fb' Attribute Values">
+        
+        <t> The following values are to be added to the 
+         " 'rtcp-fb' Attribute Values" registry in the 
+         "Session Description Protocol (SDP) Parameters. 
+         The references should be updated to point at this RFC as well as 
+         the previous references. </t>
+
         <texttable align="left">
           <ttcol align='left'>Value Name</ttcol>
-          <ttcol align='left'>Category</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
           <c>ack&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
           <c>app&nbsp;</c><c>SPECIAL&nbsp;</c>
           <c>ccm&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
@@ -3818,9 +3844,16 @@ registry) </t>
         </texttable>
       </section>
       <section title="Table: 'ack' and 'nack' Attribute Values">
+
+        <t> The following values are to be added to the 
+         " 'ack' and 'nack' Attribute Values" registry in the 
+         "Session Description Protocol (SDP) Parameters. 
+         The references should be updated to point at this RFC as well as 
+         the previous references. </t>
+
         <texttable align="left">
           <ttcol align='left'>Value Name</ttcol>
-          <ttcol align='left'>Category</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
           <c>sli&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
           <c>pli&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
           <c>rpsi&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
@@ -3832,17 +3865,32 @@ registry) </t>
         </texttable>
       </section>
       <section title="Table: 'depend' SDP Attribute Values">
+
+        <t> The following values are to be added to the 
+         " 'depend' SDP Attribute Values" registry in the 
+         "Session Description Protocol (SDP) Parameters. 
+         The references should be updated to point at this RFC as well as 
+         the previous references. </t>
+
         <texttable align="left">
           <ttcol align='left'>Token</ttcol>
-          <ttcol align='left'>Category</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
           <c>lay&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>mdc&nbsp;</c><c>NORMAL&nbsp;</c>
         </texttable>
       </section>
       <section title="Table: 'cs-correlation' Attribute Values">
+        
+        <t> The following values are to be added to the 
+         " 'cs-correlation' Attribute Values" registry in the 
+         "Session Description Protocol (SDP) Parameters. 
+         The references should be updated to point at this RFC as well as 
+         the previous references. </t>
+
+
         <texttable align="left">
           <ttcol align='left'>Token</ttcol>
-          <ttcol align='left'>Category</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
           <c>callerid&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>uuie&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>dtmf&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -3850,9 +3898,16 @@ registry) </t>
         </texttable>
       </section>
       <section title="Table: Semantics for the 'ssrc-group' SDP Attribute">
+
+        <t> The following values are to be added to the 
+         Semantics for the " 'ssrc-group' SDP Attribute" registry  
+         in the  "Session Description Protocol (SDP) Parameters. 
+         The references should be updated to point at this RFC as well as 
+         the previous references. </t>
+
         <texttable align="left">
           <ttcol align='left'>Token</ttcol>
-          <ttcol align='left'>Category</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
           <c>FID&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>FEC&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>FEC-FR&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -3860,16 +3915,30 @@ registry) </t>
         </texttable>
       </section>
       <section title="Table: SDP/RTSP key management protocol identifiers">
+
+        <t> The following values are to be added to the 
+         "SDP/RTSP key management protocol identifiers"
+         registry in the  "Session Description Protocol (SDP) Parameters. 
+         The references should be updated to point at this RFC as well as 
+         the previous references. </t>
+
         <texttable align="left">
           <ttcol align='left'>Value Name</ttcol>
-          <ttcol align='left'>Category</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
           <c>mikey&nbsp;</c><c>IDENTICAL&nbsp;</c>
         </texttable>
       </section>
       <section title="Table: Codec Control Messages">
+
+        <t> The following values are to be added to the 
+         "Codec Control Messages" registry in the  
+         "Session Description Protocol (SDP) Parameters. 
+         The references should be updated to point at this RFC as well as 
+         the previous references. </t>
+
         <texttable align="left">
           <ttcol align='left'>Value Name</ttcol>
-          <ttcol align='left'>Category</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
           <c>fir&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
           <c>tmmbr&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
           <c>tstr&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
@@ -3877,17 +3946,31 @@ registry) </t>
         </texttable>
       </section>
       <section title="Table: QoS Mechanism Tokens">
+
+        <t> The following values are to be added to the 
+         "QoS Mechanism Tokens" registry in the  
+         "Session Description Protocol (SDP) Parameters. 
+         The references should be updated to point at this RFC as well as 
+         the previous references. </t>
+
         <texttable align="left">
           <ttcol align='left'>QoS Mechanism</ttcol>
-          <ttcol align='left'>Category</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
           <c>rsvp&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>nsis&nbsp;</c><c>NORMAL&nbsp;</c>
         </texttable>
       </section>
       <section title="Table: SDP Capability Negotiation Option Tags">
+        
+        <t> The following values are to be added to the 
+         "SDP Capability Negotiation Option Tags" Registry 
+         in the "Session Description Protocol (SDP) Parameters. 
+         The references should be updated to point at this RFC as well as 
+         the previous references. </t>
+
         <texttable align="left">
           <ttcol align='left'>QoS Mechanism</ttcol>
-          <ttcol align='left'>Category</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
           <c>cap-v0&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>med-v0&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>bcap-v0&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -3896,9 +3979,16 @@ registry) </t>
         </texttable>
       </section>
       <section title="Table: Timestamp Reference Clock Source Parameters">
+
+        <t> The following values are to be added to the 
+         "Timestamp Reference Clock Source Parameters" Registry 
+         in the "Session Description Protocol (SDP) Parameters. 
+         The references should be updated to point at this RFC as well as 
+         the previous references. </t>
+
         <texttable align="left">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Category</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
           <c>ntp&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>ptp&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>gps&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -3909,9 +3999,16 @@ registry) </t>
         </texttable>
       </section>
       <section title="Table: Media Clock Source Parameters">
+
+        <t> The following values are to be added to the 
+         "Media Clock Source Parameters" Registry 
+         in the "Session Description Protocol (SDP) Parameters. 
+         The references should be updated to point at this RFC as well as 
+         the previous references. </t>
+
         <texttable align="left">
           <ttcol align='left'>Name</ttcol>
-          <ttcol align='left'>Category</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
           <c>sender&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>direct&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>IEEE1722&nbsp;</c><c>NORMAL&nbsp;</c>
