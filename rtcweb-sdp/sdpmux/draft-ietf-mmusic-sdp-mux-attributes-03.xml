@@ -3505,13 +3505,30 @@ a=pcfg:4 m=5 pt=5:101
 
    <section title="IANA Considerations">
       <t>
-       The IANA is hereby requested to add a new column named "Category"
-       to all the tables listed below. The tables provided below identifies
-       only the "SDP Name" and "Category" column for succint represenation.</t>
+       The IANA is requested to add a new column named "Mux Category"
+       to all several of the registries in the "Session Description Protocol
+       (SDP) Parameters". The tables in this section identify name of an entry
+      in the existing registry and specify the value to put in the
+      new "Mux Category" column of the associated IANA registry. Any entries in
+      the existing tables that do not have a value for the "Mux Category"
+      specified in this RFC will get a value of "TBD". Future specifications can
+      change the "TBD" entries to the correct value. 
+      </t>
+<t> TODO - define TBD in this spec </t>
+<t> TODO - define process to add new categories (standards track spec) </t>
+
        <section title="Table: SDP bwtype">
+
+         <t> The following values are to be added to the "SDP bwtype" registry
+         in the "Session Description Protocol (SDP) Parameters. The references
+         should be updated to point at this RFC as well as the previous
+         references. </t>
+<t> TODO - define process update or add new values (same as other values in
+registry) </t>
+
       	<texttable align="left">
-          <ttcol align='left'>SDP Name</ttcol>
-          <ttcol align='left'>Category</ttcol>
+          <ttcol align='left'>Type</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
           <c>CT&nbsp;</c><c>NORMAL&nbsp;</c>
 		      <c>AS&nbsp;</c><c>SUM&nbsp;</c>
           <c>RS&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -3519,6 +3536,7 @@ a=pcfg:4 m=5 pt=5:101
           <c>TIAS&nbsp;</c><c>SPECIAL&nbsp;</c>
         </texttable>
     	</section>
+
         <section title="Table: att-field ">
         <texttable align="left">
           <ttcol align='left'>SDP Name</ttcol>
