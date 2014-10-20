@@ -211,7 +211,7 @@
         used with transport multiplexing.
       </t>
     </section>
-    <section title="SDP Attribute Analysis Framework">
+    <section title="SDP Attribute Analysis Framework" anchor="sec-mux-cat">
     <t>
      Attributes in an SDP session description can be defined at the
      session-level and media-level. These attributes could be
@@ -3499,24 +3499,87 @@ a=pcfg:4 m=5 pt=5:101
                 above will apply.  To determine valid combinations, actual 
                 negotiation will have to be attempted subsequently instead. 
               </t>
-            </section>  
+            </section>
           </section>
       </section>
 
    <section title="IANA Considerations">
       <t>
+        [RFC EDITOR NOTE: Please replace RFCXXXX with the RFC number 
+        of this document.]
+      </t>
+      <t>
+       The following contact information shall be used for  all
+       registrations included here
+       </t>
+       <figure>
+        <artwork align="left"><![CDATA[
+          Contact:       snandaku@cisco.com
+          Reference:     RFCXXXX
+
+        ]]></artwork>
+      </figure>
+      <t>
        The IANA is requested to add a new column named "Mux Category"
        to all several of the registries in the "Session Description Protocol
-       (SDP) Parameters". The tables in this section identify name of an entry
-      in the existing registry and specify the value to put in the
-      new "Mux Category" column of the associated IANA registry. Any entries in
-      the existing tables that do not have a value for the "Mux Category"
-      specified in this RFC will get a value of "TBD". Future specifications can
-      change the "TBD" entries to the correct value. 
+       (SDP) Parameters". Section <xref target="sec-mux-cat-iana"/> defines
+       the new registry for identifying the initial registrations 
+       proposed in this document. The tables in <xref target="sec-mux-cat-values-iana"/> 
+       identify name of an entry in the existing registry and specify the value to put in the
+       new "Mux Category" column of the associated IANA registry. Any entries in
+       the existing tables that do not have a value for the "Mux Category"
+       specified in this RFC will get a value of "TBD". Future specifications can
+       change the "TBD" entries to the correct value.
       </t>
-<t> TODO - define TBD in this spec </t>
-<t> TODO - define process to add new categories (standards track spec) </t>
+       <section title="New Column 'Mux Category' " anchor="sec-mux-cat-iana" toc="default">
+        <t>
+        A new registry needs to be setup for the "Mux Category" column, with
+        the following registrations created initially: "NORMAL", "NOT RECOMMENDED",
+        "IDENTICAL", "TRANSPORT", "IDENTICAL-PER-PT", SPECIAL" and "TBD" as 
+        defined in this document.</t>
+        <t>Initial value registration for the column "Mux Category".</t> 
+      <figure>
+        <artwork align="left"><![CDATA[
+        Value name:     NORMAL
+        Reference :     RFCXXXX
 
+        Value name:     NOT RECOMMENDED
+        Reference :     RFCXXXX
+
+        Value name:     IDENTICAL
+        Reference :     RFCXXXX
+
+        Value name:     TRANSPORT
+        Reference :     RFCXXXX
+
+        Value name:     IDENTICAL-PER-PT
+        Reference :     RFCXXXX
+
+        Value name:     SPECIAL
+        Reference :     RFCXXXX
+
+        Value name:     TBD
+        Reference :     RFCXXXX
+      ]]></artwork>
+      </figure>
+      <t>
+      Further entries may be registered on a first-come first-serve basis.
+      Each registration needs to indicate the "Mux Category" value and 
+      identify the entries in the existing registries defined at 
+      "Session Description Protocol (SDP) Parameters" to which the newly
+      registered "Mux Category" applies. For each new registration, it is
+      mandatory that a permanent, stable, and publicly accessible document
+      exists that specifies the semantics of the registered parameter in 
+      the context of multiplexing and its applicability to existing
+      registered SDP parameters as stated above. The general registration
+      procedures of [3] apply.
+      </t>  
+       </section>
+       <section title="'Mux Category' values for SDP Registries" anchor="sec-mux-cat-values-iana" toc="default">
+        <t>
+          The various sub-sections defines below assigns the values to be used for the "Mux Category"
+          column for the corresponding registries idenfied.
+        </t>
        <section title="Table: SDP bwtype">
 
          <t> The following values are to be added to the 'SDP bwtype' registry
@@ -4014,6 +4077,7 @@ registry) </t>
           <c>IEEE1722&nbsp;</c><c>NORMAL&nbsp;</c>
         </texttable>
       </section>
+    </section>
     </section>
       <section title="Security Considerations">
 	<t> 
