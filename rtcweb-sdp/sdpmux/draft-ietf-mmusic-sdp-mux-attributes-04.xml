@@ -3466,9 +3466,9 @@ a=pcfg:4 m=5 pt=5:101
        <section title="'Mux Category' column for subregistries" 
                 anchor="sec-mux-cat-values-iana" toc="default">
         <t> Each sub-section identifies a subregistry in the "Session Description
-        Protocol (SDP) Parameters" registry. The tables list the column the identify
-        the SDP attribute name from the corresponding subregistries and the values to
-        be used for the new "Mux Category" column to be added.</t>
+        Protocol (SDP) Parameters" registry. The tables list the column that identifies
+        the SDP attribute name/Token/Value from the corresponding subregistries and the
+        values to be used for the new "Mux Category" column to be added.</t>
 
        <section title="Table: SDP bwtype">
          <t>The following values are to be added to the 'SDP bwtype' subregistry
