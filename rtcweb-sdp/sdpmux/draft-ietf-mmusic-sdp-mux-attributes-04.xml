@@ -3444,7 +3444,7 @@ a=pcfg:4 m=5 pt=5:101
           <t>Initial value registration for "Mux Category".</t>
 
           <texttable align="left">
-            <ttcol align='left'>Mux Category</ttcol>
+            <ttcol align='left'>Multiplexing Categories</ttcol>
             <ttcol align='left'>Reference</ttcol>
               <c>NORMAL&nbsp;</c><c> RFCXXXX</c>
               <c>NOT RECOMMENDED&nbsp;</c><c> RFCXXXX</c>
@@ -3457,7 +3457,7 @@ a=pcfg:4 m=5 pt=5:101
 
         <t> Further entries may be registered on a first-come first-serve basis.
         Each registration needs to indicate the multiplexing category value to be
-        added to the "Mux Category" subregistry as defined in this section.</t>
+        added to the "Multiplexing Categories" subregistry as defined in this section.</t>
         <t> Such a registration must also indicate the applicability of the
          newly defined multiplexing category value to various subregistries defined at
          "Session Description Protocol (SDP) Parameters".</t>
