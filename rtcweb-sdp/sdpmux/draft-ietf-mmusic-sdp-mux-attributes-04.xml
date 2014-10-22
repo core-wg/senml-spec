@@ -866,6 +866,10 @@
           <c>channel&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c>
           <c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>cmid&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c>
+          <c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
       </section>
@@ -3561,8 +3565,8 @@ a=pcfg:4 m=5 pt=5:101
           <c>tcap&nbsp;</c><c>INHERIT&nbsp;</c>
           <c>3GPP-QoE-Metrics&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>3GPP-Asset-Information&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
-          <c>mbms-mode&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>mbms-repair&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>mbms-mode&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>mbms-repair&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>ike-setup&nbsp;</c><c>IDENTICAL&nbsp;</c>
           <c>psk-fingerprint&nbsp;</c><c>IDENTICAL&nbsp;</c>
           <c>multicast-rtcp&nbsp;</c><c>IDENTICAL&nbsp;</c>
@@ -3616,9 +3620,9 @@ a=pcfg:4 m=5 pt=5:101
           <c>T38FaxMaxDatagram&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>T38FaxUdpEC&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>maxptime&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
-          <c>des&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>curr&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>conf&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>des&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>curr&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>conf&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>mid&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>rtcp&nbsp;</c><c>IDENTICAL&nbsp;</c>
           <c>rtcp-fb&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
@@ -3710,20 +3714,20 @@ a=pcfg:4 m=5 pt=5:101
           <c>alt-default-id&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>3GPP-Adaption-Support&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>mbms-flowid&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
-          <c>fec-source-flow&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>fec-repair-flow&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>repair-window&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>fec-source-flow&nbsp;</c><c>SPECIAL&nbsp;</c>
+          <c>fec-repair-flow&nbsp;</c><c>SPECIAL&nbsp;</c>
+          <c>repair-window&nbsp;</c><c>SPECIAL&nbsp;</c>
           <c>rams-updates&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>imageattr&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
           <c>cfw-id&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>portmapping-req&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>g.3gpp.cat&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>g.3gpp.crs&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>ecm-capable-rtp&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>ecn-capable-rtp&nbsp;</c><c>IDENTICAL&nbsp;</c>
           <c>visited-realm&nbsp;</c><c>TRANSPORT&nbsp;</c>
           <c>secondary-realm&nbsp;</c><c>TRANSPORT&nbsp;</c>
           <c>omr-s-cksum&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>omr-m-Cksum&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>omr-m-cksum&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>omr-codecs&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>omr-codecs&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>omr-m-att&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -3838,7 +3842,7 @@ a=pcfg:4 m=5 pt=5:101
           <c>rai&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
           <c>tllei&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
           <c>pslei&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
-          <c>ecn&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>ecn&nbsp;</c><c>IDENTICAL&nbsp;</c>
         </texttable>
       </section>
       <section title="Table: 'depend' SDP Attribute Values">
@@ -3852,8 +3856,8 @@ a=pcfg:4 m=5 pt=5:101
         <texttable align="left">
           <ttcol align='left'>Token</ttcol>
           <ttcol align='left'>Mux Category</ttcol>
-          <c>lay&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>mdc&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>lay&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>mdc&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
         </texttable>
       </section>
       <section title="Table: 'cs-correlation' Attribute Values">
