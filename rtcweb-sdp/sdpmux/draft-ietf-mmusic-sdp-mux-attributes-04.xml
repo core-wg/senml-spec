@@ -704,12 +704,12 @@
 
           <c>qos-mech-send&nbsp;</c>
           <c> Refer to notes below &nbsp;</c>
-          <c>B</c><c>SPECIAL&nbsp;</c>
+          <c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
           <c>qos-mech-recv&nbsp;</c>
           <c> Refer to notes below.&nbsp;</c>
-          <c>B</c><c>SPECIAL&nbsp;</c>
+          <c>B</c><c>NORMAL&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -3553,8 +3553,8 @@ a=pcfg:4 m=5 pt=5:101
           <c>ice-pwd&nbsp;</c><c>TRANSPORT&nbsp;</c>
           <c>ice-ufrag&nbsp;</c><c>TRANSPORT&nbsp;</c>
           <c>stkmstream&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>qos-mech-send&nbsp;</c><c>SPECIAL&nbsp;</c>
-          <c>qos-mech-recv&nbsp;</c><c>SPECIAL&nbsp;</c>
+          <c>qos-mech-send&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>qos-mech-recv&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>csup&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>creq&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>acap&nbsp;</c><c>INHERIT&nbsp;</c>
