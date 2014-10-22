@@ -389,7 +389,7 @@
        (encapsulating attribute) is used as part of a configuration; the 
        configuration inherits the multiplexing category of each of its 
        constituent (encapsulated) attributes and parameters. This in turn may 
-       place constraints on what constitutes a valid configuartion from a 
+       place constraints on what constitutes a valid configuration from a
        multiplexing point of view, e.g. because some attributes must be IDENTICAL 
        (see <xref target="sec-encap"/> for further details).</t> 
        <t>&nbsp;</t>
@@ -467,7 +467,7 @@
       <t>Attributes that have not been analyzed under the proposed multiplexing
       framework yet. For the purposes of implementations it is advised to 
       consider "NOT RECOMMENDED" as the category when multiplexing these
-      attribues.</t>
+      attributes.</t>
     </section>
     </section>
     <section title="Analysis of Existing Attributes" anchor="sec-cur-analysis" >
@@ -652,15 +652,15 @@
           <ttcol align='left'>Category</ttcol>
 
           <c>des&nbsp;</c><c>Refer to notes below&nbsp;</c>
-          <c>M&nbsp;</c><c>NOT RECOMMEDED&nbsp;</c>
+          <c>M&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
           <c>conf&nbsp;</c><c>Refer to notes below&nbsp;</c>
-          <c>M&nbsp;</c><c>NOT RECOMMEDED&nbsp;</c>
+          <c>M&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
           <c>curr&nbsp;</c><c>Refer to notes below&nbsp;</c>
-          <c>M&nbsp;</c><c>NOT RECOMMEDED&nbsp;</c>
+          <c>M&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
         </texttable>
@@ -801,10 +801,10 @@
 
         </texttable>
         <t hangText="Note">
-         Since RFC6773 is about tunnelling DCCP in UDP, with the UDP
+         Since RFC6773 is about tunneling DCCP in UDP, with the UDP
          port being the port of the DCCP en-/de-capsulation
          service. This encapsulation allows arbitrary DCCP packets to
-         be encapsulated and the DCCP port choosen MAY conflict with
+         be encapsulated and the DCCP port chosen MAY conflict with
          the port chosen for the RTP traffic.
         </t>
         <t>
@@ -813,7 +813,7 @@
          collapsing several DCCP port spaces together.  This MAY or
          MAY NOT work depending on the nature of DCCP encapsulations
          and ports choses thus rendering it to be very application
-         dependant.
+         dependent.
         </t>
       </section>
 
@@ -3040,7 +3040,7 @@
         </texttable>
       </section>
     </section>
-    <section title="content Atribute Analysis" anchor="SeccontentAnalysis">
+    <section title="content Attribute Analysis" anchor="SeccontentAnalysis">
       <section title="RFC4796">
         <texttable title="RFC4796 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
@@ -3455,16 +3455,16 @@ a=pcfg:4 m=5 pt=5:101
         Each registration needs to indicate the multiplexing category value to be
         added to the "Mux Category" subregistry as defined in this section.</t>
         <t> Such a registration must also indicate the applicability of the
-         newly defined mutiplexing category value to various subregistries defined at
+         newly defined multiplexing category value to various subregistries defined at
          "Session Description Protocol (SDP) Parameters".</t>
         <t>The general registration procedures of <xref target="RFC4566"/> apply.</t>
       </section>
        <section title="'Mux Category' column for subregistries" 
                 anchor="sec-mux-cat-values-iana" toc="default">
         <t> Each sub-section identifies a subregistry in the "Session Description
-        Protocol (SDP) Parameters" registry. The tables list the first column
-        from the corresponding subregistries and the values to be used for the
-        new "Mux Category" column to be added.</t>
+        Protocol (SDP) Parameters" registry. The tables list the column the identify
+        the SDP attribute name from the corresponding subregistries and the values to
+        be used for the new "Mux Category" column to be added.</t>
 
        <section title="Table: SDP bwtype">
          <t>The following values are to be added to the 'SDP bwtype' subregistry
@@ -3472,7 +3472,7 @@ a=pcfg:4 m=5 pt=5:101
          The references should be updated to point at this RFC as well 
          as the previous references.</t>
       	<texttable align="left">
-          <ttcol align='left'>Type</ttcol>
+          <ttcol align='left'>SDP Name</ttcol>
           <ttcol align='left'>Mux Category</ttcol>
           <c>CT&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>AS&nbsp;</c><c>SUM&nbsp;</c>
@@ -3575,7 +3575,7 @@ a=pcfg:4 m=5 pt=5:101
           <c>icap&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>3gpp_sync_info&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>3gpp_MaxRecvSDUSize&nbsp;</c><c>NORMAL&nbsp;</c>
-          <c>etag&nbsp;</c><c>NOT RECOMMENED&nbsp;</c>
+          <c>etag&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>duplication-delay&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>range&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>control&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
@@ -4000,7 +4000,7 @@ a=pcfg:4 m=5 pt=5:101
       </section>
       <section title="Acknowledgments">
        <t>
-       	I would like to thank Cullen Jennings and Flemming Andreason for
+       	I would like to thank Cullen Jennings and Flemming Andreasen for
         suggesting the categories, contributing text and reviewing the draft.
         I would also link to thank Magnus Westerlund, Christer Holmberg,
         Jonathan Lennox, Bo Burman, and Dan on suggesting structural
