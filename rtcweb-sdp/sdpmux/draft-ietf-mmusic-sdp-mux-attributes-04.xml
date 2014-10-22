@@ -1,0 +1,4364 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+<!ENTITY RFC2119 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY RFC2617 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2617.xml">
+
+<!ENTITY RFC4566 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4566.xml">
+<!ENTITY RFC3108 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3108.xml">
+<!ENTITY RFC3264 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3264.xml">
+<!ENTITY RFC3312 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3312.xml">
+<!ENTITY RFC3407 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3407.xml">
+<!ENTITY RFC3524 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3524.xml">
+<!ENTITY RFC3556 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3556.xml">
+<!ENTITY RFC3605 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3605.xml">
+<!ENTITY RFC3611 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3611.xml">
+<!ENTITY RFC3890 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3890.xml">
+<!ENTITY RFC4091 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4091.xml">
+<!ENTITY RFC4145 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4145.xml">
+<!ENTITY RFC4567 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4567.xml">
+<!ENTITY RFC4568 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4568.xml">
+<!ENTITY RFC4570 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4570.xml">
+<!ENTITY RFC4572 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4572.xml">
+<!ENTITY RFC4574 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4574.xml">
+<!ENTITY RFC4583 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4583.xml">
+<!ENTITY RFC4585 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4585.xml">
+<!ENTITY RFC4796 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4796.xml">
+<!ENTITY RFC4975 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4975.xml">
+<!ENTITY RFC5104 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5104.xml">
+<!ENTITY RFC5109 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5109.xml">
+<!ENTITY RFC5159 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5159.xml">
+<!ENTITY RFC5245 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5245.xml">
+<!ENTITY RFC5285 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5285.xml">
+<!ENTITY RFC5432 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5432.xml">
+<!ENTITY RFC5506 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5506.xml">
+<!ENTITY RFC5547 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5547.xml">
+<!ENTITY RFC5576 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5576.xml">
+<!ENTITY RFC5583 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5583.xml">
+<!ENTITY RFC5760 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5760.xml">
+<!ENTITY RFC5761 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5761.xml">
+<!ENTITY RFC5762 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5762.xml">
+<!ENTITY RFC5763 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5763.xml">
+<!ENTITY RFC5888 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5888.xml">
+<!ENTITY RFC5939 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5939.xml">
+<!ENTITY RFC5956 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5956.xml">
+<!ENTITY RFC6064 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6064.xml">
+<!ENTITY RFC6128 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6128.xml">
+<!ENTITY RFC6189 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6189.xml">
+<!ENTITY RFC6193 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6193.xml">
+<!ENTITY RFC6230 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6230.xml">
+<!ENTITY RFC6236 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6236.xml">
+<!ENTITY RFC6284 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6284.xml">
+<!ENTITY RFC6285 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6285.xml">
+<!ENTITY RFC6364 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6364.xml">
+<!ENTITY RFC6642 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6642.xml">
+<!ENTITY RFC6679 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6679.xml">
+<!ENTITY RFC6714 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6714.xml">
+<!ENTITY RFC6773 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6773.xml">
+<!ENTITY RFC6787 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6787.xml">
+<!ENTITY RFC6849 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6849.xml">
+<!ENTITY RFC6871 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6871.xml">
+<!ENTITY RFC6947 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6947.xml">
+<!ENTITY RFC7006 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7006.xml">
+<!ENTITY RFC7104 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7104.xml">
+<!ENTITY RFC7197 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7195.xml">
+<!ENTITY RFC7195 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7197.xml">
+<!ENTITY RFC7272 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7272.xml">
+<!ENTITY RFC7273 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7273.xml">
+<!ENTITY I-D.ietf-mmusic-sdp-bundle-negotiation SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-mmusic-sdp-bundle-negotiation.xml">
+<!ENTITY I.D-draft-ietf-dart-dscp-rtp SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I.D-draft-ietf-dart-dscp-rtp.xml">
+<!ENTITY RFC7226 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7226.xml">
+]>
+<?xml-stylesheet type="text/xsl" href="rfc2629.xslt" ?>
+
+<?rfc toc="yes" ?>
+<?rfc symrefs="yes" ?>
+<?rfc strict="yes" ?>
+<?rfc compact="yes" ?>
+<?rfc sortrefs="yes" ?>
+<?rfc colonspace="yes" ?>
+<?rfc rfcedstyle="no" ?>
+<?rfc tocdepth="4"?>
+
+<rfc category="std" docName="draft-ietf-mmusic-sdp-mux-attributes-04"
+     ipr="pre5378Trust200902">
+  <front>
+    <title abbrev="SDP Attribute Multiplexing">A Framework for SDP Attributes
+    when Multiplexing</title>
+
+     <author fullname="Suhas Nandakumar" initials="S." surname="Nandakumar">
+      <organization>Cisco</organization>
+
+      <address>
+        <postal>
+          <street>170 West Tasman Drive</street>
+
+          <city>San Jose</city>
+
+          <region>CA</region>
+
+          <code>95134</code>
+
+          <country>USA</country>
+        </postal>
+
+        <email>snandaku@cisco.com</email>
+      </address>
+    </author>
+
+    <date day="24" month="October" year="2014" />
+
+    <area>MMUSIC</area>
+
+    <abstract>
+      <t>
+        The Session Description Protocol (SDP) provides mechanisms to
+        describe attributes of multimedia sessions and of individual
+        media streams (e.g., Real-time Transport Protocol (RTP)
+        sessions) within a multimedia session. In the RTCWeb WG, there
+        is a need to use a single 5-tuple for sending and receiving
+        media associated with multiple media descriptions ("m="
+        lines). Such a requirement has raised concerns over the
+        semantic implications of the SDP attributes associated with
+        the RTP Media Streams multiplexed over a single underlying
+        transport layer flow.
+      </t>
+      <t>
+       The scope of this specification is to provide a framework for
+       analyzing the multiplexing characteristics of SDP
+       attributes. This specification also categorizes the existing
+       SDP attributes based on the framework described herein.
+      </t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section title="Introduction" anchor="sec-intro">
+      <t>
+        Real-Time Communication Web (RTCWeb) framework requires
+        Real-time Transport Protocol (RTP) as the media transport
+        protocol and Session Description Protocol (SDP) <xref
+        target="RFC4566"/> for describing and negotiating multi-media
+        communication sessions.
+       </t>
+       <t>
+        SDP defines several attributes for capturing characteristics
+        that apply to the individual media descriptions (described by
+        "m=" lines") and the overall multimedia session.  Typically
+        different media types (audio, video etc) described using
+        different media descriptions represent separate RTP Sessions
+        that are carried over individual transport layer flows.
+        However in the IETF RTCWEB WG, a need to use a single 5-tuple
+        for sending and receiving media associated with multiple SDP
+        media descriptions ("m=" lines) has been identified.  This
+        would for e.g. allow the usage of a single set of Interactive
+        Connectivity Establishment (ICE) <xref target="RFC5245"/>
+        candidates for multiple media descriptions.  This in turn has
+        made necessary to understand the interpretation and usage of the
+        SDP attributes defined for the multiplexed media descriptions.
+      </t>
+      <t>
+        Given the number of SDP attributes registered with the
+        <xref target="IANA"></xref> and possibility of new attributes
+        being defined in the future, there is need for generic
+        future-proof framework to analyze these attributes for their
+        applicability in the transport multiplexing use-cases.
+      </t>
+      <t>
+        The document starts with providing the motivation for
+        requiring such a framework. This is followed by introduction
+        to the SDP attribute analysis framework/procedures, following
+        which several sections applies the framework to the SDP
+        attributes registered with the <xref target="IANA"></xref>.
+      </t>
+    </section>
+    <section title="Terminology">
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD",
+      "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+      document are to be interpreted as described in <xref
+      target="RFC2119"></xref>.</t>
+      </section>
+    <section title="Motivation">
+      <t>The time and complications of setting up ICE <xref
+        target="RFC5245"></xref> and DTLS-SRTP <xref
+        target="RFC5763"></xref> transports for use by RTP, and
+        conservation of ports, forms an requirement to try and reduce
+        the number of transport level flows needed.  This has resulted
+        in the definition of ways, such as, <xref
+        target="I-D.ietf-mmusic-sdp-bundle-negotiation"></xref> to
+        multiplex RTP over a single transport flow in order to
+        preserve network resources such as port numbers. This imposes
+        further restrictions on applicability of these SDP attributes
+        as they are defined today. </t>
+       <t>The specific problem is that there are attribute combinations
+         which make sense when specified on independent "m= "lines -- as
+         with classical SDP -- that do not make sense when those
+         "m="" lines are then multiplexed over the same transport. To give
+         an obvious example, ICE permits each "m=" line to have an
+         independently specified ice-ufrag attribute. However, if the
+         media from multiple "m=" lines is multiplexed over the same ICE
+         component, then the meaning of media-level ice-ufrag
+         attributes becomes muddled.</t>
+      <t>As of today there are close to 250 SDP attributes registered
+        with the <xref target="IANA"></xref> and more will be
+        added in the future.  There is no clearly defined procedure to
+        establish the validity/applicability of these attribute when
+        used with transport multiplexing.</t>
+    </section>
+    <section title="SDP Attribute Analysis Framework" anchor="sec-mux-fwork">
+      <t>Attributes in an SDP session description can be defined at the
+       session-level and media-level. These attributes could be
+       semantically grouped as noted below.</t>
+	  <t>
+       <list style="symbols">
+         <t> Attributes related to media content such as media type,
+         encoding schemes, payload types.</t>
+         <t> Attributes specifying media transport characteristics like 
+          RTP/RTCP port numbers, network addresses, QOS.</t>
+         <t> Metadata description attributes capturing session timing and 
+          origin information.</t>
+         <t> Attributes establishing relationships between media streams 
+          such as grouping framework</t>
+       </list>
+      </t>
+      <t>With the above semantic grouping as a reference, the proposed
+        framework classifies each attribute into one of the following
+        categories:</t> 
+      <section title="Category: NORMAL">
+        <t>Attributes that can be independently specified when
+         multiplexing and retain their original semantics.</t>
+         <t>&nbsp;</t>
+        <t>In the example given below, the direction and label
+          attributes are independently specified for audio and video
+          m=lines. These attributes are not impacted by multiplexing
+          these media streams over a single transport layer flow.</t>
+        <figure>
+          <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+     v=0
+     o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
+     s=
+     c=IN IP4 host.atlanta.example.com
+     t=0 0
+     m=audio 49172 RTP/AVP 99
+     a=sendonly
+     a=label:1
+     a=rtpmap:99 iLBC/8000
+     m=video 49172 RTP/AVP 31
+     a=recvonly
+     a=label:2
+     a=rtpmap:31 H261/90000
+          ]]></artwork>
+        </figure>
+	   <t>&nbsp;</t>
+      </section>
+      <section title="Category: NOT RECOMMENDED">  
+        <t>Attributes that are recommended against multiplexing since
+          their usage under multiplexing might lead to incorrect
+          behavior.</t>
+         <t>&nbsp;</t>
+         <t>Example: Multiplexing media descriptions having attribute
+          zrtp-hash defined with the media descriptions lacking it,
+          would either complicate the handling of multiplexed streams
+          or might fail multiplexing altogether.</t> 
+         <figure>
+           <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+     v=0
+     o=bob 2890844527 2890844527 IN IP4 client.biloxi.example.com
+     s=
+     c=IN IP4 client.biloxi.example.com
+     t=0 0
+     m=audio 3456 RTP/AVP 97 // with zrtp
+     a=rtpmap:97 iLBC/8000
+     <allOneLine>
+     a=zrtp-hash:1.10 fe30efd02423cb054e50efd0248742ac7a52c8f91bc2
+     df881ae642c371ba46df
+     </allOneLine>
+     m=video 34567 RTP/AVP 31 //without zrtp
+     a=rtpmap:31 H261/90000
+           ]]></artwork>
+        </figure>
+	   <t>&nbsp;</t>
+      </section>
+      <section title="Category: IDENTICAL">  
+         <t>Attributes that MUST be identical across all the media
+         descriptions being multiplexed.</t>
+         <t>&nbsp;</t>
+         <t>Attributes such as rtcp-mux fall into this category.  Since
+          RTCP reporting is done per RTP Session, RTCP Multiplexing
+          MUST to enabled for both the audio and video m=lines in the
+          example below if they are transported over a single 5-tuple.</t> 
+         <figure>
+           <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+     v=0
+     o=bob 2890844527 2890844527 IN IP4 client.biloxi.example.com
+     s=
+     c=IN IP4 client.biloxi.example.com
+     t=0 0
+     m=audio 34567 RTP/AVP 97
+     a=rtcp-mux
+     m=video 34567 RTP/AVP 31
+     a=rtpmap:31 H261/90000
+     a=rtcp-mux
+           ]]></artwork>
+         </figure>
+        <t>&nbsp;</t>
+      </section>
+      <section title="Category: SUM">
+        <t>Attributes can be set as they are normally used but
+         software using them in the multiplexing scenario, MUST apply 
+         the sum of all the attributes being multiplexed instead of 
+         trying to use them independently. This is typically used for 
+         bandwidth or other rate limiting attributes to the 
+         underlying transport.</t>
+         <t>&nbsp;</t>
+         <t>
+          The software parsing the SDP sample below, should use the
+          aggregate Application Specific (AS) bandwidth value from the
+          individual media descriptions to determine the AS value for
+          the multiplexed session.  Thus the calculated AS value would
+          be 256+64 bytes for the given example.
+         </t> 
+         <figure>
+           <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+      v=0
+      o=test 2890844526 2890842807 IN IP4 126.16.64.4
+      c=IN IP4 client.biloxi.example.com
+      t=0 0
+      m=audio 49170 RTP/AVP 0
+      b=AS:64
+      m=video 51372 RTP/AVP 31
+      b=AS:256
+           ]]></artwork>
+        </figure>
+        <t>&nbsp;</t>
+      </section>
+      <section title="Category: TRANSPORT">
+        <t> Attributes that can be set normally for multiple items in
+         a multiplexed group but the software MUST pick just one of
+         the attribute of the given type for use. The one chosen is
+         the attribute associated with the "m=" line that represents
+         the information being used for the transport of the RTP.</t>
+        <t>&nbsp;</t>
+        <t>In the example below, "a=crypto" attribute is defined for both
+        the audio and the video m=lines. The video media line's a=crypto
+        attribute is chosen since its mid value (bar) appears first in
+        the a=group:BUNDLE line. This is due to BUNDLE grouping semantic
+        <xref target="I-D.ietf-mmusic-sdp-bundle-negotiation"></xref>
+        which mandates the values from m=line corresponding to the mid
+        appearing first on the a=group:BUNDLE line to be considered for
+        setting up the RTP Transport.</t>
+       <figure>
+         <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+
+
+     v=0
+     o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
+     s=
+     c=IN IP4 host.atlanta.example.com
+     t=0 0
+     a=group:BUNDLE bar foo
+     m=audio 49172 RTP/AVP 99
+     a=mid:foo
+     a=crypto:1 AES_CM_128_HMAC_SHA1_80
+       inline:d0RmdmcmVCspeEc3QGZiNWpVLFJhQX1cfHAwJSoj|2^20|1:32
+     a=rtpmap:99 iLBC/8000
+     m=video 51374 RTP/AVP 31
+     a=mid:bar
+     a=crypto:1 AES_CM_128_HMAC_SHA1_80
+       inline:EcGZiNWpFJhQXdspcl1ekcmVCNWpVLcfHAwJSoj|2^20|1:32
+     a=rtpmap:96 H261/90000
+         ]]></artwork>
+       </figure>
+       <t>&nbsp;</t>
+     </section>
+     <section title="Category: INHERIT">
+       <t>Attributes that encapsulate other SDP attributes or parameters.
+       These attributes inherit their multiplexing characteristics from the
+       attributes or parameters they encapsulate. Such attributes as of today, 
+       are defined in <xref target="RFC3407"/>, <xref target="RFC5939"/> and 
+       <xref target="RFC6871"/> as part of a generic framework for indicating 
+       and negotiating transport, media and media format related capabilities 
+       in the SDP. </t>
+       <t>The inheritance manifests itself when the encapsulated attribute or 
+       parameter is being leveraged. In the case of SDP Capability Negotiation 
+       <xref target="RFC5939"/> for example, this occurs when a capability 
+       (encapsulating attribute) is used as part of a configuration; the 
+       configuration inherits the multiplexing category of each of its 
+       constituent (encapsulated) attributes and parameters. This in turn may 
+       place constraints on what constitutes a valid configuartion from a 
+       multiplexing point of view, e.g. because some attributes must be IDENTICAL 
+       (see <xref target="sec-encap"/> for further details).</t> 
+       <t>&nbsp;</t>
+       <figure>
+        <artwork align="left" alt="" height="" name="" type="" width=""
+                 xml:space="preserve"><![CDATA[
+       v=0
+       o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
+       s=
+       c=IN IP4 host.atlanta.example.com
+       t=0 0
+       m=video 3456 RTP/AVP 100
+       a=rtpmap:100 VP8/90000
+       a=fmtp:100 max-fr=30;max-fs=8040
+       a=sqn: 0
+       a=cdsc: 1 video RTP/AVP 100
+       a=cpar: a=rtcp-mux
+       m=video 3456 RTP/AVP 101
+       a=rtpmap:101 VP8/90000
+       a=fmtp:100 max-fr=15;max-fs=1200
+       a=cdsc: 2 video RTP/AVP 101
+       a=cpar: a=rtcp-mux
+        ]]></artwork>
+      </figure>
+      <t>In the above example , the category IDENTICAL is inherited for
+       the cpar encapsulated rtcp-mux attribute.</t>
+      <t>&nbsp;</t>
+      </section>
+      <section title="Category: IDENTICAL-PER-PT">
+        <t> Attributes that define the RTP payload configuration on per
+        Payload Type basis and MUST have identical values across all the
+        media descriptions for a given RTP Payload Type when repeated.</t>
+        <t>&nbsp;</t>
+        <t>In the SDP example below, Payload Types 96 and 97 are repeated
+         across all the video m= lines and all the payload specific
+         parameters (ex: rtpmap, fmtp) are identical.</t>   
+       <figure>
+          <artwork align="left" alt="" height="" name="" type="" width=""
+               xml:space="preserve"><![CDATA[
+                   
+     v=0
+     o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
+     s=
+     c=IN IP4 host.atlanta.example.com
+     t=0 0
+     a=group:BUNDLE cam1, cam2
+     m = video 96 97
+     a=mid:cam1
+     a=rtpmap:96 H264/90000
+     a=fmtp:96 profile-level-id=42400d; max-fs=3600; max-fps=3000;
+     max-mbps=108000; max-br=1000
+     a=rtpmap:97 H264/90000
+     a=fmtp:97 profile-level-id=42400a; max-fs=240; max-fps=3000;
+     max-mbps=7200; max-br=200
+     m = video  96 97
+     a=mid:cam2
+     a=rtpmap:96 H264/90000
+     a=fmtp:96 profile-level-id=42400d; max-fs=3600; max-fps=3000;
+     max-mbps=108000; max-br=1000
+     a=rtpmap:97 H264/90000
+     a=fmtp:97 profile-level-id=42400a; max-fs=240; max-fps=3000;
+     max-mbps=7200; max-br=200
+          ]]></artwork>
+        </figure>
+        <t>&nbsp;</t>
+    </section>
+    <section title="Category: SPECIAL">
+      <t>Attributes where the text in the source draft must be
+      consulted for further handling when multiplexed. </t>
+      <t>As an example, for the attribute extmap, the specification
+      defining the extension MUST be referred to understand the
+      multiplexing implications.</t>
+    </section>
+    <section title="Category: TBD">
+      <t>Attributes that have not been analyzed under the proposed multiplexing
+      framework yet. For the purposes of implementations it is advised to 
+      consider "NOT RECOMMENDED" as the category when multiplexing these
+      attribues.</t>
+    </section>
+    </section>
+    <section title="Analysis of Existing Attributes" anchor="sec-cur-analysis" >
+      <t>This section analyzes attributes listed in <xref
+      target="IANA"/> grouped under the IETF document that
+      defines them. The "Level" column indicates whether the attribute
+      is currently specified as:</t>
+      <t>
+        <list style="symbols">
+          <t>S -- Session level</t>
+          <t>M -- Media level</t>
+          <t>B -- Both</t>
+          <t>SR -- Source-level (for a single SSRC)</t>
+        </list>
+      </t>
+     <section title="RFC4566 - SDP: Session Description Protocol">
+     <t><xref target="RFC4566"/> defines the Session
+      Description Protocol (SDP) that is intended for describing
+      multimedia sessions for the purposes of session announcement,
+      session invitation, and other forms of multimedia session
+      initiation.</t>
+
+      <texttable title="RFC4566 Attribute Analysis">
+        <ttcol align='left'>Attr Name</ttcol>
+        <ttcol align='left'>Notes</ttcol>
+        <ttcol align='left'>Level</ttcol>
+        <ttcol align='left'>Category</ttcol>
+
+        <c>sendrecv&nbsp;</c><c>Not impacted&nbsp;</c><c>B&nbsp;</c>
+        <c>NORMAL&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        <c>sendonly&nbsp;</c><c>Not impacted&nbsp;</c><c>B&nbsp;</c>
+        <c>NORMAL&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        <c>recvonly&nbsp;</c><c>Not impacted&nbsp;</c><c>B&nbsp;</c>
+        <c>NORMAL&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        <c>inactive&nbsp;</c><c>Not impacted&nbsp;</c><c>B&nbsp;</c>
+        <c>NORMAL&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        <c>cat&nbsp;</c><c>Not impacted&nbsp;</c><c>S&nbsp;</c>
+        <c>NORMAL&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        <c>ptime&nbsp;</c><c> The attribute value must be same
+        for a given codec configuration&nbsp;</c>
+        <c>M&nbsp;</c><c>IDENTICAL-PER-PT</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        <c>maxptime&nbsp;</c><c>The attribute value must be same
+        for a given codec configuration&nbsp;</c>
+        <c>M&nbsp;</c><c>IDENTICAL-PER-PT</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        <c>orient&nbsp;</c><c>Not Impacted
+          &nbsp;</c><c>M&nbsp;</c><c>NORMAL</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        <c>framerate&nbsp;</c><c>The attribute value must be same
+        for a given codec configuration&nbsp;</c><c>M&nbsp;</c>
+        <c>IDENTICAL-PER-PT&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        <c>quality&nbsp;</c><c>Not Impacted
+        &nbsp;</c><c>M&nbsp;</c><c>NORMAL</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        <c>rtpmap&nbsp;</c><c>The attribute value must be same
+        for a given codec configuration&nbsp;</c><c>M&nbsp;</c>
+        <c>IDENTICAL-PER-PT</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        <c>fmtp&nbsp;</c><c>The attribute value must be same
+        for a given codec configuration&nbsp;</c><c>M&nbsp;</c>
+        <c>IDENTICAL-PER-PT</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        <c>keywds&nbsp;</c><c>Not impacted&nbsp;</c><c>S&nbsp;</c>
+        <c>NORMAL&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        <c>type&nbsp;</c><c>Not Impacted
+        &nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+		    <c>type:broadcast&nbsp;</c><c>Not Impacted
+        &nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+		    <c>type:H332&nbsp;</c><c>Not Impacted
+        &nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+		    <c>type:meeting&nbsp;</c><c>Not Impacted
+        &nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+		    <c>type:moderated&nbsp;</c><c>Not Impacted
+        &nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+		    <c>type:test&nbsp;</c><c>Not Impacted
+        &nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        <c>tool&nbsp;</c><c>Not Impacted
+        &nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        <c>charset&nbsp;</c><c>Not Impacted
+        &nbsp;</c><c>S&nbsp;</c><c>NORMAL&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        <c>sdplang&nbsp;</c><c>Not Impacted
+        &nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        <c>lang&nbsp;</c><c>Not Impacted
+        &nbsp;</c><c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+      </texttable>
+
+    </section>
+    <section title="RFC4585 - RTP/AVPF">
+      <t><xref target="RFC4585"/> defines an extension to
+      the Audio-visual Profile (AVP) that enables receivers to
+      provide, statistically, more immediate feedback to the senders
+      and thus allows for short-term adaptation and efficient
+      feedback-based repair mechanisms to be implemented.</t>
+
+      <texttable title="RFC4585 Attribute Analysis">
+        <ttcol align='left'>Attr Name</ttcol>
+        <ttcol align='left'>Notes</ttcol>
+        <ttcol align='left'>Level</ttcol>
+        <ttcol align='left'>Category</ttcol>
+        <c>rtcp-fb&nbsp;</c><c>Since RTCP feedback attributes are Payload Type
+        (PT) scoped, their values MUST be identical for a given PT across
+        the multiplexed m=lines.</c><c>M</c><c>IDENTICAL-PER-PT&nbsp;</c>
+        <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+      </texttable>
+    </section>
+
+     <section title="RFC5761 - Multiplexing RTP and RTCP">
+        <t><xref target="RFC5761"/> discusses issues that
+        arise when multiplexing RTP data packets and RTP Control
+        Protocol (RTCP) packets on a single UDP port. It describes
+        when such multiplexing is and is not appropriate, and it
+        explains how the Session Description Protocol (SDP) can be
+        used to signal multiplexed sessions.</t>
+        <texttable title="RFC5761 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>rtcp-mux&nbsp;</c><c>RTP and RTCP Multiplexing affects the
+          entire RTP Session&nbsp;</c>
+          <c>M&nbsp;</c><c>IDENTICAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC3312 - Integration of Resource Management and (SIP)">
+        <t><xref target="RFC3312"/>  defines a generic framework for 
+        preconditions, which are extensible through IANA registration.  
+        This document also discusses how network quality of service can be 
+        made a precondition for establishment of sessions initiated by the 
+        Session Initiation Protocol (SIP).  These preconditions require that 
+        the participant reserve network resources before continuing with the 
+        session.</t>
+        <texttable title="RFC3312 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>des&nbsp;</c><c>Refer to notes below&nbsp;</c>
+          <c>M&nbsp;</c><c>NOT RECOMMEDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>conf&nbsp;</c><c>Refer to notes below&nbsp;</c>
+          <c>M&nbsp;</c><c>NOT RECOMMEDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>curr&nbsp;</c><c>Refer to notes below&nbsp;</c>
+          <c>M&nbsp;</c><c>NOT RECOMMEDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+        <t hangText="Note">
+         A mismatched set of Preconditions across media descriptions
+         results in Session establishment failures due to inability
+         to meet the right resource reservations requested.
+        </t>
+      </section>
+
+      <section title="RFC4574 - SDP Label Attribute ">
+        <t><xref target="RFC4574"/> defines a new Session
+        Description Protocol (SDP) media-level attribute: "label".
+        The "label" attribute carries a pointer to a media stream in
+        the context of an arbitrary network application that uses
+        SDP.  The sender of the SDP document can attach the "label"
+        attribute to a particular media stream or streams.  The
+        application can then use the provided pointer to refer to
+        each particular media stream in its context.</t>
+        <texttable title="RFC4574 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>label&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC5432 - QoS Mechanism Selection in SDP">
+        <t><xref target="RFC5432"/> defines procedures to
+        negotiate QOS mechanisms using the Session Description
+        Protocol (SDP) offer/answer model.</t>
+        <texttable title="RFC5432 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>qos-mech-send&nbsp;</c>
+          <c> Refer to notes below &nbsp;</c>
+          <c>B</c><c>SPECIAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>qos-mech-recv&nbsp;</c>
+          <c> Refer to notes below.&nbsp;</c>
+          <c>B</c><c>SPECIAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+        <t hangText="Note">
+          A single DSCP code point per flow being multiplexed
+          doesn't impact multiplexing since QOS mechanisms are
+          signaled/scoped per flow.For scenarios that involves having 
+          different DSCP for packets being transmitted over the 
+          same 5-tuple, has issues as discussed in 
+          <xref target="I.D-draft-ietf-dart-dscp-rtp"/>
+        </t>
+      </section>
+
+      <section title="RFC4568 - SDP Security Descriptions">
+        <t><xref target="RFC4568"/> defines a Session
+        Description Protocol (SDP) cryptographic attribute for
+        unicast media streams.  The attribute describes a
+        cryptographic key and other parameters that serve to
+        configure security for a unicast media stream in either a
+        single message or a roundtrip exchange.</t>
+        <texttable title="RFC4568 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>crypto&nbsp;</c><c>crypto attribute must be the one that corresponds 
+          to the "m=" line chosen for setting up the underlying transport flow </c>
+          <c>M&nbsp;</c><c>TRANSPORT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC5762 - RTP over DCCP">
+        <t>The Real-time Transport Protocol (RTP) is a widely used
+        transport for real-time multimedia on IP networks.  The
+        Datagram Congestion Control Protocol (DCCP) is a transport
+        protocol that provides desirable services for real-time
+        applications.  <xref target="RFC5762"/>
+        specifies a mapping of RTP onto DCCP, along with associated
+        signaling, such that real-time applications can make use of
+        the services provided by DCCP.</t>
+        <texttable title="RFC5762 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Current</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>dccp-service-code&nbsp;</c><c> If RFC6773 is not being
+          used in addition to RFC5762, the port in the "m=" line is a
+          DCCP port. DCCP being a connection oriented protocol, does
+          not allow multiple connections on the same
+          5-tuple.&nbsp;</c> <c>M&nbsp;</c><c>NOT
+          RECOMMENDED&nbsp;</c><c>&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+        <t hangText="Note">
+         If RFC6773 is being used in addition to RFC5762 and provided
+         that DCCP-in-UDP layer has additional demultiplexing, then it
+         may be possible to use different DCCP service codes for each
+         DCCP flow, given each uses a different DCCP port. Although
+         doing so might conflict with the media type of the "m="
+         line. None of this is standardized yet and it wouldn't work
+         as explained. Hence multiplexing MUST NOT be performed even
+         in this alternate scenario.
+        </t>
+      </section>
+
+      <section title="RFC6773 - DCCP-UDP Encapsulation">
+        <t><xref target="RFC6773"/> document specifies an
+        alternative encapsulation of the Datagram Congestion Control
+        Protocol (DCCP), referred to as DCCP-UDP.  This
+        encapsulation allows DCCP to be carried through the current
+        generation of Network Address Translation (NAT) middle boxes
+        without modification of those middle boxes.</t>
+        <texttable title="RFC6773 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>dccp-port&nbsp;</c><c> Multiplexing MUST NOT be performed
+          due to potential conflict between the port used for DCCP
+          en/decapsulation and the RTP.&nbsp;</c> <c>M&nbsp;</c><c>NOT
+          RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+        <t hangText="Note">
+         Since RFC6773 is about tunnelling DCCP in UDP, with the UDP
+         port being the port of the DCCP en-/de-capsulation
+         service. This encapsulation allows arbitrary DCCP packets to
+         be encapsulated and the DCCP port choosen MAY conflict with
+         the port chosen for the RTP traffic.
+        </t>
+        <t>
+         For multiplexing several DCCP-in-UDP encapsulations on the
+         same UDP port, with no RTP traffic on the same port implies
+         collapsing several DCCP port spaces together.  This MAY or
+         MAY NOT work depending on the nature of DCCP encapsulations
+         and ports choses thus rendering it to be very application
+         dependant.
+        </t>
+      </section>
+
+      <section title="RFC5506 - Reduced-Size RTCP in RTP Profile">
+        <t><xref target="RFC5506"/> discusses benefits and
+        issues that arise when allowing Real-time Transport Protocol
+        (RTCP) packets to be transmitted with reduced size.</t>
+        <texttable title="RFC5506 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>rtcp-rsize&nbsp;</c><c>Reduced size RTCP affects the
+          entire RTP Session&nbsp;</c>
+          <c>M&nbsp;</c><c>IDENTICAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC6787 - Media Resource Control Protocol Version 2">
+        <t>The Media Resource Control Protocol Version 2 (MRCPv2)
+        allows client hosts to control media service resources such
+        as speech synthesizers, recognizers, verifiers, and
+        identifiers residing in servers on the network.  MRCPv2 is
+        not a "stand-alone" protocol -- it relies on other
+        protocols, such as the Session Initiation Protocol (SIP), to
+        coordinate MRCPv2 clients and servers and manage sessions
+        between them, and the Session Description Protocol (SDP) to
+        describe, discover, and exchange capabilities.  It also
+        depends on SIP and SDP to establish the media sessions and
+        associated parameters between the media source or sink and
+        the media server.  Once this is done, the MRCPv2 exchange
+        operates over the control session established above,
+        allowing the client to control the media processing
+        resources on the speech resource server. <xref
+        target="RFC6787"/> defines attributes for this
+        purpose.</t>
+        <texttable title="RFC6787 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>resource&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c>
+          <c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>channel&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c>
+          <c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+
+      <section title="RFC5245 - Interactive Connectivity Establishment (ICE)">
+        <t><xref target="RFC5245"/> describes a protocol
+        for Network Address Translator(NAT) traversal for UDP-based
+        multimedia sessions established with the offer/answer model.
+        This protocol is called Interactive Connectivity
+        Establishment (ICE).  ICE makes use of the Session Traversal
+        Utilities for NAT (STUN) protocol and its
+        extension,Traversal Using Relay NAT (TURN).  ICE can be used
+        by any protocol utilizing the offer/answer model, such as
+        the Session Initiation Protocol (SIP).</t>
+        <texttable title="RFC5245 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>ice-lite&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>ice-options&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>ice-mismatch&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>ice-pwd&nbsp;</c><c>ice-pwd MUST be the one that
+          corresponds to the m=line chosen for setting up the
+          underlying transport flow&nbsp;</c>
+          <c>B</c><c>TRANSPORT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>ice-ufrag&nbsp;</c><c>ice-ufrag MUST be the one that
+          corresponds to the m=line chosen for setting up the
+          underlying transport flow&nbsp;</c>
+          <c>B</c><c>TRANSPORT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>candidate&nbsp;</c><c>ice candidate MUST be the one that
+          corresponds to the m=line chosen for setting up the
+          underlying transport
+          flow&nbsp;</c><c>M</c><c>TRANSPORT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>remote-candidates&nbsp;</c><c>ice remote candidate MUST
+          be the one that corresponds to the m=line chosen for setting
+          up the underlying transport
+          flow&nbsp;</c><c>M</c><c>TRANSPORT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC5285 - RTP Header Extensions">
+        <t><xref target="RFC5285"/> provides a general
+        mechanism to use the header extension feature of RTP (the
+        Real-Time Transport Protocol).  It provides the option to
+        use a small number of small extensions in each RTP packet,
+        where the universe of possible extensions is large and
+        registration is de-centralized.  The actual extensions in
+        use in a session are signaled in the setup information for
+        that session.</t>
+        <texttable title="RFC5285 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>extmap&nbsp;</c><c>Specific RTP extension document MUST
+          be referred&nbsp;</c> <c>B</c><c>SPECIAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC3605 - RTCP attribute in SDP ">
+      <t>Originally, SDP assumed that RTP and RTCP were carried on
+	    consecutive ports. However, this is not always true when
+	    NATs are involved.  <xref target="RFC3605"/> specifies an
+	    early mechanism to indicate the RTCP port.</t>
+        <texttable title="RFC3605 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>rtcp&nbsp;</c><c>Identical attribute value 
+          MUST be used since the RTCP port affects
+          the entire RTP session.&nbsp;</c><c>M</c>
+          <c>IDENTICAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC5576 - Source-Specific SDP Attributes">
+        <t><xref target="RFC5576"/> defines a mechanism to
+        describe RTP media sources, which are identified by their
+        synchronization source (SSRC) identifiers, in SDP, to
+        associate attributes with these sources, and to express
+        relationships among sources. It also defines several
+        source-level attributes that can be used to describe
+        properties of media sources.</t>
+        <texttable title="RFC5576 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>ssrc&nbsp;</c><c>Refer to Notes
+          below&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>ssrc-group&nbsp;</c>
+          <c>Refer to section <xref target="sec-ssrc-group"></xref>
+          for specific analysis of the grouping semantics&nbsp;</c><c>M</c>
+          <c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>cname&nbsp;</c> <c>Not Impacted&nbsp;</c><c>SR</c>
+          <c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>previous-ssrc&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c><c>SR</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>fmtp&nbsp;</c><c>The attribute value must be same for a
+          given codec configuration&nbsp;</c><c>SR</c>
+          <c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        </texttable>
+        <t hangText="Note">
+         If SSRCs are repeated across m=lines being multiplexed, they
+         MUST all represent the same underlying RTP Source.
+        </t>
+      </section>
+
+      <section title="RFC7273 - RTP Clock Source Signalling">
+        <t><xref target="RFC7273"/> specifies
+        Session Description Protocol (SDP) signalling that identifies 
+        timestamp reference clock sources and SDP signalling that identifies 
+        the media clock sources in a multimedia session.</t>
+        <texttable title="RFC7273 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>ts-refclk&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>B</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>mediaclk&nbsp;</c>
+          <c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC6236 - Image Attributes in SDP">
+        <t><xref target="RFC6236"/> proposes a new generic
+        session setup attribute to make it possible to negotiate
+        different image attributes such as image size.  A possible
+        use case is to make it possible for a low-end hand-held
+        terminal to display video without the need to rescale the
+        image,something that may consume large amounts of memory and
+        processing power. The document also helps to maintain an
+        optimal bitrate for video as only the image size that is
+        desired by the receiver is transmitted.</t>
+        <texttable title="RFC6236 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>imageattr&nbsp;</c><c>The attribute value must be same
+          for a given codec configuration&nbsp;</c><c>M&nbsp;</c>
+          <c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+	   <section title="RFC7197 -  Duplication Delay Attribute in SDP">
+        <t><xref target="RFC7197"/> defines an attribute to 
+        indicate the presence of temporally redundant media streams 
+        and the duplication delay in the Session Description 
+        Protocol.</t>
+        <texttable title="RFC7197 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>duplication-delay&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c>
+          <c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC7226 -  RTCP XR Blocks for MOS Metric Reporting">
+        <t><xref target="RFC7226"/> defines an RTP Control Protocol (RTCP) 
+        Extended Report (XR) Block including two new segment types and 
+        associated Session Description Protocol (SDP) parameters that allow 
+        the reporting of mean opinion score (MOS) Metrics for use in a 
+        range of RTP applications.</t>
+        <texttable title="RFC7226 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>calgextmap&nbsp;</c><c>Not Impacted&nbsp;</c><c>B&nbsp;</c>
+          <c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+
+      <section title="RFC6285 - Rapid Acquisition of Multicast RTP Sessions">
+        <t><xref target="RFC6285"/> describes a method
+        using the existing RTP and RTP Control Protocol (RTCP)
+        machinery that reduces the acquisition delay. In this
+        method, an auxiliary unicast RTP session carrying the
+        Reference Information to the receiver precedes or
+        accompanies the multicast stream.  This unicast RTP flow can
+        be transmitted at a faster than natural bitrate to further
+        accelerate the acquisition.  The motivating use case for
+        this capability is multicast applications that carry
+        real-time compressed audio and video.</t>
+        <texttable title="RFC6285 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>rams-updates&nbsp;</c><c>Not recommended
+          &nbsp;</c><c>M&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC6230 - Media Control Channel Framework">
+        <t><xref target="RFC6230"/> describes a framework
+        and protocol for application deployment where the
+        application programming logic and media processing are
+        distributed.  This implies that application programming
+        logic can seamlessly gain access to appropriate resources
+        that are not co-located on the same physical network entity.
+        The framework uses the Session Initiation Protocol (SIP) to
+        establish an application-level control mechanism between
+        application servers and associated external servers such as
+        media servers.</t>
+        <texttable title="RFC6230 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>cfw-id&nbsp;</c><c>Not Applicable&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+
+      <section title="RFC6364 - SDP Elements for FEC Framework">
+        <t><xref target="RFC6364"/> specifies the use of
+        the Session Description Protocol (SDP) to describe the
+        parameters required to signal the Forward Error Correction
+        (FEC) Framework Configuration Information between the
+        sender(s) and receiver(s).  This document also provides
+        examples that show the semantics for grouping multiple
+        source and repair flows together for the applications that
+        simultaneously use multiple instances of the FEC Framework.</t>
+        <texttable title="RFC6364 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>fec-source-flow&nbsp;</c><c>Specific FEC scheme document needs 
+          to be referred&nbsp;</c><c>M&nbsp;</c>
+          <c>SPECIAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>fec-repair-flow&nbsp;</c><c>Specific FEC scheme document needs 
+          to be referred&nbsp;</c><c>M&nbsp;</c>
+          <c>SPECIAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>repair-window&nbsp;</c><c>Specific FEC scheme document needs 
+          to be referred&nbsp;</c><c>M&nbsp;</c>
+          <c>SPECIAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC4796 - Content Attribute">
+        <t><xref target="RFC4796"/> defines a new Session
+        Description Protocol (SDP) media-level attribute, 'content'.
+        The 'content' attribute defines the content of the media
+        stream to a more detailed level than the media description
+        line.  The sender of an SDP session description can attach
+        the 'content' attribute to one or more media streams.  The
+        receiving application can then treat each media stream
+        differently (e.g., show it on a big or small screen) based
+        on its content.</t>
+        <texttable title="RFC4796 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>content&nbsp;</c><c>Not
+          Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC3407 - SDP Simple Capability Declaration">
+        <t><xref target="RFC3407"/> defines a set of
+        Session Description Protocol (SDP) attributes that enables
+        SDP to provide a minimal and backwards compatible capability
+        declaration mechanism.</t>
+        <texttable title="RFC3407 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>sqn&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>B</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>cdsc&nbsp;</c><c>Not
+          Impacted.&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>cpar&nbsp;</c><c>Refer to <xref target="sec-encap"/>&nbsp;</c>
+          <c>B</c><c>INHERIT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>cparmin&nbsp;</c><c>Refer to notes below &nbsp;</c>
+          <c>B</c><c>SPECIAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>cparmax&nbsp;</c><c>Refer to notes below&nbsp;</c>
+          <c>B</c><c>SPECIAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        </texttable>
+         <t hangText="Note"> Since the attributes (a=cparmin and
+         a=cparmax) define minimum and maximum numerical values
+         associated with the attributes described in a=cpar, it is
+         recommended to consult the document defining the attribute.
+        </t>
+      </section>
+
+      <section title="RFC6284 - Port Mapping between Unicast and Multicast RTP Sessions">
+        <t><xref target="RFC6284"/> presents a port
+        mapping solution that allows RTP receivers to choose their
+        own ports for an auxiliary unicast session in RTP
+        applications using both unicast and multicast services.  The
+        solution provides protection against denial-of-service or
+        packet amplification attacks that could be used to cause one
+        or more RTP packets to be sent to a victim client.</t>
+        <texttable title="RFC6284 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>portmapping-req&nbsp;</c><c>Not recommended, if port mapping is
+          required by the application&nbsp;</c><c>M&nbsp;</c>
+          <c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC6714 - MSRP-CEMA">
+        <t><xref target="RFC6714"/> defines a Message
+        Session Relay Protocol (MSRP) extension, Connection
+        Establishment for Media Anchoring (CEMA).  Support of this
+        extension is OPTIONAL.  The extension allows middle boxes to
+        anchor the MSRP connection, without the need for middle
+        boxes to modify the MSRP messages; thus, it also enables
+        secure end-to-end MSRP communication in networks where such
+        middle boxes are deployed.  This document also defines a
+        Session Description Protocol (SDP) attribute, 'msrp-cema',
+        that MSRP endpoints use to indicate support of the CEMA
+        extension.</t>
+        <texttable title="RFC6714 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>msrp-cema&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c>
+          <c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+
+      <section title="RFC4583 - SDP Format for BFCP Streams">
+        <t><xref target="RFC4583"/> document specifies how
+        to describe Binary Floor Control Protocol (BFCP) streams in
+        Session Description Protocol (SDP) descriptions. User agents
+        using the offer/answer model to establish BFCP streams use
+        this format in their offers and answers.</t>
+        <texttable title="RFC4583 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>floorctrl&nbsp;</c>
+          <c>Must be repeated across all the multiplexed
+          m=lines&nbsp;</c>
+          <c>M&nbsp;</c><c>IDENTICAL&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>confid&nbsp;</c><c>Not Impacted&nbsp;</c><c>M&nbsp;</c>
+          <c>NORMAL&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>userid&nbsp;</c><c>Not
+          Impacted&nbsp;</c><c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>floorid&nbsp;</c>
+          <c>The floorid MUST be globally unique&nbsp;</c>
+          <c>M&nbsp;</c><c>NORMAL&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC5547 - SDP Offer/Answer for File Transfer">
+        <t><xref target="RFC5547"/> provides a mechanism
+        to negotiate the transfer of one or more files between two
+        endpoints by using the Session Description Protocol (SDP)
+        offer/answer model specified in <xref target="RFC3264"/>.</t>
+        <texttable title="RFC5547 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>file-selector&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>file-transfer-id&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c> file-disposition&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c> file-date&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c> file-iconfile-range&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC6849 - SDP and RTP Media Loopback Extension">
+        <t><xref target="RFC6849"/> adds new SDP media
+        types and attributes, which enable establishment of media
+        sessions where the media is looped back to the
+        transmitter. Such media sessions will serve as monitoring
+        and troubleshooting tools by providing the means for
+        measurement of more advanced VoIP, Real-time Text and Video
+        over IP performance metrics.</t>
+        <texttable title="RFC6849 Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>loopback rtp-pkt-loopback&nbsp;</c><c>Not Impacted &nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>loopback rtp-media-loopback&nbsp;</c><c>Not Impacted &nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>loopback-source&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c>
+          <c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>loopback-mirror&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c>
+          <c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC5760 - RTCP with Unicast Feedback ">
+        <t><xref target="RFC5760"/> specifies an extension
+        to the Real-time Transport Control Protocol (RTCP) to use
+        unicast feedback to a multicast sender.  The proposed
+        extension is useful for single-source multicast sessions
+        such as Source-Specific Multicast (SSM) communication where
+        the traditional model of many-to-many group communication is
+        either not available or not desired.</t>
+        <texttable title="RFC5760 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>rtcp-unicast&nbsp;</c><c>The attribute MUST be reported
+          across all m=lines
+          multiplexed&nbsp;</c><c>M</c><c>IDENTICAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC3611 - RTCP XR">
+        <t><xref target="RFC3611"/> defines the Extended
+        Report (XR) packet type for the RTP Control Protocol (RTCP),
+        and defines how the use of XR packets can be signaled by an
+        application if it employs the Session Description Protocol
+        (SDP).</t>
+        <texttable title="RFC3611 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>rtcp-xr&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC5939 - SDP Capability Negotiation">
+        <t><xref target="RFC5939"/> defines a general SDP
+        Capability Negotiation framework. It also specifies how to
+        provide attributes and transport protocols as capabilities
+        and negotiate them using the framework.  Extensions for
+        other types of capabilities (e.g., media types and media
+        formats) may be provided in other documents.</t>
+        <texttable title="RFC5939 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>pcfg&nbsp;</c>
+          <c>Refer to Section <xref target="sec-encap"/> &nbsp;</c>
+          <c>M</c><c>SPECIAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>acfg&nbsp;</c>
+          <c>Refer to Section <xref target="sec-encap"/>&nbsp;</c>
+          <c>M</c><c>SPECIAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>csup&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c>
+          <c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>creq&nbsp;</c><c>Not Impacted&nbsp;</c><c>B</c>
+          <c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>acap&nbsp;</c>
+          <c>Refer to section <xref target="sec-encap"/>&nbsp;</c>
+          <c>B</c><c>INHERIT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>tcap&nbsp;</c>
+          <c>Refer to section <xref target="sec-encap"/>&nbsp;</c>
+          <c>B</c><c>INHERIT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>cap-v0&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>B</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC6871- SDP Media Capabilities Negotiation">
+        <t>Session Description Protocol (SDP) capability negotiation
+        provides a general framework for indicating and negotiating
+        capabilities in SDP.  The base framework defines only
+        capabilities for negotiating transport protocols and
+        attributes. <xref target="RFC6871"></xref> extends the
+        framework by defining media capabilities that can be used to
+        negotiate media types and their associated parameters.</t>
+        <texttable title="Session Description Protocol (SDP) 
+          Media Capabilities Negotiation">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>rmcap&nbsp;</c>
+          <c>Refer to Section <xref target="sec-encap"/>&nbsp;</c>
+          <c>B</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>omcap&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>B</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>mfcap&nbsp;</c>
+          <c>Refer to Section <xref target="sec-encap"/>&nbsp;</c>
+          <c>B</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>mscap&nbsp;</c>
+          <c>Refer to Section <xref target="sec-encap"/>&nbsp;</c>
+          <c>B</c><c>INHERIT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>lcfg&nbsp;</c>
+          <c>Refer to Section <xref target="sec-encap"/>&nbsp;</c>
+          <c>B</c><c>SPECIAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>sescap&nbsp;</c>
+          <c>Refer to Section <xref target="sec-encap"/>&nbsp;</c>
+          <c>S</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>med-v0&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+        <t hangText="Note"> The "sescap" attribute is NOT RECOMMENDED 
+          for use with multiplexing. The reason is that it requires the 
+          use of unique configuration numbers across the entire SDP 
+          (per <xref target="RFC6871"/> as opposed to within a media 
+          description only (per <xref target="RFC5939"/>). As described in 
+          <xref target="sec-encap"/>, the use of identical configuration 
+          numbers between multiplxed (bundled) media descriptions is the 
+          default way of indicating compatible configurations in a bundle. 
+        </t>
+      </section>
+
+	    <section title="RFC7006 - Miscellaneous Capabilities Negotiation SDP">
+        <t><xref target="RFC7006"/> extends the SDP capability negotiation 
+        framework to allow endpoints to negotiate three additional SDP 
+        capabilities.  In particular, this memo provides a mechanism to 
+        negotiate bandwidth ("b=" line), connection data ("c=" line), and 
+        session or media titles ("i=" line for each session or media).</t>
+        <texttable title="Miscellaneous Capabilities Negotiation in the
+                   Session Description Protocol (SDP)">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>bcap&nbsp;</c>
+          <c>Inherit the category SUM as 
+          applicable to b= attribute&nbsp;</c>
+          <c>B</c><c>INHERIT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>bcap-v0&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>B</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>ccap&nbsp;</c><c>The connection address type 
+          MUST be identical across
+          all the multiplexed m= lines.&nbsp;</c>
+          <c>B</c><c>IDENTICAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>ccap-v0&nbsp;</c><c>Not Impacted.&nbsp;</c>
+          <c>B</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+
+          <c>icap&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>B</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>icap-v0&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>B</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        </texttable>
+
+      </section>
+
+      <section title="RFC4567 - Key Management Extensions for SDP and RTSP">
+        <t><xref target="RFC4567"/> defines general
+        extensions for Session Description Protocol (SDP) and Real
+        Time Streaming Protocol (RTSP) to carry messages, as
+        specified by a key management protocol, in order to secure
+        the media.  These extensions are presented as a framework,
+        to be used by one or more key management protocols.  As
+        such, their use is meaningful only when complemented by an
+        appropriate key management protocol.</t>
+        <texttable title="RFC4567 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>key-mgmt&nbsp;</c><c>Key management protocol MUST be
+          identical across all the m=lines&nbsp;</c><c>B</c>
+          <c>IDENTICAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>mikey&nbsp;</c><c>Key management protocol MUST be
+          identical across all the m=lines&nbsp;</c><c>B</c>
+          <c>IDENTICAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC4572 - Comedia over TLS in SDP">
+        <t><xref target="RFC4572"/> specifies how to
+        establish secure connection-oriented media transport
+        sessions over the Transport Layer Security (TLS) protocol
+        using the Session Description Protocol (SDP).  It defines a
+        new SDP protocol identifier, 'TCP/TLS'.  It also defines the
+        syntax and semantics for an SDP 'fingerprint' attribute that
+        identifies the certificate that will be presented for the
+        TLS session.  This mechanism allows media transport over TLS
+        connections to be established securely, so long as the
+        integrity of session descriptions is assured.</t>
+        <texttable title="RFC4572 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>fingerprint&nbsp;</c><c>Fingerprint value from the m=line
+          defining the underlying transport is
+          chosen&nbsp;</c><c>B</c><c>TRANSPORT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC4570 - SDP Source Filters">
+        <t><xref target="RFC4570"/> describes how to adapt
+        the Session Description Protocol (SDP) to express one or
+        more source addresses as a source filter for one or more
+        destination "connection" addresses.  It defines the syntax
+        and semantics for an SDP "source-filter" attribute that may
+        reference either IPv4 or IPv6 address(es) as either an
+        inclusive or exclusive source list for either multicast or
+        unicast destinations.  In particular, an inclusive
+         source-filter can be used to specify a Source-Specific
+        Multicast (SSM) session.</t>
+        <texttable title="RFC4570 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>source-filter&nbsp;</c><c>The attribute MUST be repeated
+          across all m=lines
+          multiplexed&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC6128 - RTCP Port for Multicast Sessions">
+        <t>The Session Description Protocol (SDP) has an attribute that
+        allows RTP applications to specify an address and a port
+        associated with the RTP Control Protocol (RTCP) traffic.  In
+        RTP-based source-specific multicast (SSM) sessions, the same
+        attribute is used to designate the address and the RTCP port
+        of the Feedback Target in the SDP description.  However, the
+        RTCP port associated with the SSM session itself cannot be
+        specified by the same attribute to avoid ambiguity, and
+        thus, is required to be derived from the "m=" line of the
+        media description.  Deriving the RTCP port from the "m="
+        line imposes an unnecessary restriction.  <xref target="RFC6128"/> 
+        removes this restriction by introducing a new SDP attribute.</t>
+        <texttable title="RFC6128 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>multicast-rtcp&nbsp;</c><c>Multicast RTCP port MUST be
+          identical across all the
+          m=lines&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC6189 - ZRTP">
+        <t><xref target="RFC6189"/> defines ZRTP, a protocol for media 
+        path Diffie-Hellman exchange to agree on a session key and 
+        parameters for establishing unicast Secure
+        Real-time Transport Protocol (SRTP) sessions for Voice over
+        IP (VoIP) applications.</t>
+        <texttable title="RFC6189 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>zrtp-hash&nbsp;</c><c>Complicates if all the m=lines are
+          not authenticated as given in the example
+          below&nbsp;</c><c>M</c>
+          <c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+        <t>
+          Example: Multiplexing media descriptions having attribute
+          zrtp-hash defined with the media descriptions lacking it,
+          would either complicate the handling of multiplexed stream
+          or fail multiplexing.
+          <figure>
+            <artwork align="left" alt="" height="" name="" type="" width=""
+                   xml:space="preserve"><![CDATA[
+     v=0
+     o=bob 2890844527 2890844527 IN IP4 client.biloxi.example.com
+     s=
+     c=IN IP4 client.biloxi.example.com
+     t=0 0
+     m=audio 3456 RTP/AVP 97
+     a=rtpmap:97 iLBC/8000
+     <allOneLine>
+     a=zrtp-hash:1.10 fe30efd02423cb054e50efd0248742ac7a52c8f91bc2
+     df881ae642c371ba46df
+     </allOneLine>
+     m=video 34567 RTP/AVP 31
+     a=rtpmap:31 H261/90000
+            ]]></artwork>
+          </figure>
+        </t>
+      </section>
+
+      <section title="RFC4145 - Connection-Oriented Media ">
+        <t><xref target="RFC4145"/> describes how to
+        express media transport over TCP using the Session
+        Description Protocol (SDP).  It defines the SDP 'TCP'
+        protocol identifier, the SDP 'setup' attribute, which
+        describes the connection setup procedure, and the SDP
+        'connection' attribute, which handles connection
+        reestablishment.</t>
+        <texttable title="RFC4145 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>setup&nbsp;</c>
+          <c>MUST be identical across all m=lines&nbsp;</c>
+          <c>B</c><c>IDENTICAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>connection&nbsp;</c>
+          <c>MUST be identical across all m=lines&nbsp;</c>
+          <c>B</c><c>IDENTICAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC6947 - The SDP ALTC Attribute">
+        <t><xref target="RFC6947"/> proposes a mechanism that allows 
+        the same SDP offer to carry multiple IP addresses of different 
+        address families (e.g., IPv4 and IPv6).  The proposed attribute, 
+        the "altc" attribute, solves the backward-compatibility problem 
+        that plagued Alternative Network Address Types (ANAT) due to 
+        their syntax.</t>
+        <texttable title="RFC6947 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>altc&nbsp;</c><c>The IP Address and port must be the one 
+          that corresponds to the m=line chosen for setting up the 
+          underlying transport flow. &nbsp;</c>
+          <c>M</c><c>TRANSPORT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC7195 - SDP Extension for Circuit Switched Bearers 
+        in PSTN">
+        <t><xref target="RFC7195"/> describes use cases, requirements, and 
+        protocol extensions for using the Session Description Protocol 
+        (SDP) offer/answer model for establishing audio and video media 
+        streams over circuit-switched bearers in the Public Switched 
+        Telephone Network (PSTN).</t>
+        <texttable title="RFC7195 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>cs-correlation:callerid&nbsp;</c>
+          <c>Not Impacted.&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>cs-correlation:uuie&nbsp;</c>
+          <c>Not Impacted.&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          <c>cs-correlation:dtmf&nbsp;</c>
+          <c>Not Impacted.&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          <c>cs-correlation:external&nbsp;</c>
+          <c>Not Impacted.&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        </texttable>
+
+      </section>
+
+      <section title="RFC7272 - IDMS Using the RTP Control Protocol (RTCP)">
+        <t><xref target="RFC7272"/> defines a new RTP Control Protocol 
+        (RTCP) Packet Type and an RTCP Extended Report (XR) Block Type 
+        to be used for achieving Inter-Destination Media Synchronization 
+        (IDMS).</t>
+        <texttable title="RFC7272 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>rtcp-idms&nbsp;</c><c>Not Impacted.&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+      <section title="RFC5159 - OMA BCAST SDP Attributes">
+        <t><xref target="RFC5159"/> provides descriptions
+        of Session Description Protocol (SDP) attributes used by the
+        Open Mobile Alliance's Broadcast Service and Content
+        Protection specification.</t>
+        <texttable title="RFC5159 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>bcastversion&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>stkmstream&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>B</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>SRTPAuthentication&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>SRTPROCTxRate&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC6193 - Media Description for IKE in SDP">
+        <t><xref target="RFC6193"/> specifies how to
+        establish a media session that represents a virtual private
+        network using the Session Initiation Protocol for the
+        purpose of on-demand media/application sharing between
+        peers.  It extends the protocol identifier of the Session
+        Description Protocol (SDP) so that it can negotiate use of
+        the Internet Key Exchange Protocol (IKE) for media sessions
+        in the SDP offer/answer model.</t>
+        <texttable title="RFC6193 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>ike-setup&nbsp;</c><c>Attribute MUST be identical
+            across all the m=lines&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>psk-fingerprint&nbsp;</c><c>Attribute MUST be identical
+          across all the m=lines&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>ike-esp&nbsp;</c><c>Attribute MUST be identical
+          across all the m=lines&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>ike-esp-udpencap&nbsp;</c><c>Attribute MUST be identical
+          across all the m=lines&nbsp;</c><c>B</c><c>IDENTICAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+        <t hangText="Note"> With the above SDP constraints, a session
+        multiplexed with multiple m=lines will use only one IPSec
+        association for all of the m= lines.
+        </t>
+      </section>
+
+      <section title="RFC2326 - Real Time Streaming Protocol">
+        <t>The Real Time Streaming Protocol, or RTSP, is an application-level
+        protocol for control over the delivery of data with real-time
+        properties. RTSP provides an extensible framework to enable
+        controlled, on-demand delivery of real-time data, such as audio
+        and video.</t>
+        <texttable title="RFC2326 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>etag&nbsp;</c><c>RTSP is not supported for RTP Stream
+          multiplexing&nbsp;</c><c>B</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>range&nbsp;</c><c>RTSP is not supported for RTP Stream
+          multiplexing&nbsp;</c><c>B</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>control&nbsp;</c><c>RTSP is not supported for RTP Stream
+          multiplexing&nbsp;</c><c>B</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>mtag&nbsp;</c><c>RTSP is not supported for RTP Stream
+          multiplexing&nbsp;</c><c>B</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC6064 - SDP and RTSP Extensions for 3GPP">
+        <t>The Packet-switched Streaming Service (PSS) and the
+        Multimedia Broadcast/Multicast Service (MBMS) defined by
+        3GPP use the Session Description Protocol (SDP) and Real
+        Time Streaming Protocol (RTSP) with some extensions.  <xref
+        target="RFC6064"/> provides information about
+        these extensions and registers the RTSP and SDP extensions
+        with IANA.</t>
+        <texttable title="RFC6064 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>X-predecbufsize&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c>
+          <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>X-initpredecbufperiod&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c>
+          <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>X-initpostdecbufperiod&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c>
+          <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>X-decbyterate</c><c>Refer to notes below&nbsp;</c>
+          <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3gpp-videopostdecbufsize&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c>
+          <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>framesize</c><c>Refer to notes below&nbsp;</c><c>M</c>
+          <c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3GPP-Integrity-Key&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c><c>S</c>
+          <c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3GPP-SDP-Auth&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c><c>S</c>
+          <c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3GPP-SRTP-Config&nbsp;</c>
+          <c>Refer to notes below&nbsp;&nbsp;</c><c>M</c>
+          <c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>alt,alt-default-id&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c>
+          <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>alt-group&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c><c>M</c>
+          <c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3GPP-Adaptation-Support&nbsp;</c>
+          <c>Refer to notes below&nbsp;&nbsp;</c><c>M</c>
+          <c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3GPP-Asset-Informatio&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c><c>B</c>
+          <c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>mbms-mode&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c><c>B</c>
+          <c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>mbms-flowid&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c><c>M</c>
+          <c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>mbms-repair&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c><c>B</c>
+          <c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3GPP-QoE-Metrics:Corruption duration&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c>
+          <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3GPP-QoE-Metrics:Rebuffering duration&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c>
+          <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3GPP-QoE-Metrics:Initial buffering duration&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c>
+          <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3GPP-QoE-Metrics:Successive loss of RTP packets&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c>
+          <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3GPP-QoE-Metrics:Frame rate deviation&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c>
+          <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3GPP-QoE-Metrics:Jitter duration&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c>
+          <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3GPP-QoE-Metrics:Content Switch Time&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c>
+          <c>B</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3GPP-QoE-Metrics:Average Codec Bitrat&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c>
+          <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3GPP-QoE-Metrics:Codec Information&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c>
+          <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3GPP-QoE-Metrics:Buffer Status&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c>
+          <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+        <t hangText="Notes">
+         <xref target="RFC6064"/> defines SDP attributes that are
+         applicable in the declarative usage of SDP alone. For
+         purposes of this document, only the Offer/Answer usage of SDP
+         is considered as mandated by <xref
+         target="I-D.ietf-mmusic-sdp-bundle-negotiation"></xref>.
+        </t>
+      </section>
+
+      <section title="RFC3108 - ATM SDP">
+        <t><xref target="RFC3108">RFC3108</xref> describes conventions
+        for using the Session Description Protocol (SDP) described
+        for controlling ATM Bearer Connections, and any associated
+        ATM Adaptation Layer (AAL).</t>
+        <texttable title="RFC3108 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>aalType&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>eecid&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aalType&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>capability&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>qosClass&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>bcob&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>stc&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>upcc&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>atmQOSparms&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>atmTrfcDesc&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>abrParms&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>abrSetup&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>bearerType&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>lij&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>anycast&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>cache&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>bearerSigIE&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aalApp&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>cbrRate&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>sbc&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>clkrec&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>fec&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>prtfl&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>structure&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>cpsSDUsize&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2CPS&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2CPSSDUrate&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2sscs3661unassured&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2sscs3661assured&nbsp;</c>
+          <c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2sscs3662&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal5sscop&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>atmmap&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>silenceSupp&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>ecan&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>gc&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>profileDesc&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>vsel&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>dsel&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>fsel&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>onewaySel&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>codecconfig&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>isup_usi&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>isup_usi&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>chain&nbsp;</c><c>Not Impacted</c>
+          <c>B&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        </texttable>
+        <t hangText="Note">RFC3108 describes conventions for using the
+        Session Description Protocol (SDP) for characterizing ATM
+        bearer connections using an AAL1, AAL2 or AAL5 adaptation
+        layers. For AAL1, AAL2 and AAL5, bearer connections can be
+        used to transport single media streams. In addition, for AAL1
+        and AAL2, multiple media streams may be multiplexed into a
+        bearer connection. For all adaptation types (AAL1, AAL2 and
+        AAL5), bearer connections may be bundled into a single media
+        group. In all cases addressed by RFC3108, a real-time media
+        stream (voice, video, voiceband data, pseudo-wire and others)
+        or a multiplex of media streams is mapped directly into an ATM
+        connection.  RFC3108 does not address cases where ATM serves
+        as a low-level transport pipe for IP packets which in turn may
+        carry one or more real-time (e.g. VoIP) media sessions with a
+        life-cycle different from that of the underlying ATM
+        transport.
+        </t>
+     </section>
+     <section title="3GPP TS 26.114">
+        <t>
+          <xref target="R3GPPTS26.114"/> specifies IP multimedia subsystem: 
+          Media handling and interaction
+        </t>
+        <texttable title="3GPP TS 24.182 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>3gpp_sync_info&nbsp;</c>
+          <c>Usage defined for the IP Multimedia Subsystem&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>3gpp_MaxRecvSDUSize&nbsp;</c>
+          <c>Usage defined for the IP Multimedia Subsystem&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        </texttable>
+      </section>
+
+      <section title="3GPP TS 183.063">
+        <t>
+          <xref target="R3GPPTS183.063"/> Telecommunications and Internet 
+          converged Services and Protocols for Advanced Networking (TISPAN);
+        </t>
+        <texttable title="3GPP TS 24.182 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>PSCid&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>Not-ApplIcable</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>bc_service&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>Not-AppIlcable</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>bc_program&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>Not-AppIlcable</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>bc_service_package&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>Not-Appilcable</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        </texttable>
+      </section>
+
+      <section title="3GPP TS 24.182">
+        <t>
+          <xref target="R3GPPTS24.182"/> specifies IP multimedia subsystem 
+          Custom Alerting tones
+        </t>
+        <texttable title="3GPP TS 24.182 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>g.3gpp.cat&nbsp;</c>
+          <c>Usage defined for the IP Multimedia Subsystem&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="3GPP TS 24.183">
+        <t>
+          <xref target="R3GPPTS24.183"/> specifies IP multimedia
+          subsystem Custom Ringing Signal
+        </t>
+        <texttable title="3GPP TS 24.183 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>g.3gpp.crs&nbsp;</c>
+          <c>Usage defined for the IP Multimedia Subsystem&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="3GPP TS 24.229">
+        <t>
+         <xref target="R3GPPTS24.229"/> specifies IP multimedia call 
+         control protocol based on Session Initial protocol and 
+         Session Description Protocol.
+        </t>
+        <texttable title="3GPP TS 24.229 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>secondary-realm&nbsp;</c>
+          <c>Per media-level attribute MUST be used per
+          underlying transport&nbsp;</c><c>M</c>
+          <c>TRANSPORT&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>visited-realm&nbsp;</c>
+          <c>Per media-level attribute MUST be used per
+          underlying transport&nbsp;</c><c>M</c>
+          <c>TRANSPORT&nbsp;</c><c>&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>omr-m-cksum&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c><c>&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>omr-s-cksum&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c><c>&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>omr-m-att&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c><c>&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>omr-s-bw&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>omr-s-bw&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>omr-m-att&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>omr-codecs&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        </texttable>
+      </section>
+
+      <section title="ITU T.38">
+        <t>
+         <xref target="T.38"></xref> defines procedures for 
+         real-time Group 3 facsimile communications over IP networks.
+        </t>
+        <texttable title="ITU T.38 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>T38FaxVersion&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>T38MaxBitRate&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>T38FaxFillBitRemoval&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>T38FaxTranscodingMMR&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>T38FaxTranscodingJBIG&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>T38FaxRateManagement&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>T38FaxMaxBuffer&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>T38FaxMaxDatagram&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>T38FaxUdpEC&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>T38FaxMaxIFP&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>T38FaxUdpECDepth&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>T38FaxUdpFECMaxSpan&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>T38ModemType&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+         <t hangText="Note"> The ITU T.38 attributes are clearly unaffected 
+          by multiplexing and are specific to the working of the fax 
+          protocol itself.</t>
+      </section>
+
+      <section title="ITU-T-REC.Q1970">
+        <t>
+         <xref target="ITU-T-REC.Q1970"></xref> defines BICC IP bearer 
+         control protocol.
+        </t>
+       <texttable title="ITU-T-REC.Q1970 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+        <c>ipbcp&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>S</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+      </texttable> 
+      </section>
+
+      <section title="ITU-T H.248.15">
+        <t>
+          ITU-T H.248.15 <xref target="H.248.15"></xref> defines Gateway Control Protocol
+          SDP H.248 package attribute
+        </t>
+        <texttable title="ITU-T H.248.15 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>h248item&nbsp;</c><c>It is also only applicable for
+          signaling the inclusion of H.248 extension packages to a
+          gateway via the local and remote descriptors.  The attribute
+          itself is unaffected by multiplexing, but the packaged
+          referenced in a specific use of the attribute may be
+          impacted.  Further analysis of each package is needed to
+          determine if there is an issue.  This is only a concern in
+          environments using a decomposed server/gateway with H.248
+          signaled between them.  The ITU-T will need to do further
+          analysis of various packages when they specify how to signal
+          the use of multiplexing to a gateway.&nbsp;</c>
+          <c>B</c><c>SPECIAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC4975 - The Message Session Relay Protocol">
+        <t><xref target="RFC4975"/> the Message Session
+        Relay Protocol, a protocol for transmitting a series of
+        related instant messages in the context of a session.
+        Message sessions are treated like any other media stream
+        when set up via a rendezvous or session creation protocol
+        such as the Session Initiation Protocol.</t>
+        <texttable title="RFC4975 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>accept-types&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>accept-wrapped-types&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>max-size&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>path&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="RFC4574 - SDP Label Attribute ">
+        <t><xref target="RFC4574"/> defines a new Session
+        Description Protocol (SDP) media-level attribute: "label".
+        The "label" attribute carries a pointer to a media stream in
+        the context of an arbitrary network application that uses
+        SDP.  The sender of the SDP document can attach the "label"
+        attribute to a particular media stream or streams.  The
+        application can then use the provided pointer to refer to
+        each particular media stream in its context.</t>
+        <texttable title="RFC4574 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>label&nbsp;</c><c>Not Impacted&nbsp;</c><c>M</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+
+      <section title="Historical Attributes">
+        <t>
+          This section specifies analysis for the attributes that are
+          included for historic usage alone by the <xref
+          target="IANA"></xref>.
+        </t>
+        <texttable title="Historical Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>rtpred1&nbsp;</c><c>Historic attributes.&nbsp;</c>
+          <c>Not-Applicable</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>rtpred2&nbsp;</c><c>Historic attributes.&nbsp;</c>
+          <c>Not-Applicable</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+   </section>
+   <section title="bwtype Attribute Analysis" anchor="SecbwtypeAnalysis" >
+    <t>This section specifies handling of specific bandwidth attributes 
+      when used in multiplexing scenarios.</t>
+     <section title="RFC4566 - SDP: Session Description Protocol">
+       <texttable title="RFC4566 bwtype Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Notes</ttcol>
+         <ttcol align='left'>Level</ttcol>
+         <ttcol align='left'>Category</ttcol>
+
+         <c>bwtype:CT&nbsp;</c><c>Not Impacted&nbsp;</c>
+         <c>S</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+         <c>bwtype:AS&nbsp;</c><c> As a session attribute, it
+         specifies the session aggregate unless media-level b=RR
+         and/or b=RS attributes are used.  Under this interpretation
+         the multiplexing scheme has no impact and thus NORMAL
+         category applies.&nbsp;</c>
+
+         <c>B</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         <c>bwtype:AS&nbsp;</c><c> For the media level usage,
+	        the aggregate of individual bandwidth values is considered.&nbsp;</c>
+          <c>B</c>
+         <c>SUM&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+       </texttable>
+     </section>
+     <section title="RFC3556 - SDP Bandwidth Modifiers for RTCP Bandwidth">
+       <t><xref target="RFC3556">RFC3556</xref> defines an extension to
+        the Session Description Protocol (SDP) to specify two
+        additional modifiers for the bandwidth attribute.  These
+        modifiers may be used to specify the bandwidth allowed for
+        RTP Control Protocol (RTCP) packets in a Real-time Transport
+        Protocol (RTP) session.</t>
+       <texttable title="RFC3556 bwtype Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Notes</ttcol>
+         <ttcol align='left'>Level</ttcol>
+         <ttcol align='left'>Category</ttcol>
+
+         <c>bwtype:RS&nbsp;</c><c>Session level usage represents
+         session aggregate and media level usage indicates SUM of the
+         individual values while multiplexing&nbsp;</c>
+         <c>B</c><c>NORMAL</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+         <c>bwtype:RR&nbsp;</c><c>Session level usage represents
+         session aggregate and media level usage indicates SUM of the
+         individual values while multiplexing&nbsp;</c>
+         <c>B</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+       </texttable>
+     </section>
+     <section title="RFC3890 - Bandwidth Modifier for SDP">
+       <t><xref target="RFC3890">RFC3890</xref> defines a Session
+        Description Protocol (SDP) Transport Independent Application
+        Specific Maximum (TIAS) bandwidth modifier that does not
+        include transport overhead; instead an additional packet rate
+        attribute is defined.  The transport independent bit-rate
+        value together with the maximum packet rate can then be used
+        to calculate the real bit-rate over the transport actually
+        used.</t>
+       <texttable title="RFC3890 bwtype Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Notes</ttcol>
+         <ttcol align='left'>Level</ttcol>
+         <ttcol align='left'>Category</ttcol>
+
+         <c>bwtype:TIAS&nbsp;</c><c>The usage of TIAS is not clearly
+         defined Offer/Answer
+         usage.&nbsp;</c><c>B</c><c>SPECIAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c> 
+         <c>bwtype:maxprate&nbsp;</c><c>The usage of TIAS and maxprate is not 
+         well defined under multiplexing&nbsp;</c><c>B</c><c>SPECIAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+       </texttable>
+       <t hangText="Note"> The intention of TIAS is that the media
+       level bit-rate is multiplied with the known per-packet overhead
+       for the selected transport and the maxprate value to determine
+       the worst case bit-rate from the transport to more accurately
+       capture the required usage.  Summing TIAS values independently
+       across m=lines and multiplying the computed sum with maxprate
+       and the per-packet overhead would inflate the value
+       significantly. Instead performing multiplication and adding the
+       individual values is a more appropriate usage. This still
+       ignores the fact that this is a send side declaration, and not
+       intended for receiver negotiation.
+       </t>
+     </section>
+   </section>
+   <section title="rtcp-fb Attribute Analysis" anchor="SecrtcpfbAnalysis">
+     <t>
+      This section analyzes rtcp-fb SDP attributes.
+     </t>
+
+     <section title="RFC4585 - RTP/AVPF">
+       <t><xref target="RFC4585">RFC4585</xref> defines an extension to
+        the Audio-visual Profile (AVP) that enables receivers to
+        provide, statistically, more immediate feedback to the
+        senders and thus allows for short-term adaptation and
+        efficient feedback-based repair mechanisms to be implemented.</t>
+       <texttable title="RFC4585 Attribute Analysis">
+         <ttcol align='left'>Attr Name</ttcol>
+         <ttcol align='left'>Notes</ttcol>
+         <ttcol align='left'>Level</ttcol>
+         <ttcol align='left'>Category</ttcol>
+
+         <c>ack rpsi&nbsp;</c><c>The attribute value must be same
+         for a given codec configuration</c>
+         <c>M</c><c>IDENTICAL-PER-PT&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+         <c>ack app&nbsp;</c>
+         <c>Feedback parameters MUST be handled in the app specific
+         way when multiplexed</c>
+         <c>M</c><c>SPECIAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+         <c>nack&nbsp;</c><c>The attribute value must be same
+         for a given codec configuration</c>
+         <c>M</c><c>IDENTICAL-PER-PT&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+         <c>nack pli&nbsp;</c><c>The attribute value must be same
+         for a given codec configuration</c>
+         <c>M</c><c>IDENTICAL-PER-PT&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+         <c>nack sli&nbsp;</c><c>The attribute value must be same
+         for a given codec configuration</c>
+         <c>M</c><c>IDENTICAL-PER-PT&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+         <c>nack rpsi&nbsp;</c><c>The attribute value must be same
+         for a given codec configuration </c>
+         <c>M</c><c>IDENTICAL-PER-PT&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+         <c>nack app&nbsp;</c>
+         <c>Feedback parameters MUST be handled in the app specific
+         way when multiplexed</c>
+         <c>M</c><c>SPECIAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+         <c>trr-int&nbsp;</c><c>The attribute value must be same
+         for a given codec configuration</c>
+         <c>M</c><c>IDENTICAL-PER-PT&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+       </texttable>
+     </section>
+
+     <section title="RFC5104 - Codec Control Messages in AVPF">
+       <t><xref target="RFC5104">RFC5104</xref> specifies a few
+        extensions to the messages defined in the Audio-Visual
+        Profile with Feedback (AVPF).  They are helpful primarily in
+        conversational multimedia scenarios where centralized
+        multipoint functionalities are in use.  However, some are
+        also usable in smaller multicast environments and
+        point-to-point calls.</t>
+       <texttable title="RFC5104 Attribute Analysis">
+         <ttcol align='left'>Attr Name</ttcol>
+         <ttcol align='left'>Notes</ttcol>
+         <ttcol align='left'>Level</ttcol>
+         <ttcol align='left'>Category</ttcol>
+
+         <c>ccm&nbsp;</c><c>The attribute value must be same
+        for a given codec configuration</c>
+         <c>M</c><c>IDENTICAL-PER-PT&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+       </texttable>
+
+     </section>
+     <section title="RFC6285 - Unicast-Based RAMS">
+       <texttable title="RFC6285 Attribute Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Notes</ttcol>
+         <ttcol align='left'>Level</ttcol>
+         <ttcol align='left'>Category</ttcol>
+
+         <c>nack rai&nbsp;</c><c>The attribute value must be same
+         for a given codec configuration&nbsp;</c>
+         <c>M&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+       </texttable>
+     </section>
+     <section title="RFC6679 - ECN for RTP over UDP/IP">
+       <t><xref target="RFC6679">RFC6679</xref> specifies how Explicit
+        Congestion Notification (ECN) can be used with the Real-time
+        Transport Protocol (RTP) running over UDP, using the RTP
+        Control Protocol (RTCP) as a feedback mechanism.  It defines
+        a new RTCP Extended Report (XR) block for periodic ECN
+        feedback, a new RTCP transport feedback message for timely
+        reporting of congestion events, and a Session Traversal
+        Utilities for NAT (STUN) extension used in the optional
+        initialization method using Interactive Connectivity
+        Establishment (ICE).</t>
+       <texttable title="RFC6679 Attribute Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Notes</ttcol>
+         <ttcol align='left'>Level</ttcol>
+         <ttcol align='left'>Category</ttcol>
+
+         <c>ecn-capable-rtp&nbsp;</c><c>ECN markup are enabled at the
+         RTP Session level&nbsp;</c>
+         <c>M&nbsp;</c><c>IDENTICAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+         <c>nack ecn&nbsp;</c><c>This attribute enables ECN at the RTP
+         session level&nbsp;</c>
+         <c>M&nbsp;</c><c>IDENTICAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+       </texttable>
+
+     </section>
+     <section title="RFC6642 - Third-Party Loss Report">
+       <t>In a large RTP session using the RTP Control Protocol (RTCP)
+        feedback mechanism defined in RFC 4585 <xref
+        target="RFC4585"></xref>, a feedback target may experience
+        transient overload if some event causes a large number of
+        receivers to send feedback at once.  This overload is usually
+        avoided by ensuring that feedback reports are forwarded to
+        all receivers, allowing them to avoid sending duplicate
+        feedback reports.  However, there are cases where it is not
+        recommended to forward feedback reports, and this may allow
+        feedback implosion.  RFC6642 <xref target="RFC6642"></xref>
+        memo discusses these cases and defines a new RTCP Third-Party
+        Loss Report that can be used to inform receivers that the
+        feedback target is aware of some loss event, allowing them to
+        suppress feedback.  Associated Session Description Protocol
+        (SDP) signaling is also defined.</t>
+        <texttable title="RFC6642 Attribute Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Notes</ttcol>
+         <ttcol align='left'>Level</ttcol>
+         <ttcol align='left'>Category</ttcol>
+
+         <c>nack tllei&nbsp;</c><c>The attribute value must be same
+         for a given codec configuration&nbsp;</c>
+         <c>M&nbsp;</c>
+         <c>IDENTICAL-PER-PT&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+         <c>nack pslei&nbsp;</c><c>The attribute value must be same
+         for a given codec configuration&nbsp;</c>
+         <c>M&nbsp;</c>
+         <c>IDENTICAL-PER-PT&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+       </texttable>
+     </section>
+     <section title="RFC5104 - Codec Control Messages in AVPF">
+       <texttable title="RFC5104 Attribute Analysis">
+         <ttcol align='left'>Attr Name</ttcol>
+         <ttcol align='left'>Notes</ttcol>
+         <ttcol align='left'>Level</ttcol>
+         <ttcol align='left'>Category</ttcol>
+
+         <c>ccm fir&nbsp;</c><c>The attribute value must be same
+         for a given codec configuration</c>
+         <c>M</c><c>IDENTICAL-PER-PT&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+         <c>ccm tmmbr&nbsp;</c><c>The attribute value must be same
+         for a given codec configuration</c>
+         <c>M</c><c>IDENTICAL-PER-PT&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+         <c>ccm tstr&nbsp;</c><c>The attribute value must be same
+         for a given codec configuration</c>
+         <c>M</c><c>IDENTICAL-PER-PT&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+         <c>ccm vbcm&nbsp;</c><c>The attribute value must be same
+         for a given codec configuration</c>
+         <c>M</c><c>IDENTICAL-PER-PT&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+       </texttable>
+     </section>
+   </section>
+  <section title="group Attribute Analysis"
+     anchor="SecgroupAnalysis">
+     <t>
+       This section analyzes SDP &quot;group&quot; semantics.
+     </t>
+     <section title="RFC5888 - SDP Grouping Framework">
+       <t>
+         <xref target="RFC5888">RFC5888</xref> defines a framework
+         to group "m" lines in the Session Description Protocol (SDP)
+         for different purposes.
+       </t>
+       <texttable title="RFC5888 Attribute Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Notes</ttcol>
+         <ttcol align='left'>Level</ttcol>
+         <ttcol align='left'>Category</ttcol>
+
+         <c>group:LS&nbsp;</c><c>Not Impacted&nbsp;</c>
+         <c>S&nbsp;</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+         <c>group:FID&nbsp;</c><c>Not Impacted&nbsp;</c>
+         <c>S&nbsp;</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+       </texttable>
+     </section>
+     <section title="RFC3524 - Mapping Media Streams to 
+      Resource Reservation Flows">
+       <t><xref target="RFC3524">RFC3524</xref> defines an extension to
+        the Session Description Protocol (SDP) grouping framework.
+        It allows requesting a group of media streams to be mapped
+        into a single resource reservation flow.  The SDP syntax
+        needed is defined, as well as a new "semantics" attribute
+        called Single Reservation Flow (SRF).</t>
+       <texttable title="RFC3524 Attribute Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Notes</ttcol>
+         <ttcol align='left'>Level</ttcol>
+         <ttcol align='left'>Category</ttcol>
+
+         <c>group:SRF&nbsp;</c><c>Not Impacted&nbsp;</c>
+         <c>S&nbsp;</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+       </texttable>
+     </section>
+
+     <section title="RFC4091 - ANAT Semantics">
+       <t>
+         <xref target="RFC4091">RFC4091</xref> defines the Alternative
+         Network Address Types (ANAT) semantics for the Session
+         Description Protocol (SDP) grouping framework.  The ANAT
+         semantics allow alternative types of network addresses to
+         establish a particular media stream.
+       </t>
+       <texttable title="RFC4091 Attribute Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Notes</ttcol>
+         <ttcol align='left'>Level</ttcol>
+         <ttcol align='left'>Category</ttcol>
+
+         <c>group:ANAT&nbsp;</c><c>ANAT semantics is obseleted&nbsp;</c>
+         <c>S&nbsp;</c>
+         <c>NOT RECOMMENDED&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+       </texttable>
+
+     </section>
+
+     <section title="RFC5956 - FEC Grouping Semantics in SDP">
+       <t><xref target="RFC5956">RFC5956</xref> defines the semantics
+        for grouping the associated source and FEC-based (Forward
+        Error Correction) repair flows in the Session Description
+        Protocol (SDP).  The semantics defined in the document are to
+        be used with the SDP Grouping Framework (RFC 5888).  These
+        semantics allow the description of grouping relationships
+        between the source and repair flows when one or more source
+        and/or repair flows are associated in the same group, and
+        they provide support for additive repair flows.  SSRC-level
+        (Synchronization Source) grouping semantics are also defined
+        in this document for Real-time Transport Protocol (RTP)
+        streams using SSRC multiplexing.</t>
+       <texttable title="RFC5956 Attribute Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Notes</ttcol>
+         <ttcol align='left'>Level</ttcol>
+         <ttcol align='left'>Category</ttcol>
+
+         <c>group:FEC-FR&nbsp;</c><c>Not Impacted&nbsp;</c><c>S&nbsp;</c>
+         <c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+       </texttable>
+     </section>
+     <section title="RFC5583 - Signaling Media Decoding Dependency in SDP">
+       <t><xref target="RFC5583">RFC5583</xref> defines semantics that
+        allow for signaling the decoding dependency of different
+        media descriptions with the same media type in the Session
+        Description Protocol (SDP).  This is required, for example,
+        if media data is separated and transported in different
+        network streams as a result of the use of a layered or
+        multiple descriptive media coding process.</t>
+       <texttable title="RFC5583 Attribute Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Notes</ttcol>
+         <ttcol align='left'>Level</ttcol>
+         <ttcol align='left'>Category</ttcol>
+
+         <c>depend lay&nbsp;</c><c>The attribute value must be same
+         for a given codec configuration &nbsp;</c><c>M</c>
+         <c>IDENTICAL-PER-PT&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+         <c>depend mdc&nbsp;</c><c>The attribute value must be same
+         for a given codec configuration&nbsp;</c><c>M</c>
+         <c>IDENTICAL-PER-PT&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+       </texttable>
+     </section>
+	 <section title="RFC7104 - Duplication Grouping Semantics in the  SDP">
+       <t><xref target="RFC7104"/> defines the semantics for
+   		  grouping redundant streams in the Session Description Protocol (SDP).
+   		  The semantics defined in this document are to be used with the SDP
+   	    Grouping Framework. Grouping semantics at the Synchronization Source
+   		  (SSRC) level are also defined in this document for RTP streams using
+   		  SSRC multiplexing.</t>
+       <texttable title="RFC7104 Attribute Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Notes</ttcol>
+         <ttcol align='left'>Level</ttcol>
+         <ttcol align='left'>Category</ttcol>
+
+         <c>group:DUP&nbsp;</c><c>Not Impacted&nbsp;</c><c>S&nbsp;</c>
+         <c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+    	</texttable>
+     </section>
+   </section>
+   <section title="ssrc-group Attribute Analysis"
+     anchor="sec-ssrc-group">
+    <t>
+     This section analyzes "ssrc-group" semantics.
+    </t>
+     <section title="RFC5576 - Source-Specific SDP Attributes">
+       <texttable title="RFC5576 Attribute Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Notes</ttcol>
+         <ttcol align='left'>Level</ttcol>
+         <ttcol align='left'>Category</ttcol>
+
+         <c>ssrc-group:FID&nbsp;</c><c>Not Impacted&nbsp;</c>
+         <c>SR</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+         <c>ssrc-group:FEC&nbsp;</c><c>Not Impacted&nbsp;</c>
+         <c>SR</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+         <c>ssrc-groupFEC-FR&nbsp;</c><c>Not Impacted&nbsp;</c>
+         <c>SR</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+       </texttable>
+     </section>
+     <section title="RFC7104 - Duplication Grouping Semantics in the SDP">
+       <texttable title="RFC7104 Attribute Analysis">
+         <ttcol align='left'>Name</ttcol>
+         <ttcol align='left'>Notes</ttcol>
+         <ttcol align='left'>Level</ttcol>
+         <ttcol align='left'>Category</ttcol>
+
+         <c>ssrc-group:DUP&nbsp;</c><c>Not Impacted&nbsp;</c>
+         <c>SR</c>
+         <c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        </texttable>
+     </section>
+   </section>
+    <section title="QoS Mechanism Token Analysis"
+      anchor="SecqostokenAnalysis">
+      <t>
+        This section analyzes QoS tokes specified with SDP.
+      </t>
+      <section title="RFC5432 - QoS Mechanism Selection in SDP">
+        <texttable title="RFC5432 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>rsvp&nbsp;</c><c>Not Impacted, since QOS mechanisms are
+          applied per flow.&nbsp;</c>
+          <c>B</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>nsis&nbsp;</c><c>Not Impacted, since QOS mechanisms are 
+          applied per flow.&nbsp;</c>
+          <c>B</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+        </texttable>
+      </section>
+    </section>
+    <section title="k= Attribute Analysis" anchor="SeckAnalysis">
+      <section title="RFC4566 SDP: Session Description Protocol">
+        <texttable title="RFC4566 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>k=&nbsp;</c>
+          <c>It is NOT recommended to use this attribute&nbsp;</c><c>S</c>
+          <c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+    </section>
+    <section title="content Atribute Analysis" anchor="SeccontentAnalysis">
+      <section title="RFC4796">
+        <texttable title="RFC4796 Attribute Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+         <c>content:slides&nbsp;</c><c>Not Impacted&nbsp;</c>
+         <c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+         <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>content:speaker&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>content:main&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>content:sl&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>content:alt&nbsp;</c><c>Not Impacted&nbsp;</c>
+          <c>M&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+      </section>
+    </section>
+
+    <section anchor="sec-pay" title="Payload Formats">
+
+      <section title="RFC5109 - RTP Payload Format for Generic FEC">
+        <t><xref target="RFC5109"/> describes a payload
+        format for generic Forward Error Correction (FEC) for media
+        data encapsulated in RTP.  It is based on the exclusive-or
+        (parity) operation.  The payload format allows end systems
+        to apply protection using various protection lengths and
+        levels, in addition to using various protection group sizes
+        to adapt to different media and channel characteristics. It
+        enables complete recovery of the protected packets or
+        partial recovery of the critical parts of the payload
+        depending on the packet loss situation.</t>
+
+        <texttable title="RFC5109 Payload Format Analysis">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Notes</ttcol>
+          <ttcol align='left'>Level</ttcol>
+          <ttcol align='left'>Category</ttcol>
+
+          <c>audio/ulpfec&nbsp;</c>
+          <c>Not recommended for multiplexing due to reuse of SSRCs&nbsp;</c>
+          <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>video/ulpfec&nbsp;</c>
+          <c>Not recommended for multiplexing due to reuse of SSRCs&nbsp;</c>
+          <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>text/ulpfec&nbsp;</c>
+          <c>Not recommended for multiplexing due to reuse of SSRCs&nbsp;</c>
+          <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+          <c>application/ulpfec&nbsp;</c>
+          <c>Not recommended for multiplexing due to reuse of SSRCs&nbsp;</c>
+          <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
+        </texttable>
+
+        <t> Draft draft-lennox-payload-ulp-ssrc-mux proposes a simple
+        fix to make it possible to use ULP with multiplexing and ULP
+        is allowed when used with that. </t>
+
+      </section>
+
+      </section>
+      <section title="Multiplexing Considerations for Encapsulating Attributes" 
+        anchor="sec-encap">
+          <t>This sections deals with recommendations for defining the
+           multiplexing characteristics of the SDP attributes that
+           encapsulate other SDP attributes/parameters. Such
+           attributes as of today, for example, are defined in
+           [RFC3407], [RFC5939] and [RFC6871] as part of a generic
+           framework for indicating and negotiating transport, media
+           and media format related capabilities in the SDP.</t>
+          <t>The behavior of such attributes under multiplexing is in
+           turn defined by the multiplexing behavior of the attributes
+           they encapsulate which are made known once the Offer/Answer
+           negotiation process is completed.</t>
+          <section title="RFC3407 - cpar Attribute Analysis">
+             <t> RFC3407 capability parameter attribute (a=cpar)
+             encapsulates b= (bandwidth) or an a= attribute. For
+             bandwidth attribute encapsulation, the category SUM is
+             inherited. For the case of a= attribute, the category
+             corresponding to the SDP attribute being encapsulated is
+             inherited.
+             </t>
+              <t>
+              <figure>
+                  <artwork align="left" alt="" height="" name="" type="" width=""
+                      xml:space="preserve"><![CDATA[
+ v=0
+ o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
+ s=
+ c=IN IP4 host.atlanta.example.com
+ t=0 0
+ m=video 3456 RTP/AVP 100
+ a=rtpmap:100 VP8/90000
+ a=sqn: 0
+ a=cdsc: 1 video RTP/AVP 100
+ a=cpar: a=rtcp-mux
+ m=video 3456 RTP/AVP 101
+ a=rtpmap:101 VP8/90000
+ a=fmtp:100 max-fr=15;max-fs=1200
+ a=cdsc: 2 video RTP/AVP 101
+ a=cpar: a=rtcp-mux
+                ]]></artwork>
+              </figure>
+             </t>
+             <t> In the above example ,the category IDENTICAL is
+             inherited for the cpar encapsulated rtcp-mux
+             attribute. </t>
+          <t>&nbsp;</t>
+         </section>
+          <section title="RFC5939 Analysis">
+              <t><xref target="RFC5939"/> defines a general SDP
+              capability negotiation framework. It also specifies
+              how to provide transport protocols and SDP attributes
+              as capabilities and negotiate them using the
+              framework.</t>
+              <t>For this purpose,  <xref target="RFC5939"/> defines the following
+                  <list style="symbols">
+                    <t>A set of capabilities for the session and its
+                    associated media stream components, supported
+                    by each side. The attribute ("a=acap") defines
+                    how to list an attribute name and its
+                    associated value (if any) as a capability. The
+                    attribute ("a=tcap") defines how to list
+                    transport protocols (e.g., "RTP/AVP") as
+                    capabilities.</t>
+                    <t>A set of potential configurations ("a=pcfg") provided
+                    by the offerer to indicate whcich combination of those
+                    capabilities can be used for the session and its 
+                    associated media stream components.  Potential
+                    configurations are not ready for use until fully 
+                    negotiated. They provide an alternative that may
+                    be used, subject to SDP capability negotiation 
+                    procedures. In particular the answerer may choose 
+                    one of the potential configurations for use as part 
+                    of the current Offer/Answer exchange.</t>
+                    <t>An actual configuration ("a=acfg") for the session 
+                    and its associated media stream components. The 
+                    actual configuration identifies the potential 
+                    configuration that was negotiated for use. Use
+                    of an actual configuration does not require
+                    any further negotiation.</t>
+                    <t>A negotiation process that takes the current
+                    actual and the set of potential configurations
+                    (combinations of capabilities) as input and
+                    provides the negotiated actual configurations
+                    as output. In <xref target="RFC5939"/> the 
+                    negotiation process is done independently for 
+                    each media description.</t>  
+                  </list>
+              </t>
+              <section title="Recommendation - Procedures for Potential Configuration Pairing">
+                <t>This section provides recommendations for entities
+                generating and processing SDP under the generic
+                capability negotiation framework as defined in
+                <xref target="RFC5939"/> under the context of media
+                stream multiplexing.</t>
+                <t>These recommendations are provided for the purposes
+                of enabling the Offerer to make sure that the
+                generated potential configurations between the
+                multiplexed streams can (easily) be negotiated to be
+                consistent between those streams. In particular, the
+                procedures aim to simplify Answerer's procedure to choose
+                potential configurations that are consistent across
+                all the bundled media descriptions.</t>
+                <t>A potential configuration selects a set of attributes 
+                and parameters that become part of the media description 
+                when negotiated. When multiplexing media descriptions with 
+                potential configurations specified, there may be a need 
+                for coordinating this selection between multiplexed media 
+                descriptions ensuring right multiplexing behavior.</t>
+                <t> Although it is possible to analyze the various potential 
+                configurations in bundled media descriptions to find combinations 
+                that satisfy such constraints, it can quickly become complicated 
+                to do so. </t>
+                <t> The procedures defined in <xref target="RFC5939"/> state 
+                that each potential configuration in the SDP has a unique 
+                configuration number, however the scope of uniqueness is 
+                limited to each media description. To make it simple for the 
+                answerer to chose valid combinations of potential configurations 
+                across media descriptions in a given bundle group, we provide a 
+                simple rule for constructiong potential configurations:-
+                  <list style="symbols">
+                    <t> Let m-bundle be the set of media descriptions that form 
+                    a given bundle .</t>
+                    <t> Let m-bundle-pcfg be the set of media descriptions in 
+                    m-bundle that include one or more potential configurations.</t>
+                    <t> Each media description in m-bundle-pcfg MUST have at 
+                    least one potential configuration with the same configuration 
+                    number (e.g. "1").</t>
+                    <t> For each potential configuration with configuration number x 
+                    in m-bundle-pcfg, the offerer MUST ensure that if the answerer 
+                    chooses configuration number x in each of the media descriptions 
+                    in m-bundle-pcfg, then the resulting SDP will have all multiplexing 
+                    constraints satisfied for those media descriptions.</t>
+                    <t> Since it is nearly impossible to define a generic
+                    mechanism for various capability extensions , this
+                    document does't provide procedures for dealing
+                    with the capability extension attributes. However,
+                    <xref target="med-cap-analysis"/> provide
+                    analysis of media capability extension attributes
+                    as defined in <xref target="RFC6871"/>. </t>
+                    </list>
+                  </t>  
+                  <t> The above allows the answerer to easily find multiplexing compatible 
+                  combinations of potential configurations:- The answerer simply choses a 
+                  potential configuration (number) that is present in all of the media 
+                  descriptions with potential configurations in the bundle.</t> 
+                  <t> Note that it is still possible for the offerer to provide additional 
+                  potential configurations with independent configuration numbers. The 
+                  answerer will have to perform more complicated analysis to determine 
+                  valid multiplexed combinations of those.</t> 
+                <section title="Example: Transport Capability Multiplexing">     
+            <figure title="">
+              <artwork><![CDATA[
+v=0
+o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
+s=
+c=IN IP4 host.atlanta.example.com
+t=0 0 
+a=tcap:1 RTP/SAVPF
+a=tcap:2 RTP/SAVP
+a=group:BUNDLE audio video
+m= audio
+a=mid:audio
+a=pcfg:1 t=1 
+a=pcfg:2
+m= video
+a=mid:video
+a=pcfg:1 t=1 
+a=pcfg:2 t=2
+              ]]></artwork>
+            </figure>
+            <t>In the example above, the potential configurations that offer 
+            transport protocol capability of RTP/SAVPF has the same configuration 
+            number "1" in both the audio and video media descriptions.</t>
+          </section>  
+          <section title="Example: Attribute Capability Multiplexing">  
+            <figure title="">
+              <artwork><![CDATA[
+
+v=0
+o=alice 2890844526 2890844527 IN IP4 host.atlanta.example.com
+s=
+c=IN IP4 host.atlanta.example.com
+t=0 0
+a=acap:1 a=rtcp-mux
+a=acap:2 a=crypto:1 AES_CM_128_HMAC_SHA1_80
+       inline:EcGZiNWpFJhQXdspcl1ekcmVCNWpVLcfHAwJSoj|2^20|1:32
+a=group:BUNDLE audio video
+m= audio 49172 RTP/AVP 99
+a=mid:audio
+a=pcfg:1 a=1
+a=pcfg:2
+m= video 560024 RTP/AVP 100
+a=mid:video
+a=pcfg:1 a=1 
+a=pcfg:2 a=2
+              ]]></artwork>
+            </figure> 
+            <t>In the example above, the potential configuration number "1" is 
+            repeated while referring to attribute capability a=rtcp-mux, since 
+            the behavior is IDENTICAL for the attribute a=rtcp-mux under
+            multiplexing.</t>
+          </section>    
+        </section>
+      </section>
+      <section title = "RFC6871 Analysis" anchor="med-cap-analysis">
+        <t><xref target="RFC6871"/> extends capability negotiation
+        framework described in <xref target="RFC5939"/> by
+        defining media capabilities that can be used to indicate
+        and negotiate media types and their associated format
+        parameters. It also allows indication of latent configurations 
+        and session capabilities.</t>
+        <section title="Recommendation: Dealing with Payload Type Numbers">
+          <t><xref target="RFC6871"/> defines a new payload type ("pt") parameter 
+          to be used with the potential, actual and latent configuration parameters. 
+          The parameter associates RTP payload type numbers with the 
+          referenced RTP-based media format capabilities ("a=rmcap") defined 
+          in [RFC6871] and is appropriate only when the transport protocol 
+          uses RTP. This means that the same payload type number can be 
+          assigned as part of potential or actual configurations in different 
+          media descriptions in a bundle. There are rules for the usage of 
+          identical Payload Type values across multiplexed m=lines as 
+          described in <xref target="I-D.ietf-mmusic-sdp-bundle-negotiation"></xref>, 
+          which MUST be followed here as well. As described in Section 15.2, the use 
+          of identical configuration numbers for compatible configurations in different 
+          media descriptions that are part of the bundle provides a way to ensure that 
+          the answerer can easily pick compatible configurations here as well.</t>  
+          <section title="Example: Attribute Capability Under Shared Payload Type">
+            <t>The attributes (a=rmcap, a=mfcap) follow the above
+            recommendations under mutliplexing.</t> 
+              <figure title="">
+                <artwork><![CDATA[
+v=0
+o=- 25678 753849 IN IP4 192.0.2.1
+s=
+c=IN IP4 192.0.2.1
+t=0 0
+a=creq:med-v0
+m=audio 54322 RTP/AVP 96
+a=rtpmap:96 AMR-WB/16000/1
+a=fmtp:96 mode-change-capability=1; max-red=220;
+mode-set=0,2,4,7
+a=rmcap:1,3 audio AMR-WB/16000/1
+a=rmcap:2 audio AMR/8000/1
+a=mfcap:1,2 mode-change-capability=1
+a=mfcap:3 mode-change-capability=2
+a=pcfg:1 m=1 pt=1:96
+a=pcfg:2 m=2 pt=2:97
+a=pcfg:3 m=3 pt=3:98
+m=audio 54322 RTP/AVP 96
+a=rtpmap:96 AMR-WB/16000/1
+a=fmtp:96 mode-change-capability=1; max-red=220;
+mode-set=0,2,4,7
+a=rmcap:4 audio AMR/8000/1
+a=rmcap:5 audio OPUS/48000/2
+a=mfcap:5 minptime=40
+a=mfcap:4 mode-change-capability=1
+a=pcfg:1 m=4 pt=4:97
+a=pcfg:4 m=5 pt=5:101
+]]>
+                  </artwork>
+                </figure> 
+            <t>In the example above, the potential configuration
+            number "1" is repeated when referring to media and media
+            format capability used for the Payload Type 97. This
+            implies that both the media capability 2 and 4 along
+            with their media format capabilities MUST refer to the
+            same codec configuration , as per the definition of
+            IDENTICAL-PER-PT.</t>
+          </section> 
+        </section> 
+        <section title="Recommendation: Dealing with Latent Configurations">
+          <t><xref target="RFC6871"/> adds the notion of a latent configurations, 
+          which provides configuration information that may be used to guide a subsequent 
+          offer/exchange, e.g. by adding another media stream or use alternative 
+          codec combinations not currently offered. Latent configurations have 
+          configuration numbers which cannot overlap with the potential configuration 
+          numbers <xref target="RFC6871"/>. Supported combinations of potential and 
+          latent configurations are indicated by use of the "a=sescap" attribute, 
+          however use of this attribute is not recommended with bundled media, 
+          since it requires the use of unique configuration numbers across the SDP. 
+          Taken together, this means there is no well-defined way to indicate supported 
+          combinations of latent configurations, or combinations of latent and potential 
+          configurations with bundled media. It is still allowed to 
+          use the latent configuration attribute, however the limitations 
+          above will apply.  To determine valid combinations, actual 
+          negotiation will have to be attempted subsequently instead.</t>
+            </section>
+        </section>
+      </section>
+     <section title="IANA Considerations">
+      <t>[RFC EDITOR NOTE: Please replace RFCXXXX with the RFC number 
+        of this document.]</t>
+      <t>The IANA is requested to add a new column named "Mux Category"
+       to all several of the sub-registries in the "Session Description Protocol
+       (SDP) Parameters" registry. Section <xref target="sec-mux-cat-iana"/> defines
+       a new registry for identifying the initial registrations 
+       for various multiplexing categories proposed in this document. 
+       The tables in <xref target="sec-mux-cat-values-iana"/> 
+       identify name of an entry in the existing registry and specify the value to put in the
+       new "Mux Category" column of the associated IANA registry. Any entries in
+       the existing tables that do not have a value for the "Mux Category"
+       specified in this RFC will get a value of "TBD". Future specifications can
+       change the "TBD" entries to the correct value.</t>
+       <section title="New Column 'Mux Category' " anchor="sec-mux-cat-iana" toc="default">
+          <t>A new sub-registry needs to be called  the "Mux Category", with
+          the following registrations created initially: "NORMAL", "NOT RECOMMENDED",
+          "IDENTICAL", "TRANSPORT", "IDENTICAL-PER-PT", SPECIAL" and "TBD" as 
+          defined in this document.</t>
+          <t>Initial value registration for the column "Mux Category".</t>
+
+          <texttable align="left">
+            <ttcol align='left'>Mux Category</ttcol>
+            <ttcol align='left'>Reference</ttcol>
+              <c>NORMAL&nbsp;</c><c> RFCXXXX</c>
+              <c>NOT RECOMMENDED&nbsp;</c><c> RFCXXXX</c>
+              <c>IDNETICAL&nbsp;</c><c> RFCXXXX</c>
+              <c>TRANSPORT&nbsp;</c><c> RFCXXXX</c>
+              <c>IDENTICAL-PER-PT&nbsp;</c><c> RFCXXXX</c>
+              <c>SPECIAL&nbsp;</c><c> RFCXXXX</c>
+              <c>TBD&nbsp;</c><c> RFCXXXX</c>
+        </texttable>
+
+        <t> Further entries may be registered on a first-come first-serve basis.
+        Each registration needs to indicate the "Mux Category" value and 
+        identify the entries in the existing subregistries defined at 
+        "Session Description Protocol (SDP) Parameters" to which the newly
+        registered "Mux Category" value applies.</t>
+        <t> For each new registration, it is mandatory that a permanent, stable, 
+        and publicly accessible document exists that specifies the semantics of 
+        the registered "Mux Cateogry" in the context of multiplexing and 
+        its applicability to existing registered SDP parameters as stated above.
+        The general registration procedures of <xref target="RFC4566"/> apply.</t>
+      </section>
+       <section title="'Mux Category' column for subregistries" 
+                anchor="sec-mux-cat-values-iana" toc="default">
+        <t> Each sub-section identifies a subregistry in the "Session Description
+        Protocol (SDP) Parameters" registry. The tables list the first column
+        from the correpsonding subregistries and the values to be used for the 
+        new "Mux Category" column to be added.</t>
+
+       <section title="Table: SDP bwtype">
+         <t>The following values are to be added to the 'SDP bwtype' subregistry
+         in the "Session Description Protocol (SDP) Parameters" registry. 
+         The references should be updated to point at this RFC as well 
+         as the previous references.</t>
+      	<texttable align="left">
+          <ttcol align='left'>Type</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
+          <c>CT&nbsp;</c><c>NORMAL&nbsp;</c>
+		      <c>AS&nbsp;</c><c>SUM&nbsp;</c>
+          <c>RS&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>RR&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>TIAS&nbsp;</c><c>SPECIAL&nbsp;</c>
+        </texttable>
+    	</section>
+
+      <section title="Table: att-field (session level)">
+        <t>The following values are to be added to the 'att-field (session level)' 
+        subregistry in the "Session Description Protocol (SDP) Parameters registry. 
+        The references should be updated to point at this RFC as well as the previous
+        references.</t>
+        <texttable align="left">
+          <ttcol align='left'>SDP Name</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
+          <c>cat&nbsp;</c><c>NORMAL&nbsp;</c>
+		      <c>keywds&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>type&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>type:broadcast&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>type:H332&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>type:meeting&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>type:moderated&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>type:test&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>charset&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>charset:iso8895-1&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>tool&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>ipbcp&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>group&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>ice-lite&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>ice-options&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>bcastversion&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>3GPP-Integrity-Key&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>3GPP-SDP-Auth&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>alt-group&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>PSCid&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>bc_service&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>bc_program&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>bc_service_package&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>sescap&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>rtsp-ice-d-m&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+        </texttable>
+      </section>
+      <section title="Table: att-field (both session and media level)">
+        <t> The following values are to be added to the 'att-field (both session
+        and media level)' subregistry in the "Session Description Protocol (SDP) 
+        Parameters registry. The references should be updated to point at this RFC 
+        as well as the previous references. </t>
+
+        <texttable align="left">
+          <ttcol align='left'>SDP Name</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
+          <c>recvonly&nbsp;</c><c>NORMAL&nbsp;</c>
+		      <c>sendrecv&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>sendonly&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>sdplang&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>lang&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>h248item&nbsp;</c><c>SPECIAL&nbsp;</c>
+          <c>sqn&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>cdsc&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>cpar&nbsp;</c><c>INHERIT&nbsp;</c>
+          <c>cparmin&nbsp;</c><c>SPECIAL&nbsp;</c>
+          <c>cparmax&nbsp;</c><c>SPECIAL&nbsp;</c>
+          <c>rtcp-xr&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>maxprate&nbsp;</c><c>SPECIAL&nbsp;</c>
+          <c>setup&nbsp;</c><c>IDENTICAL&nbsp;</c>
+          <c>connection&nbsp;</c><c>IDENTICAL&nbsp;</c>
+          <c>key-mgmt&nbsp;</c><c>IDENTICAL&nbsp;</c>
+          <c>source-filter&nbsp;</c><c>IDENTICAL&nbsp;</c>
+          <c>inactive&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>fingerprint&nbsp;</c><c>TRANSPORT&nbsp;</c>
+          <c>flute-tsi&nbsp;</c><c>TBD&nbsp;</c>
+          <c>flute-ch&nbsp;</c><c>TBD&nbsp;</c>
+          <c>FEC-declaration&nbsp;</c><c>TBD&nbsp;</c>
+          <c>FEC-OTI-extension&nbsp;</c><c>TBD&nbsp;</c>
+          <c>content-desc&nbsp;</c><c>TBD&nbsp;</c>
+          <c>ice-pwd&nbsp;</c><c>TRANSPORT&nbsp;</c>
+          <c>ice-ufrag&nbsp;</c><c>TRANSPORT&nbsp;</c>
+          <c>stkmstream&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>qos-mech-send&nbsp;</c><c>SPECIAL&nbsp;</c>
+          <c>qos-mech-recv&nbsp;</c><c>SPECIAL&nbsp;</c>
+          <c>csup&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>creq&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>acap&nbsp;</c><c>INHERIT&nbsp;</c>
+          <c>tcap&nbsp;</c><c>INHERIT&nbsp;</c>
+          <c>3GPP-QoE-Metrics&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>3GPP-Asset-Information&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>mbms-mode&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>mbms-repair&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>ike-setup&nbsp;</c><c>IDENTICAL&nbsp;</c>
+		      <c>psk-fingerprint&nbsp;</c><c>IDENTICAL&nbsp;</c>
+		      <c>multicast-rtcp&nbsp;</c><c>IDENTICAL&nbsp;</c>
+          <c>rmcap&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>omcap&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>mfcap&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>mscap&nbsp;</c><c>INHERIT&nbsp;</c>
+          <c>bcap&nbsp;</c><c>INHERIT&nbsp;</c>
+          <c>ccap&nbsp;</c><c>IDENTICAL&nbsp;</c>
+          <c>icap&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>3gpp_sync_info&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>3gpp_MaxRecvSDUSize&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>etag&nbsp;</c><c>NOT RECOMMENED&nbsp;</c>
+          <c>duplication-delay&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>range&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>control&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>mtag&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>ts-refclk&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>mediaclk&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>calgextmap&nbsp;</c><c>NORMAL&nbsp;</c>
+        </texttable>
+      </section>
+      <section title="Table: att-field (media level only)">
+        <t> The following values are to be added to the 
+        'att-field (media level only' registry in the 
+        "Session Description Protocol (SDP) Parameters registry. 
+        The references should be updated to point at this RFC as 
+        well as the previous references. </t>
+
+        <texttable align="left">
+          <ttcol align='left'>SDP Name</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
+          <c>ptime&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>orient&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>orient:portrait&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>orient:landscape&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>orient:seascape&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>framerate&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>quality&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>rtpmap&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>fmtp&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>rtpred1&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>rtpred2&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>T38FaxVersion&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>T38MaxBitRate&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>T38MaxBitRate&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>T38FaxTranscodingMMR&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>T38FaxTranscodingJBIG&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>T38FaxRateManagement&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>T38FaxMaxBuffer&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>T38FaxMaxDatagram&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>T38FaxUdpEC&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>maxptime&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>des&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>curr&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>conf&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>mid&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>rtcp&nbsp;</c><c>IDENTICAL&nbsp;</c>
+          <c>rtcp-fb&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>label&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>T38VendorInfo&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>crypto&nbsp;</c><c>TRANSPORT&nbsp;</c>
+          <c>eecid&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aalType&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>capability&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>qosClass&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>bcob&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>stc&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>upcc&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>atmQOSparms&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>atmQOSparms&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>abrParms&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>abrSetup&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>bearerType&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>lij&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>anycast&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>cache&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>bearerSigIE&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aalApp&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>cbrRate&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>sbc&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>clkrec&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>fec&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>prtfl&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>structure&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>cpsSDUsize&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>all2CPS&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>all2CPSSDUrate&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2sscs3661unassured&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2sscs3661assured&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal2sscs3662&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>aal5sscop&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>atmmap&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>silenceSupp&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>ecan&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>gc&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>profileDesc&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>vsel&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>dsel&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>fsel&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>onewaySel&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>codecConfig&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>isup_usi&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>uiLayer1_Prot&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>chain&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>floorctrl&nbsp;</c><c>IDENTICAL&nbsp;</c>
+          <c>confid&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>userid&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>floorid&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>FEC&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>profileDesc&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>accept-types&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>accept-wrapped-types&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>max-size&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>path&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>dccp-service-code&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>rtcp-mux&nbsp;</c><c>IDENTICAL&nbsp;</c>
+          <c>candidate&nbsp;</c><c>TRANSPORT&nbsp;</c>
+          <c>ice-mismatch&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>remote-candidates&nbsp;</c><c>TRANSPORT&nbsp;</c>
+          <c>SRTPAuthentication&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>SRTPROCTxRate&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>rtcp-rsize&nbsp;</c><c>IDENTICAL&nbsp;</c>
+          <c>file-selector&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>file-transfer-id&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>file-disposition&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>file-date&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>file-icon&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>file-range&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>depend&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>ssrc&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>ssrc-group&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>rtcp-unicast&nbsp;</c><c>IDENTICAL&nbsp;</c>
+          <c>pcfg&nbsp;</c><c>SPECIAL&nbsp;</c>
+          <c>acfg&nbsp;</c><c>SPECIAL&nbsp;</c>
+          <c>zrtp-hash&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>X-predecbufsize&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>X-initpredecbufperiod&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>X-initpostdecbufperiod&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>X-decbyterate&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>3gpp-videopostdecbufsize&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>framesize&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>3GPP-SRTP-Config&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>alt&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>alt-default-id&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>3GPP-Adaption-Support&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>mbms-flowid&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>fec-source-flow&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>fec-repair-flow&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>repair-window&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>rams-updates&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>imageattr&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>cfw-id&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>portmapping-req&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>g.3gpp.cat&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>g.3gpp.crs&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>ecm-capable-rtp&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>visited-realm&nbsp;</c><c>TRANSPORT&nbsp;</c>
+          <c>secondary-realm&nbsp;</c><c>TRANSPORT&nbsp;</c>
+          <c>omr-s-cksum&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>omr-m-Cksum&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>omr-codecs&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>omr-codecs&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>omr-m-att&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>omr-m-bw&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>omr-s-bw&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>msrcp-cema&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>dccp-port&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>resource&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>channel&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>cmid&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>content&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>lcfg&nbsp;</c><c>SPECIAL&nbsp;</c>
+          <c>loopback&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>loopback-source&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>loopback-mirror&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>chatroom&nbsp;</c><c>TBD&nbsp;</c>
+          <c>altc&nbsp;</c><c>TRANSPORT&nbsp;</c>
+          <c>T38FaxMaxIFP&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>T38FaxUdpECDepth&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>T38FaxUdpFECMaxSpan&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>T38ModemType&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>cs-correlation&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>rtcpidms&nbsp;</c><c>NORMAL&nbsp;</c>
+          </texttable>
+      </section>
+      <section title="Table: att-field (source level)">
+        <t>The following values are to be added to the 
+        'att-field (source level)' registry in the 
+        "Session Description Protocol (SDP) Parameters registry. 
+        The references should be updated to point at this RFC as 
+        well as the previous references. </t>
+
+        <texttable align="left">
+          <ttcol align='left'>SDP Name</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
+          <c>cname&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>previous-ssrc&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>fmtp&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>ts-refclk&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>mediaclk&nbsp;</c><c>NORMAL&nbsp;</c>
+        </texttable>
+      </section>
+      <section title="Table: content SDP Parameters">
+         <t>The following values are to be added to the 
+         'content SDP Parameters' subregistry in the
+         "Session Description Protocol (SDP) Parameters registry. 
+         The references should be updated to point at this RFC 
+         as well as  the previous references. </t>
+
+        <texttable align="left">
+          <ttcol align='left'>SDP Name</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
+          <c>slides&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>speaker&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>sl&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>main&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>alt&nbsp;</c><c>NORMAL&nbsp;</c>
+        </texttable>
+      </section>
+      <section title="Table: Semantics for the 'group' SDP Attribute">
+        <t>The following values are to be added to the 
+         'Semantics for the "group" SDP Attribute' subregistry in the 
+         "Session Description Protocol (SDP) Parameters registry. 
+         The references should be updated to point at this RFC as well as 
+         the previous references.</t>
+
+        <texttable align="left">
+          <ttcol align='left'>Token</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
+          <c>LS&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>FID&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>SRF&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>ANAT&nbsp;</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>FEC&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>FEC-FR&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>CS&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>DDP&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>DUP&nbsp;</c><c>NORMAL&nbsp;</c>
+        </texttable>
+      </section>
+      <section title="Table: 'rtcp-fb' Attribute Values">
+        <t>The following values are to be added to the 
+         " 'rtcp-fb' Attribute Values" subregistry in the 
+         "Session Description Protocol (SDP) Parameters registry. 
+         The references should be updated to point at this RFC as well as 
+         the previous references.</t>
+
+        <texttable align="left">
+          <ttcol align='left'>Value Name</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
+          <c>ack&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>app&nbsp;</c><c>SPECIAL&nbsp;</c>
+          <c>ccm&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>nack&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>trr-int&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+        </texttable>
+      </section>
+      <section title="Table: 'ack' and 'nack' Attribute Values">
+        <t>The following values are to be added to the 
+         " 'ack' and 'nack' Attribute Values" subregistry in the 
+         "Session Description Protocol (SDP) Parameters" registry. 
+         The references should be updated to point at this RFC as 
+         well as the previous references.</t>
+
+        <texttable align="left">
+          <ttcol align='left'>Value Name</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
+          <c>sli&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>pli&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>rpsi&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>app&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>rai&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>tllei&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>pslei&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>ecn&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+        </texttable>
+      </section>
+      <section title="Table: 'depend' SDP Attribute Values">
+
+        <t> The following values are to be added to the 
+         " 'depend' SDP Attribute Values" subregistry in the 
+         "Session Description Protocol (SDP) Parameters registry. 
+         The references should be updated to point at this RFC 
+         as well as the previous references. </t>
+
+        <texttable align="left">
+          <ttcol align='left'>Token</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
+          <c>lay&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>mdc&nbsp;</c><c>NORMAL&nbsp;</c>
+        </texttable>
+      </section>
+      <section title="Table: 'cs-correlation' Attribute Values">
+
+        <t> The following values are to be added to the 
+         " 'cs-correlation' Attribute Values" subregistry in the 
+         "Session Description Protocol (SDP) Parameters registry. 
+         The references should be updated to point at this RFC 
+         as well as the previous references. </t>
+
+
+        <texttable align="left">
+          <ttcol align='left'>Value</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
+          <c>callerid&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>uuie&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>dtmf&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>external&nbsp;</c><c>NORMAL&nbsp;</c>
+        </texttable>
+      </section>
+      <section title="Table: Semantics for the 'ssrc-group' SDP Attribute">
+
+        <t> The following values are to be added to the 
+         Semantics for the " Semantics for the "ssrc-group'"SDP Attribute" 
+         subregistry in the  "Session Description Protocol (SDP) Parameters 
+         registry. The references should be updated to point at this RFC 
+         as well as the previous references. </t>
+
+        <texttable align="left">
+          <ttcol align='left'>Token</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
+          <c>FID&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>FEC&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>FEC-FR&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>DUP&nbsp;</c><c>NORMAL&nbsp;</c>
+        </texttable>
+      </section>
+      <section title="Table: SDP/RTSP key management protocol identifiers">
+        <t>The following values are to be added to the 
+        "SDP/RTSP key management protocol identifiers" subregistry
+        in the  "Session Description Protocol (SDP) Parameters registry. 
+        The references should be updated to point at this RFC as well as 
+        the previous references.</t>
+
+        <texttable align="left">
+          <ttcol align='left'>Value Name</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
+          <c>mikey&nbsp;</c><c>IDENTICAL&nbsp;</c>
+        </texttable>
+      </section>
+      <section title="Table: Codec Control Messages">
+        <t> The following values are to be added to the 
+         "Codec Control Messages" subregistry in the  
+         "Session Description Protocol (SDP) Parameters registry. 
+         The references should be updated to point at this RFC 
+         as well as the previous references. </t>
+
+        <texttable align="left">
+          <ttcol align='left'>Value Name</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
+          <c>fir&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>tmmbr&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>tstr&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+          <c>vbcm&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
+        </texttable>
+      </section>
+      <section title="Table: QoS Mechanism Tokens">
+        <t> The following values are to be added to the 
+         "QoS Mechanism Tokens" subregistry in the  
+         "Session Description Protocol (SDP) Parameters registry. 
+         The references should be updated to point at this RFC 
+         as well as the previous references. </t>
+
+        <texttable align="left">
+          <ttcol align='left'>QoS Mechanism</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
+          <c>rsvp&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>nsis&nbsp;</c><c>NORMAL&nbsp;</c>
+        </texttable>
+      </section>
+      <section title="Table: SDP Capability Negotiation Option Tags">
+        <t> The following values are to be added to the 
+         "SDP Capability Negotiation Option Tags" subregistry 
+         in the "Session Description Protocol (SDP) Parameters registry. 
+         The references should be updated to point at this RFC 
+         as well as the previous references. </t>
+
+        <texttable align="left">
+          <ttcol align='left'>QoS Mechanism</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
+          <c>cap-v0&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>med-v0&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>bcap-v0&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>ccap-v0&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>icap-v0&nbsp;</c><c>NORMAL&nbsp;</c>
+        </texttable>
+      </section>
+      <section title="Table: Timestamp Reference Clock Source Parameters">
+        <t> The following values are to be added to the 
+         "Timestamp Reference Clock Source Parameters" subregistry 
+         in the "Session Description Protocol (SDP) Parameters registry. 
+         The references should be updated to point at this RFC as well as 
+         the previous references. </t>
+
+        <texttable align="left">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
+          <c>ntp&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>ptp&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>gps&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>gal&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>glonass&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>local&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>private&nbsp;</c><c>NORMAL&nbsp;</c>
+        </texttable>
+      </section>
+      <section title="Table: Media Clock Source Parameters">
+
+        <t> The following values are to be added to the 
+         "Media Clock Source Parameters" subegistry 
+         in the "Session Description Protocol (SDP) Parameters
+         registry. The references should be updated to point at 
+         this RFC as well as the previous references. </t>
+
+        <texttable align="left">
+          <ttcol align='left'>Name</ttcol>
+          <ttcol align='left'>Mux Category</ttcol>
+          <c>sender&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>direct&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>IEEE1722&nbsp;</c><c>NORMAL&nbsp;</c>
+        </texttable>
+      </section>
+    </section>
+    </section>
+      <section title="Security Considerations">
+	<t> 
+	  This document does not add any new security considerations
+	  beyond the existing considerations in the RFC for protocols
+	  that are being multiplexed together. </t>
+	<t>
+	  The ways that SRTP streams are keyed is not believed to
+	  create any two-time pad vulnerability for the currently
+	  defined SRTP keying mechanism.
+       </t>
+      </section>
+      <section title="Acknowledgments">
+       <t>
+       	I would like to thank Cullen Jennings for suggesting the
+       	categories, contributing text and reviewing the draft. I would
+       	also link to thank Magnus, Christer, Jonathan Lennox, Bo
+       	Burman, and Dan on suggesting structural changes helping
+       	improve the document readability.
+       </t>
+       <t>
+       	I would like also to thank following experts on their inputs and
+        reviews as listed - Flemming Andreasen(5.20,5.28,5.29,15), Rohan Mahy(5.45),
+        Eric Burger(5.22),Christian Huitema(5.13), Christer Holmberg(5.17,5.22,5.40,5.41),
+        Richard Ejzak (5.36,5.42,5.43,5.44), Colin Perkins(5.7,5.8),
+        Magnus westerlund(5.2,5.3,5.9,5.26, 5.27,6.1,6.2,6.3,8.3,7),
+        Roni Evens(5.12,5.27,8.4), Subha Dhesikan(5.5,12.1,14),
+        Dan Wing(5.6,5.11,5.30,5.34,5.37),
+        Ali C Begen(5.1,5.16,5.18,5.21,5.33,8.2,8.4,13.1),
+        Bo Burman (7.2,7.6), Charles Eckel(5.14,5.23,5.24,9.1,8.5),
+        Paul Kyzivat(5.24), Ian Johansson(5.15), Saravanan Shanmugham(5.10),
+        Paul E Jones(5.25), Rajesh Kumar(5.39), Jonathan Lennox(5.31,5,14,11.1),
+        Mo Zanaty(5.4,5.19,8.1,8.3,8.5,12.1), Christian Huitema (5.13),
+        Qin Wu (5.38 PM-Dir review).
+      </t>
+    </section>
+    <section title="Change Log">
+      <t>[RFC EDITOR NOTE: Please remove this section when publishing]</t>
+      <t>Changes from draft-ietf-mmusic-sdp-mux-attributes-02
+        <list style="symbols">
+          <t>
+            Incorporated suggestions from Flemming on Capability Negotiation.
+          </t>
+          <t>
+            Closed open issues from IETF90
+          </t>
+          <t>
+            Added IANA section to list the categories for all the SDP attributes
+            anlayzed
+          </t>
+          <t>
+            Lots of cleanup
+          </t>
+          <t>
+            Reformatted Refernces section to use short-form notation
+          </t> 
+        </list>
+      </t>
+      <t>Changes from draft-ietf-mmusic-sdp-mux-attributes-01
+        <list style="symbols">
+          <t>
+            Updated section 15 to provide detailed recommendation on dealing
+            with encapsulating attributes. Also updated sections 5.20,
+            5.28, 5.29 to refer to Section 15.
+          </t>
+          <t>
+            Added new categories IDENTICAL-PER-PT and INHERIT 
+          </t>
+          <t>
+            Updated Sections 16 to add the new categories.
+          </t>
+          <t>
+            Updated Sections 5.1, 5.14, 5.15, 5.38, 8.5 to reflect the
+            category IDENTICAL-PER-PT.
+          </t>
+          <t>
+            Reformatted section 4 to add individual categories to their 
+            own sections.
+          </t> 
+        </list>
+      </t>
+      <t>Changes from draft-ietf-mmusic-sdp-mux-attributes-00
+        <list style="symbols">
+          <t>
+            Added Section 15 to provide recommendations on multiplexing
+            SDP encapsulating attributes. Also updated sections 5.20,
+            5.28, 5.29 to refer to Section 15.
+          </t>
+          <t>
+            Updated Section 5.38 to incorporate PM-dir review inputs from
+            Qin Wu
+          </t>
+          <t>
+            Updated Sections 5.2,5.14,8.5 to refer to BUNDLE draft for more clarity.
+          </t>
+          <t>
+            Fixed few nits regarding sentence clarity and fill-in the NOTES
+            section where information was lacking.
+          </t>
+        </list>
+      </t>
+      <t>Changes from draft-nandakumar-mmusic-mux-attributes-05
+        <list style="symbols">
+          <t>
+            Renamed the document to be a WG document.
+          </t>
+          <t>
+           Added Section 14.
+          </t>
+          <t>
+           Updated Open Issues based on IETF88 discussions.
+          </t>
+        </list>
+      </t>
+      <t>Changes from draft-nandakumar-mmusic-mux-attributes-04
+        <list style="symbols">
+          <t>
+             Added few OPEN ISSUES that needs to be discussed.
+          </t>
+          <t>
+           Updated sections 5.10,5.23,5,24,5,25,7.2,9.1,5.12,5.27,8.4,
+           5.44,5.11,5.4,5.19,10.1,10.5,5.21,10.4,15.1
+          </t>
+          <t>
+           Updated Table Column name Current to Level and improved TRANSPORT
+           category explanation on suggestions form Dan Wing.
+          </t>
+          <t>
+           Grouped all the rtcp-fb attribute analysis under a single section
+           as suggested by Magnus/
+          </t>
+        </list>
+      </t>
+
+      <t>Changes from draft-nandakumar-mmusic-mux-attributes-03
+        <list style="symbols">
+          <t> Maintenance change to clean up grammatical nits and wordings.
+          </t>
+        </list>
+      </t>
+
+      <t>Changes from draft-nandakumar-mmusic-mux-attributes-02
+        <list style="symbols">
+          <t>Updated Sections 5.3,5.5,5.6,5.7,5.9,5.8,5.11,5.13,5.22,5.34,
+          5.37,5.40,5.41,5.42,5.43,5.44,5.45,6.1,6.2,6.3,8,3,12.1 based on the
+          inputs from the respective RFC Authors.
+          </t>
+        </list>
+      </t>
+      <t>Changes from draft-nandakumar-mmusic-mux-attributes-01
+        <list style="symbols">
+          <t>Replaced Category BAD with NOT RECOMMENDED.</t>
+          <t>Added Category TBD.</t>
+          <t>Updated IANA Consideration Section.</t>
+        </list>
+      </t>
+      <t>Changes from draft-nandakumar-mmusic-mux-attributes-00
+        <list style="symbols">
+          <t>Added new section for dealing with FEC payload types.</t>
+        </list>
+      </t>
+    </section>
+  </middle>
+
+  <back>
+    <references title="Normative References">
+      &RFC4566;
+
+      <reference anchor="RFC2119">
+        <front>
+          <title abbrev="RFC Key Words">Key words for use in RFCs to Indicate
+          Requirement Levels</title>
+
+          <author fullname="Scott Bradner" initials="S." surname="Bradner">
+            <organization>Harvard University</organization>
+
+            <address>
+              <postal>
+                <street>1350 Mass. Ave.</street>
+
+                <street>Cambridge</street>
+
+                <street>MA 02138</street>
+              </postal>
+
+              <phone>- +1 617 495 3864</phone>
+
+              <email>sob@harvard.edu</email>
+            </address>
+          </author>
+
+          <date month="March" year="1997" />
+
+          <area>General</area>
+
+          <keyword>keyword</keyword>
+        </front>
+
+        <seriesInfo name="BCP" value="14" />
+
+        <seriesInfo name="RFC" value="2119" />
+
+        <format octets="4723"
+                target="http://www.rfc-editor.org/rfc/rfc2119.txt" type="TXT" />
+
+        <format octets="17491"
+                target="http://xml.resource.org/public/rfc/html/rfc2119.html"
+                type="HTML" />
+
+        <format octets="5777"
+                target="http://xml.resource.org/public/rfc/xml/rfc2119.xml"
+                type="XML" />
+      </reference>
+    </references>
+
+    <references  title="Informative References">
+      &RFC3108;
+      &RFC3264;
+      &RFC3312;
+      &RFC3407;
+      &RFC3524;
+      &RFC3556;
+      &RFC3605;
+      &RFC3611;
+      &RFC3890;
+      &RFC4091;
+      &RFC4145;
+      &RFC4567;
+      &RFC4568;
+      &RFC4570;
+      &RFC4572;
+      &RFC4574;
+      &RFC4583;
+      &RFC4585;
+      &RFC4796;
+      &RFC4975;
+      &RFC5104;
+      &RFC5109;
+      &RFC5159;
+      &RFC5245;
+      &RFC5285;
+      &RFC5432;
+      &RFC5506;
+      &RFC5547;
+      &RFC5576;
+      &RFC5583;
+      &RFC5760;
+      &RFC5761;
+      &RFC5762;
+      &RFC5763;
+      &RFC5888;
+      &RFC5939;
+      &RFC5956;
+      &RFC6064;
+      &RFC6128;
+      &RFC6189;
+      &RFC6193;
+      &RFC6230;
+      &RFC6236;
+      &RFC6284;
+      &RFC6285;
+      &RFC6364;
+      &RFC6642;
+      &RFC6679;
+      &RFC6714;
+      &RFC6773;
+      &RFC6787;
+      &RFC6849;
+      &RFC6871;
+      &RFC6947;
+      &RFC7006;
+      &RFC7104;
+      &RFC7195;
+      &RFC7197;
+      &RFC7272;
+      &RFC7273;
+      &RFC7226;
+      &I-D.ietf-mmusic-sdp-bundle-negotiation;
+
+      <reference anchor='IANA' 
+        target="http://www.iana.org/assignments/sdp-parameters/sdp-parameters.xml">
+        <front>
+          <title>S Description Protocol (SDP) Parameters</title>
+          <author/>
+          <date/>
+        </front>
+      </reference>
+      
+      <reference anchor='T.38' target="http://www.itu.int/rec/T-REC-T.38/e">
+        <front>
+          <title>Procedures for real-time Group 3 facsimile communication over IP networks</title>
+          <author/>
+          <date/>
+        </front>
+      </reference>
+      
+      <reference anchor='H.248.15' target="http://www.itu.int/rec/T-REC-H.248.15">
+        <front>
+          <title> Gateway control protocol: SDP H.248 package attribute</title>
+          <author/>
+          <date/>
+        </front>
+      </reference>
+
+     <reference anchor='ITU-T-REC.Q1970' 
+      target="https://www.itu.int/rec/T-REC-Q.1970-200609-I/en">
+        <front>
+          <title> Q.1970 : BICC IP bearer control protocol</title>
+          <author/>
+          <date/>
+        </front>
+      </reference> 
+
+      <reference anchor='R3GPPTS26.114' 
+       target="http://www.in2eps.com/3g26/tk-3gpp-26-114.html">
+        <front>
+          <title>IP multimedia Subsystem : Media Handling and interaction</title>
+          <author/>
+          <date/>
+        </front>
+      </reference>
+
+      <reference anchor='R3GPPTS24.229' 
+        target="http://www.3gpp.org/ftp/Specs/html-info/24229.htm">
+        <front>
+          <title>IP multimedia call control protocol based on
+           Session Initiation Protocol (SIP)
+            and Session Description Protocol (SDP);</title>
+          <author/>
+          <date/>
+        </front>
+      </reference>
+
+       <reference anchor='R3GPPTS183.063' 
+        target="http://www.in2eps.com/etispan/tk-etsi-tispan03-183-063.html">
+        <front>
+          <title> TISPAN - IMS based ITPV Stage 3 specification.</title>
+          
+          <author/>
+          <date/>
+        </front>
+      </reference>
+
+      <reference anchor='R3GPPTS24.182' 
+        target="http://www.3gpp.org/ftp/Specs/html-info/24182.htm">
+        <front>
+          <title>IP Multimedia Subsystem (IMS) Customized Alerting Tones (CAT);
+           Protocol specification</title>
+          <author/>
+          <date/>
+        </front>
+      </reference>
+
+     <reference anchor='R3GPPTS24.183' 
+      target="http://www.3gpp.org/ftp/Specs/html-info/24183.htm">
+        <front>
+          <title>IP Multimedia Subsystem (IMS) Customized Ringing Signal (CRS);
+           Protocol specification</title>
+          <author/>
+          <date/>
+        </front>
+      </reference>
+      
+      <reference anchor="I.D-draft-ietf-dart-dscp-rtp">
+        <front>
+          <title>The Session Description Protocol (SDP) Content Attribute</title>
+          <author fullname="David Black" initials="D." surname="Black">
+            <organization></organization>
+          </author>
+          <author fullname="Paul Jones" initials="P." surname="Jones">
+            <organization></organization>
+          </author>
+          <date month="September" year="2014" />
+        </front>
+        <seriesInfo name='Internet-Draft' value='draft-ietf-dart-dscp-rtp-07' />
+        <format type='TXT'
+          target='http://www.ietf.org/id/draft-ietf-dart-dscp-rtp-07.txt' />
+      </reference>
+
+    </references>
+  </back>
+</rfc>
