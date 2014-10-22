@@ -190,14 +190,14 @@
         further restrictions on applicability of these SDP attributes
         as they are defined today. </t>
        <t>The specific problem is that there are attribute combinations
-         which make sense when specified on independent "m= "lines -- as
-         with classical SDP -- that do not make sense when those
-         "m="" lines are then multiplexed over the same transport. To give
-         an obvious example, ICE permits each "m=" line to have an
-         independently specified ice-ufrag attribute. However, if the
-         media from multiple "m=" lines is multiplexed over the same ICE
-         component, then the meaning of media-level ice-ufrag
-         attributes becomes muddled.</t>
+        which make sense when specified on independent "m= "lines -- as
+        with classical SDP -- that do not make sense when those
+        "m="" lines are then multiplexed over the same transport. To give
+        an obvious example, ICE permits each "m=" line to have an
+        independently specified ice-ufrag attribute. However, if the
+        media from multiple "m=" lines is multiplexed over the same ICE
+        component, then the meaning of media-level ice-ufrag
+        attributes becomes muddled.</t>
       <t>As of today there are close to 250 SDP attributes registered
         with the <xref target="IANA"></xref> and more will be
         added in the future.  There is no clearly defined procedure to
@@ -210,13 +210,13 @@
        semantically grouped as noted below.</t>
 	  <t>
        <list style="symbols">
-         <t> Attributes related to media content such as media type,
+         <t>Attributes related to media content such as media type,
          encoding schemes, payload types.</t>
-         <t> Attributes specifying media transport characteristics like 
+         <t>Attributes specifying media transport characteristics like
           RTP/RTCP port numbers, network addresses, QOS.</t>
-         <t> Metadata description attributes capturing session timing and 
+         <t>Metadata description attributes capturing session timing and
           origin information.</t>
-         <t> Attributes establishing relationships between media streams 
+         <t>Attributes establishing relationships between media streams
           such as grouping framework</t>
        </list>
       </t>
@@ -228,9 +228,9 @@
          multiplexing and retain their original semantics.</t>
          <t>&nbsp;</t>
         <t>In the example given below, the direction and label
-          attributes are independently specified for audio and video
-          m=lines. These attributes are not impacted by multiplexing
-          these media streams over a single transport layer flow.</t>
+         attributes are independently specified for audio and video
+         m=lines. These attributes are not impacted by multiplexing
+         these media streams over a single transport layer flow.</t>
         <figure>
           <artwork align="left" alt="" height="" name="" type="" width=""
                    xml:space="preserve"><![CDATA[
@@ -1481,8 +1481,7 @@
         attributes. <xref target="RFC6871"></xref> extends the
         framework by defining media capabilities that can be used to
         negotiate media types and their associated parameters.</t>
-        <texttable title="Session Description Protocol (SDP) 
-          Media Capabilities Negotiation">
+        <texttable title="RFC6871 - Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Level</ttcol>
@@ -1539,8 +1538,7 @@
         capabilities.  In particular, this memo provides a mechanism to 
         negotiate bandwidth ("b=" line), connection data ("c=" line), and 
         session or media titles ("i=" line for each session or media).</t>
-        <texttable title="Miscellaneous Capabilities Negotiation in the
-                   Session Description Protocol (SDP)">
+        <texttable title="RFC7006 - Attribute Analysis ">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Level</ttcol>
@@ -1986,10 +1984,16 @@
           <c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
 
-          <c>alt,alt-default-id&nbsp;</c>
+          <c>alt&nbsp;</c>
           <c>Refer to notes below&nbsp;</c>
           <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
           <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+          
+          <c>alt-default-id&nbsp;</c>
+          <c>Refer to notes below&nbsp;</c>
+          <c>M</c><c>NOT RECOMMENDED&nbsp;</c>
+          <c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c><c>&nbsp;</c>
+
 
           <c>alt-group&nbsp;</c>
           <c>Refer to notes below&nbsp;</c><c>M</c>
@@ -2206,7 +2210,7 @@
           <xref target="R3GPPTS26.114"/> specifies IP multimedia subsystem: 
           Media handling and interaction
         </t>
-        <texttable title="3GPP TS 24.182 Attribute Analysis">
+        <texttable title="3GPP TS 26.114 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Level</ttcol>
@@ -2229,7 +2233,7 @@
           <xref target="R3GPPTS183.063"/> Telecommunications and Internet 
           converged Services and Protocols for Advanced Networking (TISPAN);
         </t>
-        <texttable title="3GPP TS 24.182 Attribute Analysis">
+        <texttable title="3GPP TS 183.063 Attribute Analysis">
           <ttcol align='left'>Name</ttcol>
           <ttcol align='left'>Notes</ttcol>
           <ttcol align='left'>Level</ttcol>
@@ -2565,7 +2569,7 @@
        </texttable>
      </section>
      <section title="RFC3556 - SDP Bandwidth Modifiers for RTCP Bandwidth">
-       <t><xref target="RFC3556">RFC3556</xref> defines an extension to
+       <t><xref target="RFC3556"/> defines an extension to
         the Session Description Protocol (SDP) to specify two
         additional modifiers for the bandwidth attribute.  These
         modifiers may be used to specify the bandwidth allowed for
@@ -2592,7 +2596,7 @@
        </texttable>
      </section>
      <section title="RFC3890 - Bandwidth Modifier for SDP">
-       <t><xref target="RFC3890">RFC3890</xref> defines a Session
+       <t><xref target="RFC3890"/> defines a Session
         Description Protocol (SDP) Transport Independent Application
         Specific Maximum (TIAS) bandwidth modifier that does not
         include transport overhead; instead an additional packet rate
@@ -2635,7 +2639,7 @@
      </t>
 
      <section title="RFC4585 - RTP/AVPF">
-       <t><xref target="RFC4585">RFC4585</xref> defines an extension to
+       <t><xref target="RFC4585"/> defines an extension to
         the Audio-visual Profile (AVP) that enables receivers to
         provide, statistically, more immediate feedback to the
         senders and thus allows for short-term adaptation and
@@ -2691,7 +2695,7 @@
      </section>
 
      <section title="RFC5104 - Codec Control Messages in AVPF">
-       <t><xref target="RFC5104">RFC5104</xref> specifies a few
+       <t><xref target="RFC5104"/> specifies a few
         extensions to the messages defined in the Audio-Visual
         Profile with Feedback (AVPF).  They are helpful primarily in
         conversational multimedia scenarios where centralized
@@ -2726,7 +2730,7 @@
        </texttable>
      </section>
      <section title="RFC6679 - ECN for RTP over UDP/IP">
-       <t><xref target="RFC6679">RFC6679</xref> specifies how Explicit
+       <t><xref target="RFC6679"/> specifies how Explicit
         Congestion Notification (ECN) can be used with the Real-time
         Transport Protocol (RTP) running over UDP, using the RTP
         Control Protocol (RTCP) as a feedback mechanism.  It defines
@@ -2755,19 +2759,18 @@
      </section>
      <section title="RFC6642 - Third-Party Loss Report">
        <t>In a large RTP session using the RTP Control Protocol (RTCP)
-        feedback mechanism defined in RFC 4585 <xref
-        target="RFC4585"></xref>, a feedback target may experience
-        transient overload if some event causes a large number of
-        receivers to send feedback at once.  This overload is usually
-        avoided by ensuring that feedback reports are forwarded to
-        all receivers, allowing them to avoid sending duplicate
-        feedback reports.  However, there are cases where it is not
-        recommended to forward feedback reports, and this may allow
-        feedback implosion.  RFC6642 <xref target="RFC6642"></xref>
+        feedback mechanism defined in <xref target="RFC4585"></xref>,
+        a feedback target may experience transient overload if some event
+        causes a large number of receivers to send feedback at once.
+        This overload is usually avoided by ensuring that feedback
+        reports are forwarded to all receivers, allowing them to avoid
+        sending duplicate feedback reports.  However, there are cases where
+        it is not recommended to forward feedback reports, and this may allow
+        feedback implosion. <xref target="RFC6642"></xref>
         memo discusses these cases and defines a new RTCP Third-Party
         Loss Report that can be used to inform receivers that the
         feedback target is aware of some loss event, allowing them to
-        suppress feedback.  Associated Session Description Protocol
+        suppress feedback. Associated Session Description Protocol
         (SDP) signaling is also defined.</t>
         <texttable title="RFC6642 Attribute Analysis">
          <ttcol align='left'>Name</ttcol>
@@ -2825,7 +2828,7 @@
      </t>
      <section title="RFC5888 - SDP Grouping Framework">
        <t>
-         <xref target="RFC5888">RFC5888</xref> defines a framework
+         <xref target="RFC5888"/> defines a framework
          to group "m" lines in the Session Description Protocol (SDP)
          for different purposes.
        </t>
@@ -2847,7 +2850,7 @@
      </section>
      <section title="RFC3524 - Mapping Media Streams to 
       Resource Reservation Flows">
-       <t><xref target="RFC3524">RFC3524</xref> defines an extension to
+       <t><xref target="RFC3524"/> defines an extension to
         the Session Description Protocol (SDP) grouping framework.
         It allows requesting a group of media streams to be mapped
         into a single resource reservation flow.  The SDP syntax
@@ -2868,7 +2871,7 @@
 
      <section title="RFC4091 - ANAT Semantics">
        <t>
-         <xref target="RFC4091">RFC4091</xref> defines the Alternative
+         <xref target="RFC4091"/> defines the Alternative
          Network Address Types (ANAT) semantics for the Session
          Description Protocol (SDP) grouping framework.  The ANAT
          semantics allow alternative types of network addresses to
@@ -2889,7 +2892,7 @@
      </section>
 
      <section title="RFC5956 - FEC Grouping Semantics in SDP">
-       <t><xref target="RFC5956">RFC5956</xref> defines the semantics
+       <t><xref target="RFC5956"/> defines the semantics
         for grouping the associated source and FEC-based (Forward
         Error Correction) repair flows in the Session Description
         Protocol (SDP).  The semantics defined in the document are to
@@ -2914,7 +2917,7 @@
        </texttable>
      </section>
      <section title="RFC5583 - Signaling Media Decoding Dependency in SDP">
-       <t><xref target="RFC5583">RFC5583</xref> defines semantics that
+       <t><xref target="RFC5583"/> defines semantics that
         allow for signaling the decoding dependency of different
         media descriptions with the same media type in the Session
         Description Protocol (SDP).  This is required, for example,
@@ -3124,7 +3127,8 @@
            multiplexing characteristics of the SDP attributes that
            encapsulate other SDP attributes/parameters. Such
            attributes as of today, for example, are defined in
-           [RFC3407], [RFC5939] and [RFC6871] as part of a generic
+           <xref target="RFC3407"/>, <xref target="RFC5939"/> and
+           <xref target="RFC6871"/> as part of a generic
            framework for indicating and negotiating transport, media
            and media format related capabilities in the SDP.</t>
           <t>The behavior of such attributes under multiplexing is in
@@ -3132,12 +3136,12 @@
            they encapsulate which are made known once the Offer/Answer
            negotiation process is completed.</t>
           <section title="RFC3407 - cpar Attribute Analysis">
-             <t> RFC3407 capability parameter attribute (a=cpar)
-             encapsulates b= (bandwidth) or an a= attribute. For
-             bandwidth attribute encapsulation, the category SUM is
-             inherited. For the case of a= attribute, the category
-             corresponding to the SDP attribute being encapsulated is
-             inherited.
+             <t> <xref target="RFC3407"/> capability parameter
+             attribute (a=cpar) encapsulates b= (bandwidth) or an
+             a= attribute. For bandwidth attribute encapsulation,
+             the category SUM is inherited. For the case of a= attribute,
+             the category corresponding to the SDP attribute being
+             encapsulated is inherited.
              </t>
               <t>
               <figure>
@@ -3207,7 +3211,8 @@
                     each media description.</t>  
                   </list>
               </t>
-              <section title="Recommendation - Procedures for Potential Configuration Pairing">
+              <section title="Recommendation - Procedures for Potential Configuration Pairing"
+                  anchor="sec-cap-neg-proc">
                 <t>This section provides recommendations for entities
                 generating and processing SDP under the generic
                 capability negotiation framework as defined in
@@ -3335,16 +3340,18 @@ a=pcfg:2 a=2
           to be used with the potential, actual and latent configuration parameters. 
           The parameter associates RTP payload type numbers with the 
           referenced RTP-based media format capabilities ("a=rmcap") defined 
-          in [RFC6871] and is appropriate only when the transport protocol 
+          in <xref target="RFC6871"/> and is appropriate only when the transport protocol
           uses RTP. This means that the same payload type number can be 
           assigned as part of potential or actual configurations in different 
           media descriptions in a bundle. There are rules for the usage of 
           identical Payload Type values across multiplexed m=lines as 
           described in <xref target="I-D.ietf-mmusic-sdp-bundle-negotiation"></xref>, 
-          which MUST be followed here as well. As described in Section 15.2, the use 
-          of identical configuration numbers for compatible configurations in different 
-          media descriptions that are part of the bundle provides a way to ensure that 
-          the answerer can easily pick compatible configurations here as well.</t>  
+          which MUST be followed here as well. As described in
+          <xref target="sec-cap-neg-proc"/>, the use of identical
+          configuration numbers for compatible configurations in
+          different media descriptions that are part of the bundle provides
+          a way to ensure that the answerer can easily pick compatible
+          configurations here as well.</t>
           <section title="Example: Attribute Capability Under Shared Payload Type">
             <t>The attributes (a=rmcap, a=mfcap) follow the above
             recommendations under mutliplexing.</t> 
@@ -3391,10 +3398,10 @@ a=pcfg:4 m=5 pt=5:101
         </section> 
         <section title="Recommendation: Dealing with Latent Configurations">
           <t><xref target="RFC6871"/> adds the notion of a latent configurations, 
-          which provides configuration information that may be used to guide a subsequent 
-          offer/exchange, e.g. by adding another media stream or use alternative 
-          codec combinations not currently offered. Latent configurations have 
-          configuration numbers which cannot overlap with the potential configuration 
+          which provides configuration information that may be used to guide a
+          subsequent offer/exchange, e.g. by adding another media stream or use
+          alternative codec combinations not currently offered. Latent configurations
+          have configuration numbers which cannot overlap with the potential configuration
           numbers <xref target="RFC6871"/>. Supported combinations of potential and 
           latent configurations are indicated by use of the "a=sescap" attribute, 
           however use of this attribute is not recommended with bundled media, 
@@ -3405,29 +3412,32 @@ a=pcfg:4 m=5 pt=5:101
           use the latent configuration attribute, however the limitations 
           above will apply.  To determine valid combinations, actual 
           negotiation will have to be attempted subsequently instead.</t>
-            </section>
+        </section>
         </section>
       </section>
      <section title="IANA Considerations">
       <t>[RFC EDITOR NOTE: Please replace RFCXXXX with the RFC number 
         of this document.]</t>
       <t>The IANA is requested to add a new column named "Mux Category"
-       to all several of the sub-registries in the "Session Description Protocol
-       (SDP) Parameters" registry. Section <xref target="sec-mux-cat-iana"/> defines
-       a new registry for identifying the initial registrations 
-       for various multiplexing categories proposed in this document. 
-       The tables in <xref target="sec-mux-cat-values-iana"/> 
-       identify name of an entry in the existing registry and specify the value to put in the
-       new "Mux Category" column of the associated IANA registry. Any entries in
-       the existing tables that do not have a value for the "Mux Category"
-       specified in this RFC will get a value of "TBD". Future specifications can
-       change the "TBD" entries to the correct value.</t>
-       <section title="New Column 'Mux Category' " anchor="sec-mux-cat-iana" toc="default">
-          <t>A new sub-registry needs to be called  the "Mux Category", with
-          the following registrations created initially: "NORMAL", "NOT RECOMMENDED",
-          "IDENTICAL", "TRANSPORT", "IDENTICAL-PER-PT", SPECIAL" and "TBD" as 
-          defined in this document.</t>
-          <t>Initial value registration for the column "Mux Category".</t>
+       to all several of the subregistries in the "Session Description Protocol
+       (SDP) Parameters" registry. <xref target="sec-mux-cat-iana"/>
+       defines a new subregistry for identifying the initial registrations
+       for various multiplexing categories applicable as proposed
+       in this document.</t>
+       <t>The tables in <xref target="sec-mux-cat-values-iana"/>
+       identify name of an entry in the existing subregistry and specify the value
+       to put in the new "Mux Category" column of the associated IANA registry.
+       Any entries in the existing tables that do not have a value for the
+       "Mux Category" specified in this RFC will get a value of "TBD".
+       Future specifications can change the "TBD" entries to the
+       correct value.</t>
+       <section title="New 'Multiplexing Categories' subregistry " anchor="sec-mux-cat-iana">
+          <t>A new sub-registry needs to be defined called  the
+          "Multiplexing Categories", with the following registrations
+          created initially: "NORMAL", "NOT RECOMMENDED",
+          "IDENTICAL", "TRANSPORT", "IDENTICAL-PER-PT", "SPECIAL"
+          and "TBD" as defined in this document.</t>
+          <t>Initial value registration for "Mux Category".</t>
 
           <texttable align="left">
             <ttcol align='left'>Mux Category</ttcol>
@@ -3442,21 +3452,18 @@ a=pcfg:4 m=5 pt=5:101
         </texttable>
 
         <t> Further entries may be registered on a first-come first-serve basis.
-        Each registration needs to indicate the "Mux Category" value and 
-        identify the entries in the existing subregistries defined at 
-        "Session Description Protocol (SDP) Parameters" to which the newly
-        registered "Mux Category" value applies.</t>
-        <t> For each new registration, it is mandatory that a permanent, stable, 
-        and publicly accessible document exists that specifies the semantics of 
-        the registered "Mux Cateogry" in the context of multiplexing and 
-        its applicability to existing registered SDP parameters as stated above.
-        The general registration procedures of <xref target="RFC4566"/> apply.</t>
+        Each registration needs to indicate the multiplexing category value to be
+        added to the "Mux Category" subregistry as defined in this section.</t>
+        <t> Such a registration must also indicate the applicability of the
+         newly defined mutiplexing category value to various subregistries defined at
+         "Session Description Protocol (SDP) Parameters".</t>
+        <t>The general registration procedures of <xref target="RFC4566"/> apply.</t>
       </section>
        <section title="'Mux Category' column for subregistries" 
                 anchor="sec-mux-cat-values-iana" toc="default">
         <t> Each sub-section identifies a subregistry in the "Session Description
         Protocol (SDP) Parameters" registry. The tables list the first column
-        from the correpsonding subregistries and the values to be used for the 
+        from the corresponding subregistries and the values to be used for the
         new "Mux Category" column to be added.</t>
 
        <section title="Table: SDP bwtype">
@@ -3468,7 +3475,7 @@ a=pcfg:4 m=5 pt=5:101
           <ttcol align='left'>Type</ttcol>
           <ttcol align='left'>Mux Category</ttcol>
           <c>CT&nbsp;</c><c>NORMAL&nbsp;</c>
-		      <c>AS&nbsp;</c><c>SUM&nbsp;</c>
+          <c>AS&nbsp;</c><c>SUM&nbsp;</c>
           <c>RS&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>RR&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>TIAS&nbsp;</c><c>SPECIAL&nbsp;</c>
@@ -3476,7 +3483,7 @@ a=pcfg:4 m=5 pt=5:101
     	</section>
 
       <section title="Table: att-field (session level)">
-        <t>The following values are to be added to the 'att-field (session level)' 
+        <t>The following values are to be added to the "att-field (session level)"
         subregistry in the "Session Description Protocol (SDP) Parameters registry. 
         The references should be updated to point at this RFC as well as the previous
         references.</t>
@@ -3484,7 +3491,7 @@ a=pcfg:4 m=5 pt=5:101
           <ttcol align='left'>SDP Name</ttcol>
           <ttcol align='left'>Mux Category</ttcol>
           <c>cat&nbsp;</c><c>NORMAL&nbsp;</c>
-		      <c>keywds&nbsp;</c><c>NORMAL&nbsp;</c>
+          <c>keywds&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>type&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>type:broadcast&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>type:H332&nbsp;</c><c>NORMAL&nbsp;</c>
@@ -3511,8 +3518,8 @@ a=pcfg:4 m=5 pt=5:101
         </texttable>
       </section>
       <section title="Table: att-field (both session and media level)">
-        <t> The following values are to be added to the 'att-field (both session
-        and media level)' subregistry in the "Session Description Protocol (SDP) 
+        <t> The following values are to be added to the "att-field (both session
+        and media level)" subregistry in the "Session Description Protocol (SDP)
         Parameters registry. The references should be updated to point at this RFC 
         as well as the previous references. </t>
 
@@ -3557,8 +3564,8 @@ a=pcfg:4 m=5 pt=5:101
           <c>mbms-mode&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>mbms-repair&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>ike-setup&nbsp;</c><c>IDENTICAL&nbsp;</c>
-		      <c>psk-fingerprint&nbsp;</c><c>IDENTICAL&nbsp;</c>
-		      <c>multicast-rtcp&nbsp;</c><c>IDENTICAL&nbsp;</c>
+          <c>psk-fingerprint&nbsp;</c><c>IDENTICAL&nbsp;</c>
+          <c>multicast-rtcp&nbsp;</c><c>IDENTICAL&nbsp;</c>
           <c>rmcap&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
           <c>omcap&nbsp;</c><c>NORMAL&nbsp;</c>
           <c>mfcap&nbsp;</c><c>IDENTICAL-PER-PT&nbsp;</c>
@@ -3580,7 +3587,7 @@ a=pcfg:4 m=5 pt=5:101
       </section>
       <section title="Table: att-field (media level only)">
         <t> The following values are to be added to the 
-        'att-field (media level only' registry in the 
+        "att-field (media level only" registry in the
         "Session Description Protocol (SDP) Parameters registry. 
         The references should be updated to point at this RFC as 
         well as the previous references. </t>
@@ -3744,7 +3751,7 @@ a=pcfg:4 m=5 pt=5:101
       </section>
       <section title="Table: att-field (source level)">
         <t>The following values are to be added to the 
-        'att-field (source level)' registry in the 
+        "att-field (source level)" registry in the
         "Session Description Protocol (SDP) Parameters registry. 
         The references should be updated to point at this RFC as 
         well as the previous references. </t>
@@ -3761,7 +3768,7 @@ a=pcfg:4 m=5 pt=5:101
       </section>
       <section title="Table: content SDP Parameters">
          <t>The following values are to be added to the 
-         'content SDP Parameters' subregistry in the
+         "content SDP Parameters" subregistry in the
          "Session Description Protocol (SDP) Parameters registry. 
          The references should be updated to point at this RFC 
          as well as  the previous references. </t>
@@ -3778,7 +3785,7 @@ a=pcfg:4 m=5 pt=5:101
       </section>
       <section title="Table: Semantics for the 'group' SDP Attribute">
         <t>The following values are to be added to the 
-         'Semantics for the "group" SDP Attribute' subregistry in the 
+         "Semantics for the "group" SDP Attribute" subregistry in the
          "Session Description Protocol (SDP) Parameters registry. 
          The references should be updated to point at this RFC as well as 
          the previous references.</t>
@@ -3799,7 +3806,7 @@ a=pcfg:4 m=5 pt=5:101
       </section>
       <section title="Table: 'rtcp-fb' Attribute Values">
         <t>The following values are to be added to the 
-         " 'rtcp-fb' Attribute Values" subregistry in the 
+         " 'rtcp-fb' Attribute Values" subregistry in the
          "Session Description Protocol (SDP) Parameters registry. 
          The references should be updated to point at this RFC as well as 
          the previous references.</t>
@@ -3816,7 +3823,7 @@ a=pcfg:4 m=5 pt=5:101
       </section>
       <section title="Table: 'ack' and 'nack' Attribute Values">
         <t>The following values are to be added to the 
-         " 'ack' and 'nack' Attribute Values" subregistry in the 
+         " 'ack' and 'nack' Attribute Values" subregistry in the
          "Session Description Protocol (SDP) Parameters" registry. 
          The references should be updated to point at this RFC as 
          well as the previous references.</t>
@@ -3870,7 +3877,7 @@ a=pcfg:4 m=5 pt=5:101
       <section title="Table: Semantics for the 'ssrc-group' SDP Attribute">
 
         <t> The following values are to be added to the 
-         Semantics for the " Semantics for the "ssrc-group'"SDP Attribute" 
+         Semantics for the "Semantics for the "ssrc-group'"SDP Attribute"
          subregistry in the  "Session Description Protocol (SDP) Parameters 
          registry. The references should be updated to point at this RFC 
          as well as the previous references. </t>
@@ -3964,7 +3971,6 @@ a=pcfg:4 m=5 pt=5:101
         </texttable>
       </section>
       <section title="Table: Media Clock Source Parameters">
-
         <t> The following values are to be added to the 
          "Media Clock Source Parameters" subegistry 
          in the "Session Description Protocol (SDP) Parameters
@@ -3994,15 +4000,15 @@ a=pcfg:4 m=5 pt=5:101
       </section>
       <section title="Acknowledgments">
        <t>
-       	I would like to thank Cullen Jennings for suggesting the
-       	categories, contributing text and reviewing the draft. I would
-       	also link to thank Magnus, Christer, Jonathan Lennox, Bo
-       	Burman, and Dan on suggesting structural changes helping
-       	improve the document readability.
+       	I would like to thank Cullen Jennings and Flemming Andreason for
+        suggesting the categories, contributing text and reviewing the draft.
+        I would also link to thank Magnus Westerlund, Christer Holmberg,
+        Jonathan Lennox, Bo Burman, and Dan on suggesting structural
+        changes helping improve the document readability.
        </t>
        <t>
        	I would like also to thank following experts on their inputs and
-        reviews as listed - Flemming Andreasen(5.20,5.28,5.29,15), Rohan Mahy(5.45),
+        reviews as listed - Flemming Andreasen(5.20,5.28,5.29,14), Rohan Mahy(5.45),
         Eric Burger(5.22),Christian Huitema(5.13), Christer Holmberg(5.17,5.22,5.40,5.41),
         Richard Ejzak (5.36,5.42,5.43,5.44), Colin Perkins(5.7,5.8),
         Magnus westerlund(5.2,5.3,5.9,5.26, 5.27,6.1,6.2,6.3,8.3,7),
@@ -4018,6 +4024,16 @@ a=pcfg:4 m=5 pt=5:101
     </section>
     <section title="Change Log">
       <t>[RFC EDITOR NOTE: Please remove this section when publishing]</t>
+      <t>Changes from draft-ietf-mmusic-sdp-mux-attributes-03
+          <list style="symbols">
+              <t>
+               More re-work on the IANA section.
+              </t>
+              <t>
+               Clean ups preparing for the last call.
+              </t>
+          </list>
+      </t>
       <t>Changes from draft-ietf-mmusic-sdp-mux-attributes-02
         <list style="symbols">
           <t>
@@ -4262,7 +4278,7 @@ a=pcfg:4 m=5 pt=5:101
       <reference anchor='IANA' 
         target="http://www.iana.org/assignments/sdp-parameters/sdp-parameters.xml">
         <front>
-          <title>S Description Protocol (SDP) Parameters</title>
+          <title>Session Description Protocol (SDP) Parameters</title>
           <author/>
           <date/>
         </front>
