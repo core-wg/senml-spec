@@ -4767,7 +4767,7 @@ Alice                                                            Bob
           <c><xref target="draft-ietf-payload-rtp-opus"></xref></c>
           <c>a=rtcp-fb:109 nack</c>
           <c><xref target="RFC5104"></xref> </c>
-          <c>a=recvonly</c>
+          <c>a=sendonly</c>
           <c><xref target="RFC3264"></xref></c>
           <c>a=setup:actpass</c>
           <c><xref target="RFC4145"></xref></c>
