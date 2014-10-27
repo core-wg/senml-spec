@@ -1,5 +1,5 @@
 
-NAME=draft-ietf-rtcweb-video-00
+NAME=draft-ietf-rtcweb-video-02
 MD=kramdown-rfc2629
 X2R=xml2rfc
 CF=cupsfilter

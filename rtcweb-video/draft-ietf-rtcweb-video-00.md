@@ -2,7 +2,7 @@
 title: "WebRTC Video Processing and Codec Requirements"
 abbrev: WebRTC Video
 docname: draft-ietf-rtcweb-video-00
-date: 2014-04-11
+date: 2014-07-01
 category: std
 ipr: trust200902
 
@@ -212,6 +212,44 @@ other work done. Please, save your comments on this topic until that time.
 The currently recorded working group consensus is that all implementations
 MUST support a single, specified mandatory-to-implement codec. The remaining
 decision point is a selection of this single codec.
+
+Temperature of Working Group
+----------------------------------
+To capture the conversation so far, this section summarizes the result of a
+straw poll that the working group undertook in December 2013 and January 2014.
+Respondants were asked to answer "Yes," "Acceptable," or "No" for each
+option. The options were collected from the working group at large prior to
+the initiation of the straw poll.
+
+~~~~~~~~
+                                                    Yes  Acc  No
+                                                    ---  ---  ---
+ 1. All entities MUST support H.264                 48%  11%  41%
+ 2. All entities MUST support VP8                   41%  17%  42%
+ 3. All entities MUST support both H.264 and VP8     9%  38%  53%
+ 4. Browsers MUST support both H.264 and VP8, other
+    entities MUST support at least one of H.264
+    and VP8                                         11%  34%  55%
+ 5. All entities MUST support at least one of
+    H.264 and VP8                                   10%  16%  74%
+ 6. All entities MUST support H.261                  5%  23%  72%
+ 7. There is no MTI video codec                     12%  30%  58%
+ 8. All entities MUST support H.261 and allentities
+    MUST support at least one of H.264 and VP8       4%  28%  68%
+ 9. All entities MUST support Theora                 7%  26%  67%
+10. All entities MUST implement at least two of
+    {VP8, H.264, H.261}                              5%  30%  65%
+11. All entities MUST implement at least two of
+    {VP8, H.264, H.263}                              5%  25%  70%
+12. All entities MUST support decoding using both
+    H.264 and VP8, and MUST support encoding using
+    at least one of H.264 or VP8                     7%  20%  73%
+13. All entities MUST support H.263                  6%  19%  75%
+14. All entities MUST implement at least two of
+    {VP8, H.264, Theora}                             6%  27%  67%
+15. All entities MUST support decoding using Theora  1%  15%  84%
+16. All entities MUST support Motion JPEG            1%  25%  74%
+~~~~~~~~
 
 {::comment}
 There is a need for some minimum set of mandatory to implement (MTI) video
