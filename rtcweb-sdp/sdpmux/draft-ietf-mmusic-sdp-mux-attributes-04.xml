@@ -3448,7 +3448,7 @@ a=pcfg:4 m=5 pt=5:101
             <ttcol align='left'>Reference</ttcol>
               <c>NORMAL&nbsp;</c><c> RFCXXXX</c>
               <c>NOT RECOMMENDED&nbsp;</c><c> RFCXXXX</c>
-              <c>IDNETICAL&nbsp;</c><c> RFCXXXX</c>
+              <c>IDENTICAL&nbsp;</c><c> RFCXXXX</c>
               <c>TRANSPORT&nbsp;</c><c> RFCXXXX</c>
               <c>IDENTICAL-PER-PT&nbsp;</c><c> RFCXXXX</c>
               <c>SPECIAL&nbsp;</c><c> RFCXXXX</c>
