@@ -1,7 +1,7 @@
 # Contributing
 
 Before submitting feedback, please familiarize yourself with our current issues
-list and review the [working group home page](|WG-HOMEPAGE|). If you're
+list and review the [working group home page](http://datatracker.ietf.org/wg/core/documents/). If you're
 new to this, you may also want to read the [Tao of the
 IETF](https://www.ietf.org/tao.html).
 
@@ -10,7 +10,7 @@ terms outlined below.
 
 1. The best way to provide feedback (editorial or design) and ask questions is
 sending an e-mail to [our mailing
-list](https://www.ietf.org/mailman/listinfo/|WG-NAME|). This will ensure that
+list](https://www.ietf.org/mailman/listinfo/core). This will ensure that
 the entire Working Group sees your input in a timely fashion.
 
 2. If you have **editorial** suggestions (i.e., those that do not change the
