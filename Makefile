@@ -24,6 +24,7 @@ idnits ?= idnits
 #   https://tools.ietf.org/tools/rfcdiff/
 rfcdiff ?= rfcdiff --browse
 
+
 # For generating PDF:
 #   https://www.gnu.org/software/enscript/
 enscript ?= enscript
