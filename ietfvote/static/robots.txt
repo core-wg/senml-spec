@@ -1,5 +1,0 @@
-User-agent: *
-Disallow: /admin/
-Disallow: /tasks/
-Disallow: /enroll/
-Disallow: /sensorValues/
