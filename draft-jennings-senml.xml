@@ -1394,10 +1394,11 @@ start = senml
         <front>
           <title>The International System of Units (SI)</title>
 
-          <author>
+          <author  >
             <organization>Bureau International des Poids et
             Mesures</organization>
           </author>
+ <date month="May" year="2008" />
         </front>
 
         <seriesInfo name="8th edition, 2006" value="" />
@@ -1419,6 +1420,9 @@ start = senml
           <author initials="B." surname="Taylor">
             <organization />
           </author>
+
+ <date month="May" year="2008" />
+
         </front>
 
         <seriesInfo name="NIST Special Publication 811, 2008 Edition" value="" />
@@ -1681,6 +1685,9 @@ start = senml
           <author initials="C." surname="McDonald">
             <organization />
           </author>
+
+ <date month="May" year="2008" />
+
         </front>
 
         <seriesInfo name="Regenstrief Institute and Indiana University School of Informatics" value="" />
