@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="US-ASCII"?>
+<?xml version="1.0" encoding="us-ascii"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
 <?xml-stylesheet type="text/xsl" href="rfc2629.xslt" ?>
 <?rfc toc="yes" ?>
@@ -10,7 +10,7 @@
 <?rfc colonspace="yes" ?>
 <?rfc rfcedstyle="no" ?>
 <?rfc tocdepth="4"?>
-<rfc category="std" docName="draft-jennings-senml-11" ipr="trust200902">
+<rfc category="std" docName="draft-jennings-core-senml-00" ipr="trust200902">
   <front>
     <title abbrev="Sensor Markup">Media Types for Sensor Markup Language
     (SENML)</title>
@@ -37,25 +37,21 @@
       </address>
     </author>
 
-    <author fullname="Zach Shelby" initials="Z" surname="Shelby">
-      <organization>Sensinode</organization>
-
-      <address>
-        <postal>
-          <street>Kidekuja 2</street>
-
-          <city>Vuokatti</city>
-
-          <code>88600</code>
-
-          <country>FINLAND</country>
-        </postal>
-
-        <phone>+358407796297</phone>
-
-        <email>zach@sensinode.com</email>
-      </address>
-    </author>
+        <author initials="Z" surname="Shelby" fullname="Zach Shelby">
+          <organization>
+             ARM
+          </organization>
+          <address>
+            <postal>
+             <street>150 Rose Orchard</street>
+             <city>San Jose</city>
+             <code>95134</code>
+             <country>FINLAND</country>
+            </postal>
+            <phone>+1-408-203-9434</phone>
+            <email>zach.shelby@arm.com</email>
+          </address>
+        </author>
 
     <author fullname="Jari Arkko" initials="J" surname="Arkko">
       <organization>Ericsson</organization>
@@ -75,7 +71,7 @@
       </address>
     </author>
 
-    <date year="2013" month="January" day="11" />
+    <date year="2014"/>
 
     <area>APPS</area>
 
@@ -96,7 +92,7 @@
       <t>Connecting sensors to the internet is not new, and there have been
       many protocols designed to facilitate it. This specification defines new
       media types for carrying simple sensor information in a protocol such as
-      HTTP or CoAP<xref target="I-D.ietf-core-coap"></xref> called the Sensor
+      HTTP or CoAP<xref target="RFC7252"></xref> called the Sensor
       Markup Language (SenML). This format was designed so that processors
       with very limited capabilities could easily encode a sensor measurement
       into the media type, while at the same time a server parsing the data
@@ -107,7 +103,7 @@
       media type to help reduce the size of the data and improve efficiency in
       decoding. Instead meta-data about a sensor resource can be described
       out-of-band using the CoRE Link Format <xref
-      target="I-D.ietf-core-link-format"></xref>. The markup language can be
+      target="RFC6690"></xref>. The markup language can be
       used for a variety of data flow models, most notably data feeds pushed
       from a sensor to a collector, and the web resource model where the
       sensor is requested as a resource representation (GET
@@ -287,7 +283,7 @@
       meta-data about the device, object or sensors. Instead, it is assumed
       that this meta-data is carried out of band. For web resources using
       SenML representations, this meta-data can be made available using the
-      CoRE Link Format <xref target="I-D.ietf-core-link-format"></xref>.</t>
+      CoRE Link Format <xref target="RFC6690"></xref>.</t>
 
       <t>The CoRE Link Format provides a simple way to describe Web Links, and
       in particular allows a web server to describe resources it is hosting.
@@ -1110,23 +1106,6 @@ start = senml
           <c>Cumulative number of heart beats</c>
 
           <c>RFC-AAAA</c>
-
-
-          <c>RFC-AAAA</c>
-
-          <c>rpm</c>
-
-          <c>Revolution rate in revolutions per minute</c>
-
-          <c>RFC-AAAA</c>
-
-          <c>revs</c>
-
-          <c>Cumulative number of revolutions</c>
-
-          <c>RFC-AAAA</c>
-
-
         </texttable>
 
         <t>New entries can be added to the registration by either Expert
@@ -1394,11 +1373,11 @@ start = senml
         <front>
           <title>The International System of Units (SI)</title>
 
-          <author  >
+          <author>
             <organization>Bureau International des Poids et
             Mesures</organization>
           </author>
- <date month="May" year="2008" />
+          <date />
         </front>
 
         <seriesInfo name="8th edition, 2006" value="" />
@@ -1420,9 +1399,7 @@ start = senml
           <author initials="B." surname="Taylor">
             <organization />
           </author>
-
- <date month="May" year="2008" />
-
+          <date />
         </front>
 
         <seriesInfo name="NIST Special Publication 811, 2008 Edition" value="" />
@@ -1685,9 +1662,7 @@ start = senml
           <author initials="C." surname="McDonald">
             <organization />
           </author>
-
- <date month="May" year="2008" />
-
+          <date />
         </front>
 
         <seriesInfo name="Regenstrief Institute and Indiana University School of Informatics" value="" />
@@ -1861,7 +1836,7 @@ start = senml
                 type="XML" />
       </reference>
 
-      <reference anchor="I-D.ietf-core-coap">
+      <reference anchor="RFC7252">
         <front>
           <title>Constrained Application Protocol (CoAP)</title>
 
@@ -1877,11 +1852,8 @@ start = senml
             <organization></organization>
           </author>
 
-          <author fullname="Brian Frank" initials="B" surname="Frank">
-            <organization></organization>
-          </author>
 
-          <date day="31" month="October" year="2011" />
+          <date month="June" year="2013" />
 
           <abstract>
             <t>This document specifies the Constrained Application Protocol
@@ -1900,13 +1872,13 @@ start = senml
           </abstract>
         </front>
 
-        <seriesInfo name="Internet-Draft" value="draft-ietf-core-coap-10" />
+        <seriesInfo name="RFC" value="7252" />
 
         <format target="http://www.ietf.org/internet-drafts/draft-ietf-core-coap-10.txt"
                 type="TXT" />
       </reference>
 
-      <reference anchor="I-D.ietf-core-link-format">
+      <reference anchor="RFC6690">
         <front>
           <title>CoRE Link Format</title>
 
@@ -1914,7 +1886,7 @@ start = senml
             <organization></organization>
           </author>
 
-          <date day="16" month="November" year="2011" />
+          <date month="June" year="2012" />
 
           <abstract>
             <t>This document defines Web Linking using a link format for use
@@ -1927,8 +1899,8 @@ start = senml
           </abstract>
         </front>
 
-        <seriesInfo name="Internet-Draft"
-                    value="draft-ietf-core-link-format-14" />
+        <seriesInfo name="RFC"
+                    value="6690" />
 
         <format target="http://www.ietf.org/internet-drafts/draft-ietf-core-link-format-14.txt"
                 type="TXT" />
