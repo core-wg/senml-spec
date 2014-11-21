@@ -1,0 +1,1176 @@
+
+
+
+Network Working Group                                        C. Jennings
+Internet-Draft                                                     Cisco
+Intended status:  Standards Track                              Z. Shelby
+Expires:  January 18, 2013                                     Sensinode
+                                                                J. Arkko
+                                                                Ericsson
+                                                           July 17, 2012
+
+
+             Media Types for Sensor Markup Language (SENML)
+                        draft-jennings-senml-09
+
+Abstract
+
+   This specification defines media types for representing simple sensor
+   measurements and device parameters in the Sensor Markup Language
+   (SenML).  Representations are defined in JavaScript Object Notation
+   (JSON), eXtensible Markup Language (XML) and Efficient XML
+   Interchange (EXI), which share the common SenML data model.  A simple
+   sensor, such as a temperature sensor, could use this media type in
+   protocols such as HTTP or CoAP to transport the measurements of the
+   sensor or to be configured.
+
+Status of this Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at http://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on January 18, 2013.
+
+Copyright Notice
+
+   Copyright (c) 2012 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+
+
+
+Jennings, et al.        Expires January 18, 2013                [Page 1]
+
+Internet-Draft                Sensor Markup                    July 2012
+
+
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+Table of Contents
+
+   1.  Overview . . . . . . . . . . . . . . . . . . . . . . . . . . .  3
+   2.  Requirements and Design Goals  . . . . . . . . . . . . . . . .  3
+   3.  Terminology  . . . . . . . . . . . . . . . . . . . . . . . . .  4
+   4.  Semantics  . . . . . . . . . . . . . . . . . . . . . . . . . .  4
+   5.  Associating Meta-data  . . . . . . . . . . . . . . . . . . . .  7
+   6.  JSON Representation (application/senml+json) . . . . . . . . .  8
+     6.1.  Examples . . . . . . . . . . . . . . . . . . . . . . . . .  9
+       6.1.1.  Single Datapoint . . . . . . . . . . . . . . . . . . .  9
+       6.1.2.  Multiple Datapoints  . . . . . . . . . . . . . . . . .  9
+       6.1.3.  Multiple Measurements  . . . . . . . . . . . . . . . . 10
+       6.1.4.  Collection of Resources  . . . . . . . . . . . . . . . 10
+   7.  XML Representation (application/senml+xml) . . . . . . . . . . 11
+   8.  EXI Representation (application/senml-exi) . . . . . . . . . . 12
+   9.  Usage Considerations . . . . . . . . . . . . . . . . . . . . . 14
+   10. IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 15
+     10.1. Media Type Registration  . . . . . . . . . . . . . . . . . 15
+       10.1.1. senml+json Media Type Registration . . . . . . . . . . 16
+       10.1.2. senml+xml Media Type Registration  . . . . . . . . . . 17
+       10.1.3. senml-exi Media Type Registration  . . . . . . . . . . 18
+     10.2. XML Namespace Registration . . . . . . . . . . . . . . . . 18
+   11. Security Considerations  . . . . . . . . . . . . . . . . . . . 19
+   12. Privacy Considerations . . . . . . . . . . . . . . . . . . . . 19
+   13. Acknowledgement  . . . . . . . . . . . . . . . . . . . . . . . 19
+   14. References . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+     14.1. Normative References . . . . . . . . . . . . . . . . . . . 19
+     14.2. Informative References . . . . . . . . . . . . . . . . . . 20
+   Authors' Addresses . . . . . . . . . . . . . . . . . . . . . . . . 21
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jennings, et al.        Expires January 18, 2013                [Page 2]
+
+Internet-Draft                Sensor Markup                    July 2012
+
+
+1.  Overview
+
+   Connecting sensors to the internet is not new, and there have been
+   many protocols designed to facilitate it.  This specification defines
+   new media types for carrying simple sensor information in a protocol
+   such as HTTP or CoAP[I-D.ietf-core-coap] called the Sensor Markup
+   Language (SenML).  This format was designed so that processors with
+   very limited capabilities could easily encode a sensor measurement
+   into the media type, while at the same time a server parsing the data
+   could relatively efficiently collect a large number of sensor
+   measurements.  There are many types of more complex measurements and
+   measurements that this media type would not be suitable for.  A
+   decision was made not to carry most of the meta data about the sensor
+   in this media type to help reduce the size of the data and improve
+   efficiency in decoding.  Instead meta-data about a sensor resource
+   can be described out-of-band using the CoRE Link Format
+   [I-D.ietf-core-link-format].  The markup language can be used for a
+   variety of data flow models, most notably data feeds pushed from a
+   sensor to a collector, and the web resource model where the sensor is
+   requested as a resource representation (GET /sensor/temperature).
+
+   SenML is defined by a data model for measurements and simple meta-
+   data about measurements and devices.  The data is structured as a
+   single object (with attributes) that contains an array of entries.
+   Each entry is an object that has attributes such as a unique
+   identifier for the sensor, the time the measurement was made, and the
+   current value.  Serializations for this data model are defined for
+   JSON [RFC4627], XML and Efficient XML Interchange (EXI)
+   [W3C.REC-exi-20110310].
+
+   For example, the following shows a measurement from a temperature
+   gauge encoded in the JSON syntax.
+   {"e":[{ "n": "urn:dev:ow:10e2073a01080063", "v":23.5, "u":"Cel" }]}
+
+   In the example above, the array in the object has a single
+   measurement for a sensor named "urn:dev:ow:10e2073a01080063" with a
+   temperature of 23.5 degrees Celsius.
+
+
+2.  Requirements and Design Goals
+
+   The design goal is to be able to send simple sensor measurements in
+   small packets on mesh networks from large numbers of constrained
+   devices.  Keeping the total size under 80 bytes makes this easy to
+   use on a wireless mesh network.  It is always difficult to define
+   what small code is, but there is a desire to be able to implement
+   this in roughly 1 KB of flash on a 8 bit microprocessor.  Experience
+   with Google power meter and large scale deployments has indicated
+
+
+
+Jennings, et al.        Expires January 18, 2013                [Page 3]
+
+Internet-Draft                Sensor Markup                    July 2012
+
+
+   that the solution needs to support allowing multiple measurements to
+   be batched into a single HTTP or CoAP request.  This "batch" upload
+   capability allows the server side to efficiently support a large
+   number of devices.  It also conveniently supports batch transfers
+   from proxies and storage devices, even in situations where the sensor
+   itself sends just a single data item at a time.  The multiple
+   measurements could be from multiple related sensors or from the same
+   sensor but at different times.
+
+
+3.  Terminology
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in RFC 2119 [RFC2119].
+
+
+4.  Semantics
+
+   Each representation caries a single SenML object that represents a
+   set of measurements and/or parameters.  This object contains several
+   optional attributes described below and a mandatory array of one or
+   more entries.
+
+   Base Name
+
+      This is a string that is prepended to the names found in the
+      entries.  This attribute is optional.
+
+   Base Time
+
+      A base time that is added to the time found in an entry.  This
+      attribute is optional.
+
+   Base Units
+
+      A base unit that is assumed for all entries, unless otherwise
+      indicated.  The base unit SHOULD comply with the Unified Code for
+      Units of Measure [UCUM] in case sensitive form (c/s column).  This
+      attribute is optional.
+
+   Version
+
+      Version number of media type format.  This attribute is optional
+      positive integer and defaults to 1 if not present.
+
+
+
+
+
+
+Jennings, et al.        Expires January 18, 2013                [Page 4]
+
+Internet-Draft                Sensor Markup                    July 2012
+
+
+   Measurement or Parameter Entries
+
+      Array of values for sensor measurements or other generic
+      parameters (such as configuration parameters).  If present there
+      must be at least one entry in the array.
+
+
+   Each array entry contains several attributes, some of which are
+   optional and some of which are mandatory.
+
+   Name
+
+      Name of the sensor or parameter.  When appended to the Base Name
+      attribute, this must result in a globally unique identifier for
+      the resource.  The name is optional, if the Base Name is present.
+      If the name is missing Base Name must uniquely identify the
+      resource.  This can be used to represent a large array of
+      measurements from the same sensor without having to repeat its
+      identifier on every measurement.
+
+   Units
+
+      Units for a measurement value.  The unit SHOULD comply with the
+      Unified Code for Units of Measure [UCUM] in case sensitive form
+      (c/s column).  Optional, if Base Unit is present or if not
+      required for a parameter.
+
+   Value
+
+      Value of the entry.  Optional if a Sum value is present, otherwise
+      required.  Values are represented using three basic data types,
+      Floating point numbers ("v" field for "Value"), Booleans ("bv" for
+      "Boolean Value") and Strings ("sv" for "String Value").  Exactly
+      one of these three fields MUST appear.
+
+   Sum
+
+      Integrated sum of the values over time.  Optional.  This attribute
+      is in the units specified in the Unit value multiplied by seconds.
+
+   Time
+
+      Time when value was recorded.  Optional.
+
+
+
+
+
+
+
+
+Jennings, et al.        Expires January 18, 2013                [Page 5]
+
+Internet-Draft                Sensor Markup                    July 2012
+
+
+   Update Time
+
+      Update time.  A time in seconds that represents the maximum time
+      before this sensor will provide an updated reading for a
+      measurement.  This can be used to detect the failure of sensors or
+      communications path from the sensor.  Optional.
+
+
+   The SenML format can be extended with further custom attributes
+   placed in the base object, or in an entry.  Extensions in the base
+   object pertain to all entries, whereas extensions in an entry object
+   only pertain to that.
+
+   Systems reading one of the objects MUST check for the Version
+   attribute.  If this value is a version number larger than the version
+   which the system understands, the system SHOULD NOT use this object.
+   This allows the version number to indicate that the object contains
+   mandatory to understand attributes.  New version numbers can only be
+   defined in RFC which updates this specification or it successors.
+
+   The Name value is concatenated to the Base Name value to get the name
+   of the sensor.  The resulting name needs to uniquely identify and
+   differentiate the sensor from all others.  If the object is a
+   representation resulting from the request of a URI [RFC3986], then in
+   the absence of the Base Name attribute, this URI is used as the
+   default value of Base Name.  Thus in this case the Name field needs
+   to be unique for that URI, for example an index or subresource name
+   of sensors handled by the URI.
+
+   Alternatively, for objects not related to a URI, a unique name is
+   required.  In any case, it is RECOMMENDED that the full names are
+   represented as URIs or URNs [RFC2141].  One way to create a unique
+   name is to include a EUI-48 or EUI-64 identifier (A MAC address) or
+   some other bit string that is guaranteed uniqueness (such as a 1-wire
+   address) that is assigned to the device.  Some of the examples in
+   this draft use the device URN type as specified in
+   [I-D.arkko-core-dev-urn].  UUIDs [RFC4122] are another way to
+   generate a unique name.
+
+   The resulting concatenated name MUST consist only of characters out
+   of the set "A" to "Z", "a" to "z", "0" to "9", "-", ":", ".", or "_"
+   and it MUST start with a character out of the set "A" to "Z", "a" to
+   "z", or "0" to "9".  This restricted character set was chosen so that
+   these names can be directly used as in other types of URI including
+   segments of an HTTP path with no special encoding.  [RFC5952]
+   contains advice on encoding an IPv6 address in a name.
+
+   If either the Base Time or Time value is missing, the missing
+
+
+
+Jennings, et al.        Expires January 18, 2013                [Page 6]
+
+Internet-Draft                Sensor Markup                    July 2012
+
+
+   attribute is considered to have a value of zero.  The Base Time and
+   Time values are added together to get the time of measurement.  A
+   time of zero indicates that the sensor does not know the absolute
+   time and the measurement was made roughly "now".  A negative value is
+   used to indicate seconds in the past from roughly "now".  A positive
+   value is used to indicate the number of seconds, excluding leap
+   seconds, since the start of the year 1970 in UTC .
+
+   Representing the statistical characteristics of measurements can be
+   very complex.  Future specification may add new attributes to provide
+   better information about the statistical properties of the
+   measurement.
+
+
+5.  Associating Meta-data
+
+   SenML is designed to carry the minimum dynamic information about
+   measurements, and for efficiency reasons does not carry more static
+   meta-data about the device, object or sensors.  Instead, it is
+   assumed that this meta-data is carried out of band.  For web
+   resources using SenML representations, this meta-data can be made
+   available using the CoRE Link Format [I-D.ietf-core-link-format].
+
+   The CoRE Link Format provides a simple way to describe Web Links, and
+   in particular allows a web server to describe resources it is
+   hosting.  The list of links that a web server has available, can be
+   discovered by retrieving the /.well-known/core resource, which
+   returns the list of links in the CoRE Link Format.  Each link may
+   contain attributes, for example title, resource type, interface
+   description and content-type.
+
+   The most obvious use of this link format is to describe that a
+   resource is available in a SenML format in the first place.  The
+   relevant media type indicator is included in the Content-Type (ct=)
+   attribute.
+
+   Further semantics about a resource can be included in the Resource
+   Type and Interface Description attributes.  The Resource Type (rt=)
+   attribute is meant to give a semantic meaning to that resource.  For
+   example rt="outdoor-temperature" would indicate static semantic
+   meaning in addition to the unit information included in SenML.  The
+   Interface Description (if=) attribute is used to describe the REST
+   interface of a resource, and may include e.g. a reference to a WADL
+   description [WADL].
+
+
+
+
+
+
+
+Jennings, et al.        Expires January 18, 2013                [Page 7]
+
+Internet-Draft                Sensor Markup                    July 2012
+
+
+6.  JSON Representation (application/senml+json)
+
+   Root variables:
+
+               +---------------------------+------+--------+
+               |                     SenML | JSON | Type   |
+               +---------------------------+------+--------+
+               |                 Base Name | bn   | String |
+               |                 Base Time | bt   | Number |
+               |                Base Units | bu   | Number |
+               |                   Version | ver  | Number |
+               | Measurement or Parameters | e    | Array  |
+               +---------------------------+------+--------+
+
+   Measurement or Parameter Entries:
+
+                 +---------------+------+----------------+
+                 |         SenML | JSON | Notes          |
+                 +---------------+------+----------------+
+                 |          Name | n    | String         |
+                 |         Units | u    | String         |
+                 |         Value | v    | Floating point |
+                 |  String Value | sv   | String         |
+                 | Boolean Value | bv   | Boolean        |
+                 |     Value Sum | s    | Floating point |
+                 |          Time | t    | Number         |
+                 |   Update Time | ut   | Number         |
+                 +---------------+------+----------------+
+
+   All of the data is UTF-8, but since this is for machine to machine
+   communications on constrained systems, only characters with code
+   points between U+0001 and U+007F are allowed which corresponds to the
+   ASCII[RFC0020] subset of UTF-8.
+
+   The root contents MUST consist of exactly one JSON object as
+   specified by [RFC4627].  This object MAY contain a "bn" attribute
+   with a value of type string.  This object MAY contain a "bt"
+   attribute with a value of type number.  The object MAY contain a "bu"
+   attribute with a value of type string.  The object MAY contain a
+   "ver" attribute with a value of type number.  The object MAY contain
+   other attribute value pairs, and the object MUST contain exactly one
+   "e" attribute with a value of type array.  The array MUST have one or
+   more measurement or parameter objects.
+
+   Inside each measurement or parameter object the "n", "u", and "sv"
+   attributes are of type string, the "t" and "ut" attributes are of
+   type number, the "bv" attribute is of type boolean, and the "v" and
+   "s" attributes are of type floating point.  All the attributes are
+
+
+
+Jennings, et al.        Expires January 18, 2013                [Page 8]
+
+Internet-Draft                Sensor Markup                    July 2012
+
+
+   optional, but as specified in Section 4, one of the "v", "sv", or
+   "bv" attributes MUST appear unless the "s" attribute is also present.
+   The "v", and "sv", and "bv" attributes MUST NOT appear together.
+
+   Systems receiving measurements MUST be able to process the range of
+   floating point numbers that are representable as an IEEE double-
+   precision floating-point numbers [IEEE.754.1985].  The number of
+   significant digits in any measurement is not relevant, so a reading
+   of 1.1 has exactly the same semantic meaning as 1.10.  If the value
+   has an exponent, the "e" MUST be in lower case.  The mantissa SHOULD
+   be less than 19 characters long and the exponent SHOULD be less than
+   5 characters long.  This allows time values to have better than micro
+   second precision over the next 100 years.
+
+6.1.  Examples
+
+6.1.1.  Single Datapoint
+
+   The following shows a temperature reading taken approximately "now"
+   by a 1-wire sensor device that was assigned the unique 1-wire address
+   of 10e2073a01080063:
+
+   {"e":[{ "n": "urn:dev:ow:10e2073a01080063", "v":23.5 }]}
+
+6.1.2.  Multiple Datapoints
+
+   The following example shows voltage and current now, i.e., at an
+   unspecified time.  The device has an EUI-64 MAC address of
+   0024befffe804ff1.
+
+   {"e":[
+        { "n": "voltage", "t": 0, "u": "V", "v": 120.1 },
+        { "n": "current", "t": 0, "u": "A", "v": 1.2 }],
+    "bn": "urn:dev:mac:0024befffe804ff1/"
+   }
+
+   The next example is similar to the above one, but shows current at
+   Tue Jun 8 18:01:16 UTC 2010 and at each second for the previous 5
+   seconds.
+
+
+
+
+
+
+
+
+
+
+
+
+Jennings, et al.        Expires January 18, 2013                [Page 9]
+
+Internet-Draft                Sensor Markup                    July 2012
+
+
+   {"e":[
+        { "n": "voltage", "u": "V", "v": 120.1 },
+        { "n": "current", "t": -5, "v": 1.2 },
+        { "n": "current", "t": -4, "v": 1.30 },
+        { "n": "current", "t": -3, "v": 0.14e1 },
+        { "n": "current", "t": -2, "v": 1.5 },
+        { "n": "current", "t": -1, "v": 1.6 },
+        { "n": "current", "t": 0,   "v": 1.7 }],
+    "bn": "urn:dev:mac:0024befffe804ff1/",
+    "bt": 1276020076,
+    "ver": 1,
+    "bu": "A"
+   }
+
+6.1.3.  Multiple Measurements
+
+   The following example shows humidity measurements from a mobile
+   device with an IPv6 address 2001:db8::1, starting at Mon Oct 31 13:
+   24:24 UTC 2011.  The device also provide position data, which is
+   provided in the same measurement or parameter array as separate
+   entries.  Note time is used to for correlating data that belongs
+   together, e.g., a measurement and a parameter associated with it.
+   Finally, the device also reports extra data about its battery status
+   at a separate time.
+
+   {"e":[
+        { "v": 20.0, "t": 0 },
+        { "sv": "E 24' 30.621", "n": "lon", "t": 0 },
+        { "sv": "N 60' 7.965", "n": "lat", "t": 0 },
+        { "v": 20.3, "t": 60 },
+        { "sv": "E 24' 30.622", "n": "lon", "t": 60 },
+        { "sv": "N 60' 7.965", "n": "lat", "t": 60 },
+        { "v": 20.7, "t": 120 },
+        { "sv": "E 24' 30.623", "n": "lon", "t": 120 },
+        { "sv": "N 60' 7.966", "n": "lat", "t": 120 },
+        { "v": 98.0, "u": "%EL", "t": 150 },
+        { "v": 21.2, "t": 180 },
+        { "sv": "E 24' 30.628", "n": "lon", "t": 180 },
+        { "sv": "N 60' 7.967", "n": "lat", "t": 180 }],
+    "bn": "http://[2001:db8::1]",
+    "bt": 1320067464,
+    "bu": "%"
+   }
+
+6.1.4.  Collection of Resources
+
+   The following example shows how to query one device that can provide
+   multiple measurements.  The example assumes that a client has fetched
+
+
+
+Jennings, et al.        Expires January 18, 2013               [Page 10]
+
+Internet-Draft                Sensor Markup                    July 2012
+
+
+   information from a device at 2001:db8::2 by performing a GET
+   operation on http://[2001:db8::2] at Mon Oct 31 16:27:09 UTC 2011,
+   and has gotten two separate values as a result, a temperature and
+   humidity measurement.
+
+   {"e":[
+        { "n": "temperature", "v": 27.2, "u": "Cel" },
+        { "n": "humidity", "v": 80, "u": "%" }],
+    "bn": "http://[2001:db8::2]/",
+    "bt": 1320078429,
+    "ver": 1
+   }
+
+
+7.  XML Representation (application/senml+xml)
+
+   A SenML object can also be represented in XML format as defined in
+   this section.  The following example shows an XML example for the
+   same sensor measurement as in Section 6.1.2.
+
+   <?xml version="1.0" encoding="UTF-8"?>
+   <senml xmlns="urn:ietf:params:xml:ns:senml"
+          bn="urn:dev:mac:0024befffe804ff1/"
+          bt="1276020076"
+          ver="1" bu="A">
+
+     <e n="voltage" u="V" v="120.1" />
+
+     <e n="current" t="-5" v="1.2" />
+
+     <e n="current" t="-4" v="1.30" />
+
+     <e n="current" t="-3" v="0.14e1" />
+
+     <e n="current" t="-2" v="1.5" />
+
+     <e n="current" t="-1" v="1.6" />
+
+     <e n="current" t="0" v="1.7" />
+
+   </senml>
+
+   The RelaxNG schema for the XML is:
+
+
+
+
+
+
+
+
+Jennings, et al.        Expires January 18, 2013               [Page 11]
+
+Internet-Draft                Sensor Markup                    July 2012
+
+
+   default namespace = "urn:ietf:params:xml:ns:senml"
+   namespace rng = "http://relaxng.org/ns/structure/1.0"
+
+   e = element e {
+     attribute n { xsd:string }?,
+     attribute u { xsd:string }?,
+     attribute v { xsd:float }?,
+     attribute sv { xsd:string }?,
+     attribute bv { xsd:boolean }?,
+     attribute s { xsd:decimal }?,
+     attribute t { xsd:int }?,
+     attribute ut { xsd:int }?,
+     p*
+   }
+
+   senml =
+     element senml {
+       attribute bn { xsd:string }?,
+       attribute bt { xsd:int }?,
+       attribute bu { xsd:string }?,
+       attribute ver { xsd:int }?,
+       e*
+     }
+
+   start = senml
+
+
+8.  EXI Representation (application/senml-exi)
+
+   For efficient transmission of SenML over e.g. a constrained network,
+   Efficient XML Interchange (EXI) can be used.  This encodes the XML
+   Schema structure of SenML into binary tags and values rather than
+   ASCII text.  An EXI representation of SenML SHOULD be made using the
+   strict schema-mode of EXI.  This mode however does not allow tag
+   extensions to the schema, and therefore any extensions will be lost
+   in the encoding.  For uses where extensions need to be preserved in
+   EXI, the non-strict schema mode of EXI MAY be used.
+
+   The EXI header option MUST be included.  An EXI schemaID options MUST
+   be set to the value of "a" indicating the scheme provided in this
+   specification.  Future revisions to the schema can change this
+   schemaID to allow for backwards compatibility.  When the data will be
+   transported over COAP or HTTP, an EXI Cookie SHOULD NOT be used as it
+   simply makes things larger as is redundant to information provided in
+   the Content-Type header.
+
+   The following XSD Schema is generated from the RelaxNG and used for
+   strict schema guided EXI processing.
+
+
+
+Jennings, et al.        Expires January 18, 2013               [Page 12]
+
+Internet-Draft                Sensor Markup                    July 2012
+
+
+   <?xml version="1.0" encoding="UTF-8"?>
+   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+              elementFormDefault="qualified"
+              targetNamespace="urn:ietf:params:xml:ns:senml"
+              xmlns:ns1="urn:ietf:params:xml:ns:senml">
+
+     <xs:element name="e">
+       <xs:complexType>
+         <xs:attribute name="n" type="xs:string" minOccurs="0"/>
+         <xs:attribute name="u" type="xs:string" minOccurs="0"/>
+         <xs:attribute name="v" type="xs:float" minOccurs="0"/>
+         <xs:attribute name="sv" type="xs:string" minOccurs="0"/>
+         <xs:attribute name="bv" type="xs:boolean" minOccurs="0"/>
+         <xs:attribute name="s" type="xs:decimal" minOccurs="0"/>
+         <xs:attribute name="t" type="xs:int" minOccurs="0"/>
+         <xs:attribute name="ut" type="xs:int" minOccurs="0"/>
+       </xs:complexType>
+     </xs:element>
+     <xs:element name="senml">
+       <xs:complexType>
+         <xs:sequence>
+           <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:e"/>
+         </xs:sequence>
+         <xs:attribute name="bn" type="xs:string"/>
+         <xs:attribute name="bt" type="xs:int"/>
+         <xs:attribute name="bu" type="xs:string"/>
+         <xs:attribute name="ver" type="xs:int"/>
+       </xs:complexType>
+     </xs:element>
+   </xs:schema>
+
+   The following shows a hexdump of the EXI produced from encoding the
+   following XML example.  Note that while this example is similar to
+   the first example in Section 6.1.2 in JSON format.
+
+   <?xml version="1.0" encoding="UTF-8"?>
+   <senml xmlns="urn:ietf:params:xml:ns:senml"
+          bn="urn:dev:ow:10e2073a01080063" >
+     <e n="voltage" t="0" v="120.1" u="V" />
+     <e n="current" t="0" v="1.2" u="A" />
+   </senml>
+
+   Which compresses to the following displayed in hexdump:
+
+   00000000  a0 30 0d 85 01 d7 57 26  e3 a6 46 57 63 a6 f7 73
+   00000010  a3 13 06 53 23 03 73 36  13 03 13 03 83 03 03 63
+   00000020  36 21 2e cd ed 8e 8c 2c  ec a8 00 00 d5 95 88 4c
+   00000030  02 08 4b 1b ab 93 93 2b  73 a2 00 00 34 14 19 00
+
+
+
+Jennings, et al.        Expires January 18, 2013               [Page 13]
+
+Internet-Draft                Sensor Markup                    July 2012
+
+
+   00000040  c0
+
+   The above example used the bit packed form of EXI but it is also
+   possible to use a byte packed form of EXI which can makes it easier
+   for a simple sensor to produce valid EXI without really implementing
+   EXI.  Consider the example of a temperature sensor that produces a
+   value in tenths of degrees Celsius over a range of 0.0 to 55.0. = It
+   would produce XML SenML file such as:
+
+   <?xml version="1.0" encoding="UTF-8"?>
+   <senml xmlns="urn:ietf:params:xml:ns:senml"
+          bn="urn:dev:ow:10e2073a01080063" >
+     <e n="temp"  v="23.1" u="degC" />
+   </senml>
+
+   The compressed form, using the byte alignment option of EXI, for the
+   above XML is the following:
+
+   00000000  a00048806c200200 1d75726e3a646576 |..H.l ...urn:dev|
+   00000010  3a6f773a31306532 3037336130313038 |:ow:10e2073a0108|
+   00000020  3030363303010674 656d700306646567 |0063...temp..deg|
+   00000030  430100e701010001 02               |C........|
+
+   A small temperature sensor devices that only generates this one EXI
+   file does not really need an full EXI implementation.  It can simple
+   hard code the output replacing the one wire device ID starting at
+   byte 0x14 and going to byte 0x23 with it's device ID , and replacing
+   the value "0xe7 0x01" at location 0x33 to 0x34 with the current
+   temperature.  The EXI Specification[W3C.REC-exi-20110310] contains
+   the full information on how floating point numbers are represented,
+   but for the purpose of this sensor, the temperature can be converted
+   to an integer in tenths of degrees ( 231 in this example ).  EXI
+   stores 7 bits of the integer in each byte with the top bit set to one
+   if there are further bytes.  So the first bytes at location 0x33 is
+   set to low 7 bits of the integer temperature in tenths of degrees
+   plus 0x80.  In this example 231 & 0x7F + 0x80 = 0xE7.  The second
+   byte at location 0x34 is set to the integer temperature in tenths of
+   degrees right shifted 7 bits.  In this example 231 >> 7 = 0x01.
+
+
+9.  Usage Considerations
+
+   The measurements support sending both the current value of a sensor
+   as well as the an integrated sum.  For many types of measurements,
+   the sum is more useful than the current value.  For example, an
+   electrical meter that measures the energy a given computer uses will
+   typically want to measure the cumulative amount of energy used.  This
+   is less prone to error than reporting the power each second and
+
+
+
+Jennings, et al.        Expires January 18, 2013               [Page 14]
+
+Internet-Draft                Sensor Markup                    July 2012
+
+
+   trying to have something on the server side sum together all the
+   power measurements.  If the network between the sensor and the meter
+   goes down over some period of time, when it comes back up, the
+   cumulative sum helps reflect what happened while the network was
+   down.  A meter like this would typically report a measurement with
+   the units set to watts, but it would put the sum of energy used in
+   the "s" attribute of the measurement.  It might optionally include
+   the current power in the "v" attribute.
+
+   While the benefit of using the integrated sum is fairly clear for
+   measurements like power and energy, it is less obvious for something
+   like temperature.  Reporting the sum of the temperature makes it easy
+   to compute averages even when the individual temperature values are
+   not reported frequently enough to compute accurate averages.
+   Implementors are encouraged to report the cumulative sum as well as
+   the raw value of a given sensor.
+
+   Applications that use the cumulative sum values need to understand
+   they are very loosely defined by this specification, and depending on
+   the particular sensor implementation may behave in unexpected ways.
+   Applications should be able to deal with the following issues:
+
+   1.  Many sensors will allow the cumulative sums to "wrap" back to
+       zero after the value gets sufficiently large.
+   2.  Some sensors will reset the cumulative sum back to zero when the
+       device is reset, loses power, or is replaced with a different
+       sensor.
+   3.  Applications cannot make assumptions about when the device
+       started accumulating values into the sum.
+
+   Typically applications can make some assumptions about specific
+   sensors that will allow them to deal with these problems.  A common
+   assumption is that for sensors whose measurement values are always
+   positive, the sum should never get smaller; so if the sum does get
+   smaller, the application will know that one of the situations listed
+   above has happened.
+
+
+10.  IANA Considerations
+
+   Note to RFC Editor:  Please replace all occurrences of "RFC-AAAA"
+   with the RFC number of this specification.
+
+10.1.  Media Type Registration
+
+   The following registrations are done following the procedure
+   specified in [RFC4288] and [RFC3023].
+
+
+
+
+Jennings, et al.        Expires January 18, 2013               [Page 15]
+
+Internet-Draft                Sensor Markup                    July 2012
+
+
+   Note to RFC Editor:  Please replace all occurrences of "RFC-AAAA"
+   with the RFC number of this specification.
+
+10.1.1.  senml+json Media Type Registration
+
+   Type name:  application
+
+   Subtype name:  senml+json
+
+   Required parameters:  none
+
+   Optional parameters:  none
+
+   Encoding considerations:  Must be encoded as using a subset of the
+   encoding allowed in [RFC4627].  Specifically, only the ASCII[RFC0020]
+   subset of the UTF-8 characters are allowed.  This simplifies
+   implementation of very simple system and does not impose any
+   significant limitations as all this data is meant for machine to
+   machine communications and is not meant to be human readable.
+
+   Security considerations:  Sensor data can contain a wide range of
+   information ranging from information that is very public, such the
+   outside temperature in a given city, to very private information that
+   requires integrity and confidentiality protection, such as patient
+   health information.  This format does not provide any security and
+   instead relies on the transport protocol that carries it to provide
+   security.  Given applications need to look at the overall context of
+   how this media type will be used to decide if the security is
+   adequate.
+
+   Interoperability considerations:  Applications should ignore any JSON
+   key value pairs that they do not understand.  This allows backwards
+   compatibility extensions to this specification.  The "ver" field can
+   be used to ensure the receiver supports a minimal level of
+   functionality needed by the creator of the JSON object.
+
+   Published specification:  RFC-AAAA
+
+   Applications that use this media type:  The type is used by systems
+   that report electrical power usage and environmental information such
+   as temperature and humidity.  It can be used for a wide range of
+   sensor reporting systems.
+
+   Additional information:
+
+   Magic number(s):  none
+
+   File extension(s):  senml
+
+
+
+Jennings, et al.        Expires January 18, 2013               [Page 16]
+
+Internet-Draft                Sensor Markup                    July 2012
+
+
+   Macintosh file type code(s):  none
+
+   Person & email address to contact for further information:  Cullen
+   Jennings <c.jennings@ieee.org>
+
+   Intended usage:  COMMON
+
+   Restrictions on usage:  None
+
+   Author:  Cullen Jennings <c.jennings@ieee.org>
+
+   Change controller:  IESG
+
+10.1.2.  senml+xml Media Type Registration
+
+   Type name:  application
+
+   Subtype name:  senml+xml
+
+   Required parameters:  none
+
+   Optional parameters:  none
+
+   Encoding considerations:  TBD
+
+   Security considerations:  TBD
+
+   Interoperability considerations:  TBD
+
+   Published specification:  RFC-AAAA
+
+   Applications that use this media type:  TBD
+
+   Additional information:
+
+   Magic number(s):  none
+
+   File extension(s):  senml
+
+   Macintosh file type code(s):  none
+
+   Person & email address to contact for further information:  Cullen
+   Jennings <c.jennings@ieee.org>
+
+   Intended usage:  COMMON
+
+   Restrictions on usage:  None
+
+
+
+
+Jennings, et al.        Expires January 18, 2013               [Page 17]
+
+Internet-Draft                Sensor Markup                    July 2012
+
+
+   Author:  Cullen Jennings <c.jennings@ieee.org>
+
+   Change controller:  IESG
+
+10.1.3.  senml-exi Media Type Registration
+
+   Type name:  application
+
+   Subtype name:  senml-exi
+
+   Required parameters:  none
+
+   Optional parameters:  none
+
+   Encoding considerations:  TBD
+
+   Security considerations:  TBD
+
+   Interoperability considerations:  TBD
+
+   Published specification:  RFC-AAAA
+
+   Applications that use this media type:  TBD
+
+   Additional information:
+
+   Magic number(s):  none
+
+   File extension(s):  senml
+
+   Macintosh file type code(s):  none
+
+   Person & email address to contact for further information:  Cullen
+   Jennings <c.jennings@ieee.org>
+
+   Intended usage:  COMMON
+
+   Restrictions on usage:  None
+
+   Author:  Cullen Jennings <c.jennings@ieee.org>
+
+   Change controller:  IESG
+
+10.2.  XML Namespace Registration
+
+   This document registers the following XML name paces in the IETF XML
+   registry defined in [RFC3688].
+
+
+
+
+Jennings, et al.        Expires January 18, 2013               [Page 18]
+
+Internet-Draft                Sensor Markup                    July 2012
+
+
+   URI:  urn:ietf:params:xml:ns:senml
+
+   Registrant Contact:  The IESG.
+
+   XML:  N/A, the requested URIs are XML namespaces
+
+
+11.  Security Considerations
+
+   See Section 12.Further discussion of security proprieties can be
+   found in Section 10.1.
+
+
+12.  Privacy Considerations
+
+   Sensor data can range from information with almost no security
+   considerations, such as the current temperature in a given city, to
+   highly sensitive medical or location data.  This specification
+   provides no security protection for the data but is meant to be used
+   inside another container or transport protocol such as S/MIME or HTTP
+   with TLS that can provide integrity, confidentiality, and
+   authentication information about the source of the data.
+
+
+13.  Acknowledgement
+
+   We would like to thank Lisa Dusseault, Joe Hildebrand, Lyndsay
+   Campbell, Martin Thomson, John Klensin, Bjoern Hoehrmann, and Carsten
+   Bormann for their review comments.
+
+
+14.  References
+
+14.1.  Normative References
+
+   [IEEE.754.1985]
+              Institute of Electrical and Electronics Engineers,
+              "Standard for Binary Floating-Point Arithmetic",
+              IEEE Standard 754, August 1985.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [RFC3023]  Murata, M., St. Laurent, S., and D. Kohn, "XML Media
+              Types", RFC 3023, January 2001.
+
+   [RFC3688]  Mealling, M., "The IETF XML Registry", BCP 81, RFC 3688,
+              January 2004.
+
+
+
+Jennings, et al.        Expires January 18, 2013               [Page 19]
+
+Internet-Draft                Sensor Markup                    July 2012
+
+
+   [RFC4288]  Freed, N. and J. Klensin, "Media Type Specifications and
+              Registration Procedures", BCP 13, RFC 4288, December 2005.
+
+   [RFC4627]  Crockford, D., "The application/json Media Type for
+              JavaScript Object Notation (JSON)", RFC 4627, July 2006.
+
+   [UCUM]     Schadow, G. and C. McDonald, "The Unified Code for Units
+              of Measure (UCUM)", Regenstrief Institute and Indiana
+              University School of Informatics .
+
+   [W3C.REC-exi-20110310]
+              Kamiya, T. and J. Schneider, "Efficient XML Interchange
+              (EXI) Format 1.0", World Wide Web Consortium
+              Recommendation REC-exi-20110310, March 2011,
+              <http://www.w3.org/TR/2011/REC-exi-20110310>.
+
+14.2.  Informative References
+
+   [I-D.arkko-core-dev-urn]
+              Arkko, J., Jennings, C., and Z. Shelby, "Uniform Resource
+              Names for Device Identifiers", draft-arkko-core-dev-urn-01
+              (work in progress), October 2011.
+
+   [I-D.ietf-core-coap]
+              Shelby, Z., Hartke, K., Bormann, C., and B. Frank,
+              "Constrained Application Protocol (CoAP)",
+              draft-ietf-core-coap-10 (work in progress), October 2011.
+
+   [I-D.ietf-core-link-format]
+              Shelby, Z., "CoRE Link Format",
+              draft-ietf-core-link-format-14 (work in progress),
+              November 2011.
+
+   [RFC0020]  Cerf, V., "ASCII format for network interchange", RFC 20,
+              October 1969.
+
+   [RFC2141]  Moats, R., "URN Syntax", RFC 2141, May 1997.
+
+   [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
+              Resource Identifier (URI): Generic Syntax", STD 66,
+              RFC 3986, January 2005.
+
+   [RFC4122]  Leach, P., Mealling, M., and R. Salz, "A Universally
+              Unique IDentifier (UUID) URN Namespace", RFC 4122,
+              July 2005.
+
+   [RFC5952]  Kawamura, S. and M. Kawashima, "A Recommendation for IPv6
+              Address Text Representation", RFC 5952, August 2010.
+
+
+
+Jennings, et al.        Expires January 18, 2013               [Page 20]
+
+Internet-Draft                Sensor Markup                    July 2012
+
+
+   [WADL]     Hadley, M., "Web Application Description Language (WADL)",
+              2009, <http://java.net/projects/wadl/sources/svn/content/
+              trunk/www/wadl20090202.pdf>.
+
+
+Authors' Addresses
+
+   Cullen Jennings
+   Cisco
+   170 West Tasman Drive
+   San Jose, CA  95134
+   USA
+
+   Phone:  +1 408 421-9990
+   Email:  fluffy@cisco.com
+
+
+   Zach Shelby
+   Sensinode
+   Kidekuja 2
+   Vuokatti  88600
+   FINLAND
+
+   Phone:  +358407796297
+   Email:  zach@sensinode.com
+
+
+   Jari Arkko
+   Ericsson
+   Jorvas  02420
+   Finland
+
+   Email:  jari.arkko@piuha.net
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jennings, et al.        Expires January 18, 2013               [Page 21]
+
