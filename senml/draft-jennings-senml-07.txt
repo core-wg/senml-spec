@@ -830,7 +830,7 @@ Internet-Draft                Sensor Markup                     Nov 2011
    |     Sv | sievert                                      | RFC-AAAA  |
    |    kat | katal                                        | RFC-AAAA  |
    |     pH | pH acidity                                   | RFC-AAAA  |
-   |      % | Value of a switch.  A value of 0.0 indicates | RFC-AAAA  |
+   |      % | Value of a switch. A value of 0.0 indicates  | RFC-AAAA  |
    |        | the switch is off while 100.0 indicates on.  |           |
    |  count | counter value                                | RFC-AAAA  |
 
@@ -851,10 +851,10 @@ Internet-Draft                Sensor Markup                     Nov 2011
    |  cd/m2 | luminance                                    | RFC-AAAA  |
    |   Bspl | bel sound pressure level                     | RFC-AAAA  |
    |  bit/s | bits per second                              | RFC-AAAA  |
-   |    lat | degrees latitude.  Assumed to be in WGS84    | RFC-AAAA  |
+   |    lat | degrees latitude. Assumed to be in WGS84     | RFC-AAAA  |
    |        | unless another reference frame is known for  |           |
    |        | the sensor.                                  |           |
-   |    lon | degrees longitude.  Assumed to be in WGS84   | RFC-AAAA  |
+   |    lon | degrees longitude. Assumed to be in WGS84    | RFC-AAAA  |
    |        | unless another reference frame is known for  |           |
    |        | the sensor.                                  |           |
    |    %EL | remaining battery energy level in percents   | RFC-AAAA  |
