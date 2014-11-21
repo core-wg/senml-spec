@@ -3,7 +3,7 @@
 This is the working area for the [IETF CORE Working
 Group](https://trac.tools.ietf.org/wg/core/trac/wiki) draft of Media Types for Sensor Markup Language (SENML)
 
-* [Editor's copy](https://TODO.github.io/security-arch/)
+* [Editor's copy](http://fluffy.github.io/senml-spec/index.html)
 * [Working Group Draft] (https://tools.ietf.org/html/draft-jennings-core-senml)
 
 
