@@ -114,7 +114,7 @@ configured.
 Connecting sensors to the internet is not new, and there have been
 many protocols designed to facilitate it. This specification defines new
 media types for carrying simple sensor information in a protocol such as
-HTTP or CoAP{{RFC7252}} called the Sensor
+HTTP or CoAP {{RFC7252}} called the Sensor
 Markup Language (SenML). This format was designed so that processors
 with very limited capabilities could easily encode a sensor measurement
 into the media type, while at the same time a server parsing the data
@@ -170,13 +170,13 @@ sensors or from the same sensor but at different times.
 # Terminology
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-"SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+"SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this
 document are to be interpreted as described in {{RFC2119}}.
 
 
 # Semantics {#semant}
 
-Each representation caries a single SenML object that represents a
+Each representation carries a single SenML object that represents a
 set of measurements and/or parameters. This object contains several
 optional attributes described below and a mandatory array of one or more
 entries.
@@ -227,7 +227,7 @@ Name
 : Name of the sensor or
   parameter. When appended to the Base Name attribute, this must
   result in a globally unique identifier for the resource. The name is
-  optional, if the Base Name is present. If the name is missing Base
+  optional, if the Base Name is present. If the name is missing, Base
   Name must uniquely identify the resource. This can be used to
   represent a large array of measurements from the same sensor without
   having to repeat its identifier on every measurement.
@@ -282,12 +282,13 @@ attribute. If this value is a version number larger than the version
 which the system understands, the system SHOULD NOT use this object.
 This allows the version number to indicate that the object contains
 mandatory to understand attributes. New version numbers can only be
-defined in RFC which updates this specification or it successors.
+defined in an RFC that updates this specification or it successors.
 
 The Name value is concatenated to the Base Name value to get the name
 of the sensor. The resulting name needs to uniquely identify and
 differentiate the sensor from all others. If the object is a
-representation resulting from the request of a URI {{RFC3986}}, then in the absence of the Base Name
+representation resulting from the request of a URI {{RFC3986}}, then
+in the absence of the Base Name
 attribute, this URI is used as the default value of Base Name. Thus in
 this case the Name field needs to be unique for that URI, for example an
 index or subresource name of sensors handled by the URI.
@@ -298,14 +299,17 @@ represented as URIs or URNs {{RFC2141}}. One way to
 create a unique name is to include a EUI-48 or EUI-64 identifier (A MAC
 address) or some other bit string that is guaranteed uniqueness (such as
 a 1-wire address) that is assigned to the device. Some of the examples
-in this draft use the device URN type as specified in {{I-D.arkko-core-dev-urn}}. UUIDs {{RFC4122}} are another way to generate a unique name.
+in this draft use the device URN type as specified in
+{{I-D.arkko-core-dev-urn}}. UUIDs {{RFC4122}} are another way to
+generate a unique name.
 
 The resulting concatenated name MUST consist only of characters out
 of the set "A" to "Z", "a" to "z", "0" to "9", "-", ":", ".", or "_" and
 it MUST start with a character out of the set "A" to "Z", "a" to "z", or
 "0" to "9". This restricted character set was chosen so that these names
 can be directly used as in other types of URI including segments of an
-HTTP path with no special encoding. {{RFC5952}} contains advice on encoding an IPv6 address in a name.
+HTTP path with no special encoding. {{RFC5952}} contains advice on
+encoding an IPv6 address in a name.
 
 If either the Base Time or Time value is missing, the missing
 attribute is considered to have a value of zero. The Base Time and Time
@@ -314,7 +318,7 @@ indicates that the sensor does not know the absolute time and the
 measurement was made roughly "now". A negative value is used to indicate
 seconds in the past from roughly "now". A positive value is used to
 indicate the number of seconds, excluding leap seconds, since the start
-of the year 1970 in UTC .
+of the year 1970 in UTC.
 
 Representing the statistical characteristics of measurements can be
 very complex. Future specification may add new attributes to provide
@@ -406,10 +410,11 @@ floating point numbers that are representable as an IEEE
 double-precision floating-point numbers {{IEEE.754.1985}}. The number of significant digits in any
 measurement is not relevant, so a reading of 1.1 has exactly the same
 semantic meaning as 1.10. If the value has an exponent, the "e" MUST be
-in lower case. The mantissa SHOULD be less than 19 characters long and
+in lower case. <!-- XXX: Can't really impose this requirement, can we? -->
+The mantissa SHOULD be less than 19 characters long and
 the exponent SHOULD be less than 5 characters long. This allows time
 values to have better than micro second precision over the next 100
-years.
+years. <!-- XXX: Should we adapt this to I-JSON? -->
 
 ## Examples
 
@@ -643,7 +648,6 @@ first example in {{co-ex}} in JSON format.
 Which compresses to the following displayed in hexdump:
 
 ~~~~
-
 00000000  a0 30 0d 85 01 d7 57 26  e3 a6 46 57 63 a6 f7 73
 00000010  a3 13 06 53 23 03 73 36  13 03 13 03 83 03 03 63
 00000020  36 21 2e cd ed 8e 8c 2c  ec a8 00 00 d5 95 88 4c
@@ -681,12 +685,12 @@ above XML is the following:
 A small temperature sensor devices that only generates this one EXI
 file does not really need an full EXI implementation. It can simple hard
 code the output replacing the one wire device ID starting at byte 0x14
-and going to byte 0x23 with it's device ID , and replacing the value
+and going to byte 0x23 with it's device ID, and replacing the value
 "0xe7 0x01" at location 0x33 to 0x34 with the current temperature. The
-EXI Specification{{W3C.REC-exi-20110310}} contains
+EXI Specification {{W3C.REC-exi-20110310}} contains
 the full information on how floating point numbers are represented, but
 for the purpose of this sensor, the temperature can be converted to an
-integer in tenths of degrees ( 231 in this example ). EXI stores 7 bits
+integer in tenths of degrees (231 in this example). EXI stores 7 bits
 of the integer in each byte with the top bit set to one if there are
 further bytes. So the first bytes at location 0x33 is set to low 7 bits
 of the integer temperature in tenths of degrees plus 0x80. In this
@@ -758,7 +762,7 @@ of measurement. Definitions for many of these units can be found in {{NIST811}} 
 
 In adition to the units in this table, any of the Unified Code for
 Units of Measure {{UCUM}} in case sensitive form (c/s
-column) can be prepended by the string "UCUM:" and used in SEML.
+column) can be prepended by the string "UCUM:" and used in SenML.
 
 | Symbol | Description                                                                                       | Reference |
 | m      | meter                                                                                             | RFC-AAAA  |
