@@ -607,14 +607,14 @@ strict schema guided EXI processing.
            xmlns:ns1="urn:ietf:params:xml:ns:senml">
   <xs:element name="e">
     <xs:complexType>
-      <xs:attribute name="n" type="xs:string" minOccurs="0"/>
-      <xs:attribute name="u" type="xs:string" minOccurs="0"/>
-      <xs:attribute name="v" type="xs:float" minOccurs="0"/>
-      <xs:attribute name="sv" type="xs:string" minOccurs="0"/>
-      <xs:attribute name="bv" type="xs:boolean" minOccurs="0"/>
-      <xs:attribute name="s" type="xs:decimal" minOccurs="0"/>
-      <xs:attribute name="t" type="xs:int" minOccurs="0"/>
-      <xs:attribute name="ut" type="xs:int" minOccurs="0"/>
+      <xs:attribute name="n" type="xs:string"/>
+      <xs:attribute name="u" type="xs:string"/>
+      <xs:attribute name="v" type="xs:float"/>
+      <xs:attribute name="sv" type="xs:string"/>
+      <xs:attribute name="bv" type="xs:boolean"/>
+      <xs:attribute name="s" type="xs:decimal"/>
+      <xs:attribute name="t" type="xs:int"/>
+      <xs:attribute name="ut" type="xs:int"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="senml">
