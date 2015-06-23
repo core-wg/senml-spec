@@ -44,6 +44,14 @@ author:
   code: '02420'
   country: Finland
   email: jari.arkko@piuha.net
+- ins: A. Keranen
+  name: Ari Keranen
+  org: Ericsson
+  street: ''
+  city: Jorvas
+  code: '02420'
+  country: Finland
+  email: ari.keranen@ericsson.com
 normative:
   RFC2119:
   RFC5226:
