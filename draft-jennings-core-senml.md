@@ -153,7 +153,7 @@ temperature of 23.5 degrees Celsius.
 
 The design goal is to be able to send simple sensor measurements in
 small packets on mesh networks from large numbers of constrained
-devices. Keeping the total size under 80 bytes makes this easy to use on
+devices. Keeping the total size of payload under 80 bytes makes this easy to use on
 a wireless mesh network. It is always difficult to define what small
 code is, but there is a desire to be able to implement this in roughly 1
 KB of flash on a 8 bit microprocessor. Experience with Google power
@@ -253,7 +253,8 @@ Value
 Sum
 : Integrated sum of the
   values over time. Optional. This attribute is in the units specified
-  in the Unit value multiplied by seconds.
+  in the Unit value multiplied by seconds (e.g., velocity ("m/s") 
+  becomes meter ("m")).
 {: vspace='0'}
 
 
@@ -264,8 +265,7 @@ Time
 
 
 Update Time
-: Update time. A
-  time in seconds that represents the maximum time before this sensor
+: A time in seconds that represents the maximum time before this sensor
   will provide an updated reading for a measurement. This can be used
   to detect the failure of sensors or communications path from the
   sensor. Optional.
@@ -592,7 +592,7 @@ be set to the value of "a" indicating the scheme provided in this
 specification. Future revisions to the schema can change this schemaID
 to allow for backwards compatibility. When the data will be transported
 over COAP or HTTP, an EXI Cookie SHOULD NOT be used as it simply makes
-things larger as is redundant to information provided in the
+things larger and is redundant to information provided in the
 Content-Type header.
 
 The following XSD Schema is generated from the RelaxNG and used for
@@ -667,7 +667,7 @@ produce XML SenML file such as:
 <?xml version="1.0" encoding="UTF-8"?>
 <senml xmlns="urn:ietf:params:xml:ns:senml"
        bn="urn:dev:ow:10e2073a01080063" >
-  <e n="temp"  v="23.1" u="degC" />
+  <e n="temp"  v="23.1" u="Cel" />
 </senml>
 ~~~~
 
