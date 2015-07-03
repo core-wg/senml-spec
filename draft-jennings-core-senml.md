@@ -52,6 +52,16 @@ author:
   code: '02420'
   country: Finland
   email: ari.keranen@ericsson.com
+-
+  ins: C. Bormann
+  name: Carsten Bormann
+  org: Universitaet Bremen TZI
+  street: Postfach 330440
+  city: Bremen
+  code: D-28359
+  country: Germany
+  phone: +49-421-218-63921
+  email: cabo@tzi.org
 normative:
   RFC2119:
   RFC5226:
@@ -72,7 +82,8 @@ normative:
       NIST: Special Publication 811
   RFC3688:
   W3C.REC-exi-20110310:
-  RFC4627:
+  RFC7159:
+  RFC7049: cbor
   RFC3023:
   RFC4288:
   RFC2119:
@@ -95,6 +106,7 @@ informative:
   RFC4122:
   RFC0020:
   I-D.arkko-core-dev-urn:
+  I-D.greevenbosch-appsawg-cbor-cddl: cddl
   WADL:
     target: http://java.net/projects/wadl/sources/svn/content/trunk/www/wadl20090202.pdf
     title: Web Application Description Language (WADL)
@@ -143,7 +155,8 @@ meta-data about measurements and devices. The data is structured as a
 single object (with attributes) that contains an array of entries. Each
 entry is an object that has attributes such as a unique identifier for
 the sensor, the time the measurement was made, and the current value.
-Serializations for this data model are defined for JSON {{RFC4627}}, XML and Efficient XML Interchange (EXI) {{W3C.REC-exi-20110310}}.
+Serializations for this data model are defined for JSON {{RFC7159}},
+CBOR {{RFC7049}}, XML, and Efficient XML Interchange (EXI) {{W3C.REC-exi-20110310}}.
 
 For example, the following shows a measurement from a temperature
 gauge encoded in the JSON syntax.
@@ -195,29 +208,21 @@ Base Name
 : This is a string
   that is prepended to the names found in the entries. This attribute
   is optional.
-{: vspace='0'}
-
 
 Base Time
 : A base time that is
   added to the time found in an entry. This attribute is
   optional.
-{: vspace='0'}
-
 
 Base Units
 : A base unit that
   is assumed for all entries, unless otherwise indicated. This
   attribute is optional.
-{: vspace='0'}
-
 
 Version
 : Version number of
   media type format. This attribute is optional positive integer and
   defaults to 1 if not present.
-{: vspace='0'}
-
 
 Measurement or Parameter Entries
 : Array of values for sensor measurements or other
@@ -239,14 +244,10 @@ Name
   Name must uniquely identify the resource. This can be used to
   represent a large array of measurements from the same sensor without
   having to repeat its identifier on every measurement.
-{: vspace='0'}
-
 
 Units
 : Units for a measurement
   value.
-{: vspace='0'}
-
 
 Value
 : Value of the entry.
@@ -255,22 +256,16 @@ Value
   ("v" field for "Value"), Booleans ("bv" for "Boolean Value") and
   Strings ("sv" for "String Value"). Exactly one of these three fields
   MUST appear.
-{: vspace='0'}
-
 
 Sum
 : Integrated sum of the
   values over time. Optional. This attribute is in the units specified
   in the Unit value multiplied by seconds (e.g., velocity ("m/s") 
   becomes meter ("m")).
-{: vspace='0'}
-
 
 Time
 : Time when value was
   recorded. Optional.
-{: vspace='0'}
-
 
 Update Time
 : A time in seconds that represents the maximum time before this sensor
@@ -396,7 +391,7 @@ between U+0001 and U+007F are allowed which corresponds to the
 ASCII {{RFC0020}} subset of UTF-8.
 
 The root contents MUST consist of exactly one JSON object as
-specified by {{RFC4627}}. This object MAY contain a
+specified by {{RFC7159}}. This object MAY contain a
 "bn" attribute with a value of type string. This object MAY contain a
 "bt" attribute with a value of type number. The object MAY contain a
 "bu" attribute with a value of type string. The object MAY contain a
@@ -433,7 +428,6 @@ The following shows a temperature reading taken approximately
 address of 10e2073a01080063:
 
 ~~~~
-
 {"e":[{ "n": "urn:dev:ow:10e2073a01080063", "v":23.5 }]}
 ~~~~
 
@@ -445,7 +439,6 @@ unspecified time. The device has an EUI-64 MAC address of
 0024befffe804ff1.
 
 ~~~~
-
 {"e":[
      { "n": "voltage", "t": 0, "u": "V", "v": 120.1 },
      { "n": "current", "t": 0, "u": "A", "v": 1.2 }],
@@ -458,7 +451,6 @@ at Tue Jun 8 18:01:16 UTC 2010 and at each second for the previous 5
 seconds.
 
 ~~~~
-
 {"e":[
      { "n": "voltage", "u": "V", "v": 120.1 },
      { "n": "current", "t": -5, "v": 1.2 },
@@ -487,7 +479,6 @@ Finally, the device also reports extra data about its battery status
 at a separate time.
 
 ~~~~
-
 {"e":[
      { "v": 20.0, "t": 0 },
      { "sv": "E 24' 30.621", "u": "lon", "t": 0 },
@@ -519,7 +510,6 @@ and has gotten two separate values as a result, a temperature and
 humidity measurement.
 
 ~~~~
-
 {"e":[
      { "n": "temperature", "v": 27.2, "u": "Cel" },
      { "n": "humidity", "v": 80, "u": "%RH" }],
@@ -529,7 +519,72 @@ humidity measurement.
 }
 ~~~~
 
+# CBOR Representation (application/senml+cbor)
 
+The CBOR {{RFC7049}} representation is equivalent to the JSON representation, with
+the following changes:
+
+* For compactness, the CBOR representation uses integers for the map
+  keys defined in {{labels}}).  This table is conclusive, i.e., there
+  is no intention to define any additional integer map keys; any
+  extensions will use string map keys.
+
+* For JSON Numbers, the CBOR representation can use integers, floating
+  point numbers, or decimal fractions (CBOR Tag 4); the common
+  limitations of JSON implementations are not relevant for these.  For
+  the version number, however, only an unsigned integer is allowed.
+
+| Name                      | JSON label | CBOR label |
+| Version                   | ver        |         -1 |
+| Measurement or Parameters | e          |         -2 |
+| Base Name                 | bn         |         -3 |
+| Base Time                 | bt         |         -4 |
+| Base Units                | bu         |         -5 |
+| Name                      | n          |          0 |
+| Units                     | u          |          1 |
+| Value                     | v          |          2 |
+| String Value              | sv         |          3 |
+| Boolean Value             | bv         |          4 |
+| Value Sum                 | s          |          5 |
+| Time                      | t          |          6 |
+| Update Time               | ut         |          7 |
+{: #labels cols="r l l" title="CBOR representation: integers for map keys"}
+
+For reference, the CBOR representation can be described with the CDDL
+{{-cddl}} specification in {{senmlcddl}}.
+
+~~~~ CDDL
+SenML = {
+      ? bn => tstr,       ; Base Name
+      ? bt => numeric,    ; Base Time
+      ? bu => tstr,       ; Base Units
+      ? ver => uint,      ; Version
+      * tstr => any,      ; (Extension)
+      e => [+ meas],      ; Measurements
+}
+
+meas = {
+      ? n => tstr,        ; Name
+      ? u => tstr,        ; Units
+      ? ( v => numeric // ; Numeric Value
+          sv => tstr //   ; String Value
+          bv => bool )    ; Boolean Value
+      ? s => numeric,     ; Value Sum
+      ? t => numeric,     ; Time
+      ? ut => numeric,    ; Update Time
+}
+
+numeric = number / decfrac
+
+ver = -1
+e   = -2     v   =  2
+bn  = -3     sv  =  3
+bt  = -4     bv  =  4
+bu  = -5     s   =  5
+n   =  0     t   =  6
+u   =  1     ut  =  7
+~~~~
+{: #senmlcddl title="CDDL specification for CBOR SenML"}
 
 
 # XML Representation (application/senml+xml) {#sec-xml-examle}
@@ -539,7 +594,6 @@ this section. The following example shows an XML example for the same
 sensor measurement as in {{co-ex}}.
 
 ~~~~
-
 <?xml version="1.0" encoding="UTF-8"?>
 <senml xmlns="urn:ietf:params:xml:ns:senml"
        bn="urn:dev:mac:0024befffe804ff1/"
@@ -558,7 +612,6 @@ sensor measurement as in {{co-ex}}.
 The RelaxNG schema for the XML is:
 
 ~~~~
-
 default namespace = "urn:ietf:params:xml:ns:senml"
 namespace rng = "http://relaxng.org/ns/structure/1.0"
 e = element e {
@@ -607,7 +660,6 @@ The following XSD Schema is generated from the RelaxNG and used for
 strict schema guided EXI processing.
 
 ~~~~
-
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            elementFormDefault="qualified"
@@ -644,7 +696,6 @@ following XML example. Note that while this example is similar to the
 first example in {{co-ex}} in JSON format.
 
 ~~~~
-
 <?xml version="1.0" encoding="UTF-8"?>
 <senml xmlns="urn:ietf:params:xml:ns:senml"
        bn="urn:dev:ow:10e2073a01080063" >
@@ -671,7 +722,6 @@ tenths of degrees Celsius over a range of 0.0 to 55.0. = It would
 produce XML SenML file such as:
 
 ~~~~
-
 <?xml version="1.0" encoding="UTF-8"?>
 <senml xmlns="urn:ietf:params:xml:ns:senml"
        bn="urn:dev:ow:10e2073a01080063" >
@@ -683,7 +733,6 @@ The compressed form, using the byte alignment option of EXI, for the
 above XML is the following:
 
 ~~~~
-
 00000000  a00048806c200200 1d75726e3a646576 |..H.l ...urn:dev|
 00000010  3a6f773a31306532 3037336130313038 |:ow:10e2073a0108|
 00000020  3030363303010674 656d700306646567 |0063...temp..deg|
@@ -772,56 +821,61 @@ In adition to the units in this table, any of the Unified Code for
 Units of Measure {{UCUM}} in case sensitive form (c/s
 column) can be prepended by the string "UCUM:" and used in SenML.
 
-| Symbol | Description                                                                                       | Reference |
-| m      | meter                                                                                             | RFC-AAAA  |
-| kg     | kilogram                                                                                          | RFC-AAAA  |
-| s      | second                                                                                            | RFC-AAAA  |
-| A      | ampere                                                                                            | RFC-AAAA  |
-| K      | kelvin                                                                                            | RFC-AAAA  |
-| cd     | candela                                                                                           | RFC-AAAA  |
-| mol    | mole                                                                                              | RFC-AAAA  |
-| Hz     | hertz                                                                                             | RFC-AAAA  |
-| rad    | radian                                                                                            | RFC-AAAA  |
-| sr     | steradian                                                                                         | RFC-AAAA  |
-| N      | newton                                                                                            | RFC-AAAA  |
-| Pa     | pascal                                                                                            | RFC-AAAA  |
-| J      | joule                                                                                             | RFC-AAAA  |
-| W      | watt                                                                                              | RFC-AAAA  |
-| C      | coulomb                                                                                           | RFC-AAAA  |
-| V      | volt                                                                                              | RFC-AAAA  |
-| F      | farad                                                                                             | RFC-AAAA  |
-| Ohm    | ohm                                                                                               | RFC-AAAA  |
-| S      | siemens                                                                                           | RFC-AAAA  |
-| Wb     | weber                                                                                             | RFC-AAAA  |
-| T      | tesla                                                                                             | RFC-AAAA  |
-| H      | henry                                                                                             | RFC-AAAA  |
-| Cel    | degrees Celsius                                                                                   | RFC-AAAA  |
-| lm     | lumen                                                                                             | RFC-AAAA  |
-| lx     | lux                                                                                               | RFC-AAAA  |
-| Bq     | becquerel                                                                                         | RFC-AAAA  |
-| Gy     | gray                                                                                              | RFC-AAAA  |
-| Sv     | sievert                                                                                           | RFC-AAAA  |
-| kat    | katal                                                                                             | RFC-AAAA  |
-| pH     | pH acidity                                                                                        | RFC-AAAA  |
-| %      | Value of a switch. A value of 0.0 indicates the switch is off while 100.0 indicates on.           | RFC-AAAA  |
-| count  | counter value                                                                                     | RFC-AAAA  |
-| %RH    | Relative Humidity                                                                                 | RFC-AAAA  |
-| m2     | area                                                                                              | RFC-AAAA  |
-| l      | volume in liters                                                                                  | RFC-AAAA  |
-| m/s    | velocity                                                                                          | RFC-AAAA  |
-| m/s2   | acceleration                                                                                      | RFC-AAAA  |
-| l/s    | flow rate in liters per second                                                                    | RFC-AAAA  |
-| W/m2   | irradiance                                                                                        | RFC-AAAA  |
-| cd/m2  | luminance                                                                                         | RFC-AAAA  |
-| Bspl   | bel sound pressure level                                                                          | RFC-AAAA  |
-| bit/s  | bits per second                                                                                   | RFC-AAAA  |
-| lat    | degrees latitude. Assumed to be in WGS84 unless another reference frame is known for the sensor.  | RFC-AAAA  |
-| lon    | degrees longitude. Assumed to be in WGS84 unless another reference frame is known for the sensor. | RFC-AAAA  |
-| %EL    | remaining battery energy level in percents                                                        | RFC-AAAA  |
-| EL     | remaining battery energy level in seconds                                                         | RFC-AAAA  |
-| beet/m | Heart rate in beets per minute                                                                    | RFC-AAAA  |
-| beets  | Cumulative number of heart beats                                                                  | RFC-AAAA  |
+| Symbol | Description                                | Reference |
+| m      | meter                                      | RFC-AAAA  |
+| kg     | kilogram                                   | RFC-AAAA  |
+| s      | second                                     | RFC-AAAA  |
+| A      | ampere                                     | RFC-AAAA  |
+| K      | kelvin                                     | RFC-AAAA  |
+| cd     | candela                                    | RFC-AAAA  |
+| mol    | mole                                       | RFC-AAAA  |
+| Hz     | hertz                                      | RFC-AAAA  |
+| rad    | radian                                     | RFC-AAAA  |
+| sr     | steradian                                  | RFC-AAAA  |
+| N      | newton                                     | RFC-AAAA  |
+| Pa     | pascal                                     | RFC-AAAA  |
+| J      | joule                                      | RFC-AAAA  |
+| W      | watt                                       | RFC-AAAA  |
+| C      | coulomb                                    | RFC-AAAA  |
+| V      | volt                                       | RFC-AAAA  |
+| F      | farad                                      | RFC-AAAA  |
+| Ohm    | ohm                                        | RFC-AAAA  |
+| S      | siemens                                    | RFC-AAAA  |
+| Wb     | weber                                      | RFC-AAAA  |
+| T      | tesla                                      | RFC-AAAA  |
+| H      | henry                                      | RFC-AAAA  |
+| Cel    | degrees Celsius                            | RFC-AAAA  |
+| lm     | lumen                                      | RFC-AAAA  |
+| lx     | lux                                        | RFC-AAAA  |
+| Bq     | becquerel                                  | RFC-AAAA  |
+| Gy     | gray                                       | RFC-AAAA  |
+| Sv     | sievert                                    | RFC-AAAA  |
+| kat    | katal                                      | RFC-AAAA  |
+| pH     | pH acidity                                 | RFC-AAAA  |
+| %      | Value of a switch (note 1)                 | RFC-AAAA  |
+| count  | counter value                              | RFC-AAAA  |
+| %RH    | Relative Humidity                          | RFC-AAAA  |
+| m2     | area                                       | RFC-AAAA  |
+| l      | volume in liters                           | RFC-AAAA  |
+| m/s    | velocity                                   | RFC-AAAA  |
+| m/s2   | acceleration                               | RFC-AAAA  |
+| l/s    | flow rate in liters per second             | RFC-AAAA  |
+| W/m2   | irradiance                                 | RFC-AAAA  |
+| cd/m2  | luminance                                  | RFC-AAAA  |
+| Bspl   | bel sound pressure level                   | RFC-AAAA  |
+| bit/s  | bits per second                            | RFC-AAAA  |
+| lat    | degrees latitude (note 2)                  | RFC-AAAA  |
+| lon    | degrees longitude (note 2)                 | RFC-AAAA  |
+| %EL    | remaining battery energy level in percents | RFC-AAAA  |
+| EL     | remaining battery energy level in seconds  | RFC-AAAA  |
+| beet/m | Heart rate in beets per minute             | RFC-AAAA  |
+| beets  | Cumulative number of heart beats           | RFC-AAAA  |
 {: cols="r l l"}
+
+* Note 1: A value of 0.0 indicates the switch is off while 100.0
+  indicates on.
+* Note 2: Assumed to be in WGS84 unless another reference frame is
+  known for the sensor.
 
 New entries can be added to the registration by either Expert
 Review or IESG Approval as defined in {{RFC5226}}.
@@ -896,7 +950,7 @@ Required parameters: none
 Optional parameters: none
 
 Encoding considerations: Must be encoded as using a subset of the
-encoding allowed in {{RFC4627}}. Specifically,
+encoding allowed in {{RFC7159}}. Specifically,
 only the ASCII{{RFC0020}} subset of the UTF-8
 characters are allowed. This simplifies implementation of very
 simple system and does not impose any significant limitations as all
@@ -918,6 +972,49 @@ JSON key value pairs that they do not understand. This allows
 backwards compatibility extensions to this specification. The "ver"
 field can be used to ensure the receiver supports a minimal level of
 functionality needed by the creator of the JSON object.
+
+Published specification: RFC-AAAA
+
+Applications that use this media type: The type is used by
+systems that report electrical power usage and environmental
+information such as temperature and humidity. It can be used for a
+wide range of sensor reporting systems.
+
+Additional information:
+
+Magic number(s): none
+
+File extension(s): senml
+
+Macintosh file type code(s): none
+
+Person & email address to contact for further information:
+Cullen Jennings \<fluffy@iii.ca>
+
+Intended usage: COMMON
+
+Restrictions on usage: None
+
+Author: Cullen Jennings \<fluffy@iii.ca>
+
+Change controller: IESG
+
+
+### senml+cbor Media Type Registration
+
+Type name: application
+
+Subtype name: senml+cbor
+
+Required parameters: none
+
+Optional parameters: none
+
+Encoding considerations: TBD
+
+Security considerations: TBD
+
+Interoperability considerations: TBD
 
 Published specification: RFC-AAAA
 
@@ -1042,8 +1139,8 @@ XML: N/A, the requested URIs are XML namespaces
 
 # Security Considerations {#sec-sec}
 
-See {{sec-privacy}}.Further discussion of security
-proprieties can be found in {{sec-iana-media}}.
+See {{sec-privacy}}. Further discussion of security
+properties can be found in {{sec-iana-media}}.
 
 
 # Privacy Considerations {#sec-privacy}
@@ -1060,8 +1157,7 @@ information about the source of the data.
 # Acknowledgement
 
 We would like to thank Lisa Dusseault, Joe Hildebrand, Lyndsay
-Campbell, Martin Thomson, John Klensin, Bjoern Hoehrmann, and Carsten
-Bormann for their review comments.
+Campbell, Martin Thomson, John Klensin, and Bjoern Hoehrmann for their review comments.
 
 
 --- back
