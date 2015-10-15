@@ -1,7 +1,7 @@
 ---
 stand_alone: true
 ipr: trust200902
-docname: draft-jennings-core-senml-latest
+docname: draft-jennings-core-senml-01
 cat: std
 pi:
   toc: 'yes'
@@ -13,9 +13,11 @@ pi:
   colonspace: 'yes'
   rfcedstyle: 'no'
   tocdepth: '4'
-title: Media Types for Sensor Markup Language (SENML)
+title: |-
+  Media Types for Sensor Markup Language
+      (SENML)
 abbrev: Sensor Markup
-area: APPS
+area: ART
 author:
 - ins: C. Jennings
   name: Cullen Jennings
@@ -33,7 +35,7 @@ author:
   street: 150 Rose Orchard
   city: San Jose
   code: '95134'
-  country: FINLAND # Oh, really?
+  country: USA
   phone: "+1-408-203-9434"
   email: zach.shelby@arm.com
 - ins: J. Arkko
@@ -52,23 +54,14 @@ author:
   code: '02420'
   country: Finland
   email: ari.keranen@ericsson.com
--
-  ins: C. Bormann
-  name: Carsten Bormann
-  org: Universitaet Bremen TZI
-  street: Postfach 330440
-  city: Bremen
-  code: D-28359
-  country: Germany
-  phone: +49-421-218-63921
-  email: cabo@tzi.org
 normative:
-  RFC2119:
-  RFC5226:
+  RFC5226: 
   BIPM:
     title: The International System of Units (SI)
     author:
-    - org: Bureau International des Poids et Mesures
+    - org: |-
+        Bureau International des Poids et
+                    Mesures
     date: 2006
     seriesinfo:
       "8th": edition
@@ -80,14 +73,13 @@ normative:
     date: 2008
     seriesinfo:
       NIST: Special Publication 811
-  RFC3688:
-  W3C.REC-exi-20110310:
-  RFC7159:
-  RFC7049: cbor
-  RFC3023:
-  RFC4288:
-  RFC2119:
-  IEEE.754.1985:
+  RFC3688: 
+  W3C.REC-exi-20110310: 
+  RFC7159: 
+  RFC7303: 
+  RFC6838: 
+  RFC2119: 
+  IEEE.754.1985: 
   UCUM:
     title: The Unified Code for Units of Measure (UCUM)
     author:
@@ -96,17 +88,17 @@ normative:
     date: 2013
     target: http://unitsofmeasure.org/ucum.html
     seriesinfo:
-      Regenstrief: Institute and Indiana University School of Informatics
+      Regenstrief Institute and Indiana University School of: Informatics
+  RFC7049: 
 informative:
-  RFC2141:
-  RFC3986:
-  RFC7252:
-  RFC6690:
-  RFC5952:
-  RFC4122:
-  RFC0020:
-  I-D.arkko-core-dev-urn:
-  I-D.greevenbosch-appsawg-cbor-cddl: cddl
+  RFC2141: 
+  RFC3986: 
+  RFC7252: 
+  RFC6690: 
+  RFC5952: 
+  RFC4122: 
+  RFC0020: 
+  I-D.arkko-core-dev-urn: 
   WADL:
     target: http://java.net/projects/wadl/sources/svn/content/trunk/www/wadl20090202.pdf
     title: Web Application Description Language (WADL)
@@ -118,13 +110,15 @@ informative:
 
 --- abstract
 
-This specification defines media types for representing simple sensor
-measurements and device parameters in the Sensor Markup Language
-(SenML). Representations are defined in JavaScript Object Notation
-(JSON), eXtensible Markup Language (XML) and Efficient XML Interchange
-(EXI), which share the common SenML data model. A simple sensor, such as
-a temperature sensor, could use this media type in protocols such as
-HTTP or CoAP to transport the measurements of the sensor or to be
+This specification defines media types for representing
+simple sensor measurements and device parameters in the Sensor
+Markup Language (SenML). Representations are defined in
+JavaScript Object Notation (JSON), Concise Binary Object
+Representation (CBOR), eXtensible Markup Language (XML), and
+Efficient XML Interchange (EXI), which share the common SenML
+data model. A simple sensor, such as a temperature sensor, could
+use this media type in protocols such as HTTP or CoAP to
+transport the measurements of the sensor or to be
 configured.
 
 --- middle
@@ -151,12 +145,12 @@ sensor is requested as a resource representation (GET
 /sensor/temperature).
 
 SenML is defined by a data model for measurements and simple
-meta-data about measurements and devices. The data is structured as a
-single object (with attributes) that contains an array of entries. Each
-entry is an object that has attributes such as a unique identifier for
-the sensor, the time the measurement was made, and the current value.
-Serializations for this data model are defined for JSON {{RFC7159}},
-CBOR {{RFC7049}}, XML, and Efficient XML Interchange (EXI) {{W3C.REC-exi-20110310}}.
+meta-data about measurements and devices. The data is structured
+as a single object (with attributes) that contains an array of
+entries. Each entry is an object that has attributes such as a
+unique identifier for the sensor, the time the measurement was
+made, and the current value.  Serializations for this data model
+are defined for JSON {{RFC7159}}, CBOR {{RFC7049}}, XML, and Efficient XML Interchange (EXI) {{W3C.REC-exi-20110310}}.
 
 For example, the following shows a measurement from a temperature
 gauge encoded in the JSON syntax.
@@ -172,20 +166,22 @@ temperature of 23.5 degrees Celsius.
 
 # Requirements and Design Goals
 
-The design goal is to be able to send simple sensor measurements in
-small packets on mesh networks from large numbers of constrained
-devices. Keeping the total size of payload under 80 bytes makes this easy to use on
-a wireless mesh network. It is always difficult to define what small
-code is, but there is a desire to be able to implement this in roughly 1
-KB of flash on a 8 bit microprocessor. Experience with Google power
-meter and large scale deployments has indicated that the solution needs
-to support allowing multiple measurements to be batched into a single
-HTTP or CoAP request. This "batch" upload capability allows the server
-side to efficiently support a large number of devices. It also
-conveniently supports batch transfers from proxies and storage devices,
-even in situations where the sensor itself sends just a single data item
-at a time. The multiple measurements could be from multiple related
-sensors or from the same sensor but at different times.
+The design goal is to be able to send simple sensor
+measurements in small packets on mesh networks from large
+numbers of constrained devices. Keeping the total size of
+payload under 80 bytes makes this easy to use on a wireless mesh
+network. It is always difficult to define what small code is,
+but there is a desire to be able to implement this in roughly 1
+KB of flash on a 8 bit microprocessor. Experience with Google
+power meter and large scale deployments has indicated that the
+solution needs to support allowing multiple measurements to be
+batched into a single HTTP or CoAP request. This "batch" upload
+capability allows the server side to efficiently support a large
+number of devices. It also conveniently supports batch transfers
+from proxies and storage devices, even in situations where the
+sensor itself sends just a single data item at a time. The
+multiple measurements could be from multiple related sensors or
+from the same sensor but at different times.
 
 
 # Terminology
@@ -226,9 +222,9 @@ Version
 
 Measurement or Parameter Entries
 : Array of values for sensor measurements or other
-  generic parameters (such as configuration parameters). If present
-  there must be at least one entry in the array.
-{: vspace='0'}
+generic parameters (such as configuration parameters). If present
+there must be at least one entry in the array.
+{: vspace='1'}
 
 
 Each array entry contains several attributes, some of which are
@@ -259,9 +255,9 @@ Value
 
 Sum
 : Integrated sum of the
-  values over time. Optional. This attribute is in the units specified
-  in the Unit value multiplied by seconds (e.g., velocity ("m/s") 
-  becomes meter ("m")).
+values over time. Optional. This attribute is in the units specified
+in the Unit value multiplied by seconds.
+
 
 Time
 : Time when value was
@@ -272,7 +268,7 @@ Update Time
   will provide an updated reading for a measurement. This can be used
   to detect the failure of sensors or communications path from the
   sensor. Optional.
-{: vspace='0'}
+{: vspace='1'}
 
 
 The SenML format can be extended with further custom attributes
@@ -290,8 +286,7 @@ defined in an RFC that updates this specification or it successors.
 The Name value is concatenated to the Base Name value to get the name
 of the sensor. The resulting name needs to uniquely identify and
 differentiate the sensor from all others. If the object is a
-representation resulting from the request of a URI {{RFC3986}}, then
-in the absence of the Base Name
+representation resulting from the request of a URI {{RFC3986}}, then in the absence of the Base Name
 attribute, this URI is used as the default value of Base Name. Thus in
 this case the Name field needs to be unique for that URI, for example an
 index or subresource name of sensors handled by the URI.
@@ -302,17 +297,14 @@ represented as URIs or URNs {{RFC2141}}. One way to
 create a unique name is to include a EUI-48 or EUI-64 identifier (A MAC
 address) or some other bit string that is guaranteed uniqueness (such as
 a 1-wire address) that is assigned to the device. Some of the examples
-in this draft use the device URN type as specified in
-{{I-D.arkko-core-dev-urn}}. UUIDs {{RFC4122}} are another way to
-generate a unique name.
+in this draft use the device URN type as specified in {{I-D.arkko-core-dev-urn}}. UUIDs {{RFC4122}} are another way to generate a unique name.
 
 The resulting concatenated name MUST consist only of characters out
 of the set "A" to "Z", "a" to "z", "0" to "9", "-", ":", ".", or "_" and
 it MUST start with a character out of the set "A" to "Z", "a" to "z", or
 "0" to "9". This restricted character set was chosen so that these names
 can be directly used as in other types of URI including segments of an
-HTTP path with no special encoding. {{RFC5952}} contains advice on
-encoding an IPv6 address in a name.
+HTTP path with no special encoding. {{RFC5952}} contains advice on encoding an IPv6 address in a name.
 
 If either the Base Time or Time value is missing, the missing
 attribute is considered to have a value of zero. The Base Time and Time
@@ -370,7 +362,7 @@ Root variables:
 | Base Units                | bu   | Number |
 | Version                   | ver  | Number |
 | Measurement or Parameters | e    | Array  |
-{: cols="r l l"}
+{:cols='r l l'}
 
 Measurement or Parameter Entries:
 
@@ -383,7 +375,11 @@ Measurement or Parameter Entries:
 | Value Sum     | s    | Floating point |
 | Time          | t    | Number         |
 | Update Time   | ut   | Number         |
-{: cols="r l l"}
+{:cols='r l l'}
+
+It is RECOMMENDED that in textual JSON format, when present,
+the attributes appear in the above order. However,
+implementations MUST be able to process them in any order.
 
 All of the data is UTF-8, but since this is for machine to machine
 communications on constrained systems, only characters with code points
@@ -439,10 +435,10 @@ unspecified time. The device has an EUI-64 MAC address of
 0024befffe804ff1.
 
 ~~~~
-{"e":[
+{"bn": "urn:dev:mac:0024befffe804ff1/",
+ "e":[
      { "n": "voltage", "t": 0, "u": "V", "v": 120.1 },
-     { "n": "current", "t": 0, "u": "A", "v": 1.2 }],
- "bn": "urn:dev:mac:0024befffe804ff1/"
+     { "n": "current", "t": 0, "u": "A", "v": 1.2 }]
 }
 ~~~~
 
@@ -450,20 +446,56 @@ The next example is similar to the above one, but shows current
 at Tue Jun 8 18:01:16 UTC 2010 and at each second for the previous 5
 seconds.
 
+
 ~~~~
-{"e":[
+{"bn": "urn:dev:mac:0024befffe804ff1/",
+ "bt": 1276020076,
+ "bu": "A",
+ "ver": 1,
+ "e":[
      { "n": "voltage", "u": "V", "v": 120.1 },
      { "n": "current", "t": -5, "v": 1.2 },
      { "n": "current", "t": -4, "v": 1.30 },
      { "n": "current", "t": -3, "v": 0.14e1 },
      { "n": "current", "t": -2, "v": 1.5 },
      { "n": "current", "t": -1, "v": 1.6 },
-     { "n": "current", "t": 0,   "v": 1.7 }],
- "bn": "urn:dev:mac:0024befffe804ff1/",
- "bt": 1276020076,
- "ver": 1,
- "bu": "A"
+     { "n": "current", "t": 0,   "v": 1.7 }]
 }
+~~~~
+
+Note that in some usage scenarios of SenML the
+implementations MAY store or transmit SenML in a stream-like
+fashion, where data is collected over time and continuously
+added to the object. This mode of operation is optional, but
+systems or protocols using SenML in this fashion MUST
+specify that they are doing this. In this situation the
+SenML stream can be sent and received in a partial fashion,
+i.e., a measurement entry can be read as soon as it is
+received and only not when the entire SenML object is
+complete.
+
+For instance, the following stream of measurements may be
+sent from the producer of a SenML object to the consumer of
+that SenML object, and each measurement object may be
+reported at the time it arrives:
+
+
+~~~~
+{"bn": "http://[2001:db8::1]",
+ "bt": 1320067464,
+ "bu": "%RH",
+ "e":[
+     { "v": 21.2, "t": 0 },
+     { "v": 21.3, "t": 10 },
+     { "v": 21.4, "t": 20 },
+     { "v": 21.4, "t": 30 },
+     { "v": 21.5, "t": 40 },
+     { "v": 21.5, "t": 50 },
+     { "v": 21.5, "t": 60 },
+     { "v": 21.6, "t": 70 },
+     { "v": 21.7, "t": 80 },
+     { "v": 21.5, "t": 90 },
+...
 ~~~~
 
 
@@ -471,15 +503,19 @@ seconds.
 
 The following example shows humidity measurements from a mobile
 device with an IPv6 address 2001:db8::1, starting at Mon Oct 31
-13:24:24 UTC 2011. The device also provide position data, which is
+13:24:24 UTC 2011. The device also provides position data, which is
 provided in the same measurement or parameter array as separate
 entries. Note time is used to for correlating data that belongs
 together, e.g., a measurement and a parameter associated with it.
 Finally, the device also reports extra data about its battery status
 at a separate time.
 
+
 ~~~~
-{"e":[
+{"bn": "http://[2001:db8::1]",
+ "bt": 1320067464,
+ "bu": "%RH",
+ "e":[
      { "v": 20.0, "t": 0 },
      { "sv": "E 24' 30.621", "u": "lon", "t": 0 },
      { "sv": "N 60' 7.965", "u": "lat", "t": 0 },
@@ -492,10 +528,7 @@ at a separate time.
      { "v": 98.0, "u": "%EL", "t": 150 },
      { "v": 21.2, "t": 180 },
      { "sv": "E 24' 30.628", "u": "lon", "t": 180 },
-     { "sv": "N 60' 7.967", "u": "lat", "t": 180 }],
- "bn": "http://[2001:db8::1]",
- "bt": 1320067464,
- "bu": "%RH"
+     { "sv": "N 60' 7.967", "u": "lat", "t": 180 }]
 }
 ~~~~
 
@@ -509,30 +542,38 @@ operation on http://[2001:db8::2] at Mon Oct 31 16:27:09 UTC 2011,
 and has gotten two separate values as a result, a temperature and
 humidity measurement.
 
+
 ~~~~
-{"e":[
-     { "n": "temperature", "v": 27.2, "u": "Cel" },
-     { "n": "humidity", "v": 80, "u": "%RH" }],
- "bn": "http://[2001:db8::2]/",
+{"bn": "http://[2001:db8::2]/",
  "bt": 1320078429,
- "ver": 1
+ "ver": 1,
+ "e":[
+     { "n": "temperature", "v": 27.2, "u": "Cel" },
+     { "n": "humidity", "v": 80, "u": "%RH" }]
 }
 ~~~~
 
-# CBOR Representation (application/senml+cbor)
 
-The CBOR {{RFC7049}} representation is equivalent to the JSON representation, with
-the following changes:
 
-* For compactness, the CBOR representation uses integers for the map
-  keys defined in {{labels}}).  This table is conclusive, i.e., there
-  is no intention to define any additional integer map keys; any
-  extensions will use string map keys.
 
-* For JSON Numbers, the CBOR representation can use integers, floating
-  point numbers, or decimal fractions (CBOR Tag 4); the common
-  limitations of JSON implementations are not relevant for these.  For
-  the version number, however, only an unsigned integer is allowed.
+# CBOR Representation (application/senml+cbor) {#sec-cbor}
+
+The CBOR {{RFC7049}} representation is equivalent to the
+JSON representation, with the following changes:
+
+* For compactness, the CBOR representation uses integers for
+the map keys defined in {{tbl-cbor-labels}}. This
+table is conclusive, i.e., there is no intention to define any
+additional integer map keys; any extensions will use string
+map keys.
+
+* For JSON Numbers, the CBOR representation can use
+integers, floating point numbers, or decimal fractions (CBOR
+Tag 4); the common limitations of JSON implementations are not
+relevant for these. For the version number, however, only an
+unsigned integer is allowed.
+
+
 
 | Name                      | JSON label | CBOR label |
 | Version                   | ver        |         -1 |
@@ -548,43 +589,8 @@ the following changes:
 | Value Sum                 | s          |          5 |
 | Time                      | t          |          6 |
 | Update Time               | ut         |          7 |
-{: #labels cols="r l l" title="CBOR representation: integers for map keys"}
+{: #tbl-cbor-labels cols="r l r" title="CBOR representation: integers for map keys"}
 
-For reference, the CBOR representation can be described with the CDDL
-{{-cddl}} specification in {{senmlcddl}}.
-
-~~~~ CDDL
-SenML = {
-      ? bn => tstr,       ; Base Name
-      ? bt => numeric,    ; Base Time
-      ? bu => tstr,       ; Base Units
-      ? ver => uint,      ; Version
-      * tstr => any,      ; (Extension)
-      e => [+ meas],      ; Measurements
-}
-
-meas = {
-      ? n => tstr,        ; Name
-      ? u => tstr,        ; Units
-      ? ( v => numeric // ; Numeric Value
-          sv => tstr //   ; String Value
-          bv => bool )    ; Boolean Value
-      ? s => numeric,     ; Value Sum
-      ? t => numeric,     ; Time
-      ? ut => numeric,    ; Update Time
-}
-
-numeric = number / decfrac
-
-ver = -1
-e   = -2     v   =  2
-bn  = -3     sv  =  3
-bt  = -4     bv  =  4
-bu  = -5     s   =  5
-n   =  0     t   =  6
-u   =  1     ut  =  7
-~~~~
-{: #senmlcddl title="CDDL specification for CBOR SenML"}
 
 
 # XML Representation (application/senml+xml) {#sec-xml-examle}
@@ -592,6 +598,7 @@ u   =  1     ut  =  7
 A SenML object can also be represented in XML format as defined in
 this section. The following example shows an XML example for the same
 sensor measurement as in {{co-ex}}.
+
 
 ~~~~
 <?xml version="1.0" encoding="UTF-8"?>
@@ -611,9 +618,11 @@ sensor measurement as in {{co-ex}}.
 
 The RelaxNG schema for the XML is:
 
+
 ~~~~
 default namespace = "urn:ietf:params:xml:ns:senml"
 namespace rng = "http://relaxng.org/ns/structure/1.0"
+
 e = element e {
   attribute n { xsd:string }?,
   attribute u { xsd:string }?,
@@ -625,6 +634,7 @@ e = element e {
   attribute ut { xsd:int }?,
   p*
 }
+
 senml =
   element senml {
     attribute bn { xsd:string }?,
@@ -633,6 +643,7 @@ senml =
     attribute ver { xsd:int }?,
     e*
   }
+
 start = senml
 ~~~~
 
@@ -652,12 +663,13 @@ The EXI header option MUST be included. An EXI schemaID options MUST
 be set to the value of "a" indicating the scheme provided in this
 specification. Future revisions to the schema can change this schemaID
 to allow for backwards compatibility. When the data will be transported
-over COAP or HTTP, an EXI Cookie SHOULD NOT be used as it simply makes
+over CoAP or HTTP, an EXI Cookie SHOULD NOT be used as it simply makes
 things larger and is redundant to information provided in the
 Content-Type header.
 
 The following XSD Schema is generated from the RelaxNG and used for
 strict schema guided EXI processing.
+
 
 ~~~~
 <?xml version="1.0" encoding="UTF-8"?>
@@ -665,6 +677,7 @@ strict schema guided EXI processing.
            elementFormDefault="qualified"
            targetNamespace="urn:ietf:params:xml:ns:senml"
            xmlns:ns1="urn:ietf:params:xml:ns:senml">
+
   <xs:element name="e">
     <xs:complexType>
       <xs:attribute name="n" type="xs:string"/>
@@ -695,6 +708,7 @@ The following shows a hexdump of the EXI produced from encoding the
 following XML example. Note that while this example is similar to the
 first example in {{co-ex}} in JSON format.
 
+
 ~~~~
 <?xml version="1.0" encoding="UTF-8"?>
 <senml xmlns="urn:ietf:params:xml:ns:senml"
@@ -705,6 +719,7 @@ first example in {{co-ex}} in JSON format.
 ~~~~
 
 Which compresses to the following displayed in hexdump:
+
 
 ~~~~
 00000000  a0 30 0d 85 01 d7 57 26  e3 a6 46 57 63 a6 f7 73
@@ -718,14 +733,14 @@ The above example used the bit packed form of EXI but it is also
 possible to use a byte packed form of EXI which can makes it easier for
 a simple sensor to produce valid EXI without really implementing EXI.
 Consider the example of a temperature sensor that produces a value in
-tenths of degrees Celsius over a range of 0.0 to 55.0. = It would
-produce XML SenML file such as:
+tenths of degrees Celsius over a range of 0.0 to 55.0. It would
+produce an XML SenML file such as:
 
 ~~~~
 <?xml version="1.0" encoding="UTF-8"?>
 <senml xmlns="urn:ietf:params:xml:ns:senml"
        bn="urn:dev:ow:10e2073a01080063" >
-  <e n="temp"  v="23.1" u="Cel" />
+  <e n="temp" v="23.1" u="Cel" />
 </senml>
 ~~~~
 
@@ -733,10 +748,10 @@ The compressed form, using the byte alignment option of EXI, for the
 above XML is the following:
 
 ~~~~
-00000000  a00048806c200200 1d75726e3a646576 |..H.l ...urn:dev|
+00000000  a054c9006c200000 1d75726e3a646576 |.T..l ...urn:dev|
 00000010  3a6f773a31306532 3037336130313038 |:ow:10e2073a0108|
-00000020  3030363303010674 656d700306646567 |0063...temp..deg|
-00000030  430100e701010001 02               |C........|
+00000020  3030363304010674 656d70030543656c |0063...temp..Cel|
+00000030  0100e70101000102                  |........|
 ~~~~
 
 A small temperature sensor devices that only generates this one EXI
@@ -817,7 +832,7 @@ IANA will create a registry of unit symbols. The primary purpose of
 this registry is to make sure that symbols uniquely map to give type
 of measurement. Definitions for many of these units can be found in {{NIST811}} and {{BIPM}}.
 
-In adition to the units in this table, any of the Unified Code for
+In addition to the units in this table, any of the Unified Code for
 Units of Measure {{UCUM}} in case sensitive form (c/s
 column) can be prepended by the string "UCUM:" and used in SenML.
 
@@ -868,9 +883,9 @@ column) can be prepended by the string "UCUM:" and used in SenML.
 | lon    | degrees longitude (note 2)                 | RFC-AAAA  |
 | %EL    | remaining battery energy level in percents | RFC-AAAA  |
 | EL     | remaining battery energy level in seconds  | RFC-AAAA  |
-| beet/m | Heart rate in beets per minute             | RFC-AAAA  |
-| beets  | Cumulative number of heart beats           | RFC-AAAA  |
-{: cols="r l l"}
+| beat/m | Heart rate in beats per minute             | RFC-AAAA  |
+| beats  | Cumulative number of heart beats           | RFC-AAAA  |
+{:cols='r l l'}
 
 * Note 1: A value of 0.0 indicates the switch is off while 100.0
   indicates on.
@@ -881,6 +896,8 @@ New entries can be added to the registration by either Expert
 Review or IESG Approval as defined in {{RFC5226}}.
 Experts should exercise their own good judgment but need to consider
 the following guidelines:
+
+
 
 1. There needs to be a real and compelling use for any new unit to
   be added.
@@ -934,7 +951,7 @@ the following guidelines:
 ## Media Type Registration {#sec-iana-media}
 
 The following registrations are done following the procedure
-specified in {{RFC4288}} and {{RFC3023}}.
+specified in {{RFC6838}} and {{RFC7303}}.
 
 Note to RFC Editor: Please replace all occurrences of "RFC-AAAA"
 with the RFC number of this specification.
@@ -951,7 +968,7 @@ Optional parameters: none
 
 Encoding considerations: Must be encoded as using a subset of the
 encoding allowed in {{RFC7159}}. Specifically,
-only the ASCII{{RFC0020}} subset of the UTF-8
+only the ASCII {{RFC0020}} subset of the UTF-8
 characters are allowed. This simplifies implementation of very
 simple system and does not impose any significant limitations as all
 this data is meant for machine to machine communications and is not
@@ -1018,10 +1035,11 @@ Interoperability considerations: TBD
 
 Published specification: RFC-AAAA
 
-Applications that use this media type: The type is used by
-systems that report electrical power usage and environmental
-information such as temperature and humidity. It can be used for a
-wide range of sensor reporting systems.
+Applications that use this media type: The type is used
+by systems that report electrical power usage and
+environmental information such as temperature and
+humidity. It can be used for a wide range of sensor
+reporting systems.
 
 Additional information:
 
@@ -1126,7 +1144,7 @@ Change controller: IESG
 
 ## XML Namespace Registration {#sec-iana-url}
 
-This document registers the following XML name paces in the IETF
+This document registers the following XML namespaces in the IETF
 XML registry defined in {{RFC3688}}.
 
 URI: urn:ietf:params:xml:ns:senml
@@ -1157,7 +1175,11 @@ information about the source of the data.
 # Acknowledgement
 
 We would like to thank Lisa Dusseault, Joe Hildebrand, Lyndsay
-Campbell, Martin Thomson, John Klensin, and Bjoern Hoehrmann for their review comments.
+Campbell, Martin Thomson, John Klensin, Bjoern Hoehrmann, and Carsten
+Bormann for their review comments.
+
+The CBOR Representation text was contributed by Carsten
+Bormann.
 
 
 --- back
