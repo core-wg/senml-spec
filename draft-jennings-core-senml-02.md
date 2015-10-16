@@ -584,6 +584,41 @@ the following changes:
 | Update Time               | ut         |          7 |
 {: #labels cols="r l l" title="CBOR representation: integers for map keys"}
 
+For reference, the CBOR representation can be described with the CDDL
+{{I-D.greevenbosch-appsawg-cbor-cddl}} specification in {{senmlcddl}}.
+
+~~~~ CDDL
+SenML = {
+      ? bn => tstr,       ; Base Name
+      ? bt => numeric,    ; Base Time
+      ? bu => tstr,       ; Base Units
+      ? ver => uint,      ; Version
+      * tstr => any,      ; (Extension)
+      e => [+ meas],      ; Measurements
+}
+
+meas = {
+      ? n => tstr,        ; Name
+      ? u => tstr,        ; Units
+      ? ( v => numeric // ; Numeric Value
+          sv => tstr //   ; String Value
+          bv => bool )    ; Boolean Value
+      ? s => numeric,     ; Value Sum
+      ? t => numeric,     ; Time
+      ? ut => numeric,    ; Update Time
+}
+
+numeric = number / decfrac
+
+ver = -1
+e   = -2     v   =  2
+bn  = -3     sv  =  3
+bt  = -4     bv  =  4
+bu  = -5     s   =  5
+n   =  0     t   =  6
+u   =  1     ut  =  7
+~~~~
+{: #senmlcddl title="CDDL specification for CBOR SenML"}
 
 
 # XML Representation (application/senml+xml) {#sec-xml-examle}
