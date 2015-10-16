@@ -1,8 +1,12 @@
 ---
 stand_alone: true
 ipr: trust200902
-docname: draft-jennings-core-senml-latest
+docname: draft-jennings-core-senml-01
+
+date: july 6, 2015
+
 cat: std
+
 pi:
   toc: 'yes'
   symrefs: 'yes'
@@ -13,9 +17,11 @@ pi:
   colonspace: 'yes'
   rfcedstyle: 'no'
   tocdepth: '4'
+  
 title: Media Types for Sensor Markup Language (SENML)
 abbrev: Sensor Markup
 area: APPS
+
 author:
 - ins: C. Jennings
   name: Cullen Jennings
@@ -52,19 +58,12 @@ author:
   code: '02420'
   country: Finland
   email: ari.keranen@ericsson.com
--
-  ins: C. Bormann
-  name: Carsten Bormann
-  org: Universitaet Bremen TZI
-  street: Postfach 330440
-  city: Bremen
-  code: D-28359
-  country: Germany
-  phone: +49-421-218-63921
-  email: cabo@tzi.org
+
 normative:
   RFC2119:
   RFC5226:
+  RFC6838:
+  RFC7303:
   BIPM:
     title: The International System of Units (SI)
     author:
@@ -83,9 +82,7 @@ normative:
   RFC3688:
   W3C.REC-exi-20110310:
   RFC7159:
-  RFC7049: cbor
-  RFC3023:
-  RFC4288:
+  RFC7049: 
   RFC2119:
   IEEE.754.1985:
   UCUM:
@@ -97,6 +94,7 @@ normative:
     target: http://unitsofmeasure.org/ucum.html
     seriesinfo:
       Regenstrief: Institute and Indiana University School of Informatics
+
 informative:
   RFC2141:
   RFC3986:
@@ -106,7 +104,7 @@ informative:
   RFC4122:
   RFC0020:
   I-D.arkko-core-dev-urn:
-  I-D.greevenbosch-appsawg-cbor-cddl: cddl
+  I-D.greevenbosch-appsawg-cbor-cddl: 
   WADL:
     target: http://java.net/projects/wadl/sources/svn/content/trunk/www/wadl20090202.pdf
     title: Web Application Description Language (WADL)
@@ -121,7 +119,7 @@ informative:
 This specification defines media types for representing simple sensor
 measurements and device parameters in the Sensor Markup Language
 (SenML). Representations are defined in JavaScript Object Notation
-(JSON), eXtensible Markup Language (XML) and Efficient XML Interchange
+(JSON), Concise Binary Object Representation (CBOR), eXtensible Markup Language (XML) and Efficient XML Interchange
 (EXI), which share the common SenML data model. A simple sensor, such as
 a temperature sensor, could use this media type in protocols such as
 HTTP or CoAP to transport the measurements of the sensor or to be
@@ -191,7 +189,7 @@ sensors or from the same sensor but at different times.
 # Terminology
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-"SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this
+"SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
 document are to be interpreted as described in {{RFC2119}}.
 
 
@@ -260,7 +258,7 @@ Value
 Sum
 : Integrated sum of the
   values over time. Optional. This attribute is in the units specified
-  in the Unit value multiplied by seconds (e.g., velocity ("m/s") 
+  in the Unit value multiplied by seconds
   becomes meter ("m")).
 
 Time
@@ -385,6 +383,10 @@ Measurement or Parameter Entries:
 | Update Time   | ut   | Number         |
 {: cols="r l l"}
 
+It is RECOMMENDED that in textual JSON format, when present, the
+attributes appear in the above order.  However, implementations MUST
+be able to process them in any order.
+   
 All of the data is UTF-8, but since this is for machine to machine
 communications on constrained systems, only characters with code points
 between U+0001 and U+007F are allowed which corresponds to the
@@ -439,10 +441,11 @@ unspecified time. The device has an EUI-64 MAC address of
 0024befffe804ff1.
 
 ~~~~
-{"e":[
+{
+ "bn": "urn:dev:mac:0024befffe804ff1/",
+ "e":[
      { "n": "voltage", "t": 0, "u": "V", "v": 120.1 },
-     { "n": "current", "t": 0, "u": "A", "v": 1.2 }],
- "bn": "urn:dev:mac:0024befffe804ff1/"
+     { "n": "current", "t": 0, "u": "A", "v": 1.2 }]
 }
 ~~~~
 
@@ -451,19 +454,50 @@ at Tue Jun 8 18:01:16 UTC 2010 and at each second for the previous 5
 seconds.
 
 ~~~~
-{"e":[
+{"bn": "urn:dev:mac:0024befffe804ff1/",
+ "bt": 1276020076,
+ "bu": "A",
+ "ver": 1,
+ "e":[
      { "n": "voltage", "u": "V", "v": 120.1 },
      { "n": "current", "t": -5, "v": 1.2 },
      { "n": "current", "t": -4, "v": 1.30 },
      { "n": "current", "t": -3, "v": 0.14e1 },
      { "n": "current", "t": -2, "v": 1.5 },
      { "n": "current", "t": -1, "v": 1.6 },
-     { "n": "current", "t": 0,   "v": 1.7 }],
- "bn": "urn:dev:mac:0024befffe804ff1/",
- "bt": 1276020076,
- "ver": 1,
- "bu": "A"
+     { "n": "current", "t": 0,   "v": 1.7 }]
 }
+~~~~
+
+Note that in some usage scenarios of SenML the implementations MAY store or
+transmit SenML in a stream-like fashion, where data is collected over time and
+continuously added to the object.  This mode of operation is optional, but
+systems or protocols using SenML in this fashion MUST specify that they are
+doing this.  In this situation the SenML stream can be sent and received in a
+partial fashion, i.e., a measurement entry can be read as soon as it is received
+and only not when the entire SenML object is complete.
+
+For instance, the following stream of measurements may be sent from the producer
+of a SenML object to the consumer of that SenML object, and each measurement
+object may be reported at the time it arrives:
+
+~~~
+{"bn": "http://[2001:db8::1]",
+  "bt": 1276020076,
+  "ver": 1, 
+  "bu": ""%RH",
+    "e":[
+        { "v": 21.2, "t": 0 },
+        { "v": 21.3, "t": 10 },
+        { "v": 21.4, "t": 20 },
+        { "v": 21.4, "t": 30 },
+        { "v": 21.5, "t": 40 },
+        { "v": 21.5, "t": 50 },
+        { "v": 21.5, "t": 60 },
+        { "v": 21.6, "t": 70 },
+        { "v": 21.7, "t": 80 },
+        { "v": 21.5, "t": 90 },
+        ...
 ~~~~
 
 
@@ -471,7 +505,7 @@ seconds.
 
 The following example shows humidity measurements from a mobile
 device with an IPv6 address 2001:db8::1, starting at Mon Oct 31
-13:24:24 UTC 2011. The device also provide position data, which is
+13:24:24 UTC 2011. The device also provides position data, which is
 provided in the same measurement or parameter array as separate
 entries. Note time is used to for correlating data that belongs
 together, e.g., a measurement and a parameter associated with it.
@@ -479,7 +513,10 @@ Finally, the device also reports extra data about its battery status
 at a separate time.
 
 ~~~~
-{"e":[
+{"bn": "http://[2001:db8::1]",
+ "bt": 1320067464,
+ "bu": "%RH"
+ "e":[
      { "v": 20.0, "t": 0 },
      { "sv": "E 24' 30.621", "u": "lon", "t": 0 },
      { "sv": "N 60' 7.965", "u": "lat", "t": 0 },
@@ -492,10 +529,7 @@ at a separate time.
      { "v": 98.0, "u": "%EL", "t": 150 },
      { "v": 21.2, "t": 180 },
      { "sv": "E 24' 30.628", "u": "lon", "t": 180 },
-     { "sv": "N 60' 7.967", "u": "lat", "t": 180 }],
- "bn": "http://[2001:db8::1]",
- "bt": 1320067464,
- "bu": "%RH"
+     { "sv": "N 60' 7.967", "u": "lat", "t": 180 }]
 }
 ~~~~
 
@@ -510,12 +544,12 @@ and has gotten two separate values as a result, a temperature and
 humidity measurement.
 
 ~~~~
-{"e":[
-     { "n": "temperature", "v": 27.2, "u": "Cel" },
-     { "n": "humidity", "v": 80, "u": "%RH" }],
- "bn": "http://[2001:db8::2]/",
+{"bn": "http://[2001:db8::2]/",
  "bt": 1320078429,
- "ver": 1
+ "ver": 1, 
+ "e":[
+     { "n": "temperature", "v": 27.2, "u": "Cel" },
+     { "n": "humidity", "v": 80, "u": "%RH" }]
 }
 ~~~~
 
@@ -550,41 +584,6 @@ the following changes:
 | Update Time               | ut         |          7 |
 {: #labels cols="r l l" title="CBOR representation: integers for map keys"}
 
-For reference, the CBOR representation can be described with the CDDL
-{{-cddl}} specification in {{senmlcddl}}.
-
-~~~~ CDDL
-SenML = {
-      ? bn => tstr,       ; Base Name
-      ? bt => numeric,    ; Base Time
-      ? bu => tstr,       ; Base Units
-      ? ver => uint,      ; Version
-      * tstr => any,      ; (Extension)
-      e => [+ meas],      ; Measurements
-}
-
-meas = {
-      ? n => tstr,        ; Name
-      ? u => tstr,        ; Units
-      ? ( v => numeric // ; Numeric Value
-          sv => tstr //   ; String Value
-          bv => bool )    ; Boolean Value
-      ? s => numeric,     ; Value Sum
-      ? t => numeric,     ; Time
-      ? ut => numeric,    ; Update Time
-}
-
-numeric = number / decfrac
-
-ver = -1
-e   = -2     v   =  2
-bn  = -3     sv  =  3
-bt  = -4     bv  =  4
-bu  = -5     s   =  5
-n   =  0     t   =  6
-u   =  1     ut  =  7
-~~~~
-{: #senmlcddl title="CDDL specification for CBOR SenML"}
 
 
 # XML Representation (application/senml+xml) {#sec-xml-examle}
@@ -652,7 +651,7 @@ The EXI header option MUST be included. An EXI schemaID options MUST
 be set to the value of "a" indicating the scheme provided in this
 specification. Future revisions to the schema can change this schemaID
 to allow for backwards compatibility. When the data will be transported
-over COAP or HTTP, an EXI Cookie SHOULD NOT be used as it simply makes
+over CoAP or HTTP, an EXI Cookie SHOULD NOT be used as it simply makes
 things larger and is redundant to information provided in the
 Content-Type header.
 
@@ -817,7 +816,7 @@ IANA will create a registry of unit symbols. The primary purpose of
 this registry is to make sure that symbols uniquely map to give type
 of measurement. Definitions for many of these units can be found in {{NIST811}} and {{BIPM}}.
 
-In adition to the units in this table, any of the Unified Code for
+In addition to the units in this table, any of the Unified Code for
 Units of Measure {{UCUM}} in case sensitive form (c/s
 column) can be prepended by the string "UCUM:" and used in SenML.
 
@@ -934,7 +933,7 @@ the following guidelines:
 ## Media Type Registration {#sec-iana-media}
 
 The following registrations are done following the procedure
-specified in {{RFC4288}} and {{RFC3023}}.
+specified in {{RFC6838}} and {{RFC7303}}.
 
 Note to RFC Editor: Please replace all occurrences of "RFC-AAAA"
 with the RFC number of this specification.
@@ -1126,7 +1125,7 @@ Change controller: IESG
 
 ## XML Namespace Registration {#sec-iana-url}
 
-This document registers the following XML name paces in the IETF
+This document registers the following XML namespaces in the IETF
 XML registry defined in {{RFC3688}}.
 
 URI: urn:ietf:params:xml:ns:senml
@@ -1156,8 +1155,10 @@ information about the source of the data.
 
 # Acknowledgement
 
-We would like to thank Lisa Dusseault, Joe Hildebrand, Lyndsay
-Campbell, Martin Thomson, John Klensin, and Bjoern Hoehrmann for their review comments.
+We would like to thank Carsten Bormann, Lisa Dusseault, Joe Hildebrand, Lyndsay
+Campbell, Martin Thomson, John Klensin, and Bjoern Hoehrmann for their review
+comments.
 
+The CBOR Representation text was contributed by Carsten Bormann.
 
 --- back
