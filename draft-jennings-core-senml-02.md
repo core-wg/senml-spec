@@ -141,27 +141,29 @@ decoding. Instead meta-data about a sensor resource can be described
 out-of-band using the CoRE Link Format {{RFC6690}}. The markup language can be
 used for a variety of data flow models, most notably data feeds pushed
 from a sensor to a collector, and the web resource model where the
-sensor is requested as a resource representation (GET
-/sensor/temperature).
+sensor is requested as a resource representation (e.g., "GET
+/sensor/temperature").
 
 SenML is defined by a data model for measurements and simple
 meta-data about measurements and devices. The data is structured
-as a single object (with attributes) that contains an array of
+as a single array that contains base value object(s) and array(s) of
 entries. Each entry is an object that has attributes such as a
 unique identifier for the sensor, the time the measurement was
 made, and the current value.  Serializations for this data model
-are defined for JSON {{RFC7159}}, CBOR {{RFC7049}}, XML, and Efficient XML Interchange (EXI) {{W3C.REC-exi-20110310}}.
+are defined for JSON {{RFC7159}}, CBOR {{RFC7049}}, XML, and 
+Efficient XML Interchange (EXI) {{W3C.REC-exi-20110310}}.
 
 For example, the following shows a measurement from a temperature
 gauge encoded in the JSON syntax.
 
 ~~~~
-{"e":[{ "n": "urn:dev:ow:10e2073a01080063", "v":23.5, "u":"Cel" }]}
+[{}, [{ "n": "urn:dev:ow:10e2073a01080063", "v":23.5, "u":"Cel" }]]
 ~~~~
 
-In the example above, the array in the object has a single
-measurement for a sensor named "urn:dev:ow:10e2073a01080063" with a
-temperature of 23.5 degrees Celsius.
+In the example above, the first element of the root array is empty
+object since there are no base values. The second array inside the root
+array has a single measurement for a sensor named
+"urn:dev:ow:10e2073a01080063" with a temperature of 23.5 degrees Celsius.
 
 
 # Requirements and Design Goals
@@ -187,50 +189,41 @@ from the same sensor but at different times.
 # Terminology
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-"SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this
-document are to be interpreted as described in {{RFC2119}}.
+"SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", 
+and "OPTIONAL" in this document are to be interpreted as described 
+in {{RFC2119}}.
 
 
 # Semantics {#semant}
 
-Each representation carries a single SenML object that represents a
-set of measurements and/or parameters. This object contains several
-optional attributes described below and a mandatory array of one or more
-entries.
-
-
+Each representation carries a single SenML array that represents a
+set of measurements and/or parameters. This array contains a base object
+with several optional attributes described below and a mandatory array 
+of one or more entries.
 
 Base Name
-: This is a string
-  that is prepended to the names found in the entries. This attribute
-  is optional.
+: This is a string that is prepended to the names found in the entries.
+  This attribute is optional.
 
 Base Time
-: A base time that is
-  added to the time found in an entry. This attribute is
-  optional.
-
-Base Units
-: A base unit that
-  is assumed for all entries, unless otherwise indicated. This
+: A base time that is added to the time found in an entry. This 
   attribute is optional.
 
+Base Units
+: A base unit that is assumed for all entries, unless otherwise indicated.
+  This attribute is optional.
+
 Version
-: Version number of
-  media type format. This attribute is optional positive integer and
-  defaults to 1 if not present.
+: Version number of media type format. This attribute is optional positive
+  integer and defaults to 1 if not present.
 
 Measurement or Parameter Entries
-: Array of values for sensor measurements or other
-generic parameters (such as configuration parameters). If present
-there must be at least one entry in the array.
-{: vspace='1'}
-
+: Array of values for sensor measurements or other generic parameters
+ (such as configuration parameters). There must be at least one entry
+ in the array.
 
 Each array entry contains several attributes, some of which are
 optional and some of which are mandatory.
-
-
 
 Name
 : Name of the sensor or
@@ -242,8 +235,7 @@ Name
   having to repeat its identifier on every measurement.
 
 Units
-: Units for a measurement
-  value.
+: Units for a measurement value.
 
 Value
 : Value of the entry.
@@ -254,27 +246,23 @@ Value
   MUST appear.
 
 Sum
-: Integrated sum of the
-values over time. Optional. This attribute is in the units specified
-in the Unit value multiplied by seconds.
-
+: Integrated sum of the values over time. Optional. This attribute is
+  in the units specified in the Unit value multiplied by seconds.
 
 Time
-: Time when value was
-  recorded. Optional.
+: Time when value was recorded. Optional. 
 
 Update Time
 : A time in seconds that represents the maximum time before this sensor
   will provide an updated reading for a measurement. This can be used
   to detect the failure of sensors or communications path from the
   sensor. Optional.
-{: vspace='1'}
-
+  
 
 The SenML format can be extended with further custom attributes
-placed in the base object, or in an entry. Extensions in the base object
-pertain to all entries, whereas extensions in an entry object only
-pertain to that.
+placed in a base object, or in an entry. Extensions in a base object
+pertain to all entries following the base object, whereas extensions
+in an entry object only pertain to that entry.
 
 Systems reading one of the objects MUST check for the Version
 attribute. If this value is a version number larger than the version
@@ -283,28 +271,33 @@ This allows the version number to indicate that the object contains
 mandatory to understand attributes. New version numbers can only be
 defined in an RFC that updates this specification or it successors.
 
-The Name value is concatenated to the Base Name value to get the name
-of the sensor. The resulting name needs to uniquely identify and
+The Name value is concatenated to the Base Name value to get the name of
+the sensor. The resulting name needs to uniquely identify and
 differentiate the sensor from all others. If the object is a
-representation resulting from the request of a URI {{RFC3986}}, then in the absence of the Base Name
-attribute, this URI is used as the default value of Base Name. Thus in
-this case the Name field needs to be unique for that URI, for example an
-index or subresource name of sensors handled by the URI.
+representation resulting from the request of a URI {{RFC3986}}, then in
+the absence of the Base Name attribute, this URI is used as the default
+value of Base Name. Thus in this case the Name field needs to be unique
+for that URI, for example an index or subresource name of sensors
+handled by the URI.
 
 Alternatively, for objects not related to a URI, a unique name is
 required. In any case, it is RECOMMENDED that the full names are
-represented as URIs or URNs {{RFC2141}}. One way to
-create a unique name is to include a EUI-48 or EUI-64 identifier (A MAC
-address) or some other bit string that is guaranteed uniqueness (such as
-a 1-wire address) that is assigned to the device. Some of the examples
-in this draft use the device URN type as specified in {{I-D.arkko-core-dev-urn}}. UUIDs {{RFC4122}} are another way to generate a unique name.
+represented as URIs or URNs {{RFC2141}}. One way to create a unique name
+is to include a EUI-48 or EUI-64 identifier (a MAC address) or some
+other bit string that has guaranteed uniqueness (such as a 1-wire
+address) that is assigned to the device. Some of the examples in this
+draft use the device URN type as specified in
+{{I-D.arkko-core-dev-urn}}. UUIDs {{RFC4122}} are another way to
+generate a unique name.
 
 The resulting concatenated name MUST consist only of characters out
 of the set "A" to "Z", "a" to "z", "0" to "9", "-", ":", ".", or "_" and
 it MUST start with a character out of the set "A" to "Z", "a" to "z", or
 "0" to "9". This restricted character set was chosen so that these names
 can be directly used as in other types of URI including segments of an
-HTTP path with no special encoding. {{RFC5952}} contains advice on encoding an IPv6 address in a name.
+HTTP path with no special encoding. {{RFC5952}} contains advice on 
+encoding an IPv6 address in a name.
+<!-- TODO: too strict restriction? -->
 
 If either the Base Time or Time value is missing, the missing
 attribute is considered to have a value of zero. The Base Time and Time
@@ -335,13 +328,11 @@ in particular allows a web server to describe resources it is hosting.
 The list of links that a web server has available, can be discovered by
 retrieving the /.well-known/core resource, which returns the list of
 links in the CoRE Link Format. Each link may contain attributes, for
-example title, resource type, interface description and
-content-type.
+example title, resource type, interface description, and content-type.
 
 The most obvious use of this link format is to describe that a
 resource is available in a SenML format in the first place. The relevant
-media type indicator is included in the Content-Type (ct=)
-attribute.
+media type indicator is included in the Content-Type (ct=) attribute.
 
 Further semantics about a resource can be included in the Resource
 Type and Interface Description attributes. The Resource Type (rt=)
@@ -354,14 +345,13 @@ resource, and may include e.g. a reference to a WADL description {{WADL}}.
 
 # JSON Representation (application/senml+json)
 
-Root variables:
+Base object variables:
 
 | SenML                     | JSON | Type   |
 | Base Name                 | bn   | String |
 | Base Time                 | bt   | Number |
 | Base Units                | bu   | Number |
 | Version                   | ver  | Number |
-| Measurement or Parameters | e    | Array  |
 {:cols='r l l'}
 
 Measurement or Parameter Entries:
@@ -377,24 +367,23 @@ Measurement or Parameter Entries:
 | Update Time   | ut   | Number         |
 {:cols='r l l'}
 
-It is RECOMMENDED that in textual JSON format, when present,
-the attributes appear in the above order. However,
-implementations MUST be able to process them in any order.
 
 All of the data is UTF-8, but since this is for machine to machine
 communications on constrained systems, only characters with code points
 between U+0001 and U+007F are allowed which corresponds to the
 ASCII {{RFC0020}} subset of UTF-8.
+<!-- TODO: too strict? -->
 
-The root contents MUST consist of exactly one JSON object as
-specified by {{RFC7159}}. This object MAY contain a
-"bn" attribute with a value of type string. This object MAY contain a
-"bt" attribute with a value of type number. The object MAY contain a
-"bu" attribute with a value of type string. The object MAY contain a
-"ver" attribute with a value of type number. The object MAY contain
-other attribute value pairs, and the object MUST contain exactly one "e"
-attribute with a value of type array. The array MUST have one or more
-measurement or parameter objects.
+The root content consists of an array with even amount of JSON objects
+where the first (and then every odd) element is a base object and the
+second (and then every even) element is a measurements array. The base
+object MAY contain a "bn" attribute with a value of type string. The
+object MAY contain a "bt" attribute with a value of type number. The
+object MAY contain a "bu" attribute with a value of type string. The
+object MAY contain a "ver" attribute with a value of type number. The
+object MAY contain other attribute value pairs. The base object MUST be
+followed by an array. The array MUST have one or more measurement or
+parameter objects.
 
 Inside each measurement or parameter object the "n", "u", and "sv"
 attributes are of type string, the "t" and "ut" attributes are of type
@@ -403,6 +392,7 @@ attributes are of type floating point. All the attributes are optional,
 but as specified in {{semant}}, one of the "v", "sv",
 or "bv" attributes MUST appear unless the "s" attribute is also present.
 The "v", and "sv", and "bv" attributes MUST NOT appear together.
+
 
 Systems receiving measurements MUST be able to process the range of
 floating point numbers that are representable as an IEEE
@@ -424,7 +414,7 @@ The following shows a temperature reading taken approximately
 address of 10e2073a01080063:
 
 ~~~~
-{"e":[{ "n": "urn:dev:ow:10e2073a01080063", "v":23.5 }]}
+[ {}, [{ "n": "urn:dev:ow:10e2073a01080063", "v":23.5 }] ]
 ~~~~
 
 
@@ -435,11 +425,10 @@ unspecified time. The device has an EUI-64 MAC address of
 0024befffe804ff1.
 
 ~~~~
-{"bn": "urn:dev:mac:0024befffe804ff1/",
- "e":[
-     { "n": "voltage", "t": 0, "u": "V", "v": 120.1 },
-     { "n": "current", "t": 0, "u": "A", "v": 1.2 }]
-}
+[{"bn": "urn:dev:mac:0024befffe804ff1/"},
+ [ { "n": "voltage", "t": 0, "u": "V", "v": 120.1 },
+   { "n": "current", "t": 0, "u": "A", "v": 1.2 } ]
+]
 ~~~~
 
 The next example is similar to the above one, but shows current
@@ -448,19 +437,18 @@ seconds.
 
 
 ~~~~
-{"bn": "urn:dev:mac:0024befffe804ff1/",
- "bt": 1276020076,
- "bu": "A",
- "ver": 1,
- "e":[
-     { "n": "voltage", "u": "V", "v": 120.1 },
-     { "n": "current", "t": -5, "v": 1.2 },
-     { "n": "current", "t": -4, "v": 1.30 },
-     { "n": "current", "t": -3, "v": 0.14e1 },
-     { "n": "current", "t": -2, "v": 1.5 },
-     { "n": "current", "t": -1, "v": 1.6 },
-     { "n": "current", "t": 0,   "v": 1.7 }]
-}
+[{"bn": "urn:dev:mac:0024befffe804ff1/",
+  "bt": 1276020076,
+  "bu": "A",
+  "ver": 1},
+ [ { "n": "voltage", "u": "V", "v": 120.1 },
+   { "n": "current", "t": -5, "v": 1.2 },
+   { "n": "current", "t": -4, "v": 1.30 },
+   { "n": "current", "t": -3, "v": 0.14e1 },
+   { "n": "current", "t": -2, "v": 1.5 },
+   { "n": "current", "t": -1, "v": 1.6 },
+   { "n": "current", "t": 0,  "v": 1.7 } ]
+]
 ~~~~
 
 Note that in some usage scenarios of SenML the
@@ -481,20 +469,19 @@ reported at the time it arrives:
 
 
 ~~~~
-{"bn": "http://[2001:db8::1]",
- "bt": 1320067464,
- "bu": "%RH",
- "e":[
-     { "v": 21.2, "t": 0 },
-     { "v": 21.3, "t": 10 },
-     { "v": 21.4, "t": 20 },
-     { "v": 21.4, "t": 30 },
-     { "v": 21.5, "t": 40 },
-     { "v": 21.5, "t": 50 },
-     { "v": 21.5, "t": 60 },
-     { "v": 21.6, "t": 70 },
-     { "v": 21.7, "t": 80 },
-     { "v": 21.5, "t": 90 },
+[{"bn": "http://[2001:db8::1]",
+  "bt": 1320067464,
+  "bu": "%RH"},
+ [ { "v": 21.2, "t": 0 },
+   { "v": 21.3, "t": 10 },
+   { "v": 21.4, "t": 20 },
+   { "v": 21.4, "t": 30 },
+   { "v": 21.5, "t": 40 },
+   { "v": 21.5, "t": 50 },
+   { "v": 21.5, "t": 60 },
+   { "v": 21.6, "t": 70 },
+   { "v": 21.7, "t": 80 },
+   { "v": 21.5, "t": 90 },
 ...
 ~~~~
 
@@ -512,24 +499,23 @@ at a separate time.
 
 
 ~~~~
-{"bn": "http://[2001:db8::1]",
- "bt": 1320067464,
- "bu": "%RH",
- "e":[
-     { "v": 20.0, "t": 0 },
-     { "sv": "E 24' 30.621", "u": "lon", "t": 0 },
-     { "sv": "N 60' 7.965", "u": "lat", "t": 0 },
-     { "v": 20.3, "t": 60 },
-     { "sv": "E 24' 30.622", "u": "lon", "t": 60 },
-     { "sv": "N 60' 7.965", "u": "lat", "t": 60 },
-     { "v": 20.7, "t": 120 },
-     { "sv": "E 24' 30.623", "u": "lon", "t": 120 },
-     { "sv": "N 60' 7.966", "u": "lat", "t": 120 },
-     { "v": 98.0, "u": "%EL", "t": 150 },
-     { "v": 21.2, "t": 180 },
-     { "sv": "E 24' 30.628", "u": "lon", "t": 180 },
-     { "sv": "N 60' 7.967", "u": "lat", "t": 180 }]
-}
+[{"bn": "http://[2001:db8::1]",
+  "bt": 1320067464,
+  "bu": "%RH"},
+ [ { "v": 20.0, "t": 0 },
+   { "sv": "E 24' 30.621", "u": "lon", "t": 0 },
+   { "sv": "N 60' 7.965", "u": "lat", "t": 0 },
+   { "v": 20.3, "t": 60 },
+   { "sv": "E 24' 30.622", "u": "lon", "t": 60 },
+   { "sv": "N 60' 7.965", "u": "lat", "t": 60 },
+   { "v": 20.7, "t": 120 },
+   { "sv": "E 24' 30.623", "u": "lon", "t": 120 },
+   { "sv": "N 60' 7.966", "u": "lat", "t": 120 },
+   { "v": 98.0, "u": "%EL", "t": 150 },
+   { "v": 21.2, "t": 180 },
+   { "sv": "E 24' 30.628", "u": "lon", "t": 180 },
+   { "sv": "N 60' 7.967", "u": "lat", "t": 180 } ]
+]
 ~~~~
 
 
@@ -544,16 +530,13 @@ humidity measurement.
 
 
 ~~~~
-{"bn": "http://[2001:db8::2]/",
- "bt": 1320078429,
- "ver": 1,
- "e":[
-     { "n": "temperature", "v": 27.2, "u": "Cel" },
-     { "n": "humidity", "v": 80, "u": "%RH" }]
-}
+[{"bn": "http://[2001:db8::2]/",
+  "bt": 1320078429,
+  "ver": 1},
+ [ { "n": "temperature", "v": 27.2, "u": "Cel" },
+   { "n": "humidity", "v": 80, "u": "%RH" } ]
+]
 ~~~~
-
-
 
 
 # CBOR Representation (application/senml+cbor) {#sec-cbor}
