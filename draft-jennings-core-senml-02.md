@@ -1,7 +1,7 @@
 ---
 stand_alone: true
 ipr: trust200902
-docname: draft-jennings-core-senml-01
+docname: draft-jennings-core-senml-02
 cat: std
 pi:
   toc: 'yes'
