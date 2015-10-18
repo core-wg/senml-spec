@@ -13,9 +13,7 @@ pi:
   colonspace: 'yes'
   rfcedstyle: 'no'
   tocdepth: '4'
-title: |-
-  Media Types for Sensor Markup Language
-      (SENML)
+title: Media Types for Sensor Markup Language (SENML)
 abbrev: Sensor Markup
 area: ART
 author:
@@ -59,9 +57,7 @@ normative:
   BIPM:
     title: The International System of Units (SI)
     author:
-    - org: |-
-        Bureau International des Poids et
-                    Mesures
+    - org: Bureau International des Poids et Mesures
     date: 2006
     seriesinfo:
       "8th": edition
@@ -77,6 +73,7 @@ normative:
   W3C.REC-exi-20110310: 
   RFC7159: 
   RFC7303: 
+  RFC7396:
   RFC6838: 
   RFC2119: 
   IEEE.754.1985: 
@@ -196,7 +193,7 @@ in {{RFC2119}}.
 
 # Semantics {#semant}
 
-Each representation carries a single SenML array that represents a
+Each SenML representation carries a single array that represents a
 set of measurements and/or parameters. This array contains a base object
 with several optional attributes described below and a mandatory array 
 of one or more entries.
@@ -217,13 +214,13 @@ Version
 : Version number of media type format. This attribute is optional positive
   integer and defaults to 1 if not present.
 
-Measurement or Parameter Entries
-: Array of values for sensor measurements or other generic parameters
- (such as configuration parameters). There must be at least one entry
- in the array.
+
+The measurement or parameter entries array contains values for sensor
+measurements or other generic parameters, such as configuration
+parameters. There must be at least one entry in the array. This array is called simply "measurement array" in the following text.
 
 Each array entry contains several attributes, some of which are
-optional and some of which are mandatory.
+optional and some of which are mandatory:
 
 Name
 : Name of the sensor or
@@ -235,7 +232,7 @@ Name
   having to repeat its identifier on every measurement.
 
 Units
-: Units for a measurement value.
+: Units for a measurement value. Optional.
 
 Value
 : Value of the entry.
@@ -307,6 +304,13 @@ measurement was made roughly "now". A negative value is used to indicate
 seconds in the past from roughly "now". A positive value is used to
 indicate the number of seconds, excluding leap seconds, since the start
 of the year 1970 in UTC.
+
+A measurement array MAY be followed by another base object and
+measurement array. The new base object can add, change, and/or remove
+base values from the previous base object(s). The new base values are
+applied to the following measurement arrays. Every base object MUST be
+followed by a measurement array, and hence base objects are found in the
+root array at even indexes and measurement arrays at odd indexes.
 
 Representing the statistical characteristics of measurements can be
 very complex. Future specification may add new attributes to provide
@@ -385,6 +389,12 @@ object MAY contain other attribute value pairs. The base object MUST be
 followed by an array. The array MUST have one or more measurement or
 parameter objects.
 
+If the root array has more than one base object, each following base
+object modifies the base values using the JSON merge patch format
+{{RFC7396}}. That is, base values can be added or modified by defining
+their new values and existing base values can removed by defining the
+value as "null".
+
 Inside each measurement or parameter object the "n", "u", and "sv"
 attributes are of type string, the "t" and "ut" attributes are of type
 number, the "bv" attribute is of type boolean, and the "v" and "s"
@@ -392,7 +402,6 @@ attributes are of type floating point. All the attributes are optional,
 but as specified in {{semant}}, one of the "v", "sv",
 or "bv" attributes MUST appear unless the "s" attribute is also present.
 The "v", and "sv", and "bv" attributes MUST NOT appear together.
-
 
 Systems receiving measurements MUST be able to process the range of
 floating point numbers that are representable as an IEEE
