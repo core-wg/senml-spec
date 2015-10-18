@@ -84,15 +84,6 @@ normative:
     date: 2008
     seriesinfo:
       NIST: Special Publication 811
-  UCUM:
-    title: The Unified Code for Units of Measure (UCUM)
-    author:
-    - ins: G. Schadow
-    - ins: C. McDonald
-    date: 2013
-    target: http://unitsofmeasure.org/ucum.html
-    seriesinfo:
-      Regenstrief Institute and Indiana University School of: Informatics
 
 informative:
   RFC0020: 
@@ -102,6 +93,15 @@ informative:
   RFC5952: 
   RFC6690: 
   I-D.arkko-core-dev-urn: 
+  UCUM:
+    title: The Unified Code for Units of Measure (UCUM) 
+    author:
+    - ins: G. Schadow 
+    - ins: C. McDonald 
+    date: 2013 
+    target: http://unitsofmeasure.org/ucum.html 
+    seriesinfo:
+      Regenstrief Institute and Indiana University School of: Informatics 
   WADL:
     target: http://java.net/projects/wadl/sources/svn/content/trunk/www/wadl20090202.pdf
     title: Web Application Description Language (WADL)
@@ -827,10 +827,6 @@ IANA will create a registry of unit symbols. The primary purpose of
 this registry is to make sure that symbols uniquely map to give type
 of measurement. Definitions for many of these units can be found in {{NIST811}} and {{BIPM}}.
 
-In addition to the units in this table, any of the Unified Code for
-Units of Measure {{UCUM}} in case sensitive form (c/s
-column) can be prepended by the string "UCUM:" and used in SenML.
-
 | Symbol | Description                                | Reference |
 | m      | meter                                      | RFC-AAAA  |
 | kg     | kilogram                                   | RFC-AAAA  |
@@ -897,50 +893,54 @@ the following guidelines:
 1. There needs to be a real and compelling use for any new unit to
   be added.
 
-1. Units should define the semantic information and be chosen
+2. Units should define the semantic information and be chosen
   carefully. Implementors need to remember that the same word may be
   used in different real-life contexts. For example, degrees when
   measuring latitude have no semantic relation to degrees when
   measuring temperature; thus two different units are needed.
 
-1. These measurements are produced by computers for consumption by
+3. These measurements are produced by computers for consumption by
   computers. The principle is that conversion has to be easily be
   done when both reading and writing the media type. The value of a
   single canonical representation outweighs the convenience of easy
   human representations or loss of precision in a conversion.
 
-1. Use of SI prefixes such as "k" before the unit is not allowed.
+4. Use of SI prefixes such as "k" before the unit is not allowed.
   Instead one can represent the value using scientific notation such
   a 1.2e3.
 
-1. For a given type of measurement, there will only be one unit
+5. For a given type of measurement, there will only be one unit
   type defined. So for length, meters are defined and other lengths
   such as mile, foot, light year are not allowed. For most cases,
   the SI unit is preferred.
 
-1. Symbol names that could be easily confused with existing common
+6. Symbol names that could be easily confused with existing common
   units or units combined with prefixes should be avoided. For
   example, selecting a unit name of "mph" to indicate something that
   had nothing to do with velocity would be a bad choice, as "mph" is
   commonly used to mean miles per hour.
 
-1. The following should not be used because the are common SI
+7. The following should not be used because the are common SI
   prefixes: Y, Z, E, P, T, G, M, k, h, da, d, c, n, u, p, f, a, z,
   y, Ki, Mi, Gi, Ti, Pi, Ei, Zi, Yi.
 
-1. The following units should not be used as they are commonly
+8. The following units should not be used as they are commonly
   used to represent other measurements Ky, Gal, dyn, etg, P, St, Mx,
   G, Oe, Gb, sb, Lmb, ph, Ci, R, RAD, REM, gal, bbl, qt, degF, Cal,
   BTU, HP, pH, B/s, psi, Torr, atm, at, bar, kWh.
 
-1. The unit names are case sensitive and the correct case needs to
+9. The unit names are case sensitive and the correct case needs to
   be used, but symbols that differ only in case should not be
   allocated.
 
-1. A number after a unit typically indicates the previous unit
+10. A number after a unit typically indicates the previous unit
   raised to that power, and the / indicates that the units that
   follow are the reciprocal. A unit should have only one / in the
   name.
+
+11. A good list of common units can be found in the Unified Code for Units of
+   Measure {{UCUM}}.
+
 
 
 ## Media Type Registration {#sec-iana-media}
