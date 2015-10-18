@@ -198,19 +198,19 @@ set of measurements and/or parameters. This array contains a base object
 with several optional attributes described below and a mandatory array 
 of one or more entries.
 
-Base Name
+Base Name:
 : This is a string that is prepended to the names found in the entries.
   This attribute is optional.
 
-Base Time
+Base Time:
 : A base time that is added to the time found in an entry. This 
   attribute is optional.
 
-Base Units
+Base Units:
 : A base unit that is assumed for all entries, unless otherwise indicated.
   This attribute is optional.
 
-Version
+Version:
 : Version number of media type format. This attribute is optional positive
   integer and defaults to 1 if not present.
 
@@ -222,7 +222,7 @@ parameters. There must be at least one entry in the array. This array is called 
 Each array entry contains several attributes, some of which are
 optional and some of which are mandatory:
 
-Name
+Name:
 : Name of the sensor or
   parameter. When appended to the Base Name attribute, this must
   result in a globally unique identifier for the resource. The name is
@@ -231,7 +231,7 @@ Name
   represent a large array of measurements from the same sensor without
   having to repeat its identifier on every measurement.
 
-Units
+Units:
 : Units for a measurement value. Optional.
 
 Value
@@ -242,14 +242,14 @@ Value
   Strings ("sv" for "String Value"). Exactly one of these three fields
   MUST appear.
 
-Sum
+Sum:
 : Integrated sum of the values over time. Optional. This attribute is
   in the units specified in the Unit value multiplied by seconds.
 
-Time
+Time:
 : Time when value was recorded. Optional. 
 
-Update Time
+Update Time:
 : A time in seconds that represents the maximum time before this sensor
   will provide an updated reading for a measurement. This can be used
   to detect the failure of sensors or communications path from the
@@ -533,7 +533,7 @@ at a separate time.
 The following example shows how to query one device that can
 provide multiple measurements. The example assumes that a client has
 fetched information from a device at 2001:db8::2 by performing a GET
-operation on http://[2001:db8::2] at Mon Oct 31 16:27:09 UTC 2011,
+operation on http://\[2001:db8::2\] at Mon Oct 31 16:27:09 UTC 2011,
 and has gotten two separate values as a result, a temperature and
 humidity measurement.
 
