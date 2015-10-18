@@ -3,6 +3,9 @@ stand_alone: true
 ipr: trust200902
 docname: draft-jennings-core-senml-02
 cat: std
+
+date: October 18, 2015
+
 pi:
   toc: 'yes'
   symrefs: 'yes'
@@ -13,9 +16,11 @@ pi:
   colonspace: 'yes'
   rfcedstyle: 'no'
   tocdepth: '4'
+  
 title: Media Types for Sensor Markup Language (SENML)
 abbrev: Sensor Markup
 area: ART
+
 author:
 - ins: C. Jennings
   name: Cullen Jennings
@@ -52,8 +57,18 @@ author:
   code: '02420'
   country: Finland
   email: ari.keranen@ericsson.com
+
 normative:
+  IEEE.754.1985: 
+  RFC2119: 
+  RFC3688: 
   RFC5226: 
+  RFC6838: 
+  RFC7049: 
+  RFC7159: 
+  RFC7303: 
+  RFC7396:
+  W3C.REC-exi-20110310: 
   BIPM:
     title: The International System of Units (SI)
     author:
@@ -69,14 +84,6 @@ normative:
     date: 2008
     seriesinfo:
       NIST: Special Publication 811
-  RFC3688: 
-  W3C.REC-exi-20110310: 
-  RFC7159: 
-  RFC7303: 
-  RFC7396:
-  RFC6838: 
-  RFC2119: 
-  IEEE.754.1985: 
   UCUM:
     title: The Unified Code for Units of Measure (UCUM)
     author:
@@ -86,15 +93,14 @@ normative:
     target: http://unitsofmeasure.org/ucum.html
     seriesinfo:
       Regenstrief Institute and Indiana University School of: Informatics
-  RFC7049: 
+
 informative:
+  RFC0020: 
   RFC2141: 
   RFC3986: 
-  RFC7252: 
-  RFC6690: 
-  RFC5952: 
   RFC4122: 
-  RFC0020: 
+  RFC5952: 
+  RFC6690: 
   I-D.arkko-core-dev-urn: 
   WADL:
     target: http://java.net/projects/wadl/sources/svn/content/trunk/www/wadl20090202.pdf
@@ -125,7 +131,7 @@ configured.
 Connecting sensors to the internet is not new, and there have been
 many protocols designed to facilitate it. This specification defines new
 media types for carrying simple sensor information in a protocol such as
-HTTP or CoAP {{RFC7252}} called the Sensor
+HTTP or CoAP called the Sensor
 Markup Language (SenML). This format was designed so that processors
 with very limited capabilities could easily encode a sensor measurement
 into the media type, while at the same time a server parsing the data
@@ -792,18 +798,15 @@ they are very loosely defined by this specification, and depending on
 the particular sensor implementation may behave in unexpected ways.
 Applications should be able to deal with the following issues:
 
-
-
 1. Many sensors will allow the cumulative sums to "wrap" back to
   zero after the value gets sufficiently large.
 
-1. Some sensors will reset the cumulative sum back to zero when the
+2. Some sensors will reset the cumulative sum back to zero when the
   device is reset, loses power, or is replaced with a different
   sensor.
 
-1. Applications cannot make assumptions about when the device
+3. Applications cannot make assumptions about when the device
   started accumulating values into the sum.
-
 
 Typically applications can make some assumptions about specific
 sensors that will allow them to deal with these problems. A common
