@@ -218,7 +218,7 @@ Base Units:
 
 Version:
 : Version number of media type format. This attribute is optional positive
-  integer and defaults to 1 if not present.
+  integer and defaults to 2 if not present.
 
 
 The measurement or parameter entries array contains values for sensor
