@@ -20,11 +20,11 @@ author:
 - ins: C. Jennings
   name: Cullen Jennings
   org: Cisco
-  street: 170 West Tasman Drive
-  city: San Jose
-  region: CA
-  code: '95134'
-  country: USA
+  street: 400 3rd Avenue SW
+  city: Calgary
+  region: AB
+  code: 'T2P 4H2'
+  country: Canada
   phone: "+1 408 421-9990"
   email: fluffy@cisco.com
 - ins: Z. Shelby
