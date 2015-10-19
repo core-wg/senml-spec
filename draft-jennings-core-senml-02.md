@@ -65,7 +65,8 @@ normative:
   RFC5226: 
   RFC6838: 
   RFC7049: 
-  RFC7159: 
+  RFC7159:
+  RFC7252: 
   RFC7303: 
   RFC7396:
   W3C.REC-exi-20110310: 
@@ -1153,9 +1154,16 @@ XML: N/A, the requested URIs are XML namespaces
 IANA is requested to assign CoAP Content-Format IDs for the SenML media
 types in the "CoAP Content-Formats" sub-registry, within the "CoRE
 Parameters" registry {{RFC7252}}. All IDs are assigned from the "Expert
-Review" (0-255) range.
+Review" (0-255) range. The assigned IDs are show in 
+{{tbl-coap-content-formats}}.
 
-
+| Media type               | ID  |
+| application/senml+json   | TBD |
+| application/senml+cbor   | TBD |
+| application/senml+xml    | TBD |
+| application/senml-exi    | TBD |
+{: #tbl-coap-content-formats cols="l l" title="CoAP Content-Format IDs"}
+ 
 
 # Security Considerations {#sec-sec}
 
