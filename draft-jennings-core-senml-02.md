@@ -575,10 +575,9 @@ unsigned integer is allowed.
 
 | Name                      | JSON label | CBOR label |
 | Version                   | ver        |         -1 |
-| Measurement or Parameters | e          |         -2 |
-| Base Name                 | bn         |         -3 |
-| Base Time                 | bt         |         -4 |
-| Base Units                | bu         |         -5 |
+| Base Name                 | bn         |         -2 |
+| Base Time                 | bt         |         -3 |
+| Base Units                | bu         |         -4 |
 | Name                      | n          |          0 |
 | Units                     | u          |          1 |
 | Value                     | v          |          2 |
@@ -1170,8 +1169,8 @@ information about the source of the data.
 # Acknowledgement
 
 We would like to thank Lisa Dusseault, Joe Hildebrand, Lyndsay
-Campbell, Martin Thomson, John Klensin, Bjoern Hoehrmann, and Carsten
-Bormann for their review comments.
+Campbell, Martin Thomson, John Klensin, Bjoern Hoehrmann, Carsten
+Bormann, and Christian Amsuess for their review comments.
 
 The CBOR Representation text was contributed by Carsten
 Bormann.
