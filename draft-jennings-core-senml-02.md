@@ -3,6 +3,9 @@ stand_alone: true
 ipr: trust200902
 docname: draft-jennings-core-senml-02
 cat: std
+
+date: October 18, 2015
+
 pi:
   toc: 'yes'
   symrefs: 'yes'
@@ -13,18 +16,20 @@ pi:
   colonspace: 'yes'
   rfcedstyle: 'no'
   tocdepth: '4'
+  
 title: Media Types for Sensor Markup Language (SENML)
 abbrev: Sensor Markup
 area: ART
+
 author:
 - ins: C. Jennings
   name: Cullen Jennings
   org: Cisco
-  street: 170 West Tasman Drive
-  city: San Jose
-  region: CA
-  code: '95134'
-  country: USA
+  street: 400 3rd Avenue SW
+  city: Calgary
+  region: AB
+  code: 'T2P 4H2'
+  country: Canada
   phone: "+1 408 421-9990"
   email: fluffy@cisco.com
 - ins: Z. Shelby
@@ -52,8 +57,18 @@ author:
   code: '02420'
   country: Finland
   email: ari.keranen@ericsson.com
+
 normative:
+  IEEE.754.1985: 
+  RFC2119: 
+  RFC3688: 
   RFC5226: 
+  RFC6838: 
+  RFC7049: 
+  RFC7159: 
+  RFC7303: 
+  RFC7396:
+  W3C.REC-exi-20110310: 
   BIPM:
     title: The International System of Units (SI)
     author:
@@ -69,33 +84,24 @@ normative:
     date: 2008
     seriesinfo:
       NIST: Special Publication 811
-  RFC3688: 
-  W3C.REC-exi-20110310: 
-  RFC7159: 
-  RFC7303: 
-  RFC7396:
-  RFC6838: 
-  RFC2119: 
-  IEEE.754.1985: 
-  UCUM:
-    title: The Unified Code for Units of Measure (UCUM)
-    author:
-    - ins: G. Schadow
-    - ins: C. McDonald
-    date: 2013
-    target: http://unitsofmeasure.org/ucum.html
-    seriesinfo:
-      Regenstrief Institute and Indiana University School of: Informatics
-  RFC7049: 
+
 informative:
+  RFC0020: 
   RFC2141: 
   RFC3986: 
-  RFC7252: 
-  RFC6690: 
-  RFC5952: 
   RFC4122: 
-  RFC0020: 
+  RFC5952: 
+  RFC6690: 
   I-D.arkko-core-dev-urn: 
+  UCUM:
+    title: The Unified Code for Units of Measure (UCUM) 
+    author:
+    - ins: G. Schadow 
+    - ins: C. McDonald 
+    date: 2013 
+    target: http://unitsofmeasure.org/ucum.html 
+    seriesinfo:
+      Regenstrief Institute and Indiana University School of: Informatics 
   WADL:
     target: http://java.net/projects/wadl/sources/svn/content/trunk/www/wadl20090202.pdf
     title: Web Application Description Language (WADL)
@@ -125,7 +131,7 @@ configured.
 Connecting sensors to the internet is not new, and there have been
 many protocols designed to facilitate it. This specification defines new
 media types for carrying simple sensor information in a protocol such as
-HTTP or CoAP {{RFC7252}} called the Sensor
+HTTP or CoAP called the Sensor
 Markup Language (SenML). This format was designed so that processors
 with very limited capabilities could easily encode a sensor measurement
 into the media type, while at the same time a server parsing the data
@@ -198,21 +204,21 @@ set of measurements and/or parameters. This array contains a base object
 with several optional attributes described below and a mandatory array 
 of one or more entries.
 
-Base Name
+Base Name:
 : This is a string that is prepended to the names found in the entries.
   This attribute is optional.
 
-Base Time
+Base Time:
 : A base time that is added to the time found in an entry. This 
   attribute is optional.
 
-Base Units
+Base Units:
 : A base unit that is assumed for all entries, unless otherwise indicated.
   This attribute is optional.
 
-Version
+Version:
 : Version number of media type format. This attribute is optional positive
-  integer and defaults to 1 if not present.
+  integer and defaults to 2 if not present.
 
 
 The measurement or parameter entries array contains values for sensor
@@ -222,7 +228,7 @@ parameters. There must be at least one entry in the array. This array is called 
 Each array entry contains several attributes, some of which are
 optional and some of which are mandatory:
 
-Name
+Name:
 : Name of the sensor or
   parameter. When appended to the Base Name attribute, this must
   result in a globally unique identifier for the resource. The name is
@@ -231,7 +237,7 @@ Name
   represent a large array of measurements from the same sensor without
   having to repeat its identifier on every measurement.
 
-Units
+Units:
 : Units for a measurement value. Optional.
 
 Value
@@ -242,14 +248,14 @@ Value
   Strings ("sv" for "String Value"). Exactly one of these three fields
   MUST appear.
 
-Sum
+Sum:
 : Integrated sum of the values over time. Optional. This attribute is
   in the units specified in the Unit value multiplied by seconds.
 
-Time
+Time:
 : Time when value was recorded. Optional. 
 
-Update Time
+Update Time:
 : A time in seconds that represents the maximum time before this sensor
   will provide an updated reading for a measurement. This can be used
   to detect the failure of sensors or communications path from the
@@ -533,7 +539,7 @@ at a separate time.
 The following example shows how to query one device that can
 provide multiple measurements. The example assumes that a client has
 fetched information from a device at 2001:db8::2 by performing a GET
-operation on http://[2001:db8::2] at Mon Oct 31 16:27:09 UTC 2011,
+operation on http://\[2001:db8::2\] at Mon Oct 31 16:27:09 UTC 2011,
 and has gotten two separate values as a result, a temperature and
 humidity measurement.
 
@@ -792,18 +798,15 @@ they are very loosely defined by this specification, and depending on
 the particular sensor implementation may behave in unexpected ways.
 Applications should be able to deal with the following issues:
 
-
-
 1. Many sensors will allow the cumulative sums to "wrap" back to
   zero after the value gets sufficiently large.
 
-1. Some sensors will reset the cumulative sum back to zero when the
+2. Some sensors will reset the cumulative sum back to zero when the
   device is reset, loses power, or is replaced with a different
   sensor.
 
-1. Applications cannot make assumptions about when the device
+3. Applications cannot make assumptions about when the device
   started accumulating values into the sum.
-
 
 Typically applications can make some assumptions about specific
 sensors that will allow them to deal with these problems. A common
@@ -823,10 +826,6 @@ the RFC number of this specification.
 IANA will create a registry of unit symbols. The primary purpose of
 this registry is to make sure that symbols uniquely map to give type
 of measurement. Definitions for many of these units can be found in {{NIST811}} and {{BIPM}}.
-
-In addition to the units in this table, any of the Unified Code for
-Units of Measure {{UCUM}} in case sensitive form (c/s
-column) can be prepended by the string "UCUM:" and used in SenML.
 
 | Symbol | Description                                | Reference |
 | m      | meter                                      | RFC-AAAA  |
@@ -894,50 +893,54 @@ the following guidelines:
 1. There needs to be a real and compelling use for any new unit to
   be added.
 
-1. Units should define the semantic information and be chosen
+2. Units should define the semantic information and be chosen
   carefully. Implementors need to remember that the same word may be
   used in different real-life contexts. For example, degrees when
   measuring latitude have no semantic relation to degrees when
   measuring temperature; thus two different units are needed.
 
-1. These measurements are produced by computers for consumption by
+3. These measurements are produced by computers for consumption by
   computers. The principle is that conversion has to be easily be
   done when both reading and writing the media type. The value of a
   single canonical representation outweighs the convenience of easy
   human representations or loss of precision in a conversion.
 
-1. Use of SI prefixes such as "k" before the unit is not allowed.
+4. Use of SI prefixes such as "k" before the unit is not allowed.
   Instead one can represent the value using scientific notation such
   a 1.2e3.
 
-1. For a given type of measurement, there will only be one unit
+5. For a given type of measurement, there will only be one unit
   type defined. So for length, meters are defined and other lengths
   such as mile, foot, light year are not allowed. For most cases,
   the SI unit is preferred.
 
-1. Symbol names that could be easily confused with existing common
+6. Symbol names that could be easily confused with existing common
   units or units combined with prefixes should be avoided. For
   example, selecting a unit name of "mph" to indicate something that
   had nothing to do with velocity would be a bad choice, as "mph" is
   commonly used to mean miles per hour.
 
-1. The following should not be used because the are common SI
+7. The following should not be used because the are common SI
   prefixes: Y, Z, E, P, T, G, M, k, h, da, d, c, n, u, p, f, a, z,
   y, Ki, Mi, Gi, Ti, Pi, Ei, Zi, Yi.
 
-1. The following units should not be used as they are commonly
+8. The following units should not be used as they are commonly
   used to represent other measurements Ky, Gal, dyn, etg, P, St, Mx,
   G, Oe, Gb, sb, Lmb, ph, Ci, R, RAD, REM, gal, bbl, qt, degF, Cal,
   BTU, HP, pH, B/s, psi, Torr, atm, at, bar, kWh.
 
-1. The unit names are case sensitive and the correct case needs to
+9. The unit names are case sensitive and the correct case needs to
   be used, but symbols that differ only in case should not be
   allocated.
 
-1. A number after a unit typically indicates the previous unit
+10. A number after a unit typically indicates the previous unit
   raised to that power, and the / indicates that the units that
   follow are the reciprocal. A unit should have only one / in the
   name.
+
+11. A good list of common units can be found in the Unified Code for Units of
+   Measure {{UCUM}}.
+
 
 
 ## Media Type Registration {#sec-iana-media}
