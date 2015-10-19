@@ -65,7 +65,8 @@ normative:
   RFC5226: 
   RFC6838: 
   RFC7049: 
-  RFC7159: 
+  RFC7159:
+  RFC7252: 
   RFC7303: 
   RFC7396:
   W3C.REC-exi-20110310: 
@@ -755,15 +756,15 @@ A small temperature sensor devices that only generates this one EXI
 file does not really need an full EXI implementation. It can simple hard
 code the output replacing the one wire device ID starting at byte 0x14
 and going to byte 0x23 with it's device ID, and replacing the value
-"0xe7 0x01" at location 0x33 to 0x34 with the current temperature. The
+"0xe7 0x01" at location 0x32 to 0x33 with the current temperature. The
 EXI Specification {{W3C.REC-exi-20110310}} contains
 the full information on how floating point numbers are represented, but
 for the purpose of this sensor, the temperature can be converted to an
 integer in tenths of degrees (231 in this example). EXI stores 7 bits
 of the integer in each byte with the top bit set to one if there are
-further bytes. So the first bytes at location 0x33 is set to low 7 bits
+further bytes. So the first bytes at location 0x32 is set to low 7 bits
 of the integer temperature in tenths of degrees plus 0x80. In this
-example 231 & 0x7F + 0x80 = 0xE7. The second byte at location 0x34
+example 231 & 0x7F + 0x80 = 0xE7. The second byte at location 0x33
 is set to the integer temperature in tenths of degrees right shifted 7
 bits. In this example 231 >> 7 = 0x01.
 
@@ -1152,7 +1153,21 @@ Registrant Contact: The IESG.
 
 XML: N/A, the requested URIs are XML namespaces
 
+## CoAP Content-Format Registration
 
+IANA is requested to assign CoAP Content-Format IDs for the SenML media
+types in the "CoAP Content-Formats" sub-registry, within the "CoRE
+Parameters" registry {{RFC7252}}. All IDs are assigned from the "Expert
+Review" (0-255) range. The assigned IDs are show in 
+{{tbl-coap-content-formats}}.
+
+| Media type               | ID  |
+| application/senml+json   | TBD |
+| application/senml+cbor   | TBD |
+| application/senml+xml    | TBD |
+| application/senml-exi    | TBD |
+{: #tbl-coap-content-formats cols="l l" title="CoAP Content-Format IDs"}
+ 
 
 # Security Considerations {#sec-sec}
 
