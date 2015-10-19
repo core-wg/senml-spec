@@ -825,7 +825,12 @@ the RFC number of this specification.
 
 IANA will create a registry of unit symbols. The primary purpose of
 this registry is to make sure that symbols uniquely map to give type
-of measurement. Definitions for many of these units can be found in {{NIST811}} and {{BIPM}}.
+of measurement. Definitions for many of these units can be found in 
+{{NIST811}} and {{BIPM}}.
+
+All the registry entries in {{tbl-iana-symbols}} use "v" (numeric)
+values. New entries allocated in the registry must define what kind of
+values they use.
 
 | Symbol | Description                                | Reference |
 | m      | meter                                      | RFC-AAAA  |
@@ -876,7 +881,7 @@ of measurement. Definitions for many of these units can be found in {{NIST811}} 
 | EL     | remaining battery energy level in seconds  | RFC-AAAA  |
 | beat/m | Heart rate in beats per minute             | RFC-AAAA  |
 | beats  | Cumulative number of heart beats           | RFC-AAAA  |
-{:cols='r l l'}
+{: #tbl-iana-symbols cols='r l l'}
 
 * Note 1: A value of 0.0 indicates the switch is off while 100.0
   indicates on.
