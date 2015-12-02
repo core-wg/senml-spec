@@ -219,7 +219,7 @@ Base Units:
 
 Version:
 : Version number of media type format. This attribute is optional positive
-  integer and defaults to 2 if not present.
+  integer and defaults to 3 if not present.
 
 
 The measurement or parameter entries array contains values for sensor
@@ -558,7 +558,7 @@ The RelaxNG schema for the XML is:
 
 
 ~~~~
-{::include senml-v2.rnc}
+{::include senml-v3.rnc}
 ~~~~
 
 
@@ -585,7 +585,7 @@ The following XSD Schema is generated from the RelaxNG and used for
 strict schema guided EXI processing.
 
 ~~~~
-{::include senml-v2-gen.xsd}
+{::include senml-v3-gen.xsd}
 ~~~~
 
 The following shows a hexdump of the EXI produced from encoding the

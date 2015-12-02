@@ -1,6 +1,6 @@
 [{"bn": "http://[2001:db8::2]/",
   "bt": 1320078429,
-  "ver": 1},
- [ { "n": "temperature", "v": 27.2, "u": "Cel" },
-   { "n": "humidity", "v": 80, "u": "%RH" } ]
+  "ver": 3},
+   { "n": "temperature", "v": 27.2, "u": "Cel" },
+   { "n": "humidity", "v": 80, "u": "%RH" } 
 ]
