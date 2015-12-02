@@ -5,7 +5,7 @@ xml2rfc ?= xml2rfc
 kramdown-rfc2629 ?= kramdown-rfc2629
 
 
-draft = draft-jennings-core-senml-02
+draft = draft-jennings-core-senml-03
 
 .PHONY: latest txt html pdf  diff clean  
 

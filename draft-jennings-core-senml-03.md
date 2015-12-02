@@ -1,10 +1,10 @@
 ---
 stand_alone: true
 ipr: trust200902
-docname: draft-jennings-core-senml-02
+docname: draft-jennings-core-senml-03
 cat: std
 
-date: October 18, 2015
+date: December 1, 2015
 
 pi:
   toc: 'yes'
@@ -161,7 +161,7 @@ For example, the following shows a measurement from a temperature
 gauge encoded in the JSON syntax.
 
 ~~~~
-[{}, [{ "n": "urn:dev:ow:10e2073a01080063", "v":23.5, "u":"Cel" }]]
+{::include ex1.json}
 ~~~~
 
 In the example above, the first element of the root array is empty
@@ -430,7 +430,7 @@ The following shows a temperature reading taken approximately
 address of 10e2073a01080063:
 
 ~~~~
-[ {}, [{ "n": "urn:dev:ow:10e2073a01080063", "v":23.5 }] ]
+{::include ex1.json}
 ~~~~
 
 
@@ -441,30 +441,15 @@ unspecified time. The device has an EUI-64 MAC address of
 0024befffe804ff1.
 
 ~~~~
-[{"bn": "urn:dev:mac:0024befffe804ff1/"},
- [ { "n": "voltage", "t": 0, "u": "V", "v": 120.1 },
-   { "n": "current", "t": 0, "u": "A", "v": 1.2 } ]
-]
+{::include ex2.json}
 ~~~~
 
 The next example is similar to the above one, but shows current
 at Tue Jun 8 18:01:16 UTC 2010 and at each second for the previous 5
 seconds.
 
-
 ~~~~
-[{"bn": "urn:dev:mac:0024befffe804ff1/",
-  "bt": 1276020076,
-  "bu": "A",
-  "ver": 1},
- [ { "n": "voltage", "u": "V", "v": 120.1 },
-   { "n": "current", "t": -5, "v": 1.2 },
-   { "n": "current", "t": -4, "v": 1.30 },
-   { "n": "current", "t": -3, "v": 0.14e1 },
-   { "n": "current", "t": -2, "v": 1.5 },
-   { "n": "current", "t": -1, "v": 1.6 },
-   { "n": "current", "t": 0,  "v": 1.7 } ]
-]
+{::include ex3.json}
 ~~~~
 
 Note that in some usage scenarios of SenML the
@@ -485,19 +470,7 @@ reported at the time it arrives:
 
 
 ~~~~
-[{"bn": "http://[2001:db8::1]",
-  "bt": 1320067464,
-  "bu": "%RH"},
- [ { "v": 21.2, "t": 0 },
-   { "v": 21.3, "t": 10 },
-   { "v": 21.4, "t": 20 },
-   { "v": 21.4, "t": 30 },
-   { "v": 21.5, "t": 40 },
-   { "v": 21.5, "t": 50 },
-   { "v": 21.5, "t": 60 },
-   { "v": 21.6, "t": 70 },
-   { "v": 21.7, "t": 80 },
-   { "v": 21.5, "t": 90 },
+{::include ex4-gen.json-trim}
 ...
 ~~~~
 
@@ -515,23 +488,7 @@ at a separate time.
 
 
 ~~~~
-[{"bn": "http://[2001:db8::1]",
-  "bt": 1320067464,
-  "bu": "%RH"},
- [ { "v": 20.0, "t": 0 },
-   { "v": 24.30621, "u": "lon", "t": 0 },
-   { "v": 60.07965, "u": "lat", "t": 0 },  
-   { "v": 20.3, "t": 60 },
-   { "v": 24.30622, "u": "lon", "t": 60 },
-   { "v": 60.07965, "u": "lat", "t": 60 },
-   { "v": 20.7, "t": 120 },
-   { "v": 24.30623, "u": "lon", "t": 120 },
-   { "v": 60.07966, "u": "lat", "t": 120 },
-   { "v": 98.0, "u": "%EL", "t": 150 },
-   { "v": 21.2, "t": 180 },
-   { "v": 24.30628, "u": "lon", "t": 180 },
-   { "v": 60.07967, "u": "lat", "t": 180 } ]
-]
+{::include ex5.json}
 ~~~~
 
 
@@ -546,12 +503,7 @@ humidity measurement.
 
 
 ~~~~
-[{"bn": "http://[2001:db8::2]/",
-  "bt": 1320078429,
-  "ver": 1},
- [ { "n": "temperature", "v": 27.2, "u": "Cel" },
-   { "n": "humidity", "v": 80, "u": "%RH" } ]
-]
+{::include ex6.json}
 ~~~~
 
 
@@ -599,50 +551,14 @@ sensor measurement as in {{co-ex}}.
 
 
 ~~~~
-<?xml version="1.0" encoding="UTF-8"?>
-<senml xmlns="urn:ietf:params:xml:ns:senml"
-       bn="urn:dev:mac:0024befffe804ff1/"
-       bt="1276020076"
-       ver="1" bu="A">
-  <e n="voltage" u="V" v="120.1" />
-  <e n="current" t="-5" v="1.2" />
-  <e n="current" t="-4" v="1.30" />
-  <e n="current" t="-3" v="0.14e1" />
-  <e n="current" t="-2" v="1.5" />
-  <e n="current" t="-1" v="1.6" />
-  <e n="current" t="0" v="1.7" />
-</senml>
+{::include ex7.xml}
 ~~~~
 
 The RelaxNG schema for the XML is:
 
 
 ~~~~
-default namespace = "urn:ietf:params:xml:ns:senml"
-namespace rng = "http://relaxng.org/ns/structure/1.0"
-
-e = element e {
-  attribute n { xsd:string }?,
-  attribute u { xsd:string }?,
-  attribute v { xsd:float }?,
-  attribute sv { xsd:string }?,
-  attribute bv { xsd:boolean }?,
-  attribute s { xsd:decimal }?,
-  attribute t { xsd:int }?,
-  attribute ut { xsd:int }?,
-  p*
-}
-
-senml =
-  element senml {
-    attribute bn { xsd:string }?,
-    attribute bt { xsd:int }?,
-    attribute bu { xsd:string }?,
-    attribute ver { xsd:int }?,
-    e*
-  }
-
-start = senml
+{::include senml-v2.rnc}
 ~~~~
 
 
@@ -668,38 +584,8 @@ Content-Type header.
 The following XSD Schema is generated from the RelaxNG and used for
 strict schema guided EXI processing.
 
-
 ~~~~
-<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           elementFormDefault="qualified"
-           targetNamespace="urn:ietf:params:xml:ns:senml"
-           xmlns:ns1="urn:ietf:params:xml:ns:senml">
-
-  <xs:element name="e">
-    <xs:complexType>
-      <xs:attribute name="n" type="xs:string"/>
-      <xs:attribute name="u" type="xs:string"/>
-      <xs:attribute name="v" type="xs:float"/>
-      <xs:attribute name="sv" type="xs:string"/>
-      <xs:attribute name="bv" type="xs:boolean"/>
-      <xs:attribute name="s" type="xs:decimal"/>
-      <xs:attribute name="t" type="xs:int"/>
-      <xs:attribute name="ut" type="xs:int"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="senml">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:e"/>
-      </xs:sequence>
-      <xs:attribute name="bn" type="xs:string"/>
-      <xs:attribute name="bt" type="xs:int"/>
-      <xs:attribute name="bu" type="xs:string"/>
-      <xs:attribute name="ver" type="xs:int"/>
-    </xs:complexType>
-  </xs:element>
-</xs:schema>
+{::include senml-v2-gen.xsd}
 ~~~~
 
 The following shows a hexdump of the EXI produced from encoding the
@@ -708,23 +594,13 @@ first example in {{co-ex}} in JSON format.
 
 
 ~~~~
-<?xml version="1.0" encoding="UTF-8"?>
-<senml xmlns="urn:ietf:params:xml:ns:senml"
-       bn="urn:dev:ow:10e2073a01080063" >
-  <e n="voltage" t="0" v="120.1" u="V" />
-  <e n="current" t="0" v="1.2" u="A" />
-</senml>
+{::include ex8.xml}
 ~~~~
 
 Which compresses to the following displayed in hexdump:
 
-
 ~~~~
-00000000  a0 30 0d 85 01 d7 57 26  e3 a6 46 57 63 a6 f7 73
-00000010  a3 13 06 53 23 03 73 36  13 03 13 03 83 03 03 63
-00000020  36 21 2e cd ed 8e 8c 2c  ec a8 00 00 d5 95 88 4c
-00000030  02 08 4b 1b ab 93 93 2b  73 a2 00 00 34 14 19 00
-00000040  c0
+{::include ex8-gen.hex}
 ~~~~
 
 The above example used the bit packed form of EXI but it is also
@@ -735,36 +611,29 @@ tenths of degrees Celsius over a range of 0.0 to 55.0. It would
 produce an XML SenML file such as:
 
 ~~~~
-<?xml version="1.0" encoding="UTF-8"?>
-<senml xmlns="urn:ietf:params:xml:ns:senml"
-       bn="urn:dev:ow:10e2073a01080063" >
-  <e n="temp" v="23.1" u="Cel" />
-</senml>
+{::include ex9.xml}
 ~~~~
 
 The compressed form, using the byte alignment option of EXI, for the
 above XML is the following:
 
 ~~~~
-00000000  a054c9006c200000 1d75726e3a646576 |.T..l ...urn:dev|
-00000010  3a6f773a31306532 3037336130313038 |:ow:10e2073a0108|
-00000020  3030363304010674 656d70030543656c |0063...temp..Cel|
-00000030  0100e70101000102                  |........|
+{::include ex9-gen.hex}
 ~~~~
 
 A small temperature sensor devices that only generates this one EXI
 file does not really need an full EXI implementation. It can simple hard
-code the output replacing the one wire device ID starting at byte 0x14
-and going to byte 0x23 with it's device ID, and replacing the value
-"0xe7 0x01" at location 0x32 to 0x33 with the current temperature. The
+code the output replacing the one wire device ID starting at byte 0x24
+and going to byte 0x33 with it's device ID, and replacing the value
+"0xe7 0x01" at location 0x41 to 0x42 with the current temperature. The
 EXI Specification {{W3C.REC-exi-20110310}} contains
 the full information on how floating point numbers are represented, but
 for the purpose of this sensor, the temperature can be converted to an
 integer in tenths of degrees (231 in this example). EXI stores 7 bits
 of the integer in each byte with the top bit set to one if there are
-further bytes. So the first bytes at location 0x32 is set to low 7 bits
+further bytes. So the first bytes at location 0x41 is set to low 7 bits
 of the integer temperature in tenths of degrees plus 0x80. In this
-example 231 & 0x7F + 0x80 = 0xE7. The second byte at location 0x33
+example 231 & 0x7F + 0x80 = 0xE7. The second byte at location 0x42
 is set to the integer temperature in tenths of degrees right shifted 7
 bits. In this example 231 >> 7 = 0x01.
 
@@ -892,8 +761,6 @@ New entries can be added to the registration by either Expert
 Review or IESG Approval as defined in {{RFC5226}}.
 Experts should exercise their own good judgment but need to consider
 the following guidelines:
-
-
 
 1. There needs to be a real and compelling use for any new unit to
   be added.
