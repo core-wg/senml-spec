@@ -65,7 +65,8 @@ normative:
   RFC5226: 
   RFC6838: 
   RFC7049: 
-  RFC7159: 
+  RFC7159:
+  RFC7252: 
   RFC7303: 
   RFC7396:
   W3C.REC-exi-20110310: 
@@ -518,18 +519,18 @@ at a separate time.
   "bt": 1320067464,
   "bu": "%RH"},
  [ { "v": 20.0, "t": 0 },
-   { "sv": "E 24' 30.621", "u": "lon", "t": 0 },
-   { "sv": "N 60' 7.965", "u": "lat", "t": 0 },
+   { "v": 24.30621, "u": "lon", "t": 0 },
+   { "v": 60.07965, "u": "lat", "t": 0 },  
    { "v": 20.3, "t": 60 },
-   { "sv": "E 24' 30.622", "u": "lon", "t": 60 },
-   { "sv": "N 60' 7.965", "u": "lat", "t": 60 },
+   { "v": 24.30622, "u": "lon", "t": 60 },
+   { "v": 60.07965, "u": "lat", "t": 60 },
    { "v": 20.7, "t": 120 },
-   { "sv": "E 24' 30.623", "u": "lon", "t": 120 },
-   { "sv": "N 60' 7.966", "u": "lat", "t": 120 },
+   { "v": 24.30623, "u": "lon", "t": 120 },
+   { "v": 60.07966, "u": "lat", "t": 120 },
    { "v": 98.0, "u": "%EL", "t": 150 },
    { "v": 21.2, "t": 180 },
-   { "sv": "E 24' 30.628", "u": "lon", "t": 180 },
-   { "sv": "N 60' 7.967", "u": "lat", "t": 180 } ]
+   { "v": 24.30628, "u": "lon", "t": 180 },
+   { "v": 60.07967, "u": "lat", "t": 180 } ]
 ]
 ~~~~
 
@@ -575,10 +576,9 @@ unsigned integer is allowed.
 
 | Name                      | JSON label | CBOR label |
 | Version                   | ver        |         -1 |
-| Measurement or Parameters | e          |         -2 |
-| Base Name                 | bn         |         -3 |
-| Base Time                 | bt         |         -4 |
-| Base Units                | bu         |         -5 |
+| Base Name                 | bn         |         -2 |
+| Base Time                 | bt         |         -3 |
+| Base Units                | bu         |         -4 |
 | Name                      | n          |          0 |
 | Units                     | u          |          1 |
 | Value                     | v          |          2 |
@@ -756,15 +756,15 @@ A small temperature sensor devices that only generates this one EXI
 file does not really need an full EXI implementation. It can simple hard
 code the output replacing the one wire device ID starting at byte 0x14
 and going to byte 0x23 with it's device ID, and replacing the value
-"0xe7 0x01" at location 0x33 to 0x34 with the current temperature. The
+"0xe7 0x01" at location 0x32 to 0x33 with the current temperature. The
 EXI Specification {{W3C.REC-exi-20110310}} contains
 the full information on how floating point numbers are represented, but
 for the purpose of this sensor, the temperature can be converted to an
 integer in tenths of degrees (231 in this example). EXI stores 7 bits
 of the integer in each byte with the top bit set to one if there are
-further bytes. So the first bytes at location 0x33 is set to low 7 bits
+further bytes. So the first bytes at location 0x32 is set to low 7 bits
 of the integer temperature in tenths of degrees plus 0x80. In this
-example 231 & 0x7F + 0x80 = 0xE7. The second byte at location 0x34
+example 231 & 0x7F + 0x80 = 0xE7. The second byte at location 0x33
 is set to the integer temperature in tenths of degrees right shifted 7
 bits. In this example 231 >> 7 = 0x01.
 
@@ -825,7 +825,12 @@ the RFC number of this specification.
 
 IANA will create a registry of unit symbols. The primary purpose of
 this registry is to make sure that symbols uniquely map to give type
-of measurement. Definitions for many of these units can be found in {{NIST811}} and {{BIPM}}.
+of measurement. Definitions for many of these units can be found in 
+{{NIST811}} and {{BIPM}}.
+
+All the registry entries in {{tbl-iana-symbols}} use "v" (numeric)
+values. New entries allocated in the registry must define what kind of
+values they use.
 
 | Symbol | Description                                | Reference |
 | m      | meter                                      | RFC-AAAA  |
@@ -876,7 +881,7 @@ of measurement. Definitions for many of these units can be found in {{NIST811}} 
 | EL     | remaining battery energy level in seconds  | RFC-AAAA  |
 | beat/m | Heart rate in beats per minute             | RFC-AAAA  |
 | beats  | Cumulative number of heart beats           | RFC-AAAA  |
-{:cols='r l l'}
+{: #tbl-iana-symbols cols='r l l'}
 
 * Note 1: A value of 0.0 indicates the switch is off while 100.0
   indicates on.
@@ -1148,7 +1153,21 @@ Registrant Contact: The IESG.
 
 XML: N/A, the requested URIs are XML namespaces
 
+## CoAP Content-Format Registration
 
+IANA is requested to assign CoAP Content-Format IDs for the SenML media
+types in the "CoAP Content-Formats" sub-registry, within the "CoRE
+Parameters" registry {{RFC7252}}. All IDs are assigned from the "Expert
+Review" (0-255) range. The assigned IDs are show in 
+{{tbl-coap-content-formats}}.
+
+| Media type               | ID  |
+| application/senml+json   | TBD |
+| application/senml+cbor   | TBD |
+| application/senml+xml    | TBD |
+| application/senml-exi    | TBD |
+{: #tbl-coap-content-formats cols="l l" title="CoAP Content-Format IDs"}
+ 
 
 # Security Considerations {#sec-sec}
 
@@ -1170,8 +1189,8 @@ information about the source of the data.
 # Acknowledgement
 
 We would like to thank Lisa Dusseault, Joe Hildebrand, Lyndsay
-Campbell, Martin Thomson, John Klensin, Bjoern Hoehrmann, and Carsten
-Bormann for their review comments.
+Campbell, Martin Thomson, John Klensin, Bjoern Hoehrmann, Carsten
+Bormann, and Christian Amsuess for their review comments.
 
 The CBOR Representation text was contributed by Carsten
 Bormann.
