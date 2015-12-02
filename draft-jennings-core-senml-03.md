@@ -68,7 +68,6 @@ normative:
   RFC7159:
   RFC7252: 
   RFC7303: 
-  RFC7396:
   W3C.REC-exi-20110310: 
   BIPM:
     title: The International System of Units (SI)
@@ -103,14 +102,6 @@ informative:
     target: http://unitsofmeasure.org/ucum.html 
     seriesinfo:
       Regenstrief Institute and Indiana University School of: Informatics 
-  WADL:
-    target: http://java.net/projects/wadl/sources/svn/content/trunk/www/wadl20090202.pdf
-    title: Web Application Description Language (WADL)
-    author:
-    - ins: M. J. H. Hadley
-      name: Marc J. Hadley
-      org: Sun Microsystems Inc.
-    date: 2009
 
 --- abstract
 
@@ -387,13 +378,13 @@ a "bu" attribute with a value of type string. The object MAY contain a "ver"
 attribute with a value of type number. The object MAY contain other attribute
 value pairs.
 
-The objects MAY include the "n", "u", and "sv" attributes are of type string,
-the "t" and "ut" attributes are of type number, the "bv" attribute is of type
+The objects MAY include the "n", "u", and "vs" attributes are of type string,
+the "t" and "ut" attributes are of type number, the "vb" attribute is of type
 boolean, and the "v" and "s" attributes are of type floating point for the SenML
 atributes defined in the table above. All the attributes are optional, but as
 specified in {{semant}}, one of the "v", "vs", or "vb" attributes MUST appear
 unless the "s" attribute is also present in Records that represent a
-measurement.  The "v", and "sv", and "bv" attributes MUST NOT appear together in
+measurement.  The "v", and "vs", and "vb" attributes MUST NOT appear together in
 the same object.
 
 Systems receiving measurements MUST be able to process the range of floating
@@ -621,7 +612,7 @@ not really need an full EXI implementation. It can simple hard code the output
 replacing the one wire device ID starting at byte 0x16 and going to byte 0x31
 with it's device ID, and replacing the value "0xe7 0x01" at location 0x38 to
 0x39 with the current temperature. The EXI Specification
-{{W3C.REC-exi-20110310}} contains the full information on how floating point
+{{W3C.REC-exi-20110310}} contains the full information 'on how floating point
 numbers are represented, but for the purpose of this sensor, the temperature can
 be converted to an integer in tenths of degrees (231 in this example). EXI
 stores 7 bits of the integer in each byte with the top bit set to one if there

@@ -1,25 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="urn:ietf:params:xml:ns:senml" xmlns:ns1="urn:ietf:params:xml:ns:senml">
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+elementFormDefault="qualified"
+targetNamespace="urn:ietf:params:xml:ns:senml"
+xmlns:ns1="urn:ietf:params:xml:ns:senml">
   <xs:element name="senml">
     <xs:complexType>
-      <xs:attribute name="bn" type="xs:string"/>
-      <xs:attribute name="bt" type="xs:int"/>
-      <xs:attribute name="bu" type="xs:string"/>
-      <xs:attribute name="n" type="xs:string"/>
-      <xs:attribute name="s" type="xs:float"/>
-      <xs:attribute name="t" type="xs:int"/>
-      <xs:attribute name="u" type="xs:string"/>
-      <xs:attribute name="ut" type="xs:int"/>
-      <xs:attribute name="v" type="xs:float"/>
-      <xs:attribute name="vb" type="xs:boolean"/>
-      <xs:attribute name="ver" type="xs:int"/>
-      <xs:attribute name="vs" type="xs:string"/>
+      <xs:attribute name="bn" type="xs:string" />
+      <xs:attribute name="bt" type="xs:int" />
+      <xs:attribute name="bu" type="xs:string" />
+      <xs:attribute name="n" type="xs:string" />
+      <xs:attribute name="s" type="xs:float" />
+      <xs:attribute name="t" type="xs:int" />
+      <xs:attribute name="u" type="xs:string" />
+      <xs:attribute name="ut" type="xs:int" />
+      <xs:attribute name="v" type="xs:float" />
+      <xs:attribute name="vb" type="xs:boolean" />
+      <xs:attribute name="ver" type="xs:int" />
+      <xs:attribute name="vs" type="xs:string" />
     </xs:complexType>
   </xs:element>
   <xs:element name="senmls">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="ns1:senml"/>
+        <xs:element maxOccurs="unbounded" ref="ns1:senml" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

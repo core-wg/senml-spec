@@ -36,14 +36,16 @@ clean:
 	$(xml2rfc) $< -o $@ --html
 
 %.gen.xml: %.json
-	checkSenML -xml -i $< > $@
+	checkSenML -xml -i $< | tidy -xml -i -wrap 68 -q -o $@
 
 %.chk: %.xml senml3.rnc
 	java -jar bin/jing.jar -c senml3.rnc $< > $@
 
-%.gen.xsd: %.rnc 
+%.tmp.xsd: %.rnc 
 	java -jar bin/trang.jar $< $@
 
+%.gen.xsd: %.tmp.xsd 
+	cat $< | tidy -xml -q -i -wrap 68 -o $@
 
 
 ex4.gen.json-trim: ex4.json
@@ -63,4 +65,4 @@ ex9.gen.exi: ex9.gen.xml senml3.gen.xsd
 	java -cp "bin/xercesImpl.jar:bin/exificient.jar" com.siemens.ct.exi.cmd.EXIficientCMD -encode -i ex9.gen.xml -o ex9.gen.exi -schema senml3.gen.xsd -strict -includeOptions -includeSchemaId -bytePacked 
 
 ex9.gen.hex: ex9.gen.exi
-	hexdump -C ex9.gen.exi > ex9.gen.hex
+	hexdump -C ex9.gen.exi | sed -e "s/000000//" | sed -e "s/  |/ |/" | sed -e "s/  / /" | sed -e "s/  / /" > ex9.gen.hex
