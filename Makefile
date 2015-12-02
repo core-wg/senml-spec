@@ -7,9 +7,11 @@ kramdown-rfc2629 ?= kramdown-rfc2629
 
 draft = draft-jennings-core-senml-03
 
-.PHONY: latest txt html pdf  diff clean  
+.PHONY: latest txt html pdf  diff clean check 
 
-latest: txt html senml-chk.xml senml-gen.jlog
+latest: txt html 
+
+check: ex9.gen.chk ex8.gen.chk ex7.gen.chk ex6.gen.chk ex5.gen.chk ex4.gen.chk ex3.gen.chk ex2.gen.chk ex1.gen.chk
 
 
 txt: $(draft).txt
@@ -18,13 +20,13 @@ pdf: $(draft).pdf
 
 
 clean:
-	-rm -f $(draft).{txt,html,xml,pdf} senml-gen.* senml-v3-gen.* ex[0-9]-gen.{exi,hex,json-trim}
+	-rm -f $(draft).{txt,html,xml,pdf} *.gen.{chk,xsd,hex,exi,xml} *.gen.json-trim
 
 
-.INTERMEDIATE: $(draft).xml
+.INTERMEDIATE: $(draft).xml 
 
 
-%.xml: %.md ex4-gen.json-trim senml-v3-gen.xsd ex8-gen.hex ex9-gen.hex
+%.xml: %.md ex1.json ex1.json ex2.json ex3.json ex4.gen.json-trim ex5.json ex6.json ex7.xml senml3.rnc senml3.gen.xsd ex8.xml ex8.gen.hex ex9.xml ex9.gen.hex 
 	$(kramdown-rfc2629) $< > $@
 
 %.txt: %.xml
@@ -34,42 +36,29 @@ clean:
 	$(xml2rfc) $< -o $@ --html
 
 
+%.gen.xml: %.json
+	checkSenML -xml -i $< > $@
 
-senml-gen.xml: senml.xml
-	cp senml.xml senml-gen.xml
+%.chk: %.xml senml3.rnc
+	java -jar bin/jing.jar -c senml3.rnc $< > $@
 
-senml-gen.exi: senml-gen.xml senml-gen.xsd
-	java -cp "bin/xercesImpl.jar:bin/exificient.jar" com.siemens.ct.exi.cmd.EXIficientCMD -encode -i senml-gen.xml -o senml-gen.exi -schema senml-gen.xsd -bytePacked -strict -includeOptions -includeSchemaId 
+%.gen.xsd: %.rnc 
+	java -jar bin/trang.jar $< $@
 
-senml-chk.xml: senml-gen.exi senml-gen.xsd
-	java -cp "bin/xercesImpl.jar:bin/exificient.jar" com.siemens.ct.exi.cmd.EXIficientCMD -decode -i senml-gen.exi -o senml-chk.xml -schema senml-gen.xsd -bytePacked -strict -includeOptions -includeSchemaId 
-
-senml-gen.rng: senml.rnc
-	java -jar bin/trang.jar senml.rnc senml-gen.rng
-
-senml-gen.xsd: senml.rnc 
-	java -jar bin/trang.jar senml.rnc senml-gen.xsd
-
-senml-v3-gen.xsd: senml-v3.rnc 
-	java -jar bin/trang.jar senml-v3.rnc senml-v3-gen.xsd
-
-senml-gen.jlog: senml.rnc senml-gen.xml
-	java -jar bin/jing.jar -c senml.rnc senml-gen.xml > senml-gen.jlog
+ex4.gen.json-trim: ex4.json
+	head -13 <  $< > $@ 
 
 
-ex4-gen.json-trim: ex4.json
-	head -13 < ex4.json > ex4-gen.json-trim
+
+ex8.gen.exi: ex8.xml senml3.gen.xsd
+	java -cp "bin/xercesImpl.jar:bin/exificient.jar" com.siemens.ct.exi.cmd.EXIficientCMD -encode -i ex8.xml -o ex8.gen.exi -schema senml3.gen.xsd -strict -includeOptions -includeSchemaId 
+
+ex8.gen.hex: ex8.gen.exi
+	hexdump ex8.gen.exi > ex8.gen.hex
 
 
-ex8-gen.exi: ex8.xml senml-v3-gen.xsd
-	java -cp "bin/xercesImpl.jar:bin/exificient.jar" com.siemens.ct.exi.cmd.EXIficientCMD -encode -i ex8.xml -o ex8-gen.exi -schema senml-v3-gen.xsd -strict -includeOptions -includeSchemaId 
+ex9.gen.exi: ex9.xml senml3.gen.xsd
+	java -cp "bin/xercesImpl.jar:bin/exificient.jar" com.siemens.ct.exi.cmd.EXIficientCMD -encode -i ex9.xml -o ex9.gen.exi -schema senml3.gen.xsd -bytePacked -strict -includeOptions -includeSchemaId 
 
-ex8-gen.hex: ex8-gen.exi
-	hexdump ex8-gen.exi > ex8-gen.hex
-
-
-ex9-gen.exi: ex9.xml senml-v3-gen.xsd
-	java -cp "bin/xercesImpl.jar:bin/exificient.jar" com.siemens.ct.exi.cmd.EXIficientCMD -encode -i ex9.xml -o ex9-gen.exi -schema senml-v3-gen.xsd -bytePacked -strict -includeOptions -includeSchemaId 
-
-ex9-gen.hex: ex9-gen.exi
-	hexdump -C ex9-gen.exi > ex9-gen.hex
+ex9.gen.hex: ex9.gen.exi
+	hexdump -C ex9.gen.exi > ex9.gen.hex

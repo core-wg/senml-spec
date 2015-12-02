@@ -470,7 +470,7 @@ reported at the time it arrives:
 
 
 ~~~~
-{::include ex4-gen.json-trim}
+{::include ex4.gen.json-trim}
 ...
 ~~~~
 
@@ -558,7 +558,7 @@ The RelaxNG schema for the XML is:
 
 
 ~~~~
-{::include senml-v3.rnc}
+{::include senml3.rnc}
 ~~~~
 
 
@@ -585,7 +585,7 @@ The following XSD Schema is generated from the RelaxNG and used for
 strict schema guided EXI processing.
 
 ~~~~
-{::include senml-v3-gen.xsd}
+{::include senml3.gen.xsd}
 ~~~~
 
 The following shows a hexdump of the EXI produced from encoding the
@@ -600,7 +600,7 @@ first example in {{co-ex}} in JSON format.
 Which compresses to the following displayed in hexdump:
 
 ~~~~
-{::include ex8-gen.hex}
+{::include ex8.gen.hex}
 ~~~~
 
 The above example used the bit packed form of EXI but it is also
@@ -618,7 +618,7 @@ The compressed form, using the byte alignment option of EXI, for the
 above XML is the following:
 
 ~~~~
-{::include ex9-gen.hex}
+{::include ex9.gen.hex}
 ~~~~
 
 A small temperature sensor devices that only generates this one EXI
