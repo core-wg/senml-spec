@@ -35,7 +35,6 @@ clean:
 %.html: %.xml
 	$(xml2rfc) $< -o $@ --html
 
-
 %.gen.xml: %.json
 	checkSenML -xml -i $< > $@
 
@@ -45,20 +44,23 @@ clean:
 %.gen.xsd: %.rnc 
 	java -jar bin/trang.jar $< $@
 
+
+
 ex4.gen.json-trim: ex4.json
 	head -13 <  $< > $@ 
 
 
 
-ex8.gen.exi: ex8.xml senml3.gen.xsd
-	java -cp "bin/xercesImpl.jar:bin/exificient.jar" com.siemens.ct.exi.cmd.EXIficientCMD -encode -i ex8.xml -o ex8.gen.exi -schema senml3.gen.xsd -strict -includeOptions -includeSchemaId 
+ex8.gen.exi: ex8.gen.xml senml3.gen.xsd
+	java -cp "bin/xercesImpl.jar:bin/exificient.jar" com.siemens.ct.exi.cmd.EXIficientCMD -encode -i ex8.gen.xml -o ex8.gen.exi -schema senml3.gen.xsd -strict -includeOptions -includeSchemaId 
 
 ex8.gen.hex: ex8.gen.exi
 	hexdump ex8.gen.exi > ex8.gen.hex
 
 
-ex9.gen.exi: ex9.xml senml3.gen.xsd
-	java -cp "bin/xercesImpl.jar:bin/exificient.jar" com.siemens.ct.exi.cmd.EXIficientCMD -encode -i ex9.xml -o ex9.gen.exi -schema senml3.gen.xsd -bytePacked -strict -includeOptions -includeSchemaId 
+
+ex9.gen.exi: ex9.gen.xml senml3.gen.xsd
+	java -cp "bin/xercesImpl.jar:bin/exificient.jar" com.siemens.ct.exi.cmd.EXIficientCMD -encode -i ex9.gen.xml -o ex9.gen.exi -schema senml3.gen.xsd -strict -includeOptions -includeSchemaId -bytePacked 
 
 ex9.gen.hex: ex9.gen.exi
 	hexdump -C ex9.gen.exi > ex9.gen.hex

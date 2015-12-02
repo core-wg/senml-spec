@@ -1,0 +1,5 @@
+<senmls xmlns="urn:ietf:params:xml:ns:senml">
+  <senml bn="urn:dev:mac:0024befffe804ff1/"></senml>
+  <senml n="voltage" u="V" v="120.1"></senml>
+  <senml n="current" u="A" v="1.2"></senml>
+</senmls>

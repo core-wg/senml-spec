@@ -619,8 +619,8 @@ above XML is the following:
 A small temperature sensor devices that only generates this one EXI file does
 not really need an full EXI implementation. It can simple hard code the output
 replacing the one wire device ID starting at byte 0x16 and going to byte 0x31
-with it's device ID, and replacing the value "0xe7 0x01" at location 0x3E to
-0x3F with the current temperature. The EXI Specification
+with it's device ID, and replacing the value "0xe7 0x01" at location 0x38 to
+0x39 with the current temperature. The EXI Specification
 {{W3C.REC-exi-20110310}} contains the full information on how floating point
 numbers are represented, but for the purpose of this sensor, the temperature can
 be converted to an integer in tenths of degrees (231 in this example). EXI
