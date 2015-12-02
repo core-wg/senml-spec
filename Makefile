@@ -11,7 +11,7 @@ draft = draft-jennings-core-senml-03
 
 latest: txt html 
 
-check: ex9.gen.chk ex8.gen.chk ex7.gen.chk ex6.gen.chk ex5.gen.chk ex4.gen.chk ex3.gen.chk ex2.gen.chk ex1.gen.chk
+check: ex12.gen.chk ex11.gen.chk ex10.gen.chk ex9.gen.chk ex8.gen.chk ex7.gen.chk ex6.gen.chk ex5.gen.chk ex4.gen.chk ex3.gen.chk ex2.gen.chk ex1.gen.chk
 
 
 txt: $(draft).txt
@@ -26,7 +26,7 @@ clean:
 .INTERMEDIATE: $(draft).xml 
 
 
-%.xml: %.md ex1.json ex1.json ex2.json ex3.json ex4.gen.json-trim ex5.json ex6.json ex7.xml senml3.rnc senml3.gen.xsd ex8.xml ex8.gen.hex ex9.xml ex9.gen.hex 
+%.xml: %.md ex4.gen.json-trim ex7.gen.xml  senml3.gen.xsd ex8.gen.xml ex8.gen.hex ex9.gen.xml ex9.gen.hex 
 	$(kramdown-rfc2629) $< > $@
 
 %.txt: %.xml
