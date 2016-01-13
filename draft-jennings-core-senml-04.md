@@ -1,10 +1,10 @@
 ---
 stand_alone: true
 ipr: trust200902
-docname: draft-jennings-core-senml-03
+docname: draft-jennings-core-senml-04
 cat: std
 
-date: December 2, 2015
+date: January 13, 2016
 
 pi:
   toc: 'yes'
@@ -499,7 +499,7 @@ only an unsigned integer is allowed.
 | Units                     | u          |          1 |
 | Value                     | v          |          2 |
 | String Value              | vs         |          3 |
-| Boolean Value             | vs         |          4 |
+| Boolean Value             | vb         |          4 |
 | Value Sum                 | s          |          5 |
 | Time                      | t          |          6 |
 | Update Time               | ut         |          7 |
