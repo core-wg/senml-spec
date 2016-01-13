@@ -4,7 +4,7 @@ ipr: trust200902
 docname: draft-jennings-core-senml-03
 cat: std
 
-date: December 1, 2015
+date: January 13, 2016
 
 pi:
   toc: 'yes'
