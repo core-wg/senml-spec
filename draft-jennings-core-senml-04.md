@@ -178,7 +178,7 @@ sensor but at different times.
 The basic design is an array with a series of measurements. The following
 example shows two meassuremets made at different times. The value of the
 measurements are in the "v" tag, the time of the measurement is in the "t" while
-the "n" has the unique sensor name and unit is cried in the "u".
+the "n" has the unique sensor name and unit is carried in the "u".
 
 ~~~~
 {::include ex10.json}
@@ -202,7 +202,7 @@ in a separate Record such as the following example.
 {::include ex12.json}
 ~~~~
 
-Time is always a mess and SenML supports absolute and relative times. Time is
+Some devices have accurate time while others do not so SenML supports absolute and relative times. Time is
 represented in floating point as second and values greater than zero represent
 an absolute time relative to the unix epoch while values of 0 or less represent
 a relative time in the past from the current time. A simple sensor with no
