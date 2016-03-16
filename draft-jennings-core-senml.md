@@ -1,10 +1,10 @@
 ---
 stand_alone: true
 ipr: trust200902
-docname: draft-jennings-core-senml-04
+docname: draft-jennings-core-senml-05
 cat: std
 
-date: January 13, 2016
+date: March 16, 2016
 
 pi:
   toc: 'yes'

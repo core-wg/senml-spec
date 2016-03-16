@@ -5,7 +5,8 @@ xml2rfc ?= xml2rfc
 kramdown-rfc2629 ?= kramdown-rfc2629
 
 
-draft = draft-jennings-core-senml-04
+DRAFT = draft-jennings-core-senml
+VERSION = 05
 
 .PHONY: latest txt html pdf  diff clean check 
 
@@ -14,9 +15,9 @@ latest: txt html
 check: ex12.gen.chk ex11.gen.chk ex10.gen.chk ex9.gen.chk ex8.gen.chk ex7.gen.chk ex6.gen.chk ex5.gen.chk ex4.gen.chk ex3.gen.chk ex2.gen.chk ex1.gen.chk
 
 
-txt: $(draft).txt
-html: $(draft).html
-pdf: $(draft).pdf
+txt: $(DRAFT)-$(VERSION).txt
+html: $(DRAFT)-$(VERSION).html
+pdf: $(DRAFT)-$(VERSION).pdf
 
 
 clean:
@@ -26,7 +27,7 @@ clean:
 .INTERMEDIATE: $(draft).xml 
 
 
-%.xml: %.md ex4.gen.json-trim ex7.gen.xml  senml3.gen.xsd ex8.gen.xml ex8.gen.hex ex9.gen.xml ex9.gen.hex 
+$(DRAFT)-$(VERSION).xml: $(DRAFT).md ex4.gen.json-trim ex7.gen.xml  senml3.gen.xsd ex8.gen.xml ex8.gen.hex ex9.gen.xml ex9.gen.hex 
 	$(kramdown-rfc2629) $< > $@
 
 %.txt: %.xml
