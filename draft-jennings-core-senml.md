@@ -105,16 +105,14 @@ informative:
 
 --- abstract
 
-This specification defines media types for representing
-simple sensor measurements and device parameters in the Sensor
-Markup Language (SenML). Representations are defined in
-JavaScript Object Notation (JSON), Concise Binary Object
-Representation (CBOR), eXtensible Markup Language (XML), and
-Efficient XML Interchange (EXI), which share the common SenML
-data model. A simple sensor, such as a temperature sensor, could
-use this media type in protocols such as HTTP or CoAP to
-transport the measurements of the sensor or to be
-configured.
+This specification defines media types for representing simple sensor
+measurements and device parameters in the Sensor Markup Language
+(SenML). Representations are defined in JavaScript Object Notation (JSON),
+Concise Binary Object Representation (CBOR), eXtensible Markup Language (XML),
+and Efficient XML Interchange (EXI), which share the common SenML data model. A
+simple sensor, such as a temperature sensor, could use this media type in
+protocols such as HTTP or CoAP to transport the measurements of the sensor or to
+be configured.
 
 --- middle
 
@@ -155,8 +153,8 @@ gauge encoded in the JSON syntax.
 ~~~~
 
 In the example above, the array has a single SenML record with a measurement for
-a sensor named "urn:dev:ow:10e2073a01080063" with a current value of 23.5 degrees
-Celsius.
+a sensor named "urn:dev:ow:10e2073a01080063" with a current value of 23.5
+degrees Celsius.
 
 
 # Requirements and Design Goals
@@ -196,22 +194,22 @@ above is the following.
 
 In the above example the Base Name is in the "bn" tag and the "n" tags in each
 Record are the empty string so they are omitted. The Base Name also could be put
-in a separate Record such as the following example. 
+in a separate Record such as the following example.
 
 ~~~~
 {::include ex12.json}
 ~~~~
 
-Some devices have accurate time while others do not so SenML supports absolute and relative times. Time is
-represented in floating point as second and values greater than zero represent
-an absolute time relative to the unix epoch while values of 0 or less represent
-a relative time in the past from the current time. A simple sensor with no
-absolute wall clock time might take a measurement every second and batch up 60
-of them then send it to a server. It would include the relative time the
-measurement was made to the time the batch was send in the SenML. The server
-might have accurate NTP time and use the time it received the data, and the
-relative offset, to replace the times in the SenML with absolute times before
-saving the SenML in a document database. 
+Some devices have accurate time while others do not so SenML supports absolute
+and relative times. Time is represented in floating point as second and values
+greater than zero represent an absolute time relative to the unix epoch while
+values of 0 or less represent a relative time in the past from the current
+time. A simple sensor with no absolute wall clock time might take a measurement
+every second and batch up 60 of them then send it to a server. It would include
+the relative time the measurement was made to the time the batch was send in the
+SenML. The server might have accurate NTP time and use the time it received the
+data, and the relative offset, to replace the times in the SenML with absolute
+times before saving the SenML in a document database.
 
 # Terminology
 
@@ -249,7 +247,7 @@ Base Unit:
 Version:
 : Version number of media type format. This attribute is optional positive
   integer and defaults to 3 if not present. If this value is present at all, it
-  SHOULD only be used in the first Record in the SenML Stream array. 
+  SHOULD only be used in the first Record in the SenML Stream array.
 
 Name:
 : Name of the sensor or parameter. When appended to the Base Name attribute,
@@ -284,7 +282,7 @@ Update Time:
   
 
 The SenML format can be extended with further custom attributes. TODO - describe
-what extensions are possible and how to do them. 
+what extensions are possible and how to do them.
 
 Systems reading one of the objects MUST check for the Version attribute. If this
 value is a version number larger than the version which the system understands,
@@ -589,19 +587,18 @@ Which compresses to the following displayed in hexdump:
 {::include ex8.gen.hex}
 ~~~~
 
-The above example used the bit packed form of EXI but it is also
-possible to use a byte packed form of EXI which can makes it easier for
-a simple sensor to produce valid EXI without really implementing EXI.
-Consider the example of a temperature sensor that produces a value in
-tenths of degrees Celsius over a range of 0.0 to 55.0. It would
-produce an XML SenML file such as:
+The above example used the bit packed form of EXI but it is also possible to use
+a byte packed form of EXI which can makes it easier for a simple sensor to
+produce valid EXI without really implementing EXI.  Consider the example of a
+temperature sensor that produces a value in tenths of degrees Celsius over a
+range of 0.0 to 55.0. It would produce an XML SenML file such as:
 
 ~~~~
 {::include ex9.gen.xml}
 ~~~~
 
-The compressed form, using the byte alignment option of EXI, for the
-above XML is the following:
+The compressed form, using the byte alignment option of EXI, for the above XML
+is the following:
 
 ~~~~
 {::include ex9.gen.hex}
@@ -667,15 +664,15 @@ the situations listed above has happened.
 
 # IANA Considerations
 
-Note to RFC Editor: Please replace all occurrences of "RFC-AAAA" with
-the RFC number of this specification.
+Note to RFC Editor: Please replace all occurrences of "RFC-AAAA" with the RFC
+number of this specification.
 
 ## Units Registry {#sec-units}
 
-IANA will create a registry of unit symbols. The primary purpose of
-this registry is to make sure that symbols uniquely map to give type
-of measurement. Definitions for many of these units can be found in 
-location such as {{NIST811}} and {{BIPM}}.
+IANA will create a registry of unit symbols. The primary purpose of this
+registry is to make sure that symbols uniquely map to give type of
+measurement. Definitions for many of these units can be found in location such
+as {{NIST811}} and {{BIPM}}.
 
 | Symbol | Description              | Type                  | Reference |
 | m      | meter                                      | float | RFC-AAAA  |
