@@ -226,28 +226,29 @@ several optional attributes described below:
 
 Base Name:
 : This is a string that is prepended to the names found in the entries.  This
-  attribute is optional. This applies to the entries in the Record containing
-  the Base Name and all entries that come in Records after it until there is a
-  Record with a new Base Name that replaces this one.
+  attribute is optional. This applies to the entries in all Records. A Base Name can
+  only be included in the first Record of the array. 
 
 Base Time:
 : A base time that is added to the time found in an entry. This attribute is
-  optional. This applies to the entries in the Record containing the Base Time
-  and all entries that come in Records after it until there is a Record with a
-  new Base Time that replaces this one.
+  optional. This applies to the entries in all Records. A Base Time can
+only be included in the first Record of the array.
 
 Base Unit:
 : A base unit that is assumed for all entries, unless otherwise indicated.  This
-  attribute is optional. If a record does not a unit value, then the base unit
+  attribute is optional. If a record does not contain a unit value, then the base unit
   is used otherwise the value of found in the Unit is used. Note the Base Unit
-  is not prepended to the Unit. This applies to the entries in the Record
-  containing the Base Unit and all entries that come in Records after it until
-  there is a Record with a new Base Unit that replaces this one.
+  is not prepended to the Unit. This applies to the entries in all Records. A Base Unit can
+  only be included in the first object of the array. 
+
+Links:
+: An array of objects that can be used to extent this specification. A Links
+element can only be included in the first object of the array. 
 
 Version:
 : Version number of media type format. This attribute is optional positive
-  integer and defaults to 3 if not present. If this value is present at all, it
-  SHOULD only be used in the first Record in the SenML Stream array.
+  integer and defaults to 3 if not present. A Version can
+  only be included in the first object of the array. 
 
 Name:
 : Name of the sensor or parameter. When appended to the Base Name attribute,
@@ -276,9 +277,9 @@ Time:
 : Time when value was recorded. Optional.
 
 Update Time:
-: A time in seconds that represents the maximum time before this sensor will
+: An optional time in seconds that represents the maximum time before this sensor will
   provide an updated reading for a measurement. This can be used to detect the
-  failure of sensors or communications path from the sensor. Optional.
+  failure of sensors or communications path from the sensor.
   
 
 The SenML format can be extended with further custom attributes. TODO - describe
@@ -301,8 +302,7 @@ of sensors handled by the URI.
 
 Alternatively, for objects not related to a URI, a unique name is required. In
 any case, it is RECOMMENDED that the full names are represented as URIs or URNs
-{{RFC2141}}. One way to create a unique name is to include a EUI-48 or EUI-64
-identifier (a MAC address) or some other bit string that has guaranteed
+{{RFC2141}}. One way to create a unique name is to include some  bit string that has guaranteed
 uniqueness (such as a 1-wire address) that is assigned to the device. Some of
 the examples in this draft use the device URN type as specified in
 {{I-D.arkko-core-dev-urn}}. UUIDs {{RFC4122}} are another way to generate a
@@ -358,6 +358,7 @@ Record atributes:
 | Value Sum     | s    | Floating point |
 | Time          | t    | Number         |
 | Update Time   | ut   | Number         |
+| Links | l | Array of objects |
 {:cols='r l l'}
 
 All of the data is UTF-8, but since this is for machine to machine
@@ -365,7 +366,8 @@ communications on constrained systems, only characters with code points between
 U+0001 and U+007F are allowed which corresponds to the ASCII {{RFC0020}} subset
 of UTF-8 with the exception of characters found in the String Value.
 
-Characters in the String Value are encoded TODO. Open Issue How.
+Characters in the String Value are encoded TODO. Open Issue How to encode
+strings. 
 
 The root content consists of an array with and JSON object for each SenML
 Record.
@@ -389,11 +391,10 @@ Systems receiving measurements MUST be able to process the range of floating
 point numbers that are representable as an IEEE double-precision floating-point
 numbers {{IEEE.754.1985}}. The number of significant digits in any measurement
 is not relevant, so a reading of 1.1 has exactly the same semantic meaning
-as 1.10. If the value has an exponent, the "e" MUST be in lower case. <!-- XXX:
-Can't really impose this requirement, can we? --> The mantissa SHOULD be less
-than 19 characters long and the exponent SHOULD be less than 5 characters
-long. This allows time values to have better than micro second precision over
-the next 100 years.
+as 1.10. If the value has an exponent, the "e" MUST be in lower case.  The
+mantissa SHOULD be less than 19 characters long and the exponent SHOULD be less
+than 5 characters long. This allows time values to have better than micro second
+precision over the next 100 years.
 
 ## Examples
 
@@ -493,6 +494,7 @@ only an unsigned integer is allowed.
 | Base Name                 | bn         |         -2 |
 | Base Time                 | bt         |         -3 |
 | Base Units                | bu         |         -4 |
+| Links                    | l       |         -5 |
 | Name                      | n          |          0 |
 | Units                     | u          |          1 |
 | Value                     | v          |          2 |
@@ -516,6 +518,8 @@ measurement as in {{co-ex}}.
 
 TODO - tag names in examples are wrong
 
+TODO - deal with links
+
 The SenML Stream is represented as a sensml tag that contains a series of
 senml tags for each SenML Record. The SenML Fields are represents as XML
 attributes.  The following table shows the mapping the SenML Field names to the
@@ -525,6 +529,7 @@ atribute used on the XML senml tag.
 | Base Name                 | bn   | string |
 | Base Time                 | bt   | int |
 | Base Unit                | bu   | int |
+| Links                      | l | XML tag |
 | Version                   | ver  | int |
 | Name          | n    | string         |
 | Unit         | u    | string         |
@@ -561,7 +566,7 @@ compatibility. When the data will be transported over CoAP or HTTP, an EXI
 Cookie SHOULD NOT be used as it simply makes things larger and is redundant to
 information provided in the Content-Type header.
 
-TODO - examples are probably have the wrong setting the schemaID 
+TODO - examples  probably have the wrong setting the schemaID 
 
 The following is the XSD Schema to be used for strict schema guided EXI
 processing. It is generated from the RelaxNG.
@@ -676,7 +681,7 @@ as {{NIST811}} and {{BIPM}}.
 
 | Symbol | Description              | Type                  | Reference |
 | m      | meter                                      | float | RFC-AAAA  |
-| kg     | kilogram                                   | float | RFC-AAAA  |
+| g     |  gram                                   | float | RFC-AAAA  |
 | s      | second                                     | float | RFC-AAAA  |
 | A      | ampere                                     | float | RFC-AAAA  |
 | K      | kelvin                                     | float | RFC-AAAA  |
@@ -749,7 +754,9 @@ judgment but need to consider the following guidelines:
   of precision in a conversion.
 
 4. Use of SI prefixes such as "k" before the unit is not allowed.  Instead one
-  can represent the value using scientific notation such a 1.2e3.
+  can represent the value using scientific notation such a 1.2e3. TODO - Open
+  Issue. Some people would like to have SI prefixes to improve human
+  readability. 
 
 5. For a given type of measurement, there will only be one unit type defined. So
   for length, meters are defined and other lengths such as mile, foot, light
