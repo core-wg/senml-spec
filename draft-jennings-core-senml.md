@@ -61,7 +61,9 @@ author:
 normative:
   IEEE.754.1985: 
   RFC2119: 
-  RFC3688: 
+  RFC3688:
+  RFC4648:
+  RFC4627:
   RFC5226: 
   RFC6838: 
   RFC7049: 
@@ -266,8 +268,9 @@ Unit:
 Value
 : Value of the entry.  Optional if a Sum value is present, otherwise
   required. Values are represented using three basic data types, Floating point
-  numbers ("v" field for "Value"), Booleans ("vb" for "Boolean Value") and
-  Strings ("vs" for "String Value"). Exactly one of these three fields MUST
+  numbers ("v" field for "Value"), Booleans ("vb" for "Boolean Value"),
+  Strings ("vs" for "String Value") and Data ("vd" for "Binary Data Value") .
+  Exactly one of these three fields MUST
   appear.
 
 Sum:
@@ -346,31 +349,23 @@ Content-Type (ct=) attribute.
 
 Record atributes:
 
-| SenML         | JSON | Type   |
-| Base Name     | bn   | String |
-| Base Time     | bt   | Number |
-| Base Unit     | bu   | Number |
-| Version       | ver  | Number |
+| SenML         | JSON | Type           |
+| Base Name     | bn   | String         |
+| Base Time     | bt   | Number         |
+| Base Unit     | bu   | Number         |
+| Version       | ver  | Number         |
 | Name          | n    | String         |
 | Unit          | u    | String         |
 | Value         | v    | Floating point |
 | String Value  | vs   | String         |
 | Boolean Value | vb   | Boolean        |
+| Data Value    | vd   | String         |
 | Value Sum     | s    | Floating point |
 | Time          | t    | Number         |
 | Update Time   | ut   | Number         |
 | Links         | l    | Array of objects |
 {:cols='r l l'}
 
-All of the data is UTF-8, but since this is for machine to machine
-communications on constrained systems, only characters with code points between
-U+0001 and U+007F are allowed which corresponds to the ASCII {{RFC0020}} subset
-of UTF-8 with the exception of characters found in the String Value.
-
-Characters in the String Value are encoded
-
-TODO. Open Issue How to encode
-strings. 
 
 The root content consists of an array with and JSON object for each SenML
 Record.
@@ -381,14 +376,19 @@ a "bu" attribute with a value of type string. The object MAY contain a "ver"
 attribute with a value of type number. The object MAY contain other attribute
 value pairs.
 
-The objects MAY include the "n", "u", and "vs" attributes are of type string,
+The objects MAY include the "n", "u", "vd", and "vs" attributes are of type string,
 the "t" and "ut" attributes are of type number, the "vb" attribute is of type
 boolean, and the "v" and "s" attributes are of type floating point for the SenML
 atributes defined in the table above. All the attributes are optional, but as
-specified in {{semant}}, one of the "v", "vs", or "vb" attributes MUST appear
+specified in {{semant}}, one of the "v", "vs", "vd", or "vb" attributes MUST appear
 unless the "s" attribute is also present in Records that represent a
 measurement.  The "v", and "vs", and "vb" attributes MUST NOT appear together in
 the same object.
+
+Only the UTF-8 form of JSON is allowed. Characters in the String Value are
+encoded using the escape sequences defined in {{RFC4627}}. Characters in the Data
+Value are base64 encoded with URL safe alphabet as defined in Section 5 of
+{{RFC4648}}.
 
 Systems receiving measurements MUST be able to process the range of floating
 point numbers that are representable as an IEEE double-precision floating-point
@@ -548,20 +548,21 @@ senml tags for each SenML Record. The SenML Fields are represents as XML
 attributes.  The following table shows the mapping the SenML Field names to the
 atribute used on the XML senml tag.
 
-| SenML Field                     | XML  | Type   |
-| Base Name                 | bn   | string |
-| Base Time                 | bt   | int |
-| Base Unit                | bu   | int |
-| Links                      | l | XML tag |
-| Version                   | ver  | int |
-| Name          | n    | string         |
-| Unit         | u    | string         |
-| Value         | v    | float  |
-| String Value  | vs   | string         |
-| Boolean Value | vb   | boolean        |
-| Value Sum     | s    | float |
-| Time          | t    | int         |
-| Update Time   | ut   | int          |
+| SenML Field   | XML  | Type    |
+| Base Name     | bn   | string  |
+| Base Time     | bt   | int     |
+| Base Unit     | bu   | int     |
+| Links         | l    | XML tag |
+| Version       | ver  | int     |
+| Name          | n    | string  |
+| Unit          | u    | string  |
+| Value         | v    | float   |
+| String Value  | vs   | string  |
+| Data Value    | vd   | string  |
+| Boolean Value | vb   | boolean |
+| Value Sum     | s    | float   |
+| Time          | t    | int     |
+| Update Time   | ut   | int     |
 {:cols='r l l'}
 
 
@@ -699,9 +700,9 @@ registry is to make sure that symbols uniquely map to give type of
 measurement. Definitions for many of these units can be found in location such
 as {{NIST811}} and {{BIPM}}.
 
-| Symbol | Description              | Type                  | Reference |
+| Symbol | Description                                | Type  | Reference |
 | m      | meter                                      | float | RFC-AAAA  |
-| g      |  gram                                      | float | RFC-AAAA  |
+| g      | gram                                       | float | RFC-AAAA  |
 | s      | second                                     | float | RFC-AAAA  |
 | A      | ampere                                     | float | RFC-AAAA  |
 | K      | kelvin                                     | float | RFC-AAAA  |
