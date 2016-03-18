@@ -366,17 +366,9 @@ Record atributes:
 | Links         | l    | Array of objects |
 {:cols='r l l'}
 
-
 The root content consists of an array with and JSON objects for each SenML
 Record. All the fields in the above table MAY occur in the records with the type
-specified in the table. In addition, there are the following constraints:
-
-1. The "bn", "bt", "bu", "ver" and "l" attributes can only occur in the first
-record.
-
-2. Each record MUST have at least one of "s", "v", "vs", "vb", or "vd".
-
-3. Each can only have a single one of "v", "vs", "vb", or "vd".
+specified in the table.
 
 Only the UTF-8 form of JSON is allowed. Characters in the String Value are
 encoded using the escape sequences defined in {{RFC4627}}. Characters in the Data
@@ -565,6 +557,7 @@ atribute used on the XML senml tag.
 | Update Time   | ut   | int     |
 {:cols='r l l'}
 
+TODO - Discuss encoding of String and Data
 
 The RelaxNG schema for the XML is:
 
