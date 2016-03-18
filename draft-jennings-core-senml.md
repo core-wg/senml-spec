@@ -465,6 +465,19 @@ at a separate time.
 {::include ex5.json}
 ~~~~
 
+The size of this example represented in varios forms, as wells as that form
+compressed with gzip is given in the following table.
+
+| Encoding | Size | Compressed Size |
+| JSON |  567 | 200 |
+| XML  | 656 | 232 |
+| CBOR| 292 | 192 |
+| EXI    | 160 | 183 |
+{: #tbl-sizes cols="l r r" title="Size Comparisons"}
+
+Note the CBOR and EXI sizes are not using the schema guidance so could be a bit
+smaller. 
+
 ### Collection of Resources {#rest-ex}
 
 The following example shows how to query one device that can
@@ -474,7 +487,7 @@ operation on http://\[2001:db8::2\] at Mon Oct 31 16:27:09 UTC 2011,
 and has gotten two separate values as a result, a temperature and
 humidity measurement.
 
-It also shows a possible use of the link extension. 
+This example also shows a possible use of the link extension. 
 
 ~~~~
 {::include ex6.json}
@@ -512,6 +525,13 @@ only an unsigned integer is allowed.
 | Time                      | t          |          6 |
 | Update Time               | ut         |          7 |
 {: #tbl-cbor-labels cols="r l r" title="CBOR representation: integers for map keys"}
+
+ The following example shows an hexdump of the  CBOR example for the same sensor
+measurement as in {{co-ex}}.
+
+~~~~
+{::include ex7.gen.cbor.hex}
+~~~~
 
 
 # XML Representation (application/senml+xml) {#sec-xml-examle}
@@ -587,10 +607,10 @@ first example in {{co-ex}} in JSON format.
 {::include ex2.gen.xml}
 ~~~~
 
-Which compresses to the following displayed in hexdump:
+Which compresses with EXI to the following displayed in hexdump:
 
 ~~~~
-{::include ex2.gen.hex}
+{::include ex2.gen.exi.hex}
 ~~~~
 
 The above example used the bit packed form of EXI but it is also possible to use
@@ -607,7 +627,7 @@ The compressed form, using the byte alignment option of EXI, for the above XML
 is the following:
 
 ~~~~
-{::include ex1.gen.hex}
+{::include ex1.gen.exi.hex}
 ~~~~
 
 A small temperature sensor devices that only generates this one EXI file does

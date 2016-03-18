@@ -23,11 +23,15 @@ pdf: $(DRAFT)-$(VERSION).pdf
 clean:
 	-rm -f $(draft).{txt,html,xml,pdf} *.gen.{chk,xsd,hex,exi,xml} *.gen.json-trim
 
+size: ex5.json ex5.gen.xml ex5.gen.exi ex5.gen.cbor ex5.json.Z ex5.gen.xml.Z ex5.gen.exi.Z ex5.gen.cbor.Z
 
 .INTERMEDIATE: $(draft).xml 
 
+%.Z: %
+	gzip -n -c -9 < $< > $@
 
-$(DRAFT)-$(VERSION).xml: $(DRAFT).md ex4.gen.json-trim ex7.gen.xml senml5.gen.xsd ex2.gen.xml ex2.gen.hex ex1.gen.xml ex1.gen.hex 
+
+$(DRAFT)-$(VERSION).xml: $(DRAFT).md ex1.gen.exi.hex ex1.gen.xml ex1.json ex10.json ex11.json ex12.json ex2.gen.exi.hex ex2.gen.xml ex2.json ex3.json ex4.gen.json-trim ex5.json ex6.json ex7.gen.cbor.hex ex7.gen.xml senml5.gen.xsd senml5.rnc
 	$(kramdown-rfc2629) $< > $@
 
 %.txt: %.xml
@@ -38,6 +42,9 @@ $(DRAFT)-$(VERSION).xml: $(DRAFT).md ex4.gen.json-trim ex7.gen.xml senml5.gen.xs
 
 %.gen.xml: %.json
 	senmlCat -xml -ijsons -i -print  $< | tidy -xml -i -wrap 68 -q -o $@
+
+%.gen.cbor: %.json
+	senmlCat -cbor -ijsons -print  $< > $@
 
 %.chk: %.xml senml5.rnc
 	java -jar bin/jing.jar -c senml5.rnc $< > $@
@@ -53,17 +60,17 @@ ex4.gen.json-trim: ex4.json
 	head -13 <  $< > $@ 
 
 
+%.hex: %
+	hexdump -C $< | sed -e "s/0000//" | sed -e "s/  |/ |/" | sed -e "s/  / /" | sed -e "s/  / /" >  $@ 
+
+
+ex5.gen.exi: ex5.gen.xml senml5.gen.xsd
+	java -cp "bin/xercesImpl.jar:bin/exificient.jar" com.siemens.ct.exi.cmd.EXIficientCMD -encode -i ex5.gen.xml -o ex5.gen.exi -schema senml5.gen.xsd -strict -includeOptions -includeSchemaId
+
 
 ex2.gen.exi: ex2.gen.xml senml5.gen.xsd
 	java -cp "bin/xercesImpl.jar:bin/exificient.jar" com.siemens.ct.exi.cmd.EXIficientCMD -encode -i ex2.gen.xml -o ex2.gen.exi -schema senml5.gen.xsd -strict -includeOptions -includeSchemaId 
 
-ex2.gen.hex: ex2.gen.exi
-	hexdump ex2.gen.exi > ex2.gen.hex
-
-
-
 ex1.gen.exi: ex1.gen.xml senml5.gen.xsd
 	java -cp "bin/xercesImpl.jar:bin/exificient.jar" com.siemens.ct.exi.cmd.EXIficientCMD -encode -i ex1.gen.xml -o ex1.gen.exi -schema senml5.gen.xsd -strict -includeOptions -includeSchemaId -bytePacked 
 
-ex1.gen.hex: ex1.gen.exi
-	hexdump -C ex1.gen.exi | sed -e "s/000000//" | sed -e "s/  |/ |/" | sed -e "s/  / /" | sed -e "s/  / /" > ex1.gen.hex
