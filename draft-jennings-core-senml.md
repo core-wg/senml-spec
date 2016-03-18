@@ -249,7 +249,7 @@ Links:
 
 Version:
 : Version number of media type format. This attribute is optional positive
-  integer and defaults to 3 if not present. A Version can
+  integer and defaults to 5 if not present. A Version can
   only be included in the first object of the array. 
 
 Name:

@@ -1,7 +1,7 @@
 [{"bn": "urn:dev:mac:0024befffe804ff1/",
   "bt": 1276020076,
   "bu": "A",
-  "ver": 3},
+  "ver": 5},
    { "n": "voltage", "u": "V", "v": 120.1 },
    { "n": "current", "t": -5, "v": 1.2 },
    { "n": "current", "t": -4, "v": 1.30 },
