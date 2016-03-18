@@ -4,7 +4,7 @@ ipr: trust200902
 docname: draft-jennings-core-senml-05
 cat: std
 
-date: March 16, 2016
+date: March 17, 2016
 
 pi:
   toc: 'yes'
@@ -368,7 +368,9 @@ communications on constrained systems, only characters with code points between
 U+0001 and U+007F are allowed which corresponds to the ASCII {{RFC0020}} subset
 of UTF-8 with the exception of characters found in the String Value.
 
-Characters in the String Value are encoded TODO. Open Issue How to encode
+Characters in the String Value are encoded
+
+TODO. Open Issue How to encode
 strings. 
 
 The root content consists of an array with and JSON object for each SenML
@@ -399,6 +401,8 @@ than 5 characters long. This allows time values to have better than micro second
 precision over the next 100 years.
 
 ## Examples
+
+TODO - simplify examples 
 
 ### Single Datapoint
 
@@ -520,10 +524,6 @@ measurement as in {{co-ex}}.
 {::include ex7.gen.xml}
 ~~~~
 
-TODO - tag names in examples are wrong
-
-TODO - deal with links
-
 The SenML Stream is represented as a sensml tag that contains a series of
 senml tags for each SenML Record. The SenML Fields are represents as XML
 attributes.  The following table shows the mapping the SenML Field names to the
@@ -549,7 +549,7 @@ atribute used on the XML senml tag.
 The RelaxNG schema for the XML is:
 
 ~~~~
-{::include senml3.rnc}
+{::include senml5.rnc}
 ~~~~
 
 
@@ -576,7 +576,7 @@ The following is the XSD Schema to be used for strict schema guided EXI
 processing. It is generated from the RelaxNG.
 
 ~~~~
-{::include senml3.gen.xsd}
+{::include senml5.gen.xsd}
 ~~~~
 
 The following shows a hexdump of the EXI produced from encoding the
@@ -584,16 +584,13 @@ following XML example. Note this example is the same information as the
 first example in {{co-ex}} in JSON format.
 
 ~~~~
-{::include ex8.gen.xml}
+{::include ex2.gen.xml}
 ~~~~
-
-TODO - replace ex8 with ex2 as they are the same. Replace ex9 with ex1. Simplify
-rest of examples.
 
 Which compresses to the following displayed in hexdump:
 
 ~~~~
-{::include ex8.gen.hex}
+{::include ex2.gen.hex}
 ~~~~
 
 The above example used the bit packed form of EXI but it is also possible to use
@@ -603,14 +600,14 @@ temperature sensor that produces a value in tenths of degrees Celsius over a
 range of 0.0 to 55.0. It would produce an XML SenML file such as:
 
 ~~~~
-{::include ex9.gen.xml}
+{::include ex1.gen.xml}
 ~~~~
 
 The compressed form, using the byte alignment option of EXI, for the above XML
 is the following:
 
 ~~~~
-{::include ex9.gen.hex}
+{::include ex1.gen.hex}
 ~~~~
 
 A small temperature sensor devices that only generates this one EXI file does

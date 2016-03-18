@@ -1,6 +1,6 @@
 [{"bn": "http://[2001:db8::2]/",
   "bt": 1320078429,
-  "ver": 3,
+  "ver": 5,
   "l": [{"href":"humidity","foo":"bar1"},
         {"href":"temperature","foo":"bar2","bar":"foo3"}]
   },
