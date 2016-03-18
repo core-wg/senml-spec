@@ -37,10 +37,10 @@ $(DRAFT)-$(VERSION).xml: $(DRAFT).md ex4.gen.json-trim ex7.gen.xml  senml3.gen.x
 	$(xml2rfc) $< -o $@ --html
 
 %.gen.xml: %.json
-	checkSenML -xml -i $< | tidy -xml -i -wrap 68 -q -o $@
+	senmlCat -xml -ijsons -i -print  $< | tidy -xml -i -wrap 68 -q -o $@
 
-%.chk: %.xml senml3.rnc
-	java -jar bin/jing.jar -c senml3.rnc $< > $@
+%.chk: %.xml senml5.rnc
+	java -jar bin/jing.jar -c senml5.rnc $< > $@
 
 %.tmp.xsd: %.rnc 
 	java -jar bin/trang.jar $< $@
@@ -54,16 +54,16 @@ ex4.gen.json-trim: ex4.json
 
 
 
-ex8.gen.exi: ex8.gen.xml senml3.gen.xsd
-	java -cp "bin/xercesImpl.jar:bin/exificient.jar" com.siemens.ct.exi.cmd.EXIficientCMD -encode -i ex8.gen.xml -o ex8.gen.exi -schema senml3.gen.xsd -strict -includeOptions -includeSchemaId 
+ex8.gen.exi: ex8.gen.xml senml5.gen.xsd
+	java -cp "bin/xercesImpl.jar:bin/exificient.jar" com.siemens.ct.exi.cmd.EXIficientCMD -encode -i ex8.gen.xml -o ex8.gen.exi -schema senml5.gen.xsd -strict -includeOptions -includeSchemaId 
 
 ex8.gen.hex: ex8.gen.exi
 	hexdump ex8.gen.exi > ex8.gen.hex
 
 
 
-ex9.gen.exi: ex9.gen.xml senml3.gen.xsd
-	java -cp "bin/xercesImpl.jar:bin/exificient.jar" com.siemens.ct.exi.cmd.EXIficientCMD -encode -i ex9.gen.xml -o ex9.gen.exi -schema senml3.gen.xsd -strict -includeOptions -includeSchemaId -bytePacked 
+ex9.gen.exi: ex9.gen.xml senml5.gen.xsd
+	java -cp "bin/xercesImpl.jar:bin/exificient.jar" com.siemens.ct.exi.cmd.EXIficientCMD -encode -i ex9.gen.xml -o ex9.gen.exi -schema senml5.gen.xsd -strict -includeOptions -includeSchemaId -bytePacked 
 
 ex9.gen.hex: ex9.gen.exi
 	hexdump -C ex9.gen.exi | sed -e "s/000000//" | sed -e "s/  |/ |/" | sed -e "s/  / /" | sed -e "s/  / /" > ex9.gen.hex

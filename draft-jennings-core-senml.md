@@ -231,19 +231,21 @@ Base Name:
 
 Base Time:
 : A base time that is added to the time found in an entry. This attribute is
-  optional. This applies to the entries in all Records. A Base Time can
-only be included in the first Record of the array.
+    optional. This applies to the entries in all Records. A Base Time can
+    only be included in the first Record of the array.
 
 Base Unit:
 : A base unit that is assumed for all entries, unless otherwise indicated.  This
-  attribute is optional. If a record does not contain a unit value, then the base unit
-  is used otherwise the value of found in the Unit is used. Note the Base Unit
-  is not prepended to the Unit. This applies to the entries in all Records. A Base Unit can
-  only be included in the first object of the array. 
+    attribute is optional. If a record does not contain a unit value, then the base unit
+    is used otherwise the value of found in the Unit is used. Note the Base Unit
+    is not prepended to the Unit. This applies to the entries in all Records. A Base Unit can
+    only be included in the first object of the array. 
 
 Links:
 : An array of objects that can be used to extent this specification. A Links
-element can only be included in the first object of the array. 
+    element can only be included in the first object of the array. Each object in
+    the Link array is constrained to constrained to being a map of strings to
+    strings where with unique keys. 
 
 Version:
 : Version number of media type format. This attribute is optional positive
@@ -467,6 +469,8 @@ fetched information from a device at 2001:db8::2 by performing a GET
 operation on http://\[2001:db8::2\] at Mon Oct 31 16:27:09 UTC 2011,
 and has gotten two separate values as a result, a temperature and
 humidity measurement.
+
+It also shows a possible use of the link extension. 
 
 ~~~~
 {::include ex6.json}
