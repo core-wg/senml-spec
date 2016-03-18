@@ -17,7 +17,7 @@ pi:
   rfcedstyle: 'no'
   tocdepth: '4'
   
-title: Media Types for Sensor Markup Language (SENML)
+title: Media Types for Sensor Markup Language (SenML)
 abbrev: Sensor Markup
 area: ART
 
@@ -133,8 +133,8 @@ There are many types of more complex measurements and measurements that this
 media type would not be suitable for.  SenML strikes a balance between having
 some information about the sensor carried with the sensor data so that the data
 is self describing but it also tries to make that a fairly minimal set of
-auxiliary information for efficiency reason. Other information abot the sensor
-can be discovered by other methods suc as using the CoRE Link Format
+auxiliary information for efficiency reason. Other information about the sensor
+can be discovered by other methods such as using the CoRE Link Format
 {{RFC6690}}.
 
 SenML is defined by a data model for measurements and simple meta-data about
@@ -174,19 +174,19 @@ multiple measurements could be from multiple related sensors or from the same
 sensor but at different times.
 
 The basic design is an array with a series of measurements. The following
-example shows two meassuremets made at different times. The value of the
-measurements are in the "v" tag, the time of the measurement is in the "t" while
-the "n" has the unique sensor name and unit is carried in the "u".
+example shows two measurements made at different times. The value of a
+measurement is in the "v" tag, the time of a measurement is in the "t" tag, 
+the "n" tag has a unique sensor name, and the unit of the measurement is carried
+in the "u" tag.
 
 ~~~~
 {::include ex10.json}
 ~~~~
 
-To keep the messages small, it does not make sense to repeat the n in each SenML
-Record so there is a concept of a Base Name which is simply a strong that is
-prepended to the Name field of any elements that record or any records that
-follow it and don't contain a Base Name. So a more compact form of the example
-above is the following.
+To keep the messages small, it does not make sense to repeat the "n" tag in each SenML
+Record so there is a concept of a Base Name which is simply a string that is
+prepended to the Name field of all elements in that record and any records that
+follow it. So a more compact form of the example above is the following.
 
 ~~~~
 {::include ex11.json}
@@ -194,14 +194,14 @@ above is the following.
 
 In the above example the Base Name is in the "bn" tag and the "n" tags in each
 Record are the empty string so they are omitted. The Base Name also could be put
-in a separate Record such as the following example.
+in a separate Record such as in the following example.
 
 ~~~~
 {::include ex12.json}
 ~~~~
 
 Some devices have accurate time while others do not so SenML supports absolute
-and relative times. Time is represented in floating point as second and values
+and relative times. Time is represented in floating point as seconds and values
 greater than zero represent an absolute time relative to the unix epoch while
 values of 0 or less represent a relative time in the past from the current
 time. A simple sensor with no absolute wall clock time might take a measurement
@@ -221,7 +221,7 @@ document are to be interpreted as described in {{RFC2119}}.
 # Semantics {#semant}
 
 Each SenML representation carries a single array that represents a set of
-measurements and/or parameters. This array contains a serious of object with
+measurements and/or parameters. This array contains a series of objects with
 several optional attributes described below:
 
 Base Name:
@@ -242,10 +242,9 @@ Base Unit:
     only be included in the first object of the array. 
 
 Links:
-: An array of objects that can be used to extent this specification. A Links
+: An array of objects that can be used to extend this specification. A Links
     element can only be included in the first object of the array. Each object in
-    the Link array is constrained to constrained to being a map of strings to
-    strings where with unique keys. 
+    the Link array is constrained to being a map of strings to strings with unique keys. 
 
 Version:
 : Version number of media type format. This attribute is optional positive
@@ -304,11 +303,11 @@ of sensors handled by the URI.
 
 Alternatively, for objects not related to a URI, a unique name is required. In
 any case, it is RECOMMENDED that the full names are represented as URIs or URNs
-{{RFC2141}}. One way to create a unique name is to include some  bit string that has guaranteed
+{{RFC2141}}. One way to create a unique name is to include some bit string that has guaranteed
 uniqueness (such as a 1-wire address) that is assigned to the device. Some of
 the examples in this draft use the device URN type as specified in
 {{I-D.arkko-core-dev-urn}}. UUIDs {{RFC4122}} are another way to generate a
-unique name.
+unique name. TODO - discuss privacy implications of stable hardware addresses.
 
 The resulting concatenated name MUST consist only of characters out of the set
 "A" to "Z", "a" to "z", "0" to "9", "-", ":", ".", or "_" and it MUST start with
@@ -316,7 +315,7 @@ a character out of the set "A" to "Z", "a" to "z", or "0" to "9". This
 restricted character set was chosen so that these names can be directly used as
 in other types of URI including segments of an HTTP path with no special
 encoding and can be directly used in many databases and analytic
-systems.. {{RFC5952}} contains advice on encoding an IPv6 address in a name.
+systems. {{RFC5952}} contains advice on encoding an IPv6 address in a name.
 
 If either the Base Time or Time value is missing, the missing attribute is
 considered to have a value of zero. The Base Time and Time values are added
@@ -347,20 +346,20 @@ Content-Type (ct=) attribute.
 
 Record atributes:
 
-| SenML                     | JSON | Type   |
-| Base Name                 | bn   | String |
-| Base Time                 | bt   | Number |
-| Base Unit                | bu   | Number |
-| Version                   | ver  | Number |
+| SenML         | JSON | Type   |
+| Base Name     | bn   | String |
+| Base Time     | bt   | Number |
+| Base Unit     | bu   | Number |
+| Version       | ver  | Number |
 | Name          | n    | String         |
-| Unit         | u    | String         |
+| Unit          | u    | String         |
 | Value         | v    | Floating point |
 | String Value  | vs   | String         |
 | Boolean Value | vb   | Boolean        |
 | Value Sum     | s    | Floating point |
 | Time          | t    | Number         |
 | Update Time   | ut   | Number         |
-| Links | l | Array of objects |
+| Links         | l    | Array of objects |
 {:cols='r l l'}
 
 All of the data is UTF-8, but since this is for machine to machine
@@ -434,11 +433,11 @@ Note that in some usage scenarios of SenML the implementations MAY store or
 transmit SenML in a stream-like fashion, where data is collected over time and
 continuously added to the object. This mode of operation is optional, but
 systems or protocols using SenML in this fashion MUST specify that they are
-doing this. SenML defines a separate mine type (TODO) to indicate Senor
+doing this. SenML defines a separate mime type (TODO) to indicate Sensor
 Streaming Markup Langage (SensML) for this usage. In this situation the SensML
 stream can be sent and received in a partial fashion, i.e., a measurement entry
 can be read as soon as the SenML Record is received and not have to wait for the
-full SenML Stream to be complete.
+full SensML Stream to be complete.
 
 For instance, the following stream of measurements may be sent via a long lived
 HTTP POST from the producer of a SensML to the consumer of that, and each
@@ -465,7 +464,7 @@ at a separate time.
 {::include ex5.json}
 ~~~~
 
-The size of this example represented in varios forms, as wells as that form
+The size of this example represented in various forms, as well as that form
 compressed with gzip is given in the following table.
 
 | Encoding | Size | Compressed Size |
@@ -475,7 +474,7 @@ compressed with gzip is given in the following table.
 | EXI    | 160 | 183 |
 {: #tbl-sizes cols="l r r" title="Size Comparisons"}
 
-Note the CBOR and EXI sizes are not using the schema guidance so could be a bit
+Note the CBOR and EXI sizes are not using the schema guidance so the could be a bit
 smaller. 
 
 ### Collection of Resources {#rest-ex}
@@ -515,7 +514,7 @@ only an unsigned integer is allowed.
 | Base Name                 | bn         |         -2 |
 | Base Time                 | bt         |         -3 |
 | Base Units                | bu         |         -4 |
-| Links                    | l       |         -5 |
+| Links                     | l          |         -5 |
 | Name                      | n          |          0 |
 | Units                     | u          |          1 |
 | Value                     | v          |          2 |
@@ -536,7 +535,7 @@ measurement as in {{co-ex}}.
 
 # XML Representation (application/senml+xml) {#sec-xml-examle}
 
-A SenML Stream  can also be represented in XML format as defined in this
+A SenML Stream can also be represented in XML format as defined in this
 section. The following example shows an XML example for the same sensor
 measurement as in {{co-ex}}.
 
@@ -702,7 +701,7 @@ as {{NIST811}} and {{BIPM}}.
 
 | Symbol | Description              | Type                  | Reference |
 | m      | meter                                      | float | RFC-AAAA  |
-| g     |  gram                                   | float | RFC-AAAA  |
+| g      |  gram                                      | float | RFC-AAAA  |
 | s      | second                                     | float | RFC-AAAA  |
 | A      | ampere                                     | float | RFC-AAAA  |
 | K      | kelvin                                     | float | RFC-AAAA  |
