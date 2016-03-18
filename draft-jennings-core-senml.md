@@ -425,7 +425,7 @@ transmit SenML in a stream-like fashion, where data is collected over time and
 continuously added to the object. This mode of operation is optional, but
 systems or protocols using SenML in this fashion MUST specify that they are
 doing this. SenML defines a separate mime type (TODO) to indicate Sensor
-Streaming Markup Langage (SensML) for this usage. In this situation the SensML
+Streaming Markup Language (SensML) for this usage. In this situation the SensML
 stream can be sent and received in a partial fashion, i.e., a measurement entry
 can be read as soon as the SenML Record is received and not have to wait for the
 full SensML Stream to be complete.
@@ -538,7 +538,7 @@ measurement as in {{co-ex}}.
 The SenML Stream is represented as a sensml tag that contains a series of
 senml tags for each SenML Record. The SenML Fields are represents as XML
 attributes.  The following table shows the mapping the SenML Field names to the
-atribute used on the XML senml tag.
+attribute used in the XML senml tag.
 
 | SenML Field   | XML  | Type    |
 | Base Name     | bn   | string  |
