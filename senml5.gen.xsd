@@ -5,9 +5,7 @@ targetNamespace="urn:ietf:params:xml:ns:senml"
 xmlns:ns1="urn:ietf:params:xml:ns:senml">
   <xs:element name="l">
     <xs:complexType>
-      <xs:attribute name="foo" type="xs:string" />
-      <xs:attribute name="bar" type="xs:string" />
-      <xs:attribute name="href" type="xs:string" />
+      <xs:anyAttribute processContents="skip" />
     </xs:complexType>
   </xs:element>
   <xs:element name="senml">

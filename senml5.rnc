@@ -2,9 +2,7 @@ default namespace = "urn:ietf:params:xml:ns:senml"
 namespace rng = "http://relaxng.org/ns/structure/1.0"
 
 link = element l {
-      attribute foo { xsd:string }?,
-      attribute bar { xsd:string }?,
-      attribute href { xsd:string }?
+      attribute * { xsd:string }*
 }
 
 
