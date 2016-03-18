@@ -15,6 +15,10 @@ latest: txt html
 check: ex12.gen.chk ex11.gen.chk ex10.gen.chk ex1.gen.chk ex2.gen.chk ex7.gen.chk ex6.gen.chk ex5.gen.chk ex4.gen.chk ex3.gen.chk ex2.gen.chk ex1.gen.chk
 
 
+diff: $(DRAFT)-$(VERSION).txt
+	htmlwdiff   $(DRAFT)-old.txt   $(DRAFT)-$(VERSION).txt >   $(DRAFT).diff.html
+
+
 txt: $(DRAFT)-$(VERSION).txt
 html: $(DRAFT)-$(VERSION).html
 pdf: $(DRAFT)-$(VERSION).pdf

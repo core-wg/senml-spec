@@ -88,7 +88,6 @@ normative:
       NIST: Special Publication 811
 
 informative:
-  RFC0020: 
   RFC2141: 
   RFC3986: 
   RFC4122: 
@@ -239,12 +238,12 @@ Base Time:
 Base Unit:
 : A base unit that is assumed for all entries, unless otherwise indicated.  This
     attribute is optional. If a record does not contain a unit value, then the base unit
-    is used otherwise the value of found in the Unit is used. Note the Base Unit
-    is not prepended to the Unit. This applies to the entries in all Records. A Base Unit can
+    is used otherwise the value of found in the Unit is used.
+    This applies to the entries in all Records. A Base Unit can
     only be included in the first object of the array. 
 
 Links:
-: An array of objects that can be used to extend this specification. A Links
+: An array of objects that can be used for additional information. A Links
     element can only be included in the first object of the array. Each object in
     the Link array is constrained to being a map of strings to strings with unique keys. 
 
@@ -263,7 +262,7 @@ Name:
 
 Unit:
 : Units for a measurement value. Optional. If the Record has not Unit, the Base
-  Unit is used as the Unit.
+  Unit is used as the Unit. Having no Unit and no Base Unit is allowed. 
 
 Value
 : Value of the entry.  Optional if a Sum value is present, otherwise
@@ -271,7 +270,8 @@ Value
   numbers ("v" field for "Value"), Booleans ("vb" for "Boolean Value"),
   Strings ("vs" for "String Value") and Data ("vd" for "Binary Data Value") .
   Exactly one of these three fields MUST
-  appear.
+  appear unless there is Sum field in which case it is allowed to have no Value
+  field or to have "v" field. 
 
 Sum:
 : Integrated sum of the values over time. Optional. This attribute is in the
@@ -367,23 +367,16 @@ Record atributes:
 {:cols='r l l'}
 
 
-The root content consists of an array with and JSON object for each SenML
-Record.
+The root content consists of an array with and JSON objects for each SenML
+Record. All the fields in the above table MAY occur in the records with the type
+specified in the table. In addition, there are the following constraints:
 
-The objects MAY contain a "bn" attribute with a value of type string. The object
-MAY contain a "bt" attribute with a value of type number. The object MAY contain
-a "bu" attribute with a value of type string. The object MAY contain a "ver"
-attribute with a value of type number. The object MAY contain other attribute
-value pairs.
+1. The "bn", "bt", "bu", "ver" and "l" attributes can only occur in the first
+record.
 
-The objects MAY include the "n", "u", "vd", and "vs" attributes are of type string,
-the "t" and "ut" attributes are of type number, the "vb" attribute is of type
-boolean, and the "v" and "s" attributes are of type floating point for the SenML
-atributes defined in the table above. All the attributes are optional, but as
-specified in {{semant}}, one of the "v", "vs", "vd", or "vb" attributes MUST appear
-unless the "s" attribute is also present in Records that represent a
-measurement.  The "v", and "vs", and "vb" attributes MUST NOT appear together in
-the same object.
+2. Each record MUST have at least one of "s", "v", "vs", "vb", or "vd".
+
+3. Each can only have a single one of "v", "vs", "vb", or "vd".
 
 Only the UTF-8 form of JSON is allowed. Characters in the String Value are
 encoded using the escape sequences defined in {{RFC4627}}. Characters in the Data
@@ -399,9 +392,15 @@ mantissa SHOULD be less than 19 characters long and the exponent SHOULD be less
 than 5 characters long. This allows time values to have better than micro second
 precision over the next 100 years.
 
+
 ## Examples
 
 TODO - simplify examples 
+
+TODO - Examples are messed up on if time is an integer or float 
+
+TODO - Add example with string , data , boolean 
+
 
 ### Single Datapoint
 
@@ -523,6 +522,7 @@ only an unsigned integer is allowed.
 | Value Sum                 | s          |          5 |
 | Time                      | t          |          6 |
 | Update Time               | ut         |          7 |
+| Data Value                | vd         |          8 |
 {: #tbl-cbor-labels cols="r l r" title="CBOR representation: integers for map keys"}
 
  The following example shows an hexdump of the  CBOR example for the same sensor
@@ -533,7 +533,7 @@ measurement as in {{co-ex}}.
 ~~~~
 
 
-# XML Representation (application/senml+xml) {#sec-xml-examle}
+# XML Representation (application/senml+xml) {#sec-xml-example}
 
 A SenML Stream can also be represented in XML format as defined in this
 section. The following example shows an XML example for the same sensor
