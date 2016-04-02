@@ -1067,5 +1067,5 @@ being a map of strings to strings with unique keys.
 The following shows an example of the links extension.
 
 ~~~~
-{::include exlinks.json}
+{::include ex8.json}
 ~~~~
