@@ -52,6 +52,7 @@ $(DRAFT)-$(VERSION).xml: $(DRAFT).md ex1.gen.exi.hex ex1.gen.xml ex1.json ex10.j
 
 %.chk: %.xml senml5.rnc
 	java -jar bin/jing.jar -c senml5.rnc $< > $@
+	cddl senml.cddl validate $<
 
 %.tmp.xsd: %.rnc 
 	java -jar bin/trang.jar $< $@
