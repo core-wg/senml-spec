@@ -93,7 +93,8 @@ informative:
   RFC4122: 
   RFC5952: 
   RFC6690: 
-  I-D.arkko-core-dev-urn: 
+  I-D.arkko-core-dev-urn:
+  I-D.greevenbosch-appsawg-cbor-cddl: 
   UCUM:
     title: The Unified Code for Units of Measure (UCUM) 
     author:
@@ -679,6 +680,45 @@ will allow them to deal with these problems. A common assumption is that for
 sensors whose measurement values are always positive, the sum should never get
 smaller; so if the sum does get smaller, the application will know that one of
 the situations listed above has happened.
+
+
+# CDDL
+
+For reference, the CBOR representation can be described with the CDDL 
+{{I-D.greevenbosch-appsawg-cbor-cddl}} specification in {{senmlcddl}}. 
+
+~~~~ cddl 
+SenML = {
+      ? bn => tstr,       ; Base Name 
+      ? bt => numeric,    ; Base Time 
+      ? bu => tstr,       ; Base Units 
+      ? ver => uint,      ; Version 
+      * tstr => any,      ; (Extension) 
+      e => [+ meas],      ; Measurements 
+}
+
+meas = {
+      ? n => tstr,        ; Name 
+      ? u => tstr,        ; Units 
+      ? ( v => numeric // ; Numeric Value 
+          sv => tstr //   ; String Value 
+          bv => bool )    ; Boolean Value 
+      ? s => numeric,     ; Value Sum 
+      ? t => numeric,     ; Time 
+      ? ut => numeric,    ; Update Time 
+}
+
+numeric = number / decfrac 
+
+ver = -1 
+e   = -2     v   =  2 
+bn  = -3     sv  =  3 
+bt  = -4     bv  =  4 
+bu  = -5     s   =  5 
+n   =  0     t   =  6 
+u   =  1     ut  =  7
+~~~~~
+{: #senmlcddl title="CDDL specification for CBOR SenML"}
 
 
 # IANA Considerations
