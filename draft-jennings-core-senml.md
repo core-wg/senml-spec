@@ -153,7 +153,7 @@ gauge encoded in the JSON syntax.
 {::include ex1.json}
 ~~~~
 
-In the example above, the array has a single SenML record with a measurement for
+In the example above, the array has a single SenML Record with a measurement for
 a sensor named "urn:dev:ow:10e2073a01080063" with a current value of 23.5
 degrees Celsius.
 
@@ -208,9 +208,9 @@ values of 0 or less represent a relative time in the past from the current
 time. A simple sensor with no absolute wall clock time might take a measurement
 every second and batch up 60 of them then send it to a server. It would include
 the relative time the measurement was made to the time the batch was send in the
-SenML. The server might have accurate NTP time and use the time it received the
+SenML Pack. The server might have accurate NTP time and use the time it received the
 data, and the relative offset, to replace the times in the SenML with absolute
-times before saving the SenML in a document database.
+times before saving the SenML Pack in a document database.
 
 # Terminology
 
@@ -218,10 +218,21 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this
 document are to be interpreted as described in {{RFC2119}}.
 
+This document also uses the following terms:
+
+SenML Record: 
+: One measurement or configuration instance in time presented
+using the SenML data model.
+
+SenML Pack: 
+: One or more SenML Records in an array structure.
+
+
+
 
 # Semantics {#semant}
 
-Each SenML representation carries a single array that represents a set of
+Each SenML Pack carries a single array that represents a set of
 measurements and/or parameters. This array contains a series of objects with
 several optional attributes described below:
 
@@ -338,7 +349,7 @@ better information about the statistical properties of the measurement.
 SenML is designed to carry the minimum dynamic information about measurements,
 and for efficiency reasons does not carry significant static meta-data about the
 device, object or sensors. Instead, it is assumed that this meta-data is carried
-out of band. For web resources using SenML representations, this meta-data can
+out of band. For web resources using SenML Packs, this meta-data can
 be made available using the CoRE Link Format {{RFC6690}}. The most obvious use
 of this link format is to describe that a resource is available in a SenML
 format in the first place. The relevant media type indicator is included in the
