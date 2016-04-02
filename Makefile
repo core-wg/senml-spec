@@ -6,7 +6,7 @@ kramdown-rfc2629 ?= kramdown-rfc2629
 
 
 DRAFT = draft-jennings-core-senml
-VERSION = 05
+VERSION = 06
 
 .PHONY: latest txt html pdf  diff clean check 
 

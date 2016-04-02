@@ -1,7 +1,7 @@
 ---
 stand_alone: true
 ipr: trust200902
-docname: draft-jennings-core-senml-05
+docname: draft-jennings-core-senml-06
 cat: std
 
 date: March 17, 2016
