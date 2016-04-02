@@ -93,7 +93,8 @@ informative:
   RFC4122: 
   RFC5952: 
   RFC6690: 
-  I-D.arkko-core-dev-urn: 
+  I-D.arkko-core-dev-urn:
+  I-D.ietf-core-links-json:
   UCUM:
     title: The Unified Code for Units of Measure (UCUM) 
     author:
@@ -253,11 +254,6 @@ Base Unit:
     This applies to the entries in all Records. A Base Unit can
     only be included in the first object of the array. 
 
-Links:
-: An array of objects that can be used for additional information. A Links
-    element can only be included in the first object of the array. Each object in
-    the Link array is constrained to being a map of strings to strings with unique keys. 
-
 Version:
 : Version number of media type format. This attribute is optional positive
   integer and defaults to 5 if not present. A Version can
@@ -374,7 +370,6 @@ Record atributes:
 | Value Sum     | s    | Floating point |
 | Time          | t    | Number         |
 | Update Time   | ut   | Number         |
-| Links         | l    | Array of objects |
 {:cols='r l l'}
 
 The root content consists of an array with and JSON objects for each SenML
@@ -488,8 +483,6 @@ operation on http://\[2001:db8::2\] at Mon Oct 31 16:27:09 UTC 2011,
 and has gotten two separate values as a result, a temperature and
 humidity measurement.
 
-This example also shows a possible use of the link extension. 
-
 ~~~~
 {::include ex6.json}
 ~~~~
@@ -516,7 +509,6 @@ only an unsigned integer is allowed.
 | Base Name                 | bn         |         -2 |
 | Base Time                 | bt         |         -3 |
 | Base Units                | bu         |         -4 |
-| Links                     | l          |         -5 |
 | Name                      | n          |          0 |
 | Units                     | u          |          1 |
 | Value                     | v          |          2 |
@@ -555,7 +547,6 @@ attribute used in the XML senml tag.
 | Base Name     | bn   | string  |
 | Base Time     | bt   | int     |
 | Base Unit     | bu   | int     |
-| Links         | l    | XML tag |
 | Version       | ver  | int     |
 | Name          | n    | string  |
 | Unit          | u    | string  |
@@ -699,7 +690,7 @@ number of this specification.
 
 ## Units Registry {#sec-units}
 
-IANA will create a registry of unit symbols. The primary purpose of this
+IANA will create a registry of SenML unit symbols. The primary purpose of this
 registry is to make sure that symbols uniquely map to give type of
 measurement. Definitions for many of these units can be found in location such
 as {{NIST811}} and {{BIPM}}.
@@ -812,6 +803,14 @@ judgment but need to consider the following guidelines:
    Measure {{UCUM}}.
 
 
+## SenML label registry
+
+IANA will create a registry for SenML labels. The initial content of the
+registry are shown in TODO.
+
+New entries can be added to the registration by either Expert Review or IESG
+Approval as defined in {{RFC5226}}.  Experts should exercise their own good
+judgment but need to consider that shorter labels should have more strict review.
 
 ## Media Type Registration {#sec-iana-media}
 
@@ -1055,3 +1054,18 @@ The CBOR Representation text was contributed by Carsten Bormann.
 
 
 --- back
+
+# Links extension
+
+An extension to SenML to support links is expected to be registered and
+defined by {{I-D.ietf-core-links-json}}.
+
+The link extension can be an array of objects that can be used for
+additional information. Each object in the Link array is constrained to
+being a map of strings to strings with unique keys. 
+
+The following shows an example of the links extension.
+
+~~~~
+{::include exlinks.json}
+~~~~
