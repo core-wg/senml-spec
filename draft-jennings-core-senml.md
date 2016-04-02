@@ -314,7 +314,7 @@ unique name. TODO - discuss privacy implications of stable hardware addresses.
 
 The resulting concatenated name MUST consist only of characters out of the set
 "A" to "Z", "a" to "z", "0" to "9", "-", ":", ".", or "_" and it MUST start with
-a character out of the set "A" to "Z", "a" to "z", or "0" to "9". This
+a character out of the set "A" to "Z", "a" to "z", or "0" to "9". Note these are case sensitve. This
 restricted character set was chosen so that these names can be directly used as
 in other types of URI including segments of an HTTP path with no special
 encoding and can be directly used in many databases and analytic
