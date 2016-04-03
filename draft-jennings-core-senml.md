@@ -318,7 +318,8 @@ any case, it is RECOMMENDED that the full names are represented as URIs or URNs
 uniqueness (such as a 1-wire address) that is assigned to the device. Some of
 the examples in this draft use the device URN type as specified in
 {{I-D.arkko-core-dev-urn}}. UUIDs {{RFC4122}} are another way to generate a
-unique name. TODO - discuss privacy implications of stable hardware addresses.
+unique name. Note that long-term stable unique identifiers are problematic for privacy
+reasons [RFC7721] and should be used with care or avoided.
 
 The resulting concatenated name MUST consist only of characters out of the set
 "A" to "Z", "a" to "z", "0" to "9", "-", ":", ".", or "_" and it MUST start with
@@ -373,7 +374,7 @@ Record atributes:
 | Update Time   | ut   | Number         |
 {:cols='r l l'}
 
-The root content consists of an array with and JSON objects for each SenML
+The root content consists of an array with JSON objects for each SenML
 Record. All the fields in the above table MAY occur in the records with the type
 specified in the table.
 
