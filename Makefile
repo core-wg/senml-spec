@@ -35,7 +35,7 @@ size: ex5.json ex5.gen.xml ex5.gen.exi ex5.gen.cbor ex5.json.Z ex5.gen.xml.Z ex5
 	gzip -n -c -9 < $< > $@
 
 
-$(DRAFT)-$(VERSION).xml: $(DRAFT).md ex1.gen.exi.hex ex1.gen.xml ex1.json ex10.json ex11.json ex12.json ex2.gen.exi.hex ex2.gen.xml ex2.json ex3.json ex4.gen.json-trim ex5.json ex6.json ex7.gen.cbor.hex ex7.gen.xml senml5.gen.xsd senml5.rnc exlinks.json
+$(DRAFT)-$(VERSION).xml: $(DRAFT).md ex1.gen.exi.hex ex1.gen.xml ex1.json ex10.json ex11.json ex12.json ex2.gen.exi.hex ex2.gen.xml ex2.json ex3.json ex4.gen.json-trim ex5.json ex6.json ex7.gen.cbor.hex ex7.gen.xml senml5.gen.xsd senml5.rnc ex8.json
 	$(kramdown-rfc2629) $< > $@
 
 %.txt: %.xml
@@ -52,6 +52,7 @@ $(DRAFT)-$(VERSION).xml: $(DRAFT).md ex1.gen.exi.hex ex1.gen.xml ex1.json ex10.j
 
 %.chk: %.xml senml5.rnc
 	java -jar bin/jing.jar -c senml5.rnc $< > $@
+	cddl senml.cddl validate $<
 
 %.tmp.xsd: %.rnc 
 	java -jar bin/trang.jar $< $@

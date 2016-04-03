@@ -414,7 +414,7 @@ sensor device that was assigned the unique 1-wire address of 10e2073a01080063:
 ### Multiple Datapoints {#co-ex}
 
 The following example shows voltage and current now, i.e., at an unspecified
-time. The device has an EUI-64 MAC address of 0024befffe804ff1.
+time. 
 
 ~~~~
 {::include ex2.json}
@@ -1079,5 +1079,5 @@ being a map of strings to strings with unique keys.
 The following shows an example of the links extension.
 
 ~~~~
-{::include exlinks.json}
+{::include ex8.json}
 ~~~~
