@@ -361,7 +361,7 @@ Record atributes:
 | Base Name     | bn   | String         |
 | Base Time     | bt   | Number         |
 | Base Unit     | bu   | Number         |
-| Version       | ver  | Number         |
+| Version       | bver | Number         |
 | Name          | n    | String         |
 | Unit          | u    | String         |
 | Value         | v    | Floating point |
@@ -506,7 +506,7 @@ only an unsigned integer is allowed.
 
 
 | Name                      | JSON label | CBOR label |
-| Version                   | ver        |         -1 |
+| Version                   | bver       |         -1 |
 | Base Name                 | bn         |         -2 |
 | Base Time                 | bt         |         -3 |
 | Base Units                | bu         |         -4 |
@@ -548,7 +548,7 @@ attribute used in the XML senml tag.
 | Base Name     | bn   | string  |
 | Base Time     | bt   | int     |
 | Base Unit     | bu   | int     |
-| Version       | ver  | int     |
+| Version       | bver | int     |
 | Name          | n    | string  |
 | Unit          | u    | string  |
 | Value         | v    | float   |
