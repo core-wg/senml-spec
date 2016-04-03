@@ -94,6 +94,7 @@ informative:
   RFC5952: 
   RFC6690: 
   I-D.arkko-core-dev-urn:
+  I-D.greevenbosch-appsawg-cbor-cddl: 
   I-D.ietf-core-links-json:
   UCUM:
     title: The Unified Code for Units of Measure (UCUM) 
@@ -683,6 +684,17 @@ smaller; so if the sum does get smaller, the application will know that one of
 the situations listed above has happened.
 
 
+# CDDL
+
+For reference, the CBOR representation can be described with the CDDL 
+{{I-D.greevenbosch-appsawg-cbor-cddl}} specification in {{senmlcddl}}. 
+
+~~~~ cddl 
+{::include senml.cddl}
+~~~~~
+{: #senmlcddl title="CDDL specification for CBOR SenML"}
+
+
 # IANA Considerations
 
 Note to RFC Editor: Please replace all occurrences of "RFC-AAAA" with the RFC
@@ -1050,7 +1062,7 @@ We would like to thank Lisa Dusseault, Joe Hildebrand, Lyndsay Campbell, Martin
 Thomson, John Klensin, Bjoern Hoehrmann, Carsten Bormann, and Christian Amsuess
 for their review comments.
 
-The CBOR Representation text was contributed by Carsten Bormann.
+The CBOR Representation text and CDDL  was contributed by Carsten Bormann.
 
 
 --- back
