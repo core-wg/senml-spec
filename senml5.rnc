@@ -9,6 +9,7 @@ link = element l {
 senml = element senml {
   attribute bn { xsd:string }?,
   attribute bt { xsd:float }?,
+  attribute bv { xsd:float }?,
   attribute bu { xsd:string }?,
   attribute n { xsd:string }?,
   attribute s { xsd:float }?,
