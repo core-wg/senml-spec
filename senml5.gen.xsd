@@ -17,6 +17,7 @@ xmlns:ns1="urn:ietf:params:xml:ns:senml">
       <xs:attribute name="bn" type="xs:string" />
       <xs:attribute name="bt" type="xs:float" />
       <xs:attribute name="bu" type="xs:string" />
+      <xs:attribute name="bv" type="xs:float" />
       <xs:attribute name="n" type="xs:string" />
       <xs:attribute name="s" type="xs:float" />
       <xs:attribute name="t" type="xs:float" />
