@@ -24,7 +24,7 @@ xmlns:ns1="urn:ietf:params:xml:ns:senml">
       <xs:attribute name="ut" type="xs:float" />
       <xs:attribute name="v" type="xs:float" />
       <xs:attribute name="vb" type="xs:boolean" />
-      <xs:attribute name="ver" type="xs:int" />
+      <xs:attribute name="bver" type="xs:int" />
       <xs:attribute name="vs" type="xs:string" />
     </xs:complexType>
   </xs:element>

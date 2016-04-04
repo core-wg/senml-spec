@@ -17,7 +17,7 @@ senml = element senml {
   attribute ut { xsd:float }?,
   attribute v { xsd:float }?,
   attribute vb { xsd:boolean }?,
-  attribute ver { xsd:int }?,
+  attribute bver { xsd:int }?,
   attribute vs { xsd:string }?,
   
   link*
