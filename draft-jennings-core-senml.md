@@ -364,17 +364,17 @@ Record atributes:
 
 | SenML         | JSON | Type           |
 | Base Name     | bn   | String         |
-| Base Time     | bt   | Number         |
-| Base Unit     | bu   | Number         |
+| Base Time     | bt   | Number        |
+| Base Unit     | bu   | String         |
 | Base Value    | bv   | Number         |
 | Version       | bver | Number         |
 | Name          | n    | String         |
 | Unit          | u    | String         |
-| Value         | v    | Floating point |
+| Value         | v    | Number |
 | String Value  | vs   | String         |
 | Boolean Value | vb   | Boolean        |
 | Data Value    | vd   | String         |
-| Value Sum     | s    | Floating point |
+| Value Sum     | s    | Number|
 | Time          | t    | Number         |
 | Update Time   | ut   | Number         |
 {:cols='r l l'}
@@ -567,8 +567,6 @@ attribute used in the XML senml tag.
 | Time          | t    | float   |
 | Update Time   | ut   | float   |
 {:cols='r l l'}
-
-TODO - Discuss encoding of String and Data
 
 The RelaxNG schema for the XML is:
 
