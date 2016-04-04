@@ -548,8 +548,8 @@ attribute used in the XML senml tag.
 
 | SenML Field   | XML  | Type    |
 | Base Name     | bn   | string  |
-| Base Time     | bt   | int     |
-| Base Unit     | bu   | int     |
+| Base Time     | bt   | float   |
+| Base Unit     | bu   | string  |
 | Version       | bver | int     |
 | Name          | n    | string  |
 | Unit          | u    | string  |
@@ -558,8 +558,8 @@ attribute used in the XML senml tag.
 | Data Value    | vd   | string  |
 | Boolean Value | vb   | boolean |
 | Value Sum     | s    | float   |
-| Time          | t    | int     |
-| Update Time   | ut   | int     |
+| Time          | t    | float   |
+| Update Time   | ut   | float   |
 {:cols='r l l'}
 
 TODO - Discuss encoding of String and Data
