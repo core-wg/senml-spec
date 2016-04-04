@@ -1,7 +1,6 @@
 [{"bn": "urn:dev:ow:10e2073a01080063/",
   "bt": 1320078429,
-  "l": [{"href":"humidity","foo":"bar1"},
-        {"href":"temperature","foo":"bar2","bar":"foo3"}]
+  "l": ”[{\”href\":\"humidity\",\"foo\":\"bar1\"}\”
   },
   { "n": "temperature", "v": 27.2, "u": "Cel" },
   { "n": "humidity", "v": 80, "u": "%RH" } 
