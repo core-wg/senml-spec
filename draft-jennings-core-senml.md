@@ -231,8 +231,6 @@ SenML Pack:
 : One or more SenML Records in an array structure.
 
 
-
-
 # Semantics {#semant}
 
 Each SenML Pack carries a single array that represents a set of
@@ -255,6 +253,11 @@ Base Unit:
     is used otherwise the value of found in the Unit is used.
     This applies to the entries in all Records. A Base Unit can
     only be included in the first object of the array. 
+    
+Base Value:
+: A base value is added to the value found in an entry, similar to Base Time. 
+    This attribute is optional. This applies to the entries in all Records.
+    A Base Time can only be included in the first Record of the array.
 
 Version:
 : Version number of media type format. This attribute is optional positive
@@ -363,6 +366,7 @@ Record atributes:
 | Base Name     | bn   | String         |
 | Base Time     | bt   | Number         |
 | Base Unit     | bu   | Number         |
+| Base Value    | bv   | Number         |
 | Version       | bver | Number         |
 | Name          | n    | String         |
 | Unit          | u    | String         |
@@ -400,7 +404,7 @@ TODO - simplify examples
 
 TODO - Examples are messed up on if time is an integer or float 
 
-TODO - Add example with string , data , boolean 
+TODO - Add example with string, data, boolean, and base value 
 
 
 ### Single Datapoint
@@ -512,6 +516,7 @@ only an unsigned integer is allowed.
 | Base Name                 | bn         |         -2 |
 | Base Time                 | bt         |         -3 |
 | Base Units                | bu         |         -4 |
+| Base Value                | bv         |         -5 |
 | Name                      | n          |          0 |
 | Units                     | u          |          1 |
 | Value                     | v          |          2 |
@@ -550,6 +555,7 @@ attribute used in the XML senml tag.
 | Base Name     | bn   | string  |
 | Base Time     | bt   | int     |
 | Base Unit     | bu   | int     |
+| Base Value    | bv   | float   |
 | Version       | bver | int     |
 | Name          | n    | string  |
 | Unit          | u    | string  |
