@@ -257,7 +257,7 @@ Base Unit:
 Base Value:
 : A base value is added to the value found in an entry, similar to Base Time. 
     This attribute is optional. This applies to the entries in all Records.
-    A Base Time can only be included in the first Record of the array.
+    A Base Value can only be included in the first Record of the array.
 
 Version:
 : Version number of media type format. This attribute is optional positive

@@ -10,6 +10,7 @@ initial-defined = {
   ? bn => tstr,        ; Base Name
   ? bt => numeric,     ; Base Time
   ? bu => tstr,        ; Base Units
+  ? bv => numeric,     ; Base value
   ? bver => uint,      ; Base Version
   follow-on-defined-group,
   + base-key-value-pair
@@ -34,7 +35,7 @@ bver = -1  n  = 0   s  = 5
 bn  = -2   u  = 1   t  = 6
 bt  = -3   v  = 2   ut = 7
 bu  = -4   vs = 3   vd = 8
-           vb = 4
+bv  = -5   vb = 4
 ; use the label *names* for JSON
 
 ; now define the generic versions
