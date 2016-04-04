@@ -57,6 +57,14 @@ author:
   code: '02420'
   country: Finland
   email: ari.keranen@ericsson.com
+- ins: C. Bormann
+  name: Carsten Bormann
+  org: Universitaet Bremen TZI
+  street: Postfach 330440
+  city: Bremen
+  code: D-28359
+  country: Germany
+  email: cabo@tzi.org
 
 normative:
   IEEE.754.1985: 
