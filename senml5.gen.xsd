@@ -15,12 +15,12 @@ xmlns:ns1="urn:ietf:params:xml:ns:senml">
         ref="ns1:l" />
       </xs:sequence>
       <xs:attribute name="bn" type="xs:string" />
-      <xs:attribute name="bt" type="xs:float" />
+      <xs:attribute name="bt" type="xs:double" />
       <xs:attribute name="bv" type="xs:float" />
       <xs:attribute name="bu" type="xs:string" />
       <xs:attribute name="n" type="xs:string" />
       <xs:attribute name="s" type="xs:float" />
-      <xs:attribute name="t" type="xs:float" />
+      <xs:attribute name="t" type="xs:double" />
       <xs:attribute name="u" type="xs:string" />
       <xs:attribute name="ut" type="xs:float" />
       <xs:attribute name="v" type="xs:float" />
