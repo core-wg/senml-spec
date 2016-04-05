@@ -8,18 +8,21 @@ link = element l {
 
 senml = element senml {
   attribute bn { xsd:string }?,
-  attribute bt { xsd:float }?,
-  attribute bv { xsd:float }?,
+  attribute bt { xsd:double }?,
+  attribute bv { xsd:double }?,
   attribute bu { xsd:string }?,
-  attribute n { xsd:string }?,
-  attribute s { xsd:float }?,
-  attribute t { xsd:float }?,
-  attribute u { xsd:string }?,
-  attribute ut { xsd:float }?,
-  attribute v { xsd:float }?,
-  attribute vb { xsd:boolean }?,
   attribute bver { xsd:int }?,
+
+  attribute n { xsd:string }?,
+  attribute s { xsd:double }?,
+  attribute t { xsd:double }?,
+  attribute u { xsd:string }?,
+  attribute ut { xsd:double }?,
+
+  attribute v { xsd:double }?,
+  attribute vb { xsd:boolean }?,
   attribute vs { xsd:string }?,
+  attribute vd { xsd:string }?,
   
   link*
 }
