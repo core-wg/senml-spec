@@ -554,19 +554,19 @@ attribute used in the XML senml tag.
 
 | SenML Field   | XML  | Type    |
 | Base Name     | bn   | string  |
-| Base Time     | bt   | float   |
+| Base Time     | bt   | double   |
 | Base Unit     | bu   | string  |
-| Base Value    | bv   | float   |
-| Version       | bver | int     |
+| Base Value    | bv   | double   |
+| Base Version       | bver | int     |
 | Name          | n    | string  |
 | Unit          | u    | string  |
-| Value         | v    | float   |
+| Value         | v    | double   |
 | String Value  | vs   | string  |
 | Data Value    | vd   | string  |
 | Boolean Value | vb   | boolean |
-| Value Sum     | s    | float   |
-| Time          | t    | float   |
-| Update Time   | ut   | float   |
+| Value Sum     | s    | double   |
+| Time          | t    | double   |
+| Update Time   | ut   | double   |
 {:cols='r l l'}
 
 The RelaxNG schema for the XML is:
