@@ -50,6 +50,12 @@ $(DRAFT)-$(VERSION).xml: $(DRAFT).md ex1.gen.exi.hex ex1.gen.xml ex1.json ex10.j
 %.gen.cbor: %.json
 	senmlCat -cbor -ijsons -print  $< > $@
 
+
+%.gen.cbor.txt: %.gen.cbor
+	cbor2pretty.rb $< > $@
+
+
+
 %.chk: %.xml senml5.rnc
 	java -jar bin/jing.jar -c senml5.rnc $< > $@
 	#cddl senml.cddl validate $<
