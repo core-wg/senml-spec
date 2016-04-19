@@ -401,9 +401,6 @@ precision over the next 100 years.
 
 ## Examples
 
-TODO - simplify examples 
-
-TODO - Examples are messed up on if time is an integer or float 
 
 TODO - Add example with string, data, boolean, and base value 
 
@@ -533,7 +530,7 @@ only an unsigned integer is allowed.
 measurement as in {{co-ex}}.
 
 ~~~~
-{::include ex7.gen.cbor.hex}
+{::include ex3.gen.cbor.hex}
 ~~~~
 
 
@@ -544,7 +541,7 @@ section. The following example shows an XML example for the same sensor
 measurement as in {{co-ex}}.
 
 ~~~~
-{::include ex7.gen.xml}
+{::include ex3.gen.xml}
 ~~~~
 
 The SenML Stream is represented as a sensml tag that contains a series of
@@ -572,7 +569,7 @@ attribute used in the XML senml tag.
 The RelaxNG schema for the XML is:
 
 ~~~~
-{::include senml5.rnc}
+{::include senml.rnc}
 ~~~~
 
 
@@ -599,7 +596,7 @@ The following is the XSD Schema to be used for strict schema guided EXI
 processing. It is generated from the RelaxNG.
 
 ~~~~
-{::include senml5.gen.xsd}
+{::include senml.gen.xsd}
 ~~~~
 
 The following shows a hexdump of the EXI produced from encoding the
