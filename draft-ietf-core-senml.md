@@ -698,6 +698,7 @@ For reference, the CBOR representation can be described with the CDDL
 ~~~~~
 {: #senmlcddl title="CDDL specification for CBOR SenML"}
 
+TODO - seems to be a problem with CDDL not validating examples
 
 # IANA Considerations
 
