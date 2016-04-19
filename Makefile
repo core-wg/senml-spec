@@ -14,6 +14,8 @@ latest: txt html
 
 check: ex12.gen.chk ex11.gen.chk ex10.gen.chk ex6.gen.chk ex5.gen.chk ex4.gen.chk ex3.gen.chk ex2.gen.chk ex1.gen.chk
 
+check2: ex12.chk ex11.chk ex10.chk ex6.chk ex5.chk ex4.chk ex3.chk ex2.chk ex1.chk  ex3.gen.cbor.chk
+
 
 diff: $(DRAFT)-$(VERSION).txt
 	htmlwdiff   $(DRAFT)-old.txt   $(DRAFT)-$(VERSION).txt >   $(DRAFT).diff.html
@@ -25,7 +27,7 @@ pdf: $(DRAFT)-$(VERSION).pdf
 
 
 clean:
-	-rm -f $(draft).{txt,html,xml,pdf} *.gen.{chk,xsd,hex,exi,xml} *.gen.exi.hex *.gen.json-trim
+	-rm -f $(draft).{txt,html,xml,pdf} *.gen.{chk,xsd,hex,exi,xml} *.chk *.gen.exi.hex *.gen.json-trim
 
 size: ex5.json ex5.gen.xml ex5.gen.exi ex5.gen.cbor ex5.json.Z ex5.gen.xml.Z ex5.gen.exi.Z ex5.gen.cbor.Z
 
@@ -58,7 +60,13 @@ $(DRAFT)-$(VERSION).xml: $(DRAFT).md ex1.gen.exi.hex ex1.gen.xml ex1.json ex10.j
 
 %.chk: %.xml senml.rnc
 	java -jar bin/jing.jar -c senml.rnc $< > $@
-	#cddl senml.cddl validate $<
+
+%.chk: %.json senml.cddl
+	cddl senml.cddl validate $<  > $@
+
+%.gen.cbor.chk: %.gen.cbor senml.cddl
+	cddl senml.cddl validate $<  > $@
+
 
 %.tmp.xsd: %.rnc 
 	java -jar bin/trang.jar $< $@
