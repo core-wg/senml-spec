@@ -14,7 +14,7 @@ latest: txt html
 
 check: ex12.gen.chk ex11.gen.chk ex10.gen.chk ex6.gen.chk ex5.gen.chk ex4.gen.chk ex3.gen.chk ex2.gen.chk ex1.gen.chk
 
-check2: ex12.chk ex11.chk ex10.chk ex6.chk ex5.chk ex4.chk ex3.chk ex2.chk ex1.chk  ex3.gen.cbor.chk
+check2: ex12.chk ex11.chk ex10.chk ex6.chk ex5.chk ex4.chk ex3.chk ex2.chk ex1.chk  ex3.gen.cbor.chk ex3.gen.cbor.txt
 
 
 diff: $(DRAFT)-$(VERSION).txt
@@ -52,11 +52,8 @@ $(DRAFT)-$(VERSION).xml: $(DRAFT).md ex1.gen.exi.hex ex1.gen.xml ex1.json ex10.j
 %.gen.cbor: %.json
 	senmlCat -cbor -ijson -print  $< > $@
 
-
 %.gen.cbor.txt: %.gen.cbor
 	cbor2pretty.rb $< > $@
-
-
 
 %.chk: %.xml senml.rnc
 	java -jar bin/jing.jar -c senml.rnc $< > $@
