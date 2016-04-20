@@ -22,21 +22,13 @@ follow-on-defined-group = (
    ? ( v => numeric // ; Numeric Value
        vs => tstr //   ; String Value
        vb => bool //   ; Boolean Value
-       vd => bstr )    ; Data Value
+       vd => binary-value ) ; Data Value
    ? s => numeric,     ; Value Sum
    ? t => numeric,     ; Time
    ? ut => numeric,    ; Update Time
    * key-value-pair
 )
 follow-on-defined = { follow-on-defined-group }
-
-; CBOR version (use the labels)
-bver = -1  n  = 0   s  = 5
-bn  = -2   u  = 1   t  = 6
-bt  = -3   v  = 2   ut = 7
-bu  = -4   vs = 3   vd = 8
-bv  = -5   vb = 4
-; use the label *names* for JSON
 
 ; now define the generic versions
 
@@ -57,6 +49,5 @@ base-key-value-pair = ( b-label => value )
 non-b-label = tstr .regexp  "[A-Zac-z0-9][-_:.A-Za-z0-9]*" / uint
 b-label = tstr .regexp  "b[-_:.A-Za-z0-9]+" / nint
 
-value = tstr / bstr / numeric / bool
+value = tstr / binary-value / numeric / bool
 numeric = number / decfrac
- 
