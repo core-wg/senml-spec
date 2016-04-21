@@ -6,7 +6,7 @@ kramdown-rfc2629 ?= kramdown-rfc2629
 
 
 DRAFT = draft-ietf-core-senml
-VERSION = 00
+VERSION = 01
 
 .PHONY: latest txt html pdf  diff clean check 
 
@@ -58,11 +58,11 @@ $(DRAFT)-$(VERSION).xml: $(DRAFT).md ex1.gen.exi.hex ex1.gen.xml ex1.json ex10.j
 %.chk: %.xml senml.rnc
 	java -jar bin/jing.jar -c senml.rnc $< > $@
 
-%.chk: %.json senml.cddl
-	cddl senml.cddl validate $<  > $@
+%.chk: %.json senml.cddl senml-json.cddl
+	cat senml.cddl senml-json.cddl | cddl - validate $<  > $@
 
-%.gen.cbor.chk: %.gen.cbor senml.cddl
-	cddl senml.cddl validate $<  > $@
+%.gen.cbor.chk: %.gen.cbor senml.cddl senml-cbor.cddl
+	cat senml.cddl senml-cbor.cddl | cddl - validate $<  > $@
 
 
 %.tmp.xsd: %.rnc 

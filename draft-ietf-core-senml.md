@@ -690,15 +690,29 @@ the situations listed above has happened.
 
 # CDDL
 
-For reference, the CBOR representation can be described with the CDDL 
-{{I-D.greevenbosch-appsawg-cbor-cddl}} specification in {{senmlcddl}}. 
+For reference, the JSON and CBOR representations can be described with
+the common CDDL
+{{I-D.greevenbosch-appsawg-cbor-cddl}} specification in {{senmlcddl}}.
 
-~~~~ cddl 
+~~~~ cddl
 {::include senml.cddl}
 ~~~~~
-{: #senmlcddl title="CDDL specification for CBOR SenML"}
+{: #senmlcddl title="Common CDDL specification for CBOR and JSON SenML"}
 
-TODO - seems to be a problem with CDDL not validating examples
+For JSON, we use text labels and base64url-encoded binary data ({{senmlcddl-json}}).
+
+~~~~ cddl
+{::include senml-json.cddl}
+~~~~~
+{: #senmlcddl-json title="JSON-specific CDDL specification for SenML"}
+
+For CBOR, we use integer labels and native binary data ({{senmlcddl-cbor}}).
+
+~~~~ cddl
+{::include senml-cbor.cddl}
+~~~~~
+{: #senmlcddl-cbor title="CBOR-specific CDDL specification for SenML"}
+
 
 # IANA Considerations
 
