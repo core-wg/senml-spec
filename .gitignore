@@ -12,4 +12,7 @@ old
 old?
 ex*.gen.chk
 ex*.gen.xml
+ex*.chk
 senml3.tmp.xsd
+ex5.gen.cbor
+ex5.gen.exi

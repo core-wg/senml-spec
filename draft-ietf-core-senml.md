@@ -198,12 +198,7 @@ follow it. So a more compact form of the example above is the following.
 ~~~~
 
 In the above example the Base Name is in the "bn" tag and the "n" tags in each
-Record are the empty string so they are omitted. The Base Name also could be put
-in a separate Record such as in the following example.
-
-~~~~
-{::include ex12.json}
-~~~~
+Record are the empty string so they are omitted. 
 
 Some devices have accurate time while others do not so SenML supports absolute
 and relative times. Time is represented in floating point as seconds and values

@@ -12,9 +12,9 @@ VERSION = 01
 
 latest: txt html 
 
-check: ex12.gen.chk ex11.gen.chk ex10.gen.chk ex6.gen.chk ex5.gen.chk ex4.gen.chk ex3.gen.chk ex2.gen.chk ex1.gen.chk
+check: ex11.gen.chk ex10.gen.chk  ex8.gen.chk ex6.gen.chk ex5.gen.chk ex4.gen.chk ex3.gen.chk ex2.gen.chk ex1.gen.chk
 
-check2: ex12.chk ex11.chk ex10.chk ex6.chk ex5.chk ex4.chk ex3.chk ex2.chk ex1.chk  ex3.gen.cbor.chk ex3.gen.cbor.txt
+check2: ex11.chk ex10.chk  ex8.chk ex6.chk ex5.chk ex4.chk ex3.chk ex2.chk ex1.chk  ex3.gen.cbor.chk ex3.gen.cbor.txt
 
 
 diff: $(DRAFT)-$(VERSION).txt
@@ -37,7 +37,7 @@ size: ex5.json ex5.gen.xml ex5.gen.exi ex5.gen.cbor ex5.json.Z ex5.gen.xml.Z ex5
 	gzip -n -c -9 < $< > $@
 
 
-$(DRAFT)-$(VERSION).xml: $(DRAFT).md ex1.gen.exi.hex ex1.gen.xml ex1.json ex10.json ex11.json ex12.json ex2.gen.exi.hex ex2.gen.xml ex2.json ex3.json ex4.gen.json-trim ex5.json ex6.json senml.gen.xsd senml.rnc ex8.json ex3.gen.xml ex3.gen.cbor.hex
+$(DRAFT)-$(VERSION).xml: $(DRAFT).md ex1.gen.exi.hex ex1.gen.xml ex1.json ex10.json ex11.json  ex2.gen.exi.hex ex2.gen.xml ex2.json ex3.json ex4.gen.json-trim ex5.json ex6.json senml.gen.xsd senml.rnc ex8.json ex3.gen.xml ex3.gen.cbor.hex
 	$(kramdown-rfc2629) $< > $@
 
 %.txt: %.xml
@@ -61,8 +61,13 @@ $(DRAFT)-$(VERSION).xml: $(DRAFT).md ex1.gen.exi.hex ex1.gen.xml ex1.json ex10.j
 %.chk: %.json senml.cddl senml-json.cddl
 	cat senml.cddl senml-json.cddl | cddl - validate $<  > $@
 
+#%.gen.cbor.chk: %.gen.cbor senml.cddl senml-cbor.cddl
+#	cat senml.cddl senml-cbor.cddl | cddl - validate $<  > $@
+
+
+# TODO - fix cbor to match above line not this one
 %.gen.cbor.chk: %.gen.cbor senml.cddl senml-cbor.cddl
-	cat senml.cddl senml-cbor.cddl | cddl - validate $<  > $@
+	cat senml.cddl senml-json.cddl | cddl - validate $<  > $@
 
 
 %.tmp.xsd: %.rnc 

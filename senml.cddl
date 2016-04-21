@@ -19,14 +19,14 @@ initial-defined = {
 follow-on-defined-group = (
    ? n => tstr,        ; Name
    ? u => tstr,        ; Units
+   ? s => numeric,     ; Value Sum
+   ? t => numeric,     ; Time
+   ? ut => numeric,    ; Update Time
+   * key-value-pair,
    ? ( v => numeric // ; Numeric Value
        vs => tstr //   ; String Value
        vb => bool //   ; Boolean Value
        vd => binary-value ) ; Data Value
-   ? s => numeric,     ; Value Sum
-   ? t => numeric,     ; Time
-   ? ut => numeric,    ; Update Time
-   * key-value-pair
 )
 follow-on-defined = { follow-on-defined-group }
 
