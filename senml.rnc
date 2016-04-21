@@ -1,10 +1,6 @@
 default namespace = "urn:ietf:params:xml:ns:senml"
 namespace rng = "http://relaxng.org/ns/structure/1.0"
 
-link = element l {
-      attribute * { xsd:string }*
-}
-
 
 senml = element senml {
   attribute bn { xsd:string }?,
@@ -24,7 +20,7 @@ senml = element senml {
   attribute vs { xsd:string }?,
   attribute vd { xsd:string }?,
   
-  link*
+  attribute l { xsd:string }?
 }
 
 sensml =

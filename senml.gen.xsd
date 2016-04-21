@@ -3,17 +3,8 @@
 elementFormDefault="qualified"
 targetNamespace="urn:ietf:params:xml:ns:senml"
 xmlns:ns1="urn:ietf:params:xml:ns:senml">
-  <xs:element name="l">
-    <xs:complexType>
-      <xs:anyAttribute processContents="skip" />
-    </xs:complexType>
-  </xs:element>
   <xs:element name="senml">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" maxOccurs="unbounded"
-        ref="ns1:l" />
-      </xs:sequence>
       <xs:attribute name="bn" type="xs:string" />
       <xs:attribute name="bt" type="xs:double" />
       <xs:attribute name="bv" type="xs:double" />
@@ -28,6 +19,7 @@ xmlns:ns1="urn:ietf:params:xml:ns:senml">
       <xs:attribute name="vb" type="xs:boolean" />
       <xs:attribute name="vs" type="xs:string" />
       <xs:attribute name="vd" type="xs:string" />
+      <xs:attribute name="l" type="xs:string" />
     </xs:complexType>
   </xs:element>
   <xs:element name="sensml">
