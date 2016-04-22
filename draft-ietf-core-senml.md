@@ -256,9 +256,11 @@ Base Value:
     A Base Value can only be included in the first Record of the array.
 
 Version:
-: Version number of media type format. This attribute is optional positive
+: Version number of media type format. This attribute is an optional positive
   integer and defaults to 5 if not present. A Version can
-  only be included in the first object of the array. 
+  only be included in the first object of the array. Note to RFC Editor. Change
+  the default value from to 100 when this specification is published as an RFC
+  and remove this note. 
 
 Name:
 : Name of the sensor or parameter. When appended to the Base Name attribute,
@@ -341,6 +343,8 @@ Representing the statistical characteristics of measurements, such as accuracy,
 can be very complex. Future specification may add new attributes to provide
 better information about the statistical properties of the measurement.
 
+A SenML object is referred to as "expanded" if it does not contain any base
+values and has no relative times. 
 
 # Associating Meta-data
 
@@ -467,7 +471,7 @@ compressed with gzip is given in the following table.
 {::include size.md}
 {: #tbl-sizes cols="l r r" title="Size Comparisons"}
 
-Note the CBOR and EXI sizes are not using the schema guidance so the could be a bit
+Note the EXI sizes are not using the schema guidance so the EXI could be a bit
 smaller. 
 
 ### Collection of Resources {#rest-ex}
