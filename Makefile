@@ -8,16 +8,18 @@ kramdown-rfc2629 ?= kramdown-rfc2629
 DRAFT = draft-ietf-core-senml
 VERSION = 01
 
-.PHONY: latest txt html pdf  diff clean check 
+.PHONY: draft txt html pdf  clean check check2
 
-latest: txt html 
+draft: txt html 
+
+all: draft check check2  $(DRAFT).diff.html
 
 check: ex11.gen.chk ex10.gen.chk  ex8.gen.chk ex6.gen.chk ex5.gen.chk ex4.gen.chk ex3.gen.chk ex2.gen.chk ex1.gen.chk
 
 check2: ex11.chk ex10.chk  ex8.chk ex6.chk ex5.chk ex4.chk ex3.chk ex2.chk ex1.chk  ex3.gen.cbor.chk ex3.gen.cbor.txt
 
 
-diff: $(DRAFT)-$(VERSION).txt
+$(DRAFT).diff.html: $(DRAFT)-$(VERSION).txt $(DRAFT)-old.txt 
 	htmlwdiff   $(DRAFT)-old.txt   $(DRAFT)-$(VERSION).txt >   $(DRAFT).diff.html
 
 
@@ -37,7 +39,7 @@ size: ex5.json ex5.gen.xml ex5.gen.exi ex5.gen.cbor ex5.json.Z ex5.gen.xml.Z ex5
 	gzip -n -c -9 < $< > $@
 
 
-$(DRAFT)-$(VERSION).xml: $(DRAFT).md ex1.gen.exi.hex ex1.gen.xml ex1.json ex10.json ex11.json  ex2.gen.exi.hex ex2.gen.xml ex2.json ex3.json ex4.gen.json-trim ex5.json ex6.json senml.gen.xsd senml.rnc ex8.json ex3.gen.xml ex3.gen.cbor.hex size.md
+$(DRAFT)-$(VERSION).xml: $(DRAFT).md ex1.gen.exi.hex ex1.gen.xml ex1.json ex10.json ex11.json  ex2.gen.exi.hex ex2.gen.xml ex2.json ex3.json ex4.gen.json-trim ex5.json ex6.json senml.gen.xsd senml.rnc ex8.json ex3.gen.xml ex3.gen.cbor.hex size.md ex3.gen.cbor.txt
 	$(kramdown-rfc2629) $< > $@
 
 %.txt: %.xml
@@ -53,7 +55,7 @@ $(DRAFT)-$(VERSION).xml: $(DRAFT).md ex1.gen.exi.hex ex1.gen.xml ex1.json ex10.j
 	ruby senml-json2cbor.rb  $< > $@
 
 %.gen.cbor.txt: %.gen.cbor 
-	cbor2pretty.rb $< > $@
+	cbor2pretty.rb $< | sed -e "s/6465763a6f773a3130653230373361303130383/ ... /" > $@
 
 %.chk: %.xml senml.rnc
 	java -jar bin/jing.jar -c senml.rnc $< > $@

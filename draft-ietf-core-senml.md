@@ -517,11 +517,11 @@ only an unsigned integer is allowed.
 | Data Value                | vd         |          8 |
 {: #tbl-cbor-labels cols="r l r" title="CBOR representation: integers for map keys"}
 
- The following example shows an hexdump of the  CBOR example for the same sensor
+ The following example shows a dump of the  CBOR example for the same sensor
 measurement as in {{co-ex}}.
 
 ~~~~
-{::include ex3.gen.cbor.hex}
+{::include ex3.gen.cbor.txt}
 ~~~~
 
 
