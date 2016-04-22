@@ -28,17 +28,17 @@ end
 
 # This hacks off precision to 10 bits of mantissa so CBOR can generate
 # half floats. Optional. Comment out if undesired.
-class Float
-  def cborify_senml
-    short = [[self].pack("g").unpack("N")[0] & 0xFFFFE000].pack("N").unpack("g")[0]
-    # warn [short, short.to_cbor.size].inspect
-    if short.to_cbor.size == 3
-      short
-    else
-      self
-    end
-  end
-end
+#class Float
+#  def cborify_senml
+#    short = [[self].pack("g").unpack("N")[0] & 0xFFFFE000].pack("N").unpack("g")[0]
+#    # warn [short, short.to_cbor.size].inspect
+#    if short.to_cbor.size == 3
+#      short
+#     else
+#      self
+#    end
+#  end
+#end
 
 class Object
   def cborify_senml

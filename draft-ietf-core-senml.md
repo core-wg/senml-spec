@@ -464,11 +464,7 @@ at a separate time.
 The size of this example represented in various forms, as well as that form
 compressed with gzip is given in the following table.
 
-| Encoding | Size | Compressed Size |
-| JSON |  567 | 200 |
-| XML  | 656 | 232 |
-| CBOR| 292 | 192 |
-| EXI    | 160 | 183 |
+{::include size.md}
 {: #tbl-sizes cols="l r r" title="Size Comparisons"}
 
 Note the CBOR and EXI sizes are not using the schema guidance so the could be a bit

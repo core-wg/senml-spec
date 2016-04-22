@@ -27,7 +27,7 @@ pdf: $(DRAFT)-$(VERSION).pdf
 
 
 clean:
-	-rm -f $(draft).{txt,html,xml,pdf} *.gen.{chk,xsd,hex,exi,xml} *.chk *.gen.exi.hex *.gen.json-trim
+	-rm -f $(draft).{txt,html,xml,pdf} *.gen.{chk,xsd,hex,exi,xml,cbor} *.chk *.gen.cbor.hex *.gen.exi.hex *.gen.json-trim
 
 size: ex5.json ex5.gen.xml ex5.gen.exi ex5.gen.cbor ex5.json.Z ex5.gen.xml.Z ex5.gen.exi.Z ex5.gen.cbor.Z
 
@@ -37,7 +37,7 @@ size: ex5.json ex5.gen.xml ex5.gen.exi ex5.gen.cbor ex5.json.Z ex5.gen.xml.Z ex5
 	gzip -n -c -9 < $< > $@
 
 
-$(DRAFT)-$(VERSION).xml: $(DRAFT).md ex1.gen.exi.hex ex1.gen.xml ex1.json ex10.json ex11.json  ex2.gen.exi.hex ex2.gen.xml ex2.json ex3.json ex4.gen.json-trim ex5.json ex6.json senml.gen.xsd senml.rnc ex8.json ex3.gen.xml ex3.gen.cbor.hex
+$(DRAFT)-$(VERSION).xml: $(DRAFT).md ex1.gen.exi.hex ex1.gen.xml ex1.json ex10.json ex11.json  ex2.gen.exi.hex ex2.gen.xml ex2.json ex3.json ex4.gen.json-trim ex5.json ex6.json senml.gen.xsd senml.rnc ex8.json ex3.gen.xml ex3.gen.cbor.hex size.md
 	$(kramdown-rfc2629) $< > $@
 
 %.txt: %.xml
@@ -49,10 +49,10 @@ $(DRAFT)-$(VERSION).xml: $(DRAFT).md ex1.gen.exi.hex ex1.gen.xml ex1.json ex10.j
 %.gen.xml: %.json
 	senmlCat -xml -ijson -i -print  $< | tidy -xml -i -wrap 68 -q -o $@
 
-%.gen.cbor: %.json
-	senmlCat -cbor -ijson -print  $< > $@
+%.gen.cbor: %.json senml-json2cbor.rb
+	ruby senml-json2cbor.rb  $< > $@
 
-%.gen.cbor.txt: %.gen.cbor
+%.gen.cbor.txt: %.gen.cbor 
 	cbor2pretty.rb $< > $@
 
 %.chk: %.xml senml.rnc
@@ -61,14 +61,8 @@ $(DRAFT)-$(VERSION).xml: $(DRAFT).md ex1.gen.exi.hex ex1.gen.xml ex1.json ex10.j
 %.chk: %.json senml.cddl senml-json.cddl
 	cat senml.cddl senml-json.cddl | cddl - validate $<  > $@
 
-#%.gen.cbor.chk: %.gen.cbor senml.cddl senml-cbor.cddl
-#	cat senml.cddl senml-cbor.cddl | cddl - validate $<  > $@
-
-
-# TODO - fix cbor to match above line not this one
 %.gen.cbor.chk: %.gen.cbor senml.cddl senml-cbor.cddl
-	cat senml.cddl senml-json.cddl | cddl - validate $<  > $@
-
+	cat senml.cddl senml-cbor.cddl | cddl - validate $<  > $@
 
 %.tmp.xsd: %.rnc 
 	java -jar bin/trang.jar $< $@
@@ -94,3 +88,10 @@ ex2.gen.exi: ex2.gen.xml senml.gen.xsd
 ex1.gen.exi: ex1.gen.xml senml.gen.xsd
 	java -cp "bin/xercesImpl.jar:bin/exificient.jar" com.siemens.ct.exi.cmd.EXIficientCMD -encode -i ex1.gen.xml -o ex1.gen.exi -schema senml.gen.xsd -strict -includeOptions -includeSchemaId -bytePacked 
 
+
+size.md: ex5.gen.cbor ex5.gen.cbor.Z ex5.gen.exi ex5.gen.exi.Z ex5.gen.xml ex5.gen.xml.Z ex5.json ex5.json.Z
+	echo "| Encoding | Size | Compressed Size |" > size.md
+	echo "| JSON |  "  `cat ex5.json | wc -c `  "|" `cat ex5.json.Z | wc -c` "|" >> size.md 
+	echo "| XML |  "  `cat ex5.gen.xml | wc -c `  "|" `cat ex5.gen.xml.Z | wc -c` "|" >> size.md 
+	echo "| CBOR |  "  `cat ex5.gen.cbor | wc -c `  "|" `cat ex5.gen.cbor.Z | wc -c` "|" >> size.md 
+	echo "| EXI |  "  `cat ex5.gen.exi | wc -c `  "|" `cat ex5.gen.exi.Z | wc -c` "|" >> size.md 
