@@ -158,7 +158,7 @@ gauge encoded in the JSON syntax.
 ~~~~
 
 In the example above, the array has a single SenML Record with a measurement for
-a sensor named "urn:dev:ow:10e2073a01080063" with a current value of 23.5
+a sensor named "urn:dev:ow:10e2073a01080063" with a current value of 23.1
 degrees Celsius.
 
 
