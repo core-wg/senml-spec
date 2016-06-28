@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<senml xmlns="urn:ietf:params:xml:ns:senml"
+       bn="urn:dev:ow:10e2073a01080063" >
+  <e n="voltage" t="0" v="120.1" u="V" />
+  <e n="current" t="0" v="1.2" u="A" />
+</senml>

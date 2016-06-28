@@ -1,0 +1,31 @@
+default namespace = "urn:ietf:params:xml:ns:senml"
+namespace rng = "http://relaxng.org/ns/structure/1.0"
+
+
+senml = element senml {
+  attribute bn { xsd:string }?,
+  attribute bt { xsd:double }?,
+  attribute bv { xsd:double }?,
+  attribute bu { xsd:string }?,
+  attribute bver { xsd:int }?,
+
+  attribute n { xsd:string }?,
+  attribute s { xsd:double }?,
+  attribute t { xsd:double }?,
+  attribute u { xsd:string }?,
+  attribute ut { xsd:double }?,
+
+  attribute v { xsd:double }?,
+  attribute vb { xsd:boolean }?,
+  attribute vs { xsd:string }?,
+  attribute vd { xsd:string }?,
+  
+  attribute l { xsd:string }?
+}
+
+sensml =
+  element sensml {
+    senml+
+}
+
+start = sensml

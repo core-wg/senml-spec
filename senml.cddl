@@ -1,0 +1,53 @@
+
+SenML-Pack = [initial-record, * follow-on-record]
+
+initial-record = initial-defined .and initial-generic
+follow-on-record = follow-on-defined .and follow-on-generic
+
+; first do a specification of the labels as defined:
+
+initial-defined = {
+  ? bn => tstr,        ; Base Name
+  ? bt => numeric,     ; Base Time
+  ? bu => tstr,        ; Base Units
+  ? bv => numeric,     ; Base value
+  ? bver => uint,      ; Base Version
+  follow-on-defined-group,
+  + base-key-value-pair
+}
+
+follow-on-defined-group = (
+   ? n => tstr,        ; Name
+   ? u => tstr,        ; Units
+   ? s => numeric,     ; Value Sum
+   ? t => numeric,     ; Time
+   ? ut => numeric,    ; Update Time
+   * key-value-pair,
+   ? ( v => numeric // ; Numeric Value
+       vs => tstr //   ; String Value
+       vb => bool //   ; Boolean Value
+       vd => binary-value ) ; Data Value
+)
+follow-on-defined = { follow-on-defined-group }
+
+; now define the generic versions
+
+initial-generic = {
+  follow-on-generic-group,
+  * base-key-value-pair,
+}
+
+follow-on-generic-group = (
+  + key-value-pair,
+)
+follow-on-generic = { follow-on-generic-group }
+
+key-value-pair = ( non-b-label => value )
+
+base-key-value-pair = ( b-label => value )
+
+non-b-label = tstr .regexp  "[A-Zac-z0-9][-_:.A-Za-z0-9]*" / uint
+b-label = tstr .regexp  "b[-_:.A-Za-z0-9]+" / nint
+
+value = tstr / binary-value / numeric / bool
+numeric = number / decfrac

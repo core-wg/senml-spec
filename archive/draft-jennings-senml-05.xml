@@ -1,0 +1,1245 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+<?xml-stylesheet type="text/xsl" href="rfc2629.xslt" ?>
+<?rfc toc="yes" ?>
+<?rfc symrefs="yes" ?>
+<?rfc iprnotified="yes" ?>
+<?rfc strict="yes" ?>
+<?rfc compact="yes" ?>
+<?rfc sortrefs="no" ?>
+<?rfc colonspace="yes" ?>
+<?rfc rfcedstyle="no" ?>
+<?rfc tocdepth="4"?>
+<rfc category="exp" docName="draft-jennings-senml-05" ipr="trust200902">
+  <front>
+    <title abbrev="Sensor Markup">Media Type for Sensor Markup Language
+    (SENML)</title>
+
+    <author fullname="Cullen Jennings" initials="C." surname="Jennings">
+      <organization>Cisco</organization>
+
+      <address>
+        <postal>
+          <street>170 West Tasman Drive</street>
+
+          <city>San Jose</city>
+
+          <region>CA</region>
+
+          <code>95134</code>
+
+          <country>USA</country>
+        </postal>
+
+        <phone>+1 408 421-9990</phone>
+
+        <email>fluffy@cisco.com</email>
+      </address>
+    </author>
+
+    <date day="14" month="March" year="2011" />
+
+    <area>APPS</area>
+
+    <abstract>
+      <t>This specification defines media types for representing simple sensor
+      measurements in JSON. A simple sensor, such as a temperature sensor,
+      could use this media type in protocols such as HTTP to transport the
+      values of a sensor.</t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section title="Overview">
+      <t>Connecting sensors to the internet is not new, and there have been
+      many protocols designed to facilitate it. This specification defines new
+      media types for carrying simple sensor information in a protocol such as
+      HTTP or CoAP<xref target="I-D.ietf-core-coap"></xref>. This format was
+      designed so that processors with very limited capabilities could easily
+      encode a sensor reading into the media type, while at the same time a
+      server parsing the data could relatively efficiently collect a large
+      number of sensor readings. There are many types of more complex
+      measurements and readings that this media type would not be suitable
+      for. A decision was made not to carry most of the meta data about the
+      sensor in this media type to help reduce the size of the data and
+      improve efficiency in decoding.</t>
+
+      <t>JSON<xref target="RFC4627"></xref> was selected as a basis for the
+      encoding as it represents a widely understood way of encoding data that
+      is popular in current web based APIs and represents reasonable
+      trade-offs between extensibility, simplicity, and efficiency.</t>
+
+      <t>The data is structured as a single JSON object (with attributes) that
+      contains an array of measurements. Each measurement is a JSON object
+      that has attributes such as a unique identifier for the sensor, the time
+      the measurement was made, and the current value. For example, the
+      following shows a measurement from a temperature gauge in JSON
+      syntax.</t>
+
+      <figure>
+        <artwork><![CDATA[
+{"m":[{ "n": "0017f202a5c5-Temp", "v":23.5, "u":"degC" }]}
+]]></artwork>
+      </figure>
+
+      <t>In the example above, the array in the object has a single
+      measurement for a sensor named "0017f202a5c5-Temp" with a temperature of
+      23.5 degrees Celsius.</t>
+    </section>
+
+    <section title="Requirements and Design Goals">
+      <t>The design goal is to be able to send simple sensor measurements in
+      small packets on mesh networks from large numbers of constrained
+      devices. Keeping the total size under 80 bytes makes this easy to use on
+      a wireless mesh network. It is always difficult to define what small
+      code is, but there is a desire to be able to implement this in roughly 1
+      KB of flash on a 8 bit microprocessor. Experience with Google power
+      meter and other large scale deployments has indicated strongly that the
+      solution needs to support allowing multiple measurements to be batched
+      into a single HTTP request. This "batch" upload capability allows the
+      server side to efficiently support a large number of devices. The
+      multiple measurements could be from multiple related sensors or from the
+      same sensor but at different times.</t>
+    </section>
+
+    <section title="Terminology">
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+      "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+      document are to be interpreted as described in <xref
+      target="RFC2119">RFC 2119</xref>.</t>
+    </section>
+
+    <section title="Semantics">
+      <t>Each media type caries a single JSON object that represents a set of
+      measurements. This object contains several optional attributes described
+      below and a mandatory array of one or more measurements.</t>
+
+      <t><list style="hanging">
+          <t hangText="bn:">This is a base name string that is perpended to
+          the names found in the measurements. This attribute is optional.</t>
+
+          <t hangText="bt:">A base time that is added to the time found in a
+          measurement. This attribute is optional.</t>
+
+          <t hangText="ver:">Version number of media type format. This
+          attribute is optional positive integer and defaults to 1 if not
+          present.</t>
+
+          <t hangText="m:">Array of measurements. Mandatory and there must be
+          at least one measurement in the array.</t>
+        </list></t>
+
+      <t>Each measurement contains several attributes, some of which are
+      optional and some of which are mandatory.</t>
+
+      <t><list style="hanging">
+          <t hangText="n:">Name of sensor. When appended to the "bn"
+          attribute, this must result in a globally unique identifier for the
+          sensor.</t>
+
+          <t hangText="u:">Units for the sensor value. Optional. Acceptable
+          values are specified in <xref target="sec-units"> </xref></t>
+
+          <t hangText="v:">Value of the sensor. Optional if an s value is
+          present, otherwise required.</t>
+
+          <t hangText="s:">Integrated sum of the sensor values over time.
+          Optional. This attribute is in the units specified in the u value
+          multiplied by seconds.</t>
+
+          <t hangText="t:">Time when measurement was made. Optional.</t>
+
+          <t hangText="unc:">The uncertainty in the measurement, that uses the
+          same units as the base; if absent, the value is unknown (i.e., don't
+          assume that this is zero). Optional.</t>
+
+          <t hangText="c:">The confidence of the measurement, as a probability
+          between 0.0 and 1.0; if absent, this can be considered to be 0.95.
+          Optional.</t>
+
+          <t hangText="ut">Update time. A time in seconds that represents the
+          maximum time before this sensor will provide an updated reading.
+          This can be used to detect the failure of sensors or communications
+          path from the sensor. Optional.</t>
+
+          <!--         <t hangText=":">TODO Privacy forwarding flag. This attribute is
+          Optional.</t>
+
+          <t hangText=":">TODO Tags. This attribute is Optional.</t>
+
+          <t hangText=":">TODO Description. This attribute is Optional.</t>
+
+          <t hangText=":">TODO Min. This attribute is Optional.</t>
+
+          <t hangText=":">TODO Max. This attribute is Optional.</t>-->
+        </list>The bt, v, s, and t attributes are floating point numbers.
+      Systems receiving measurements MUST be able to process the range of
+      numbers that are representable as an IEEE double-precision
+      floating-point numbers <xref target="IEEE.754.1985"></xref>. The number
+      of significant digits in any measurement is not relevant, so a reading
+      of 1.1 has exactly the same semantic meaning as 1.10. If the value has
+      an exponent, the "e" MUST be in lower case. The mantissa SHOULD be less
+      than 19 characters long and the exponent SHOULD be less than 5
+      characters long. This allows time values to have better than micro
+      second precision over the next 100 years.</t>
+
+      <t>Systems reading one of the JSON objects MUST check for the ver
+      attribute. If this value is a version number larger than the version
+      which system understands, the system SHOULD NOT use this JSON object.
+      This allows the version number to indicate that the object contains
+      mandatory to understand attributes. New version numbers can only be
+      defined in RFC which updates this specification or it successors.</t>
+
+      <t>The n value is concatenated to the bn value to get the name of the
+      sensor. The resulting name needs to uniquely identity and differentiate
+      the sensor from all others. If the name contains 48 bits of random
+      material, or 48 bits of material that is procedurally assigned in a
+      unique way, it is considered to be good enough uniqueness. One way to
+      achieve this uniqueness is to include a EUI-48 identifier (A MAC
+      address) or some other 48 bit identifier that is guaranteed uniqueness
+      (such as a 1-wire address) that is assigned to the device. UUIDs <xref
+      target="RFC4122"></xref> are another way to generate a unique name.</t>
+
+      <t>The resulting concatenated name MUST consist only of characters out
+      of the set "A" to "Z", "a" to "z", "0" to "9", "-", ":", ".", or "_" and
+      it MUST start with a character out of the set "A" to "Z", "a" to "z", or
+      "0" to "9". This restricted character set was chosen so that these names
+      can be directly used as in other types of URI including segments of an
+      HTTP path with no special encoding. <xref target="RFC5952"></xref>
+      contains advice on encoding an IPv6 address in a name.</t>
+
+      <t>If either the bt or t value is missing, the missing attribute is
+      considered to have a value of zero. The bt and t values are added
+      together to get the time of measurement. A time of zero indicates that
+      the sensor does not know the absolute time and the measurement was made
+      roughly "now". A negative value is used to indicate seconds in the past
+      from roughly "now". A positive value is used to indicate the number of
+      seconds, excluding leap seconds, since the start of the year 1970 in UTC
+      .</t>
+
+      <t>Representing the statistical characteristics of measurements can be
+      very complex. This specification only provides a very course grain
+      description in the c and unc attributes. Future specification may add
+      new attributes to provide better information about the statistical
+      properties of the measurement. For example, attributes to specify a
+      distribution and it's parameters could be added or a attributes to carry
+      additional properties such as the estimated root mean square error. </t>
+    </section>
+
+    <section title="Syntax">
+      <t>All of the data is UTF-8, but since this is for machine to machine
+      communications on constrained systems, only characters with code points
+      between U+0001 and U+007F are allowed which corresponds to the
+      ASCII<xref target="RFC0020"></xref> subset of UTF-8.</t>
+
+      <t>The contents MUST consist of exactly one JSON object as specified by
+      <xref target="RFC4627"></xref>. This object MAY contain a "bn" attribute
+      with a value of type string. This object MAY contain a "bt" attribute
+      with a value of type number. The object MAY contain other attribute
+      value pairs. The object MUST contain exactly one "m" attribute with a
+      value of type array. The array MUST have one or more measurement
+      objects.</t>
+
+      <t>Inside each measurement object the "n" and "u" attribute are of type
+      string and the "t", "v", and "s" attributes are of type number.</t>
+
+      <section title="Simple Example">
+        <t>The following shows a temperature reading taken approximately "now"
+        by a 1-wire sensor device that was assigned the unique 1-wire address
+        of 0x000801EF221E:</t>
+
+        <figure>
+          <artwork><![CDATA[{"m":[{ "n": "000801EF221E-Temp", "v":23.5 }]}]]></artwork>
+        </figure>
+      </section>
+
+      <section title="Complex Example">
+        <t>The following example show the voltage at Tue Jun 8 18:01:16 UTC
+        2010 along with the current at that time and at each second for the
+        previous 5 seconds. The device has a MAC address of 0017f202b5c4.</t>
+
+        <!-- times generated with date '+%s' ; date -u ; date '+%s'-->
+
+        <figure>
+          <artwork><![CDATA[{"m":[
+     { "n": "voltage", "u": "V",
+           "v": 120.1, "anExtension": 0.0 },
+     { "n": "current", "t": -5, "v": 1.2 },
+     { "n": "current", "t": -4, "v": 1.30 },
+     { "n": "current", "t": -3, "v": 0.14e1 },
+     { "n": "current", "t": -2, "v": 1.5 },
+     { "n": "current", "t": -1, "v": 1.6 },
+     { "n": "current", "t": 0,   "v": 1.7 }
+       ],
+ "bn": "0017f202a5c4-",
+ "bt": 1276020076,
+  "someExtensions": "a value"
+} ]]></artwork>
+        </figure>
+      </section>
+    </section>
+
+    <section title="Usage Considerations">
+      <t>The measurements support sending both the current value of a sensor
+      as well as the an integrated sum. For many types of measurements, the
+      sum is more useful than the current value. For example, an electrical
+      meter that measures the energy a given computer uses will typically want
+      to measure the cumulative amount of energy used. This is less prone to
+      error than reporting the power each second and trying to have something
+      on the server side sum together all the power measurements. If the
+      network between the sensor and the meter goes down over some period of
+      time, when it comes back up, the cumulative sum helps reflect what
+      happened while the network was down. A meter like this would typically
+      report a measurement with the units set to watts, but it would put the
+      sum of energy used in the "s" attribute of the measurement. It might
+      optionally include the current power in the "v" attribute.</t>
+
+      <t>While the benefit of using the integrated sum is fairly clear for
+      measurements like power and energy, it is less obvious for something
+      like temperature. Reporting the sum of the temperature makes it easy to
+      compute averages even when the individual temperature values are not
+      reported frequently enough to compute accurate averages. Implementors
+      are encouraged to report the cumulative sum as well as the raw value of
+      a given sensor.</t>
+
+      <t>Applications that use the cumulative sum values need to understand
+      they are very loosely defined by this specification, and depending on
+      the particular sensor implementation may behave in unexpected ways.
+      Applications should be able to deal with the following issues:</t>
+
+      <t><list style="numbers">
+          <t>Many sensors will allow the cumulative sums to "wrap" back to
+          zero after the value gets sufficiently large.</t>
+
+          <t>Some sensors will reset the cumulative sum back to zero when the
+          device is reset, loses power, or is replaced with a different
+          sensor.</t>
+
+          <t>Applications cannot make assumptions about when the device
+          started accumulating values into the sum.</t>
+        </list></t>
+
+      <t>Typically applications can make some assumptions about specific
+      sensors that will allow them to deal with these problems. A common
+      assumption is that for sensors whose measurement values are always
+      positive, the sum should never get smaller; so if the sum does get
+      smaller, the application will know that one of the situations listed
+      above has happened.</t>
+    </section>
+
+    <section title="IANA Considerations">
+      <t>Note to RFC Editor: Please replace all occurrences of "RFC-AAAA" with
+      the RFC number of this specification.</t>
+
+      <section anchor="sec-units" title="Units Registry">
+        <t>IANA will create a registry of unit symbols. The primary purpose of
+        this registry is to make sure that symbols uniquely map to give type
+        of measurement. Definitions for many of these units can be found in
+        <xref target="NIST822"></xref> and <xref target="BIPM"></xref>.</t>
+
+        <texttable>
+          <ttcol align="right">Symbol</ttcol>
+
+          <ttcol align="left">Description</ttcol>
+
+          <ttcol align="left">Reference</ttcol>
+
+          <c>m</c>
+
+          <c>meter</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>kg</c>
+
+          <c>kilogram</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>s</c>
+
+          <c>second</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>A</c>
+
+          <c>ampere</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>K</c>
+
+          <c>kelvin</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>cd</c>
+
+          <c>candela</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>mol</c>
+
+          <c>mole</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>Hz</c>
+
+          <c>hertz</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>rad</c>
+
+          <c>radian</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>sr</c>
+
+          <c>steradian</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>N</c>
+
+          <c>newton</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>Pa</c>
+
+          <c>pascal</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>J</c>
+
+          <c>joule</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>W</c>
+
+          <c>watt</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>C</c>
+
+          <c>coulomb</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>V</c>
+
+          <c>volt</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>F</c>
+
+          <c>farad</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>Ohm</c>
+
+          <c>ohm</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>S</c>
+
+          <c>siemens</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>Wb</c>
+
+          <c>weber</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>T</c>
+
+          <c>tesla</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>H</c>
+
+          <c>henry</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>degC</c>
+
+          <c>degrees Celsius</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>lm</c>
+
+          <c>lumen</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>lx</c>
+
+          <c>lux</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>Bq</c>
+
+          <c>becquerel</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>Gy</c>
+
+          <c>gray</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>Sv</c>
+
+          <c>sievert</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>kat</c>
+
+          <c>katal</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>pH</c>
+
+          <c>pH acidity</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>%</c>
+
+          <c>Value of a switch. A value of 0.0 indicates the switch is off
+          while 100.0 indicates on.</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>count</c>
+
+          <c>counter value</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>%RH</c>
+
+          <c>Relative Humidity</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>m2</c>
+
+          <c>area</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>l</c>
+
+          <c>volume in liters</c>
+
+          <c>RFC-AAAA</c>
+
+          <!-- should this be m3 -->
+
+          <c>m/s</c>
+
+          <c>velocity</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>m/s2</c>
+
+          <c>acceleration</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>l/s</c>
+
+          <c>flow rate in liters per second</c>
+
+          <c>RFC-AAAA</c>
+
+          <!-- should this be m3/s -->
+
+          <c>W/m2</c>
+
+          <c>irradiance</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>cd/m2</c>
+
+          <c>luminance</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>Bspl</c>
+
+          <c>bel sound pressure level</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>bit/s</c>
+
+          <c>bits per second</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>lat</c>
+
+          <c>degrees latitude. Assumed to be in WGS84 unless another reference
+          frame is known for the sensor.</c>
+
+          <c>RFC-AAAA</c>
+
+          <c>lon</c>
+
+          <c>degrees longitude. Assumed to be in WGS84 unless another
+          reference frame is known for the sensor.</c>
+
+          <c>RFC-AAAA</c>
+        </texttable>
+
+        <t>New entries can be added to the registration by either Expert
+        Review or IESG Approval as defined in <xref target="RFC5226"></xref>.
+        Experts should exercise their own good judgement but need to consider
+        the following guidelines:</t>
+
+        <t><list style="numbers">
+            <t>There needs to be a real and compelling use for any new unit to
+            be added.</t>
+
+            <t>Units should define the semantic information and be chosen
+            carefully. Implementors need to remember that the same word may be
+            used in different real-life contexts. For example, degrees when
+            measuring latitude have no semantic relation to degrees when
+            measuring temperature; thus two different units are needed.</t>
+
+            <t>These measurements are produced by computers for consumption by
+            computers. The principle is that conversion has to be easily be
+            done when both reading and writing the media type. The value of a
+            single canonical representation outweighs the convenience of easy
+            human representations or loss of precision in a conversion.</t>
+
+            <t>Use of SI prefixes such as "k" before the unit is not allowed.
+            Instead one can represent the value using scientific notation such
+            a 1.2e3.</t>
+
+            <t>For a given type of measurement, there will only be one unit
+            type defined. So for length, meters are defined and other lengths
+            such as mile, foot, light year are not allowed. For most cases,
+            the SI unit is preferred.</t>
+
+            <t>Symbol names that could be easily confused with existing common
+            units or units combined with prefixes should be avoided. For
+            example, selecting a unit name of "mph" to indicate something that
+            had nothing to do with velocity would be a bad choice, as "mph" is
+            commonly used to mean miles per hour.</t>
+
+            <t>The following should not be used because the are common SI
+            prefixes: Y, Z, E, P, T, G, M, k, h, da, d, c, n, u, p, f, a, z,
+            y, Ki, Mi, Gi, Ti, Pi, Ei, Zi, Yi.</t>
+
+            <t>The following units should not be used as they are commonly
+            used to represent other measurements Ky, Gal, dyn, etg, P, St, Mx,
+            G, Oe, Gb, sb, Lmb, ph, Ci, R, RAD, REM, gal, bbl, qt, degF, Cal,
+            BTU, HP, pH, B/s, psi, Torr, atm, at, bar, kWh.</t>
+
+            <t>The unit names are case sensitive and the correct case needs to
+            be used, but symbols that differ only in case should not be
+            allocated.</t>
+
+            <t>A number after a unit typically indicates the previous unit
+            raised to that power, and the / indicates that the units that
+            follow are the reciprocal. A unit should have only one / in the
+            name.</t>
+          </list></t>
+      </section>
+
+      <section anchor="sec-iana-media" title="Media Type Registration">
+        <t>The following registrations are done following the procedure
+        specified in <xref target="RFC4288"></xref> and <xref
+        target="RFC3023"></xref>.</t>
+
+        <t>Note to RFC Editor: Please replace all occurrences of "RFC-AAAA"
+        with the RFC number of this specification.</t>
+
+        <section title="senml+json Media Type Registration">
+          <t>To: ietf-types@iana.org</t>
+
+          <t>Subject: Registration of media type application/senml+json</t>
+
+          <t>Type name: application</t>
+
+          <t>Subtype name: senml+json</t>
+
+          <t>Required parameters: none</t>
+
+          <t>Optional parameters: none</t>
+
+          <t>Encoding considerations: Must be encoded as using a subset of the
+          encoding allowed in <xref target="RFC4627"></xref>. Specifically,
+          only the ASCII<xref target="RFC0020"></xref> subset of the UTF-8
+          characters are allowed. This simplifies implementation of very
+          simple system and does not impose any significant limitations as all
+          this data is meant for machine to machine communications and is not
+          meant to be human readable.</t>
+
+          <t>Security considerations: Sensor data can contain a wide range of
+          information ranging from information that is very public, such the
+          outside temperature in a given city, to very private information
+          that requires integrity and confidentiality protection, such as
+          patient health information. This format does not provide any
+          security and instead relies on the transport protocol that carries
+          it to provide security. Given applications need to look at the
+          overall context of how this media type will be used to decide if the
+          security is adequate.</t>
+
+          <t>Interoperability considerations: Applications should ignore any
+          JSON key value pairs that they do not understand. This allows
+          backwards compatibility extensions to this specification. The "ver"
+          field can be used to ensure the receiver supports a minimal level of
+          functionality needed by the creator of the JSON object.</t>
+
+          <t>Published specification: RFC-AAAA</t>
+
+          <t>Applications that use this media type: The type is used by
+          systems that report electrical power usage and environmental
+          information such as temperature and humidity. It can be used for a
+          wide range of sensor reporting systems.</t>
+
+          <t>Additional information:</t>
+
+          <t>Magic number(s): none</t>
+
+          <t>File extension(s): senml</t>
+
+          <t>Macintosh file type code(s): none</t>
+
+          <t>Person &amp; email address to contact for further information:
+          Cullen Jennings &lt;c.jennings@ieee.org&gt;</t>
+
+          <t>Intended usage: COMMON</t>
+
+          <t>Restrictions on usage: None</t>
+
+          <t>Author: Cullen Jennings &lt;c.jennings@ieee.org&gt;</t>
+
+          <t>Change controller: IESG</t>
+        </section>
+      </section>
+    </section>
+
+    <section anchor="sec-sec" title="Security Considerations">
+      <t>See <xref target="sec-privacy"></xref>.Further discussion of security
+      proprieties can be found in <xref target="sec-iana-media"></xref>.</t>
+    </section>
+
+    <section anchor="sec-privacy" title="Privacy Considerations">
+      <t>Sensor data can range from information with almost no security
+      considerations, such as the current temperature in a given city, to
+      highly sensitive medical or location data. This specification provides
+      no security protection for the data but is meant to be used inside
+      another container or transport protocol such as S/MIME or HTTP with TLS
+      that can provide integrity, confidentiality, and authentication
+      information about the source of the data.</t>
+    </section>
+
+    <section title="Acknowledgement">
+      <t>I would like to thank Lisa Dusseault, Joe Hildebrand, Lyndsay
+      Campbell, Martin Thomson, John Klensin, Bjoern Hoehrmann, and Carsten
+      Bormann for their review comments.</t>
+    </section>
+  </middle>
+
+  <back>
+    <references title="Normative References">
+      <reference anchor="RFC4627">
+        <front>
+          <title>The application/json Media Type for JavaScript Object
+          Notation (JSON)</title>
+
+          <author fullname="D. Crockford" initials="D." surname="Crockford">
+            <organization></organization>
+          </author>
+
+          <date month="July" year="2006" />
+
+          <abstract>
+            <t>JavaScript Object Notation (JSON) is a lightweight, text-based,
+            language-independent data interchange format. It was derived from
+            the ECMAScript Programming Language Standard. JSON defines a small
+            set of formatting rules for the portable representation of
+            structured data. This memo provides information for the Internet
+            community.</t>
+          </abstract>
+        </front>
+
+        <seriesInfo name="RFC" value="4627" />
+
+        <format octets="16319"
+                target="http://www.rfc-editor.org/rfc/rfc4627.txt" type="TXT" />
+      </reference>
+
+      <reference anchor="RFC3023">
+        <front>
+          <title>XML Media Types</title>
+
+          <author fullname="M. Murata" initials="M." surname="Murata">
+            <organization></organization>
+          </author>
+
+          <author fullname="S. St. Laurent" initials="S."
+                  surname="St. Laurent">
+            <organization></organization>
+          </author>
+
+          <author fullname="D. Kohn" initials="D." surname="Kohn">
+            <organization></organization>
+          </author>
+
+          <date month="January" year="2001" />
+
+          <abstract>
+            <t>This document standardizes five new media types -- text/xml,
+            application/xml, text/xml-external-parsed-entity, application/xml-
+            external-parsed-entity, and application/xml-dtd -- for use in
+            exchanging network entities that are related to the Extensible
+            Markup Language (XML). This document also standardizes a
+            convention (using the suffix '+xml') for naming media types
+            outside of these five types when those media types represent XML
+            MIME (Multipurpose Internet Mail Extensions) entities. [STANDARDS
+            TRACK]</t>
+          </abstract>
+        </front>
+
+        <seriesInfo name="RFC" value="3023" />
+
+        <format octets="86011"
+                target="http://www.rfc-editor.org/rfc/rfc3023.txt" type="TXT" />
+      </reference>
+
+      <reference anchor="RFC4288">
+        <front>
+          <title>Media Type Specifications and Registration Procedures</title>
+
+          <author fullname="N. Freed" initials="N." surname="Freed">
+            <organization></organization>
+          </author>
+
+          <author fullname="J. Klensin" initials="J." surname="Klensin">
+            <organization></organization>
+          </author>
+
+          <date month="December" year="2005" />
+
+          <abstract>
+            <t>This document defines procedures for the specification and
+            registration of media types for use in MIME and other Internet
+            protocols. This document specifies an Internet Best Current
+            Practices for the Internet Community, and requests discussion and
+            suggestions for improvements.</t>
+          </abstract>
+        </front>
+
+        <seriesInfo name="BCP" value="13" />
+
+        <seriesInfo name="RFC" value="4288" />
+
+        <format octets="52667"
+                target="http://www.rfc-editor.org/rfc/rfc4288.txt" type="TXT" />
+      </reference>
+
+      <reference anchor="RFC2119">
+        <front>
+          <title abbrev="RFC Key Words">Key words for use in RFCs to Indicate
+          Requirement Levels</title>
+
+          <author fullname="Scott Bradner" initials="S." surname="Bradner">
+            <organization>Harvard University</organization>
+
+            <address>
+              <postal>
+                <street>1350 Mass. Ave.</street>
+
+                <street>Cambridge</street>
+
+                <street>MA 02138</street>
+              </postal>
+
+              <phone>- +1 617 495 3864</phone>
+
+              <email>sob@harvard.edu</email>
+            </address>
+          </author>
+
+          <date month="March" year="1997" />
+
+          <area>General</area>
+
+          <keyword>keyword</keyword>
+
+          <abstract>
+            <t>In many standards track documents several words are used to
+            signify the requirements in the specification. These words are
+            often capitalized. This document defines these words as they
+            should be interpreted in IETF documents. Authors who follow these
+            guidelines should incorporate this phrase near the beginning of
+            their document: <list style="empty">
+                <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL",
+                "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
+                "OPTIONAL" in this document are to be interpreted as described
+                in RFC 2119.</t>
+              </list></t>
+
+            <t>Note that the force of these words is modified by the
+            requirement level of the document in which they are used.</t>
+          </abstract>
+        </front>
+
+        <seriesInfo name="BCP" value="14" />
+
+        <seriesInfo name="RFC" value="2119" />
+
+        <format octets="4723"
+                target="http://www.rfc-editor.org/rfc/rfc2119.txt" type="TXT" />
+
+        <format octets="17491"
+                target="http://xml.resource.org/public/rfc/html/rfc2119.html"
+                type="HTML" />
+
+        <format octets="5777"
+                target="http://xml.resource.org/public/rfc/xml/rfc2119.xml"
+                type="XML" />
+      </reference>
+
+      <reference anchor="IEEE.754.1985">
+        <front>
+          <title>Standard for Binary Floating-Point Arithmetic</title>
+
+          <author>
+            <organization>Institute of Electrical and Electronics
+            Engineers</organization>
+          </author>
+
+          <date month="August" year="1985" />
+        </front>
+
+        <seriesInfo name="IEEE" value="Standard 754" />
+      </reference>
+
+      <reference anchor="RFC5226">
+        <front>
+          <title>Guidelines for Writing an IANA Considerations Section in
+          RFCs</title>
+
+          <author fullname="T. Narten" initials="T." surname="Narten">
+            <organization></organization>
+          </author>
+
+          <author fullname="H. Alvestrand" initials="H." surname="Alvestrand">
+            <organization></organization>
+          </author>
+
+          <date month="May" year="2008" />
+
+          <abstract>
+            <t>Many protocols make use of identifiers consisting of constants
+            and other well-known values. Even after a protocol has been
+            defined and deployment has begun, new values may need to be
+            assigned (e.g., for a new option type in DHCP, or a new encryption
+            or authentication transform for IPsec). To ensure that such
+            quantities have consistent values and interpretations across all
+            implementations, their assignment must be administered by a
+            central authority. For IETF protocols, that role is provided by
+            the Internet Assigned Numbers Authority (IANA).&lt;/t&gt;&lt;t&gt;
+            In order for IANA to manage a given namespace prudently, it needs
+            guidelines describing the conditions under which new values can be
+            assigned or when modifications to existing values can be made. If
+            IANA is expected to play a role in the management of a namespace,
+            IANA must be given clear and concise instructions describing that
+            role. This document discusses issues that should be considered in
+            formulating a policy for assigning values to a namespace and
+            provides guidelines for authors on the specific text that must be
+            included in documents that place demands on
+            IANA.&lt;/t&gt;&lt;t&gt; This document obsoletes RFC 2434. This
+            document specifies an Internet Best Current Practices for the
+            Internet Community, and requests discussion and suggestions for
+            improvements.</t>
+          </abstract>
+        </front>
+
+        <seriesInfo name="BCP" value="26" />
+
+        <seriesInfo name="RFC" value="5226" />
+
+        <format octets="66160"
+                target="http://www.rfc-editor.org/rfc/rfc5226.txt" type="TXT" />
+      </reference>
+    </references>
+
+    <references title="Informative References">
+      <reference anchor="I-D.ietf-core-coap">
+        <front>
+          <title>Constrained Application Protocol (CoAP)</title>
+
+          <author fullname="Zach Shelby" initials="Z" surname="Shelby">
+            <organization></organization>
+          </author>
+
+          <author fullname="Brian Frank" initials="B" surname="Frank">
+            <organization></organization>
+          </author>
+
+          <author fullname="Don Sturek" initials="D" surname="Sturek">
+            <organization></organization>
+          </author>
+
+          <date day="24" month="January" year="2011" />
+
+          <abstract>
+            <t>This document specifies the Constrained Application Protocol
+            (CoAP), a specialized web transfer protocol for use with
+            constrained networks and nodes for machine-to-machine applications
+            such as smart energy and building automation. These constrained
+            nodes often have 8-bit microcontrollers with small amounts of ROM
+            and RAM, while networks such as 6LoWPAN often have high packet
+            error rates and a typical throughput of 10s of kbit/s. CoAP
+            provides a method/response interaction model between application
+            end-points, supports built-in resource discovery, and includes key
+            web concepts such as URIs and content-types. CoAP easily
+            translates to HTTP for integration with the web while meeting
+            specialized requirements such as multicast support, very low
+            overhead and simplicity for constrained environments.</t>
+          </abstract>
+        </front>
+
+        <seriesInfo name="Internet-Draft" value="draft-ietf-core-coap-04" />
+
+        <format target="http://www.ietf.org/internet-drafts/draft-ietf-core-coap-04.txt"
+                type="TXT" />
+      </reference>
+
+      <reference anchor="BIPM">
+        <front>
+          <title>The International System of Units (SI)</title>
+
+          <author>
+            <organization>Bureau International des Poids et
+            Mesures</organization>
+          </author>
+        </front>
+
+        <seriesInfo name="8th edition, 2006" value="" />
+
+        <format target="http://www.bipm.org/utils/common/pdf/si_brochure_8_en.pdf"
+                type="PDF" />
+      </reference>
+
+      <reference anchor="NIST822">
+        <front>
+          <title>Guide for the Use of the International System of Units
+          (SI)</title>
+
+          <author initials="A." surname="Thompson">
+            <organization />
+          </author>
+
+          <author initials="B." surname="Taylor">
+            <organization />
+          </author>
+        </front>
+
+        <seriesInfo name="NIST Special Publication 811, 2008 Edition" value="" />
+
+        <format target="http://physics.nist.gov/cuu/pdf/sp811.pdf" type="PDF" />
+      </reference>
+
+      <reference anchor="RFC5952">
+        <front>
+          <title>A Recommendation for IPv6 Address Text Representation</title>
+
+          <author fullname="S. Kawamura" initials="S." surname="Kawamura">
+            <organization></organization>
+          </author>
+
+          <author fullname="M. Kawashima" initials="M." surname="Kawashima">
+            <organization></organization>
+          </author>
+
+          <date month="August" year="2010" />
+
+          <abstract>
+            <t>As IPv6 deployment increases, there will be a dramatic increase
+            in the need to use IPv6 addresses in text. While the IPv6 address
+            architecture in Section 2.2 of RFC 4291 describes a flexible model
+            for text representation of an IPv6 address, this flexibility has
+            been causing problems for operators, system engineers, and users.
+            This document defines a canonical textual representation format.
+            It does not define a format for internal storage, such as within
+            an application or database. It is expected that the canonical
+            format will be followed by humans and systems when representing
+            IPv6 addresses as text, but all implementations must accept and be
+            able to handle any legitimate RFC 4291 format. [STANDARDS
+            TRACK]</t>
+          </abstract>
+        </front>
+
+        <seriesInfo name="RFC" value="5952" />
+
+        <format octets="26570"
+                target="http://www.rfc-editor.org/rfc/rfc5952.txt" type="TXT" />
+      </reference>
+
+      <reference anchor="RFC4122">
+        <front>
+          <title abbrev="UUID URN">A Universally Unique IDentifier (UUID) URN
+          Namespace</title>
+
+          <author fullname="Paul J. Leach" initials="P." surname="Leach">
+            <organization>Microsoft</organization>
+
+            <address>
+              <postal>
+                <street>1 Microsoft Way</street>
+
+                <city>Redmond</city>
+
+                <region>WA</region>
+
+                <code>98052</code>
+
+                <country>US</country>
+              </postal>
+
+              <phone>+1 425-882-8080</phone>
+
+              <email>paulle@microsoft.com</email>
+            </address>
+          </author>
+
+          <author fullname="Michael Mealling" initials="M." surname="Mealling">
+            <organization>Refactored Networks, LLC</organization>
+
+            <address>
+              <postal>
+                <street>1635 Old Hwy 41</street>
+
+                <street>Suite 112, Box 138</street>
+
+                <city>Kennesaw</city>
+
+                <region>GA</region>
+
+                <code>30152</code>
+
+                <country>US</country>
+              </postal>
+
+              <phone>+1-678-581-9656</phone>
+
+              <email>michael@refactored-networks.com</email>
+
+              <uri>http://www.refactored-networks.com</uri>
+            </address>
+          </author>
+
+          <author fullname="Rich Salz" initials="R." surname="Salz">
+            <organization>DataPower Technology, Inc.</organization>
+
+            <address>
+              <postal>
+                <street>1 Alewife Center</street>
+
+                <city>Cambridge</city>
+
+                <region>MA</region>
+
+                <code>02142</code>
+
+                <country>US</country>
+              </postal>
+
+              <phone>+1 617-864-0455</phone>
+
+              <email>rsalz@datapower.com</email>
+
+              <uri>http://www.datapower.com</uri>
+            </address>
+          </author>
+
+          <date month="July" year="2005" />
+
+          <keyword>URN, UUID</keyword>
+
+          <abstract>
+            <t>This specification defines a Uniform Resource Name namespace
+            for UUIDs (Universally Unique IDentifier), also known as GUIDs
+            (Globally Unique IDentifier). A UUID is 128 bits long, and can
+            guarantee uniqueness across space and time. UUIDs were originally
+            used in the Apollo Network Computing System and later in the Open
+            Software Foundation's (OSF) Distributed Computing Environment
+            (DCE), and then in Microsoft Windows platforms.</t>
+
+            <t>This specification is derived from the DCE specification with
+            the kind permission of the OSF (now known as The Open Group).
+            Information from earlier versions of the DCE specification have
+            been incorporated into this document.</t>
+          </abstract>
+        </front>
+
+        <seriesInfo name="RFC" value="4122" />
+
+        <format octets="59319"
+                target="http://www.rfc-editor.org/rfc/rfc4122.txt" type="TXT" />
+
+        <format octets="82717"
+                target="http://xml.resource.org/public/rfc/html/rfc4122.html"
+                type="HTML" />
+
+        <format octets="62931"
+                target="http://xml.resource.org/public/rfc/xml/rfc4122.xml"
+                type="XML" />
+      </reference>
+
+      <reference anchor="RFC0020">
+        <front>
+          <title>ASCII format for network interchange</title>
+
+          <author fullname="Vint Cerf" initials="V." surname="Cerf">
+            <organization>University California Los Angeles
+            (UCLA)</organization>
+          </author>
+
+          <date day="16" month="October" year="1969" />
+
+          <abstract>
+            <t>For concreteness, we suggest the use of standard 7-bit ASCII
+            embedded in an 8 bit byte whose high order bit is always 0.</t>
+          </abstract>
+        </front>
+
+        <seriesInfo name="RFC" value="20" />
+
+        <format octets="18504"
+                target="http://www.rfc-editor.org/rfc/rfc20.txt" type="TXT" />
+      </reference>
+    </references>
+  </back>
+</rfc>
