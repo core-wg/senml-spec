@@ -64,7 +64,6 @@ normative:
   RFC2119: 
   RFC3688:
   RFC4648:
-  RFC4627:
   RFC5226: 
   RFC6838: 
   RFC7049: 
@@ -125,8 +124,8 @@ be configured.
 
 Connecting sensors to the internet is not new, and there have been many
 protocols designed to facilitate it. This specification defines new media types
-for carrying simple sensor information in a protocol such as HTTP or CoAP called
-the Sensor Markup Language (SenML). This format was designed so that processors
+for carrying simple sensor information in a protocol such as HTTP or CoAP. 
+This format was designed so that processors
 with very limited capabilities could easily encode a sensor measurement into the
 media type, while at the same time a server parsing the data could relatively
 efficiently collect a large number of sensor measurements.  The markup language
@@ -246,7 +245,7 @@ Base Time:
 Base Unit:
 : A base unit that is assumed for all entries, unless otherwise indicated.  This
     attribute is optional. If a record does not contain a unit value, then the base unit
-    is used otherwise the value of found in the Unit is used.
+    is used. Otherwise the value of found in the Unit is used.
     This applies to the entries in all Records. A Base Unit can
     only be included in the first object of the array. 
     
@@ -271,7 +270,7 @@ Name:
   every measurement.
 
 Unit:
-: Units for a measurement value. Optional. If the Record has not Unit, the Base
+: Units for a measurement value. Optional. If the Record has no Unit, the Base
   Unit is used as the Unit. Having no Unit and no Base Unit is allowed. 
 
 Value
@@ -360,31 +359,31 @@ Content-Type (ct=) attribute.
 
 # JSON Representation (application/senml+json)
 
-Record atributes:
+The following JSON object member names are used in JSON SenML Record atributes:
 
 | SenML         | JSON | Type           |
 | Base Name     | bn   | String         |
-| Base Time     | bt   | Number        |
+| Base Time     | bt   | Number         |
 | Base Unit     | bu   | String         |
 | Base Value    | bv   | Number         |
 | Version       | bver | Number         |
 | Name          | n    | String         |
 | Unit          | u    | String         |
-| Value         | v    | Number |
+| Value         | v    | Number         |
 | String Value  | vs   | String         |
 | Boolean Value | vb   | Boolean        |
 | Data Value    | vd   | String         |
-| Value Sum     | s    | Number|
+| Value Sum     | s    | Number         |
 | Time          | t    | Number         |
 | Update Time   | ut   | Number         |
 {:cols='r l l'}
 
-The root content consists of an array with JSON objects for each SenML
+The root content consists of an array with one JSON object for each SenML
 Record. All the fields in the above table MAY occur in the records with the type
 specified in the table.
 
 Only the UTF-8 form of JSON is allowed. Characters in the String Value are
-encoded using the escape sequences defined in {{RFC4627}}. Characters in the Data
+encoded using the escape sequences defined in {{RFC7159}}. Characters in the Data
 Value are base64 encoded with URL safe alphabet as defined in Section 5 of
 {{RFC4648}}.
 
@@ -424,7 +423,7 @@ time.
 ~~~~
 
 The next example is similar to the above one, but shows current at Tue Jun 8
-18:01:16 UTC 2010 and at each second for the previous 5 seconds.
+18:01:16.001 UTC 2010 and at each second for the previous 5 seconds.
 
 ~~~~
 {::include ex3.json}
@@ -442,7 +441,7 @@ full SensML Stream to be complete.
 
 For instance, the following stream of measurements may be sent via a long lived
 HTTP POST from the producer of a SensML to the consumer of that, and each
-measurement object may be reported at the time it measured:
+measurement object may be reported at the time it was measured:
 
 ~~~~
 {::include ex4.gen.json-trim}
@@ -453,7 +452,7 @@ measurement object may be reported at the time it measured:
 ### Multiple Measurements {#an-co-ex}
 
 The following example shows humidity measurements from a mobile
-device with an IPv6 address 2001:db8::1, starting at Mon Oct 31
+device with a 1-wire address 10e2073a01080063, starting at Mon Oct 31
 13:24:24 UTC 2011. The device also provides position data, which is
 provided in the same measurement or parameter array as separate
 entries. Note time is used to for correlating data that belongs
@@ -471,8 +470,8 @@ compressed with gzip is given in the following table.
 {::include size.md}
 {: #tbl-sizes cols="l r r" title="Size Comparisons"}
 
-Note the EXI sizes are not using the schema guidance so the EXI could be a bit
-smaller. 
+Note the EXI sizes are not using the schema guidance so the EXI representation 
+could be a bit smaller. 
 
 ### Collection of Resources {#rest-ex}
 
@@ -521,7 +520,7 @@ only an unsigned integer is allowed.
 | Data Value                | vd         |          8 |
 {: #tbl-cbor-labels cols="r l r" title="CBOR representation: integers for map keys"}
 
- The following example shows a dump of the  CBOR example for the same sensor
+The following example shows a dump of the CBOR example for the same sensor
 measurement as in {{co-ex}}.
 
 ~~~~
@@ -531,7 +530,7 @@ measurement as in {{co-ex}}.
 
 # XML Representation (application/senml+xml) {#sec-xml-example}
 
-A SenML Stream can also be represented in XML format as defined in this
+A SenML Pack or Stream can also be represented in XML format as defined in this
 section. The following example shows an XML example for the same sensor
 measurement as in {{co-ex}}.
 
@@ -626,10 +625,10 @@ is the following:
 ~~~~
 
 A small temperature sensor devices that only generates this one EXI file does
-not really need an full EXI implementation. It can simple hard code the output
-replacing the one wire device ID starting at byte 0x16 and going to byte 0x31
-with it's device ID, and replacing the value "0xe7 0x01" at location 0x38 to
-0x39 with the current temperature. The EXI Specification
+not really need an full EXI implementation. It can simply hard code the output
+replacing the 1-wire device ID starting at byte 0x20 and going to byte 0x2F
+with it's device ID, and replacing the value "0xe7 0x01" at location 0x37 and
+0x38 with the current temperature. The EXI Specification
 {{W3C.REC-exi-20110310}} contains the full information 'on how floating point
 numbers are represented, but for the purpose of this sensor, the temperature can
 be converted to an integer in tenths of degrees (231 in this example). EXI
@@ -844,7 +843,7 @@ The following registrations are done following the procedure
 specified in {{RFC6838}} and {{RFC7303}}.
 
 
-### senml+json Media Type Registration
+### senml+json Media Type Registration {#sec-senml-json}
 
 Type name: application
 
@@ -871,14 +870,14 @@ adequate.
 
 Interoperability considerations: Applications should ignore any JSON key value
 pairs that they do not understand. This allows backwards compatibility
-extensions to this specification. The "ver" field can be used to ensure the
+extensions to this specification. The "bver" field can be used to ensure the
 receiver supports a minimal level of functionality needed by the creator of the
 JSON object.
 
 Published specification: RFC-AAAA
 
 Applications that use this media type: The type is used by systems that report
-electrical power usage and environmental information such as temperature and
+e.g., electrical power usage and environmental information such as temperature and
 humidity. It can be used for a wide range of sensor reporting systems.
 
 Additional information:
@@ -913,17 +912,13 @@ Optional parameters: none
 
 Encoding considerations: TBD
 
-Security considerations: TBD
+Security considerations: See {{sec-senml-json}}
 
 Interoperability considerations: TBD
 
 Published specification: RFC-AAAA
 
-Applications that use this media type: The type is used
-by systems that report electrical power usage and
-environmental information such as temperature and
-humidity. It can be used for a wide range of sensor
-reporting systems.
+Applications that use this media type: See {{sec-senml-json}}
 
 Additional information:
 
@@ -957,13 +952,13 @@ Optional parameters: none
 
 Encoding considerations: TBD
 
-Security considerations: TBD
+Security considerations: See {{sec-senml-json}}
 
 Interoperability considerations: TBD
 
 Published specification: RFC-AAAA
 
-Applications that use this media type: TBD
+Applications that use this media type: See {{sec-senml-json}}
 
 Additional information:
 
@@ -1003,7 +998,7 @@ Interoperability considerations: TBD
 
 Published specification: RFC-AAAA
 
-Applications that use this media type: TBD
+Applications that use this media type: See {{sec-senml-json}}
 
 Additional information:
 
