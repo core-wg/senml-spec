@@ -770,19 +770,23 @@ and SHOULD be implemented by consumers that can use the related base units.
 | dB       | decibel (logarithmic quantity)                    | float | RFC-AAAA  |
 | Bspl     | bel (sound pressure level; logarithmic quantity)* | float | RFC-AAAA  |
 | count    | 1 (counter value)                                 | float | RFC-AAAA  |
-| %        | 1 (Ratio e.g., value of a switch, note 1)         | float | RFC-AAAA  |
+| /        | 1 (Ratio e.g., value of a switch, note 1)         | float | RFC-AAAA  |
+| %        | 1 (Ratio e.g., value of a switch, note 1)*        | float | RFC-AAAA  |
 | %RH      | Percentage (Relative Humidity)                    | float | RFC-AAAA  |
 | %EL      | Percentage (remaining battery energy level)       | float | RFC-AAAA  |
 | EL       | seconds (remaining battery energy level)          | float | RFC-AAAA  |
 | 1/s      | 1 per second (event rate)                         | float | RFC-AAAA  |
+| 1/min    | 1 per minute (event rate, "rpm")*                 | float | RFC-AAAA  |
 | beat/min | 1 per minute (Heart rate in beats per minute)*    | float | RFC-AAAA  |
 | beats    | 1 (Cumulative number of heart beats)*             | float | RFC-AAAA  |
 {: #tbl-iana-symbols cols='r l l'}
 
 * Note 1: A value of 0.0 indicates the switch is off while 1.0
-  indicates on and 0.5 would be half on.  Note that while the name
-  strongly suggests a percentage (0..100) --- this is however NOT a
-  percentage, but the absolute ratio!
+  indicates on and 0.5 would be half on.  The preferred name of this
+  unit is "/".  For historical reasons, the name "%" is also provided
+  for the same unit -- but note that while that name strongly suggests
+  a percentage (0..100) --- it is however NOT a percentage, but the
+  absolute ratio!
 * Note 2: Assumed to be in WGS84 unless another reference frame is
   known for the sensor.
 
