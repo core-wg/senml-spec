@@ -1,12 +1,12 @@
 # senml-spec
 Specification for SenML
 =======
-# draft-jennings-core-senml
+# draft-ietf-core-senml
 
 This is the working area for the [IETF CORE Working
 Group](https://trac.tools.ietf.org/wg/core/trac/wiki) draft of Media Types for Sensor Markup Language (SENML)
 
-* [Working Group Draft] (https://tools.ietf.org/html/draft-jennings-core-senml)
+* [Working Group Draft] (https://tools.ietf.org/html/draft-ietf-core-senml)
 
 
 ## Contributing
