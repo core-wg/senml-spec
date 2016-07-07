@@ -131,7 +131,7 @@ be configured.
 
 # Overview
 
-Connecting sensors to the internet is not new, and there have been many
+Connecting sensors to the Internet is not new, and there have been many
 protocols designed to facilitate it. This specification defines new media types
 for carrying simple sensor information in a protocol such as HTTP or CoAP. 
 This format was designed so that processors
@@ -210,7 +210,7 @@ Record are the empty string so they are omitted.
 
 Some devices have accurate time while others do not so SenML supports absolute
 and relative times. Time is represented in floating point as seconds and values
-greater than zero represent an absolute time relative to the unix epoch while
+greater than zero represent an absolute time relative to the Unix epoch while
 values of 0 or less represent a relative time in the past from the current
 time. A simple sensor with no absolute wall clock time might take a measurement
 every second and batch up 60 of them then send it to a server. It would include
@@ -369,7 +369,7 @@ Content-Type (ct=) attribute.
 # JSON Representation (application/senml+json)
 
 The SenML labels (JSON object member names) shown in {{tbl-json-labels}} are
-used in JSON SenML Record atributes.
+used in JSON SenML Record attributes.
 
 | Name          | label| Type           |
 | Base Name     | bn   | String         |
