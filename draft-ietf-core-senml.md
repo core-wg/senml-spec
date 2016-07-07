@@ -235,40 +235,39 @@ SenML Pack:
 : One or more SenML Records in an array structure.
 
 
-# Semantics {#semant}
+# SenML Structure and Semantics {#senml-structure}
 
 Each SenML Pack carries a single array that represents a set of
-measurements and/or parameters. This array contains a series of objects with
-several optional attributes described below:
+measurements and/or parameters. This array contains a series of SenML Records with
+several attributes described below. There are two kind of attributes:
+base and regular. The base attributes can only be included in the first SenML 
+Record and they apply to the entries in all Records. All base attributes are
+optional. Regular attributes can be included in any SenML Record and apply only
+to that Record.
+
+## Base attributes {#senml-base}
 
 Base Name:
-: This is a string that is prepended to the names found in the entries.  This
-  attribute is optional. This applies to the entries in all Records. A Base Name can
-  only be included in the first Record of the array. 
+: This is a string that is prepended to the names found in the entries. 
 
 Base Time:
-: A base time that is added to the time found in an entry. This attribute is
-    optional. This applies to the entries in all Records. A Base Time can
-    only be included in the first Record of the array.
+: A base time that is added to the time found in an entry. 
 
 Base Unit:
-: A base unit that is assumed for all entries, unless otherwise indicated.  This
-    attribute is optional. If a record does not contain a unit value, then the base unit
-    is used. Otherwise the value of found in the Unit is used.
-    This applies to the entries in all Records. A Base Unit can
-    only be included in the first object of the array. 
+: A base unit that is assumed for all entries, unless otherwise indicated. 
+  If a record does not contain a unit value, then the base unit
+  is used. Otherwise the value of found in the Unit is used.
     
 Base Value:
 : A base value is added to the value found in an entry, similar to Base Time. 
-    This attribute is optional. This applies to the entries in all Records.
-    A Base Value can only be included in the first Record of the array.
 
 Version:
 : Version number of media type format. This attribute is an optional positive
-  integer and defaults to 5 if not present. A Version can
-  only be included in the first object of the array. Note to RFC Editor. Change
-  the default value from to 100 when this specification is published as an RFC
+  integer and defaults to 5 if not present. Note to RFC Editor. Change
+  the default value to 100 when this specification is published as an RFC
   and remove this note. 
+
+## Regular attributes
 
 Name:
 : Name of the sensor or parameter. When appended to the Base Name attribute,
@@ -286,8 +285,8 @@ Value
 : Value of the entry.  Optional if a Sum value is present, otherwise
   required. Values are represented using three basic data types, Floating point
   numbers ("v" field for "Value"), Booleans ("vb" for "Boolean Value"),
-  Strings ("vs" for "String Value") and Data ("vd" for "Binary Data Value") .
-  Exactly one of these three fields MUST
+  Strings ("vs" for "String Value") and Binary Data ("vd" for "Data Value") .
+  Exactly one of these four fields MUST
   appear unless there is Sum field in which case it is allowed to have no Value
   field or to have "v" field. 
 
@@ -302,10 +301,11 @@ Update Time:
 : An optional time in seconds that represents the maximum time before this sensor will
   provide an updated reading for a measurement. This can be used to detect the
   failure of sensors or communications path from the sensor.
-  
 
-The SenML format can be extended with further custom attributes. TODO - describe
-what extensions are possible and how to do them.
+## TBD
+
+The SenML format can be extended with further custom attributes. Both new base and
+regular attributes are allowed. See {{iana-senml-label-registry}} for details.
 
 Systems reading one of the objects MUST check for the Version attribute. If this
 value is a version number larger than the version which the system understands,
@@ -354,7 +354,7 @@ better information about the statistical properties of the measurement.
 A SenML object is referred to as "expanded" if it does not contain any base
 values and has no relative times. 
 
-# Associating Meta-data
+## Associating Meta-data
 
 SenML is designed to carry the minimum dynamic information about measurements,
 and for efficiency reasons does not carry significant static meta-data about the
@@ -368,10 +368,10 @@ Content-Type (ct=) attribute.
 
 # JSON Representation (application/senml+json)
 
-The following SenML labels (JSON object member names) are used in JSON SenML
-Record atributes:
+The SenML labels (JSON object member names) shown in {{tbl-json-labels}} are
+used in JSON SenML Record atributes.
 
-| Name          | JSON | Type           |
+| Name          | label| Type           |
 | Base Name     | bn   | String         |
 | Base Time     | bt   | Number         |
 | Base Unit     | bu   | String         |
@@ -386,7 +386,7 @@ Record atributes:
 | Value Sum     | s    | Number         |
 | Time          | t    | Number         |
 | Update Time   | ut   | Number         |
-{: #tbl-json-labels cols='r l l' title="SenML labels"}
+{: #tbl-json-labels cols='r l l' title="JSON SenML Labels"}
 
 The root content consists of an array with one JSON object for each SenML
 Record. All the fields in the above table MAY occur in the records with the type
@@ -550,8 +550,8 @@ measurement as in {{co-ex}}.
 
 The SenML Stream is represented as a sensml tag that contains a series of
 senml tags for each SenML Record. The SenML Fields are represents as XML
-attributes.  The following table shows the mapping the SenML Field names to the
-attribute used in the XML senml tag.
+attributes.  The following table shows the mapping of the SenML labels to the
+attribute names and types used in the XML senml tags.
 
 | Name          | XML  | Type    |
 | Base Name     | bn   | string  |
@@ -568,7 +568,7 @@ attribute used in the XML senml tag.
 | Value Sum     | s    | double  |
 | Time          | t    | double  |
 | Update Time   | ut   | double  |
-{:cols='r l l'}
+{: #tbl-xml-labels cols='r l l' title="XML SenML Labels"}
 
 The RelaxNG schema for the XML is:
 
@@ -838,14 +838,19 @@ judgment but need to consider the following guidelines:
    Measure {{UCUM}}.
 
 
-## SenML label registry
+## SenML label registry {#iana-senml-label-registry}
 
-IANA will create a registry for SenML labels. The initial content of the
-registry are shown in {{#tbl-json-labels}}.
+IANA will create a new registry for SenML labels. The initial content of the
+registry are shown in {{tbl-json-labels}} and {{tbl-xml-labels}}.
 
 New entries can be added to the registration by either Expert Review or IESG
 Approval as defined in {{RFC5226}}.  Experts should exercise their own good
 judgment but need to consider that shorter labels should have more strict review.
+
+All new SenML labels that have "base" semantics (see {{senml-base}}) must
+start with character 'b'. Regular labels must not start with that character.
+
+All new entries must define the Label Name, Label, JSON Type, and XML Type.
 
 ## Media Type Registration {#sec-iana-media}
 
