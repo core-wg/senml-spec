@@ -368,9 +368,10 @@ Content-Type (ct=) attribute.
 
 # JSON Representation (application/senml+json)
 
-The following JSON object member names are used in JSON SenML Record atributes:
+The following SenML labels (JSON object member names) are used in JSON SenML
+Record atributes:
 
-| SenML         | JSON | Type           |
+| Name          | JSON | Type           |
 | Base Name     | bn   | String         |
 | Base Time     | bt   | Number         |
 | Base Unit     | bu   | String         |
@@ -385,7 +386,7 @@ The following JSON object member names are used in JSON SenML Record atributes:
 | Value Sum     | s    | Number         |
 | Time          | t    | Number         |
 | Update Time   | ut   | Number         |
-{:cols='r l l'}
+{: #tbl-json-labels cols='r l l' title="SenML labels"}
 
 The root content consists of an array with one JSON object for each SenML
 Record. All the fields in the above table MAY occur in the records with the type
@@ -552,21 +553,21 @@ senml tags for each SenML Record. The SenML Fields are represents as XML
 attributes.  The following table shows the mapping the SenML Field names to the
 attribute used in the XML senml tag.
 
-| SenML Field   | XML  | Type    |
+| Name          | XML  | Type    |
 | Base Name     | bn   | string  |
-| Base Time     | bt   | double   |
+| Base Time     | bt   | double  |
 | Base Unit     | bu   | string  |
-| Base Value    | bv   | double   |
-| Base Version       | bver | int     |
+| Base Value    | bv   | double  |
+| Base Version  | bver | int     |
 | Name          | n    | string  |
 | Unit          | u    | string  |
-| Value         | v    | double   |
+| Value         | v    | double  |
 | String Value  | vs   | string  |
 | Data Value    | vd   | string  |
 | Boolean Value | vb   | boolean |
-| Value Sum     | s    | double   |
-| Time          | t    | double   |
-| Update Time   | ut   | double   |
+| Value Sum     | s    | double  |
+| Time          | t    | double  |
+| Update Time   | ut   | double  |
 {:cols='r l l'}
 
 The RelaxNG schema for the XML is:
@@ -840,7 +841,7 @@ judgment but need to consider the following guidelines:
 ## SenML label registry
 
 IANA will create a registry for SenML labels. The initial content of the
-registry are shown in TODO.
+registry are shown in {{#tbl-json-labels}}.
 
 New entries can be added to the registration by either Expert Review or IESG
 Approval as defined in {{RFC5226}}.  Experts should exercise their own good
@@ -1050,10 +1051,10 @@ assigned IDs are show in {{tbl-coap-content-formats}}.
 
 | Media type               | ID  |
 | application/senml+json   | TBD |
-| application/sensml+json   | TBD |
+| application/sensml+json  | TBD |
 | application/senml+cbor   | TBD |
 | application/senml+xml    | TBD |
-| application/sensml+xml    | TBD |
+| application/sensml+xml   | TBD |
 | application/senml-exi    | TBD |
 {: #tbl-coap-content-formats cols="l l" title="CoAP Content-Format IDs"}
  
