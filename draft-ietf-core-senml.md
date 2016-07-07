@@ -97,6 +97,14 @@ informative:
   I-D.arkko-core-dev-urn:
   I-D.greevenbosch-appsawg-cbor-cddl: 
   I-D.ietf-core-links-json:
+  IEC-80000-13:
+    title: >
+      Quantities and units –
+      Part 13: Information science and technology
+    seriesinfo:
+      IEC: 80000-13
+      Edition: 1.0
+    date: 2008-03
   UCUM:
     title: The Unified Code for Units of Measure (UCUM) 
     author:
@@ -718,63 +726,77 @@ number of this specification.
 IANA will create a registry of SenML unit symbols. The primary purpose of this
 registry is to make sure that symbols uniquely map to give type of
 measurement. Definitions for many of these units can be found in location such
-as {{NIST811}} and {{BIPM}}.
+as {{NIST811}} and {{BIPM}}.  Units marked with an asterisk are NOT
+RECOMMENDED to be produced by new implementations, but are in active use
+and SHOULD be implemented by consumers that can use the related base units.
 
-| Symbol   | Description                                  | Type  | Reference |
-| m        | meter                                        | float | RFC-AAAA  |
-| g        | gram                                         | float | RFC-AAAA  |
-| s        | second                                       | float | RFC-AAAA  |
-| A        | ampere                                       | float | RFC-AAAA  |
-| K        | kelvin                                       | float | RFC-AAAA  |
-| cd       | candela                                      | float | RFC-AAAA  |
-| mol      | mole                                         | float | RFC-AAAA  |
-| Hz       | hertz                                        | float | RFC-AAAA  |
-| rad      | radian                                       | float | RFC-AAAA  |
-| sr       | steradian                                    | float | RFC-AAAA  |
-| N        | newton                                       | float | RFC-AAAA  |
-| Pa       | pascal                                       | float | RFC-AAAA  |
-| J        | joule                                        | float | RFC-AAAA  |
-| W        | watt                                         | float | RFC-AAAA  |
-| C        | coulomb                                      | float | RFC-AAAA  |
-| V        | volt                                         | float | RFC-AAAA  |
-| F        | farad                                        | float | RFC-AAAA  |
-| Ohm      | ohm                                          | float | RFC-AAAA  |
-| S        | siemens                                      | float | RFC-AAAA  |
-| Wb       | weber                                        | float | RFC-AAAA  |
-| T        | tesla                                        | float | RFC-AAAA  |
-| H        | henry                                        | float | RFC-AAAA  |
-| Cel      | degrees Celsius                              | float | RFC-AAAA  |
-| lm       | lumen                                        | float | RFC-AAAA  |
-| lx       | lux                                          | float | RFC-AAAA  |
-| Bq       | becquerel                                    | float | RFC-AAAA  |
-| Gy       | gray                                         | float | RFC-AAAA  |
-| Sv       | sievert                                      | float | RFC-AAAA  |
-| kat      | katal                                        | float | RFC-AAAA  |
-| pH       | pH (acidity)                                 | float | RFC-AAAA  |
-| %        | q Value of a switch (note 1)                 | float | RFC-AAAA  |
-| count    | q counter value                              | float | RFC-AAAA  |
-| %RH      | q Relative Humidity                          | float | RFC-AAAA  |
-| m2       | square meter (area)                          | float | RFC-AAAA  |
-| l        | liter (volume)                               | float | RFC-AAAA  |
-| m/s      | meter per second (velocity)                  | float | RFC-AAAA  |
-| m/s2     | meter per square second (acceleration)       | float | RFC-AAAA  |
-| l/s      | liter per second (flow rate)                 | float | RFC-AAAA  |
-| W/m2     | watt per square meter (irradiance)           | float | RFC-AAAA  |
-| cd/m2    | candela per square meter (luminance)         | float | RFC-AAAA  |
-| Bspl     | q bel (sound pressure level)                 | float | RFC-AAAA  |
-| bit/s    | bit per second (data rate)                   | float | RFC-AAAA  |
-| lat      | degrees latitude (note 2)                    | float | RFC-AAAA  |
-| lon      | degrees longitude (note 2)                   | float | RFC-AAAA  |
-| %EL      | q remaining battery energy level in percents | float | RFC-AAAA  |
-| EL       | q remaining battery energy level in seconds  | float | RFC-AAAA  |
-| beat/min | q Heart rate in beats per minute             | float | RFC-AAAA  |
-| beats    | q Cumulative number of heart beats           | float | RFC-AAAA  |
+| Symbol   | Description                                       | Type  | Reference |
+| m        | meter                                             | float | RFC-AAAA  |
+| kg       | kilogram                                          | float | RFC-AAAA  |
+| g        | gram*                                             | float | RFC-AAAA  |
+| s        | second                                            | float | RFC-AAAA  |
+| A        | ampere                                            | float | RFC-AAAA  |
+| K        | kelvin                                            | float | RFC-AAAA  |
+| cd       | candela                                           | float | RFC-AAAA  |
+| mol      | mole                                              | float | RFC-AAAA  |
+| Hz       | hertz                                             | float | RFC-AAAA  |
+| rad      | radian                                            | float | RFC-AAAA  |
+| sr       | steradian                                         | float | RFC-AAAA  |
+| N        | newton                                            | float | RFC-AAAA  |
+| Pa       | pascal                                            | float | RFC-AAAA  |
+| J        | joule                                             | float | RFC-AAAA  |
+| W        | watt                                              | float | RFC-AAAA  |
+| C        | coulomb                                           | float | RFC-AAAA  |
+| V        | volt                                              | float | RFC-AAAA  |
+| F        | farad                                             | float | RFC-AAAA  |
+| Ohm      | ohm                                               | float | RFC-AAAA  |
+| S        | siemens                                           | float | RFC-AAAA  |
+| Wb       | weber                                             | float | RFC-AAAA  |
+| T        | tesla                                             | float | RFC-AAAA  |
+| H        | henry                                             | float | RFC-AAAA  |
+| Cel      | degrees Celsius                                   | float | RFC-AAAA  |
+| lm       | lumen                                             | float | RFC-AAAA  |
+| lx       | lux                                               | float | RFC-AAAA  |
+| Bq       | becquerel                                         | float | RFC-AAAA  |
+| Gy       | gray                                              | float | RFC-AAAA  |
+| Sv       | sievert                                           | float | RFC-AAAA  |
+| kat      | katal                                             | float | RFC-AAAA  |
+| m2       | square meter (area)                               | float | RFC-AAAA  |
+| m3       | cubic meter (volume)                              | float | RFC-AAAA  |
+| l        | liter (volume)*                                   | float | RFC-AAAA  |
+| m/s      | meter per second (velocity)                       | float | RFC-AAAA  |
+| m/s2     | meter per square second (acceleration)            | float | RFC-AAAA  |
+| m3/s     | cubic meter per second (flow rate)                | float | RFC-AAAA  |
+| l/s      | liter per second (flow rate)*                     | float | RFC-AAAA  |
+| W/m2     | watt per square meter (irradiance)                | float | RFC-AAAA  |
+| cd/m2    | candela per square meter (luminance)              | float | RFC-AAAA  |
+| bit      | bit (information content)                         | float | RFC-AAAA  |
+| B        | Byte (information content, note 3)                | float | RFC-AAAA  |
+| bit/s    | bit per second (data rate)                        | float | RFC-AAAA  |
+| lat      | degrees latitude (note 2)                         | float | RFC-AAAA  |
+| lon      | degrees longitude (note 2)                        | float | RFC-AAAA  |
+| pH       | pH value (acidity; logarithmic quantity)          | float | RFC-AAAA  |
+| dB       | decibel (logarithmic quantity)                    | float | RFC-AAAA  |
+| Bspl     | bel (sound pressure level; logarithmic quantity)* | float | RFC-AAAA  |
+| count    | 1 (counter value)*                                | float | RFC-AAAA  |
+| %        | Percentage (Value of a switch, note 1)*           | float | RFC-AAAA  |
+| %RH      | Percentage (Relative Humidity)*                   | float | RFC-AAAA  |
+| %EL      | Percentage (remaining battery energy level)*      | float | RFC-AAAA  |
+| EL       | seconds (remaining battery energy level)*         | float | RFC-AAAA  |
+| 1/s      | 1 per second (event rate)                         | float | RFC-AAAA  |
+| 1/min    | 1 per minute (event rate)*                        | float | RFC-AAAA  |
+| beat/min | 1 per minute (Heart rate in beats per minute)*    | float | RFC-AAAA  |
+| beats    | 1 (Cumulative number of heart beats)*             | float | RFC-AAAA  |
 {: #tbl-iana-symbols cols='r l l'}
 
-* Note 1: A value of 0.0 indicates the switch is off while 1.0
-  indicates on and 0.5 would be half on. 
+* Note 1: A value of 0.0 indicates the switch is off while 100.0
+  indicates on and 50.0 would be half on.
 * Note 2: Assumed to be in WGS84 unless another reference frame is
   known for the sensor.
+* Note 3: While {{IEC-80000-13}} prefers "o" (octet), that abbreviation is
+  only well-known in a few countries.  {{IEC-80000-13}} is aware of the
+  conflict betwen "B" (byte) and "B" (bel), which is mitigated by the
+  typical unit for expressing a logarithmic level being "dB" (decibel).
 
 New entries can be added to the registration by either Expert Review or IESG
 Approval as defined in {{RFC5226}}.  Experts should exercise their own good
