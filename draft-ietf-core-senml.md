@@ -1,7 +1,7 @@
 ---
 stand_alone: true
 ipr: trust200902
-docname: draft-ietf-core-senml-00
+docname: draft-ietf-core-senml-01
 cat: std
 
 date: April 19, 2016
@@ -18,7 +18,7 @@ pi:
   tocdepth: '4'
   
 title: Media Types for Sensor Markup Language (SenML)
-abbrev: Sensor Markup
+abbrev: SenML
 area: ART
 
 author:
@@ -1087,9 +1087,6 @@ authentication information about the source of the data.
 We would like to thank Lisa Dusseault, Joe Hildebrand, Lyndsay Campbell, Martin
 Thomson, John Klensin, Bjoern Hoehrmann, Carsten Bormann, and Christian Amsuess
 for their review comments.
-
-The CBOR Representation text and CDDL  was contributed by Carsten Bormann.
-
 
 --- back
 
