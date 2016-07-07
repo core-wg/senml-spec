@@ -306,6 +306,7 @@ Update Time:
 
 The SenML format can be extended with further custom attributes. Both new base and
 regular attributes are allowed. See {{iana-senml-label-registry}} for details.
+Implementations MUST ignore attributes they don't recognize.
 
 Systems reading one of the objects MUST check for the Version attribute. If this
 value is a version number larger than the version which the system understands,
