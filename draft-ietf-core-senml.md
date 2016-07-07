@@ -302,7 +302,7 @@ Update Time:
   provide an updated reading for a measurement. This can be used to detect the
   failure of sensors or communications path from the sensor.
 
-## TBD
+## Considerations
 
 The SenML format can be extended with further custom attributes. Both new base and
 regular attributes are allowed. See {{iana-senml-label-registry}} for details.
@@ -443,8 +443,9 @@ Note that in some usage scenarios of SenML the implementations MAY store or
 transmit SenML in a stream-like fashion, where data is collected over time and
 continuously added to the object. This mode of operation is optional, but
 systems or protocols using SenML in this fashion MUST specify that they are
-doing this. SenML defines a separate mime type (TODO) to indicate Sensor
-Streaming Markup Language (SensML) for this usage. In this situation the SensML
+doing this. SenML defines a separate media type to indicate Sensor
+Streaming Markup Language (SensML) for this usage (see {{sec-senml-json}}). 
+In this situation the SensML
 stream can be sent and received in a partial fashion, i.e., a measurement entry
 can be read as soon as the SenML Record is received and not have to wait for the
 full SensML Stream to be complete.
