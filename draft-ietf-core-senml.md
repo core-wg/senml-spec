@@ -893,7 +893,7 @@ Additional information:
 
 Magic number(s): none
 
-File extension(s): senml
+File extension(s): senml and sensml
 
 Macintosh file type code(s): none
 
@@ -933,7 +933,7 @@ Additional information:
 
 Magic number(s): none
 
-File extension(s): senml
+File extension(s): senmlc
 
 Macintosh file type code(s): none
 
@@ -973,7 +973,7 @@ Additional information:
 
 Magic number(s): none
 
-File extension(s): senml
+File extension(s): senmlx and sensmlx
 
 Macintosh file type code(s): none
 
@@ -1013,7 +1013,7 @@ Additional information:
 
 Magic number(s): none
 
-File extension(s): senml
+File extension(s): senmle
 
 Macintosh file type code(s): none
 
