@@ -732,9 +732,15 @@ registry is to make sure that symbols uniquely map to give type of
 measurement. Definitions for many of these units can be found in location such
 as {{NIST811}} and {{BIPM}}.
 
+Units marked with an asterisk are NOT
+RECOMMENDED to be produced by new implementations, but are in active use
+and SHOULD be implemented by consumers that can use the related base
+units.
+
 | Symbol | Description                                | Type  | Reference |
 | m      | meter                                      | float | RFC-AAAA  |
-| g      | gram                                       | float | RFC-AAAA  |
+| kg       | kilogram                                          | float | RFC-AAAA  |
+| g        | gram*                                             | float | RFC-AAAA  |
 | s      | second                                     | float | RFC-AAAA  |
 | A      | ampere                                     | float | RFC-AAAA  |
 | K      | kelvin                                     | float | RFC-AAAA  |
@@ -762,25 +768,30 @@ as {{NIST811}} and {{BIPM}}.
 | Gy     | gray                                       | float | RFC-AAAA  |
 | Sv     | sievert                                    | float | RFC-AAAA  |
 | kat    | katal                                      | float | RFC-AAAA  |
-| pH     | pH acidity                                 | float | RFC-AAAA  |
-| %      | Value of a switch (note 1)                 | float | RFC-AAAA  |
+| pH       | pH value (acidity; logarithmic quantity)          | float | RFC-AAAA  |
+| %        | Percentage (Value of a switch, note 1)        | float | RFC-AAAA  |
 | count  | counter value                              | float | RFC-AAAA  |
 | %RH    | Relative Humidity                          | float | RFC-AAAA  |
-| m2     | area                                       | float | RFC-AAAA  |
-| l      | volume in liters                           | float | RFC-AAAA  |
-| m/s    | velocity                                   | float | RFC-AAAA  |
-| m/s2   | acceleration                               | float | RFC-AAAA  |
-| l/s    | flow rate in liters per second             | float | RFC-AAAA  |
-| W/m2   | irradiance                                 | float | RFC-AAAA  |
-| cd/m2  | luminance                                  | float | RFC-AAAA  |
-| Bspl   | bel sound pressure level                   | float | RFC-AAAA  |
-| bit/s  | bits per second                            | float | RFC-AAAA  |
+| m2       | square meter (area)                               | float | RFC-AAAA  |
+| m3       | cubic meter (volume)                              | float | RFC-AAAA  |
+| l        | liter (volume)*                                   | float | RFC-AAAA  |
+| m/s      | meter per second (velocity)                       | float | RFC-AAAA  |
+| m/s2     | meter per square second (acceleration)            | float | RFC-AAAA  |
+| m3/s     | cubic meter per second (flow rate)                | float | RFC-AAAA  |
+| l/s      | liter per second (flow rate)*                     | float | RFC-AAAA  |
+| W/m2     | watt per square meter (irradiance)                | float | RFC-AAAA  |
+| cd/m2    | candela per square meter (luminance)              | float | RFC-AAAA  |
+| Bspl     | bel (sound pressure level; logarithmic quantity) |float| | RFC-AAAA  |
+| bit      | bit (information content)                         | float | RFC-AAAA  |
+| bit/s    | bit per second (data rate)                        | float | RFC-AAAA  |
 | lat    | degrees latitude (note 2)                  | float | RFC-AAAA  |
 | lon    | degrees longitude (note 2)                 | float | RFC-AAAA  |
-| %EL    | remaining battery energy level in percents | float | RFC-AAAA  |
-| EL     | remaining battery energy level in seconds  | float | RFC-AAAA  |
-| beat/m | Heart rate in beats per minute             | float | RFC-AAAA  |
-| beats  | Cumulative number of heart beats           | float | RFC-AAAA  |
+| %EL      | Percentage (remaining battery energy level)      | float | RFC-AAAA  |
+| EL       | seconds (remaining battery energy level)         | float | RFC-AAAA  |
+| count    | 1 (counter value)                                 | float | RFC-AAAA  |
+| 1/s      | 1 per second (event rate)                         | float | RFC-AAAA  |
+| beat/min | 1 per minute (Heart rate in beats per minute)   | float | RFC-AAAA  |
+| beats    | 1 (Cumulative number of heart beats)        | float | RFC-AAAA  |
 {: #tbl-iana-symbols cols='r l l'}
 
 * Note 1: A value of 0.0 indicates the switch is off while 1.0
