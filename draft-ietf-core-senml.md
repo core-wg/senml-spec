@@ -808,10 +808,10 @@ judgment but need to consider the following guidelines:
   representation outweighs the convenience of easy human representations or loss
   of precision in a conversion.
 
-4. Use of SI prefixes such as "k" before the unit is not allowed.  Instead one
-  can represent the value using scientific notation such a 1.2e3. TODO - Open
-  Issue. Some people would like to have SI prefixes to improve human
-  readability. 
+4. Use of SI prefixes such as "k" before the unit is not recommended.  Instead one
+  can represent the value using scientific notation such a 1.2e3. The "kg" unit is
+  exception to this rule since it is an SI base unit; the "g" unit is provided
+  for legacy compatibility.
 
 5. For a given type of measurement, there will only be one unit type defined. So
   for length, meters are defined and other lengths such as mile, foot, light
