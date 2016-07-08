@@ -4,7 +4,7 @@ ipr: trust200902
 docname: draft-ietf-core-senml-01
 cat: std
 
-date: April 19, 2016
+date: July 8, 2016
 
 pi:
   toc: 'yes'
