@@ -808,37 +808,32 @@ judgment but need to consider the following guidelines:
   representation outweighs the convenience of easy human representations or loss
   of precision in a conversion.
 
-4. Use of SI prefixes such as "k" before the unit is not allowed.  Instead one
-  can represent the value using scientific notation such a 1.2e3. TODO - Open
-  Issue. Some people would like to have SI prefixes to improve human
-  readability. 
-
-5. For a given type of measurement, there will only be one unit type defined. So
+4. For a given type of measurement, there will only be one unit type defined. So
   for length, meters are defined and other lengths such as mile, foot, light
   year are not allowed. For most cases, the SI unit is preferred.
 
-6. Symbol names that could be easily confused with existing common units or
+5. Symbol names that could be easily confused with existing common units or
   units combined with prefixes should be avoided. For example, selecting a unit
   name of "mph" to indicate something that had nothing to do with velocity would
   be a bad choice, as "mph" is commonly used to mean miles per hour.
 
-7. The following should not be used because the are common SI prefixes: Y, Z, E,
+6. The following should not be used because the are common SI prefixes: Y, Z, E,
   P, T, G, M, k, h, da, d, c, n, u, p, f, a, z, y, Ki, Mi, Gi, Ti, Pi, Ei, Zi,
   Yi.
 
-8. The following units should not be used as they are commonly used to represent
+7. The following units should not be used as they are commonly used to represent
   other measurements Ky, Gal, dyn, etg, P, St, Mx, G, Oe, Gb, sb, Lmb, ph, Ci,
   R, RAD, REM, gal, bbl, qt, degF, Cal, BTU, HP, pH, B/s, psi, Torr, atm, at,
   bar, kWh.
 
-9. The unit names are case sensitive and the correct case needs to be used, but
+8. The unit names are case sensitive and the correct case needs to be used, but
   symbols that differ only in case should not be allocated.
 
-10. A number after a unit typically indicates the previous unit raised to that
+9. A number after a unit typically indicates the previous unit raised to that
   power, and the / indicates that the units that follow are the reciprocal. A
   unit should have only one / in the name.
 
-11. A good list of common units can be found in the Unified Code for Units of
+10. A good list of common units can be found in the Unified Code for Units of
    Measure {{UCUM}}.
 
 
