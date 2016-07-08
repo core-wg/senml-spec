@@ -1001,7 +1001,7 @@ Change controller: IESG
 
 Type name: application
 
-Subtype name: senml-exi and and sensml-exi
+Subtype name: senml-exi and sensml-exi
 
 Required parameters: none
 
