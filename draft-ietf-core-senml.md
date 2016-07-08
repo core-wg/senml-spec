@@ -263,9 +263,9 @@ Base Value:
 
 Version:
 : Version number of media type format. This attribute is an optional positive
-  integer and defaults to 5 if not present. Note to RFC Editor. Change
-  the default value to 100 when this specification is published as an RFC
-  and remove this note. 
+  integer and defaults to 5 if not present. \[RFC Editor: change
+  the default value to 10 when this specification is published as an RFC
+  and remove this note\]
 
 ## Regular attributes
 
