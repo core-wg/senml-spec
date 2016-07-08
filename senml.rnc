@@ -18,9 +18,7 @@ senml = element senml {
   attribute v { xsd:double }?,
   attribute vb { xsd:boolean }?,
   attribute vs { xsd:string }?,
-  attribute vd { xsd:string }?,
-  
-  attribute l { xsd:string }?
+  attribute vd { xsd:string }?
 }
 
 sensml =

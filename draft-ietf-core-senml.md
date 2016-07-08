@@ -255,8 +255,8 @@ Base Time:
 
 Base Unit:
 : A base unit that is assumed for all entries, unless otherwise indicated. 
-  If a record does not contain a unit value, then the base unit
-  is used. Otherwise the value of found in the Unit is used.
+  If a record does not contain a Unit value, then the Base Unit
+  is used. Otherwise the value found in the Unit (if any) is used.
     
 Base Value:
 : A base value is added to the value found in an entry, similar to Base Time. 
