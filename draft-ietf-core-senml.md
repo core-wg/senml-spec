@@ -839,7 +839,7 @@ judgment but need to consider the following guidelines:
   Yi.
 
 8. The following units should not be used as they are commonly used to represent
-  other measurements Ky, Gal, dyn, etg, P, St, Mx, G, Oe, Gb, sb, Lmb, ph, Ci,
+  other measurements Ky, Gal, dyn, etg, P, St, Mx, G, Oe, Gb, sb, Lmb, mph, Ci,
   R, RAD, REM, gal, bbl, qt, degF, Cal, BTU, HP, pH, B/s, psi, Torr, atm, at,
   bar, kWh.
 
