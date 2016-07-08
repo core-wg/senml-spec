@@ -31,7 +31,7 @@ author:
   code: 'T2P 4H2'
   country: Canada
   phone: "+1 408 421-9990"
-  email: fluffy@cisco.com
+  email: fluffy@iii.ca
 - ins: Z. Shelby
   name: Zach Shelby
   org: ARM
