@@ -734,63 +734,72 @@ as {{NIST811}} and {{BIPM}}.  Units marked with an asterisk are NOT
 RECOMMENDED to be produced by new implementations, but are in active use
 and SHOULD be implemented by consumers that can use the related base units.
 
-| Symbol   | Description                                       | Type  | Reference |
-| m        | meter                                             | float | RFC-AAAA  |
-| kg       | kilogram                                          | float | RFC-AAAA  |
-| g        | gram*                                             | float | RFC-AAAA  |
-| s        | second                                            | float | RFC-AAAA  |
-| A        | ampere                                            | float | RFC-AAAA  |
-| K        | kelvin                                            | float | RFC-AAAA  |
-| cd       | candela                                           | float | RFC-AAAA  |
-| mol      | mole                                              | float | RFC-AAAA  |
-| Hz       | hertz                                             | float | RFC-AAAA  |
-| rad      | radian                                            | float | RFC-AAAA  |
-| sr       | steradian                                         | float | RFC-AAAA  |
-| N        | newton                                            | float | RFC-AAAA  |
-| Pa       | pascal                                            | float | RFC-AAAA  |
-| J        | joule                                             | float | RFC-AAAA  |
-| W        | watt                                              | float | RFC-AAAA  |
-| C        | coulomb                                           | float | RFC-AAAA  |
-| V        | volt                                              | float | RFC-AAAA  |
-| F        | farad                                             | float | RFC-AAAA  |
-| Ohm      | ohm                                               | float | RFC-AAAA  |
-| S        | siemens                                           | float | RFC-AAAA  |
-| Wb       | weber                                             | float | RFC-AAAA  |
-| T        | tesla                                             | float | RFC-AAAA  |
-| H        | henry                                             | float | RFC-AAAA  |
-| Cel      | degrees Celsius                                   | float | RFC-AAAA  |
-| lm       | lumen                                             | float | RFC-AAAA  |
-| lx       | lux                                               | float | RFC-AAAA  |
-| Bq       | becquerel                                         | float | RFC-AAAA  |
-| Gy       | gray                                              | float | RFC-AAAA  |
-| Sv       | sievert                                           | float | RFC-AAAA  |
-| kat      | katal                                             | float | RFC-AAAA  |
-| m2       | square meter (area)                               | float | RFC-AAAA  |
-| m3       | cubic meter (volume)                              | float | RFC-AAAA  |
-| l        | liter (volume)*                                   | float | RFC-AAAA  |
-| m/s      | meter per second (velocity)                       | float | RFC-AAAA  |
-| m/s2     | meter per square second (acceleration)            | float | RFC-AAAA  |
-| m3/s     | cubic meter per second (flow rate)                | float | RFC-AAAA  |
-| l/s      | liter per second (flow rate)*                     | float | RFC-AAAA  |
-| W/m2     | watt per square meter (irradiance)                | float | RFC-AAAA  |
-| cd/m2    | candela per square meter (luminance)              | float | RFC-AAAA  |
-| bit      | bit (information content)                         | float | RFC-AAAA  |
-| bit/s    | bit per second (data rate)                        | float | RFC-AAAA  |
-| lat      | degrees latitude (note 2)                         | float | RFC-AAAA  |
-| lon      | degrees longitude (note 2)                        | float | RFC-AAAA  |
-| pH       | pH value (acidity; logarithmic quantity)          | float | RFC-AAAA  |
-| dB       | decibel (logarithmic quantity)                    | float | RFC-AAAA  |
-| Bspl     | bel (sound pressure level; logarithmic quantity)* | float | RFC-AAAA  |
-| count    | 1 (counter value)                                 | float | RFC-AAAA  |
-| /        | 1 (Ratio e.g., value of a switch, note 1)         | float | RFC-AAAA  |
-| %        | 1 (Ratio e.g., value of a switch, note 1)*        | float | RFC-AAAA  |
-| %RH      | Percentage (Relative Humidity)                    | float | RFC-AAAA  |
-| %EL      | Percentage (remaining battery energy level)       | float | RFC-AAAA  |
-| EL       | seconds (remaining battery energy level)          | float | RFC-AAAA  |
-| 1/s      | 1 per second (event rate)                         | float | RFC-AAAA  |
-| 1/min    | 1 per minute (event rate, "rpm")*                 | float | RFC-AAAA  |
-| beat/min | 1 per minute (Heart rate in beats per minute)*    | float | RFC-AAAA  |
-| beats    | 1 (Cumulative number of heart beats)*             | float | RFC-AAAA  |
+| Symbol   | Description                          | Definition | Type  | Reference |
+| m        | meter                                | [BIPM]     | float | RFC-AAAA  |
+| kg       | kilogram                             | [BIPM]     | float | RFC-AAAA  |
+| g        | gram*                                | [BIPM]     | float | RFC-AAAA  |
+| s        | second                               | [BIPM]     | float | RFC-AAAA  |
+| A        | ampere                               | [BIPM]     | float | RFC-AAAA  |
+| K        | kelvin                               | [BIPM]     | float | RFC-AAAA  |
+| cd       | candela                              | [BIPM]     | float | RFC-AAAA  |
+| mol      | mole                                 | [BIPM]     | float | RFC-AAAA  |
+| Hz       | hertz                                | [BIPM]     | float | RFC-AAAA  |
+| rad      | radian                               | [BIPM]     | float | RFC-AAAA  |
+| sr       | steradian                            | [BIPM]     | float | RFC-AAAA  |
+| N        | newton                               | [BIPM]     | float | RFC-AAAA  |
+| Pa       | pascal                               | [BIPM]     | float | RFC-AAAA  |
+| J        | joule                                | [BIPM]     | float | RFC-AAAA  |
+| W        | watt                                 | [BIPM]     | float | RFC-AAAA  |
+| C        | coulomb                              | [BIPM]     | float | RFC-AAAA  |
+| V        | volt                                 | [BIPM]     | float | RFC-AAAA  |
+| F        | farad                                | [BIPM]     | float | RFC-AAAA  |
+| Ohm      | ohm                                  | [BIPM]     | float | RFC-AAAA  |
+| S        | siemens                              | [BIPM]     | float | RFC-AAAA  |
+| Wb       | weber                                | [BIPM]     | float | RFC-AAAA  |
+| T        | tesla                                | [BIPM]     | float | RFC-AAAA  |
+| H        | henry                                | [BIPM]     | float | RFC-AAAA  |
+| Cel      | degrees Celsius                      | [BIPM]     | float | RFC-AAAA  |
+| lm       | lumen                                | [BIPM]     | float | RFC-AAAA  |
+| lx       | lux                                  | [BIPM]     | float | RFC-AAAA  |
+| Bq       | becquerel                            | [BIPM]     | float | RFC-AAAA  |
+| Gy       | gray                                 | [BIPM]     | float | RFC-AAAA  |
+| Sv       | sievert                              | [BIPM]     | float | RFC-AAAA  |
+| kat      | katal                                | [BIPM]     | float | RFC-AAAA  |
+| m2       | square meter (area)                  | [BIPM]     | float | RFC-AAAA  |
+| m3       | cubic meter (volume)                 | [BIPM]     | float | RFC-AAAA  |
+| l        | liter (volume)*                      | [BIPM]     | float | RFC-AAAA  |
+| m/s      | meter per second (velocity)          | [BIPM]     | float | RFC-AAAA  |
+| m/s2     | meter per square second              | [BIPM]     | float | RFC-AAAA  |
+|          | (acceleration)                       |            |       |           |
+| m3/s     | cubic meter per second (flow rate)   |            | float | RFC-AAAA  |
+| l/s      | liter per second (flow rate)*        |            | float | RFC-AAAA  |
+| W/m2     | watt per square meter (irradiance)   | [BIPM]     | float | RFC-AAAA  |
+| cd/m2    | candela per square meter (luminance) | [BIPM]     | float | RFC-AAAA  |
+| bit      | bit (information content)            |            | float | RFC-AAAA  |
+| bit/s    | bit per second (data rate)           |            | float | RFC-AAAA  |
+| lat      | degrees latitude (note 2)            |            | float | RFC-AAAA  |
+| lon      | degrees longitude (note 2)           |            | float | RFC-AAAA  |
+| pH       | pH value (acidity; logarithmic       |            | float | RFC-AAAA  |
+|          | quantity)                            |            |       |           |
+| dB       | decibel (logarithmic quantity)       | [BIPM]     | float | RFC-AAAA  |
+| Bspl     | bel (sound pressure level;           | [BIPM]     | float | RFC-AAAA  |
+|          | logarithmic quantity)*               |            |       |           |
+| count    | 1 (counter value)                    |            | float | RFC-AAAA  |
+| /        | 1 (Ratio e.g., value of a switch,    |            | float | RFC-AAAA  |
+|          | note 1)                              |            |       |           |
+| %        | 1 (Ratio e.g., value of a switch,    |            | float | RFC-AAAA  |
+|          | note 1)*                             |            |       |           |
+| %RH      | Percentage (Relative Humidity)       |            | float | RFC-AAAA  |
+| %EL      | Percentage (remaining battery energy |            | float | RFC-AAAA  |
+|          | level)                               |            |       |           |
+| EL       | seconds (remaining battery energy    |            | float | RFC-AAAA  |
+|          | level)                               |            |       |           |
+| 1/s      | 1 per second (event rate)            |            | float | RFC-AAAA  |
+| 1/min    | 1 per minute (event rate, "rpm")*    |            | float | RFC-AAAA  |
+| beat/min | 1 per minute (Heart rate in beats    |            | float | RFC-AAAA  |
+|          | per minute)*                         |            |       |           |
+| beats    | 1 (Cumulative number of heart        |            | float | RFC-AAAA  |
+|          | beats)*                              |            |       |           |
 {: #tbl-iana-symbols cols='r l l'}
 
 * Note 1: A value of 0.0 indicates the switch is off while 1.0
