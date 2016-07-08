@@ -1099,7 +1099,7 @@ authentication information about the source of the data.
 # Acknowledgement
 
 We would like to thank Lisa Dusseault, Joe Hildebrand, Lyndsay Campbell, Martin
-Thomson, John Klensin, Bjoern Hoehrmann, Carsten Bormann, and Christian Amsuess
+Thomson, John Klensin, Bjoern Hoehrmann, and Christian Amsuess
 for their review comments.
 
 --- back
