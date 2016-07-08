@@ -864,7 +864,7 @@ specified in {{RFC6838}} and {{RFC7303}}.
 
 Type name: application
 
-Subtype name: senml+json  and sensml+json
+Subtype name: senml+json and sensml+json
 
 Required parameters: none
 
@@ -921,7 +921,7 @@ Change controller: IESG
 
 Type name: application
 
-Subtype name: senml+cbor 
+Subtype name: senml+cbor and sensml+cbor
 
 Required parameters: none
 
@@ -941,7 +941,7 @@ Additional information:
 
 Magic number(s): none
 
-File extension(s): senmlc
+File extension(s): senmlc and sensmlc
 
 Macintosh file type code(s): none
 
@@ -1001,7 +1001,7 @@ Change controller: IESG
 
 Type name: application
 
-Subtype name: senml-exi
+Subtype name: senml-exi and and sensml-exi
 
 Required parameters: none
 
@@ -1021,7 +1021,7 @@ Additional information:
 
 Magic number(s): none
 
-File extension(s): senmle
+File extension(s): senmle and sensmle
 
 Macintosh file type code(s): none
 
