@@ -352,8 +352,11 @@ Representing the statistical characteristics of measurements, such as accuracy,
 can be very complex. Future specification may add new attributes to provide
 better information about the statistical properties of the measurement.
 
-A SenML object is referred to as "expanded" if it does not contain any base
-values and has no relative times. 
+A SenML Record is referred to as "expanded" if it does not contain any base
+values and has no relative times, but the the base values of the SenML Pack
+(if any) are applied to the Record. That is, name and base name are
+concatenated, base time is added to the time of the Record, if Record did 
+not contain Unit the Base Unit is applied to the record, etc.
 
 ## Associating Meta-data
 
