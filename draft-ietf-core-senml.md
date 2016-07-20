@@ -283,12 +283,11 @@ Unit:
 
 Value
 : Value of the entry.  Optional if a Sum value is present, otherwise
-  required. Values are represented using three basic data types, Floating point
-  numbers ("v" field for "Value"), Booleans ("vb" for "Boolean Value"),
-  Strings ("vs" for "String Value") and Binary Data ("vd" for "Data Value") .
-  Exactly one of these four fields MUST
-  appear unless there is Sum field in which case it is allowed to have no Value
-  field or to have "v" field. 
+  required. Values are represented using basic data types. This specification
+  defines floating point numbers ("v" field for "Value"), booleans ("vb" for 
+  "Boolean Value"), strings ("vs" for "String Value") and binary data ("vd" for
+  "Data Value"). Exactly one value field MUST appear unless there is Sum field 
+  in which case it is allowed to have no Value field. 
 
 Sum:
 : Integrated sum of the values over time. Optional. This attribute is in the
