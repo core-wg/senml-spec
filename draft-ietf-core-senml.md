@@ -351,11 +351,19 @@ Representing the statistical characteristics of measurements, such as accuracy,
 can be very complex. Future specification may add new attributes to provide
 better information about the statistical properties of the measurement.
 
+## Expanded Records
+
+Sometimes it is useful to be able to refer to a defined normalized format for
+SenML records is useful for big data applications and intermediate forms. 
+
 A SenML Record is referred to as "expanded" if it does not contain any base
-values and has no relative times, but the the base values of the SenML Pack
-(if any) are applied to the Record. That is, name and base name are
-concatenated, base time is added to the time of the Record, if Record did 
-not contain Unit the Base Unit is applied to the record, etc.
+values and has no relative times, but the the base values of the SenML Pack (if
+any) are applied to the Record. That is, name and base name are concatenated,
+base time is added to the time of the Record, if Record did not contain Unit the
+Base Unit is applied to the record, etc. In addition, for XML and JSON formats, each
+record is on one line with no extra whitespace.
+
+TODO add example
 
 ## Associating Meta-data
 
