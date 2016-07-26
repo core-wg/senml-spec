@@ -1,0 +1,16 @@
+<sensml xmlns="urn:ietf:params:xml:ns:senml">
+  <senml bn="urn:dev:ow:10e2073a01080063" bt="1.320067464e+09"
+  bu="%RH" v="20"></senml>
+  <senml u="lon" v="24.30621"></senml>
+  <senml u="lat" v="60.07965"></senml>
+  <senml t="60" v="20.3"></senml>
+  <senml u="lon" t="60" v="24.30622"></senml>
+  <senml u="lat" t="60" v="60.07965"></senml>
+  <senml t="120" v="20.7"></senml>
+  <senml u="lon" t="120" v="24.30623"></senml>
+  <senml u="lat" t="120" v="60.07966"></senml>
+  <senml u="%EL" t="150" v="98"></senml>
+  <senml t="180" v="21.2"></senml>
+  <senml u="lon" t="180" v="24.30628"></senml>
+  <senml u="lat" t="180" v="60.07967"></senml>
+</sensml>
