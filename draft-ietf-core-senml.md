@@ -567,6 +567,7 @@ attribute names and types used in the XML senml tags.
 | Base Time     | bt   | double  |
 | Base Unit     | bu   | string  |
 | Base Value    | bv   | double  |
+| Base Sum    | bs   | double  |
 | Base Version  | bver | int     |
 | Name          | n    | string  |
 | Unit          | u    | string  |
