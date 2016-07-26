@@ -8,3 +8,6 @@ draft*.xml
 .i-d-template
 old
 old?
+ex*.chk
+ex*.Z
+
