@@ -59,7 +59,7 @@ $(DRAFT)-$(VERSION).xml: $(DRAFT).md
 	senmlCat -xml -ijson -i -print  $< | tidy -xml -i -wrap 68 -q -o $@
 
 %.gen.json: %.json
-	cat  $< | python -m json.tool > $@
+	senmlCat -json -ijson -i -print  $<	> $@ 
 
 %.gen.cbor: %.json senml-json2cbor.rb
 	ruby senml-json2cbor.rb  $< > $@
