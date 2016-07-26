@@ -9,6 +9,8 @@ senml = element senml {
   attribute bu { xsd:string }?,
   attribute bver { xsd:int }?,
 
+  attribute l { xsd:string }?,
+
   attribute n { xsd:string }?,
   attribute s { xsd:double }?,
   attribute t { xsd:double }?,
