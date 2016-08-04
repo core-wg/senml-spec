@@ -260,7 +260,10 @@ Base Unit:
     
 Base Value:
 : A base value is added to the value found in an entry, similar to Base Time. 
-
+ 
+Base Sum:
+: A base sum is added to the sum found in an entry, similar to Base Time. 
+ 
 Version:
 : Version number of media type format. This attribute is an optional positive
   integer and defaults to 5 if not present. \[RFC Editor: change
@@ -388,6 +391,7 @@ used in JSON SenML Record attributes.
 | Base Time     | bt   | Number         |
 | Base Unit     | bu   | String         |
 | Base Value    | bv   | Number         |
+| Base Sum    | bs   | Number         |
 | Version       | bver | Number         |
 | Name          | n    | String         |
 | Unit          | u    | String         |
@@ -532,6 +536,7 @@ only an unsigned integer is allowed.
 | Base Time                 | bt         |         -3 |
 | Base Units                | bu         |         -4 |
 | Base Value                | bv         |         -5 |
+| Base Sum                | bs         |         -6 |
 | Name                      | n          |          0 |
 | Units                     | u          |          1 |
 | Value                     | v          |          2 |
@@ -571,6 +576,7 @@ attribute names and types used in the XML senml tags.
 | Base Time     | bt   | double  |
 | Base Unit     | bu   | string  |
 | Base Value    | bv   | double  |
+| Base Sum    | bs   | double  |
 | Base Version  | bver | int     |
 | Name          | n    | string  |
 | Unit          | u    | string  |
