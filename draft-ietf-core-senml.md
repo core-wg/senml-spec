@@ -872,7 +872,7 @@ judgment but need to consider the following guidelines:
    Measure {{UCUM}}.
 
 
-## SenML label registry {#iana-senml-label-registry}
+## SenML Label Registry {#iana-senml-label-registry}
 
 IANA will create a new registry for SenML labels. The initial content of the
 registry are shown in {{tbl-json-labels}} and {{tbl-xml-labels}}.
@@ -1122,7 +1122,7 @@ for their review comments.
 
 --- back
 
-# Links extension
+# Links Extension
 
 An attribute to support a link extension for SenML is defined as a string
 attribute by this specification. The link extension can be used for additional
