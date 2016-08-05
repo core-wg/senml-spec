@@ -1124,9 +1124,9 @@ for their review comments.
 
 # Links extension
 
-An atribute to support an link extension for SenML is defined as a string
+An attribute to support a link extension for SenML is defined as a string
 attribute by this specification. The link extension can be used for additional
-information.  The definition and usage of the contents of this value are
+information about a SenML Record.  The definition and usage of the contents of this value are
 specified in {{I-D.ietf-core-links-json}}.
 
 For JSON and XML the attribtue has a label of "l" and a value that is a string.
