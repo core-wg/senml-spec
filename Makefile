@@ -84,7 +84,7 @@ $(DRAFT)-$(VERSION).xml: $(DRAFT).md
 
 
 ex4.gen.json-trim: ex4.gen.json
-	head -44 <  $< > $@ 
+	head -11 <  $< > $@ 
 
 
 %.hex: %
