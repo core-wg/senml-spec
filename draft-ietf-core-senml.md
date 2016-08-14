@@ -452,7 +452,7 @@ The next example is similar to the above one, but shows current at Tue Jun 8
 18:01:16.001 UTC 2010 and at each second for the previous 5 seconds.
 
 ~~~~
-{::include ex3.gen.json}
+{::include ex3.gen.wrap.json}
 ~~~~
 
 Note that in some usage scenarios of SenML the implementations MAY store or
@@ -510,7 +510,7 @@ and has gotten two separate values as a result, a temperature and
 humidity measurement.
 
 ~~~~
-{::include ex6.gen.json}
+{::include ex6.gen.wrap.json}
 ~~~~
 
 
@@ -1133,5 +1133,5 @@ being a map of strings to strings with unique keys.
 The following shows an example of the links extension.
 
 ~~~~
-{::include ex8.gen.json}
+{::include ex8.gen.wrap.json}
 ~~~~
