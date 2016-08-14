@@ -613,8 +613,6 @@ compatibility. When the data will be transported over CoAP or HTTP, an EXI
 Cookie SHOULD NOT be used as it simply makes things larger and is redundant to
 information provided in the Content-Type header.
 
-TODO - examples  probably have the wrong setting for the schemaID 
-
 The following is the XSD Schema to be used for strict schema guided EXI
 processing. It is generated from the RelaxNG.
 
