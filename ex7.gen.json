@@ -1,0 +1,6 @@
+[
+  {"bn":"urn:dev:ow:10e2073a01080063","n":"temp","u":"Cel","v":23.1},
+  {"n":"label","vs":"Machine Room"},
+  {"n":"open","vb":false},
+  {"n":"nfv-reader","vd":"aGkgCg=="}
+]

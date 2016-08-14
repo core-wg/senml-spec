@@ -426,9 +426,6 @@ precision over the next 100 years.
 ## Examples
 
 
-TODO - Add example with string, data, boolean, and base value 
-
-
 ### Single Datapoint
 
 The following shows a temperature reading taken approximately "now" by a 1-wire
@@ -499,6 +496,16 @@ compressed with gzip is given in the following table.
 
 Note the EXI sizes are not using the schema guidance so the EXI representation 
 could be a bit smaller. 
+
+### Multiple Data Types {#mult-types-ex}
+
+The following  example shows a sensor that returns multiple
+different data types. 
+
+~~~~
+{::include ex7.gen.json}
+~~~~
+
 
 ### Collection of Resources {#rest-ex}
 
