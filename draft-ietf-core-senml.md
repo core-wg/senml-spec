@@ -565,6 +565,11 @@ only an unsigned integer is allowed.
 | Link                      | l       |          9 |
 {: #tbl-cbor-labels cols="r l r" title="CBOR representation: integers for map keys"}
 
+* For steaming JSON of type SensML, the array containing the records
+  SHOULD be an CBOR indefinite length array while for non streaming
+  JSON a definite length array MUST be used.
+
+
 The following example shows a dump of the CBOR example for the same sensor
 measurement as in {{co-ex}}.
 
