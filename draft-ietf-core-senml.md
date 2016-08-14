@@ -1,7 +1,7 @@
 ---
 stand_alone: true
 ipr: trust200902
-docname: draft-ietf-core-senml-02
+docname: draft-ietf-core-senml-03
 cat: std
 
 date: July 8, 2016
