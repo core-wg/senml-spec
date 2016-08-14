@@ -366,8 +366,7 @@ any) are applied to the Record. That is, name and base name are concatenated,
 base time is added to the time of the Record, if Record did not contain Unit the
 Base Unit is applied to the record, etc. In addition the records need to be in
 chronological order.
-
-TODO add example
+An example of this is show in {{resolved-ex}}.
 
 ## Associating Meta-data
 
@@ -496,6 +495,17 @@ compressed with gzip is given in the following table.
 
 Note the EXI sizes are not using the schema guidance so the EXI representation 
 could be a bit smaller. 
+
+
+### Resolved Data {#resolved-ex}
+
+The following shows the example from the previos section show in
+resolved format.
+
+~~~~
+{::include ex5.gen.resolved.json}
+~~~~
+
 
 ### Multiple Data Types {#mult-types-ex}
 
