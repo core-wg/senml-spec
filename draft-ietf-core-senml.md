@@ -546,6 +546,7 @@ only an unsigned integer is allowed.
 | Time                      | t          |          6 |
 | Update Time               | ut         |          7 |
 | Data Value                | vd         |          8 |
+| Link                      | l       |          9 |
 {: #tbl-cbor-labels cols="r l r" title="CBOR representation: integers for map keys"}
 
 The following example shows a dump of the CBOR example for the same sensor
@@ -869,7 +870,7 @@ judgment but need to consider the following guidelines:
    Measure {{UCUM}}.
 
 
-## SenML label registry {#iana-senml-label-registry}
+## SenML Label Registry {#iana-senml-label-registry}
 
 IANA will create a new registry for SenML labels. The initial content of the
 registry are shown in {{tbl-json-labels}} and {{tbl-xml-labels}}.
@@ -1119,14 +1120,14 @@ for their review comments.
 
 --- back
 
-# Links extension
+# Links Extension
 
-An extension to SenML to support links is expected to be registered and
-defined by {{I-D.ietf-core-links-json}}.
+An attribute to support a link extension for SenML is defined as a string
+attribute by this specification. The link extension can be used for additional
+information about a SenML Record.  The definition and usage of the contents of this value are
+specified in {{I-D.ietf-core-links-json}}.
 
-The link extension can be an array of objects that can be used for
-additional information. Each object in the Link array is constrained to
-being a map of strings to strings with unique keys. 
+For JSON and XML the attribtue has a label of "l" and a value that is a string.
 
 The following shows an example of the links extension.
 
