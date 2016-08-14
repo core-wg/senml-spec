@@ -499,13 +499,12 @@ could be a bit smaller.
 
 ### Multiple Data Types {#mult-types-ex}
 
-The following  example shows a sensor that returns multiple
+The following  example shows a sensor that returns
 different data types. 
 
 ~~~~
 {::include ex7.gen.json}
 ~~~~
-
 
 ### Collection of Resources {#rest-ex}
 
