@@ -162,7 +162,7 @@ For example, the following shows a measurement from a temperature
 gauge encoded in the JSON syntax.
 
 ~~~~
-{::include ex1.json}
+{::include ex1.gen.json}
 ~~~~
 
 In the example above, the array has a single SenML Record with a measurement for
@@ -193,7 +193,7 @@ the "n" tag has a unique sensor name, and the unit of the measurement is carried
 in the "u" tag.
 
 ~~~~
-{::include ex10.json}
+{::include ex10.gen.json}
 ~~~~
 
 To keep the messages small, it does not make sense to repeat the "n" tag in each SenML
@@ -202,7 +202,7 @@ prepended to the Name field of all elements in that record and any records that
 follow it. So a more compact form of the example above is the following.
 
 ~~~~
-{::include ex11.json}
+{::include ex11.gen.json}
 ~~~~
 
 In the above example the Base Name is in the "bn" tag and the "n" tags in each
@@ -366,8 +366,7 @@ any) are applied to the Record. That is, name and base name are concatenated,
 base time is added to the time of the Record, if Record did not contain Unit the
 Base Unit is applied to the record, etc. In addition the records need to be in
 chronological order.
-
-TODO add example
+An example of this is show in {{resolved-ex}}.
 
 ## Associating Meta-data
 
@@ -426,16 +425,13 @@ precision over the next 100 years.
 ## Examples
 
 
-TODO - Add example with string, data, boolean, and base value 
-
-
 ### Single Datapoint
 
 The following shows a temperature reading taken approximately "now" by a 1-wire
 sensor device that was assigned the unique 1-wire address of 10e2073a01080063:
 
 ~~~~
-{::include ex1.json}
+{::include ex1.gen.json}
 ~~~~
 
 
@@ -445,14 +441,14 @@ The following example shows voltage and current now, i.e., at an unspecified
 time. 
 
 ~~~~
-{::include ex2.json}
+{::include ex2.gen.json}
 ~~~~
 
 The next example is similar to the above one, but shows current at Tue Jun 8
 18:01:16.001 UTC 2010 and at each second for the previous 5 seconds.
 
 ~~~~
-{::include ex3.json}
+{::include ex3.gen.wrap.json}
 ~~~~
 
 Note that in some usage scenarios of SenML the implementations MAY store or
@@ -488,7 +484,7 @@ Finally, the device also reports extra data about its battery status
 at a separate time.
 
 ~~~~
-{::include ex5.json}
+{::include ex5.gen.json}
 ~~~~
 
 The size of this example represented in various forms, as well as that form
@@ -500,6 +496,26 @@ compressed with gzip is given in the following table.
 Note the EXI sizes are not using the schema guidance so the EXI representation 
 could be a bit smaller. 
 
+
+### Resolved Data {#resolved-ex}
+
+The following shows the example from the previos section show in
+resolved format.
+
+~~~~
+{::include ex5.gen.resolved.json}
+~~~~
+
+
+### Multiple Data Types {#mult-types-ex}
+
+The following  example shows a sensor that returns
+different data types. 
+
+~~~~
+{::include ex7.gen.json}
+~~~~
+
 ### Collection of Resources {#rest-ex}
 
 The following example shows how to query one device that can
@@ -510,7 +526,7 @@ and has gotten two separate values as a result, a temperature and
 humidity measurement.
 
 ~~~~
-{::include ex6.json}
+{::include ex6.gen.wrap.json}
 ~~~~
 
 
@@ -1132,5 +1148,5 @@ For JSON and XML the attribtue has a label of "l" and a value that is a string.
 The following shows an example of the links extension.
 
 ~~~~
-{::include ex8.json}
+{::include ex8.gen.wrap.json}
 ~~~~
