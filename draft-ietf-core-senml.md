@@ -540,10 +540,12 @@ defined in {{tbl-cbor-labels}}. This table is conclusive, i.e., there is no
 intention to define any additional integer map keys; any extensions will use
 string map keys.
 
-* For JSON Numbers, the CBOR representation can use integers, floating point
-numbers, or decimal fractions (CBOR Tag 4); the common limitations of JSON
-implementations are not relevant for these. For the version number, however,
-only an unsigned integer is allowed.
+* For JSON Numbers, the CBOR representation can use integers, floating
+point numbers, or decimal fractions (CBOR Tag 4); however a
+representation SHOULD be choose such that when it the CBOR value is
+converted back to an IEEE double-precision floating-point value, it
+has exactly the same value as the original Number.  For the version
+number, only an unsigned integer is allowed.
 
 
 | Name                      | JSON label | CBOR label |
