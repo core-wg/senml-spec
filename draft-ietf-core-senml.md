@@ -346,7 +346,7 @@ If either the Base Time or Time value is missing, the missing attribute is
 considered to have a value of zero. The Base Time and Time values are added
 together to get the time of measurement. A time of zero indicates that the
 sensor does not know the absolute time and the measurement was made roughly
-"now". A negative value is used to indicate seconds in the past from roughly
+"now". Zero, or a negative value is used to indicate seconds in the past from roughly
 "now". A positive value is used to indicate the number of seconds, excluding
 leap seconds, since the start of the year 1970 in UTC.
 
