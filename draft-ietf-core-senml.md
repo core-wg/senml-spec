@@ -363,10 +363,13 @@ applications and intermediate forms when converting to other formats.
 A SenML Record is referred to as "resolved" if it does not contain any base
 values and has no relative times, but the the base values of the SenML Pack (if
 any) are applied to the Record. That is, name and base name are concatenated,
-base time is added to the time of the Record, if Record did not contain Unit the
+base time is added to the time of the Record, if the Record did not contain Unit the
 Base Unit is applied to the record, etc. In addition the records need to be in
 chronological order.
 An example of this is show in {{resolved-ex}}.
+
+Future specification that defines new base attributes need to specify
+how the attribute is resolved.
 
 ## Associating Meta-data
 
@@ -1130,9 +1133,9 @@ authentication information about the source of the data.
 
 # Acknowledgement
 
-We would like to thank Lisa Dusseault, Joe Hildebrand, Lyndsay Campbell, Martin
-Thomson, John Klensin, Bjoern Hoehrmann, and Christian Amsuess
-for their review comments.
+We would like to thank Lisa Dusseault, Joe Hildebrand, Lyndsay
+Campbell, Martin Thomson, John Klensin, Bjoern Hoehrmann, Christian
+Groves, and Christian Amsuess, for their review comments.
 
 --- back
 
