@@ -413,7 +413,8 @@ Value are base64 encoded with URL safe alphabet as defined in Section 5 of
 {{RFC4648}}.
 
 Systems receiving measurements MUST be able to process the range of floating
-point numbers that are representable as an IEEE double-precision floating-point
+point numbers that are representable as an IEEE double precision
+floating point
 numbers {{IEEE.754.1985}}. The number of significant digits in any measurement
 is not relevant, so a reading of 1.1 has exactly the same semantic meaning
 as 1.10. If the value has an exponent, the "e" MUST be in lower case.  The
@@ -542,8 +543,8 @@ string map keys.
 
 * For JSON Numbers, the CBOR representation can use integers, floating
 point numbers, or decimal fractions (CBOR Tag 4); however a
-representation SHOULD be choose such that when it the CBOR value is
-converted back to an IEEE double-precision floating-point value, it
+representation SHOULD be choosen such that when the CBOR value is
+converted back to an IEEE double precision floating point value, it
 has exactly the same value as the original Number.  For the version
 number, only an unsigned integer is allowed.
 
