@@ -350,6 +350,11 @@ sensor does not know the absolute time and the measurement was made roughly
 "now". A positive value is used to indicate the number of seconds, excluding
 leap seconds, since the start of the year 1970 in UTC.
 
+If only one of the Base Sum or Sum value is present, the missing attribute is
+considered to have a value of zero. The Base Sum and Sum values are added
+together to get the sum of measurement. If neither the Base Sum or Sum
+are present, then the measurement does not have a sum value. 
+
 Representing the statistical characteristics of measurements, such as accuracy,
 can be very complex. Future specification may add new attributes to provide
 better information about the statistical properties of the measurement.
