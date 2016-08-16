@@ -544,18 +544,17 @@ humidity measurement.
 The CBOR {{RFC7049}} representation is equivalent to the JSON representation,
 with the following changes:
 
+* For JSON Numbers, the CBOR representation can use integers, floating 
+point numbers, or decimal fractions (CBOR Tag 4); however a 
+representation SHOULD be choosen such that when the CBOR value is 
+converted back to an IEEE double precision floating point value, it 
+has exactly the same value as the original Number.  For the version 
+number, only an unsigned integer is allowed. 
+
 * For compactness, the CBOR representation uses integers for the map keys
 defined in {{tbl-cbor-labels}}. This table is conclusive, i.e., there is no
 intention to define any additional integer map keys; any extensions will use
 string map keys.
-
-* For JSON Numbers, the CBOR representation can use integers, floating
-point numbers, or decimal fractions (CBOR Tag 4); however a
-representation SHOULD be choosen such that when the CBOR value is
-converted back to an IEEE double precision floating point value, it
-has exactly the same value as the original Number.  For the version
-number, only an unsigned integer is allowed.
-
 
 | Name                      | JSON label | CBOR label |
 | Version                   | bver       |         -1 |
