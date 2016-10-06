@@ -931,6 +931,10 @@ All new entries must define the Label Name, Label, JSON Type, and XML Type.
 The following registrations are done following the procedure
 specified in {{RFC6838}} and {{RFC7303}}.
 
+Note to RFC Editor - please remove this paragraph. Note that a request for media
+type review for senml+json was sent to the media-types@iana.org on Sept
+21, 2010. A second request for all the types was sent on TBD.
+
 
 ### senml+json Media Type Registration {#sec-senml-json}
 
