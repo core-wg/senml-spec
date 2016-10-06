@@ -366,7 +366,7 @@ SenML records. This normalized format tends to get used for big data
 applications and intermediate forms when converting to other formats.
 
 A SenML Record is referred to as "resolved" if it does not contain any base
-values and has no relative times, but the the base values of the SenML Pack (if
+values and has no relative times, but the base values of the SenML Pack (if
 any) are applied to the Record. That is, name and base name are concatenated,
 base time is added to the time of the Record, if the Record did not contain Unit the
 Base Unit is applied to the record, etc. In addition the records need to be in
