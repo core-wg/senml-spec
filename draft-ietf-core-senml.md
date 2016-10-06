@@ -416,7 +416,7 @@ Record. All the fields in the above table MAY occur in the records with the type
 specified in the table.
 
 Only the UTF-8 form of JSON is allowed. Characters in the String Value are
-encoded using the escape sequences defined in {{RFC7159}}. Characters in the Data
+encoded using the escape sequences defined in {{RFC7159}}. Octets in the Data
 Value are base64 encoded with URL safe alphabet as defined in Section 5 of
 {{RFC4648}}.
 
@@ -544,17 +544,22 @@ humidity measurement.
 The CBOR {{RFC7049}} representation is equivalent to the JSON representation,
 with the following changes:
 
-* For JSON Numbers, the CBOR representation can use integers, floating 
-point numbers, or decimal fractions (CBOR Tag 4); however a 
-representation SHOULD be choosen such that when the CBOR value is 
-converted back to an IEEE double precision floating point value, it 
-has exactly the same value as the original Number.  For the version 
-number, only an unsigned integer is allowed. 
+* For JSON Numbers, the CBOR representation can use integers, floating
+point numbers, or decimal fractions (CBOR Tag 4); however a
+representation SHOULD be choosen such that when the CBOR value is
+converted back to an IEEE double precision floating point value, it
+has exactly the same value as the original Number.  For the version
+number, only an unsigned integer is allowed.
+
+* Characters in the String Value are encoded using a definite length
+text string (type 3). Octets in the Data Value are encoded using a
+definite length byte string (type 2) .
 
 * For compactness, the CBOR representation uses integers for the map keys
 defined in {{tbl-cbor-labels}}. This table is conclusive, i.e., there is no
 intention to define any additional integer map keys; any extensions will use
 string map keys.
+
 
 | Name                      | JSON label | CBOR label |
 | Version                   | bver       |         -1 |
@@ -590,7 +595,14 @@ measurement as in {{co-ex}}.
 # XML Representation (application/senml+xml) {#sec-xml-example}
 
 A SenML Pack or Stream can also be represented in XML format as defined in this
-section. The following example shows an XML example for the same sensor
+section.
+
+Only the UTF-8 form of XML is allowed. Characters in the String Value are
+encoded using the escape sequences defined in {{RFC7159}}. Octets in the Data
+Value are base64 encoded with URL safe alphabet as defined in Section 5 of
+{{RFC4648}}.
+
+The following example shows an XML example for the same sensor
 measurement as in {{co-ex}}.
 
 ~~~~
