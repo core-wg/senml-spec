@@ -552,7 +552,7 @@ has exactly the same value as the original Number.  For the version
 number, only an unsigned integer is allowed.
 
 * Characters in the String Value are encoded using a definite length
-test string (type 3). Octets in the Data Value are encoded using a
+text string (type 3). Octets in the Data Value are encoded using a
 definite length byte string (type 2) .
 
 * For compactness, the CBOR representation uses integers for the map keys
