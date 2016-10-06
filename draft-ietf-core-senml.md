@@ -639,7 +639,7 @@ The RelaxNG schema for the XML is:
 ~~~~
 
 
-# EXI Representation (application/senml-exi)
+# EXI Representation (application/senml+exi)
 
 For efficient transmission of SenML over e.g. a constrained network, Efficient
 XML Interchange (EXI) can be used. This encodes the XML Schema structure of
@@ -1069,11 +1069,11 @@ Author: Cullen Jennings \<fluffy@iii.ca>
 Change controller: IESG
 
 
-### senml-exi Media Type Registration
+### senml+exi Media Type Registration
 
 Type name: application
 
-Subtype name: senml-exi and sensml-exi
+Subtype name: senml+exi and sensml+exi
 
 Required parameters: none
 
@@ -1132,9 +1132,11 @@ assigned IDs are show in {{tbl-coap-content-formats}}.
 | application/senml+json   | TBD |
 | application/sensml+json  | TBD |
 | application/senml+cbor   | TBD |
+| application/sensml+cbor   | TBD |
 | application/senml+xml    | TBD |
 | application/sensml+xml   | TBD |
-| application/senml-exi    | TBD |
+| application/senml+exi    | TBD |
+| application/sensml+exi    | TBD |
 {: #tbl-coap-content-formats cols="l l" title="CoAP Content-Format IDs"}
  
 
