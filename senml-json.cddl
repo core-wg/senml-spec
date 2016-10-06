@@ -2,6 +2,6 @@ bver = "bver" n  = "n"   s  = "s"
 bn  = "bn"    u  = "u"   t  = "t"
 bt  = "bt"    v  = "v"   ut = "ut"
 bu  = "bu"    vs = "vs"  vd = "vd"
-bv  = "bv"    vb = "vb"
+bv  = "bv"    vb = "vb"  l  = "l" 
 
 binary-value = tstr             ; base64url encoded

@@ -409,6 +409,7 @@ used in JSON SenML Record attributes.
 | Value Sum     | s    | Number         |
 | Time          | t    | Number         |
 | Update Time   | ut   | Number         |
+| Link   | l   | String         |
 {: #tbl-json-labels cols='r l l' title="JSON SenML Labels"}
 
 The root content consists of an array with one JSON object for each SenML
@@ -577,6 +578,7 @@ string map keys.
 | Time                      | t          |          6 |
 | Update Time               | ut         |          7 |
 | Data Value                | vd         |          8 |
+| Link                | l         |          9 |
 {: #tbl-cbor-labels cols="r l r" title="CBOR representation: integers for map keys"}
 
 * For streaming SensML in CBOR representation, the array containing the
@@ -630,6 +632,7 @@ attribute  types used in the XML senml tags.
 | Value Sum     | s    | double  |
 | Time          | t    | double  |
 | Update Time   | ut   | double  |
+| Link   | l  | string  |
 {: #tbl-xml-labels cols='r l l' title="XML SenML Labels"}
 
 The RelaxNG schema for the XML is:
@@ -933,6 +936,7 @@ registry is:
 | Update Time   | ut   |  7 | double  |  a | RFCXXXX |
 | Value         | v    |  2 | double  |  a | RFCXXXX |
 | Value Sum     | s    |  5 | double  |  a | RFCXXXX |
+| Link              | l    |  9 | string  |  a | RFCXXXX |
 {: #tbl-seml-reg cols='r l l' title="SenML Labels"}
 
 Note to RFC Editor. Please replace RFCXXXX with the number for this RFC.
