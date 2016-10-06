@@ -915,42 +915,53 @@ judgment but need to consider the following guidelines:
 ## SenML Label Registry {#iana-senml-label-registry}
 
 IANA will create a new registry for SenML labels. The initial content of the
-registry was formed by combing  {{tbl-json-labels}} and {{tbl-xml-labels}} and
-is:
+registry is:
 
-| Name          | Label|CBOR| XML Type| Note    |
-| Base Name     | bn   | -2 | string  | RFCXXXX |
-| Base Sum      | bs   | -6 | double  | RFCXXXX |
-| Base Time     | bt   | -3 | double  | RFCXXXX |
-| Base Unit     | bu   | -4 | string  | RFCXXXX |
-| Base Value    | bv   | -5 | double  | RFCXXXX |
-| Base Version  | bver | -1 | int     | RFCXXXX |
-| Boolean Value | vb   |  4 | boolean | RFCXXXX |
-| Data Value    | vd   |  8 | string  | RFCXXXX |
-| Name          | n    |  0 | string  | RFCXXXX |
-| String Value  | vs   |  3 | string  | RFCXXXX |
-| Time          | t    |  6 | double  | RFCXXXX |
-| Unit          | u    |  1 | string  | RFCXXXX |
-| Update Time   | ut   |  7 | double  | RFCXXXX |
-| Value         | v    |  2 | double  | RFCXXXX |
-| Value Sum     | s    |  5 | double  | RFCXXXX |
+| Name          | Label|CBOR| XML Type| ID | Note    |
+| Base Name     | bn   | -2 | string  |  a | RFCXXXX |
+| Base Sum      | bs   | -6 | double  |  a | RFCXXXX |
+| Base Time     | bt   | -3 | double  |  a | RFCXXXX |
+| Base Unit     | bu   | -4 | string  |  a | RFCXXXX |
+| Base Value    | bv   | -5 | double  |  a | RFCXXXX |
+| Base Version  | bver | -1 | int     |  a | RFCXXXX |
+| Boolean Value | vb   |  4 | boolean |  a | RFCXXXX |
+| Data Value    | vd   |  8 | string  |  a | RFCXXXX |
+| Name          | n    |  0 | string  |  a | RFCXXXX |
+| String Value  | vs   |  3 | string  |  a | RFCXXXX |
+| Time          | t    |  6 | double  |  a | RFCXXXX |
+| Unit          | u    |  1 | string  |  a | RFCXXXX |
+| Update Time   | ut   |  7 | double  |  a | RFCXXXX |
+| Value         | v    |  2 | double  |  a | RFCXXXX |
+| Value Sum     | s    |  5 | double  |  a | RFCXXXX |
 {: #tbl-seml-reg cols='r l l' title="SenML Labels"}
 
 Note to RFC Editor. Please replace RFCXXXX with the number for this RFC.
 
 All new entries must define the Label Name, Label, and XML Type but the CBOR
 labels SHOULD be left empty as CBOR will use the string encoding for any new
-labels. The JSON, CBOR, and EXI types are derived from the XML type. The Note
-field SHOULD contain information about where to find out more information about
-this label. 
+labels. The ID fields contains the EXI schemaID of the first Schema which
+includes this label or is empty if this label was not intended for use with
+EXI. The Note field SHOULD contain information about where to find out more
+information about this label.
+
+The JSON, CBOR, and EXI types are derived from the XML type.
 
 New entries can be added to the registration by either Expert Review or IESG
 Approval as defined in {{RFC5226}}.  Experts should exercise their own good
 judgment but need to consider that shorter labels should have more strict review.
 
-All new SenML labels that have "base" semantics (see {{senml-base}}) must
-start with character 'b'. Regular labels must not start with that character.
+All new SenML labels that have "base" semantics (see {{senml-base}}) MUST
+start with character 'b'. Regular labels MUST NOT start with that character.
 
+Extensions that add a label that is intended for use with XML need to create a
+new RelaxNG scheme that includes all the labels in the IANA registry.
+
+Extensions that add a labels that is intended for use with EXI need to create a
+new XSD Schema that includes all the labels in the IANA registry then allocate a
+new EXI schemaID. Moving to the next letter in the alphabet is the suggested say
+to create the new EXI schemaID.  Any labels with previously blank ID values
+SHOULD be updated in the IANA table to have their ID set to this new schemaID
+value.
 
 ## Media Type Registration {#sec-iana-media}
 
