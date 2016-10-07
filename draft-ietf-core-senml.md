@@ -409,6 +409,7 @@ used in JSON SenML Record attributes.
 | Value Sum     | s    | Number         |
 | Time          | t    | Number         |
 | Update Time   | ut   | Number         |
+| Link   | l   | String         |
 {: #tbl-json-labels cols='r l l' title="JSON SenML Labels"}
 
 The root content consists of an array with one JSON object for each SenML
@@ -561,7 +562,7 @@ intention to define any additional integer map keys; any extensions will use
 string map keys.
 
 
-| Name                      | JSON label | CBOR label |
+| Name                      | Label      | CBOR Label |
 | Version                   | bver       |         -1 |
 | Base Name                 | bn         |         -2 |
 | Base Time                 | bt         |         -3 |
@@ -577,7 +578,7 @@ string map keys.
 | Time                      | t          |          6 |
 | Update Time               | ut         |          7 |
 | Data Value                | vd         |          8 |
-| Link                      | l       |          9 |
+| Link                | l         |          9 |
 {: #tbl-cbor-labels cols="r l r" title="CBOR representation: integers for map keys"}
 
 * For streaming SensML in CBOR representation, the array containing the
@@ -611,10 +612,11 @@ measurement as in {{co-ex}}.
 
 The SenML Stream is represented as a sensml tag that contains a series of
 senml tags for each SenML Record. The SenML Fields are represents as XML
-attributes.  The following table shows the mapping of the SenML labels to the
-attribute names and types used in the XML senml tags.
+attributes.  The following table shows the mapping of the SenML labels, which
+are used for the attribute name, to the
+attribute  types used in the XML senml tags.
 
-| Name          | XML  | Type    |
+| Name          | Label| Type    |
 | Base Name     | bn   | string  |
 | Base Time     | bt   | double  |
 | Base Unit     | bu   | string  |
@@ -630,6 +632,7 @@ attribute names and types used in the XML senml tags.
 | Value Sum     | s    | double  |
 | Time          | t    | double  |
 | Update Time   | ut   | double  |
+| Link   | l  | string  |
 {: #tbl-xml-labels cols='r l l' title="XML SenML Labels"}
 
 The RelaxNG schema for the XML is:
@@ -915,16 +918,58 @@ judgment but need to consider the following guidelines:
 ## SenML Label Registry {#iana-senml-label-registry}
 
 IANA will create a new registry for SenML labels. The initial content of the
-registry are shown in {{tbl-json-labels}} and {{tbl-xml-labels}}.
+registry is:
+
+| Name          | Label|CBOR| XML Type| ID | Note    |
+| Base Name     | bn   | -2 | string  |  a | RFCXXXX |
+| Base Sum      | bs   | -6 | double  |  a | RFCXXXX |
+| Base Time     | bt   | -3 | double  |  a | RFCXXXX |
+| Base Unit     | bu   | -4 | string  |  a | RFCXXXX |
+| Base Value    | bv   | -5 | double  |  a | RFCXXXX |
+| Base Version  | bver | -1 | int     |  a | RFCXXXX |
+| Boolean Value | vb   |  4 | boolean |  a | RFCXXXX |
+| Data Value    | vd   |  8 | string  |  a | RFCXXXX |
+| Name          | n    |  0 | string  |  a | RFCXXXX |
+| String Value  | vs   |  3 | string  |  a | RFCXXXX |
+| Time          | t    |  6 | double  |  a | RFCXXXX |
+| Unit          | u    |  1 | string  |  a | RFCXXXX |
+| Update Time   | ut   |  7 | double  |  a | RFCXXXX |
+| Value         | v    |  2 | double  |  a | RFCXXXX |
+| Value Sum     | s    |  5 | double  |  a | RFCXXXX |
+| Link              | l    |  9 | string  |  a | RFCXXXX |
+{: #tbl-seml-reg cols='r l l' title="SenML Labels"}
+
+Note to RFC Editor. Please replace RFCXXXX with the number for this RFC.
+
+All new entries must define the Label Name, Label, and XML Type but the CBOR
+labels SHOULD be left empty as CBOR will use the string encoding for any new
+labels. The ID fields contains the EXI schemaID of the first Schema which
+includes this label or is empty if this label was not intended for use with
+EXI. The Note field SHOULD contain information about where to find out more
+information about this label.
+
+The JSON, CBOR, and EXI types are derived from the XML type. All XML numeric
+types such as double, float, integer and int become a JSON Number. XML boolean
+and string become a JSON Boolean and String respectively. CBOR
+representes numeric values with a CBOR type that does not loose any
+information from the JSON value. EXI uses the XML types. 
 
 New entries can be added to the registration by either Expert Review or IESG
 Approval as defined in {{RFC5226}}.  Experts should exercise their own good
 judgment but need to consider that shorter labels should have more strict review.
 
-All new SenML labels that have "base" semantics (see {{senml-base}}) must
-start with character 'b'. Regular labels must not start with that character.
+All new SenML labels that have "base" semantics (see {{senml-base}}) MUST
+start with character 'b'. Regular labels MUST NOT start with that character.
 
-All new entries must define the Label Name, Label, JSON Type, and XML Type.
+Extensions that add a label that is intended for use with XML need to create a
+new RelaxNG scheme that includes all the labels in the IANA registry.
+
+Extensions that add a label that is intended for use with EXI need to create a
+new XSD Schema that includes all the labels in the IANA registry then allocate a
+new EXI schemaID. Moving to the next letter in the alphabet is the suggested way
+to create the new EXI schemaID.  Any labels with previously blank ID values
+SHOULD be updated in the IANA table to have their ID set to this new schemaID
+value.
 
 ## Media Type Registration {#sec-iana-media}
 
