@@ -509,7 +509,7 @@ could be a bit smaller.
 
 ### Resolved Data {#resolved-ex}
 
-The following shows the example from the previos section show in
+The following shows the example from the previous section show in
 resolved format.
 
 ~~~~
@@ -547,7 +547,7 @@ with the following changes:
 
 * For JSON Numbers, the CBOR representation can use integers, floating
 point numbers, or decimal fractions (CBOR Tag 4); however a
-representation SHOULD be choosen such that when the CBOR value is
+representation SHOULD be chosen such that when the CBOR value is
 converted back to an IEEE double precision floating point value, it
 has exactly the same value as the original Number.  For the version
 number, only an unsigned integer is allowed.
@@ -951,7 +951,7 @@ information about this label.
 The JSON, CBOR, and EXI types are derived from the XML type. All XML numeric
 types such as double, float, integer and int become a JSON Number. XML boolean
 and string become a JSON Boolean and String respectively. CBOR
-representes numeric values with a CBOR type that does not loose any
+represents numeric values with a CBOR type that does not loose any
 information from the JSON value. EXI uses the XML types. 
 
 New entries can be added to the registration by either Expert Review or IESG
@@ -1220,7 +1220,7 @@ attribute by this specification. The link extension can be used for additional
 information about a SenML Record.  The definition and usage of the contents of this value are
 specified in {{I-D.ietf-core-links-json}}.
 
-For JSON and XML the attribtue has a label of "l" and a value that is a string.
+For JSON and XML the attribute has a label of "l" and a value that is a string.
 
 The following shows an example of the links extension.
 
