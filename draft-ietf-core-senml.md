@@ -1,10 +1,10 @@
 ---
 stand_alone: true
 ipr: trust200902
-docname: draft-ietf-core-senml-03
+docname: draft-ietf-core-senml-04
 cat: std
 
-date: October 7, 2016
+date: October 8, 2016
 
 pi:
   toc: 'yes'
@@ -978,7 +978,7 @@ specified in {{RFC6838}} and {{RFC7303}}.
 
 Note to RFC Editor - please remove this paragraph. Note that a request for media
 type review for senml+json was sent to the media-types@iana.org on Sept
-21, 2010. A second request for all the types was sent on TODO.
+21, 2010. A second request for all the types was sent on October 7, 2016.
 
 
 ### senml+json Media Type Registration {#sec-senml-json}
