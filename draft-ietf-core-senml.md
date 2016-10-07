@@ -962,9 +962,9 @@ start with character 'b'. Regular labels MUST NOT start with that character.
 Extensions that add a label that is intended for use with XML need to create a
 new RelaxNG scheme that includes all the labels in the IANA registry.
 
-Extensions that add a labels that is intended for use with EXI need to create a
+Extensions that add a label that is intended for use with EXI need to create a
 new XSD Schema that includes all the labels in the IANA registry then allocate a
-new EXI schemaID. Moving to the next letter in the alphabet is the suggested say
+new EXI schemaID. Moving to the next letter in the alphabet is the suggested way
 to create the new EXI schemaID.  Any labels with previously blank ID values
 SHOULD be updated in the IANA table to have their ID set to this new schemaID
 value.
