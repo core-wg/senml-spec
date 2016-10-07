@@ -950,7 +950,9 @@ information about this label.
 
 The JSON, CBOR, and EXI types are derived from the XML type. All XML numeric
 types such as double, float, integer and int become a JSON Number. XML boolean
-and string become a JSON Boolean and String respectively.
+and string become a JSON Boolean and String respectively. CBOR
+representes numeric values with a CBOR type that does not loose any
+information from the JSON value. EXI uses the XML types. 
 
 New entries can be added to the registration by either Expert Review or IESG
 Approval as defined in {{RFC5226}}.  Experts should exercise their own good
