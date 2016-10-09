@@ -541,38 +541,36 @@ humidity measurement.
 
 ### Setting an Actuator {#thermo-ex}
 
-The following example show the senml that could be used to set the current
-set point of a typical residential thermostat which has a temperature
-set point, a switch to turn on and off the heat, and a switch to turn
-on the fan override.
+The following example show the senml that could be used to set the current set
+point of a typical residential thermostat which has a temperature set point, a
+switch to turn on and off the heat, and a switch to turn on the fan override.
 
 ~~~~
 {::include ex9.gen.json}
 ~~~~
 
-In the following example two different lights are turned on. It is
-assumed that the lights are on a TODO network that can guarantee
-delivery of the messages to the two lights with 10 ms. The
-controlleroller has set the time of the lights coming on to 20 ms in
-the future from the current time. This allows both lights to receive
-the message, wait till that time, then apply the switch command so that
-both lights come on at the same time.
+In the following example two different lights are turned on. It is assumed that
+the lights are on a 802.1BA network that can guarantee delivery of the messages
+to the two lights within 15 ms and uses 802.1AS for time synchronization. The
+controlleroller has set the time of the lights coming on to 20 ms in the future
+from the current time. This allows both lights to receive the message, wait till
+that time, then apply the switch command so that both lights come on at the same
+time.
 
 ~~~~
 {::include ex12.gen.json}
 ~~~~
 
-The following shows two lights being turned off using a non
-deterministic network that has a high odds of delivering a message is
-less than 100 ms. The curent time is 1320078429. The user has just
-turned off a light switch which is turning off two lights. Both lights
-are dimmed to 50% brightens immediately to give the user instant
-feedback that something is changing. However given the network, the
-lights will probably dim at somewhat different times. Then 100 ms in
-the future, both lights will go off at the same time. The instant but
-not synchronized dimming gives the suer the sensation of quick
-responses and the timed off 100 ms in the future gives the perception
-of both lights going off at the same time vs the annoying pop corn
+The following shows two lights being turned off using a non deterministic
+network that has a high odds of delivering a message is less than 100 ms and
+uses NTP for time synchronization. The curent time is 1320078429. The user has
+just turned off a light switch which is turning off two lights. Both lights are
+dimmed to 50% brightens immediately to give the user instant feedback that
+something is changing. However given the network, the lights will probably dim
+at somewhat different times. Then 100 ms in the future, both lights will go off
+at the same time. The instant but not synchronized dimming gives the user the
+sensation of quick responses and the timed off 100 ms in the future gives the
+perception of both lights going off at the same time vs the annoying popcorn
 effect.
 
 ~~~~
