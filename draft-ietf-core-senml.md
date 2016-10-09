@@ -539,6 +539,16 @@ humidity measurement.
 {::include ex6.gen.wrap.json}
 ~~~~
 
+### Setting an Actuator {#thermo-ex}
+
+The following example show the senml that could be used to set the current
+set point of a typical residential thermostat which has a temperature
+set point, a switch to turn on and off the heat, and a switch to turn
+on the fan override.
+
+~~~~
+{::include ex9.gen.json}
+~~~~
 
 # CBOR Representation (application/senml+cbor) {#sec-cbor}
 
