@@ -562,6 +562,23 @@ both lights come on at the same time.
 {::include ex12.gen.json}
 ~~~~
 
+The following shows two lights being turned off using a non
+deterministic network that has a high odds of delivering a message is
+less than 100 ms. The curent time is 1320078429. The user has just
+turned off a light switch which is turning off two lights. Both lights
+are dimmed to 50% brightens immediately to give the user instant
+feedback that something is changing. However given the network, the
+lights will probably dim at somewhat different times. Then 100 ms in
+the future, both lights will go off at the same time. The instant but
+not synchronized dimming gives the suer the sensation of quick
+responses and the timed off 100 ms in the future gives the perception
+of both lights going off at the same time vs the annoying pop corn
+effect.
+
+~~~~
+{::include ex13.gen.json}
+~~~~
+
 
 # CBOR Representation (application/senml+cbor) {#sec-cbor}
 
