@@ -550,6 +550,19 @@ on the fan override.
 {::include ex9.gen.json}
 ~~~~
 
+In the following example two different lights are turned on. It is
+assumed that the lights are on a TODO network that can guarantee
+delivery of the messages to the two lights with 10 ms. The
+controlleroller has set the time of the lights coming on to 20 ms in
+the future from the current time. This allows both lights to receive
+the message, wait till that time, then apply the switch command so that
+both lights come on at the same time.
+
+~~~~
+{::include ex12.gen.json}
+~~~~
+
+
 # CBOR Representation (application/senml+cbor) {#sec-cbor}
 
 The CBOR {{RFC7049}} representation is equivalent to the JSON representation,
