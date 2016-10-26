@@ -513,7 +513,7 @@ The following shows the example from the previous section show in
 resolved format.
 
 ~~~~
-{::include ex5.gen.resolved.json}
+{::include ex5.gen.resolved.wrap.json}
 ~~~~
 
 
