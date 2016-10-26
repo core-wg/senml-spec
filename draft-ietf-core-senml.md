@@ -193,7 +193,7 @@ the "n" tag has a unique sensor name, and the unit of the measurement is carried
 in the "u" tag.
 
 ~~~~
-{::include ex10.gen.json}
+{::include ex10.gen.wrap.json}
 ~~~~
 
 To keep the messages small, it does not make sense to repeat the "n" tag in each SenML
@@ -202,7 +202,7 @@ prepended to the Name field of all elements in that record and any records that
 follow it. So a more compact form of the example above is the following.
 
 ~~~~
-{::include ex11.gen.json}
+{::include ex11.gen.wrap.json}
 ~~~~
 
 In the above example the Base Name is in the "bn" tag and the "n" tags in each
