@@ -494,7 +494,7 @@ Finally, the device also reports extra data about its battery status
 at a separate time.
 
 ~~~~
-{::include ex5.gen.json}
+{::include ex5.gen.wrap.json}
 ~~~~
 
 The size of this example represented in various forms, as well as that form
