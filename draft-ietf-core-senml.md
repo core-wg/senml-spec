@@ -1028,32 +1028,34 @@ Required parameters: none
 
 Optional parameters: none
 
-Encoding considerations: Must be encoded as using a subset of the encoding
-allowed in {{RFC7159}}. See RFC-AAAA for details. This simplifies implementation
-of very simple system and does not impose any significant limitations as all
-this data is meant for machine to machine communications and is not meant to be
-human readable.
+Encoding considerations: Must be encoded as using a subset of the
+encoding allowed in {{RFC7159}}. See RFC-AAAA for details. This
+simplifies implementation of very simple system and does not impose
+any significant limitations as all this data is meant for machine to
+machine communications and is not meant to be human readable.
 
-Security considerations: Sensor data can contain a wide range of information
-ranging from information that is very public, such the outside temperature in a
-given city, to very private information that requires integrity and
-confidentiality protection, such as patient health information. This format does
-not provide any security and instead relies on the transport protocol that
-carries it to provide security. Given applications need to look at the overall
-context of how this media type will be used to decide if the security is
+Security considerations: Sensor data can contain a wide range of
+information ranging from information that is very public, such the
+outside temperature in a given city, to very private information that
+requires integrity and confidentiality protection, such as patient
+health information. This format does not provide any security and
+instead relies on the transport protocol that carries it to provide
+security. Given applications need to look at the overall context of
+how this media type will be used to decide if the security is
 adequate.
 
-Interoperability considerations: Applications should ignore any JSON key value
-pairs that they do not understand. This allows backwards compatibility
-extensions to this specification. The "bver" field can be used to ensure the
-receiver supports a minimal level of functionality needed by the creator of the
-JSON object.
+Interoperability considerations: Applications should ignore any JSON
+key value pairs that they do not understand. This allows backwards
+compatibility extensions to this specification. The "bver" field can
+be used to ensure the receiver supports a minimal level of
+functionality needed by the creator of the JSON object.
 
 Published specification: RFC-AAAA
 
-Applications that use this media type: The type is used by systems that report
-e.g., electrical power usage and environmental information such as temperature and
-humidity. It can be used for a wide range of sensor reporting systems.
+Applications that use this media type: The type is used by systems
+that report e.g., electrical power usage and environmental information
+such as temperature and humidity. It can be used for a wide range of
+sensor reporting systems.
 
 Additional information:
 
