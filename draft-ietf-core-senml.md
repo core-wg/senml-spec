@@ -596,8 +596,9 @@ definite length byte string (type 2) .
 * For compactness, the CBOR representation uses integers for the map keys
 defined in {{tbl-cbor-labels}}. This table is conclusive, i.e., there is no
 intention to define any additional integer map keys; any extensions will use
-string map keys.
-
+string map keys. This allows translators converting between CBOR and JSON
+representations to convert also all future labels without needing to update
+implementations.
 
 | Name                      | Label      | CBOR Label |
 | Version                   | bver       |         -1 |
