@@ -30,7 +30,6 @@ author:
   region: AB
   code: 'T2P 4H2'
   country: Canada
-  phone: "+1 408 421-9990"
   email: fluffy@iii.ca
 - ins: Z. Shelby
   name: Zach Shelby
