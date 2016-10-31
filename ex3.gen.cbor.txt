@@ -1,8 +1,8 @@
 87                                      # array(7)
    a7                                   # map(7)
       21                                # negative(1)
-      78 1c                             # text(28)
-         75726e3a ... 03036332f # "urn:dev:ow:10e2073a01080063/"
+      78 1b                             # text(27)
+         75726e3a ... 030363b # "urn:dev:ow:10e2073a0108006;"
       22                                # negative(2)
       fb 41d303a15b001062               # primitive(4743138824102613090)
       23                                # negative(3)
