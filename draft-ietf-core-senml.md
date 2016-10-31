@@ -594,7 +594,7 @@ same time.
 
 The following shows two lights being turned off using a non
 deterministic network that has a high odds of delivering a message in
-less than 100 ms and uses NTP for time synchronization. The curent
+less than 100 ms and uses NTP for time synchronization. The current
 time is 1320078429. The user has just turned off a light switch which
 is turning off two lights. Both lights are dimmed to 50% brightness
 immediately to give the user instant feedback that something is
@@ -1215,7 +1215,7 @@ adequate.
 
 Interoperability considerations: Applications should ignore any tags
 or attributes that they do not understand. This allows backwards
-compatibility extensions to this specification. The "bver" atribute in
+compatibility extensions to this specification. The "bver" attribute in
 the senml tag can be used to ensure the receiver supports a minimal
 level of functionality needed by the creator of the XML.
 
@@ -1271,7 +1271,7 @@ adequate.
 
 Interoperability considerations: Applications should ignore any tags
 or attributes that they do not understand. This allows backwards
-compatibility extensions to this specification. The "bver" atribute in
+compatibility extensions to this specification. The "bver" attribute in
 the senml tag can be used to ensure the receiver supports a minimal
 level of functionality needed by the creator of the XML.  Further
 information on using schemas to guide the EXI can be found in
