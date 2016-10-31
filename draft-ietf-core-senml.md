@@ -1072,7 +1072,7 @@ in {{RFC6838}} and {{RFC7303}}.
 Note to RFC Editor - please remove this paragraph. Note that a request
 for media type review for senml+json was sent to the
 media-types@iana.org on Sept 21, 2010. A second request for all the
-types was sent on October 7, 2016.
+types was sent on October 31, 2016.
 
 
 ### senml+json Media Type Registration {#sec-senml-json}
