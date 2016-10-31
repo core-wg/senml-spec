@@ -8,6 +8,7 @@ xmlns:ns1="urn:ietf:params:xml:ns:senml">
       <xs:attribute name="bn" type="xs:string" />
       <xs:attribute name="bt" type="xs:double" />
       <xs:attribute name="bv" type="xs:double" />
+      <xs:attribute name="bs" type="xs:double" />
       <xs:attribute name="bu" type="xs:string" />
       <xs:attribute name="bver" type="xs:int" />
       <xs:attribute name="l" type="xs:string" />
