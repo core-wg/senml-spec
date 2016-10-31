@@ -119,7 +119,7 @@ informative:
 --- abstract
 
 This specification defines media types for representing simple sensor
-measurements and device parameters in the Sensor Markup Language
+measurements and device parameters in the Sensor  Measurement Lists
 (SenML). Representations are defined in JavaScript Object Notation (JSON),
 Concise Binary Object Representation (CBOR), eXtensible Markup Language (XML),
 and Efficient XML Interchange (EXI), which share the common SenML data model. A
@@ -466,7 +466,7 @@ transmit SenML in a stream-like fashion, where data is collected over time and
 continuously added to the object. This mode of operation is optional, but
 systems or protocols using SenML in this fashion MUST specify that they are
 doing this. SenML defines a separate media type to indicate Sensor
-Streaming Markup Language (SensML) for this usage (see {{sec-senml-json}}). 
+Streaming Measurement Lists  (SensML) for this usage (see {{sec-senml-json}}). 
 In this situation the SensML
 stream can be sent and received in a partial fashion, i.e., a measurement entry
 can be read as soon as the SenML Record is received and not have to wait for the
