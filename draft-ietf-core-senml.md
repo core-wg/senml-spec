@@ -79,7 +79,8 @@ normative:
   RFC7159:
   RFC7252: 
   RFC7303: 
-  W3C.REC-exi-20110310: 
+  W3C.REC-exi-20140211:
+  W3C.REC-xml-20081126:
   BIPM:
     title: The International System of Units (SI)
     author:
@@ -159,7 +160,7 @@ attributes such as an unique identifier for the sensor, the time the
 measurement was made, the unit the measurement is in, and the current
 value of the sensor.  Serializations for this data model are defined
 for JSON {{RFC7159}}, CBOR {{RFC7049}}, XML, and Efficient XML
-Interchange (EXI) {{W3C.REC-exi-20110310}}.
+Interchange (EXI) {{W3C.REC-exi-20140211}}.
 
 For example, the following shows a measurement from a temperature
 gauge encoded in the JSON syntax.
@@ -776,7 +777,7 @@ file does not really need an full EXI implementation. It can simply
 hard code the output replacing the 1-wire device ID starting at byte
 0x20 and going to byte 0x2F with it's device ID, and replacing the
 value "0xe7 0x01" at location 0x37 and 0x38 with the current
-temperature. The EXI Specification {{W3C.REC-exi-20110310}} contains
+temperature. The EXI Specification {{W3C.REC-exi-20140211}} contains
 the full information 'on how floating point numbers are represented,
 but for the purpose of this sensor, the temperature can be converted
 to an integer in tenths of degrees (231 in this example). EXI stores 7
@@ -1144,15 +1145,31 @@ Required parameters: none
 
 Optional parameters: none
 
-Encoding considerations: TBD
+Encoding considerations: Must be encoded as using {{RFC7049}}. See
+RFC-AAAA for details.
 
-Security considerations: See {{sec-senml-json}}
+Security considerations: Sensor data can contain a wide range of
+information ranging from information that is very public, such the
+outside temperature in a given city, to very private information that
+requires integrity and confidentiality protection, such as patient
+health information. This format does not provide any security and
+instead relies on the transport protocol that carries it to provide
+security. Given applications need to look at the overall context of
+how this media type will be used to decide if the security is
+adequate.
 
-Interoperability considerations: TBD
+Interoperability considerations: Applications should ignore any 
+key value pairs that they do not understand. This allows backwards
+compatibility extensions to this specification. The "bver" field can
+be used to ensure the receiver supports a minimal level of
+functionality needed by the creator of the CBOR object.
 
 Published specification: RFC-AAAA
 
-Applications that use this media type: See {{sec-senml-json}}
+Applications that use this media type: The type is used by systems
+that report e.g., electrical power usage and environmental information
+such as temperature and humidity. It can be used for a wide range of
+sensor reporting systems.
 
 Additional information:
 
@@ -1184,15 +1201,31 @@ Required parameters: none
 
 Optional parameters: none
 
-Encoding considerations: TBD
+Encoding considerations: Must be encoded as using
+{{W3C.REC-xml-20081126}}. See RFC-AAAA for details.
 
-Security considerations: See {{sec-senml-json}}
+Security considerations: Sensor data can contain a wide range of
+information ranging from information that is very public, such the
+outside temperature in a given city, to very private information that
+requires integrity and confidentiality protection, such as patient
+health information. This format does not provide any security and
+instead relies on the transport protocol that carries it to provide
+security. Given applications need to look at the overall context of
+how this media type will be used to decide if the security is
+adequate.
 
-Interoperability considerations: TBD
+Interoperability considerations: Applications should ignore any tags
+or attributes that they do not understand. This allows backwards
+compatibility extensions to this specification. The "bver" atribute in
+the senml tag can be used to ensure the receiver supports a minimal
+level of functionality needed by the creator of the XML.
 
 Published specification: RFC-AAAA
 
-Applications that use this media type: See {{sec-senml-json}}
+Applications that use this media type: The type is used by systems
+that report e.g., electrical power usage and environmental information
+such as temperature and humidity. It can be used for a wide range of
+sensor reporting systems.
 
 Additional information:
 
@@ -1224,15 +1257,33 @@ Required parameters: none
 
 Optional parameters: none
 
-Encoding considerations: TBD
+Encoding considerations: Must be encoded as using
+{{W3C.REC-exi-20140211}}. See RFC-AAAA for details.
 
-Security considerations: TBD
+Security considerations:  Sensor data can contain a wide range of
+information ranging from information that is very public, such the
+outside temperature in a given city, to very private information that
+requires integrity and confidentiality protection, such as patient
+health information. This format does not provide any security and
+instead relies on the transport protocol that carries it to provide
+security. Given applications need to look at the overall context of
+how this media type will be used to decide if the security is
+adequate.
 
-Interoperability considerations: TBD
+Interoperability considerations: Applications should ignore any tags
+or attributes that they do not understand. This allows backwards
+compatibility extensions to this specification. The "bver" atribute in
+the senml tag can be used to ensure the receiver supports a minimal
+level of functionality needed by the creator of the XML.  Further
+information on using schemas to guide the EXI can be found in
+RFC-AAAA.
 
 Published specification: RFC-AAAA
 
-Applications that use this media type: See {{sec-senml-json}}
+Applications that use this media type: The type is used by systems
+that report e.g., electrical power usage and environmental information
+such as temperature and humidity. It can be used for a wide range of
+sensor reporting systems.
 
 Additional information:
 
