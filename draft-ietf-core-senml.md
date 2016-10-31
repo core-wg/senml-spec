@@ -4,7 +4,7 @@ ipr: trust200902
 docname: draft-ietf-core-senml-04
 cat: std
 
-date: October 8, 2016
+date: October 31, 2016
 
 pi:
   toc: 'yes'
@@ -17,7 +17,7 @@ pi:
   rfcedstyle: 'no'
   tocdepth: '4'
   
-title: Media Types for Sensor Markup Language (SenML)
+title: Media Types for Sensor Measurement Lists (SenML)
 abbrev: SenML
 area: ART
 
