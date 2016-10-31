@@ -19,5 +19,5 @@ VOLUME /senml
 
 WORKDIR /senml
 
-CMD [ "/usr/bin/make", "all" ]
+CMD [ "/usr/bin/make", "draft" ]
 
