@@ -1210,7 +1210,7 @@ authentication information about the source of the data.
 We would like to thank Alexander Pelov, Andrew McClure, Andrew
 Mcgregor, Bjoern Hoehrmann, Christian Amsuess, Christian Groves,
 Daniel Peintner, Jan-Piet Mens, Joe Hildebrand, John Klensin, Karl
-Pálsson, Lennart Dührsen, Lisa Dusseault, Lyndsay Campbell, Martin
+Palsson, Lennart Duhrsen, Lisa Dusseault, Lyndsay Campbell, Martin
 Thomson, Michael Koster, and Stephen Farrell, for their review
 comments.
 
