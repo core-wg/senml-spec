@@ -14,13 +14,13 @@ draft: txt html
 
 diff: $(DRAFT).diff.html
 
-gen: check check2  ex1.gen.exi.hex ex1.gen.xml ex1.json ex10.json ex11.json  ex2.gen.exi.hex ex2.gen.xml ex2.json ex3.json ex4.gen.json-trim ex5.json ex6.json senml.gen.xsd senml.rnc ex8.json ex3.gen.xml ex3.gen.cbor.hex size.md ex3.gen.cbor.txt ex3.gen.cbor ex8.gen.xml ex1.gen.json  ex10.gen.json  ex11.gen.json  ex2.gen.json  ex3.gen.json  ex5.gen.json  ex6.gen.json  ex8.gen.json  ex3.gen.wrap.json ex6.gen.wrap.json ex8.gen.wrap.json ex7.gen.json ex5.gen.resolved.json ex9.gen.json ex12.gen.json ex13.gen.json ex5.gen.wrap.json ex5.gen.resolved.wrap.json ex10.gen.wrap.json ex11.gen.wrap.json ex4.gen.wrap.json
+gen: check check2  ex1.gen.exi.hex ex1.gen.xml ex1.json ex10.json ex11.json  ex2.gen.exi.hex ex2.gen.xml ex2.json ex3.json ex4.gen.json-trim ex5.json ex6.json senml.gen.xsd senml.rnc ex8.json ex3.gen.xml ex3.gen.cbor.hex size.md ex3.gen.cbor.txt ex3.gen.cbor ex8.gen.xml ex1.gen.json  ex10.gen.json  ex11.gen.json  ex2.gen.json  ex3.gen.json  ex5.gen.json  ex6.gen.json  ex8.gen.json  ex3.gen.wrap.json ex6.gen.wrap.json ex8.gen.wrap.json ex7.gen.json ex5.gen.resolved.json ex9.gen.json ex12.gen.json ex13.gen.json ex5.gen.wrap.json ex5.gen.resolved.wrap.json ex10.gen.wrap.json ex11.gen.wrap.json ex4.gen.wrap.json ex1.gen.json ex5.gen.exi.hex
 
 check: ex11.gen.chk ex10.gen.chk  ex8.gen.chk ex6.gen.chk ex5.gen.chk ex4.gen.chk ex3.gen.chk ex2.gen.chk ex1.gen.chk ex9.gen.chk ex12.gen.chk ex13.gen.chk
 
 check2: ex11.chk ex10.chk  ex8.chk ex6.chk ex5.chk ex4.chk ex3.chk ex2.chk ex1.chk  ex3.gen.cbor.chk ex3.gen.cbor.txt ex9.chk ex12.chk ex13.chk
 
-all: gen draft diff
+all: gen draft 
 
 $(DRAFT).diff.html: $(DRAFT)-$(VERSION).txt $(DRAFT)-old.txt 
 	htmlwdiff   $(DRAFT)-old.txt   $(DRAFT)-$(VERSION).txt >   $(DRAFT).diff.html
@@ -32,7 +32,7 @@ pdf: $(DRAFT)-$(VERSION).pdf
 
 
 clean:
-	-rm -f $(DRAFT)-$(VERSION).{txt,html,xml,pdf} *.gen.{chk,xsd,hex,exi,xml,cbor} *.chk *.gen.cbor.hex *.gen.exi.hex *.gen.json-trim
+	-rm -f $(DRAFT)-$(VERSION).{txt,html,xml,pdf} ex*.gen* ex*.chk senml.gen.xsd
 
 size: ex5.json ex5.gen.xml ex5.gen.exi ex5.gen.cbor ex5.json.Z ex5.gen.xml.Z ex5.gen.exi.Z ex5.gen.cbor.Z
 
