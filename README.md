@@ -48,23 +48,21 @@ providing a link to the issue in the message body.
 
 ## Building the Draft
 
-In order to build a copy of the draft, you will need to install xml2rfc.  This
-requires Python 2.7 and can be installed using `pip`:
+A docker image can be created with
 
 ```sh
-$ pip install xml2rfc
+docker build -t senml .
 ```
 
-You may also need to install kramdown-xml2rfc, which requires Ruby and can be
-installed using the roby package manager, `gem`:
-
+Then the docker images can be run to build the draft with
 ```sh
-$ gem install kramdown-xml2rfc
+docker run -v `pwd`:/senml senml
 ```
 
-Other tools can be used to produce PDF files, or to provide a comparison.  These
-tools - and where to find them - are described in the `Makefile`.
-
+Another usefull command to get a shell in in the docker image is
+```sh
+docker run -it -v `pwd`:/senml senml /usr/bin/tcsh
+```
 
 ## NOTE WELL
 
