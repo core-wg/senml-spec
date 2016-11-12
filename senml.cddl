@@ -22,6 +22,7 @@ follow-on-defined-group = (
    ? s => numeric,     ; Value Sum
    ? t => numeric,     ; Time
    ? ut => numeric,    ; Update Time
+   ? l => tstr,        ; Link
    * key-value-pair,
    ? ( v => numeric // ; Numeric Value
        vs => tstr //   ; String Value
