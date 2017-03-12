@@ -1068,6 +1068,8 @@ IANA table to have their ID set to this new schemaID value.
 
 The following registrations are done following the procedure specified
 in {{RFC6838}} and {{RFC7303}}.
+Clipboard formats are defined for the JSON and XML form of lists but do
+not make sense for steams or other formats.
 
 Note to RFC Editor - please remove this paragraph. Note that a request
 for media type review for senml+json was sent to the
@@ -1120,7 +1122,12 @@ Magic number(s): none
 
 File extension(s): senml and sensml
 
+Windows Clipboard Name: "JSON Sensor Measurement List" for senml 
+
 Macintosh file type code(s): none
+
+Macintosh Universal Type Identifier code: org.ietf.senml-json
+conforms to public.text for senml
 
 Person & email address to contact for further information:
 Cullen Jennings \<fluffy@iii.ca>
@@ -1175,7 +1182,7 @@ Additional information:
 Magic number(s): none
 
 File extension(s): senmlc and sensmlc
-
+ 
 Macintosh file type code(s): none
 
 Person & email address to contact for further information:
@@ -1232,7 +1239,12 @@ Magic number(s): none
 
 File extension(s): senmlx and sensmlx
 
+Windows Clipboard Name: "XML Sensor Measurement List" for senmlx 
+
 Macintosh file type code(s): none
+
+Macintosh Universal Type Identifier code: org.ietf.senml-xml
+conforms to  publc.xml for senmlx 
 
 Person & email address to contact for further information:
 Cullen Jennings \<fluffy@iii.ca>
