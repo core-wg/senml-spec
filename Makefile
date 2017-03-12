@@ -32,7 +32,7 @@ pdf: $(DRAFT)-$(VERSION).pdf
 
 
 clean:
-	-rm -f $(DRAFT)-$(VERSION).{txt,html,xml,pdf} ex*.gen* ex*.chk senml.gen.xsd
+	-rm -f $(DRAFT)-$(VERSION).{txt,html,xml,pdf} ex*.gen* ex*.chk senml.gen.xsd size.md draft-ietf-core-senml-??.*
 
 size: ex5.json ex5.gen.xml ex5.gen.exi ex5.gen.cbor ex5.json.Z ex5.gen.xml.Z ex5.gen.exi.Z ex5.gen.cbor.Z
 
