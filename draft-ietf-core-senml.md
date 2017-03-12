@@ -1069,7 +1069,7 @@ IANA table to have their ID set to this new schemaID value.
 The following registrations are done following the procedure specified
 in {{RFC6838}} and {{RFC7303}}.
 Clipboard formats are defined for the JSON and XML form of lists but do
-not make sense for steams or other formats.
+not make sense for streams or other formats.
 
 Note to RFC Editor - please remove this paragraph. Note that a request
 for media type review for senml+json was sent to the
