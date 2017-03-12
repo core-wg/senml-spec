@@ -32,7 +32,7 @@ pdf: $(DRAFT)-$(VERSION).pdf
 
 
 clean:
-	-rm -f $(DRAFT)-$(VERSION).{txt,html,xml,pdf} ex*.gen* ex*.chk senml.gen.xsd size.md draft-ietf-core-senml-??.*
+	-rm -f $(DRAFT)-$(VERSION).{txt,html,xml,pdf} ex*.gen* ex*.chk axs senml.gen.xsd size.md draft-ietf-core-senml-??.*
 
 size: ex5.json ex5.gen.xml ex5.gen.exi ex5.gen.cbor ex5.json.Z ex5.gen.xml.Z ex5.gen.exi.Z ex5.gen.cbor.Z
 
@@ -118,13 +118,16 @@ ex5.gen.resolved.json: ex5.json
 
 
 ex5.gen.exi: ex5.gen.xml senml.gen.xsd
-	java -cp "bin/xercesImpl.jar:bin/exificient.jar" com.siemens.ct.exi.cmd.EXIficientCMD -encode -i ex5.gen.xml -o ex5.gen.exi -schema senml.gen.xsd -strict -includeOptions -includeSchemaId
+	cp senml.gen.xsd a 
+	java -cp "bin/xercesImpl.jar:bin/exificient.jar" com.siemens.ct.exi.cmd.EXIficientCMD -encode -i ex5.gen.xml -o ex5.gen.exi -schema a -strict -includeOptions -includeSchemaId
 
 ex2.gen.exi: ex2.gen.xml senml.gen.xsd
-	java -cp "bin/xercesImpl.jar:bin/exificient.jar" com.siemens.ct.exi.cmd.EXIficientCMD -encode -i ex2.gen.xml -o ex2.gen.exi -schema senml.gen.xsd -strict -includeOptions -includeSchemaId 
+	cp senml.gen.xsd a 
+	java -cp "bin/xercesImpl.jar:bin/exificient.jar" com.siemens.ct.exi.cmd.EXIficientCMD -encode -i ex2.gen.xml -o ex2.gen.exi -schema a -strict -includeOptions -includeSchemaId 
 
 ex1.gen.exi: ex1.gen.xml senml.gen.xsd
-	java -cp "bin/xercesImpl.jar:bin/exificient.jar" com.siemens.ct.exi.cmd.EXIficientCMD -encode -i ex1.gen.xml -o ex1.gen.exi -schema senml.gen.xsd -strict -includeOptions -includeSchemaId -bytePacked 
+	cp senml.gen.xsd a 
+	java -cp "bin/xercesImpl.jar:bin/exificient.jar" com.siemens.ct.exi.cmd.EXIficientCMD -encode -i ex1.gen.xml -o ex1.gen.exi -schema a -strict -includeOptions -includeSchemaId -bytePacked 
 
 
 size.md: ex5.gen.cbor ex5.gen.cbor.Z ex5.gen.exi ex5.gen.exi.Z ex5.gen.xml ex5.gen.xml.Z ex5.json ex5.json.Z
