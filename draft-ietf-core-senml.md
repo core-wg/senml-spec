@@ -1120,6 +1120,10 @@ Magic number(s): none
 
 File extension(s): senml and sensml
 
+Windows Clipboard Name: "SenML Presentation" and "SensML Presentation"
+
+Macintosh Universal Type Identifier code: org.ietf.senml and org.ietf.sensml
+
 Macintosh file type code(s): none
 
 Person & email address to contact for further information:
@@ -1176,6 +1180,10 @@ Magic number(s): none
 
 File extension(s): senmlc and sensmlc
 
+Windows Clipboard Name: "SenML CBOR Presentation" and "SensML CBOR Presentation"
+
+Macintosh Universal Type Identifier code: org.ietf.senmlc and org.ietf.sensmlc
+
 Macintosh file type code(s): none
 
 Person & email address to contact for further information:
@@ -1231,6 +1239,10 @@ Additional information:
 Magic number(s): none
 
 File extension(s): senmlx and sensmlx
+
+Windows Clipboard Name: "SenML XML Presentation" and "SensML XML Presentation"
+
+Macintosh Universal Type Identifier code: org.ietf.senmlx and org.ietf.sensmlx
 
 Macintosh file type code(s): none
 
@@ -1289,6 +1301,10 @@ Additional information:
 Magic number(s): none
 
 File extension(s): senmle and sensmle
+
+Windows Clipboard Name: "SenML EXI Presentation" and "SensML EXI Presentation"
+
+Macintosh Universal Type Identifier code: org.ietf.senmle and org.ietf.sensmle
 
 Macintosh file type code(s): none
 
