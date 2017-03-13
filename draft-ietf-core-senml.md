@@ -1187,6 +1187,9 @@ File extension(s): senmlc and sensmlc
  
 Macintosh file type code(s): none
 
+Macintosh Universal Type Identifier code: org.ietf.senml-cbor
+conforms to public.data for senmlc
+
 Person & email address to contact for further information:
 Cullen Jennings \<fluffy@iii.ca>
 
@@ -1305,6 +1308,9 @@ Magic number(s): none
 File extension(s): senmle and sensmle
 
 Macintosh file type code(s): none
+
+Macintosh Universal Type Identifier code: org.ietf.senml-exi
+conforms to public.data for senmle
 
 Person & email address to contact for further information:
 Cullen Jennings \<fluffy@iii.ca>
