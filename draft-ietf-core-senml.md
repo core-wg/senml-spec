@@ -102,6 +102,7 @@ informative:
   RFC4122: 
   RFC5952: 
   RFC6690:
+  RFC7111: csvfrag
   RFC7721:
   I-D.arkko-core-dev-urn:
   I-D.greevenbosch-appsawg-cbor-cddl: 
@@ -793,36 +794,48 @@ temperature in tenths of degrees right shifted 7 bits. In this example
 
 A SenML Pack typically consists of multiple SenML Records and for some
 applications it may be useful to be able to refer with a Fragment
-Identifier to a single Record, or a set of records, in a Pack. The
+Identifier to a single record, or a set of records, in a Pack. The
 fragment identifier is only interpreted by a client and does not
 impact retrieval of a representation. The SenML Fragment
 Identification is modeled afer CSV Fragment Identifiers {{RFC7111}}.
 
-To select a single SenML Record, "rec" scheme followed by single
-number is used. The first Record is at position 1. A set of records
-can be selected using a comma separated list of Record positions or
-with a range of positions using '-' character. The "*" character can
-be used to indicate the last Senml Pack.
+To select a single SenML Record, the "rec" scheme followed by a single
+number is used.  For the purpose of numbering records, the first
+record is at position 1.  A range of records can be selected by giving
+the first and the last record number separated by a '-'
+character. Instead of the second number, the "\*" character can be
+used to indicate the last Senml Record in the Pack.  A set of records
+can also be selected using a comma separated list of record positions
+or ranges.
 
+(We use the term "selecting a record" for identifying it as part of
+the fragment, not in the sense of isolating it from the Pack --- the
+record still needs to be interpreted as part of the Pack, e.g., using
+the base values defined in record 1.)
 
-## Fragment Identification Examples 
+## Fragment Identification Examples
 
-3rd SenML Record from "coap://example.com/temp" resource can be 
+The 3rd SenML Record from "coap://example.com/temp" resource can be
 selected with:
 
   coap://example.com/temp#rec=3
-
-The 3rd and 5th can be selected with:
-
-  coap://example.com/temp#rec=3,5
 
 Records from 3rd to 6th can be selected with:
 
   coap://example.com/temp#rec=3-6
 
-To select all Records from 2nd to last:
+Records from 19th to the last can be selected with:
 
-  coap://example.com/temp#rec=2-*
+  coap://example.com/temp#rec=19-*
+
+The 3rd and 5th record can be selected with:
+
+  coap://example.com/temp#rec=3,5
+
+To select the Records from third to fifth, the 10th record, and all
+from 19th to the last:
+
+  coap://example.com/temp#rec=3-5,10,19-*
 
 
 # Usage Considerations
