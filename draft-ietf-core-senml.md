@@ -1129,263 +1129,506 @@ types was sent on October 31, 2016.
 
 ### senml+json Media Type Registration {#sec-senml-json}
 
-Type name: application
+Type name: application 
 
-Subtype name: senml+json and sensml+json
+Subtype name: senml+json 
 
-Required parameters: none
+Required parameters: none 
 
-Optional parameters: none
+Optional parameters: none 
 
-Encoding considerations: Must be encoded as using a subset of the
-encoding allowed in {{RFC7159}}. See RFC-AAAA for details. This
-simplifies implementation of very simple system and does not impose
-any significant limitations as all this data is meant for machine to
-machine communications and is not meant to be human readable.
+Encoding considerations: Must be encoded as using a subset of the 
+encoding allowed in {{RFC7159}}. See RFC-AAAA for details. This 
+simplifies implementation of very simple system and does not impose 
+any significant limitations as all this data is meant for machine to 
+machine communications and is not meant to be human readable. 
 
-Security considerations: Sensor data can contain a wide range of
-information ranging from information that is very public, such the
-outside temperature in a given city, to very private information that
-requires integrity and confidentiality protection, such as patient
-health information. This format does not provide any security and
-instead relies on the transport protocol that carries it to provide
-security. Given applications need to look at the overall context of
-how this media type will be used to decide if the security is
-adequate.
+Security considerations: Sensor data can contain a wide range of 
+information ranging from information that is very public, such the 
+outside temperature in a given city, to very private information that 
+requires integrity and confidentiality protection, such as patient 
+health information. This format does not provide any security and 
+instead relies on the transport protocol that carries it to provide 
+security. Given applications need to look at the overall context of 
+how this media type will be used to decide if the security is 
+adequate. 
 
-Interoperability considerations: Applications should ignore any JSON
-key value pairs that they do not understand. This allows backwards
-compatibility extensions to this specification. The "bver" field can
-be used to ensure the receiver supports a minimal level of
-functionality needed by the creator of the JSON object.
+Interoperability considerations: Applications should ignore any JSON 
+key value pairs that they do not understand. This allows backwards 
+compatibility extensions to this specification. The "bver" field can 
+be used to ensure the receiver supports a minimal level of 
+functionality needed by the creator of the JSON object. 
 
-Published specification: RFC-AAAA
+Published specification: RFC-AAAA 
 
-Applications that use this media type: The type is used by systems
-that report e.g., electrical power usage and environmental information
-such as temperature and humidity. It can be used for a wide range of
-sensor reporting systems.
+Applications that use this media type: The type is used by systems 
+that report e.g., electrical power usage and environmental information 
+such as temperature and humidity. It can be used for a wide range of 
+sensor reporting systems. 
 
-Fragment identifier considerations: Fragment identification for
-application/senml+json is supported by using fragment identifiers as
-specified by RFC-AAAA.
+Fragment identifier considerations: Fragment identification for 
+application/senml+json is supported by using fragment identifiers as 
+specified by RFC-AAAA. 
 
-Additional information:
+Additional information: 
 
-Magic number(s): none
+Magic number(s): none 
 
-File extension(s): senml and sensml
+File extension(s): senml 
 
-Windows Clipboard Name: "JSON Sensor Measurement List" for senml 
+Windows Clipboard Name: "JSON Sensor Measurement List" 
 
-Macintosh file type code(s): none
+Macintosh file type code(s): none 
 
-Macintosh Universal Type Identifier code: org.ietf.senml-json
-conforms to public.text for senml
+Macintosh Universal Type Identifier code: org.ietf.senml-json 
+conforms to public.text 
 
-Person & email address to contact for further information:
+Person & email address to contact for further information: 
 Cullen Jennings \<fluffy@iii.ca>
 
-Intended usage: COMMON
+Intended usage: COMMON 
 
-Restrictions on usage: None
+Restrictions on usage: None 
 
 Author: Cullen Jennings \<fluffy@iii.ca>
 
 Change controller: IESG
 
+### sensml+json Media Type Registration {#sec-sensml-json}
 
-### senml+cbor Media Type Registration
+Type name: application 
 
-Type name: application
+Subtype name: sensml+json 
 
-Subtype name: senml+cbor and sensml+cbor
+Required parameters: none 
 
-Required parameters: none
+Optional parameters: none 
 
-Optional parameters: none
+Encoding considerations: Must be encoded as using a subset of the 
+encoding allowed in {{RFC7159}}. See RFC-AAAA for details. This 
+simplifies implementation of very simple system and does not impose 
+any significant limitations as all this data is meant for machine to 
+machine communications and is not meant to be human readable. 
 
-Encoding considerations: Must be encoded as using {{RFC7049}}. See
-RFC-AAAA for details.
+Security considerations: Sensor data can contain a wide range of 
+information ranging from information that is very public, such the 
+outside temperature in a given city, to very private information that 
+requires integrity and confidentiality protection, such as patient 
+health information. This format does not provide any security and 
+instead relies on the transport protocol that carries it to provide 
+security. Given applications need to look at the overall context of 
+how this media type will be used to decide if the security is 
+adequate. 
 
-Security considerations: Sensor data can contain a wide range of
-information ranging from information that is very public, such the
-outside temperature in a given city, to very private information that
-requires integrity and confidentiality protection, such as patient
-health information. This format does not provide any security and
-instead relies on the transport protocol that carries it to provide
-security. Given applications need to look at the overall context of
-how this media type will be used to decide if the security is
-adequate.
+Interoperability considerations: Applications should ignore any JSON 
+key value pairs that they do not understand. This allows backwards 
+compatibility extensions to this specification. The "bver" field can 
+be used to ensure the receiver supports a minimal level of 
+functionality needed by the creator of the JSON object. 
+
+Published specification: RFC-AAAA 
+
+Applications that use this media type: The type is used by systems 
+that report e.g., electrical power usage and environmental information 
+such as temperature and humidity. It can be used for a wide range of 
+sensor reporting systems. 
+
+Fragment identifier considerations: Fragment identification for 
+application/senml+json is supported by using fragment identifiers as 
+specified by RFC-AAAA. 
+
+Additional information: 
+
+Magic number(s): none 
+
+File extension(s): sensml 
+
+Macintosh file type code(s): none 
+
+Person & email address to contact for further information: 
+Cullen Jennings \<fluffy@iii.ca>
+
+Intended usage: COMMON 
+
+Restrictions on usage: None 
+
+Author: Cullen Jennings \<fluffy@iii.ca>
+
+Change controller: IESG 
+
+
+### senml+cbor Media Type Registration 
+
+Type name: application 
+
+Subtype name: senml+cbor 
+
+Required parameters: none 
+
+Optional parameters: none 
+
+Encoding considerations: Must be encoded as using {{RFC7049}}. See 
+RFC-AAAA for details. 
+
+Security considerations: Sensor data can contain a wide range of 
+information ranging from information that is very public, such the 
+outside temperature in a given city, to very private information that 
+requires integrity and confidentiality protection, such as patient 
+health information. This format does not provide any security and 
+instead relies on the transport protocol that carries it to provide 
+security. Given applications need to look at the overall context of 
+how this media type will be used to decide if the security is 
+adequate. 
 
 Interoperability considerations: Applications should ignore any 
-key value pairs that they do not understand. This allows backwards
-compatibility extensions to this specification. The "bver" field can
-be used to ensure the receiver supports a minimal level of
-functionality needed by the creator of the CBOR object.
+key value pairs that they do not understand. This allows backwards 
+compatibility extensions to this specification. The "bver" field can 
+be used to ensure the receiver supports a minimal level of 
+functionality needed by the creator of the CBOR object. 
 
-Published specification: RFC-AAAA
+Published specification: RFC-AAAA 
 
-Applications that use this media type: The type is used by systems
-that report e.g., electrical power usage and environmental information
-such as temperature and humidity. It can be used for a wide range of
-sensor reporting systems.
+Applications that use this media type: The type is used by systems 
+that report e.g., electrical power usage and environmental information 
+such as temperature and humidity. It can be used for a wide range of 
+sensor reporting systems. 
 
-Fragment identifier considerations: Fragment identification for
-application/senml+cbor is supported by using fragment identifiers as
-specified by RFC-AAAA.
+Fragment identifier considerations: Fragment identification for 
+application/senml+cbor is supported by using fragment identifiers as 
+specified by RFC-AAAA. 
 
-Additional information:
+Additional information: 
 
-Magic number(s): none
+Magic number(s): none 
 
-File extension(s): senmlc and sensmlc
+File extension(s): senmlc 
  
-Macintosh file type code(s): none
+Macintosh file type code(s): none 
 
-Macintosh Universal Type Identifier code: org.ietf.senml-cbor
-conforms to public.data for senmlc
+Macintosh Universal Type Identifier code: org.ietf.senml-cbor 
+conforms to public.data 
 
-Person & email address to contact for further information:
+Person & email address to contact for further information: 
 Cullen Jennings \<fluffy@iii.ca>
 
-Intended usage: COMMON
+Intended usage: COMMON 
 
-Restrictions on usage: None
+Restrictions on usage: None 
 
 Author: Cullen Jennings \<fluffy@iii.ca>
 
-Change controller: IESG
+Change controller: IESG 
 
+### sensml+cbor Media Type Registration 
 
-### senml+xml Media Type Registration
+Type name: application 
 
-Type name: application
+Subtype name: sensml+cbor 
 
-Subtype name: senml+xml and sensml+xml
+Required parameters: none 
 
-Required parameters: none
+Optional parameters: none 
 
-Optional parameters: none
+Encoding considerations: Must be encoded as using {{RFC7049}}. See 
+RFC-AAAA for details. 
 
-Encoding considerations: Must be encoded as using
-{{W3C.REC-xml-20081126}}. See RFC-AAAA for details.
+Security considerations: Sensor data can contain a wide range of 
+information ranging from information that is very public, such the 
+outside temperature in a given city, to very private information that 
+requires integrity and confidentiality protection, such as patient 
+health information. This format does not provide any security and 
+instead relies on the transport protocol that carries it to provide 
+security. Given applications need to look at the overall context of 
+how this media type will be used to decide if the security is 
+adequate. 
 
-Security considerations: Sensor data can contain a wide range of
-information ranging from information that is very public, such the
-outside temperature in a given city, to very private information that
-requires integrity and confidentiality protection, such as patient
-health information. This format does not provide any security and
-instead relies on the transport protocol that carries it to provide
-security. Given applications need to look at the overall context of
-how this media type will be used to decide if the security is
-adequate.
+Interoperability considerations: Applications should ignore any 
+key value pairs that they do not understand. This allows backwards 
+compatibility extensions to this specification. The "bver" field can 
+be used to ensure the receiver supports a minimal level of 
+functionality needed by the creator of the CBOR object. 
 
-Interoperability considerations: Applications should ignore any tags
-or attributes that they do not understand. This allows backwards
-compatibility extensions to this specification. The "bver" attribute in
-the senml tag can be used to ensure the receiver supports a minimal
-level of functionality needed by the creator of the XML.
+Published specification: RFC-AAAA 
 
-Published specification: RFC-AAAA
+Applications that use this media type: The type is used by systems 
+that report e.g., electrical power usage and environmental information 
+such as temperature and humidity. It can be used for a wide range of 
+sensor reporting systems. 
 
-Applications that use this media type: The type is used by systems
-that report e.g., electrical power usage and environmental information
-such as temperature and humidity. It can be used for a wide range of
-sensor reporting systems.
+Fragment identifier considerations: Fragment identification for 
+application/senml+cbor is supported by using fragment identifiers as 
+specified by RFC-AAAA. 
 
-Fragment identifier considerations: Fragment identification for
-application/senml+xml is supported by using fragment identifiers as
-specified by RFC-AAAA.
+Additional information: 
 
-Additional information:
+Magic number(s): none 
 
-Magic number(s): none
+File extension(s): sensmlc 
+ 
+Macintosh file type code(s): none 
 
-File extension(s): senmlx and sensmlx
-
-Windows Clipboard Name: "XML Sensor Measurement List" for senmlx 
-
-Macintosh file type code(s): none
-
-Macintosh Universal Type Identifier code: org.ietf.senml-xml
-conforms to public.xml for senmlx 
-
-Person & email address to contact for further information:
+Person & email address to contact for further information: 
 Cullen Jennings \<fluffy@iii.ca>
 
-Intended usage: COMMON
+Intended usage: COMMON 
 
-Restrictions on usage: None
+Restrictions on usage: None 
 
 Author: Cullen Jennings \<fluffy@iii.ca>
 
-Change controller: IESG
+Change controller: IESG 
 
 
-### senml+exi Media Type Registration
+### senml+xml Media Type Registration 
 
-Type name: application
+Type name: application 
 
-Subtype name: senml+exi and sensml+exi
+Subtype name: senml+xml 
 
-Required parameters: none
+Required parameters: none 
 
-Optional parameters: none
+Optional parameters: none 
 
-Encoding considerations: Must be encoded as using
-{{W3C.REC-exi-20140211}}. See RFC-AAAA for details.
+Encoding considerations: Must be encoded as using 
+{{W3C.REC-xml-20081126}}. See RFC-AAAA for details. 
 
-Security considerations:  Sensor data can contain a wide range of
-information ranging from information that is very public, such the
-outside temperature in a given city, to very private information that
-requires integrity and confidentiality protection, such as patient
-health information. This format does not provide any security and
-instead relies on the transport protocol that carries it to provide
-security. Given applications need to look at the overall context of
-how this media type will be used to decide if the security is
-adequate.
+Security considerations: Sensor data can contain a wide range of 
+information ranging from information that is very public, such the 
+outside temperature in a given city, to very private information that 
+requires integrity and confidentiality protection, such as patient 
+health information. This format does not provide any security and 
+instead relies on the transport protocol that carries it to provide 
+security. Given applications need to look at the overall context of 
+how this media type will be used to decide if the security is 
+adequate. 
 
-Interoperability considerations: Applications should ignore any tags
-or attributes that they do not understand. This allows backwards
-compatibility extensions to this specification. The "bver" attribute in
-the senml tag can be used to ensure the receiver supports a minimal
-level of functionality needed by the creator of the XML.  Further
-information on using schemas to guide the EXI can be found in
-RFC-AAAA.
+Interoperability considerations: Applications should ignore any tags 
+or attributes that they do not understand. This allows backwards 
+compatibility extensions to this specification. The "bver" attribute in 
+the senml tag can be used to ensure the receiver supports a minimal 
+level of functionality needed by the creator of the XML. 
 
-Published specification: RFC-AAAA
+Published specification: RFC-AAAA 
 
-Applications that use this media type: The type is used by systems
-that report e.g., electrical power usage and environmental information
-such as temperature and humidity. It can be used for a wide range of
-sensor reporting systems.
+Applications that use this media type: The type is used by systems 
+that report e.g., electrical power usage and environmental information 
+such as temperature and humidity. It can be used for a wide range of 
+sensor reporting systems. 
 
-Fragment identifier considerations: Fragment identification for
-application/senml+exi is supported by using fragment identifiers as
-specified by RFC-AAAA.
+Fragment identifier considerations: Fragment identification for 
+application/senml+xml is supported by using fragment identifiers as 
+specified by RFC-AAAA. 
 
-Additional information:
+Additional information: 
 
-Magic number(s): none
+Magic number(s): none 
 
-File extension(s): senmle and sensmle
+File extension(s): senmlx 
 
-Macintosh file type code(s): none
+Windows Clipboard Name: "XML Sensor Measurement List" 
 
-Macintosh Universal Type Identifier code: org.ietf.senml-exi
-conforms to public.data for senmle
+Macintosh file type code(s): none 
 
-Person & email address to contact for further information:
+Macintosh Universal Type Identifier code: org.ietf.senml-xml 
+conforms to public.xml 
+
+Person & email address to contact for further information: 
 Cullen Jennings \<fluffy@iii.ca>
 
-Intended usage: COMMON
+Intended usage: COMMON 
 
-Restrictions on usage: None
+Restrictions on usage: None 
 
 Author: Cullen Jennings \<fluffy@iii.ca>
 
-Change controller: IESG
+Change controller: IESG 
+
+
+### sensml+xml Media Type Registration 
+
+Type name: application 
+
+Subtype name: sensml+xml 
+
+Required parameters: none 
+
+Optional parameters: none 
+
+Encoding considerations: Must be encoded as using 
+{{W3C.REC-xml-20081126}}. See RFC-AAAA for details. 
+
+Security considerations: Sensor data can contain a wide range of 
+information ranging from information that is very public, such the 
+outside temperature in a given city, to very private information that 
+requires integrity and confidentiality protection, such as patient 
+health information. This format does not provide any security and 
+instead relies on the transport protocol that carries it to provide 
+security. Given applications need to look at the overall context of 
+how this media type will be used to decide if the security is 
+adequate. 
+
+Interoperability considerations: Applications should ignore any tags 
+or attributes that they do not understand. This allows backwards 
+compatibility extensions to this specification. The "bver" attribute in 
+the senml tag can be used to ensure the receiver supports a minimal 
+level of functionality needed by the creator of the XML. 
+
+Published specification: RFC-AAAA 
+
+Applications that use this media type: The type is used by systems 
+that report e.g., electrical power usage and environmental information 
+such as temperature and humidity. It can be used for a wide range of 
+sensor reporting systems. 
+
+Fragment identifier considerations: Fragment identification for 
+application/senml+xml is supported by using fragment identifiers as 
+specified by RFC-AAAA. 
+
+Additional information: 
+
+Magic number(s): none 
+
+File extension(s): sensmlx 
+
+Macintosh file type code(s): none 
+
+Person & email address to contact for further information: 
+Cullen Jennings \<fluffy@iii.ca>
+
+Intended usage: COMMON 
+
+Restrictions on usage: None 
+
+Author: Cullen Jennings \<fluffy@iii.ca>
+
+Change controller: IESG 
+
+
+### senml+exi Media Type Registration 
+
+Type name: application 
+
+Subtype name: senml+exi 
+
+Required parameters: none 
+
+Optional parameters: none 
+
+Encoding considerations: Must be encoded as using 
+{{W3C.REC-exi-20140211}}. See RFC-AAAA for details. 
+
+Security considerations:  Sensor data can contain a wide range of 
+information ranging from information that is very public, such the 
+outside temperature in a given city, to very private information that 
+requires integrity and confidentiality protection, such as patient 
+health information. This format does not provide any security and 
+instead relies on the transport protocol that carries it to provide 
+security. Given applications need to look at the overall context of 
+how this media type will be used to decide if the security is 
+adequate. 
+
+Interoperability considerations: Applications should ignore any tags 
+or attributes that they do not understand. This allows backwards 
+compatibility extensions to this specification. The "bver" attribute in 
+the senml tag can be used to ensure the receiver supports a minimal 
+level of functionality needed by the creator of the XML.  Further 
+information on using schemas to guide the EXI can be found in 
+RFC-AAAA. 
+
+Published specification: RFC-AAAA 
+
+Applications that use this media type: The type is used by systems 
+that report e.g., electrical power usage and environmental information 
+such as temperature and humidity. It can be used for a wide range of 
+sensor reporting systems. 
+
+Fragment identifier considerations: Fragment identification for 
+application/senml+exi is supported by using fragment identifiers as 
+specified by RFC-AAAA. 
+
+Additional information: 
+
+Magic number(s): none 
+
+File extension(s): senmle 
+
+Macintosh file type code(s): none 
+
+Macintosh Universal Type Identifier code: org.ietf.senml-exi 
+conforms to public.data 
+
+Person & email address to contact for further information: 
+Cullen Jennings \<fluffy@iii.ca>
+
+Intended usage: COMMON 
+
+Restrictions on usage: None 
+
+Author: Cullen Jennings \<fluffy@iii.ca>
+
+Change controller: IESG 
+
+
+### sensml+exi Media Type Registration 
+
+Type name: application 
+
+Subtype name: sensml+exi 
+
+Required parameters: none 
+
+Optional parameters: none 
+
+Encoding considerations: Must be encoded as using 
+{{W3C.REC-exi-20140211}}. See RFC-AAAA for details. 
+
+Security considerations:  Sensor data can contain a wide range of 
+information ranging from information that is very public, such the 
+outside temperature in a given city, to very private information that 
+requires integrity and confidentiality protection, such as patient 
+health information. This format does not provide any security and 
+instead relies on the transport protocol that carries it to provide 
+security. Given applications need to look at the overall context of 
+how this media type will be used to decide if the security is 
+adequate. 
+
+Interoperability considerations: Applications should ignore any tags 
+or attributes that they do not understand. This allows backwards 
+compatibility extensions to this specification. The "bver" attribute in 
+the senml tag can be used to ensure the receiver supports a minimal 
+level of functionality needed by the creator of the XML.  Further 
+information on using schemas to guide the EXI can be found in 
+RFC-AAAA. 
+
+Published specification: RFC-AAAA 
+
+Applications that use this media type: The type is used by systems 
+that report e.g., electrical power usage and environmental information 
+such as temperature and humidity. It can be used for a wide range of 
+sensor reporting systems. 
+
+Fragment identifier considerations: Fragment identification for 
+application/senml+exi is supported by using fragment identifiers as 
+specified by RFC-AAAA. 
+
+Additional information: 
+
+Magic number(s): none 
+
+File extension(s): sensmle 
+
+Macintosh file type code(s): none 
+
+Person & email address to contact for further information: 
+Cullen Jennings \<fluffy@iii.ca>
+
+Intended usage: COMMON 
+
+Restrictions on usage: None 
+
+Author: Cullen Jennings \<fluffy@iii.ca>
+
+Change controller: IESG 
 
 
 
