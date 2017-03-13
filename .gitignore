@@ -2,6 +2,7 @@ draft*.redxml
 draft*.txt
 draft*.html
 draft*.pdf
+a
 *~
 draft*.xml
 .refcache
