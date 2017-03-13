@@ -138,7 +138,7 @@ such as HTTP or CoAP.  This format was designed so that processors
 with very limited capabilities could easily encode a sensor
 measurement into the media type, while at the same time a server
 parsing the data could relatively efficiently collect a large number
-of sensor measurements.  The markup language can be used for a variety
+of sensor measurements. SenML can be used for a variety
 of data flow models, most notably data feeds pushed from a sensor to a
 collector, and the web resource model where the sensor is requested as
 a resource representation (e.g., "GET /sensor/temperature").
@@ -219,10 +219,10 @@ absolute and relative times. Time is represented in floating point as
 seconds and values greater than zero represent an absolute time
 relative to the Unix epoch while values of 0 or less represent a
 relative time in the past from the current time. A simple sensor with
-no absolute wall clock time might take a measurement every second and
-batch up 60 of them then send it to a server. It would include the
-relative time the measurement was made to the time the batch was send
-in the SenML Pack. The server might have accurate NTP time and use the
+no absolute wall clock time might take a measurement every second, 
+batch up 60 of them, and then send the batch to a server. It would include the
+relative time each measurement was made compared to the time the batch was sent
+in each SenML Record. The server might have accurate NTP time and use the
 time it received the data, and the relative offset, to replace the
 times in the SenML with absolute times before saving the SenML Pack in
 a document database.
@@ -423,7 +423,7 @@ The SenML labels (JSON object member names) shown in
 | Base Time     | bt   | Number         |
 | Base Unit     | bu   | String         |
 | Base Value    | bv   | Number         |
-| Base Sum    | bs   | Number         |
+| Base Sum      | bs   | Number         |
 | Version       | bver | Number         |
 | Name          | n    | String         |
 | Unit          | u    | String         |
@@ -434,7 +434,7 @@ The SenML labels (JSON object member names) shown in
 | Value Sum     | s    | Number         |
 | Time          | t    | Number         |
 | Update Time   | ut   | Number         |
-| Link   | l   | String         |
+| Link          | l    | String         |
 {: #tbl-json-labels cols='r l l' title="JSON SenML Labels"}
 
 The root content consists of an array with one JSON object for each
