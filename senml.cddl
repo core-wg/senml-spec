@@ -11,6 +11,7 @@ initial-defined = {
   ? bt => numeric,     ; Base Time
   ? bu => tstr,        ; Base Units
   ? bv => numeric,     ; Base value
+  ? bs => numeric,     ; Base sum
   ? bver => uint,      ; Base Version
   follow-on-defined-group,
   + base-key-value-pair
