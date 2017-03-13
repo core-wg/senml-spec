@@ -1118,6 +1118,10 @@ that report e.g., electrical power usage and environmental information
 such as temperature and humidity. It can be used for a wide range of
 sensor reporting systems.
 
+Fragment identifier considerations: Fragment identification for
+application/senml+json is supported by using fragment identifiers as
+specified by RFC-AAAA.
+
 Additional information:
 
 Magic number(s): none
@@ -1179,6 +1183,10 @@ that report e.g., electrical power usage and environmental information
 such as temperature and humidity. It can be used for a wide range of
 sensor reporting systems.
 
+Fragment identifier considerations: Fragment identification for
+application/senml+cbor is supported by using fragment identifiers as
+specified by RFC-AAAA.
+
 Additional information:
 
 Magic number(s): none
@@ -1237,6 +1245,10 @@ Applications that use this media type: The type is used by systems
 that report e.g., electrical power usage and environmental information
 such as temperature and humidity. It can be used for a wide range of
 sensor reporting systems.
+
+Fragment identifier considerations: Fragment identification for
+application/senml+xml is supported by using fragment identifiers as
+specified by RFC-AAAA.
 
 Additional information:
 
@@ -1300,6 +1312,10 @@ Applications that use this media type: The type is used by systems
 that report e.g., electrical power usage and environmental information
 such as temperature and humidity. It can be used for a wide range of
 sensor reporting systems.
+
+Fragment identifier considerations: Fragment identification for
+application/senml+exi is supported by using fragment identifiers as
+specified by RFC-AAAA.
 
 Additional information:
 
