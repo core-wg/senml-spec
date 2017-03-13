@@ -1246,7 +1246,7 @@ Windows Clipboard Name: "XML Sensor Measurement List" for senmlx
 Macintosh file type code(s): none
 
 Macintosh Universal Type Identifier code: org.ietf.senml-xml
-conforms to  publc.xml for senmlx 
+conforms to public.xml for senmlx 
 
 Person & email address to contact for further information:
 Cullen Jennings \<fluffy@iii.ca>
