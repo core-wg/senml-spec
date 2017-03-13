@@ -724,10 +724,12 @@ extensions to the schema, and therefore any extensions will be lost in
 the encoding.  For uses where extensions need to be preserved in EXI,
 the non-strict schema mode of EXI MAY be used.
 
-The EXI header option MUST be included. An EXI schemaID options MUST
-be set to the value of "a" indicating the scheme provided in this
-specification. Future revisions to the schema can change this schemaID
-to allow for backwards compatibility. When the data will be
+The EXI header MUST include an "EXI Options", as defined in
+{{W3C.REC-exi-20140211}}, with an schemaId set to the value of "a"
+indicating the schema provided in this specification.
+Future revisions to the schema can change the value of the schemaId to
+allow for backwards compatibility.
+When the data will be
 transported over CoAP or HTTP, an EXI Cookie SHOULD NOT be used as it
 simply makes things larger and is redundant to information provided in
 the Content-Type header.
@@ -1032,7 +1034,7 @@ RFC.
 
 All new entries must define the Label Name, Label, and XML Type but
 the CBOR labels SHOULD be left empty as CBOR will use the string
-encoding for any new labels. The ID fields contains the EXI schemaID
+encoding for any new labels. The ID fields contains the EXI schemaId value
 of the first Schema which includes this label or is empty if this
 label was not intended for use with EXI. The Note field SHOULD contain
 information about where to find out more information about this label.
@@ -1059,10 +1061,10 @@ registry.
 
 Extensions that add a label that is intended for use with EXI need to
 create a new XSD Schema that includes all the labels in the IANA
-registry then allocate a new EXI schemaID. Moving to the next letter
-in the alphabet is the suggested way to create the new EXI schemaID.
+registry then allocate a new EXI schemaId value. Moving to the next letter
+in the alphabet is the suggested way to create the new value for the EXI schemaId.
 Any labels with previously blank ID values SHOULD be updated in the
-IANA table to have their ID set to this new schemaID value.
+IANA table to have their ID set to this new schemaId value.
 
 ## Media Type Registration {#sec-iana-media}
 
