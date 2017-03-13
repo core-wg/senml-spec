@@ -797,7 +797,7 @@ applications it may be useful to be able to refer with a Fragment
 Identifier to a single record, or a set of records, in a Pack. The
 fragment identifier is only interpreted by a client and does not
 impact retrieval of a representation. The SenML Fragment
-Identification is modeled afer CSV Fragment Identifiers {{RFC7111}}.
+Identification is modeled after CSV Fragment Identifiers {{RFC7111}}.
 
 To select a single SenML Record, the "rec" scheme followed by a single
 number is used.  For the purpose of numbering records, the first
