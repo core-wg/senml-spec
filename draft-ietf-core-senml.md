@@ -789,6 +789,41 @@ integer temperature in tenths of degrees plus 0x80. In this example
 temperature in tenths of degrees right shifted 7 bits. In this example
 231 >> 7 = 0x01.
 
+# Fragment Identification Methods
+
+A SenML Pack typically consists of multiple SenML Records and for some
+applications it may be useful to be able to refer with a Fragment
+Identifier to a single Record, or a set of records, in a Pack. The
+fragment identifier is only interpreted by a client and does not
+impact retrieval of a representation. The SenML Fragment
+Identification is modeled afer CSV Fragment Identifiers {{RFC7111}}.
+
+To select a single SenML Record, "rec" scheme followed by single
+number is used. The first Record is at position 1. A set of records
+can be selected using a comma separated list of Record positions or
+with a range of positions using '-' character. The "*" character can
+be used to indicate the last Senml Pack.
+
+
+## Fragment Identification Examples 
+
+3rd SenML Record from "coap://example.com/temp" resource can be 
+selected with:
+
+  coap://example.com/temp#rec=3
+
+The 3rd and 5th can be selected with:
+
+  coap://example.com/temp#rec=3,5
+
+Records from 3rd to 6th can be selected with:
+
+  coap://example.com/temp#rec=3-6
+
+To select all Records from 2nd to last:
+
+  coap://example.com/temp#rec=2-*
+
 
 # Usage Considerations
 
