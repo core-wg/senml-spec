@@ -326,7 +326,7 @@ The SenML format can be extended with further custom attributes. Both
 new base and regular attributes are allowed. See
 {{iana-senml-label-registry}} for details.  Implementations MUST
 ignore attributes they don't recognize unless that attribute has a label
-name that ends with the '_' character in wich case an error MUST be
+name that ends with the '_' character in which case an error MUST be
 generated. 
 
 Systems reading one of the objects MUST check for the Version
