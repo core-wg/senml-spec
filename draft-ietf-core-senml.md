@@ -780,7 +780,7 @@ hard code the output replacing the 1-wire device ID starting at byte
 0x20 and going to byte 0x2F with it's device ID, and replacing the
 value "0xe7 0x01" at location 0x37 and 0x38 with the current
 temperature. The EXI Specification {{W3C.REC-exi-20140211}} contains
-the full information 'on how floating point numbers are represented,
+the full information on how floating point numbers are represented,
 but for the purpose of this sensor, the temperature can be converted
 to an integer in tenths of degrees (231 in this example). EXI stores 7
 bits of the integer in each byte with the top bit set to one if there
@@ -803,7 +803,7 @@ To select a single SenML Record, the "rec" scheme followed by a single
 number is used.  For the purpose of numbering records, the first
 record is at position 1.  A range of records can be selected by giving
 the first and the last record number separated by a '-'
-character. Instead of the second number, the "\*" character can be
+character. Instead of the second number, the '\*' character can be
 used to indicate the last Senml Record in the Pack.  A set of records
 can also be selected using a comma separated list of record positions
 or ranges.
