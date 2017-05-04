@@ -325,7 +325,9 @@ Update Time:
 The SenML format can be extended with further custom attributes. Both
 new base and regular attributes are allowed. See
 {{iana-senml-label-registry}} for details.  Implementations MUST
-ignore attributes they don't recognize.
+ignore attributes they don't recognize unless that attribute has a label
+name that ends with the '_' character in wich case an error MUST be
+generated. 
 
 Systems reading one of the objects MUST check for the Version
 attribute. If this value is a version number larger than the version
@@ -1114,6 +1116,9 @@ registry then allocate a new EXI schemaId value. Moving to the next letter
 in the alphabet is the suggested way to create the new value for the EXI schemaId.
 Any labels with previously blank ID values SHOULD be updated in the
 IANA table to have their ID set to this new schemaId value.
+
+Extensions that are mandatory to understand to correctly process the
+Pack MUST have a label name that end with the '_' character.
 
 ## Media Type Registration {#sec-iana-media}
 
