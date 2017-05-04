@@ -986,6 +986,7 @@ use the related base units.
 | 1/min    | 1 per minute (event rate, "rpm")*                 | float | RFC-AAAA  |
 | beat/min | 1 per minute (Heart rate in beats per minute)*    | float | RFC-AAAA  |
 | beats    | 1 (Cumulative number of heart beats)*             | float | RFC-AAAA  |
+| S/m | Siemens per meter (conductivity) | float | RFC-AAAA  |
 {: #tbl-iana-symbols cols='r l l'}
 
 * Note 1: A value of 0.0 indicates the switch is off while 1.0
