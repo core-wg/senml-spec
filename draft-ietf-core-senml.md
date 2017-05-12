@@ -526,9 +526,6 @@ form compressed with gzip is given in the following table.
 {::include size.md}
 {: #tbl-sizes cols="l r r" title="Size Comparisons"}
 
-Note the EXI sizes are not using the schema guidance so the EXI
-representation could be a bit smaller.
-
 
 ### Resolved Data {#resolved-ex}
 
