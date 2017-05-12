@@ -13,3 +13,5 @@ ex*.chk
 ex*.Z
 foo.html
 bar.html
+senml.tmp.xsd
+
