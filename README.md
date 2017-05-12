@@ -11,7 +11,7 @@ Group](https://trac.tools.ietf.org/wg/core/trac/wiki) draft of Media Types for S
 ## Contributing
 
 Before submitting feedback, please familiarize yourself with our current issues
-list and review the [working group home page](http://datatracker.ietf.org/wg/core/documents/. If you're
+list and review the [working group home page](http://datatracker.ietf.org/wg/core/documents/). If you're
 new to this, you may also want to read the [Tao of the
 IETF](https://www.ietf.org/tao.html).
 

@@ -1,10 +1,10 @@
 ---
 stand_alone: true
 ipr: trust200902
-docname: draft-ietf-core-senml-05
+docname: draft-ietf-core-senml-07
 cat: std
 
-date: March 11, 2017
+date: May 4, 2017
 
 pi:
   toc: 'yes'
@@ -325,7 +325,9 @@ Update Time:
 The SenML format can be extended with further custom attributes. Both
 new base and regular attributes are allowed. See
 {{iana-senml-label-registry}} for details.  Implementations MUST
-ignore attributes they don't recognize.
+ignore attributes they don't recognize unless that attribute has a label
+name that ends with the '_' character in which case an error MUST be
+generated. 
 
 Systems reading one of the objects MUST check for the Version
 attribute. If this value is a version number larger than the version
@@ -772,7 +774,7 @@ hard code the output replacing the 1-wire device ID starting at byte
 0x20 and going to byte 0x2F with it's device ID, and replacing the
 value "0xe7 0x01" at location 0x37 and 0x38 with the current
 temperature. The EXI Specification {{W3C.REC-exi-20140211}} contains
-the full information 'on how floating point numbers are represented,
+the full information on how floating point numbers are represented,
 but for the purpose of this sensor, the temperature can be converted
 to an integer in tenths of degrees (231 in this example). EXI stores 7
 bits of the integer in each byte with the top bit set to one if there
@@ -795,7 +797,7 @@ To select a single SenML Record, the "rec" scheme followed by a single
 number is used.  For the purpose of numbering records, the first
 record is at position 1.  A range of records can be selected by giving
 the first and the last record number separated by a '-'
-character. Instead of the second number, the "\*" character can be
+character. Instead of the second number, the '\*' character can be
 used to indicate the last Senml Record in the Pack.  A set of records
 can also be selected using a comma separated list of record positions
 or ranges.
@@ -978,6 +980,7 @@ use the related base units.
 | 1/min    | 1 per minute (event rate, "rpm")*                 | float | RFC-AAAA  |
 | beat/min | 1 per minute (Heart rate in beats per minute)*    | float | RFC-AAAA  |
 | beats    | 1 (Cumulative number of heart beats)*             | float | RFC-AAAA  |
+| S/m | Siemens per meter (conductivity) | float | RFC-AAAA  |
 {: #tbl-iana-symbols cols='r l l'}
 
 * Note 1: A value of 0.0 indicates the switch is off while 1.0
@@ -1105,6 +1108,9 @@ registry then allocate a new EXI schemaId value. Moving to the next letter
 in the alphabet is the suggested way to create the new value for the EXI schemaId.
 Any labels with previously blank ID values SHOULD be updated in the
 IANA table to have their ID set to this new schemaId value.
+
+Extensions that are mandatory to understand to correctly process the
+Pack MUST have a label name that ends with the '_' character.
 
 ## Media Type Registration {#sec-iana-media}
 
