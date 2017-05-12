@@ -548,12 +548,14 @@ types.
 
 ### Collection of Resources {#rest-ex}
 
-The following example shows how to query one device that can provide
-multiple measurements. The example assumes that a client has fetched
-information from a device at 2001:db8::2 by performing a GET operation
-on http://\[2001:db8::2\] at Mon Oct 31 16:27:09 UTC 2011, and has
-gotten two separate values as a result, a temperature and humidity
-measurement.
+The following example shows the results from a query to one device
+that agregates multiple measurements from another devices. The example
+assumes that a client has fetched information from a device at
+2001:db8::2 by performing a GET operation on http://\[2001:db8::2\] at
+Mon Oct 31 16:27:09 UTC 2011, and has gotten two separate values as a
+result, a temperature and humidity measurement as well as the results
+from another device at http://\[2001:db8::1\] that also had a
+temperature and humidity.
 
 ~~~~
 {::include ex6.gen.wrap.json}

@@ -1,7 +1,6 @@
 default namespace = "urn:ietf:params:xml:ns:senml"
 namespace rng = "http://relaxng.org/ns/structure/1.0"
 
-
 senml = element senml {
   attribute bn { xsd:string }?,
   attribute bt { xsd:double }?,
