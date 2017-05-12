@@ -345,7 +345,7 @@ examples in this draft use the device URN type as specified in
 {{I-D.arkko-core-dev-urn}}. UUIDs {{RFC4122}} are another way to
 generate a unique name. Note that long-term stable unique identifiers
 are problematic for privacy reasons and should be used
-with care or avoided as described in {{RFC7721}}.
+with care or avoided as described in {{RFC7721}}. 
 
 The resulting concatenated name MUST consist only of characters out of
 the set "A" to "Z", "a" to "z", "0" to "9", "-", ":", ".", or "_" and
