@@ -336,23 +336,16 @@ defined in an RFC that updates this specification or it successors.
 
 The Name value is concatenated to the Base Name value to get the name
 of the sensor. The resulting name needs to uniquely identify and
-differentiate the sensor from all others. If the object is a
-representation resulting from the request of a URI {{RFC3986}}, then
-in the absence of the Base Name attribute, this URI is used as the
-default value of Base Name. Thus in this case the Name field needs to
-be unique for that URI, for example an index or subresource name of
-sensors handled by the URI.
-
-Alternatively, for objects not related to a URI, a unique name is
-required. In any case, it is RECOMMENDED that the full names are
+differentiate the sensor from all others.
+It is RECOMMENDED that the full names are
 represented as URIs or URNs {{RFC2141}}. One way to create a unique
 name is to include some bit string that has guaranteed uniqueness
 (such as a 1-wire address) that is assigned to the device. Some of the
 examples in this draft use the device URN type as specified in
 {{I-D.arkko-core-dev-urn}}. UUIDs {{RFC4122}} are another way to
 generate a unique name. Note that long-term stable unique identifiers
-are problematic for privacy reasons {{RFC7721}} and should be used
-with care or avoided.
+are problematic for privacy reasons and should be used
+with care or avoided as described in {{RFC7721}}.
 
 The resulting concatenated name MUST consist only of characters out of
 the set "A" to "Z", "a" to "z", "0" to "9", "-", ":", ".", or "_" and
