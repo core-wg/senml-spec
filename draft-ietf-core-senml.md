@@ -297,9 +297,7 @@ Name:
   sensor without having to repeat its identifier on every measurement.
 
 Unit:
-: Units for a measurement value. Optional. If the Record has no Unit,
-  the Base Unit is used as the Unit. Having no Unit and no Base Unit
-  is allowed.
+: Units for a measurement value. Optional.
 
 Value
 : Value of the entry.  Optional if a Sum value is present, otherwise
@@ -378,6 +376,10 @@ attribute is considered to have a value of zero. The Base Sum and Sum
 values are added together to get the sum of measurement. If neither
 the Base Sum or Sum are present, then the measurement does not have a
 sum value.
+
+If the Base Value or Value is not present, the missing attribute(s)
+are considered to have a value of zero. The Base Value and Value are
+added together to get the value of the measurement.
 
 Representing the statistical characteristics of measurements, such as
 accuracy, can be very complex. Future specification may add new
