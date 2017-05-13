@@ -1,9 +1,9 @@
-[{"bn": "2001:db8::2",
-  "bt": 1320078429,
-   "n": "temperature", "v": 25.2, "u": "Cel" },
- { "n": "humidity", "v": 30, "u": "%RH" },
- {"bn": "2001:db8::1",
-  "bt": 1320078428,
-  "n": "temperature", "v": 12.3, "u": "Cel" },
-  { "n": "humidity", "v": 67, "u": "%RH" } 
+[
+    {"bn": "2001:db8::2",
+     "bt": 1320078429,
+     "n": "temperature", "v": 25.2, "u": "Cel" },
+    { "n": "humidity", "v": 30, "u": "%RH" },
+    {"bn": "2001:db8::1",
+     "n": "temperature", "v": 12.3, "u": "Cel" },
+    { "n": "humidity", "v": 67, "u": "%RH" } 
 ]
