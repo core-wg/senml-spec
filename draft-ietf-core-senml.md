@@ -361,6 +361,9 @@ of an HTTP path with no special encoding and can be directly used in
 many databases and analytic systems. {{RFC5952}} contains advice on
 encoding an IPv6 address in a name.
 
+If the Record has no Unit, the Base Unit is used as the Unit. Having
+no Unit and no Base Unit is allowed.
+  
 If either the Base Time or Time value is missing, the missing
 attribute is considered to have a value of zero. The Base Time and
 Time values are added together to get the time of measurement. A time
