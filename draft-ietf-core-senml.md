@@ -250,9 +250,12 @@ SenML Pack:
 Each SenML Pack carries a single array that represents a set of
 measurements and/or parameters. This array contains a series of SenML
 Records with several attributes described below. There are two kind of
-attributes: base and regular. The base attributes can only be included
-in the first SenML Record and they apply to the entries in all
-Records. All base attributes are optional. Regular attributes can be
+attributes: base and regular.
+The base attributes can  be included
+in the any SenML Record and they apply to the entries in the Record.
+Each base attribute also applies to all Records after it up to, but not
+including, the next Record that has that same base attribute. 
+All base attributes are optional. Regular attributes can be
 included in any SenML Record and apply only to that Record.
 
 ## Base attributes {#senml-base}
