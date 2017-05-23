@@ -1,7 +1,7 @@
 ---
 stand_alone: true
 ipr: trust200902
-docname: draft-ietf-core-senml-07
+docname: draft-ietf-core-senml-08
 cat: std
 
 date: May 4, 2017
@@ -182,7 +182,7 @@ devices. Keeping the total size of payload under 80 bytes makes this
 easy to use on a wireless mesh network. It is always difficult to
 define what small code is, but there is a desire to be able to
 implement this in roughly 1 KB of flash on a 8 bit
-microprocessor. Experience with Google power meter and large scale
+microprocessor. Experience with power meters and other large scale
 deployments has indicated that the solution needs to support allowing
 multiple measurements to be batched into a single HTTP or CoAP
 request. This "batch" upload capability allows the server side to
@@ -250,9 +250,12 @@ SenML Pack:
 Each SenML Pack carries a single array that represents a set of
 measurements and/or parameters. This array contains a series of SenML
 Records with several attributes described below. There are two kind of
-attributes: base and regular. The base attributes can only be included
-in the first SenML Record and they apply to the entries in all
-Records. All base attributes are optional. Regular attributes can be
+attributes: base and regular.
+The base attributes can  be included
+in the any SenML Record and they apply to the entries in the Record.
+Each base attribute also applies to all Records after it up to, but not
+including, the next Record that has that same base attribute. 
+All base attributes are optional. Regular attributes can be
 included in any SenML Record and apply only to that Record.
 
 ## Base attributes {#senml-base}
@@ -294,9 +297,7 @@ Name:
   sensor without having to repeat its identifier on every measurement.
 
 Unit:
-: Units for a measurement value. Optional. If the Record has no Unit,
-  the Base Unit is used as the Unit. Having no Unit and no Base Unit
-  is allowed.
+: Units for a measurement value. Optional.
 
 Value
 : Value of the entry.  Optional if a Sum value is present, otherwise
@@ -338,23 +339,16 @@ defined in an RFC that updates this specification or it successors.
 
 The Name value is concatenated to the Base Name value to get the name
 of the sensor. The resulting name needs to uniquely identify and
-differentiate the sensor from all others. If the object is a
-representation resulting from the request of a URI {{RFC3986}}, then
-in the absence of the Base Name attribute, this URI is used as the
-default value of Base Name. Thus in this case the Name field needs to
-be unique for that URI, for example an index or subresource name of
-sensors handled by the URI.
-
-Alternatively, for objects not related to a URI, a unique name is
-required. In any case, it is RECOMMENDED that the full names are
+differentiate the sensor from all others.
+It is RECOMMENDED that the full names are
 represented as URIs or URNs {{RFC2141}}. One way to create a unique
 name is to include some bit string that has guaranteed uniqueness
 (such as a 1-wire address) that is assigned to the device. Some of the
 examples in this draft use the device URN type as specified in
 {{I-D.arkko-core-dev-urn}}. UUIDs {{RFC4122}} are another way to
 generate a unique name. Note that long-term stable unique identifiers
-are problematic for privacy reasons {{RFC7721}} and should be used
-with care or avoided.
+are problematic for privacy reasons and should be used
+with care or avoided as described in {{RFC7721}}. 
 
 The resulting concatenated name MUST consist only of characters out of
 the set "A" to "Z", "a" to "z", "0" to "9", "-", ":", ".", or "_" and
@@ -365,6 +359,9 @@ of an HTTP path with no special encoding and can be directly used in
 many databases and analytic systems. {{RFC5952}} contains advice on
 encoding an IPv6 address in a name.
 
+If the Record has no Unit, the Base Unit is used as the Unit. Having
+no Unit and no Base Unit is allowed.
+  
 If either the Base Time or Time value is missing, the missing
 attribute is considered to have a value of zero. The Base Time and
 Time values are added together to get the time of measurement. A time
@@ -379,6 +376,10 @@ attribute is considered to have a value of zero. The Base Sum and Sum
 values are added together to get the sum of measurement. If neither
 the Base Sum or Sum are present, then the measurement does not have a
 sum value.
+
+If the Base Value or Value is not present, the missing attribute(s)
+are considered to have a value of zero. The Base Value and Value are
+added together to get the value of the measurement.
 
 Representing the statistical characteristics of measurements, such as
 accuracy, can be very complex. Future specification may add new
@@ -535,9 +536,6 @@ form compressed with gzip is given in the following table.
 {::include size.md}
 {: #tbl-sizes cols="l r r" title="Size Comparisons"}
 
-Note the EXI sizes are not using the schema guidance so the EXI
-representation could be a bit smaller.
-
 
 ### Resolved Data {#resolved-ex}
 
@@ -560,12 +558,15 @@ types.
 
 ### Collection of Resources {#rest-ex}
 
-The following example shows how to query one device that can provide
-multiple measurements. The example assumes that a client has fetched
-information from a device at 2001:db8::2 by performing a GET operation
-on http://\[2001:db8::2\] at Mon Oct 31 16:27:09 UTC 2011, and has
-gotten two separate values as a result, a temperature and humidity
-measurement.
+The following example shows the results from a query to one device
+that aggregates multiple measurements from another devices. The example
+assumes that a client has fetched information from a device at
+2001:db8::2 by performing a GET operation on http://\[2001:db8::2\] at
+Mon Oct 31 16:27:09 UTC 2011, and has gotten two separate values as a
+result, a temperature and humidity measurement as well as the results
+from another device at http://\[2001:db8::1\] that also had a
+temperature and humidity. Note that the last record would use the Base
+Name from the 3rd record but the Base Time from the first record. 
 
 ~~~~
 {::include ex6.gen.wrap.json}

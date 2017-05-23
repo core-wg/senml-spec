@@ -1,4 +1,6 @@
 [
-  {"bn":"2001:db8::2","bt":1.320078429e+09,"n":"temperature","u":"Cel","v":27.2},
-  {"n":"humidity","u":"%RH","v":80}
+  {"bn":"2001:db8::2","bt":1.320078429e+09,"n":"temperature","u":"Cel","v":25.2},
+  {"n":"humidity","u":"%RH","v":30},
+  {"bn":"2001:db8::1","n":"temperature","u":"Cel","v":12.3},
+  {"n":"humidity","u":"%RH","v":67}
 ]
