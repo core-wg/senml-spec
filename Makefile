@@ -105,7 +105,7 @@ ex5.gen.resolved.wrap.json: ex5.gen.resolved.json
 	cat ex5.gen.resolved.json | sed -e 's/,"v"/,#   "v"/' | tr "#" "\n" > ex5.gen.resolved.wrap.json
 
 ex6.gen.wrap.json: ex6.gen.json
-	cat ex6.gen.json | sed -e 's/\+09,/\+09,#   /' | tr "#" "\n" > ex6.gen.wrap.json
+	cat ex6.gen.json | sed -e 's/\+09,/\+09,#   /' | sed -e 's/\:1",/\:1",#   /' | tr "#" "\n"  > ex6.gen.wrap.json
 
 ex8.gen.wrap.json: ex8.gen.json
 	cat ex8.gen.json | sed -e 's/,"l"/,#   "l"/' |  sed -e 's/,"n"/,#   "n"/' | tr "#" "\n" > ex8.gen.wrap.json
