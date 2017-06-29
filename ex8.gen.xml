@@ -1,6 +1,6 @@
 <sensml xmlns="urn:ietf:params:xml:ns:senml">
   <senml bn="urn:dev:ow:10e2073a01080063:" bt="1.320078429e+09"
-  l="[{&quot;href&quot;:&quot;humidity&quot;,&quot;foo&quot;:&quot;bar1&quot;}"
+  l="[{&quot;href&quot;:&quot;humidity&quot;,&quot;foo&quot;:&quot;bar&quot;}]"
   n="temperature" u="Cel" v="27.2"></senml>
   <senml n="humidity" u="%RH" v="80"></senml>
 </sensml>
