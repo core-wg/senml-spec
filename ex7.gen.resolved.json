@@ -1,6 +1,5 @@
 [
-  {"n":"urn:dev:ow:10e2073a01080063:temp","u":"Cel","t":1.495586834e+09,"v":23.1},
-  {"n":"urn:dev:ow:10e2073a01080063:label","t":1.495586834e+09,"vs":"Machine Room"},
-  {"n":"urn:dev:ow:10e2073a01080063:open","t":1.495586834e+09,"vb":false}
-  {"n":"urn:dev:ow:10e2073a01080063:nfv-reader","t":1.495586834e+09,"vd":"aGkgCg=="}
+  {"n":"urn:dev:ow:10e2073a01080063:temp","u":"Cel","t":1.498780179e+09,"v":23.1},
+  {"n":"urn:dev:ow:10e2073a01080063:label","t":1.498780179e+09,"vs":"Machine Room"},
+  {"n":"urn:dev:ow:10e2073a01080063:open","t":1.498780179e+09,"vb":false}
 ]
