@@ -1,5 +1,5 @@
 
-SenML-Pack = [ record, * record]
+SenML-Pack = [1* record]
 
 record = {
   ? bn => tstr,        ; Base Name
@@ -24,7 +24,9 @@ record = {
 ; now define the generic versions
 key-value-pair = ( label => value )
 
-label = tstr .regexp  "[A-Za-z0-9][-_:.A-Za-z0-9]*" / uint
+label = non-b-label / b-label
+non-b-label = tstr .regexp  "[A-Zac-z0-9][-_:.A-Za-z0-9]*" / uint
+b-label = tstr .regexp  "b[-_:.A-Za-z0-9]+" / nint
 
 value = tstr / binary-value / numeric / bool
 numeric = number / decfrac

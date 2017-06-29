@@ -978,6 +978,7 @@ use the related base units.
 | lon      | degrees longitude (note 2)                        | float | RFC-AAAA  |
 | pH       | pH value (acidity; logarithmic quantity)          | float | RFC-AAAA  |
 | dB       | decibel (logarithmic quantity)                    | float | RFC-AAAA  |
+| dBW      | decibel relative to 1 W (power level)             | float | RFC-AAAA  |
 | Bspl     | bel (sound pressure level; logarithmic quantity)* | float | RFC-AAAA  |
 | count    | 1 (counter value)                                 | float | RFC-AAAA  |
 | /        | 1 (Ratio e.g., value of a switch, note 1)         | float | RFC-AAAA  |
@@ -989,7 +990,7 @@ use the related base units.
 | 1/min    | 1 per minute (event rate, "rpm")*                 | float | RFC-AAAA  |
 | beat/min | 1 per minute (Heart rate in beats per minute)*    | float | RFC-AAAA  |
 | beats    | 1 (Cumulative number of heart beats)*             | float | RFC-AAAA  |
-| S/m | Siemens per meter (conductivity) | float | RFC-AAAA  |
+| S/m      | Siemens per meter (conductivity)                  | float | RFC-AAAA  |
 {: #tbl-iana-symbols cols='r l l'}
 
 * Note 1: A value of 0.0 indicates the switch is off while 1.0
