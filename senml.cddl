@@ -1,5 +1,5 @@
 
-SenML-Pack = [ record, * record]
+SenML-Pack = [1* record]
 
 record = {
   ? bn => tstr,        ; Base Name
