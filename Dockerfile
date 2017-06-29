@@ -1,12 +1,18 @@
 # Set up a docker machine that has all the tools to build teh senml spec
 
-FROM ubuntu
+FROM ubuntu:latest
 MAINTAINER Cullen Jennings <fluffy@iii.ca>
 
 # set up basic build machine
 RUN apt-get -y update
+
+RUN apt-get -y upgrade 
+
 RUN apt-get -y install tcsh
-RUN apt-get install -y build-essential 
+
+RUN apt-get install -y gcc make
+
+# RUN apt-get install -y build-essential 
 
 RUN apt-get install -y python-pip python-dev
 RUN pip install --upgrade pip
