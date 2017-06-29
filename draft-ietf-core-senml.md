@@ -252,7 +252,7 @@ measurements and/or parameters. This array contains a series of SenML
 Records with several attributes described below. There are two kind of
 attributes: base and regular.
 The base attributes can  be included
-in the any SenML Record and they apply to the entries in the Record.
+in any SenML Record and they apply to the entries in the Record.
 Each base attribute also applies to all Records after it up to, but not
 including, the next Record that has that same base attribute. 
 All base attributes are optional. Regular attributes can be
@@ -299,7 +299,7 @@ Name:
 Unit:
 : Units for a measurement value. Optional.
 
-Value
+Value:
 : Value of the entry.  Optional if a Sum value is present, otherwise
   required. Values are represented using basic data types. This
   specification defines floating point numbers ("v" field for
@@ -1662,11 +1662,11 @@ media types in the "CoAP Content-Formats" sub-registry, within the
 | application/senml+json   | TBD |
 | application/sensml+json  | TBD |
 | application/senml+cbor   | TBD |
-| application/sensml+cbor   | TBD |
+| application/sensml+cbor  | TBD |
 | application/senml+xml    | TBD |
 | application/sensml+xml   | TBD |
 | application/senml+exi    | TBD |
-| application/sensml+exi    | TBD |
+| application/sensml+exi   | TBD |
 {: #tbl-coap-content-formats cols="l l" title="CoAP Content-Format IDs"}
  
 
