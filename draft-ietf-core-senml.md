@@ -244,6 +244,9 @@ using the SenML data model.
 SenML Pack: 
 : One or more SenML Records in an array structure.
 
+SenML Label:
+: A short name used in SenML Records to denote different attributes
+(e.g., "v" for "value").
 
 # SenML Structure and Semantics {#senml-structure}
 
