@@ -630,8 +630,8 @@ number, only an unsigned integer is allowed.
 text string (type 3). Octets in the Data Value are encoded using a
 definite length byte string (type 2).
 
-* For compactness, the CBOR representation uses integers for the map
-keys defined in {{tbl-cbor-labels}}. This table is conclusive, i.e.,
+* For compactness, the CBOR representation uses integers for the 
+labels, as defined in {{tbl-cbor-labels}}. This table is conclusive, i.e.,
 there is no intention to define any additional integer map keys; any
 extensions will use string map keys. This allows translators
 converting between CBOR and JSON representations to convert also all
