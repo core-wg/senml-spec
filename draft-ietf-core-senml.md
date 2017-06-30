@@ -657,8 +657,8 @@ future labels without needing to update implementations.
 {: #tbl-cbor-labels cols="r l r" title="CBOR representation: integers for map keys"}
 
 * For streaming SensML in CBOR representation, the array containing
-  the records SHOULD be an CBOR indefinite length array while for non
-  streaming SenML, a definite length array MUST be used.
+  the records SHOULD be a CBOR indefinite length array while for 
+  non-streaming SenML, a definite length array MUST be used.
 
 The following example shows a dump of the CBOR example for the same
 sensor measurement as in {{co-ex}}.
@@ -777,7 +777,7 @@ above XML is the following:
 {::include ex1.gen.exi.hex}
 ~~~~
 
-A small temperature sensor devices that only generates this one EXI
+A small temperature sensor device that only generates this one EXI
 file does not really need an full EXI implementation. It can simply
 hard code the output replacing the 1-wire device ID starting at byte
 0x20 and going to byte 0x2F with it's device ID, and replacing the
@@ -807,7 +807,7 @@ number is used.  For the purpose of numbering records, the first
 record is at position 1.  A range of records can be selected by giving
 the first and the last record number separated by a '-'
 character. Instead of the second number, the '\*' character can be
-used to indicate the last Senml Record in the Pack.  A set of records
+used to indicate the last SenML Record in the Pack.  A set of records
 can also be selected using a comma separated list of record positions
 or ranges.
 
