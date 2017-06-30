@@ -1114,7 +1114,7 @@ registry.
 
 Extensions that add a label that is intended for use with EXI need to
 create a new XSD Schema that includes all the labels in the IANA
-registry then allocate a new EXI schemaId value. Moving to the next letter
+registry and then allocate a new EXI schemaId value. Moving to the next letter
 in the alphabet is the suggested way to create the new value for the EXI schemaId.
 Any labels with previously blank ID values SHOULD be updated in the
 IANA table to have their ID set to this new schemaId value.
