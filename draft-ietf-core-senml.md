@@ -814,7 +814,7 @@ or ranges.
 (We use the term "selecting a record" for identifying it as part of
 the fragment, not in the sense of isolating it from the Pack --- the
 record still needs to be interpreted as part of the Pack, e.g., using
-the base values defined in record 1.)
+the base values defined in earlier records)
 
 ## Fragment Identification Examples
 
