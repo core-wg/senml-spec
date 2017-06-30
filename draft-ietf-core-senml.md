@@ -628,7 +628,7 @@ number, only an unsigned integer is allowed.
 
 * Characters in the String Value are encoded using a definite length
 text string (type 3). Octets in the Data Value are encoded using a
-definite length byte string (type 2) .
+definite length byte string (type 2).
 
 * For compactness, the CBOR representation uses integers for the map
 keys defined in {{tbl-cbor-labels}}. This table is conclusive, i.e.,
@@ -643,7 +643,7 @@ future labels without needing to update implementations.
 | Base Time                 | bt         |         -3 |
 | Base Units                | bu         |         -4 |
 | Base Value                | bv         |         -5 |
-| Base Sum                | bs         |         -6 |
+| Base Sum                  | bs         |         -6 |
 | Name                      | n          |          0 |
 | Units                     | u          |          1 |
 | Value                     | v          |          2 |
@@ -653,7 +653,7 @@ future labels without needing to update implementations.
 | Time                      | t          |          6 |
 | Update Time               | ut         |          7 |
 | Data Value                | vd         |          8 |
-| Link                | l         |          9 |
+| Link                      | l          |          9 |
 {: #tbl-cbor-labels cols="r l r" title="CBOR representation: integers for map keys"}
 
 * For streaming SensML in CBOR representation, the array containing
@@ -696,7 +696,7 @@ used in the XML senml tags.
 | Base Time     | bt   | double  |
 | Base Unit     | bu   | string  |
 | Base Value    | bv   | double  |
-| Base Sum    | bs   | double  |
+| Base Sum      | bs   | double  |
 | Base Version  | bver | int     |
 | Name          | n    | string  |
 | Unit          | u    | string  |
@@ -1079,7 +1079,7 @@ of the registry is:
 | Update Time   | ut   |  7 | double  |  a | RFCXXXX |
 | Value         | v    |  2 | double  |  a | RFCXXXX |
 | Value Sum     | s    |  5 | double  |  a | RFCXXXX |
-| Link              | l    |  9 | string  |  a | RFCXXXX |
+| Link          | l    |  9 | string  |  a | RFCXXXX |
 {: #tbl-seml-reg cols='r l l' title="SenML Labels"}
 
 Note to RFC Editor. Please replace RFCXXXX with the number for this
