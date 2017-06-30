@@ -246,8 +246,8 @@ SenML Pack:
 : One or more SenML Records in an array structure.
 
 SenML Label:
-: A short name used in SenML Records to denote different attributes
-(e.g., "v" for "value").
+: A short name used in SenML Records to denote different SenML 
+attributes (e.g., "v" for "value").
 
 # SenML Structure and Semantics {#senml-structure}
 
@@ -690,10 +690,10 @@ measurement as in {{co-ex}}.
 ~~~~
 
 The SenML Stream is represented as a sensml tag that contains a series
-of senml tags for each SenML Record. The SenML Fields are represents
-as XML attributes.  The following table shows the mapping of the SenML
-labels, which are used for the attribute name, to the attribute types
-used in the XML senml tags.
+of senml tags for each SenML Record. The SenML attributes are
+represented as XML attributes.  The following table shows the mapping
+of the SenML labels, which are used for the attribute name, to the
+attribute types used in the XML senml tags.
 
 | Name          | Label| Type    |
 | Base Name     | bn   | string  |
