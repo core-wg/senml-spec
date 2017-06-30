@@ -258,7 +258,7 @@ including, the next Record that has that same base attribute.
 All base attributes are optional. Regular attributes can be
 included in any SenML Record and apply only to that Record.
 
-## Base attributes {#senml-base}
+## Base Attributes {#senml-base}
 
 Base Name:
 : This is a string that is prepended to the names found in the entries. 
@@ -286,7 +286,7 @@ Version:
   present. \[RFC Editor: change the default value to 10 when this
   specification is published as an RFC and remove this note\]
 
-## Regular attributes
+## Regular Attributes
 
 Name:
 : Name of the sensor or parameter. When appended to the Base Name
