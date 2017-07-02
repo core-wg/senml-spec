@@ -124,7 +124,8 @@ informative:
     - ins: C. McDonald 
     date: 2013 
     target: http://unitsofmeasure.org/ucum.html 
-    seriesinfo: Regenstrief Institute and Indiana University School of  Informatics
+    seriesinfo:
+      Regenstrief Institute and Indiana University School of Informatics
 
 --- abstract
 
