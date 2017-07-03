@@ -457,8 +457,8 @@ values at the given time(s).
 # JSON Representation (application/senml+json)
 
 For the SenML fields shown in {{tbl-json-labels}}, the SenML labels
-are used as the JSON object member names within are used in JSON SenML
-Records represented as these JSON objects.
+are used as the JSON object member names within JSON objects
+representing the JSON SenML Records.
 
 | Name          | label| Type           |
 | Base Name     | bn   | String         |
