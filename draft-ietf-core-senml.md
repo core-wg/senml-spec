@@ -344,6 +344,10 @@ ignore attributes they don't recognize unless that attribute has a label
 name that ends with the '_' character in which case an error MUST be
 generated. 
 
+All SenML Records in a Pack MUST have the same version number. This is
+typically done by adding a base Version attribute to only the first Record
+in the Pack.
+
 Systems reading one of the objects MUST check for the Version
 attribute. If this value is a version number larger than the version
 which the system understands, the system SHOULD NOT use this object.
