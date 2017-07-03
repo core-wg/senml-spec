@@ -365,7 +365,7 @@ are problematic for privacy reasons and should be used
 with care or avoided as described in {{RFC7721}}. 
 
 The resulting concatenated name MUST consist only of characters out of
-the set "A" to "Z", "a" to "z", "0" to "9", "-", ":", ".", or "_" and
+the set "A" to "Z", "a" to "z", "0" to "9", "-", ":", ".", "/", or "_" and
 it MUST start with a character out of the set "A" to "Z", "a" to "z",
 or "0" to "9". This restricted character set was chosen so that these
 names can be directly used as in other types of URI including segments
