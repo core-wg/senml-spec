@@ -1516,7 +1516,7 @@ security. Given applications need to look at the overall context of
 how this media type will be used to decide if the security is 
 adequate. 
 
-Interoperability considerations: Applications should ignore any XMLtags 
+Interoperability considerations: Applications should ignore any XML tags 
 or attributes that they do not understand. This allows backwards 
 compatibility extensions to this specification. The "bver" attribute in 
 the senml XML tag can be used to ensure the receiver supports a minimal 
