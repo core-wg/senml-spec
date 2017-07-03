@@ -268,7 +268,7 @@ including, the next Record that has that same base attribute.
 All base attributes are optional. Regular attributes can be
 included in any SenML Record and apply only to that Record.
 
-## Base attributes {#senml-base}
+## Base Attributes {#senml-base}
 
 Base Name:
 : This is a string that is prepended to the names found in the entries. 
@@ -296,7 +296,7 @@ Version:
   present. \[RFC Editor: change the default value to 10 when this
   specification is published as an RFC and remove this note\]
 
-## Regular attributes
+## Regular Attributes
 
 Name:
 : Name of the sensor or parameter. When appended to the Base Name
@@ -648,10 +648,10 @@ number, only an unsigned integer is allowed.
 
 * Characters in the String Value are encoded using a definite length
 text string (type 3). Octets in the Data Value are encoded using a
-definite length byte string (type 2) .
+definite length byte string (type 2).
 
-* For compactness, the CBOR representation uses integers for the map
-keys defined in {{tbl-cbor-labels}}. This table is conclusive, i.e.,
+* For compactness, the CBOR representation uses integers for the 
+labels, as defined in {{tbl-cbor-labels}}. This table is conclusive, i.e.,
 there is no intention to define any additional integer map keys; any
 extensions will use string map keys. This allows translators
 converting between CBOR and JSON representations to convert also all
@@ -663,7 +663,7 @@ future labels without needing to update implementations.
 | Base Time                 | bt         |         -3 |
 | Base Units                | bu         |         -4 |
 | Base Value                | bv         |         -5 |
-| Base Sum                | bs         |         -6 |
+| Base Sum                  | bs         |         -6 |
 | Name                      | n          |          0 |
 | Units                     | u          |          1 |
 | Value                     | v          |          2 |
@@ -673,12 +673,12 @@ future labels without needing to update implementations.
 | Time                      | t          |          6 |
 | Update Time               | ut         |          7 |
 | Data Value                | vd         |          8 |
-| Link                | l         |          9 |
+| Link                      | l          |          9 |
 {: #tbl-cbor-labels cols="r l r" title="CBOR representation: integers for map keys"}
 
 * For streaming SensML in CBOR representation, the array containing
-  the records SHOULD be an CBOR indefinite length array while for non
-  streaming SenML, a definite length array MUST be used.
+  the records SHOULD be a CBOR indefinite length array while for 
+  non-streaming SenML, a definite length array MUST be used.
 
 The following example shows a dump of the CBOR example for the same
 sensor measurement as in {{co-ex}}.
@@ -716,7 +716,7 @@ used in the XML senml tags.
 | Base Time     | bt   | double  |
 | Base Unit     | bu   | string  |
 | Base Value    | bv   | double  |
-| Base Sum    | bs   | double  |
+| Base Sum      | bs   | double  |
 | Base Version  | bver | int     |
 | Name          | n    | string  |
 | Unit          | u    | string  |
@@ -797,7 +797,7 @@ above XML is the following:
 {::include ex1.gen.exi.hex}
 ~~~~
 
-A small temperature sensor devices that only generates this one EXI
+A small temperature sensor device that only generates this one EXI
 file does not really need an full EXI implementation. It can simply
 hard code the output replacing the 1-wire device ID starting at byte
 0x20 and going to byte 0x2F with it's device ID, and replacing the
@@ -827,14 +827,14 @@ number is used.  For the purpose of numbering records, the first
 record is at position 1.  A range of records can be selected by giving
 the first and the last record number separated by a '-'
 character. Instead of the second number, the '\*' character can be
-used to indicate the last Senml Record in the Pack.  A set of records
+used to indicate the last SenML Record in the Pack.  A set of records
 can also be selected using a comma separated list of record positions
 or ranges.
 
 (We use the term "selecting a record" for identifying it as part of
 the fragment, not in the sense of isolating it from the Pack --- the
 record still needs to be interpreted as part of the Pack, e.g., using
-the base values defined in record 1.)
+the base values defined in earlier records)
 
 ## Fragment Identification Examples
 
@@ -1099,7 +1099,7 @@ of the registry is:
 | Update Time   | ut   |  7 | double  |  a | RFCXXXX |
 | Value         | v    |  2 | double  |  a | RFCXXXX |
 | Value Sum     | s    |  5 | double  |  a | RFCXXXX |
-| Link              | l    |  9 | string  |  a | RFCXXXX |
+| Link          | l    |  9 | string  |  a | RFCXXXX |
 {: #tbl-seml-reg cols='r l l' title="SenML Labels"}
 
 Note to RFC Editor. Please replace RFCXXXX with the number for this
@@ -1134,7 +1134,7 @@ registry.
 
 Extensions that add a label that is intended for use with EXI need to
 create a new XSD Schema that includes all the labels in the IANA
-registry then allocate a new EXI schemaId value. Moving to the next letter
+registry and then allocate a new EXI schemaId value. Moving to the next letter
 in the alphabet is the suggested way to create the new value for the EXI schemaId.
 Any labels with previously blank ID values SHOULD be updated in the
 IANA table to have their ID set to this new schemaId value.
