@@ -418,13 +418,12 @@ Content-Type (ct=) attribute.
 
 ## Configuration and Actuation usage
 
-While typical use of SenML is retrieving sensor data, SenML can also
-be used for configuring parameters and controlling actuators. When a
-SenML Pack is sent (e.g., using a HTTP/CoAP POST or PUT method) and
-the semantics of the target are such that SenML is interpreted as
-configuration/actuation, SenML Records are interpreted as a request to
-change the values of given resources (names) to given values at given
-time(s).
+SenML can also be used for configuring parameters and controlling
+actuators. When a SenML Pack is sent (e.g., using a HTTP/CoAP POST or
+PUT method) and the semantics of the target are such that SenML is
+interpreted as configuration/actuation, SenML Records are interpreted
+as a request to change the values of given resources (names) to given
+values at the given time(s).
 
 # JSON Representation (application/senml+json)
 
