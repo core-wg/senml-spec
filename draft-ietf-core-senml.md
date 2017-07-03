@@ -107,6 +107,16 @@ informative:
   I-D.arkko-core-dev-urn:
   I-D.greevenbosch-appsawg-cbor-cddl: 
   I-D.ietf-core-links-json:
+  IEEE802.1ba-2011:
+    title: IEEE Standard for Local and metropolitan area networks--Audio Video Bridging (AVB) Systems
+    author:
+    - organization: IEEE
+    date: 2011
+  IEEE802.1as-2011:
+    title: IEEE Standard for Local and Metropolitan Area Networks - Timing and Synchronization for Time-Sensitive Applications in Bridged Local Area Networks
+    author:
+    - organization: IEEE
+    date: 2011
   UCUM:
     title: The Unified Code for Units of Measure (UCUM) 
     author:
@@ -115,7 +125,7 @@ informative:
     date: 2013 
     target: http://unitsofmeasure.org/ucum.html 
     seriesinfo:
-      Regenstrief Institute and Indiana University School of: Informatics 
+      Regenstrief Institute and Indiana University School of Informatics
 
 --- abstract
 
@@ -584,9 +594,11 @@ switch to turn on the fan override.
 ~~~~
 
 In the following example two different lights are turned on. It is
-assumed that the lights are on a 802.1BA network that can guarantee
-delivery of the messages to the two lights within 15 ms and
-uses 802.1AS for time synchronization. The controller has set the time
+assumed that the lights are on a network that can guarantee delivery
+of the messages to the two lights within 15 ms (e.g. a networking
+using 802.1BA [[IEEE802.1ba-2011] and
+802.1AS [[IEEE802.1as-2011]] for time synchronization).
+The controller has set the time
 of the lights coming on to 20 ms in the future from the current
 time. This allows both lights to receive the message, wait till that
 time, then apply the switch command so that both lights come on at the
