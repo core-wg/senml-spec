@@ -257,7 +257,16 @@ SenML Pack:
 
 SenML Label:
 : A short name used in SenML Records to denote different SenML 
-attributes (e.g., "v" for "value").
+fields (e.g., "v" for "value").
+
+SenML Field:
+: A component of a record that associates a value to a SenML Label for
+this record.
+
+This document uses the terms "attribute" and "tag" where they occur
+with the underlying technologies (XML and CBOR), not for SenML
+concepts per se.  Note that "attribute" has been widely used
+previously as a synonym for SenML "field", though.
 
 # SenML Structure and Semantics {#senml-structure}
 
@@ -709,11 +718,11 @@ measurement as in {{co-ex}}.
 {::include ex3.gen.xml}
 ~~~~
 
-The SenML Stream is represented as a sensml tag that contains a series
-of senml tags for each SenML Record. The SenML attributes are
+The SenML Stream is represented as a sensml element that contains a series
+of senml elements for each SenML Record. The SenML attributes are
 represented as XML attributes.  The following table shows the mapping
 of the SenML labels, which are used for the attribute name, to the
-attribute types used in the XML senml tags.
+attribute types used in the XML senml elements.
 
 | Name          | Label| Type    |
 | Base Name     | bn   | string  |
@@ -1434,10 +1443,10 @@ security. Given applications need to look at the overall context of
 how this media type will be used to decide if the security is 
 adequate. 
 
-Interoperability considerations: Applications should ignore any tags 
+Interoperability considerations: Applications should ignore any XML tags 
 or attributes that they do not understand. This allows backwards 
 compatibility extensions to this specification. The "bver" attribute in 
-the senml tag can be used to ensure the receiver supports a minimal 
+the senml XML tag can be used to ensure the receiver supports a minimal 
 level of functionality needed by the creator of the XML. 
 
 Published specification: RFC-AAAA 
@@ -1499,10 +1508,10 @@ security. Given applications need to look at the overall context of
 how this media type will be used to decide if the security is 
 adequate. 
 
-Interoperability considerations: Applications should ignore any tags 
+Interoperability considerations: Applications should ignore any XMLtags 
 or attributes that they do not understand. This allows backwards 
 compatibility extensions to this specification. The "bver" attribute in 
-the senml tag can be used to ensure the receiver supports a minimal 
+the senml XML tag can be used to ensure the receiver supports a minimal 
 level of functionality needed by the creator of the XML. 
 
 Published specification: RFC-AAAA 
@@ -1559,10 +1568,10 @@ security. Given applications need to look at the overall context of
 how this media type will be used to decide if the security is 
 adequate. 
 
-Interoperability considerations: Applications should ignore any tags 
+Interoperability considerations: Applications should ignore any XML tags 
 or attributes that they do not understand. This allows backwards 
 compatibility extensions to this specification. The "bver" attribute in 
-the senml tag can be used to ensure the receiver supports a minimal 
+the senml XML tag can be used to ensure the receiver supports a minimal 
 level of functionality needed by the creator of the XML.  Further 
 information on using schemas to guide the EXI can be found in 
 RFC-AAAA. 
@@ -1624,10 +1633,10 @@ security. Given applications need to look at the overall context of
 how this media type will be used to decide if the security is 
 adequate. 
 
-Interoperability considerations: Applications should ignore any tags 
+Interoperability considerations: Applications should ignore any XML tags 
 or attributes that they do not understand. This allows backwards 
 compatibility extensions to this specification. The "bver" attribute in 
-the senml tag can be used to ensure the receiver supports a minimal 
+the senml XML tag can be used to ensure the receiver supports a minimal 
 level of functionality needed by the creator of the XML.  Further 
 information on using schemas to guide the EXI can be found in 
 RFC-AAAA. 
