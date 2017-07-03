@@ -204,16 +204,17 @@ or from the same sensor but at different times.
 
 The basic design is an array with a series of measurements. The
 following example shows two measurements made at different times. The
-value of a measurement is in the "v" tag, the time of a measurement is
-in the "t" tag, the "n" tag has a unique sensor name, and the unit of
-the measurement is carried in the "u" tag.
+value of a measurement is given by the "v" attribute, the time of a
+measurement is in the "t" attribute, the "n" attribute has a unique
+sensor name, and the unit of the measurement is carried in the "u"
+attribute.
 
 ~~~~
 {::include ex10.gen.wrap.json}
 ~~~~
 
 To keep the messages small, it does not make sense to repeat the "n"
-tag in each SenML Record so there is a concept of a Base Name which is
+attribute in each SenML Record so there is a concept of a Base Name which is
 simply a string that is prepended to the Name field of all elements in
 that record and any records that follow it. So a more compact form of
 the example above is the following.
@@ -222,7 +223,7 @@ the example above is the following.
 {::include ex11.gen.wrap.json}
 ~~~~
 
-In the above example the Base Name is in the "bn" tag and the "n" tags
+In the above example the Base Name is in the "bn" attribute and the "n" attributes
 in each Record are the empty string so they are omitted.
 
 Some devices have accurate time while others do not so SenML supports
@@ -254,6 +255,9 @@ using the SenML data model.
 SenML Pack: 
 : One or more SenML Records in an array structure.
 
+SenML Label:
+: A short name used in SenML Records to denote different SenML 
+attributes (e.g., "v" for "value").
 
 # SenML Structure and Semantics {#senml-structure}
 
@@ -706,10 +710,10 @@ measurement as in {{co-ex}}.
 ~~~~
 
 The SenML Stream is represented as a sensml tag that contains a series
-of senml tags for each SenML Record. The SenML Fields are represents
-as XML attributes.  The following table shows the mapping of the SenML
-labels, which are used for the attribute name, to the attribute types
-used in the XML senml tags.
+of senml tags for each SenML Record. The SenML attributes are
+represented as XML attributes.  The following table shows the mapping
+of the SenML labels, which are used for the attribute name, to the
+attribute types used in the XML senml tags.
 
 | Name          | Label| Type    |
 | Base Name     | bn   | string  |
