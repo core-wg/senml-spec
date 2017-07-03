@@ -623,7 +623,7 @@ switch to turn on the fan override.
 
 In the following example two different lights are turned on. It is
 assumed that the lights are on a network that can guarantee delivery
-of the messages to the two lights within 15 ms (e.g. a networking
+of the messages to the two lights within 15 ms (e.g. a network
 using 802.1BA {{IEEE802.1ba-2011}} and
 802.1AS {{IEEE802.1as-2011}} for time synchronization).
 The controller has set the time
