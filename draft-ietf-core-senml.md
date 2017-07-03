@@ -355,7 +355,7 @@ name that ends with the '_' character in which case an error MUST be
 generated. 
 
 All SenML Records in a Pack MUST have the same version number. This is
-typically done by adding a base Version attribute to only the first Record
+typically done by adding a Base Version field to only the first Record
 in the Pack.
 
 Systems reading one of the objects MUST check for the Version
