@@ -166,7 +166,7 @@ discovered by other methods such as using the CoRE Link Format
 SenML is defined by a data model for measurements and simple meta-data
 about measurements and devices. The data is structured as a single
 array that contains a series of SenML Records which can each contain
-attributes such as an unique identifier for the sensor, the time the
+fields such as an unique identifier for the sensor, the time the
 measurement was made, the unit the measurement is in, and the current
 value of the sensor.  Serializations for this data model are defined
 for JSON {{RFC7159}}, CBOR {{RFC7049}}, XML, and Efficient XML
@@ -204,17 +204,17 @@ or from the same sensor but at different times.
 
 The basic design is an array with a series of measurements. The
 following example shows two measurements made at different times. The
-value of a measurement is given by the "v" attribute, the time of a
-measurement is in the "t" attribute, the "n" attribute has a unique
+value of a measurement is given by the "v" field, the time of a
+measurement is in the "t" field, the "n" field has a unique
 sensor name, and the unit of the measurement is carried in the "u"
-attribute.
+field.
 
 ~~~~
 {::include ex10.gen.wrap.json}
 ~~~~
 
 To keep the messages small, it does not make sense to repeat the "n"
-attribute in each SenML Record so there is a concept of a Base Name which is
+field in each SenML Record so there is a concept of a Base Name which is
 simply a string that is prepended to the Name field of all elements in
 that record and any records that follow it. So a more compact form of
 the example above is the following.
@@ -223,7 +223,7 @@ the example above is the following.
 {::include ex11.gen.wrap.json}
 ~~~~
 
-In the above example the Base Name is in the "bn" attribute and the "n" attributes
+In the above example the Base Name is in the "bn" field and the "n" fields
 in each Record are the empty string so they are omitted.
 
 Some devices have accurate time while others do not so SenML supports
@@ -257,22 +257,32 @@ SenML Pack:
 
 SenML Label:
 : A short name used in SenML Records to denote different SenML 
-attributes (e.g., "v" for "value").
+fields (e.g., "v" for "value").
+
+SenML Field:
+: A component of a record that associates a value to a SenML Label for
+this record.
+
+This document uses the terms "attribute" and "tag" where they occur
+with the underlying technologies (XML, CBOR {{RFC7049}}, and Link
+Format {{RFC6690}}), not for SenML concepts per se.  Note that
+"attribute" has been widely used previously as a synonym for SenML
+"field", though.
 
 # SenML Structure and Semantics {#senml-structure}
 
 Each SenML Pack carries a single array that represents a set of
 measurements and/or parameters. This array contains a series of SenML
-Records with several attributes described below. There are two kind of
-attributes: base and regular.
-The base attributes can  be included
+Records with several fields described below. There are two kinds of
+fields: base and regular.
+The base fields can  be included
 in any SenML Record and they apply to the entries in the Record.
-Each base attribute also applies to all Records after it up to, but not
-including, the next Record that has that same base attribute. 
-All base attributes are optional. Regular attributes can be
+Each base field also applies to all Records after it up to, but not
+including, the next Record that has that same base field. 
+All base fields are optional. Regular fields can be
 included in any SenML Record and apply only to that Record.
 
-## Base Attributes {#senml-base}
+## Base Fields {#senml-base}
 
 Base Name:
 : This is a string that is prepended to the names found in the entries. 
@@ -295,16 +305,16 @@ Base Sum:
 Time.
  
 Version:
-: Version number of media type format. This attribute is an optional
+: Version number of media type format. This field is an optional
   positive integer and defaults to 5 if not
   present. \[RFC Editor: change the default value to 10 when this
   specification is published as an RFC and remove this note\]
 
-## Regular Attributes
+## Regular Fields
 
 Name:
 : Name of the sensor or parameter. When appended to the Base Name
-  attribute, this must result in a globally unique identifier for the
+  field, this must result in a globally unique identifier for the
   resource. The name is optional, if the Base Name is present. If the
   name is missing, Base Name must uniquely identify the resource. This
   can be used to represent a large array of measurements from the same
@@ -323,7 +333,7 @@ Value:
   is allowed to have no Value field.
 
 Sum:
-: Integrated sum of the values over time. Optional. This attribute is
+: Integrated sum of the values over time. Optional. This field is
   in the units specified in the Unit value multiplied by seconds.
 
 Time:
@@ -337,10 +347,10 @@ Update Time:
 
 ## Considerations
 
-The SenML format can be extended with further custom attributes. Both
-new base and regular attributes are allowed. See
+The SenML format can be extended with further custom fields. Both
+new base and regular fields are allowed. See
 {{iana-senml-label-registry}} for details.  Implementations MUST
-ignore attributes they don't recognize unless that attribute has a label
+ignore fields they don't recognize unless that field has a label
 name that ends with the '_' character in which case an error MUST be
 generated. 
 
@@ -349,10 +359,10 @@ typically done by adding a base Version attribute to only the first Record
 in the Pack.
 
 Systems reading one of the objects MUST check for the Version
-attribute. If this value is a version number larger than the version
+field. If this value is a version number larger than the version
 which the system understands, the system SHOULD NOT use this object.
 This allows the version number to indicate that the object contains
-mandatory to understand attributes. New version numbers can only be
+mandatory to understand fields. New version numbers can only be
 defined in an RFC that updates this specification or it successors.
 
 The Name value is concatenated to the Base Name value to get the name
@@ -381,7 +391,7 @@ If the Record has no Unit, the Base Unit is used as the Unit. Having
 no Unit and no Base Unit is allowed.
   
 If either the Base Time or Time value is missing, the missing
-attribute is considered to have a value of zero. The Base Time and
+field is considered to have a value of zero. The Base Time and
 Time values are added together to get the time of measurement. A time
 of zero indicates that the sensor does not know the absolute time and
 the measurement was made roughly "now". A negative value is used to
@@ -390,18 +400,18 @@ used to indicate the number of seconds, excluding leap seconds, since
 the start of the year 1970 in UTC.
 
 If only one of the Base Sum or Sum value is present, the missing
-attribute is considered to have a value of zero. The Base Sum and Sum
+field is considered to have a value of zero. The Base Sum and Sum
 values are added together to get the sum of measurement. If neither
 the Base Sum or Sum are present, then the measurement does not have a
 sum value.
 
-If the Base Value or Value is not present, the missing attribute(s)
+If the Base Value or Value is not present, the missing field(s)
 are considered to have a value of zero. The Base Value and Value are
 added together to get the value of the measurement.
 
 Representing the statistical characteristics of measurements, such as
 accuracy, can be very complex. Future specification may add new
-attributes to provide better information about the statistical
+fields to provide better information about the statistical
 properties of the measurement.
 
 ## Resolved Records
@@ -419,8 +429,8 @@ if the Record did not contain Unit the Base Unit is applied to the
 record, etc. In addition the records need to be in chronological
 order.  An example of this is show in {{resolved-ex}}.
 
-Future specification that defines new base attributes need to specify
-how the attribute is resolved.
+Future specification that defines new base fields need to specify
+how the field is resolved.
 
 ## Associating Meta-data
 
@@ -432,7 +442,8 @@ using SenML Packs, this meta-data can be made available using the CoRE
 Link Format {{RFC6690}}. The most obvious use of this link format is
 to describe that a resource is available in a SenML format in the
 first place. The relevant media type indicator is included in the
-Content-Type (ct=) attribute.
+Content-Type (ct=) link attribute (which is defined for the Link
+Format in Section 7.2.1 of {{RFC7252}}).
 
 ## Configuration and Actuation usage
 
@@ -445,8 +456,9 @@ values at the given time(s).
 
 # JSON Representation (application/senml+json)
 
-The SenML labels (JSON object member names) shown in
-{{tbl-json-labels}} are used in JSON SenML Record attributes.
+For the SenML fields shown in {{tbl-json-labels}}, the SenML labels
+are used as the JSON object member names within are used in JSON SenML
+Records represented as these JSON objects.
 
 | Name          | label| Type           |
 | Base Name     | bn   | String         |
@@ -467,14 +479,14 @@ The SenML labels (JSON object member names) shown in
 | Link          | l    | String         |
 {: #tbl-json-labels cols='r l l' title="JSON SenML Labels"}
 
-The root content consists of an array with one JSON object for each
-SenML Record. All the fields in the above table MAY occur in the
-records with the type specified in the table.
+The root JSON value consists of an array with one JSON object for each
+SenML Record.  All the fields in the above table MAY occur in the
+records with member values of the type specified in the table.
 
 Only the UTF-8 form of JSON is allowed. Characters in the String Value
 are encoded using the escape sequences defined in {{RFC7159}}. Octets
 in the Data Value are base64 encoded with URL safe alphabet as defined
-in Section 5 of {{RFC4648}}.
+in Section 5 of {{RFC4648}}, with padding omitted.
 
 Systems receiving measurements MUST be able to process the range of
 floating point numbers that are representable as an IEEE double
@@ -713,11 +725,12 @@ measurement as in {{co-ex}}.
 {::include ex3.gen.xml}
 ~~~~
 
-The SenML Stream is represented as a sensml tag that contains a series
-of senml tags for each SenML Record. The SenML attributes are
-represented as XML attributes.  The following table shows the mapping
-of the SenML labels, which are used for the attribute name, to the
-attribute types used in the XML senml tags.
+The SenML Stream is represented as a sensml element that contains a series
+of senml elements for each SenML Record. The SenML fields are
+represented as XML attributes.  For each field defined in this
+document, the following table shows the SenML labels, which are used
+for the XML attribute name, as well as the according restrictions on the
+XML attribute values ("type") as used in the XML senml elements.
 
 | Name          | Label| Type    |
 | Base Name     | bn   | string  |
@@ -882,9 +895,9 @@ measurements. If the network between the sensor and the meter goes
 down over some period of time, when it comes back up, the cumulative
 sum helps reflect what happened while the network was down. A meter
 like this would typically report a measurement with the units set to
-watts, but it would put the sum of energy used in the "s" attribute of
+watts, but it would put the sum of energy used in the "s" field of
 the measurement. It might optionally include the current power in the
-"v" attribute.
+"v" field.
 
 While the benefit of using the integrated sum is fairly clear for
 measurements like power and energy, it is less obvious for something
@@ -1438,10 +1451,10 @@ security. Given applications need to look at the overall context of
 how this media type will be used to decide if the security is 
 adequate. 
 
-Interoperability considerations: Applications should ignore any tags 
+Interoperability considerations: Applications should ignore any XML tags 
 or attributes that they do not understand. This allows backwards 
 compatibility extensions to this specification. The "bver" attribute in 
-the senml tag can be used to ensure the receiver supports a minimal 
+the senml XML tag can be used to ensure the receiver supports a minimal 
 level of functionality needed by the creator of the XML. 
 
 Published specification: RFC-AAAA 
@@ -1503,10 +1516,10 @@ security. Given applications need to look at the overall context of
 how this media type will be used to decide if the security is 
 adequate. 
 
-Interoperability considerations: Applications should ignore any tags 
+Interoperability considerations: Applications should ignore any XMLtags 
 or attributes that they do not understand. This allows backwards 
 compatibility extensions to this specification. The "bver" attribute in 
-the senml tag can be used to ensure the receiver supports a minimal 
+the senml XML tag can be used to ensure the receiver supports a minimal 
 level of functionality needed by the creator of the XML. 
 
 Published specification: RFC-AAAA 
@@ -1563,10 +1576,10 @@ security. Given applications need to look at the overall context of
 how this media type will be used to decide if the security is 
 adequate. 
 
-Interoperability considerations: Applications should ignore any tags 
+Interoperability considerations: Applications should ignore any XML tags 
 or attributes that they do not understand. This allows backwards 
 compatibility extensions to this specification. The "bver" attribute in 
-the senml tag can be used to ensure the receiver supports a minimal 
+the senml XML tag can be used to ensure the receiver supports a minimal 
 level of functionality needed by the creator of the XML.  Further 
 information on using schemas to guide the EXI can be found in 
 RFC-AAAA. 
@@ -1628,10 +1641,10 @@ security. Given applications need to look at the overall context of
 how this media type will be used to decide if the security is 
 adequate. 
 
-Interoperability considerations: Applications should ignore any tags 
+Interoperability considerations: Applications should ignore any XML tags 
 or attributes that they do not understand. This allows backwards 
 compatibility extensions to this specification. The "bver" attribute in 
-the senml tag can be used to ensure the receiver supports a minimal 
+the senml XML tag can be used to ensure the receiver supports a minimal 
 level of functionality needed by the creator of the XML.  Further 
 information on using schemas to guide the EXI can be found in 
 RFC-AAAA. 
@@ -1730,13 +1743,13 @@ comments.
 
 # Links Extension
 
-An attribute to support a link extension for SenML is defined as a
-string attribute by this specification. The link extension can be used
+A field to support a link extension for SenML is defined as a
+string field by this specification. The link extension can be used
 for additional information about a SenML Record.  The definition and
 usage of the contents of this value are specified in
 {{I-D.ietf-core-links-json}}.
 
-For JSON and XML the attribute has a label of "l" and a value that is
+For JSON and XML the field has a label of "l" and a value that is
 a string.
 
 The following shows an example of the links extension.
