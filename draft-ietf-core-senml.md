@@ -1,7 +1,7 @@
 ---
 stand_alone: true
 ipr: trust200902
-docname: draft-ietf-core-senml-10
+docname: draft-cisco-senml-00
 cat: std
 
 date: July 3, 2017
@@ -17,55 +17,15 @@ pi:
   rfcedstyle: 'no'
   tocdepth: '4'
   
-title: Media Types for Sensor Measurement Lists (SenML)
+title: Sensor Markup Language (SenML)
 abbrev: SenML
-area: ART
 
 author:
-- ins: C. Jennings
-  name: Cullen Jennings
+- ins: _
+  name: See Github
   org: Cisco
-  street: 400 3rd Avenue SW
-  city: Calgary
-  region: AB
-  code: 'T2P 4H2'
-  country: Canada
-  email: fluffy@iii.ca
-- ins: Z. Shelby
-  name: Zach Shelby
-  org: ARM
-  street: 150 Rose Orchard
-  city: San Jose
-  code: '95134'
-  country: USA
-  phone: "+1-408-203-9434"
-  email: zach.shelby@arm.com
-- ins: J. Arkko
-  name: Jari Arkko
-  org: Ericsson
-  street: ''
-  city: Jorvas
-  code: '02420'
-  country: Finland
-  email: jari.arkko@piuha.net
-- ins: A. Keranen
-  name: Ari Keranen
-  org: Ericsson
-  street: ''
-  city: Jorvas
-  code: '02420'
-  country: Finland
-  email: ari.keranen@ericsson.com
--
-  ins: C. Bormann
-  name: Carsten Bormann
-  org: Universitaet Bremen TZI
-  street: Postfach 330440
-  city: Bremen
-  code: D-28359
-  country: Germany
-  phone: +49-421-218-63921
-  email: cabo@tzi.org
+
+
 
 normative:
   IEEE.754.1985: 
