@@ -23,7 +23,7 @@ abbrev: SenML
 author:
 - ins: _
   name: See Github
-  org: Cisco
+  org: _
 
 
 
@@ -32,11 +32,9 @@ normative:
   RFC2119: 
   RFC3688:
   RFC4648:
-  RFC5226: 
   RFC6838: 
   RFC7049: 
   RFC7159:
-  RFC7252: 
   RFC7303: 
   W3C.REC-exi-20140211:
   W3C.REC-xml-20081126:
@@ -62,30 +60,9 @@ informative:
   RFC4122: 
   RFC5952: 
   RFC6690:
-  RFC7111: csvfrag
   RFC7721:
   I-D.arkko-core-dev-urn:
   I-D.greevenbosch-appsawg-cbor-cddl: 
-  I-D.ietf-core-links-json:
-  IEEE802.1ba-2011:
-    title: IEEE Standard for Local and metropolitan area networks--Audio Video Bridging (AVB) Systems
-    author:
-    - organization: IEEE
-    date: 2011
-  IEEE802.1as-2011:
-    title: IEEE Standard for Local and Metropolitan Area Networks - Timing and Synchronization for Time-Sensitive Applications in Bridged Local Area Networks
-    author:
-    - organization: IEEE
-    date: 2011
-  UCUM:
-    title: The Unified Code for Units of Measure (UCUM) 
-    author:
-    - ins: G. Schadow 
-    - ins: C. McDonald 
-    date: 2013 
-    target: http://unitsofmeasure.org/ucum.html 
-    seriesinfo:
-      Regenstrief Institute and Indiana University: School of Informatics
 
 --- abstract
 
@@ -559,9 +536,7 @@ switch to turn on the fan override.
 
 In the following example two different lights are turned on. It is
 assumed that the lights are on a network that can guarantee delivery
-of the messages to the two lights within 15 ms (e.g. a network
-using 802.1BA {{IEEE802.1ba-2011}} and
-802.1AS {{IEEE802.1as-2011}} for time synchronization).
+of the messages to the two lights within 15 ms.
 The controller has set the time
 of the lights coming on to 20 ms in the future from the current
 time. This allows both lights to receive the message, wait till that
@@ -965,9 +940,6 @@ their own good judgment but need to consider the following guidelines:
 10. A number after a unit typically indicates the previous unit raised to that
   power, and the / indicates that the units that follow are the reciprocal. A
   unit should have only one / in the name.
-
-11. A good list of common units can be found in the Unified Code for
-   Units of Measure {{UCUM}}.
 
 
 
