@@ -766,54 +766,6 @@ integer temperature in tenths of degrees plus 0x80. In this example
 temperature in tenths of degrees right shifted 7 bits. In this example
 231 >> 7 = 0x01.
 
-# Fragment Identification Methods
-
-A SenML Pack typically consists of multiple SenML Records and for some
-applications it may be useful to be able to refer with a Fragment
-Identifier to a single record, or a set of records, in a Pack. The
-fragment identifier is only interpreted by a client and does not
-impact retrieval of a representation. The SenML Fragment
-Identification is modeled after CSV Fragment Identifiers {{RFC7111}}.
-
-To select a single SenML Record, the "rec" scheme followed by a single
-number is used.  For the purpose of numbering records, the first
-record is at position 1.  A range of records can be selected by giving
-the first and the last record number separated by a '-'
-character. Instead of the second number, the '\*' character can be
-used to indicate the last SenML Record in the Pack.  A set of records
-can also be selected using a comma separated list of record positions
-or ranges.
-
-(We use the term "selecting a record" for identifying it as part of
-the fragment, not in the sense of isolating it from the Pack --- the
-record still needs to be interpreted as part of the Pack, e.g., using
-the base values defined in earlier records)
-
-## Fragment Identification Examples
-
-The 3rd SenML Record from "coap://example.com/temp" resource can be
-selected with:
-
-  coap://example.com/temp#rec=3
-
-Records from 3rd to 6th can be selected with:
-
-  coap://example.com/temp#rec=3-6
-
-Records from 19th to the last can be selected with:
-
-  coap://example.com/temp#rec=19-*
-
-The 3rd and 5th record can be selected with:
-
-  coap://example.com/temp#rec=3,5
-
-To select the Records from third to fifth, the 10th record, and all
-from 19th to the last:
-
-  coap://example.com/temp#rec=3-5,10,19-*
-
-
 # Usage Considerations
 
 The measurements support sending both the current value of a sensor as
