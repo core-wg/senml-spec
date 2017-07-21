@@ -384,13 +384,7 @@ order.  An example of this is show in {{resolved-ex}}.
 SenML is designed to carry the minimum dynamic information about
 measurements, and for efficiency reasons does not carry significant
 static meta-data about the device, object or sensors. Instead, it is
-assumed that this meta-data is carried out of band. For web resources
-using SenML Packs, this meta-data can be made available using the CoRE
-Link Format {{RFC6690}}. The most obvious use of this link format is
-to describe that a resource is available in a SenML format in the
-first place. The relevant media type indicator is included in the
-Content-Type (ct=) link attribute (which is defined for the Link
-Format in Section 7.2.1 of {{RFC7252}}).
+assumed that this meta-data is carried out of band.
 
 ## Configuration and Actuation usage
 
@@ -417,13 +411,11 @@ representing the JSON SenML Records.
 | Name          | n    | String         |
 | Unit          | u    | String         |
 | Value         | v    | Number         |
-| String Value  | vs   | String         |
-| Boolean Value | vb   | Boolean        |
 | Data Value    | vd   | String         |
 | Value Sum     | s    | Number         |
 | Time          | t    | Number         |
 | Update Time   | ut   | Number         |
-| Link          | l    | String         |
+
 {: #tbl-json-labels cols='r l l' title="JSON SenML Labels"}
 
 The root JSON value consists of an array with one JSON object for each
