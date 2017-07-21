@@ -67,7 +67,7 @@ informative:
 --- abstract
 
 This specification defines media types for representing simple sensor
-measurements and device parameters.
+measurements and device parameters called SenML.
 Representations are defined in JavaScript Object Notation
 (JSON), Concise Binary Object Representation (CBOR), eXtensible Markup
 Language (XML), and Efficient XML Interchange (EXI), which share the
