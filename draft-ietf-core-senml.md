@@ -316,8 +316,7 @@ Systems reading one of the objects MUST check for the Version
 field. If this value is a version number larger than the version
 which the system understands, the system SHOULD NOT use this object.
 This allows the version number to indicate that the object contains
-mandatory to understand fields. New version numbers can only be
-defined in an RFC that updates this specification or it successors.
+mandatory to understand fields. 
 
 The Name value is concatenated to the Base Name value to get the name
 of the sensor. The resulting name needs to uniquely identify and
@@ -333,7 +332,7 @@ are problematic for privacy reasons and should be used
 with care or avoided as described in {{RFC7721}}. 
 
 The resulting concatenated name MUST consist only of characters out of
-the set "A" to "Z", "a" to "z", "0" to "9", "-", ":", ".", "/", or "_" and
+the set "A" to "Z", "a" to "z", "0" to "9", "-", ":", ".", or "_" and
 it MUST start with a character out of the set "A" to "Z", "a" to "z",
 or "0" to "9". This restricted character set was chosen so that these
 names can be directly used as in other types of URI including segments
