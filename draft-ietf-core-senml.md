@@ -422,8 +422,7 @@ The root JSON value consists of an array with one JSON object for each
 SenML Record.  All the fields in the above table MAY occur in the
 records with member values of the type specified in the table.
 
-Only the UTF-8 form of JSON is allowed. Characters in the String Value
-are encoded using the escape sequences defined in {{RFC7159}}. Octets
+Only the UTF-8 form of JSON is allowed.  Octets
 in the Data Value are base64 encoded with URL safe alphabet as defined
 in Section 5 of {{RFC4648}}, with padding omitted.
 
@@ -526,8 +525,8 @@ resolved format.
 
 ### Multiple Data Types {#mult-types-ex}
 
-The following example shows a sensor that returns different data
-types.
+The following example shows a sensor that returns different data 
+types. 
 
 ~~~~
 {::include ex7.gen.json}
