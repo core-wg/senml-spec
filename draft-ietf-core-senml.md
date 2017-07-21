@@ -1510,25 +1510,6 @@ Registrant Contact: The IESG.
 
 XML: N/A, the requested URIs are XML namespaces
 
-## CoAP Content-Format Registration
-
-IANA is requested to assign CoAP Content-Format IDs for the SenML
-media types in the "CoAP Content-Formats" sub-registry, within the
-"CoRE Parameters" registry {{RFC7252}}. All IDs are assigned from the
-"Expert Review" (0-255) range. The assigned IDs are show in
-{{tbl-coap-content-formats}}.
-
-| Media type               | ID  |
-| application/senml+json   | TBD |
-| application/sensml+json  | TBD |
-| application/senml+cbor   | TBD |
-| application/sensml+cbor  | TBD |
-| application/senml+xml    | TBD |
-| application/sensml+xml   | TBD |
-| application/senml+exi    | TBD |
-| application/sensml+exi   | TBD |
-{: #tbl-coap-content-formats cols="l l" title="CoAP Content-Format IDs"}
- 
 
 # Security Considerations {#sec-sec}
 
