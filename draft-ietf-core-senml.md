@@ -362,10 +362,6 @@ If the Base Value or Value is not present, the missing field(s)
 are considered to have a value of zero. The Base Value and Value are
 added together to get the value of the measurement.
 
-Representing the statistical characteristics of measurements, such as
-accuracy, can be very complex. Future specification may add new
-fields to provide better information about the statistical
-properties of the measurement.
 
 ## Resolved Records
 
@@ -382,8 +378,6 @@ if the Record did not contain Unit the Base Unit is applied to the
 record, etc. In addition the records need to be in chronological
 order.  An example of this is show in {{resolved-ex}}.
 
-Future specification that defines new base fields need to specify
-how the field is resolved.
 
 ## Associating Meta-data
 
