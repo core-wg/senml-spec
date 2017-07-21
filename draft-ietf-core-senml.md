@@ -855,7 +855,6 @@ are made with pull requests to the github repo at TODO.
 
 | Symbol   | Description                                       | Type  | Reference |
 | m        | meter                                             | float |   |
-| kg       | kilogram                                          | float |   |
 | g        | gram                                              | float |   |
 | s        | second                                            | float |   |
 | A        | ampere                                            | float |   |
@@ -902,8 +901,7 @@ are made with pull requests to the github repo at TODO.
 | dBW      | decibel relative to 1 W (power level)             | float |   |
 | Bspl     | bel (sound pressure level; logarithmic quantity) | float |   |
 | count    | 1 (counter value)                                 | float |   |
-| /        | 1 (Ratio e.g., value of a switch, note 1)         | float |   |
-| %        | 1 (Ratio e.g., value of a switch, note 1)         | float |   |
+| /        | 1 (Ratio e.g., value of a switch)         | float |   |
 | %RH      | Percentage (Relative Humidity)                    | float |   |
 | %EL      | Percentage (remaining battery energy level)       | float |   |
 | EL       | seconds (remaining battery energy level)          | float |   |
@@ -914,13 +912,6 @@ are made with pull requests to the github repo at TODO.
 | S/m      | Siemens per meter (conductivity)                  | float |   |
 {: #tbl-iana-symbols cols='r l l'}
 
-* Note 1: A value of 0.0 indicates the switch is off while 1.0
-  indicates on and 0.5 would be half on.  The preferred name of this
-  unit is "/".  For historical reasons, the name "%" is also provided
-  for the same unit -- but note that while that name strongly suggests
-  a percentage (0..100) --- it is however NOT a percentage, but the
-  absolute ratio!
-  
 * Note 2: Assumed to be in WGS84 unless another reference frame is
   known for the sensor.
 
