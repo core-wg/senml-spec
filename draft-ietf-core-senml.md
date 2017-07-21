@@ -284,8 +284,7 @@ Value:
 : Value of the entry.  Optional if a Sum value is present, otherwise
   required. Values are represented using basic data types. This
   specification defines floating point numbers ("v" field for
-  "Value"), booleans ("vb" for "Boolean Value"), strings ("vs" for
-  "String Value") and binary data ("vd" for "Data Value"). Exactly one
+  "Value"), and binary data ("vd" for "Data Value"). Exactly one
   value field MUST appear unless there is Sum field in which case it
   is allowed to have no Value field.
 
@@ -307,9 +306,7 @@ Update Time:
 The SenML format can be extended with further custom fields. Both
 new base and regular fields are allowed. See
 {{iana-senml-label-registry}} for details.  Implementations MUST
-ignore fields they don't recognize unless that field has a label
-name that ends with the '_' character in which case an error MUST be
-generated. 
+ignore fields they don't recognize. 
 
 All SenML Records in a Pack MUST have the same version number. This is
 typically done by adding a Base Version field to only the first Record
