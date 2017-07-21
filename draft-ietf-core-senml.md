@@ -90,8 +90,8 @@ informative:
 --- abstract
 
 This specification defines media types for representing simple sensor
-measurements and device parameters in the Sensor Measurement Lists
-(SenML). Representations are defined in JavaScript Object Notation
+measurements and device parameters.
+Representations are defined in JavaScript Object Notation
 (JSON), Concise Binary Object Representation (CBOR), eXtensible Markup
 Language (XML), and Efficient XML Interchange (EXI), which share the
 common SenML data model. A simple sensor, such as a temperature
@@ -119,9 +119,7 @@ that this media type would not be suitable for.  SenML strikes a
 balance between having some information about the sensor carried with
 the sensor data so that the data is self describing but it also tries
 to make that a fairly minimal set of auxiliary information for
-efficiency reason. Other information about the sensor can be
-discovered by other methods such as using the CoRE Link Format
-{{RFC6690}}.
+efficiency reason. 
 
 SenML is defined by a data model for measurements and simple meta-data
 about measurements and devices. The data is structured as a single
