@@ -304,8 +304,7 @@ Update Time:
 ## Considerations
 
 The SenML format can be extended with further custom fields. Both
-new base and regular fields are allowed. See
-{{iana-senml-label-registry}} for details.  Implementations MUST
+new base and regular fields are allowed.   Implementations MUST
 ignore fields they don't recognize. 
 
 All SenML Records in a Pack MUST have the same version number. This is
@@ -842,80 +841,77 @@ For CBOR, we use integer labels and native binary data
 {: #senmlcddl-cbor title="CBOR-specific CDDL specification for SenML"}
 
 
-# IANA Considerations
+# Reistry Considerations
 
-Note to RFC Editor: Please replace all occurrences of "RFC-AAAA" with
-the RFC number of this specification.
+
 
 ## Units Registry {#sec-units}
 
-IANA will create a registry of SenML unit symbols. The primary purpose
+The primary purpose
 of this registry is to make sure that symbols uniquely map to give
 type of measurement. Definitions for many of these units can be found
-in location such as {{NIST811}} and {{BIPM}}.  Units marked with an
-asterisk are NOT RECOMMENDED to be produced by new implementations,
-but are in active use and SHOULD be implemented by consumers that can
-use the related base units.
+in location such as {{NIST811}} and {{BIPM}}. Updates to this table
+are made with pull requests to the github repo at TODO. 
 
 | Symbol   | Description                                       | Type  | Reference |
-| m        | meter                                             | float | RFC-AAAA  |
-| kg       | kilogram                                          | float | RFC-AAAA  |
-| g        | gram*                                             | float | RFC-AAAA  |
-| s        | second                                            | float | RFC-AAAA  |
-| A        | ampere                                            | float | RFC-AAAA  |
-| K        | kelvin                                            | float | RFC-AAAA  |
-| cd       | candela                                           | float | RFC-AAAA  |
-| mol      | mole                                              | float | RFC-AAAA  |
-| Hz       | hertz                                             | float | RFC-AAAA  |
-| rad      | radian                                            | float | RFC-AAAA  |
-| sr       | steradian                                         | float | RFC-AAAA  |
-| N        | newton                                            | float | RFC-AAAA  |
-| Pa       | pascal                                            | float | RFC-AAAA  |
-| J        | joule                                             | float | RFC-AAAA  |
-| W        | watt                                              | float | RFC-AAAA  |
-| C        | coulomb                                           | float | RFC-AAAA  |
-| V        | volt                                              | float | RFC-AAAA  |
-| F        | farad                                             | float | RFC-AAAA  |
-| Ohm      | ohm                                               | float | RFC-AAAA  |
-| S        | siemens                                           | float | RFC-AAAA  |
-| Wb       | weber                                             | float | RFC-AAAA  |
-| T        | tesla                                             | float | RFC-AAAA  |
-| H        | henry                                             | float | RFC-AAAA  |
-| Cel      | degrees Celsius                                   | float | RFC-AAAA  |
-| lm       | lumen                                             | float | RFC-AAAA  |
-| lx       | lux                                               | float | RFC-AAAA  |
-| Bq       | becquerel                                         | float | RFC-AAAA  |
-| Gy       | gray                                              | float | RFC-AAAA  |
-| Sv       | sievert                                           | float | RFC-AAAA  |
-| kat      | katal                                             | float | RFC-AAAA  |
-| m2       | square meter (area)                               | float | RFC-AAAA  |
-| m3       | cubic meter (volume)                              | float | RFC-AAAA  |
-| l        | liter (volume)*                                   | float | RFC-AAAA  |
-| m/s      | meter per second (velocity)                       | float | RFC-AAAA  |
-| m/s2     | meter per square second (acceleration)            | float | RFC-AAAA  |
-| m3/s     | cubic meter per second (flow rate)                | float | RFC-AAAA  |
-| l/s      | liter per second (flow rate)*                     | float | RFC-AAAA  |
-| W/m2     | watt per square meter (irradiance)                | float | RFC-AAAA  |
-| cd/m2    | candela per square meter (luminance)              | float | RFC-AAAA  |
-| bit      | bit (information content)                         | float | RFC-AAAA  |
-| bit/s    | bit per second (data rate)                        | float | RFC-AAAA  |
-| lat      | degrees latitude (note 2)                         | float | RFC-AAAA  |
-| lon      | degrees longitude (note 2)                        | float | RFC-AAAA  |
-| pH       | pH value (acidity; logarithmic quantity)          | float | RFC-AAAA  |
-| dB       | decibel (logarithmic quantity)                    | float | RFC-AAAA  |
-| dBW      | decibel relative to 1 W (power level)             | float | RFC-AAAA  |
-| Bspl     | bel (sound pressure level; logarithmic quantity)* | float | RFC-AAAA  |
-| count    | 1 (counter value)                                 | float | RFC-AAAA  |
-| /        | 1 (Ratio e.g., value of a switch, note 1)         | float | RFC-AAAA  |
-| %        | 1 (Ratio e.g., value of a switch, note 1)*        | float | RFC-AAAA  |
-| %RH      | Percentage (Relative Humidity)                    | float | RFC-AAAA  |
-| %EL      | Percentage (remaining battery energy level)       | float | RFC-AAAA  |
-| EL       | seconds (remaining battery energy level)          | float | RFC-AAAA  |
-| 1/s      | 1 per second (event rate)                         | float | RFC-AAAA  |
-| 1/min    | 1 per minute (event rate, "rpm")*                 | float | RFC-AAAA  |
-| beat/min | 1 per minute (Heart rate in beats per minute)*    | float | RFC-AAAA  |
-| beats    | 1 (Cumulative number of heart beats)*             | float | RFC-AAAA  |
-| S/m      | Siemens per meter (conductivity)                  | float | RFC-AAAA  |
+| m        | meter                                             | float |   |
+| kg       | kilogram                                          | float |   |
+| g        | gram                                              | float |   |
+| s        | second                                            | float |   |
+| A        | ampere                                            | float |   |
+| K        | kelvin                                            | float |   |
+| cd       | candela                                           | float |   |
+| mol      | mole                                              | float |   |
+| Hz       | hertz                                             | float |   |
+| rad      | radian                                            | float |   |
+| sr       | steradian                                         | float |   |
+| N        | newton                                            | float |   |
+| Pa       | pascal                                            | float |   |
+| J        | joule                                             | float |   |
+| W        | watt                                              | float |   |
+| C        | coulomb                                           | float |   |
+| V        | volt                                              | float |   |
+| F        | farad                                             | float |   |
+| Ohm      | ohm                                               | float |   |
+| S        | siemens                                           | float |   |
+| Wb       | weber                                             | float |   |
+| T        | tesla                                             | float |   |
+| H        | henry                                             | float |   |
+| Cel      | degrees Celsius                                   | float |   |
+| lm       | lumen                                             | float |   |
+| lx       | lux                                               | float |   |
+| Bq       | becquerel                                         | float |   |
+| Gy       | gray                                              | float |   |
+| Sv       | sievert                                           | float |   |
+| kat      | katal                                             | float |   |
+| m2       | square meter (area)                               | float |   |
+| m3       | cubic meter (volume)                              | float |   |
+| l        | liter (volume)                                   | float |   |
+| m/s      | meter per second (velocity)                       | float |   |
+| m/s2     | meter per square second (acceleration)            | float |   |
+| m3/s     | cubic meter per second (flow rate)                | float |   |
+| l/s      | liter per second (flow rate)                     | float |   |
+| W/m2     | watt per square meter (irradiance)                | float |   |
+| cd/m2    | candela per square meter (luminance)              | float |   |
+| bit      | bit (information content)                         | float |   |
+| bit/s    | bit per second (data rate)                        | float |   |
+| lat      | degrees latitude (note 2)                         | float |   |
+| lon      | degrees longitude (note 2)                        | float |   |
+| pH       | pH value (acidity; logarithmic quantity)          | float |   |
+| dB       | decibel (logarithmic quantity)                    | float |   |
+| dBW      | decibel relative to 1 W (power level)             | float |   |
+| Bspl     | bel (sound pressure level; logarithmic quantity) | float |   |
+| count    | 1 (counter value)                                 | float |   |
+| /        | 1 (Ratio e.g., value of a switch, note 1)         | float |   |
+| %        | 1 (Ratio e.g., value of a switch, note 1)         | float |   |
+| %RH      | Percentage (Relative Humidity)                    | float |   |
+| %EL      | Percentage (remaining battery energy level)       | float |   |
+| EL       | seconds (remaining battery energy level)          | float |   |
+| 1/s      | 1 per second (event rate)                         | float |   |
+| 1/min    | 1 per minute (event rate, "rpm")                 | float |   |
+| beat/min | 1 per minute (Heart rate in beats per minute)    | float |   |
+| beats    | 1 (Cumulative number of heart beats)             | float |   |
+| S/m      | Siemens per meter (conductivity)                  | float |   |
 {: #tbl-iana-symbols cols='r l l'}
 
 * Note 1: A value of 0.0 indicates the switch is off while 1.0
@@ -928,8 +924,8 @@ use the related base units.
 * Note 2: Assumed to be in WGS84 unless another reference frame is
   known for the sensor.
 
-New entries can be added to the registration by either Expert Review
-or IESG Approval as defined in {{RFC5226}}.  Experts should exercise
+New entries can be added to the registration by a pull request.
+Commiters should exercise
 their own good judgment but need to consider the following guidelines:
 
 1. There needs to be a real and compelling use for any new unit to be
@@ -983,69 +979,7 @@ their own good judgment but need to consider the following guidelines:
    Units of Measure {{UCUM}}.
 
 
-## SenML Label Registry {#iana-senml-label-registry}
 
-IANA will create a new registry for SenML labels. The initial content
-of the registry is:
-
-| Name          | Label|CBOR| XML Type| ID | Note    |
-| Base Name     | bn   | -2 | string  |  a | RFCXXXX |
-| Base Sum      | bs   | -6 | double  |  a | RFCXXXX |
-| Base Time     | bt   | -3 | double  |  a | RFCXXXX |
-| Base Unit     | bu   | -4 | string  |  a | RFCXXXX |
-| Base Value    | bv   | -5 | double  |  a | RFCXXXX |
-| Base Version  | bver | -1 | int     |  a | RFCXXXX |
-| Boolean Value | vb   |  4 | boolean |  a | RFCXXXX |
-| Data Value    | vd   |  8 | string  |  a | RFCXXXX |
-| Name          | n    |  0 | string  |  a | RFCXXXX |
-| String Value  | vs   |  3 | string  |  a | RFCXXXX |
-| Time          | t    |  6 | double  |  a | RFCXXXX |
-| Unit          | u    |  1 | string  |  a | RFCXXXX |
-| Update Time   | ut   |  7 | double  |  a | RFCXXXX |
-| Value         | v    |  2 | double  |  a | RFCXXXX |
-| Value Sum     | s    |  5 | double  |  a | RFCXXXX |
-| Link          | l    |  9 | string  |  a | RFCXXXX |
-{: #tbl-seml-reg cols='r l l' title="SenML Labels"}
-
-Note to RFC Editor. Please replace RFCXXXX with the number for this
-RFC.
-
-All new entries must define the Label Name, Label, and XML Type but
-the CBOR labels SHOULD be left empty as CBOR will use the string
-encoding for any new labels. The ID fields contains the EXI schemaId value
-of the first Schema which includes this label or is empty if this
-label was not intended for use with EXI. The Note field SHOULD contain
-information about where to find out more information about this label.
-
-The JSON, CBOR, and EXI types are derived from the XML type. All XML
-numeric types such as double, float, integer and int become a JSON
-Number. XML boolean and string become a JSON Boolean and String
-respectively. CBOR represents numeric values with a CBOR type that
-does not loose any information from the JSON value. EXI uses the XML
-types.
-
-New entries can be added to the registration by either Expert Review
-or IESG Approval as defined in {{RFC5226}}.  Experts should exercise
-their own good judgment but need to consider that shorter labels
-should have more strict review.
-
-All new SenML labels that have "base" semantics (see {{senml-base}})
-MUST start with character 'b'. Regular labels MUST NOT start with that
-character.
-
-Extensions that add a label that is intended for use with XML need to
-create a new RelaxNG scheme that includes all the labels in the IANA
-registry.
-
-Extensions that add a label that is intended for use with EXI need to
-create a new XSD Schema that includes all the labels in the IANA
-registry and then allocate a new EXI schemaId value. Moving to the next letter
-in the alphabet is the suggested way to create the new value for the EXI schemaId.
-Any labels with previously blank ID values SHOULD be updated in the
-IANA table to have their ID set to this new schemaId value.
-
-Extensions that are mandatory to understand to correctly process the
-Pack MUST have a label name that ends with the '_' character.
 
 ## Media Type Registration {#sec-iana-media}
 
@@ -1567,7 +1501,7 @@ Change controller: IESG
 
 ## XML Namespace Registration {#sec-iana-url}
 
-This document registers the following XML namespaces in the IETF XML
+This document uses the following XML namespaces in the IETF XML
 registry defined in {{RFC3688}}.
 
 URI: urn:ietf:params:xml:ns:senml
@@ -1615,6 +1549,9 @@ information about the source of the data.
 
 # Acknowledgement
 
+Much of the text was written by Cullen Jennings, Ari Keranen, Jari
+Arkko, Zach Shelby and Carsten Bormann. 
+
 We would like to thank Alexander Pelov, Andrew McClure, Andrew
 Mcgregor, Bjoern Hoehrmann, Christian Amsuess, Christian Groves,
 Daniel Peintner, Jan-Piet Mens, Joe Hildebrand, John Klensin, Karl
@@ -1625,19 +1562,3 @@ comments.
 
 --- back
 
-# Links Extension
-
-A field to support a link extension for SenML is defined as a
-string field by this specification. The link extension can be used
-for additional information about a SenML Record.  The definition and
-usage of the contents of this value are specified in
-{{I-D.ietf-core-links-json}}.
-
-For JSON and XML the field has a label of "l" and a value that is
-a string.
-
-The following shows an example of the links extension.
-
-~~~~
-{::include ex8.gen.wrap.json}
-~~~~
