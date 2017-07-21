@@ -18,8 +18,6 @@ senml = element senml {
   attribute ut { xsd:double }?,
 
   attribute v { xsd:double }?,
-  attribute vb { xsd:boolean }?,
-  attribute vs { xsd:string }?,
   attribute vd { xsd:string }?
 }
 

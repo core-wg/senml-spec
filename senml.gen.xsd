@@ -18,8 +18,6 @@ xmlns:ns1="urn:ietf:params:xml:ns:senml">
       <xs:attribute name="u" type="xs:string" />
       <xs:attribute name="ut" type="xs:double" />
       <xs:attribute name="v" type="xs:double" />
-      <xs:attribute name="vb" type="xs:boolean" />
-      <xs:attribute name="vs" type="xs:string" />
       <xs:attribute name="vd" type="xs:string" />
     </xs:complexType>
   </xs:element>

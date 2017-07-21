@@ -415,7 +415,6 @@ representing the JSON SenML Records.
 | Value Sum     | s    | Number         |
 | Time          | t    | Number         |
 | Update Time   | ut   | Number         |
-
 {: #tbl-json-labels cols='r l l' title="JSON SenML Labels"}
 
 The root JSON value consists of an array with one JSON object for each
@@ -604,8 +603,7 @@ converted back to an IEEE double precision floating point value, it
 has exactly the same value as the original Number.  For the version
 number, only an unsigned integer is allowed.
 
-* Characters in the String Value are encoded using a definite length
-text string (type 3). Octets in the Data Value are encoded using a
+*  Octets in the Data Value are encoded using a
 definite length byte string (type 2).
 
 * For compactness, the CBOR representation uses integers for the 
@@ -625,8 +623,6 @@ future labels without needing to update implementations.
 | Name                      | n          |          0 |
 | Units                     | u          |          1 |
 | Value                     | v          |          2 |
-| String Value              | vs         |          3 |
-| Boolean Value             | vb         |          4 |
 | Value Sum                 | s          |          5 |
 | Time                      | t          |          6 |
 | Update Time               | ut         |          7 |
@@ -680,9 +676,7 @@ XML attribute values ("type") as used in the XML senml elements.
 | Name          | n    | string  |
 | Unit          | u    | string  |
 | Value         | v    | double  |
-| String Value  | vs   | string  |
 | Data Value    | vd   | string  |
-| Boolean Value | vb   | boolean |
 | Value Sum     | s    | double  |
 | Time          | t    | double  |
 | Update Time   | ut   | double  |
