@@ -264,9 +264,8 @@ Time.
  
 Version:
 : Version number of media type format. This field is an optional
-  positive integer and defaults to 5 if not
-  present. \[RFC Editor: change the default value to 10 when this
-  specification is published as an RFC and remove this note\]
+  positive integer and defaults to 9 if not
+  present.
 
 ## Regular Fields
 
