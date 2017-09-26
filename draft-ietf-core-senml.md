@@ -536,7 +536,7 @@ collected over time and continuously added to the object. This mode of
 operation is optional, but systems or protocols using SenML in this
 fashion MUST specify that they are doing this. SenML defines a
 separate media type to indicate Sensor Streaming Measurement Lists
-(SensML) for this usage (see {{sec-senml-json}}).  In this situation
+(SensML) for this usage (see {{sec-sensml-json}}).  In this situation
 the SensML stream can be sent and received in a partial fashion, i.e.,
 a measurement entry can be read as soon as the SenML Record is
 received and not have to wait for the full SensML Stream to be
