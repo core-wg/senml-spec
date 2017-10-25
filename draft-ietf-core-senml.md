@@ -1044,9 +1044,9 @@ use the related base units.
 * Note 2: Assumed to be in WGS84 unless another reference frame is
   known for the sensor.
 
-New entries can be added to the registration by either Expert Review
-or IESG Approval as defined in {{RFC5226}}.  Experts should exercise
-their own good judgment but need to consider the following guidelines:
+New entries can be added to the registration by Expert Review as defined
+in {{RFC5226}}. Experts should exercise their own good judgment but
+need to consider the following guidelines:
 
 1. There needs to be a real and compelling use for any new unit to be
    added.
