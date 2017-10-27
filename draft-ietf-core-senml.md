@@ -1019,15 +1019,15 @@ use the related base units.
 | cd/m2    | candela per square meter (luminance)              | float | RFC-AAAA  |
 | bit      | bit (information content)                         | float | RFC-AAAA  |
 | bit/s    | bit per second (data rate)                        | float | RFC-AAAA  |
-| lat      | degrees latitude (note 2)                         | float | RFC-AAAA  |
-| lon      | degrees longitude (note 2)                        | float | RFC-AAAA  |
+| lat      | degrees latitude (note 1)                         | float | RFC-AAAA  |
+| lon      | degrees longitude (note 1)                        | float | RFC-AAAA  |
 | pH       | pH value (acidity; logarithmic quantity)          | float | RFC-AAAA  |
 | dB       | decibel (logarithmic quantity)                    | float | RFC-AAAA  |
 | dBW      | decibel relative to 1 W (power level)             | float | RFC-AAAA  |
 | Bspl     | bel (sound pressure level; logarithmic quantity)* | float | RFC-AAAA  |
 | count    | 1 (counter value)                                 | float | RFC-AAAA  |
-| /        | 1 (Ratio e.g., value of a switch, note 1)         | float | RFC-AAAA  |
-| %        | 1 (Ratio e.g., value of a switch, note 1)*        | float | RFC-AAAA  |
+| /        | 1 (Ratio e.g., value of a switch, note 2)         | float | RFC-AAAA  |
+| %        | 1 (Ratio e.g., value of a switch, note 2)*        | float | RFC-AAAA  |
 | %RH      | Percentage (Relative Humidity)                    | float | RFC-AAAA  |
 | %EL      | Percentage (remaining battery energy level)       | float | RFC-AAAA  |
 | EL       | seconds (remaining battery energy level)          | float | RFC-AAAA  |
@@ -1038,15 +1038,15 @@ use the related base units.
 | S/m      | Siemens per meter (conductivity)                  | float | RFC-AAAA  |
 {: #tbl-iana-symbols cols='r l l'}
 
-* Note 1: A value of 0.0 indicates the switch is off while 1.0
+* Note 1: Assumed to be in WGS84 unless another reference frame is
+  known for the sensor.
+
+* Note 2: A value of 0.0 indicates the switch is off while 1.0
   indicates on and 0.5 would be half on.  The preferred name of this
   unit is "/".  For historical reasons, the name "%" is also provided
   for the same unit -- but note that while that name strongly suggests
   a percentage (0..100) --- it is however NOT a percentage, but the
   absolute ratio!
-  
-* Note 2: Assumed to be in WGS84 unless another reference frame is
-  known for the sensor.
 
 New entries can be added to the registration by either Expert Review
 or IESG Approval as defined in {{RFC5226}}.  Experts should exercise
