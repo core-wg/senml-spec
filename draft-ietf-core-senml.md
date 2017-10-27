@@ -102,6 +102,7 @@ informative:
   RFC4122: 
   RFC5952: 
   RFC6690:
+  RFC6973: privacycons
   RFC7111: csvfrag
   RFC7721:
   I-D.arkko-core-dev-urn:
@@ -374,9 +375,8 @@ name is to include some bit string that has guaranteed uniqueness
 (such as a 1-wire address) that is assigned to the device. Some of the
 examples in this draft use the device URN type as specified in
 {{I-D.arkko-core-dev-urn}}. UUIDs {{RFC4122}} are another way to
-generate a unique name. Note that long-term stable unique identifiers
-are problematic for privacy reasons and should be used
-with care or avoided as described in {{RFC7721}}. 
+generate a unique name.  See {{sec-privacy}} for privacy considerations
+that apply to the use of long-term stable unique identifiers.
 
 The resulting concatenated name MUST consist only of characters out of
 the set "A" to "Z", "a" to "z", "0" to "9", "-", ":", ".", "/", or "_" and
@@ -1735,10 +1735,12 @@ TLS that can provide integrity, confidentiality, and authentication
 information about the source of the data.
 
 The name fields need to uniquely identify the sources or destinations
-of the values in a SenML Pack. However, long-term stable unique
-identifiers are problematic for privacy reasons and should be used
-with care or avoided as described in {{RFC7721}}.
-
+of the values in a SenML Pack.  However, the use of long-term stable
+unique identifiers can be problematic for privacy reasons {{RFC6973}},
+depending on the application and the potential of these identifiers to
+be used in correlation with other information.  They should be used
+with care or avoided as for example described for IPv6 addresses in
+{{RFC7721}}.
 
 # Acknowledgement
 
