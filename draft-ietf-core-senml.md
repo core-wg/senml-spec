@@ -72,7 +72,7 @@ normative:
   RFC2119: 
   RFC3688:
   RFC4648:
-  RFC5226: 
+  RFC8126: 
   RFC6838: 
   RFC7049: 
   RFC7159:
@@ -1045,7 +1045,7 @@ use the related base units.
   known for the sensor.
 
 New entries can be added to the registration by Expert Review as defined
-in {{RFC5226}}. Experts should exercise their own good judgment but
+in {{RFC8126}}. Experts should exercise their own good judgment but
 need to consider the following guidelines:
 
 1. There needs to be a real and compelling use for any new unit to be
@@ -1141,7 +1141,7 @@ does not loose any information from the JSON value. EXI uses the XML
 types.
 
 New entries can be added to the registration by either Expert Review
-or IESG Approval as defined in {{RFC5226}}.  Experts should exercise
+or IESG Approval as defined in {{RFC8126}}.  Experts should exercise
 their own good judgment but need to consider that shorter labels
 should have more strict review.
 
