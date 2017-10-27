@@ -429,6 +429,10 @@ if the Record did not contain Unit the Base Unit is applied to the
 record, etc. In addition the records need to be in chronological
 order.  An example of this is show in {{resolved-ex}}.
 
+The Version field MUST NOT be present if the SenML version defined in
+this document is used and MUST be present otherwise in the first SenML
+Record.
+
 Future specification that defines new base fields need to specify
 how the field is resolved.
 
