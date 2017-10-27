@@ -1734,15 +1734,20 @@ another container or transport protocol such as S/MIME or HTTP with
 TLS that can provide integrity, confidentiality, and authentication
 information about the source of the data.
 
+The name fields need to uniquely identify the sources or destinations
+of the values in a SenML Pack. However, long-term stable unique
+identifiers are problematic for privacy reasons and should be used
+with care or avoided as described in {{RFC7721}}.
+
 
 # Acknowledgement
 
 We would like to thank Alexander Pelov, Andrew McClure, Andrew
 Mcgregor, Bjoern Hoehrmann, Christian Amsuess, Christian Groves,
-Daniel Peintner, Jan-Piet Mens, Joe Hildebrand, John Klensin, Karl
-Palsson, Lennart Duhrsen, Lisa Dusseault, Lyndsay Campbell, Martin
-Thomson, Michael Koster, Peter Saint-Andre, and Stephen Farrell,
-for their review comments.
+Daniel Peintner, Jan-Piet Mens, Jim Schaad, Joe Hildebrand, John
+Klensin, Karl Palsson, Lennart Duhrsen, Lisa Dusseault, Lyndsay
+Campbell, Martin Thomson, Michael Koster, Peter Saint-Andre, and
+Stephen Farrell, for their review comments.
 
 
 --- back
