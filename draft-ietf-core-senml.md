@@ -339,11 +339,11 @@ Sum:
 Time:
 : Time when value was recorded. Optional.
 
-Update Time:
-: An optional time in seconds that represents the maximum time before
-  this sensor will provide an updated reading for a measurement. This
-  can be used to detect the failure of sensors or communications path
-  from the sensor.
+Update Time: 
+: Period of time in seconds that represents the maximum time before
+  this sensor will provide an updated reading for a measurement.
+  Optional. This can be used to detect the failure of sensors or
+  communications path from the sensor.
 
 ## Considerations
 
