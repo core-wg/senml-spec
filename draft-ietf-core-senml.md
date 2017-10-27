@@ -423,8 +423,8 @@ formats.
 
 A SenML Record is referred to as "resolved" if it does not contain any
 base values, i.e., labels starting with character 'b', except for
-Version field (see below), and has no relative times. To resolve the
-records the base values of the SenML Pack (if any) are applied to the
+Version fields (see below), and has no relative times. To resolve the
+records, the base values of the SenML Pack (if any) are applied to the
 Record. That is, name and base name are concatenated, base time is
 added to the time of the Record, if the Record did not contain Unit
 the Base Unit is applied to the record, etc. In addition the records
