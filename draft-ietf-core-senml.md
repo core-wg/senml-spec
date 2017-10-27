@@ -707,6 +707,12 @@ sensor measurement as in {{co-ex}}.
 {::include ex3.gen.cbor.hex}
 ~~~~
 
+In CBOR diagnostic notation (Section 6 of {{RFC7049}}), this is:
+
+~~~~
+{::include ex3.gen.cbor.diag}
+~~~~
+
 
 # XML Representation (application/senml+xml) {#sec-xml-example}
 
