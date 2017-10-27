@@ -355,7 +355,7 @@ name that ends with the '_' character in which case an error MUST be
 generated. 
 
 All SenML Records in a Pack MUST have the same version number. This is
-typically done by adding a Base Version field to only to the first Record
+typically done by adding a Base Version field to only the first Record
 in the Pack.
 
 Systems reading one of the objects MUST check for the Version
@@ -422,16 +422,17 @@ big data applications and intermediate forms when converting to other
 formats.
 
 A SenML Record is referred to as "resolved" if it does not contain any
-base values and has no relative times, but the base values of the
-SenML Pack (if any) are applied to the Record. That is, name and base
-name are concatenated, base time is added to the time of the Record,
-if the Record did not contain Unit the Base Unit is applied to the
-record, etc. In addition the records need to be in chronological
-order.  An example of this is show in {{resolved-ex}}.
+base values, except for Version field (see below), and has no relative
+times, but the base values of the SenML Pack (if any) are applied to
+the Record. That is, name and base name are concatenated, base time is
+added to the time of the Record, if the Record did not contain Unit
+the Base Unit is applied to the record, etc. In addition the records
+need to be in chronological order.  An example of this is show in
+{{resolved-ex}}.
 
-The Version field MUST NOT be present if the SenML version defined in
-this document is used and MUST be present otherwise in all the SenML
-Record.
+The Version field MUST NOT be present in resolved records if the SenML
+version defined in this document is used and MUST be present otherwise
+in all the SenML Records.
 
 Future specification that defines new base fields need to specify
 how the field is resolved.
