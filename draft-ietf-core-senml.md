@@ -362,7 +362,8 @@ Systems reading one of the objects MUST check for the Version
 field. If this value is a version number larger than the version
 which the system understands, the system SHOULD NOT use this object.
 This allows the version number to indicate that the object contains
-mandatory to understand fields. New version numbers can only be
+structure or semantics that is different from what is defined in the present document
+beyond just making use of the extension points provided here. New version numbers can only be
 defined in an RFC that updates this specification or it successors.
 
 The Name value is concatenated to the Base Name value to get the name
