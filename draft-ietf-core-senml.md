@@ -355,7 +355,7 @@ name that ends with the '_' character in which case an error MUST be
 generated. 
 
 All SenML Records in a Pack MUST have the same version number. This is
-typically done by adding a Base Version field to only the first Record
+typically done by adding a Base Version field to only to the first Record
 in the Pack.
 
 Systems reading one of the objects MUST check for the Version
@@ -430,7 +430,7 @@ record, etc. In addition the records need to be in chronological
 order.  An example of this is show in {{resolved-ex}}.
 
 The Version field MUST NOT be present if the SenML version defined in
-this document is used and MUST be present otherwise in the first SenML
+this document is used and MUST be present otherwise in all the SenML
 Record.
 
 Future specification that defines new base fields need to specify
