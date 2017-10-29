@@ -365,27 +365,32 @@ This allows the version number to indicate that the object contains
 mandatory to understand fields. New version numbers can only be
 defined in an RFC that updates this specification or it successors.
 
-The Name value is concatenated to the Base Name value to get the name
-of the sensor. The resulting name needs to uniquely identify and
-differentiate the sensor from all others.
-It is RECOMMENDED that the full names are
-represented as URIs {{RFC3986}} or URNs {{RFC2141}}. One way to create a unique
-name is to include some bit string that has guaranteed uniqueness
-(such as a 1-wire address) that is assigned to the device. Some of the
-examples in this draft use the device URN type as specified in
-{{I-D.arkko-core-dev-urn}}. UUIDs {{RFC4122}} are another way to
-generate a unique name. Note that long-term stable unique identifiers
-are problematic for privacy reasons and should be used
-with care or avoided as described in {{RFC7721}}. 
+The Name value is concatenated to the Base Name value to yield the
+name of the sensor. The resulting concatenated name needs to uniquely
+identify and differentiate the sensor from all others. The
+concatenated name MUST consist only of characters out of the set "A"
+to "Z", "a" to "z", "0" to "9", "-", ":", ".", "/", and "_";
+furthermore, it MUST start with a character out of the set "A" to "Z",
+"a" to "z", or "0" to "9". This restricted character set was chosen so
+that concatenated names can be used directly within various URI
+schemes (including segments of an HTTP path with no special encoding)
+and can be used directly in many databases and analytic systems.
+{{RFC5952}} contains advice on encoding an IPv6 address in a name. See
+{{sec-privacy}} for privacy considerations that apply to the use of
+long-term stable unique identifiers.
 
-The resulting concatenated name MUST consist only of characters out of
-the set "A" to "Z", "a" to "z", "0" to "9", "-", ":", ".", "/", or "_" and
-it MUST start with a character out of the set "A" to "Z", "a" to "z",
-or "0" to "9". This restricted character set was chosen so that these
-names can be directly used in other types of URI including segments
-of an HTTP path with no special encoding and can be directly used in
-many databases and analytic systems. {{RFC5952}} contains advice on
-encoding an IPv6 address in a name.
+Although it is RECOMMENDED that concatenated names are represented as
+URIs {{RFC3986}} or URNs {{RFC2141}}, the restricted character set
+specified above puts strict limits on the URI schemes and URN
+namespaces that can be used. As a result, implementers need to take
+care in choosing the naming scheme for concatenated names, because
+such names both need to be unique and need to conform to the
+restricted character set. One approach is to include a bit string that
+has guaranteed uniqueness (such as a 1-wire address). Some of the
+examples within this document use the device URN namespace as
+specified in {{I-D.arkko-core-dev-urn}}. UUIDs {{RFC4122}} are another
+way to generate a unique name. However, the restricted character set
+does not allow the use of many URI schemes in names as such.
 
 If the Record has no Unit, the Base Unit is used as the Unit. Having
 no Unit and no Base Unit is allowed.
