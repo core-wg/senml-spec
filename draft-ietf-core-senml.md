@@ -1140,10 +1140,10 @@ respectively. CBOR represents numeric values with a CBOR type that
 does not loose any information from the JSON value. EXI uses the XML
 types.
 
-New entries can be added to the registration by either Expert Review
-or IESG Approval as defined in {{RFC8126}}.  Experts should exercise
-their own good judgment but need to consider that shorter labels
-should have more strict review.
+New entries can be added to the registration by Expert Review as
+defined in {{RFC8126}}.  Experts should exercise their own good
+judgment but need to consider that shorter labels should have more
+strict review.
 
 All new SenML labels that have "base" semantics (see {{senml-base}})
 MUST start with character 'b'. Regular labels MUST NOT start with that
