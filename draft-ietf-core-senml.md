@@ -1109,12 +1109,12 @@ need to consider the following guidelines:
   mile, foot, light year are not allowed. For most cases, the SI unit
   is preferred.
 
-  (Note that some amount of judgement will be required here, as even
+  (Note that some amount of judgment will be required here, as even
   SI itself is not entirely consistent in this respect.  For instance,
   for temperature {{ISO-80000-5}} defines a quantity, item 5-1
   (thermodynamic temperature), and a corresponding unit 5-1.a
   (Kelvin), and then goes ahead to define another quantity right
-  besides that, item 5-2 (“Celsius temperature”), and the
+  besides that, item 5-2 ("Celsius temperature"), and the
   corresponding unit 5-2.a (degree Celsius).  The latter quantity is
   defined such that it gives the thermodynamic temperature as a delta
   from T0 = 275.15 K.  ISO 80000-5 is defining both units side by
