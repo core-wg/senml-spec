@@ -72,7 +72,7 @@ normative:
   RFC2119: 
   RFC3688:
   RFC4648:
-  RFC5226: 
+  RFC8126: 
   RFC6838: 
   RFC7049: 
   RFC7159:
@@ -1061,9 +1061,9 @@ use the related base units.
   a percentage (0..100) --- it is however NOT a percentage, but the
   absolute ratio!
 
-New entries can be added to the registration by either Expert Review
-or IESG Approval as defined in {{RFC5226}}.  Experts should exercise
-their own good judgment but need to consider the following guidelines:
+New entries can be added to the registration by Expert Review as defined
+in {{RFC8126}}. Experts should exercise their own good judgment but
+need to consider the following guidelines:
 
 1. There needs to be a real and compelling use for any new unit to be
    added.
@@ -1157,10 +1157,10 @@ respectively. CBOR represents numeric values with a CBOR type that
 does not lose any information from the JSON value. EXI uses the XML
 types.
 
-New entries can be added to the registration by either Expert Review
-or IESG Approval as defined in {{RFC5226}}.  Experts should exercise
-their own good judgment but need to consider that shorter labels
-should have more strict review.
+New entries can be added to the registration by Expert Review as
+defined in {{RFC8126}}.  Experts should exercise their own good
+judgment but need to consider that shorter labels should have more
+strict review.
 
 All new SenML labels that have "base" semantics (see {{senml-base}})
 MUST start with character 'b'. Regular labels MUST NOT start with that
