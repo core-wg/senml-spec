@@ -97,7 +97,7 @@ normative:
       NIST: Special Publication 811
 
 informative:
-  RFC2141: 
+  RFC8141: 
   RFC3986: 
   RFC4122: 
   RFC5952: 
@@ -382,7 +382,7 @@ and can be used directly in many databases and analytic systems.
 long-term stable unique identifiers.
 
 Although it is RECOMMENDED that concatenated names are represented as
-URIs {{RFC3986}} or URNs {{RFC2141}}, the restricted character set
+URIs {{RFC3986}} or URNs {{RFC8141}}, the restricted character set
 specified above puts strict limits on the URI schemes and URN
 namespaces that can be used. As a result, implementers need to take
 care in choosing the naming scheme for concatenated names, because
