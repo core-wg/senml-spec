@@ -447,7 +447,7 @@ big data applications and intermediate forms when converting to other
 formats.
 
 A SenML Record is referred to as "resolved" if it does not contain any
-base values, i.e., labels starting with character 'b', except for
+base values, i.e., labels starting with the character 'b', except for
 Version fields (see below), and has no relative times. To resolve the
 records, the base values of the SenML Pack (if any) are applied to the
 Record. That is, name and base name are concatenated, base time is
@@ -941,7 +941,7 @@ measurements like power and energy, it is less obvious for something
 like temperature. Reporting the sum of the temperature makes it easy
 to compute averages even when the individual temperature values are
 not reported frequently enough to compute accurate
-averages. Implementors are encouraged to report the cumulative sum as
+averages. implementers are encouraged to report the cumulative sum as
 well as the raw value of a given sensor.
 
 Applications that use the cumulative sum values need to understand
@@ -1088,7 +1088,7 @@ need to consider the following guidelines:
    added.
 
 2. Units should define the semantic information and be chosen
-  carefully. Implementors need to remember that the same word may be
+  carefully. implementers need to remember that the same word may be
   used in different real-life contexts. For example, degrees when
   measuring latitude have no semantic relation to degrees when
   measuring temperature; thus two different units are needed.
@@ -1196,8 +1196,8 @@ should have more strict review.  New entries should not be made that
 counteract the advice at the end of {{considerations}}.
 
 All new SenML labels that have "base" semantics (see {{senml-base}})
-MUST start with character 'b'. Regular labels MUST NOT start with that
-character.
+MUST start with the character 'b'. Regular labels MUST NOT start with
+that character.
 
 Extensions that add a label that is intended for use with XML need to
 create a new RelaxNG scheme that includes all the labels in the IANA
