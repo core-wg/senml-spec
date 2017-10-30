@@ -72,7 +72,7 @@ normative:
   RFC2119: 
   RFC3688:
   RFC4648:
-  RFC5226: 
+  RFC8126: 
   RFC6838: 
   RFC7049: 
   RFC7159:
@@ -102,11 +102,11 @@ informative:
   RFC4122: 
   RFC5952: 
   RFC6690:
+  RFC6973: privacycons
   RFC7111: csvfrag
   RFC7721:
   I-D.arkko-core-dev-urn:
   I-D.greevenbosch-appsawg-cbor-cddl: 
-  I-D.ietf-core-links-json:
   IEEE802.1ba-2011:
     title: IEEE Standard for Local and metropolitan area networks--Audio Video Bridging (AVB) Systems
     author:
@@ -187,11 +187,11 @@ current value of 23.1 degrees Celsius.
 # Requirements and Design Goals
 
 The design goal is to be able to send simple sensor measurements in
-small packets on mesh networks from large numbers of constrained
-devices. Keeping the total size of payload under 80 bytes makes this
-easy to use on a wireless mesh network. It is always difficult to
-define what small code is, but there is a desire to be able to
-implement this in roughly 1 KB of flash on a 8 bit
+small packets from large numbers of constrained devices. Keeping the
+total size of payload small makes it easy to use SenML also in
+constrained networks, e.g., in a 6LoWPAN {{?RFC4944}}.  It is always
+difficult to define what small code is, but there is a desire to be
+able to implement this in roughly 1 KB of flash on a 8 bit
 microprocessor. Experience with power meters and other large scale
 deployments has indicated that the solution needs to support allowing
 multiple measurements to be batched into a single HTTP or CoAP
@@ -339,11 +339,11 @@ Sum:
 Time:
 : Time when value was recorded. Optional.
 
-Update Time:
-: An optional time in seconds that represents the maximum time before
-  this sensor will provide an updated reading for a measurement. This
-  can be used to detect the failure of sensors or communications path
-  from the sensor.
+Update Time: 
+: Period of time in seconds that represents the maximum time before
+  this sensor will provide an updated reading for a measurement.
+  Optional. This can be used to detect the failure of sensors or
+  communications path from the sensor.
 
 ## Considerations
 
@@ -358,34 +358,43 @@ All SenML Records in a Pack MUST have the same version number. This is
 typically done by adding a Base Version field to only the first Record
 in the Pack.
 
-Systems reading one of the objects MUST check for the Version
-field. If this value is a version number larger than the version
-which the system understands, the system SHOULD NOT use this object.
-This allows the version number to indicate that the object contains
-mandatory to understand fields. New version numbers can only be
-defined in an RFC that updates this specification or it successors.
+Systems reading one of the objects MUST check for the Version field.
+If this value is a version number larger than the version which the
+system understands, the system SHOULD NOT use this object. This allows
+the version number to indicate that the object contains structure or
+semantics that is different from what is defined in the present
+document beyond just making use of the extension points provided here.
+New version numbers can only be defined in an RFC that updates this
+specification or it successors.
 
-The Name value is concatenated to the Base Name value to get the name
-of the sensor. The resulting name needs to uniquely identify and
-differentiate the sensor from all others.
-It is RECOMMENDED that the full names are
-represented as URIs {{RFC3986}} or URNs {{RFC8141}}. One way to create a unique
-name is to include some bit string that has guaranteed uniqueness
-(such as a 1-wire address) that is assigned to the device. Some of the
-examples in this draft use the device URN type as specified in
-{{I-D.arkko-core-dev-urn}}. UUIDs {{RFC4122}} are another way to
-generate a unique name. Note that long-term stable unique identifiers
-are problematic for privacy reasons and should be used
-with care or avoided as described in {{RFC7721}}. 
+The Name value is concatenated to the Base Name value to yield the
+name of the sensor. The resulting concatenated name needs to uniquely
+identify and differentiate the sensor from all others. The
+concatenated name MUST consist only of characters out of the set "A"
+to "Z", "a" to "z", "0" to "9", "-", ":", ".", "/", and "_";
+furthermore, it MUST start with a character out of the set "A" to "Z",
+"a" to "z", or "0" to "9". This restricted character set was chosen so
+that concatenated names can be used directly within various URI
+schemes (including segments of an HTTP path with no special encoding)
+and can be used directly in many databases and analytic systems.
+{{RFC5952}} contains advice on encoding an IPv6 address in a name. See
+{{sec-privacy}} for privacy considerations that apply to the use of
+long-term stable unique identifiers.
 
-The resulting concatenated name MUST consist only of characters out of
-the set "A" to "Z", "a" to "z", "0" to "9", "-", ":", ".", "/", or "_" and
-it MUST start with a character out of the set "A" to "Z", "a" to "z",
-or "0" to "9". This restricted character set was chosen so that these
-names can be directly used in other types of URI including segments
-of an HTTP path with no special encoding and can be directly used in
-many databases and analytic systems. {{RFC5952}} contains advice on
-encoding an IPv6 address in a name.
+Although it is RECOMMENDED that concatenated names are represented as
+URIs {{RFC3986}} or URNs {{RFC8141}}, the restricted character set
+specified above puts strict limits on the URI schemes and URN
+namespaces that can be used. As a result, implementers need to take
+care in choosing the naming scheme for concatenated names, because
+such names both need to be unique and need to conform to the
+restricted character set. One approach is to include a bit string that
+has guaranteed uniqueness (such as a 1-wire address). Some of the
+examples within this document use the device URN namespace as
+specified in {{I-D.arkko-core-dev-urn}}. UUIDs {{RFC4122}} are another
+way to generate a unique name. However, the restricted character set
+does not allow the use of many URI schemes in names as such. The use of 
+URIs with characters incompatible with this set, and possible mapping 
+rules between the two, are outside of the scope of the present document.
 
 If the Record has no Unit, the Base Unit is used as the Unit. Having
 no Unit and no Base Unit is allowed.
@@ -422,12 +431,18 @@ big data applications and intermediate forms when converting to other
 formats.
 
 A SenML Record is referred to as "resolved" if it does not contain any
-base values and has no relative times, but the base values of the
-SenML Pack (if any) are applied to the Record. That is, name and base
-name are concatenated, base time is added to the time of the Record,
-if the Record did not contain Unit the Base Unit is applied to the
-record, etc. In addition the records need to be in chronological
-order.  An example of this is show in {{resolved-ex}}.
+base values, i.e., labels starting with character 'b', except for
+Version fields (see below), and has no relative times. To resolve the
+records, the base values of the SenML Pack (if any) are applied to the
+Record. That is, name and base name are concatenated, base time is
+added to the time of the Record, if the Record did not contain Unit
+the Base Unit is applied to the record, etc. In addition the records
+need to be in chronological order.  An example of this is show in
+{{resolved-ex}}.
+
+The Version field MUST NOT be present in resolved records if the SenML
+version defined in this document is used and MUST be present otherwise
+in all the resolved SenML Records.
 
 Future specification that defines new base fields need to specify
 how the field is resolved.
@@ -452,7 +467,10 @@ actuators. When a SenML Pack is sent (e.g., using a HTTP/CoAP POST or
 PUT method) and the semantics of the target are such that SenML is
 interpreted as configuration/actuation, SenML Records are interpreted
 as a request to change the values of given (sub)resources (given as
-names) to given values at the given time(s).
+names) to given values at the given time(s). The semantics of the
+target resource supporting this usage can be described, e.g., using
+{{?I-D.ietf-core-interfaces}}. Examples of actuation usage are shown
+in {{thermo-ex}}.
 
 # JSON Representation (application/senml+json)
 
@@ -476,7 +494,6 @@ representing the JSON SenML Records.
 | Value Sum     | s    | Number         |
 | Time          | t    | Number         |
 | Update Time   | ut   | Number         |
-| Link          | l    | String         |
 {: #tbl-json-labels cols='r l l' title="JSON SenML Labels"}
 
 The root JSON value consists of an array with one JSON object for each
@@ -693,7 +710,6 @@ future labels without needing to update implementations.
 | Time                      | t          |          6 |
 | Update Time               | ut         |          7 |
 | Data Value                | vd         |          8 |
-| Link                      | l          |          9 |
 {: #tbl-cbor-labels cols="r l r" title="CBOR representation: integers for map keys"}
 
 * For streaming SensML in CBOR representation, the array containing
@@ -705,6 +721,12 @@ sensor measurement as in {{co-ex}}.
 
 ~~~~
 {::include ex3.gen.cbor.hex}
+~~~~
+
+In CBOR diagnostic notation (Section 6 of {{RFC7049}}), this is:
+
+~~~~
+{::include ex3.gen.cbor.diag}
 ~~~~
 
 
@@ -748,7 +770,6 @@ XML attribute values ("type") as used in the XML senml elements.
 | Value Sum     | s    | double  |
 | Time          | t    | double  |
 | Update Time   | ut   | double  |
-| Link   | l  | string  |
 {: #tbl-xml-labels cols='r l l' title="XML SenML Labels"}
 
 The RelaxNG schema for the XML is:
@@ -1015,15 +1036,15 @@ use the related base units.
 | cd/m2    | candela per square meter (luminance)              | float | RFC-AAAA  |
 | bit      | bit (information content)                         | float | RFC-AAAA  |
 | bit/s    | bit per second (data rate)                        | float | RFC-AAAA  |
-| lat      | degrees latitude (note 2)                         | float | RFC-AAAA  |
-| lon      | degrees longitude (note 2)                        | float | RFC-AAAA  |
+| lat      | degrees latitude (note 1)                         | float | RFC-AAAA  |
+| lon      | degrees longitude (note 1)                        | float | RFC-AAAA  |
 | pH       | pH value (acidity; logarithmic quantity)          | float | RFC-AAAA  |
 | dB       | decibel (logarithmic quantity)                    | float | RFC-AAAA  |
 | dBW      | decibel relative to 1 W (power level)             | float | RFC-AAAA  |
 | Bspl     | bel (sound pressure level; logarithmic quantity)* | float | RFC-AAAA  |
 | count    | 1 (counter value)                                 | float | RFC-AAAA  |
-| /        | 1 (Ratio e.g., value of a switch, note 1)         | float | RFC-AAAA  |
-| %        | 1 (Ratio e.g., value of a switch, note 1)*        | float | RFC-AAAA  |
+| /        | 1 (Ratio e.g., value of a switch, note 2)         | float | RFC-AAAA  |
+| %        | 1 (Ratio e.g., value of a switch, note 2)*        | float | RFC-AAAA  |
 | %RH      | Percentage (Relative Humidity)                    | float | RFC-AAAA  |
 | %EL      | Percentage (remaining battery energy level)       | float | RFC-AAAA  |
 | EL       | seconds (remaining battery energy level)          | float | RFC-AAAA  |
@@ -1034,19 +1055,19 @@ use the related base units.
 | S/m      | Siemens per meter (conductivity)                  | float | RFC-AAAA  |
 {: #tbl-iana-symbols cols='r l l'}
 
-* Note 1: A value of 0.0 indicates the switch is off while 1.0
+* Note 1: Assumed to be in WGS84 unless another reference frame is
+  known for the sensor.
+
+* Note 2: A value of 0.0 indicates the switch is off while 1.0
   indicates on and 0.5 would be half on.  The preferred name of this
   unit is "/".  For historical reasons, the name "%" is also provided
   for the same unit -- but note that while that name strongly suggests
   a percentage (0..100) --- it is however NOT a percentage, but the
   absolute ratio!
-  
-* Note 2: Assumed to be in WGS84 unless another reference frame is
-  known for the sensor.
 
-New entries can be added to the registration by either Expert Review
-or IESG Approval as defined in {{RFC5226}}.  Experts should exercise
-their own good judgment but need to consider the following guidelines:
+New entries can be added to the registration by Expert Review as defined
+in {{RFC8126}}. Experts should exercise their own good judgment but
+need to consider the following guidelines:
 
 1. There needs to be a real and compelling use for any new unit to be
    added.
@@ -1104,23 +1125,22 @@ their own good judgment but need to consider the following guidelines:
 IANA will create a new registry for SenML labels. The initial content
 of the registry is:
 
-| Name          | Label|CBOR| XML Type| ID | Note    |
-| Base Name     | bn   | -2 | string  |  a | RFCXXXX |
-| Base Sum      | bs   | -6 | double  |  a | RFCXXXX |
-| Base Time     | bt   | -3 | double  |  a | RFCXXXX |
-| Base Unit     | bu   | -4 | string  |  a | RFCXXXX |
-| Base Value    | bv   | -5 | double  |  a | RFCXXXX |
-| Base Version  | bver | -1 | int     |  a | RFCXXXX |
-| Boolean Value | vb   |  4 | boolean |  a | RFCXXXX |
-| Data Value    | vd   |  8 | string  |  a | RFCXXXX |
-| Name          | n    |  0 | string  |  a | RFCXXXX |
-| String Value  | vs   |  3 | string  |  a | RFCXXXX |
-| Time          | t    |  6 | double  |  a | RFCXXXX |
-| Unit          | u    |  1 | string  |  a | RFCXXXX |
-| Update Time   | ut   |  7 | double  |  a | RFCXXXX |
-| Value         | v    |  2 | double  |  a | RFCXXXX |
-| Value Sum     | s    |  5 | double  |  a | RFCXXXX |
-| Link          | l    |  9 | string  |  a | RFCXXXX |
+| Name          | Label|CBOR| Type    |EXI ID| Note    |
+| Base Name     | bn   | -2 | string  |  a   | RFCXXXX |
+| Base Sum      | bs   | -6 | double  |  a   | RFCXXXX |
+| Base Time     | bt   | -3 | double  |  a   | RFCXXXX |
+| Base Unit     | bu   | -4 | string  |  a   | RFCXXXX |
+| Base Value    | bv   | -5 | double  |  a   | RFCXXXX |
+| Base Version  | bver | -1 | int     |  a   | RFCXXXX |
+| Boolean Value | vb   |  4 | boolean |  a   | RFCXXXX |
+| Data Value    | vd   |  8 | string  |  a   | RFCXXXX |
+| Name          | n    |  0 | string  |  a   | RFCXXXX |
+| String Value  | vs   |  3 | string  |  a   | RFCXXXX |
+| Time          | t    |  6 | double  |  a   | RFCXXXX |
+| Unit          | u    |  1 | string  |  a   | RFCXXXX |
+| Update Time   | ut   |  7 | double  |  a   | RFCXXXX |
+| Value         | v    |  2 | double  |  a   | RFCXXXX |
+| Value Sum     | s    |  5 | double  |  a   | RFCXXXX |
 {: #tbl-seml-reg cols='r l l' title="SenML Labels"}
 
 Note to RFC Editor. Please replace RFCXXXX with the number for this
@@ -1128,7 +1148,7 @@ RFC.
 
 All new entries must define the Label Name, Label, and XML Type but
 the CBOR labels SHOULD be left empty as CBOR will use the string
-encoding for any new labels. The ID fields contains the EXI schemaId value
+encoding for any new labels. The EXI ID column contains the EXI schemaId value
 of the first Schema which includes this label or is empty if this
 label was not intended for use with EXI. The Note field SHOULD contain
 information about where to find out more information about this label.
@@ -1140,10 +1160,10 @@ respectively. CBOR represents numeric values with a CBOR type that
 does not lose any information from the JSON value. EXI uses the XML
 types.
 
-New entries can be added to the registration by either Expert Review
-or IESG Approval as defined in {{RFC5226}}.  Experts should exercise
-their own good judgment but need to consider that shorter labels
-should have more strict review.
+New entries can be added to the registration by Expert Review as
+defined in {{RFC8126}}.  Experts should exercise their own good
+judgment but need to consider that shorter labels should have more
+strict review.
 
 All new SenML labels that have "base" semantics (see {{senml-base}})
 MUST start with character 'b'. Regular labels MUST NOT start with that
@@ -1728,32 +1748,23 @@ another container or transport protocol such as S/MIME or HTTP with
 TLS that can provide integrity, confidentiality, and authentication
 information about the source of the data.
 
+The name fields need to uniquely identify the sources or destinations
+of the values in a SenML Pack.  However, the use of long-term stable
+unique identifiers can be problematic for privacy reasons {{RFC6973}},
+depending on the application and the potential of these identifiers to
+be used in correlation with other information.  They should be used
+with care or avoided as for example described for IPv6 addresses in
+{{RFC7721}}.
 
 # Acknowledgement
 
 We would like to thank Alexander Pelov, Andrew McClure, Andrew
 Mcgregor, Bjoern Hoehrmann, Christian Amsuess, Christian Groves,
-Daniel Peintner, Jan-Piet Mens, Joe Hildebrand, John Klensin, Karl
-Palsson, Lennart Duhrsen, Lisa Dusseault, Lyndsay Campbell, Martin
-Thomson, Michael Koster, Peter Saint-Andre, and Stephen Farrell,
-for their review comments.
+Daniel Peintner, Jan-Piet Mens, Jim Schaad, Joe Hildebrand, John
+Klensin, Karl Palsson, Lennart Duhrsen, Lisa Dusseault, Lyndsay
+Campbell, Martin Thomson, Michael Koster, Peter Saint-Andre, and
+Stephen Farrell, for their review comments.
 
 
 --- back
 
-# Links Extension
-
-A field to support a link extension for SenML is defined as a
-string field by this specification. The link extension can be used
-for additional information about a SenML Record.  The definition and
-usage of the contents of this value are specified in
-{{I-D.ietf-core-links-json}}.
-
-For JSON and XML the field has a label of "l" and a value that is
-a string.
-
-The following shows an example of the links extension.
-
-~~~~
-{::include ex8.gen.wrap.json}
-~~~~
