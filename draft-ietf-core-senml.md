@@ -358,13 +358,14 @@ All SenML Records in a Pack MUST have the same version number. This is
 typically done by adding a Base Version field to only the first Record
 in the Pack.
 
-Systems reading one of the objects MUST check for the Version
-field. If this value is a version number larger than the version
-which the system understands, the system SHOULD NOT use this object.
-This allows the version number to indicate that the object contains
-structure or semantics that is different from what is defined in the present document
-beyond just making use of the extension points provided here. New version numbers can only be
-defined in an RFC that updates this specification or it successors.
+Systems reading one of the objects MUST check for the Version field.
+If this value is a version number larger than the version which the
+system understands, the system SHOULD NOT use this object. This allows
+the version number to indicate that the object contains structure or
+semantics that is different from what is defined in the present
+document beyond just making use of the extension points provided here.
+New version numbers can only be defined in an RFC that updates this
+specification or it successors.
 
 The Name value is concatenated to the Base Name value to get the name
 of the sensor. The resulting name needs to uniquely identify and
