@@ -126,6 +126,14 @@ informative:
     target: http://unitsofmeasure.org/ucum.html 
     seriesinfo:
       Regenstrief Institute and Indiana University: School of Informatics
+  ISO-80000-5:
+    title: >
+      Quantities and units –
+      Part 5: Thermodynamics
+    seriesinfo:
+      ISO: 80000-5
+      Edition: 1.0
+    date: 2007-05-01
 
 --- abstract
 
@@ -422,6 +430,14 @@ Representing the statistical characteristics of measurements, such as
 accuracy, can be very complex. Future specification may add new
 fields to provide better information about the statistical
 properties of the measurement.
+
+In summary, the structure of a SenML record is laid out to support a
+single measurement per record.  If multiple data values are measured
+at the same time (e.g., air pressure and altitude), they are best kept
+as separate records linked through their Time value; this is even true
+where one of the data values is more "meta" than others (e.g.,
+describes a condition that influences other measurements at the same
+time).
 
 ## Resolved Records
 
@@ -1093,6 +1109,20 @@ need to consider the following guidelines:
   mile, foot, light year are not allowed. For most cases, the SI unit
   is preferred.
 
+  (Note that some amount of judgement will be required here, as even
+  SI itself is not entirely consistent in this respect.  For instance,
+  for temperature {{ISO-80000-5}} defines a quantity, item 5-1
+  (thermodynamic temperature), and a corresponding unit 5-1.a
+  (Kelvin), and then goes ahead to define another quantity right
+  besides that, item 5-2 (“Celsius temperature”), and the
+  corresponding unit 5-2.a (degree Celsius).  The latter quantity is
+  defined such that it gives the thermodynamic temperature as a delta
+  from T0 = 275.15 K.  ISO 80000-5 is defining both units side by
+  side, and not really expressing a preference.  This level of
+  recognition of the alternative unit degree Celsius is the reason why
+  Celsius temperatures exceptionally seem acceptable in the SenML
+  units list alongside Kelvin.)
+
 6. Symbol names that could be easily confused with existing common
   units or units combined with prefixes should be avoided. For
   example, selecting a unit name of "mph" to indicate something that
@@ -1159,10 +1189,11 @@ respectively. CBOR represents numeric values with a CBOR type that
 does not lose any information from the JSON value. EXI uses the XML
 types.
 
-New entries can be added to the registration by Expert Review as
-defined in {{RFC8126}}.  Experts should exercise their own good
-judgment but need to consider that shorter labels should have more
-strict review.
+New entries can be added to the registration by either Expert Review
+or IESG Approval as defined in {{RFC8126}}.  Experts should exercise
+their own good judgment but need to consider that shorter labels
+should have more strict review.  New entries should not be made that
+counteract the advice at the end of {{considerations}}.
 
 All new SenML labels that have "base" semantics (see {{senml-base}})
 MUST start with character 'b'. Regular labels MUST NOT start with that
