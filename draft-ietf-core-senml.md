@@ -102,6 +102,7 @@ informative:
   RFC4122: 
   RFC5952: 
   RFC6690:
+  RFC6973: privacycons
   RFC7111: csvfrag
   RFC7721:
   I-D.arkko-core-dev-urn:
@@ -275,7 +276,7 @@ Each SenML Pack carries a single array that represents a set of
 measurements and/or parameters. This array contains a series of SenML
 Records with several fields described below. There are two kinds of
 fields: base and regular.
-The base fields can  be included
+The base fields can be included
 in any SenML Record and they apply to the entries in the Record.
 Each base field also applies to all Records after it up to, but not
 including, the next Record that has that same base field. 
@@ -339,11 +340,11 @@ Sum:
 Time:
 : Time when value was recorded. Optional.
 
-Update Time:
-: An optional time in seconds that represents the maximum time before
-  this sensor will provide an updated reading for a measurement. This
-  can be used to detect the failure of sensors or communications path
-  from the sensor.
+Update Time: 
+: Period of time in seconds that represents the maximum time before
+  this sensor will provide an updated reading for a measurement.
+  Optional. This can be used to detect the failure of sensors or
+  communications path from the sensor.
 
 ## Considerations
 
@@ -429,12 +430,18 @@ big data applications and intermediate forms when converting to other
 formats.
 
 A SenML Record is referred to as "resolved" if it does not contain any
-base values and has no relative times, but the base values of the
-SenML Pack (if any) are applied to the Record. That is, name and base
-name are concatenated, base time is added to the time of the Record,
-if the Record did not contain Unit the Base Unit is applied to the
-record, etc. In addition the records need to be in chronological
-order.  An example of this is show in {{resolved-ex}}.
+base values, i.e., labels starting with character 'b', except for
+Version fields (see below), and has no relative times. To resolve the
+records, the base values of the SenML Pack (if any) are applied to the
+Record. That is, name and base name are concatenated, base time is
+added to the time of the Record, if the Record did not contain Unit
+the Base Unit is applied to the record, etc. In addition the records
+need to be in chronological order.  An example of this is show in
+{{resolved-ex}}.
+
+The Version field MUST NOT be present in resolved records if the SenML
+version defined in this document is used and MUST be present otherwise
+in all the resolved SenML Records.
 
 Future specification that defines new base fields need to specify
 how the field is resolved.
@@ -1022,15 +1029,15 @@ use the related base units.
 | cd/m2    | candela per square meter (luminance)              | float | RFC-AAAA  |
 | bit      | bit (information content)                         | float | RFC-AAAA  |
 | bit/s    | bit per second (data rate)                        | float | RFC-AAAA  |
-| lat      | degrees latitude (note 2)                         | float | RFC-AAAA  |
-| lon      | degrees longitude (note 2)                        | float | RFC-AAAA  |
+| lat      | degrees latitude (note 1)                         | float | RFC-AAAA  |
+| lon      | degrees longitude (note 1)                        | float | RFC-AAAA  |
 | pH       | pH value (acidity; logarithmic quantity)          | float | RFC-AAAA  |
 | dB       | decibel (logarithmic quantity)                    | float | RFC-AAAA  |
 | dBW      | decibel relative to 1 W (power level)             | float | RFC-AAAA  |
 | Bspl     | bel (sound pressure level; logarithmic quantity)* | float | RFC-AAAA  |
 | count    | 1 (counter value)                                 | float | RFC-AAAA  |
-| /        | 1 (Ratio e.g., value of a switch, note 1)         | float | RFC-AAAA  |
-| %        | 1 (Ratio e.g., value of a switch, note 1)*        | float | RFC-AAAA  |
+| /        | 1 (Ratio e.g., value of a switch, note 2)         | float | RFC-AAAA  |
+| %        | 1 (Ratio e.g., value of a switch, note 2)*        | float | RFC-AAAA  |
 | %RH      | Percentage (Relative Humidity)                    | float | RFC-AAAA  |
 | %EL      | Percentage (remaining battery energy level)       | float | RFC-AAAA  |
 | EL       | seconds (remaining battery energy level)          | float | RFC-AAAA  |
@@ -1041,15 +1048,15 @@ use the related base units.
 | S/m      | Siemens per meter (conductivity)                  | float | RFC-AAAA  |
 {: #tbl-iana-symbols cols='r l l'}
 
-* Note 1: A value of 0.0 indicates the switch is off while 1.0
+* Note 1: Assumed to be in WGS84 unless another reference frame is
+  known for the sensor.
+
+* Note 2: A value of 0.0 indicates the switch is off while 1.0
   indicates on and 0.5 would be half on.  The preferred name of this
   unit is "/".  For historical reasons, the name "%" is also provided
   for the same unit -- but note that while that name strongly suggests
   a percentage (0..100) --- it is however NOT a percentage, but the
   absolute ratio!
-  
-* Note 2: Assumed to be in WGS84 unless another reference frame is
-  known for the sensor.
 
 New entries can be added to the registration by either Expert Review
 or IESG Approval as defined in {{RFC5226}}.  Experts should exercise
@@ -1111,23 +1118,23 @@ their own good judgment but need to consider the following guidelines:
 IANA will create a new registry for SenML labels. The initial content
 of the registry is:
 
-| Name          | Label|CBOR| XML Type| ID | Note    |
-| Base Name     | bn   | -2 | string  |  a | RFCXXXX |
-| Base Sum      | bs   | -6 | double  |  a | RFCXXXX |
-| Base Time     | bt   | -3 | double  |  a | RFCXXXX |
-| Base Unit     | bu   | -4 | string  |  a | RFCXXXX |
-| Base Value    | bv   | -5 | double  |  a | RFCXXXX |
-| Base Version  | bver | -1 | int     |  a | RFCXXXX |
-| Boolean Value | vb   |  4 | boolean |  a | RFCXXXX |
-| Data Value    | vd   |  8 | string  |  a | RFCXXXX |
-| Name          | n    |  0 | string  |  a | RFCXXXX |
-| String Value  | vs   |  3 | string  |  a | RFCXXXX |
-| Time          | t    |  6 | double  |  a | RFCXXXX |
-| Unit          | u    |  1 | string  |  a | RFCXXXX |
-| Update Time   | ut   |  7 | double  |  a | RFCXXXX |
-| Value         | v    |  2 | double  |  a | RFCXXXX |
-| Value Sum     | s    |  5 | double  |  a | RFCXXXX |
-| Link          | l    |  9 | string  |  a | RFCXXXX |
+| Name          | Label|CBOR| Type    |EXI ID| Note    |
+| Base Name     | bn   | -2 | string  |  a   | RFCXXXX |
+| Base Sum      | bs   | -6 | double  |  a   | RFCXXXX |
+| Base Time     | bt   | -3 | double  |  a   | RFCXXXX |
+| Base Unit     | bu   | -4 | string  |  a   | RFCXXXX |
+| Base Value    | bv   | -5 | double  |  a   | RFCXXXX |
+| Base Version  | bver | -1 | int     |  a   | RFCXXXX |
+| Boolean Value | vb   |  4 | boolean |  a   | RFCXXXX |
+| Data Value    | vd   |  8 | string  |  a   | RFCXXXX |
+| Name          | n    |  0 | string  |  a   | RFCXXXX |
+| String Value  | vs   |  3 | string  |  a   | RFCXXXX |
+| Time          | t    |  6 | double  |  a   | RFCXXXX |
+| Unit          | u    |  1 | string  |  a   | RFCXXXX |
+| Update Time   | ut   |  7 | double  |  a   | RFCXXXX |
+| Value         | v    |  2 | double  |  a   | RFCXXXX |
+| Value Sum     | s    |  5 | double  |  a   | RFCXXXX |
+| Link          | l    |  9 | string  |  a   | RFCXXXX |
 {: #tbl-seml-reg cols='r l l' title="SenML Labels"}
 
 Note to RFC Editor. Please replace RFCXXXX with the number for this
@@ -1135,7 +1142,7 @@ RFC.
 
 All new entries must define the Label Name, Label, and XML Type but
 the CBOR labels SHOULD be left empty as CBOR will use the string
-encoding for any new labels. The ID fields contains the EXI schemaId value
+encoding for any new labels. The EXI ID column contains the EXI schemaId value
 of the first Schema which includes this label or is empty if this
 label was not intended for use with EXI. The Note field SHOULD contain
 information about where to find out more information about this label.
@@ -1144,7 +1151,7 @@ The JSON, CBOR, and EXI types are derived from the XML type. All XML
 numeric types such as double, float, integer and int become a JSON
 Number. XML boolean and string become a JSON Boolean and String
 respectively. CBOR represents numeric values with a CBOR type that
-does not loose any information from the JSON value. EXI uses the XML
+does not lose any information from the JSON value. EXI uses the XML
 types.
 
 New entries can be added to the registration by either Expert Review
@@ -1735,15 +1742,22 @@ another container or transport protocol such as S/MIME or HTTP with
 TLS that can provide integrity, confidentiality, and authentication
 information about the source of the data.
 
+The name fields need to uniquely identify the sources or destinations
+of the values in a SenML Pack.  However, the use of long-term stable
+unique identifiers can be problematic for privacy reasons {{RFC6973}},
+depending on the application and the potential of these identifiers to
+be used in correlation with other information.  They should be used
+with care or avoided as for example described for IPv6 addresses in
+{{RFC7721}}.
 
 # Acknowledgement
 
 We would like to thank Alexander Pelov, Andrew McClure, Andrew
 Mcgregor, Bjoern Hoehrmann, Christian Amsuess, Christian Groves,
-Daniel Peintner, Jan-Piet Mens, Joe Hildebrand, John Klensin, Karl
-Palsson, Lennart Duhrsen, Lisa Dusseault, Lyndsay Campbell, Martin
-Thomson, Michael Koster, Peter Saint-Andre, and Stephen Farrell,
-for their review comments.
+Daniel Peintner, Jan-Piet Mens, Jim Schaad, Joe Hildebrand, John
+Klensin, Karl Palsson, Lennart Duhrsen, Lisa Dusseault, Lyndsay
+Campbell, Martin Thomson, Michael Koster, Peter Saint-Andre, and
+Stephen Farrell, for their review comments.
 
 
 --- back
