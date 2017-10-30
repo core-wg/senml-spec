@@ -97,7 +97,7 @@ normative:
       NIST: Special Publication 811
 
 informative:
-  RFC2141: 
+  RFC8141: 
   RFC3986: 
   RFC4122: 
   RFC5952: 
@@ -369,7 +369,7 @@ The Name value is concatenated to the Base Name value to get the name
 of the sensor. The resulting name needs to uniquely identify and
 differentiate the sensor from all others.
 It is RECOMMENDED that the full names are
-represented as URIs {{RFC3986}} or URNs {{RFC2141}}. One way to create a unique
+represented as URIs {{RFC3986}} or URNs {{RFC8141}}. One way to create a unique
 name is to include some bit string that has guaranteed uniqueness
 (such as a 1-wire address) that is assigned to the device. Some of the
 examples in this draft use the device URN type as specified in
