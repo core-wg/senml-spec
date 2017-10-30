@@ -414,6 +414,14 @@ accuracy, can be very complex. Future specification may add new
 fields to provide better information about the statistical
 properties of the measurement.
 
+In summary, the structure of a SenML record is laid out to support a
+single measurement per record.  If multiple data values are measured
+at the same time (e.g., air pressure and altitude), they are best kept
+as separate records linked through their Time value; this is even true
+where one of the data values is more "meta" than others (e.g.,
+describes a condition that influences other measurements at the same
+time).
+
 ## Resolved Records
 
 Sometimes it is useful to be able to refer to a defined normalized
@@ -1143,7 +1151,8 @@ types.
 New entries can be added to the registration by either Expert Review
 or IESG Approval as defined in {{RFC5226}}.  Experts should exercise
 their own good judgment but need to consider that shorter labels
-should have more strict review.
+should have more strict review.  New entries should not be made that
+counteract the advice at the end of {{considerations}}.
 
 All new SenML labels that have "base" semantics (see {{senml-base}})
 MUST start with character 'b'. Regular labels MUST NOT start with that
