@@ -187,11 +187,11 @@ current value of 23.1 degrees Celsius.
 # Requirements and Design Goals
 
 The design goal is to be able to send simple sensor measurements in
-small packets on mesh networks from large numbers of constrained
-devices. Keeping the total size of payload under 80 bytes makes this
-easy to use on a wireless mesh network. It is always difficult to
-define what small code is, but there is a desire to be able to
-implement this in roughly 1 KB of flash on a 8 bit
+small packets from large numbers of constrained devices. Keeping the
+total size of payload small makes it easy to use SenML also in
+constrained networks, e.g., in a 6LoWPAN {{?RFC4944}}.  It is always
+difficult to define what small code is, but there is a desire to be
+able to implement this in roughly 1 KB of flash on a 8 bit
 microprocessor. Experience with power meters and other large scale
 deployments has indicated that the solution needs to support allowing
 multiple measurements to be batched into a single HTTP or CoAP
