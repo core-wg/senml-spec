@@ -466,7 +466,10 @@ actuators. When a SenML Pack is sent (e.g., using a HTTP/CoAP POST or
 PUT method) and the semantics of the target are such that SenML is
 interpreted as configuration/actuation, SenML Records are interpreted
 as a request to change the values of given (sub)resources (given as
-names) to given values at the given time(s).
+names) to given values at the given time(s). The semantics of the
+target resource supporting this usage can be described, e.g., using
+{{?I-D.ietf-core-interfaces}}. Examples of actuation usage are shown
+in {{thermo-ex}}.
 
 # JSON Representation (application/senml+json)
 
