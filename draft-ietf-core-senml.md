@@ -1100,7 +1100,7 @@ their own good judgment but need to consider the following guidelines:
   from T0 = 275.15 K.  ISO 80000-5 is defining both units side by
   side, and not really expressing a preference.  This level of
   recognition of the alternative unit degree Celsius is the reason why
-  Celsius temperatures exceptionally seem acceptabble in the SenML
+  Celsius temperatures exceptionally seem acceptable in the SenML
   units list alongside Kelvin.)
 
 6. Symbol names that could be easily confused with existing common
