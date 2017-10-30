@@ -739,6 +739,8 @@ sensor measurement as in {{co-ex}}.
 {::include ex3.gen.cbor.hex}
 ~~~~
 
+<?rfc needLines="8"?>
+
 In CBOR diagnostic notation (Section 6 of {{RFC7049}}), this is:
 
 ~~~~
