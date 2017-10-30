@@ -126,6 +126,14 @@ informative:
     target: http://unitsofmeasure.org/ucum.html 
     seriesinfo:
       Regenstrief Institute and Indiana University: School of Informatics
+  ISO-80000-5:
+    title: >
+      Quantities and units –
+      Part 5: Thermodynamics
+    seriesinfo:
+      ISO: 80000-5
+      Edition: 1.0
+    date: 2007-05-01
 
 --- abstract
 
@@ -1083,7 +1091,7 @@ their own good judgment but need to consider the following guidelines:
 
   (Note that some amount of judgement will be required here, as even
   SI itself is not entirely consistent in this respect.  For instance,
-  for temperature ISO 80000-5 defines a quantity, item 5-1
+  for temperature {{ISO-80000-5}} defines a quantity, item 5-1
   (thermodynamic temperature), and a corresponding unit 5-1.a
   (Kelvin), and then goes ahead to define another quantity right
   besides that, item 5-2 (“Celsius temperature”), and the
