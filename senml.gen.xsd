@@ -11,7 +11,6 @@ xmlns:ns1="urn:ietf:params:xml:ns:senml">
       <xs:attribute name="bs" type="xs:double" />
       <xs:attribute name="bu" type="xs:string" />
       <xs:attribute name="bver" type="xs:int" />
-      <xs:attribute name="l" type="xs:string" />
       <xs:attribute name="n" type="xs:string" />
       <xs:attribute name="s" type="xs:double" />
       <xs:attribute name="t" type="xs:double" />
