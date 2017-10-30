@@ -275,7 +275,7 @@ Each SenML Pack carries a single array that represents a set of
 measurements and/or parameters. This array contains a series of SenML
 Records with several fields described below. There are two kinds of
 fields: base and regular.
-The base fields can  be included
+The base fields can be included
 in any SenML Record and they apply to the entries in the Record.
 Each base field also applies to all Records after it up to, but not
 including, the next Record that has that same base field. 
@@ -1137,7 +1137,7 @@ The JSON, CBOR, and EXI types are derived from the XML type. All XML
 numeric types such as double, float, integer and int become a JSON
 Number. XML boolean and string become a JSON Boolean and String
 respectively. CBOR represents numeric values with a CBOR type that
-does not loose any information from the JSON value. EXI uses the XML
+does not lose any information from the JSON value. EXI uses the XML
 types.
 
 New entries can be added to the registration by either Expert Review
