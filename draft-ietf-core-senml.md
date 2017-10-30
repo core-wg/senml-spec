@@ -106,7 +106,6 @@ informative:
   RFC7721:
   I-D.arkko-core-dev-urn:
   I-D.greevenbosch-appsawg-cbor-cddl: 
-  I-D.ietf-core-links-json:
   IEEE802.1ba-2011:
     title: IEEE Standard for Local and metropolitan area networks--Audio Video Bridging (AVB) Systems
     author:
@@ -476,7 +475,6 @@ representing the JSON SenML Records.
 | Value Sum     | s    | Number         |
 | Time          | t    | Number         |
 | Update Time   | ut   | Number         |
-| Link          | l    | String         |
 {: #tbl-json-labels cols='r l l' title="JSON SenML Labels"}
 
 The root JSON value consists of an array with one JSON object for each
@@ -693,7 +691,6 @@ future labels without needing to update implementations.
 | Time                      | t          |          6 |
 | Update Time               | ut         |          7 |
 | Data Value                | vd         |          8 |
-| Link                      | l          |          9 |
 {: #tbl-cbor-labels cols="r l r" title="CBOR representation: integers for map keys"}
 
 * For streaming SensML in CBOR representation, the array containing
@@ -748,7 +745,6 @@ XML attribute values ("type") as used in the XML senml elements.
 | Value Sum     | s    | double  |
 | Time          | t    | double  |
 | Update Time   | ut   | double  |
-| Link   | l  | string  |
 {: #tbl-xml-labels cols='r l l' title="XML SenML Labels"}
 
 The RelaxNG schema for the XML is:
@@ -1120,7 +1116,6 @@ of the registry is:
 | Update Time   | ut   |  7 | double  |  a | RFCXXXX |
 | Value         | v    |  2 | double  |  a | RFCXXXX |
 | Value Sum     | s    |  5 | double  |  a | RFCXXXX |
-| Link          | l    |  9 | string  |  a | RFCXXXX |
 {: #tbl-seml-reg cols='r l l' title="SenML Labels"}
 
 Note to RFC Editor. Please replace RFCXXXX with the number for this
@@ -1741,19 +1736,3 @@ for their review comments.
 
 --- back
 
-# Links Extension
-
-A field to support a link extension for SenML is defined as a
-string field by this specification. The link extension can be used
-for additional information about a SenML Record.  The definition and
-usage of the contents of this value are specified in
-{{I-D.ietf-core-links-json}}.
-
-For JSON and XML the field has a label of "l" and a value that is
-a string.
-
-The following shows an example of the links extension.
-
-~~~~
-{::include ex8.gen.wrap.json}
-~~~~
