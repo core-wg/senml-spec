@@ -943,7 +943,7 @@ measurements like power and energy, it is less obvious for something
 like temperature. Reporting the sum of the temperature makes it easy
 to compute averages even when the individual temperature values are
 not reported frequently enough to compute accurate
-averages. implementers are encouraged to report the cumulative sum as
+averages. Implementers are encouraged to report the cumulative sum as
 well as the raw value of a given sensor.
 
 Applications that use the cumulative sum values need to understand
