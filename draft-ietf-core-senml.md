@@ -106,7 +106,7 @@ informative:
   RFC7111: csvfrag
   RFC7721:
   I-D.arkko-core-dev-urn:
-  I-D.greevenbosch-appsawg-cbor-cddl: 
+  I-D.ietf-cbor-cddl: 
   IEEE802.1ba-2011:
     title: IEEE Standard for Local and metropolitan area networks--Audio Video Bridging (AVB) Systems
     author:
@@ -954,8 +954,7 @@ above has happened.
 # CDDL
 
 For reference, the JSON and CBOR representations can be described with
-the common CDDL {{I-D.greevenbosch-appsawg-cbor-cddl}} specification
-in {{senmlcddl}}.
+the common CDDL {{I-D.ietf-cbor-cddl}} specification in {{senmlcddl}}.
 
 ~~~~ cddl
 {::include senml.cddl}
@@ -1759,7 +1758,7 @@ with care or avoided as for example described for IPv6 addresses in
 # Acknowledgement
 
 We would like to thank Alexander Pelov, Andrew McClure, Andrew
-Mcgregor, Bjoern Hoehrmann, Christian Amsuess, Christian Groves,
+McGregor, Bjoern Hoehrmann, Christian Amsuess, Christian Groves,
 Daniel Peintner, Jan-Piet Mens, Jim Schaad, Joe Hildebrand, John
 Klensin, Karl Palsson, Lennart Duhrsen, Lisa Dusseault, Lyndsay
 Campbell, Martin Thomson, Michael Koster, Peter Saint-Andre, and
