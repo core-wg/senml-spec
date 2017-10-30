@@ -1,10 +1,10 @@
 ---
 stand_alone: true
 ipr: trust200902
-docname: draft-ietf-core-senml-10
+docname: draft-ietf-core-senml-11
 cat: std
 
-date: July 3, 2017
+date: October 30, 2017
 
 pi:
   toc: 'yes'
