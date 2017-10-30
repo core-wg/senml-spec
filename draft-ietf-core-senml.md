@@ -390,7 +390,9 @@ has guaranteed uniqueness (such as a 1-wire address). Some of the
 examples within this document use the device URN namespace as
 specified in {{I-D.arkko-core-dev-urn}}. UUIDs {{RFC4122}} are another
 way to generate a unique name. However, the restricted character set
-does not allow the use of many URI schemes in names as such.
+does not allow the use of many URI schemes in names as such. The use of 
+URIs with characters incompatible with this set, and possible mapping 
+rules between the two, are outside of the scope of the present document.
 
 If the Record has no Unit, the Base Unit is used as the Unit. Having
 no Unit and no Base Unit is allowed.
