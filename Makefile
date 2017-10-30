@@ -6,7 +6,7 @@ kramdown-rfc2629 ?= kramdown-rfc2629
 
 
 DRAFT = draft-ietf-core-senml
-VERSION = 10
+VERSION = 11
 
 .PHONY: draft txt html pdf  clean check check2
 
@@ -14,7 +14,7 @@ draft: txt html
 
 diff: $(DRAFT).diff.html
 
-gen: check check2 check3 ex1.gen.exi.hex ex1.gen.xml ex1.json ex10.json ex11.json  ex2.gen.exi.hex ex2.gen.xml ex2.json ex3.json ex4.gen.json-trim ex5.json ex6.json senml.gen.xsd senml.rnc ex8.json ex3.gen.xml ex3.gen.cbor.hex size.md ex3.gen.cbor.txt ex3.gen.cbor ex8.gen.xml ex1.gen.json  ex10.gen.json  ex11.gen.json  ex2.gen.json  ex3.gen.json  ex5.gen.json  ex6.gen.json  ex8.gen.json  ex3.gen.wrap.json ex6.gen.wrap.json ex8.gen.wrap.json ex7.gen.json ex5.gen.resolved.json ex9.gen.json ex12.gen.json ex13.gen.json ex5.gen.wrap.json ex5.gen.resolved.wrap.json ex10.gen.wrap.json ex11.gen.wrap.json ex4.gen.wrap.json ex1.gen.json ex5.gen.exi.hex
+gen: check check2 check3 ex1.gen.exi.hex ex1.gen.xml ex1.json ex10.json ex11.json  ex2.gen.exi.hex ex2.gen.xml ex2.json ex3.json ex4.gen.json-trim ex5.json ex6.json senml.gen.xsd senml.rnc ex8.json ex3.gen.xml ex3.gen.cbor.hex ex3.gen.cbor.diag size.md ex3.gen.cbor.txt ex3.gen.cbor ex8.gen.xml ex1.gen.json  ex10.gen.json  ex11.gen.json  ex2.gen.json  ex3.gen.json  ex5.gen.json  ex6.gen.json  ex8.gen.json  ex3.gen.wrap.json ex6.gen.wrap.json ex8.gen.wrap.json ex7.gen.json ex5.gen.resolved.json ex9.gen.json ex12.gen.json ex13.gen.json ex5.gen.wrap.json ex5.gen.resolved.wrap.json ex10.gen.wrap.json ex11.gen.wrap.json ex4.gen.wrap.json ex1.gen.json ex5.gen.exi.hex
 
 check: ex11.gen.chk ex10.gen.chk  ex8.gen.chk ex6.gen.chk ex5.gen.chk ex4.gen.chk ex3.gen.chk ex2.gen.chk ex1.gen.chk ex9.gen.chk ex12.gen.chk ex13.gen.chk 
 
@@ -70,6 +70,9 @@ $(DRAFT)-$(VERSION).xml: $(DRAFT).md
 
 %.gen.cbor: %.json senml-json2cbor.rb
 	ruby senml-json2cbor.rb  $< > $@
+
+%.gen.cbor.diag: %.gen.cbor
+	cbor2diag.rb $< > $@
 
 %.gen.cbor.txt: %.gen.cbor 
 	cbor2pretty.rb $< | sed -e "s/6465763a6f773a3130653230373361303130383/ ... /" > $@
