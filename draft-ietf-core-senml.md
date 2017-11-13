@@ -1225,7 +1225,8 @@ not make sense for streams or other formats.
 Note to RFC Editor - please remove this paragraph. Note that a request
 for media type review for senml+json was sent to the
 media-types@iana.org on Sept 21, 2010. A second request for all the
-types was sent on October 31, 2016.
+types was sent on October 31, 2016. Please change all instances
+of RFC-AAAA with the RFC number of this document.
 
 
 ### senml+json Media Type Registration {#sec-senml-json}
@@ -1244,7 +1245,7 @@ simplifies implementation of very simple system and does not impose
 any significant limitations as all this data is meant for machine to 
 machine communications and is not meant to be human readable. 
 
-Security considerations: See {{sec-sec}}.
+Security considerations: See {{sec-sec}} of RFC-AAAA.
 
 Interoperability considerations: Applications should ignore any JSON 
 key value pairs that they do not understand. This allows backwards 
@@ -1303,7 +1304,7 @@ simplifies implementation of very simple system and does not impose
 any significant limitations as all this data is meant for machine to 
 machine communications and is not meant to be human readable. 
 
-Security considerations: See {{sec-sec}}.
+Security considerations: See {{sec-sec}} of RFC-AAAA.
 
 Interoperability considerations: Applications should ignore any JSON 
 key value pairs that they do not understand. This allows backwards 
@@ -1355,7 +1356,7 @@ Optional parameters: none
 Encoding considerations: Must be encoded as using {{RFC7049}}. See 
 RFC-AAAA for details. 
 
-Security considerations: See {{sec-sec}}.
+Security considerations: See {{sec-sec}} of RFC-AAAA.
 
 Interoperability considerations: Applications should ignore any 
 key value pairs that they do not understand. This allows backwards 
@@ -1409,7 +1410,7 @@ Optional parameters: none
 Encoding considerations: Must be encoded as using {{RFC7049}}. See 
 RFC-AAAA for details. 
 
-Security considerations: See {{sec-sec}}.
+Security considerations: See {{sec-sec}} of RFC-AAAA.
 
 Interoperability considerations: Applications should ignore any 
 key value pairs that they do not understand. This allows backwards 
@@ -1461,7 +1462,7 @@ Optional parameters: none
 Encoding considerations: Must be encoded as using 
 {{W3C.REC-xml-20081126}}. See RFC-AAAA for details. 
 
-Security considerations: See {{sec-sec}}.
+Security considerations: See {{sec-sec}} of RFC-AAAA.
 
 Interoperability considerations: Applications should ignore any XML tags 
 or attributes that they do not understand. This allows backwards 
@@ -1518,7 +1519,7 @@ Optional parameters: none
 Encoding considerations: Must be encoded as using 
 {{W3C.REC-xml-20081126}}. See RFC-AAAA for details. 
 
-Security considerations: See {{sec-sec}}.
+Security considerations: See {{sec-sec}} of RFC-AAAA.
 
 Interoperability considerations: Applications should ignore any XML tags 
 or attributes that they do not understand. This allows backwards 
@@ -1570,7 +1571,7 @@ Optional parameters: none
 Encoding considerations: Must be encoded as using 
 {{W3C.REC-exi-20140211}}. See RFC-AAAA for details. 
 
-Security considerations: See {{sec-sec}}.
+Security considerations: See {{sec-sec}} of RFC-AAAA.
 
 Interoperability considerations: Applications should ignore any XML tags 
 or attributes that they do not understand. This allows backwards 
@@ -1627,7 +1628,7 @@ Optional parameters: none
 Encoding considerations: Must be encoded as using 
 {{W3C.REC-exi-20140211}}. See RFC-AAAA for details. 
 
-Security considerations: See {{sec-sec}}.
+Security considerations: See {{sec-sec}} of RFC-AAAA.
 
 Interoperability considerations: Applications should ignore any XML tags 
 or attributes that they do not understand. This allows backwards 
