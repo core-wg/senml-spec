@@ -1706,11 +1706,11 @@ media types in the "CoAP Content-Formats" sub-registry, within the
 Sensor data can contain a wide range of information ranging from
 information that is very public, such as the outside temperature in a
 given city, to very private information that requires integrity and
-confidentiality protection, such as patient health information. SenML
-format does not provide any security and instead relies on the
-transport or transfer protocol that carries it to provide security.
-Applications using SenML need to look at the overall context of how
-this media type will be used to decide if the security is adequate.
+confidentiality protection, such as patient health information. The
+SenML format does not provide any security and instead relies on the
+protocol that carries it to provide security. Applications using SenML
+need to look at the overall context of how this media type will be
+used to decide if the security is adequate.
 
 See also {{sec-privacy}}. 
 
