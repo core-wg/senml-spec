@@ -13,7 +13,6 @@ record = {
   ? s => numeric,     ; Value Sum
   ? t => numeric,     ; Time
   ? ut => numeric,    ; Update Time
-  ? l => tstr,        ; Link
   ? ( v => numeric // ; Numeric Value
       vs => tstr //   ; String Value
       vb => bool //   ; Boolean Value
