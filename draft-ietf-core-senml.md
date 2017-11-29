@@ -1225,7 +1225,8 @@ not make sense for streams or other formats.
 Note to RFC Editor - please remove this paragraph. Note that a request
 for media type review for senml+json was sent to the
 media-types@iana.org on Sept 21, 2010. A second request for all the
-types was sent on October 31, 2016.
+types was sent on October 31, 2016. Please change all instances
+of RFC-AAAA with the RFC number of this document.
 
 
 ### senml+json Media Type Registration {#sec-senml-json}
@@ -1244,15 +1245,7 @@ simplifies implementation of very simple system and does not impose
 any significant limitations as all this data is meant for machine to 
 machine communications and is not meant to be human readable. 
 
-Security considerations: Sensor data can contain a wide range of 
-information ranging from information that is very public, such the 
-outside temperature in a given city, to very private information that 
-requires integrity and confidentiality protection, such as patient 
-health information. This format does not provide any security and 
-instead relies on the transport protocol that carries it to provide 
-security. Given applications need to look at the overall context of 
-how this media type will be used to decide if the security is 
-adequate. 
+Security considerations: See {{sec-sec}} of RFC-AAAA.
 
 Interoperability considerations: Applications should ignore any JSON 
 key value pairs that they do not understand. This allows backwards 
@@ -1311,15 +1304,7 @@ simplifies implementation of very simple system and does not impose
 any significant limitations as all this data is meant for machine to 
 machine communications and is not meant to be human readable. 
 
-Security considerations: Sensor data can contain a wide range of 
-information ranging from information that is very public, such the 
-outside temperature in a given city, to very private information that 
-requires integrity and confidentiality protection, such as patient 
-health information. This format does not provide any security and 
-instead relies on the transport protocol that carries it to provide 
-security. Given applications need to look at the overall context of 
-how this media type will be used to decide if the security is 
-adequate. 
+Security considerations: See {{sec-sec}} of RFC-AAAA.
 
 Interoperability considerations: Applications should ignore any JSON 
 key value pairs that they do not understand. This allows backwards 
@@ -1371,15 +1356,7 @@ Optional parameters: none
 Encoding considerations: Must be encoded as using {{RFC7049}}. See 
 RFC-AAAA for details. 
 
-Security considerations: Sensor data can contain a wide range of 
-information ranging from information that is very public, such the 
-outside temperature in a given city, to very private information that 
-requires integrity and confidentiality protection, such as patient 
-health information. This format does not provide any security and 
-instead relies on the transport protocol that carries it to provide 
-security. Given applications need to look at the overall context of 
-how this media type will be used to decide if the security is 
-adequate. 
+Security considerations: See {{sec-sec}} of RFC-AAAA.
 
 Interoperability considerations: Applications should ignore any 
 key value pairs that they do not understand. This allows backwards 
@@ -1433,15 +1410,7 @@ Optional parameters: none
 Encoding considerations: Must be encoded as using {{RFC7049}}. See 
 RFC-AAAA for details. 
 
-Security considerations: Sensor data can contain a wide range of 
-information ranging from information that is very public, such the 
-outside temperature in a given city, to very private information that 
-requires integrity and confidentiality protection, such as patient 
-health information. This format does not provide any security and 
-instead relies on the transport protocol that carries it to provide 
-security. Given applications need to look at the overall context of 
-how this media type will be used to decide if the security is 
-adequate. 
+Security considerations: See {{sec-sec}} of RFC-AAAA.
 
 Interoperability considerations: Applications should ignore any 
 key value pairs that they do not understand. This allows backwards 
@@ -1493,15 +1462,7 @@ Optional parameters: none
 Encoding considerations: Must be encoded as using 
 {{W3C.REC-xml-20081126}}. See RFC-AAAA for details. 
 
-Security considerations: Sensor data can contain a wide range of 
-information ranging from information that is very public, such the 
-outside temperature in a given city, to very private information that 
-requires integrity and confidentiality protection, such as patient 
-health information. This format does not provide any security and 
-instead relies on the transport protocol that carries it to provide 
-security. Given applications need to look at the overall context of 
-how this media type will be used to decide if the security is 
-adequate. 
+Security considerations: See {{sec-sec}} of RFC-AAAA.
 
 Interoperability considerations: Applications should ignore any XML tags 
 or attributes that they do not understand. This allows backwards 
@@ -1558,15 +1519,7 @@ Optional parameters: none
 Encoding considerations: Must be encoded as using 
 {{W3C.REC-xml-20081126}}. See RFC-AAAA for details. 
 
-Security considerations: Sensor data can contain a wide range of 
-information ranging from information that is very public, such the 
-outside temperature in a given city, to very private information that 
-requires integrity and confidentiality protection, such as patient 
-health information. This format does not provide any security and 
-instead relies on the transport protocol that carries it to provide 
-security. Given applications need to look at the overall context of 
-how this media type will be used to decide if the security is 
-adequate. 
+Security considerations: See {{sec-sec}} of RFC-AAAA.
 
 Interoperability considerations: Applications should ignore any XML tags 
 or attributes that they do not understand. This allows backwards 
@@ -1618,15 +1571,7 @@ Optional parameters: none
 Encoding considerations: Must be encoded as using 
 {{W3C.REC-exi-20140211}}. See RFC-AAAA for details. 
 
-Security considerations:  Sensor data can contain a wide range of 
-information ranging from information that is very public, such the 
-outside temperature in a given city, to very private information that 
-requires integrity and confidentiality protection, such as patient 
-health information. This format does not provide any security and 
-instead relies on the transport protocol that carries it to provide 
-security. Given applications need to look at the overall context of 
-how this media type will be used to decide if the security is 
-adequate. 
+Security considerations: See {{sec-sec}} of RFC-AAAA.
 
 Interoperability considerations: Applications should ignore any XML tags 
 or attributes that they do not understand. This allows backwards 
@@ -1683,15 +1628,7 @@ Optional parameters: none
 Encoding considerations: Must be encoded as using 
 {{W3C.REC-exi-20140211}}. See RFC-AAAA for details. 
 
-Security considerations:  Sensor data can contain a wide range of 
-information ranging from information that is very public, such the 
-outside temperature in a given city, to very private information that 
-requires integrity and confidentiality protection, such as patient 
-health information. This format does not provide any security and 
-instead relies on the transport protocol that carries it to provide 
-security. Given applications need to look at the overall context of 
-how this media type will be used to decide if the security is 
-adequate. 
+Security considerations: See {{sec-sec}} of RFC-AAAA.
 
 Interoperability considerations: Applications should ignore any XML tags 
 or attributes that they do not understand. This allows backwards 
@@ -1766,9 +1703,16 @@ media types in the "CoAP Content-Formats" sub-registry, within the
 
 # Security Considerations {#sec-sec}
 
-See {{sec-privacy}}. Further discussion of security properties can be
-found in {{sec-iana-media}}.
+Sensor data can contain a wide range of information ranging from
+information that is very public, such as the outside temperature in a
+given city, to very private information that requires integrity and
+confidentiality protection, such as patient health information. The
+SenML format does not provide any security and instead relies on the
+protocol that carries it to provide security. Applications using SenML
+need to look at the overall context of how this media type will be
+used to decide if the security is adequate.
 
+See also {{sec-privacy}}. 
 
 # Privacy Considerations {#sec-privacy}
 
