@@ -353,6 +353,35 @@ Update Time:
   Optional. This can be used to detect the failure of sensors or
   communications path from the sensor.
 
+## SenML labels
+
+{{tbl-labels}} shows all SenML fields with their respective
+lables and data types defined by this document.
+
+| Name          | Label | CBOR Label | JSON Type  | XML Type   |
+| Base Name     | bn    | -2         | String     | string     |
+| Base Time     | bt    | -3         | Number     | double     |
+| Base Unit     | bu    | -4         | String     | string     |
+| Base Value    | bv    | -5         | Number     | double     |
+| Base Sum      | bs    | -6         | Number     | double     |
+| Version       | bver  | -1         | Number     | int        |
+| Name          | n     |  0         | String     | string     |
+| Unit          | u     |  1         | String     | string     |
+| Value         | v     |  2         | Number     | double     |
+| String Value  | vs    |  3         | String     | string     |
+| Boolean Value | vb    |  4         | Boolean    | boolean    |
+| Data Value    | vd    |  8         | String (*) | string (*) |
+| Value Sum     | s     |  5         | Number     | double     |
+| Time          | t     |  6         | Number     | double     |
+| Update Time   | ut    |  7         | Number     | double     |
+{: #tbl-labels cols="r l r l l" title="SenML Labels"}
+
+Data Value is base64 encoded string with URL safe alphabet as defined
+in Section 5 of {{RFC4648}}, with padding omitted.
+
+For details of JSON representation see {{sec-json}}, for CBOR 
+{{sec-cbor}}, and for XML {{sec-xml}}.
+
 ## Considerations
 
 The SenML format can be extended with further custom fields. Both
@@ -488,7 +517,7 @@ target resource supporting this usage can be described, e.g., using
 {{?I-D.ietf-core-interfaces}}. Examples of actuation usage are shown
 in {{thermo-ex}}.
 
-# JSON Representation (application/senml+json)
+# JSON Representation (application/senml+json) {#sec-json}
 
 For the SenML fields shown in {{tbl-json-labels}}, the SenML labels
 are used as the JSON object member names within JSON objects
@@ -748,7 +777,7 @@ In CBOR diagnostic notation (Section 6 of {{RFC7049}}), this is:
 ~~~~
 
 
-# XML Representation (application/senml+xml) {#sec-xml-example}
+# XML Representation (application/senml+xml) {#sec-xml}
 
 A SenML Pack or Stream can also be represented in XML format as
 defined in this section.
