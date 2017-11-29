@@ -714,11 +714,11 @@ future labels without needing to update implementations.
 | Version                   | bver       |         -1 |
 | Base Name                 | bn         |         -2 |
 | Base Time                 | bt         |         -3 |
-| Base Units                | bu         |         -4 |
+| Base Unit                 | bu         |         -4 |
 | Base Value                | bv         |         -5 |
 | Base Sum                  | bs         |         -6 |
 | Name                      | n          |          0 |
-| Units                     | u          |          1 |
+| Unit                      | u          |          1 |
 | Value                     | v          |          2 |
 | String Value              | vs         |          3 |
 | Boolean Value             | vb         |          4 |
