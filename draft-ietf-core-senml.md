@@ -355,8 +355,8 @@ Update Time:
 
 ## SenML labels
 
-{{tbl-labels}} shows all SenML fields with their respective
-lables and data types defined by this document.
+{{tbl-labels}} shows all SenML fields defined by this document with
+their respective labels and data types.
 
 | Name          | Label | CBOR Label | JSON Type  | XML Type   |
 | Base Name     | bn    | -2         | String     | string     |
