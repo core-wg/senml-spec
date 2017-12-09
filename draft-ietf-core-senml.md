@@ -379,8 +379,8 @@ their respective labels and data types.
 Data Value is base64 encoded string with URL safe alphabet as defined
 in Section 5 of {{RFC4648}}, with padding omitted.
 
-For details of JSON representation see {{sec-json}}, for CBOR 
-{{sec-cbor}}, and for XML {{sec-xml}}.
+For details of the JSON representation see {{sec-json}}, for the CBOR 
+{{sec-cbor}}, and for the XML {{sec-xml}}.
 
 ## Considerations
 
