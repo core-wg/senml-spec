@@ -353,6 +353,35 @@ Update Time:
   Optional. This can be used to detect the failure of sensors or
   communications path from the sensor.
 
+## SenML labels
+
+{{tbl-labels}} shows all SenML fields defined by this document with
+their respective labels and data types.
+
+| Name          | Label | CBOR Label | JSON Type  | XML Type   |
+| Base Name     | bn    | -2         | String     | string     |
+| Base Time     | bt    | -3         | Number     | double     |
+| Base Unit     | bu    | -4         | String     | string     |
+| Base Value    | bv    | -5         | Number     | double     |
+| Base Sum      | bs    | -6         | Number     | double     |
+| Version       | bver  | -1         | Number     | int        |
+| Name          | n     |  0         | String     | string     |
+| Unit          | u     |  1         | String     | string     |
+| Value         | v     |  2         | Number     | double     |
+| String Value  | vs    |  3         | String     | string     |
+| Boolean Value | vb    |  4         | Boolean    | boolean    |
+| Data Value    | vd    |  8         | String (*) | string (*) |
+| Value Sum     | s     |  5         | Number     | double     |
+| Time          | t     |  6         | Number     | double     |
+| Update Time   | ut    |  7         | Number     | double     |
+{: #tbl-labels cols="r l r l l" title="SenML Labels"}
+
+Data Value is base64 encoded string with URL safe alphabet as defined
+in Section 5 of {{RFC4648}}, with padding omitted.
+
+For details of the JSON representation see {{sec-json}}, for the CBOR 
+{{sec-cbor}}, and for the XML {{sec-xml}}.
+
 ## Considerations
 
 The SenML format can be extended with further custom fields. Both
@@ -488,7 +517,7 @@ target resource supporting this usage can be described, e.g., using
 {{?I-D.ietf-core-interfaces}}. Examples of actuation usage are shown
 in {{thermo-ex}}.
 
-# JSON Representation (application/senml+json)
+# JSON Representation (application/senml+json) {#sec-json}
 
 For the SenML fields shown in {{tbl-json-labels}}, the SenML labels
 are used as the JSON object member names within JSON objects
@@ -748,7 +777,7 @@ In CBOR diagnostic notation (Section 6 of {{RFC7049}}), this is:
 ~~~~
 
 
-# XML Representation (application/senml+xml) {#sec-xml-example}
+# XML Representation (application/senml+xml) {#sec-xml}
 
 A SenML Pack or Stream can also be represented in XML format as
 defined in this section.
@@ -1156,30 +1185,35 @@ need to consider the following guidelines:
 IANA will create a new registry for SenML labels. The initial content
 of the registry is:
 
-| Name          | Label|CBOR| Type    |EXI ID| Note    |
-| Base Name     | bn   | -2 | string  |  a   | RFCXXXX |
-| Base Sum      | bs   | -6 | double  |  a   | RFCXXXX |
-| Base Time     | bt   | -3 | double  |  a   | RFCXXXX |
-| Base Unit     | bu   | -4 | string  |  a   | RFCXXXX |
-| Base Value    | bv   | -5 | double  |  a   | RFCXXXX |
-| Base Version  | bver | -1 | int     |  a   | RFCXXXX |
-| Boolean Value | vb   |  4 | boolean |  a   | RFCXXXX |
-| Data Value    | vd   |  8 | string  |  a   | RFCXXXX |
-| Name          | n    |  0 | string  |  a   | RFCXXXX |
-| String Value  | vs   |  3 | string  |  a   | RFCXXXX |
-| Time          | t    |  6 | double  |  a   | RFCXXXX |
-| Unit          | u    |  1 | string  |  a   | RFCXXXX |
-| Update Time   | ut   |  7 | double  |  a   | RFCXXXX |
-| Value         | v    |  2 | double  |  a   | RFCXXXX |
-| Value Sum     | s    |  5 | double  |  a   | RFCXXXX |
-{: #tbl-seml-reg cols='r l l' title="SenML Labels"}
+| Name          | Label | CL | JSON Type | XML Type | EI | Reference |
+| Base Name     | bn    | -2 | String    | string   | a  | RFCXXXX   |
+| Base Time     | bt    | -3 | Number    | double   | a  | RFCXXXX   |
+| Base Unit     | bu    | -4 | String    | string   | a  | RFCXXXX   |
+| Base Value    | bv    | -5 | Number    | double   | a  | RFCXXXX   |
+| Base Sum      | bs    | -6 | Number    | double   | a  | RFCXXXX   |
+| Base Version  | bver  | -1 | Number    | int      | a  | RFCXXXX   |
+| Name          | n     |  0 | String    | string   | a  | RFCXXXX   |
+| Unit          | u     |  1 | String    | string   | a  | RFCXXXX   |
+| Value         | v     |  2 | Number    | double   | a  | RFCXXXX   |
+| String Value  | vs    |  3 | String    | string   | a  | RFCXXXX   |
+| Boolean Value | vb    |  4 | Boolean   | boolean  | a  | RFCXXXX   |
+| Data Value    | vd    |  8 | String    | string   | a  | RFCXXXX   |
+| Value Sum     | s     |  5 | Number    | double   | a  | RFCXXXX   |
+| Time          | t     |  6 | Number    | double   | a  | RFCXXXX   |
+| Update Time   | ut    |  7 | Number    | double   | a  | RFCXXXX   |
+{: #tbl-seml-reg cols='r l l' title="IANA Registry for SenML Labels, CL = CBOR Label, EI = EXI ID"}
+
+This is the same table as {{tbl-labels}}, with notes removed, and with
+columns added for the information that is all the same for this
+initial set of registrations, but will need to be supplied with a
+different value for new registrations.
 
 Note to RFC Editor. Please replace RFCXXXX with the number for this
 RFC.
 
 All new entries must define the Label Name, Label, and XML Type but
 the CBOR labels SHOULD be left empty as CBOR will use the string
-encoding for any new labels. The EXI ID column contains the EXI schemaId value
+encoding for any new labels. The EI column contains the EXI schemaId value
 of the first Schema which includes this label or is empty if this
 label was not intended for use with EXI. The Note field SHOULD contain
 information about where to find out more information about this label.
