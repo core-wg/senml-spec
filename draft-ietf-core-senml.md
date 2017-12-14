@@ -353,7 +353,7 @@ Update Time:
   Optional. This can be used to detect the failure of sensors or
   communications path from the sensor.
 
-## SenML labels
+## SenML Labels
 
 {{tbl-labels}} provides an overview of all SenML fields defined by
 this document with their respective labels and data types.
