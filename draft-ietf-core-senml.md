@@ -1118,7 +1118,7 @@ need to consider the following guidelines:
 1. There needs to be a real and compelling use for any new unit to be
    added.
 
-2. Unit should define the semantic information and be chosen
+2. Each unit should define the semantic information and be chosen
   carefully. Implementers need to remember that the same word may be
   used in different real-life contexts. For example, degrees when
   measuring latitude have no semantic relation to degrees when
