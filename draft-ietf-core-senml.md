@@ -329,7 +329,7 @@ Name:
   sensor without having to repeat its identifier on every measurement.
 
 Unit:
-: Units for a measurement value. Optional.
+: Unit for a measurement value. Optional.
 
 Value:
 : Value of the entry.  Optional if a Sum value is present, otherwise
@@ -342,7 +342,7 @@ Value:
 
 Sum:
 : Integrated sum of the values over time. Optional. This field is
-  in the units specified in the Unit value multiplied by seconds.
+  in the unit specified in the Unit value multiplied by seconds.
 
 Time:
 : Time when value was recorded. Optional.
@@ -962,7 +962,7 @@ something on the server side sum together all the power
 measurements. If the network between the sensor and the meter goes
 down over some period of time, when it comes back up, the cumulative
 sum helps reflect what happened while the network was down. A meter
-like this would typically report a measurement with the units set to
+like this would typically report a measurement with the unit set to
 watts, but it would put the sum of energy used in the "s" field of
 the measurement. It might optionally include the current power in the
 "v" field.
@@ -1118,8 +1118,8 @@ need to consider the following guidelines:
 1. There needs to be a real and compelling use for any new unit to be
    added.
 
-2. Units should define the semantic information and be chosen
-  carefully. implementers need to remember that the same word may be
+2. Each unit should define the semantic information and be chosen
+  carefully. Implementers need to remember that the same word may be
   used in different real-life contexts. For example, degrees when
   measuring latitude have no semantic relation to degrees when
   measuring temperature; thus two different units are needed.
