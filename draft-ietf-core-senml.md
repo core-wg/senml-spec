@@ -1119,7 +1119,7 @@ need to consider the following guidelines:
    added.
 
 2. Unit should define the semantic information and be chosen
-  carefully. implementers need to remember that the same word may be
+  carefully. Implementers need to remember that the same word may be
   used in different real-life contexts. For example, degrees when
   measuring latitude have no semantic relation to degrees when
   measuring temperature; thus two different units are needed.
