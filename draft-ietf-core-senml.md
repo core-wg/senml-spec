@@ -160,14 +160,15 @@ configured.
 Connecting sensors to the Internet is not new, and there have been
 many protocols designed to facilitate it. This specification defines
 new media types for carrying simple sensor information in a protocol
-such as HTTP or CoAP.  This format was designed so that processors
-with very limited capabilities could easily encode a sensor
-measurement into the media type, while at the same time a server
-parsing the data could relatively efficiently collect a large number
-of sensor measurements. SenML can be used for a variety
-of data flow models, most notably data feeds pushed from a sensor to a
-collector, and the web resource model where the sensor is requested as
-a resource representation (e.g., "GET /sensor/temperature").
+such as HTTP {{?RFC7230}} or CoAP {{RFC7252}}.  This format was
+designed so that processors with very limited capabilities could
+easily encode a sensor measurement into the media type, while at the
+same time a server parsing the data could relatively efficiently
+collect a large number of sensor measurements. SenML can be used for a
+variety of data flow models, most notably data feeds pushed from a
+sensor to a collector, and the web resource model where the sensor is
+requested as a resource representation (e.g., "GET
+/sensor/temperature").
 
 There are many types of more complex measurements and measurements
 that this media type would not be suitable for.  SenML strikes a
@@ -1764,9 +1765,10 @@ Sensor data can range from information with almost no security
 considerations, such as the current temperature in a given city, to
 highly sensitive medical or location data. This specification provides
 no security protection for the data but is meant to be used inside
-another container or transport protocol such as S/MIME or HTTP with
-TLS that can provide integrity, confidentiality, and authentication
-information about the source of the data.
+another container or transport protocol such as S/MIME {{?RFC5751}} or
+HTTP with TLS {{?RFC5246}} that can provide integrity,
+confidentiality, and authentication information about the source of
+the data.
 
 The name fields need to uniquely identify the sources or destinations
 of the values in a SenML Pack.  However, the use of long-term stable
