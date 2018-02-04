@@ -95,6 +95,11 @@ normative:
     date: 2008
     seriesinfo:
       NIST: Special Publication 811
+  POSIX:
+    title: IEEE Std 1003.1, 2013 Edition - Standard for Information Technology -- Portable Operating System Interface (POSIX(R)) Base Specifications, Issue 7
+    author:
+    - organization: IEEE
+    date: April 2013
 
 informative:
   RFC8141: 
@@ -237,7 +242,7 @@ in each Record are the empty string so they are omitted.
 Some devices have accurate time while others do not so SenML supports
 absolute and relative times. Time is represented in floating point as
 seconds and values greater than zero represent an absolute time
-relative to the Unix epoch while values of 0 or less represent a
+relative to the Unix epoch {{POSIX}} while values of 0 or less represent a
 relative time in the past from the current time. A simple sensor with
 no absolute wall clock time might take a measurement every second, 
 batch up 60 of them, and then send the batch to a server. It would include the
