@@ -78,6 +78,7 @@ normative:
   RFC7159:
   RFC7252: 
   RFC7303: 
+  RFC8174:
   W3C.REC-exi-20140211:
   W3C.REC-xml-20081126:
   BIPM:
@@ -257,7 +258,8 @@ a document database.
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
 "OPTIONAL" in this document are to be interpreted as described in
-{{RFC2119}}.
+ BCP 14 {{RFC2119}} {{RFC8174}} when, and only when, they appear in
+all capitals, as shown here.
 
 This document also uses the following terms:
 
