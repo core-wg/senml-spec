@@ -603,8 +603,8 @@ Note that in some usage scenarios of SenML the implementations MAY
 store or transmit SenML in a stream-like fashion, where data is
 collected over time and continuously added to the object. This mode of
 operation is optional, but systems or protocols using SenML in this
-fashion MUST specify that they are doing this. SenML defines a
-separate media type to indicate Sensor Streaming Measurement Lists
+fashion MUST specify that they are doing this. SenML defines
+separate media types to indicate Sensor Streaming Measurement Lists
 (SensML) for this usage (see {{sec-sensml-json}}).  In this situation
 the SensML stream can be sent and received in a partial fashion, i.e.,
 a measurement entry can be read as soon as the SenML Record is
@@ -1259,9 +1259,11 @@ Pack MUST have a label name that ends with the '_' character.
 ## Media Type Registration {#sec-iana-media}
 
 The following registrations are done following the procedure specified
-in {{RFC6838}} and {{RFC7303}}.
-Clipboard formats are defined for the JSON and XML form of lists but do
-not make sense for streams or other formats.
+in {{RFC6838}} and {{RFC7303}}. This document registers media types
+for each serialization format of SenML (JSON, CBOR, and EXI) and also
+media types for the same formats of the streaming use (SensML). Clipboard
+formats are defined for the JSON and XML form of lists but do not make
+sense for streams or other formats.
 
 Note to RFC Editor - please remove this paragraph. Note that a request
 for media type review for senml+json was sent to the
