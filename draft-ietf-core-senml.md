@@ -149,8 +149,9 @@ measurements and device parameters in the Sensor Measurement Lists
 (JSON), Concise Binary Object Representation (CBOR), eXtensible Markup
 Language (XML), and Efficient XML Interchange (EXI), which share the
 common SenML data model. A simple sensor, such as a temperature
-sensor, could use this media type in protocols such as HTTP or CoAP to
-transport the measurements of the sensor or to be configured.
+sensor, could use one of these media types in protocols such as HTTP
+or CoAP to transport the measurements of the sensor or to be
+configured.
 
 --- middle
 
