@@ -1752,10 +1752,11 @@ Sensor data can contain a wide range of information ranging from
 information that is very public, such as the outside temperature in a
 given city, to very private information that requires integrity and
 confidentiality protection, such as patient health information. The
-SenML format does not provide any security and instead relies on the
-protocol that carries it to provide security. Applications using SenML
-need to look at the overall context of how this media type will be
-used to decide if the security is adequate.
+SenML formats do not provide any security and instead rely on the
+protocol that carries them to provide security. Applications using
+SenML need to look at the overall context of how these media types
+will be used to decide if the security is adequate. The SenML formats
+defined by this specification do not contain any executable content.
 
 See also {{sec-privacy}}. 
 
