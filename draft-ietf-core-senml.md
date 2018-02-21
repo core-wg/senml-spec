@@ -1009,8 +1009,9 @@ above has happened.
 
 # CDDL
 
-For reference, the JSON and CBOR representations can be described with
-the common CDDL {{I-D.ietf-cbor-cddl}} specification in {{senmlcddl}}.
+As a convenient reference, the JSON and CBOR representations can be
+described with the common CDDL {{I-D.ietf-cbor-cddl}} specification in
+{{senmlcddl}} (informative).
 
 ~~~~ cddl
 {::include senml.cddl}
