@@ -1312,11 +1312,12 @@ machine communications and is not meant to be human readable.
 
 Security considerations: See {{sec-sec}} of RFC-AAAA.
 
-Interoperability considerations: Applications should ignore any JSON 
-key value pairs that they do not understand. This allows backwards 
-compatibility extensions to this specification. The "bver" field can 
-be used to ensure the receiver supports a minimal level of 
-functionality needed by the creator of the JSON object. 
+Interoperability considerations: Applications MUST ignore any JSON
+key value pairs that they do not understand unless the key ends with
+the '_' character in which case an error MUST be generated. This
+allows backwards compatible extensions to this specification. The
+"bver" field can  be used to ensure the receiver supports a minimal
+level of functionality needed by the creator of the JSON object.
 
 Published specification: RFC-AAAA 
 
@@ -1371,11 +1372,12 @@ machine communications and is not meant to be human readable.
 
 Security considerations: See {{sec-sec}} of RFC-AAAA.
 
-Interoperability considerations: Applications should ignore any JSON 
-key value pairs that they do not understand. This allows backwards 
-compatibility extensions to this specification. The "bver" field can 
-be used to ensure the receiver supports a minimal level of 
-functionality needed by the creator of the JSON object. 
+Interoperability considerations: Applications MUST ignore any JSON key
+value pairs that they do not understand unless the key ends with the
+'_' character in which case an error MUST be generated. This allows
+backwards compatible extensions to this specification. The "bver"
+field can  be used to ensure the receiver supports a minimal level of
+functionality needed by the creator of the JSON object.
 
 Published specification: RFC-AAAA 
 
@@ -1423,11 +1425,12 @@ RFC-AAAA for details.
 
 Security considerations: See {{sec-sec}} of RFC-AAAA.
 
-Interoperability considerations: Applications should ignore any 
-key value pairs that they do not understand. This allows backwards 
-compatibility extensions to this specification. The "bver" field can 
-be used to ensure the receiver supports a minimal level of 
-functionality needed by the creator of the CBOR object. 
+Interoperability considerations: Applications MUST ignore any key
+value pairs that they do not understand unless the key ends with the
+'_' character in which case an error MUST be generated. This allows
+backwards compatible extensions to this specification. The "bver"
+field can  be used to ensure the receiver supports a minimal level of
+functionality needed by the creator of the CBOR object.
 
 Published specification: RFC-AAAA 
 
@@ -1477,11 +1480,12 @@ RFC-AAAA for details.
 
 Security considerations: See {{sec-sec}} of RFC-AAAA.
 
-Interoperability considerations: Applications should ignore any 
-key value pairs that they do not understand. This allows backwards 
-compatibility extensions to this specification. The "bver" field can 
-be used to ensure the receiver supports a minimal level of 
-functionality needed by the creator of the CBOR object. 
+Interoperability considerations: Applications MUST ignore any key
+value pairs that they do not understand unless the key ends with the
+'_' character in which case an error MUST be generated. This allows
+backwards compatible extensions to this specification. The "bver"
+field can  be used to ensure the receiver supports a minimal level of
+functionality needed by the creator of the CBOR object.
 
 Published specification: RFC-AAAA 
 
@@ -1529,11 +1533,13 @@ Encoding considerations: Must be encoded as using
 
 Security considerations: See {{sec-sec}} of RFC-AAAA.
 
-Interoperability considerations: Applications should ignore any XML tags 
-or attributes that they do not understand. This allows backwards 
-compatibility extensions to this specification. The "bver" attribute in 
-the senml XML tag can be used to ensure the receiver supports a minimal 
-level of functionality needed by the creator of the XML. 
+Interoperability considerations: Applications MUST ignore any XML tags
+or attributes that they do not understand unless the attribute name
+ends with the '_' character in which case an error MUST be generated.
+This allows backwards compatible extensions to this specification. The
+"bver" attribute in the senml XML tag can be used to ensure the
+receiver supports a minimal level of functionality needed by the
+creator of the XML SenML Pack.
 
 Published specification: RFC-AAAA 
 
@@ -1586,11 +1592,13 @@ Encoding considerations: Must be encoded as using
 
 Security considerations: See {{sec-sec}} of RFC-AAAA.
 
-Interoperability considerations: Applications should ignore any XML tags 
-or attributes that they do not understand. This allows backwards 
-compatibility extensions to this specification. The "bver" attribute in 
-the senml XML tag can be used to ensure the receiver supports a minimal 
-level of functionality needed by the creator of the XML. 
+Interoperability considerations: Applications MUST ignore any XML tags
+or attributes that they do not understand unless the attribute name
+ends with the '_' character in which case an error MUST be generated.
+This allows backwards compatible extensions to this specification. The
+"bver" attribute in the senml XML tag can be used to ensure the
+receiver supports a minimal level of functionality needed by the
+creator of the XML SenML Pack.
 
 Published specification: RFC-AAAA 
 
@@ -1638,13 +1646,14 @@ Encoding considerations: Must be encoded as using
 
 Security considerations: See {{sec-sec}} of RFC-AAAA.
 
-Interoperability considerations: Applications should ignore any XML tags 
-or attributes that they do not understand. This allows backwards 
-compatibility extensions to this specification. The "bver" attribute in 
-the senml XML tag can be used to ensure the receiver supports a minimal 
-level of functionality needed by the creator of the XML.  Further 
-information on using schemas to guide the EXI can be found in 
-RFC-AAAA. 
+Interoperability considerations: Applications MUST ignore any XML tags
+or attributes that they do not understand unless the attribute name
+ends with the '_' character in which case an error MUST be generated.
+This allows backwards compatible extensions to this specification. The
+"bver" attribute in the senml XML tag can be used to ensure the
+receiver supports a minimal level of functionality needed by the
+creator of the XML SenML Pack. Further information on using schemas
+to guide the EXI can be found in RFC-AAAA.
 
 Published specification: RFC-AAAA 
 
@@ -1695,13 +1704,14 @@ Encoding considerations: Must be encoded as using
 
 Security considerations: See {{sec-sec}} of RFC-AAAA.
 
-Interoperability considerations: Applications should ignore any XML tags 
-or attributes that they do not understand. This allows backwards 
-compatibility extensions to this specification. The "bver" attribute in 
-the senml XML tag can be used to ensure the receiver supports a minimal 
-level of functionality needed by the creator of the XML.  Further 
-information on using schemas to guide the EXI can be found in 
-RFC-AAAA. 
+Interoperability considerations: Applications MUST ignore any XML tags
+or attributes that they do not understand unless the attribute name
+ends with the '_' character in which case an error MUST be generated.
+This allows backwards compatible extensions to this specification. The
+"bver" attribute in the senml XML tag can be used to ensure the
+receiver supports a minimal level of functionality needed by the
+creator of the XML SenML Pack. Further information on using schemas
+to guide the EXI can be found in RFC-AAAA.
 
 Published specification: RFC-AAAA 
 
@@ -1803,12 +1813,12 @@ with care or avoided as for example described for IPv6 addresses in
 
 # Acknowledgement
 
-We would like to thank Alexander Pelov, Andrew McClure, Andrew
-McGregor, Bjoern Hoehrmann, Christian Amsuess, Christian Groves,
-Daniel Peintner, Jan-Piet Mens, Jim Schaad, Joe Hildebrand, John
-Klensin, Karl Palsson, Lennart Duhrsen, Lisa Dusseault, Lyndsay
-Campbell, Martin Thomson, Michael Koster, Peter Saint-Andre, and
-Stephen Farrell, for their review comments.
+We would like to thank Alexander Pelov, Alexey Melnikov, Andrew
+McClure, Andrew McGregor, Bjoern Hoehrmann, Christian Amsuess,
+Christian Groves, Daniel Peintner, Jan-Piet Mens, Jim Schaad, Joe
+Hildebrand, John Klensin, Karl Palsson, Lennart Duhrsen, Lisa
+Dusseault, Lyndsay Campbell, Martin Thomson, Michael Koster, Peter
+Saint-Andre, and Stephen Farrell, for their review comments.
 
 
 --- back
