@@ -69,7 +69,8 @@ author:
 
 normative:
   IEEE.754.1985: 
-  RFC2119: 
+  RFC2119:
+  RFC3629: 
   RFC3688:
   RFC4648:
   RFC8126: 
@@ -81,6 +82,7 @@ normative:
   RFC8174:
   W3C.REC-exi-20140211:
   W3C.REC-xml-20081126:
+  W3C.REC-xmlschema-1-20041028:
   BIPM:
     title: The International System of Units (SI)
     author:
@@ -106,6 +108,13 @@ normative:
       Section 4.15: "'Seconds Since the Epoch'"
       IEEE Std: '1003.1'
       '2013': Edition
+  RNC:
+    target: http://www.oasis-open.org/committees/relax-ng/compact-20021121.html
+    title: RELAX NG Compact Syntax
+    author:
+    - ins: J. Clark
+    seriesinfo: OASIS
+    date: November 2002
 
 informative:
   RFC8141: 
@@ -190,8 +199,8 @@ array that contains a series of SenML Records which can each contain
 fields such as an unique identifier for the sensor, the time the
 measurement was made, the unit the measurement is in, and the current
 value of the sensor.  Serializations for this data model are defined
-for JSON {{RFC7159}}, CBOR {{RFC7049}}, XML, and Efficient XML
-Interchange (EXI) {{W3C.REC-exi-20140211}}.
+for JSON {{RFC7159}}, CBOR {{RFC7049}}, XML {{W3C.REC-xml-20081126}},
+and Efficient XML Interchange (EXI) {{W3C.REC-exi-20140211}}.
 
 For example, the following shows a measurement from a temperature
 gauge encoded in the JSON syntax.
@@ -561,10 +570,10 @@ The root JSON value consists of an array with one JSON object for each
 SenML Record.  All the fields in the above table MAY occur in the
 records with member values of the type specified in the table.
 
-Only the UTF-8 form of JSON is allowed. Characters in the String Value
-are encoded using the escape sequences defined in {{RFC7159}}. Octets
-in the Data Value are base64 encoded with URL safe alphabet as defined
-in Section 5 of {{RFC4648}}, with padding omitted.
+Only the UTF-8 {{RFC3629}} form of JSON is allowed. Characters in the
+String Value are encoded using the escape sequences defined in
+{{RFC7159}}. Octets in the Data Value are base64 encoded with URL safe
+alphabet as defined in Section 5 of {{RFC4648}}, with padding omitted.
 
 Systems receiving measurements MUST be able to process the range of
 floating point numbers that are representable as an IEEE double
@@ -835,7 +844,7 @@ XML attribute values ("type") as used in the XML senml elements.
 | Update Time   | ut   | double  |
 {: #tbl-xml-labels cols='r l l' title="XML SenML Labels"}
 
-The RelaxNG schema for the XML is:
+The RelaxNG {{RNC}} schema for the XML is:
 
 ~~~~
 {::include senml.rnc}
@@ -846,12 +855,13 @@ The RelaxNG schema for the XML is:
 
 For efficient transmission of SenML over e.g. a constrained network,
 Efficient XML Interchange (EXI) can be used. This encodes the XML
-Schema structure of SenML into binary tags and values rather than
-ASCII text.  An EXI representation of SenML SHOULD be made using the
-strict schema-mode of EXI. This mode however does not allow tag
-extensions to the schema, and therefore any extensions will be lost in
-the encoding.  For uses where extensions need to be preserved in EXI,
-the non-strict schema mode of EXI MAY be used.
+Schema {{W3C.REC-xmlschema-1-20041028}} structure of SenML into binary
+tags and values rather than ASCII text.  An EXI representation of
+SenML SHOULD be made using the strict schema-mode of EXI. This mode
+however does not allow tag extensions to the schema, and therefore any
+extensions will be lost in the encoding.  For uses where extensions
+need to be preserved in EXI, the non-strict schema mode of EXI MAY be
+used.
 
 The EXI header MUST include an "EXI Options", as defined in
 {{W3C.REC-exi-20140211}}, with an schemaId set to the value of "a"
