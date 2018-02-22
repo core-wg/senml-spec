@@ -96,11 +96,16 @@ normative:
     date: 2008
     seriesinfo:
       NIST: Special Publication 811
-  POSIX:
-    title: IEEE Std 1003.1, 2013 Edition - Standard for Information Technology -- Portable Operating System Interface (POSIX(R)) Base Specifications, Issue 7
+  TIME_T:
+    target: http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_15
+    title: 'Vol. 1: Base Definitions, Issue 7'
     author:
-    - organization: IEEE
-    date: April 2013
+    - org: The Open Group Base Specifications
+    date: 2013
+    seriesinfo:
+      Section 4.15: "'Seconds Since the Epoch'"
+      IEEE Std: '1003.1'
+      '2013': Edition
 
 informative:
   RFC8141: 
@@ -244,16 +249,18 @@ in each Record are the empty string so they are omitted.
 
 Some devices have accurate time while others do not so SenML supports
 absolute and relative times. Time is represented in floating point as
-seconds and values greater than zero represent an absolute time
-relative to the Unix epoch {{POSIX}} while values of 0 or less represent a
+seconds. Values greater than zero represent an absolute time relative
+to the Unix epoch (1970-01-01T00:00Z in UTC time) and the time is
+counted same way as the Portable Operating System Interface (POSIX)
+"seconds since the epoch" {{TIME_T}}.  Values of 0 or less represent a
 relative time in the past from the current time. A simple sensor with
-no absolute wall clock time might take a measurement every second, 
-batch up 60 of them, and then send the batch to a server. It would include the
-relative time each measurement was made compared to the time the batch was sent
-in each SenML Record. The server might have accurate NTP time and use the
-time it received the data, and the relative offset, to replace the
-times in the SenML with absolute times before saving the SenML Pack in
-a document database.
+no absolute wall clock time might take a measurement every second,
+batch up 60 of them, and then send the batch to a server. It would
+include the relative time each measurement was made compared to the
+time the batch was sent in each SenML Record. The server might have
+accurate NTP time and use the time it received the data, and the
+relative offset, to replace the times in the SenML with absolute times
+before saving the SenML Pack in a document database.
 
 # Terminology
 
