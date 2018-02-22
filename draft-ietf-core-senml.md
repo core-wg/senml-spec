@@ -583,14 +583,16 @@ alphabet as defined in Section 5 of {{RFC4648}}, with padding omitted.
 
 Systems receiving measurements MUST be able to process the range of
 floating point numbers that are representable as an IEEE double
-precision floating point numbers {{IEEE.754.1985}}. The number of
+precision floating point numbers {{IEEE.754.1985}}.  This allows time
+values to have better than microsecond precision over the next 100 years.
+The number of
 significant digits in any measurement is not relevant, so a reading
 of 1.1 has exactly the same semantic meaning as 1.10. If the value has
-an exponent, the "e" MUST be in lower case.  The mantissa SHOULD be
+an exponent, the "e" MUST be in lower case.  In the interest of
+avoiding unnecessary verbosity and speeding up processing,
+the mantissa SHOULD be
 less than 19 characters long and the exponent SHOULD be less than 5
-characters long. This allows time values to have better than micro
-second precision over the next 100 years.
-
+characters long. 
 
 ## Examples
 
