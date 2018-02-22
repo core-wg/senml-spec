@@ -4,7 +4,7 @@ ipr: trust200902
 docname: draft-ietf-core-senml-12
 cat: std
 
-date: December 14, 2017
+date: 2018-02-22
 
 pi:
   toc: 'yes'
@@ -76,7 +76,7 @@ normative:
   RFC8126: 
   RFC6838: 
   RFC7049: 
-  RFC7159:
+  RFC8259: json
   RFC7252: 
   RFC7303: 
   RFC8174:
@@ -109,12 +109,16 @@ normative:
       IEEE Std: '1003.1'
       '2013': Edition
   RNC:
-    target: http://www.oasis-open.org/committees/relax-ng/compact-20021121.html
-    title: RELAX NG Compact Syntax
+    title: >
+      Information technology — Document Schema Definition Language (DSDL) —
+      Part 2:
+      Regular-grammar-based validation — RELAX NG
     author:
-    - ins: J. Clark
-    seriesinfo: OASIS
-    date: November 2002
+    - org: ISO/IEC
+    date: 2008-12-15
+    seriesinfo:
+      ISO/IEC: 19757-2
+      Annex C:: RELAX NG Compact syntax
 
 informative:
   RFC8141: 
@@ -199,7 +203,7 @@ array that contains a series of SenML Records which can each contain
 fields such as an unique identifier for the sensor, the time the
 measurement was made, the unit the measurement is in, and the current
 value of the sensor.  Serializations for this data model are defined
-for JSON {{RFC7159}}, CBOR {{RFC7049}}, XML {{W3C.REC-xml-20081126}},
+for JSON {{-json}}, CBOR {{RFC7049}}, XML {{W3C.REC-xml-20081126}},
 and Efficient XML Interchange (EXI) {{W3C.REC-exi-20140211}}.
 
 For example, the following shows a measurement from a temperature
@@ -457,7 +461,7 @@ way to generate a unique name. However, the restricted character set
 does not allow the use of many URI schemes, such as the 'tag' scheme
 {{?RFC4151}} and the 'ni' scheme {{?RFC6920}}, in names as such. The
 use of  URIs with characters incompatible with this set, and possible
-mapping  rules between the two, are outside of the scope of the
+mapping rules between the two, are outside of the scope of the
 present document.
 
 If the Record has no Unit, the Base Unit is used as the Unit. Having
@@ -574,7 +578,7 @@ records with member values of the type specified in the table.
 
 Only the UTF-8 {{RFC3629}} form of JSON is allowed. Characters in the
 String Value are encoded using the escape sequences defined in
-{{RFC7159}}. Octets in the Data Value are base64 encoded with URL safe
+{{-json}}. Octets in the Data Value are base64 encoded with URL safe
 alphabet as defined in Section 5 of {{RFC4648}}, with padding omitted.
 
 Systems receiving measurements MUST be able to process the range of
@@ -810,7 +814,7 @@ A SenML Pack or Stream can also be represented in XML format as
 defined in this section.
 
 Only the UTF-8 form of XML is allowed. Characters in the String Value
-are encoded using the escape sequences defined in {{RFC7159}}. Octets
+are encoded using the escape sequences defined in {{-json}}. Octets
 in the Data Value are base64 encoded with URL safe alphabet as defined
 in Section 5 of {{RFC4648}}.
 
@@ -1305,7 +1309,7 @@ Required parameters: none
 Optional parameters: none 
 
 Encoding considerations: Must be encoded as using a subset of the 
-encoding allowed in {{RFC7159}}. See RFC-AAAA for details. This 
+encoding allowed in {{-json}}. See RFC-AAAA for details. This 
 simplifies implementation of very simple system and does not impose 
 any significant limitations as all this data is meant for machine to 
 machine communications and is not meant to be human readable. 
@@ -1365,7 +1369,7 @@ Required parameters: none
 Optional parameters: none 
 
 Encoding considerations: Must be encoded as using a subset of the 
-encoding allowed in {{RFC7159}}. See RFC-AAAA for details. This 
+encoding allowed in {{-json}}. See RFC-AAAA for details. This 
 simplifies implementation of very simple system and does not impose 
 any significant limitations as all this data is meant for machine to 
 machine communications and is not meant to be human readable. 
