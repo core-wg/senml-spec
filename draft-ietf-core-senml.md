@@ -1278,7 +1278,7 @@ IANA table to have their ID set to this new schemaId value.
 Extensions that are mandatory to understand to correctly process the
 Pack MUST have a label name that ends with the '_' character.
 
-## Media Type Registration {#sec-iana-media}
+## Media Type Registrations {#sec-iana-media}
 
 The following registrations are done following the procedure specified
 in {{RFC6838}} and {{RFC7303}}. This document registers media types
