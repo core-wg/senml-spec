@@ -842,7 +842,7 @@ The RelaxNG schema for the XML is:
 ~~~~
 
 
-# EXI Representation (application/senml+exi)
+# EXI Representation (application/senml-exi)
 
 For efficient transmission of SenML over e.g. a constrained network,
 Efficient XML Interchange (EXI) can be used. This encodes the XML
@@ -1611,11 +1611,11 @@ Author: Cullen Jennings \<fluffy@iii.ca>
 Change controller: IESG 
 
 
-### senml+exi Media Type Registration 
+### senml-exi Media Type Registration 
 
 Type name: application 
 
-Subtype name: senml+exi 
+Subtype name: senml-exi 
 
 Required parameters: none 
 
@@ -1642,7 +1642,7 @@ such as temperature and humidity. It can be used for a wide range of
 sensor reporting systems. 
 
 Fragment identifier considerations: Fragment identification for 
-application/senml+exi is supported by using fragment identifiers as 
+application/senml-exi is supported by using fragment identifiers as 
 specified by RFC-AAAA. 
 
 Additional information: 
@@ -1668,11 +1668,11 @@ Author: Cullen Jennings \<fluffy@iii.ca>
 Change controller: IESG 
 
 
-### sensml+exi Media Type Registration 
+### sensml-exi Media Type Registration 
 
 Type name: application 
 
-Subtype name: sensml+exi 
+Subtype name: sensml-exi 
 
 Required parameters: none 
 
@@ -1699,7 +1699,7 @@ such as temperature and humidity. It can be used for a wide range of
 sensor reporting systems. 
 
 Fragment identifier considerations: Fragment identification for 
-application/senml+exi is supported by using fragment identifiers as 
+application/senml-exi is supported by using fragment identifiers as 
 specified by RFC-AAAA. 
 
 Additional information: 
@@ -1749,8 +1749,8 @@ media types in the "CoAP Content-Formats" sub-registry, within the
 | application/sensml+cbor  | TBD |
 | application/senml+xml    | TBD |
 | application/sensml+xml   | TBD |
-| application/senml+exi    | TBD |
-| application/sensml+exi   | TBD |
+| application/senml-exi    | TBD |
+| application/sensml-exi   | TBD |
 {: #tbl-coap-content-formats cols="l l" title="CoAP Content-Format IDs"}
  
 
