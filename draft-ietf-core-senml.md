@@ -1758,6 +1758,8 @@ protocol that carries them to provide security. Applications using
 SenML need to look at the overall context of how these media types
 will be used to decide if the security is adequate. The SenML formats
 defined by this specification do not contain any executable content.
+However, future extensions could potentially embed application 
+specific executable content in the data.
 
 See also {{sec-privacy}}. 
 
