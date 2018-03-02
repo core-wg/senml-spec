@@ -6,7 +6,7 @@ kramdown-rfc2629 ?= kramdown-rfc2629
 
 
 DRAFT = draft-ietf-core-senml
-VERSION = 12
+VERSION = 13
 
 .PHONY: draft txt html pdf  clean check check2
 
