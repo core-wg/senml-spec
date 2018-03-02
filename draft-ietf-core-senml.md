@@ -4,7 +4,7 @@ ipr: trust200902
 docname: draft-ietf-core-senml-12
 cat: std
 
-date: December 14, 2017
+date: 2018-02-22
 
 pi:
   toc: 'yes'
@@ -69,17 +69,20 @@ author:
 
 normative:
   IEEE.754.1985: 
-  RFC2119: 
+  RFC2119:
+  RFC3629: 
   RFC3688:
   RFC4648:
   RFC8126: 
   RFC6838: 
   RFC7049: 
-  RFC7159:
+  RFC8259: json
   RFC7252: 
   RFC7303: 
+  RFC8174:
   W3C.REC-exi-20140211:
   W3C.REC-xml-20081126:
+  W3C.REC-xmlschema-1-20041028:
   BIPM:
     title: The International System of Units (SI)
     author:
@@ -95,6 +98,27 @@ normative:
     date: 2008
     seriesinfo:
       NIST: Special Publication 811
+  TIME_T:
+    target: http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_15
+    title: 'Vol. 1: Base Definitions, Issue 7'
+    author:
+    - org: The Open Group Base Specifications
+    date: 2013
+    seriesinfo:
+      Section 4.15: "'Seconds Since the Epoch'"
+      IEEE Std: '1003.1'
+      '2013': Edition
+  RNC:
+    title: >
+      Information technology — Document Schema Definition Language (DSDL) —
+      Part 2:
+      Regular-grammar-based validation — RELAX NG
+    author:
+    - org: ISO/IEC
+    date: 2008-12-15
+    seriesinfo:
+      ISO/IEC: 19757-2
+      Annex C:: RELAX NG Compact syntax
 
 informative:
   RFC8141: 
@@ -143,8 +167,9 @@ measurements and device parameters in the Sensor Measurement Lists
 (JSON), Concise Binary Object Representation (CBOR), eXtensible Markup
 Language (XML), and Efficient XML Interchange (EXI), which share the
 common SenML data model. A simple sensor, such as a temperature
-sensor, could use this media type in protocols such as HTTP or CoAP to
-transport the measurements of the sensor or to be configured.
+sensor, could use one of these media types in protocols such as HTTP
+or CoAP to transport the measurements of the sensor or to be
+configured.
 
 --- middle
 
@@ -153,14 +178,15 @@ transport the measurements of the sensor or to be configured.
 Connecting sensors to the Internet is not new, and there have been
 many protocols designed to facilitate it. This specification defines
 new media types for carrying simple sensor information in a protocol
-such as HTTP or CoAP.  This format was designed so that processors
-with very limited capabilities could easily encode a sensor
-measurement into the media type, while at the same time a server
-parsing the data could relatively efficiently collect a large number
-of sensor measurements. SenML can be used for a variety
-of data flow models, most notably data feeds pushed from a sensor to a
-collector, and the web resource model where the sensor is requested as
-a resource representation (e.g., "GET /sensor/temperature").
+such as HTTP {{?RFC7230}} or CoAP {{RFC7252}}.  This format was
+designed so that processors with very limited capabilities could
+easily encode a sensor measurement into the media type, while at the
+same time a server parsing the data could relatively efficiently
+collect a large number of sensor measurements. SenML can be used for a
+variety of data flow models, most notably data feeds pushed from a
+sensor to a collector, and the web resource model where the sensor is
+requested as a resource representation (e.g., "GET
+/sensor/temperature").
 
 There are many types of more complex measurements and measurements
 that this media type would not be suitable for.  SenML strikes a
@@ -177,8 +203,8 @@ array that contains a series of SenML Records which can each contain
 fields such as an unique identifier for the sensor, the time the
 measurement was made, the unit the measurement is in, and the current
 value of the sensor.  Serializations for this data model are defined
-for JSON {{RFC7159}}, CBOR {{RFC7049}}, XML, and Efficient XML
-Interchange (EXI) {{W3C.REC-exi-20140211}}.
+for JSON {{-json}}, CBOR {{RFC7049}}, XML {{W3C.REC-xml-20081126}},
+and Efficient XML Interchange (EXI) {{W3C.REC-exi-20140211}}.
 
 For example, the following shows a measurement from a temperature
 gauge encoded in the JSON syntax.
@@ -236,23 +262,26 @@ in each Record are the empty string so they are omitted.
 
 Some devices have accurate time while others do not so SenML supports
 absolute and relative times. Time is represented in floating point as
-seconds and values greater than zero represent an absolute time
-relative to the Unix epoch while values of 0 or less represent a
+seconds. Values greater than zero represent an absolute time relative
+to the Unix epoch (1970-01-01T00:00Z in UTC time) and the time is
+counted same way as the Portable Operating System Interface (POSIX)
+"seconds since the epoch" {{TIME_T}}.  Values of 0 or less represent a
 relative time in the past from the current time. A simple sensor with
-no absolute wall clock time might take a measurement every second, 
-batch up 60 of them, and then send the batch to a server. It would include the
-relative time each measurement was made compared to the time the batch was sent
-in each SenML Record. The server might have accurate NTP time and use the
-time it received the data, and the relative offset, to replace the
-times in the SenML with absolute times before saving the SenML Pack in
-a document database.
+no absolute wall clock time might take a measurement every second,
+batch up 60 of them, and then send the batch to a server. It would
+include the relative time each measurement was made compared to the
+time the batch was sent in each SenML Record. The server might have
+accurate NTP time and use the time it received the data, and the
+relative offset, to replace the times in the SenML with absolute times
+before saving the SenML Pack in a document database.
 
 # Terminology
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
 "OPTIONAL" in this document are to be interpreted as described in
-{{RFC2119}}.
+ BCP 14 {{RFC2119}} {{RFC8174}} when, and only when, they appear in
+all capitals, as shown here.
 
 This document also uses the following terms:
 
@@ -429,9 +458,11 @@ has guaranteed uniqueness (such as a 1-wire address). Some of the
 examples within this document use the device URN namespace as
 specified in {{I-D.arkko-core-dev-urn}}. UUIDs {{RFC4122}} are another
 way to generate a unique name. However, the restricted character set
-does not allow the use of many URI schemes in names as such. The use of 
-URIs with characters incompatible with this set, and possible mapping 
-rules between the two, are outside of the scope of the present document.
+does not allow the use of many URI schemes, such as the 'tag' scheme
+{{?RFC4151}} and the 'ni' scheme {{?RFC6920}}, in names as such. The
+use of  URIs with characters incompatible with this set, and possible
+mapping rules between the two, are outside of the scope of the
+present document.
 
 If the Record has no Unit, the Base Unit is used as the Unit. Having
 no Unit and no Base Unit is allowed.
@@ -545,21 +576,23 @@ The root JSON value consists of an array with one JSON object for each
 SenML Record.  All the fields in the above table MAY occur in the
 records with member values of the type specified in the table.
 
-Only the UTF-8 form of JSON is allowed. Characters in the String Value
-are encoded using the escape sequences defined in {{RFC7159}}. Octets
-in the Data Value are base64 encoded with URL safe alphabet as defined
-in Section 5 of {{RFC4648}}, with padding omitted.
+Only the UTF-8 {{RFC3629}} form of JSON is allowed. Characters in the
+String Value are encoded using the escape sequences defined in
+{{-json}}. Octets in the Data Value are base64 encoded with URL safe
+alphabet as defined in Section 5 of {{RFC4648}}, with padding omitted.
 
 Systems receiving measurements MUST be able to process the range of
 floating point numbers that are representable as an IEEE double
-precision floating point numbers {{IEEE.754.1985}}. The number of
+precision floating point numbers {{IEEE.754.1985}}.  This allows time
+values to have better than microsecond precision over the next 100 years.
+The number of
 significant digits in any measurement is not relevant, so a reading
 of 1.1 has exactly the same semantic meaning as 1.10. If the value has
-an exponent, the "e" MUST be in lower case.  The mantissa SHOULD be
+an exponent, the "e" MUST be in lower case.  In the interest of
+avoiding unnecessary verbosity and speeding up processing,
+the mantissa SHOULD be
 less than 19 characters long and the exponent SHOULD be less than 5
-characters long. This allows time values to have better than micro
-second precision over the next 100 years.
-
+characters long. 
 
 ## Examples
 
@@ -596,8 +629,8 @@ Note that in some usage scenarios of SenML the implementations MAY
 store or transmit SenML in a stream-like fashion, where data is
 collected over time and continuously added to the object. This mode of
 operation is optional, but systems or protocols using SenML in this
-fashion MUST specify that they are doing this. SenML defines a
-separate media type to indicate Sensor Streaming Measurement Lists
+fashion MUST specify that they are doing this. SenML defines
+separate media types to indicate Sensor Streaming Measurement Lists
 (SensML) for this usage (see {{sec-sensml-json}}).  In this situation
 the SensML stream can be sent and received in a partial fashion, i.e.,
 a measurement entry can be read as soon as the SenML Record is
@@ -783,7 +816,7 @@ A SenML Pack or Stream can also be represented in XML format as
 defined in this section.
 
 Only the UTF-8 form of XML is allowed. Characters in the String Value
-are encoded using the escape sequences defined in {{RFC7159}}. Octets
+are encoded using the escape sequences defined in {{-json}}. Octets
 in the Data Value are base64 encoded with URL safe alphabet as defined
 in Section 5 of {{RFC4648}}.
 
@@ -819,23 +852,24 @@ XML attribute values ("type") as used in the XML senml elements.
 | Update Time   | ut   | double  |
 {: #tbl-xml-labels cols='r l l' title="XML SenML Labels"}
 
-The RelaxNG schema for the XML is:
+The RelaxNG {{RNC}} schema for the XML is:
 
 ~~~~
 {::include senml.rnc}
 ~~~~
 
 
-# EXI Representation (application/senml+exi)
+# EXI Representation (application/senml-exi)
 
 For efficient transmission of SenML over e.g. a constrained network,
 Efficient XML Interchange (EXI) can be used. This encodes the XML
-Schema structure of SenML into binary tags and values rather than
-ASCII text.  An EXI representation of SenML SHOULD be made using the
-strict schema-mode of EXI. This mode however does not allow tag
-extensions to the schema, and therefore any extensions will be lost in
-the encoding.  For uses where extensions need to be preserved in EXI,
-the non-strict schema mode of EXI MAY be used.
+Schema {{W3C.REC-xmlschema-1-20041028}} structure of SenML into binary
+tags and values rather than ASCII text.  An EXI representation of
+SenML SHOULD be made using the strict schema-mode of EXI. This mode
+however does not allow tag extensions to the schema, and therefore any
+extensions will be lost in the encoding.  For uses where extensions
+need to be preserved in EXI, the non-strict schema mode of EXI MAY be
+used.
 
 The EXI header MUST include an "EXI Options", as defined in
 {{W3C.REC-exi-20140211}}, with an schemaId set to the value of "a"
@@ -1000,8 +1034,9 @@ above has happened.
 
 # CDDL
 
-For reference, the JSON and CBOR representations can be described with
-the common CDDL {{I-D.ietf-cbor-cddl}} specification in {{senmlcddl}}.
+As a convenient reference, the JSON and CBOR representations can be
+described with the common CDDL {{I-D.ietf-cbor-cddl}} specification in
+{{senmlcddl}} (informative).
 
 ~~~~ cddl
 {::include senml.cddl}
@@ -1249,12 +1284,14 @@ IANA table to have their ID set to this new schemaId value.
 Extensions that are mandatory to understand to correctly process the
 Pack MUST have a label name that ends with the '_' character.
 
-## Media Type Registration {#sec-iana-media}
+## Media Type Registrations {#sec-iana-media}
 
 The following registrations are done following the procedure specified
-in {{RFC6838}} and {{RFC7303}}.
-Clipboard formats are defined for the JSON and XML form of lists but do
-not make sense for streams or other formats.
+in {{RFC6838}} and {{RFC7303}}. This document registers media types
+for each serialization format of SenML (JSON, CBOR, and EXI) and also
+media types for the same formats of the streaming use (SensML). Clipboard
+formats are defined for the JSON and XML form of lists but do not make
+sense for streams or other formats.
 
 Note to RFC Editor - please remove this paragraph. Note that a request
 for media type review for senml+json was sent to the
@@ -1274,18 +1311,19 @@ Required parameters: none
 Optional parameters: none 
 
 Encoding considerations: Must be encoded as using a subset of the 
-encoding allowed in {{RFC7159}}. See RFC-AAAA for details. This 
+encoding allowed in {{-json}}. See RFC-AAAA for details. This 
 simplifies implementation of very simple system and does not impose 
 any significant limitations as all this data is meant for machine to 
 machine communications and is not meant to be human readable. 
 
 Security considerations: See {{sec-sec}} of RFC-AAAA.
 
-Interoperability considerations: Applications should ignore any JSON 
-key value pairs that they do not understand. This allows backwards 
-compatibility extensions to this specification. The "bver" field can 
-be used to ensure the receiver supports a minimal level of 
-functionality needed by the creator of the JSON object. 
+Interoperability considerations: Applications MUST ignore any JSON
+key value pairs that they do not understand unless the key ends with
+the '_' character in which case an error MUST be generated. This
+allows backwards compatible extensions to this specification. The
+"bver" field can  be used to ensure the receiver supports a minimal
+level of functionality needed by the creator of the JSON object.
 
 Published specification: RFC-AAAA 
 
@@ -1333,18 +1371,19 @@ Required parameters: none
 Optional parameters: none 
 
 Encoding considerations: Must be encoded as using a subset of the 
-encoding allowed in {{RFC7159}}. See RFC-AAAA for details. This 
+encoding allowed in {{-json}}. See RFC-AAAA for details. This 
 simplifies implementation of very simple system and does not impose 
 any significant limitations as all this data is meant for machine to 
 machine communications and is not meant to be human readable. 
 
 Security considerations: See {{sec-sec}} of RFC-AAAA.
 
-Interoperability considerations: Applications should ignore any JSON 
-key value pairs that they do not understand. This allows backwards 
-compatibility extensions to this specification. The "bver" field can 
-be used to ensure the receiver supports a minimal level of 
-functionality needed by the creator of the JSON object. 
+Interoperability considerations: Applications MUST ignore any JSON key
+value pairs that they do not understand unless the key ends with the
+'_' character in which case an error MUST be generated. This allows
+backwards compatible extensions to this specification. The "bver"
+field can  be used to ensure the receiver supports a minimal level of
+functionality needed by the creator of the JSON object.
 
 Published specification: RFC-AAAA 
 
@@ -1392,11 +1431,12 @@ RFC-AAAA for details.
 
 Security considerations: See {{sec-sec}} of RFC-AAAA.
 
-Interoperability considerations: Applications should ignore any 
-key value pairs that they do not understand. This allows backwards 
-compatibility extensions to this specification. The "bver" field can 
-be used to ensure the receiver supports a minimal level of 
-functionality needed by the creator of the CBOR object. 
+Interoperability considerations: Applications MUST ignore any key
+value pairs that they do not understand unless the key ends with the
+'_' character in which case an error MUST be generated. This allows
+backwards compatible extensions to this specification. The "bver"
+field can  be used to ensure the receiver supports a minimal level of
+functionality needed by the creator of the CBOR object.
 
 Published specification: RFC-AAAA 
 
@@ -1446,11 +1486,12 @@ RFC-AAAA for details.
 
 Security considerations: See {{sec-sec}} of RFC-AAAA.
 
-Interoperability considerations: Applications should ignore any 
-key value pairs that they do not understand. This allows backwards 
-compatibility extensions to this specification. The "bver" field can 
-be used to ensure the receiver supports a minimal level of 
-functionality needed by the creator of the CBOR object. 
+Interoperability considerations: Applications MUST ignore any key
+value pairs that they do not understand unless the key ends with the
+'_' character in which case an error MUST be generated. This allows
+backwards compatible extensions to this specification. The "bver"
+field can  be used to ensure the receiver supports a minimal level of
+functionality needed by the creator of the CBOR object.
 
 Published specification: RFC-AAAA 
 
@@ -1498,11 +1539,13 @@ Encoding considerations: Must be encoded as using
 
 Security considerations: See {{sec-sec}} of RFC-AAAA.
 
-Interoperability considerations: Applications should ignore any XML tags 
-or attributes that they do not understand. This allows backwards 
-compatibility extensions to this specification. The "bver" attribute in 
-the senml XML tag can be used to ensure the receiver supports a minimal 
-level of functionality needed by the creator of the XML. 
+Interoperability considerations: Applications MUST ignore any XML tags
+or attributes that they do not understand unless the attribute name
+ends with the '_' character in which case an error MUST be generated.
+This allows backwards compatible extensions to this specification. The
+"bver" attribute in the senml XML tag can be used to ensure the
+receiver supports a minimal level of functionality needed by the
+creator of the XML SenML Pack.
 
 Published specification: RFC-AAAA 
 
@@ -1555,11 +1598,13 @@ Encoding considerations: Must be encoded as using
 
 Security considerations: See {{sec-sec}} of RFC-AAAA.
 
-Interoperability considerations: Applications should ignore any XML tags 
-or attributes that they do not understand. This allows backwards 
-compatibility extensions to this specification. The "bver" attribute in 
-the senml XML tag can be used to ensure the receiver supports a minimal 
-level of functionality needed by the creator of the XML. 
+Interoperability considerations: Applications MUST ignore any XML tags
+or attributes that they do not understand unless the attribute name
+ends with the '_' character in which case an error MUST be generated.
+This allows backwards compatible extensions to this specification. The
+"bver" attribute in the senml XML tag can be used to ensure the
+receiver supports a minimal level of functionality needed by the
+creator of the XML SenML Pack.
 
 Published specification: RFC-AAAA 
 
@@ -1592,11 +1637,11 @@ Author: Cullen Jennings \<fluffy@iii.ca>
 Change controller: IESG 
 
 
-### senml+exi Media Type Registration 
+### senml-exi Media Type Registration 
 
 Type name: application 
 
-Subtype name: senml+exi 
+Subtype name: senml-exi 
 
 Required parameters: none 
 
@@ -1607,13 +1652,14 @@ Encoding considerations: Must be encoded as using
 
 Security considerations: See {{sec-sec}} of RFC-AAAA.
 
-Interoperability considerations: Applications should ignore any XML tags 
-or attributes that they do not understand. This allows backwards 
-compatibility extensions to this specification. The "bver" attribute in 
-the senml XML tag can be used to ensure the receiver supports a minimal 
-level of functionality needed by the creator of the XML.  Further 
-information on using schemas to guide the EXI can be found in 
-RFC-AAAA. 
+Interoperability considerations: Applications MUST ignore any XML tags
+or attributes that they do not understand unless the attribute name
+ends with the '_' character in which case an error MUST be generated.
+This allows backwards compatible extensions to this specification. The
+"bver" attribute in the senml XML tag can be used to ensure the
+receiver supports a minimal level of functionality needed by the
+creator of the XML SenML Pack. Further information on using schemas
+to guide the EXI can be found in RFC-AAAA.
 
 Published specification: RFC-AAAA 
 
@@ -1623,7 +1669,7 @@ such as temperature and humidity. It can be used for a wide range of
 sensor reporting systems. 
 
 Fragment identifier considerations: Fragment identification for 
-application/senml+exi is supported by using fragment identifiers as 
+application/senml-exi is supported by using fragment identifiers as 
 specified by RFC-AAAA. 
 
 Additional information: 
@@ -1649,11 +1695,11 @@ Author: Cullen Jennings \<fluffy@iii.ca>
 Change controller: IESG 
 
 
-### sensml+exi Media Type Registration 
+### sensml-exi Media Type Registration 
 
 Type name: application 
 
-Subtype name: sensml+exi 
+Subtype name: sensml-exi 
 
 Required parameters: none 
 
@@ -1664,13 +1710,14 @@ Encoding considerations: Must be encoded as using
 
 Security considerations: See {{sec-sec}} of RFC-AAAA.
 
-Interoperability considerations: Applications should ignore any XML tags 
-or attributes that they do not understand. This allows backwards 
-compatibility extensions to this specification. The "bver" attribute in 
-the senml XML tag can be used to ensure the receiver supports a minimal 
-level of functionality needed by the creator of the XML.  Further 
-information on using schemas to guide the EXI can be found in 
-RFC-AAAA. 
+Interoperability considerations: Applications MUST ignore any XML tags
+or attributes that they do not understand unless the attribute name
+ends with the '_' character in which case an error MUST be generated.
+This allows backwards compatible extensions to this specification. The
+"bver" attribute in the senml XML tag can be used to ensure the
+receiver supports a minimal level of functionality needed by the
+creator of the XML SenML Pack. Further information on using schemas
+to guide the EXI can be found in RFC-AAAA.
 
 Published specification: RFC-AAAA 
 
@@ -1680,7 +1727,7 @@ such as temperature and humidity. It can be used for a wide range of
 sensor reporting systems. 
 
 Fragment identifier considerations: Fragment identification for 
-application/senml+exi is supported by using fragment identifiers as 
+application/senml-exi is supported by using fragment identifiers as 
 specified by RFC-AAAA. 
 
 Additional information: 
@@ -1730,8 +1777,8 @@ media types in the "CoAP Content-Formats" sub-registry, within the
 | application/sensml+cbor  | TBD |
 | application/senml+xml    | TBD |
 | application/sensml+xml   | TBD |
-| application/senml+exi    | TBD |
-| application/sensml+exi   | TBD |
+| application/senml-exi    | TBD |
+| application/sensml-exi   | TBD |
 {: #tbl-coap-content-formats cols="l l" title="CoAP Content-Format IDs"}
  
 
@@ -1741,10 +1788,13 @@ Sensor data can contain a wide range of information ranging from
 information that is very public, such as the outside temperature in a
 given city, to very private information that requires integrity and
 confidentiality protection, such as patient health information. The
-SenML format does not provide any security and instead relies on the
-protocol that carries it to provide security. Applications using SenML
-need to look at the overall context of how this media type will be
-used to decide if the security is adequate.
+SenML formats do not provide any security and instead rely on the
+protocol that carries them to provide security. Applications using
+SenML need to look at the overall context of how these media types
+will be used to decide if the security is adequate. The SenML formats
+defined by this specification do not contain any executable content.
+However, future extensions could potentially embed application 
+specific executable content in the data.
 
 See also {{sec-privacy}}. 
 
@@ -1754,9 +1804,10 @@ Sensor data can range from information with almost no security
 considerations, such as the current temperature in a given city, to
 highly sensitive medical or location data. This specification provides
 no security protection for the data but is meant to be used inside
-another container or transport protocol such as S/MIME or HTTP with
-TLS that can provide integrity, confidentiality, and authentication
-information about the source of the data.
+another container or transport protocol such as S/MIME {{?RFC5751}} or
+HTTP with TLS {{?RFC5246}} that can provide integrity,
+confidentiality, and authentication information about the source of
+the data.
 
 The name fields need to uniquely identify the sources or destinations
 of the values in a SenML Pack.  However, the use of long-term stable
@@ -1768,12 +1819,12 @@ with care or avoided as for example described for IPv6 addresses in
 
 # Acknowledgement
 
-We would like to thank Alexander Pelov, Andrew McClure, Andrew
-McGregor, Bjoern Hoehrmann, Christian Amsuess, Christian Groves,
-Daniel Peintner, Jan-Piet Mens, Jim Schaad, Joe Hildebrand, John
-Klensin, Karl Palsson, Lennart Duhrsen, Lisa Dusseault, Lyndsay
-Campbell, Martin Thomson, Michael Koster, Peter Saint-Andre, and
-Stephen Farrell, for their review comments.
+We would like to thank Alexander Pelov, Alexey Melnikov, Andrew
+McClure, Andrew McGregor, Bjoern Hoehrmann, Christian Amsuess,
+Christian Groves, Daniel Peintner, Jan-Piet Mens, Jim Schaad, Joe
+Hildebrand, John Klensin, Karl Palsson, Lennart Duhrsen, Lisa
+Dusseault, Lyndsay Campbell, Martin Thomson, Michael Koster, Peter
+Saint-Andre, and Stephen Farrell, for their review comments.
 
 
 --- back
