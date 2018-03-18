@@ -1767,7 +1767,7 @@ XML: N/A, the requested URIs are XML namespaces
 IANA is requested to assign CoAP Content-Format IDs for the SenML
 media types in the "CoAP Content-Formats" sub-registry, within the
 "CoRE Parameters" registry {{RFC7252}}. The suggested assignment for
-IDs is show in {{tbl-coap-content-formats}}.
+IDs is shown in {{tbl-coap-content-formats}}.
 
 | Media type               | ID  |
 | application/senml+json   | 110 |
