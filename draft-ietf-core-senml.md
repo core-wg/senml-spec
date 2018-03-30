@@ -164,7 +164,7 @@ informative:
 This specification defines media types for representing simple sensor
 measurements and device parameters in the Sensor Measurement Lists
 (SenML). Representations are defined in JavaScript Object Notation
-(JSON), Concise Binary Object Representation (CBOR), eXtensible Markup
+(JSON), Concise Binary Object Representation (CBOR), Extensible Markup
 Language (XML), and Efficient XML Interchange (EXI), which share the
 common SenML data model. A simple sensor, such as a temperature
 sensor, could use one of these media types in protocols such as HTTP
