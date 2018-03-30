@@ -141,15 +141,6 @@ informative:
     author:
     - organization: IEEE
     date: 2011
-  UCUM:
-    title: The Unified Code for Units of Measure (UCUM) 
-    author:
-    - ins: G. Schadow 
-    - ins: C. McDonald 
-    date: 2013 
-    target: http://unitsofmeasure.org/ucum.html 
-    seriesinfo:
-      Regenstrief Institute and Indiana University: School of Informatics
   ISO-80000-5:
     title: >
       Quantities and units –
@@ -1210,9 +1201,6 @@ need to consider the following guidelines:
 10. A number after a unit typically indicates the previous unit raised to that
   power, and the / indicates that the units that follow are the reciprocal. A
   unit should have only one / in the name.
-
-11. A good list of common units can be found in the Unified Code for
-   Units of Measure {{UCUM}}.
 
 
 ## SenML Label Registry {#iana-senml-label-registry}
