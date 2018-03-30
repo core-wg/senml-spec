@@ -692,7 +692,7 @@ types.
 ### Collection of Resources {#rest-ex}
 
 The following example shows the results from a query to one device
-that aggregates multiple measurements from another devices. The example
+that aggregates multiple measurements from other devices. The example
 assumes that a client has fetched information from a device at
 2001:db8::2 by performing a GET operation on http://\[2001:db8::2\] at
 Mon Oct 31 16:27:09 UTC 2011, and has gotten two separate values as a
@@ -921,10 +921,10 @@ above XML is the following:
 ~~~~
 
 A small temperature sensor device that only generates this one EXI
-file does not really need an full EXI implementation. It can simply
+file does not really need a full EXI implementation. It can simply
 hard code the output replacing the 1-wire device ID starting at byte
-0x20 and going to byte 0x2F with it's device ID, and replacing the
-value "0xe7 0x01" at location 0x37 and 0x38 with the current
+0x14 and going to byte 0x23 with its device ID, and replacing the
+value "0xe7 0x01" at location 0x31 and 0x32 with the current
 temperature. The EXI Specification {{W3C.REC-exi-20140211}} contains
 the full information on how floating point numbers are represented,
 but for the purpose of this sensor, the temperature can be converted
