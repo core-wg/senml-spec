@@ -1274,7 +1274,7 @@ advice at the end of {{considerations}}.
 All new SenML labels that have "base" semantics (see {{senml-base}})
 MUST start with the character 'b'. Regular labels MUST NOT start with
 that character. All new SenML labels with Value semantics (see
-{senml-fields}) MUST have "Value" in their (long form) name.
+{{senml-fields}}) MUST have "Value" in their (long form) name.
 
 Extensions that add a label that is intended for use with XML need to
 create a new RelaxNG scheme that includes all the labels in the IANA
