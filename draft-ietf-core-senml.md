@@ -129,7 +129,7 @@ informative:
   RFC6973: privacycons
   RFC7111: csvfrag
   RFC7721:
-  I-D.arkko-core-dev-urn:
+  I-D.ietf-core-dev-urn:
   I-D.ietf-cbor-cddl: 
   IEEE802.1ba-2011:
     title: IEEE Standard for Local and metropolitan area networks--Audio Video Bridging (AVB) Systems
@@ -456,7 +456,7 @@ such names both need to be unique and need to conform to the
 restricted character set. One approach is to include a bit string that
 has guaranteed uniqueness (such as a 1-wire address). Some of the
 examples within this document use the device URN namespace as
-specified in {{I-D.arkko-core-dev-urn}}. UUIDs {{RFC4122}} are another
+specified in {{I-D.ietf-core-dev-urn}}. UUIDs {{RFC4122}} are another
 way to generate a unique name. However, the restricted character set
 does not allow the use of many URI schemes, such as the 'tag' scheme
 {{?RFC4151}} and the 'ni' scheme {{?RFC6920}}, in names as such. The
