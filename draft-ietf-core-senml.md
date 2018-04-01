@@ -1065,10 +1065,9 @@ For CBOR, we use integer labels and native binary data
 Note to RFC Editor: Please replace all occurrences of "RFC-AAAA" with
 the RFC number of this specification.
 
-IANA will create a new group in the "Protocol Registries" which will
-be named "Sensor Measurement Lists (SenML) Parameters". The registries
-defined in {{sec-units}} and {{iana-senml-label-registry}} will be
-created inside this group.
+IANA will create a new registry for "Sensor Measurement Lists (SenML)
+Parameters". The sub-registries defined in {{sec-units}} and {{iana-
+senml-label-registry}} will be created inside this registry.
 
 
 ## Units Registry {#sec-units}
