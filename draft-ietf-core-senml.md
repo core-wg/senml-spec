@@ -1393,7 +1393,7 @@ such as temperature and humidity. It can be used for a wide range of
 sensor reporting systems. 
 
 Fragment identifier considerations: Fragment identification for 
-application/senml+json is supported by using fragment identifiers as 
+application/sensml+json is supported by using fragment identifiers as 
 specified by RFC-AAAA. 
 
 Additional information: 
@@ -1501,7 +1501,7 @@ such as temperature and humidity. It can be used for a wide range of
 sensor reporting systems. 
 
 Fragment identifier considerations: Fragment identification for 
-application/senml+cbor is supported by using fragment identifiers as 
+application/sensml+cbor is supported by using fragment identifiers as 
 specified by RFC-AAAA. 
 
 Additional information: 
@@ -1614,7 +1614,7 @@ such as temperature and humidity. It can be used for a wide range of
 sensor reporting systems. 
 
 Fragment identifier considerations: Fragment identification for 
-application/senml+xml is supported by using fragment identifiers as 
+application/sensml+xml is supported by using fragment identifiers as 
 specified by RFC-AAAA. 
 
 Additional information: 
@@ -1727,7 +1727,7 @@ such as temperature and humidity. It can be used for a wide range of
 sensor reporting systems. 
 
 Fragment identifier considerations: Fragment identification for 
-application/senml-exi is supported by using fragment identifiers as 
+application/sensml-exi is supported by using fragment identifiers as 
 specified by RFC-AAAA. 
 
 Additional information: 
