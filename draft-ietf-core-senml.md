@@ -1066,8 +1066,8 @@ Note to RFC Editor: Please replace all occurrences of "RFC-AAAA" with
 the RFC number of this specification.
 
 IANA will create a new registry for "Sensor Measurement Lists (SenML)
-Parameters". The sub-registries defined in {{sec-units}} and {{iana-
-senml-label-registry}} will be created inside this registry.
+Parameters". The sub-registries defined in {{sec-units}} and 
+{{iana-senml-label-registry}} will be created inside this registry.
 
 
 ## Units Registry {#sec-units}
