@@ -1775,7 +1775,7 @@ media types in the "CoAP Content-Formats" sub-registry, within the
 "CoRE Parameters" registry {{RFC7252}}. IDs for the JSON, CBOR, and
 EXI Content-Formats are assigned from the "Expert Review" (0-255)
 range and for the XML Content-Format from the "IETF Review or IESG
-Approval" range. The assigned IDs are show in 
+Approval" range. The assigned IDs are shown in 
 {{tbl-coap-content-formats}}.
 
 | Media type               | ID  |
