@@ -311,13 +311,12 @@ Format {{RFC6690}}), not for SenML concepts per se.  Note that
 Each SenML Pack carries a single array that represents a set of
 measurements and/or parameters. This array contains a series of SenML
 Records with several fields described below. There are two kinds of
-fields: base and regular.
-The base fields can be included
-in any SenML Record and they apply to the entries in the Record.
-Each base field also applies to all Records after it up to, but not
-including, the next Record that has that same base field. 
-All base fields are optional. Regular fields can be
-included in any SenML Record and apply only to that Record.
+fields: base and regular. The base fields can be included in any SenML
+Record and they apply to the entries in the Record. Each base field
+also applies to all Records after it up to, but not including, the
+next Record that has that same base field.  All base fields are
+optional. Regular fields can be included in any SenML Record and apply
+only to that Record.
 
 ## Base Fields {#senml-base}
 
