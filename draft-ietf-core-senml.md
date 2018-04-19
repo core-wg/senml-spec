@@ -1226,30 +1226,27 @@ IANA will create a new registry for SenML labels. The initial content
 of the registry is:
 
 | Name          | Label | CL | JSON Type | XML Type | EI | Reference |
-| Base Name     | bn    | -2 | String    | string   | a  | RFCXXXX   |
-| Base Time     | bt    | -3 | Number    | double   | a  | RFCXXXX   |
-| Base Unit     | bu    | -4 | String    | string   | a  | RFCXXXX   |
-| Base Value    | bv    | -5 | Number    | double   | a  | RFCXXXX   |
-| Base Sum      | bs    | -6 | Number    | double   | a  | RFCXXXX   |
-| Base Version  | bver  | -1 | Number    | int      | a  | RFCXXXX   |
-| Name          | n     |  0 | String    | string   | a  | RFCXXXX   |
-| Unit          | u     |  1 | String    | string   | a  | RFCXXXX   |
-| Value         | v     |  2 | Number    | double   | a  | RFCXXXX   |
-| String Value  | vs    |  3 | String    | string   | a  | RFCXXXX   |
-| Boolean Value | vb    |  4 | Boolean   | boolean  | a  | RFCXXXX   |
-| Data Value    | vd    |  8 | String    | string   | a  | RFCXXXX   |
-| Value Sum     | s     |  5 | Number    | double   | a  | RFCXXXX   |
-| Time          | t     |  6 | Number    | double   | a  | RFCXXXX   |
-| Update Time   | ut    |  7 | Number    | double   | a  | RFCXXXX   |
+| Base Name     | bn    | -2 | String    | string   | a  | RFC-AAAA   |
+| Base Time     | bt    | -3 | Number    | double   | a  | RFC-AAAA   |
+| Base Unit     | bu    | -4 | String    | string   | a  | RFC-AAAA   |
+| Base Value    | bv    | -5 | Number    | double   | a  | RFC-AAAA   |
+| Base Sum      | bs    | -6 | Number    | double   | a  | RFC-AAAA   |
+| Base Version  | bver  | -1 | Number    | int      | a  | RFC-AAAA   |
+| Name          | n     |  0 | String    | string   | a  | RFC-AAAA   |
+| Unit          | u     |  1 | String    | string   | a  | RFC-AAAA   |
+| Value         | v     |  2 | Number    | double   | a  | RFC-AAAA   |
+| String Value  | vs    |  3 | String    | string   | a  | RFC-AAAA   |
+| Boolean Value | vb    |  4 | Boolean   | boolean  | a  | RFC-AAAA   |
+| Data Value    | vd    |  8 | String    | string   | a  | RFC-AAAA   |
+| Value Sum     | s     |  5 | Number    | double   | a  | RFC-AAAA   |
+| Time          | t     |  6 | Number    | double   | a  | RFC-AAAA   |
+| Update Time   | ut    |  7 | Number    | double   | a  | RFC-AAAA   |
 {: #tbl-seml-reg cols='r l l' title="IANA Registry for SenML Labels, CL = CBOR Label, EI = EXI ID"}
 
 This is the same table as {{tbl-labels}}, with notes removed, and with
 columns added for the information that is all the same for this
 initial set of registrations, but will need to be supplied with a
 different value for new registrations.
-
-Note to RFC Editor. Please replace RFCXXXX with the number for this
-RFC.
 
 All new entries must define the Label Name, Label, and XML Type but
 the CBOR labels SHOULD be left empty as CBOR will use the string
