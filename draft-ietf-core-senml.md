@@ -987,7 +987,7 @@ from 19th to the last:
 # Usage Considerations
 
 The measurements support sending both the current value of a sensor as
-well as the an integrated sum. For many types of measurements, the sum
+well as an integrated sum. For many types of measurements, the sum
 is more useful than the current value. For example, an electrical
 meter that measures the energy a given computer uses will typically
 want to measure the cumulative amount of energy used. This is less
