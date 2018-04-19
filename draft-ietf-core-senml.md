@@ -1778,15 +1778,15 @@ range and for the XML Content-Format from the "IETF Review or IESG
 Approval" range. The assigned IDs are shown in 
 {{tbl-coap-content-formats}}.
 
-| Media type               | ID  |
-| application/senml+json   | TBD |
-| application/sensml+json  | TBD |
-| application/senml+cbor   | TBD |
-| application/sensml+cbor  | TBD |
-| application/senml-exi    | TBD |
-| application/sensml-exi   | TBD |
-| application/senml+xml    | TBD |
-| application/sensml+xml   | TBD |
+| Media type               | ID  | Encoding | Reference
+| application/senml+json   | TBD |          | RFC-AAAA
+| application/sensml+json  | TBD |          | RFC-AAAA
+| application/senml+cbor   | TBD |          | RFC-AAAA
+| application/sensml+cbor  | TBD |          | RFC-AAAA
+| application/senml-exi    | TBD |          | RFC-AAAA
+| application/sensml-exi   | TBD |          | RFC-AAAA
+| application/senml+xml    | TBD |          | RFC-AAAA
+| application/sensml+xml   | TBD |          | RFC-AAAA
 {: #tbl-coap-content-formats cols="l l" title="CoAP Content-Format IDs"}
  
 
