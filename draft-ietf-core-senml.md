@@ -1792,17 +1792,24 @@ Approval" range. The assigned IDs are shown in
 
 # Security Considerations {#sec-sec}
 
-Sensor data can contain a wide range of information ranging from
-information that is very public, such as the outside temperature in a
-given city, to very private information that requires integrity and
-confidentiality protection, such as patient health information. The
-SenML formats do not provide any security and instead rely on the
-protocol that carries them to provide security. Applications using
-SenML need to look at the overall context of how these media types
-will be used to decide if the security is adequate. The SenML formats
-defined by this specification do not contain any executable content.
-However, future extensions could potentially embed application 
-specific executable content in the data.
+Sensor data presented with SenML can contain a wide range of
+information ranging from information that is very public, such as the
+outside temperature in a given city, to very private information that
+requires integrity and confidentiality protection, such as patient
+health information. When SenML is used for configuration or actuation,
+it can be used to change the state of systems and impact also physical
+world, e.g., by turning off a heater or opening a lock.
+
+The SenML formats alone do not provide any security and instead rely
+on the protocol that carries them to provide security. Applications
+using SenML need to look at the overall context of how these formats
+will be used to decide if the security is adequate. In particular for
+sensitive sensor data and actuation use it is important to ensure that
+proper security mechanims are used.
+
+The SenML formats defined by this specification do not contain any
+executable content. However, future extensions could potentially embed
+application specific executable content in the data.
 
 See also {{sec-privacy}}. 
 
