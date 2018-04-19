@@ -17,7 +17,7 @@ pi:
   rfcedstyle: 'no'
   tocdepth: '4'
   
-title: Media Types for Sensor Measurement Lists (SenML)
+title: Sensor Measurement Lists (SenML)
 abbrev: SenML
 area: ART
 
