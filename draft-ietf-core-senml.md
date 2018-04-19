@@ -405,8 +405,8 @@ this document with their respective labels and data types.
 | Update Time   | ut    |  7         | Number     | double     |
 {: #tbl-labels cols="r l r l l" title="SenML Labels"}
 
-Data Value is base64 encoded string with URL safe alphabet as defined
-in Section 5 of {{RFC4648}}, with padding omitted.
+(*) Data Value is base64 encoded string with URL safe alphabet as
+defined in Section 5 of {{RFC4648}}, with padding omitted.
 
 For details of the JSON representation see {{sec-json}}, for the CBOR 
 {{sec-cbor}}, and for the XML {{sec-xml}}.
