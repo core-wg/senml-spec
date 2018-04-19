@@ -158,6 +158,13 @@ informative:
       ISO: 80000-5
       Edition: 1.0
     date: 2007-05-01
+  AN1796:
+    target: http://pdfserv.maximintegrated.com/en/an/AN1796.pdf
+    title: Overview of 1-Wire Technology and Its Use
+    author:
+      name: Bernhard Linke
+      org: Maxim Integrated
+    date: 2008-06-19
 
 --- abstract
 
@@ -453,15 +460,15 @@ namespaces that can be used. As a result, implementers need to take
 care in choosing the naming scheme for concatenated names, because
 such names both need to be unique and need to conform to the
 restricted character set. One approach is to include a bit string that
-has guaranteed uniqueness (such as a 1-wire address). Some of the
-examples within this document use the device URN namespace as
+has guaranteed uniqueness (such as a 1-wire address {{AN1796}}). Some
+of the examples within this document use the device URN namespace as
 specified in {{I-D.ietf-core-dev-urn}}. UUIDs {{RFC4122}} are another
 way to generate a unique name. However, the restricted character set
 does not allow the use of many URI schemes, such as the 'tag' scheme
 {{?RFC4151}} and the 'ni' scheme {{?RFC6920}}, in names as such. The
 use of  URIs with characters incompatible with this set, and possible
-mapping rules between the two, are outside of the scope of the
-present document.
+mapping rules between the two, are outside of the scope of the present
+document.
 
 If the Record has no Unit, the Base Unit is used as the Unit. Having
 no Unit and no Base Unit is allowed.
