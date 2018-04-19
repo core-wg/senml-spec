@@ -426,7 +426,7 @@ in the Pack.
 
 Systems reading one of the objects MUST check for the Version field.
 If this value is a version number larger than the version which the
-system understands, the system SHOULD NOT use this object. This allows
+system understands, the system MUST NOT use this object. This allows
 the version number to indicate that the object contains structure or
 semantics that is different from what is defined in the present
 document beyond just making use of the extension points provided here.
