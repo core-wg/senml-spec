@@ -1815,7 +1815,7 @@ See also {{sec-privacy}}.
 
 # Privacy Considerations {#sec-privacy}
 
-Sensor data can range from information with almost no security
+Sensor data can range from information with almost no privacy
 considerations, such as the current temperature in a given city, to
 highly sensitive medical or location data. This specification provides
 no security protection for the data but is meant to be used inside
