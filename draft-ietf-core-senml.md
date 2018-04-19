@@ -1819,7 +1819,7 @@ considerations, such as the current temperature in a given city, to
 highly sensitive medical or location data. This specification provides
 no security protection for the data but is meant to be used inside
 another container or transport protocol such as S/MIME {{?RFC5751}} or
-HTTP with TLS {{?RFC5246}} that can provide integrity,
+HTTP with TLS {{?RFC2818}} that can provide integrity,
 confidentiality, and authentication information about the source of
 the data.
 
