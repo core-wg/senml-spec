@@ -499,22 +499,25 @@ where one of the data values is more "meta" than others (e.g.,
 describes a condition that influences other measurements at the same
 time).
 
-## Resolved Records
+## Resolved Records {#resolved-records}
 
 Sometimes it is useful to be able to refer to a defined normalized
 format for SenML records. This normalized format tends to get used for
 big data applications and intermediate forms when converting to other
-formats.
+formats. Also, if SenML Records are used outside of a SenML Pack, they
+need to be resolved first to ensure applicable base values are
+applied.
 
 A SenML Record is referred to as "resolved" if it does not contain any
 base values, i.e., labels starting with the character 'b', except for
 Version fields (see below), and has no relative times. To resolve the
-records, the base values of the SenML Pack (if any) are applied to the
-Record. That is, name and base name are concatenated, base time is
-added to the time of the Record, if the Record did not contain Unit
-the Base Unit is applied to the record, etc. In addition the records
-need to be in chronological order.  An example of this is show in
-{{resolved-ex}}.
+Records, the applicable base values of the SenML Pack (if any) are
+applied to the Record. That is, for the base values in the Record or
+before the Record in the Pack, name and base name are concatenated,
+base time is added to the time of the Record, if the Record did not
+contain Unit the Base Unit is applied to the record, etc. In addition
+the records need to be in chronological order in the Pack.  An example
+of this is show in {{resolved-ex}}.
 
 The Version field MUST NOT be present in resolved records if the SenML
 version defined in this document is used and MUST be present otherwise
@@ -1803,6 +1806,12 @@ will be used to decide if the security is adequate. The SenML formats
 defined by this specification do not contain any executable content.
 However, future extensions could potentially embed application 
 specific executable content in the data.
+
+SenML Records are intended to be interpreted in the context of any
+applicable base values. If records become separated from the record
+that establishes the base values, the data will be useless or, worse,
+wrong. Care needs to be taken in keeping the integrity of a Pack that
+contains unresolved SenML Records (see {{resolved-records}}).
 
 See also {{sec-privacy}}. 
 
