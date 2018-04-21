@@ -773,7 +773,8 @@ labels, as defined in {{tbl-cbor-labels}}. This table is conclusive, i.e.,
 there is no intention to define any additional integer map keys; any
 extensions will use string map keys. This allows translators
 converting between CBOR and JSON representations to convert also all
-future labels without needing to update implementations.
+future labels without needing to update implementations. The base
+values are given negative CBOR labels and others non-negative labels. 
 
 | Name                      | Label      | CBOR Label |
 | Version                   | bver       |         -1 |
