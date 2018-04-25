@@ -548,7 +548,7 @@ target resource supporting this usage can be described, e.g., using
 {{?I-D.ietf-core-interfaces}}. Examples of actuation usage are shown
 in {{thermo-ex}}.
 
-# JSON Representation (application/senml+json) {#sec-json}
+# JSON Representation (application/senml-json) {#sec-json}
 
 For the SenML fields shown in {{tbl-json-labels}}, the SenML labels
 are used as the JSON object member names within JSON objects
@@ -749,7 +749,7 @@ same time.
 ~~~~
 
 
-# CBOR Representation (application/senml+cbor) {#sec-cbor}
+# CBOR Representation (application/senml-cbor) {#sec-cbor}
 
 The CBOR {{RFC7049}} representation is equivalent to the JSON
 representation, with the following changes:
@@ -810,7 +810,7 @@ In CBOR diagnostic notation (Section 6 of {{RFC7049}}), this is:
 ~~~~
 
 
-# XML Representation (application/senml+xml) {#sec-xml}
+# XML Representation (application/senml-xml) {#sec-xml}
 
 A SenML Pack or Stream can also be represented in XML format as
 defined in this section.
@@ -1315,17 +1315,17 @@ identifier is defined in a different way thus this specification uses
 "-" instead of "+" in the media types.
 
 Note to RFC Editor - please remove this paragraph. Note that a request
-for media type review for senml+json was sent to the
+for media type review for senml-json was sent to the
 media-types@iana.org on Sept 21, 2010. A second request for all the
 types was sent on October 31, 2016. Please change all instances
 of RFC-AAAA with the RFC number of this document.
 
 
-### senml+json Media Type Registration {#sec-senml-json}
+### senml-json Media Type Registration {#sec-senml-json}
 
 Type name: application 
 
-Subtype name: senml+json 
+Subtype name: senml-json 
 
 Required parameters: none 
 
@@ -1354,7 +1354,7 @@ such as temperature and humidity. It can be used for a wide range of
 sensor reporting systems. 
 
 Fragment identifier considerations: Fragment identification for 
-application/senml+json is supported by using fragment identifiers as 
+application/senml-json is supported by using fragment identifiers as 
 specified by RFC-AAAA. 
 
 Additional information: 
@@ -1381,11 +1381,11 @@ Author: Cullen Jennings \<fluffy@iii.ca>
 
 Change controller: IESG
 
-### sensml+json Media Type Registration {#sec-sensml-json}
+### sensml-json Media Type Registration {#sec-sensml-json}
 
 Type name: application 
 
-Subtype name: sensml+json 
+Subtype name: sensml-json 
 
 Required parameters: none 
 
@@ -1414,7 +1414,7 @@ such as temperature and humidity. It can be used for a wide range of
 sensor reporting systems. 
 
 Fragment identifier considerations: Fragment identification for 
-application/sensml+json is supported by using fragment identifiers as 
+application/sensml-json is supported by using fragment identifiers as 
 specified by RFC-AAAA. 
 
 Additional information: 
@@ -1437,11 +1437,11 @@ Author: Cullen Jennings \<fluffy@iii.ca>
 Change controller: IESG 
 
 
-### senml+cbor Media Type Registration 
+### senml-cbor Media Type Registration 
 
 Type name: application 
 
-Subtype name: senml+cbor 
+Subtype name: senml-cbor 
 
 Required parameters: none 
 
@@ -1467,7 +1467,7 @@ such as temperature and humidity. It can be used for a wide range of
 sensor reporting systems. 
 
 Fragment identifier considerations: Fragment identification for 
-application/senml+cbor is supported by using fragment identifiers as 
+application/senml-cbor is supported by using fragment identifiers as 
 specified by RFC-AAAA. 
 
 Additional information: 
@@ -1492,11 +1492,11 @@ Author: Cullen Jennings \<fluffy@iii.ca>
 
 Change controller: IESG 
 
-### sensml+cbor Media Type Registration 
+### sensml-cbor Media Type Registration 
 
 Type name: application 
 
-Subtype name: sensml+cbor 
+Subtype name: sensml-cbor 
 
 Required parameters: none 
 
@@ -1522,7 +1522,7 @@ such as temperature and humidity. It can be used for a wide range of
 sensor reporting systems. 
 
 Fragment identifier considerations: Fragment identification for 
-application/sensml+cbor is supported by using fragment identifiers as 
+application/sensml-cbor is supported by using fragment identifiers as 
 specified by RFC-AAAA. 
 
 Additional information: 
@@ -1545,11 +1545,11 @@ Author: Cullen Jennings \<fluffy@iii.ca>
 Change controller: IESG 
 
 
-### senml+xml Media Type Registration 
+### senml-xml Media Type Registration 
 
 Type name: application 
 
-Subtype name: senml+xml 
+Subtype name: senml-xml 
 
 Required parameters: none 
 
@@ -1576,7 +1576,7 @@ such as temperature and humidity. It can be used for a wide range of
 sensor reporting systems. 
 
 Fragment identifier considerations: Fragment identification for 
-application/senml+xml is supported by using fragment identifiers as 
+application/senml-xml is supported by using fragment identifiers as 
 specified by RFC-AAAA. 
 
 Additional information: 
@@ -1604,11 +1604,11 @@ Author: Cullen Jennings \<fluffy@iii.ca>
 Change controller: IESG 
 
 
-### sensml+xml Media Type Registration 
+### sensml-xml Media Type Registration 
 
 Type name: application 
 
-Subtype name: sensml+xml 
+Subtype name: sensml-xml 
 
 Required parameters: none 
 
@@ -1635,7 +1635,7 @@ such as temperature and humidity. It can be used for a wide range of
 sensor reporting systems. 
 
 Fragment identifier considerations: Fragment identification for 
-application/sensml+xml is supported by using fragment identifiers as 
+application/sensml-xml is supported by using fragment identifiers as 
 specified by RFC-AAAA. 
 
 Additional information: 
@@ -1794,14 +1794,14 @@ Approval" range. The assigned IDs are shown in
 {{tbl-coap-content-formats}}.
 
 | Media type               | ID  |
-| application/senml+json   | TBD |
-| application/sensml+json  | TBD |
-| application/senml+cbor   | TBD |
-| application/sensml+cbor  | TBD |
+| application/senml-json   | TBD |
+| application/sensml-json  | TBD |
+| application/senml-cbor   | TBD |
+| application/sensml-cbor  | TBD |
 | application/senml-exi    | TBD |
 | application/sensml-exi   | TBD |
-| application/senml+xml    | TBD |
-| application/sensml+xml   | TBD |
+| application/senml-xml    | TBD |
+| application/sensml-xml   | TBD |
 {: #tbl-coap-content-formats cols="l l" title="CoAP Content-Format IDs"}
  
 
