@@ -476,6 +476,16 @@ indicate seconds in the past from roughly "now". A positive value is
 used to indicate the number of seconds, excluding leap seconds, since
 the start of the year 1970 in UTC.
 
+This specification deliberately leaves the accuracy of "now" very
+vague as it is determined by the overall systems that uses SenML. In a
+system where a sensor sends a SenML record with Time of zero over a
+high speed RS 485 link to an embedded system with accurate time, the
+resulting time could be within 1 ms. At the other extreme, a
+deployment that sends SenML wind speed readings over a globalstar
+satellite link from a mountain valley had resulting time values that
+were up to 15 minutes off the actual time of when the sensor reading
+and the time eror depended on satellite locations and conditions.
+
 If only one of the Base Sum or Sum value is present, the missing
 field is considered to have a value of zero. The Base Sum and Sum
 values are added together to get the sum of measurement. If neither
