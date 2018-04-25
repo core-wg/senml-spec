@@ -1299,21 +1299,6 @@ media types for the same formats of the streaming use (SensML). Clipboard
 formats are defined for the JSON and XML form of lists but do not make
 sense for streams or other formats.
 
-When considering if the Media Type should have a "+" or "-" in the
-middle of it, one key issue is that SenML defines it's own fragment
-identifiers and does not use the fragment identifiers that might be
-used by other media types that end in "+xml" or other plus syntax. The
-reason that SenML defines it's own fragment identifiers is so that the
-specific fragments being identified are the same SenML record
-regardless of which media type is used. For example, in the URL
-"coap://example.com/temp#rec=3", there is no way to know from looking
-at the URL if the data would be sent from client to server in
-senml-json or senml-cbor but it is clearly desirable that the same
-record be identified regardless of which media-type was used. This
-would not work for formats such as "+xml" where the fragment
-identifier is defined in a different way thus this specification uses
-"-" instead of "+" in the media types.
-
 Note to RFC Editor - please remove this paragraph. Note that a request
 for media type review for senml+json was sent to the
 media-types@iana.org on Sept 21, 2010. A second request for all the
