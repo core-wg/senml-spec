@@ -119,6 +119,16 @@ normative:
     seriesinfo:
       ISO/IEC: 19757-2
       Annex C:: RELAX NG Compact syntax
+  XPointerFramework:
+    title: XPointer Framework
+    author:
+    - ins: P. Grosso
+    - ins: E. Maler
+    - ins: J. Marsh
+    - ins: N. Walsh   
+    date: March 2003
+    seriesinfo: W3C Recommendation REC-XPointer-Framework
+    target: http://www.w3.org/TR/2003/REC-xptr-framework-20030325/
 
 informative:
   RFC8141: 
@@ -982,6 +992,12 @@ To select the Records from third to fifth, the 10th record, and all
 from 19th to the last:
 
   coap://example.com/temp#rec=3-5,10,19-*
+
+## Fragment Identification for the XML Format
+
+In addition to the SenML Fragment Identifiers described above, with 
+the XML SenML formats also the syntax defined in {{XPointerFramework}}
+can be used, as recommended by {{!RFC5703}}.
 
 
 # Usage Considerations
