@@ -997,7 +997,7 @@ from 19th to the last:
 
 In addition to the SenML Fragment Identifiers described above, with 
 the XML SenML formats also the syntax defined in {{XPointerFramework}}
-can be used, as recommended by {{!RFC5703}}.
+can be used, as recommended by {{!RFC7303}}.
 
 
 # Usage Considerations
