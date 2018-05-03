@@ -280,7 +280,7 @@ include the relative time each measurement was made compared to the
 time the batch was sent in each SenML Record. The server might have
 accurate NTP time and use the time it received the data, and the
 relative offset, to replace the times in the SenML with absolute times
-before saving the SenML in a document database.
+before saving the SenML information in a document database.
 
 # Terminology
 
