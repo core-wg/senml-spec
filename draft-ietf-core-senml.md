@@ -478,7 +478,7 @@ document.
 
 If the Record has no Unit, the Base Unit is used as the Unit. Having
 no Unit and no Base Unit is allowed.
-  
+
 If either the Base Time or Time value is missing, the missing
 field is considered to have a value of zero. The Base Time and
 Time values are added together to get the time of measurement. A time
@@ -490,7 +490,7 @@ the start of the year 1970 in UTC.
 
 Obviously, "now"-referenced SenML records are only useful within a
 specific communication context (e.g., based on information on when the
-SenML pack was sent) or together with some other context
+SenML pack, or a specific record in a SensML stream, was sent) or together with some other context
 information that can be used for deriving a meaning of "now"; the
 expectation for any archival use is that they will be processed into
 UTC-referenced records before that context would cease to be available.
