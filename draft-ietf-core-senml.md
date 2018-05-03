@@ -571,7 +571,7 @@ Format in Section 7.2.1 of {{RFC7252}}).
 
 ## Sensor Streaming Measurement Lists (SensML) {#sec-sensml}
 
-In some usage scenarios of SenML, the implementations MAY
+In some usage scenarios of SenML, the implementations
 store or transmit SenML in a stream-like fashion, where data is
 collected over time and continuously added to the object. This mode of
 operation is optional, but systems or protocols using SenML in this
