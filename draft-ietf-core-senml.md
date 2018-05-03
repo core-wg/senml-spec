@@ -1074,7 +1074,7 @@ smaller, the application will know that one of the situations listed
 above has happened.
 
 Despite the name sum, the sum field is not useful for applications
-that keep a running count of the number of times that an event happened or
+that maintain a running count of the number of times that an event happened or
 keeping track of a counter such as the total number of bytes sent on an
 interface. Data like that can be sent directly in the value field.
 
