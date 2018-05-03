@@ -572,7 +572,7 @@ Format in Section 7.2.1 of {{RFC7252}}).
 
 ## Sensor Streaming Measurement Lists (SensML) {#sec-sensml}
 
-In some usage scenarios of SenML, the implementations MAY
+In some usage scenarios of SenML, the implementations
 store or transmit SenML in a stream-like fashion, where data is
 collected over time and continuously added to the object. This mode of
 operation is optional, but systems or protocols using SenML in this
@@ -1337,10 +1337,24 @@ Pack MUST have a label name that ends with the '_' character.
 
 The following registrations are done following the procedure specified
 in {{RFC6838}} and {{RFC7303}}. This document registers media types
-for each serialization format of SenML (JSON, CBOR, and EXI) and also
-media types for the same formats of the streaming use (SensML). Clipboard
-formats are defined for the JSON and XML form of lists but do not make
-sense for streams or other formats.
+for each serialization format of SenML (JSON, CBOR, XML, and EXI) and also
+an equivalent set of media types for the streaming use (SensML, see {{sec-sensml}}). Clipboard
+formats are defined for the JSON and XML forms of SenML but not for streams or non-textual formats.
+
+The reason there are both SenML and the streaming SensML formats is
+that they are not the same data formats and they require separate
+negotiation to understand if they are supported and which one is
+being used. The non streaming format is required to have some sort of
+end of pack syntax which indicates there will be no more records. Many
+implementations that receive SenML wait for this end of pack marker
+before processing any of the records. On the other hand, with the streaming
+formats, it is explicitly not required to wait for this end of pack marker. Many
+implementations that produce streaming SensML will never send this end
+of pack marker so implementations that receive streaming SensML can
+not wait for the end of pack marker before they start processing the
+records. Given the SenML and streaming SenML are different data
+formats, and requirement for separate negotiation, a media type for
+each one is needed.
 
 Note to RFC Editor - please remove this paragraph. Note that a request
 for media type review for senml+json was sent to the
