@@ -17,7 +17,7 @@ pi:
   rfcedstyle: 'no'
   tocdepth: '4'
   
-title: Media Types for Sensor Measurement Lists (SenML)
+title: Sensor Measurement Lists (SenML)
 abbrev: SenML
 area: ART
 
@@ -158,10 +158,17 @@ informative:
       ISO: 80000-5
       Edition: 1.0
     date: 2007-05-01
+  AN1796:
+    target: http://pdfserv.maximintegrated.com/en/an/AN1796.pdf
+    title: Overview of 1-Wire Technology and Its Use
+    author:
+      name: Bernhard Linke
+      org: Maxim Integrated
+    date: 2008-06-19
 
 --- abstract
 
-This specification defines media types for representing simple sensor
+This specification defines a format for representing simple sensor
 measurements and device parameters in the Sensor Measurement Lists
 (SenML). Representations are defined in JavaScript Object Notation
 (JSON), Concise Binary Object Representation (CBOR), Extensible Markup
@@ -176,10 +183,10 @@ configured.
 # Overview
 
 Connecting sensors to the Internet is not new, and there have been
-many protocols designed to facilitate it. This specification defines
-new media types for carrying simple sensor information in a protocol
-such as HTTP {{?RFC7230}} or CoAP {{RFC7252}}.  This format was
-designed so that processors with very limited capabilities could
+many protocols designed to facilitate it. This specification defines a
+format and media types for carrying simple sensor information in a
+protocol such as HTTP {{?RFC7230}} or CoAP {{RFC7252}}.  This format
+is designed so that processors with very limited capabilities could
 easily encode a sensor measurement into the media type, while at the
 same time a server parsing the data could relatively efficiently
 collect a large number of sensor measurements. SenML can be used for a
@@ -273,7 +280,7 @@ include the relative time each measurement was made compared to the
 time the batch was sent in each SenML Record. The server might have
 accurate NTP time and use the time it received the data, and the
 relative offset, to replace the times in the SenML with absolute times
-before saving the SenML Pack in a document database.
+before saving the SenML information in a document database.
 
 # Terminology
 
@@ -300,6 +307,12 @@ SenML Field:
 : A component of a record that associates a value to a SenML Label for
 this record.
 
+SensML:
+: Sensor Streaming Measurement List (see {{sec-sensml}}).
+
+SensML Stream:
+: One or more SenML Records to be processed as a stream.
+
 This document uses the terms "attribute" and "tag" where they occur
 with the underlying technologies (XML, CBOR {{RFC7049}}, and Link
 Format {{RFC6690}}), not for SenML concepts per se.  Note that
@@ -311,13 +324,12 @@ Format {{RFC6690}}), not for SenML concepts per se.  Note that
 Each SenML Pack carries a single array that represents a set of
 measurements and/or parameters. This array contains a series of SenML
 Records with several fields described below. There are two kinds of
-fields: base and regular.
-The base fields can be included
-in any SenML Record and they apply to the entries in the Record.
-Each base field also applies to all Records after it up to, but not
-including, the next Record that has that same base field. 
-All base fields are optional. Regular fields can be
-included in any SenML Record and apply only to that Record.
+fields: base and regular. Both the base fields and the regular fields
+can be included in any SenML Record. The base fields apply to the
+entries in the Record and also to all Records after it up to, but not
+including, the next Record that has that same base field.  All base
+fields are optional. Regular fields can be included in any SenML
+Record and apply only to that Record.
 
 ## Base Fields {#senml-base}
 
@@ -406,8 +418,8 @@ this document with their respective labels and data types.
 | Update Time   | ut    |  7         | Number     | double     |
 {: #tbl-labels cols="r l r l l" title="SenML Labels"}
 
-Data Value is base64 encoded string with URL safe alphabet as defined
-in Section 5 of {{RFC4648}}, with padding omitted.
+(*) Data Value is base64 encoded string with URL safe alphabet as
+defined in Section 5 of {{RFC4648}}, with padding omitted.
 
 For details of the JSON representation see {{sec-json}}, for the CBOR 
 {{sec-cbor}}, and for the XML {{sec-xml}}.
@@ -427,7 +439,7 @@ in the Pack.
 
 Systems reading one of the objects MUST check for the Version field.
 If this value is a version number larger than the version which the
-system understands, the system SHOULD NOT use this object. This allows
+system understands, the system MUST NOT use this object. This allows
 the version number to indicate that the object contains structure or
 semantics that is different from what is defined in the present
 document beyond just making use of the extension points provided here.
@@ -455,19 +467,19 @@ namespaces that can be used. As a result, implementers need to take
 care in choosing the naming scheme for concatenated names, because
 such names both need to be unique and need to conform to the
 restricted character set. One approach is to include a bit string that
-has guaranteed uniqueness (such as a 1-wire address). Some of the
-examples within this document use the device URN namespace as
+has guaranteed uniqueness (such as a 1-wire address {{AN1796}}). Some
+of the examples within this document use the device URN namespace as
 specified in {{I-D.ietf-core-dev-urn}}. UUIDs {{RFC4122}} are another
 way to generate a unique name. However, the restricted character set
 does not allow the use of many URI schemes, such as the 'tag' scheme
 {{?RFC4151}} and the 'ni' scheme {{?RFC6920}}, in names as such. The
 use of  URIs with characters incompatible with this set, and possible
-mapping rules between the two, are outside of the scope of the
-present document.
+mapping rules between the two, are outside of the scope of the present
+document.
 
 If the Record has no Unit, the Base Unit is used as the Unit. Having
 no Unit and no Base Unit is allowed.
-  
+
 If either the Base Time or Time value is missing, the missing
 field is considered to have a value of zero. The Base Time and
 Time values are added together to get the time of measurement. A time
@@ -476,6 +488,24 @@ the measurement was made roughly "now". A negative value is used to
 indicate seconds in the past from roughly "now". A positive value is
 used to indicate the number of seconds, excluding leap seconds, since
 the start of the year 1970 in UTC.
+
+Obviously, "now"-referenced SenML records are only useful within a
+specific communication context (e.g., based on information on when the
+SenML pack, or a specific record in a SensML stream, was sent) or together with some other context
+information that can be used for deriving a meaning of "now"; the
+expectation for any archival use is that they will be processed into
+UTC-referenced records before that context would cease to be available.
+This specification deliberately leaves the accuracy of "now" very
+vague as it is determined by the overall systems that use SenML. In a
+system where a sensor without wall-clock time sends a SenML record
+with a "now"-referenced time over a
+high speed RS 485 link to an embedded system with accurate time that
+resolves "now" based on the time of reception, the
+resulting time uncertainty could be within 1 ms. At the other extreme, a
+deployment that sends SenML wind speed readings over a LEO
+satellite link from a mountain valley might have resulting reception time values that
+are easily a dozen minutes off the actual time of the sensor reading, with
+the time uncertainty depending on satellite locations and conditions.
 
 If only one of the Base Sum or Sum value is present, the missing
 field is considered to have a value of zero. The Base Sum and Sum
@@ -500,22 +530,25 @@ where one of the data values is more "meta" than others (e.g.,
 describes a condition that influences other measurements at the same
 time).
 
-## Resolved Records
+## Resolved Records {#resolved-records}
 
 Sometimes it is useful to be able to refer to a defined normalized
 format for SenML records. This normalized format tends to get used for
 big data applications and intermediate forms when converting to other
-formats.
+formats. Also, if SenML Records are used outside of a SenML Pack, they
+need to be resolved first to ensure applicable base values are
+applied.
 
 A SenML Record is referred to as "resolved" if it does not contain any
 base values, i.e., labels starting with the character 'b', except for
 Version fields (see below), and has no relative times. To resolve the
-records, the base values of the SenML Pack (if any) are applied to the
-Record. That is, name and base name are concatenated, base time is
-added to the time of the Record, if the Record did not contain Unit
-the Base Unit is applied to the record, etc. In addition the records
-need to be in chronological order.  An example of this is show in
-{{resolved-ex}}.
+Records, the applicable base values of the SenML Pack (if any) are
+applied to the Record. That is, for the base values in the Record or
+before the Record in the Pack, name and base name are concatenated,
+base time is added to the time of the Record, if the Record did not
+contain Unit the Base Unit is applied to the record, etc. In addition
+the records need to be in chronological order in the Pack.  An example
+of this is show in {{resolved-ex}}.
 
 The Version field MUST NOT be present in resolved records if the SenML
 version defined in this document is used and MUST be present otherwise
@@ -536,6 +569,21 @@ to describe that a resource is available in a SenML format in the
 first place. The relevant media type indicator is included in the
 Content-Type (ct=) link attribute (which is defined for the Link
 Format in Section 7.2.1 of {{RFC7252}}).
+
+## Sensor Streaming Measurement Lists (SensML) {#sec-sensml}
+
+In some usage scenarios of SenML, the implementations MAY
+store or transmit SenML in a stream-like fashion, where data is
+collected over time and continuously added to the object. This mode of
+operation is optional, but systems or protocols using SenML in this
+fashion MUST specify that they are doing this. SenML defines
+separate media types to indicate Sensor Streaming Measurement Lists
+(SensML) for this usage (see {{sec-sensml-json}}).  In this situation,
+the SensML stream can be sent and received in a partial fashion, i.e.,
+a measurement entry can be read as soon as the SenML Record is
+received and does not have to wait for the full SensML Stream to be
+complete.
+
 
 ## Configuration and Actuation usage
 
@@ -626,21 +674,10 @@ seconds.
 {::include ex3.gen.wrap.json}
 ~~~~
 
-Note that in some usage scenarios of SenML the implementations MAY
-store or transmit SenML in a stream-like fashion, where data is
-collected over time and continuously added to the object. This mode of
-operation is optional, but systems or protocols using SenML in this
-fashion MUST specify that they are doing this. SenML defines
-separate media types to indicate Sensor Streaming Measurement Lists
-(SensML) for this usage (see {{sec-sensml-json}}).  In this situation
-the SensML stream can be sent and received in a partial fashion, i.e.,
-a measurement entry can be read as soon as the SenML Record is
-received and not have to wait for the full SensML Stream to be
-complete.
-
-For instance, the following stream of measurements may be sent via a
-long lived HTTP POST from the producer of a SensML to the consumer of
-that, and each measurement object may be reported at the time it was
+As an example of Sensor Streaming Measurement Lists (SensML), the
+following stream of measurements may be sent via a
+long lived HTTP POST from the producer of the stream to its consumer,
+and each measurement object may be reported at the time it was
 measured:
 
 ~~~~
@@ -771,7 +808,8 @@ labels, as defined in {{tbl-cbor-labels}}. This table is conclusive, i.e.,
 there is no intention to define any additional integer map keys; any
 extensions will use string map keys. This allows translators
 converting between CBOR and JSON representations to convert also all
-future labels without needing to update implementations.
+future labels without needing to update implementations. The base
+values are given negative CBOR labels and others non-negative labels. 
 
 | Name                      | Label      | CBOR Label |
 | Version                   | bver       |         -1 |
@@ -988,7 +1026,7 @@ from 19th to the last:
 # Usage Considerations
 
 The measurements support sending both the current value of a sensor as
-well as the an integrated sum. For many types of measurements, the sum
+well as an integrated sum. For many types of measurements, the sum
 is more useful than the current value.
 For historical reasons, this field is called "sum" instead of
 "integral" which would more accurately describe its function.
@@ -1234,30 +1272,27 @@ IANA will create a new registry for SenML labels. The initial content
 of the registry is:
 
 | Name          | Label | CL | JSON Type | XML Type | EI | Reference |
-| Base Name     | bn    | -2 | String    | string   | a  | RFCXXXX   |
-| Base Time     | bt    | -3 | Number    | double   | a  | RFCXXXX   |
-| Base Unit     | bu    | -4 | String    | string   | a  | RFCXXXX   |
-| Base Value    | bv    | -5 | Number    | double   | a  | RFCXXXX   |
-| Base Sum      | bs    | -6 | Number    | double   | a  | RFCXXXX   |
-| Base Version  | bver  | -1 | Number    | int      | a  | RFCXXXX   |
-| Name          | n     |  0 | String    | string   | a  | RFCXXXX   |
-| Unit          | u     |  1 | String    | string   | a  | RFCXXXX   |
-| Value         | v     |  2 | Number    | double   | a  | RFCXXXX   |
-| String Value  | vs    |  3 | String    | string   | a  | RFCXXXX   |
-| Boolean Value | vb    |  4 | Boolean   | boolean  | a  | RFCXXXX   |
-| Data Value    | vd    |  8 | String    | string   | a  | RFCXXXX   |
-| Value Sum     | s     |  5 | Number    | double   | a  | RFCXXXX   |
-| Time          | t     |  6 | Number    | double   | a  | RFCXXXX   |
-| Update Time   | ut    |  7 | Number    | double   | a  | RFCXXXX   |
+| Base Name     | bn    | -2 | String    | string   | a  | RFC-AAAA   |
+| Base Time     | bt    | -3 | Number    | double   | a  | RFC-AAAA   |
+| Base Unit     | bu    | -4 | String    | string   | a  | RFC-AAAA   |
+| Base Value    | bv    | -5 | Number    | double   | a  | RFC-AAAA   |
+| Base Sum      | bs    | -6 | Number    | double   | a  | RFC-AAAA   |
+| Base Version  | bver  | -1 | Number    | int      | a  | RFC-AAAA   |
+| Name          | n     |  0 | String    | string   | a  | RFC-AAAA   |
+| Unit          | u     |  1 | String    | string   | a  | RFC-AAAA   |
+| Value         | v     |  2 | Number    | double   | a  | RFC-AAAA   |
+| String Value  | vs    |  3 | String    | string   | a  | RFC-AAAA   |
+| Boolean Value | vb    |  4 | Boolean   | boolean  | a  | RFC-AAAA   |
+| Data Value    | vd    |  8 | String    | string   | a  | RFC-AAAA   |
+| Value Sum     | s     |  5 | Number    | double   | a  | RFC-AAAA   |
+| Time          | t     |  6 | Number    | double   | a  | RFC-AAAA   |
+| Update Time   | ut    |  7 | Number    | double   | a  | RFC-AAAA   |
 {: #tbl-seml-reg cols='r l l' title="IANA Registry for SenML Labels, CL = CBOR Label, EI = EXI ID"}
 
 This is the same table as {{tbl-labels}}, with notes removed, and with
 columns added for the information that is all the same for this
 initial set of registrations, but will need to be supplied with a
 different value for new registrations.
-
-Note to RFC Editor. Please replace RFCXXXX with the number for this
-RFC.
 
 All new entries must define the Label Name, Label, and XML Type but
 the CBOR labels SHOULD be left empty as CBOR will use the string
@@ -1786,42 +1821,55 @@ range and for the XML Content-Format from the "IETF Review or IESG
 Approval" range. The assigned IDs are shown in 
 {{tbl-coap-content-formats}}.
 
-| Media type               | ID  |
-| application/senml+json   | TBD |
-| application/sensml+json  | TBD |
-| application/senml+cbor   | TBD |
-| application/sensml+cbor  | TBD |
-| application/senml-exi    | TBD |
-| application/sensml-exi   | TBD |
-| application/senml+xml    | TBD |
-| application/sensml+xml   | TBD |
+| Media type               | Encoding | ID   | Reference
+| application/senml+json   | -        | TBD1 | RFC-AAAA
+| application/sensml+json  | -        | TBD2 | RFC-AAAA
+| application/senml+cbor   | -        | TBD3 | RFC-AAAA
+| application/sensml+cbor  | -        | TBD4 | RFC-AAAA
+| application/senml-exi    | -        | TBD5 | RFC-AAAA
+| application/sensml-exi   | -        | TBD6 | RFC-AAAA
+| application/senml+xml    | -        | TBD7 | RFC-AAAA
+| application/sensml+xml   | -        | TBD8 | RFC-AAAA
 {: #tbl-coap-content-formats cols="l l" title="CoAP Content-Format IDs"}
  
 
 # Security Considerations {#sec-sec}
 
-Sensor data can contain a wide range of information ranging from
-information that is very public, such as the outside temperature in a
-given city, to very private information that requires integrity and
-confidentiality protection, such as patient health information. The
-SenML formats do not provide any security and instead rely on the
-protocol that carries them to provide security. Applications using
-SenML need to look at the overall context of how these media types
-will be used to decide if the security is adequate. The SenML formats
-defined by this specification do not contain any executable content.
-However, future extensions could potentially embed application 
-specific executable content in the data.
+Sensor data presented with SenML can contain a wide range of
+information ranging from information that is very public, such as the
+outside temperature in a given city, to very private information that
+requires integrity and confidentiality protection, such as patient
+health information. When SenML is used for configuration or actuation,
+it can be used to change the state of systems and impact also physical
+world, e.g., by turning off a heater or opening a lock.
+
+The SenML formats alone do not provide any security and instead rely
+on the protocol that carries them to provide security. Applications
+using SenML need to look at the overall context of how these formats
+will be used to decide if the security is adequate. In particular for
+sensitive sensor data and actuation use it is important to ensure that
+proper security mechanims are used.
+
+The SenML formats defined by this specification do not contain any
+executable content. However, future extensions could potentially embed
+application specific executable content in the data.
+
+SenML Records are intended to be interpreted in the context of any
+applicable base values. If records become separated from the record
+that establishes the base values, the data will be useless or, worse,
+wrong. Care needs to be taken in keeping the integrity of a Pack that
+contains unresolved SenML Records (see {{resolved-records}}).
 
 See also {{sec-privacy}}. 
 
 # Privacy Considerations {#sec-privacy}
 
-Sensor data can range from information with almost no security
+Sensor data can range from information with almost no privacy
 considerations, such as the current temperature in a given city, to
 highly sensitive medical or location data. This specification provides
 no security protection for the data but is meant to be used inside
-another container or transport protocol such as S/MIME {{?RFC5751}} or
-HTTP with TLS {{?RFC5246}} that can provide integrity,
+another container or transfer protocol such as S/MIME {{?RFC5751}} or
+HTTP with TLS {{?RFC2818}} that can provide integrity,
 confidentiality, and authentication information about the source of
 the data.
 
