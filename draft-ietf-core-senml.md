@@ -308,7 +308,7 @@ SenML Field:
 this record.
 
 SensML:
-: Sensor Streaming Measurement List ({{sec-sensml}}).
+: Sensor Streaming Measurement List (see {{sec-sensml}}).
 
 SensML Stream:
 : One or more SenML Records to be processed as a stream.
