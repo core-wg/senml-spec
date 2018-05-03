@@ -476,6 +476,11 @@ indicate seconds in the past from roughly "now". A positive value is
 used to indicate the number of seconds, excluding leap seconds, since
 the start of the year 1970 in UTC.
 
+Obviously, "now"-referenced SenML records are only useful within a
+specific communication context or together with some other context
+information that can be used for deriving a meaning of "now"; the
+expectation for any archival use is that they will be processed into
+UTC-referenced records before that context would cease to be available.
 This specification deliberately leaves the accuracy of "now" very
 vague as it is determined by the overall systems that uses SenML. In a
 system where a sensor sends a SenML record with Time of zero over a
