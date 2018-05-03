@@ -307,6 +307,12 @@ SenML Field:
 : A component of a record that associates a value to a SenML Label for
 this record.
 
+SensML:
+: Sensor Streaming Measurement List (see {{sec-sensml}}).
+
+SensML Stream:
+: One or more SenML Records to be processed as a stream.
+
 This document uses the terms "attribute" and "tag" where they occur
 with the underlying technologies (XML, CBOR {{RFC7049}}, and Link
 Format {{RFC6690}}), not for SenML concepts per se.  Note that
@@ -472,7 +478,7 @@ document.
 
 If the Record has no Unit, the Base Unit is used as the Unit. Having
 no Unit and no Base Unit is allowed.
-  
+
 If either the Base Time or Time value is missing, the missing
 field is considered to have a value of zero. The Base Time and
 Time values are added together to get the time of measurement. A time
@@ -484,7 +490,7 @@ the start of the year 1970 in UTC.
 
 Obviously, "now"-referenced SenML records are only useful within a
 specific communication context (e.g., based on information on when the
-SenML pack was sent) or together with some other context
+SenML pack, or a specific record in a SensML stream, was sent) or together with some other context
 information that can be used for deriving a meaning of "now"; the
 expectation for any archival use is that they will be processed into
 UTC-referenced records before that context would cease to be available.
@@ -562,6 +568,21 @@ to describe that a resource is available in a SenML format in the
 first place. The relevant media type indicator is included in the
 Content-Type (ct=) link attribute (which is defined for the Link
 Format in Section 7.2.1 of {{RFC7252}}).
+
+## Sensor Streaming Measurement Lists (SensML) {#sec-sensml}
+
+In some usage scenarios of SenML, the implementations MAY
+store or transmit SenML in a stream-like fashion, where data is
+collected over time and continuously added to the object. This mode of
+operation is optional, but systems or protocols using SenML in this
+fashion MUST specify that they are doing this. SenML defines
+separate media types to indicate Sensor Streaming Measurement Lists
+(SensML) for this usage (see {{sec-sensml-json}}).  In this situation,
+the SensML stream can be sent and received in a partial fashion, i.e.,
+a measurement entry can be read as soon as the SenML Record is
+received and does not have to wait for the full SensML Stream to be
+complete.
+
 
 ## Configuration and Actuation usage
 
@@ -652,21 +673,10 @@ seconds.
 {::include ex3.gen.wrap.json}
 ~~~~
 
-Note that in some usage scenarios of SenML the implementations MAY
-store or transmit SenML in a stream-like fashion, where data is
-collected over time and continuously added to the object. This mode of
-operation is optional, but systems or protocols using SenML in this
-fashion MUST specify that they are doing this. SenML defines
-separate media types to indicate Sensor Streaming Measurement Lists
-(SensML) for this usage (see {{sec-sensml-json}}).  In this situation
-the SensML stream can be sent and received in a partial fashion, i.e.,
-a measurement entry can be read as soon as the SenML Record is
-received and not have to wait for the full SensML Stream to be
-complete.
-
-For instance, the following stream of measurements may be sent via a
-long lived HTTP POST from the producer of a SensML to the consumer of
-that, and each measurement object may be reported at the time it was
+As an example of Sensor Streaming Measurement Lists (SensML), the
+following stream of measurements may be sent via a
+long lived HTTP POST from the producer of the stream to its consumer,
+and each measurement object may be reported at the time it was
 measured:
 
 ~~~~
