@@ -1329,10 +1329,9 @@ Pack MUST have a label name that ends with the '_' character.
 
 The following registrations are done following the procedure specified
 in {{RFC6838}} and {{RFC7303}}. This document registers media types
-for each serialization format of SenML (JSON, CBOR, and EXI) and also
-media types for the same formats of the streaming use (SensML). Clipboard
-formats are defined for the JSON and XML form of lists but do not make
-sense for streams or other formats.
+for each serialization format of SenML (JSON, CBOR, XML, and EXI) and also
+an equivalent set of media types for the streaming use (SensML, see {{sec-sensml}}). Clipboard
+formats are defined for the JSON and XML forms of SenML but not for streams or non-textual formats.
 
 The reason there are both SenML and the streaming SensML formats is
 that they are not the same data formats and they require separate
