@@ -383,7 +383,8 @@ Value:
 
 Sum:
 : Integrated sum of the values over time. Optional. This field is
-  in the unit specified in the Unit value multiplied by seconds.
+  in the unit specified in the Unit value multiplied by seconds. For
+  historical reason it is named sum instead of integral.
 
 Time:
 : Time when value was recorded. Optional.
@@ -1026,7 +1027,10 @@ from 19th to the last:
 
 The measurements support sending both the current value of a sensor as
 well as an integrated sum. For many types of measurements, the sum
-is more useful than the current value. For example, an electrical
+is more useful than the current value.
+For historical reasons, this field is called "sum" instead of
+"integral" which would more accurately describe its function.
+For example, an electrical
 meter that measures the energy a given computer uses will typically
 want to measure the cumulative amount of energy used. This is less
 prone to error than reporting the power each second and trying to have
@@ -1069,6 +1073,10 @@ positive, the sum should never get smaller; so if the sum does get
 smaller, the application will know that one of the situations listed
 above has happened.
 
+Despite the name sum, the sum field is not useful for applications
+that maintain a running count of the number of times that an event happened or
+keeping track of a counter such as the total number of bytes sent on an
+interface. Data like that can be sent directly in the value field.
 
 # CDDL
 
