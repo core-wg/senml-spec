@@ -177,7 +177,7 @@ configured.
 
 Connecting sensors to the Internet is not new, and there have been
 many protocols designed to facilitate it. This specification defines a
-format and new media types for carrying simple sensor information in a
+format and media types for carrying simple sensor information in a
 protocol such as HTTP {{?RFC7230}} or CoAP {{RFC7252}}.  This format
 is designed so that processors with very limited capabilities could
 easily encode a sensor measurement into the media type, while at the
