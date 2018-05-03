@@ -17,7 +17,7 @@ pi:
   rfcedstyle: 'no'
   tocdepth: '4'
   
-title: Media Types for Sensor Measurement Lists (SenML)
+title: Sensor Measurement Lists (SenML)
 abbrev: SenML
 area: ART
 
@@ -161,7 +161,7 @@ informative:
 
 --- abstract
 
-This specification defines media types for representing simple sensor
+This specification defines a format for representing simple sensor
 measurements and device parameters in the Sensor Measurement Lists
 (SenML). Representations are defined in JavaScript Object Notation
 (JSON), Concise Binary Object Representation (CBOR), Extensible Markup
@@ -176,10 +176,10 @@ configured.
 # Overview
 
 Connecting sensors to the Internet is not new, and there have been
-many protocols designed to facilitate it. This specification defines
-new media types for carrying simple sensor information in a protocol
-such as HTTP {{?RFC7230}} or CoAP {{RFC7252}}.  This format was
-designed so that processors with very limited capabilities could
+many protocols designed to facilitate it. This specification defines a
+format and media types for carrying simple sensor information in a
+protocol such as HTTP {{?RFC7230}} or CoAP {{RFC7252}}.  This format
+is designed so that processors with very limited capabilities could
 easily encode a sensor measurement into the media type, while at the
 same time a server parsing the data could relatively efficiently
 collect a large number of sensor measurements. SenML can be used for a
@@ -405,8 +405,8 @@ this document with their respective labels and data types.
 | Update Time   | ut    |  7         | Number     | double     |
 {: #tbl-labels cols="r l r l l" title="SenML Labels"}
 
-Data Value is base64 encoded string with URL safe alphabet as defined
-in Section 5 of {{RFC4648}}, with padding omitted.
+(*) Data Value is base64 encoded string with URL safe alphabet as
+defined in Section 5 of {{RFC4648}}, with padding omitted.
 
 For details of the JSON representation see {{sec-json}}, for the CBOR 
 {{sec-cbor}}, and for the XML {{sec-xml}}.
@@ -426,7 +426,7 @@ in the Pack.
 
 Systems reading one of the objects MUST check for the Version field.
 If this value is a version number larger than the version which the
-system understands, the system SHOULD NOT use this object. This allows
+system understands, the system MUST NOT use this object. This allows
 the version number to indicate that the object contains structure or
 semantics that is different from what is defined in the present
 document beyond just making use of the extension points provided here.
@@ -987,7 +987,7 @@ from 19th to the last:
 # Usage Considerations
 
 The measurements support sending both the current value of a sensor as
-well as the an integrated sum. For many types of measurements, the sum
+well as an integrated sum. For many types of measurements, the sum
 is more useful than the current value. For example, an electrical
 meter that measures the energy a given computer uses will typically
 want to measure the cumulative amount of energy used. This is less
@@ -1789,23 +1789,30 @@ Approval" range. The assigned IDs are shown in
 
 # Security Considerations {#sec-sec}
 
-Sensor data can contain a wide range of information ranging from
-information that is very public, such as the outside temperature in a
-given city, to very private information that requires integrity and
-confidentiality protection, such as patient health information. The
-SenML formats do not provide any security and instead rely on the
-protocol that carries them to provide security. Applications using
-SenML need to look at the overall context of how these media types
-will be used to decide if the security is adequate. The SenML formats
-defined by this specification do not contain any executable content.
-However, future extensions could potentially embed application 
-specific executable content in the data.
+Sensor data presented with SenML can contain a wide range of
+information ranging from information that is very public, such as the
+outside temperature in a given city, to very private information that
+requires integrity and confidentiality protection, such as patient
+health information. When SenML is used for configuration or actuation,
+it can be used to change the state of systems and impact also physical
+world, e.g., by turning off a heater or opening a lock.
+
+The SenML formats alone do not provide any security and instead rely
+on the protocol that carries them to provide security. Applications
+using SenML need to look at the overall context of how these formats
+will be used to decide if the security is adequate. In particular for
+sensitive sensor data and actuation use it is important to ensure that
+proper security mechanims are used.
+
+The SenML formats defined by this specification do not contain any
+executable content. However, future extensions could potentially embed
+application specific executable content in the data.
 
 See also {{sec-privacy}}. 
 
 # Privacy Considerations {#sec-privacy}
 
-Sensor data can range from information with almost no security
+Sensor data can range from information with almost no privacy
 considerations, such as the current temperature in a given city, to
 highly sensitive medical or location data. This specification provides
 no security protection for the data but is meant to be used inside
