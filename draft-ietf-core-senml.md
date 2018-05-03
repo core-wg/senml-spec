@@ -1346,11 +1346,11 @@ The reason there are both SenML and the streaming SensML formats is
 that they are not the same data formats and they require separate
 negotiation formats to understand if they are supported and which is
 being used. The non streaming format is required to have some sort of
-end of pack syntax which indicates there will be no records. Many
+end of pack syntax which indicates there will be no more records. Many
 implementations that receive SenML wait for this end of pack marker
-before processing in of the records. On the other hand, the streaming
-format is not required to have this end of pack marker. Many
-implementation that produce streaming SensML will never send this end
+before processing any of the records. On the other hand, with the streaming
+formats, it is explicitly not required to wait for this end of pack marker. Many
+implementations that produce streaming SensML will never send this end
 of pack marker so implementations that receive streaming SensML can
 not wait for the end of pack marker before they start processing the
 records. Given the SenML and streaming SenML are different data
