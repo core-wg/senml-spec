@@ -1075,7 +1075,7 @@ above has happened.
 
 Despite the name sum, the sum field is not useful for applications
 that keep a running count of the number of times that an event happened or
-keeping track of a counter such as the total number of byte sent on an
+keeping track of a counter such as the total number of bytes sent on an
 interface. Data like that can be sent directly in the value field.
 
 # CDDL
