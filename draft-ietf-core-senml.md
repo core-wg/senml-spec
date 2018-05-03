@@ -1344,7 +1344,7 @@ sense for streams or other formats.
 
 The reason there are both SenML and the streaming SensML formats is
 that they are not the same data formats and they require separate
-negotiation formats to understand if they are supported and which is
+negotiation to understand if they are supported and which one is
 being used. The non streaming format is required to have some sort of
 end of pack syntax which indicates there will be no more records. Many
 implementations that receive SenML wait for this end of pack marker
