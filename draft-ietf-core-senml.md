@@ -158,6 +158,13 @@ informative:
       ISO: 80000-5
       Edition: 1.0
     date: 2007-05-01
+  AN1796:
+    target: http://pdfserv.maximintegrated.com/en/an/AN1796.pdf
+    title: Overview of 1-Wire Technology and Its Use
+    author:
+      name: Bernhard Linke
+      org: Maxim Integrated
+    date: 2008-06-19
 
 --- abstract
 
@@ -273,7 +280,7 @@ include the relative time each measurement was made compared to the
 time the batch was sent in each SenML Record. The server might have
 accurate NTP time and use the time it received the data, and the
 relative offset, to replace the times in the SenML with absolute times
-before saving the SenML Pack in a document database.
+before saving the SenML information in a document database.
 
 # Terminology
 
@@ -311,13 +318,12 @@ Format {{RFC6690}}), not for SenML concepts per se.  Note that
 Each SenML Pack carries a single array that represents a set of
 measurements and/or parameters. This array contains a series of SenML
 Records with several fields described below. There are two kinds of
-fields: base and regular.
-The base fields can be included
-in any SenML Record and they apply to the entries in the Record.
-Each base field also applies to all Records after it up to, but not
-including, the next Record that has that same base field. 
-All base fields are optional. Regular fields can be
-included in any SenML Record and apply only to that Record.
+fields: base and regular. Both the base fields and the regular fields
+can be included in any SenML Record. The base fields apply to the
+entries in the Record and also to all Records after it up to, but not
+including, the next Record that has that same base field.  All base
+fields are optional. Regular fields can be included in any SenML
+Record and apply only to that Record.
 
 ## Base Fields {#senml-base}
 
@@ -454,15 +460,15 @@ namespaces that can be used. As a result, implementers need to take
 care in choosing the naming scheme for concatenated names, because
 such names both need to be unique and need to conform to the
 restricted character set. One approach is to include a bit string that
-has guaranteed uniqueness (such as a 1-wire address). Some of the
-examples within this document use the device URN namespace as
+has guaranteed uniqueness (such as a 1-wire address {{AN1796}}). Some
+of the examples within this document use the device URN namespace as
 specified in {{I-D.ietf-core-dev-urn}}. UUIDs {{RFC4122}} are another
 way to generate a unique name. However, the restricted character set
 does not allow the use of many URI schemes, such as the 'tag' scheme
 {{?RFC4151}} and the 'ni' scheme {{?RFC6920}}, in names as such. The
 use of  URIs with characters incompatible with this set, and possible
-mapping rules between the two, are outside of the scope of the
-present document.
+mapping rules between the two, are outside of the scope of the present
+document.
 
 If the Record has no Unit, the Base Unit is used as the Unit. Having
 no Unit and no Base Unit is allowed.
@@ -1826,8 +1832,8 @@ Sensor data can range from information with almost no privacy
 considerations, such as the current temperature in a given city, to
 highly sensitive medical or location data. This specification provides
 no security protection for the data but is meant to be used inside
-another container or transport protocol such as S/MIME {{?RFC5751}} or
-HTTP with TLS {{?RFC5246}} that can provide integrity,
+another container or transfer protocol such as S/MIME {{?RFC5751}} or
+HTTP with TLS {{?RFC2818}} that can provide integrity,
 confidentiality, and authentication information about the source of
 the data.
 
