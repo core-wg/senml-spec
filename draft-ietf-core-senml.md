@@ -371,8 +371,8 @@ Value:
 
 Sum:
 : Integrated sum of the values over time. Optional. This field is
-  in the unit specified in the Unit value multiplied by seconds. Due
-  to historical reason it is named sum instead of integral.
+  in the unit specified in the Unit value multiplied by seconds. For
+  historical reason it is named sum instead of integral.
 
 Time:
 : Time when value was recorded. Optional.
@@ -990,8 +990,8 @@ from 19th to the last:
 The measurements support sending both the current value of a sensor as
 well as the an integrated sum. For many types of measurements, the sum
 is more useful than the current value.
-For historical reasons, the sum field is called a sum instead of
-integral which more accurately describes its function.
+For historical reasons, this field is called "sum" instead of
+"integral" which would more accurately describe its function.
 For example, an electrical
 meter that measures the energy a given computer uses will typically
 want to measure the cumulative amount of energy used. This is less
