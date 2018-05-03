@@ -119,6 +119,16 @@ normative:
     seriesinfo:
       ISO/IEC: 19757-2
       Annex C:: RELAX NG Compact syntax
+  XPointerFramework:
+    title: XPointer Framework
+    author:
+    - ins: P. Grosso
+    - ins: E. Maler
+    - ins: J. Marsh
+    - ins: N. Walsh   
+    date: March 2003
+    seriesinfo: W3C Recommendation REC-XPointer-Framework
+    target: http://www.w3.org/TR/2003/REC-xptr-framework-20030325/
 
 informative:
   RFC8141: 
@@ -1022,6 +1032,24 @@ from 19th to the last:
 
   coap://example.com/temp#rec=3-5,10,19-*
 
+## Fragment Identification for the XML and EXI Formats
+
+In addition to the SenML Fragment Identifiers described above, with
+the XML and EXI SenML formats also the syntax defined in
+{{XPointerFramework}} can be used.  (This is required by {{!RFC7303}}
+for media types using the "+xml" structured syntax suffix.  SenML
+allows this for the EXI formats as well for consistency.)
+
+Note that fragment identifiers are available to the client side only;
+they are not provided in transfer protocols such as CoAP or HTTP.
+Thus, they cannot be used by the server in deciding which media type
+to send.  Where a server has multiple representations available for a
+resource identified by a URI, it might send a JSON or CBOR
+representation when the client was directed to use an XML/EXI fragment
+identifier with this.  Clients can prevent running into this problem
+by explicitly requesting an XML or EXI media type (e.g., using the
+CoAP Accept option) when XML/EXI-only fragment identifier syntax is
+in use in the URI.
 
 # Usage Considerations
 
