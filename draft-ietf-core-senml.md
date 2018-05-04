@@ -1047,7 +1047,7 @@ from 19th to the last:
 
 In addition to the SenML Fragment Identifiers described above, with
 the XML and EXI SenML formats also the syntax defined in
-{{XPointerFramework}} can be used.  (This is required by {{!RFC7303}}
+{{XPointerFramework}} can be used.  (This is required by {{RFC7303}}
 for media types using the "+xml" structured syntax suffix.  SenML
 allows this for the EXI formats as well for consistency.)
 
@@ -1351,7 +1351,7 @@ New entries can be added to the registration by Expert Review as
 defined in {{RFC8126}}.  Experts should exercise their own good
 judgment but need to consider that shorter labels should have more
 strict review.  New entries should not be made that counteract the
-advice at the end of {{considerations}}.
+advice at the end of {{values}}.
 
 All new SenML labels that have "base" semantics (see {{senml-base}})
 MUST start with the character 'b'. Regular labels MUST NOT start with
