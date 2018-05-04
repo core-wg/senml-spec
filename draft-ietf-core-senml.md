@@ -205,7 +205,7 @@ configured.
 Connecting sensors to the Internet is not new, and there have been
 many protocols designed to facilitate it. This specification defines a
 format and media types for carrying simple sensor information in a
-protocol such as HTTP {{?RFC7230}} or CoAP {{RFC7252}}.  This format
+protocol such as HTTP {{?RFC7230}} or CoAP {{RFC7252}}.  The SenML format
 is designed so that processors with very limited capabilities could
 easily encode a sensor measurement into the media type, while at the
 same time a server parsing the data could relatively efficiently
@@ -339,6 +339,9 @@ Format {{RFC6690}}), not for SenML concepts per se.  Note that
 "attribute" has been widely used previously as a synonym for SenML
 "field", though.
 
+All comparisons of text strings are performed byte-by-byte (and
+therefore necessarily case-sensitive).
+
 # SenML Structure and Semantics {#senml-structure}
 
 Each SenML Pack carries a single array that represents a set of
@@ -349,7 +352,8 @@ can be included in any SenML Record. The base fields apply to the
 entries in the Record and also to all Records after it up to, but not
 including, the next Record that has that same base field.  All base
 fields are optional. Regular fields can be included in any SenML
-Record and apply only to that Record.
+Record and apply only to that Record. 
+
 
 ## Base Fields {#senml-base}
 
