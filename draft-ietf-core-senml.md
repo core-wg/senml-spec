@@ -125,10 +125,20 @@ normative:
     - ins: P. Grosso
     - ins: E. Maler
     - ins: J. Marsh
-    - ins: N. Walsh   
+    - ins: N. Walsh
     date: March 2003
     seriesinfo: W3C Recommendation REC-XPointer-Framework
     target: http://www.w3.org/TR/2003/REC-xptr-framework-20030325/
+  XPointerElement:
+    title: XPointer element() Scheme
+    target: https://www.w3.org/TR/2003/REC-xptr-element-20030325/
+    seriesinfo: W3C Recommendation REC-xptr-element
+    author:
+    - ins: P. Grosso
+    - ins: E. Maler
+    - ins: J. Marsh
+    - ins: N. Walsh
+    date: March 2003
 
 informative:
   RFC8141: 
@@ -1046,7 +1056,9 @@ from 19th to the last:
 ## Fragment Identification for the XML and EXI Formats
 
 In addition to the SenML Fragment Identifiers described above, with
-the XML and EXI SenML formats also the syntax defined in
+the XML and EXI SenML formats also the syntax defined in the
+XPointer element() Scheme
+{{XPointerElement}} of the XPointer Framework
 {{XPointerFramework}} can be used.  (This is required by {{RFC7303}}
 for media types using the "+xml" structured syntax suffix.  SenML
 allows this for the EXI formats as well for consistency.)
