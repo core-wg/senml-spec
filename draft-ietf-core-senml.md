@@ -125,10 +125,20 @@ normative:
     - ins: P. Grosso
     - ins: E. Maler
     - ins: J. Marsh
-    - ins: N. Walsh   
+    - ins: N. Walsh
     date: March 2003
     seriesinfo: W3C Recommendation REC-XPointer-Framework
     target: http://www.w3.org/TR/2003/REC-xptr-framework-20030325/
+  XPointerElement:
+    title: XPointer element() Scheme
+    target: https://www.w3.org/TR/2003/REC-xptr-element-20030325/
+    seriesinfo: W3C Recommendation REC-xptr-element
+    author:
+    - ins: P. Grosso
+    - ins: E. Maler
+    - ins: J. Marsh
+    - ins: N. Walsh
+    date: March 2003
 
 informative:
   RFC8141: 
@@ -445,7 +455,7 @@ generated.
 
 All SenML Records in a Pack MUST have the same version number. This is
 typically done by adding a Base Version field to only the first Record
-in the Pack.
+in the Pack, or by using the default value.
 
 Systems reading one of the objects MUST check for the Version field.
 If this value is a version number larger than the version which the
@@ -495,7 +505,9 @@ document.
 ### Units
 
 If the Record has no Unit, the Base Unit is used as the Unit. Having
-no Unit and no Base Unit is allowed.
+no Unit and no Base Unit is allowed; any information that may be
+required about units applicable to the value then needs to be provided
+by the application context.
 
 ### Time
 
@@ -1046,7 +1058,9 @@ from 19th to the last:
 ## Fragment Identification for the XML and EXI Formats
 
 In addition to the SenML Fragment Identifiers described above, with
-the XML and EXI SenML formats also the syntax defined in
+the XML and EXI SenML formats also the syntax defined in the
+XPointer element() Scheme
+{{XPointerElement}} of the XPointer Framework
 {{XPointerFramework}} can be used.  (This is required by {{RFC7303}}
 for media types using the "+xml" structured syntax suffix.  SenML
 allows this for the EXI formats as well for consistency.)
