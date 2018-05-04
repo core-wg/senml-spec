@@ -455,7 +455,7 @@ generated.
 
 All SenML Records in a Pack MUST have the same version number. This is
 typically done by adding a Base Version field to only the first Record
-in the Pack.
+in the Pack, or by using the default value.
 
 Systems reading one of the objects MUST check for the Version field.
 If this value is a version number larger than the version which the
