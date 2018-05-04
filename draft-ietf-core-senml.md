@@ -1,7 +1,7 @@
 ---
 stand_alone: true
 ipr: trust200902
-docname: draft-ietf-core-senml-14
+docname: draft-ietf-core-senml-15
 cat: std
 
 date: 2018
@@ -558,7 +558,7 @@ before the Record in the Pack, name and base name are concatenated,
 base time is added to the time of the Record, if the Record did not
 contain Unit the Base Unit is applied to the record, etc. In addition
 the records need to be in chronological order in the Pack.  An example
-of this is show in {{resolved-ex}}.
+of this is shown in {{resolved-ex}}.
 
 The Version field MUST NOT be present in resolved records if the SenML
 version defined in this document is used and MUST be present otherwise
@@ -1366,7 +1366,7 @@ Pack MUST have a label name that ends with the '_' character.
 The following registrations are done following the procedure specified
 in {{RFC6838}} and {{RFC7303}}. This document registers media types
 for each serialization format of SenML (JSON, CBOR, XML, and EXI) and also
-an equivalent set of media types for the streaming use (SensML, see {{sec-sensml}}). Clipboard
+a corresponding set of media types for the streaming use (SensML, see {{sec-sensml}}). Clipboard
 formats are defined for the JSON and XML forms of SenML but not for streams or non-textual formats.
 
 The reason there are both SenML and the streaming SensML formats is
@@ -1381,7 +1381,7 @@ implementations that produce streaming SensML will never send this end
 of pack marker so implementations that receive streaming SensML can
 not wait for the end of pack marker before they start processing the
 records. Given the SenML and streaming SenML are different data
-formats, and requirement for separate negotiation, a media type for
+formats, and the requirement for separate negotiation, a media type for
 each one is needed.
 
 Note to RFC Editor - please remove this paragraph. Note that a request
@@ -1882,7 +1882,7 @@ information ranging from information that is very public, such as the
 outside temperature in a given city, to very private information that
 requires integrity and confidentiality protection, such as patient
 health information. When SenML is used for configuration or actuation,
-it can be used to change the state of systems and impact also physical
+it can be used to change the state of systems and also impact the physical
 world, e.g., by turning off a heater or opening a lock.
 
 The SenML formats alone do not provide any security and instead rely
