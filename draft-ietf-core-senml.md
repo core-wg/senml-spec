@@ -505,7 +505,9 @@ document.
 ### Units
 
 If the Record has no Unit, the Base Unit is used as the Unit. Having
-no Unit and no Base Unit is allowed.
+no Unit and no Base Unit is allowed; any information that may be
+required about units applicable to the value then needs to be provided
+by the application context.
 
 ### Time
 
