@@ -127,12 +127,14 @@ normative:
     - ins: J. Marsh
     - ins: N. Walsh
     date: March 2003
-    seriesinfo: W3C Recommendation REC-XPointer-Framework
+    seriesinfo:
+      W3C Recommendation: REC-XPointer-Framework
     target: http://www.w3.org/TR/2003/REC-xptr-framework-20030325/
   XPointerElement:
     title: XPointer element() Scheme
     target: https://www.w3.org/TR/2003/REC-xptr-element-20030325/
-    seriesinfo: W3C Recommendation REC-xptr-element
+    seriesinfo:
+      W3C Recommendation: REC-xptr-element
     author:
     - ins: P. Grosso
     - ins: E. Maler
