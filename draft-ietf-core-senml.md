@@ -434,7 +434,7 @@ defined in Section 5 of {{RFC4648}}, with padding omitted.
 For details of the JSON representation see {{sec-json}}, for the CBOR 
 {{sec-cbor}}, and for the XML {{sec-xml}}.
 
-## Considerations
+## Extensibility
 
 The SenML format can be extended with further custom fields. Both
 new base and regular fields are allowed. See
@@ -455,6 +455,10 @@ semantics that is different from what is defined in the present
 document beyond just making use of the extension points provided here.
 New version numbers can only be defined in an RFC that updates this
 specification or it successors.
+
+## Records and Their Fields
+
+### Names
 
 The Name value is concatenated to the Base Name value to yield the
 name of the sensor. The resulting concatenated name needs to uniquely
@@ -487,8 +491,12 @@ use of  URIs with characters incompatible with this set, and possible
 mapping rules between the two, are outside of the scope of the present
 document.
 
+### Units
+
 If the Record has no Unit, the Base Unit is used as the Unit. Having
 no Unit and no Base Unit is allowed.
+
+### Time
 
 If either the Base Time or Time value is missing, the missing
 field is considered to have a value of zero. The Base Time and
@@ -516,6 +524,8 @@ deployment that sends SenML wind speed readings over a LEO
 satellite link from a mountain valley might have resulting reception time values that
 are easily a dozen minutes off the actual time of the sensor reading, with
 the time uncertainty depending on satellite locations and conditions.
+
+### Values
 
 If only one of the Base Sum or Sum value is present, the missing
 field is considered to have a value of zero. The Base Sum and Sum
