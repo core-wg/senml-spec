@@ -339,7 +339,8 @@ can be included in any SenML Record. The base fields apply to the
 entries in the Record and also to all Records after it up to, but not
 including, the next Record that has that same base field.  All base
 fields are optional. Regular fields can be included in any SenML
-Record and apply only to that Record.
+Record and apply only to that Record. All comparisons of text strings
+are performed byte-by-byte (and therefore necessarily case-sensitive).
 
 ## Base Fields {#senml-base}
 
