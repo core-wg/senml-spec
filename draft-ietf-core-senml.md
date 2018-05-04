@@ -434,7 +434,7 @@ defined in Section 5 of {{RFC4648}}, with padding omitted.
 For details of the JSON representation see {{sec-json}}, for the CBOR 
 {{sec-cbor}}, and for the XML {{sec-xml}}.
 
-## Considerations
+## Extensibility
 
 The SenML format can be extended with further custom fields. Both
 new base and regular fields are allowed. See
@@ -456,6 +456,10 @@ document beyond just making use of the extension points provided here.
 New version numbers can only be defined in an RFC that updates this
 specification or it successors.
 
+## Records and Their Fields
+
+### Names
+
 The Name value is concatenated to the Base Name value to yield the
 name of the sensor. The resulting concatenated name needs to uniquely
 identify and differentiate the sensor from all others. The
@@ -464,7 +468,8 @@ to "Z", "a" to "z", "0" to "9", "-", ":", ".", "/", and "_";
 furthermore, it MUST start with a character out of the set "A" to "Z",
 "a" to "z", or "0" to "9". This restricted character set was chosen so
 that concatenated names can be used directly within various URI
-schemes (including segments of an HTTP path with no special encoding)
+schemes (including segments of an HTTP path with no special encoding;
+note that a name that contains "/" characters maps into multiple URI path segments)
 and can be used directly in many databases and analytic systems.
 {{RFC5952}} contains advice on encoding an IPv6 address in a name. See
 {{sec-privacy}} for privacy considerations that apply to the use of
@@ -487,8 +492,12 @@ use of  URIs with characters incompatible with this set, and possible
 mapping rules between the two, are outside of the scope of the present
 document.
 
+### Units
+
 If the Record has no Unit, the Base Unit is used as the Unit. Having
 no Unit and no Base Unit is allowed.
+
+### Time
 
 If either the Base Time or Time value is missing, the missing
 field is considered to have a value of zero. The Base Time and
@@ -516,6 +525,8 @@ deployment that sends SenML wind speed readings over a LEO
 satellite link from a mountain valley might have resulting reception time values that
 are easily a dozen minutes off the actual time of the sensor reading, with
 the time uncertainty depending on satellite locations and conditions.
+
+### Values
 
 If only one of the Base Sum or Sum value is present, the missing
 field is considered to have a value of zero. The Base Sum and Sum
@@ -1036,7 +1047,7 @@ from 19th to the last:
 
 In addition to the SenML Fragment Identifiers described above, with
 the XML and EXI SenML formats also the syntax defined in
-{{XPointerFramework}} can be used.  (This is required by {{!RFC7303}}
+{{XPointerFramework}} can be used.  (This is required by {{RFC7303}}
 for media types using the "+xml" structured syntax suffix.  SenML
 allows this for the EXI formats as well for consistency.)
 
@@ -1340,7 +1351,7 @@ New entries can be added to the registration by Expert Review as
 defined in {{RFC8126}}.  Experts should exercise their own good
 judgment but need to consider that shorter labels should have more
 strict review.  New entries should not be made that counteract the
-advice at the end of {{considerations}}.
+advice at the end of {{values}}.
 
 All new SenML labels that have "base" semantics (see {{senml-base}})
 MUST start with the character 'b'. Regular labels MUST NOT start with
