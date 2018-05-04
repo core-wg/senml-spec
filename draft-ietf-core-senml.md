@@ -468,7 +468,8 @@ to "Z", "a" to "z", "0" to "9", "-", ":", ".", "/", and "_";
 furthermore, it MUST start with a character out of the set "A" to "Z",
 "a" to "z", or "0" to "9". This restricted character set was chosen so
 that concatenated names can be used directly within various URI
-schemes (including segments of an HTTP path with no special encoding)
+schemes (including segments of an HTTP path with no special encoding;
+note that a name that contains "/" characters maps into multiple URI path segments)
 and can be used directly in many databases and analytic systems.
 {{RFC5952}} contains advice on encoding an IPv6 address in a name. See
 {{sec-privacy}} for privacy considerations that apply to the use of
