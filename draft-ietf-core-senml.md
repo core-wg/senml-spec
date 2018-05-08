@@ -1922,8 +1922,7 @@ using SenML need to look at the overall context of how these formats
 will be used to decide if the security is adequate. In particular for
 sensitive sensor data and actuation use it is important to ensure that
 proper security mechanisms are used to provide e.g., data integrity,
-confidentiality, and source authentication as appropriate for the
-usage.
+confidentiality, and authentication as appropriate for the usage.
 
 The SenML formats defined by this specification do not contain any
 executable content. However, future extensions could potentially embed
