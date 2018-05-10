@@ -207,10 +207,10 @@ configured.
 Connecting sensors to the Internet is not new, and there have been
 many protocols designed to facilitate it. This specification defines a
 format and media types for carrying simple sensor information in a
-protocol such as HTTP {{?RFC7230}} or CoAP {{RFC7252}}.  The SenML format
-is designed so that processors with very limited capabilities could
-easily encode a sensor measurement into the media type, while at the
-same time a server parsing the data could relatively efficiently
+protocol such as HTTP {{?RFC7230}} or CoAP {{RFC7252}}.  The SenML
+format is designed so that processors with very limited capabilities
+could easily encode a sensor measurement into the media type, while at
+the same time a server parsing the data could relatively efficiently
 collect a large number of sensor measurements. SenML can be used for a
 variety of data flow models, most notably data feeds pushed from a
 sensor to a collector, and the web resource model where the sensor is
@@ -277,17 +277,17 @@ field.
 ~~~~
 
 To keep the messages small, it does not make sense to repeat the "n"
-field in each SenML Record so there is a concept of a Base Name which is
-simply a string that is prepended to the Name field of all elements in
-that record and any records that follow it. So a more compact form of
-the example above is the following.
+field in each SenML Record so there is a concept of a Base Name which
+is simply a string that is prepended to the Name field of all elements
+in that record and any records that follow it. So a more compact form
+of the example above is the following.
 
 ~~~~
 {::include ex11.gen.wrap.json}
 ~~~~
 
-In the above example the Base Name is in the "bn" field and the "n" fields
-in each Record are the empty string so they are omitted.
+In the above example the Base Name is in the "bn" field and the "n"
+fields in each Record are the empty string so they are omitted.
 
 Some devices have accurate time while others do not so SenML supports
 absolute and relative times. Time is represented in floating point as
@@ -360,7 +360,8 @@ Record and apply only to that Record.
 ## Base Fields {#senml-base}
 
 Base Name:
-: This is a string that is prepended to the names found in the entries. 
+: This is a string that is prepended to the names found in the 
+  entries. 
 
 Base Time:
 : A base time that is added to the time found in an entry. 
@@ -373,11 +374,11 @@ Base Unit:
     
 Base Value:
 : A base value is added to the value found in an entry, similar to
-Base Time.
+  Base Time.
  
 Base Sum:
 : A base sum is added to the sum found in an entry, similar to Base
-Time.
+  Time.
  
 Version:
 : Version number of media type format. This field is an optional
@@ -485,11 +486,11 @@ furthermore, it MUST start with a character out of the set "A" to "Z",
 "a" to "z", or "0" to "9". This restricted character set was chosen so
 that concatenated names can be used directly within various URI
 schemes (including segments of an HTTP path with no special encoding;
-note that a name that contains "/" characters maps into multiple URI path segments)
-and can be used directly in many databases and analytic systems.
-{{RFC5952}} contains advice on encoding an IPv6 address in a name. See
-{{sec-privacy}} for privacy considerations that apply to the use of
-long-term stable unique identifiers.
+note that a name that contains "/" characters maps into multiple URI
+path segments) and can be used directly in many databases and analytic
+systems. {{RFC5952}} contains advice on encoding an IPv6 address in a
+name. See {{sec-privacy}} for privacy considerations that apply to the
+use of long-term stable unique identifiers.
 
 Although it is RECOMMENDED that concatenated names are represented as
 URIs {{RFC3986}} or URNs {{RFC8141}}, the restricted character set
@@ -528,20 +529,20 @@ the start of the year 1970 in UTC.
 
 Obviously, "now"-referenced SenML records are only useful within a
 specific communication context (e.g., based on information on when the
-SenML pack, or a specific record in a SensML stream, was sent) or together with some other context
-information that can be used for deriving a meaning of "now"; the
-expectation for any archival use is that they will be processed into
-UTC-referenced records before that context would cease to be available.
-This specification deliberately leaves the accuracy of "now" very
-vague as it is determined by the overall systems that use SenML. In a
-system where a sensor without wall-clock time sends a SenML record
-with a "now"-referenced time over a
-high speed RS 485 link to an embedded system with accurate time that
-resolves "now" based on the time of reception, the
-resulting time uncertainty could be within 1 ms. At the other extreme, a
-deployment that sends SenML wind speed readings over a LEO
-satellite link from a mountain valley might have resulting reception time values that
-are easily a dozen minutes off the actual time of the sensor reading, with
+SenML pack, or a specific record in a SensML stream, was sent) or
+together with some other context information that can be used for
+deriving a meaning of "now"; the expectation for any archival use is
+that they will be processed into UTC-referenced records before that
+context would cease to be available. This specification deliberately
+leaves the accuracy of "now" very vague as it is determined by the
+overall systems that use SenML. In a system where a sensor without
+wall-clock time sends a SenML record with a "now"-referenced time over
+a high speed RS 485 link to an embedded system with accurate time that
+resolves "now" based on the time of reception, the resulting time
+uncertainty could be within 1 ms. At the other extreme, a deployment
+that sends SenML wind speed readings over a LEO satellite link from a
+mountain valley might have resulting reception time values that are
+easily a dozen minutes off the actual time of the sensor reading, with
 the time uncertainty depending on satellite locations and conditions.
 
 ### Values
@@ -672,15 +673,13 @@ alphabet as defined in Section 5 of {{RFC4648}}, with padding omitted.
 Systems receiving measurements MUST be able to process the range of
 floating point numbers that are representable as an IEEE double
 precision floating point numbers {{IEEE.754.1985}}.  This allows time
-values to have better than microsecond precision over the next 100 years.
-The number of
-significant digits in any measurement is not relevant, so a reading
-of 1.1 has exactly the same semantic meaning as 1.10. If the value has
-an exponent, the "e" MUST be in lower case.  In the interest of
-avoiding unnecessary verbosity and speeding up processing,
-the mantissa SHOULD be
-less than 19 characters long and the exponent SHOULD be less than 5
-characters long. 
+values to have better than microsecond precision over the next 100
+years. The number of significant digits in any measurement is not
+relevant, so a reading of 1.1 has exactly the same semantic meaning as
+1.10. If the value has an exponent, the "e" MUST be in lower case.  In
+the interest of avoiding unnecessary verbosity and speeding up
+processing, the mantissa SHOULD be less than 19 characters long and
+the exponent SHOULD be less than 5 characters long.
 
 ## Examples
 
@@ -842,13 +841,13 @@ number, only an unsigned integer is allowed.
 text string (type 3). Octets in the Data Value are encoded using a
 definite length byte string (type 2).
 
-* For compactness, the CBOR representation uses integers for the 
-labels, as defined in {{tbl-cbor-labels}}. This table is conclusive, i.e.,
-there is no intention to define any additional integer map keys; any
-extensions will use string map keys. This allows translators
+* For compactness, the CBOR representation uses integers for the
+labels, as defined in {{tbl-cbor-labels}}. This table is conclusive,
+i.e., there is no intention to define any additional integer map keys;
+any extensions will use string map keys. This allows translators
 converting between CBOR and JSON representations to convert also all
 future labels without needing to update implementations. The base
-values are given negative CBOR labels and others non-negative labels. 
+values are given negative CBOR labels and others non-negative labels.
 
 | Name                      | Label      | CBOR Label |
 | Version                   | bver       |         -1 |
@@ -905,12 +904,12 @@ measurement as in {{co-ex}}.
 {::include ex3.gen.xml}
 ~~~~
 
-The SenML Stream is represented as a sensml element that contains a series
-of senml elements for each SenML Record. The SenML fields are
+The SenML Stream is represented as a sensml element that contains a
+series of senml elements for each SenML Record. The SenML fields are
 represented as XML attributes.  For each field defined in this
 document, the following table shows the SenML labels, which are used
-for the XML attribute name, as well as the according restrictions on the
-XML attribute values ("type") as used in the XML senml elements.
+for the XML attribute name, as well as the according restrictions on
+the XML attribute values ("type") as used in the XML senml elements.
 
 | Name          | Label| Type    |
 | Base Name     | bn   | string  |
@@ -1133,9 +1132,10 @@ smaller, the application will know that one of the situations listed
 above has happened.
 
 Despite the name sum, the sum field is not useful for applications
-that maintain a running count of the number of times that an event happened or
-keeping track of a counter such as the total number of bytes sent on an
-interface. Data like that can be sent directly in the value field.
+that maintain a running count of the number of times that an event
+happened or keeping track of a counter such as the total number of
+bytes sent on an interface. Data like that can be sent directly in the
+value field.
 
 # CDDL
 
@@ -1256,9 +1256,9 @@ use the related base units.
   a percentage (0..100) --- it is however NOT a percentage, but the
   absolute ratio!
 
-New entries can be added to the registration by Expert Review as defined
-in {{RFC8126}}. Experts should exercise their own good judgment but
-need to consider the following guidelines:
+New entries can be added to the registration by Expert Review as
+defined in {{RFC8126}}. Experts should exercise their own good
+judgment but need to consider the following guidelines:
 
 1. There needs to be a real and compelling use for any new unit to be
    added.
@@ -1317,9 +1317,9 @@ need to consider the following guidelines:
 9. The unit names are case sensitive and the correct case needs to be
   used, but symbols that differ only in case should not be allocated.
 
-10. A number after a unit typically indicates the previous unit raised to that
-  power, and the / indicates that the units that follow are the reciprocal. A
-  unit should have only one / in the name.
+10. A number after a unit typically indicates the previous unit raised
+  to that power, and the / indicates that the units that follow are
+  the reciprocal. A unit should have only one / in the name.
 
 11. A good list of common units can be found in the Unified Code for
    Units of Measure {{UCUM}}.
@@ -1355,10 +1355,11 @@ different value for new registrations.
 
 All new entries must define the Label Name, Label, and XML Type but
 the CBOR labels SHOULD be left empty as CBOR will use the string
-encoding for any new labels. The EI column contains the EXI schemaId value
-of the first Schema which includes this label or is empty if this
-label was not intended for use with EXI. The Note field SHOULD contain
-information about where to find out more information about this label.
+encoding for any new labels. The EI column contains the EXI schemaId
+value of the first Schema which includes this label or is empty if
+this label was not intended for use with EXI. The Note field SHOULD
+contain information about where to find out more information about
+this label.
 
 The JSON, CBOR, and EXI types are derived from the XML type. All XML
 numeric types such as double, float, integer and int become a JSON
@@ -1384,10 +1385,11 @@ registry.
 
 Extensions that add a label that is intended for use with EXI need to
 create a new XSD Schema that includes all the labels in the IANA
-registry and then allocate a new EXI schemaId value. Moving to the next letter
-in the alphabet is the suggested way to create the new value for the EXI schemaId.
-Any labels with previously blank ID values SHOULD be updated in the
-IANA table to have their ID set to this new schemaId value.
+registry and then allocate a new EXI schemaId value. Moving to the
+next letter in the alphabet is the suggested way to create the new
+value for the EXI schemaId. Any labels with previously blank ID values
+SHOULD be updated in the IANA table to have their ID set to this new
+schemaId value.
 
 Extensions that are mandatory to understand to correctly process the
 Pack MUST have a label name that ends with the '_' character.
@@ -1396,24 +1398,25 @@ Pack MUST have a label name that ends with the '_' character.
 
 The following registrations are done following the procedure specified
 in {{RFC6838}} and {{RFC7303}}. This document registers media types
-for each serialization format of SenML (JSON, CBOR, XML, and EXI) and also
-a corresponding set of media types for the streaming use (SensML, see {{sec-sensml}}). Clipboard
-formats are defined for the JSON and XML forms of SenML but not for streams or non-textual formats.
+for each serialization format of SenML (JSON, CBOR, XML, and EXI) and
+also a corresponding set of media types for the streaming use (SensML,
+see {{sec-sensml}}). Clipboard formats are defined for the JSON and
+XML forms of SenML but not for streams or non-textual formats.
 
 The reason there are both SenML and the streaming SensML formats is
 that they are not the same data formats and they require separate
-negotiation to understand if they are supported and which one is
-being used. The non streaming format is required to have some sort of
-end of pack syntax which indicates there will be no more records. Many
+negotiation to understand if they are supported and which one is being
+used. The non streaming format is required to have some sort of end of
+pack syntax which indicates there will be no more records. Many
 implementations that receive SenML wait for this end of pack marker
-before processing any of the records. On the other hand, with the streaming
-formats, it is explicitly not required to wait for this end of pack marker. Many
-implementations that produce streaming SensML will never send this end
-of pack marker so implementations that receive streaming SensML can
-not wait for the end of pack marker before they start processing the
-records. Given the SenML and streaming SenML are different data
-formats, and the requirement for separate negotiation, a media type for
-each one is needed.
+before processing any of the records. On the other hand, with the
+streaming formats, it is explicitly not required to wait for this end
+of pack marker. Many implementations that produce streaming SensML
+will never send this end of pack marker so implementations that
+receive streaming SensML can not wait for the end of pack marker
+before they start processing the records. Given the SenML and
+streaming SenML are different data formats, and the requirement for
+separate negotiation, a media type for each one is needed.
 
 Note to RFC Editor - please remove this paragraph. Note that a request
 for media type review for senml+json was sent to the
@@ -1913,8 +1916,8 @@ information ranging from information that is very public, such as the
 outside temperature in a given city, to very private information that
 requires integrity and confidentiality protection, such as patient
 health information. When SenML is used for configuration or actuation,
-it can be used to change the state of systems and also impact the physical
-world, e.g., by turning off a heater or opening a lock.
+it can be used to change the state of systems and also impact the
+physical world, e.g., by turning off a heater or opening a lock.
 
 The SenML formats alone do not provide any security and instead rely
 on the protocol that carries them to provide security. Applications
