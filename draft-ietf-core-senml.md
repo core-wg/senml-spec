@@ -527,6 +527,13 @@ indicate seconds in the past from roughly "now". A positive value is
 used to indicate the number of seconds, excluding leap seconds, since
 the start of the year 1970 in UTC.
 
+Because negative time values are used for presenting time relative to
+"now", all time instances after "now" need to be presented with
+absolute time values. Also because Time and Base Time are added
+together, care must be taken to ensure that the sum does not 
+inadvertently become positive (i.e., absolute time) when negative 
+(relative) time was intended to be used.
+
 Obviously, "now"-referenced SenML records are only useful within a
 specific communication context (e.g., based on information on when the
 SenML pack, or a specific record in a SensML stream, was sent) or
