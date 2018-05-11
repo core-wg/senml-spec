@@ -534,7 +534,7 @@ have accurate time available.
 Values greater than 2^28 represent an absolute time relative to the
 Unix epoch (1970-01-01T00:00Z in UTC time) and the time is counted
 same way as the Portable Operating System Interface (POSIX) "seconds
-since the epoch" {{TIME_T}}
+since the epoch" {{TIME_T}}.
 
 Obviously, "now"-referenced SenML records are only useful within a
 specific communication context (e.g., based on information on when the
