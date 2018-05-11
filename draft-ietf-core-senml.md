@@ -624,6 +624,9 @@ a measurement entry can be read as soon as the SenML Record is
 received and does not have to wait for the full SensML Stream to be
 complete.
 
+If times relative to "now" (see {{time}}) are used in SenML Records of
+a SensML stream, their interpretation of "now" is the time when the
+specific Record is sent in the stream.
 
 ## Configuration and Actuation usage
 
