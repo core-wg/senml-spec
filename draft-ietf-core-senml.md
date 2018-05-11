@@ -536,6 +536,11 @@ Unix epoch (1970-01-01T00:00Z in UTC time) and the time is counted
 same way as the Portable Operating System Interface (POSIX) "seconds
 since the epoch" {{TIME_T}}.
 
+Because time values up to 2^28 are used for presenting time relative
+to "now" and Time and Base Time are added together, care must be taken
+to ensure that the sum does not inadvertently become greater and 2^28
+(i.e., absolute time) when relative time was intended to be used.
+
 Obviously, "now"-referenced SenML records are only useful within a
 specific communication context (e.g., based on information on when the
 SenML pack, or a specific record in a SensML stream, was sent) or
