@@ -526,14 +526,14 @@ If either the Base Time or Time value is missing, the missing field is
 considered to have a value of zero. The Base Time and Time values are
 added together to get the time of measurement. 
 
-Values less than 2**28 represent time relative to the current time.
-That is, a time of zero indicates that the sensor does not know the
-absolute time and the measurement was made roughly "now". A negative
-value indicates seconds in the past from roughly "now". Positive
-values up to 2**28 indicate seconds in the future from "now". These
-can be used, e.g., for actuation use when the desired change should
-happen in the future but the sender or the receiver does not have
-accurate time available.
+Values less than 268,435,456 (2**28) represent time relative to the
+current time. That is, a time of zero indicates that the sensor does
+not know the absolute time and the measurement was made roughly "now".
+A negative value indicates seconds in the past from roughly "now".
+Positive values up to 2**28 indicate seconds in the future from "now".
+Positive values can be used, e.g., for actuation use when the desired
+change should happen in the future but the sender or the receiver does
+not have accurate time available.
 
 Values greater than or equal to 2**28 represent an absolute time
 relative to the Unix epoch (1970-01-01T00:00Z in UTC time) and the
