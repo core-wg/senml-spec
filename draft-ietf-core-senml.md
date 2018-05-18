@@ -544,7 +544,7 @@ absolute time value that can be expressed (2**28) is 1978-07-04
 
 Because time values up to 2**28 are used for presenting time relative
 to "now" and Time and Base Time are added together, care must be taken
-to ensure that the sum does not inadvertently become greater and 2**28
+to ensure that the sum does not inadvertently become greater than 2**28
 (i.e., absolute time) when relative time was intended to be used.
 
 Obviously, "now"-referenced SenML records are only useful within a
