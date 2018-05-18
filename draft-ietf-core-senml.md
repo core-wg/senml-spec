@@ -291,18 +291,18 @@ fields in each Record are the empty string so they are omitted.
 
 Some devices have accurate time while others do not so SenML supports
 absolute and relative times. Time is represented in floating point as
-seconds. Values greater than zero represent an absolute time relative
-to the Unix epoch (1970-01-01T00:00Z in UTC time) and the time is
-counted same way as the Portable Operating System Interface (POSIX)
-"seconds since the epoch" {{TIME_T}}.  Values of 0 or less represent a
-relative time in the past from the current time. A simple sensor with
-no absolute wall clock time might take a measurement every second,
-batch up 60 of them, and then send the batch to a server. It would
-include the relative time each measurement was made compared to the
-time the batch was sent in each SenML Record. The server might have
-accurate NTP time and use the time it received the data, and the
-relative offset, to replace the times in the SenML with absolute times
-before saving the SenML information in a document database.
+seconds. Values greater than or equal to 2**28 represent an absolute
+time relative to the Unix epoch. Values less than 2**28 represent time
+relative to the current time.
+
+A simple sensor with no absolute wall clock time might take a
+measurement every second, batch up 60 of them, and then send the batch
+to a server. It would include the relative time each measurement was
+made compared to the time the batch was sent in each SenML Record. The
+server might have accurate NTP time and use the time it received the
+data, and the relative offset, to replace the times in the SenML with
+absolute times before saving the SenML information in a document
+database.
 
 # Terminology
 
@@ -343,6 +343,10 @@ Format {{RFC6690}}), not for SenML concepts per se.  Note that
 
 All comparisons of text strings are performed byte-by-byte (and
 therefore necessarily case-sensitive).
+
+Where arithmetic is used, this specification uses the notation
+familiar from the programming language C, except that the operator
+"**" stands for exponentiation.
 
 # SenML Structure and Semantics {#senml-structure}
 
@@ -518,14 +522,30 @@ by the application context.
 
 ### Time
 
-If either the Base Time or Time value is missing, the missing
-field is considered to have a value of zero. The Base Time and
-Time values are added together to get the time of measurement. A time
-of zero indicates that the sensor does not know the absolute time and
-the measurement was made roughly "now". A negative value is used to
-indicate seconds in the past from roughly "now". A positive value is
-used to indicate the number of seconds, excluding leap seconds, since
-the start of the year 1970 in UTC.
+If either the Base Time or Time value is missing, the missing field is
+considered to have a value of zero. The Base Time and Time values are
+added together to get the time of measurement. 
+
+Values less than 268,435,456 (2**28) represent time relative to the
+current time. That is, a time of zero indicates that the sensor does
+not know the absolute time and the measurement was made roughly "now".
+A negative value indicates seconds in the past from roughly "now".
+Positive values up to 2**28 indicate seconds in the future from "now".
+Positive values can be used, e.g., for actuation use when the desired
+change should happen in the future but the sender or the receiver does
+not have accurate time available.
+
+Values greater than or equal to 2**28 represent an absolute time
+relative to the Unix epoch (1970-01-01T00:00Z in UTC time) and the
+time is counted same way as the Portable Operating System Interface
+(POSIX) "seconds since the epoch" {{TIME_T}}. Therefore the smallest
+absolute time value that can be expressed (2**28) is 1978-07-04 
+21:24:16 UTC.
+
+Because time values up to 2**28 are used for presenting time relative
+to "now" and Time and Base Time are added together, care must be taken
+to ensure that the sum does not inadvertently reach 2**28 (i.e., 
+absolute time) when relative time was intended to be used.
 
 Obviously, "now"-referenced SenML records are only useful within a
 specific communication context (e.g., based on information on when the
