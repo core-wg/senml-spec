@@ -1,7 +1,7 @@
 ---
 stand_alone: true
 ipr: trust200902
-docname: draft-ietf-core-senml-15
+docname: draft-ietf-core-senml-16
 cat: std
 
 date: 2018
@@ -291,8 +291,8 @@ fields in each Record are the empty string so they are omitted.
 
 Some devices have accurate time while others do not so SenML supports
 absolute and relative times. Time is represented in floating point as
-seconds. Values greater than or equal to 2**28 represent an absolute
-time relative to the Unix epoch. Values less than 2**28 represent time
+seconds. Values greater than or equal to 2\*\*28 represent an absolute
+time relative to the Unix epoch. Values less than 2\*\*28 represent time
 relative to the current time.
 
 A simple sensor with no absolute wall clock time might take a
@@ -526,25 +526,25 @@ If either the Base Time or Time value is missing, the missing field is
 considered to have a value of zero. The Base Time and Time values are
 added together to get the time of measurement. 
 
-Values less than 268,435,456 (2**28) represent time relative to the
+Values less than 268,435,456 (2\*\*28) represent time relative to the
 current time. That is, a time of zero indicates that the sensor does
 not know the absolute time and the measurement was made roughly "now".
 A negative value indicates seconds in the past from roughly "now".
-Positive values up to 2**28 indicate seconds in the future from "now".
+Positive values up to 2\*\*28 indicate seconds in the future from "now".
 Positive values can be used, e.g., for actuation use when the desired
 change should happen in the future but the sender or the receiver does
 not have accurate time available.
 
-Values greater than or equal to 2**28 represent an absolute time
+Values greater than or equal to 2\*\*28 represent an absolute time
 relative to the Unix epoch (1970-01-01T00:00Z in UTC time) and the
 time is counted same way as the Portable Operating System Interface
 (POSIX) "seconds since the epoch" {{TIME_T}}. Therefore the smallest
-absolute time value that can be expressed (2**28) is 1978-07-04 
+absolute time value that can be expressed (2\*\*28) is 1978-07-04 
 21:24:16 UTC.
 
-Because time values up to 2**28 are used for presenting time relative
+Because time values up to 2\*\*28 are used for presenting time relative
 to "now" and Time and Base Time are added together, care must be taken
-to ensure that the sum does not inadvertently reach 2**28 (i.e., 
+to ensure that the sum does not inadvertently reach 2\*\*28 (i.e., 
 absolute time) when relative time was intended to be used.
 
 Obviously, "now"-referenced SenML records are only useful within a
