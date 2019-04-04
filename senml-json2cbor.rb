@@ -59,7 +59,7 @@ bver = -1  n  = 0   s  = 5
 bn  = -2   u  = 1   t  = 6
 bt  = -3   v  = 2   ut = 7
 bu  = -4   vs = 3   vd = 8
-bv  = -5   vb = 4   l  = 9
+bv  = -5   vb = 4
 bs  = -6
 
 binary-value = bstr
