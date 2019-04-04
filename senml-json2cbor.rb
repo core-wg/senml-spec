@@ -1,3 +1,10 @@
+#!/usr/bin/env ruby
+
+# ruby senml2cbor.rb senml-data.json > senml-data.cbor
+# (reads from stdin if no argument given)
+#
+# Installation: do `gem install cbor` first
+
 require 'json'
 require 'cbor'
 
